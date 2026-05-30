@@ -26,16 +26,16 @@
 
         body {
             background: var(--bg-gradient);
-            height: 100vh; /* Altura exacta de la pantalla */
+            height: 100vh;
             width: 100vw;
-            overflow: hidden; /* PROHIBIDO EL SCROLL */
+            overflow: hidden; /* SIN SCROLL VERTICAL */
             display: flex;
             flex-direction: column;
-            padding: 1vh 1vw; /* Márgenes mínimos relativos */
+            padding: 1vh 1vw;
             color: var(--text-main);
         }
 
-        /* --- Header Compacto (5% altura) --- */
+        /* --- Header Compacto --- */
         header {
             height: 8vh;
             display: flex;
@@ -46,7 +46,7 @@
         }
 
         h1 {
-            font-size: 2.5vh; /* Tamaño relativo a la altura de pantalla */
+            font-size: 2.5vh;
             color: var(--primary);
             font-weight: 800;
             text-transform: uppercase;
@@ -63,30 +63,24 @@
             flex: 1;
             display: flex;
             flex-direction: column;
-            gap: 1.5vh; /* Espacio vertical entre los dos contenedores */
+            gap: 1.5vh;
             padding: 1vh 0;
         }
 
-        /* Contenedores Flexibles */
         .row-container {
             display: flex;
-            gap: 1.5vw; /* Espacio horizontal entre tarjetas */
+            gap: 1.5vw;
             width: 100%;
         }
 
-        /* Fila Superior: 3 Módulos -> Ocupa un poco más de espacio (55%) para destacar */
-        #top-row {
-            flex: 55; 
+        /* Ambas filas ahora equilibradas al 50% para 4 módulos cada una */
+        #top-row, #bottom-row {
+            flex: 1;  /* Ocupan la misma proporción */
         }
 
-        /* Fila Inferior: 4 Módulos -> Ocupa el resto (45%) */
-        #bottom-row {
-            flex: 45;
-        }
-
-        /* --- Estilo de las Tarjetas --- */
+        /* --- Tarjetas --- */
         .card {
-            flex: 1; /* Todas las tarjetas ocupan el mismo ancho en su fila */
+            flex: 1;
             background: var(--glass-bg);
             backdrop-filter: blur(12px);
             border: 1px solid var(--glass-border);
@@ -112,9 +106,8 @@
             z-index: 10;
         }
 
-        /* Iconos y Textos Responsivos (vh/vw) */
         .icon-box {
-            font-size: 4vh; /* El icono escala según la altura de la pantalla */
+            font-size: 4vh;
             color: var(--primary);
             margin-bottom: 1.5vh;
             transition: transform 0.3s;
@@ -141,7 +134,6 @@
             font-weight: 900;
         }
 
-        /* --- Footer (Muy pequeño) --- */
         footer {
             height: 2vh;
             text-align: center;
@@ -150,7 +142,7 @@
             opacity: 0.7;
         }
 
-        /* --- MODAL (Aquí SI permitimos scroll interno) --- */
+        /* --- MODAL (scroll interno) --- */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -175,7 +167,7 @@
             background: white;
             width: 90%;
             max-width: 600px;
-            max-height: 80vh; /* Máximo 80% de la pantalla */
+            max-height: 80vh;
             border-radius: 15px;
             display: flex;
             flex-direction: column;
@@ -208,7 +200,7 @@
 
         .modal-body {
             padding: 20px;
-            overflow-y: auto; /* SCROLL SOLO DENTRO DEL MODAL */
+            overflow-y: auto;
         }
 
         .link-item {
@@ -238,17 +230,14 @@
             border-bottom: 1px solid #ddd;
         }
 
-        /* --- Ajustes para Móviles (Pantalla Vertical) --- */
+        /* Ajuste móvil para mantener 4 tarjetas visibles sin scroll */
         @media (max-width: 768px) {
             h1 { font-size: 1.2rem; }
             .row-container {
-                flex-wrap: wrap; /* Permitir que se acomoden si es necesario */
+                flex-wrap: nowrap; /* Evita que se apilen verticalmente */
+                gap: 1vw;
             }
-            /* En móvil, forzamos rejilla 2x2 para que se vea todo */
-            #top-row .card { min-width: 30%; } /* 3 en línea apretados o cambiar lógica */
-            
-            /* Ajuste radical para móviles para que quepa todo sin scroll */
-            .card h3 { font-size: 1.5vh; }
+            .card h3 { font-size: 1.4vh; }
             .icon-box { font-size: 3vh; margin-bottom: 0.5vh; }
             .card { padding: 5px; }
         }
@@ -262,11 +251,8 @@
     </header>
 
     <main>
-        <section id="top-row" class="row-container">
-            </section>
-
-        <section id="bottom-row" class="row-container">
-            </section>
+        <section id="top-row" class="row-container"></section>
+        <section id="bottom-row" class="row-container"></section>
     </main>
 
     <footer>
@@ -279,15 +265,21 @@
                 <h3 id="modalTitle">Título</h3>
                 <button class="close-btn" onclick="closeModalDirect()">&times;</button>
             </div>
-            <div class="modal-body" id="modalBody">
-                </div>
+            <div class="modal-body" id="modalBody"></div>
         </div>
     </div>
 
     <script>
-        // DATOS
+        // DATOS: Nuevo módulo "Personal" al inicio, luego Laboral, Finanza, Despensa, y los 4 de abajo
         const modules = [
-            // --- GRUPO SUPERIOR (Indices 0, 1, 2) ---
+            // Módulo Personal (nuevo, a la izquierda de Laboral)
+            {
+                title: "Personal",
+                icon: "fa-user",
+                links: [
+                    { name: "Peso Corporal", url: "https://rfioravante73-ar.github.io/peso-corporal/" }
+                ]
+            },
             {
                 title: "Laboral",
                 icon: "fa-briefcase",
@@ -317,7 +309,7 @@
                 icon: "fa-chart-line",
                 links: [
                     { name: "Ir a Finanzas", url: "https://rfioravante73-ar.github.io/finanzas/" },
-                    { name: "Mi Garrafa", url: "https://experiencia-ia.github.io/Mi-garrafa/" }   // NUEVO ENLACE AÑADIDO
+                    { name: "Mi Garrafa", url: "https://experiencia-ia.github.io/Mi-garrafa/" }
                 ]
             },
             {
@@ -325,8 +317,6 @@
                 icon: "fa-cart-shopping",
                 links: [{ name: "Ir a Despensa", url: "https://rfioravante73-ar.github.io/stock-hogar/" }]
             },
-
-            // --- GRUPO INFERIOR (Indices 3, 4, 5, 6) ---
             {
                 title: "Farmacia Hogar",
                 icon: "fa-capsules",
@@ -349,7 +339,6 @@
             }
         ];
 
-        // RENDERIZADO
         const topRow = document.getElementById('top-row');
         const bottomRow = document.getElementById('bottom-row');
 
@@ -366,18 +355,17 @@
         }
 
         function init() {
-            // Renderizar Top (Indices 0, 1, 2)
-            for(let i = 0; i < 3; i++) {
+            // Primeros 4 módulos (índices 0,1,2,3) en la fila superior
+            for(let i = 0; i < 4; i++) {
                 topRow.appendChild(createCard(modules[i], i));
             }
-
-            // Renderizar Bottom (Indices 3, 4, 5, 6)
-            for(let i = 3; i < modules.length; i++) {
+            // Siguientes 4 módulos (índices 4,5,6,7) en la fila inferior
+            for(let i = 4; i < modules.length; i++) {
                 bottomRow.appendChild(createCard(modules[i], i));
             }
         }
 
-        // LOGICA MODAL
+        // Modal
         const modalOverlay = document.getElementById('modalOverlay');
         const modalTitle = document.getElementById('modalTitle');
         const modalBody = document.getElementById('modalBody');
@@ -415,9 +403,7 @@
             if(e.target === modalOverlay) closeModalDirect();
         }
 
-        // Iniciar
         init();
-
     </script>
 </body>
 </html>
