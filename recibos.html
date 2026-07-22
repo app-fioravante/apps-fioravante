@@ -10,6 +10,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
+    <!-- Firebase SDK (compat) -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+
     <style>
         :root {
             --bg-body: #f8fafc;
@@ -33,7 +37,6 @@
             justify-content: center;
         }
 
-        /* Landing page */
         #landingPage {
             display: flex;
             flex-direction: column;
@@ -79,7 +82,6 @@
             color: #fff;
         }
 
-        /* Contenedor principal */
         #appContainer {
             display: none;
             width: 100%;
@@ -101,7 +103,6 @@
             color: #fff;
         }
 
-        /* Tarjetas KPI - Colores y Sombras */
         .card-kpi {
             border: none;
             border-radius: 1.25rem;
@@ -119,7 +120,6 @@
             padding: 1.75rem;
         }
 
-        /* Gradientes Modernos KPI */
         .kpi-total { background: linear-gradient(135deg, #4f46e5 0%, #312e81 100%); }
         .kpi-cantidad { background: linear-gradient(135deg, #10b981 0%, #064e3b 100%); }
         .kpi-filtro { background: linear-gradient(135deg, #f59e0b 0%, #78350f 100%); }
@@ -131,7 +131,6 @@
             margin-top: 0.5rem;
         }
 
-        /* Tablas responsivas */
         .table-responsive {
             background: #fff;
             border-radius: 1.25rem;
@@ -166,7 +165,6 @@
             background-color: #f8fafc;
         }
 
-        /* Paginación */
         .pagination .page-link {
             color: var(--primary-color);
             border-radius: 0.5rem;
@@ -187,7 +185,6 @@
             box-shadow: 0 4px 10px rgba(59, 130, 246, 0.3);
         }
 
-        /* Modal Agregar */
         .modal-content {
             border: none;
             border-radius: 1.5rem;
@@ -206,7 +203,6 @@
         .btn-primary { background-color: var(--primary-color); border-color: var(--primary-color); }
         .btn-primary:hover { background-color: var(--primary-hover); border-color: var(--primary-hover); }
 
-        /* Modal Flotante de Alerta Rojo (Esquina Inferior Derecha) */
         .toast-delete-alert {
             position: fixed;
             bottom: 24px;
@@ -231,7 +227,6 @@
             }
         }
 
-        /* Filtros */
         .filtro-label {
             font-weight: 600;
             color: #475569;
@@ -240,7 +235,6 @@
             display: block;
         }
 
-        /* Botones de acción */
         .btn-sm {
             padding: 0.5rem 1rem;
             font-weight: 500;
@@ -376,12 +370,13 @@
                 <table class="table table-hover align-middle mb-0" id="tablaRecibos">
                     <thead>
                         <tr>
-                            <th style="width:10%;">Nº</th>
-                            <th style="width:15%;">Mes</th>
-                            <th style="width:10%;">Año</th>
-                            <th style="width:30%;">Emitido por</th>
-                            <th style="width:20%;">Monto Total</th>
-                            <th style="width:15%;" class="text-center no-print">Acciones</th>
+                            <th style="width:8%;">Nº</th>
+                            <th style="width:12%;">Mes</th>
+                            <th style="width:8%;">Año</th>
+                            <th style="width:20%;">Emitido por</th>
+                            <th style="width:15%;">Categoría Laboral</th>   <!-- NUEVA COLUMNA -->
+                            <th style="width:17%;">Monto Total</th>
+                            <th style="width:20%;" class="text-center no-print">Acciones</th>
                         </tr>
                     </thead>
                     <tbody id="cuerpoTabla">
@@ -405,17 +400,17 @@
             </div>
             
             <div class="mt-3 text-center small text-muted no-print pb-4">
-                <i class="fas fa-shield-alt me-1"></i> Datos almacenados localmente de forma segura
+                <i class="fas fa-shield-alt me-1"></i> Datos almacenados en Firebase Firestore
             </div>
         </div>
     </div>
 
-    <!-- ========== MODAL NUEVO RECIBO ========== -->
+    <!-- ========== MODAL NUEVO / EDITAR RECIBO (REUTILIZABLE) ========== -->
     <div class="modal fade" id="modalRecibo" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title fw-bold">
+                    <h5 class="modal-title fw-bold" id="modalReciboTitle">
                         <i class="fas fa-plus-circle text-primary me-2"></i> Agregar Recibo
                     </h5>
                     <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal"></button>
@@ -438,16 +433,22 @@
                                 <input type="number" class="form-control shadow-none" id="anio" placeholder="Ej. 2025" min="2000" max="2100" required />
                             </div>
                             <div class="col-md-6 mb-3">
+                                <label for="categoria" class="form-label fw-semibold text-secondary small">Categoría Laboral</label>
+                                <input type="text" class="form-control shadow-none" id="categoria" placeholder="Ej. Administrativo, Operario, etc." />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
                                 <label for="monto" class="form-label fw-semibold text-secondary small">Monto Mensual</label>
                                 <div class="input-group">
                                     <span class="input-group-text bg-light">$</span>
                                     <input type="number" step="0.01" class="form-control shadow-none" id="monto" placeholder="0.00" required />
                                 </div>
                             </div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="emisor" class="form-label fw-semibold text-secondary small">Emitido por (Empresa)</label>
-                            <input type="text" class="form-control shadow-none" id="emisor" placeholder="Nombre de la empresa" required />
+                            <div class="col-md-6 mb-3">
+                                <label for="emisor" class="form-label fw-semibold text-secondary small">Emitido por (Empresa)</label>
+                                <input type="text" class="form-control shadow-none" id="emisor" placeholder="Nombre de la empresa" required />
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -484,7 +485,21 @@
         (function() {
             'use strict';
 
-            const STORAGE_KEY = 'recibosData';
+            // ========== CONFIGURACIÓN FIREBASE ==========
+            const firebaseConfig = {
+                apiKey: "AIzaSyCSBCfESDOGNxqzFS_hOHRK5NWGFBhnnww",
+                authDomain: "haberes-rf.firebaseapp.com",
+                projectId: "haberes-rf",
+                storageBucket: "haberes-rf.firebasestorage.app",
+                messagingSenderId: "811734787736",
+                appId: "1:811734787736:web:48f4248ab72731db1bd2ed"
+            };
+
+            firebase.initializeApp(firebaseConfig);
+            const db = firebase.firestore();
+            const coleccion = db.collection('sueldo');
+
+            // ========== VARIABLES GLOBALES ==========
             const POR_PAGINA = 12;
             const MESES = [
                 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
@@ -495,6 +510,10 @@
             let paginaActual = 1;
             let filtroMes = '', filtroAnio = '', filtroEmisor = '';
             let idParaEliminar = null;
+
+            // Variables para el modal de edición
+            let modoEdicion = false;        // false = agregar, true = editar
+            let idEditando = null;
 
             // Elementos DOM
             const $landing = document.getElementById('landingPage');
@@ -514,9 +533,11 @@
             const $guardarRecibo = document.getElementById('guardarRecibo');
             const $formRecibo = document.getElementById('formRecibo');
             const $modalRecibo = new bootstrap.Modal(document.getElementById('modalRecibo'));
+            const $modalTitle = document.getElementById('modalReciboTitle');
             const $num = document.getElementById('numero');
             const $mes = document.getElementById('mes');
             const $anio = document.getElementById('anio');
+            const $categoria = document.getElementById('categoria');
             const $emisor = document.getElementById('emisor');
             const $monto = document.getElementById('monto');
 
@@ -526,29 +547,117 @@
             const $btnCancelarDelete = document.getElementById('btnCancelarDelete');
             const $btnCancelarDeleteX = document.getElementById('btnCancelarDeleteX');
 
+            // ========== FUNCIONES DE NAVEGACIÓN ==========
             function mostrarLanding() { $landing.style.display = 'flex'; $app.style.display = 'none'; }
             function mostrarApp() { $landing.style.display = 'none'; $app.style.display = 'block'; renderizarTabla(); }
 
             $btnIngresar.addEventListener('click', mostrarApp);
             $btnSalir.addEventListener('click', mostrarLanding);
 
-            function formatearMoneda(valor) { return '$' + Number(valor).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ','); }
-            function generarId() { return Date.now() + '-' + Math.random().toString(36).substr(2, 6); }
-
-            // Cargar datos (Sin datos ficticios hardcodeados)
-            function cargarDatos() {
-                const stored = localStorage.getItem(STORAGE_KEY);
-                if (stored) { 
-                    try { 
-                        recibos = JSON.parse(stored); 
-                        return; 
-                    } catch (_) {} 
-                }
-                recibos = []; 
-                guardarDatos();
+            // ========== FUNCIÓN DE FORMATO DE MONEDA ==========
+            function formatearMoneda(valor) {
+                return '$' + Number(valor).toLocaleString('es-ES', {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                });
             }
 
-            function guardarDatos() { localStorage.setItem(STORAGE_KEY, JSON.stringify(recibos)); }
+            // ========== OPERACIONES CON FIRESTORE ==========
+
+            async function cargarDatos() {
+                try {
+                    const snapshot = await coleccion.get();
+                    const docs = [];
+                    snapshot.forEach(doc => {
+                        const data = doc.data();
+                        docs.push({
+                            id: doc.id,
+                            numero: data.numero,
+                            mes: data.mes,
+                            mesIndex: data.mesIndex,
+                            anio: data.anio,
+                            emisor: data.emisor,
+                            categoria: data.categoria || '',   // si no existe, cadena vacía
+                            monto: data.monto
+                        });
+                    });
+                    recibos = docs;
+                    actualizarKPIs();
+                    renderizarTabla();
+                } catch (error) {
+                    console.error('Error al cargar datos:', error);
+                    alert('Error al cargar los datos desde Firebase. Revisa la consola.');
+                }
+            }
+
+            async function agregarRecibo(numero, mes, anio, emisor, categoria, monto) {
+                try {
+                    const mesIndex = MESES.indexOf(mes);
+                    if (mesIndex === -1) throw new Error('Mes inválido');
+
+                    const nuevoDoc = {
+                        numero: numero,
+                        mes: mes,
+                        mesIndex: mesIndex,
+                        anio: anio,
+                        emisor: emisor.trim(),
+                        categoria: categoria.trim() || '',
+                        monto: monto
+                    };
+
+                    await coleccion.add(nuevoDoc);
+                    await cargarDatos();
+                    const filtrados = obtenerFiltrados();
+                    const totalPaginas = Math.ceil(filtrados.length / POR_PAGINA) || 1;
+                    paginaActual = totalPaginas;
+                    renderizarTabla();
+                    return true;
+                } catch (error) {
+                    console.error('Error al agregar recibo:', error);
+                    alert('Error al guardar en Firebase. Revisa la consola.');
+                    return false;
+                }
+            }
+
+            async function actualizarRecibo(id, numero, mes, anio, emisor, categoria, monto) {
+                try {
+                    const mesIndex = MESES.indexOf(mes);
+                    if (mesIndex === -1) throw new Error('Mes inválido');
+
+                    await coleccion.doc(id).update({
+                        numero: numero,
+                        mes: mes,
+                        mesIndex: mesIndex,
+                        anio: anio,
+                        emisor: emisor.trim(),
+                        categoria: categoria.trim() || '',
+                        monto: monto
+                    });
+                    await cargarDatos();
+                    renderizarTabla();
+                    return true;
+                } catch (error) {
+                    console.error('Error al actualizar recibo:', error);
+                    alert('Error al actualizar en Firebase. Revisa la consola.');
+                    return false;
+                }
+            }
+
+            async function eliminarRecibo(id) {
+                try {
+                    await coleccion.doc(id).delete();
+                    await cargarDatos();
+                    const filtrados = obtenerFiltrados();
+                    const totalPaginas = Math.ceil(filtrados.length / POR_PAGINA) || 1;
+                    if (paginaActual > totalPaginas) paginaActual = totalPaginas;
+                    renderizarTabla();
+                } catch (error) {
+                    console.error('Error al eliminar recibo:', error);
+                    alert('Error al eliminar en Firebase. Revisa la consola.');
+                }
+            }
+
+            // ========== FUNCIONES DE FILTRADO Y RENDERIZADO ==========
 
             function obtenerFiltrados() {
                 const filtrados = recibos.filter(r => {
@@ -558,7 +667,8 @@
                     if (filtroEmisor && !r.emisor.toLowerCase().includes(filtroEmisor.toLowerCase())) ok = false;
                     return ok;
                 });
-                return filtrados.sort((a, b) => b.numero - a.numero);
+                filtrados.sort((a, b) => b.numero - a.numero);
+                return filtrados;
             }
 
             function renderizarTabla() {
@@ -573,7 +683,7 @@
                 $resultadosFiltro.textContent = totalFiltrados;
 
                 if (paginaDatos.length === 0) {
-                    $cuerpo.innerHTML = `<tr><td colspan="6" class="text-center text-muted py-5"><i class="fas fa-inbox fa-2x mb-3 d-block text-light"></i>No hay recibos registrados o coincidentes.</td></tr>`;
+                    $cuerpo.innerHTML = `<tr><td colspan="7" class="text-center text-muted py-5"><i class="fas fa-inbox fa-2x mb-3 d-block text-light"></i>No hay recibos registrados o coincidentes.</td></tr>`;
                 } else {
                     let html = '';
                     for (const r of paginaDatos) {
@@ -583,8 +693,12 @@
                                 <td class="fw-medium">${r.mes}</td>
                                 <td>${r.anio}</td>
                                 <td>${r.emisor}</td>
+                                <td>${r.categoria || '—'}</td>
                                 <td><span class="fw-bold text-success">${formatearMoneda(r.monto)}</span></td>
                                 <td class="text-center no-print">
+                                    <button class="btn btn-light text-primary btn-sm btn-editar border me-1" data-id="${r.id}" title="Editar">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
                                     <button class="btn btn-light text-danger btn-sm btn-eliminar border" data-id="${r.id}" title="Eliminar">
                                         <i class="fas fa-trash-alt"></i>
                                     </button>
@@ -594,7 +708,16 @@
                     }
                     $cuerpo.innerHTML = html;
 
-                    // Abrir modal flotante rojo al hacer clic en eliminar
+                    // Eventos para editar
+                    document.querySelectorAll('.btn-editar').forEach(btn => {
+                        btn.addEventListener('click', function() {
+                            const id = this.dataset.id;
+                            const recibo = recibos.find(r => r.id === id);
+                            if (recibo) abrirModalEdicion(recibo);
+                        });
+                    });
+
+                    // Eventos para eliminar
                     document.querySelectorAll('.btn-eliminar').forEach(btn => {
                         btn.addEventListener('click', function() {
                             abrirModalEliminar(this.dataset.id);
@@ -604,27 +727,6 @@
                 renderizarPaginacion(totalPaginas);
                 actualizarKPIs();
             }
-
-            // Gestión del Modal Flotante Rojo para Eliminar
-            function abrirModalEliminar(id) {
-                idParaEliminar = id;
-                $deleteModal.style.display = 'block';
-            }
-
-            function cerrarModalEliminar() {
-                idParaEliminar = null;
-                $deleteModal.style.display = 'none';
-            }
-
-            $btnCancelarDelete.addEventListener('click', cerrarModalEliminar);
-            $btnCancelarDeleteX.addEventListener('click', cerrarModalEliminar);
-
-            $btnConfirmarDelete.addEventListener('click', function() {
-                if (idParaEliminar) {
-                    eliminarRecibo(idParaEliminar);
-                    cerrarModalEliminar();
-                }
-            });
 
             function renderizarPaginacion(totalPaginas) {
                 let html = `
@@ -656,36 +758,142 @@
                 $totalRecibos.textContent = recibos.length;
             }
 
-            function agregarRecibo(numero, mes, anio, emisor, monto) {
-                const mesIndex = MESES.indexOf(mes);
-                if (mesIndex === -1) return false;
-                recibos.push({ id: generarId(), numero, mes, mesIndex, anio, emisor: emisor.trim(), monto });
-                guardarDatos();
-                paginaActual = Math.ceil(obtenerFiltrados().length / POR_PAGINA) || 1;
-                renderizarTabla();
-                return true;
+            // ========== GESTIÓN DEL MODAL DE ELIMINACIÓN ==========
+
+            function abrirModalEliminar(id) {
+                idParaEliminar = id;
+                $deleteModal.style.display = 'block';
             }
 
-            function eliminarRecibo(id) {
-                recibos = recibos.filter(r => r.id !== id);
-                guardarDatos();
-                const totalPaginas = Math.ceil(obtenerFiltrados().length / POR_PAGINA) || 1;
-                if (paginaActual > totalPaginas) paginaActual = totalPaginas;
-                renderizarTabla();
+            function cerrarModalEliminar() {
+                idParaEliminar = null;
+                $deleteModal.style.display = 'none';
             }
+
+            $btnCancelarDelete.addEventListener('click', cerrarModalEliminar);
+            $btnCancelarDeleteX.addEventListener('click', cerrarModalEliminar);
+
+            $btnConfirmarDelete.addEventListener('click', function() {
+                if (idParaEliminar) {
+                    eliminarRecibo(idParaEliminar);
+                    cerrarModalEliminar();
+                }
+            });
+
+            // ========== GESTIÓN DEL MODAL DE AGREGAR / EDITAR ==========
+
+            function abrirModalEdicion(recibo) {
+                modoEdicion = true;
+                idEditando = recibo.id;
+                $modalTitle.innerHTML = `<i class="fas fa-edit text-primary me-2"></i> Editar Recibo #${recibo.numero}`;
+                // Precargar datos
+                $num.value = recibo.numero;
+                $mes.value = recibo.mes;
+                $anio.value = recibo.anio;
+                $categoria.value = recibo.categoria || '';
+                $emisor.value = recibo.emisor;
+                $monto.value = recibo.monto;
+                $modalRecibo.show();
+            }
+
+            function abrirModalAgregar() {
+                modoEdicion = false;
+                idEditando = null;
+                $modalTitle.innerHTML = `<i class="fas fa-plus-circle text-primary me-2"></i> Agregar Recibo`;
+                // Resetear y predefinir
+                $formRecibo.reset();
+                const maxNum = recibos.reduce((max, r) => Math.max(max, r.numero), 0);
+                $num.value = maxNum + 1;
+                $anio.value = new Date().getFullYear();
+                $mes.value = MESES[new Date().getMonth()];
+                $categoria.value = '';
+                $modalRecibo.show();
+            }
+
+            // Botón "Nuevo" abre el modal en modo agregar
+            document.getElementById('btnAgregar').addEventListener('click', abrirModalAgregar);
+
+            // Evento show del modal (para asegurar que siempre se resetee si es agregar)
+            document.getElementById('modalRecibo').addEventListener('show.bs.modal', function() {
+                // Si no es edición, se prepara como agregar (esto lo maneja el botón Nuevo)
+                // Pero si se abre por otro lado, asegurar que esté en modo agregar por defecto
+                if (!modoEdicion) {
+                    abrirModalAgregar(); // esto lo reconfigura
+                }
+            });
+
+            // Guardar (Agregar o Actualizar)
+            $guardarRecibo.addEventListener('click', async function() {
+                const num = parseInt($num.value);
+                const m = $mes.value;
+                const a = parseInt($anio.value);
+                const e = $emisor.value.trim();
+                const cat = $categoria.value.trim();
+                const mon = parseFloat($monto.value);
+
+                if (!num || num <= 0) return alert('Ingresa un número válido.');
+                if (!m) return alert('Selecciona un mes.');
+                if (!a || a < 2000 || a > 2100) return alert('Ingresa un año válido.');
+                if (!e) return alert('Ingresa el emisor.');
+                if (!mon || mon <= 0) return alert('Ingresa un monto válido.');
+
+                let exito = false;
+                if (modoEdicion && idEditando) {
+                    exito = await actualizarRecibo(idEditando, num, m, a, e, cat, mon);
+                } else {
+                    exito = await agregarRecibo(num, m, a, e, cat, mon);
+                }
+
+                if (exito) {
+                    $modalRecibo.hide();
+                    $formRecibo.reset();
+                    modoEdicion = false;
+                    idEditando = null;
+                }
+            });
+
+            // ========== IMPRIMIR ==========
 
             function imprimirTablaFiltrada() {
                 const filtrados = obtenerFiltrados();
                 if (filtrados.length === 0) return alert('No hay datos para imprimir con el filtro actual.');
                 let filas = '';
-                for (const r of filtrados) filas += `<tr><td>${r.numero}</td><td>${r.mes}</td><td>${r.anio}</td><td>${r.emisor}</td><td style="text-align:right;">${formatearMoneda(r.monto)}</td></tr>`;
+                for (const r of filtrados) {
+                    filas += `<tr>
+                        <td>${r.numero}</td>
+                        <td>${r.mes}</td>
+                        <td>${r.anio}</td>
+                        <td>${r.emisor}</td>
+                        <td>${r.categoria || '—'}</td>
+                        <td style="text-align:right;">${formatearMoneda(r.monto)}</td>
+                    </tr>`;
+                }
                 const total = filtrados.reduce((acc, r) => acc + r.monto, 0);
-                const estilo = `<style>body{font-family:'Inter',sans-serif;padding:2rem;}h2{color:#0f172a;margin-bottom:1rem;}table{width:100%;border-collapse:collapse;margin-top:1rem;}th{background:#f1f5f9;font-weight:600;padding:0.6rem 0.8rem;border:1px solid #cbd5e1;}td{padding:0.5rem 0.8rem;border:1px solid #cbd5e1;}.total-row{font-weight:700;background:#f8fafc;}.footer{margin-top:2rem;color:#64748b;font-size:0.9rem;}.badge{background:#3b82f6;color:#fff;padding:0.2rem 0.8rem;border-radius:20px;}</style>`;
-                const contenido = `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Recibos - Reporte</title>${estilo}</head><body><h2><i class="fas fa-receipt"></i> Reporte de Recibos</h2><p><span class="badge">${filtrados.length} recibos</span> &nbsp; Total: <strong>${formatearMoneda(total)}</strong></p><table><thead><tr><th>Nº</th><th>Mes</th><th>Año</th><th>Emitido por</th><th>Monto</th></tr></thead><tbody>${filas}<tr class="total-row"><td colspan="4" style="text-align:right;">TOTAL</td><td style="text-align:right;">${formatearMoneda(total)}</td></tr></tbody></table><div class="footer">Documento generado el ${new Date().toLocaleDateString()} a las ${new Date().toLocaleTimeString()}</div></body></html>`;
+                const estilo = `<style>
+                    body{font-family:'Inter',sans-serif;padding:2rem;}
+                    h2{color:#0f172a;margin-bottom:1rem;}
+                    table{width:100%;border-collapse:collapse;margin-top:1rem;}
+                    th{background:#f1f5f9;font-weight:600;padding:0.6rem 0.8rem;border:1px solid #cbd5e1;}
+                    td{padding:0.5rem 0.8rem;border:1px solid #cbd5e1;}
+                    .total-row{font-weight:700;background:#f8fafc;}
+                    .footer{margin-top:2rem;color:#64748b;font-size:0.9rem;}
+                    .badge{background:#3b82f6;color:#fff;padding:0.2rem 0.8rem;border-radius:20px;}
+                </style>`;
+                const contenido = `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Recibos - Reporte</title>${estilo}</head><body>
+                    <h2><i class="fas fa-receipt"></i> Reporte de Recibos</h2>
+                    <p><span class="badge">${filtrados.length} recibos</span> &nbsp; Total: <strong>${formatearMoneda(total)}</strong></p>
+                    <table>
+                        <thead><tr><th>Nº</th><th>Mes</th><th>Año</th><th>Emitido por</th><th>Categoría</th><th>Monto</th></tr></thead>
+                        <tbody>${filas}<tr class="total-row"><td colspan="5" style="text-align:right;">TOTAL</td><td style="text-align:right;">${formatearMoneda(total)}</td></tr></tbody>
+                    </table>
+                    <div class="footer">Documento generado el ${new Date().toLocaleDateString()} a las ${new Date().toLocaleTimeString()}</div>
+                </body></html>`;
                 const ventana = window.open('', '_blank', 'width=1000,height=600');
                 if (!ventana) return alert('Por favor, permite las ventanas emergentes para imprimir.');
                 ventana.document.write(contenido); ventana.document.close(); ventana.focus(); ventana.print();
             }
+
+            // ========== LLENAR SELECTS ==========
 
             function llenarSelects() {
                 const selects = [$filtroMes, $mes];
@@ -699,9 +907,13 @@
                 $filtroAnio.value = ''; $filtroEmisor.value = '';
             }
 
-            function init() {
-                cargarDatos(); llenarSelects();
+            // ========== INICIALIZACIÓN ==========
+
+            async function init() {
+                llenarSelects();
                 document.getElementById('fechaActual').textContent = new Date().toLocaleDateString('es-ES', { day: '2-digit', month: 'long', year: 'numeric' });
+
+                await cargarDatos();
 
                 $btnFiltrar.addEventListener('click', function() {
                     filtroMes = $filtroMes.value; filtroAnio = $filtroAnio.value.trim(); filtroEmisor = $filtroEmisor.value.trim();
@@ -711,24 +923,9 @@
                 [$filtroAnio, $filtroEmisor, $filtroMes].forEach(el => el.addEventListener('keydown', e => { if (e.key === 'Enter') $btnFiltrar.click(); }));
                 $btnImprimir.addEventListener('click', imprimirTablaFiltrada);
 
-                $guardarRecibo.addEventListener('click', function() {
-                    const num = parseInt($num.value), m = $mes.value, a = parseInt($anio.value), e = $emisor.value.trim(), mon = parseFloat($monto.value);
-                    if (!num || num <= 0) return alert('Ingresa un número válido.');
-                    if (!m) return alert('Selecciona un mes.');
-                    if (!a || a < 2000 || a > 2100) return alert('Ingresa un año válido.');
-                    if (!e) return alert('Ingresa el emisor.');
-                    if (!mon || mon <= 0) return alert('Ingresa un monto válido.');
-                    if (agregarRecibo(num, m, a, e, mon)) { $modalRecibo.hide(); $formRecibo.reset(); $anio.value = new Date().getFullYear(); }
-                });
-
-                document.getElementById('modalRecibo').addEventListener('show.bs.modal', function() {
-                    $formRecibo.reset(); $anio.value = new Date().getFullYear();
-                    $num.value = recibos.reduce((max, r) => Math.max(max, r.numero), 0) + 1;
-                    $mes.value = MESES[new Date().getMonth()];
-                });
-
                 actualizarKPIs();
             }
+
             document.addEventListener('DOMContentLoaded', init);
         })();
     </script>
