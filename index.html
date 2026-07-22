@@ -83,7 +83,7 @@
             flex: 1;
             background: var(--glass-bg);
             backdrop-filter: blur(12px);
-            border: 1px solid var(--glass-border);
+            border: 3px solid var(--glass-border);
             border-radius: 16px;
             display: flex;
             flex-direction: column;
@@ -132,6 +132,21 @@
             font-size: 4vh;
             opacity: 0.05;
             font-weight: 900;
+        }
+
+        /* Estados de selección */
+        .card.selected {
+            transform: scale(1.02);
+            background: #ffffff;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            border-width: 3px;
+            z-index: 10;
+        }
+
+        .card.dimmed {
+            filter: grayscale(0.9) opacity(0.6);
+            transform: scale(0.96);
+            pointer-events: none; /* evita clics mientras está gris */
         }
 
         footer {
@@ -278,7 +293,8 @@
                 icon: "fa-user",
                 links: [
                     { name: "Peso Corporal", url: "https://app-fioravante.github.io/peso-corporal/" },
-                    { name: "Alquiler Vivienda", url: "https://app-fioravante.github.io/alquiler-vivienda/" }
+                    { name: "Alquiler Vivienda", url: "https://app-fioravante.github.io/alquiler-vivienda/" },
+                    { name: "Recibos de Sueldo", url: "https://app-fioravante.github.io/apps-fioravante/recibos" }
                 ]
             },
             {
@@ -340,19 +356,64 @@
             }
         ];
 
+        // Colores de borde para cada módulo (8 colores distintos)
+        const borderColors = [
+            '#e11d48', // rojo
+            '#2563eb', // azul
+            '#16a34a', // verde
+            '#ca8a04', // amarillo
+            '#7c3aed', // morado
+            '#0891b2', // cian
+            '#db2777', // rosa
+            '#ea580c'  // naranja
+        ];
+
         const topRow = document.getElementById('top-row');
         const bottomRow = document.getElementById('bottom-row');
 
         function createCard(mod, index) {
             const card = document.createElement('div');
             card.className = 'card';
-            card.onclick = () => openModal(mod);
+            // Asignar color de borde único
+            card.style.borderColor = borderColors[index % borderColors.length];
+            card.dataset.index = index;
+            card.onclick = () => {
+                selectCard(card);
+                openModal(mod);
+            };
             card.innerHTML = `
                 <div class="card-number">${index + 1}</div>
                 <i class="fas ${mod.icon} icon-box"></i>
                 <h3>${mod.title}</h3>
             `;
             return card;
+        }
+
+        // Manejo de selección
+        let selectedCard = null;
+
+        function selectCard(card) {
+            // Si ya hay una seleccionada, la desmarcamos
+            if (selectedCard) {
+                selectedCard.classList.remove('selected');
+                // Restaurar todas las tarjetas (quitar dimmed)
+                document.querySelectorAll('.card').forEach(c => c.classList.remove('dimmed'));
+            }
+            // Marcar la nueva
+            card.classList.add('selected');
+            // Grisear las demás
+            document.querySelectorAll('.card').forEach(c => {
+                if (c !== card) c.classList.add('dimmed');
+            });
+            selectedCard = card;
+        }
+
+        function clearSelection() {
+            if (selectedCard) {
+                selectedCard.classList.remove('selected');
+                selectedCard = null;
+            }
+            document.querySelectorAll('.card').forEach(c => c.classList.remove('dimmed'));
         }
 
         function init() {
@@ -397,7 +458,11 @@
 
         function closeModalDirect() {
             modalOverlay.classList.remove('active');
-            setTimeout(() => modalOverlay.style.display = 'none', 300);
+            setTimeout(() => {
+                modalOverlay.style.display = 'none';
+                // Al cerrar el modal, restauramos todas las tarjetas
+                clearSelection();
+            }, 300);
         }
 
         function closeModal(e) {
