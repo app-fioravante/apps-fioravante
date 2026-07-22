@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Recibos · sueldo-anteriores</title>
+
+    <!-- Bootstrap 5 + FontAwesome 6 + Google Fonts -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+    <!-- Firebase SDK compat (v9) -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+
+    <style>
+        :root {
+            --bg: #f1f5f9;
+            --card-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --radius: 1.25rem;
+        }
+
+        * {
+            font-family: 'Inter', system-ui, sans-serif;
+        }
+
+        body {
+            background: var(--bg);
+            color: #0f172a;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+        }
+
+        /* Encabezado */
+        .header-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .header-bar h1 {
+            font-weight: 700;
+            font-size: 1.75rem;
+            letter-spacing: -0.02em;
+        }
+
+        .header-bar .badge-date {
+            background: white;
+            border-radius: 50px;
+            padding: 0.5rem 1.2rem;
+            font-weight: 500;
+            box-shadow: var(--card-shadow);
+            border: 1px solid #e2e8f0;
+        }
+
+        /* KPIs */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.25rem;
+            margin-bottom: 2rem;
+        }
+
+        .kpi-card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 1.5rem 1.25rem;
+            box-shadow: var(--card-shadow);
+            border: 1px solid #eef2f6;
+            transition: transform 0.2s;
+        }
+
+        .kpi-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .kpi-card .label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: #64748b;
+            font-weight: 600;
+        }
+
+        .kpi-card .value {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-top: 0.3rem;
+        }
+
+        .kpi-card .value small {
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: #64748b;
+            margin-left: 0.3rem;
+        }
+
+        .kpi-card .icon {
+            float: right;
+            font-size: 2rem;
+            opacity: 0.25;
+        }
+
+        /* Filtros */
+        .filtros-box {
+            background: white;
+            border-radius: var(--radius);
+            padding: 1.25rem 1.5rem;
+            box-shadow: var(--card-shadow);
+            border: 1px solid #eef2f6;
+            margin-bottom: 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-end;
+            gap: 1rem;
+        }
+
+        .filtros-box .grupo {
+            flex: 1 0 150px;
+            min-width: 120px;
+        }
+
+        .filtros-box label {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: #64748b;
+            margin-bottom: 0.25rem;
+        }
+
+        .filtros-box input,
+        .filtros-box select {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.6rem;
+            padding: 0.45rem 0.8rem;
+            width: 100%;
+            font-size: 0.9rem;
+            transition: 0.2s;
+        }
+
+        .filtros-box input:focus,
+        .filtros-box select:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+        }
+
+        .filtros-box .acciones {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            border: none;
+            border-radius: 50px;
+            padding: 0.45rem 1.5rem;
+            font-weight: 500;
+            transition: 0.2s;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-hover);
+            transform: translateY(-1px);
+        }
+
+        .btn-success {
+            background: #0d9488;
+            border: none;
+            border-radius: 50px;
+            padding: 0.45rem 1.5rem;
+            font-weight: 500;
+        }
+
+        .btn-success:hover {
+            background: #0f766e;
+        }
+
+        /* Tabla */
+        .table-wrapper {
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--card-shadow);
+            border: 1px solid #eef2f6;
+            overflow: hidden;
+        }
+
+        .table {
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        .table thead th {
+            background: #f8fafc;
+            color: #475569;
+            font-weight: 600;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            padding: 1rem 0.8rem;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .table tbody td {
+            padding: 0.8rem;
+            vertical-align: middle;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .table tbody tr:hover {
+            background: #fafbfc;
+        }
+
+        .table .monto {
+            font-weight: 700;
+            color: #0d9488;
+        }
+
+        .table .acciones-cell {
+            white-space: nowrap;
+        }
+
+        .btn-icon {
+            background: transparent;
+            border: none;
+            padding: 0.3rem 0.6rem;
+            border-radius: 0.4rem;
+            transition: 0.15s;
+            color: #64748b;
+        }
+
+        .btn-icon:hover {
+            background: #f1f5f9;
+            color: #0f172a;
+        }
+
+        .btn-icon.text-danger:hover {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+
+        .btn-icon.text-primary:hover {
+            background: #dbeafe;
+            color: #2563eb;
+        }
+
+        /* Paginación */
+        .pagination-custom {
+            display: flex;
+            justify-content: center;
+            gap: 0.3rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .pagination-custom .page-item {
+            list-style: none;
+        }
+
+        .pagination-custom .page-link {
+            display: inline-block;
+            padding: 0.4rem 0.9rem;
+            border-radius: 0.6rem;
+            border: 1px solid #e2e8f0;
+            background: white;
+            color: #334155;
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.15s;
+        }
+
+        .pagination-custom .page-link:hover {
+            background: #f1f5f9;
+            border-color: #cbd5e1;
+        }
+
+        .pagination-custom .active .page-link {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: white;
+        }
+
+        .pagination-custom .disabled .page-link {
+            opacity: 0.4;
+            pointer-events: none;
+        }
+
+        /* Modal */
+        .modal-content {
+            border: none;
+            border-radius: 1.5rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        .modal-header {
+            border-bottom: 1px solid #f1f5f9;
+            padding: 1.5rem 1.5rem 0.75rem;
+        }
+
+        .modal-footer {
+            border-top: 1px solid #f1f5f9;
+            padding: 0.75rem 1.5rem 1.5rem;
+        }
+
+        .modal-title {
+            font-weight: 700;
+        }
+
+        /* Toast de confirmación de eliminación (usamos modal en lugar de toast) */
+        .btn-outline-secondary {
+            border-radius: 50px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .kpi-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .filtros-box {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .filtros-box .grupo {
+                flex: 1 1 auto;
+            }
+            .header-bar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        @media print {
+            .no-print { display: none !important; }
+            .table-wrapper { border: none; box-shadow: none; }
+            .kpi-card { border: 1px solid #ccc; box-shadow: none; }
+            body { background: white; padding: 0.5in; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <!-- ===== ENCABEZADO ===== -->
+        <div class="header-bar">
+            <div>
+                <h1><i class="fas fa-receipt text-primary me-2"></i>Recibos Anteriores</h1>
+                <p class="text-muted mb-0" style="font-size:0.9rem;">Gestión de sueldos · Colección <code>sueldo-anteriores</code></p>
+            </div>
+            <div class="d-flex align-items-center gap-3">
+                <span class="badge-date"><i class="far fa-calendar-alt me-1"></i> <span id="fechaActual"></span></span>
+                <button id="btnImprimir" class="btn btn-outline-secondary btn-sm no-print" style="border-radius:50px;">
+                    <i class="fas fa-print me-1"></i> Imprimir
+                </button>
+            </div>
+        </div>
+
+        <!-- ===== KPIS ===== -->
+        <div class="kpi-grid">
+            <div class="kpi-card">
+                <span class="icon"><i class="fas fa-wallet"></i></span>
+                <div class="label">Total Cobrado</div>
+                <div class="value" id="totalCobrado">$0.00</div>
+            </div>
+            <div class="kpi-card">
+                <span class="icon"><i class="fas fa-file-invoice"></i></span>
+                <div class="label">Cantidad de Recibos</div>
+                <div class="value" id="totalRecibos">0</div>
+            </div>
+            <div class="kpi-card">
+                <span class="icon"><i class="fas fa-filter"></i></span>
+                <div class="label">Filtro Coincidencias</div>
+                <div class="value" id="resultadosFiltro">0</div>
+            </div>
+        </div>
+
+        <!-- ===== FILTROS ===== -->
+        <div class="filtros-box no-print">
+            <div class="grupo">
+                <label><i class="far fa-calendar-alt me-1"></i> Mes</label>
+                <select id="filtroMes"><option value="">Todos</option></select>
+            </div>
+            <div class="grupo">
+                <label><i class="far fa-calendar me-1"></i> Año</label>
+                <input type="number" id="filtroAnio" placeholder="Ej. 2025" min="1998" max="2100" />
+            </div>
+            <div class="grupo">
+                <label><i class="fas fa-building me-1"></i> Emisor</label>
+                <input type="text" id="filtroEmisor" placeholder="Empresa" />
+            </div>
+            <div class="grupo accions">
+                <button id="btnFiltrar" class="btn btn-primary btn-sm"><i class="fas fa-search me-1"></i> Filtrar</button>
+                <button id="btnAgregar" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#modalRecibo"><i class="fas fa-plus me-1"></i> Nuevo</button>
+            </div>
+        </div>
+
+        <!-- ===== TABLA ===== -->
+        <div class="table-wrapper">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th style="width:8%;">Nº</th>
+                        <th style="width:12%;">Mes</th>
+                        <th style="width:8%;">Año</th>
+                        <th style="width:22%;">Emitido por</th>
+                        <th style="width:18%;">Categoría</th>
+                        <th style="width:15%;">Monto</th>
+                        <th style="width:17%;" class="text-center no-print">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="cuerpoTabla">
+                    <tr><td colspan="7" class="text-center text-muted py-4">Cargando...</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- ===== PAGINACIÓN ===== -->
+        <nav class="no-print">
+            <ul class="pagination-custom" id="paginacion"></ul>
+        </nav>
+
+        <div class="text-center text-muted small mt-3 no-print">
+            <i class="fas fa-database me-1"></i> Datos en Firestore · colección <strong>sueldo-anteriores</strong>
+        </div>
+    </div>
+
+    <!-- ===== MODAL AGREGAR / EDITAR ===== -->
+    <div class="modal fade" id="modalRecibo" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitle"><i class="fas fa-plus-circle text-primary me-2"></i>Agregar Recibo</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body px-4">
+                    <form id="formRecibo" autocomplete="off">
+                        <div class="row g-3">
+                            <div class="col-6">
+                                <label class="form-label fw-semibold text-secondary small">Número</label>
+                                <input type="number" class="form-control" id="numero" placeholder="Ej. 101" required />
+                            </div>
+                            <div class="col-6">
+                                <label class="form-label fw-semibold text-secondary small">Mes</label>
+                                <select class="form-select" id="mes" required></select>
+                            </div>
+                            <div class="col-6">
+                                <label class="form-label fw-semibold text-secondary small">Año</label>
+                                <!-- Cambio: mínimo 1998 -->
+                                <input type="number" class="form-control" id="anio" placeholder="2025" min="1998" max="2100" required />
+                            </div>
+                            <div class="col-6">
+                                <label class="form-label fw-semibold text-secondary small">Monto ($)</label>
+                                <input type="number" step="0.01" class="form-control" id="monto" placeholder="0.00" required />
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label fw-semibold text-secondary small">Emitido por</label>
+                                <input type="text" class="form-control" id="emisor" placeholder="Nombre de la empresa" required />
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label fw-semibold text-secondary small">Categoría Laboral</label>
+                                <input type="text" class="form-control" id="categoria" placeholder="Ej. Administrativo, Operario" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary rounded-pill px-4" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary rounded-pill px-4" id="guardarRecibo"><i class="fas fa-save me-1"></i> Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== MODAL CONFIRMACIÓN ELIMINAR ===== -->
+    <div class="modal fade" id="modalEliminar" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm">
+            <div class="modal-content">
+                <div class="modal-header border-0 pb-0">
+                    <h5 class="modal-title text-danger"><i class="fas fa-exclamation-triangle me-2"></i>Eliminar</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body px-4">
+                    <p>¿Estás seguro de eliminar este recibo? Esta acción no se puede deshacer.</p>
+                </div>
+                <div class="modal-footer border-0 pt-0">
+                    <button type="button" class="btn btn-outline-secondary rounded-pill px-4" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-danger rounded-pill px-4" id="confirmarEliminar"><i class="fas fa-trash-alt me-1"></i> Eliminar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        (function() {
+            'use strict';
+
+            // ========== FIREBASE CONFIG ==========
+            const firebaseConfig = {
+                apiKey: "AIzaSyCSBCfESDOGNxqzFS_hOHRK5NWGFBhnnww",
+                authDomain: "haberes-rf.firebaseapp.com",
+                projectId: "haberes-rf",
+                storageBucket: "haberes-rf.firebasestorage.app",
+                messagingSenderId: "811734787736",
+                appId: "1:811734787736:web:48f4248ab72731db1bd2ed"
+            };
+
+            firebase.initializeApp(firebaseConfig);
+            const db = firebase.firestore();
+            const coleccion = db.collection('sueldo-anteriores'); // <-- NUEVA COLECCIÓN
+
+            // ========== CONSTANTES ==========
+            const POR_PAGINA = 12;
+            const MESES = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+                'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+            ];
+
+            // ========== ESTADO ==========
+            let recibos = [];
+            let paginaActual = 1;
+            let filtroMes = '',
+                filtroAnio = '',
+                filtroEmisor = '';
+            let idParaEliminar = null;
+            let modoEdicion = false;
+            let idEditando = null;
+
+            // ========== DOM REFS ==========
+            const $cuerpo = document.getElementById('cuerpoTabla');
+            const $paginacion = document.getElementById('paginacion');
+            const $totalCobrado = document.getElementById('totalCobrado');
+            const $totalRecibos = document.getElementById('totalRecibos');
+            const $resultadosFiltro = document.getElementById('resultadosFiltro');
+            const $filtroMes = document.getElementById('filtroMes');
+            const $filtroAnio = document.getElementById('filtroAnio');
+            const $filtroEmisor = document.getElementById('filtroEmisor');
+            const $btnFiltrar = document.getElementById('btnFiltrar');
+            const $btnImprimir = document.getElementById('btnImprimir');
+            const $btnAgregar = document.getElementById('btnAgregar');
+            const $guardarRecibo = document.getElementById('guardarRecibo');
+            const $formRecibo = document.getElementById('formRecibo');
+            const $modalRecibo = new bootstrap.Modal(document.getElementById('modalRecibo'));
+            const $modalEliminar = new bootstrap.Modal(document.getElementById('modalEliminar'));
+            const $modalTitle = document.getElementById('modalTitle');
+            const $num = document.getElementById('numero');
+            const $mes = document.getElementById('mes');
+            const $anio = document.getElementById('anio');
+            const $categoria = document.getElementById('categoria');
+            const $emisor = document.getElementById('emisor');
+            const $monto = document.getElementById('monto');
+            const $confirmarEliminar = document.getElementById('confirmarEliminar');
+
+            // ========== UTILIDADES ==========
+            function formatearMoneda(valor) {
+                return '$' + Number(valor).toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            }
+
+            function llenarSelectMes(select, incluirTodos = false) {
+                select.innerHTML = '';
+                if (incluirTodos) {
+                    const opt = document.createElement('option');
+                    opt.value = '';
+                    opt.textContent = 'Todos los meses';
+                    select.appendChild(opt);
+                }
+                for (const m of MESES) {
+                    const opt = document.createElement('option');
+                    opt.value = m;
+                    opt.textContent = m;
+                    select.appendChild(opt);
+                }
+            }
+
+            // ========== CARGAR DATOS ==========
+            async function cargarDatos() {
+                try {
+                    const snapshot = await coleccion.get();
+                    const docs = [];
+                    snapshot.forEach(doc => {
+                        const d = doc.data();
+                        docs.push({
+                            id: doc.id,
+                            numero: d.numero,
+                            mes: d.mes,
+                            mesIndex: d.mesIndex,
+                            anio: d.anio,
+                            emisor: d.emisor,
+                            categoria: d.categoria || '',
+                            monto: d.monto
+                        });
+                    });
+                    recibos = docs;
+                    actualizarKPIs();
+                } catch (error) {
+                    console.error('Error al cargar:', error);
+                    alert('Error al cargar datos de Firebase. Revisa consola.');
+                }
+            }
+
+            function actualizarKPIs() {
+                const total = recibos.reduce((acc, r) => acc + r.monto, 0);
+                $totalCobrado.textContent = formatearMoneda(total);
+                $totalRecibos.textContent = recibos.length;
+            }
+
+            // ========== FILTRADO ==========
+            function obtenerFiltrados() {
+                return recibos
+                    .filter(r => {
+                        if (filtroMes && r.mes !== filtroMes) return false;
+                        if (filtroAnio && r.anio !== parseInt(filtroAnio)) return false;
+                        if (filtroEmisor && !r.emisor.toLowerCase().includes(filtroEmisor.toLowerCase())) return false;
+                        return true;
+                    })
+                    .sort((a, b) => b.numero - a.numero);
+            }
+
+            // ========== RENDERIZAR TABLA ==========
+            function renderizarTabla() {
+                const filtrados = obtenerFiltrados();
+                const totalFiltrados = filtrados.length;
+                const totalPaginas = Math.ceil(totalFiltrados / POR_PAGINA) || 1;
+                if (paginaActual > totalPaginas) paginaActual = totalPaginas;
+                const inicio = (paginaActual - 1) * POR_PAGINA;
+                const fin = Math.min(inicio + POR_PAGINA, totalFiltrados);
+                const paginaDatos = filtrados.slice(inicio, fin);
+
+                $resultadosFiltro.textContent = totalFiltrados;
+
+                if (paginaDatos.length === 0) {
+                    $cuerpo.innerHTML = `<tr><td colspan="7" class="text-center text-muted py-5"><i class="fas fa-inbox fa-2x d-block mb-2 text-secondary"></i>No hay recibos</td></tr>`;
+                } else {
+                    let html = '';
+                    for (const r of paginaDatos) {
+                        html += `
+                            <tr>
+                                <td><span class="fw-bold">#${r.numero}</span></td>
+                                <td>${r.mes}</td>
+                                <td>${r.anio}</td>
+                                <td>${r.emisor}</td>
+                                <td>${r.categoria || '—'}</td>
+                                <td class="monto">${formatearMoneda(r.monto)}</td>
+                                <td class="text-center accions-cell no-print">
+                                    <button class="btn-icon text-primary btn-editar" data-id="${r.id}" title="Editar"><i class="fas fa-edit"></i></button>
+                                    <button class="btn-icon text-danger btn-eliminar" data-id="${r.id}" title="Eliminar"><i class="fas fa-trash-alt"></i></button>
+                                </td>
+                            </tr>
+                        `;
+                    }
+                    $cuerpo.innerHTML = html;
+
+                    // Eventos editar
+                    document.querySelectorAll('.btn-editar').forEach(btn => {
+                        btn.addEventListener('click', function() {
+                            const id = this.dataset.id;
+                            const recibo = recibos.find(r => r.id === id);
+                            if (recibo) abrirModalEdicion(recibo);
+                        });
+                    });
+
+                    // Eventos eliminar
+                    document.querySelectorAll('.btn-eliminar').forEach(btn => {
+                        btn.addEventListener('click', function() {
+                            idParaEliminar = this.dataset.id;
+                            $modalEliminar.show();
+                        });
+                    });
+                }
+
+                renderizarPaginacion(totalPaginas);
+            }
+
+            function renderizarPaginacion(totalPaginas) {
+                let html = '';
+                const prev = paginaActual - 1;
+                const next = paginaActual + 1;
+                html += `<li class="page-item ${paginaActual === 1 ? 'disabled' : ''}"><a class="page-link" href="#" data-pagina="${prev}">&laquo;</a></li>`;
+                for (let i = 1; i <= totalPaginas; i++) {
+                    html += `<li class="page-item ${i === paginaActual ? 'active' : ''}"><a class="page-link" href="#" data-pagina="${i}">${i}</a></li>`;
+                }
+                html += `<li class="page-item ${paginaActual === totalPaginas ? 'disabled' : ''}"><a class="page-link" href="#" data-pagina="${next}">&raquo;</a></li>`;
+                $paginacion.innerHTML = html;
+
+                $paginacion.querySelectorAll('a.page-link').forEach(enlace => {
+                    enlace.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const p = parseInt(this.dataset.pagina);
+                        if (!isNaN(p) && p >= 1 && p <= totalPaginas) {
+                            paginaActual = p;
+                            renderizarTabla();
+                        }
+                    });
+                });
+            }
+
+            // ========== CRUD ==========
+            function existeNumero(numero, idExcluir) {
+                return recibos.some(r => r.numero === numero && r.id !== idExcluir);
+            }
+
+            async function agregarRecibo(numero, mes, anio, emisor, categoria, monto) {
+                if (existeNumero(numero)) {
+                    alert(`Ya existe un recibo con el número ${numero}.`);
+                    return false;
+                }
+                const mesIndex = MESES.indexOf(mes);
+                if (mesIndex === -1) throw new Error('Mes inválido');
+                try {
+                    await coleccion.add({
+                        numero,
+                        mes,
+                        mesIndex,
+                        anio,
+                        emisor: emisor.trim(),
+                        categoria: categoria.trim() || '',
+                        monto
+                    });
+                    await cargarDatos();
+                    reposicionarPaginaPorId(null); // va al final
+                    renderizarTabla();
+                    return true;
+                } catch (error) {
+                    console.error(error);
+                    alert('Error al guardar.');
+                    return false;
+                }
+            }
+
+            async function actualizarRecibo(id, numero, mes, anio, emisor, categoria, monto) {
+                if (existeNumero(numero, id)) {
+                    alert(`Ya existe otro recibo con el número ${numero}.`);
+                    return false;
+                }
+                const mesIndex = MESES.indexOf(mes);
+                if (mesIndex === -1) throw new Error('Mes inválido');
+                try {
+                    await coleccion.doc(id).update({
+                        numero,
+                        mes,
+                        mesIndex,
+                        anio,
+                        emisor: emisor.trim(),
+                        categoria: categoria.trim() || '',
+                        monto
+                    });
+                    await cargarDatos();
+                    reposicionarPaginaPorId(id);
+                    renderizarTabla();
+                    return true;
+                } catch (error) {
+                    console.error(error);
+                    alert('Error al actualizar.');
+                    return false;
+                }
+            }
+
+            async function eliminarRecibo(id) {
+                try {
+                    await coleccion.doc(id).delete();
+                    await cargarDatos();
+                    const filtrados = obtenerFiltrados();
+                    const totalPaginas = Math.ceil(filtrados.length / POR_PAGINA) || 1;
+                    if (paginaActual > totalPaginas) paginaActual = totalPaginas;
+                    renderizarTabla();
+                } catch (error) {
+                    console.error(error);
+                    alert('Error al eliminar.');
+                }
+            }
+
+            // Reposicionar página para que un id sea visible (si es null, va a la última)
+            function reposicionarPaginaPorId(id) {
+                const filtrados = obtenerFiltrados();
+                if (id === null) {
+                    paginaActual = Math.ceil(filtrados.length / POR_PAGINA) || 1;
+                    return;
+                }
+                const idx = filtrados.findIndex(r => r.id === id);
+                if (idx === -1) {
+                    paginaActual = 1;
+                } else {
+                    paginaActual = Math.floor(idx / POR_PAGINA) + 1;
+                }
+            }
+
+            // ========== MODALES ==========
+
+            function abrirModalEdicion(recibo) {
+                modoEdicion = true;
+                idEditando = recibo.id;
+                $modalTitle.innerHTML = `<i class="fas fa-edit text-primary me-2"></i>Editar Recibo #${recibo.numero}`;
+                $num.value = recibo.numero;
+                $mes.value = recibo.mes;
+                $anio.value = recibo.anio;
+                $categoria.value = recibo.categoria || '';
+                $emisor.value = recibo.emisor;
+                $monto.value = recibo.monto;
+                $modalRecibo.show();
+            }
+
+            function abrirModalAgregar() {
+                modoEdicion = false;
+                idEditando = null;
+                $modalTitle.innerHTML = `<i class="fas fa-plus-circle text-primary me-2"></i>Agregar Recibo`;
+                $formRecibo.reset();
+                const maxNum = recibos.reduce((max, r) => Math.max(max, r.numero), 0);
+                $num.value = maxNum + 1;
+                $anio.value = new Date().getFullYear();
+                $mes.value = MESES[new Date().getMonth()];
+                $categoria.value = '';
+                $modalRecibo.show();
+            }
+
+            // ========== EVENTOS ==========
+
+            // Botón Nuevo
+            $btnAgregar.addEventListener('click', abrirModalAgregar);
+
+            // Guardar
+            $guardarRecibo.addEventListener('click', async function() {
+                const num = parseInt($num.value);
+                const m = $mes.value;
+                const a = parseInt($anio.value);
+                const e = $emisor.value.trim();
+                const cat = $categoria.value.trim();
+                const mon = parseFloat($monto.value);
+
+                if (isNaN(num)) return alert('Número inválido.');
+                if (!m) return alert('Selecciona un mes.');
+                if (isNaN(a) || a < 1998 || a > 2100) return alert('Año inválido (1998-2100).'); // Cambio: mínimo 1998
+                if (!e) return alert('Ingresa el emisor.');
+                if (isNaN(mon) || mon <= 0) return alert('Monto inválido.');
+
+                let exito = false;
+                if (modoEdicion && idEditando) {
+                    exito = await actualizarRecibo(idEditando, num, m, a, e, cat, mon);
+                } else {
+                    exito = await agregarRecibo(num, m, a, e, cat, mon);
+                }
+                if (exito) {
+                    $modalRecibo.hide();
+                    $formRecibo.reset();
+                    modoEdicion = false;
+                    idEditando = null;
+                }
+            });
+
+            // Confirmar eliminar
+            $confirmarEliminar.addEventListener('click', function() {
+                if (idParaEliminar) {
+                    eliminarRecibo(idParaEliminar);
+                    idParaEliminar = null;
+                    $modalEliminar.hide();
+                }
+            });
+
+            // Filtrar
+            $btnFiltrar.addEventListener('click', function() {
+                filtroMes = $filtroMes.value;
+                filtroAnio = $filtroAnio.value.trim();
+                filtroEmisor = $filtroEmisor.value.trim();
+                paginaActual = 1;
+                renderizarTabla();
+            });
+
+            // Enter en filtros
+            [$filtroAnio, $filtroEmisor, $filtroMes].forEach(el => {
+                el.addEventListener('keydown', e => { if (e.key === 'Enter') $btnFiltrar.click(); });
+            });
+
+            // Imprimir
+            $btnImprimir.addEventListener('click', function() {
+                const filtrados = obtenerFiltrados();
+                if (filtrados.length === 0) return alert('No hay datos para imprimir.');
+                let filas = '';
+                for (const r of filtrados) {
+                    filas += `<tr>
+                        <td>${r.numero}</td>
+                        <td>${r.mes}</td>
+                        <td>${r.anio}</td>
+                        <td>${r.emisor}</td>
+                        <td>${r.categoria || '—'}</td>
+                        <td style="text-align:right;">${formatearMoneda(r.monto)}</td>
+                    </tr>`;
+                }
+                const total = filtrados.reduce((acc, r) => acc + r.monto, 0);
+                const estilo = `
+                    <style>
+                        body{font-family:'Inter',sans-serif;padding:2rem;}
+                        h2{color:#0f172a;margin-bottom:1rem;}
+                        table{width:100%;border-collapse:collapse;}
+                        th{background:#f1f5f9;font-weight:600;padding:0.5rem;border:1px solid #cbd5e1;}
+                        td{padding:0.5rem;border:1px solid #cbd5e1;}
+                        .total{font-weight:700;background:#f8fafc;}
+                        .footer{margin-top:2rem;color:#64748b;font-size:0.9rem;}
+                        .badge{background:#2563eb;color:#fff;padding:0.2rem 0.8rem;border-radius:20px;}
+                    </style>
+                `;
+                const html = `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Recibos - Reporte</title>${estilo}</head><body>
+                    <h2><i class="fas fa-receipt"></i> Reporte de Recibos</h2>
+                    <p><span class="badge">${filtrados.length} recibos</span> Total: <strong>${formatearMoneda(total)}</strong></p>
+                    <table>
+                        <thead><tr><th>Nº</th><th>Mes</th><th>Año</th><th>Emisor</th><th>Categoría</th><th>Monto</th></tr></thead>
+                        <tbody>${filas}<tr class="total"><td colspan="5" style="text-align:right;">TOTAL</td><td style="text-align:right;">${formatearMoneda(total)}</td></tr></tbody>
+                    </table>
+                    <div class="footer">Generado el ${new Date().toLocaleString()}</div>
+                </body></html>`;
+                const ventana = window.open('', '_blank', 'width=1000,height=600');
+                if (!ventana) return alert('Permite ventanas emergentes para imprimir.');
+                ventana.document.write(html);
+                ventana.document.close();
+                ventana.focus();
+                ventana.print();
+            });
+
+            // ========== INICIALIZACIÓN ==========
+            async function init() {
+                // Llenar selects de meses
+                llenarSelectMes($filtroMes, true);
+                llenarSelectMes($mes, false);
+
+                // Fecha actual
+                document.getElementById('fechaActual').textContent =
+                    new Date().toLocaleDateString('es-ES', { day: '2-digit', month: 'long', year: 'numeric' });
+
+                await cargarDatos();
+                renderizarTabla();
+            }
+
+            document.addEventListener('DOMContentLoaded', init);
+        })();
+    </script>
+</body>
+</html>
