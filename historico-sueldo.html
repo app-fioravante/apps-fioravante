@@ -30,12 +30,26 @@
         body {
             background: var(--bg);
             color: #0f172a;
-            padding: 2rem 1rem;
+            padding: 0;
+            /* sin espacios laterales */
             min-height: 100vh;
         }
 
+        /* Contenedor principal: ocupa todo el ancho sin padding */
         .container {
-            max-width: 1400px;
+            max-width: 100% !important;
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+        }
+
+        /* Elementos que no son la tabla: mantienen separación lateral */
+        .header-bar,
+        .kpi-grid,
+        .filtros-box,
+        .pagination-custom,
+        .text-center.text-muted {
+            padding-left: 1rem;
+            padding-right: 1rem;
         }
 
         /* Encabezado */
@@ -46,6 +60,8 @@
             flex-wrap: wrap;
             gap: 1rem;
             margin-bottom: 2rem;
+            padding-top: 2rem;
+            /* espacio superior */
         }
 
         .header-bar h1 {
@@ -191,18 +207,24 @@
             background: #0f766e;
         }
 
-        /* Tabla */
+        /* Tabla: ocupa todo el ancho disponible */
         .table-wrapper {
             background: white;
             border-radius: var(--radius);
             box-shadow: var(--card-shadow);
             border: 1px solid #eef2f6;
-            overflow: hidden;
+            overflow-x: auto;
+            /* scroll horizontal en móvil */
+            margin: 0;
+            /* sin márgenes laterales */
+            width: 100%;
         }
 
         .table {
             margin: 0;
             font-size: 0.9rem;
+            min-width: 700px;
+            /* para que en móvil se active el scroll */
         }
 
         .table thead th {
@@ -321,7 +343,6 @@
             font-weight: 700;
         }
 
-        /* Toast de confirmación de eliminación (usamos modal en lugar de toast) */
         .btn-outline-secondary {
             border-radius: 50px;
         }
@@ -331,24 +352,51 @@
             .kpi-grid {
                 grid-template-columns: 1fr 1fr;
             }
+
             .filtros-box {
                 flex-direction: column;
                 align-items: stretch;
             }
+
             .filtros-box .grupo {
                 flex: 1 1 auto;
             }
+
             .header-bar {
                 flex-direction: column;
                 align-items: flex-start;
             }
+
+            /* Ajuste de padding en móvil para no perder espacio */
+            .header-bar,
+            .kpi-grid,
+            .filtros-box,
+            .pagination-custom,
+            .text-center.text-muted {
+                padding-left: 0.75rem;
+                padding-right: 0.75rem;
+            }
         }
 
         @media print {
-            .no-print { display: none !important; }
-            .table-wrapper { border: none; box-shadow: none; }
-            .kpi-card { border: 1px solid #ccc; box-shadow: none; }
-            body { background: white; padding: 0.5in; }
+            .no-print {
+                display: none !important;
+            }
+
+            .table-wrapper {
+                border: none;
+                box-shadow: none;
+            }
+
+            .kpi-card {
+                border: 1px solid #ccc;
+                box-shadow: none;
+            }
+
+            body {
+                background: white;
+                padding: 0.5in;
+            }
         }
     </style>
 </head>
@@ -410,7 +458,7 @@
         </div>
 
         <!-- ===== TABLA ===== -->
-        <div class="table-wrapper">
+        <div class="table-wrapper table-responsive">
             <table class="table table-hover">
                 <thead>
                     <tr>
@@ -460,7 +508,6 @@
                             </div>
                             <div class="col-6">
                                 <label class="form-label fw-semibold text-secondary small">Año</label>
-                                <!-- Cambio: mínimo 1998 -->
                                 <input type="number" class="form-control" id="anio" placeholder="2025" min="1998" max="2100" required />
                             </div>
                             <div class="col-6">
@@ -524,7 +571,7 @@
 
             firebase.initializeApp(firebaseConfig);
             const db = firebase.firestore();
-            const coleccion = db.collection('sueldo-anteriores'); // <-- NUEVA COLECCIÓN
+            const coleccion = db.collection('sueldo-anteriores');
 
             // ========== CONSTANTES ==========
             const POR_PAGINA = 12;
@@ -733,7 +780,7 @@
                         monto
                     });
                     await cargarDatos();
-                    reposicionarPaginaPorId(null); // va al final
+                    reposicionarPaginaPorId(null);
                     renderizarTabla();
                     return true;
                 } catch (error) {
@@ -785,7 +832,6 @@
                 }
             }
 
-            // Reposicionar página para que un id sea visible (si es null, va a la última)
             function reposicionarPaginaPorId(id) {
                 const filtrados = obtenerFiltrados();
                 if (id === null) {
@@ -830,10 +876,8 @@
 
             // ========== EVENTOS ==========
 
-            // Botón Nuevo
             $btnAgregar.addEventListener('click', abrirModalAgregar);
 
-            // Guardar
             $guardarRecibo.addEventListener('click', async function() {
                 const num = parseInt($num.value);
                 const m = $mes.value;
@@ -844,7 +888,7 @@
 
                 if (isNaN(num)) return alert('Número inválido.');
                 if (!m) return alert('Selecciona un mes.');
-                if (isNaN(a) || a < 1998 || a > 2100) return alert('Año inválido (1998-2100).'); // Cambio: mínimo 1998
+                if (isNaN(a) || a < 1998 || a > 2100) return alert('Año inválido (1998-2100).');
                 if (!e) return alert('Ingresa el emisor.');
                 if (isNaN(mon) || mon <= 0) return alert('Monto inválido.');
 
@@ -862,7 +906,6 @@
                 }
             });
 
-            // Confirmar eliminar
             $confirmarEliminar.addEventListener('click', function() {
                 if (idParaEliminar) {
                     eliminarRecibo(idParaEliminar);
@@ -871,7 +914,6 @@
                 }
             });
 
-            // Filtrar
             $btnFiltrar.addEventListener('click', function() {
                 filtroMes = $filtroMes.value;
                 filtroAnio = $filtroAnio.value.trim();
@@ -880,12 +922,10 @@
                 renderizarTabla();
             });
 
-            // Enter en filtros
             [$filtroAnio, $filtroEmisor, $filtroMes].forEach(el => {
                 el.addEventListener('keydown', e => { if (e.key === 'Enter') $btnFiltrar.click(); });
             });
 
-            // Imprimir
             $btnImprimir.addEventListener('click', function() {
                 const filtrados = obtenerFiltrados();
                 if (filtrados.length === 0) return alert('No hay datos para imprimir.');
@@ -932,11 +972,9 @@
 
             // ========== INICIALIZACIÓN ==========
             async function init() {
-                // Llenar selects de meses
                 llenarSelectMes($filtroMes, true);
                 llenarSelectMes($mes, false);
 
-                // Fecha actual
                 document.getElementById('fechaActual').textContent =
                     new Date().toLocaleDateString('es-ES', { day: '2-digit', month: 'long', year: 'numeric' });
 
