@@ -86,7 +86,19 @@
             display: none;
             width: 100%;
             min-height: 100vh;
-            padding: 2rem 0;
+            padding: 0.5rem 0.5rem 0;  /* reducido para aprovechar espacio */
+        }
+
+        /* Ajuste para que en escritorio ocupe todo */
+        @media (min-width: 992px) {
+            #appContainer {
+                padding: 0.5rem 1rem 0;
+            }
+            .container-xl {
+                max-width: 100% !important;
+                padding-left: 0.5rem !important;
+                padding-right: 0.5rem !important;
+            }
         }
 
         .btn-salir {
@@ -101,6 +113,21 @@
         .btn-salir:hover {
             background: #dc2626;
             color: #fff;
+        }
+
+        /* Botón volver: sin relleno, pequeño, solo texto */
+        .btn-volver {
+            font-size: 0.9rem;
+            padding: 0.2rem 0.5rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            background: transparent !important;
+            border: none !important;
+            box-shadow: none !important;
+        }
+        .btn-volver:hover {
+            color: var(--primary-hover);
+            text-decoration: underline;
         }
 
         .card-kpi {
@@ -241,14 +268,46 @@
             border-radius: 0.5rem;
         }
 
+        /* Contenedor del histórico: sin bordes ni sombras, ocupa todo */
+        #historicoContainer {
+            display: none;
+            width: 100%;
+            min-height: 80vh; /* se ajustará con flex */
+            background: white;
+            border-radius: 0.25rem;
+            padding: 0;
+            margin: 0;
+            position: relative;
+            flex: 1;
+        }
+
+        #historicoContainer iframe {
+            width: 100%;
+            height: 85vh;  /* alto en escritorio */
+            border: none;
+            border-radius: 0.25rem;
+            display: block;
+        }
+
+        /* Responsive móvil */
         @media (max-width: 768px) {
-            #appContainer { padding: 1rem; }
-            .filtros-row > div { margin-bottom: 1rem; }
+            #appContainer { padding: 0.5rem; }
+            .filtros-row > div { margin-bottom: 0.5rem; }
             .card-body { padding: 1.25rem; }
             .d-flex.align-items-center.justify-content-between.mb-4 {
                 flex-direction: column;
                 align-items: flex-start !important;
-                gap: 1rem;
+                gap: 0.5rem;
+            }
+            #historicoContainer {
+                min-height: 70vh;
+            }
+            #historicoContainer iframe {
+                height: 70vh;
+            }
+            .btn-volver {
+                font-size: 0.8rem;
+                padding: 0.1rem 0.3rem;
             }
         }
 
@@ -275,137 +334,156 @@
         </div>
     </div>
 
-    <!-- ========== APLICACIÓN PRINCIPAL (TABLA) ========== -->
+    <!-- ========== APLICACIÓN PRINCIPAL ========== -->
     <div id="appContainer">
         <div class="container-xl">
 
-            <!-- Barra superior -->
-            <div class="d-flex align-items-center justify-content-between mb-4 flex-wrap">
+            <!-- Barra superior con el botón Volver justo debajo de Salir -->
+            <div class="d-flex align-items-center justify-content-between mb-3 flex-wrap">
                 <div>
                     <h1 class="h3 fw-bold mb-1">
                         <i class="fas fa-receipt text-primary me-2"></i> Mis Recibos
                     </h1>
                     <p class="text-muted mb-0" style="font-size: 0.95rem;">Visualiza y administra tus ingresos</p>
                 </div>
-                <div class="d-flex align-items-center gap-3">
-                    <span class="badge bg-white text-dark px-3 py-2 rounded-pill shadow-sm border">
-                        <i class="far fa-calendar-alt text-primary me-1"></i> <span id="fechaActual" class="fw-medium"></span>
-                    </span>
-                    <button id="btnSalir" class="btn btn-salir">
-                        <i class="fas fa-sign-out-alt me-1"></i> Salir
+                <div class="d-flex flex-column align-items-end">
+                    <div class="d-flex align-items-center gap-3">
+                        <span class="badge bg-white text-dark px-3 py-2 rounded-pill shadow-sm border">
+                            <i class="far fa-calendar-alt text-primary me-1"></i> <span id="fechaActual" class="fw-medium"></span>
+                        </span>
+                        <button id="btnSalir" class="btn btn-salir">
+                            <i class="fas fa-sign-out-alt me-1"></i> Salir
+                        </button>
+                    </div>
+                    <!-- Botón Volver (oculto por defecto) -->
+                    <button id="btnVolver" class="btn-volver mt-1" style="display:none;">
+                        <i class="fas fa-arrow-left me-1"></i> Volver
                     </button>
                 </div>
             </div>
 
-            <!-- KPIs -->
-            <div class="row g-3 mb-4">
-                <div class="col-lg-4 col-md-6 col-12">
-                    <div class="card card-kpi kpi-total">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center justify-content-between">
-                                <span><i class="fas fa-wallet fa-2x opacity-75"></i></span>
-                                <span class="badge bg-white text-dark rounded-pill px-3 shadow-sm">Total</span>
-                            </div>
-                            <div class="kpi-number" id="totalCobrado">$0.00</div>
-                            <div class="small opacity-75 fw-medium">Suma de haberes cobrados</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-12">
-                    <div class="card card-kpi kpi-cantidad">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center justify-content-between">
-                                <span><i class="fas fa-file-invoice-dollar fa-2x opacity-75"></i></span>
-                                <span class="badge bg-white text-dark rounded-pill px-3 shadow-sm">Cantidad</span>
-                            </div>
-                            <div class="kpi-number" id="totalRecibos">0</div>
-                            <div class="small opacity-75 fw-medium">Total de recibos registrados</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-12 col-12">
-                    <div class="card card-kpi kpi-filtro">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center justify-content-between">
-                                <span><i class="fas fa-filter fa-2x opacity-75"></i></span>
-                                <span class="badge bg-white text-dark rounded-pill px-3 shadow-sm">Filtro</span>
-                            </div>
-                            <div class="kpi-number" id="resultadosFiltro">0</div>
-                            <div class="small opacity-75 fw-medium">Recibos coincidentes</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <!-- ========== CONTENIDO PRINCIPAL (KPIs, filtros, tabla, etc.) ========== -->
+            <div id="contenidoPrincipal">
 
-            <!-- Filtros + botón nuevo -->
-            <div class="row g-2 align-items-end filtros-row mb-4 no-print bg-white p-3 rounded-4 shadow-sm border">
-                <div class="col-xl-3 col-lg-3 col-md-6 col-12">
-                    <label class="filtro-label"><i class="far fa-calendar-alt me-1"></i> Mes</label>
-                    <select id="filtroMes" class="form-select form-select-sm shadow-none">
-                        <option value="">Todos los meses</option>
-                    </select>
+                <!-- KPIs -->
+                <div class="row g-2 mb-3">
+                    <div class="col-lg-4 col-md-6 col-12">
+                        <div class="card card-kpi kpi-total">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <span><i class="fas fa-wallet fa-2x opacity-75"></i></span>
+                                    <span class="badge bg-white text-dark rounded-pill px-3 shadow-sm">Total</span>
+                                </div>
+                                <div class="kpi-number" id="totalCobrado">$0.00</div>
+                                <div class="small opacity-75 fw-medium">Suma de haberes cobrados</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-12">
+                        <div class="card card-kpi kpi-cantidad">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <span><i class="fas fa-file-invoice-dollar fa-2x opacity-75"></i></span>
+                                    <span class="badge bg-white text-dark rounded-pill px-3 shadow-sm">Cantidad</span>
+                                </div>
+                                <div class="kpi-number" id="totalRecibos">0</div>
+                                <div class="small opacity-75 fw-medium">Total de recibos registrados</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-12 col-12">
+                        <div class="card card-kpi kpi-filtro">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <span><i class="fas fa-filter fa-2x opacity-75"></i></span>
+                                    <span class="badge bg-white text-dark rounded-pill px-3 shadow-sm">Filtro</span>
+                                </div>
+                                <div class="kpi-number" id="resultadosFiltro">0</div>
+                                <div class="small opacity-75 fw-medium">Recibos coincidentes</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-xl-2 col-lg-2 col-md-6 col-12">
-                    <label class="filtro-label"><i class="far fa-calendar me-1"></i> Año</label>
-                    <input type="number" id="filtroAnio" class="form-control form-control-sm shadow-none" placeholder="Ej. 2025" min="2000" max="2100" />
-                </div>
-                <div class="col-xl-3 col-lg-3 col-md-6 col-12">
-                    <label class="filtro-label"><i class="fas fa-building me-1"></i> Emitido por</label>
-                    <input type="text" id="filtroEmisor" class="form-control form-control-sm shadow-none" placeholder="Empresa o empleador" />
-                </div>
-                <div class="col-xl-2 col-lg-2 col-md-3 col-6">
-                    <button id="btnFiltrar" class="btn btn-primary btn-sm w-100 shadow-sm">
-                        <i class="fas fa-search me-1"></i> Filtrar
-                    </button>
-                </div>
-                <div class="col-xl-2 col-lg-2 col-md-3 col-6">
-                    <button id="btnAgregar" class="btn btn-success btn-sm w-100 shadow-sm" data-bs-toggle="modal" data-bs-target="#modalRecibo" style="background-color: #10b981; border-color: #10b981;">
-                        <i class="fas fa-plus me-1"></i> Nuevo
-                    </button>
-                </div>
-            </div>
 
-            <!-- Tabla -->
-            <div class="table-responsive">
-                <table class="table table-hover align-middle mb-0" id="tablaRecibos">
-                    <thead>
-                        <tr>
-                            <th style="width:8%;">Nº</th>
-                            <th style="width:12%;">Mes</th>
-                            <th style="width:8%;">Año</th>
-                            <th style="width:20%;">Emitido por</th>
-                            <th style="width:15%;">Categoría Laboral</th>
-                            <th style="width:17%;">Monto Total</th>
-                            <th style="width:20%;" class="text-center no-print">Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody id="cuerpoTabla">
+                <!-- Filtros + botones -->
+                <div class="row g-2 align-items-end filtros-row mb-3 no-print bg-white p-2 rounded-4 shadow-sm border">
+                    <div class="col-xl-3 col-lg-3 col-md-6 col-12">
+                        <label class="filtro-label"><i class="far fa-calendar-alt me-1"></i> Mes</label>
+                        <select id="filtroMes" class="form-select form-select-sm shadow-none">
+                            <option value="">Todos los meses</option>
+                        </select>
+                    </div>
+                    <div class="col-xl-2 col-lg-2 col-md-6 col-12">
+                        <label class="filtro-label"><i class="far fa-calendar me-1"></i> Año</label>
+                        <input type="number" id="filtroAnio" class="form-control form-control-sm shadow-none" placeholder="Ej. 2025" min="2000" max="2100" />
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-6 col-12">
+                        <label class="filtro-label"><i class="fas fa-building me-1"></i> Emitido por</label>
+                        <input type="text" id="filtroEmisor" class="form-control form-control-sm shadow-none" placeholder="Empresa o empleador" />
+                    </div>
+                    <div class="col-xl-2 col-lg-2 col-md-3 col-6">
+                        <button id="btnFiltrar" class="btn btn-primary btn-sm w-100 shadow-sm">
+                            <i class="fas fa-search me-1"></i> Filtrar
+                        </button>
+                    </div>
+                    <div class="col-xl-2 col-lg-2 col-md-3 col-6 d-flex gap-1">
+                        <button id="btnAgregar" class="btn btn-success btn-sm flex-fill shadow-sm" data-bs-toggle="modal" data-bs-target="#modalRecibo" style="background-color: #10b981; border-color: #10b981;">
+                            <i class="fas fa-plus me-1"></i> Nuevo
+                        </button>
+                        <button id="btnHistorico" class="btn btn-secondary btn-sm flex-fill shadow-sm">
+                            <i class="fas fa-history me-1"></i> Recibos Históricos (1998-2000)
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Tabla -->
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0" id="tablaRecibos">
+                        <thead>
+                            <tr>
+                                <th style="width:8%;">Nº</th>
+                                <th style="width:12%;">Mes</th>
+                                <th style="width:8%;">Año</th>
+                                <th style="width:20%;">Emitido por</th>
+                                <th style="width:15%;">Categoría Laboral</th>
+                                <th style="width:17%;">Monto Total</th>
+                                <th style="width:20%;" class="text-center no-print">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cuerpoTabla">
+                            <!-- generado por JS -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Paginación -->
+                <nav class="mt-3 no-print" aria-label="Paginación">
+                    <ul class="pagination justify-content-center flex-wrap" id="paginacion">
                         <!-- generado por JS -->
-                    </tbody>
-                </table>
+                    </ul>
+                </nav>
+
+                <!-- Botón imprimir -->
+                <div class="text-center mt-3 no-print">
+                    <button id="btnImprimir" class="btn btn-light border px-4 shadow-sm text-secondary rounded-pill">
+                        <i class="fas fa-print me-2"></i> Imprimir Reporte
+                    </button>
+                </div>
+            </div>
+            <!-- ========== FIN CONTENIDO PRINCIPAL ========== -->
+
+            <!-- ========== CONTENEDOR PARA EL HISTÓRICO (iframe) ========== -->
+            <div id="historicoContainer">
+                <iframe src="https://app-fioravante.github.io/apps-fioravante/historico-sueldo" title="Recibos Históricos"></iframe>
             </div>
 
-            <!-- Paginación -->
-            <nav class="mt-4 no-print" aria-label="Paginación">
-                <ul class="pagination justify-content-center flex-wrap" id="paginacion">
-                    <!-- generado por JS -->
-                </ul>
-            </nav>
-
-            <!-- Botón imprimir -->
-            <div class="text-center mt-4 no-print">
-                <button id="btnImprimir" class="btn btn-light border px-4 shadow-sm text-secondary rounded-pill">
-                    <i class="fas fa-print me-2"></i> Imprimir Reporte
-                </button>
-            </div>
-            
-            <div class="mt-3 text-center small text-muted no-print pb-4">
+            <div class="mt-2 text-center small text-muted no-print pb-2">
                 <i class="fas fa-shield-alt me-1"></i> Datos almacenados en Firebase Firestore
             </div>
         </div>
     </div>
 
-    <!-- ========== MODAL NUEVO / EDITAR RECIBO (REUTILIZABLE) ========== -->
+    <!-- ========== MODAL NUEVO / EDITAR RECIBO ========== -->
     <div class="modal fade" id="modalRecibo" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -462,7 +540,7 @@
         </div>
     </div>
 
-    <!-- ========== MODAL ALERTA ROJO DE ELIMINACIÓN (ESQUINA INFERIOR DERECHA) ========== -->
+    <!-- ========== MODAL ALERTA ROJO DE ELIMINACIÓN ========== -->
     <div id="deleteModal" class="toast-delete-alert p-3 border-0 text-white" style="display: none;">
         <div class="d-flex align-items-center mb-2">
             <i class="fas fa-exclamation-triangle fa-lg me-2 text-warning"></i>
@@ -512,7 +590,7 @@
             let idParaEliminar = null;
 
             // Variables para el modal de edición
-            let modoEdicion = false;        // false = agregar, true = editar
+            let modoEdicion = false;
             let idEditando = null;
 
             // Elementos DOM
@@ -520,6 +598,7 @@
             const $app = document.getElementById('appContainer');
             const $btnIngresar = document.getElementById('btnIngresar');
             const $btnSalir = document.getElementById('btnSalir');
+            const $btnVolver = document.getElementById('btnVolver');
             const $cuerpo = document.getElementById('cuerpoTabla');
             const $paginacion = document.getElementById('paginacion');
             const $totalCobrado = document.getElementById('totalCobrado');
@@ -541,11 +620,14 @@
             const $emisor = document.getElementById('emisor');
             const $monto = document.getElementById('monto');
 
-            // Modal Rojo de Eliminar
             const $deleteModal = document.getElementById('deleteModal');
             const $btnConfirmarDelete = document.getElementById('btnConfirmarDelete');
             const $btnCancelarDelete = document.getElementById('btnCancelarDelete');
             const $btnCancelarDeleteX = document.getElementById('btnCancelarDeleteX');
+
+            const $btnHistorico = document.getElementById('btnHistorico');
+            const $contenidoPrincipal = document.getElementById('contenidoPrincipal');
+            const $historicoContainer = document.getElementById('historicoContainer');
 
             // ========== FUNCIONES DE NAVEGACIÓN ==========
             function mostrarLanding() { $landing.style.display = 'flex'; $app.style.display = 'none'; }
@@ -554,7 +636,7 @@
             $btnIngresar.addEventListener('click', mostrarApp);
             $btnSalir.addEventListener('click', mostrarLanding);
 
-            // ========== FUNCIÓN DE FORMATO DE MONEDA ==========
+            // ========== FORMATO MONEDA ==========
             function formatearMoneda(valor) {
                 return '$' + Number(valor).toLocaleString('es-ES', {
                     minimumFractionDigits: 2,
@@ -562,9 +644,7 @@
                 });
             }
 
-            // ========== OPERACIONES CON FIRESTORE ==========
-
-            // Carga los datos y actualiza KPIs (no renderiza tabla)
+            // ========== FIRESTORE ==========
             async function cargarDatos() {
                 try {
                     const snapshot = await coleccion.get();
@@ -590,22 +670,18 @@
                 }
             }
 
-            // Verifica si ya existe un recibo con el mismo número (excluyendo un id opcional)
             function existeNumero(numero, idExcluir) {
                 return recibos.some(r => r.numero === numero && r.id !== idExcluir);
             }
 
             async function agregarRecibo(numero, mes, anio, emisor, categoria, monto) {
                 try {
-                    // Validar duplicado
                     if (existeNumero(numero)) {
                         alert('Ya existe un recibo con el número ' + numero + '. Por favor, elige otro.');
                         return false;
                     }
-
                     const mesIndex = MESES.indexOf(mes);
                     if (mesIndex === -1) throw new Error('Mes inválido');
-
                     const nuevoDoc = {
                         numero: numero,
                         mes: mes,
@@ -615,7 +691,6 @@
                         categoria: categoria.trim() || '',
                         monto: monto
                     };
-
                     const docRef = await coleccion.add(nuevoDoc);
                     await cargarDatos();
                     reposicionarPagina(docRef.id);
@@ -630,15 +705,12 @@
 
             async function actualizarRecibo(id, numero, mes, anio, emisor, categoria, monto) {
                 try {
-                    // Validar duplicado (excluyendo el propio id)
                     if (existeNumero(numero, id)) {
                         alert('Ya existe otro recibo con el número ' + numero + '. Por favor, elige otro.');
                         return false;
                     }
-
                     const mesIndex = MESES.indexOf(mes);
                     if (mesIndex === -1) throw new Error('Mes inválido');
-
                     await coleccion.doc(id).update({
                         numero: numero,
                         mes: mes,
@@ -673,8 +745,7 @@
                 }
             }
 
-            // ========== FUNCIONES DE FILTRADO Y RENDERIZADO ==========
-
+            // ========== FILTRADO Y RENDERIZADO ==========
             function obtenerFiltrados() {
                 const filtrados = recibos.filter(r => {
                     let ok = true;
@@ -687,15 +758,11 @@
                 return filtrados;
             }
 
-            // Reposiciona la página actual para que el recibo con el id dado sea visible
             function reposicionarPagina(id) {
                 const filtrados = obtenerFiltrados();
                 const idx = filtrados.findIndex(r => r.id === id);
-                if (idx === -1) {
-                    paginaActual = 1;
-                } else {
-                    paginaActual = Math.floor(idx / POR_PAGINA) + 1;
-                }
+                if (idx === -1) paginaActual = 1;
+                else paginaActual = Math.floor(idx / POR_PAGINA) + 1;
             }
 
             function renderizarTabla() {
@@ -735,7 +802,6 @@
                     }
                     $cuerpo.innerHTML = html;
 
-                    // Eventos para editar
                     document.querySelectorAll('.btn-editar').forEach(btn => {
                         btn.addEventListener('click', function() {
                             const id = this.dataset.id;
@@ -744,7 +810,6 @@
                         });
                     });
 
-                    // Eventos para eliminar
                     document.querySelectorAll('.btn-eliminar').forEach(btn => {
                         btn.addEventListener('click', function() {
                             abrirModalEliminar(this.dataset.id);
@@ -784,8 +849,7 @@
                 $totalRecibos.textContent = recibos.length;
             }
 
-            // ========== GESTIÓN DEL MODAL DE ELIMINACIÓN ==========
-
+            // ========== MODAL ELIMINAR ==========
             function abrirModalEliminar(id) {
                 idParaEliminar = id;
                 $deleteModal.style.display = 'block';
@@ -806,8 +870,7 @@
                 }
             });
 
-            // ========== GESTIÓN DEL MODAL DE AGREGAR / EDITAR ==========
-
+            // ========== MODAL AGREGAR / EDITAR ==========
             function abrirModalEdicion(recibo) {
                 modoEdicion = true;
                 idEditando = recibo.id;
@@ -834,10 +897,8 @@
                 $modalRecibo.show();
             }
 
-            // Botón "Nuevo" abre el modal en modo agregar
             document.getElementById('btnAgregar').addEventListener('click', abrirModalAgregar);
 
-            // Guardar (Agregar o Actualizar)
             $guardarRecibo.addEventListener('click', async function() {
                 const num = parseInt($num.value);
                 const m = $mes.value;
@@ -846,7 +907,6 @@
                 const cat = $categoria.value.trim();
                 const mon = parseFloat($monto.value);
 
-                // Validar que el número sea un valor numérico (puede ser negativo o cero)
                 if (isNaN(num)) return alert('Ingresa un número válido.');
                 if (!m) return alert('Selecciona un mes.');
                 if (!a || a < 2000 || a > 2100) return alert('Ingresa un año válido.');
@@ -869,7 +929,6 @@
             });
 
             // ========== IMPRIMIR ==========
-
             function imprimirTablaFiltrada() {
                 const filtrados = obtenerFiltrados();
                 if (filtrados.length === 0) return alert('No hay datos para imprimir con el filtro actual.');
@@ -910,7 +969,6 @@
             }
 
             // ========== LLENAR SELECTS ==========
-
             function llenarSelects() {
                 const selects = [$filtroMes, $mes];
                 for (const sel of selects) {
@@ -924,7 +982,6 @@
             }
 
             // ========== INICIALIZACIÓN ==========
-
             async function init() {
                 llenarSelects();
                 document.getElementById('fechaActual').textContent = new Date().toLocaleDateString('es-ES', { day: '2-digit', month: 'long', year: 'numeric' });
@@ -939,6 +996,23 @@
 
                 [$filtroAnio, $filtroEmisor, $filtroMes].forEach(el => el.addEventListener('keydown', e => { if (e.key === 'Enter') $btnFiltrar.click(); }));
                 $btnImprimir.addEventListener('click', imprimirTablaFiltrada);
+
+                // Mostrar histórico: ocultar contenido principal, mostrar iframe y mostrar botón Volver
+                $btnHistorico.addEventListener('click', function() {
+                    $contenidoPrincipal.style.display = 'none';
+                    $historicoContainer.style.display = 'block';
+                    $btnVolver.style.display = 'inline-block';
+                    // Opcional: ocultar el botón histórico para no confundir
+                    // $btnHistorico.style.display = 'none';
+                });
+
+                // Volver: mostrar contenido principal, ocultar iframe y ocultar botón Volver
+                $btnVolver.addEventListener('click', function() {
+                    $historicoContainer.style.display = 'none';
+                    $contenidoPrincipal.style.display = 'block';
+                    $btnVolver.style.display = 'none';
+                    // $btnHistorico.style.display = 'inline-block';
+                });
             }
 
             document.addEventListener('DOMContentLoaded', init);
