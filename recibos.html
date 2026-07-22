@@ -374,7 +374,7 @@
                             <th style="width:12%;">Mes</th>
                             <th style="width:8%;">Año</th>
                             <th style="width:20%;">Emitido por</th>
-                            <th style="width:15%;">Categoría Laboral</th>   <!-- NUEVA COLUMNA -->
+                            <th style="width:15%;">Categoría Laboral</th>
                             <th style="width:17%;">Monto Total</th>
                             <th style="width:20%;" class="text-center no-print">Acciones</th>
                         </tr>
@@ -564,6 +564,7 @@
 
             // ========== OPERACIONES CON FIRESTORE ==========
 
+            // Carga los datos y actualiza KPIs (no renderiza tabla)
             async function cargarDatos() {
                 try {
                     const snapshot = await coleccion.get();
@@ -577,21 +578,31 @@
                             mesIndex: data.mesIndex,
                             anio: data.anio,
                             emisor: data.emisor,
-                            categoria: data.categoria || '',   // si no existe, cadena vacía
+                            categoria: data.categoria || '',
                             monto: data.monto
                         });
                     });
                     recibos = docs;
                     actualizarKPIs();
-                    renderizarTabla();
                 } catch (error) {
                     console.error('Error al cargar datos:', error);
                     alert('Error al cargar los datos desde Firebase. Revisa la consola.');
                 }
             }
 
+            // Verifica si ya existe un recibo con el mismo número (excluyendo un id opcional)
+            function existeNumero(numero, idExcluir) {
+                return recibos.some(r => r.numero === numero && r.id !== idExcluir);
+            }
+
             async function agregarRecibo(numero, mes, anio, emisor, categoria, monto) {
                 try {
+                    // Validar duplicado
+                    if (existeNumero(numero)) {
+                        alert('Ya existe un recibo con el número ' + numero + '. Por favor, elige otro.');
+                        return false;
+                    }
+
                     const mesIndex = MESES.indexOf(mes);
                     if (mesIndex === -1) throw new Error('Mes inválido');
 
@@ -605,11 +616,9 @@
                         monto: monto
                     };
 
-                    await coleccion.add(nuevoDoc);
+                    const docRef = await coleccion.add(nuevoDoc);
                     await cargarDatos();
-                    const filtrados = obtenerFiltrados();
-                    const totalPaginas = Math.ceil(filtrados.length / POR_PAGINA) || 1;
-                    paginaActual = totalPaginas;
+                    reposicionarPagina(docRef.id);
                     renderizarTabla();
                     return true;
                 } catch (error) {
@@ -621,6 +630,12 @@
 
             async function actualizarRecibo(id, numero, mes, anio, emisor, categoria, monto) {
                 try {
+                    // Validar duplicado (excluyendo el propio id)
+                    if (existeNumero(numero, id)) {
+                        alert('Ya existe otro recibo con el número ' + numero + '. Por favor, elige otro.');
+                        return false;
+                    }
+
                     const mesIndex = MESES.indexOf(mes);
                     if (mesIndex === -1) throw new Error('Mes inválido');
 
@@ -634,6 +649,7 @@
                         monto: monto
                     });
                     await cargarDatos();
+                    reposicionarPagina(id);
                     renderizarTabla();
                     return true;
                 } catch (error) {
@@ -669,6 +685,17 @@
                 });
                 filtrados.sort((a, b) => b.numero - a.numero);
                 return filtrados;
+            }
+
+            // Reposiciona la página actual para que el recibo con el id dado sea visible
+            function reposicionarPagina(id) {
+                const filtrados = obtenerFiltrados();
+                const idx = filtrados.findIndex(r => r.id === id);
+                if (idx === -1) {
+                    paginaActual = 1;
+                } else {
+                    paginaActual = Math.floor(idx / POR_PAGINA) + 1;
+                }
             }
 
             function renderizarTabla() {
@@ -725,7 +752,6 @@
                     });
                 }
                 renderizarPaginacion(totalPaginas);
-                actualizarKPIs();
             }
 
             function renderizarPaginacion(totalPaginas) {
@@ -786,7 +812,6 @@
                 modoEdicion = true;
                 idEditando = recibo.id;
                 $modalTitle.innerHTML = `<i class="fas fa-edit text-primary me-2"></i> Editar Recibo #${recibo.numero}`;
-                // Precargar datos
                 $num.value = recibo.numero;
                 $mes.value = recibo.mes;
                 $anio.value = recibo.anio;
@@ -800,7 +825,6 @@
                 modoEdicion = false;
                 idEditando = null;
                 $modalTitle.innerHTML = `<i class="fas fa-plus-circle text-primary me-2"></i> Agregar Recibo`;
-                // Resetear y predefinir
                 $formRecibo.reset();
                 const maxNum = recibos.reduce((max, r) => Math.max(max, r.numero), 0);
                 $num.value = maxNum + 1;
@@ -813,15 +837,6 @@
             // Botón "Nuevo" abre el modal en modo agregar
             document.getElementById('btnAgregar').addEventListener('click', abrirModalAgregar);
 
-            // Evento show del modal (para asegurar que siempre se resetee si es agregar)
-            document.getElementById('modalRecibo').addEventListener('show.bs.modal', function() {
-                // Si no es edición, se prepara como agregar (esto lo maneja el botón Nuevo)
-                // Pero si se abre por otro lado, asegurar que esté en modo agregar por defecto
-                if (!modoEdicion) {
-                    abrirModalAgregar(); // esto lo reconfigura
-                }
-            });
-
             // Guardar (Agregar o Actualizar)
             $guardarRecibo.addEventListener('click', async function() {
                 const num = parseInt($num.value);
@@ -831,7 +846,8 @@
                 const cat = $categoria.value.trim();
                 const mon = parseFloat($monto.value);
 
-                if (!num || num <= 0) return alert('Ingresa un número válido.');
+                // Validar que el número sea un valor numérico (puede ser negativo o cero)
+                if (isNaN(num)) return alert('Ingresa un número válido.');
                 if (!m) return alert('Selecciona un mes.');
                 if (!a || a < 2000 || a > 2100) return alert('Ingresa un año válido.');
                 if (!e) return alert('Ingresa el emisor.');
@@ -914,6 +930,7 @@
                 document.getElementById('fechaActual').textContent = new Date().toLocaleDateString('es-ES', { day: '2-digit', month: 'long', year: 'numeric' });
 
                 await cargarDatos();
+                renderizarTabla();
 
                 $btnFiltrar.addEventListener('click', function() {
                     filtroMes = $filtroMes.value; filtroAnio = $filtroAnio.value.trim(); filtroEmisor = $filtroEmisor.value.trim();
@@ -922,8 +939,6 @@
 
                 [$filtroAnio, $filtroEmisor, $filtroMes].forEach(el => el.addEventListener('keydown', e => { if (e.key === 'Enter') $btnFiltrar.click(); }));
                 $btnImprimir.addEventListener('click', imprimirTablaFiltrada);
-
-                actualizarKPIs();
             }
 
             document.addEventListener('DOMContentLoaded', init);
