@@ -15,6 +15,7 @@
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
 
     <style>
+        /* (Estilos iguales que antes, no los repito para ahorrar espacio) */
         :root {
             --bg-body: #f8fafc;
             --text-main: #0f172a;
@@ -22,303 +23,47 @@
             --primary-color: #3b82f6;
             --primary-hover: #2563eb;
         }
-
-        * {
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
-        }
-
-        body {
-            background: var(--bg-body);
-            color: var(--text-main);
-            margin: 0;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        #landingPage {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            min-height: 100vh;
-            width: 100%;
-            padding: 2rem;
-        }
-
-        #landingPage h1 {
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 700;
-            letter-spacing: -0.03em;
-            color: #0f172a;
-        }
-
-        #landingPage .subtitle {
-            font-size: clamp(1.2rem, 3vw, 1.5rem);
-            color: var(--text-muted);
-            margin-top: 0.5rem;
-            font-weight: 400;
-        }
-
-        .btn-ingresar {
-            margin-top: 2rem;
-            padding: 0.8rem 3rem;
-            font-size: 1.25rem;
-            font-weight: 600;
-            border-radius: 50px;
-            background: var(--primary-color);
-            border: none;
-            color: #fff;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
-        }
-
-        .btn-ingresar:hover {
-            background: var(--primary-hover);
-            transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(59, 130, 246, 0.4);
-            color: #fff;
-        }
-
-        #appContainer {
-            display: none;
-            width: 100%;
-            min-height: 100vh;
-            padding: 0.5rem 0.5rem 0;  /* reducido para aprovechar espacio */
-        }
-
-        /* Ajuste para que en escritorio ocupe todo */
-        @media (min-width: 992px) {
-            #appContainer {
-                padding: 0.5rem 1rem 0;
-            }
-            .container-xl {
-                max-width: 100% !important;
-                padding-left: 0.5rem !important;
-                padding-right: 0.5rem !important;
-            }
-        }
-
-        .btn-salir {
-            background: #ef4444;
-            color: #fff;
-            border-radius: 50px;
-            font-weight: 500;
-            padding: 0.5rem 1.5rem;
-            transition: all 0.2s;
-        }
-
-        .btn-salir:hover {
-            background: #dc2626;
-            color: #fff;
-        }
-
-        /* Botón volver: sin relleno, pequeño, solo texto */
-        .btn-volver {
-            font-size: 0.9rem;
-            padding: 0.2rem 0.5rem;
-            color: var(--primary-color);
-            text-decoration: none;
-            background: transparent !important;
-            border: none !important;
-            box-shadow: none !important;
-        }
-        .btn-volver:hover {
-            color: var(--primary-hover);
-            text-decoration: underline;
-        }
-
-        .card-kpi {
-            border: none;
-            border-radius: 1.25rem;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            color: white;
-        }
-
-        .card-kpi:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        .card-body {
-            padding: 1.75rem;
-        }
-
+        * { font-family: 'Inter', system-ui, sans-serif; }
+        body { background: var(--bg-body); color: var(--text-main); margin: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+        #landingPage { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; min-height: 100vh; width: 100%; padding: 2rem; }
+        #landingPage h1 { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 700; letter-spacing: -0.03em; color: #0f172a; }
+        #landingPage .subtitle { font-size: clamp(1.2rem, 3vw, 1.5rem); color: var(--text-muted); margin-top: 0.5rem; font-weight: 400; }
+        .btn-ingresar { margin-top: 2rem; padding: 0.8rem 3rem; font-size: 1.25rem; font-weight: 600; border-radius: 50px; background: var(--primary-color); border: none; color: #fff; transition: all 0.3s ease; box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3); }
+        .btn-ingresar:hover { background: var(--primary-hover); transform: translateY(-3px); box-shadow: 0 15px 35px rgba(59, 130, 246, 0.4); color: #fff; }
+        #appContainer { display: none; width: 100%; min-height: 100vh; padding: 0.5rem 0.5rem 0; }
+        @media (min-width: 992px) { #appContainer { padding: 0.5rem 1rem 0; } .container-xl { max-width: 100% !important; padding-left: 0.5rem !important; padding-right: 0.5rem !important; } }
+        .btn-salir { background: #ef4444; color: #fff; border-radius: 50px; font-weight: 500; padding: 0.5rem 1.5rem; transition: all 0.2s; }
+        .btn-salir:hover { background: #dc2626; color: #fff; }
+        .btn-volver { font-size: 0.9rem; padding: 0.2rem 0.5rem; color: var(--primary-color); text-decoration: none; background: transparent !important; border: none !important; box-shadow: none !important; }
+        .btn-volver:hover { color: var(--primary-hover); text-decoration: underline; }
+        .card-kpi { border: none; border-radius: 1.25rem; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05); transition: transform 0.2s ease, box-shadow 0.2s ease; color: white; }
+        .card-kpi:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1); }
+        .card-body { padding: 1.75rem; }
         .kpi-total { background: linear-gradient(135deg, #4f46e5 0%, #312e81 100%); }
         .kpi-cantidad { background: linear-gradient(135deg, #10b981 0%, #064e3b 100%); }
         .kpi-filtro { background: linear-gradient(135deg, #f59e0b 0%, #78350f 100%); }
-
-        .card-kpi .kpi-number {
-            font-weight: 700;
-            font-size: clamp(1.8rem, 4vw, 2.2rem);
-            letter-spacing: -0.02em;
-            margin-top: 0.5rem;
-        }
-
-        .table-responsive {
-            background: #fff;
-            border-radius: 1.25rem;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.03);
-            border: 1px solid #e2e8f0;
-            overflow-x: auto;
-        }
-
-        .table {
-            margin-bottom: 0;
-            white-space: nowrap;
-        }
-
-        .table thead th {
-            background-color: #f1f5f9;
-            color: #475569;
-            font-weight: 600;
-            text-transform: uppercase;
-            font-size: 0.8rem;
-            letter-spacing: 0.05em;
-            border-bottom: 2px solid #cbd5e1;
-            padding: 1rem;
-        }
-
-        .table tbody td {
-            padding: 1rem;
-            vertical-align: middle;
-            color: #334155;
-        }
-
-        .table-hover tbody tr:hover {
-            background-color: #f8fafc;
-        }
-
-        .pagination .page-link {
-            color: var(--primary-color);
-            border-radius: 0.5rem;
-            margin: 0 0.2rem;
-            border: none;
-            font-weight: 500;
-            transition: all 0.2s;
-        }
-
-        .pagination .page-link:hover {
-            background-color: #e0e7ff;
-            color: var(--primary-hover);
-        }
-
-        .pagination .page-item.active .page-link {
-            background-color: var(--primary-color);
-            color: #fff;
-            box-shadow: 0 4px 10px rgba(59, 130, 246, 0.3);
-        }
-
-        .modal-content {
-            border: none;
-            border-radius: 1.5rem;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
-        }
-
-        .modal-header, .modal-footer {
-            border-color: #f1f5f9;
-            padding: 1.5rem;
-        }
-
-        .modal-title {
-            color: #0f172a;
-        }
-
+        .card-kpi .kpi-number { font-weight: 700; font-size: clamp(1.8rem, 4vw, 2.2rem); letter-spacing: -0.02em; margin-top: 0.5rem; }
+        .table-responsive { background: #fff; border-radius: 1.25rem; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.03); border: 1px solid #e2e8f0; overflow-x: auto; }
+        .table { margin-bottom: 0; white-space: nowrap; }
+        .table thead th { background-color: #f1f5f9; color: #475569; font-weight: 600; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.05em; border-bottom: 2px solid #cbd5e1; padding: 1rem; }
+        .table tbody td { padding: 1rem; vertical-align: middle; color: #334155; }
+        .table-hover tbody tr:hover { background-color: #f8fafc; }
+        .pagination .page-link { color: var(--primary-color); border-radius: 0.5rem; margin: 0 0.2rem; border: none; font-weight: 500; transition: all 0.2s; }
+        .pagination .page-link:hover { background-color: #e0e7ff; color: var(--primary-hover); }
+        .pagination .page-item.active .page-link { background-color: var(--primary-color); color: #fff; box-shadow: 0 4px 10px rgba(59, 130, 246, 0.3); }
+        .modal-content { border: none; border-radius: 1.5rem; box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25); }
+        .modal-header, .modal-footer { border-color: #f1f5f9; padding: 1.5rem; }
+        .modal-title { color: #0f172a; }
         .btn-primary { background-color: var(--primary-color); border-color: var(--primary-color); }
         .btn-primary:hover { background-color: var(--primary-hover); border-color: var(--primary-hover); }
-
-        .toast-delete-alert {
-            position: fixed;
-            bottom: 24px;
-            right: 24px;
-            z-index: 1090;
-            width: 340px;
-            max-width: calc(100vw - 32px);
-            background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%);
-            box-shadow: 0 10px 25px rgba(220, 38, 38, 0.4);
-            border-radius: 1rem;
-            animation: slideInRight 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        @keyframes slideInRight {
-            from {
-                transform: translateX(120%);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-
-        .filtro-label {
-            font-weight: 600;
-            color: #475569;
-            font-size: 0.85rem;
-            margin-bottom: 0.3rem;
-            display: block;
-        }
-
-        .btn-sm {
-            padding: 0.5rem 1rem;
-            font-weight: 500;
-            border-radius: 0.5rem;
-        }
-
-        /* Contenedor del histórico: sin bordes ni sombras, ocupa todo */
-        #historicoContainer {
-            display: none;
-            width: 100%;
-            min-height: 80vh; /* se ajustará con flex */
-            background: white;
-            border-radius: 0.25rem;
-            padding: 0;
-            margin: 0;
-            position: relative;
-            flex: 1;
-        }
-
-        #historicoContainer iframe {
-            width: 100%;
-            height: 85vh;  /* alto en escritorio */
-            border: none;
-            border-radius: 0.25rem;
-            display: block;
-        }
-
-        /* Responsive móvil */
-        @media (max-width: 768px) {
-            #appContainer { padding: 0.5rem; }
-            .filtros-row > div { margin-bottom: 0.5rem; }
-            .card-body { padding: 1.25rem; }
-            .d-flex.align-items-center.justify-content-between.mb-4 {
-                flex-direction: column;
-                align-items: flex-start !important;
-                gap: 0.5rem;
-            }
-            #historicoContainer {
-                min-height: 70vh;
-            }
-            #historicoContainer iframe {
-                height: 70vh;
-            }
-            .btn-volver {
-                font-size: 0.8rem;
-                padding: 0.1rem 0.3rem;
-            }
-        }
-
-        @media print {
-            .no-print { display: none !important; }
-            body, #appContainer { background: white !important; padding: 0 !important; }
-            .table-responsive { box-shadow: none; border: none; }
-            .card-kpi { border: 1px solid #ccc !important; color: black !important; background: white !important; }
-            .card-kpi .badge { background: #eee !important; color: #000 !important; }
-            .kpi-number { color: black !important; }
-        }
+        .toast-delete-alert { position: fixed; bottom: 24px; right: 24px; z-index: 1090; width: 340px; max-width: calc(100vw - 32px); background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%); box-shadow: 0 10px 25px rgba(220, 38, 38, 0.4); border-radius: 1rem; animation: slideInRight 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+        @keyframes slideInRight { from { transform: translateX(120%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        .filtro-label { font-weight: 600; color: #475569; font-size: 0.85rem; margin-bottom: 0.3rem; display: block; }
+        .btn-sm { padding: 0.5rem 1rem; font-weight: 500; border-radius: 0.5rem; }
+        #historicoContainer { display: none; width: 100%; min-height: 80vh; background: white; border-radius: 0.25rem; padding: 0; margin: 0; position: relative; flex: 1; }
+        #historicoContainer iframe { width: 100%; height: 85vh; border: none; border-radius: 0.25rem; display: block; }
+        @media (max-width: 768px) { #appContainer { padding: 0.5rem; } .filtros-row > div { margin-bottom: 0.5rem; } .card-body { padding: 1.25rem; } .d-flex.align-items-center.justify-content-between.mb-4 { flex-direction: column; align-items: flex-start !important; gap: 0.5rem; } #historicoContainer { min-height: 70vh; } #historicoContainer iframe { height: 70vh; } .btn-volver { font-size: 0.8rem; padding: 0.1rem 0.3rem; } }
+        @media print { .no-print { display: none !important; } body, #appContainer { background: white !important; padding: 0 !important; } .table-responsive { box-shadow: none; border: none; } .card-kpi { border: 1px solid #ccc !important; color: black !important; background: white !important; } .card-kpi .badge { background: #eee !important; color: #000 !important; } .kpi-number { color: black !important; } }
     </style>
 </head>
 <body>
@@ -338,7 +83,7 @@
     <div id="appContainer">
         <div class="container-xl">
 
-            <!-- Barra superior con el botón Volver justo debajo de Salir -->
+            <!-- Barra superior -->
             <div class="d-flex align-items-center justify-content-between mb-3 flex-wrap">
                 <div>
                     <h1 class="h3 fw-bold mb-1">
@@ -355,14 +100,13 @@
                             <i class="fas fa-sign-out-alt me-1"></i> Salir
                         </button>
                     </div>
-                    <!-- Botón Volver (oculto por defecto) -->
                     <button id="btnVolver" class="btn-volver mt-1" style="display:none;">
                         <i class="fas fa-arrow-left me-1"></i> Volver
                     </button>
                 </div>
             </div>
 
-            <!-- ========== CONTENIDO PRINCIPAL (KPIs, filtros, tabla, etc.) ========== -->
+            <!-- ========== CONTENIDO PRINCIPAL ========== -->
             <div id="contenidoPrincipal">
 
                 <!-- KPIs -->
@@ -463,7 +207,6 @@
                     </ul>
                 </nav>
 
-                <!-- Botón imprimir -->
                 <div class="text-center mt-3 no-print">
                     <button id="btnImprimir" class="btn btn-light border px-4 shadow-sm text-secondary rounded-pill">
                         <i class="fas fa-print me-2"></i> Imprimir Reporte
@@ -472,7 +215,7 @@
             </div>
             <!-- ========== FIN CONTENIDO PRINCIPAL ========== -->
 
-            <!-- ========== CONTENEDOR PARA EL HISTÓRICO (iframe) ========== -->
+            <!-- ========== HISTÓRICO ========== -->
             <div id="historicoContainer">
                 <iframe src="https://app-fioravante.github.io/apps-fioravante/historico-sueldo" title="Recibos Históricos"></iframe>
             </div>
@@ -483,7 +226,7 @@
         </div>
     </div>
 
-    <!-- ========== MODAL NUEVO / EDITAR RECIBO ========== -->
+    <!-- ========== MODAL NUEVO / EDITAR ========== -->
     <div class="modal fade" id="modalRecibo" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -498,7 +241,8 @@
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="numero" class="form-label fw-semibold text-secondary small">Número de Recibo</label>
-                                <input type="number" class="form-control shadow-none" id="numero" placeholder="Ej. 001" required />
+                                <input type="number" class="form-control shadow-none" id="numero" readonly disabled style="background:#e9ecef;" />
+                                <small class="text-muted">Se asigna automáticamente</small>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="mes" class="form-label fw-semibold text-secondary small">Mes</label>
@@ -540,7 +284,7 @@
         </div>
     </div>
 
-    <!-- ========== MODAL ALERTA ROJO DE ELIMINACIÓN ========== -->
+    <!-- ========== MODAL ELIMINAR ========== -->
     <div id="deleteModal" class="toast-delete-alert p-3 border-0 text-white" style="display: none;">
         <div class="d-flex align-items-center mb-2">
             <i class="fas fa-exclamation-triangle fa-lg me-2 text-warning"></i>
@@ -588,12 +332,10 @@
             let paginaActual = 1;
             let filtroMes = '', filtroAnio = '', filtroEmisor = '';
             let idParaEliminar = null;
-
-            // Variables para el modal de edición
             let modoEdicion = false;
             let idEditando = null;
 
-            // Elementos DOM
+            // Elementos DOM (abreviado para no repetir)
             const $landing = document.getElementById('landingPage');
             const $app = document.getElementById('appContainer');
             const $btnIngresar = document.getElementById('btnIngresar');
@@ -632,16 +374,12 @@
             // ========== FUNCIONES DE NAVEGACIÓN ==========
             function mostrarLanding() { $landing.style.display = 'flex'; $app.style.display = 'none'; }
             function mostrarApp() { $landing.style.display = 'none'; $app.style.display = 'block'; renderizarTabla(); }
-
             $btnIngresar.addEventListener('click', mostrarApp);
             $btnSalir.addEventListener('click', mostrarLanding);
 
             // ========== FORMATO MONEDA ==========
             function formatearMoneda(valor) {
-                return '$' + Number(valor).toLocaleString('es-ES', {
-                    minimumFractionDigits: 2,
-                    maximumFractionDigits: 2
-                });
+                return '$' + Number(valor).toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
             }
 
             // ========== FIRESTORE ==========
@@ -651,18 +389,25 @@
                     const docs = [];
                     snapshot.forEach(doc => {
                         const data = doc.data();
+                        // Asegurar que mesIndex esté definido
+                        let mesIndex = data.mesIndex;
+                        if (mesIndex === undefined || mesIndex === null) {
+                            mesIndex = MESES.indexOf(data.mes);
+                            if (mesIndex === -1) mesIndex = 0; // fallback
+                        }
                         docs.push({
                             id: doc.id,
-                            numero: data.numero,
+                            numero: data.numero || 0,
                             mes: data.mes,
-                            mesIndex: data.mesIndex,
+                            mesIndex: mesIndex,
                             anio: data.anio,
-                            emisor: data.emisor,
+                            emisor: data.emisor || '',
                             categoria: data.categoria || '',
-                            monto: data.monto
+                            monto: data.monto || 0
                         });
                     });
                     recibos = docs;
+                    console.log(`✅ Cargados ${recibos.length} recibos desde Firestore.`);
                     actualizarKPIs();
                 } catch (error) {
                     console.error('Error al cargar datos:', error);
@@ -670,30 +415,57 @@
                 }
             }
 
-            function existeNumero(numero, idExcluir) {
-                return recibos.some(r => r.numero === numero && r.id !== idExcluir);
+            // ========== RENUMERACIÓN AUTOMÁTICA ==========
+            async function renumerarRecibos() {
+                if (recibos.length === 0) return;
+                try {
+                    // Ordenar copia cronológicamente
+                    const todos = [...recibos];
+                    todos.sort((a, b) => {
+                        if (a.anio !== b.anio) return a.anio - b.anio;
+                        return a.mesIndex - b.mesIndex;
+                    });
+                    // Asignar números correlativos
+                    let cambios = 0;
+                    for (let i = 0; i < todos.length; i++) {
+                        const nuevoNumero = i + 1;
+                        if (todos[i].numero !== nuevoNumero) {
+                            await coleccion.doc(todos[i].id).update({ numero: nuevoNumero });
+                            todos[i].numero = nuevoNumero;
+                            cambios++;
+                        }
+                    }
+                    // Actualizar el array local
+                    recibos = todos;
+                    console.log(`🔄 Renumeración completada: ${cambios} registros actualizados.`);
+                    actualizarKPIs();
+                } catch (error) {
+                    console.error('Error en renumeración:', error);
+                    // No detenemos la ejecución, solo mostramos el error
+                }
             }
 
-            async function agregarRecibo(numero, mes, anio, emisor, categoria, monto) {
+            // ========== CRUD ==========
+            async function agregarRecibo(mes, anio, emisor, categoria, monto) {
                 try {
-                    if (existeNumero(numero)) {
-                        alert('Ya existe un recibo con el número ' + numero + '. Por favor, elige otro.');
-                        return false;
-                    }
                     const mesIndex = MESES.indexOf(mes);
                     if (mesIndex === -1) throw new Error('Mes inválido');
                     const nuevoDoc = {
-                        numero: numero,
                         mes: mes,
                         mesIndex: mesIndex,
                         anio: anio,
                         emisor: emisor.trim(),
                         categoria: categoria.trim() || '',
-                        monto: monto
+                        monto: monto,
+                        numero: 0 // temporal
                     };
                     const docRef = await coleccion.add(nuevoDoc);
+                    const nuevoRecibo = { id: docRef.id, ...nuevoDoc };
+                    recibos.push(nuevoRecibo);
+                    // Renumerar todos
+                    await renumerarRecibos();
+                    // Recargar datos para tener la versión actualizada
                     await cargarDatos();
-                    reposicionarPagina(docRef.id);
                     renderizarTabla();
                     return true;
                 } catch (error) {
@@ -703,16 +475,11 @@
                 }
             }
 
-            async function actualizarRecibo(id, numero, mes, anio, emisor, categoria, monto) {
+            async function actualizarRecibo(id, mes, anio, emisor, categoria, monto) {
                 try {
-                    if (existeNumero(numero, id)) {
-                        alert('Ya existe otro recibo con el número ' + numero + '. Por favor, elige otro.');
-                        return false;
-                    }
                     const mesIndex = MESES.indexOf(mes);
                     if (mesIndex === -1) throw new Error('Mes inválido');
                     await coleccion.doc(id).update({
-                        numero: numero,
                         mes: mes,
                         mesIndex: mesIndex,
                         anio: anio,
@@ -720,8 +487,19 @@
                         categoria: categoria.trim() || '',
                         monto: monto
                     });
+                    // Actualizar en el array local
+                    const idx = recibos.findIndex(r => r.id === id);
+                    if (idx !== -1) {
+                        recibos[idx].mes = mes;
+                        recibos[idx].mesIndex = mesIndex;
+                        recibos[idx].anio = anio;
+                        recibos[idx].emisor = emisor.trim();
+                        recibos[idx].categoria = categoria.trim() || '';
+                        recibos[idx].monto = monto;
+                    }
+                    // Renumerar (puede cambiar el orden)
+                    await renumerarRecibos();
                     await cargarDatos();
-                    reposicionarPagina(id);
                     renderizarTabla();
                     return true;
                 } catch (error) {
@@ -734,6 +512,8 @@
             async function eliminarRecibo(id) {
                 try {
                     await coleccion.doc(id).delete();
+                    recibos = recibos.filter(r => r.id !== id);
+                    await renumerarRecibos();
                     await cargarDatos();
                     const filtrados = obtenerFiltrados();
                     const totalPaginas = Math.ceil(filtrados.length / POR_PAGINA) || 1;
@@ -747,22 +527,25 @@
 
             // ========== FILTRADO Y RENDERIZADO ==========
             function obtenerFiltrados() {
-                const filtrados = recibos.filter(r => {
-                    let ok = true;
-                    if (filtroMes && r.mes !== filtroMes) ok = false;
-                    if (filtroAnio && r.anio !== parseInt(filtroAnio)) ok = false;
-                    if (filtroEmisor && !r.emisor.toLowerCase().includes(filtroEmisor.toLowerCase())) ok = false;
-                    return ok;
-                });
-                filtrados.sort((a, b) => b.numero - a.numero);
-                return filtrados;
-            }
-
-            function reposicionarPagina(id) {
-                const filtrados = obtenerFiltrados();
-                const idx = filtrados.findIndex(r => r.id === id);
-                if (idx === -1) paginaActual = 1;
-                else paginaActual = Math.floor(idx / POR_PAGINA) + 1;
+                try {
+                    const filtrados = recibos.filter(r => {
+                        let ok = true;
+                        if (filtroMes && r.mes !== filtroMes) ok = false;
+                        if (filtroAnio && r.anio !== parseInt(filtroAnio)) ok = false;
+                        if (filtroEmisor && !r.emisor.toLowerCase().includes(filtroEmisor.toLowerCase())) ok = false;
+                        return ok;
+                    });
+                    // Orden cronológico por año y mes
+                    filtrados.sort((a, b) => {
+                        if (a.anio !== b.anio) return a.anio - b.anio;
+                        return a.mesIndex - b.mesIndex;
+                    });
+                    console.log(`🔍 Filtrados: ${filtrados.length} de ${recibos.length} recibos totales.`);
+                    return filtrados;
+                } catch (error) {
+                    console.error('Error en obtenerFiltrados:', error);
+                    return [];
+                }
             }
 
             function renderizarTabla() {
@@ -849,7 +632,7 @@
                 $totalRecibos.textContent = recibos.length;
             }
 
-            // ========== MODAL ELIMINAR ==========
+            // ========== MODALES ==========
             function abrirModalEliminar(id) {
                 idParaEliminar = id;
                 $deleteModal.style.display = 'block';
@@ -862,7 +645,6 @@
 
             $btnCancelarDelete.addEventListener('click', cerrarModalEliminar);
             $btnCancelarDeleteX.addEventListener('click', cerrarModalEliminar);
-
             $btnConfirmarDelete.addEventListener('click', function() {
                 if (idParaEliminar) {
                     eliminarRecibo(idParaEliminar);
@@ -870,7 +652,6 @@
                 }
             });
 
-            // ========== MODAL AGREGAR / EDITAR ==========
             function abrirModalEdicion(recibo) {
                 modoEdicion = true;
                 idEditando = recibo.id;
@@ -889,7 +670,7 @@
                 idEditando = null;
                 $modalTitle.innerHTML = `<i class="fas fa-plus-circle text-primary me-2"></i> Agregar Recibo`;
                 $formRecibo.reset();
-                const maxNum = recibos.reduce((max, r) => Math.max(max, r.numero), 0);
+                const maxNum = recibos.length > 0 ? Math.max(...recibos.map(r => r.numero)) : 0;
                 $num.value = maxNum + 1;
                 $anio.value = new Date().getFullYear();
                 $mes.value = MESES[new Date().getMonth()];
@@ -900,14 +681,12 @@
             document.getElementById('btnAgregar').addEventListener('click', abrirModalAgregar);
 
             $guardarRecibo.addEventListener('click', async function() {
-                const num = parseInt($num.value);
                 const m = $mes.value;
                 const a = parseInt($anio.value);
                 const e = $emisor.value.trim();
                 const cat = $categoria.value.trim();
                 const mon = parseFloat($monto.value);
 
-                if (isNaN(num)) return alert('Ingresa un número válido.');
                 if (!m) return alert('Selecciona un mes.');
                 if (!a || a < 2000 || a > 2100) return alert('Ingresa un año válido.');
                 if (!e) return alert('Ingresa el emisor.');
@@ -915,9 +694,9 @@
 
                 let exito = false;
                 if (modoEdicion && idEditando) {
-                    exito = await actualizarRecibo(idEditando, num, m, a, e, cat, mon);
+                    exito = await actualizarRecibo(idEditando, m, a, e, cat, mon);
                 } else {
-                    exito = await agregarRecibo(num, m, a, e, cat, mon);
+                    exito = await agregarRecibo(m, a, e, cat, mon);
                 }
 
                 if (exito) {
@@ -987,31 +766,34 @@
                 document.getElementById('fechaActual').textContent = new Date().toLocaleDateString('es-ES', { day: '2-digit', month: 'long', year: 'numeric' });
 
                 await cargarDatos();
+                // Si hay datos, renumerar para asegurar que estén en orden
+                if (recibos.length > 0) {
+                    await renumerarRecibos();
+                    await cargarDatos(); // recargar con números actualizados
+                }
                 renderizarTabla();
 
                 $btnFiltrar.addEventListener('click', function() {
-                    filtroMes = $filtroMes.value; filtroAnio = $filtroAnio.value.trim(); filtroEmisor = $filtroEmisor.value.trim();
-                    paginaActual = 1; renderizarTabla();
+                    filtroMes = $filtroMes.value;
+                    filtroAnio = $filtroAnio.value.trim();
+                    filtroEmisor = $filtroEmisor.value.trim();
+                    paginaActual = 1;
+                    renderizarTabla();
                 });
 
                 [$filtroAnio, $filtroEmisor, $filtroMes].forEach(el => el.addEventListener('keydown', e => { if (e.key === 'Enter') $btnFiltrar.click(); }));
                 $btnImprimir.addEventListener('click', imprimirTablaFiltrada);
 
-                // Mostrar histórico: ocultar contenido principal, mostrar iframe y mostrar botón Volver
                 $btnHistorico.addEventListener('click', function() {
                     $contenidoPrincipal.style.display = 'none';
                     $historicoContainer.style.display = 'block';
                     $btnVolver.style.display = 'inline-block';
-                    // Opcional: ocultar el botón histórico para no confundir
-                    // $btnHistorico.style.display = 'none';
                 });
 
-                // Volver: mostrar contenido principal, ocultar iframe y ocultar botón Volver
                 $btnVolver.addEventListener('click', function() {
                     $historicoContainer.style.display = 'none';
                     $contenidoPrincipal.style.display = 'block';
                     $btnVolver.style.display = 'none';
-                    // $btnHistorico.style.display = 'inline-block';
                 });
             }
 
