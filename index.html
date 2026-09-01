@@ -7,9 +7,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            /* Variables de Color */
-            --primary: #1e40af;       /* Azul Fuerte */
-            --secondary: #60a5fa;     /* Azul Claro */
+            --primary: #1e40af;
+            --secondary: #60a5fa;
             --bg-gradient: linear-gradient(180deg, #f0f9ff 0%, #bfdbfe 100%);
             --glass-bg: rgba(255, 255, 255, 0.85);
             --glass-border: rgba(255, 255, 255, 0.6);
@@ -28,14 +27,13 @@
             background: var(--bg-gradient);
             height: 100vh;
             width: 100vw;
-            overflow: hidden; /* SIN SCROLL VERTICAL */
+            overflow: hidden;
             display: flex;
             flex-direction: column;
             padding: 1vh 1vw;
             color: var(--text-main);
         }
 
-        /* --- Header Compacto --- */
         header {
             height: 8vh;
             display: flex;
@@ -58,7 +56,6 @@
             color: var(--text-sub);
         }
 
-        /* --- Layout Principal (90% altura) --- */
         main {
             flex: 1;
             display: flex;
@@ -73,12 +70,10 @@
             width: 100%;
         }
 
-        /* Ambas filas ahora equilibradas al 50% para 4 módulos cada una */
         #top-row, #bottom-row {
-            flex: 1;  /* Ocupan la misma proporción */
+            flex: 1;
         }
 
-        /* --- Tarjetas --- */
         .card {
             flex: 1;
             background: var(--glass-bg);
@@ -134,7 +129,6 @@
             font-weight: 900;
         }
 
-        /* Estados de selección */
         .card.selected {
             transform: scale(1.02);
             background: #ffffff;
@@ -146,7 +140,7 @@
         .card.dimmed {
             filter: grayscale(0.9) opacity(0.6);
             transform: scale(0.96);
-            pointer-events: none; /* evita clics mientras está gris */
+            pointer-events: none;
         }
 
         footer {
@@ -157,7 +151,6 @@
             opacity: 0.7;
         }
 
-        /* --- MODAL (scroll interno) --- */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -245,11 +238,10 @@
             border-bottom: 1px solid #ddd;
         }
 
-        /* Ajuste móvil para mantener 4 tarjetas visibles sin scroll */
         @media (max-width: 768px) {
             h1 { font-size: 1.2rem; }
             .row-container {
-                flex-wrap: nowrap; /* Evita que se apilen verticalmente */
+                flex-wrap: nowrap;
                 gap: 1vw;
             }
             .card h3 { font-size: 1.4vh; }
@@ -285,9 +277,7 @@
     </div>
 
     <script>
-        // DATOS: Nuevo módulo "Personal" al inicio, luego Laboral, Finanza, Despensa, y los 4 de abajo
         const modules = [
-            // Módulo Personal (nuevo, a la izquierda de Laboral)
             {
                 title: "Personal",
                 icon: "fa-user",
@@ -341,8 +331,11 @@
             },
             {
                 title: "Biblia",
-                icon: "fa-book-bible",
-                links: [{ name: "Ir a Biblia", url: "https://app-fioravante.github.io/appbiblia/" }]
+                icon: "fa-bible",  // corregido: ícono válido
+                links: [
+                    { name: "Ir a Biblia", url: "https://app-fioravante.github.io/appbiblia/" },
+                    { name: "Ir a Cronologia Biblia Historia", url: "https://experiencia-ia.github.io/crono-bibliahistoria/" }
+                ]
             },
             {
                 title: "Astronomía",
@@ -356,16 +349,9 @@
             }
         ];
 
-        // Colores de borde para cada módulo (8 colores distintos)
         const borderColors = [
-            '#e11d48', // rojo
-            '#2563eb', // azul
-            '#16a34a', // verde
-            '#ca8a04', // amarillo
-            '#7c3aed', // morado
-            '#0891b2', // cian
-            '#db2777', // rosa
-            '#ea580c'  // naranja
+            '#e11d48', '#2563eb', '#16a34a', '#ca8a04',
+            '#7c3aed', '#0891b2', '#db2777', '#ea580c'
         ];
 
         const topRow = document.getElementById('top-row');
@@ -374,7 +360,6 @@
         function createCard(mod, index) {
             const card = document.createElement('div');
             card.className = 'card';
-            // Asignar color de borde único
             card.style.borderColor = borderColors[index % borderColors.length];
             card.dataset.index = index;
             card.onclick = () => {
@@ -389,19 +374,14 @@
             return card;
         }
 
-        // Manejo de selección
         let selectedCard = null;
 
         function selectCard(card) {
-            // Si ya hay una seleccionada, la desmarcamos
             if (selectedCard) {
                 selectedCard.classList.remove('selected');
-                // Restaurar todas las tarjetas (quitar dimmed)
                 document.querySelectorAll('.card').forEach(c => c.classList.remove('dimmed'));
             }
-            // Marcar la nueva
             card.classList.add('selected');
-            // Grisear las demás
             document.querySelectorAll('.card').forEach(c => {
                 if (c !== card) c.classList.add('dimmed');
             });
@@ -417,17 +397,14 @@
         }
 
         function init() {
-            // Primeros 4 módulos (índices 0,1,2,3) en la fila superior
-            for(let i = 0; i < 4; i++) {
+            for (let i = 0; i < 4; i++) {
                 topRow.appendChild(createCard(modules[i], i));
             }
-            // Siguientes 4 módulos (índices 4,5,6,7) en la fila inferior
-            for(let i = 4; i < modules.length; i++) {
+            for (let i = 4; i < modules.length; i++) {
                 bottomRow.appendChild(createCard(modules[i], i));
             }
         }
 
-        // Modal
         const modalOverlay = document.getElementById('modalOverlay');
         const modalTitle = document.getElementById('modalTitle');
         const modalBody = document.getElementById('modalBody');
@@ -437,7 +414,7 @@
             modalBody.innerHTML = '';
 
             mod.links.forEach(link => {
-                if(link.isHeader) {
+                if (link.isHeader) {
                     const h = document.createElement('div');
                     h.className = 'section-title';
                     h.innerText = link.name;
@@ -460,13 +437,12 @@
             modalOverlay.classList.remove('active');
             setTimeout(() => {
                 modalOverlay.style.display = 'none';
-                // Al cerrar el modal, restauramos todas las tarjetas
                 clearSelection();
             }, 300);
         }
 
         function closeModal(e) {
-            if(e.target === modalOverlay) closeModalDirect();
+            if (e.target === modalOverlay) closeModalDirect();
         }
 
         init();
