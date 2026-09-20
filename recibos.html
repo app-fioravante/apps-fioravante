@@ -87,6 +87,15 @@
         .progress-mini { height: 6px; border-radius: 6px; background: #e2e8f0; overflow: hidden; min-width: 60px; }
         .progress-mini > div { height: 100%; border-radius: 6px; }
 
+        /* ====== GESTIÓN DE DATOS (Firestore / JSON) ====== */
+        .data-toolbar { display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center; }
+        .data-toolbar .badge-estado { font-size: 0.72rem; padding: 0.4rem 0.7rem; border-radius: 50px; display: inline-flex; align-items: center; gap: 0.35rem; }
+        .badge-estado.estado-on { background: #ecfdf5; color: #047857; border: 1px solid #a7f3d0; }
+        .badge-estado.estado-off { background: #fef2f2; color: #b91c1c; border: 1px solid #fecaca; }
+        .badge-estado .dot-pulse { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+        .estado-on .dot-pulse { background: #10b981; box-shadow: 0 0 0 3px rgba(16,185,129,.25); }
+        .estado-off .dot-pulse { background: #ef4444; box-shadow: 0 0 0 3px rgba(239,68,68,.25); }
+
         @media (max-width: 768px) {
             #appContainer { padding: 0.5rem; }
             .filtros-row > div { margin-bottom: 0.5rem; }
@@ -224,6 +233,29 @@
                         <button id="btnEstadisticas" class="btn btn-sm w-100 shadow-sm text-white" style="background: linear-gradient(135deg,#6366f1,#4338ca); border:none;">
                             <i class="fas fa-chart-line me-1"></i> Ver Reporte Estadístico (Categoría · Emisor · Mes · Año)
                         </button>
+                    </div>
+
+                    <!-- ========== GESTIÓN DE DATOS (JSON / Firestore) ========== -->
+                    <div class="col-12 mt-2 pt-2 border-top">
+                        <div class="data-toolbar">
+                            <button id="btnExportarJSON" class="btn btn-sm btn-outline-primary shadow-sm">
+                                <i class="fas fa-file-download me-1"></i> Exportar JSON
+                            </button>
+                            <button id="btnImportarJSON" class="btn btn-sm btn-outline-success shadow-sm" disabled>
+                                <i class="fas fa-file-upload me-1"></i> Importar JSON
+                            </button>
+                            <input type="file" id="inputArchivoJSON" accept=".json,application/json" style="display:none;" />
+                            <button id="btnToggleFirestore" class="btn btn-sm btn-success shadow-sm">
+                                <i class="fas fa-database me-1"></i> Firestore: ACTIVO
+                            </button>
+                            <span id="estadoFirestoreBadge" class="badge-estado estado-on">
+                                <span class="dot-pulse"></span> Base de datos conectada
+                            </span>
+                            <span id="estadoModoBadge" class="badge-estado estado-on" style="display:none;"></span>
+                        </div>
+                        <div class="small text-muted mt-2" id="ayudaModoDatos" style="font-size:0.75rem;">
+                            <i class="fas fa-info-circle me-1"></i> Con Firestore activo puedes <strong>exportar</strong> los registros. Desactívalo para <strong>importar</strong> un JSON.
+                        </div>
                     </div>
                 </div>
 
@@ -605,6 +637,10 @@
             let modoEdicion = false;
             let idEditando = null;
 
+            // Estado de Firestore (ACTIVO por defecto). Al desactivar, la app opera
+            // en modo local en memoria (importación JSON) sin tocar la base.
+            let firestoreActivo = true;
+
             // Filtros de estadísticas
             let stFiltroAnio = '', stFiltroEmisor = '', stFiltroCategoria = '';
 
@@ -656,6 +692,15 @@
             const $stBtnLimpiar = document.getElementById('stBtnLimpiar');
             const $btnImprimirStats = document.getElementById('btnImprimirStats');
 
+            // Elementos gestión de datos
+            const $btnExportarJSON = document.getElementById('btnExportarJSON');
+            const $btnImportarJSON = document.getElementById('btnImportarJSON');
+            const $inputArchivoJSON = document.getElementById('inputArchivoJSON');
+            const $btnToggleFirestore = document.getElementById('btnToggleFirestore');
+            const $estadoFirestoreBadge = document.getElementById('estadoFirestoreBadge');
+            const $estadoModoBadge = document.getElementById('estadoModoBadge');
+            const $ayudaModoDatos = document.getElementById('ayudaModoDatos');
+
             // ========== CONFIGURACIÓN CHART.JS ==========
             if (window.Chart) {
                 Chart.defaults.font.family = "'Inter', system-ui, sans-serif";
@@ -700,6 +745,10 @@
                     .replace(/'/g, '&#39;');
             }
 
+            function generarIdLocal() {
+                return 'local-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9);
+            }
+
             // ========== FUNCIONES DE NAVEGACIÓN ==========
             function mostrarLanding() {
                 $landing.style.display = 'flex';
@@ -717,6 +766,12 @@
 
             // ========== FIRESTORE ==========
             async function cargarDatos() {
+                // Si Firestore está desactivado, se conserva el arreglo local en memoria
+                // (por ejemplo, los datos importados por JSON).
+                if (!firestoreActivo) {
+                    actualizarKPIs();
+                    return;
+                }
                 try {
                     const snapshot = await coleccion.get();
                     const docs = [];
@@ -748,8 +803,25 @@
             }
 
             // ========== RENUMERACIÓN AUTOMÁTICA ==========
+            function renumerarLocal() {
+                if (recibos.length === 0) return;
+                recibos.sort((a, b) => {
+                    if (a.anio !== b.anio) return a.anio - b.anio;
+                    return a.mesIndex - b.mesIndex;
+                });
+                recibos.forEach((r, i) => { r.numero = i + 1; });
+                actualizarKPIs();
+            }
+
             async function renumerarRecibos() {
                 if (recibos.length === 0) return;
+
+                // Modo local: renumerar sólo en memoria
+                if (!firestoreActivo) {
+                    renumerarLocal();
+                    return;
+                }
+
                 try {
                     const todos = [...recibos];
                     todos.sort((a, b) => {
@@ -775,9 +847,30 @@
 
             // ========== CRUD ==========
             async function agregarRecibo(mes, anio, emisor, categoria, monto) {
+                const mesIndex = MESES.indexOf(mes);
+                if (mesIndex === -1) { alert('Mes inválido'); return false; }
+
+                // ----- MODO LOCAL (Firestore desactivado) -----
+                if (!firestoreActivo) {
+                    const nuevoRecibo = {
+                        id: generarIdLocal(),
+                        mes: mes,
+                        mesIndex: mesIndex,
+                        anio: anio,
+                        emisor: emisor.trim(),
+                        categoria: categoria.trim() || '',
+                        monto: monto,
+                        numero: 0
+                    };
+                    recibos.push(nuevoRecibo);
+                    renumerarLocal();
+                    renderizarTabla();
+                    refrescarSelectoresEstadisticas();
+                    return true;
+                }
+
+                // ----- MODO FIRESTORE -----
                 try {
-                    const mesIndex = MESES.indexOf(mes);
-                    if (mesIndex === -1) throw new Error('Mes inválido');
                     const nuevoDoc = {
                         mes: mes,
                         mesIndex: mesIndex,
@@ -803,9 +896,28 @@
             }
 
             async function actualizarRecibo(id, mes, anio, emisor, categoria, monto) {
+                const mesIndex = MESES.indexOf(mes);
+                if (mesIndex === -1) { alert('Mes inválido'); return false; }
+
+                // ----- MODO LOCAL -----
+                if (!firestoreActivo) {
+                    const idx = recibos.findIndex(r => r.id === id);
+                    if (idx !== -1) {
+                        recibos[idx].mes = mes;
+                        recibos[idx].mesIndex = mesIndex;
+                        recibos[idx].anio = anio;
+                        recibos[idx].emisor = emisor.trim();
+                        recibos[idx].categoria = categoria.trim() || '';
+                        recibos[idx].monto = monto;
+                    }
+                    renumerarLocal();
+                    renderizarTabla();
+                    refrescarSelectoresEstadisticas();
+                    return true;
+                }
+
+                // ----- MODO FIRESTORE -----
                 try {
-                    const mesIndex = MESES.indexOf(mes);
-                    if (mesIndex === -1) throw new Error('Mes inválido');
                     await coleccion.doc(id).update({
                         mes: mes,
                         mesIndex: mesIndex,
@@ -836,6 +948,19 @@
             }
 
             async function eliminarRecibo(id) {
+                // ----- MODO LOCAL -----
+                if (!firestoreActivo) {
+                    recibos = recibos.filter(r => r.id !== id);
+                    renumerarLocal();
+                    const filtrados = obtenerFiltrados();
+                    const totalPaginas = Math.ceil(filtrados.length / POR_PAGINA) || 1;
+                    if (paginaActual > totalPaginas) paginaActual = totalPaginas;
+                    renderizarTabla();
+                    refrescarSelectoresEstadisticas();
+                    return;
+                }
+
+                // ----- MODO FIRESTORE -----
                 try {
                     await coleccion.doc(id).delete();
                     recibos = recibos.filter(r => r.id !== id);
@@ -1075,6 +1200,204 @@
                 ventana.focus();
                 ventana.print();
             }
+
+            // ================================================================
+            // ============ GESTIÓN DE DATOS: JSON / FIRESTORE ================
+            // ================================================================
+
+            // ---- Exportar todos los registros actuales a un único JSON ----
+            function exportarJSON() {
+                if (!firestoreActivo) {
+                    alert('La exportación sólo está disponible con Firestore activo.');
+                    return;
+                }
+                if (!recibos || recibos.length === 0) {
+                    alert('No hay registros para exportar.');
+                    return;
+                }
+
+                // Se exportan los datos SIN el ID de Firestore (para que la base
+                // permanezca intacta y el JSON sea portátil/reimportable).
+                const datos = recibos
+                    .slice()
+                    .sort((a, b) => {
+                        if (a.anio !== b.anio) return a.anio - b.anio;
+                        return a.mesIndex - b.mesIndex;
+                    })
+                    .map(r => ({
+                        numero: r.numero,
+                        mes: r.mes,
+                        mesIndex: r.mesIndex,
+                        anio: r.anio,
+                        emisor: r.emisor,
+                        categoria: r.categoria || '',
+                        monto: Number(r.monto) || 0
+                    }));
+
+                const payload = {
+                    generado: new Date().toISOString(),
+                    origen: 'Firestore · colección "sueldo"',
+                    total: datos.length,
+                    registros: datos
+                };
+
+                const json = JSON.stringify(payload, null, 2);
+                const blob = new Blob([json], { type: 'application/json;charset=utf-8' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                const fecha = new Date().toISOString().slice(0, 10);
+                a.href = url;
+                a.download = 'recibos_sueldo_' + fecha + '.json';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+
+                console.log('📦 Exportados ' + datos.length + ' registros a JSON (Firestore intacto).');
+            }
+
+            // ---- Importar JSON (sólo con Firestore desactivado) ----
+            function procesarArchivoJSON(file) {
+                if (!file) return;
+                if (firestoreActivo) {
+                    alert('Para importar un JSON primero debes desactivar Firestore.');
+                    return;
+                }
+                const reader = new FileReader();
+                reader.onload = function(ev) {
+                    try {
+                        const contenido = ev.target.result;
+                        let parsed = JSON.parse(contenido);
+
+                        // Acepta tanto un array directo como { registros: [...] }
+                        let lista = null;
+                        if (Array.isArray(parsed)) {
+                            lista = parsed;
+                        } else if (parsed && Array.isArray(parsed.registros)) {
+                            lista = parsed.registros;
+                        } else {
+                            throw new Error('El JSON no contiene un arreglo de registros válido.');
+                        }
+
+                        const nuevos = [];
+                        lista.forEach((d, i) => {
+                            if (!d || typeof d !== 'object') return;
+                            let mesIndex = (typeof d.mesIndex === 'number') ? d.mesIndex : MESES.indexOf(d.mes);
+                            if (mesIndex === -1 || isNaN(mesIndex)) mesIndex = 0;
+                            const mesFinal = d.mes || MESES[mesIndex] || '';
+                            nuevos.push({
+                                id: generarIdLocal(),
+                                numero: Number(d.numero) || (i + 1),
+                                mes: mesFinal,
+                                mesIndex: mesIndex,
+                                anio: Number(d.anio) || 0,
+                                emisor: String(d.emisor || '').trim(),
+                                categoria: String(d.categoria || '').trim(),
+                                monto: Number(d.monto) || 0
+                            });
+                        });
+
+                        if (nuevos.length === 0) {
+                            alert('El archivo no contiene registros válidos.');
+                            return;
+                        }
+
+                        recibos = nuevos;
+                        renumerarLocal();
+                        paginaActual = 1;
+                        renderizarTabla();
+                        actualizarKPIs();
+                        refrescarSelectoresEstadisticas();
+                        alert('✅ Importados ' + recibos.length + ' registros correctamente. La base de datos Firestore permanece intacta.');
+                        console.log('📥 Importados ' + recibos.length + ' registros desde JSON (modo local).');
+                    } catch (err) {
+                        console.error('Error al importar JSON:', err);
+                        alert('Error al procesar el archivo JSON:\n' + err.message);
+                    } finally {
+                        // Permite volver a seleccionar el mismo archivo
+                        $inputArchivoJSON.value = '';
+                    }
+                };
+                reader.onerror = function() {
+                    alert('No se pudo leer el archivo seleccionado.');
+                    $inputArchivoJSON.value = '';
+                };
+                reader.readAsText(file, 'utf-8');
+            }
+
+            // ---- Actualizar UI según el estado de Firestore ----
+            function actualizarUIEstadoFirestore() {
+                if (firestoreActivo) {
+                    $btnToggleFirestore.className = 'btn btn-sm btn-success shadow-sm';
+                    $btnToggleFirestore.innerHTML = '<i class="fas fa-database me-1"></i> Firestore: ACTIVO';
+                    $btnExportarJSON.disabled = false;
+                    $btnImportarJSON.disabled = true;
+                    $estadoFirestoreBadge.className = 'badge-estado estado-on';
+                    $estadoFirestoreBadge.innerHTML = '<span class="dot-pulse"></span> Base de datos conectada';
+                    $estadoModoBadge.style.display = 'none';
+                    $ayudaModoDatos.innerHTML = '<i class="fas fa-info-circle me-1"></i> Con Firestore activo puedes <strong>exportar</strong> los registros. Desactívalo para <strong>importar</strong> un JSON.';
+                } else {
+                    $btnToggleFirestore.className = 'btn btn-sm btn-danger shadow-sm';
+                    $btnToggleFirestore.innerHTML = '<i class="fas fa-database me-1"></i> Firestore: INACTIVO';
+                    $btnExportarJSON.disabled = true;
+                    $btnImportarJSON.disabled = false;
+                    $estadoFirestoreBadge.className = 'badge-estado estado-off';
+                    $estadoFirestoreBadge.innerHTML = '<span class="dot-pulse"></span> Base de datos desconectada';
+                    $estadoModoBadge.className = 'badge-estado estado-off';
+                    $estadoModoBadge.innerHTML = '<i class="fas fa-file-import me-1"></i> Modo local (JSON)';
+                    $estadoModoBadge.style.display = 'inline-flex';
+                    $ayudaModoDatos.innerHTML = '<i class="fas fa-info-circle me-1"></i> Modo local activo: puedes <strong>importar</strong> un JSON. La base de datos Firestore permanece intacta. Al reactivar Firestore se recargarán los datos desde la nube.';
+                }
+            }
+
+            // ---- Alternar Firestore ----
+            async function toggleFirestore() {
+                if (!firestoreActivo) {
+                    // Reactivar Firestore: advertir que se perderán los datos locales
+                    const ok = confirm('Al activar Firestore se recargarán los datos desde la base de datos en la nube.\n\nLos cambios locales (incluyendo registros importados) que no se hayan guardado en Firestore se perderán.\n\n¿Deseas continuar?');
+                    if (!ok) return;
+
+                    firestoreActivo = true;
+                    actualizarUIEstadoFirestore();
+
+                    // Recargar desde Firestore (base intacta)
+                    await cargarDatos();
+                    if (recibos.length > 0) {
+                        await renumerarRecibos();
+                        await cargarDatos();
+                    }
+                    paginaActual = 1;
+                    renderizarTabla();
+                    refrescarSelectoresEstadisticas();
+                    console.log('🟢 Firestore ACTIVADO. Datos recargados desde la nube.');
+                } else {
+                    // Desactivar Firestore (modo local)
+                    const ok = confirm('Al desactivar Firestore, la aplicación trabajará en modo local.\n\nSe conservarán en memoria los registros actuales, pero los cambios que realices NO se guardarán en la base de datos.\n\nLa base de datos Firestore permanecerá intacta.\n\n¿Deseas continuar?');
+                    if (!ok) return;
+
+                    firestoreActivo = false;
+                    actualizarUIEstadoFirestore();
+                    console.log('🔴 Firestore DESACTIVADO. Modo local activo.');
+                }
+            }
+
+            // ---- Eventos de gestión de datos ----
+            $btnExportarJSON.addEventListener('click', exportarJSON);
+
+            $btnImportarJSON.addEventListener('click', function() {
+                if (firestoreActivo) {
+                    alert('Para importar un JSON primero debes desactivar Firestore.');
+                    return;
+                }
+                $inputArchivoJSON.click();
+            });
+
+            $inputArchivoJSON.addEventListener('change', function() {
+                const file = this.files && this.files[0];
+                if (file) procesarArchivoJSON(file);
+            });
+
+            $btnToggleFirestore.addEventListener('click', toggleFirestore);
 
             // ================================================================
             // =====================  MÓDULO ESTADÍSTICO  =====================
@@ -1690,8 +2013,11 @@
                 document.getElementById('fechaActual').textContent =
                     new Date().toLocaleDateString('es-ES', { day: '2-digit', month: 'long', year: 'numeric' });
 
+                // Estado inicial de los controles de datos
+                actualizarUIEstadoFirestore();
+
                 await cargarDatos();
-                if (recibos.length > 0) {
+                if (firestoreActivo && recibos.length > 0) {
                     await renumerarRecibos();
                     await cargarDatos();
                 }
