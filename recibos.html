@@ -14,8 +14,10 @@
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
 
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
     <style>
-        /* (Estilos iguales que antes, no los repito para ahorrar espacio) */
         :root {
             --bg-body: #f8fafc;
             --text-main: #0f172a;
@@ -62,8 +64,48 @@
         .btn-sm { padding: 0.5rem 1rem; font-weight: 500; border-radius: 0.5rem; }
         #historicoContainer { display: none; width: 100%; min-height: 80vh; background: white; border-radius: 0.25rem; padding: 0; margin: 0; position: relative; flex: 1; }
         #historicoContainer iframe { width: 100%; height: 85vh; border: none; border-radius: 0.25rem; display: block; }
-        @media (max-width: 768px) { #appContainer { padding: 0.5rem; } .filtros-row > div { margin-bottom: 0.5rem; } .card-body { padding: 1.25rem; } .d-flex.align-items-center.justify-content-between.mb-4 { flex-direction: column; align-items: flex-start !important; gap: 0.5rem; } #historicoContainer { min-height: 70vh; } #historicoContainer iframe { height: 70vh; } .btn-volver { font-size: 0.8rem; padding: 0.1rem 0.3rem; } }
-        @media print { .no-print { display: none !important; } body, #appContainer { background: white !important; padding: 0 !important; } .table-responsive { box-shadow: none; border: none; } .card-kpi { border: 1px solid #ccc !important; color: black !important; background: white !important; } .card-kpi .badge { background: #eee !important; color: #000 !important; } .kpi-number { color: black !important; } }
+
+        /* ====== ESTADÍSTICAS ====== */
+        #estadisticasContainer { display: none; width: 100%; padding-bottom: 1.5rem; }
+        .chart-card { background: #fff; border-radius: 1.25rem; box-shadow: 0 10px 25px rgba(0,0,0,0.04); border: 1px solid #e2e8f0; padding: 1.25rem; height: 100%; }
+        .chart-title { font-size: 0.98rem; font-weight: 700; color: #0f172a; margin-bottom: 0.15rem; display: flex; align-items: center; gap: 0.45rem; }
+        .chart-sub { font-size: 0.78rem; color: #64748b; margin-bottom: 0.9rem; }
+        .chart-wrap { position: relative; height: 340px; }
+        .stat-card { background: #fff; border-radius: 1rem; border: 1px solid #e2e8f0; box-shadow: 0 6px 18px rgba(0,0,0,0.04); padding: 1rem 1.1rem; height: 100%; transition: transform .18s ease, box-shadow .18s ease; }
+        .stat-card:hover { transform: translateY(-3px); box-shadow: 0 12px 26px rgba(0,0,0,0.08); }
+        .stat-card .lbl { font-size: 0.72rem; text-transform: uppercase; letter-spacing: .06em; color: #64748b; font-weight: 600; }
+        .stat-card .val { font-size: 1.35rem; font-weight: 700; color: #0f172a; letter-spacing: -0.02em; margin-top: .25rem; line-height: 1.15; word-break: break-word; }
+        .stat-card .sub { font-size: 0.75rem; color: #94a3b8; }
+        .stat-icon { width: 40px; height: 40px; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 1rem; flex-shrink: 0; }
+        .tabla-resumen { width: 100%; font-size: 0.86rem; border-collapse: collapse; }
+        .tabla-resumen thead th { background: #f1f5f9; color: #475569; font-weight: 600; text-transform: uppercase; font-size: 0.7rem; letter-spacing: .05em; padding: 0.65rem 0.75rem; border-bottom: 2px solid #cbd5e1; text-align: left; }
+        .tabla-resumen tbody td { padding: 0.6rem 0.75rem; border-bottom: 1px solid #f1f5f9; color: #334155; }
+        .tabla-resumen tbody tr:hover { background: #f8fafc; }
+        .tabla-resumen .num { text-align: right; font-variant-numeric: tabular-nums; }
+        .tabla-resumen tfoot td { padding: 0.7rem 0.75rem; font-weight: 700; background: #f8fafc; border-top: 2px solid #cbd5e1; }
+        .dot { display:inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+        .progress-mini { height: 6px; border-radius: 6px; background: #e2e8f0; overflow: hidden; min-width: 60px; }
+        .progress-mini > div { height: 100%; border-radius: 6px; }
+
+        @media (max-width: 768px) {
+            #appContainer { padding: 0.5rem; }
+            .filtros-row > div { margin-bottom: 0.5rem; }
+            .card-body { padding: 1.25rem; }
+            .d-flex.align-items-center.justify-content-between.mb-4 { flex-direction: column; align-items: flex-start !important; gap: 0.5rem; }
+            #historicoContainer { min-height: 70vh; }
+            #historicoContainer iframe { height: 70vh; }
+            .btn-volver { font-size: 0.8rem; padding: 0.1rem 0.3rem; }
+            .chart-wrap { height: 260px; }
+            .stat-card .val { font-size: 1.15rem; }
+        }
+        @media print {
+            .no-print { display: none !important; }
+            body, #appContainer { background: white !important; padding: 0 !important; }
+            .table-responsive { box-shadow: none; border: none; }
+            .card-kpi { border: 1px solid #ccc !important; color: black !important; background: white !important; }
+            .card-kpi .badge { background: #eee !important; color: #000 !important; }
+            .kpi-number { color: black !important; }
+        }
     </style>
 </head>
 <body>
@@ -175,7 +217,12 @@
                             <i class="fas fa-plus me-1"></i> Nuevo
                         </button>
                         <button id="btnHistorico" class="btn btn-secondary btn-sm flex-fill shadow-sm">
-                            <i class="fas fa-history me-1"></i> Recibos Históricos (1998-2000)
+                            <i class="fas fa-history me-1"></i> Históricos
+                        </button>
+                    </div>
+                    <div class="col-12 mt-2">
+                        <button id="btnEstadisticas" class="btn btn-sm w-100 shadow-sm text-white" style="background: linear-gradient(135deg,#6366f1,#4338ca); border:none;">
+                            <i class="fas fa-chart-line me-1"></i> Ver Reporte Estadístico (Categoría · Emisor · Mes · Año)
                         </button>
                     </div>
                 </div>
@@ -214,6 +261,222 @@
                 </div>
             </div>
             <!-- ========== FIN CONTENIDO PRINCIPAL ========== -->
+
+            <!-- ========== ESTADÍSTICAS ========== -->
+            <div id="estadisticasContainer">
+
+                <div class="d-flex align-items-center justify-content-between mb-3 flex-wrap gap-2">
+                    <div>
+                        <h2 class="h4 fw-bold mb-0">
+                            <i class="fas fa-chart-line text-primary me-2"></i> Reporte Estadístico
+                        </h2>
+                        <p class="text-muted small mb-0">Análisis de haberes por categoría laboral, emisor, mes y año</p>
+                    </div>
+                    <button id="btnImprimirStats" class="btn btn-light border rounded-pill px-3 shadow-sm text-secondary no-print">
+                        <i class="fas fa-print me-1"></i> Imprimir Estadísticas
+                    </button>
+                </div>
+
+                <!-- Filtros de estadísticas -->
+                <div class="row g-2 align-items-end mb-3 bg-white p-3 rounded-4 shadow-sm border no-print">
+                    <div class="col-xl-2 col-lg-3 col-md-6 col-12">
+                        <label class="filtro-label"><i class="far fa-calendar me-1"></i> Año</label>
+                        <select id="stFiltroAnio" class="form-select form-select-sm shadow-none">
+                            <option value="">Todos los años</option>
+                        </select>
+                    </div>
+                    <div class="col-xl-3 col-lg-4 col-md-6 col-12">
+                        <label class="filtro-label"><i class="fas fa-building me-1"></i> Emisor</label>
+                        <select id="stFiltroEmisor" class="form-select form-select-sm shadow-none">
+                            <option value="">Todos los emisores</option>
+                        </select>
+                    </div>
+                    <div class="col-xl-3 col-lg-5 col-md-6 col-12">
+                        <label class="filtro-label"><i class="fas fa-briefcase me-1"></i> Categoría laboral</label>
+                        <select id="stFiltroCategoria" class="form-select form-select-sm shadow-none">
+                            <option value="">Todas las categorías</option>
+                        </select>
+                    </div>
+                    <div class="col-xl-2 col-lg-6 col-md-6 col-6">
+                        <button id="stBtnAplicar" class="btn btn-primary btn-sm w-100 shadow-sm">
+                            <i class="fas fa-sync-alt me-1"></i> Actualizar
+                        </button>
+                    </div>
+                    <div class="col-xl-2 col-lg-6 col-md-6 col-6">
+                        <button id="stBtnLimpiar" class="btn btn-outline-secondary btn-sm w-100 shadow-sm">
+                            <i class="fas fa-eraser me-1"></i> Limpiar
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Sin datos -->
+                <div id="statsVacio" class="text-center text-muted py-5" style="display:none;">
+                    <i class="fas fa-chart-area fa-3x text-light mb-3 d-block"></i>
+                    No hay datos suficientes para generar el reporte con los filtros seleccionados.
+                </div>
+
+                <!-- Contenido estadístico -->
+                <div id="statsContenido">
+
+                    <!-- KPIs estadísticos -->
+                    <div class="row g-2 mb-3">
+                        <div class="col-xl-3 col-lg-6 col-md-6 col-12">
+                            <div class="stat-card d-flex align-items-center gap-3">
+                                <div class="stat-icon" style="background: linear-gradient(135deg,#4f46e5,#312e81);">
+                                    <i class="fas fa-sack-dollar"></i>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <div class="lbl">Total acumulado</div>
+                                    <div class="val" id="stTotal">$0.00</div>
+                                    <div class="sub" id="stPeriodoLabel">—</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-6 col-md-6 col-12">
+                            <div class="stat-card d-flex align-items-center gap-3">
+                                <div class="stat-icon" style="background: linear-gradient(135deg,#10b981,#064e3b);">
+                                    <i class="fas fa-file-invoice-dollar"></i>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <div class="lbl">Recibos analizados</div>
+                                    <div class="val" id="stRecibos">0</div>
+                                    <div class="sub" id="stMesesCubiertos">0 meses</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-6 col-md-6 col-12">
+                            <div class="stat-card d-flex align-items-center gap-3">
+                                <div class="stat-icon" style="background: linear-gradient(135deg,#f59e0b,#78350f);">
+                                    <i class="fas fa-chart-simple"></i>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <div class="lbl">Promedio por recibo</div>
+                                    <div class="val" id="stPromedio">$0.00</div>
+                                    <div class="sub" id="stPromedioMensual">Prom. mensual: $0.00</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-6 col-md-6 col-12">
+                            <div class="stat-card d-flex align-items-center gap-3">
+                                <div class="stat-icon" style="background: linear-gradient(135deg,#ef4444,#991b1b);">
+                                    <i class="fas fa-trophy"></i>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <div class="lbl">Categoría principal</div>
+                                    <div class="val" id="stTopCat" style="font-size:1.05rem;">—</div>
+                                    <div class="sub" id="stTopCatMonto">$0.00</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Gráficos -->
+                    <div class="row g-3">
+                        <div class="col-12">
+                            <div class="chart-card">
+                                <div class="chart-title"><i class="fas fa-chart-line text-primary"></i> Evolución mensual de haberes por año</div>
+                                <div class="chart-sub">Comparativa mes a mes del monto total percibido en cada año</div>
+                                <div class="chart-wrap"><canvas id="chartEvolucionAnual"></canvas></div>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="chart-card">
+                                <div class="chart-title"><i class="fas fa-chart-area text-success"></i> Tendencia acumulada por año</div>
+                                <div class="chart-sub">Monto acumulado a lo largo del año (curva de crecimiento de ingresos)</div>
+                                <div class="chart-wrap"><canvas id="chartAcumulado"></canvas></div>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="chart-card">
+                                <div class="chart-title"><i class="fas fa-briefcase text-warning"></i> Evolución por categoría laboral</div>
+                                <div class="chart-sub" id="subCategorias">Monto mensual por categoría a lo largo del tiempo</div>
+                                <div class="chart-wrap"><canvas id="chartCategorias"></canvas></div>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="chart-card">
+                                <div class="chart-title"><i class="fas fa-building text-danger"></i> Evolución por emisor</div>
+                                <div class="chart-sub" id="subEmisores">Monto mensual por empresa/empleador a lo largo del tiempo</div>
+                                <div class="chart-wrap"><canvas id="chartEmisores"></canvas></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tablas resumen -->
+                    <div id="resumenTablas" class="row g-3 mt-1">
+                        <div class="col-lg-6">
+                            <div class="chart-card">
+                                <div class="chart-title"><i class="fas fa-briefcase text-warning"></i> Detalle por categoría laboral</div>
+                                <div class="chart-sub">Totales, participación y promedio</div>
+                                <div class="table-responsive" style="border:none; box-shadow:none; border-radius:0;">
+                                    <table class="tabla-resumen" id="tablaCategorias">
+                                        <thead>
+                                            <tr>
+                                                <th>Categoría</th>
+                                                <th class="num">Recibos</th>
+                                                <th class="num">Total</th>
+                                                <th class="num">%</th>
+                                                <th class="num">Promedio</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                        <tfoot></tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div class="chart-card">
+                                <div class="chart-title"><i class="fas fa-building text-danger"></i> Detalle por emisor</div>
+                                <div class="chart-sub">Totales, participación y promedio</div>
+                                <div class="table-responsive" style="border:none; box-shadow:none; border-radius:0;">
+                                    <table class="tabla-resumen" id="tablaEmisores">
+                                        <thead>
+                                            <tr>
+                                                <th>Emisor</th>
+                                                <th class="num">Recibos</th>
+                                                <th class="num">Total</th>
+                                                <th class="num">%</th>
+                                                <th class="num">Promedio</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                        <tfoot></tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="chart-card">
+                                <div class="chart-title"><i class="fas fa-calendar-days text-primary"></i> Detalle cronológico por año y mes</div>
+                                <div class="chart-sub">Desglose período a período con variación respecto al período anterior</div>
+                                <div class="table-responsive" style="border:none; box-shadow:none; border-radius:0; max-height:520px; overflow-y:auto;">
+                                    <table class="tabla-resumen" id="tablaPeriodos">
+                                        <thead>
+                                            <tr>
+                                                <th>Período</th>
+                                                <th class="num">Recibos</th>
+                                                <th class="num">Total</th>
+                                                <th class="num">Promedio</th>
+                                                <th class="num">Variación</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                        <tfoot></tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!-- ========== FIN ESTADÍSTICAS ========== -->
 
             <!-- ========== HISTÓRICO ========== -->
             <div id="historicoContainer">
@@ -327,6 +590,13 @@
                 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
                 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
             ];
+            const MESES_CORTOS = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
+
+            const PALETA = [
+                '#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6',
+                '#06b6d4', '#ec4899', '#84cc16', '#f97316', '#6366f1',
+                '#14b8a6', '#a855f7', '#eab308', '#0ea5e9', '#d946ef'
+            ];
 
             let recibos = [];
             let paginaActual = 1;
@@ -335,7 +605,13 @@
             let modoEdicion = false;
             let idEditando = null;
 
-            // Elementos DOM (abreviado para no repetir)
+            // Filtros de estadísticas
+            let stFiltroAnio = '', stFiltroEmisor = '', stFiltroCategoria = '';
+
+            // Instancias de gráficos
+            const charts = {};
+
+            // Elementos DOM
             const $landing = document.getElementById('landingPage');
             const $app = document.getElementById('appContainer');
             const $btnIngresar = document.getElementById('btnIngresar');
@@ -371,16 +647,73 @@
             const $contenidoPrincipal = document.getElementById('contenidoPrincipal');
             const $historicoContainer = document.getElementById('historicoContainer');
 
+            const $btnEstadisticas = document.getElementById('btnEstadisticas');
+            const $estadisticasContainer = document.getElementById('estadisticasContainer');
+            const $stFiltroAnio = document.getElementById('stFiltroAnio');
+            const $stFiltroEmisor = document.getElementById('stFiltroEmisor');
+            const $stFiltroCategoria = document.getElementById('stFiltroCategoria');
+            const $stBtnAplicar = document.getElementById('stBtnAplicar');
+            const $stBtnLimpiar = document.getElementById('stBtnLimpiar');
+            const $btnImprimirStats = document.getElementById('btnImprimirStats');
+
+            // ========== CONFIGURACIÓN CHART.JS ==========
+            if (window.Chart) {
+                Chart.defaults.font.family = "'Inter', system-ui, sans-serif";
+                Chart.defaults.font.size = 12;
+                Chart.defaults.color = '#64748b';
+                Chart.defaults.plugins.legend.labels.usePointStyle = true;
+                Chart.defaults.plugins.legend.labels.boxWidth = 8;
+                Chart.defaults.plugins.legend.labels.padding = 14;
+                Chart.defaults.plugins.tooltip.backgroundColor = 'rgba(15,23,42,0.94)';
+                Chart.defaults.plugins.tooltip.padding = 12;
+                Chart.defaults.plugins.tooltip.cornerRadius = 10;
+                Chart.defaults.plugins.tooltip.titleFont = { weight: '700' };
+                Chart.defaults.elements.line.borderJoinStyle = 'round';
+            }
+
+            // ========== UTILIDADES ==========
+            function formatearMoneda(valor) {
+                return '$' + Number(valor || 0).toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            }
+
+            function formatearMonedaCorta(valor) {
+                const n = Number(valor || 0);
+                if (Math.abs(n) >= 1000000) return '$' + (n / 1000000).toFixed(1) + 'M';
+                if (Math.abs(n) >= 1000) return '$' + (n / 1000).toFixed(1) + 'k';
+                return '$' + n.toFixed(0);
+            }
+
+            function colorConAlpha(hex, alpha) {
+                const h = hex.replace('#', '');
+                const r = parseInt(h.substring(0, 2), 16);
+                const g = parseInt(h.substring(2, 4), 16);
+                const b = parseInt(h.substring(4, 6), 16);
+                return 'rgba(' + r + ',' + g + ',' + b + ',' + alpha + ')';
+            }
+
+            function escaparHtml(txt) {
+                return String(txt == null ? '' : txt)
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;')
+                    .replace(/"/g, '&quot;')
+                    .replace(/'/g, '&#39;');
+            }
+
             // ========== FUNCIONES DE NAVEGACIÓN ==========
-            function mostrarLanding() { $landing.style.display = 'flex'; $app.style.display = 'none'; }
-            function mostrarApp() { $landing.style.display = 'none'; $app.style.display = 'block'; renderizarTabla(); }
+            function mostrarLanding() {
+                $landing.style.display = 'flex';
+                $app.style.display = 'none';
+            }
+
+            function mostrarApp() {
+                $landing.style.display = 'none';
+                $app.style.display = 'block';
+                renderizarTabla();
+            }
+
             $btnIngresar.addEventListener('click', mostrarApp);
             $btnSalir.addEventListener('click', mostrarLanding);
-
-            // ========== FORMATO MONEDA ==========
-            function formatearMoneda(valor) {
-                return '$' + Number(valor).toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-            }
 
             // ========== FIRESTORE ==========
             async function cargarDatos() {
@@ -389,11 +722,10 @@
                     const docs = [];
                     snapshot.forEach(doc => {
                         const data = doc.data();
-                        // Asegurar que mesIndex esté definido
                         let mesIndex = data.mesIndex;
                         if (mesIndex === undefined || mesIndex === null) {
                             mesIndex = MESES.indexOf(data.mes);
-                            if (mesIndex === -1) mesIndex = 0; // fallback
+                            if (mesIndex === -1) mesIndex = 0;
                         }
                         docs.push({
                             id: doc.id,
@@ -403,11 +735,11 @@
                             anio: data.anio,
                             emisor: data.emisor || '',
                             categoria: data.categoria || '',
-                            monto: data.monto || 0
+                            monto: Number(data.monto) || 0
                         });
                     });
                     recibos = docs;
-                    console.log(`✅ Cargados ${recibos.length} recibos desde Firestore.`);
+                    console.log('✅ Cargados ' + recibos.length + ' recibos desde Firestore.');
                     actualizarKPIs();
                 } catch (error) {
                     console.error('Error al cargar datos:', error);
@@ -419,13 +751,11 @@
             async function renumerarRecibos() {
                 if (recibos.length === 0) return;
                 try {
-                    // Ordenar copia cronológicamente
                     const todos = [...recibos];
                     todos.sort((a, b) => {
                         if (a.anio !== b.anio) return a.anio - b.anio;
                         return a.mesIndex - b.mesIndex;
                     });
-                    // Asignar números correlativos
                     let cambios = 0;
                     for (let i = 0; i < todos.length; i++) {
                         const nuevoNumero = i + 1;
@@ -435,13 +765,11 @@
                             cambios++;
                         }
                     }
-                    // Actualizar el array local
                     recibos = todos;
-                    console.log(`🔄 Renumeración completada: ${cambios} registros actualizados.`);
+                    console.log('🔄 Renumeración completada: ' + cambios + ' registros actualizados.');
                     actualizarKPIs();
                 } catch (error) {
                     console.error('Error en renumeración:', error);
-                    // No detenemos la ejecución, solo mostramos el error
                 }
             }
 
@@ -457,16 +785,15 @@
                         emisor: emisor.trim(),
                         categoria: categoria.trim() || '',
                         monto: monto,
-                        numero: 0 // temporal
+                        numero: 0
                     };
                     const docRef = await coleccion.add(nuevoDoc);
-                    const nuevoRecibo = { id: docRef.id, ...nuevoDoc };
+                    const nuevoRecibo = Object.assign({ id: docRef.id }, nuevoDoc);
                     recibos.push(nuevoRecibo);
-                    // Renumerar todos
                     await renumerarRecibos();
-                    // Recargar datos para tener la versión actualizada
                     await cargarDatos();
                     renderizarTabla();
+                    refrescarSelectoresEstadisticas();
                     return true;
                 } catch (error) {
                     console.error('Error al agregar recibo:', error);
@@ -487,7 +814,6 @@
                         categoria: categoria.trim() || '',
                         monto: monto
                     });
-                    // Actualizar en el array local
                     const idx = recibos.findIndex(r => r.id === id);
                     if (idx !== -1) {
                         recibos[idx].mes = mes;
@@ -497,10 +823,10 @@
                         recibos[idx].categoria = categoria.trim() || '';
                         recibos[idx].monto = monto;
                     }
-                    // Renumerar (puede cambiar el orden)
                     await renumerarRecibos();
                     await cargarDatos();
                     renderizarTabla();
+                    refrescarSelectoresEstadisticas();
                     return true;
                 } catch (error) {
                     console.error('Error al actualizar recibo:', error);
@@ -519,6 +845,7 @@
                     const totalPaginas = Math.ceil(filtrados.length / POR_PAGINA) || 1;
                     if (paginaActual > totalPaginas) paginaActual = totalPaginas;
                     renderizarTabla();
+                    refrescarSelectoresEstadisticas();
                 } catch (error) {
                     console.error('Error al eliminar recibo:', error);
                     alert('Error al eliminar en Firebase. Revisa la consola.');
@@ -535,12 +862,10 @@
                         if (filtroEmisor && !r.emisor.toLowerCase().includes(filtroEmisor.toLowerCase())) ok = false;
                         return ok;
                     });
-                    // Orden cronológico por año y mes
                     filtrados.sort((a, b) => {
                         if (a.anio !== b.anio) return a.anio - b.anio;
                         return a.mesIndex - b.mesIndex;
                     });
-                    console.log(`🔍 Filtrados: ${filtrados.length} de ${recibos.length} recibos totales.`);
                     return filtrados;
                 } catch (error) {
                     console.error('Error en obtenerFiltrados:', error);
@@ -560,17 +885,17 @@
                 $resultadosFiltro.textContent = totalFiltrados;
 
                 if (paginaDatos.length === 0) {
-                    $cuerpo.innerHTML = `<tr><td colspan="7" class="text-center text-muted py-5"><i class="fas fa-inbox fa-2x mb-3 d-block text-light"></i>No hay recibos registrados o coincidentes.</td></tr>`;
+                    $cuerpo.innerHTML = '<tr><td colspan="7" class="text-center text-muted py-5"><i class="fas fa-inbox fa-2x mb-3 d-block text-light"></i>No hay recibos registrados o coincidentes.</td></tr>';
                 } else {
                     let html = '';
                     for (const r of paginaDatos) {
                         html += `
                             <tr>
                                 <td><span class="fw-bold text-secondary">#${r.numero}</span></td>
-                                <td class="fw-medium">${r.mes}</td>
+                                <td class="fw-medium">${escaparHtml(r.mes)}</td>
                                 <td>${r.anio}</td>
-                                <td>${r.emisor}</td>
-                                <td>${r.categoria || '—'}</td>
+                                <td>${escaparHtml(r.emisor)}</td>
+                                <td>${escaparHtml(r.categoria || '—')}</td>
                                 <td><span class="fw-bold text-success">${formatearMoneda(r.monto)}</span></td>
                                 <td class="text-center no-print">
                                     <button class="btn btn-light text-primary btn-sm btn-editar border me-1" data-id="${r.id}" title="Editar">
@@ -621,7 +946,10 @@
                     enlace.addEventListener('click', function(e) {
                         e.preventDefault();
                         const pagina = parseInt(this.dataset.pagina);
-                        if (!isNaN(pagina) && pagina >= 1 && pagina <= totalPaginas) { paginaActual = pagina; renderizarTabla(); }
+                        if (!isNaN(pagina) && pagina >= 1 && pagina <= totalPaginas) {
+                            paginaActual = pagina;
+                            renderizarTabla();
+                        }
                     });
                 });
             }
@@ -655,7 +983,7 @@
             function abrirModalEdicion(recibo) {
                 modoEdicion = true;
                 idEditando = recibo.id;
-                $modalTitle.innerHTML = `<i class="fas fa-edit text-primary me-2"></i> Editar Recibo #${recibo.numero}`;
+                $modalTitle.innerHTML = '<i class="fas fa-edit text-primary me-2"></i> Editar Recibo #' + recibo.numero;
                 $num.value = recibo.numero;
                 $mes.value = recibo.mes;
                 $anio.value = recibo.anio;
@@ -668,9 +996,9 @@
             function abrirModalAgregar() {
                 modoEdicion = false;
                 idEditando = null;
-                $modalTitle.innerHTML = `<i class="fas fa-plus-circle text-primary me-2"></i> Agregar Recibo`;
+                $modalTitle.innerHTML = '<i class="fas fa-plus-circle text-primary me-2"></i> Agregar Recibo';
                 $formRecibo.reset();
-                const maxNum = recibos.length > 0 ? Math.max(...recibos.map(r => r.numero)) : 0;
+                const maxNum = recibos.length > 0 ? Math.max.apply(null, recibos.map(r => r.numero)) : 0;
                 $num.value = maxNum + 1;
                 $anio.value = new Date().getFullYear();
                 $mes.value = MESES[new Date().getMonth()];
@@ -707,71 +1035,668 @@
                 }
             });
 
-            // ========== IMPRIMIR ==========
+            // ========== IMPRIMIR TABLA ==========
             function imprimirTablaFiltrada() {
                 const filtrados = obtenerFiltrados();
                 if (filtrados.length === 0) return alert('No hay datos para imprimir con el filtro actual.');
                 let filas = '';
                 for (const r of filtrados) {
-                    filas += `<tr>
-                        <td>${r.numero}</td>
-                        <td>${r.mes}</td>
-                        <td>${r.anio}</td>
-                        <td>${r.emisor}</td>
-                        <td>${r.categoria || '—'}</td>
-                        <td style="text-align:right;">${formatearMoneda(r.monto)}</td>
-                    </tr>`;
+                    filas += '<tr>' +
+                        '<td>' + r.numero + '</td>' +
+                        '<td>' + escaparHtml(r.mes) + '</td>' +
+                        '<td>' + r.anio + '</td>' +
+                        '<td>' + escaparHtml(r.emisor) + '</td>' +
+                        '<td>' + escaparHtml(r.categoria || '—') + '</td>' +
+                        '<td style="text-align:right;">' + formatearMoneda(r.monto) + '</td>' +
+                        '</tr>';
                 }
                 const total = filtrados.reduce((acc, r) => acc + r.monto, 0);
-                const estilo = `<style>
-                    body{font-family:'Inter',sans-serif;padding:2rem;}
-                    h2{color:#0f172a;margin-bottom:1rem;}
-                    table{width:100%;border-collapse:collapse;margin-top:1rem;}
-                    th{background:#f1f5f9;font-weight:600;padding:0.6rem 0.8rem;border:1px solid #cbd5e1;}
-                    td{padding:0.5rem 0.8rem;border:1px solid #cbd5e1;}
-                    .total-row{font-weight:700;background:#f8fafc;}
-                    .footer{margin-top:2rem;color:#64748b;font-size:0.9rem;}
-                    .badge{background:#3b82f6;color:#fff;padding:0.2rem 0.8rem;border-radius:20px;}
-                </style>`;
-                const contenido = `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Recibos - Reporte</title>${estilo}</head><body>
-                    <h2><i class="fas fa-receipt"></i> Reporte de Recibos</h2>
-                    <p><span class="badge">${filtrados.length} recibos</span> &nbsp; Total: <strong>${formatearMoneda(total)}</strong></p>
-                    <table>
-                        <thead><tr><th>Nº</th><th>Mes</th><th>Año</th><th>Emitido por</th><th>Categoría</th><th>Monto</th></tr></thead>
-                        <tbody>${filas}<tr class="total-row"><td colspan="5" style="text-align:right;">TOTAL</td><td style="text-align:right;">${formatearMoneda(total)}</td></tr></tbody>
-                    </table>
-                    <div class="footer">Documento generado el ${new Date().toLocaleDateString()} a las ${new Date().toLocaleTimeString()}</div>
-                </body></html>`;
+                const estilo = '<style>' +
+                    "body{font-family:'Inter',sans-serif;padding:2rem;}" +
+                    'h2{color:#0f172a;margin-bottom:1rem;}' +
+                    'table{width:100%;border-collapse:collapse;margin-top:1rem;}' +
+                    'th{background:#f1f5f9;font-weight:600;padding:0.6rem 0.8rem;border:1px solid #cbd5e1;}' +
+                    'td{padding:0.5rem 0.8rem;border:1px solid #cbd5e1;}' +
+                    '.total-row{font-weight:700;background:#f8fafc;}' +
+                    '.footer{margin-top:2rem;color:#64748b;font-size:0.9rem;}' +
+                    '.badge{background:#3b82f6;color:#fff;padding:0.2rem 0.8rem;border-radius:20px;}' +
+                    '</style>';
+                const contenido = '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Recibos - Reporte</title>' + estilo + '</head><body>' +
+                    '<h2>Reporte de Recibos</h2>' +
+                    '<p><span class="badge">' + filtrados.length + ' recibos</span> &nbsp; Total: <strong>' + formatearMoneda(total) + '</strong></p>' +
+                    '<table><thead><tr><th>Nº</th><th>Mes</th><th>Año</th><th>Emitido por</th><th>Categoría</th><th>Monto</th></tr></thead>' +
+                    '<tbody>' + filas + '<tr class="total-row"><td colspan="5" style="text-align:right;">TOTAL</td><td style="text-align:right;">' + formatearMoneda(total) + '</td></tr></tbody></table>' +
+                    '<div class="footer">Documento generado el ' + new Date().toLocaleDateString() + ' a las ' + new Date().toLocaleTimeString() + '</div>' +
+                    '</body></html>';
                 const ventana = window.open('', '_blank', 'width=1000,height=600');
                 if (!ventana) return alert('Por favor, permite las ventanas emergentes para imprimir.');
-                ventana.document.write(contenido); ventana.document.close(); ventana.focus(); ventana.print();
+                ventana.document.write(contenido);
+                ventana.document.close();
+                ventana.focus();
+                ventana.print();
             }
+
+            // ================================================================
+            // =====================  MÓDULO ESTADÍSTICO  =====================
+            // ================================================================
+
+            function destruirCharts() {
+                Object.keys(charts).forEach(k => {
+                    if (charts[k]) {
+                        charts[k].destroy();
+                        delete charts[k];
+                    }
+                });
+            }
+
+            function obtenerFiltradosEstadistica() {
+                return recibos.filter(r => {
+                    if (stFiltroAnio && r.anio !== parseInt(stFiltroAnio)) return false;
+                    if (stFiltroEmisor && (r.emisor || '').trim() !== stFiltroEmisor) return false;
+                    const cat = (r.categoria || '').trim() || 'Sin categoría';
+                    if (stFiltroCategoria && cat !== stFiltroCategoria) return false;
+                    return true;
+                });
+            }
+
+            function claveCategoria(r) {
+                const c = (r.categoria || '').trim();
+                return c || 'Sin categoría';
+            }
+
+            function claveEmisor(r) {
+                const e = (r.emisor || '').trim();
+                return e || 'Sin emisor';
+            }
+
+            function agruparTotales(datos, keyFn) {
+                const map = new Map();
+                datos.forEach(r => {
+                    const k = keyFn(r);
+                    const actual = map.get(k) || { total: 0, cantidad: 0 };
+                    actual.total += r.monto;
+                    actual.cantidad += 1;
+                    map.set(k, actual);
+                });
+                return map;
+            }
+
+            function obtenerPeriodos(datos) {
+                const mapa = new Map();
+                datos.forEach(r => {
+                    const clave = r.anio + '-' + String(r.mesIndex).padStart(2, '0');
+                    if (!mapa.has(clave)) {
+                        mapa.set(clave, { anio: r.anio, mesIndex: r.mesIndex, clave: clave });
+                    }
+                });
+                return Array.from(mapa.values()).sort((a, b) => a.clave < b.clave ? -1 : 1);
+            }
+
+            function etiquetaPeriodo(p) {
+                return MESES_CORTOS[p.mesIndex] + ' ' + p.anio;
+            }
+
+            // ---------- Render principal ----------
+            function renderEstadisticas() {
+                destruirCharts();
+
+                const datos = obtenerFiltradosEstadistica();
+                const $vacio = document.getElementById('statsVacio');
+                const $contenido = document.getElementById('statsContenido');
+
+                if (!datos.length) {
+                    $vacio.style.display = 'block';
+                    $contenido.style.display = 'none';
+                    return;
+                }
+                $vacio.style.display = 'none';
+                $contenido.style.display = 'block';
+
+                const totalGeneral = datos.reduce((a, r) => a + r.monto, 0);
+                const cantidad = datos.length;
+                const periodos = obtenerPeriodos(datos);
+                const anios = Array.from(new Set(datos.map(r => r.anio))).sort((a, b) => a - b);
+
+                const catMap = agruparTotales(datos, claveCategoria);
+                const emiMap = agruparTotales(datos, claveEmisor);
+
+                // ---------- KPIs ----------
+                document.getElementById('stTotal').textContent = formatearMoneda(totalGeneral);
+                document.getElementById('stRecibos').textContent = cantidad;
+                document.getElementById('stPromedio').textContent = formatearMoneda(totalGeneral / cantidad);
+                document.getElementById('stMesesCubiertos').textContent = periodos.length + (periodos.length === 1 ? ' período' : ' períodos');
+                document.getElementById('stPromedioMensual').textContent = 'Prom. por período: ' + formatearMoneda(totalGeneral / periodos.length);
+
+                const anioTxt = stFiltroAnio ? stFiltroAnio : (anios.length === 1 ? String(anios[0]) : anios[0] + ' – ' + anios[anios.length - 1]);
+                document.getElementById('stPeriodoLabel').textContent = anioTxt + ' · ' + periodos.length + ' meses';
+
+                const catOrdenadas = Array.from(catMap.entries()).sort((a, b) => b[1].total - a[1].total);
+                if (catOrdenadas.length) {
+                    document.getElementById('stTopCat').textContent = catOrdenadas[0][0];
+                    document.getElementById('stTopCatMonto').textContent = formatearMoneda(catOrdenadas[0][1].total) +
+                        ' · ' + ((catOrdenadas[0][1].total / totalGeneral) * 100).toFixed(1) + '%';
+                } else {
+                    document.getElementById('stTopCat').textContent = '—';
+                    document.getElementById('stTopCatMonto').textContent = '$0.00';
+                }
+
+                // ---------- Gráfico 1: Evolución mensual por año ----------
+                const dsEvolucion = anios.map((anio, i) => {
+                    const color = PALETA[i % PALETA.length];
+                    const data = MESES.map((_, mi) =>
+                        datos.filter(r => r.anio === anio && r.mesIndex === mi)
+                             .reduce((a, r) => a + r.monto, 0)
+                    );
+                    return {
+                        label: 'Año ' + anio,
+                        data: data,
+                        borderColor: color,
+                        backgroundColor: colorConAlpha(color, 0.10),
+                        pointBackgroundColor: '#fff',
+                        pointBorderColor: color,
+                        pointBorderWidth: 2,
+                        pointRadius: 4,
+                        pointHoverRadius: 7,
+                        borderWidth: 3,
+                        tension: 0.35,
+                        fill: false,
+                        spanGaps: true
+                    };
+                });
+
+                charts.evolucion = new Chart(document.getElementById('chartEvolucionAnual'), {
+                    type: 'line',
+                    data: { labels: MESES_CORTOS, datasets: dsEvolucion },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        interaction: { mode: 'index', intersect: false },
+                        plugins: {
+                            legend: { position: 'top', align: 'end' },
+                            tooltip: {
+                                callbacks: {
+                                    title: function(items) { return items[0].label; },
+                                    label: function(ctx) {
+                                        return ctx.dataset.label + ': ' + formatearMoneda(ctx.parsed.y);
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            x: { grid: { display: false }, ticks: { font: { weight: '600' } } },
+                            y: {
+                                beginAtZero: true,
+                                grid: { color: '#f1f5f9' },
+                                ticks: { callback: function(v) { return formatearMonedaCorta(v); } }
+                            }
+                        }
+                    }
+                });
+
+                // ---------- Gráfico 2: Acumulado por año ----------
+                const dsAcumulado = anios.map((anio, i) => {
+                    const color = PALETA[i % PALETA.length];
+                    let acc = 0;
+                    const data = MESES.map((_, mi) => {
+                        acc += datos.filter(r => r.anio === anio && r.mesIndex === mi)
+                                    .reduce((a, r) => a + r.monto, 0);
+                        return acc;
+                    });
+                    return {
+                        label: 'Acumulado ' + anio,
+                        data: data,
+                        borderColor: color,
+                        backgroundColor: colorConAlpha(color, 0.14),
+                        pointBackgroundColor: '#fff',
+                        pointBorderColor: color,
+                        pointBorderWidth: 2,
+                        pointRadius: 3,
+                        pointHoverRadius: 6,
+                        borderWidth: 3,
+                        tension: 0.30,
+                        fill: true
+                    };
+                });
+
+                charts.acumulado = new Chart(document.getElementById('chartAcumulado'), {
+                    type: 'line',
+                    data: { labels: MESES_CORTOS, datasets: dsAcumulado },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        interaction: { mode: 'index', intersect: false },
+                        plugins: {
+                            legend: { position: 'top', align: 'end' },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(ctx) {
+                                        return ctx.dataset.label + ': ' + formatearMoneda(ctx.parsed.y);
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            x: { grid: { display: false } },
+                            y: {
+                                beginAtZero: true,
+                                grid: { color: '#f1f5f9' },
+                                ticks: { callback: function(v) { return formatearMonedaCorta(v); } }
+                            }
+                        }
+                    }
+                });
+
+                // ---------- Gráfico 3: Por categoría laboral ----------
+                const labelsPeriodos = periodos.map(etiquetaPeriodo);
+                const topCategorias = catOrdenadas.slice(0, 10).map(e => e[0]);
+
+                const dsCategorias = topCategorias.map((cat, i) => {
+                    const color = PALETA[i % PALETA.length];
+                    const data = periodos.map(p =>
+                        datos.filter(r => claveCategoria(r) === cat && r.anio === p.anio && r.mesIndex === p.mesIndex)
+                             .reduce((a, r) => a + r.monto, 0)
+                    );
+                    return {
+                        label: cat,
+                        data: data,
+                        borderColor: color,
+                        backgroundColor: colorConAlpha(color, 0.08),
+                        pointBackgroundColor: '#fff',
+                        pointBorderColor: color,
+                        pointBorderWidth: 2,
+                        pointRadius: periodos.length > 18 ? 2 : 4,
+                        pointHoverRadius: 7,
+                        borderWidth: 2.5,
+                        tension: 0.35,
+                        fill: false,
+                        spanGaps: true
+                    };
+                });
+
+                document.getElementById('subCategorias').textContent =
+                    topCategorias.length + ' categoría(s) mostrada(s) · ' + periodos.length + ' período(s)';
+
+                charts.categorias = new Chart(document.getElementById('chartCategorias'), {
+                    type: 'line',
+                    data: { labels: labelsPeriodos, datasets: dsCategorias },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        interaction: { mode: 'index', intersect: false },
+                        plugins: {
+                            legend: { position: 'top', align: 'end' },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(ctx) {
+                                        return ctx.dataset.label + ': ' + formatearMoneda(ctx.parsed.y);
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            x: { grid: { display: false }, ticks: { maxRotation: 60, minRotation: 0, autoSkip: true, maxTicksLimit: 18 } },
+                            y: {
+                                beginAtZero: true,
+                                grid: { color: '#f1f5f9' },
+                                ticks: { callback: function(v) { return formatearMonedaCorta(v); } }
+                            }
+                        }
+                    }
+                });
+
+                // ---------- Gráfico 4: Por emisor ----------
+                const emiOrdenados = Array.from(emiMap.entries()).sort((a, b) => b[1].total - a[1].total);
+                const topEmisores = emiOrdenados.slice(0, 10).map(e => e[0]);
+
+                const dsEmisores = topEmisores.map((emi, i) => {
+                    const color = PALETA[(i + 3) % PALETA.length];
+                    const data = periodos.map(p =>
+                        datos.filter(r => claveEmisor(r) === emi && r.anio === p.anio && r.mesIndex === p.mesIndex)
+                             .reduce((a, r) => a + r.monto, 0)
+                    );
+                    return {
+                        label: emi,
+                        data: data,
+                        borderColor: color,
+                        backgroundColor: colorConAlpha(color, 0.08),
+                        pointBackgroundColor: '#fff',
+                        pointBorderColor: color,
+                        pointBorderWidth: 2,
+                        pointRadius: periodos.length > 18 ? 2 : 4,
+                        pointHoverRadius: 7,
+                        borderWidth: 2.5,
+                        tension: 0.35,
+                        fill: false,
+                        spanGaps: true
+                    };
+                });
+
+                document.getElementById('subEmisores').textContent =
+                    topEmisores.length + ' emisor(es) mostrado(s) · ' + periodos.length + ' período(s)';
+
+                charts.emisores = new Chart(document.getElementById('chartEmisores'), {
+                    type: 'line',
+                    data: { labels: labelsPeriodos, datasets: dsEmisores },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        interaction: { mode: 'index', intersect: false },
+                        plugins: {
+                            legend: { position: 'top', align: 'end' },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(ctx) {
+                                        return ctx.dataset.label + ': ' + formatearMoneda(ctx.parsed.y);
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            x: { grid: { display: false }, ticks: { maxRotation: 60, minRotation: 0, autoSkip: true, maxTicksLimit: 18 } },
+                            y: {
+                                beginAtZero: true,
+                                grid: { color: '#f1f5f9' },
+                                ticks: { callback: function(v) { return formatearMonedaCorta(v); } }
+                            }
+                        }
+                    }
+                });
+
+                // ---------- Tablas resumen ----------
+                renderTablaCategorias(catOrdenadas, totalGeneral, catMap);
+                renderTablaEmisores(emiOrdenados, totalGeneral, emiMap);
+                renderTablaPeriodos(datos, periodos, totalGeneral);
+            }
+
+            function renderTablaCategorias(ordenadas, totalGeneral, catMap) {
+                const tbody = document.querySelector('#tablaCategorias tbody');
+                const tfoot = document.querySelector('#tablaCategorias tfoot');
+                let html = '';
+                ordenadas.forEach((entrada, i) => {
+                    const nombre = entrada[0];
+                    const info = entrada[1];
+                    const pct = totalGeneral > 0 ? (info.total / totalGeneral) * 100 : 0;
+                    const color = PALETA[i % PALETA.length];
+                    html += '<tr>' +
+                        '<td><span class="dot" style="background:' + color + '"></span>' + escaparHtml(nombre) + '</td>' +
+                        '<td class="num">' + info.cantidad + '</td>' +
+                        '<td class="num fw-semibold">' + formatearMoneda(info.total) + '</td>' +
+                        '<td class="num">' +
+                            '<div class="d-flex align-items-center justify-content-end gap-2">' +
+                                '<span>' + pct.toFixed(1) + '%</span>' +
+                                '<div class="progress-mini" style="width:60px;"><div style="width:' + pct.toFixed(1) + '%;background:' + color + '"></div></div>' +
+                            '</div>' +
+                        '</td>' +
+                        '<td class="num">' + formatearMoneda(info.total / info.cantidad) + '</td>' +
+                    '</tr>';
+                });
+                tbody.innerHTML = html || '<tr><td colspan="5" class="text-center text-muted py-3">Sin datos</td></tr>';
+
+                const totalRecibos = Array.from(catMap.values()).reduce((a, v) => a + v.cantidad, 0);
+                tfoot.innerHTML = '<tr>' +
+                    '<td>TOTAL</td>' +
+                    '<td class="num">' + totalRecibos + '</td>' +
+                    '<td class="num">' + formatearMoneda(totalGeneral) + '</td>' +
+                    '<td class="num">100%</td>' +
+                    '<td class="num">' + formatearMoneda(totalRecibos ? totalGeneral / totalRecibos : 0) + '</td>' +
+                '</tr>';
+            }
+
+            function renderTablaEmisores(ordenadas, totalGeneral, emiMap) {
+                const tbody = document.querySelector('#tablaEmisores tbody');
+                const tfoot = document.querySelector('#tablaEmisores tfoot');
+                let html = '';
+                ordenadas.forEach((entrada, i) => {
+                    const nombre = entrada[0];
+                    const info = entrada[1];
+                    const pct = totalGeneral > 0 ? (info.total / totalGeneral) * 100 : 0;
+                    const color = PALETA[(i + 3) % PALETA.length];
+                    html += '<tr>' +
+                        '<td><span class="dot" style="background:' + color + '"></span>' + escaparHtml(nombre) + '</td>' +
+                        '<td class="num">' + info.cantidad + '</td>' +
+                        '<td class="num fw-semibold">' + formatearMoneda(info.total) + '</td>' +
+                        '<td class="num">' +
+                            '<div class="d-flex align-items-center justify-content-end gap-2">' +
+                                '<span>' + pct.toFixed(1) + '%</span>' +
+                                '<div class="progress-mini" style="width:60px;"><div style="width:' + pct.toFixed(1) + '%;background:' + color + '"></div></div>' +
+                            '</div>' +
+                        '</td>' +
+                        '<td class="num">' + formatearMoneda(info.total / info.cantidad) + '</td>' +
+                    '</tr>';
+                });
+                tbody.innerHTML = html || '<tr><td colspan="5" class="text-center text-muted py-3">Sin datos</td></tr>';
+
+                const totalRecibos = Array.from(emiMap.values()).reduce((a, v) => a + v.cantidad, 0);
+                tfoot.innerHTML = '<tr>' +
+                    '<td>TOTAL</td>' +
+                    '<td class="num">' + totalRecibos + '</td>' +
+                    '<td class="num">' + formatearMoneda(totalGeneral) + '</td>' +
+                    '<td class="num">100%</td>' +
+                    '<td class="num">' + formatearMoneda(totalRecibos ? totalGeneral / totalRecibos : 0) + '</td>' +
+                '</tr>';
+            }
+
+            function renderTablaPeriodos(datos, periodos, totalGeneral) {
+                const tbody = document.querySelector('#tablaPeriodos tbody');
+                const tfoot = document.querySelector('#tablaPeriodos tfoot');
+                let html = '';
+                let anterior = null;
+
+                periodos.forEach(p => {
+                    const delPeriodo = datos.filter(r => r.anio === p.anio && r.mesIndex === p.mesIndex);
+                    const total = delPeriodo.reduce((a, r) => a + r.monto, 0);
+                    const cant = delPeriodo.length;
+                    const prom = cant ? total / cant : 0;
+
+                    let variacionHtml = '<span class="text-muted">—</span>';
+                    if (anterior !== null && anterior > 0) {
+                        const dif = ((total - anterior) / anterior) * 100;
+                        const cls = dif >= 0 ? 'text-success' : 'text-danger';
+                        const icono = dif >= 0 ? 'fa-arrow-up' : 'fa-arrow-down';
+                        variacionHtml = '<span class="' + cls + ' fw-semibold"><i class="fas ' + icono + ' me-1" style="font-size:.7rem;"></i>' +
+                                        (dif >= 0 ? '+' : '') + dif.toFixed(1) + '%</span>';
+                    } else if (anterior === 0) {
+                        variacionHtml = '<span class="text-muted">n/a</span>';
+                    }
+
+                    html += '<tr>' +
+                        '<td class="fw-semibold">' + MESES[p.mesIndex] + ' ' + p.anio + '</td>' +
+                        '<td class="num">' + cant + '</td>' +
+                        '<td class="num fw-semibold">' + formatearMoneda(total) + '</td>' +
+                        '<td class="num">' + formatearMoneda(prom) + '</td>' +
+                        '<td class="num">' + variacionHtml + '</td>' +
+                    '</tr>';
+
+                    anterior = total;
+                });
+
+                tbody.innerHTML = html || '<tr><td colspan="5" class="text-center text-muted py-3">Sin datos</td></tr>';
+
+                tfoot.innerHTML = '<tr>' +
+                    '<td>TOTAL</td>' +
+                    '<td class="num">' + datos.length + '</td>' +
+                    '<td class="num">' + formatearMoneda(totalGeneral) + '</td>' +
+                    '<td class="num">' + formatearMoneda(datos.length ? totalGeneral / datos.length : 0) + '</td>' +
+                    '<td class="num"></td>' +
+                '</tr>';
+            }
+
+            // ---------- Selectores de estadísticas ----------
+            function refrescarSelectoresEstadisticas() {
+                const anios = Array.from(new Set(recibos.map(r => r.anio))).sort((a, b) => b - a);
+                const emisores = Array.from(new Set(recibos.map(r => claveEmisor(r)))).sort((a, b) => a.localeCompare(b, 'es'));
+                const categorias = Array.from(new Set(recibos.map(r => claveCategoria(r)))).sort((a, b) => a.localeCompare(b, 'es'));
+
+                const actualAnio = $stFiltroAnio.value;
+                const actualEmisor = $stFiltroEmisor.value;
+                const actualCat = $stFiltroCategoria.value;
+
+                $stFiltroAnio.innerHTML = '<option value="">Todos los años</option>' +
+                    anios.map(a => '<option value="' + a + '">' + a + '</option>').join('');
+
+                $stFiltroEmisor.innerHTML = '<option value="">Todos los emisores</option>' +
+                    emisores.map(e => '<option value="' + escaparHtml(e) + '">' + escaparHtml(e) + '</option>').join('');
+
+                $stFiltroCategoria.innerHTML = '<option value="">Todas las categorías</option>' +
+                    categorias.map(c => '<option value="' + escaparHtml(c) + '">' + escaparHtml(c) + '</option>').join('');
+
+                if (actualAnio && anios.indexOf(parseInt(actualAnio)) !== -1) $stFiltroAnio.value = actualAnio;
+                if (actualEmisor && emisores.indexOf(actualEmisor) !== -1) $stFiltroEmisor.value = actualEmisor;
+                if (actualCat && categorias.indexOf(actualCat) !== -1) $stFiltroCategoria.value = actualCat;
+            }
+
+            function aplicarFiltrosEstadisticos() {
+                stFiltroAnio = $stFiltroAnio.value;
+                stFiltroEmisor = $stFiltroEmisor.value;
+                stFiltroCategoria = $stFiltroCategoria.value;
+                renderEstadisticas();
+            }
+
+            // ---------- Imprimir estadísticas ----------
+            function imprimirEstadisticas() {
+                const datos = obtenerFiltradosEstadistica();
+                if (!datos.length) return alert('No hay datos para imprimir con los filtros actuales.');
+
+                const total = datos.reduce((a, r) => a + r.monto, 0);
+                const titulosGraficos = [
+                    'Evolución mensual de haberes por año',
+                    'Tendencia acumulada por año',
+                    'Evolución por categoría laboral',
+                    'Evolución por emisor'
+                ];
+
+                const canvasList = document.querySelectorAll('#estadisticasContainer canvas');
+                let graficosHtml = '';
+                canvasList.forEach((c, i) => {
+                    let src = '';
+                    try { src = c.toDataURL('image/png', 1.0); } catch (e) { src = ''; }
+                    if (src) {
+                        graficosHtml += '<div class="graf"><h3>' + (titulosGraficos[i] || '') + '</h3><img src="' + src + '" alt="gráfico"></div>';
+                    }
+                });
+
+                const resumenHtml = document.getElementById('resumenTablas').innerHTML;
+
+                const estilo = '<style>' +
+                    "body{font-family:'Inter',system-ui,sans-serif;padding:1.5rem;color:#0f172a;}" +
+                    'h1{font-size:1.6rem;margin:0 0 .3rem;}' +
+                    'h2{font-size:1.05rem;margin:1.6rem 0 .6rem;border-bottom:2px solid #e2e8f0;padding-bottom:.35rem;}' +
+                    'h3{font-size:.9rem;margin:.8rem 0 .4rem;color:#334155;}' +
+                    '.meta{color:#64748b;font-size:.85rem;margin-bottom:1rem;}' +
+                    '.kpis{display:flex;flex-wrap:wrap;gap:.6rem;margin-bottom:1rem;}' +
+                    '.kpi{border:1px solid #e2e8f0;border-radius:10px;padding:.6rem .9rem;min-width:170px;}' +
+                    '.kpi .l{font-size:.68rem;text-transform:uppercase;letter-spacing:.05em;color:#64748b;font-weight:700;}' +
+                    '.kpi .v{font-size:1.05rem;font-weight:700;margin-top:.15rem;}' +
+                    '.graf{page-break-inside:avoid;margin-bottom:1.2rem;}' +
+                    '.graf img{width:100%;max-width:100%;border:1px solid #e2e8f0;border-radius:10px;}' +
+                    'table{width:100%;border-collapse:collapse;font-size:.78rem;margin-bottom:1rem;}' +
+                    'th{background:#f1f5f9;text-align:left;padding:.4rem .5rem;border:1px solid #cbd5e1;font-size:.7rem;text-transform:uppercase;}' +
+                    'td{padding:.35rem .5rem;border:1px solid #e2e8f0;}' +
+                    '.num{text-align:right;}' +
+                    'tfoot td{font-weight:700;background:#f8fafc;}' +
+                    '.progress-mini{display:none;}' +
+                    '.dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px;}' +
+                    '.chart-card{border:none;padding:0;box-shadow:none;}' +
+                    '.chart-sub{color:#64748b;font-size:.78rem;margin-bottom:.5rem;}' +
+                    '.chart-title{font-weight:700;font-size:.95rem;}' +
+                    '.footer{margin-top:1.5rem;color:#64748b;font-size:.8rem;border-top:1px solid #e2e8f0;padding-top:.6rem;}' +
+                    '@page{size:A4;margin:1.2cm;}' +
+                    '</style>';
+
+                const kpisHtml =
+                    '<div class="kpis">' +
+                        '<div class="kpi"><div class="l">Total acumulado</div><div class="v">' + formatearMoneda(total) + '</div></div>' +
+                        '<div class="kpi"><div class="l">Recibos</div><div class="v">' + datos.length + '</div></div>' +
+                        '<div class="kpi"><div class="l">Promedio por recibo</div><div class="v">' + formatearMoneda(total / datos.length) + '</div></div>' +
+                        '<div class="kpi"><div class="l">Filtros</div><div class="v" style="font-size:.85rem;">' +
+                            (stFiltroAnio ? 'Año ' + stFiltroAnio : 'Todos los años') + ' · ' +
+                            (stFiltroEmisor ? escaparHtml(stFiltroEmisor) : 'Todos los emisores') +
+                        '</div></div>' +
+                    '</div>';
+
+                const contenido = '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Reporte Estadístico de Recibos</title>' + estilo + '</head><body>' +
+                    '<h1>Reporte Estadístico de Recibos de Sueldo</h1>' +
+                    '<div class="meta">Generado el ' + new Date().toLocaleDateString('es-ES', { day: '2-digit', month: 'long', year: 'numeric' }) +
+                    ' a las ' + new Date().toLocaleTimeString('es-ES') + '</div>' +
+                    kpisHtml +
+                    '<h2>Gráficos</h2>' + graficosHtml +
+                    '<h2>Resumen detallado</h2>' + resumenHtml +
+                    '<div class="footer">Documento generado automáticamente por el sistema de control de Recibos de Sueldo.</div>' +
+                    '</body></html>';
+
+                const ventana = window.open('', '_blank', 'width=1200,height=800');
+                if (!ventana) return alert('Por favor, permite las ventanas emergentes para imprimir.');
+                ventana.document.write(contenido);
+                ventana.document.close();
+                ventana.focus();
+                setTimeout(function() { ventana.print(); }, 500);
+            }
+
+            // ---------- Navegación a estadísticas ----------
+            $btnEstadisticas.addEventListener('click', function() {
+                $contenidoPrincipal.style.display = 'none';
+                $historicoContainer.style.display = 'none';
+                $estadisticasContainer.style.display = 'block';
+                $btnVolver.style.display = 'inline-block';
+                refrescarSelectoresEstadisticas();
+                stFiltroAnio = $stFiltroAnio.value;
+                stFiltroEmisor = $stFiltroEmisor.value;
+                stFiltroCategoria = $stFiltroCategoria.value;
+                renderEstadisticas();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            $stBtnAplicar.addEventListener('click', aplicarFiltrosEstadisticos);
+            $stBtnLimpiar.addEventListener('click', function() {
+                $stFiltroAnio.value = '';
+                $stFiltroEmisor.value = '';
+                $stFiltroCategoria.value = '';
+                aplicarFiltrosEstadisticos();
+            });
+            $btnImprimirStats.addEventListener('click', imprimirEstadisticas);
+
+            [$stFiltroAnio, $stFiltroEmisor, $stFiltroCategoria].forEach(el => {
+                el.addEventListener('change', aplicarFiltrosEstadisticos);
+            });
 
             // ========== LLENAR SELECTS ==========
             function llenarSelects() {
                 const selects = [$filtroMes, $mes];
                 for (const sel of selects) {
-                    const current = sel.value; sel.innerHTML = '';
-                    if (sel === $filtroMes) { const opt = document.createElement('option'); opt.value = ''; opt.textContent = 'Todos los meses'; sel.appendChild(opt); }
-                    for (const m of MESES) { const opt = document.createElement('option'); opt.value = m; opt.textContent = m; sel.appendChild(opt); }
+                    const current = sel.value;
+                    sel.innerHTML = '';
+                    if (sel === $filtroMes) {
+                        const opt = document.createElement('option');
+                        opt.value = '';
+                        opt.textContent = 'Todos los meses';
+                        sel.appendChild(opt);
+                    }
+                    for (const m of MESES) {
+                        const opt = document.createElement('option');
+                        opt.value = m;
+                        opt.textContent = m;
+                        sel.appendChild(opt);
+                    }
                     if (current) sel.value = current;
                 }
                 $anio.value = new Date().getFullYear();
-                $filtroAnio.value = ''; $filtroEmisor.value = '';
+                $filtroAnio.value = '';
+                $filtroEmisor.value = '';
             }
 
             // ========== INICIALIZACIÓN ==========
             async function init() {
                 llenarSelects();
-                document.getElementById('fechaActual').textContent = new Date().toLocaleDateString('es-ES', { day: '2-digit', month: 'long', year: 'numeric' });
+                document.getElementById('fechaActual').textContent =
+                    new Date().toLocaleDateString('es-ES', { day: '2-digit', month: 'long', year: 'numeric' });
 
                 await cargarDatos();
-                // Si hay datos, renumerar para asegurar que estén en orden
                 if (recibos.length > 0) {
                     await renumerarRecibos();
-                    await cargarDatos(); // recargar con números actualizados
+                    await cargarDatos();
                 }
                 renderizarTabla();
+                refrescarSelectoresEstadisticas();
 
                 $btnFiltrar.addEventListener('click', function() {
                     filtroMes = $filtroMes.value;
@@ -781,19 +1706,36 @@
                     renderizarTabla();
                 });
 
-                [$filtroAnio, $filtroEmisor, $filtroMes].forEach(el => el.addEventListener('keydown', e => { if (e.key === 'Enter') $btnFiltrar.click(); }));
+                [$filtroAnio, $filtroEmisor, $filtroMes].forEach(el =>
+                    el.addEventListener('keydown', e => { if (e.key === 'Enter') $btnFiltrar.click(); })
+                );
+
                 $btnImprimir.addEventListener('click', imprimirTablaFiltrada);
 
                 $btnHistorico.addEventListener('click', function() {
                     $contenidoPrincipal.style.display = 'none';
+                    $estadisticasContainer.style.display = 'none';
                     $historicoContainer.style.display = 'block';
                     $btnVolver.style.display = 'inline-block';
                 });
 
                 $btnVolver.addEventListener('click', function() {
                     $historicoContainer.style.display = 'none';
+                    $estadisticasContainer.style.display = 'none';
                     $contenidoPrincipal.style.display = 'block';
                     $btnVolver.style.display = 'none';
+                    destruirCharts();
+                });
+
+                // Redibujar gráficos si cambia el tamaño de la ventana estando en estadísticas
+                let resizeTimer = null;
+                window.addEventListener('resize', function() {
+                    if ($estadisticasContainer.style.display === 'block') {
+                        clearTimeout(resizeTimer);
+                        resizeTimer = setTimeout(function() {
+                            Object.values(charts).forEach(c => { if (c) c.resize(); });
+                        }, 180);
+                    }
                 });
             }
 
