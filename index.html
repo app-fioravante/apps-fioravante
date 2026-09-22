@@ -1,451 +1,530 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Rómulo Fioravante App</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --primary: #1e40af;
-            --secondary: #60a5fa;
-            --bg-gradient: linear-gradient(180deg, #f0f9ff 0%, #bfdbfe 100%);
-            --glass-bg: rgba(255, 255, 255, 0.85);
-            --glass-border: rgba(255, 255, 255, 0.6);
-            --text-main: #1e293b;
-            --text-sub: #64748b;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Rómulo Fioravante App</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+  :root{
+    --bg:#f6f7fb;
+    --surface:#ffffff;
+    --border:#e4e7ee;
+    --border-strong:#d7dbe4;
+    --text-main:#0f172a;
+    --text-sub:#5b6472;
+    --text-faint:#94a0b3;
+    --brand:#1e3a8a;
+    --shadow-sm:0 1px 2px rgba(15,23,42,.04);
+    --shadow-md:0 16px 32px -20px rgba(15,23,42,.18);
+    --shadow-lg:0 24px 48px -18px rgba(15,23,42,.22);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Inter',system-ui,sans-serif;
+    color:var(--text-main);
+    background:var(--bg);
+    min-height:100vh;
+  }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', system-ui, sans-serif;
-        }
+  .topbar{
+    background:var(--surface);
+    border-bottom:1px solid var(--border);
+  }
+  .topbar-inner{
+    max-width:1180px;
+    margin:0 auto;
+    padding:22px 28px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
+    flex-wrap:wrap;
+  }
+  .brand{display:flex;align-items:center;gap:14px;}
+  .mark{
+    width:42px;height:42px;
+    border-radius:11px;
+    background:var(--brand);
+    color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    font-weight:700;
+    font-size:.92rem;
+    letter-spacing:.02em;
+    flex-shrink:0;
+  }
+  h1{
+    font-weight:800;
+    font-size:1.28rem;
+    letter-spacing:-.01em;
+    color:var(--text-main);
+  }
+  h1 .year{color:var(--text-faint);font-weight:600;}
+  .subtitle{
+    margin-top:2px;
+    font-size:.86rem;
+    color:var(--text-sub);
+  }
+  .meta-clock{
+    text-align:right;
+    line-height:1.35;
+  }
+  .meta-clock .date{
+    font-size:.82rem;
+    color:var(--text-sub);
+    text-transform:capitalize;
+  }
+  .meta-clock .time{
+    font-size:.95rem;
+    font-weight:600;
+    color:var(--text-main);
+    font-variant-numeric:tabular-nums;
+  }
 
-        body {
-            background: var(--bg-gradient);
-            height: 100vh;
-            width: 100vw;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            padding: 1vh 1vw;
-            color: var(--text-main);
-        }
+  main{
+    max-width:1180px;
+    margin:0 auto;
+    padding:34px 28px 56px;
+  }
+  .page-heading{
+    margin-bottom:22px;
+  }
+  .page-heading h2{
+    font-size:1.05rem;
+    font-weight:700;
+    color:var(--text-main);
+  }
+  .page-heading p{
+    margin-top:4px;
+    font-size:.86rem;
+    color:var(--text-sub);
+  }
 
-        header {
-            height: 8vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-        }
+  #grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(255px,1fr));
+    gap:16px;
+  }
 
-        h1 {
-            font-size: 2.5vh;
-            color: var(--primary);
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
+  .card{
+    --accent:#1d4ed8;
+    display:flex;
+    flex-direction:column;
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-left:3px solid var(--accent);
+    border-radius:14px;
+    padding:20px 20px 16px;
+    cursor:pointer;
+    box-shadow:var(--shadow-sm);
+    transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+    opacity:0;
+    transform:translateY(8px);
+    animation:riseIn .4s ease forwards;
+  }
+  .card:hover{
+    transform:translateY(-3px);
+    box-shadow:var(--shadow-md);
+    border-color:var(--border-strong);
+  }
+  .card:hover .go{transform:translateX(3px);color:var(--accent);}
 
-        .subtitle {
-            font-size: 1.5vh;
-            color: var(--text-sub);
-        }
+  .icon-badge{
+    width:44px;height:44px;
+    border-radius:11px;
+    display:flex;align-items:center;justify-content:center;
+    background:color-mix(in srgb, var(--accent) 12%, white);
+    color:var(--accent);
+    font-size:1.05rem;
+    flex-shrink:0;
+  }
 
-        main {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 1.5vh;
-            padding: 1vh 0;
-        }
+  .card h3{
+    font-weight:700;
+    font-size:1rem;
+    margin-top:14px;
+    color:var(--text-main);
+  }
+  .card p.desc{
+    margin-top:5px;
+    font-size:.84rem;
+    line-height:1.45;
+    color:var(--text-sub);
+    flex:1;
+  }
+  .card .meta{
+    margin-top:14px;
+    padding-top:11px;
+    border-top:1px solid var(--border);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    font-size:.78rem;
+    color:var(--text-faint);
+  }
+  .card .meta .go{
+    color:var(--text-faint);
+    transition:transform .18s ease, color .18s ease;
+  }
 
-        .row-container {
-            display: flex;
-            gap: 1.5vw;
-            width: 100%;
-        }
+  .card.selected{
+    border-color:var(--accent);
+    box-shadow:var(--shadow-lg);
+  }
+  .card.dimmed{opacity:.4;pointer-events:none;transform:none;}
 
-        #top-row, #bottom-row {
-            flex: 1;
-        }
+  @keyframes riseIn{to{opacity:1;transform:translateY(0);}}
 
-        .card {
-            flex: 1;
-            background: var(--glass-bg);
-            backdrop-filter: blur(12px);
-            border: 3px solid var(--glass-border);
-            border-radius: 16px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            padding: 10px;
-            position: relative;
-            overflow: hidden;
-        }
+  footer{
+    text-align:center;
+    padding:10px 20px 30px;
+    font-size:.78rem;
+    color:var(--text-faint);
+  }
 
-        .card:hover {
-            transform: scale(1.02);
-            background: #ffffff;
-            border-color: var(--secondary);
-            box-shadow: 0 10px 15px rgba(30, 64, 175, 0.15);
-            z-index: 10;
-        }
+  /* Modal */
+  .modal-overlay{
+    position:fixed;inset:0;
+    background:rgba(15,23,42,.45);
+    backdrop-filter:blur(4px);
+    z-index:1000;
+    display:none;
+    justify-content:center;align-items:center;
+    padding:20px;
+    opacity:0;
+    transition:opacity .2s ease;
+  }
+  .modal-overlay.active{opacity:1;}
+  .modal{
+    --accent:#1d4ed8;
+    width:100%;max-width:560px;max-height:82vh;
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:16px;
+    display:flex;flex-direction:column;
+    box-shadow:var(--shadow-lg);
+    transform:scale(.96);
+    transition:transform .2s ease;
+    overflow:hidden;
+  }
+  .modal-overlay.active .modal{transform:scale(1);}
+  .modal-header{
+    padding:20px 22px;
+    display:flex;align-items:center;gap:14px;
+    border-bottom:1px solid var(--border);
+    border-top:3px solid var(--accent);
+  }
+  .modal-header .icon-badge{width:40px;height:40px;font-size:.95rem;}
+  .modal-header .titles{flex:1;}
+  .modal-header h3{
+    font-size:1.08rem;font-weight:700;color:var(--text-main);
+  }
+  .modal-header .count{font-size:.8rem;color:var(--text-sub);margin-top:2px;}
+  .close-btn{
+    background:var(--bg);
+    border:1px solid var(--border);
+    color:var(--text-sub);
+    width:32px;height:32px;border-radius:9px;
+    font-size:1rem;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    transition:background .18s ease, color .18s ease;
+  }
+  .close-btn:hover{background:var(--border);color:var(--text-main);}
 
-        .icon-box {
-            font-size: 4vh;
-            color: var(--primary);
-            margin-bottom: 1.5vh;
-            transition: transform 0.3s;
-        }
+  .modal-body{padding:16px 20px 22px;overflow-y:auto;}
+  .modal-body::-webkit-scrollbar{width:8px;}
+  .modal-body::-webkit-scrollbar-thumb{background:var(--border-strong);border-radius:8px;}
 
-        .card:hover .icon-box {
-            transform: translateY(-5px);
-            color: var(--secondary);
-        }
+  .section-title{
+    font-weight:700;
+    font-size:.8rem;
+    color:var(--accent);
+    margin:18px 0 8px;
+    padding-bottom:6px;
+    border-bottom:1px solid var(--border);
+  }
+  .section-title:first-child{margin-top:0;}
 
-        .card h3 {
-            font-size: 2vh;
-            font-weight: 700;
-            color: var(--text-main);
-            line-height: 1.2;
-        }
+  .link-item{
+    display:flex;align-items:center;justify-content:space-between;gap:10px;
+    padding:12px 14px;
+    margin-bottom:8px;
+    background:var(--bg);
+    border:1px solid var(--border);
+    border-radius:10px;
+    text-decoration:none;
+    color:var(--text-main);
+    font-size:.9rem;
+    font-weight:500;
+    transition:background .18s ease, border-color .18s ease, transform .18s ease;
+  }
+  .link-item .name{display:flex;align-items:center;gap:10px;}
+  .link-item i.fa-arrow-up-right-from-square{font-size:.7em;color:var(--text-faint);}
+  .link-item i.fa-chevron-right{font-size:.76em;color:var(--text-faint);transition:transform .18s ease;}
+  .link-item:hover{
+    background:#fff;
+    border-color:var(--accent);
+    transform:translateX(3px);
+  }
+  .link-item:hover i.fa-chevron-right{transform:translateX(3px);color:var(--accent);}
 
-        .card-number {
-            position: absolute;
-            top: 10px;
-            right: 15px;
-            font-size: 4vh;
-            opacity: 0.05;
-            font-weight: 900;
-        }
+  @media (max-width:640px){
+    .topbar-inner{padding:18px 18px;}
+    main{padding:24px 18px 40px;}
+    .meta-clock{text-align:left;}
+    #grid{grid-template-columns:1fr 1fr;gap:10px;}
+    .card{padding:15px 15px 13px;border-radius:13px;}
+    .card h3{font-size:.92rem;}
+    .card p.desc{font-size:.78rem;}
+    .icon-badge{width:38px;height:38px;font-size:.95rem;}
+  }
 
-        .card.selected {
-            transform: scale(1.02);
-            background: #ffffff;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-            border-width: 3px;
-            z-index: 10;
-        }
-
-        .card.dimmed {
-            filter: grayscale(0.9) opacity(0.6);
-            transform: scale(0.96);
-            pointer-events: none;
-        }
-
-        footer {
-            height: 2vh;
-            text-align: center;
-            font-size: 1.2vh;
-            color: var(--text-sub);
-            opacity: 0.7;
-        }
-
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(15, 23, 42, 0.7);
-            backdrop-filter: blur(5px);
-            z-index: 1000;
-            display: none;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .modal-overlay.active {
-            opacity: 1;
-        }
-
-        .modal {
-            background: white;
-            width: 90%;
-            max-width: 600px;
-            max-height: 80vh;
-            border-radius: 15px;
-            display: flex;
-            flex-direction: column;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.25);
-            transform: scale(0.9);
-            transition: transform 0.3s;
-        }
-
-        .modal-overlay.active .modal {
-            transform: scale(1);
-        }
-
-        .modal-header {
-            padding: 20px;
-            background: var(--primary);
-            color: white;
-            border-radius: 15px 15px 0 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .close-btn {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        .modal-body {
-            padding: 20px;
-            overflow-y: auto;
-        }
-
-        .link-item {
-            display: block;
-            padding: 12px;
-            margin-bottom: 8px;
-            background: #f1f5f9;
-            text-decoration: none;
-            color: var(--text-main);
-            border-radius: 8px;
-            border-left: 4px solid var(--secondary);
-            font-size: 0.95rem;
-            transition: background 0.2s;
-        }
-
-        .link-item:hover {
-            background: #e2e8f0;
-            padding-left: 15px;
-        }
-
-        .section-title {
-            color: var(--primary);
-            font-weight: bold;
-            margin: 15px 0 5px 0;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            border-bottom: 1px solid #ddd;
-        }
-
-        @media (max-width: 768px) {
-            h1 { font-size: 1.2rem; }
-            .row-container {
-                flex-wrap: nowrap;
-                gap: 1vw;
-            }
-            .card h3 { font-size: 1.4vh; }
-            .icon-box { font-size: 3vh; margin-bottom: 0.5vh; }
-            .card { padding: 5px; }
-        }
-    </style>
+  @media (prefers-reduced-motion:reduce){
+    .card{animation:none;opacity:1;transform:none;}
+    *{transition:none!important;}
+  }
+</style>
 </head>
 <body>
 
-    <header>
-        <h1>App Web SPA 2025-2026</h1>
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <div class="mark">RF</div>
+      <div>
+        <h1>App Web SPA <span class="year">2025–2026</span></h1>
         <p class="subtitle">Repositorio de Aplicaciones | Rómulo Fioravante</p>
-    </header>
-
-    <main>
-        <section id="top-row" class="row-container"></section>
-        <section id="bottom-row" class="row-container"></section>
-    </main>
-
-    <footer>
-        &copy; 2025-2026 Rómulo Fioravante
-    </footer>
-
-    <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
-        <div class="modal" onclick="event.stopPropagation()">
-            <div class="modal-header">
-                <h3 id="modalTitle">Título</h3>
-                <button class="close-btn" onclick="closeModalDirect()">&times;</button>
-            </div>
-            <div class="modal-body" id="modalBody"></div>
-        </div>
+      </div>
     </div>
+    <div class="meta-clock">
+      <div class="date" id="clockDate">cargando...</div>
+      <div class="time" id="clockTime">--:--</div>
+    </div>
+  </div>
+</div>
 
-    <script>
-        const modules = [
-            {
-                title: "Personal",
-                icon: "fa-user",
-                links: [
-                    { name: "Peso Corporal", url: "https://app-fioravante.github.io/peso-corporal/" },
-                    { name: "Alquiler Vivienda", url: "https://app-fioravante.github.io/alquiler-vivienda/" },
-                    { name: "Recibos de Sueldo", url: "https://app-fioravante.github.io/apps-fioravante/recibos" }
-                ]
-            },
-            {
-                title: "Laboral",
-                icon: "fa-briefcase",
-                links: [
-                    { name: "Sistema Defensor-Secretarios", url: "https://sistemadigital.github.io/defensor-secretarios/" },
-                    { name: "Sistema Empleados", url: "https://sistemadigital.github.io/empleados/" },
-                    { name: "Sistema Operador y Atención", url: "https://defensoria6.github.io/operador-defensoria/" },
-                    { name: "Control Inasistencia-Licencias", url: "https://defensorialocal-seis.github.io/faltas-licencias/" },
-                    { name: "Estadística Digital", url: "https://defensoria6.github.io/reporte/" },
-                    { name: "Clientes y Turnos (Público)", url: "https://sistemadigital.github.io/consultas-turnos/clientes" },
-                    { name: "Control Turnos (Interno)", url: "https://sistemadigital.github.io/consultas-turnos/interno" },
-                    { name: "Asignación Clientes", url: "https://sistemadigital.github.io/consultas-turnos/asignados" },
-                    { name: "Resguardo de Datos", url: "https://sistemadigital.github.io/resguardo/" },
-                    { name: "Causas Asignadas", url: "https://admindefensoria6.github.io/rf-causas/" },
-                    { name: "Agenda Defensor (sistema)", url: "https://defensorialocal-seis.github.io/agenda/" },
-                    { name: "Agenda Defensor (celular)", url: "https://defensorialocal-seis.github.io/agenda/ramos" },
-                    { isHeader: true, name: "Rómulo Fioravante" },
-                    { name: "Agenda Laboral 6 (celular)", url: "https://app-fioravante.github.io/agenda-laboral/" },
-                    { isHeader: true, name: "Secretarios" },
-                    { name: "Dra. Riveros", url: "https://sistema-secretarios.github.io/dra-riveros/" },
-                    { name: "Dra. Corrales", url: "https://sistema-secretarios.github.io/dra-corrales/" },
-                    { name: "Dr. Magnani", url: "https://sistema-secretarios.github.io/dr-magnani/" }
-                ]
-            },
-            {
-                title: "Finanza Hogar",
-                icon: "fa-chart-line",
-                links: [
-                    { name: "Ir a Finanzas", url: "https://app-fioravante.github.io/finanzas/" },
-                    { name: "Mi Garrafa", url: "https://experiencia-ia.github.io/Mi-garrafa/" }
-                ]
-            },
-            {
-                title: "Despensa Hogar",
-                icon: "fa-cart-shopping",
-                links: [{ name: "Ir a Despensa", url: "https://app-fioravante.github.io/stock-hogar/" }]
-            },
-            {
-                title: "Farmacia Hogar",
-                icon: "fa-capsules",
-                links: [{ name: "Ir a Farmacia", url: "https://app-fioravante.github.io/medicamentos-hogar/" }]
-            },
-            {
-                title: "Biblia",
-                icon: "fa-bible",  // corregido: ícono válido
-                links: [
-                    { name: "Ir a Biblia", url: "https://app-fioravante.github.io/appbiblia/" },
-                    { name: "Ir a Cronologia Biblia Historia", url: "https://experiencia-ia.github.io/crono-bibliahistoria/" }
-                ]
-            },
-            {
-                title: "Astronomía",
-                icon: "fa-moon",
-                links: [{ name: "Ir a Astroamigos", url: "https://app-fioravante.github.io/astroamigos-misiones/" }]
-            },
-            {
-                title: "Genealogía",
-                icon: "fa-tree",
-                links: [{ name: "Ir a Familia", url: "https://app-fioravante.github.io/familiia/" }]
-            }
-        ];
+<main>
+  <div class="page-heading">
+    <h2>Tus módulos</h2>
+    <p id="pageMeta"></p>
+  </div>
+  <div id="grid"></div>
+</main>
 
-        const borderColors = [
-            '#e11d48', '#2563eb', '#16a34a', '#ca8a04',
-            '#7c3aed', '#0891b2', '#db2777', '#ea580c'
-        ];
+<footer>&copy; 2025–2026 Rómulo Fioravante</footer>
 
-        const topRow = document.getElementById('top-row');
-        const bottomRow = document.getElementById('bottom-row');
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+  <div class="modal" onclick="event.stopPropagation()" id="modalPanel">
+    <div class="modal-header">
+      <div class="icon-badge" id="modalIcon"><i class="fas"></i></div>
+      <div class="titles">
+        <h3 id="modalTitle">Título</h3>
+        <div class="count" id="modalCount"></div>
+      </div>
+      <button class="close-btn" onclick="closeModalDirect()"><i class="fas fa-xmark"></i></button>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
 
-        function createCard(mod, index) {
-            const card = document.createElement('div');
-            card.className = 'card';
-            card.style.borderColor = borderColors[index % borderColors.length];
-            card.dataset.index = index;
-            card.onclick = () => {
-                selectCard(card);
-                openModal(mod);
-            };
-            card.innerHTML = `
-                <div class="card-number">${index + 1}</div>
-                <i class="fas ${mod.icon} icon-box"></i>
-                <h3>${mod.title}</h3>
-            `;
-            return card;
-        }
+<script>
+  const modules = [
+    {
+      title: "Personal",
+      icon: "fa-user",
+      desc: "Peso, alquiler de vivienda y recibos de sueldo.",
+      color: "#be123c",
+      links: [
+        { name: "Peso Corporal", url: "https://app-fioravante.github.io/peso-corporal/" },
+        { name: "Alquiler Vivienda", url: "https://app-fioravante.github.io/alquiler-vivienda/" },
+        { name: "Recibos de Sueldo", url: "https://app-fioravante.github.io/apps-fioravante/recibos" }
+      ]
+    },
+    {
+      title: "Laboral",
+      icon: "fa-briefcase",
+      desc: "Sistemas y accesos del ámbito de trabajo.",
+      color: "#1d4ed8",
+      links: [
+        { name: "Sistema Defensor-Secretarios", url: "https://sistemadigital.github.io/defensor-secretarios/" },
+        { name: "Sistema Empleados", url: "https://sistemadigital.github.io/empleados/" },
+        { name: "Sistema Operador y Atención", url: "https://defensoria6.github.io/operador-defensoria/" },
+        { name: "Control Inasistencia-Licencias", url: "https://defensorialocal-seis.github.io/faltas-licencias/" },
+        { name: "Estadística Digital", url: "https://defensoria6.github.io/reporte/" },
+        { name: "Clientes y Turnos (Público)", url: "https://sistemadigital.github.io/consultas-turnos/clientes" },
+        { name: "Control Turnos (Interno)", url: "https://sistemadigital.github.io/consultas-turnos/interno" },
+        { name: "Asignación Clientes", url: "https://sistemadigital.github.io/consultas-turnos/asignados" },
+        { name: "Resguardo de Datos", url: "https://sistemadigital.github.io/resguardo/" },
+        { name: "Causas Asignadas", url: "https://admindefensoria6.github.io/rf-causas/" },
+        { name: "Agenda Defensor (sistema)", url: "https://defensorialocal-seis.github.io/agenda/" },
+        { name: "Agenda Defensor (celular)", url: "https://defensorialocal-seis.github.io/agenda/ramos" },
+        { isHeader: true, name: "Rómulo Fioravante" },
+        { name: "Agenda Laboral 6 (celular)", url: "https://app-fioravante.github.io/agenda-laboral/" },
+        { isHeader: true, name: "Secretarios" },
+        { name: "Dra. Riveros", url: "https://sistema-secretarios.github.io/dra-riveros/" },
+        { name: "Dra. Corrales", url: "https://sistema-secretarios.github.io/dra-corrales/" },
+        { name: "Dr. Magnani", url: "https://sistema-secretarios.github.io/dr-magnani/" }
+      ]
+    },
+    {
+      title: "Finanza Hogar",
+      icon: "fa-chart-line",
+      desc: "Control de finanzas y gastos familiares.",
+      color: "#15803d",
+      links: [
+        { name: "Ir a Finanzas", url: "https://app-fioravante.github.io/finanzas/" },
+        { name: "Mi Garrafa", url: "https://experiencia-ia.github.io/Mi-garrafa/" }
+      ]
+    },
+    {
+      title: "Despensa Hogar",
+      icon: "fa-cart-shopping",
+      desc: "Inventario y stock de la despensa.",
+      color: "#a16207",
+      links: [{ name: "Ir a Despensa", url: "https://app-fioravante.github.io/stock-hogar/" }]
+    },
+    {
+      title: "Farmacia Hogar",
+      icon: "fa-capsules",
+      desc: "Control de medicamentos del hogar.",
+      color: "#6d28d9",
+      links: [{ name: "Ir a Farmacia", url: "https://app-fioravante.github.io/medicamentos-hogar/" }]
+    },
+    {
+      title: "Biblia",
+      icon: "fa-bible",
+      desc: "Lectura bíblica y cronología histórica.",
+      color: "#0e7490",
+      links: [
+        { name: "Ir a Biblia", url: "https://app-fioravante.github.io/appbiblia/" },
+        { name: "Ir a Cronología Biblia Historia", url: "https://experiencia-ia.github.io/crono-bibliahistoria/" }
+      ]
+    },
+    {
+      title: "Astronomía",
+      icon: "fa-moon",
+      desc: "Recursos y guías de astronomía.",
+      color: "#be185d",
+      links: [{ name: "Ir a Astroamigos", url: "https://app-fioravante.github.io/astroamigos-misiones/" }]
+    },
+    {
+      title: "Genealogía",
+      icon: "fa-tree",
+      desc: "Árbol genealógico familiar.",
+      color: "#c2410c",
+      links: [{ name: "Ir a Familia", url: "https://app-fioravante.github.io/familiia/" }]
+    }
+  ];
 
-        let selectedCard = null;
+  const grid = document.getElementById('grid');
 
-        function selectCard(card) {
-            if (selectedCard) {
-                selectedCard.classList.remove('selected');
-                document.querySelectorAll('.card').forEach(c => c.classList.remove('dimmed'));
-            }
-            card.classList.add('selected');
-            document.querySelectorAll('.card').forEach(c => {
-                if (c !== card) c.classList.add('dimmed');
-            });
-            selectedCard = card;
-        }
+  function linkCount(mod){
+    return mod.links.filter(l => !l.isHeader).length;
+  }
 
-        function clearSelection() {
-            if (selectedCard) {
-                selectedCard.classList.remove('selected');
-                selectedCard = null;
-            }
-            document.querySelectorAll('.card').forEach(c => c.classList.remove('dimmed'));
-        }
+  function createCard(mod, index){
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.style.setProperty('--accent', mod.color);
+    card.style.animationDelay = (index * 0.04) + 's';
+    card.onclick = () => { selectCard(card); openModal(mod); };
+    const n = linkCount(mod);
+    card.innerHTML = `
+      <div class="icon-badge"><i class="fas ${mod.icon}"></i></div>
+      <h3>${mod.title}</h3>
+      <p class="desc">${mod.desc}</p>
+      <div class="meta">
+        <span>${n} acceso${n === 1 ? '' : 's'}</span>
+        <span class="go"><i class="fas fa-chevron-right"></i></span>
+      </div>
+    `;
+    return card;
+  }
 
-        function init() {
-            for (let i = 0; i < 4; i++) {
-                topRow.appendChild(createCard(modules[i], i));
-            }
-            for (let i = 4; i < modules.length; i++) {
-                bottomRow.appendChild(createCard(modules[i], i));
-            }
-        }
+  let selectedCard = null;
 
-        const modalOverlay = document.getElementById('modalOverlay');
-        const modalTitle = document.getElementById('modalTitle');
-        const modalBody = document.getElementById('modalBody');
+  function selectCard(card){
+    if (selectedCard){
+      selectedCard.classList.remove('selected');
+      document.querySelectorAll('.card').forEach(c => c.classList.remove('dimmed'));
+    }
+    card.classList.add('selected');
+    document.querySelectorAll('.card').forEach(c => { if (c !== card) c.classList.add('dimmed'); });
+    selectedCard = card;
+  }
 
-        function openModal(mod) {
-            modalTitle.innerText = mod.title;
-            modalBody.innerHTML = '';
+  function clearSelection(){
+    if (selectedCard){ selectedCard.classList.remove('selected'); selectedCard = null; }
+    document.querySelectorAll('.card').forEach(c => c.classList.remove('dimmed'));
+  }
 
-            mod.links.forEach(link => {
-                if (link.isHeader) {
-                    const h = document.createElement('div');
-                    h.className = 'section-title';
-                    h.innerText = link.name;
-                    modalBody.appendChild(h);
-                } else {
-                    const a = document.createElement('a');
-                    a.href = link.url;
-                    a.target = "_blank";
-                    a.className = 'link-item';
-                    a.innerHTML = `<i class="fas fa-external-link-alt" style="margin-right:8px; font-size:0.8em"></i> ${link.name}`;
-                    modalBody.appendChild(a);
-                }
-            });
+  function init(){
+    modules.forEach((mod, i) => grid.appendChild(createCard(mod, i)));
+    const totalLinks = modules.reduce((sum, m) => sum + linkCount(m), 0);
+    document.getElementById('pageMeta').innerText =
+      `${modules.length} módulos con ${totalLinks} accesos en total.`;
+  }
 
-            modalOverlay.style.display = 'flex';
-            setTimeout(() => modalOverlay.classList.add('active'), 10);
-        }
+  const modalOverlay = document.getElementById('modalOverlay');
+  const modalPanel = document.getElementById('modalPanel');
+  const modalIcon = document.getElementById('modalIcon');
+  const modalTitle = document.getElementById('modalTitle');
+  const modalCount = document.getElementById('modalCount');
+  const modalBody = document.getElementById('modalBody');
 
-        function closeModalDirect() {
-            modalOverlay.classList.remove('active');
-            setTimeout(() => {
-                modalOverlay.style.display = 'none';
-                clearSelection();
-            }, 300);
-        }
+  function openModal(mod){
+    modalPanel.style.setProperty('--accent', mod.color);
+    modalIcon.innerHTML = `<i class="fas ${mod.icon}"></i>`;
+    modalTitle.innerText = mod.title;
+    const n = linkCount(mod);
+    modalCount.innerText = `${n} acceso${n === 1 ? '' : 's'}`;
+    modalBody.innerHTML = '';
 
-        function closeModal(e) {
-            if (e.target === modalOverlay) closeModalDirect();
-        }
+    mod.links.forEach(link => {
+      if (link.isHeader){
+        const h = document.createElement('div');
+        h.className = 'section-title';
+        h.innerText = link.name;
+        modalBody.appendChild(h);
+      } else {
+        const a = document.createElement('a');
+        a.href = link.url;
+        a.target = "_blank";
+        a.rel = "noopener";
+        a.className = 'link-item';
+        a.innerHTML = `<span class="name"><i class="fas fa-arrow-up-right-from-square"></i>${link.name}</span><i class="fas fa-chevron-right"></i>`;
+        modalBody.appendChild(a);
+      }
+    });
 
-        init();
-    </script>
+    modalOverlay.style.display = 'flex';
+    setTimeout(() => modalOverlay.classList.add('active'), 10);
+  }
+
+  function closeModalDirect(){
+    modalOverlay.classList.remove('active');
+    setTimeout(() => { modalOverlay.style.display = 'none'; clearSelection(); }, 200);
+  }
+
+  function closeModal(e){ if (e.target === modalOverlay) closeModalDirect(); }
+
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModalDirect(); });
+
+  function updateClock(){
+    const now = new Date();
+    document.getElementById('clockTime').innerText =
+      now.toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit' });
+    document.getElementById('clockDate').innerText =
+      now.toLocaleDateString('es-AR', { weekday: 'long', day: 'numeric', month: 'long' });
+  }
+  updateClock();
+  setInterval(updateClock, 30000);
+
+  init();
+</script>
 </body>
 </html>
