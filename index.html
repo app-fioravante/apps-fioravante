@@ -106,7 +106,7 @@
 
   #grid{
     display:grid;
-    grid-template-columns:repeat(auto-fill,minmax(255px,1fr));
+    grid-template-columns:repeat(3,minmax(0,1fr));
     gap:16px;
   }
 
@@ -276,11 +276,12 @@
     .topbar-inner{padding:18px 18px;}
     main{padding:24px 18px 40px;}
     .meta-clock{text-align:left;}
-    #grid{grid-template-columns:1fr 1fr;gap:10px;}
-    .card{padding:15px 15px 13px;border-radius:13px;}
-    .card h3{font-size:.92rem;}
-    .card p.desc{font-size:.78rem;}
-    .icon-badge{width:38px;height:38px;font-size:.95rem;}
+    #grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;}
+    .card{padding:11px 10px 10px;border-radius:12px;}
+    .card h3{font-size:.8rem;margin-top:10px;}
+    .card p.desc{font-size:.68rem;line-height:1.35;}
+    .card .meta{margin-top:10px;padding-top:8px;font-size:.68rem;}
+    .icon-badge{width:32px;height:32px;font-size:.85rem;}
   }
 
   @media (prefers-reduced-motion:reduce){
@@ -418,6 +419,23 @@
       desc: "Árbol genealógico familiar.",
       color: "#c2410c",
       links: [{ name: "Ir a Familia", url: "https://app-fioravante.github.io/familiia/" }]
+    },
+    {
+      title: "Otros",
+      icon: "fa-shapes",
+      desc: "Malvinas, telescopio, comidas, religiones y oficios del hogar.",
+      color: "#475569",
+      links: [
+        { name: "Malvinas", url: "https://app-fioravante.github.io/apps-fioravante/malvinas" },
+        { name: "Telescopio", url: "https://app-fioravante.github.io/apps-fioravante/telescopio" },
+        { name: "Finanzas", url: "https://app-fioravante.github.io/apps-fioravante/finanzas" },
+        { name: "Comida saludable", url: "https://app-fioravante.github.io/apps-fioravante/comidas" },
+        { name: "Religiones del Mundo", url: "https://app-fioravante.github.io/apps-fioravante/religiones" },
+        { name: "Redes Informáticas", url: "https://app-fioravante.github.io/apps-fioravante/redes" },
+        { name: "Albañilería y Pintura", url: "https://app-fioravante.github.io/apps-fioravante/albañileria" },
+        { name: "Plomería", url: "https://app-fioravante.github.io/apps-fioravante/plomeria" },
+        { name: "Electricidad", url: "https://app-fioravante.github.io/apps-fioravante/electricidad" }
+      ]
     }
   ];
 
