@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Primera luz: guía para usar tu telescopio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700&family=Newsreader:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#eef1f7;--surface:#fff;--text:#101828;--muted:#4f5a75;--accent:#1f5f8b;--moon:#8a5a00;--line:#cfd6e4;--ok:#1b7a4b;--bad:#b3261e;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]):not([data-theme="red"]){--bg:#0a0f1c;--surface:#121a2e;--text:#e6eaf5;--muted:#9aa4c4;--accent:#8fc1e3;--moon:#f0c987;--line:#27324f;--ok:#6fd3a0;--bad:#ff8f86;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0a0f1c;--surface:#121a2e;--text:#e6eaf5;--muted:#9aa4c4;--accent:#8fc1e3;--moon:#f0c987;--line:#27324f;--ok:#6fd3a0;--bad:#ff8f86;color-scheme:dark}
+:root[data-theme="red"]{--bg:#100000;--surface:#1c0505;--text:#ff6b5c;--muted:#b84a3e;--accent:#ff3b2e;--moon:#ff6b5c;--line:#4a1210;--ok:#ff6b5c;--bad:#ff3b2e;color-scheme:dark}
+*{box-sizing:border-box}
+html{height:100%;scroll-padding-top:calc(env(safe-area-inset-top,0px) + 70px)}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{margin:0;background:var(--bg);color:var(--text);font:18px/1.6 Newsreader,Georgia,serif}
+h1,h2,h3,.ui{font-family:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif}
+h1{font-size:clamp(2.2rem,7vw,3.8rem);line-height:1.02;margin:0 0 .5rem;letter-spacing:-.02em}
+h2{font-size:1.7rem;margin:0 0 .4rem}h3{font-size:1.1rem;margin:0 0 .3rem}
+p{margin:.4rem 0 1rem;max-width:62ch}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:30}
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);border-bottom:1px solid var(--line)}
+.bar{max-width:920px;margin:auto;display:flex;gap:.5rem;align-items:center;padding:.5rem 1rem}
+nav{display:flex;gap:.25rem;overflow-x:auto;flex:1}
+nav button,.chip,.mode{font:600 .95rem "Bricolage Grotesque",system-ui,sans-serif;background:none;color:var(--muted);border:1px solid transparent;border-radius:999px;padding:.45rem .9rem;cursor:pointer;white-space:nowrap}
+nav button[aria-selected="true"],.chip[aria-pressed="true"]{background:var(--accent);color:var(--bg)}
+.mode{border-color:var(--line);color:var(--text)}
+button:focus-visible,summary:focus-visible,input:focus-visible{outline:3px solid var(--moon);outline-offset:2px}
+main{max-width:920px;margin:auto;padding:1.5rem 1rem 4rem}
+section[hidden]{display:none}
+.hero{display:grid;grid-template-columns:1fr 220px;gap:1.5rem;align-items:center;padding:1rem 0 1.5rem}
+@media(max-width:640px){.hero{grid-template-columns:1fr}.hero svg{max-width:200px}}
+.lead{font-size:1.25rem;color:var(--muted)}
+.warn{border-left:5px solid var(--bad);background:var(--surface);padding:.8rem 1rem;border-radius:0 10px 10px 0;margin:1rem 0}
+.steps{list-style:none;counter-reset:s;padding:0;margin:1rem 0}
+.steps li{counter-increment:s;position:relative;padding:.2rem 0 1rem 3rem;border-left:2px solid var(--line);margin-left:1rem}
+.steps li::before{content:counter(s);position:absolute;left:-1rem;top:0;width:2rem;height:2rem;border-radius:50%;background:var(--accent);color:var(--bg);display:grid;place-items:center;font:700 1rem "Bricolage Grotesque",sans-serif}
+.steps b{font-family:"Bricolage Grotesque",sans-serif}
+.models{display:grid;gap:1rem}
+.model{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:1rem 1.2rem}
+.model dl{display:grid;grid-template-columns:7.5rem 1fr;gap:.2rem .8rem;margin:.5rem 0 0}
+.model dt{color:var(--muted);font-family:"Bricolage Grotesque",sans-serif;font-weight:500}.model dd{margin:0}
+.model .spec{color:var(--moon);font-family:"Bricolage Grotesque",sans-serif;font-weight:500}
+.calc{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:.8rem;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:1rem}
+label{display:block;font:500 .9rem "Bricolage Grotesque",sans-serif;color:var(--muted)}
+input{width:100%;font:600 1.2rem "Bricolage Grotesque",sans-serif;padding:.45rem .6rem;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--text)}
+.presets{display:flex;flex-wrap:wrap;gap:.4rem;margin:.6rem 0}
+.chip{border-color:var(--line);color:var(--text)}
+.out{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.8rem;margin:1rem 0}
+.out div{border-top:3px solid var(--accent);padding-top:.4rem}
+.out strong{display:block;font:700 1.7rem "Bricolage Grotesque",sans-serif}
+.out span{color:var(--muted);font-size:.95rem}
+.meter{position:relative;height:14px;border-radius:7px;background:linear-gradient(90deg,var(--line),var(--accent),var(--bad));margin:1.8rem 0 .3rem}
+.meter i{position:absolute;top:-6px;width:4px;height:26px;background:var(--text);border-radius:2px;transition:left .3s}
+.verdict{font:600 1.05rem "Bricolage Grotesque",sans-serif}
+.targets{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem;margin-top:1rem}
+.target{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:1rem}
+.target small{color:var(--moon);font-family:"Bricolage Grotesque",sans-serif;font-weight:500}
+details{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:.7rem 1rem;margin:.6rem 0}
+summary{cursor:pointer;font:600 1.05rem "Bricolage Grotesque",sans-serif}
+details p{margin:.5rem 0 .2rem}
+.q{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:1rem;margin:1rem 0}
+.opts{display:grid;gap:.5rem;margin-top:.6rem}
+.opts button{text-align:left;font:500 1rem Newsreader,Georgia,serif;background:var(--bg);color:var(--text);border:1px solid var(--line);border-radius:10px;padding:.6rem .8rem;cursor:pointer}
+.opts button.ok{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 18%,var(--bg))}
+.opts button.no{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 18%,var(--bg))}
+.fb{margin:.6rem 0 0;color:var(--muted)}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<header class="top"><div class="bar">
+<nav role="tablist" aria-label="Secciones" id="nav"></nav>
+<button class="mode" id="mode" title="Cambiar modo de color">Modo: auto</button>
+</div></header>
+<main>
+
+<section id="inicio">
+<div class="hero">
+<div>
+<h1>Primera luz</h1>
+<p class="lead">Todo lo que necesitas para sacarle partido a tu telescopio: elegir uno, calcular aumentos, saber qué mirar y observar con paciencia.</p>
+</div>
+<svg viewBox="0 0 200 200" role="img" aria-label="Vista por el ocular: Luna creciente y estrellas">
+<defs><clipPath id="c"><circle cx="100" cy="100" r="92"/></clipPath></defs>
+<circle cx="100" cy="100" r="96" fill="none" stroke="var(--line)" stroke-width="6"/>
+<g clip-path="url(#c)"><rect width="200" height="200" fill="#05070f"/>
+<g fill="#fff"><circle cx="40" cy="50" r="1.6"/><circle cx="150" cy="40" r="1.2"/><circle cx="165" cy="150" r="1.8"/><circle cx="55" cy="160" r="1"/><circle cx="120" cy="170" r="1.3"/><circle cx="30" cy="110" r="1.1"/></g>
+<circle cx="105" cy="98" r="44" fill="#e8dcc0"/><circle cx="127" cy="90" r="42" fill="#05070f"/>
+<circle cx="88" cy="110" r="5" fill="#cbbf9f"/><circle cx="82" cy="88" r="3" fill="#cbbf9f"/></g>
+</svg>
+</div>
+<div class="warn"><b class="ui">Seguridad solar.</b> Nunca mires al Sol a través del telescopio, del buscador ni de binoculares sin un filtro solar certificado colocado delante del tubo. Daña la vista en segundos y de forma permanente.</div>
+<h2>Tu primera noche, paso a paso</h2>
+<ol class="steps">
+<li><b>Aclimata el telescopio.</b> Sácalo 20 a 30 minutos antes. El aire caliente dentro del tubo deforma la imagen hasta que iguala la temperatura exterior.</li>
+<li><b>Estabiliza la montura.</b> Apoya el trípode en suelo firme, no en madera ni terrazas que vibren. Nivela y aprieta bien.</li>
+<li><b>Alinea el buscador de día.</b> Apunta el telescopio a una antena lejana y ajusta el buscador para que coincida con el centro del ocular.</li>
+<li><b>Empieza con el ocular de mayor distancia focal</b> (25 mm o similar): da más campo y es más fácil encontrar objetos.</li>
+<li><b>Enfoca en la Luna o en una estrella brillante.</b> Gira el enfocador lento hasta que la estrella sea un punto nítido.</li>
+<li><b>Adapta tu vista.</b> Evita pantallas y luz blanca unos 20 minutos; usa una linterna roja. Prueba el modo rojo de esta página.</li>
+<li><b>Sube aumentos solo si la imagen lo aguanta.</b> Si se vuelve borrosa u oscura, vuelve al ocular anterior.</li>
+</ol>
+</section>
+
+<section id="modelos" hidden>
+<h2>Tipos de telescopio</h2>
+<p>No existe el mejor telescopio, sino el que más vas a usar. Las medidas son ejemplos orientativos de tamaños frecuentes (apertura/distancia focal).</p>
+<div class="models" id="modelList"></div>
+<div class="warn"><b class="ui">Cuidado con el marketing.</b> Si una caja promete “600x” en un tubo de 50 mm, es un juguete: el aumento útil de ese telescopio ronda los 100x. Fíjate en la apertura, no en los aumentos.</div>
+</section>
+
+<section id="calculadora" hidden>
+<h2>Calculadora óptica</h2>
+<p>Introduce los datos de tu telescopio y ocular. Todo se calcula al instante.</p>
+<div class="presets" id="presets"></div>
+<div class="calc">
+<div><label for="D">Apertura (mm)</label><input id="D" type="number" min="10" value="130"></div>
+<div><label for="F">Distancia focal (mm)</label><input id="F" type="number" min="50" value="650"></div>
+<div><label for="fe">Ocular (mm)</label><input id="fe" type="number" min="2" step="0.5" value="10"></div>
+<div><label for="af">Campo aparente del ocular (°)</label><input id="af" type="number" min="30" max="110" value="52"></div>
+</div>
+<div class="out" id="out"></div>
+<div class="meter" aria-hidden="true"><i id="pin"></i></div>
+<p class="verdict" id="verdict"></p>
+<details><summary>Cómo se calcula</summary>
+<p>Aumento = focal del telescopio ÷ focal del ocular. Pupila de salida = ocular ÷ relación focal (o apertura ÷ aumento). Máximo útil ≈ 2× la apertura en mm; mínimo ≈ apertura ÷ 7. Magnitud límite ≈ 2,7 + 5·log₁₀(apertura). Resolución (Dawes) = 116 ÷ apertura en segundos de arco. Son valores teóricos: la turbulencia y la óptica los reducen.</p></details>
+</section>
+
+<section id="objetos" hidden>
+<h2>Qué mirar</h2>
+<p>Objetivos accesibles para empezar. Algunos solo se ven desde un hemisferio.</p>
+<div class="presets" id="filters"></div>
+<div class="targets" id="targets"></div>
+</section>
+
+<section id="trucos" hidden>
+<h2>Trucos de observador</h2>
+<div id="tips"></div>
+</section>
+
+<section id="quiz" hidden>
+<h2>Pon a prueba lo aprendido</h2>
+<div id="quizBox"></div>
+<p class="verdict" id="score"></p>
+</section>
+
+</main>
+<script>
+const $=s=>document.querySelector(s);
+const tabs=[["inicio","Empezar"],["modelos","Modelos"],["calculadora","Calculadora"],["objetos","Qué mirar"],["trucos","Trucos"],["quiz","Quiz"]];
+const nav=$("#nav");
+tabs.forEach(([id,t])=>{const b=document.createElement("button");b.textContent=t;b.dataset.id=id;b.setAttribute("role","tab");b.onclick=()=>show(id);nav.appendChild(b)});
+function show(id){tabs.forEach(([i])=>{$("#"+i).hidden=i!==id});nav.querySelectorAll("button").forEach(b=>b.setAttribute("aria-selected",b.dataset.id===id));window.scrollTo(0,0);try{history.replaceState(null,"","#"+id)}catch(e){}}
+show(tabs.some(t=>"#"+t[0]===location.hash)?location.hash.slice(1):"inicio");
+
+// Modo de color
+const modes=[["","auto"],["dark","noche"],["light","claro"],["red","rojo"]];let mi=0;
+$("#mode").onclick=()=>{mi=(mi+1)%modes.length;const m=modes[mi];m[0]?document.documentElement.dataset.theme=m[0]:delete document.documentElement.dataset.theme;$("#mode").textContent="Modo: "+m[1]};
+
+// Modelos
+const models=[
+["Refractor","60–102 mm · f/6 a f/12","Sin mantenimiento, imagen contrastada, listo en minutos.","Cuesta más por milímetro de apertura; los acromáticos muestran un halo de color en objetos brillantes.","Principiantes, Luna, planetas y estrellas dobles."],
+["Reflector newtoniano","114–150 mm · f/5 a f/8","Mucha apertura por poco dinero.","Pide colimar (alinear espejos) de vez en cuando; el tubo es voluminoso.","Quien quiere ver más por menos presupuesto."],
+["Dobson","150–300 mm · f/4,5 a f/6","La mayor apertura por tu dinero y montura sencilla de usar.","Sin seguimiento automático y es grande para transportar.","Cielo profundo: nebulosas, cúmulos y galaxias."],
+["Schmidt-Cassegrain","127–280 mm · f/10","Compacto, versátil y casi siempre con GoTo.","Más caro y tarda en aclimatarse; campo más estrecho.","Quien viaja o quiere apuntado automático."],
+["Maksutov-Cassegrain","90–180 mm · f/12 a f/15","Compacto, muy nítido y excelente para planetas.","Campo estrecho y poca luz para objetos tenues.","Planetas, Luna y estrellas dobles."],
+["Telescopio inteligente","50–80 mm · automático","Se alinea solo y apila imágenes; la app muestra el resultado.","Se ve en pantalla, no en un ocular, y depende de batería y software.","Ciudad con mucha contaminación lumínica."]];
+$("#modelList").innerHTML=models.map(m=>`<article class="model"><h3>${m[0]}</h3><div class="spec">${m[1]}</div><dl><dt>Ventaja</dt><dd>${m[2]}</dd><dt>Limita</dt><dd>${m[3]}</dd><dt>Ideal para</dt><dd>${m[4]}</dd></dl></article>`).join("");
+
+// Calculadora
+const presets=[["Refractor 70/700",70,700,10],["Newtoniano 130/650",130,650,10],["Dobson 200/1200",200,1200,12],["SCT 203/2032",203,2032,25]];
+$("#presets").innerHTML=presets.map((p,i)=>`<button class="chip" data-i="${i}">${p[0]}</button>`).join("");
+document.querySelectorAll("#presets .chip").forEach(b=>b.onclick=()=>{const p=presets[b.dataset.i];$("#D").value=p[1];$("#F").value=p[2];$("#fe").value=p[3];calc()});
+const fmt=(n,d=1)=>n.toLocaleString("es",{maximumFractionDigits:d});
+function calc(){
+const D=+$("#D").value,F=+$("#F").value,fe=+$("#fe").value,af=+$("#af").value;
+if(!(D>0&&F>0&&fe>0&&af>0)){$("#out").innerHTML="";$("#verdict").textContent="Completa los cuatro valores con números mayores que cero.";return}
+const M=F/fe,fr=F/D,pe=fe/fr,tf=af/M,mx=2*D,mn=D/7,lim=2.7+5*Math.log10(D),res=116/D;
+const items=[[fmt(M,0)+"x","Aumento"],["f/"+fmt(fr),"Relación focal"],[fmt(pe)+" mm","Pupila de salida"],[fmt(tf,2)+"°","Campo real"],[fmt(mn,0)+"x a "+fmt(mx,0)+"x","Rango útil"],["mag "+fmt(lim),"Estrella más débil"],[fmt(res,2)+"″","Resolución"]];
+$("#out").innerHTML=items.map(i=>`<div><strong>${i[0]}</strong><span>${i[1]}</span></div>`).join("");
+const pos=Math.max(0,Math.min(100,(M-mn)/(1.4*mx-mn)*100));$("#pin").style.left=`calc(${pos}% - 2px)`;
+let v;
+if(M>mx)v="Aumento demasiado alto para esta apertura: la imagen se verá oscura y blanda. Prueba un ocular de más milímetros.";
+else if(M<mn)v="Aumento muy bajo: la pupila de salida supera la de tu ojo (unos 7 mm) y pierdes luz. Usa un ocular más corto.";
+else if(pe>5)v="Ideal para campo amplio: cúmulos grandes, nebulosas extensas y buscar objetos.";
+else if(pe>1.5)v="Zona versátil: buen equilibrio entre brillo y detalle en la mayoría de objetos.";
+else v="Aumento alto: reserva este ocular para Luna, planetas y estrellas dobles con aire estable.";
+$("#verdict").textContent=v}
+["D","F","fe","af"].forEach(i=>$("#"+i).oninput=calc);calc();
+
+// Objetos
+const T=[
+["Luna","Sistema solar","Cualquiera","Observa cerca del terminador (línea día/noche): los cráteres se ven con sombras largas. Evita luna llena, deslumbra."],
+["Júpiter","Sistema solar","60 mm","Verás dos bandas oscuras y sus cuatro lunas galileanas alineadas. Cambian de posición cada noche."],
+["Saturno","Sistema solar","60 mm","Con 50x ya se separa el anillo del planeta. Con 100x aparece la división de Cassini si el aire está calmo."],
+["Venus","Sistema solar","Cualquiera","Muestra fases como la Luna. Mírala al atardecer o al amanecer, con el cielo aún claro."],
+["Nebulosa de Orión (M42)","Cielo profundo","60 mm","Una nube brillante bajo el cinturón de Orión. Más visible desde cielo oscuro; usa baja potencia. (Verano austral: se ve invertida)."],
+["Pléyades (M45)","Cielo profundo","Binoculares","Cúmulo grande: usa el mínimo aumento posible para encuadrarlo entero."],
+["Omega Centauri","Cielo profundo","80 mm","El cúmulo globular más grande, visible desde el hemisferio sur y latitudes bajas del norte. Parece una bola de arenilla luminosa."],
+["Nubes de Magallanes","Cielo profundo","Ojo y binoculares","Galaxias satélite visibles solo desde el hemisferio sur. Explora la Tarántula con ocular de bajo aumento."],
+["Alfa Centauri","Estrellas dobles","60 mm","Las estrellas más cercanas al Sol: se ven como dos puntos amarillos muy cercanos. Hemisferio sur."],
+["Albireo","Estrellas dobles","60 mm","Una estrella dorada y otra azul. Es una de las dobles más bonitas del hemisferio norte."]];
+const cats=["Todos","Sistema solar","Cielo profundo","Estrellas dobles"];let cur="Todos";
+function drawT(){$("#filters").innerHTML=cats.map(c=>`<button class="chip" aria-pressed="${c===cur}" data-c="${c}">${c}</button>`).join("");
+document.querySelectorAll("#filters .chip").forEach(b=>b.onclick=()=>{cur=b.dataset.c;drawT()});
+$("#targets").innerHTML=T.filter(t=>cur==="Todos"||t[1]===cur).map(t=>`<article class="target"><small>${t[1]} · desde ${t[2]}</small><h3>${t[0]}</h3><p>${t[3]}</p></article>`).join("")}
+drawT();
+
+// Trucos
+const tips=[
+["Usa la visión desviada","Para ver objetos tenues, no mires directamente al centro: dirige la mirada un poco al lado. La zona periférica de la retina es más sensible a la luz débil y el objeto “aparece”."],
+["No aprietes el ojo ni te muevas","Acércate al ocular a la distancia justa y relájate. Cuando toques el telescopio, espera unos segundos a que cese la vibración antes de juzgar la imagen."],
+["Mira los objetos altos","Cerca del horizonte la luz atraviesa más atmósfera y la imagen tiembla. Observa los objetos cuando estén a más de 30° de altura."],
+["Entiende el “seeing”","Si las estrellas parpadean mucho, la atmósfera está turbulenta: es mala noche para altos aumentos, pero puede servir para campo amplio."],
+["Respeta el cielo oscuro","Aléjate de farolas y apaga luces cercanas. Pasar de ciudad a un cielo rural puede multiplicar lo que ves en una nebulosa."],
+["Cuida el rocío","Una cubierta contra rocío en el tubo evita que la humedad empañe la óptica. Nunca limpies lentes con ropa: usa soplador y paño específico."],
+["Barlow para planetas, no para todo","Una lente Barlow duplica el aumento con el mismo ocular. Úsala solo si el aire está estable; si no, solo amplía la borrosidad."],
+["Filtros que sí ayudan","Un filtro lunar reduce el deslumbramiento. Un filtro nebular (UHC) mejora el contraste de nebulosas en cielos algo contaminados. No hacen falta para empezar."],
+["Anota lo que ves","Un cuaderno con fecha, ocular, condiciones y un dibujo rápido te enseña a ver más detalles con el tiempo. Dibujar fuerza al ojo a mirar con atención."],
+["Colima tu reflector","Si las estrellas desenfocadas no parecen círculos concéntricos, los espejos están desalineados. Colimar tarda minutos y mejora notablemente la nitidez."]];
+$("#tips").innerHTML=tips.map(t=>`<details><summary>${t[0]}</summary><p>${t[1]}</p></details>`).join("");
+
+// Quiz
+const Q=[
+["¿Qué es lo más importante al elegir un telescopio?",["La apertura","Los aumentos anunciados","El color del tubo"],0,"La apertura determina cuánta luz recoges y el detalle máximo que puedes ver."],
+["Un telescopio de 1000 mm de focal con un ocular de 10 mm da…",["10x","100x","1000x"],1,"Aumento = 1000 ÷ 10 = 100x."],
+["¿Cuánto debes esperar para que el telescopio se aclimate?",["Nada","Unos 20 a 30 minutos","Toda una noche"],1,"El aire dentro del tubo debe igualar la temperatura exterior para evitar turbulencia interna."],
+["¿Qué luz conviene usar para no perder la visión nocturna?",["Roja","Blanca","Azul"],0,"La luz roja afecta mucho menos a los bastones de la retina."],
+["¿Cómo ver mejor un objeto muy tenue?",["Mirar directo al centro","Visión desviada","Cerrar un ojo y apretar el otro"],1,"La visión periférica es más sensible a la luz débil."]];
+let sc=0,ans=0;
+$("#quizBox").innerHTML=Q.map((q,i)=>`<div class="q"><h3>${q[0]}</h3><div class="opts">${q[1].map((o,j)=>`<button data-q="${i}" data-o="${j}">${o}</button>`).join("")}</div><p class="fb" id="fb${i}"></p></div>`).join("");
+document.querySelectorAll(".opts button").forEach(b=>b.onclick=()=>{
+const i=+b.dataset.q,o=+b.dataset.o,q=Q[i],box=b.parentNode;if(box.dataset.done)return;box.dataset.done=1;ans++;
+const good=o===q[2];if(good)sc++;
+b.classList.add(good?"ok":"no");if(!good)box.children[q[2]].classList.add("ok");
+$("#fb"+i).textContent=(good?"Correcto. ":"No exactamente. ")+q[3];
+if(ans===Q.length)$("#score").textContent=`Resultado: ${sc} de ${Q.length}. `+(sc===Q.length?"Ya estás listo para tu primera noche.":"Repasa la sección de trucos y vuelve a intentarlo.")});
+</script>
+</body>
+</html>
