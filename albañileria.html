@@ -2,1707 +2,239 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Arreglos domiciliarios · Albañilería y pintura desde cero</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Albañilería y pintura en casa: guía práctica</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,600..900&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --bg:#0c0908;
-    --panel:rgba(255,255,255,.045);
-    --stroke:rgba(255,255,255,.10);
-    --text:#f6efe4;
-    --muted:#a89e91;
-    --terra:#e07a5f;
-    --ochre:#f2b544;
-    --brick:#c1553f;
-    --cement:#9aa5b1;
-    --sage:#8fbf8f;
-    --cream:#f3e9d2;
-  }
-  *{box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  body{
-    margin:0;
-    color:var(--text);
-    font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
-    line-height:1.65;
-    background:
-      radial-gradient(900px 620px at 8% -8%, rgba(224,122,95,.16), transparent 62%),
-      radial-gradient(900px 620px at 94% -2%, rgba(242,181,68,.13), transparent 62%),
-      radial-gradient(900px 700px at 50% 112%, rgba(143,191,143,.09), transparent 65%),
-      var(--bg);
-    min-height:100vh;
-    overflow-x:hidden;
-  }
-  .grid-bg{
-    position:fixed;inset:0;pointer-events:none;z-index:0;
-    background-image:
-      linear-gradient(rgba(255,255,255,.030) 1px,transparent 1px),
-      linear-gradient(90deg,rgba(255,255,255,.030) 1px,transparent 1px);
-    background-size:64px 64px;
-    -webkit-mask-image:radial-gradient(circle at 50% 16%,#000 0%,transparent 78%);
-    mask-image:radial-gradient(circle at 50% 16%,#000 0%,transparent 78%);
-    animation:gridMove 28s linear infinite;
-  }
-  @keyframes gridMove{to{background-position:64px 64px,64px 64px}}
-
-  /* ---------- HERO ---------- */
-  .hero{padding:92px 22px 40px;text-align:center;position:relative;z-index:1}
-  .eyebrow{
-    display:inline-block;font-size:.74rem;letter-spacing:.24em;text-transform:uppercase;
-    color:var(--ochre);border:1px solid rgba(242,181,68,.38);
-    background:rgba(242,181,68,.09);padding:7px 16px;border-radius:999px;
-  }
-  .hero h1{
-    font-size:clamp(2rem,5.2vw,3.45rem);line-height:1.08;margin:22px auto 0;
-    max-width:18ch;font-weight:800;letter-spacing:-.025em;
-  }
-  .grad{
-    background:linear-gradient(100deg,#e07a5f,#f2b544,#c1553f,#8fbf8f,#e07a5f);
-    background-size:320% 100%;
-    -webkit-background-clip:text;background-clip:text;color:transparent;
-    animation:shine 10s linear infinite;
-  }
-  @keyframes shine{to{background-position:320% 0}}
-  .lead{max-width:64ch;margin:20px auto 0;color:var(--muted);font-size:1.03rem}
-  .hero-cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:30px}
-  .btn{
-    display:inline-block;text-decoration:none;font-weight:600;font-size:.94rem;
-    padding:13px 26px;border-radius:999px;border:1px solid transparent;
-    transition:transform .25s,box-shadow .25s,background .25s;
-  }
-  .btn-primary{
-    color:#241008;
-    background:linear-gradient(100deg,var(--ochre),#f6cf7d 42%,var(--terra));
-    box-shadow:0 14px 34px -14px rgba(242,181,68,.9);
-  }
-  .btn-primary:hover{transform:translateY(-3px);box-shadow:0 20px 44px -14px rgba(224,122,95,.95)}
-  .btn-ghost{color:var(--text);border-color:var(--stroke);background:rgba(255,255,255,.04)}
-  .btn-ghost:hover{background:rgba(255,255,255,.09);transform:translateY(-3px)}
-
-  .aviso{
-    max-width:820px;margin:34px auto 0;padding:16px 22px;border-radius:16px;
-    background:rgba(143,191,143,.08);border:1px solid rgba(143,191,143,.32);
-    color:#d7ead7;font-size:.88rem;text-align:left;position:relative;z-index:1;
-  }
-  .aviso b{color:#fff}
-
-  /* ---------- NAV ---------- */
-  .nav{
-    position:sticky;top:0;z-index:60;
-    -webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);
-    background:rgba(12,9,8,.78);border-bottom:1px solid var(--stroke);
-  }
-  .nav-inner{
-    max-width:1180px;margin:0 auto;display:flex;gap:8px;
-    overflow-x:auto;padding:12px 20px;scrollbar-width:none;
-  }
-  .nav-inner::-webkit-scrollbar{display:none}
-  .nav a{
-    flex:0 0 auto;text-decoration:none;color:var(--muted);font-size:.86rem;font-weight:600;
-    padding:8px 16px;border-radius:999px;border:1px solid transparent;transition:.22s;white-space:nowrap;
-  }
-  .nav a:hover{color:var(--text);background:rgba(255,255,255,.06);border-color:var(--stroke)}
-
-  /* ---------- SECTIONS ---------- */
-  section{max-width:1180px;margin:0 auto;padding:74px 20px;position:relative;z-index:1;scroll-margin-top:76px}
-  .section-head{max-width:770px;margin-bottom:36px}
-  .kicker{
-    font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;color:var(--terra);
-    font-weight:700;margin:0 0 10px;
-  }
-  .section-head h2{font-size:clamp(1.5rem,3.2vw,2.15rem);margin:0 0 12px;letter-spacing:-.02em;line-height:1.2}
-  .section-head p{color:var(--muted);margin:0}
-
-  /* ---------- WORKSPACE ---------- */
-  .workspace{display:grid;grid-template-columns:minmax(0,1fr) 350px;gap:22px;align-items:start}
-  .stage{
-    position:relative;overflow:hidden;padding:12px;
-    background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.012));
-    border:1px solid var(--stroke);border-radius:24px;
-  }
-  .stage::before{
-    content:"";position:absolute;inset:0;pointer-events:none;
-    background:radial-gradient(620px 320px at 50% -10%,rgba(224,122,95,.11),transparent 70%);
-  }
-  svg.diagram{display:block;width:100%;height:auto;position:relative}
-
-  .panel{
-    background:linear-gradient(180deg,rgba(255,255,255,.065),rgba(255,255,255,.018));
-    border:1px solid var(--stroke);border-radius:24px;padding:24px;
-    position:sticky;top:84px;min-height:230px;
-  }
-  .panel .empty{color:var(--muted);font-size:.94rem;margin:0}
-  .panel .empty strong{display:block;color:var(--text);font-size:1rem;margin-bottom:6px}
-  .p-index{
-    display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;
-    background:linear-gradient(135deg,rgba(242,181,68,.34),rgba(224,122,95,.34));
-    border:1px solid rgba(242,181,68,.55);color:var(--ochre);font-weight:800;font-size:.85rem;
-    margin-bottom:12px;
-  }
-  .p-title{margin:0 0 10px;font-size:1.22rem;letter-spacing:-.01em}
-  .p-text{margin:0 0 16px;color:#d5cabd;font-size:.94rem}
-  .p-key{
-    margin:0;font-size:.85rem;color:var(--ochre);
-    background:rgba(242,181,68,.09);border-left:3px solid var(--ochre);
-    padding:10px 14px;border-radius:0 10px 10px 0;
-  }
-  .fade-in{animation:fadeSlide .45s cubic-bezier(.2,.8,.2,1)}
-  @keyframes fadeSlide{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
-
-  /* ---------- HOTSPOTS ---------- */
-  .hotspot{cursor:pointer;outline:none}
-  .hotspot .hit{fill:rgba(242,181,68,.22);stroke:var(--ochre);stroke-width:2;transition:.25s}
-  .hotspot text{
-    fill:#fff6e2;font-size:16px;font-weight:800;text-anchor:middle;
-    dominant-baseline:central;pointer-events:none;font-family:inherit;
-  }
-  .hotspot .ring{
-    fill:none;stroke:var(--ochre);stroke-width:2;opacity:0;
-    transform-box:fill-box;transform-origin:center;
-    animation:ringPulse 2.6s ease-out infinite;
-  }
-  @keyframes ringPulse{
-    0%{transform:scale(.55);opacity:.85}
-    100%{transform:scale(2.1);opacity:0}
-  }
-  .hotspot:hover .hit,.hotspot:focus-visible .hit{fill:rgba(242,181,68,.62);stroke:#fff}
-  .hotspot.active .hit{fill:var(--sage);stroke:#fff}
-  .hotspot.active text{fill:#0b1410}
-
-  /* ---------- LEYENDA ---------- */
-  .legend{display:flex;flex-wrap:wrap;gap:9px;margin-top:18px}
-  .chip{
-    display:inline-flex;align-items:center;gap:9px;
-    background:rgba(255,255,255,.05);border:1px solid var(--stroke);
-    color:var(--text);padding:8px 14px 8px 8px;border-radius:999px;
-    font-size:.85rem;font-family:inherit;cursor:pointer;
-    transition:transform .2s,background .2s,border-color .2s;
-  }
-  .chip:hover{background:rgba(242,181,68,.14);border-color:rgba(242,181,68,.55);transform:translateY(-2px)}
-  .chip.active{background:linear-gradient(100deg,rgba(242,181,68,.24),rgba(143,191,143,.24));border-color:rgba(143,191,143,.6)}
-  .chip b{
-    display:grid;place-items:center;width:22px;height:22px;border-radius:50%;
-    background:rgba(242,181,68,.18);color:var(--ochre);font-size:.72rem;font-weight:800;
-  }
-  .chip.active b{background:var(--sage);color:#0b1410}
-
-  /* ---------- TIPOS DE MURO ---------- */
-  .walls{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:16px;margin-top:30px}
-  .wall{
-    padding:20px;border-radius:20px;border:1px solid var(--stroke);
-    background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.012));
-    transition:transform .3s,border-color .3s,box-shadow .3s;
-  }
-  .wall:hover{transform:translateY(-6px);border-color:rgba(224,122,95,.5);box-shadow:0 22px 46px -26px rgba(224,122,95,.75)}
-  .wall svg{display:block;width:100%;height:76px;margin-bottom:14px;border-radius:10px}
-  .wall h4{margin:0 0 8px;font-size:1rem;letter-spacing:-.01em}
-  .wall p{margin:0;font-size:.85rem;color:var(--muted)}
-  .wall .use{
-    display:block;margin-top:10px;font-size:.79rem;color:var(--ochre);
-    border-top:1px dashed rgba(242,181,68,.28);padding-top:9px;
-  }
-
-  /* ---------- PASOS (stepper) ---------- */
-  .stepper{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px}
-  .step-btn{
-    flex:1 1 150px;text-align:left;font-family:inherit;cursor:pointer;
-    padding:14px 16px;border-radius:14px;border:1px solid var(--stroke);
-    background:rgba(255,255,255,.04);color:var(--muted);font-size:.86rem;font-weight:600;
-    transition:.25s;position:relative;overflow:hidden;
-  }
-  .step-btn:hover{background:rgba(242,181,68,.12);border-color:rgba(242,181,68,.5);transform:translateY(-3px)}
-  .step-btn.on{
-    color:#241008;border-color:transparent;
-    background:linear-gradient(100deg,var(--ochre),#f8d99a);
-    box-shadow:0 14px 30px -16px rgba(242,181,68,.95);
-  }
-  .step-btn b{display:block;font-size:.72rem;letter-spacing:.14em;opacity:.75;margin-bottom:4px}
-  .progress-line{height:6px;border-radius:99px;background:rgba(255,255,255,.07);overflow:hidden;margin-bottom:22px}
-  .progress-line i{display:block;height:100%;width:0;border-radius:99px;
-    background:linear-gradient(90deg,var(--ochre),var(--terra));transition:width .4s cubic-bezier(.2,.8,.2,1)}
-
-  .step-detail{
-    padding:24px;border-radius:20px;border:1px solid var(--stroke);
-    background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.014));
-  }
-  .step-detail h4{margin:0 0 10px;font-size:1.12rem;letter-spacing:-.01em}
-  .step-detail p{margin:0 0 14px;color:#d5cabd;font-size:.93rem}
-  .step-detail ul{margin:0 0 14px;padding-left:20px;font-size:.9rem;color:#d5cabd}
-  .step-detail li{margin-bottom:6px}
-  .step-detail li::marker{color:var(--ochre)}
-  .step-meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
-  .step-meta span{
-    font-size:.78rem;padding:6px 12px;border-radius:999px;
-    background:rgba(143,191,143,.12);border:1px solid rgba(143,191,143,.34);color:#cfe4cf;
-  }
-
-  /* ---------- CALCULADORAS ---------- */
-  .calcs{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:22px;margin-top:34px}
-  .calc{
-    padding:26px;border-radius:24px;border:1px solid var(--stroke);
-    background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.014));
-  }
-  .calc h4{margin:0 0 6px;font-size:1.06rem;letter-spacing:-.01em}
-  .calc .sub{margin:0 0 20px;font-size:.83rem;color:var(--muted)}
-  .calc .field{margin-bottom:20px}
-  .calc label{display:flex;justify-content:space-between;align-items:baseline;font-size:.85rem;color:var(--muted);margin-bottom:8px}
-  .calc label b{color:var(--ochre);font-size:1rem;font-variant-numeric:tabular-nums}
-  input[type=range]{
-    -webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:99px;
-    background:linear-gradient(90deg,rgba(242,181,68,.85),rgba(224,122,95,.8));
-    outline:none;cursor:pointer;
-  }
-  input[type=range]::-webkit-slider-thumb{
-    -webkit-appearance:none;appearance:none;width:22px;height:22px;border-radius:50%;
-    background:#fff6e2;border:3px solid var(--ochre);cursor:pointer;
-    box-shadow:0 0 16px rgba(242,181,68,.85);transition:transform .15s;
-  }
-  input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.12)}
-  input[type=range]::-moz-range-thumb{
-    width:18px;height:18px;border-radius:50%;background:#fff6e2;
-    border:3px solid var(--ochre);cursor:pointer;box-shadow:0 0 16px rgba(242,181,68,.85);
-  }
-  .seg{display:flex;gap:6px;flex-wrap:wrap}
-  .seg button{
-    font-family:inherit;font-size:.82rem;font-weight:600;color:var(--muted);
-    padding:8px 14px;border-radius:999px;border:1px solid var(--stroke);
-    background:rgba(255,255,255,.04);cursor:pointer;transition:.2s;
-  }
-  .seg button:hover{color:var(--text);border-color:rgba(242,181,68,.5)}
-  .seg button.on{color:#241008;background:var(--ochre);border-color:transparent}
-  .out-item{
-    display:flex;justify-content:space-between;align-items:baseline;
-    padding:12px 16px;border-radius:12px;background:rgba(255,255,255,.05);
-    border:1px solid var(--stroke);margin-bottom:10px;
-  }
-  .out-item span{font-size:.85rem;color:var(--muted)}
-  .out-item b{font-size:1.1rem;color:var(--sage);font-variant-numeric:tabular-nums}
-  .note{margin:14px 0 0;font-size:.8rem;color:var(--muted);border-left:3px solid rgba(154,165,177,.4);padding-left:12px}
-
-  /* ---------- PINTURA ---------- */
-  .chain{display:flex;flex-wrap:wrap;gap:12px;align-items:stretch;margin-top:30px}
-  .chain-step{
-    flex:1 1 150px;position:relative;padding:18px 18px 18px 22px;border-radius:16px;
-    border:1px solid var(--stroke);background:rgba(255,255,255,.045);
-    transition:transform .3s,border-color .3s;
-  }
-  .chain-step:hover{transform:translateY(-5px);border-color:rgba(242,181,68,.5)}
-  .chain-step b{display:block;font-size:.7rem;letter-spacing:.16em;color:var(--terra);margin-bottom:6px}
-  .chain-step h5{margin:0 0 6px;font-size:.95rem}
-  .chain-step p{margin:0;font-size:.82rem;color:var(--muted)}
-  .chain-step::after{
-    content:"";position:absolute;right:-9px;top:50%;width:10px;height:10px;
-    border-top:2px solid rgba(242,181,68,.6);border-right:2px solid rgba(242,181,68,.6);
-    transform:translateY(-50%) rotate(45deg);
-  }
-  .chain-step:last-child::after{display:none}
-
-  .paints{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;margin-top:26px}
-  .paint{
-    padding:20px;border-radius:18px;border:1px solid var(--stroke);
-    background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.012));
-    transition:transform .3s,border-color .3s;
-  }
-  .paint:hover{transform:translateY(-5px);border-color:rgba(143,191,143,.5)}
-  .paint h4{margin:0 0 6px;font-size:.98rem;color:var(--sage)}
-  .paint p{margin:0 0 10px;font-size:.86rem;color:var(--muted)}
-  .paint .where{font-size:.79rem;color:var(--ochre)}
-
-  /* ---------- HERRAMIENTAS ---------- */
-  .tools{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:16px;margin-top:30px}
-  .tool{
-    padding:20px;border-radius:18px;border:1px solid var(--stroke);
-    background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.012));
-    transition:transform .3s,border-color .3s;
-  }
-  .tool:hover{transform:translateY(-5px);border-color:rgba(242,181,68,.5)}
-  .tool svg{display:block;width:100%;height:62px;margin-bottom:12px}
-  .tool h4{margin:0 0 5px;font-size:.93rem}
-  .tool p{margin:0;font-size:.82rem;color:var(--muted)}
-
-  /* ---------- RETOQUES ---------- */
-  .fault-layout{display:grid;grid-template-columns:330px minmax(0,1fr);gap:22px;align-items:start}
-  .fault-list{display:grid;gap:9px}
-  .fault-btn{
-    text-align:left;font-family:inherit;font-size:.88rem;font-weight:600;color:var(--text);
-    padding:14px 16px;border-radius:14px;border:1px solid var(--stroke);
-    background:rgba(255,255,255,.04);cursor:pointer;
-    transition:transform .2s,background .2s,border-color .2s;
-    display:flex;justify-content:space-between;align-items:center;gap:10px;
-  }
-  .fault-btn:hover{background:rgba(242,181,68,.12);border-color:rgba(242,181,68,.5);transform:translateX(4px)}
-  .fault-btn.active{background:linear-gradient(100deg,rgba(242,181,68,.22),rgba(143,191,143,.22));border-color:rgba(143,191,143,.65)}
-  .dot-urg{width:9px;height:9px;border-radius:50%;flex:0 0 auto}
-  .dot-alta{background:#e05c4a;box-shadow:0 0 10px rgba(224,92,74,.95)}
-  .dot-media{background:var(--ochre);box-shadow:0 0 10px rgba(242,181,68,.9)}
-  .dot-baja{background:var(--sage);box-shadow:0 0 10px rgba(143,191,143,.9)}
-
-  .urg{
-    display:inline-block;font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;
-    font-weight:800;padding:5px 12px;border-radius:999px;margin-bottom:14px;
-  }
-  .urg-alta{background:rgba(224,92,74,.16);color:#f3b3a8;border:1px solid rgba(224,92,74,.5)}
-  .urg-media{background:rgba(242,181,68,.16);color:#f6d68a;border:1px solid rgba(242,181,68,.5)}
-  .urg-baja{background:rgba(143,191,143,.16);color:#c6e2c6;border:1px solid rgba(143,191,143,.5)}
-
-  .fault-block{margin-bottom:18px}
-  .fault-block h5{
-    margin:0 0 8px;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;
-    color:var(--ochre);font-weight:800;
-  }
-  .fault-block p{margin:0;font-size:.9rem;color:#d5cabd}
-  .fault-block ul{margin:0;padding-left:20px;font-size:.88rem;color:#d5cabd}
-  .fault-block li{margin-bottom:5px}
-  .fault-block li::marker{color:var(--ochre)}
-  .fault-block .mats{
-    margin:0;font-size:.85rem;color:var(--sage);
-    background:rgba(143,191,143,.09);border-left:3px solid var(--sage);
-    padding:10px 14px;border-radius:0 10px 10px 0;
-  }
-
-  .semaforo{display:flex;flex-wrap:wrap;gap:18px;margin-top:22px;font-size:.83rem;color:var(--muted)}
-  .semaforo span{display:inline-flex;align-items:center;gap:8px}
-
-  /* ---------- ERRORES ---------- */
-  .errors{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:18px}
-  .error-card{
-    position:relative;padding:22px 22px 22px 26px;border-radius:20px;
-    border:1px solid rgba(224,92,74,.28);
-    background:linear-gradient(180deg,rgba(224,92,74,.09),rgba(255,255,255,.012));
-    transition:transform .3s,border-color .3s,box-shadow .3s;
-  }
-  .error-card::before{
-    content:"";position:absolute;left:0;top:18px;bottom:18px;width:4px;border-radius:0 4px 4px 0;
-    background:linear-gradient(180deg,#e05c4a,var(--ochre));
-  }
-  .error-card:hover{transform:translateY(-6px);border-color:rgba(224,92,74,.7);box-shadow:0 22px 46px -26px rgba(224,92,74,.85)}
-  .error-card h4{margin:0 0 10px;font-size:1rem;letter-spacing:-.01em}
-  .error-card p{margin:0 0 12px;font-size:.87rem;color:#d5cabd}
-  .error-card .fix{
-    margin:0;font-size:.83rem;color:#c6e2c6;
-    background:rgba(143,191,143,.09);border-left:3px solid var(--sage);
-    padding:9px 13px;border-radius:0 10px 10px 0;
-  }
-  .error-card .tag-err{
-    display:inline-block;font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;
-    font-weight:800;color:#f3b3a8;margin-bottom:8px;
-  }
-
-  /* ---------- GLOSARIO ---------- */
-  .glossary{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px}
-  .term{
-    padding:20px;border-radius:18px;border:1px solid var(--stroke);
-    background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.012));
-    transition:transform .3s,border-color .3s;
-  }
-  .term:hover{transform:translateY(-5px);border-color:rgba(154,165,177,.55)}
-  .term h4{margin:0 0 6px;font-size:.97rem;color:var(--cement);letter-spacing:.01em}
-  .term p{margin:0;font-size:.86rem;color:var(--muted)}
-
-  /* ---------- QUIZ ---------- */
-  .quiz-bar{
-    display:flex;gap:22px;flex-wrap:wrap;align-items:center;margin-bottom:24px;
-    padding:16px 22px;border-radius:18px;border:1px solid var(--stroke);
-    background:linear-gradient(100deg,rgba(242,181,68,.10),rgba(143,191,143,.10));
-  }
-  .quiz-bar span{font-size:.88rem;color:var(--muted)}
-  .quiz-bar b{color:var(--text);font-size:1.1rem}
-  .quiz-grid{display:grid;gap:18px}
-  .quiz-card{
-    padding:22px;border-radius:20px;border:1px solid var(--stroke);
-    background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.012));
-  }
-  .q-num{margin:0 0 6px;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--terra);font-weight:700}
-  .quiz-card h4{margin:0 0 16px;font-size:1.05rem;font-weight:700;letter-spacing:-.01em}
-  .q-opts{display:grid;gap:9px}
-  .q-opt{
-    text-align:left;font-family:inherit;font-size:.9rem;color:var(--text);cursor:pointer;
-    padding:12px 16px;border-radius:12px;border:1px solid var(--stroke);
-    background:rgba(255,255,255,.04);transition:.2s;
-  }
-  .q-opt:hover:not(:disabled){background:rgba(242,181,68,.14);border-color:rgba(242,181,68,.5);transform:translateX(4px)}
-  .q-opt:disabled{cursor:default}
-  .q-opt.correct{background:rgba(143,191,143,.16);border-color:rgba(143,191,143,.7);color:#cfe4cf}
-  .q-opt.wrong{background:rgba(224,92,74,.14);border-color:rgba(224,92,74,.6);color:#f3b3a8}
-  .q-fb{margin:16px 0 0;font-size:.87rem;padding:12px 16px;border-radius:12px;animation:fadeSlide .4s ease}
-  .q-fb.ok{background:rgba(143,191,143,.10);border-left:3px solid var(--sage);color:#cfe4cf}
-  .q-fb.no{background:rgba(224,92,74,.10);border-left:3px solid #e05c4a;color:#f3b3a8}
-
-  /* ---------- FOOTER ---------- */
-  footer{
-    text-align:center;padding:56px 20px 70px;color:var(--muted);font-size:.85rem;
-    border-top:1px solid var(--stroke);margin-top:40px;position:relative;z-index:1;
-  }
-  footer strong{color:var(--text)}
-
-  /* ---------- REVEAL ---------- */
-  .reveal{opacity:0;transform:translateY(28px);transition:opacity .75s cubic-bezier(.2,.75,.2,1),transform .75s cubic-bezier(.2,.75,.2,1)}
-  .reveal.visible{opacity:1;transform:none}
-
-  @media (max-width:920px){
-    .workspace,.fault-layout{grid-template-columns:1fr}
-    .panel{position:static;min-height:0}
-    .chain-step::after{display:none}
-  }
-  @media (prefers-reduced-motion:reduce){
-    *{animation:none!important;transition:none!important}
-    .reveal{opacity:1;transform:none}
-  }
+:root{--bg:#F3F5F6;--card:#fff;--ink:#1B2A33;--mut:#566872;--line:#DDE3E7;--or:#F26B1D;--or-s:#FFE9DA;--teal:#0E8A8C;--teal-s:#DDF3F3;--mus:#F2B705;--mus-s:#FFF4CC;--br:#B5452F;--br-s:#F8E3DE;--cem:#C9CFD3;color-scheme:light;
+--d:'Archivo',system-ui,sans-serif;--b:'Public Sans',system-ui,sans-serif;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.65 var(--b)}
+h1,h2,h3{font-family:var(--d);margin:0;line-height:1.05;font-stretch:80%;letter-spacing:-.01em}
+:focus-visible{outline:3px solid var(--teal);outline-offset:3px;border-radius:6px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:rgba(243,245,246,.93);backdrop-filter:blur(10px);border-bottom:2px solid var(--ink)}
+nav .wrap{display:flex;align-items:center;gap:20px;height:58px;overflow-x:auto;white-space:nowrap}
+nav b{font:900 19px var(--d);font-stretch:80%;margin-right:auto;display:flex;gap:8px;align-items:center}
+nav a{text-decoration:none;color:var(--mut);font-weight:600;font-size:15px}
+nav a:hover{color:var(--or)}
+.hero{padding:54px 0 36px}
+.hero .wrap{display:grid;grid-template-columns:1fr 1.05fr;gap:36px;align-items:center}
+.hero h1{font-size:clamp(42px,7vw,78px);font-weight:900;text-transform:none}
+.hero h1 em{font-style:normal;color:#fff;background:var(--or);padding:0 .18em;display:inline-block;transform:skewX(-6deg)}
+.hero p{font-size:19px;color:var(--mut);max-width:44ch;margin:20px 0 26px}
+.btn{display:inline-block;background:var(--ink);color:#fff;text-decoration:none;font-weight:600;padding:14px 24px;border-radius:6px;transition:transform .2s,background .2s;box-shadow:4px 4px 0 var(--or)}
+.btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--or)}
+.scene{background:#fff;border:2px solid var(--ink);border-radius:10px;box-shadow:8px 8px 0 var(--cem)}
+.scene svg{display:block;width:100%;height:auto}
+.brick{opacity:0;animation:lay .5s ease forwards}
+@keyframes lay{from{opacity:0;transform:translateY(-14px)}to{opacity:1;transform:none}}
+.paint{transform-origin:0 0;animation:roll 6s ease-in-out infinite}
+.roller{animation:rollx 6s ease-in-out infinite}
+@keyframes roll{0%{transform:scaleX(0)}60%,92%{transform:scaleX(1);opacity:1}100%{transform:scaleX(1);opacity:0}}
+@keyframes rollx{0%{transform:translateX(0)}60%,100%{transform:translateX(190px)}}
+section{padding:64px 0}
+.band{background:#fff;border-block:1px solid var(--line)}
+.head{max-width:640px;margin-bottom:32px}
+.head h2{font-size:clamp(32px,4.8vw,50px);font-weight:900}
+.head p{color:var(--mut);margin:12px 0 0}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}
+.tab{font:700 15px var(--b);border:2px solid var(--ink);background:#fff;color:var(--ink);padding:9px 18px;border-radius:6px;cursor:pointer;transition:all .15s}
+.tab:hover{background:var(--mus-s)}
+.tab[aria-selected=true]{background:var(--ink);color:#fff}
+.steps{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;counter-reset:s}
+.step{background:var(--bg);border:2px solid var(--ink);border-radius:10px;padding:22px 20px 20px;counter-increment:s;animation:in .4s ease both}
+@keyframes in{from{opacity:0;transform:translateY(8px)}}
+.step::before{content:counter(s);display:grid;place-items:center;width:34px;height:34px;background:var(--or);color:#fff;font:900 17px var(--d);border-radius:6px;margin-bottom:12px}
+.pt .step::before{background:var(--teal)}
+.step h3{font-size:21px;margin-bottom:6px}.step p{margin:0;font-size:15px;color:var(--mut)}
+.tools{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px}
+.tool{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px;text-align:center;transition:transform .25s,border-color .25s}
+.tool:hover{transform:rotate(-2deg) translateY(-4px);border-color:var(--or)}
+.tool svg{width:64px;height:64px}.tool b{display:block;font:800 17px var(--d);margin-top:6px}.tool span{font-size:13.5px;color:var(--mut);line-height:1.35;display:block}
+.tips{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px}
+.tip{background:#fff;border:1px solid var(--line);border-radius:12px;padding:20px;display:flex;flex-direction:column;gap:8px;animation:in .4s ease both}
+.tip h3{font-size:20px}.tip p{margin:0;font-size:15.5px;color:var(--mut)}
+.tag{align-self:flex-start;font-size:13px;font-weight:700;padding:3px 10px;border-radius:5px}
+.a .tag{background:var(--or-s);color:#9A3E08}.a{border-top:5px solid var(--or)}
+.p .tag{background:var(--teal-s);color:#0A5D5F}.p{border-top:5px solid var(--teal)}
+.h .tag{background:var(--mus-s);color:#6B5000}.h{border-top:5px solid var(--mus)}
+.s .tag{background:var(--br-s);color:#8C2E1B}.s{border-top:5px solid var(--br)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:26px;align-items:start}
+.calc{background:var(--bg);border:2px solid var(--ink);border-radius:12px;padding:22px}
+.calc h3{font-size:24px;margin-bottom:12px}
+.f{display:grid;grid-template-columns:1fr 110px;gap:10px;align-items:center;padding:7px 0;font-size:15px}
+input[type=number],select,input[type=search]{width:100%;font:500 15px var(--b);padding:8px 10px;border:2px solid var(--line);border-radius:8px;background:#fff;color:var(--ink)}
+input:focus,select:focus{border-color:var(--teal);outline:0}
+.res{margin-top:12px;border-radius:10px;padding:14px 16px;background:var(--mus-s);font-size:15px}
+.res b{font:900 30px var(--d);display:block;line-height:1.1}
+.mix{margin-top:30px;background:#fff;border:2px solid var(--ink);border-radius:12px;overflow:auto}
+table{width:100%;border-collapse:collapse;min-width:540px;font-size:15px}
+th,td{text-align:left;padding:12px 16px;border-bottom:1px solid var(--line)}
+th{background:var(--ink);color:#fff;font:700 14px var(--b)}
+tr:last-child td{border:0}
+.gl{margin-bottom:20px}
+input[type=search]{max-width:420px;padding:13px 18px;border-radius:8px;font-size:16px}
+.terms{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:12px;align-items:start}
+details{background:#fff;border:1px solid var(--line);border-radius:10px;padding:0 18px;transition:all .2s}
+details[open]{border-color:var(--or);box-shadow:4px 4px 0 var(--or-s)}
+summary{cursor:pointer;font:800 19px var(--d);font-stretch:85%;padding:14px 0;list-style:none;display:flex;justify-content:space-between}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";color:var(--or);font-size:24px;line-height:1;transition:transform .25s}
+details[open] summary::after{transform:rotate(45deg)}
+details p{margin:0 0 15px;font-size:15.5px;color:var(--mut)}
+.none{display:none;color:var(--mut)}
+.epp{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px}
+.epp div{background:var(--bg);border:2px solid var(--ink);border-radius:10px;padding:16px;font-size:14.5px;color:var(--mut)}
+.epp b{display:block;font:800 19px var(--d);color:var(--ink);margin:6px 0 2px}
+footer{padding:34px 0 50px;color:var(--mut);font-size:14.5px}
+@media(max-width:860px){.hero .wrap,.two{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.brick{opacity:1}.paint{transform:none}html{scroll-behavior:auto}}
 </style>
 </head>
 <body>
-<div class="grid-bg"></div>
+<nav><div class="wrap">
+<b><svg width="28" height="28" viewBox="0 0 28 28"><rect x="2" y="4" width="11" height="6" fill="#F26B1D"/><rect x="15" y="4" width="11" height="6" fill="#F26B1D"/><rect x="8" y="12" width="11" height="6" fill="#0E8A8C"/><rect x="2" y="20" width="11" height="5" fill="#F2B705"/><rect x="15" y="20" width="11" height="5" fill="#F26B1D"/></svg>Mano de obra en casa</b>
+<a href="#obra">Paso a paso</a><a href="#herramientas">Herramientas</a><a href="#calculos">Cálculos</a><a href="#consejos">Consejos</a><a href="#glosario">Glosario</a>
+</div></nav>
 
-<!-- ================= HERO ================= -->
-<header class="hero">
-  <p class="eyebrow">Curso visual · Nivel cero</p>
-  <h1>Arreglos de albañilería y pintura <span class="grad">explicados desde cero</span></h1>
-  <p class="lead">
-    Cómo leer un muro, preparar la superficie, dosificar una mezcla, pintar sin burbujas y
-    reparar grietas o manchas antes de que se agranden. Todo con diagramas que puedes tocar.
-  </p>
-  <div class="hero-cta">
-    <a class="btn btn-primary" href="#muros">Empezar el recorrido</a>
-    <a class="btn btn-ghost" href="#retoques">Ver reparaciones</a>
-  </div>
-  <p class="aviso">
-    <b>Antes de empezar:</b> trabaja con guantes, anteojos y barbijo cuando lijes o mezcles polvo.
-    No intervengas instalaciones eléctricas ni gas mientras trabajas en un muro: corta la energía
-    y consulta a un profesional matriculado. Las proporciones y rendimientos que verás son
-    <b>orientativos</b> y dependen del material y de cada región.
-  </p>
-</header>
+<header class="hero"><div class="wrap">
+<div>
+<h1>Levantá, revocá y <em>pintá</em> con criterio</h1>
+<p>Aprendé el orden correcto de cada trabajo, los materiales que necesitás y los errores que más cuestan en una obra doméstica.</p>
+<a class="btn" href="#obra">Empezar</a>
+</div>
+<div class="scene" aria-label="Animación: una pared que se levanta y un rodillo que pinta">
+<svg viewBox="0 0 480 330" id="hs" role="img" aria-label="Pared de ladrillos y rodillo pintando un panel">
+<rect width="480" height="330" fill="#EEF1F3"/>
+<rect y="290" width="480" height="40" fill="#C9CFD3"/>
+<g id="wall"></g>
+<rect x="268" y="60" width="190" height="230" fill="#fff" stroke="#1B2A33" stroke-width="3"/>
+<rect class="paint" x="270" y="62" width="186" height="226" fill="#0E8A8C"/>
+<g class="roller"><rect x="262" y="120" width="16" height="70" rx="6" fill="#F2B705" stroke="#1B2A33" stroke-width="3"/><path d="M270 120v-14h-24v-18" fill="none" stroke="#1B2A33" stroke-width="3"/><rect x="236" y="62" width="20" height="30" rx="5" fill="#F26B1D" stroke="#1B2A33" stroke-width="3"/></g>
+</svg>
+</div>
+</div></header>
 
-<!-- ================= NAV ================= -->
-<nav class="nav">
-  <div class="nav-inner">
-    <a href="#muros">01 · Muros</a>
-    <a href="#herramientas">02 · Herramientas</a>
-    <a href="#preparacion">03 · Preparación</a>
-    <a href="#mezclas">04 · Mezclas</a>
-    <a href="#pintura">05 · Pintura</a>
-    <a href="#retoques">06 · Retoques</a>
-    <a href="#errores">07 · Errores</a>
-    <a href="#glosario">08 · Glosario</a>
-    <a href="#quiz">09 · Autoevaluación</a>
-  </div>
-</nav>
+<section id="obra" class="band"><div class="wrap">
+<div class="head"><h2>El orden importa</h2><p>Saltear un paso es la causa más común de fisuras, humedad y pintura que se levanta. Elegí el trabajo y seguí la secuencia.</p></div>
+<div class="tabs" role="tablist" id="st">
+<button class="tab" role="tab" aria-selected="true" data-k="alb">Albañilería: levantar una pared</button>
+<button class="tab" role="tab" aria-selected="false" data-k="pin">Pintura: renovar un ambiente</button>
+</div>
+<div class="steps" id="steps"></div>
+</div></section>
 
-<main>
+<section id="herramientas"><div class="wrap">
+<div class="head"><h2>Herramientas básicas</h2><p>Tener lo justo y en buen estado ahorra tiempo y mejora el acabado.</p></div>
+<div class="tools">
+<div class="tool"><svg viewBox="0 0 64 64"><path d="M8 40 44 14l6 8-30 24z" fill="#C9CFD3" stroke="#1B2A33" stroke-width="3" stroke-linejoin="round"/><path d="M44 18l12 14" stroke="#F26B1D" stroke-width="7" stroke-linecap="round"/></svg><b>Cuchara</b><span>Toma y extiende la mezcla.</span></div>
+<div class="tool"><svg viewBox="0 0 64 64"><rect x="6" y="22" width="52" height="20" rx="4" fill="#F2B705" stroke="#1B2A33" stroke-width="3"/><circle cx="32" cy="32" r="6" fill="#fff" stroke="#1B2A33" stroke-width="3"/><circle cx="32" cy="32" r="2" fill="#0E8A8C"/></svg><b>Nivel</b><span>Verifica que todo quede horizontal.</span></div>
+<div class="tool"><svg viewBox="0 0 64 64"><path d="M32 6v30" stroke="#1B2A33" stroke-width="3"/><path d="M32 36 22 58h20z" fill="#B5452F" stroke="#1B2A33" stroke-width="3" stroke-linejoin="round"/><circle cx="32" cy="8" r="4" fill="#F26B1D"/></svg><b>Plomada</b><span>Asegura paredes aplomadas.</span></div>
+<div class="tool"><svg viewBox="0 0 64 64"><rect x="8" y="30" width="38" height="16" rx="6" fill="#0E8A8C" stroke="#1B2A33" stroke-width="3"/><path d="M46 38h8v14" fill="none" stroke="#1B2A33" stroke-width="3"/><rect x="48" y="50" width="12" height="10" rx="3" fill="#F26B1D" stroke="#1B2A33" stroke-width="3"/></svg><b>Rodillo</b><span>Cubre superficies grandes parejo.</span></div>
+<div class="tool"><svg viewBox="0 0 64 64"><rect x="22" y="6" width="20" height="24" rx="3" fill="#F2B705" stroke="#1B2A33" stroke-width="3"/><path d="M22 30h20l-3 26H25z" fill="#C9CFD3" stroke="#1B2A33" stroke-width="3" stroke-linejoin="round"/></svg><b>Pincel</b><span>Para bordes y zócalos.</span></div>
+<div class="tool"><svg viewBox="0 0 64 64"><rect x="8" y="26" width="48" height="14" rx="3" fill="#fff" stroke="#1B2A33" stroke-width="3"/><path d="M14 26v14M26 26v14M38 26v14M50 26v14" stroke="#1B2A33" stroke-width="2"/></svg><b>Regla y fratás</b><span>Alisa revoques y carpetas.</span></div>
+</div>
+</div></section>
 
-<!-- ================= 01 MUROS ================= -->
-<section id="muros">
-  <div class="section-head reveal">
-    <p class="kicker">Paso 01</p>
-    <h2>El muro por dentro: cinco capas que debes conocer</h2>
-    <p>
-      Lo que ves al mirar una pared es solo la última capa. Debajo hay un sistema de capas
-      que trabaja en conjunto. Si una falla, la pintura siempre lo termina mostrando.
-      Toca cada número para ver qué hace.
-    </p>
-  </div>
+<section id="calculos" class="band"><div class="wrap">
+<div class="head"><h2>Calculá antes de comprar</h2><p>Estimaciones orientativas para presupuestar. Confirmá siempre el rendimiento en la etiqueta del producto.</p></div>
+<div class="two">
+<div class="calc"><h3>Pintura necesaria</h3>
+<div class="f"><label for="pw">Ancho de paredes (m)</label><input type="number" id="pw" value="12" min="0" step="0.5"></div>
+<div class="f"><label for="ph">Alto (m)</label><input type="number" id="ph" value="2.6" min="0" step="0.1"></div>
+<div class="f"><label for="po">Puertas y ventanas (m²)</label><input type="number" id="po" value="4" min="0" step="0.5"></div>
+<div class="f"><label for="pm">Manos</label><input type="number" id="pm" value="2" min="1" max="4"></div>
+<div class="f"><label for="pr">Rendimiento (m²/L)</label><input type="number" id="pr" value="10" min="1"></div>
+<div class="res">Superficie a pintar <b id="pa">0 m²</b>Pintura: <b id="pl">0 L</b></div></div>
+<div class="calc"><h3>Ladrillos para una pared</h3>
+<div class="f"><label for="ba">Superficie (m²)</label><input type="number" id="ba" value="20" min="0" step="0.5"></div>
+<div class="f"><label for="bt">Tipo</label><select id="bt"><option value="15">Hueco cerámico</option><option value="50">Común macizo</option></select></div>
+<div class="f"><label for="bw">Desperdicio (%)</label><input type="number" id="bw" value="5" min="0" max="30"></div>
+<div class="res">Cantidad estimada <b id="bn">0 u.</b><small>Descuenta aberturas antes de calcular.</small></div></div>
+</div>
+<div class="mix"><table><thead><tr><th>Trabajo</th><th>Mezcla orientativa (partes)</th><th>Detalle</th></tr></thead><tbody>
+<tr><td>Asiento de ladrillos</td><td>1 cemento : 1 cal : 5 arena</td><td>Mezcla plástica que adhiere bien al ladrillo.</td></tr>
+<tr><td>Azotado hidrófugo</td><td>1 cemento : 3 arena + hidrófugo</td><td>Capa fina y fluida que sella contra la humedad.</td></tr>
+<tr><td>Revoque grueso</td><td>1 cemento : 1 cal : 4 arena</td><td>Nivela y da cuerpo a la pared.</td></tr>
+<tr><td>Revoque fino</td><td>Cal con arena fina</td><td>Terminación lisa lista para pintar.</td></tr>
+</tbody></table></div>
+</div></section>
 
-  <div class="workspace reveal">
-    <div class="stage">
-      <svg class="diagram" viewBox="0 0 900 540" role="img" aria-label="Corte transversal de un muro con sus cinco capas">
-        <defs>
-          <pattern id="pBrick" width="92" height="40" patternUnits="userSpaceOnUse">
-            <rect width="92" height="40" fill="#5e2c22"/>
-            <rect x="2" y="2" width="88" height="17" rx="2.5" fill="#a3503a"/>
-            <rect x="-44" y="21" width="88" height="17" rx="2.5" fill="#9a4a36"/>
-            <rect x="48" y="21" width="88" height="17" rx="2.5" fill="#9a4a36"/>
-          </pattern>
-          <pattern id="pRough" width="28" height="28" patternUnits="userSpaceOnUse">
-            <rect width="28" height="28" fill="#59616c"/>
-            <circle cx="7" cy="8" r="2.4" fill="#6b7481"/>
-            <circle cx="20" cy="17" r="2.8" fill="#4e5560"/>
-            <circle cx="13" cy="23" r="1.9" fill="#6b7481"/>
-            <circle cx="24" cy="6" r="1.7" fill="#4e5560"/>
-          </pattern>
-          <pattern id="pFine" width="22" height="22" patternUnits="userSpaceOnUse">
-            <rect width="22" height="22" fill="#8b939e"/>
-            <circle cx="6" cy="7" r="1.3" fill="#9aa2ad"/>
-            <circle cx="16" cy="15" r="1.2" fill="#7d858f"/>
-          </pattern>
-          <linearGradient id="gPaint" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0" stop-color="#e07a5f"/><stop offset=".55" stop-color="#ee9578"/><stop offset="1" stop-color="#d96c50"/>
-          </linearGradient>
-          <linearGradient id="gEnduido" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="#f0e5d0"/><stop offset="1" stop-color="#ded1ba"/>
-          </linearGradient>
-        </defs>
+<section id="consejos"><div class="wrap">
+<div class="head"><h2>Consejos de obra</h2><p>Lo que enseña la experiencia, agrupado por tema.</p></div>
+<div class="tabs" id="tt">
+<button class="tab" aria-selected="true" data-f="all">Todos</button><button class="tab" aria-selected="false" data-f="a">Albañilería</button><button class="tab" aria-selected="false" data-f="p">Pintura</button><button class="tab" aria-selected="false" data-f="h">Humedad</button><button class="tab" aria-selected="false" data-f="s">Seguridad</button>
+</div>
+<div class="tips" id="tips"></div>
+</div></section>
 
-        <!-- fondo de la sección -->
-        <rect x="60" y="70" width="800" height="420" rx="14" fill="#0b1018" stroke="#2a3341" stroke-width="2"/>
+<section class="band"><div class="wrap">
+<div class="head"><h2>Protegete en cada tarea</h2><p>Una obra pequeña también tiene riesgos. Estos elementos evitan la mayoría de los accidentes.</p></div>
+<div class="epp">
+<div>⛑️<b>Casco</b>Obras con trabajo en altura o caída de objetos.</div>
+<div>🥽<b>Gafas</b>Al picar, lijar o mezclar cal y cemento.</div>
+<div>🧤<b>Guantes</b>La cal y el cemento irritan la piel.</div>
+<div>😷<b>Barbijo</b>Polvo de lijado y pinturas con solvente.</div>
+<div>🥾<b>Calzado cerrado</b>Con puntera, para clavos y materiales pesados.</div>
+</div>
+</div></section>
 
-        <!-- capa 5: pintura -->
-        <rect x="60" y="70" width="800" height="24" fill="url(#gPaint)"/>
-        <!-- capa 4: enduido -->
-        <rect x="60" y="94" width="800" height="46" fill="url(#gEnduido)"/>
-        <!-- capa 3: revoque fino -->
-        <rect x="60" y="140" width="800" height="78" fill="url(#pFine)"/>
-        <!-- capa 2: revoque grueso -->
-        <rect x="60" y="218" width="800" height="104" fill="url(#pRough)"/>
-        <!-- capa 1: ladrillo -->
-        <rect x="60" y="322" width="800" height="168" fill="url(#pBrick)"/>
-        <!-- línea inferior redondeada -->
-        <rect x="60" y="474" width="800" height="16" rx="0" fill="#0b1018"/>
+<section id="glosario"><div class="wrap">
+<div class="head"><h2>Glosario de obra</h2><p>Palabras que vas a escuchar en la ferretería y con el maestro mayor de obras.</p></div>
+<div class="gl"><input type="search" id="q" placeholder="Buscar un término…" aria-label="Buscar en el glosario"></div>
+<div class="terms" id="terms"></div>
+<p class="none" id="none">Sin resultados. Probá con “revoque” o “látex”.</p>
+</div></section>
 
-        <!-- etiquetas -->
-        <g font-family="inherit" font-size="15" font-weight="700">
-          <text x="92" y="88" fill="#3d1c12">Pintura de terminación</text>
-          <text x="92" y="124" fill="#6b5f4a">Enduido / masilla</text>
-          <text x="92" y="185" fill="#31383f">Revoque fino (enlucido)</text>
-          <text x="92" y="278" fill="#e6edf5">Revoque grueso (azotado)</text>
-          <text x="92" y="414" fill="#ffe6dc">Ladrillo o bloque</text>
-        </g>
-
-        <!-- flecha de vista -->
-        <g stroke="#9aa5b1" stroke-width="2" fill="none" opacity=".7">
-          <line x1="500" y1="46" x2="500" y2="18"/>
-          <path d="M494 26 L500 16 L506 26"/>
-        </g>
-        <text x="500" y="14" text-anchor="middle" fill="#9aa5b1" font-size="11.5" font-family="inherit" letter-spacing="2">VISTA EXTERIOR</text>
-
-        <!-- HOTSPOTS -->
-        <g class="hotspot" data-group="muros" data-id="pintura" tabindex="0" role="button">
-          <circle class="ring" cx="808" cy="82" r="17"/>
-          <circle class="hit" cx="808" cy="82" r="17"/>
-          <text x="808" y="82">1</text>
-        </g>
-        <g class="hotspot" data-group="muros" data-id="enduido" tabindex="0" role="button">
-          <circle class="ring" cx="808" cy="117" r="17"/>
-          <circle class="hit" cx="808" cy="117" r="17"/>
-          <text x="808" y="117">2</text>
-        </g>
-        <g class="hotspot" data-group="muros" data-id="fino" tabindex="0" role="button">
-          <circle class="ring" cx="808" cy="179" r="17"/>
-          <circle class="hit" cx="808" cy="179" r="17"/>
-          <text x="808" y="179">3</text>
-        </g>
-        <g class="hotspot" data-group="muros" data-id="grueso" tabindex="0" role="button">
-          <circle class="ring" cx="808" cy="270" r="17"/>
-          <circle class="hit" cx="808" cy="270" r="17"/>
-          <text x="808" y="270">4</text>
-        </g>
-        <g class="hotspot" data-group="muros" data-id="ladrillo" tabindex="0" role="button">
-          <circle class="ring" cx="808" cy="406" r="17"/>
-          <circle class="hit" cx="808" cy="406" r="17"/>
-          <text x="808" y="406">5</text>
-        </g>
-      </svg>
-    </div>
-
-    <aside class="panel" data-panel="muros">
-      <p class="empty"><strong>Toca un número del corte</strong>o usa la lista de abajo para recorrer las capas del muro.</p>
-    </aside>
-  </div>
-
-  <div class="legend reveal" data-legend="muros"></div>
-
-  <!-- TIPOS DE MURO -->
-  <div class="section-head reveal" style="margin-top:56px;margin-bottom:0">
-    <p class="kicker">Materiales</p>
-    <h2 style="font-size:clamp(1.3rem,2.6vw,1.7rem)">Los cinco muros más comunes</h2>
-    <p>Reconocer el material cambia por completo la forma de trabajar: la mezcla, el anclaje y la pintura no son iguales.</p>
-  </div>
-
-  <div class="walls reveal">
-    <article class="wall">
-      <svg viewBox="0 0 120 60" aria-hidden="true">
-        <rect width="120" height="60" rx="6" fill="#5e2c22"/>
-        <g fill="#a3503a">
-          <rect x="3" y="3" width="54" height="25" rx="2"/>
-          <rect x="61" y="3" width="56" height="25" rx="2"/>
-          <rect x="-25" y="32" width="54" height="25" rx="2"/>
-          <rect x="33" y="32" width="54" height="25" rx="2"/>
-          <rect x="91" y="32" width="54" height="25" rx="2"/>
-        </g>
-      </svg>
-      <h4>Ladrillo común</h4>
-      <p>Macizo y pesado. Muy resistente, ideal para muros portantes y tabiques donde se necesita firmeza.</p>
-      <span class="use">Anclaje: tarugo largo o químico.</span>
-    </article>
-
-    <article class="wall">
-      <svg viewBox="0 0 120 60" aria-hidden="true">
-        <rect width="120" height="60" rx="6" fill="#5e2c22"/>
-        <g fill="#b05a42">
-          <rect x="3" y="3" width="36" height="25" rx="2"/>
-          <rect x="43" y="3" width="36" height="25" rx="2"/>
-          <rect x="83" y="3" width="34" height="25" rx="2"/>
-          <rect x="3" y="32" width="36" height="25" rx="2"/>
-          <rect x="43" y="32" width="36" height="25" rx="2"/>
-          <rect x="83" y="32" width="34" height="25" rx="2"/>
-        </g>
-        <g fill="#2a1310" opacity=".55">
-          <rect x="11" y="9" width="20" height="6" rx="2"/>
-          <rect x="51" y="9" width="20" height="6" rx="2"/>
-          <rect x="11" y="38" width="20" height="6" rx="2"/>
-          <rect x="51" y="38" width="20" height="6" rx="2"/>
-        </g>
-      </svg>
-      <h4>Ladrillo hueco</h4>
-      <p>Más liviano, con cámaras de aire. Se usa en tabiques interiores y medianeras no portantes.</p>
-      <span class="use">Anclaje: tarugo específico para hueco.</span>
-    </article>
-
-    <article class="wall">
-      <svg viewBox="0 0 120 60" aria-hidden="true">
-        <rect width="120" height="60" rx="6" fill="#4a5560"/>
-        <g fill="#7f8a96" stroke="#5c6672" stroke-width="1.5">
-          <rect x="3" y="3" width="54" height="25" rx="3"/>
-          <rect x="61" y="3" width="56" height="25" rx="3"/>
-          <rect x="-25" y="32" width="54" height="25" rx="3"/>
-          <rect x="33" y="32" width="54" height="25" rx="3"/>
-          <rect x="91" y="32" width="54" height="25" rx="3"/>
-        </g>
-      </svg>
-      <h4>Bloque de cemento</h4>
-      <p>Grande y uniforme. Rápido de levantar, muy usado en cerramientos y muros exteriores.</p>
-      <span class="use">Anclaje: tarugo de expansión.</span>
-    </article>
-
-    <article class="wall">
-      <svg viewBox="0 0 120 60" aria-hidden="true">
-        <rect width="120" height="60" rx="6" fill="#7d8794"/>
-        <g stroke="#5c6672" stroke-width="1.6" fill="none">
-          <circle cx="18" cy="16" r="4"/><circle cx="44" cy="30" r="5"/>
-          <circle cx="76" cy="14" r="4"/><circle cx="100" cy="34" r="5"/>
-          <circle cx="30" cy="46" r="4"/><circle cx="66" cy="48" r="4"/>
-        </g>
-        <rect x="4" y="4" width="112" height="52" rx="5" fill="none" stroke="#9aa5b1" stroke-width="2" opacity=".5"/>
-      </svg>
-      <h4>Hormigón armado</h4>
-      <p>El más resistente. Suele ser estructural: no se perfora a ciegas ni se corta sin asesoramiento.</p>
-      <span class="use">Anclaje: broca para hormigón y tarugo químico.</span>
-    </article>
-
-    <article class="wall">
-      <svg viewBox="0 0 120 60" aria-hidden="true">
-        <rect width="120" height="60" rx="6" fill="#dcd6c8"/>
-        <rect x="4" y="4" width="112" height="52" rx="5" fill="#f1ece1" stroke="#c7c0b0" stroke-width="1.5"/>
-        <line x1="4" y1="30" x2="116" y2="30" stroke="#c7c0b0" stroke-width="1.5"/>
-        <g fill="#b9b1a1">
-          <circle cx="24" cy="16" r="1.6"/><circle cx="60" cy="16" r="1.6"/><circle cx="96" cy="16" r="1.6"/>
-          <circle cx="24" cy="44" r="1.6"/><circle cx="60" cy="44" r="1.6"/><circle cx="96" cy="44" r="1.6"/>
-        </g>
-      </svg>
-      <h4>Placa de yeso</h4>
-      <p>Tabique liviano montado sobre perfiles metálicos. Rápido, limpio y fácil de reparar.</p>
-      <span class="use">Anclaje: tarugo para placa o mariposa.</span>
-    </article>
-  </div>
-</section>
-
-<!-- ================= 02 HERRAMIENTAS ================= -->
-<section id="herramientas">
-  <div class="section-head reveal">
-    <p class="kicker">Paso 02</p>
-    <h2>La caja de herramientas mínima</h2>
-    <p>
-      No necesitas un taller completo para hacer un buen trabajo. Con estas seis herramientas
-      y un par de accesorios ya puedes resolver casi cualquier retoque doméstico.
-    </p>
-  </div>
-
-  <div class="tools reveal">
-    <article class="tool">
-      <svg viewBox="0 0 100 60" aria-hidden="true">
-        <line x1="72" y1="10" x2="56" y2="26" stroke="#c98b4b" stroke-width="9" stroke-linecap="round"/>
-        <path d="M56 26 L22 50 L33 58 L64 32 Z" fill="none" stroke="#9aa5b1" stroke-width="3.5" stroke-linejoin="round"/>
-      </svg>
-      <h4>Cuchara de albañil</h4>
-      <p>Para tomar la mezcla, aplicarla y dar forma al revoque.</p>
-    </article>
-
-    <article class="tool">
-      <svg viewBox="0 0 100 60" aria-hidden="true">
-        <rect x="14" y="34" width="60" height="14" rx="3" fill="none" stroke="#9aa5b1" stroke-width="3.5"/>
-        <path d="M34 34 V18 H58 V34" fill="none" stroke="#c98b4b" stroke-width="5" stroke-linecap="round"/>
-      </svg>
-      <h4>Llana</h4>
-      <p>Para alisar, emparejar y dar textura final al revoque o al enduido.</p>
-    </article>
-
-    <article class="tool">
-      <svg viewBox="0 0 100 60" aria-hidden="true">
-        <rect x="6" y="24" width="88" height="15" rx="5" fill="none" stroke="#9aa5b1" stroke-width="3.5"/>
-        <rect x="38" y="28" width="24" height="7" rx="3.5" fill="#f2b544" opacity=".8"/>
-      </svg>
-      <h4>Nivel de burbuja</h4>
-      <p>Verifica que la superficie quede horizontal o vertical. Nunca se reemplaza "a ojo".</p>
-    </article>
-
-    <article class="tool">
-      <svg viewBox="0 0 100 60" aria-hidden="true">
-        <line x1="50" y1="6" x2="50" y2="30" stroke="#9aa5b1" stroke-width="2.5"/>
-        <path d="M50 30 L36 54 H64 Z" fill="none" stroke="#c98b4b" stroke-width="3.5" stroke-linejoin="round"/>
-      </svg>
-      <h4>Plomada</h4>
-      <p>Comprueba la verticalidad de una pared o de una guía.</p>
-    </article>
-
-    <article class="tool">
-      <svg viewBox="0 0 100 60" aria-hidden="true">
-        <rect x="42" y="6" width="12" height="24" rx="5" fill="none" stroke="#c98b4b" stroke-width="3.5"/>
-        <rect x="34" y="30" width="28" height="9" rx="2" fill="none" stroke="#9aa5b1" stroke-width="2.5"/>
-        <path d="M34 39 H62 L57 56 H39 Z" fill="none" stroke="#9aa5b1" stroke-width="3" stroke-linejoin="round"/>
-      </svg>
-      <h4>Brocha</h4>
-      <p>Para bordes, esquinas, marcos y zonas donde el rodillo no llega.</p>
-    </article>
-
-    <article class="tool">
-      <svg viewBox="0 0 100 60" aria-hidden="true">
-        <rect x="12" y="14" width="46" height="18" rx="9" fill="none" stroke="#9aa5b1" stroke-width="3.5"/>
-        <path d="M58 23 H72 V44" fill="none" stroke="#c98b4b" stroke-width="4.5" stroke-linecap="round"/>
-        <line x1="72" y1="44" x2="72" y2="50" stroke="#c98b4b" stroke-width="4.5" stroke-linecap="round"/>
-      </svg>
-      <h4>Rodillo</h4>
-      <p>Para grandes superficies planas. Rinde mucho más rápido que la brocha.</p>
-    </article>
-  </div>
-</section>
-
-<!-- ================= 03 PREPARACIÓN ================= -->
-<section id="preparacion">
-  <div class="section-head reveal">
-    <p class="kicker">Paso 03</p>
-    <h2>Preparar la superficie: el 70 % del resultado</h2>
-    <p>
-      Un trabajo bien preparado dura años; uno apurado se desprende en meses.
-      Recorre los cinco pasos en orden y verás por qué cada uno importa.
-    </p>
-  </div>
-
-  <div class="reveal">
-    <div class="stepper" id="stepper"></div>
-    <div class="progress-line"><i id="stepProgress"></i></div>
-    <div class="step-detail" id="stepDetail"></div>
-  </div>
-</section>
-
-<!-- ================= 04 MEZCLAS ================= -->
-<section id="mezclas">
-  <div class="section-head reveal">
-    <p class="kicker">Paso 04</p>
-    <h2>Mezclas y cantidades: calcular antes de comprar</h2>
-    <p>
-      Comprar de más es desperdicio; comprar de menos obliga a una segunda mezcla que nunca
-      queda igual. Estas dos calculadoras te dan una estimación rápida antes de ir al corralón.
-    </p>
-  </div>
-
-  <div class="calcs reveal">
-    <!-- CALCULADORA MORTERO -->
-    <div class="calc">
-      <h4>Calculadora de mortero</h4>
-      <p class="sub">Para revoques, carpetas y asientos de mampostería.</p>
-
-      <div class="field">
-        <label for="areaM">Superficie a cubrir <b id="areaMVal">10 m²</b></label>
-        <input type="range" id="areaM" min="1" max="120" value="10" step="1">
-      </div>
-
-      <div class="field">
-        <label for="espM">Espesor de la capa <b id="espMVal">15 mm</b></label>
-        <input type="range" id="espM" min="5" max="40" value="15" step="5">
-      </div>
-
-      <div class="field">
-        <label style="margin-bottom:10px">Dosificación cemento : arena</label>
-        <div class="seg" id="mixSeg">
-          <button type="button" data-mix="3" class="on">1 : 3</button>
-          <button type="button" data-mix="4">1 : 4</button>
-          <button type="button" data-mix="5">1 : 5</button>
-        </div>
-      </div>
-
-      <div class="out-item"><span>Volumen de mortero</span><b id="outVol">0,150 m³</b></div>
-      <div class="out-item"><span>Bolsas de cemento (50 kg)</span><b id="outBags">2</b></div>
-      <div class="out-item"><span>Arena</span><b id="outSand">0,13 m³</b></div>
-      <div class="out-item"><span>Agua aproximada</span><b id="outWater">45 L</b></div>
-
-      <p class="note">Cálculo orientativo. No incluye desperdicio: agrega entre 10 % y 15 % si la superficie es irregular.</p>
-    </div>
-
-    <!-- CALCULADORA PINTURA -->
-    <div class="calc">
-      <h4>Calculadora de pintura</h4>
-      <p class="sub">Para estimar litros y envases antes de comprar.</p>
-
-      <div class="field">
-        <label for="areaP">Superficie a pintar <b id="areaPVal">25 m²</b></label>
-        <input type="range" id="areaP" min="1" max="200" value="25" step="1">
-      </div>
-
-      <div class="field">
-        <label for="manos">Cantidad de manos <b id="manosVal">2</b></label>
-        <input type="range" id="manos" min="1" max="3" value="2" step="1">
-      </div>
-
-      <div class="field">
-        <label for="rend">Rendimiento <b id="rendVal">10 m²/L</b></label>
-        <input type="range" id="rend" min="6" max="14" value="10" step="1">
-      </div>
-
-      <div class="field">
-        <label style="margin-bottom:10px">Tamaño del envase</label>
-        <div class="seg" id="sizeSeg">
-          <button type="button" data-size="4">4 L</button>
-          <button type="button" data-size="10">10 L</button>
-          <button type="button" data-size="20" class="on">20 L</button>
-        </div>
-      </div>
-
-      <div class="out-item"><span>Pintura necesaria</span><b id="outLiters">5,0 L</b></div>
-      <div class="out-item"><span>Envases a comprar</span><b id="outCans">1</b></div>
-      <div class="out-item"><span>Sellador (1 mano)</span><b id="outSealer">2,5 L</b></div>
-
-      <p class="note">El rendimiento real baja en muros rugosos o porosos. Consulta siempre la etiqueta del producto.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ================= 05 PINTURA ================= -->
-<section id="pintura">
-  <div class="section-head reveal">
-    <p class="kicker">Paso 05</p>
-    <h2>Pintura: el orden de las capas no se negocia</h2>
-    <p>
-      Cada producto cumple una función distinta y depende del anterior. Saltarse un paso
-      se nota al poco tiempo: burbujas, descascarado o manchas que vuelven a salir.
-    </p>
-  </div>
-
-  <div class="chain reveal">
-    <div class="chain-step">
-      <b>01</b><h5>Limpieza y lijado</h5>
-      <p>Quitar polvo, grasa y pintura suelta. Lijar para que la superficie tenga agarre.</p>
-    </div>
-    <div class="chain-step">
-      <b>02</b><h5>Sellador</h5>
-      <p>Unifica la absorción del muro y fija el polvo. Evita que la pintura se consuma de más.</p>
-    </div>
-    <div class="chain-step">
-      <b>03</b><h5>Enduido</h5>
-      <p>Solo si hay huecos o imperfecciones. Se aplica fino, en capas, y se lija.</p>
-    </div>
-    <div class="chain-step">
-      <b>04</b><h5>Primera mano</h5>
-      <p>Pintura diluida según indicación del fabricante. Cubre y prepara para la siguiente.</p>
-    </div>
-    <div class="chain-step">
-      <b>05</b><h5>Segunda mano</h5>
-      <p>La capa de terminación. Con el mismo rodillo y la misma dirección para un acabado parejo.</p>
-    </div>
-  </div>
-
-  <div class="paints reveal">
-    <article class="paint">
-      <h4>Látex interior</h4>
-      <p>Base de agua, secado rápido y bajo olor. Es la opción más común dentro de la casa.</p>
-      <span class="where">Dormitorios, living, pasillos</span>
-    </article>
-    <article class="paint">
-      <h4>Acrílico exterior</h4>
-      <p>Más resistente al sol y la lluvia. Forma una película flexible que soporta los cambios de temperatura.</p>
-      <span class="where">Fachadas, balcones, paredes expuestas</span>
-    </article>
-    <article class="paint">
-      <h4>Esmalte sintético</h4>
-      <p>Acabado duro y lavable, con brillo. Requiere buen ventilado y tiempo de secado más largo.</p>
-      <span class="where">Aberturas, rejas, muebles, zócalos</span>
-    </article>
-    <article class="paint">
-      <h4>Pintura antimanchas</h4>
-      <p>Bloquea manchas de humedad, nicotina o grasa para que no atraviesen la capa nueva.</p>
-      <span class="where">Techos, zonas manchadas, después de reparar</span>
-    </article>
-    <article class="paint">
-      <h4>Sellador / fijador</h4>
-      <p>No es pintura de terminación: penetra en el muro y consolida la superficie. Es la base de todo.</p>
-      <span class="where">Siempre, antes de la primera mano</span>
-    </article>
-    <article class="paint">
-      <h4>Hidrófugo</h4>
-      <p>Se incorpora a la mezcla o se aplica sobre la superficie para repeler el agua.</p>
-      <span class="where">Muros exteriores, baños, sótanos</span>
-    </article>
-  </div>
-</section>
-
-<!-- ================= 06 RETOQUES ================= -->
-<section id="retoques">
-  <div class="section-head reveal">
-    <p class="kicker">Paso 06</p>
-    <h2>Retoques estéticos y reparaciones frecuentes</h2>
-    <p>
-      Cada defecto del muro cuenta una historia. Selecciona uno y verás qué lo provoca,
-      cómo se repara paso a paso y con qué materiales.
-    </p>
-  </div>
-
-  <div class="fault-layout reveal">
-    <div class="fault-list" id="faultList"></div>
-    <aside class="panel" id="faultPanel" style="position:sticky;top:84px">
-      <p class="empty"><strong>Elige un defecto</strong>en la lista para ver el diagnóstico y la reparación paso a paso.</p>
-    </aside>
-  </div>
-
-  <div class="semaforo reveal">
-    <span><i class="dot-urg dot-alta"></i> Prioridad alta · puede afectar la estructura o la salud</span>
-    <span><i class="dot-urg dot-media"></i> Prioridad media · conviene resolver pronto</span>
-    <span><i class="dot-urg dot-baja"></i> Prioridad baja · reparación estética</span>
-  </div>
-</section>
-
-<!-- ================= 07 ERRORES ================= -->
-<section id="errores">
-  <div class="section-head reveal">
-    <p class="kicker">Paso 07</p>
-    <h2>Los errores que arruinan un trabajo</h2>
-    <p>
-      Casi todos los trabajos que se desprenden, se manchan o se agrietan vienen de un puñado
-      de malas prácticas repetidas. Reconocerlas es la mitad del oficio.
-    </p>
-  </div>
-
-  <div class="errors reveal">
-    <article class="error-card">
-      <span class="tag-err">Error frecuente</span>
-      <h4>Pintar sobre humedad activa</h4>
-      <p>La pintura no detiene el agua: la encierra. En pocas semanas aparecen burbujas y el film se desprende.</p>
-      <p class="fix">Solución: encontrar y cortar el origen de la humedad antes de pensar en pintar.</p>
-    </article>
-
-    <article class="error-card">
-      <span class="tag-err">Error frecuente</span>
-      <h4>Saltar el sellador</h4>
-      <p>El muro absorbe la pintura de forma despareja. Quedan zonas más claras y se gasta el doble de producto.</p>
-      <p class="fix">Solución: aplicar siempre una mano de sellador o fijador antes de la pintura.</p>
-    </article>
-
-    <article class="error-card">
-      <span class="tag-err">Error frecuente</span>
-      <h4>No lijar entre manos</h4>
-      <p>Los granos y las marcas del rodillo se acumulan. La superficie final queda áspera al tacto.</p>
-      <p class="fix">Solución: lijar suave entre manos y retirar el polvo antes de continuar.</p>
-    </article>
-
-    <article class="error-card">
-      <span class="tag-err">Error frecuente</span>
-      <h4>Revoque demasiado grueso de una vez</h4>
-      <p>Una capa de más de 2 cm no fragua bien: se contrae, se agrieta y se desprende del muro.</p>
-      <p class="fix">Solución: aplicar en capas sucesivas y dejar fraguar entre cada una.</p>
-    </article>
-
-    <article class="error-card">
-      <span class="tag-err">Error frecuente</span>
-      <h4>Tapar una grieta estructural con masilla</h4>
-      <p>La masilla es rígida. Si el movimiento continúa, la grieta vuelve a aparecer en pocos meses.</p>
-      <p class="fix">Solución: si la grieta es ancha o diagonal, consultar antes de repararla y usar material elástico.</p>
-    </article>
-
-    <article class="error-card">
-      <span class="tag-err">Error frecuente</span>
-      <h4>No curar el mortero</h4>
-      <p>El cemento necesita humedad para fraguar bien. Si se seca rápido, pierde resistencia y se agrieta.</p>
-      <p class="fix">Solución: humedecer la superficie durante los primeros días, sobre todo con calor.</p>
-    </article>
-
-    <article class="error-card">
-      <span class="tag-err">Error frecuente</span>
-      <h4>Usar pintura de interior en el exterior</h4>
-      <p>El látex interior no soporta sol ni lluvia: se tiza, se decolora y se desprende rápido.</p>
-      <p class="fix">Solución: elegir siempre el producto según el ambiente donde va a vivir.</p>
-    </article>
-
-    <article class="error-card">
-      <span class="tag-err">Error frecuente</span>
-      <h4>Lijar o mezclar sin protección</h4>
-      <p>El polvo de cemento y el de lijado son irritantes para ojos y vías respiratorias.</p>
-      <p class="fix">Solución: usar anteojos, guantes y barbijo, y ventilar siempre el ambiente.</p>
-    </article>
-  </div>
-</section>
-
-<!-- ================= 08 GLOSARIO ================= -->
-<section id="glosario">
-  <div class="section-head reveal">
-    <p class="kicker">Paso 08</p>
-    <h2>Glosario del oficio</h2>
-    <p>Con estos dieciocho términos ya puedes entender un presupuesto o hablar con un oficial.</p>
-  </div>
-
-  <div class="glossary reveal">
-    <div class="term"><h4>Revoque</h4><p>Recubrimiento de mortero que se aplica sobre el muro para emparejarlo y protegerlo.</p></div>
-    <div class="term"><h4>Azotado</h4><p>Primera capa de revoque, más gruesa y rugosa. Es la que da cuerpo y adherencia.</p></div>
-    <div class="term"><h4>Enlucido</h4><p>Capa fina y alisada de mortero o yeso que deja la superficie lista para pintar.</p></div>
-    <div class="term"><h4>Enduido</h4><p>Pasta que rellena imperfecciones finas. Se aplica en capas delgadas y se lija.</p></div>
-    <div class="term"><h4>Mortero</h4><p>Mezcla de cemento, arena y agua. Es el adhesivo y recubrimiento base de la albañilería.</p></div>
-    <div class="term"><h4>Hormigón</h4><p>Mezcla de cemento, arena, piedra y agua. Más resistente que el mortero, se usa en estructuras.</p></div>
-    <div class="term"><h4>Dosificación</h4><p>Proporción entre los componentes de una mezcla, por ejemplo 1 parte de cemento y 3 de arena.</p></div>
-    <div class="term"><h4>Fraguado</h4><p>Proceso por el cual la mezcla endurece y gana resistencia con el paso del tiempo.</p></div>
-    <div class="term"><h4>Curado</h4><p>Mantener húmedo el mortero recién colocado para que fragüe correctamente.</p></div>
-    <div class="term"><h4>Eflorescencia</h4><p>Manchas blancas de sales que salen del muro al secarse la humedad. También llamado salitre.</p></div>
-    <div class="term"><h4>Hidrófugo</h4><p>Aditivo o producto que reduce la absorción de agua del muro.</p></div>
-    <div class="term"><h4>Imprimación</h4><p>Primera capa que prepara y fija la superficie antes de la pintura final.</p></div>
-    <div class="term"><h4>Sellador</h4><p>Producto que penetra en el muro y unifica su absorción. No es pintura de terminación.</p></div>
-    <div class="term"><h4>Rendimiento</h4><p>Superficie que cubre un litro o un kilo de producto. Aparece en la etiqueta.</p></div>
-    <div class="term"><h4>Fratás</h4><p>Herramienta de mango con base plana que se usa para alisar y dar textura al revoque.</p></div>
-    <div class="term"><h4>Regla</h4><p>Perfil recto que se apoya sobre guías para emparejar el revoque antes de alisarlo.</p></div>
-    <div class="term"><h4>Puente de adherencia</h4><p>Producto que mejora el agarre entre una superficie vieja y una capa nueva.</p></div>
-    <div class="term"><h4>Merma</h4><p>Pérdida de material por desperdicio, transporte o irregularidad de la superficie.</p></div>
-  </div>
-</section>
-
-<!-- ================= 09 QUIZ ================= -->
-<section id="quiz">
-  <div class="section-head reveal">
-    <p class="kicker">Paso 09</p>
-    <h2>Autoevaluación</h2>
-    <p>Seis preguntas para confirmar que los conceptos quedaron claros. Cada respuesta explica el porqué.</p>
-  </div>
-
-  <div class="quiz-bar reveal">
-    <span>Aciertos: <b id="score">0</b></span>
-    <span>Respondidas: <b id="progress">0/6</b></span>
-  </div>
-
-  <div class="quiz-grid" id="quizGrid"></div>
-</section>
-
-</main>
-
-<footer>
-  <p>Material educativo abierto sobre albañilería, pintura y retoques domiciliarios.</p>
-  <p><strong>Trabaja con protección, ventila los ambientes y consulta a un profesional ante cualquier duda estructural.</strong></p>
-</footer>
+<footer><div class="wrap">Contenido educativo general. Para trabajos estructurales consultá a un profesional matriculado y respetá el código de edificación de tu municipio.</div></footer>
 
 <script>
-/* =========================================================
-   1) DATOS DE LAS CAPAS DEL MURO
-   ========================================================= */
-const DATA = {
-  muros: {
-    pintura: {
-      n: 1,
-      name: 'Pintura de terminación',
-      text: 'Es la capa visible. No solo decora: protege al muro del sol, la lluvia y la contaminación. Su duración depende directamente de cómo estén las capas que tiene debajo.',
-      key: 'Una pintura que se descascara casi siempre es síntoma de un problema más profundo.'
-    },
-    enduido: {
-      n: 2,
-      name: 'Enduido o masilla',
-      text: 'Es una pasta fina que rellena las imperfecciones del revoque: poros, rayas y desniveles pequeños. Se aplica en capas delgadas y se lija hasta dejar la superficie lisa al tacto.',
-      key: 'El enduido no rellena huecos grandes ni tapa grietas estructurales.'
-    },
-    fino: {
-      n: 3,
-      name: 'Revoque fino (enlucido)',
-      text: 'Es la capa de mortero más delgada y alisada. Le da planitud a la pared y prepara el terreno para el enduido y la pintura. Se aplica con llana y fratás.',
-      key: 'Si el revoque fino está suelto, todo lo que se aplique encima se cae.'
-    },
-    grueso: {
-      n: 4,
-      name: 'Revoque grueso (azotado)',
-      text: 'Es la capa de cuerpo, de 1 a 2 cm. Empareja las irregularidades del ladrillo y protege al muro de la humedad. Tiene textura rugosa a propósito, para que el revoque fino se agarre.',
-      key: 'Nunca se aplica de una sola vez: se hace en capas y se deja fraguar.'
-    },
-    ladrillo: {
-      n: 5,
-      name: 'Ladrillo o bloque',
-      text: 'Es la estructura del muro. Puede ser ladrillo común, hueco, bloque de cemento u hormigón. Su tipo determina cómo se ancla un clavo, un mueble o una abertura.',
-      key: 'Antes de perforar, identifica el material: cambia la mecha y el tarugo.'
-    }
-  }
-};
+const S={alb:[["Replanteo","Marcá en el piso la ubicación de la pared con hilo y escuadra."],["Capa aisladora","Colocá una barrera hidrófuga antes de la primera hilada para frenar la humedad ascendente."],["Hiladas a nivel","Asentá los ladrillos trabados, controlando nivel y plomada en cada fila."],["Encadenado","Cerrá la pared con una viga de hormigón armado que la une a la estructura."],["Azotado","Aplicá una capa fina con hidrófugo para que el revoque se adhiera."],["Revoque grueso","Nivelá la pared con regla y dejá curar sin que se seque de golpe."],["Revoque fino","Terminá con fratás. Esperá el secado completo antes de pintar."]],
+pin:[["Limpiar y proteger","Quitá polvo, grasa y moho. Cubrí pisos y muebles con nylon y cinta."],["Reparar","Rascá lo suelto, tapá fisuras y agujeros con masilla o enduido."],["Lijar","Pasá lija fina para emparejar y quitá el polvo con un paño húmedo."],["Sellador","Aplicá sellador o fijador para uniformar la absorción de la pared."],["Primera mano","Pintá con rodillo, en «W» y sin cargar de más. Los bordes, con pincel."],["Segunda mano","Esperá el tiempo de secado indicado en el envase antes de repasar."],["Retoques","Retirá la cinta cuando la pintura aún no esté dura para evitar que se descascare."]]};
+const st=document.getElementById("steps");
+function showS(k){st.className="steps "+(k==="pin"?"pt":"");st.innerHTML=S[k].map((s,i)=>`<div class="step" style="animation-delay:${i*50}ms"><h3>${s[0]}</h3><p>${s[1]}</p></div>`).join("")}
+document.getElementById("st").addEventListener("click",e=>{const b=e.target.closest(".tab");if(!b)return;document.querySelectorAll("#st .tab").forEach(x=>x.setAttribute("aria-selected",x===b));showS(b.dataset.k)});showS("alb");
 
-/* =========================================================
-   2) PANELES INTERACTIVOS DEL MURO
-   ========================================================= */
-function renderPanel(group, id) {
-  const panel = document.querySelector(`[data-panel="${group}"]`);
-  const item = DATA[group][id];
-  if (!panel || !item) return;
+const tips=[
+["a","Mojá los ladrillos","Los ladrillos secos absorben el agua de la mezcla y debilitan la unión. Humedecelos antes de asentar."],
+["a","Trabá las juntas","Los ladrillos de una hilada deben cubrir la junta de la anterior, nunca quedar uno sobre otro."],
+["a","Curá el revoque","Rociá con agua las primeras jornadas para evitar fisuras por secado rápido."],
+["a","Usá arena limpia","La arena con tierra o arcilla reduce la resistencia de la mezcla."],
+["p","No pintes sobre humedad","Primero buscá el origen de la mancha. La pintura solo la tapa y se vuelve a levantar."],
+["p","Pintá de arriba hacia abajo","Empezá por el techo, luego paredes y por último zócalos y aberturas."],
+["p","Mezclá todo el lote","Si usás varios envases, juntalos en un balde para que el color sea idéntico."],
+["p","Látex para interior, esmalte para aberturas","Elegí el producto según la superficie y la exposición al sol y la lluvia."],
+["h","Fijate en el origen","Una mancha puede venir de una pérdida de caño, una grieta exterior o condensación."],
+["h","Ventilá los ambientes","El vapor de cocina y baño favorece el moho. Abrí ventanas tras cada ducha."],
+["h","Tratá el moho antes de pintar","Lavá con una solución de agua y lavandina, enjuagá y dejá secar por completo."],
+["s","Cortá el agua y la luz","Antes de picar paredes, localizá caños y cables para no dañarlos."],
+["s","Escalera firme","Apoyala en piso plano y no te pares en los últimos peldaños."],
+["s","Guardá solventes con cuidado","Mantené los envases cerrados, lejos de calor y fuera del alcance de los niños."]];
+const L={a:"Albañilería",p:"Pintura",h:"Humedad",s:"Seguridad"};
+const te=document.getElementById("tips");
+function showT(f){te.innerHTML=tips.filter(t=>f==="all"||t[0]===f).map(t=>`<article class="tip ${t[0]}"><span class="tag">${L[t[0]]}</span><h3>${t[1]}</h3><p>${t[2]}</p></article>`).join("")}
+document.getElementById("tt").addEventListener("click",e=>{const b=e.target.closest(".tab");if(!b)return;document.querySelectorAll("#tt .tab").forEach(x=>x.setAttribute("aria-selected",x===b));showT(b.dataset.f)});showT("all");
 
-  panel.innerHTML = `
-    <div class="fade-in">
-      <span class="p-index">${item.n}</span>
-      <h3 class="p-title">${item.name}</h3>
-      <p class="p-text">${item.text}</p>
-      <p class="p-key">${item.key}</p>
-    </div>`;
+const v=id=>Math.max(0,+document.getElementById(id).value||0),o=(id,t)=>document.getElementById(id).textContent=t;
+function calc(){const a=Math.max(0,v("pw")*v("ph")-v("po"));o("pa",a.toFixed(1)+" m²");o("pl",(a*Math.max(1,v("pm"))/Math.max(1,v("pr"))).toFixed(1)+" L");
+o("bn",Math.ceil(v("ba")*+document.getElementById("bt").value*(1+v("bw")/100)).toLocaleString("es-AR")+" u.")}
+document.querySelectorAll(".calc input,.calc select").forEach(i=>i.addEventListener("input",calc));calc();
 
-  document.querySelectorAll(`.hotspot[data-group="${group}"]`).forEach(h => {
-    h.classList.toggle('active', h.dataset.id === id);
-  });
-  document.querySelectorAll(`.chip[data-group="${group}"]`).forEach(c => {
-    c.classList.toggle('active', c.dataset.id === id);
-  });
-}
+const gl=[["Mampostería","Conjunto de ladrillos o bloques unidos con mezcla para formar paredes."],["Mezcla","Combinación de cemento, cal, arena y agua usada para unir y revestir."],["Cal","Aglomerante que da plasticidad y adherencia a la mezcla."],["Hormigón","Mezcla de cemento, arena y piedra que, con hierros, forma columnas y vigas."],["Encadenado","Viga perimetral de hormigón que ata las paredes entre sí."],["Capa aisladora","Barrera horizontal que impide que la humedad suba por la pared."],["Azotado hidrófugo","Primera capa de revoque con aditivo impermeabilizante."],["Revoque grueso","Capa de nivelación sobre el ladrillo antes de la terminación."],["Revoque fino","Terminación lisa de cal que deja la pared lista para pintar."],["Contrapiso","Base de hormigón pobre sobre la que se coloca la carpeta y el piso."],["Carpeta","Capa de mortero que alisa el contrapiso antes de colocar cerámicos."],["Fratás","Herramienta plana con la que se alisa el revoque."],["Plomada","Hilo con peso que marca la vertical exacta."],["Fisura","Grieta fina en el revoque, a menudo por secado rápido o movimientos."],["Eflorescencia","Mancha blanca de sales que aflora en la pared por humedad."],["Enduido","Masilla que rellena imperfecciones y alisa antes de pintar."],["Fijador o sellador","Líquido que uniforma la absorción y mejora el agarre de la pintura."],["Látex","Pintura al agua para paredes y techos interiores o exteriores."],["Esmalte sintético","Pintura resistente para metal y madera, con acabado brillante o satinado."],["Rendimiento","Superficie en m² que cubre un litro de pintura según el fabricante."],["Mano","Cada capa de pintura aplicada sobre la superficie."]];
+const T=document.getElementById("terms"),N=document.getElementById("none"),Q=document.getElementById("q");
+const nm=s=>s.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();
+function dg(){const x=nm(Q.value.trim()),r=gl.filter(g=>nm(g[0]+" "+g[1]).includes(x));T.innerHTML=r.map(g=>`<details><summary>${g[0]}</summary><p>${g[1]}</p></details>`).join("");N.style.display=r.length?"none":"block"}
+Q.addEventListener("input",dg);dg();
 
-(function buildLegend() {
-  const legend = document.querySelector('[data-legend="muros"]');
-  if (!legend) return;
-  Object.entries(DATA.muros).forEach(([id, item]) => {
-    const btn = document.createElement('button');
-    btn.className = 'chip';
-    btn.dataset.group = 'muros';
-    btn.dataset.id = id;
-    btn.innerHTML = `<b>${item.n}</b> ${item.name}`;
-    btn.addEventListener('click', () => renderPanel('muros', id));
-    legend.appendChild(btn);
-  });
-})();
-
-document.querySelectorAll('.hotspot').forEach(h => {
-  const activate = () => renderPanel(h.dataset.group, h.dataset.id);
-  h.addEventListener('click', activate);
-  h.addEventListener('keydown', e => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      activate();
-    }
-  });
-  h.setAttribute('aria-label', 'Ver información de la capa ' + h.dataset.id);
-});
-
-/* =========================================================
-   3) PASOS DE PREPARACIÓN
-   ========================================================= */
-const STEPS = [
-  {
-    title: 'Diagnóstico y protección',
-    text: 'Antes de tocar nada, entiende qué está fallando. ¿Hay humedad? ¿La grieta es vieja o nueva? ¿El revoque suena hueco al golpearlo? Cubre muebles y pisos, y corta la energía si vas a perforar cerca de cables o tomas.',
-    list: [
-      'Golpea suavemente el muro: un sonido hueco indica revoque desprendido.',
-      'Observa si la grieta tiene bordes limpios (nueva) o sucios (vieja).',
-      'Fotografía el daño antes de repararlo: sirve para comparar después.'
-    ],
-    meta: ['30 a 60 minutos', 'Sin materiales', 'Solo inspección']
-  },
-  {
-    title: 'Limpieza y retiro',
-    text: 'Toda capa nueva necesita una base firme y limpia. Retira la pintura que se descascara, el polvo, la grasa de cocina y cualquier resto suelto. Si el revoque se desprende con la mano, hay que sacarlo: dejarlo es peor.',
-    list: [
-      'Rasqueta o espátula para retirar lo suelto.',
-      'Cepillo de cerdas duras para el polvo.',
-      'Agua con detergente suave para zonas grasosas; enjuagar y dejar secar.'
-    ],
-    meta: ['1 a 2 horas', 'Rasqueta y cepillo', 'Dejar secar 24 h']
-  },
-  {
-    title: 'Reparación de la base',
-    text: 'Aquí se resuelve lo estructural: grietas, huecos y faltantes de revoque. Las grietas capilares se abren en V y se rellenan. Los huecos profundos se hacen en dos capas, nunca de una sola vez.',
-    list: [
-      'Abrir la grieta en V con una espátula o cortafrío pequeño.',
-      'Humedecer la zona antes de aplicar el mortero.',
-      'Aplicar en capas de 1 cm como máximo y dejar fraguar entre capas.'
-    ],
-    meta: ['2 a 6 horas', 'Mortero y espátula', 'Fraguado 24 h']
-  },
-  {
-    title: 'Lijado y emparejado',
-    text: 'Con la base firme y seca, se empareja la superficie. Se lija para eliminar granos, se aplica enduido en capas finas donde haga falta y se vuelve a lijar. La mano debe deslizarse sin encontrar escalones.',
-    list: [
-      'Lija de grano medio para desbastar, fina para terminar.',
-      'Enduido en capas de 1 a 2 mm, nunca más gruesas.',
-      'Retirar todo el polvo antes de la imprimación.'
-    ],
-    meta: ['2 a 4 horas', 'Lija y enduido', 'Usar barbijo']
-  },
-  {
-    title: 'Imprimación',
-    text: 'La última etapa antes de pintar. El sellador o fijador penetra en el muro, unifica la absorción y mejora la adherencia. Sin este paso, la pintura se consume de forma despareja y el resultado queda manchado.',
-    list: [
-      'Aplicar con rodillo o brocha de forma pareja.',
-      'Respetar el tiempo de secado indicado por el fabricante.',
-      'En muros muy porosos, evaluar una segunda mano diluida.'
-    ],
-    meta: ['1 a 2 horas', 'Sellador y rodillo', 'Secado 4 a 12 h']
-  }
-];
-
-(function buildStepper() {
-  const wrap = document.getElementById('stepper');
-  const detail = document.getElementById('stepDetail');
-  const bar = document.getElementById('stepProgress');
-  if (!wrap) return;
-
-  STEPS.forEach((s, i) => {
-    const b = document.createElement('button');
-    b.className = 'step-btn';
-    b.type = 'button';
-    b.dataset.i = i;
-    b.innerHTML = `<b>PASO ${String(i + 1).padStart(2, '0')}</b>${s.title}`;
-    b.addEventListener('click', () => show(i));
-    wrap.appendChild(b);
-  });
-
-  function show(i) {
-    const s = STEPS[i];
-    detail.innerHTML = `
-      <div class="fade-in">
-        <h4>${String(i + 1).padStart(2, '0')} · ${s.title}</h4>
-        <p>${s.text}</p>
-        <ul>${s.list.map(x => `<li>${x}</li>`).join('')}</ul>
-        <div class="step-meta">${s.meta.map(m => `<span>${m}</span>`).join('')}</div>
-      </div>`;
-    wrap.querySelectorAll('.step-btn').forEach(b => {
-      b.classList.toggle('on', +b.dataset.i === i);
-    });
-    bar.style.width = ((i + 1) / STEPS.length * 100) + '%';
-  }
-
-  show(0);
-})();
-
-/* =========================================================
-   4) CALCULADORA DE MORTERO
-   ========================================================= */
-(function mortarCalc() {
-  const area = document.getElementById('areaM');
-  const esp = document.getElementById('espM');
-  const areaVal = document.getElementById('areaMVal');
-  const espVal = document.getElementById('espMVal');
-  const outVol = document.getElementById('outVol');
-  const outBags = document.getElementById('outBags');
-  const outSand = document.getElementById('outSand');
-  const outWater = document.getElementById('outWater');
-  const seg = document.getElementById('mixSeg');
-  if (!area) return;
-
-  let mix = 3;
-
-  // bolsas por m³ según dosificación, y arena por m³
-  const FACTOR = {
-    3: { bags: 8.0, sand: 0.85 },
-    4: { bags: 6.4, sand: 0.90 },
-    5: { bags: 5.5, sand: 0.94 }
-  };
-
-  function fmt(n, dec) {
-    return n.toFixed(dec).replace('.', ',');
-  }
-
-  function update() {
-    const a = +area.value;
-    const e = +esp.value;
-    const vol = a * (e / 1000);
-    const f = FACTOR[mix];
-
-    const bags = vol * f.bags;
-    const sand = vol * f.sand;
-    const water = bags * 50 * 0.5; // ~0.5 L por kg de cemento
-
-    areaVal.textContent = a + ' m²';
-    espVal.textContent = e + ' mm';
-
-    outVol.textContent = fmt(vol, 3) + ' m³';
-    outBags.textContent = Math.ceil(bags);
-    outSand.textContent = fmt(sand, 2) + ' m³';
-    outWater.textContent = Math.round(water) + ' L';
-  }
-
-  seg.querySelectorAll('button').forEach(b => {
-    b.addEventListener('click', () => {
-      mix = +b.dataset.mix;
-      seg.querySelectorAll('button').forEach(x => x.classList.toggle('on', x === b));
-      update();
-    });
-  });
-
-  area.addEventListener('input', update);
-  esp.addEventListener('input', update);
-  update();
-})();
-
-/* =========================================================
-   5) CALCULADORA DE PINTURA
-   ========================================================= */
-(function paintCalc() {
-  const area = document.getElementById('areaP');
-  const manos = document.getElementById('manos');
-  const rend = document.getElementById('rend');
-  const areaVal = document.getElementById('areaPVal');
-  const manosVal = document.getElementById('manosVal');
-  const rendVal = document.getElementById('rendVal');
-  const outLiters = document.getElementById('outLiters');
-  const outCans = document.getElementById('outCans');
-  const outSealer = document.getElementById('outSealer');
-  const seg = document.getElementById('sizeSeg');
-  if (!area) return;
-
-  let size = 20;
-
-  function fmt(n) {
-    return n.toFixed(1).replace('.', ',');
-  }
-
-  function update() {
-    const a = +area.value;
-    const m = +manos.value;
-    const r = +rend.value;
-
-    const liters = (a * m) / r;
-    const sealer = a / 10;
-
-    areaVal.textContent = a + ' m²';
-    manosVal.textContent = m;
-    rendVal.textContent = r + ' m²/L';
-
-    outLiters.textContent = fmt(liters) + ' L';
-    outCans.textContent = Math.max(1, Math.ceil(liters / size));
-    outSealer.textContent = fmt(sealer) + ' L';
-  }
-
-  seg.querySelectorAll('button').forEach(b => {
-    b.addEventListener('click', () => {
-      size = +b.dataset.size;
-      seg.querySelectorAll('button').forEach(x => x.classList.toggle('on', x === b));
-      update();
-    });
-  });
-
-  area.addEventListener('input', update);
-  manos.addEventListener('input', update);
-  rend.addEventListener('input', update);
-  update();
-})();
-
-/* =========================================================
-   6) RETOQUES Y REPARACIONES
-   ========================================================= */
-const RETOQUES = [
-  {
-    id: 'capilar',
-    titulo: 'Grieta capilar (pelo de cabello)',
-    urg: 'baja',
-    que: 'Son fisuras finísimas, de menos de 1 mm. Aparecen en el revoque por contracción durante el fraguado o por cambios de temperatura, y casi nunca comprometen la estructura.',
-    causas: [
-      'Revoque que fraguó demasiado rápido',
-      'Capas demasiado gruesas aplicadas de una vez',
-      'Movimientos leves por cambios de temperatura',
-      'Falta de curado del mortero'
-    ],
-    pasos: [
-      'Abrir la fisura en V con una espátula pequeña para que el material penetre.',
-      'Retirar el polvo con un cepillo y humedecer la zona.',
-      'Rellenar con enduido o masilla elástica, presionando bien.',
-      'Lijar al ras cuando esté seca y aplicar sellador antes de pintar.'
-    ],
-    mats: 'Espátula, enduido o masilla acrílica, lija fina, sellador.'
-  },
-  {
-    id: 'estructural',
-    titulo: 'Grieta ancha o diagonal',
-    urg: 'alta',
-    que: 'Una grieta de más de 2 mm, escalonada o en diagonal, puede indicar movimiento estructural, asentamiento del terreno o un problema de fundación. No es un tema estético.',
-    causas: [
-      'Asentamiento diferencial del terreno',
-      'Falta de refuerzo en la mampostería',
-      'Sobrecargas o modificaciones sin cálculo',
-      'Humedad que debilita la base'
-    ],
-    pasos: [
-      'No tapar la grieta sin antes evaluar su evolución.',
-      'Marcar los extremos con lápiz y medir cada 30 días para ver si crece.',
-      'Consultar a un profesional si la grieta avanza o atraviesa el muro.',
-      'Si se autoriza la reparación, usar sellador elástico de poliuretano y malla.'
-    ],
-    mats: 'Regla, lápiz, sellador de poliuretano, malla de fibra. Asesoramiento profesional.'
-  },
-  {
-    id: 'salitre',
-    titulo: 'Salitre o eflorescencia',
-    urg: 'media',
-    que: 'Son manchas blancas y polvorientas que aparecen cuando el agua atraviesa el muro y, al evaporarse, deposita sales en la superficie. Siempre indican presencia de humedad.',
-    causas: [
-      'Humedad ascendente desde el suelo',
-      'Filtraciones en muros exteriores',
-      'Falta de hidrófugo en la mezcla original',
-      'Sales naturales del ladrillo o del cemento'
-    ],
-    pasos: [
-      'Cepillar en seco para retirar las sales cristalizadas.',
-      'Lavar con agua y dejar secar completamente.',
-      'Identificar y corregir el origen de la humedad.',
-      'Aplicar sellador hidrófugo y recién después pintar.'
-    ],
-    mats: 'Cepillo de cerdas duras, hidrófugo, sellador, pintura antimanchas.'
-  },
-  {
-    id: 'humedad',
-    titulo: 'Mancha de humedad',
-    urg: 'media',
-    que: 'Una mancha oscura que crece o reaparece indica que el agua sigue entrando. Pintar encima solo la esconde unas semanas: la mancha vuelve y la pintura se ampolla.',
-    causas: [
-      'Filtración en techos, balcones o cañerías',
-      'Humedad ascendente por capilaridad',
-      'Puentes térmicos con condensación',
-      'Sellado deficiente de aberturas'
-    ],
-    pasos: [
-      'Localizar el punto exacto de entrada de agua.',
-      'Reparar la causa antes de tocar la pared.',
-      'Dejar secar el muro por completo, puede llevar semanas.',
-      'Aplicar pintura antimanchas y luego la terminación.'
-    ],
-    mats: 'Pintura antimanchas a base de solvente, sellador, pintura de terminación.'
-  },
-  {
-    id: 'moho',
-    titulo: 'Hongo o moho',
-    urg: 'media',
-    que: 'Aparece como manchas negras o verdosas, sobre todo en baños y paredes frías. Además de ser antiestético, puede afectar las vías respiratorias.',
-    causas: [
-      'Ventilación insuficiente y humedad ambiental alta',
-      'Puentes térmicos que generan condensación',
-      'Filtraciones ocultas',
-      'Pintura inadecuada en ambientes húmedos'
-    ],
-    pasos: [
-      'Limpiar con solución fungicida usando guantes y barbijo.',
-      'Ventilar el ambiente todos los días.',
-      'Corregir la causa de la humedad o la condensación.',
-      'Pintar con pintura antihongos específica para ambientes húmedos.'
-    ],
-    mats: 'Fungicida, guantes, barbijo, pintura antihongos, ventilación.'
-  },
-  {
-    id: 'descascarado',
-    titulo: 'Pintura descascarada',
-    urg: 'baja',
-    que: 'La pintura se levanta en láminas o escamas. Casi siempre es porque se aplicó sobre una superficie sucia, húmeda o sin sellador, o porque se usó un producto inadecuado.',
-    causas: [
-      'Pintar sobre polvo, grasa o humedad',
-      'Falta de sellador o de lijado previo',
-      'Pintura de interior usada en exterior',
-      'Exceso de manos aplicadas sin secado entre ellas'
-    ],
-    pasos: [
-      'Retirar toda la pintura suelta con rasqueta.',
-      'Lijar el borde del descascarado para emparejar el escalón.',
-      'Sellar la zona desnuda y dejar secar.',
-      'Repintar respetando los tiempos de secado entre manos.'
-    ],
-    mats: 'Rasqueta, lija, sellador, pintura del mismo tipo y color.'
-  },
-  {
-    id: 'hueco',
-    titulo: 'Revoque hueco o desprendido',
-    urg: 'media',
-    que: 'Al golpear el muro suena vacío porque el revoque se separó del ladrillo. Si no se retira, toda reparación posterior se cae con él.',
-    causas: [
-      'Revoque aplicado sobre superficie sucia o seca',
-      'Falta de humedecido previo del muro',
-      'Capas demasiado gruesas',
-      'Filtraciones que debilitaron la adherencia'
-    ],
-    pasos: [
-      'Delimitar la zona hueca y retirar todo el revoque flojo.',
-      'Limpiar y humedecer el ladrillo expuesto.',
-      'Aplicar mortero en capas de 1 cm, dejando fraguar entre capas.',
-      'Emparejar con revoque fino y terminar con enduido.'
-    ],
-    mats: 'Maza, cortafrío, mortero, fratás, llana, enduido.'
-  },
-  {
-    id: 'juntas',
-    titulo: 'Ladrillo visto con juntas deterioradas',
-    urg: 'baja',
-    que: 'En muros de ladrillo a la vista, el mortero de las juntas se erosiona con el tiempo. Si se profundiza, el agua penetra y el muro pierde estabilidad.',
-    causas: [
-      'Exposición prolongada al clima',
-      'Mortero de junta de baja calidad',
-      'Falta de protección superficial',
-      'Movimientos del muro'
-    ],
-    pasos: [
-      'Retirar el mortero suelto con una cuchara o escardillo.',
-      'Limpiar el polvo y humedecer la junta.',
-      'Rellenar con mortero nuevo, presionando bien.',
-      'Alisar con la cuchara y aplicar hidrófugo cuando seque.'
-    ],
-    mats: 'Escardillo, mortero, cuchara de albañil, hidrófugo, brocha.'
-  }
-];
-
-(function buildRetoques() {
-  const list = document.getElementById('faultList');
-  const panel = document.getElementById('faultPanel');
-  if (!list) return;
-
-  RETOQUES.forEach(r => {
-    const b = document.createElement('button');
-    b.className = 'fault-btn';
-    b.type = 'button';
-    b.dataset.id = r.id;
-    b.innerHTML = `<span>${r.titulo}</span><i class="dot-urg dot-${r.urg}"></i>`;
-    b.addEventListener('click', () => show(r.id));
-    list.appendChild(b);
-  });
-
-  function show(id) {
-    const r = RETOQUES.find(x => x.id === id);
-    if (!r) return;
-
-    const label = r.urg === 'alta' ? 'Prioridad alta' : r.urg === 'media' ? 'Prioridad media' : 'Prioridad baja';
-
-    panel.innerHTML = `
-      <div class="fade-in">
-        <span class="urg urg-${r.urg}">${label}</span>
-        <h3 class="p-title">${r.titulo}</h3>
-        <div class="fault-block">
-          <h5>Qué es</h5>
-          <p>${r.que}</p>
-        </div>
-        <div class="fault-block">
-          <h5>Posibles causas</h5>
-          <ul>${r.causas.map(c => `<li>${c}</li>`).join('')}</ul>
-        </div>
-        <div class="fault-block">
-          <h5>Cómo repararlo</h5>
-          <ul>${r.pasos.map(c => `<li>${c}</li>`).join('')}</ul>
-        </div>
-        <div class="fault-block">
-          <h5>Materiales</h5>
-          <p class="mats">${r.mats}</p>
-        </div>
-      </div>`;
-
-    list.querySelectorAll('.fault-btn').forEach(b => {
-      b.classList.toggle('active', b.dataset.id === id);
-    });
-  }
-
-  show('capilar');
-})();
-
-/* =========================================================
-   7) AUTOEVALUACIÓN
-   ========================================================= */
-(function quiz() {
-  const QUIZ = [
-    {
-      q: '¿Cuál es la primera capa que se aplica sobre el ladrillo?',
-      a: ['El enduido', 'El revoque grueso o azotado', 'La pintura', 'El sellador'],
-      correct: 1,
-      why: 'El revoque grueso empareja el muro y da cuerpo. Recién encima van el fino, el enduido y la pintura.'
-    },
-    {
-      q: '¿Para qué sirve el sellador antes de pintar?',
-      a: ['Para dar color', 'Para tapar grietas grandes', 'Para unificar la absorción del muro', 'Para impermeabilizar definitivamente'],
-      correct: 2,
-      why: 'El sellador penetra y unifica la porosidad. Sin él, la pintura se absorbe de forma despareja y el resultado queda manchado.'
-    },
-    {
-      q: 'Una grieta ancha y diagonal en el muro indica...',
-      a: ['Un problema estético menor', 'Un posible movimiento estructural', 'Que falta pintura', 'Que el enduido era de mala calidad'],
-      correct: 1,
-      why: 'Las grietas diagonales o escalonadas pueden indicar asentamiento o movimiento estructural. Deben evaluarse antes de taparlas.'
-    },
-    {
-      q: '¿Qué significa una dosificación 1:3?',
-      a: ['1 parte de agua y 3 de cemento', '1 parte de cemento y 3 de arena', '3 bolsas por metro cuadrado', '1 mano de pintura y 3 de sellador'],
-      correct: 1,
-      why: 'La dosificación se expresa en partes: 1 de cemento por 3 de arena. Es la mezcla típica para revoques.'
-    },
-    {
-      q: 'El salitre o eflorescencia siempre indica...',
-      a: ['Que la pintura es de mala calidad', 'Presencia de humedad en el muro', 'Que falta enduido', 'Que el muro es de hormigón'],
-      correct: 1,
-      why: 'Las sales aparecen cuando el agua atraviesa el muro y se evapora. Sin corregir la humedad, el salitre vuelve siempre.'
-    },
-    {
-      q: 'Antes de perforar un muro, lo primero es...',
-      a: ['Usar la broca más grande', 'Identificar el material y verificar que no pasen cables o caños', 'Mojar la pared', 'Aplicar enduido'],
-      correct: 1,
-      why: 'Conocer el material define la mecha y el tarugo. Y verificar que no haya instalaciones evita accidentes graves.'
-    }
-  ];
-
-  const wrap = document.getElementById('quizGrid');
-  const scoreEl = document.getElementById('score');
-  const progEl = document.getElementById('progress');
-  let score = 0, answered = 0;
-
-  QUIZ.forEach((item, qi) => {
-    const card = document.createElement('div');
-    card.className = 'quiz-card';
-
-    const num = document.createElement('p');
-    num.className = 'q-num';
-    num.textContent = 'Pregunta ' + (qi + 1);
-
-    const title = document.createElement('h4');
-    title.textContent = item.q;
-
-    const opts = document.createElement('div');
-    opts.className = 'q-opts';
-
-    item.a.forEach((txt, oi) => {
-      const b = document.createElement('button');
-      b.className = 'q-opt';
-      b.type = 'button';
-      b.textContent = txt;
-
-      b.addEventListener('click', () => {
-        if (card.dataset.done) return;
-        card.dataset.done = '1';
-        answered++;
-
-        const ok = oi === item.correct;
-        Array.from(opts.children).forEach(c => c.disabled = true);
-
-        if (ok) {
-          b.classList.add('correct');
-          score++;
-        } else {
-          b.classList.add('wrong');
-          opts.children[item.correct].classList.add('correct');
-        }
-
-        const fb = document.createElement('p');
-        fb.className = 'q-fb ' + (ok ? 'ok' : 'no');
-        fb.textContent = (ok ? 'Correcto. ' : 'No exactamente. ') + item.why;
-        card.appendChild(fb);
-
-        scoreEl.textContent = score;
-        progEl.textContent = answered + '/' + QUIZ.length;
-      });
-
-      opts.appendChild(b);
-    });
-
-    card.append(num, title, opts);
-    wrap.appendChild(card);
-  });
-})();
-
-/* =========================================================
-   8) REVELADO AL HACER SCROLL
-   ========================================================= */
-(function reveal() {
-  const items = document.querySelectorAll('.reveal');
-  if (!('IntersectionObserver' in window)) {
-    items.forEach(el => el.classList.add('visible'));
-    return;
-  }
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-        io.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
-
-  items.forEach(el => io.observe(el));
-})();
+(function(){const w=document.getElementById("wall"),c=["#F26B1D","#E0581A","#C94E18","#B5452F"];let h="";
+for(let r=0;r<6;r++)for(let i=0;i<5;i++){const off=r%2?-24:0,x=14+i*48+off;if(x<-20||x>215)continue;
+const bw=x<14?24:(x>180?24:46),bx=x<14?14:x;
+h+=`<rect class="brick" x="${bx}" y="${268-r*26}" width="${bw}" height="22" fill="${c[(r+i)%4]}" stroke="#1B2A33" stroke-width="2" style="animation-delay:${(r*5+i)*0.12}s"/>`}
+w.innerHTML=h})();
 </script>
 </body>
 </html>
