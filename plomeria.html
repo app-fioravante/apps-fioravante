@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Plomería en casa: guía práctica</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;800&family=Figtree:wght@400;600&display=swap">
+<style>
+:root{--bg:#f2f8fb;--surface:#fff;--ink:#0a2736;--mute:#486373;--line:#cfe1ea;--aqua:#0a7f9e;--cu:#a85f1f;--gr:#23805a;--fh:"Bricolage Grotesque",system-ui,sans-serif;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#06141c;--surface:#0d2430;--ink:#e4f3f9;--mute:#9bb8c6;--line:#1c3a4a;--aqua:#4fc9ea;--cu:#eaa468;--gr:#5fd1a0;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#06141c;--surface:#0d2430;--ink:#e4f3f9;--mute:#9bb8c6;--line:#1c3a4a;--aqua:#4fc9ea;--cu:#eaa468;--gr:#5fd1a0;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1rem/1.65 Figtree,system-ui,sans-serif}
+.wrap{max-width:1060px;margin:0 auto;padding:0 22px}
+section{padding:68px 0 8px}
+h2{font:800 clamp(1.7rem,4.6vw,2.5rem)/1.1 var(--fh);letter-spacing:-.02em;margin:0 0 10px}
+.sub{color:var(--mute);max-width:56ch;margin:0}
+:focus-visible{outline:3px solid var(--aqua);outline-offset:3px}
+
+/* Hero: el momento memorable */
+.hero{position:relative;overflow:hidden;color:#fff;padding:76px 0 130px;background:radial-gradient(800px 460px at 80% 25%,#0a9fc44d,transparent 65%),linear-gradient(165deg,#041f2d,#0b4f6c)}
+.hero .wrap{position:relative;z-index:2;display:grid;grid-template-columns:1.15fr .85fr;gap:20px;align-items:center}
+.hero h1{font:800 clamp(2.5rem,7.4vw,4.7rem)/1 var(--fh);letter-spacing:-.03em;margin:0 0 18px}
+.lead{font-size:1.15rem;color:#cfe8f1;max-width:36ch;margin:0 0 26px}
+.hero .wrap>div>*{animation:up .9s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--n)*.14s)}
+.btn{display:inline-block;padding:14px 28px;border-radius:99px;background:#c8742a;color:#1b0e03;font-weight:600;text-decoration:none;transition:transform .25s,background .25s}
+.btn:hover{transform:translateY(-3px);background:#e08a3c}
+.btn.g{background:transparent;color:#fff;border:1.5px solid #ffffff66;margin-left:8px}
+.btn.g:hover{background:#ffffff1f}
+.pipe{width:100%;max-width:360px;justify-self:center;overflow:visible}
+.flow{stroke-dasharray:16 14;animation:flow 1.2s linear infinite}
+.dr{transform-box:fill-box;transform-origin:50% 0;animation:drip 2.4s ease-in infinite}
+.rip{transform-box:fill-box;transform-origin:center;animation:rip 2.4s ease-out infinite}
+.d{position:absolute;top:-24px;left:var(--x);width:9px;height:13px;border-radius:50% 50% 50% 50%/65% 65% 35% 35%;background:linear-gradient(#d4f6ff,#4dc9ee);opacity:.55;animation:fall var(--s) linear var(--dl) infinite}
+.wv{position:absolute;left:0;bottom:-1px;width:200%;height:84px;animation:wave 9s linear infinite;z-index:1}
+.wv.b{bottom:10px;opacity:.45;animation-duration:15s;animation-direction:reverse}
+.wv path{fill:var(--bg)}
+@keyframes up{from{opacity:0;transform:translateY(28px)}}
+@keyframes flow{to{stroke-dashoffset:-30}}
+@keyframes drip{0%{transform:translateY(-8px) scale(.2);opacity:0}18%{transform:none;opacity:1}78%{transform:translateY(62px);opacity:1}84%,100%{transform:translateY(68px);opacity:0}}
+@keyframes rip{0%,78%{transform:scale(0);opacity:0}82%{transform:scale(.3);opacity:1}100%{transform:scale(3.2);opacity:0}}
+@keyframes fall{to{transform:translateY(115vh)}}
+@keyframes wave{to{transform:translateX(-50%)}}
+@keyframes pop{from{opacity:0;transform:translateY(10px)}}
+@keyframes sway{to{transform:translateX(9%)}}
+
+/* Recorrido del agua */
+.pipeline{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:0 26px;padding:0;margin:34px 0 0;list-style:none}
+.pipeline li{position:relative;padding-top:36px}
+.pipeline li::before{content:"";position:absolute;top:6px;left:0;right:-26px;height:12px;border-radius:6px;background:linear-gradient(#e6a56c,#b87333 55%,#85501f)}
+.pipeline li:last-child::before{right:0}
+.pipeline li::after{content:"";position:absolute;top:0;left:0;width:10px;height:24px;border-radius:3px;background:#d99352}
+.pipeline h3{font:800 1.15rem var(--fh);margin:0 0 4px}
+.pipeline p{margin:0;color:var(--mute)}
+
+/* Consejos */
+.filters{display:flex;flex-wrap:wrap;gap:10px;margin:26px 0 8px}
+.fb{border:1px solid var(--line);background:transparent;color:var(--ink);padding:8px 20px;border-radius:99px;font:inherit;cursor:pointer;transition:background .2s,color .2s}
+.fb:hover{background:var(--surface)}
+.fb[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.tips{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:0 48px}
+.tip{--t:var(--aqua);display:grid;grid-template-columns:46px 1fr;gap:16px;padding:20px 0;border-top:1px solid var(--line)}
+.tip[hidden]{display:none}
+.tip[data-c="prevencion"]{--t:var(--gr)}
+.tip[data-c="urgencia"]{--t:var(--cu)}
+.tip.swap{animation:pop .45s ease both}
+.tip i{width:46px;height:46px;border-radius:50%;border:2px solid var(--t);display:grid;place-items:center;font-style:normal;font-size:1.3rem;background:var(--surface)}
+.tip h3{font:800 1.08rem/1.25 var(--fh);margin:0 0 4px}
+.tip p{margin:0 0 4px;color:var(--mute)}
+.tip small{font-weight:600;color:var(--t)}
+.kit{display:flex;flex-wrap:wrap;gap:10px;padding:0;margin:18px 0 0;list-style:none}
+.kit li{padding:8px 16px;border:1px dashed var(--cu);border-radius:8px;font-size:.95rem}
+.kit b{font-weight:600}
+
+/* Calculadora */
+.calc{display:grid;grid-template-columns:1fr auto;gap:36px;align-items:center;margin-top:28px;padding:32px;background:var(--surface);border:1px solid var(--line);border-radius:26px}
+.calc label{font-weight:600}
+input[type=range]{width:100%;margin:12px 0 22px;accent-color:var(--aqua)}
+.out{display:flex;flex-wrap:wrap;gap:12px 34px}
+.out b{display:block;font:800 2.1rem/1 var(--fh);color:var(--aqua)}
+.out span{font-size:.9rem;color:var(--mute)}
+.note{font-size:.85rem;color:var(--mute);margin:18px 0 0}
+.tank{position:relative;width:112px;height:210px;margin:auto;border:3px solid var(--aqua);border-radius:14px 14px 26px 26px;overflow:hidden}
+.fill{position:absolute;inset:auto 0 0 0;height:10%;background:linear-gradient(#69d9f4,#0a9fc4);transition:height .6s cubic-bezier(.3,1.3,.5,1)}
+.fill::before{content:"";position:absolute;left:-12%;top:-9px;width:124%;height:18px;border-radius:50%;background:#8be6fb;animation:sway 2.6s ease-in-out infinite alternate}
+
+/* Emergencia */
+.emg{display:grid;grid-template-columns:1fr 1.5fr;gap:40px;align-items:start}
+ol.steps{list-style:none;counter-reset:s;margin:0;padding:0}
+.steps li{counter-increment:s;position:relative;padding:18px 0 18px 64px;border-top:1px solid var(--line)}
+.steps li::before{content:counter(s);position:absolute;left:0;top:14px;width:44px;height:44px;border-radius:50%;background:#b87333;color:#1b0e03;display:grid;place-items:center;font:800 1.15rem var(--fh);box-shadow:inset 0 0 0 5px #d99352}
+.steps b{font-family:var(--fh);font-size:1.08rem}
+.steps span{display:block;color:var(--mute)}
+footer{margin-top:72px;padding:34px 0 40px;background:#041f2d;color:#a9c9d6;font-size:.9rem}
+
+@media(max-width:780px){.hero .wrap,.emg,.calc{grid-template-columns:1fr}.pipe{max-width:250px}.hero{padding-top:56px}.calc{padding:24px}}
+@media(prefers-reduced-motion:reduce){*,::before,::after{animation:none!important;transition:none!important}.d{display:none}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <i class="d" style="--x:6%;--s:5s;--dl:0s"></i><i class="d" style="--x:22%;--s:6.5s;--dl:1.2s"></i><i class="d" style="--x:41%;--s:5.5s;--dl:2.4s"></i><i class="d" style="--x:58%;--s:7s;--dl:.6s"></i><i class="d" style="--x:74%;--s:6s;--dl:3s"></i><i class="d" style="--x:92%;--s:5.2s;--dl:1.8s"></i>
+  <div class="wrap">
+    <div>
+      <h1 style="--n:0">Domina el agua de tu casa</h1>
+      <p class="lead" style="--n:1">Entiende cómo funcionan tus tuberías, evita fugas costosas y actúa con calma cuando surja una emergencia.</p>
+      <p style="--n:2;margin:0"><a class="btn" href="#consejos">Ver los consejos</a><a class="btn g" href="#goteo">Calcular un goteo</a></p>
+    </div>
+    <svg class="pipe" viewBox="0 0 320 300" aria-hidden="true">
+      <defs><path id="p" d="M-20 60H220Q260 60 260 100V190" fill="none"/></defs>
+      <use href="#p" stroke="#b87333" stroke-width="26"/>
+      <use href="#p" stroke="#06202d" stroke-width="14"/>
+      <use href="#p" class="flow" stroke="#7fe3ff" stroke-width="8"/>
+      <rect x="70" y="42" width="12" height="36" rx="3" fill="#d99352"/>
+      <rect x="160" y="42" width="12" height="36" rx="3" fill="#d99352"/>
+      <rect x="240" y="186" width="40" height="16" rx="4" fill="#d99352"/>
+      <path class="dr" d="M260 214c-8 12-11 18-11 24a11 11 0 0 0 22 0c0-6-3-12-11-24z" fill="#7fe3ff"/>
+      <ellipse class="rip" cx="260" cy="286" rx="10" ry="3" fill="none" stroke="#7fe3ff" stroke-width="2"/>
+    </svg>
+  </div>
+  <svg class="wv b" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0 40q90-40 180 0t180 0t180 0t180 0t180 0t180 0t180 0t180 0V80H0z"/></svg>
+  <svg class="wv" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0 40q90-40 180 0t180 0t180 0t180 0t180 0t180 0t180 0t180 0V80H0z"/></svg>
+</header>
+
+<main>
+<section>
+  <div class="wrap">
+    <h2>El recorrido del agua</h2>
+    <p class="sub">Conocer el camino que sigue el agua te ayuda a saber dónde actuar cuando algo falla.</p>
+    <ol class="pipeline">
+      <li><h3>Medidor</h3><p>Registra cuánta agua entra a tu casa. Es tu mejor aliado para detectar fugas.</p></li>
+      <li><h3>Llave de paso</h3><p>Corta el suministro de toda la vivienda en segundos.</p></li>
+      <li><h3>Tuberías de agua</h3><p>Llevan agua fría y caliente a grifos, duchas y artefactos.</p></li>
+      <li><h3>Desagüe y sifón</h3><p>Evacúan el agua usada. El sifón guarda un poco de agua que frena los malos olores.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section id="consejos">
+  <div class="wrap">
+    <h2>Consejos para tu casa</h2>
+    <p class="sub">Hábitos simples que ahorran agua, dinero y dolores de cabeza.</p>
+    <div class="filters" role="group" aria-label="Filtrar consejos">
+      <button class="fb" data-f="todos" aria-pressed="true">Todos</button>
+      <button class="fb" data-f="ahorro" aria-pressed="false">Ahorro</button>
+      <button class="fb" data-f="prevencion" aria-pressed="false">Prevención</button>
+      <button class="fb" data-f="urgencia" aria-pressed="false">Urgencias</button>
+    </div>
+    <div class="tips">
+      <article class="tip" data-c="urgencia"><i>🚰</i><div><h3>Ubica tu llave de paso</h3><p>Corta el agua de toda la casa. Encuéntrala hoy, márcala y gírala cada seis meses para que no se trabe.</p><small>Urgencias</small></div></article>
+      <article class="tip" data-c="ahorro"><i>🚽</i><div><h3>Prueba del colorante</h3><p>Echa unas gotas de colorante en el depósito del inodoro y espera 15 minutos sin usarlo. Si el color llega a la taza, hay una fuga.</p><small>Ahorro</small></div></article>
+      <article class="tip" data-c="prevencion"><i>🍳</i><div><h3>La grasa no va al desagüe</h3><p>Se enfría, se endurece y estrecha la tubería. Déjala enfriar en un frasco y tírala a la basura.</p><small>Prevención</small></div></article>
+      <article class="tip" data-c="ahorro"><i>📟</i><div><h3>Detecta fugas ocultas</h3><p>Cierra todos los grifos y mira el medidor: si sigue girando, el agua se escapa en algún punto de la instalación.</p><small>Ahorro</small></div></article>
+      <article class="tip" data-c="prevencion"><i>🧻</i><div><h3>Solo papel higiénico</h3><p>Las toallitas húmedas, el algodón y los hisopos no se disuelven y son una causa muy común de atascos.</p><small>Prevención</small></div></article>
+      <article class="tip" data-c="prevencion"><i>🪠</i><div><h3>Ventosa antes que químicos</h3><p>Para atascos leves usa el destapacaños de ventosa. Los destapadores fuertes pueden dañar tuberías viejas y no deben mezclarse.</p><small>Prevención</small></div></article>
+      <article class="tip" data-c="ahorro"><i>🚿</i><div><h3>Limpia los aireadores</h3><p>El sarro reduce el caudal. Desenrosca el aireador del grifo, déjalo una hora en vinagre y enjuágalo.</p><small>Ahorro</small></div></article>
+      <article class="tip" data-c="prevencion"><i>🧵</i><div><h3>Cinta de teflón bien puesta</h3><p>Da 3 o 4 vueltas sobre la rosca, en el sentido en que enroscarás la pieza, para que no se desenrolle.</p><small>Prevención</small></div></article>
+      <article class="tip" data-c="urgencia"><i>🔥</i><div><h3>Olor a gas: no improvises</h3><p>No acciones interruptores ni uses llamas. Ventila, cierra la llave de gas, sal de la casa y llama a un gasista matriculado.</p><small>Urgencias</small></div></article>
+    </div>
+    <h3 style="font:800 1.2rem var(--fh);margin:40px 0 0">Kit básico para tener a mano</h3>
+    <ul class="kit">
+      <li>🔧 <b>Llave ajustable</b> para tuercas y conexiones</li>
+      <li>🪠 <b>Destapacaños</b> de ventosa</li>
+      <li>🧵 <b>Cinta de teflón</b> para roscas</li>
+      <li>🩹 <b>Cinta autovulcanizante</b> para parches de emergencia</li>
+      <li>🪣 <b>Balde y toallas</b> para contener el agua</li>
+    </ul>
+  </div>
+</section>
+
+<section id="goteo">
+  <div class="wrap">
+    <h2>¿Cuánta agua pierde un grifo que gotea?</h2>
+    <p class="sub">Mueve el control y mira cómo se llena el tanque a lo largo de un año.</p>
+    <div class="calc">
+      <div>
+        <label for="r">Gotas por minuto: <span id="dm">30</span></label>
+        <input id="r" type="range" min="5" max="120" value="30">
+        <div class="out" aria-live="polite">
+          <div><b id="ld">2,2</b><span>litros por día</span></div>
+          <div><b id="ly">788</b><span>litros por año</span></div>
+          <div><b id="bd">39</b><span>bidones de 20 litros</span></div>
+        </div>
+        <p class="note">Estimación con gotas de unos 0,05 ml. Un goteo real puede variar según la presión y el grifo.</p>
+      </div>
+      <div class="tank" aria-hidden="true"><div class="fill" id="fill"></div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap emg">
+    <div>
+      <h2>Tubería rota: tu plan en cinco pasos</h2>
+      <p class="sub">Respira, actúa en orden y evita que el daño crezca.</p>
+    </div>
+    <ol class="steps">
+      <li><b>Cierra la llave de paso general.</b><span>Es lo primero: sin presión, el agua deja de salir.</span></li>
+      <li><b>Cuida la electricidad.</b><span>Si hay agua cerca de enchufes o del tablero, baja la llave térmica solo si puedes llegar sin pisar agua.</span></li>
+      <li><b>Abre los grifos más bajos.</b><span>Así se vacía la tubería y baja la presión restante.</span></li>
+      <li><b>Contén y seca.</b><span>Usa balde y toallas, y un parche con cinta autovulcanizante mientras llega ayuda.</span></li>
+      <li><b>Llama a un plomero y toma fotos.</b><span>Las imágenes te servirán para el seguro y para explicar el problema.</span></li>
+    </ol>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">Información orientativa. Para instalaciones de gas o reparaciones complejas, recurre siempre a un profesional matriculado.</div>
+</footer>
+
+<script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+$$('.fb').forEach(b=>b.onclick=()=>{
+  $$('.fb').forEach(x=>x.setAttribute('aria-pressed',x===b));
+  $$('.tip').forEach(t=>{
+    const show=b.dataset.f==='todos'||t.dataset.c===b.dataset.f;
+    t.hidden=!show;
+    if(show){t.classList.add('swap');setTimeout(()=>t.classList.remove('swap'),500)}
+  });
+});
+const r=$('#r'),nf=n=>n.toLocaleString('es-AR');
+function upd(){
+  const v=+r.value,year=v*26.28,day=v*.072;
+  $('#dm').textContent=v;
+  $('#ld').textContent=day.toFixed(1).replace('.',',');
+  $('#ly').textContent=nf(Math.round(year));
+  $('#bd').textContent=nf(Math.round(year/20));
+  $('#fill').style.height=Math.min(100,Math.max(6,year/3200*100))+'%';
+}
+r.addEventListener('input',upd);upd();
+</script>
+</body>
+</html>
