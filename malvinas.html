@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Malvinas / Falklands, 1982: una guerra, dos relatos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#e7edeb;--bg2:#d6e0de;--card:#f3f6f5;--ink:#10243a;--mut:#506274;--line:#10243a22;--ar:#1d6aa8;--uk:#b3202d;--sea:#2a7f9e;--air:#a8700f;--land:#4f6e2f;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b1826;--bg2:#10263a;--card:#12293e;--ink:#e6eef2;--mut:#9fb2c1;--line:#e6eef220;--ar:#6fb4ea;--uk:#ef6b74;--sea:#5cb8d6;--air:#e0a73f;--land:#8fb766;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0b1826;--bg2:#10263a;--card:#12293e;--ink:#e6eef2;--mut:#9fb2c1;--line:#e6eef220;--ar:#6fb4ea;--uk:#ef6b74;--sea:#5cb8d6;--air:#e0a73f;--land:#8fb766;color-scheme:dark}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;scroll-padding-top:calc(70px + env(safe-area-inset-top,0px))}
+body{background:var(--bg);color:var(--ink);font:400 1.08rem/1.65 Newsreader,Georgia,serif;--acc:var(--ink)}
+body[data-view="ar"]{--acc:var(--ar)}body[data-view="uk"]{--acc:var(--uk)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:10}
+h1,h2,h3,h4,header,button,th,time,.kick,dt{font-family:"Bricolage Grotesque",system-ui,sans-serif}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:11;display:flex;gap:1rem;align-items:center;justify-content:space-between;flex-wrap:wrap;padding:.6rem clamp(1rem,4vw,2.5rem);background:var(--bg);border-bottom:1px solid var(--line)}
+header nav{display:flex;gap:1.2rem;font-size:.9rem}header a{color:var(--mut);text-decoration:none}header a:hover{color:var(--ink)}
+.tg{display:flex;gap:2px;background:var(--bg2);padding:3px;border-radius:99px}
+button{font:600 .85rem "Bricolage Grotesque",sans-serif;padding:.45rem .9rem;border:0;background:none;color:var(--mut);cursor:pointer;border-radius:99px}
+button[aria-pressed="true"]{background:var(--acc);color:var(--bg)}
+:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.wrap{max-width:1080px;margin:0 auto;padding:clamp(2.5rem,7vw,5rem) clamp(1rem,4vw,2rem)}
+.hero{max-width:none;background:linear-gradient(var(--line) 1px,transparent 1px) 0 0/100% 56px,linear-gradient(90deg,var(--line) 1px,transparent 1px) 0 0/56px 100%}
+.hero>*{max-width:1080px;margin-inline:auto}
+.kick{color:var(--mut);font-size:1rem}
+h1{font-weight:800;font-size:clamp(3.2rem,14vw,9.5rem);line-height:.95;letter-spacing:-.04em;color:var(--acc);margin:.6rem auto 1.4rem}
+h1.b{font-size:clamp(2.2rem,8.6vw,6.4rem)}
+h1 span{display:inline-block;animation:up .7s both cubic-bezier(.2,.7,.2,1)}
+@keyframes up{from{opacity:0;transform:translateY(.45em)}}
+.lead{max-width:46ch;font-size:1.3rem}
+.stats{display:flex;flex-wrap:wrap;gap:1.5rem 3rem;margin-top:2.5rem}
+.stats dd{font:700 2.2rem/1 "Bricolage Grotesque",sans-serif;margin:0}.stats dt{font-size:.85rem;color:var(--mut);margin-top:.3rem;font-weight:400}
+.stats div{display:flex;flex-direction:column-reverse}
+h2{font-weight:700;font-size:clamp(1.8rem,4vw,2.7rem);letter-spacing:-.025em;line-height:1.1;margin-bottom:.6rem}
+.sub{color:var(--mut);max-width:56ch;margin-bottom:2rem}
+section+section{border-top:1px solid var(--line)}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:1.5rem}
+.card{background:var(--card);padding:1.5rem 1.6rem;border-top:4px solid var(--c)}
+.card.ar{--c:var(--ar)}.card.uk{--c:var(--uk)}
+.card h3{font-size:1.35rem;color:var(--c);margin-bottom:.8rem}.card p+p{margin-top:.7rem}
+.mapbox{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);gap:1.5rem;align-items:start}
+@media(max-width:820px){.mapbox{grid-template-columns:1fr}header nav{display:none}}
+#hm{display:grid;gap:1rem}
+#hm figure{background:var(--card);border:1px solid var(--line)}
+#hm img{width:100%;max-height:640px;object-fit:contain;background:#fff;display:block}
+#hm figcaption{padding:.8rem 1rem;font-size:.92rem;color:var(--mut);line-height:1.45}
+#hm figcaption b{display:block;color:var(--ink);font:600 1rem "Bricolage Grotesque",sans-serif;margin-bottom:.2rem}
+.lk{background:var(--card);padding:1rem 1.2rem;font-size:.95rem;border-left:4px solid var(--acc)}
+.lk h3{font-size:1.05rem;margin-bottom:.3rem}.lk p{color:var(--mut);font-size:.9rem}.lk a,#info a{color:var(--acc)}.lk a{display:block;margin-top:.45rem}
+#plist{margin:1rem 0 0}
+#info{background:var(--card);padding:1.3rem 1.4rem;min-height:15rem}
+#info h3{font-size:1.3rem}.d{color:var(--mut);font-size:.95rem;margin-bottom:.6rem}
+.hint{font-size:.9rem;color:var(--mut);margin-top:.6rem}
+.chips{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.8rem}
+.chips button{border:1px solid var(--line)}
+.tl{margin-left:.5rem;border-left:2px solid var(--line);padding-left:1.6rem}
+.ev{position:relative;padding-bottom:2.4rem;--c:var(--mut)}
+.ev[data-k="m"]{--c:var(--sea)}.ev[data-k="a"]{--c:var(--air)}.ev[data-k="t"]{--c:var(--land)}
+.ev::before{content:"";position:absolute;left:calc(-1.6rem - 7px);top:.5rem;width:12px;height:12px;border-radius:50%;background:var(--bg);border:2px solid var(--c);transition:.3s}
+.ev.on::before{background:var(--c);transform:scale(1.4)}
+.ev time{font-weight:700;color:var(--c);font-size:.95rem}.ev h3{font-size:1.3rem;line-height:1.25}
+.ev p{margin-top:.45rem;padding-left:.8rem;border-left:3px solid var(--c2);font-size:1rem;max-width:68ch}
+.ev p.ar{--c2:var(--ar)}.ev p.uk{--c2:var(--uk)}
+.ev p b{font:600 .85rem "Bricolage Grotesque",sans-serif;color:var(--c2);margin-right:.4em}
+body[data-view="ar"] .uk,body[data-view="uk"] .ar{display:none}
+.wg{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:1.5rem}
+.col-a{--c:var(--ar)}.col-u{--c:var(--uk)}
+.wg h3{color:var(--c);font-size:1.4rem;margin-bottom:.8rem}
+.wg article{background:var(--card);border-left:4px solid var(--c);padding:.9rem 1.1rem;margin-bottom:.8rem}
+.wg h4{font-size:1.05rem}.wg article p{font-size:.98rem;color:var(--mut);line-height:1.5}
+.wg>div{transition:opacity .4s}body[data-view="ar"] .col-u,body[data-view="uk"] .col-a{opacity:.35}
+.tw{overflow-x:auto}table{border-collapse:collapse;width:100%;min-width:560px;font-size:1rem}
+th,td{text-align:left;vertical-align:top;padding:.9rem 1rem;border-bottom:1px solid var(--line)}
+th{font-size:.95rem}th.ar,td.ar{border-left:3px solid var(--ar)}th.uk,td.uk{border-left:3px solid var(--uk)}
+td:first-child{font:600 .95rem "Bricolage Grotesque",sans-serif;width:16%}
+footer{max-width:1080px;margin:0 auto;padding:2rem clamp(1rem,4vw,2rem) 3rem;color:var(--mut);font-size:.92rem;border-top:1px solid var(--line)}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body data-view="both">
+<header>
+<nav><a href="#contexto">Contexto</a><a href="#mapa">Mapa</a><a href="#cronologia">Cronología</a><a href="#armas">Armamento</a><a href="#diferencias">Diferencias</a></nav>
+<div class="tg" role="group" aria-label="Elegir perspectiva"><button data-v="ar">Argentina</button><button data-v="uk">Reino Unido</button><button data-v="both" aria-pressed="true">Comparar</button></div>
+</header>
+<main>
+<section class="hero wrap">
+<p class="kick">Atlántico Sur, del 2 de abril al 14 de junio de 1982</p>
+<h1 id="h1"></h1>
+<p class="lead">Una guerra de 74 días y dos formas de contarla. Elige una perspectiva arriba y observa cómo cambian los nombres, las causas y la memoria.</p>
+<dl class="stats">
+<div><dd class="cnt" data-to="74">0</dd><dt>días de guerra</dt></div>
+<div><dd class="cnt" data-to="649">0</dd><dt>argentinos fallecidos</dt></div>
+<div><dd class="cnt" data-to="255">0</dd><dt>británicos fallecidos</dt></div>
+<div><dd class="cnt" data-to="3">0</dd><dt>civiles isleños fallecidos</dt></div>
+</dl>
+</section>
+
+<section id="contexto" class="wrap">
+<h2>Dos razones para el mismo archipiélago</h2>
+<p class="sub">Ambos países reclaman la soberanía y se apoyan en principios jurídicos distintos. La disputa sigue abierta hoy.</p>
+<div class="cols">
+<div class="card ar"><h3>La mirada argentina</h3>
+<p>Argentina hereda las islas de España al independizarse en 1810. En 1833 una fuerza británica expulsa a las autoridades argentinas: para Buenos Aires, una ocupación ilegítima.</p>
+<p>La ONU reconoció la disputa (Resolución 2065, 1965) e instó a negociar. Argentina sostiene que prevalece la integridad territorial y no la autodeterminación de los isleños.</p>
+<p>En 1982 gobernaba una dictadura militar encabezada por Galtieri. La causa tenía amplio respaldo popular, pero la guerra la decidió un régimen sin legitimidad democrática. Muchos soldados eran conscriptos de 18 años, mal abrigados y mal abastecidos.</p></div>
+<div class="card uk"><h3>La mirada británica</h3>
+<p>Gran Bretaña administra las islas de forma continua desde 1833 y sus habitantes, de origen británico, viven allí desde hace generaciones.</p>
+<p>Para Londres rige la autodeterminación: los isleños, unos 1.800 en 1982, quieren seguir siendo británicos.</p>
+<p>El 2 de abril se vio como una invasión armada. La Resolución 502 exigió el retiro argentino y el gobierno de Margaret Thatcher invocó la legítima defensa (art. 51 de la Carta de la ONU). Envió una Fuerza de Tareas de más de 100 buques a unos 13.000 km de casa.</p></div>
+</div>
+</section>
+
+<section id="mapa" class="wrap">
+<h2>El teatro de operaciones</h2>
+<p class="sub">Mapas históricos de la guerra tomados de fuentes abiertas. Elige el teatro de operaciones y toca un lugar para ver cómo se recuerda desde cada orilla.</p>
+<div class="chips"><button data-m="t" aria-pressed="true">Tierra</button><button data-m="m">Mar</button><button data-m="a">Aire</button></div>
+<div class="mapbox">
+<div id="hm"></div>
+<aside id="info" aria-live="polite"></aside>
+</div>
+<div class="chips" id="plist"></div>
+</section>
+
+<section id="cronologia" class="wrap">
+<h2>Cronología de la guerra</h2>
+<p class="sub">Cada hecho se cuenta dos veces. Filtra por tipo de operación o cambia de perspectiva.</p>
+<div class="chips"><button data-k="all" aria-pressed="true">Todo</button><button data-k="d">Diplomacia</button><button data-k="m">Mar</button><button data-k="a">Aire</button><button data-k="t">Tierra</button></div>
+<div class="tl" id="tl"></div>
+</section>
+
+<section id="armas" class="wrap">
+<h2>Armamento de cada bando</h2>
+<p class="sub">Argentina tenía la ventaja de la cercanía y el Reino Unido, la de la tecnología naval y el entrenamiento.</p>
+<div class="chips"><button data-w="air" aria-pressed="true">Aire</button><button data-w="sea">Mar</button><button data-w="land">Tierra</button></div>
+<div class="wg" id="wg"></div>
+</section>
+
+<section id="diferencias" class="wrap">
+<h2>Dónde divergen los relatos</h2>
+<p class="sub">Los hechos básicos coinciden. Cambian su nombre, su causa y su significado.</p>
+<div class="tw"><table>
+<thead><tr><th>Tema</th><th class="ar">Argentina</th><th class="uk">Reino Unido</th></tr></thead>
+<tbody>
+<tr><td>Nombre</td><td class="ar">Guerra de Malvinas</td><td class="uk">Falklands War o conflicto de las Falklands</td></tr>
+<tr><td>Origen del derecho</td><td class="ar">Herencia de España (1810) y ocupación de 1833</td><td class="uk">Administración continua desde 1833 y derecho de los isleños</td></tr>
+<tr><td>Principio invocado</td><td class="ar">Integridad territorial y descolonización (Res. 1514 y 2065)</td><td class="uk">Autodeterminación y legítima defensa</td></tr>
+<tr><td>El 2 de abril</td><td class="ar">Recuperación de territorio propio</td><td class="uk">Invasión armada de territorio británico</td></tr>
+<tr><td>El Belgrano</td><td class="ar">Hundido fuera de la zona de exclusión: 323 muertos, una acción injustificada</td><td class="uk">Amenaza legítima para la flota en tiempo de guerra</td></tr>
+<tr><td>El desenlace</td><td class="ar">Derrota militar que acelera la caída de la dictadura (1983)</td><td class="uk">Victoria y “liberación” de los isleños; refuerza a Thatcher</td></tr>
+<tr><td>Memoria</td><td class="ar">2 de abril: Día del Veterano y de los Caídos en la Guerra de Malvinas</td><td class="uk">14 de junio: Día de la Liberación en las islas</td></tr>
+<tr><td>Hoy</td><td class="ar">Reclamo diplomático permanente, reafirmado en la Constitución de 1994</td><td class="uk">La soberanía no se negocia contra la voluntad de los isleños; en el referendo de 2013 el 99,8 % votó seguir siendo británico</td></tr>
+</tbody></table></div>
+</section>
+</main>
+<footer>Cifras aproximadas basadas en fuentes oficiales y académicas; los mapas históricos pertenecen a sus autores y se muestran con su licencia (dominio público o GFDL) desde Wikimedia Commons; las ubicaciones del listado son aproximadas. Para profundizar, contrasta el Informe Rattenbach (Argentina) con el Informe Franks (Reino Unido).</footer>
+
+<script>
+const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
+let V="both",K="all",W="air",M="t",sel=2;
+const TY={t:"Tierra",m:"Mar",a:"Aire"};
+const N={ar:"Malvinas",uk:"Falklands",both:"Malvinas / Falklands"};
+const nm=a=>a[0]==a[1]?a[0]:V=="ar"?a[0]:V=="uk"?a[1]:a[0]+" / "+a[1];
+const two=o=>`<p class="ar"><b>Argentina</b>${o.ar}</p><p class="uk"><b>Reino Unido</b>${o.uk}</p>`;
+const P=[
+{lat:-51.5,lng:-58.95,k:"t",nm:["San Carlos","San Carlos"],d:"21 de mayo",ar:"Los británicos desembarcan y la aviación argentina ataca sin descanso los buques, con muchas pérdidas propias.",uk:"Cabeza de playa de la operación Sutton; los buques sufren ataques aéreos en la “Bomb Alley”."},
+{lat:-51.825,lng:-58.9667,k:"t",nm:["Pradera del Ganso","Goose Green"],d:"28 de mayo",ar:"Más de 1.000 soldados resisten más de un día en la primera gran batalla terrestre.",uk:"El 2.º de Paracaidistas vence en inferioridad numérica; muere su jefe, el teniente coronel H. Jones."},
+{lat:-51.6977,lng:-57.8512,k:"t",nm:["Puerto Argentino","Stanley"],d:"14 de junio",ar:"Capital de las islas, defendida por la guarnición del general Menéndez, que allí firma la rendición.",uk:"Objetivo final de la campaña: la rendición pone fin a la guerra y “libera” a los isleños."},
+{lat:-51.66,lng:-57.98,k:"t",nm:["Monte Longdon","Mount Longdon"],d:"11 y 12 de junio",ar:"Soldados del Regimiento 7 resisten una noche de combate cuerpo a cuerpo.",uk:"El 3.º de Paracaidistas ataca de noche en una de las batallas más duras de la campaña."},
+{lat:-51.88,lng:-58.19,k:"a",nm:["Bahía Fitz Roy","Bluff Cove"],d:"8 de junio",ar:"Los A-4 Skyhawk alcanzan los buques de desembarco: el golpe aéreo más costoso para las tropas británicas.",uk:"El Sir Galahad es bombardeado cuando desembarcaban los Welsh Guards: 48 muertos."},
+{lat:-55.4,lng:-61.53,k:"m",z:6,nm:["ARA General Belgrano","ARA General Belgrano"],d:"2 de mayo",ar:"Hundido por el submarino nuclear HMS Conqueror fuera de la zona de exclusión: 323 muertos.",uk:"Para Londres era una amenaza para la Fuerza de Tareas; su hundimiento fue una acción de guerra lícita."},
+{lat:-53.07,lng:-56.93,k:"m",z:7,nm:["HMS Sheffield","HMS Sheffield"],d:"4 de mayo",ar:"Un Super Étendard lanza un misil Exocet y hunde al destructor: la Aviación Naval demuestra su eficacia.",uk:"El Exocet deja 20 muertos y revela lo vulnerable que era la flota ante los misiles."},
+{lat:-51.3333,lng:-59.6667,k:"a",nm:["Isla Calderón","Pebble Island"],d:"14 y 15 de mayo",ar:"Los aviones estacionados en la pista, entre ellos Pucará, son destruidos en tierra durante la noche.",uk:"El SAS destruye 11 aviones argentinos en una incursión nocturna."},
+{lat:-54.2811,lng:-36.5092,k:"t",z:8,nm:["Puerto Grytviken","Grytviken"],d:"25 de abril",ar:"La pequeña guarnición se rinde y el submarino Santa Fe queda fuera de combate.",uk:"Primera victoria de la campaña: se recuperan las Georgias del Sur."},
+{lat:-53.7777,lng:-67.7494,k:"a",z:7,nm:["Río Grande","Río Grande"],d:"4 y 25 de mayo",ar:"Base de la Aviación Naval: de aquí despegan los Super Étendard con Exocet que alcanzan al Sheffield y al Atlantic Conveyor.",uk:"Londres planeó una incursión del SAS contra esta base (operación Mikado), que finalmente se canceló."},
+{lat:-51.6089,lng:-69.3126,k:"a",z:7,nm:["Río Gallegos","Río Gallegos"],d:"desde mayo",ar:"Base de los A-4 Skyhawk: de aquí salen los ataques contra los buques en San Carlos y Bahía Fitz Roy.",uk:"Los atacantes llegan desde el continente, a más de 700 km, con muy poco combustible para combatir sobre las islas."},
+{lat:-7.9696,lng:-14.3936,k:"a",z:6,nm:["Isla Ascensión","Ascension Island"],d:"1 de mayo",ar:"Base de apoyo británica a unos 6.000 km de las islas; de aquí parte el Vulcan que bombardea la pista de Puerto Argentino.",uk:"Escala indispensable de la Fuerza de Tareas y punto de partida de la misión Black Buck, de más de 10.000 km ida y vuelta."}];
+const E=[
+{k:"t",d:"2 de abril",h:"Operación Rosario: desembarco en las islas",ar:"Las fuerzas argentinas recuperan las islas y Menéndez asume como gobernador militar.",uk:"Invasión de territorio británico: los Royal Marines resisten y el gobernador Rex Hunt acepta el alto el fuego."},
+{k:"d",d:"3 de abril",h:"Resolución 502 de la ONU",ar:"Pide negociar y es leída como el reconocimiento de que la soberanía está en disputa.",uk:"Exige el retiro argentino y se convierte en la base legal de la respuesta británica."},
+{k:"d",d:"5 de abril",h:"Zarpa la Fuerza de Tareas británica",ar:"Argentina refuerza las islas con miles de soldados, muchos de ellos conscriptos.",uk:"Los portaaviones Hermes e Invincible parten de Portsmouth rumbo al Atlántico Sur."},
+{k:"t",d:"25 de abril",h:"Recuperación de las Georgias del Sur",ar:"La pequeña guarnición se rinde y el submarino Santa Fe queda fuera de combate.",uk:"Primera victoria de la campaña, que levanta la moral en el país."},
+{k:"a",d:"1 de mayo",h:"Primeros bombardeos y combates aéreos",ar:"Los Dagger y Mirage entran en combate por primera vez y sufren sus primeras pérdidas.",uk:"El bombardero Vulcan realiza una misión de más de 10.000 km desde Ascensión."},
+{k:"m",d:"2 de mayo",h:"Hundimiento del crucero General Belgrano",ar:"323 muertos fuera de la zona de exclusión: la Armada vuelve a puerto y no sale más.",uk:"El HMS Conqueror ataca por considerarlo una amenaza, incluso fuera de la zona de 200 millas."},
+{k:"m",d:"4 de mayo",h:"El HMS Sheffield es alcanzado por un Exocet",ar:"Un Super Étendard de la Aviación Naval hunde al destructor.",uk:"20 muertos y una lección sobre la vulnerabilidad de los buques ante los misiles."},
+{k:"t",d:"21 de mayo",h:"Desembarco en San Carlos",ar:"Los A-4 y Dagger atacan los buques pese a las bajas: los pilotos arriesgan todo.",uk:"Unos 4.000 hombres desembarcan y aseguran la cabeza de playa."},
+{k:"a",d:"25 de mayo",h:"Coventry y Atlantic Conveyor hundidos",ar:"Día patrio: un Exocet destruye el Atlantic Conveyor, que transportaba helicópteros.",uk:"Pierden helicópteros Chinook y las tropas deben avanzar a pie."},
+{k:"t",d:"28 de mayo",h:"Batalla de Goose Green",ar:"Combate largo y duro; hay 1.000 hombres en la guarnición.",uk:"Victoria del 2.º de Paracaidistas en inferioridad numérica."},
+{k:"a",d:"8 de junio",h:"Ataque a los buques en Bluff Cove",ar:"Los A-4 golpean los buques de desembarco: el ataque más doloroso para el invasor.",uk:"48 muertos, en su mayoría guardias galeses a bordo del Sir Galahad."},
+{k:"t",d:"11 al 14 de junio",h:"Las batallas finales por Puerto Argentino",ar:"Longdon, Dos Hermanas, Tumbledown y Wireless Ridge: se pelea con valentía y poco abrigo.",uk:"Ataques nocturnos coordinados con la artillería y el apoyo naval."},
+{k:"d",d:"14 de junio",h:"Rendición en Puerto Argentino",ar:"El general Menéndez firma la rendición; en 1983 vuelve la democracia.",uk:"Fin de la guerra; en las islas se celebra cada año el Día de la Liberación."}];
+const X={air:{a:[["Mirage III y Dagger","Cazas supersónicos de la Fuerza Aérea; operaban al límite de su autonomía."],["A-4 Skyhawk","Bombardeo a baja cota contra buques: el principal arma de ataque argentina."],["Super Étendard y Exocet AM39","Solo cinco aviones y cinco misiles, pero hundieron el Sheffield y el Atlantic Conveyor."],["IA-58 Pucará","Turbohélice de ataque fabricado en Córdoba para operar desde pistas cortas."]],u:[["Sea Harrier FRS1","Despegue vertical desde portaaviones; con misiles Sidewinder AIM-9L no perdió ningún avión en combate aéreo."],["Harrier GR3","Versión de la RAF para atacar objetivos terrestres."],["Avro Vulcan","Bombardero de la misión Black Buck: ida y vuelta desde la isla Ascensión."],["Sea King, Wessex y Chinook","Helicópteros para desembarcos y transporte de tropas."]]},
+sea:{a:[["ARA General Belgrano","Crucero de 1938, ex USS Phoenix, hundido el 2 de mayo."],["ARA Santísima Trinidad","Destructor tipo 42, gemelo de los británicos de la clase Sheffield."],["ARA San Luis","Submarino alemán Tipo 209; fallas en su sistema de tiro limitaron su eficacia."],["ARA Santa Fe","Submarino clase Guppy, capturado en las Georgias del Sur."]],u:[["HMS Hermes e Invincible","Portaaviones ligeros que sostuvieron el poder aéreo de la flota."],["HMS Conqueror","Submarino nuclear que hundió al Belgrano con torpedos Mk 8."],["Destructores tipo 42","Equipados con misiles Sea Dart; el Sheffield y el Coventry fueron hundidos."],["Fragatas y transportes","Con misiles Sea Wolf; el QE2 y el Canberra se usaron como transportes de tropas."]]},
+land:{a:[["Fusil FAL 7,62 mm","Arma de fuego individual del Ejército, fabricada bajo licencia belga."],["Obús Oto Melara 105 mm","Artillería de montaña, ligera y muy usada en la defensa de las posiciones."],["Oerlikon 35 mm y radar Skyguard","Defensa antiaérea de Puerto Argentino y de la pista."],["Misiles Tigercat y Roland","Defensa antiaérea de corto alcance contra los Harrier."]],u:[["Fusil L1A1 SLR 7,62 mm","Versión británica del FAL; el arma más usada por la infantería."],["Rapier","Misil antiaéreo de corto alcance para proteger la cabeza de playa."],["Milan y Blowpipe","Misil antitanque y misil antiaéreo portátil."],["SAS, Paras, Marines y Gurkhas","Tropas de élite con alto grado de entrenamiento y experiencia en combate."]]}};
+const io=new IntersectionObserver(es=>es.forEach(e=>e.target.classList.toggle("on",e.isIntersecting&&e.intersectionRatio>.4)),{rootMargin:"-25% 0px -35% 0px",threshold:[0,.5]});
+function title(){const h=$("#h1");h.className=V=="both"?"b":"";h.innerHTML=[...N[V]].map((c,i)=>`<span style="animation-delay:${i*45}ms">${c==" "?"&nbsp;":c}</span>`).join("")}
+function labels(){$$(".nm").forEach(e=>e.textContent=nm([e.dataset.a,e.dataset.u]))}
+const WC="https://commons.wikimedia.org/wiki/",SRC="https://www.britishempire.co.uk/forces/armycampaigns/southamerica/falklands/";
+const H={
+t:{m:[["Falklandsmap_san_carlos_landings.png","Desembarco en San Carlos (21 de mayo)","Ubica la cabeza de playa británica dentro de la isla Soledad. Base del World Factbook de la CIA, con anotaciones; dominio público."],["Battle_of_Goose_Green.png","Batalla de Pradera del Ganso (28 de mayo)","Posiciones y movimientos de las compañías, a partir de un mapa de Martin Middlebrook; dominio público."]],l:[["Avance británico sobre Puerto Argentino",SRC+"falklandswarfinal1.htm"],["Rutas del avance desde San Carlos hasta Stanley",SRC+"falklandswaradvance.htm"]]},
+m:{m:[["ARA.Belgrano.sunk-es.svg","Despliegue naval antes del hundimiento del Belgrano","Según Rubén Moro, las fuerzas argentinas estaban más lejos de la zona de exclusión que lo que sostiene Middlebrook (60 a 90 millas náuticas). Autor: Keysanger; licencia GFDL."]],l:[["Mapa argentino de la Fuerza de Tareas británica",SRC+"falklandswarargentinemap1.htm"]]},
+a:{m:[],l:[["Mapa argentino de las rutas aéreas contra la flota",SRC+"falklandswarairbattle.htm"],["Distancias: bases aéreas argentinas frente a Ascensión",SRC+"falklandsmaptaskforce2.htm"],["Alcance desde las bases de la FAA hasta las islas (tesis, Real Colegio Militar de Canadá)","https://espace.rmc.ca/jspui/bitstream/11264/564/1/HIE%20424%20Di%20Blasi%20Argentine%20Air%20Superiority%20Ops.pdf"]]}};
+function hm(){const h=H[M];$("#hm").innerHTML=h.m.map(m=>`<figure><a href="${WC}File:${m[0]}" target="_blank" rel="noopener"><img src="${WC}Special:FilePath/${m[0]}?width=900" alt="${m[1]}" loading="lazy"></a><figcaption><b>${m[1]}</b>${m[2]}</figcaption></figure>`).join("")+`<div class="lk"><h3>${h.m.length?"Más mapas":"Mapas del frente aéreo"}</h3>${h.m.length?"":"<p>No pude confirmar una licencia libre para incrustarlos, así que se abren en su sitio de origen.</p>"}${h.l.map(l=>`<a href="${l[1]}" target="_blank" rel="noopener">${l[0]} ↗</a>`).join("")}</div>`}
+function plist(){$("#plist").innerHTML=P.map((p,i)=>p.k==M?`<button data-i="${i}" aria-pressed="${i==sel}">${nm(p.nm)}</button>`:"").join("")}
+function info(){const p=P[sel];$("#info").innerHTML=`<h3>${nm(p.nm)}</h3><p class="d">${TY[p.k]} · ${p.d}, 1982</p>${two(p)}<p class="hint"><a href="https://www.openstreetmap.org/?mlat=${p.lat}&mlon=${p.lng}#map=9/${p.lat}/${p.lng}" target="_blank" rel="noopener">Ver ubicación en OpenStreetMap</a></p>`}
+function pick(i){sel=i;plist();info()}
+function tl(){$("#tl").innerHTML=E.filter(e=>K=="all"||e.k==K).map(e=>`<div class="ev" data-k="${e.k}"><time>${e.d}</time><h3>${e.h}</h3>${two(e)}</div>`).join("");$$(".ev").forEach(x=>io.observe(x))}
+function weap(){$("#wg").innerHTML=["a","u"].map(s=>`<div class="col-${s}"><h3>${s=="a"?"Argentina":"Reino Unido"}</h3>${X[W][s].map(w=>`<article><h4>${w[0]}</h4><p>${w[1]}</p></article>`).join("")}</div>`).join("")}
+function sync(){[["v",V],["k",K],["w",W],["m",M]].forEach(([a,v])=>$$(`[data-${a}]`).forEach(b=>b.setAttribute("aria-pressed",b.dataset[a]==v)))}
+function all(){document.body.dataset.view=V;title();labels();plist();info();sync()}
+document.addEventListener("click",e=>{const b=e.target.closest("[data-v],[data-k],[data-w],[data-m]"),g=e.target.closest("[data-i]");
+if(g){pick(+g.dataset.i);return}
+if(!b)return;if(b.dataset.v)V=b.dataset.v;if(b.dataset.k)K=b.dataset.k;if(b.dataset.w)W=b.dataset.w;if(b.dataset.m){M=b.dataset.m;sel=P.findIndex(p=>p.k==M)}
+all();if(b.dataset.k)tl();if(b.dataset.w)weap();if(b.dataset.m)hm()});
+
+all();tl();weap();hm();
+$$(".cnt").forEach(c=>{const t=+c.dataset.to,s=performance.now();(function f(n){const p=Math.min((n-s)/1600,1);c.textContent=Math.round(t*(1-Math.pow(1-p,3))).toLocaleString("es-AR");if(p<1)requestAnimationFrame(f)})(s)});
+</script>
+</body>
+</html>
