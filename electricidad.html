@@ -1,0 +1,1471 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Electricidad domiciliaria · Curso visual desde cero</title>
+<style>
+  :root{
+    --bg:#070b12;
+    --panel:rgba(255,255,255,.045);
+    --stroke:rgba(255,255,255,.10);
+    --text:#e8eefb;
+    --muted:#8ea1bd;
+    --amber:#fbbf24;
+    --orange:#fb923c;
+    --cyan:#22d3ee;
+    --lime:#4ade80;
+    --red:#f87171;
+    --violet:#a78bfa;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    color:var(--text);
+    font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    line-height:1.65;
+    background:
+      radial-gradient(900px 620px at 8% -8%, rgba(251,191,36,.15), transparent 62%),
+      radial-gradient(900px 620px at 94% -2%, rgba(34,211,238,.14), transparent 62%),
+      radial-gradient(900px 700px at 50% 112%, rgba(167,139,250,.10), transparent 65%),
+      var(--bg);
+    min-height:100vh;
+    overflow-x:hidden;
+  }
+  .grid-bg{
+    position:fixed;inset:0;pointer-events:none;z-index:0;
+    background-image:
+      linear-gradient(rgba(255,255,255,.032) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(255,255,255,.032) 1px,transparent 1px);
+    background-size:64px 64px;
+    -webkit-mask-image:radial-gradient(circle at 50% 16%,#000 0%,transparent 78%);
+    mask-image:radial-gradient(circle at 50% 16%,#000 0%,transparent 78%);
+    animation:gridMove 28s linear infinite;
+  }
+  @keyframes gridMove{to{background-position:64px 64px,64px 64px}}
+
+  /* ---------- HERO ---------- */
+  .hero{padding:92px 22px 40px;text-align:center;position:relative;z-index:1}
+  .eyebrow{
+    display:inline-block;font-size:.74rem;letter-spacing:.24em;text-transform:uppercase;
+    color:var(--amber);border:1px solid rgba(251,191,36,.38);
+    background:rgba(251,191,36,.09);padding:7px 16px;border-radius:999px;
+  }
+  .hero h1{
+    font-size:clamp(2rem,5.4vw,3.5rem);line-height:1.08;margin:22px auto 0;
+    max-width:18ch;font-weight:800;letter-spacing:-.025em;
+  }
+  .grad{
+    background:linear-gradient(100deg,#fbbf24,#fb923c,#f472b6,#22d3ee,#fbbf24);
+    background-size:320% 100%;
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    animation:shine 10s linear infinite;
+  }
+  @keyframes shine{to{background-position:320% 0}}
+  .lead{max-width:64ch;margin:20px auto 0;color:var(--muted);font-size:1.03rem}
+  .hero-cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:30px}
+  .btn{
+    display:inline-block;text-decoration:none;font-weight:600;font-size:.94rem;
+    padding:13px 26px;border-radius:999px;border:1px solid transparent;
+    transition:transform .25s,box-shadow .25s,background .25s;
+  }
+  .btn-primary{
+    color:#1a1204;
+    background:linear-gradient(100deg,var(--amber),#fcd34d 40%,var(--orange));
+    box-shadow:0 14px 34px -14px rgba(251,191,36,.9);
+  }
+  .btn-primary:hover{transform:translateY(-3px);box-shadow:0 20px 44px -14px rgba(251,146,60,.95)}
+  .btn-ghost{color:var(--text);border-color:var(--stroke);background:rgba(255,255,255,.04)}
+  .btn-ghost:hover{background:rgba(255,255,255,.09);transform:translateY(-3px)}
+
+  .aviso{
+    max-width:820px;margin:34px auto 0;padding:16px 22px;border-radius:16px;
+    background:rgba(248,113,113,.08);border:1px solid rgba(248,113,113,.35);
+    color:#fecaca;font-size:.88rem;text-align:left;position:relative;z-index:1;
+  }
+  .aviso b{color:#fff}
+
+  /* ---------- NAV ---------- */
+  .nav{
+    position:sticky;top:0;z-index:60;
+    -webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);
+    background:rgba(7,11,18,.76);border-bottom:1px solid var(--stroke);
+  }
+  .nav-inner{
+    max-width:1180px;margin:0 auto;display:flex;gap:8px;
+    overflow-x:auto;padding:12px 20px;scrollbar-width:none;
+  }
+  .nav-inner::-webkit-scrollbar{display:none}
+  .nav a{
+    flex:0 0 auto;text-decoration:none;color:var(--muted);font-size:.86rem;font-weight:600;
+    padding:8px 16px;border-radius:999px;border:1px solid transparent;transition:.22s;white-space:nowrap;
+  }
+  .nav a:hover{color:var(--text);background:rgba(255,255,255,.06);border-color:var(--stroke)}
+
+  /* ---------- SECTIONS ---------- */
+  section{max-width:1180px;margin:0 auto;padding:74px 20px;position:relative;z-index:1;scroll-margin-top:76px}
+  .section-head{max-width:760px;margin-bottom:36px}
+  .kicker{
+    font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;color:var(--orange);
+    font-weight:700;margin:0 0 10px;
+  }
+  .section-head h2{font-size:clamp(1.5rem,3.2vw,2.15rem);margin:0 0 12px;letter-spacing:-.02em;line-height:1.2}
+  .section-head p{color:var(--muted);margin:0}
+
+  /* ---------- WORKSPACE ---------- */
+  .workspace{display:grid;grid-template-columns:minmax(0,1fr) 350px;gap:22px;align-items:start}
+  .stage{
+    position:relative;overflow:hidden;padding:12px;
+    background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.012));
+    border:1px solid var(--stroke);border-radius:24px;
+  }
+  .stage::before{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background:radial-gradient(620px 320px at 50% -10%,rgba(251,191,36,.10),transparent 70%);
+  }
+  svg.diagram{display:block;width:100%;height:auto;position:relative}
+
+  .panel{
+    background:linear-gradient(180deg,rgba(255,255,255,.065),rgba(255,255,255,.018));
+    border:1px solid var(--stroke);border-radius:24px;padding:24px;
+    position:sticky;top:84px;min-height:230px;
+  }
+  .panel .empty{color:var(--muted);font-size:.94rem;margin:0}
+  .panel .empty strong{display:block;color:var(--text);font-size:1rem;margin-bottom:6px}
+  .p-index{
+    display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;
+    background:linear-gradient(135deg,rgba(251,191,36,.32),rgba(34,211,238,.32));
+    border:1px solid rgba(251,191,36,.55);color:var(--amber);font-weight:800;font-size:.85rem;
+    margin-bottom:12px;
+  }
+  .p-title{margin:0 0 10px;font-size:1.22rem;letter-spacing:-.01em}
+  .p-text{margin:0 0 16px;color:#c6d3e6;font-size:.94rem}
+  .p-key{
+    margin:0;font-size:.85rem;color:var(--amber);
+    background:rgba(251,191,36,.09);border-left:3px solid var(--amber);
+    padding:10px 14px;border-radius:0 10px 10px 0;
+  }
+  .fade-in{animation:fadeSlide .45s cubic-bezier(.2,.8,.2,1)}
+  @keyframes fadeSlide{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+  /* ---------- HOTSPOTS ---------- */
+  .hotspot{cursor:pointer;outline:none}
+  .hotspot .hit{fill:rgba(251,191,36,.22);stroke:var(--amber);stroke-width:2;transition:.25s}
+  .hotspot text{
+    fill:#fff8e6;font-size:16px;font-weight:800;text-anchor:middle;
+    dominant-baseline:central;pointer-events:none;font-family:inherit;
+  }
+  .hotspot .ring{
+    fill:none;stroke:var(--amber);stroke-width:2;opacity:0;
+    transform-box:fill-box;transform-origin:center;
+    animation:ringPulse 2.6s ease-out infinite;
+  }
+  @keyframes ringPulse{
+    0%{transform:scale(.55);opacity:.85}
+    100%{transform:scale(2.1);opacity:0}
+  }
+  .hotspot:hover .hit,.hotspot:focus-visible .hit{fill:rgba(251,191,36,.6);stroke:#fff}
+  .hotspot.active .hit{fill:var(--violet);stroke:#fff}
+  .hotspot.active text{fill:#fff}
+
+  /* ---------- LEYENDA ---------- */
+  .legend{display:flex;flex-wrap:wrap;gap:9px;margin-top:18px}
+  .chip{
+    display:inline-flex;align-items:center;gap:9px;
+    background:rgba(255,255,255,.05);border:1px solid var(--stroke);
+    color:var(--text);padding:8px 14px 8px 8px;border-radius:999px;
+    font-size:.85rem;font-family:inherit;cursor:pointer;
+    transition:transform .2s,background .2s,border-color .2s;
+  }
+  .chip:hover{background:rgba(251,191,36,.14);border-color:rgba(251,191,36,.55);transform:translateY(-2px)}
+  .chip.active{background:linear-gradient(100deg,rgba(251,191,36,.24),rgba(167,139,250,.24));border-color:rgba(167,139,250,.6)}
+  .chip b{
+    display:grid;place-items:center;width:22px;height:22px;border-radius:50%;
+    background:rgba(251,191,36,.18);color:var(--amber);font-size:.72rem;font-weight:800;
+  }
+  .chip.active b{background:var(--violet);color:#0b0714}
+
+  /* ---------- CONCEPTOS ---------- */
+  .concept-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
+  .concept{
+    padding:22px;border-radius:20px;border:1px solid var(--stroke);
+    background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.012));
+    transition:transform .3s,border-color .3s,box-shadow .3s;position:relative;overflow:hidden;
+  }
+  .concept::after{
+    content:"";position:absolute;right:-60px;top:-60px;width:160px;height:160px;border-radius:50%;
+    background:radial-gradient(circle,rgba(251,191,36,.22),transparent 70%);
+    opacity:0;transition:opacity .4s;pointer-events:none;
+  }
+  .concept:hover{transform:translateY(-6px);border-color:rgba(251,191,36,.45);box-shadow:0 22px 46px -24px rgba(251,191,36,.6)}
+  .concept:hover::after{opacity:1}
+  .concept .unit{
+    display:inline-block;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;
+    font-weight:800;color:var(--cyan);margin-bottom:8px;
+  }
+  .concept h4{margin:0 0 8px;font-size:1.06rem;letter-spacing:-.01em}
+  .concept p{margin:0;font-size:.88rem;color:var(--muted)}
+  .concept .analogy{
+    display:block;margin-top:12px;font-size:.82rem;color:var(--amber);
+    border-top:1px dashed rgba(251,191,36,.28);padding-top:10px;
+  }
+
+  /* ---------- CALCULADORA ---------- */
+  .calc{
+    display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:26px;
+    padding:26px;border-radius:24px;border:1px solid var(--stroke);
+    background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.014));
+    margin-top:26px;
+  }
+  .calc h4{margin:0 0 18px;font-size:1.02rem;letter-spacing:-.01em}
+  .calc label{display:flex;justify-content:space-between;align-items:baseline;font-size:.85rem;color:var(--muted);margin-bottom:8px}
+  .calc label b{color:var(--amber);font-size:1rem;font-variant-numeric:tabular-nums}
+  .calc .field{margin-bottom:22px}
+  input[type=range]{
+    -webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:99px;
+    background:linear-gradient(90deg,rgba(251,191,36,.85),rgba(34,211,238,.75));
+    outline:none;cursor:pointer;
+  }
+  input[type=range]::-webkit-slider-thumb{
+    -webkit-appearance:none;appearance:none;width:22px;height:22px;border-radius:50%;
+    background:#fff8e6;border:3px solid var(--amber);cursor:pointer;
+    box-shadow:0 0 16px rgba(251,191,36,.85);transition:transform .15s;
+  }
+  input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.12)}
+  input[type=range]::-moz-range-thumb{
+    width:18px;height:18px;border-radius:50%;background:#fff8e6;
+    border:3px solid var(--amber);cursor:pointer;box-shadow:0 0 16px rgba(251,191,36,.85);
+  }
+  .out-item{
+    display:flex;justify-content:space-between;align-items:baseline;
+    padding:12px 16px;border-radius:12px;background:rgba(255,255,255,.05);
+    border:1px solid var(--stroke);margin-bottom:10px;
+  }
+  .out-item span{font-size:.85rem;color:var(--muted)}
+  .out-item b{font-size:1.15rem;color:var(--cyan);font-variant-numeric:tabular-nums}
+  .bar{height:10px;border-radius:99px;background:rgba(255,255,255,.07);overflow:hidden;margin:14px 0 12px}
+  .bar i{display:block;height:100%;width:0;border-radius:99px;transition:width .35s ease,background .35s}
+  .hint{margin:0;font-size:.83rem;color:var(--muted);min-height:3.2em}
+
+  /* ---------- TABLA ---------- */
+  .table-wrap{
+    margin-top:26px;border-radius:20px;overflow:hidden;border:1px solid var(--stroke);
+    background:rgba(255,255,255,.02);
+  }
+  table{width:100%;border-collapse:collapse;font-size:.88rem}
+  thead th{
+    text-align:left;padding:14px 18px;font-size:.72rem;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--amber);background:rgba(251,191,36,.07);
+    border-bottom:1px solid var(--stroke);font-weight:800;
+  }
+  tbody td{padding:14px 18px;border-bottom:1px solid rgba(255,255,255,.055);color:#c6d3e6;vertical-align:top}
+  tbody tr:last-child td{border-bottom:none}
+  tbody tr{transition:background .2s}
+  tbody tr:hover{background:rgba(251,191,36,.06)}
+  tbody td:first-child{color:var(--text);font-weight:700}
+
+  /* ---------- PILARES ---------- */
+  .pillars{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px;margin-top:26px}
+  .pillar{
+    padding:20px;border-radius:18px;border:1px solid var(--stroke);
+    background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.012));
+    transition:transform .3s,border-color .3s;
+  }
+  .pillar:hover{transform:translateY(-5px);border-color:rgba(74,222,128,.5)}
+  .pillar h4{margin:0 0 6px;font-size:.98rem;color:var(--lime);letter-spacing:.01em}
+  .pillar p{margin:0;font-size:.86rem;color:var(--muted)}
+
+  /* ---------- ERRORES ---------- */
+  .errors{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:18px}
+  .error-card{
+    position:relative;padding:22px 22px 22px 26px;border-radius:20px;
+    border:1px solid rgba(248,113,113,.28);
+    background:linear-gradient(180deg,rgba(248,113,113,.09),rgba(255,255,255,.012));
+    transition:transform .3s,border-color .3s,box-shadow .3s;
+  }
+  .error-card::before{
+    content:"";position:absolute;left:0;top:18px;bottom:18px;width:4px;border-radius:0 4px 4px 0;
+    background:linear-gradient(180deg,var(--red),var(--orange));
+  }
+  .error-card:hover{transform:translateY(-6px);border-color:rgba(248,113,113,.7);box-shadow:0 22px 46px -26px rgba(248,113,113,.9)}
+  .error-card h4{margin:0 0 10px;font-size:1rem;letter-spacing:-.01em}
+  .error-card p{margin:0 0 12px;font-size:.87rem;color:#c6d3e6}
+  .error-card .fix{
+    margin:0;font-size:.83rem;color:var(--lime);
+    background:rgba(74,222,128,.09);border-left:3px solid var(--lime);
+    padding:9px 13px;border-radius:0 10px 10px 0;
+  }
+  .error-card .tag-err{
+    display:inline-block;font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;
+    font-weight:800;color:var(--red);margin-bottom:8px;
+  }
+
+  /* ---------- FALLOS ---------- */
+  .fault-layout{display:grid;grid-template-columns:330px minmax(0,1fr);gap:22px;align-items:start}
+  .fault-list{display:grid;gap:9px}
+  .fault-btn{
+    text-align:left;font-family:inherit;font-size:.88rem;font-weight:600;color:var(--text);
+    padding:14px 16px;border-radius:14px;border:1px solid var(--stroke);
+    background:rgba(255,255,255,.04);cursor:pointer;
+    transition:transform .2s,background .2s,border-color .2s;
+    display:flex;justify-content:space-between;align-items:center;gap:10px;
+  }
+  .fault-btn:hover{background:rgba(251,191,36,.12);border-color:rgba(251,191,36,.5);transform:translateX(4px)}
+  .fault-btn.active{background:linear-gradient(100deg,rgba(251,191,36,.22),rgba(167,139,250,.22));border-color:rgba(167,139,250,.65)}
+  .dot-urg{width:9px;height:9px;border-radius:50%;flex:0 0 auto}
+  .dot-alta{background:var(--red);box-shadow:0 0 10px rgba(248,113,113,.95)}
+  .dot-media{background:var(--amber);box-shadow:0 0 10px rgba(251,191,36,.9)}
+  .dot-baja{background:var(--lime);box-shadow:0 0 10px rgba(74,222,128,.9)}
+
+  .urg{
+    display:inline-block;font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;
+    font-weight:800;padding:5px 12px;border-radius:999px;margin-bottom:14px;
+  }
+  .urg-alta{background:rgba(248,113,113,.16);color:#fca5a5;border:1px solid rgba(248,113,113,.5)}
+  .urg-media{background:rgba(251,191,36,.16);color:#fcd34d;border:1px solid rgba(251,191,36,.5)}
+  .urg-baja{background:rgba(74,222,128,.16);color:#86efac;border:1px solid rgba(74,222,128,.5)}
+
+  .fault-block{margin-bottom:18px}
+  .fault-block h5{
+    margin:0 0 8px;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--cyan);font-weight:800;
+  }
+  .fault-block p{margin:0;font-size:.9rem;color:#c6d3e6}
+  .fault-block ul{margin:0;padding-left:20px;font-size:.88rem;color:#c6d3e6}
+  .fault-block li{margin-bottom:5px}
+  .fault-block li::marker{color:var(--amber)}
+
+  .semaforo{display:flex;flex-wrap:wrap;gap:18px;margin-top:22px;font-size:.83rem;color:var(--muted)}
+  .semaforo span{display:inline-flex;align-items:center;gap:8px}
+
+  /* ---------- GLOSARIO ---------- */
+  .glossary{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px}
+  .term{
+    padding:20px;border-radius:18px;border:1px solid var(--stroke);
+    background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.012));
+    transition:transform .3s,border-color .3s;
+  }
+  .term:hover{transform:translateY(-5px);border-color:rgba(34,211,238,.5)}
+  .term h4{margin:0 0 6px;font-size:.98rem;color:var(--cyan);letter-spacing:.01em}
+  .term p{margin:0;font-size:.86rem;color:var(--muted)}
+
+  /* ---------- QUIZ ---------- */
+  .quiz-bar{
+    display:flex;gap:22px;flex-wrap:wrap;align-items:center;margin-bottom:24px;
+    padding:16px 22px;border-radius:18px;border:1px solid var(--stroke);
+    background:linear-gradient(100deg,rgba(251,191,36,.10),rgba(34,211,238,.10));
+  }
+  .quiz-bar span{font-size:.88rem;color:var(--muted)}
+  .quiz-bar b{color:var(--text);font-size:1.1rem}
+  .quiz-grid{display:grid;gap:18px}
+  .quiz-card{
+    padding:22px;border-radius:20px;border:1px solid var(--stroke);
+    background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.012));
+  }
+  .q-num{margin:0 0 6px;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--orange);font-weight:700}
+  .quiz-card h4{margin:0 0 16px;font-size:1.05rem;font-weight:700;letter-spacing:-.01em}
+  .q-opts{display:grid;gap:9px}
+  .q-opt{
+    text-align:left;font-family:inherit;font-size:.9rem;color:var(--text);cursor:pointer;
+    padding:12px 16px;border-radius:12px;border:1px solid var(--stroke);
+    background:rgba(255,255,255,.04);transition:.2s;
+  }
+  .q-opt:hover:not(:disabled){background:rgba(251,191,36,.14);border-color:rgba(251,191,36,.5);transform:translateX(4px)}
+  .q-opt:disabled{cursor:default}
+  .q-opt.correct{background:rgba(74,222,128,.16);border-color:rgba(74,222,128,.7);color:#bbf7d0}
+  .q-opt.wrong{background:rgba(248,113,113,.14);border-color:rgba(248,113,113,.6);color:#fecaca}
+  .q-fb{margin:16px 0 0;font-size:.87rem;padding:12px 16px;border-radius:12px;animation:fadeSlide .4s ease}
+  .q-fb.ok{background:rgba(74,222,128,.10);border-left:3px solid var(--lime);color:#bbf7d0}
+  .q-fb.no{background:rgba(248,113,113,.10);border-left:3px solid var(--red);color:#fecaca}
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    text-align:center;padding:56px 20px 70px;color:var(--muted);font-size:.85rem;
+    border-top:1px solid var(--stroke);margin-top:40px;position:relative;z-index:1;
+  }
+  footer strong{color:var(--text)}
+
+  /* ---------- REVEAL ---------- */
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .75s cubic-bezier(.2,.75,.2,1),transform .75s cubic-bezier(.2,.75,.2,1)}
+  .reveal.visible{opacity:1;transform:none}
+
+  .flowline{stroke-dasharray:9 9;animation:dash 1.6s linear infinite}
+  @keyframes dash{to{stroke-dashoffset:-18}}
+
+  @media (max-width:920px){
+    .workspace,.fault-layout,.calc{grid-template-columns:1fr}
+    .panel{position:static;min-height:0}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important}
+    .reveal{opacity:1;transform:none}
+  }
+</style>
+</head>
+<body>
+<div class="grid-bg"></div>
+
+<!-- ================= HERO ================= -->
+<header class="hero">
+  <p class="eyebrow">Curso visual · Nivel cero</p>
+  <h1>Electricidad domiciliaria <span class="grad">explicada desde cero</span></h1>
+  <p class="lead">
+    Qué es la corriente, cómo son los cables por dentro, cómo se ordena una instalación segura
+    y cómo detectar un problema antes de que se convierta en un incendio. Todo con diagramas que puedes tocar.
+  </p>
+  <div class="hero-cta">
+    <a class="btn btn-primary" href="#conceptos">Empezar el recorrido</a>
+    <a class="btn btn-ghost" href="#fallos">Detectar fallos</a>
+  </div>
+  <p class="aviso">
+    <b>Aviso de seguridad:</b> este material es educativo. La intervención del tablero, el cambio de cables
+    y cualquier trabajo con tensión debe realizarlo <b>personal electricista matriculado</b>. Ante la duda,
+    corta la energía general y consulta a un profesional.
+  </p>
+</header>
+
+<!-- ================= NAV ================= -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#conceptos">01 · Conceptos</a>
+    <a href="#cables">02 · Cables</a>
+    <a href="#instalacion">03 · Instalación</a>
+    <a href="#errores">04 · Errores</a>
+    <a href="#fallos">05 · Fallos</a>
+    <a href="#glosario">06 · Glosario</a>
+    <a href="#quiz">07 · Autoevaluación</a>
+  </div>
+</nav>
+
+<main>
+
+<!-- ================= 01 CONCEPTOS ================= -->
+<section id="conceptos">
+  <div class="section-head reveal">
+    <p class="kicker">Paso 01</p>
+    <h2>Los cinco conceptos que explican todo</h2>
+    <p>
+      Toda la electricidad domiciliaria se entiende con cinco ideas. La analogía del agua ayuda mucho
+      al principio: imagina una manguera por la que circula líquido.
+    </p>
+  </div>
+
+  <div class="concept-grid reveal">
+    <article class="concept">
+      <span class="unit">Voltaje · V (voltios)</span>
+      <h4>Tensión eléctrica</h4>
+      <p>Es la "presión" que empuja a los electrones. En una casa suele ser de 220 V o 110 V según el país.</p>
+      <span class="analogy">Como la presión del agua en la manguera.</span>
+    </article>
+    <article class="concept">
+      <span class="unit">Corriente · A (amperios)</span>
+      <h4>Intensidad de corriente</h4>
+      <p>Es la cantidad de electrones que pasan por segundo. Más aparatos encendidos = más corriente circulando.</p>
+      <span class="analogy">Como los litros de agua que pasan por minuto.</span>
+    </article>
+    <article class="concept">
+      <span class="unit">Resistencia · Ω (ohmios)</span>
+      <h4>Resistencia</h4>
+      <p>Es la oposición al paso de la corriente. Un cable fino resiste más que uno grueso; por eso se calienta.</p>
+      <span class="analogy">Como el estrechamiento de la manguera.</span>
+    </article>
+    <article class="concept">
+      <span class="unit">Potencia · W (vatios)</span>
+      <h4>Potencia</h4>
+      <p>Es la energía que consume un aparato por segundo. Un secador de pelo puede pedir 2000 W; una lámpara LED, 9 W.</p>
+      <span class="analogy">Como el trabajo que hace el agua al mover una turbina.</span>
+    </article>
+    <article class="concept">
+      <span class="unit">Energía · kWh</span>
+      <h4>Energía consumida</h4>
+      <p>Es la potencia multiplicada por el tiempo. Es lo que mide y cobra la factura de luz cada mes.</p>
+      <span class="analogy">Como el total de litros usados en todo el mes.</span>
+    </article>
+    <article class="concept">
+      <span class="unit">Frecuencia · Hz</span>
+      <h4>Frecuencia</h4>
+      <p>La corriente alterna cambia de sentido muchas veces por segundo: 50 Hz o 60 Hz según el país.</p>
+      <span class="analogy">Como el vaivén constante del agua dentro de la manguera.</span>
+    </article>
+  </div>
+
+  <!-- CALCULADORA LEY DE OHM -->
+  <div class="calc reveal">
+    <div>
+      <h4>Prueba la Ley de Ohm</h4>
+      <div class="field">
+        <label for="volt">Voltaje <b id="vVal">220 V</b></label>
+        <input type="range" id="volt" min="12" max="240" value="220" step="1">
+      </div>
+      <div class="field">
+        <label for="res">Resistencia del aparato <b id="rVal">20 Ω</b></label>
+        <input type="range" id="res" min="1" max="100" value="20" step="1">
+      </div>
+      <p class="hint" style="font-size:.8rem">
+        La fórmula es <strong style="color:var(--amber)">I = V ÷ R</strong>. A menor resistencia, más corriente circula.
+      </p>
+    </div>
+    <div>
+      <div class="out-item"><span>Corriente (I)</span><b id="outI">11,0 A</b></div>
+      <div class="out-item"><span>Potencia (P = V × I)</span><b id="outP">2420 W</b></div>
+      <div class="bar"><i id="barI"></i></div>
+      <p class="hint" id="calcHint"></p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 02 CABLES ================= -->
+<section id="cables">
+  <div class="section-head reveal">
+    <p class="kicker">Paso 02</p>
+    <h2>El cable por dentro: tres conductores, tres funciones</h2>
+    <p>
+      Un cable de instalación no es un solo hilo: dentro del aislante conviven tres conductores con
+      colores normalizados. Toca cada número para saber qué hace cada uno.
+    </p>
+  </div>
+
+  <div class="workspace reveal">
+    <div class="stage">
+      <svg class="diagram" viewBox="0 0 900 470" role="img" aria-label="Corte transversal de un cable eléctrico y sus tres conductores">
+        <defs>
+          <radialGradient id="jacketGrad" cx="35%" cy="30%" r="80%">
+            <stop offset="0" stop-color="#33405a"/><stop offset="1" stop-color="#151d2e"/>
+          </radialGradient>
+          <linearGradient id="copperGrad" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#8a4b23"/><stop offset=".45" stop-color="#d98a52"/><stop offset="1" stop-color="#8a4b23"/>
+          </linearGradient>
+        </defs>
+
+        <!-- sección transversal -->
+        <circle cx="240" cy="235" r="152" fill="url(#jacketGrad)" stroke="#3b5578" stroke-width="2.5"/>
+        <circle cx="240" cy="235" r="138" fill="#0b1320" stroke="#22314c" stroke-width="1.5"/>
+
+        <!-- conductores -->
+        <circle cx="240" cy="167" r="44" fill="#8a5a2b" stroke="#c08a4a" stroke-width="2"/>
+        <circle cx="240" cy="167" r="30" fill="url(#copperGrad)"/>
+
+        <circle cx="299" cy="269" r="44" fill="#1d4ed8" stroke="#4f83f0" stroke-width="2"/>
+        <circle cx="299" cy="269" r="30" fill="url(#copperGrad)"/>
+
+        <circle cx="181" cy="269" r="44" fill="#166534" stroke="#4ade80" stroke-width="2"/>
+        <circle cx="181" cy="269" r="30" fill="url(#copperGrad)"/>
+        <g stroke="#facc15" stroke-width="4" stroke-linecap="round" opacity=".85">
+          <line x1="167" y1="248" x2="195" y2="248"/>
+          <line x1="158" y1="262" x2="204" y2="262"/>
+          <line x1="167" y1="276" x2="195" y2="276"/>
+        </g>
+
+        <!-- cables extendidos -->
+        <g font-family="inherit">
+          <!-- fase -->
+          <text x="448" y="128" fill="#8ea1bd" font-size="13" font-weight="600">Fase · marrón o negro</text>
+          <rect x="448" y="140" width="300" height="30" rx="15" fill="#8a5a2b" stroke="#c08a4a" stroke-width="1.5"/>
+          <rect x="748" y="146" width="62" height="18" rx="5" fill="url(#copperGrad)"/>
+          <!-- neutro -->
+          <text x="448" y="218" fill="#8ea1bd" font-size="13" font-weight="600">Neutro · azul</text>
+          <rect x="448" y="230" width="300" height="30" rx="15" fill="#1d4ed8" stroke="#4f83f0" stroke-width="1.5"/>
+          <rect x="748" y="236" width="62" height="18" rx="5" fill="url(#copperGrad)"/>
+          <!-- tierra -->
+          <text x="448" y="308" fill="#8ea1bd" font-size="13" font-weight="600">Puesta a tierra · verde y amarillo</text>
+          <rect x="448" y="320" width="300" height="30" rx="15" fill="#166534" stroke="#4ade80" stroke-width="1.5"/>
+          <g stroke="#facc15" stroke-width="5" stroke-linecap="round" opacity=".9">
+            <line x1="478" y1="335" x2="486" y2="335"/>
+            <line x1="508" y1="335" x2="516" y2="335"/>
+            <line x1="538" y1="335" x2="546" y2="335"/>
+            <line x1="568" y1="335" x2="576" y2="335"/>
+            <line x1="598" y1="335" x2="606" y2="335"/>
+            <line x1="628" y1="335" x2="636" y2="335"/>
+            <line x1="658" y1="335" x2="666" y2="335"/>
+            <line x1="688" y1="335" x2="696" y2="335"/>
+            <line x1="718" y1="335" x2="726" y2="335"/>
+          </g>
+          <rect x="748" y="326" width="62" height="18" rx="5" fill="url(#copperGrad)"/>
+        </g>
+
+        <!-- HOTSPOTS -->
+        <g class="hotspot" data-group="cables" data-id="fase" tabindex="0" role="button">
+          <circle class="ring" cx="240" cy="167" r="17"/>
+          <circle class="hit" cx="240" cy="167" r="17"/>
+          <text x="240" y="167">1</text>
+        </g>
+        <g class="hotspot" data-group="cables" data-id="neutro" tabindex="0" role="button">
+          <circle class="ring" cx="299" cy="269" r="17"/>
+          <circle class="hit" cx="299" cy="269" r="17"/>
+          <text x="299" y="269">2</text>
+        </g>
+        <g class="hotspot" data-group="cables" data-id="tierra" tabindex="0" role="button">
+          <circle class="ring" cx="181" cy="269" r="17"/>
+          <circle class="hit" cx="181" cy="269" r="17"/>
+          <text x="181" y="269">3</text>
+        </g>
+        <g class="hotspot" data-group="cables" data-id="aislante" tabindex="0" role="button">
+          <circle class="ring" cx="240" cy="378" r="17"/>
+          <circle class="hit" cx="240" cy="378" r="17"/>
+          <text x="240" y="378">4</text>
+        </g>
+        <g class="hotspot" data-group="cables" data-id="cobre" tabindex="0" role="button">
+          <circle class="ring" cx="779" cy="155" r="17"/>
+          <circle class="hit" cx="779" cy="155" r="17"/>
+          <text x="779" y="155">5</text>
+        </g>
+      </svg>
+    </div>
+
+    <aside class="panel" data-panel="cables">
+      <p class="empty"><strong>Toca un número del dibujo</strong>o usa la lista de abajo para conocer cada parte del cable.</p>
+    </aside>
+  </div>
+
+  <div class="legend reveal" data-legend="cables"></div>
+
+  <div class="table-wrap reveal">
+    <table>
+      <thead>
+        <tr>
+          <th>Sección del cable</th>
+          <th>Equivalente AWG</th>
+          <th>Corriente orientativa</th>
+          <th>Uso típico</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1,5 mm²</td><td>15 AWG</td><td>hasta 15 A</td>
+          <td>Circuitos de iluminación</td>
+        </tr>
+        <tr>
+          <td>2,5 mm²</td><td>13 AWG</td><td>hasta 21 A</td>
+          <td>Tomacorrientes generales de la casa</td>
+        </tr>
+        <tr>
+          <td>4 mm²</td><td>11 AWG</td><td>hasta 28 A</td>
+          <td>Cocina, aire acondicionado, termotanque</td>
+        </tr>
+        <tr>
+          <td>6 mm²</td><td>9 AWG</td><td>hasta 36 A</td>
+          <td>Acometida pequeña, circuitos especiales</td>
+        </tr>
+        <tr>
+          <td>10 mm²</td><td>7 AWG</td><td>hasta 50 A</td>
+          <td>Acometida principal de una vivienda</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="reveal" style="font-size:.82rem;color:var(--muted);margin-top:14px;max-width:70ch">
+    Los valores son orientativos. La capacidad real depende del tipo de aislación, de cómo está instalado
+    el cable (caño, pared, aire libre), de la temperatura ambiente y del reglamento eléctrico de cada país.
+  </p>
+</section>
+
+<!-- ================= 03 INSTALACIÓN ================= -->
+<section id="instalacion">
+  <div class="section-head reveal">
+    <p class="kicker">Paso 03</p>
+    <h2>La estructura de un buen servicio eléctrico</h2>
+    <p>
+      La energía entra desde la red, pasa por protecciones y recién después llega a los enchufes.
+      Cada etapa existe por una razón. Toca los números para ver cuál.
+    </p>
+  </div>
+
+  <div class="workspace reveal">
+    <div class="stage">
+      <svg class="diagram" viewBox="0 0 960 520" role="img" aria-label="Recorrido de la instalación eléctrica domiciliaria desde la acometida hasta los circuitos">
+        <defs>
+          <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0 0 L10 5 L0 10 z" fill="#3b5578"/>
+          </marker>
+          <linearGradient id="boxGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#16223a"/><stop offset="1" stop-color="#0b1320"/>
+          </linearGradient>
+        </defs>
+
+        <!-- acometida -->
+        <g>
+          <rect x="40" y="60" width="160" height="92" rx="14" fill="url(#boxGrad)" stroke="#2f4a70" stroke-width="2"/>
+          <text x="120" y="98" text-anchor="middle" fill="#dbe8fb" font-size="15" font-weight="700" font-family="inherit">Acometida</text>
+          <text x="120" y="120" text-anchor="middle" fill="#7f93b0" font-size="11.5" font-family="inherit">entrada de la red</text>
+          <path d="M62 132 V150 M120 132 V150 M178 132 V150" stroke="#3b5578" stroke-width="2.5" stroke-linecap="round"/>
+        </g>
+
+        <!-- medidor -->
+        <g>
+          <rect x="250" y="60" width="160" height="92" rx="14" fill="url(#boxGrad)" stroke="#2f4a70" stroke-width="2"/>
+          <text x="330" y="98" text-anchor="middle" fill="#dbe8fb" font-size="15" font-weight="700" font-family="inherit">Medidor</text>
+          <text x="330" y="120" text-anchor="middle" fill="#7f93b0" font-size="11.5" font-family="inherit">mide el consumo</text>
+          <circle cx="330" cy="140" r="16" fill="none" stroke="#22d3ee" stroke-width="2" opacity=".8"/>
+          <circle cx="330" cy="140" r="4" fill="#22d3ee"/>
+        </g>
+
+        <!-- llave general -->
+        <g>
+          <rect x="460" y="60" width="160" height="92" rx="14" fill="url(#boxGrad)" stroke="#2f4a70" stroke-width="2"/>
+          <text x="540" y="98" text-anchor="middle" fill="#dbe8fb" font-size="15" font-weight="700" font-family="inherit">Llave general</text>
+          <text x="540" y="120" text-anchor="middle" fill="#7f93b0" font-size="11.5" font-family="inherit">corta todo</text>
+          <rect x="512" y="130" width="56" height="16" rx="8" fill="#0e1a2b" stroke="#fbbf24" stroke-width="2"/>
+          <circle cx="554" cy="138" r="5" fill="#fbbf24"/>
+        </g>
+
+        <!-- tablero -->
+        <g>
+          <rect x="670" y="60" width="170" height="92" rx="14" fill="url(#boxGrad)" stroke="#2f4a70" stroke-width="2"/>
+          <text x="755" y="98" text-anchor="middle" fill="#dbe8fb" font-size="15" font-weight="700" font-family="inherit">Tablero</text>
+          <text x="755" y="120" text-anchor="middle" fill="#7f93b0" font-size="11.5" font-family="inherit">disyuntores + diferencial</text>
+          <g>
+            <rect x="692" y="130" width="18" height="16" rx="3" fill="#0e1a2b" stroke="#22d3ee" stroke-width="1.8"/>
+            <rect x="716" y="130" width="18" height="16" rx="3" fill="#0e1a2b" stroke="#22d3ee" stroke-width="1.8"/>
+            <rect x="740" y="130" width="18" height="16" rx="3" fill="#0e1a2b" stroke="#22d3ee" stroke-width="1.8"/>
+            <rect x="764" y="130" width="18" height="16" rx="3" fill="#0e1a2b" stroke="#a78bfa" stroke-width="1.8"/>
+            <rect x="788" y="130" width="18" height="16" rx="3" fill="#0e1a2b" stroke="#22d3ee" stroke-width="1.8"/>
+          </g>
+        </g>
+
+        <!-- conexiones fila 1 -->
+        <line x1="202" y1="106" x2="246" y2="106" stroke="#3b5578" stroke-width="2.5" marker-end="url(#arrow)" class="flowline"/>
+        <line x1="412" y1="106" x2="456" y2="106" stroke="#3b5578" stroke-width="2.5" marker-end="url(#arrow)" class="flowline"/>
+        <line x1="622" y1="106" x2="666" y2="106" stroke="#3b5578" stroke-width="2.5" marker-end="url(#arrow)" class="flowline"/>
+
+        <!-- bajada y bus -->
+        <line x1="755" y1="154" x2="755" y2="240" stroke="#3b5578" stroke-width="2.5"/>
+        <line x1="275" y1="240" x2="860" y2="240" stroke="#3b5578" stroke-width="2.5"/>
+
+        <!-- circuitos -->
+        <g font-family="inherit">
+          <line x1="275" y1="240" x2="275" y2="300" stroke="#3b5578" stroke-width="2.5" marker-end="url(#arrow)" class="flowline"/>
+          <rect x="200" y="300" width="150" height="82" rx="13" fill="url(#boxGrad)" stroke="#2f4a70" stroke-width="2"/>
+          <text x="275" y="332" text-anchor="middle" fill="#dbe8fb" font-size="14" font-weight="700">Iluminación</text>
+          <text x="275" y="352" text-anchor="middle" fill="#7f93b0" font-size="11">1,5 mm² · 10 A</text>
+
+          <line x1="460" y1="240" x2="460" y2="300" stroke="#3b5578" stroke-width="2.5" marker-end="url(#arrow)" class="flowline"/>
+          <rect x="385" y="300" width="150" height="82" rx="13" fill="url(#boxGrad)" stroke="#2f4a70" stroke-width="2"/>
+          <text x="460" y="332" text-anchor="middle" fill="#dbe8fb" font-size="14" font-weight="700">Tomacorrientes</text>
+          <text x="460" y="352" text-anchor="middle" fill="#7f93b0" font-size="11">2,5 mm² · 16 A</text>
+
+          <line x1="645" y1="240" x2="645" y2="300" stroke="#3b5578" stroke-width="2.5" marker-end="url(#arrow)" class="flowline"/>
+          <rect x="570" y="300" width="150" height="82" rx="13" fill="url(#boxGrad)" stroke="#2f4a70" stroke-width="2"/>
+          <text x="645" y="332" text-anchor="middle" fill="#dbe8fb" font-size="14" font-weight="700">Cocina</text>
+          <text x="645" y="352" text-anchor="middle" fill="#7f93b0" font-size="11">4 mm² · 20 A</text>
+
+          <line x1="830" y1="240" x2="830" y2="300" stroke="#3b5578" stroke-width="2.5" marker-end="url(#arrow)" class="flowline"/>
+          <rect x="760" y="300" width="150" height="82" rx="13" fill="url(#boxGrad)" stroke="#2f4a70" stroke-width="2"/>
+          <text x="835" y="332" text-anchor="middle" fill="#dbe8fb" font-size="14" font-weight="700">Baño / AA</text>
+          <text x="835" y="352" text-anchor="middle" fill="#7f93b0" font-size="11">4 mm² · 20 A</text>
+        </g>
+
+        <!-- puesta a tierra -->
+        <line x1="840" y1="106" x2="908" y2="106" stroke="#4ade80" stroke-width="2.5" stroke-dasharray="7 7"/>
+        <line x1="908" y1="106" x2="908" y2="410" stroke="#4ade80" stroke-width="2.5" stroke-dasharray="7 7"/>
+        <g stroke="#4ade80" stroke-width="4" stroke-linecap="round">
+          <line x1="876" y1="416" x2="940" y2="416"/>
+          <line x1="888" y1="430" x2="928" y2="430"/>
+          <line x1="900" y1="444" x2="916" y2="444"/>
+        </g>
+
+        <!-- HOTSPOTS -->
+        <g class="hotspot" data-group="instalacion" data-id="acometida" tabindex="0" role="button">
+          <circle class="ring" cx="120" cy="106" r="17"/>
+          <circle class="hit" cx="120" cy="106" r="17"/>
+          <text x="120" y="106">1</text>
+        </g>
+        <g class="hotspot" data-group="instalacion" data-id="medidor" tabindex="0" role="button">
+          <circle class="ring" cx="330" cy="106" r="17"/>
+          <circle class="hit" cx="330" cy="106" r="17"/>
+          <text x="330" y="106">2</text>
+        </g>
+        <g class="hotspot" data-group="instalacion" data-id="general" tabindex="0" role="button">
+          <circle class="ring" cx="540" cy="106" r="17"/>
+          <circle class="hit" cx="540" cy="106" r="17"/>
+          <text x="540" y="106">3</text>
+        </g>
+        <g class="hotspot" data-group="instalacion" data-id="tablero" tabindex="0" role="button">
+          <circle class="ring" cx="755" cy="106" r="17"/>
+          <circle class="hit" cx="755" cy="106" r="17"/>
+          <text x="755" y="106">4</text>
+        </g>
+        <g class="hotspot" data-group="instalacion" data-id="circuitos" tabindex="0" role="button">
+          <circle class="ring" cx="645" cy="341" r="17"/>
+          <circle class="hit" cx="645" cy="341" r="17"/>
+          <text x="645" y="341">5</text>
+        </g>
+        <g class="hotspot" data-group="instalacion" data-id="puesta" tabindex="0" role="button">
+          <circle class="ring" cx="908" cy="430" r="17"/>
+          <circle class="hit" cx="908" cy="430" r="17"/>
+          <text x="908" y="430">6</text>
+        </g>
+      </svg>
+    </div>
+
+    <aside class="panel" data-panel="instalacion">
+      <p class="empty"><strong>Toca un número del dibujo</strong>o usa la lista de abajo para recorrer la instalación.</p>
+    </aside>
+  </div>
+
+  <div class="legend reveal" data-legend="instalacion"></div>
+
+  <div class="pillars reveal">
+    <div class="pillar">
+      <h4>Protecciones adecuadas</h4>
+      <p>Un disyuntor por circuito, con el amperaje justo. Ni más grande (no protege) ni más chico (salta todo el tiempo).</p>
+    </div>
+    <div class="pillar">
+      <h4>Interruptor diferencial</h4>
+      <p>Es la protección que salva vidas: corta la corriente cuando detecta una fuga hacia tierra.</p>
+    </div>
+    <div class="pillar">
+      <h4>Puesta a tierra</h4>
+      <p>Ofrece un camino seguro para la corriente de falla. Sin ella, la carcasa de un aparato puede quedar con tensión.</p>
+    </div>
+    <div class="pillar">
+      <h4>Calibre correcto</h4>
+      <p>Cada circuito necesita una sección de cable acorde a la corriente que va a circular. El cable fino se calienta.</p>
+    </div>
+    <div class="pillar">
+      <h4>Circuitos separados</h4>
+      <p>Iluminación, tomas, cocina y baño no comparten el mismo circuito. Así una falla no apaga toda la casa.</p>
+    </div>
+    <div class="pillar">
+      <h4>Canalización y cajas</h4>
+      <p>Los cables van dentro de caños o canaletas y las uniones, siempre dentro de cajas accesibles. Nunca empalmes sueltos en la pared.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 04 ERRORES ================= -->
+<section id="errores">
+  <div class="section-head reveal">
+    <p class="kicker">Paso 04</p>
+    <h2>Los errores que más incendios y descargas provocan</h2>
+    <p>
+      Casi todos los accidentes eléctricos domésticos vienen de un puñado de malas prácticas repetidas.
+      Reconocerlas es la mitad del trabajo.
+    </p>
+  </div>
+
+  <div class="errors reveal">
+    <article class="error-card">
+      <span class="tag-err">Error frecuente</span>
+      <h4>Sobrecargar una toma con adaptadores</h4>
+      <p>Conectar la pava, el microondas y la tostadora al mismo enchufe multiplica la corriente muy por encima de lo que el circuito soporta.</p>
+      <p class="fix">Solución: repartir los aparatos de alto consumo en circuitos distintos y evitar las "zapatillas" en cadena.</p>
+    </article>
+
+    <article class="error-card">
+      <span class="tag-err">Error frecuente</span>
+      <h4>Cable de sección menor a la necesaria</h4>
+      <p>Un cable fino para una carga grande se calienta, se endurece el aislante y con el tiempo se produce un cortocircuito.</p>
+      <p class="fix">Solución: respetar la tabla de secciones y la corriente del disyuntor que protege ese circuito.</p>
+    </article>
+
+    <article class="error-card">
+      <span class="tag-err">Error frecuente</span>
+      <h4>Empalmes fuera de caja</h4>
+      <p>Uniones con cinta aisladora dentro de la pared o del caño: no se pueden revisar y terminan aflojándose.</p>
+      <p class="fix">Solución: toda unión debe quedar dentro de una caja accesible, con bornera o conector adecuado.</p>
+    </article>
+
+    <article class="error-card">
+      <span class="tag-err">Error frecuente</span>
+      <h4>Instalación sin puesta a tierra</h4>
+      <p>Muchas casas antiguas solo tienen dos cables. Si un electrodoméstico falla, la carcasa puede quedar con tensión.</p>
+      <p class="fix">Solución: agregar el conductor de tierra y la jabalina. Es la protección más importante que existe.</p>
+    </article>
+
+    <article class="error-card">
+      <span class="tag-err">Error frecuente</span>
+      <h4>Invertir fase y neutro</h4>
+      <p>Al cambiar un tomacorriente sin respetar los colores, el interruptor puede cortar el neutro y dejar el aparato con tensión.</p>
+      <p class="fix">Solución: identificar los conductores antes de conectar y mantener el código de colores.</p>
+    </article>
+
+    <article class="error-card">
+      <span class="tag-err">Error frecuente</span>
+      <h4>Prolongador enrollado con carga alta</h4>
+      <p>Un alargue enroscado sobre sí mismo no puede disipar el calor y el cable se recalienta por dentro.</p>
+      <p class="fix">Solución: desenrollarlo por completo cuando alimenta algo potente y no usarlo como instalación fija.</p>
+    </article>
+
+    <article class="error-card">
+      <span class="tag-err">Error frecuente</span>
+      <h4>Reemplazar el disyuntor por uno más grande</h4>
+      <p>Si "salta seguido", agrandar el breaker elimina la protección: el cable se quema antes de que el aparato lo note.</p>
+      <p class="fix">Solución: encontrar la causa real de la sobrecarga o dividir el circuito.</p>
+    </article>
+
+    <article class="error-card">
+      <span class="tag-err">Error frecuente</span>
+      <h4>Tablero sin interruptor diferencial</h4>
+      <p>El disyuntor protege al cable; el diferencial protege a las personas. Sin él, una fuga a tierra no se detecta.</p>
+      <p class="fix">Solución: instalar un diferencial de 30 mA a la entrada del tablero, con revisión periódica.</p>
+    </article>
+  </div>
+</section>
+
+<!-- ================= 05 FALLOS ================= -->
+<section id="fallos">
+  <div class="section-head reveal">
+    <p class="kicker">Paso 05</p>
+    <h2>Detección temprana: señales que no debes ignorar</h2>
+    <p>
+      La instalación avisa antes de fallar. Selecciona un síntoma y verás qué puede estar ocurriendo,
+      qué hacer y con qué urgencia.
+    </p>
+  </div>
+
+  <div class="fault-layout reveal">
+    <div class="fault-list" id="faultList"></div>
+    <aside class="panel" id="faultPanel" style="position:sticky;top:84px">
+      <p class="empty"><strong>Elige un síntoma</strong>en la lista para ver el diagnóstico orientativo y los pasos a seguir.</p>
+    </aside>
+  </div>
+
+  <div class="semaforo reveal">
+    <span><i class="dot-urg dot-alta"></i> Urgencia alta · cortar la energía y llamar a un profesional</span>
+    <span><i class="dot-urg dot-media"></i> Urgencia media · revisar en las próximas horas</span>
+    <span><i class="dot-urg dot-baja"></i> Urgencia baja · corregir en el mantenimiento</span>
+  </div>
+</section>
+
+<!-- ================= 06 GLOSARIO ================= -->
+<section id="glosario">
+  <div class="section-head reveal">
+    <p class="kicker">Paso 06</p>
+    <h2>Glosario eléctrico esencial</h2>
+    <p>Con estos veinte términos ya puedes leer cualquier manual o conversación con un electricista.</p>
+  </div>
+
+  <div class="glossary reveal">
+    <div class="term"><h4>Tensión (V)</h4><p>Diferencia de potencial que impulsa la corriente. En vivienda suele ser 220 V o 110 V.</p></div>
+    <div class="term"><h4>Corriente (A)</h4><p>Cantidad de carga que circula por segundo. Determina qué cable y qué protección necesitas.</p></div>
+    <div class="term"><h4>Resistencia (Ω)</h4><p>Oposición al paso de la corriente. Genera calor cuando la corriente la atraviesa.</p></div>
+    <div class="term"><h4>Potencia (W)</h4><p>Energía consumida por segundo por un aparato. Se lee en la etiqueta del equipo.</p></div>
+    <div class="term"><h4>Fase</h4><p>Conductor que lleva la tensión respecto de tierra. Es el cable "con corriente".</p></div>
+    <div class="term"><h4>Neutro</h4><p>Conductor de retorno del circuito. Está conectado a tierra en el origen de la instalación.</p></div>
+    <div class="term"><h4>Puesta a tierra</h4><p>Conductor y jabalina que ofrecen un camino seguro a la corriente de falla.</p></div>
+    <div class="term"><h4>Disyuntor termomagnético</h4><p>Protege los cables cortando la corriente ante sobrecargas y cortocircuitos.</p></div>
+    <div class="term"><h4>Interruptor diferencial</h4><p>Detecta fugas a tierra y desconecta en milisegundos. Protege a las personas.</p></div>
+    <div class="term"><h4>Cortocircuito</h4><p>Contacto directo entre fase y neutro. La corriente se dispara y genera chispas y calor extremo.</p></div>
+    <div class="term"><h4>Sobrecarga</h4><p>Corriente mayor a la que el circuito soporta de forma sostenida. Calienta los conductores.</p></div>
+    <div class="term"><h4>Arco eléctrico</h4><p>Chispa que salta entre dos conductores. Es muy peligrosa y suele dejar marcas negras.</p></div>
+    <div class="term"><h4>Sección (mm²)</h4><p>Grosor del conductor de cobre. A mayor sección, más corriente soporta.</p></div>
+    <div class="term"><h4>AWG</h4><p>Sistema estadounidense de calibres. Curiosamente, a mayor número menor grosor.</p></div>
+    <div class="term"><h4>Acometida</h4><p>Tramo de instalación que va desde la red pública hasta el medidor y el tablero.</p></div>
+    <div class="term"><h4>Tablero</h4><p>Gabinete donde se concentran las protecciones y se reparten los circuitos de la vivienda.</p></div>
+    <div class="term"><h4>Canalización</h4><p>Caños o canaletas por donde pasan los cables, protegidos y ordenados.</p></div>
+    <div class="term"><h4>Circuito</h4><p>Conjunto de tomas e interruptores protegidos por un mismo disyuntor.</p></div>
+    <div class="term"><h4>Puesta a neutro</h4><p>Práctica incorrecta de unir neutro y tierra en una toma. Genera corrientes parásitas y riesgo.</p></div>
+    <div class="term"><h4>Continuidad</h4><p>Propiedad de un conductor sano: permite verificar con un multímetro que el camino está cerrado.</p></div>
+  </div>
+</section>
+
+<!-- ================= 07 QUIZ ================= -->
+<section id="quiz">
+  <div class="section-head reveal">
+    <p class="kicker">Paso 07</p>
+    <h2>Autoevaluación</h2>
+    <p>Seis preguntas para confirmar que los conceptos quedaron claros. Cada respuesta explica el porqué.</p>
+  </div>
+
+  <div class="quiz-bar reveal">
+    <span>Aciertos: <b id="score">0</b></span>
+    <span>Respondidas: <b id="progress">0/6</b></span>
+  </div>
+
+  <div class="quiz-grid" id="quizGrid"></div>
+</section>
+
+</main>
+
+<footer>
+  <p>Material educativo abierto sobre electricidad domiciliaria para principiantes.</p>
+  <p><strong>Trabaja siempre con la energía cortada y con personal matriculado.</strong></p>
+</footer>
+
+<script>
+/* =========================================================
+   1) DATOS DE LOS COMPONENTES (cables e instalación)
+   ========================================================= */
+const DATA = {
+  cables: {
+    fase: {
+      n: 1,
+      name: 'Conductor de fase',
+      text: 'Es el cable que lleva la tensión desde el tablero hasta el aparato. Normalmente se identifica con aislación marrón, negra o gris. Es el conductor "con corriente" y por eso nunca se debe tocar sin cortar la energía.',
+      key: 'Regla práctica: si no sabes cuál es la fase, corta la llave general.'
+    },
+    neutro: {
+      n: 2,
+      name: 'Conductor de neutro',
+      text: 'Es el camino de retorno: cierra el circuito para que la corriente pueda circular. Suele ser azul. Está conectado a tierra en el origen de la instalación, pero eso no lo hace inofensivo.',
+      key: 'Un neutro mal conectado o compartido puede aparecer con tensión.'
+    },
+    tierra: {
+      n: 3,
+      name: 'Conductor de puesta a tierra',
+      text: 'Es el cable verde con franjas amarillas. No conduce corriente en el funcionamiento normal: solo actúa cuando hay una falla, ofreciendo un camino seguro hacia la jabalina.',
+      key: 'Su misión es que la corriente de falla no pase por tu cuerpo.'
+    },
+    aislante: {
+      n: 4,
+      name: 'Aislación exterior',
+      text: 'Es la funda de PVC o material similar que envuelve a los conductores. Protege mecánicamente, aísla eléctricamente y reúne los tres cables en un solo cuerpo. Se degrada con el calor, el sol y el tiempo.',
+      key: 'Un aislante endurecido o agrietado es motivo de reemplazo.'
+    },
+    cobre: {
+      n: 5,
+      name: 'Conductor de cobre',
+      text: 'El alma del cable. El cobre conduce muy bien la electricidad y es dúctil. Puede ser un solo hilo rígido o muchos hilos finos (flexible). La sección en mm² indica cuánta corriente soporta.',
+      key: 'A mayor sección, mayor capacidad de corriente y menor calentamiento.'
+    }
+  },
+  instalacion: {
+    acometida: {
+      n: 1,
+      name: 'Acometida',
+      text: 'Es el tramo que une la red de la calle con tu vivienda. Incluye los cables, el caño de entrada y los elementos de sujeción. Debe dimensionarse según la potencia total que va a consumir la casa.',
+      key: 'Una acometida subdimensionada limita toda la instalación.'
+    },
+    medidor: {
+      n: 2,
+      name: 'Medidor de consumo',
+      text: 'Registra la energía que pasa hacia la vivienda y es la base de la facturación. Pertenece a la empresa distribuidora y no debe manipularse.',
+      key: 'El medidor mide energía en kWh, no "velocidad" de consumo.'
+    },
+    general: {
+      n: 3,
+      name: 'Llave general',
+      text: 'Es el interruptor que corta toda la instalación de la vivienda. Sirve para trabajar con seguridad y para cortar rápido ante una emergencia. Debe estar accesible y señalizado.',
+      key: 'Todo adulto de la casa debería saber dónde está y cómo se corta.'
+    },
+    tablero: {
+      n: 4,
+      name: 'Tablero de protecciones',
+      text: 'Reúne los disyuntores de cada circuito y el interruptor diferencial. Es el punto donde la instalación se reparte y donde se corta selectivamente cuando algo falla.',
+      key: 'El diferencial debe estar a la entrada, protegiendo a todos los circuitos.'
+    },
+    circuitos: {
+      n: 5,
+      name: 'Circuitos independientes',
+      text: 'Cada grupo de tomas e interruptores tiene su propio disyuntor y su propio cable. Separar iluminación, tomas generales, cocina y baño evita que una falla apague todo y permite usar el calibre correcto.',
+      key: 'Nunca mezcles cocina, baño y dormitorios en un mismo circuito.'
+    },
+    puesta: {
+      n: 6,
+      name: 'Puesta a tierra y jabalina',
+      text: 'La jabalina es una barra de cobre clavada en el suelo que conecta la instalación con la tierra física. Todo el sistema de tierra converge allí. Su resistencia debe medirse periódicamente.',
+      key: 'Sin jabalina, el diferencial no puede cumplir su función.'
+    }
+  }
+};
+
+/* =========================================================
+   2) PANELES INTERACTIVOS
+   ========================================================= */
+function renderPanel(group, id) {
+  const panel = document.querySelector(`[data-panel="${group}"]`);
+  const item = DATA[group][id];
+  if (!panel || !item) return;
+
+  panel.innerHTML = `
+    <div class="fade-in">
+      <span class="p-index">${item.n}</span>
+      <h3 class="p-title">${item.name}</h3>
+      <p class="p-text">${item.text}</p>
+      <p class="p-key">${item.key}</p>
+    </div>`;
+
+  document.querySelectorAll(`.hotspot[data-group="${group}"]`).forEach(h => {
+    h.classList.toggle('active', h.dataset.id === id);
+  });
+  document.querySelectorAll(`.chip[data-group="${group}"]`).forEach(c => {
+    c.classList.toggle('active', c.dataset.id === id);
+  });
+}
+
+function buildLegend(group) {
+  const legend = document.querySelector(`[data-legend="${group}"]`);
+  if (!legend) return;
+  Object.entries(DATA[group]).forEach(([id, item]) => {
+    const btn = document.createElement('button');
+    btn.className = 'chip';
+    btn.dataset.group = group;
+    btn.dataset.id = id;
+    btn.innerHTML = `<b>${item.n}</b> ${item.name}`;
+    btn.addEventListener('click', () => renderPanel(group, id));
+    legend.appendChild(btn);
+  });
+}
+
+['cables', 'instalacion'].forEach(buildLegend);
+
+document.querySelectorAll('.hotspot').forEach(h => {
+  const activate = () => renderPanel(h.dataset.group, h.dataset.id);
+  h.addEventListener('click', activate);
+  h.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      activate();
+    }
+  });
+  h.setAttribute('aria-label', 'Ver información del componente ' + h.dataset.id);
+});
+
+/* =========================================================
+   3) CALCULADORA LEY DE OHM
+   ========================================================= */
+(function calc(){
+  const volt = document.getElementById('volt');
+  const res  = document.getElementById('res');
+  const vVal = document.getElementById('vVal');
+  const rVal = document.getElementById('rVal');
+  const outI = document.getElementById('outI');
+  const outP = document.getElementById('outP');
+  const barI = document.getElementById('barI');
+  const hint = document.getElementById('calcHint');
+  if (!volt) return;
+
+  function update() {
+    const v = +volt.value;
+    const r = +res.value;
+    const i = v / r;
+    const p = v * i;
+
+    vVal.textContent = v + ' V';
+    rVal.textContent = r + ' Ω';
+    outI.textContent = i.toFixed(1).replace('.', ',') + ' A';
+    outP.textContent = Math.round(p) + ' W';
+
+    const pct = Math.min(100, (i / 40) * 100);
+    barI.style.width = pct + '%';
+
+    if (i < 10) {
+      barI.style.background = 'linear-gradient(90deg,#4ade80,#86efac)';
+      hint.textContent = 'Corriente baja: un cable de 1,5 mm² trabajaría cómodo con esta carga.';
+    } else if (i < 20) {
+      barI.style.background = 'linear-gradient(90deg,#fbbf24,#fb923c)';
+      hint.textContent = 'Corriente media: necesitas al menos 2,5 mm² y una protección de 16 A.';
+    } else {
+      barI.style.background = 'linear-gradient(90deg,#fb923c,#f87171)';
+      hint.textContent = 'Corriente alta: este valor supera un circuito doméstico típico. En la realidad el cable se calentaría.';
+    }
+  }
+
+  volt.addEventListener('input', update);
+  res.addEventListener('input', update);
+  update();
+})();
+
+/* =========================================================
+   4) DETECCIÓN TEMPRANA DE FALLOS
+   ========================================================= */
+const FALLOS = [
+  {
+    id: 'salta',
+    titulo: 'Salta el diferencial seguido',
+    urg: 'alta',
+    que: 'El sistema de protección corta la energía a propósito porque detecta una fuga de corriente hacia tierra o una sobrecarga.',
+    causas: [
+      'Un electrodoméstico con la aislación dañada',
+      'Humedad dentro de una caja o de un tomacorriente',
+      'Un circuito con demasiada carga conectada',
+      'El propio diferencial defectuoso o mal dimensionado'
+    ],
+    hacer: [
+      'Desconectar los aparatos de ese circuito uno por uno para aislar el culpable',
+      'No reemplazar el diferencial por uno de mayor sensibilidad ni puentearlo',
+      'Si salta sin ninguna carga conectada, llamar a un electricista matriculado'
+    ]
+  },
+  {
+    id: 'caliente',
+    titulo: 'Enchufe o cable caliente',
+    urg: 'alta',
+    que: 'El calor aparece cuando hay una resistencia excesiva al paso de la corriente, casi siempre por una conexión floja o un cable demasiado fino.',
+    causas: [
+      'Tornillo del borne flojo: el contacto no es firme',
+      'Cable de sección menor a la carga que soporta',
+      'Tomacorriente viejo con contactos desgastados',
+      'Sobrecarga por varios aparatos en la misma toma'
+    ],
+    hacer: [
+      'Cortar la energía de ese circuito en el tablero',
+      'No volver a usar la toma hasta que sea revisada',
+      'Reemplazar la toma si muestra marcas de calor o plástico deformado'
+    ]
+  },
+  {
+    id: 'olor',
+    titulo: 'Olor a quemado o plástico',
+    urg: 'alta',
+    que: 'Es una de las señales más claras de que algo se está sobrecalentando por dentro. Puede haber un cortocircuito en formación.',
+    causas: [
+      'Aislación derritiéndose por sobrecalentamiento',
+      'Arco eléctrico en una conexión floja',
+      'Motor de un aparato trabado consumiendo de más',
+      'Cable con sección insuficiente trabajando al límite'
+    ],
+    hacer: [
+      'Cortar la llave general de inmediato',
+      'No encender nada hasta identificar el origen del olor',
+      'Si el olor viene del tablero, no rearmar: llamar a un profesional'
+    ]
+  },
+  {
+    id: 'parpadeo',
+    titulo: 'Las luces parpadean o bajan de intensidad',
+    urg: 'media',
+    que: 'Las variaciones bruscas indican que la tensión no llega de forma estable, por una conexión deficiente o una carga que arranca.',
+    causas: [
+      'Conexión floja en el tablero o en el medidor',
+      'Cable de acometida subdimensionado',
+      'Un aparato de gran consumo arrancando (heladera, aire)',
+      'Lámparas LED incompatibles con el dimmer o el circuito'
+    ],
+    hacer: [
+      'Verificar si ocurre en toda la casa o solo en un ambiente',
+      'Si es generalizado, revisar las conexiones del tablero con la energía cortada',
+      'Si persiste, solicitar una medición de tensión a la distribuidora'
+    ]
+  },
+  {
+    id: 'chispa',
+    titulo: 'Chisporroteo o zumbido en una toma',
+    urg: 'alta',
+    que: 'El chisporroteo es un arco eléctrico: la corriente salta entre contactos que no se tocan bien. Genera calor extremo y carboniza el material.',
+    causas: [
+      'Contactos internos del tomacorriente desgastados',
+      'Enchufe que hace mal contacto y se mueve',
+      'Humedad dentro de la caja',
+      'Conexión de bornes floja'
+    ],
+    hacer: [
+      'Cortar la energía de ese circuito',
+      'Reemplazar el tomacorriente, no "acomodarlo"',
+      'Revisar si hay marcas negras: indican arco eléctrico previo'
+    ]
+  },
+  {
+    id: 'sintierra',
+    titulo: 'Tomacorriente sin puesta a tierra',
+    urg: 'media',
+    que: 'Muchas instalaciones antiguas solo tienen dos cables. Sin tierra, una falla interna de un aparato puede poner tensión en su carcasa metálica.',
+    causas: [
+      'Instalación antigua previa a la normativa de tierra',
+      'Toma de tres patas conectada solo con fase y neutro',
+      'Jabalina desconectada o con resistencia alta'
+    ],
+    hacer: [
+      'No usar "puentes" entre neutro y tierra: es peligroso e ilegal',
+      'Incorporar el conductor de tierra hasta la jabalina',
+      'Medir la resistencia de puesta a tierra con un telurómetro'
+    ]
+  },
+  {
+    id: 'calambre',
+    titulo: 'Da calambre al tocar un aparato',
+    urg: 'alta',
+    que: 'La carcasa metálica está con tensión por una falla de aislación interna. Es una situación de riesgo eléctrico directo.',
+    causas: [
+      'Aislación interna del aparato deteriorada',
+      'Ausencia o mal funcionamiento de la puesta a tierra',
+      'Diferencial ausente o puenteado',
+      'Humedad dentro del equipo'
+    ],
+    hacer: [
+      'Desenchufar el aparato sin tocarlo con las manos desnudas',
+      'No volver a usarlo hasta que sea revisado',
+      'Verificar de inmediato la puesta a tierra y el diferencial de la vivienda'
+    ]
+  },
+  {
+    id: 'flojo',
+    titulo: 'El enchufe queda flojo y se cae',
+    urg: 'baja',
+    que: 'Los contactos internos del tomacorriente pierden elasticidad con los años. Un enchufe flojo genera calor y arcos eléctricos.',
+    causas: [
+      'Desgaste natural de las láminas de contacto',
+      'Enchufes de mala calidad',
+      'Uso intensivo con cargas altas',
+      'Enchufes forzados o torcidos'
+    ],
+    hacer: [
+      'Reemplazar el tomacorriente por uno nuevo de buena calidad',
+      'Evitar los adaptadores que aumentan el peso sobre la toma',
+      'Aprovechar para revisar el estado de los cables dentro de la caja'
+    ]
+  }
+];
+
+(function faults(){
+  const list = document.getElementById('faultList');
+  const panel = document.getElementById('faultPanel');
+  if (!list) return;
+
+  FALLOS.forEach(f => {
+    const b = document.createElement('button');
+    b.className = 'fault-btn';
+    b.type = 'button';
+    b.dataset.id = f.id;
+    b.innerHTML = `<span>${f.titulo}</span><i class="dot-urg dot-${f.urg}"></i>`;
+    b.addEventListener('click', () => showFault(f.id));
+    list.appendChild(b);
+  });
+
+  function showFault(id) {
+    const f = FALLOS.find(x => x.id === id);
+    if (!f) return;
+
+    const urgLabel = f.urg === 'alta' ? 'Urgencia alta' : f.urg === 'media' ? 'Urgencia media' : 'Urgencia baja';
+
+    panel.innerHTML = `
+      <div class="fade-in">
+        <span class="urg urg-${f.urg}">${urgLabel}</span>
+        <h3 class="p-title">${f.titulo}</h3>
+        <div class="fault-block">
+          <h5>Qué está pasando</h5>
+          <p>${f.que}</p>
+        </div>
+        <div class="fault-block">
+          <h5>Posibles causas</h5>
+          <ul>${f.causas.map(c => `<li>${c}</li>`).join('')}</ul>
+        </div>
+        <div class="fault-block">
+          <h5>Qué hacer</h5>
+          <ul>${f.hacer.map(c => `<li>${c}</li>`).join('')}</ul>
+        </div>
+      </div>`;
+
+    list.querySelectorAll('.fault-btn').forEach(b => {
+      b.classList.toggle('active', b.dataset.id === id);
+    });
+  }
+
+  showFault('salta');
+})();
+
+/* =========================================================
+   5) AUTOEVALUACIÓN
+   ========================================================= */
+(function quiz(){
+  const QUIZ = [
+    {
+      q: '¿Qué mide el voltaje?',
+      a: ['La cantidad de electrones que circulan', 'La "presión" que impulsa la corriente', 'La energía consumida en un mes', 'El grosor del cable'],
+      correct: 1,
+      why: 'El voltaje es la diferencia de potencial, la fuerza que empuja a los electrones. Se mide en voltios.'
+    },
+    {
+      q: '¿De qué color es el conductor de puesta a tierra?',
+      a: ['Azul', 'Marrón o negro', 'Verde con franjas amarillas', 'Rojo'],
+      correct: 2,
+      why: 'El verde y amarillo identifica al conductor de protección en casi todo el mundo.'
+    },
+    {
+      q: '¿Qué protección actúa principalmente para cuidar a las personas?',
+      a: ['El disyuntor termomagnético', 'El interruptor diferencial', 'El medidor', 'La llave general'],
+      correct: 1,
+      why: 'El diferencial detecta fugas a tierra y corta la corriente en milisegundos. El disyuntor protege sobre todo al cable.'
+    },
+    {
+      q: '¿Qué ocurre si usas un cable de sección menor a la necesaria?',
+      a: ['Nada, el cable se adapta', 'Funciona mejor porque ocupa menos', 'Se calienta y puede provocar un incendio', 'El medidor lo corrige automáticamente'],
+      correct: 2,
+      why: 'Un cable fino ofrece más resistencia, se calienta y degrada su aislación hasta fallar.'
+    },
+    {
+      q: 'Un tomacorriente que se calienta al usarlo indica...',
+      a: ['Que funciona perfectamente', 'Una conexión floja o una sobrecarga', 'Que hay demasiada puesta a tierra', 'Que el voltaje es bajo'],
+      correct: 1,
+      why: 'El calor en la toma casi siempre viene de un contacto deficiente o de una carga mayor a la que soporta el circuito.'
+    },
+    {
+      q: 'Ante olor a quemado que sale del tablero, lo correcto es...',
+      a: ['Seguir usando la instalación con normalidad', 'Cortar la llave general y llamar a un electricista', 'Reemplazar el disyuntor por uno más grande', 'Abrir el tablero y tocar los cables'],
+      correct: 1,
+      why: 'El olor a quemado puede ser un cortocircuito en formación. Se corta la energía y se llama a un profesional matriculado.'
+    }
+  ];
+
+  const wrap = document.getElementById('quizGrid');
+  const scoreEl = document.getElementById('score');
+  const progEl = document.getElementById('progress');
+  let score = 0, answered = 0;
+
+  QUIZ.forEach((item, qi) => {
+    const card = document.createElement('div');
+    card.className = 'quiz-card';
+
+    const num = document.createElement('p');
+    num.className = 'q-num';
+    num.textContent = 'Pregunta ' + (qi + 1);
+
+    const title = document.createElement('h4');
+    title.textContent = item.q;
+
+    const opts = document.createElement('div');
+    opts.className = 'q-opts';
+
+    item.a.forEach((txt, oi) => {
+      const b = document.createElement('button');
+      b.className = 'q-opt';
+      b.type = 'button';
+      b.textContent = txt;
+
+      b.addEventListener('click', () => {
+        if (card.dataset.done) return;
+        card.dataset.done = '1';
+        answered++;
+
+        const ok = oi === item.correct;
+        Array.from(opts.children).forEach(c => c.disabled = true);
+
+        if (ok) {
+          b.classList.add('correct');
+          score++;
+        } else {
+          b.classList.add('wrong');
+          opts.children[item.correct].classList.add('correct');
+        }
+
+        const fb = document.createElement('p');
+        fb.className = 'q-fb ' + (ok ? 'ok' : 'no');
+        fb.textContent = (ok ? 'Correcto. ' : 'No exactamente. ') + item.why;
+        card.appendChild(fb);
+
+        scoreEl.textContent = score;
+        progEl.textContent = answered + '/' + QUIZ.length;
+      });
+
+      opts.appendChild(b);
+    });
+
+    card.append(num, title, opts);
+    wrap.appendChild(card);
+  });
+})();
+
+/* =========================================================
+   6) REVELADO AL HACER SCROLL
+   ========================================================= */
+(function reveal(){
+  const items = document.querySelectorAll('.reveal');
+  if (!('IntersectionObserver' in window)) {
+    items.forEach(el => el.classList.add('visible'));
+    return;
+  }
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+
+  items.forEach(el => io.observe(el));
+})();
+</script>
+</body>
+</html>
