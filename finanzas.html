@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<title>Finanzas del hogar: aprende a manejar tu dinero</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:light;--bg:#f3f8f5;--card:#fff;--ink:#0d2b24;--mut:#4d645d;--line:#d6e5de;--grn:#12a36b;--grn2:#dcf5ea;--gold:#f2b01e;--gold2:#fff1c9;--blue:#2b6cff;--blue2:#e3ebff;--red:#f0605d;--red2:#ffe3e2;--vio:#7c5cff;--vio2:#ece7ff;
+--d:"Manrope","Trebuchet MS",system-ui,sans-serif;--b:"Source Sans 3",system-ui,-apple-system,"Segoe UI",sans-serif;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-behavior:smooth;scroll-padding-top:calc(78px + env(safe-area-inset-top,0px))}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17.5px/1.65 var(--b);-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:rgba(243,248,245,.92);z-index:30}
+h1,h2,h3{font-family:var(--d);line-height:1.15;margin:0;letter-spacing:-.02em}
+p{margin:0}
+:focus-visible{outline:3px solid var(--blue);outline-offset:3px;border-radius:8px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 22px}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:40;background:rgba(243,248,245,.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:66px;gap:14px}
+.logo{font:800 1.2rem var(--d);text-decoration:none;color:var(--ink);display:flex;align-items:center;gap:10px;white-space:nowrap}
+.logo i{width:32px;height:32px;border-radius:50%;background:var(--gold);display:grid;place-items:center;font:800 1rem var(--d);font-style:normal}
+nav ul{display:flex;gap:2px;list-style:none;margin:0;padding:0;overflow-x:auto}
+nav a{display:block;padding:8px 13px;border-radius:999px;text-decoration:none;font-weight:700;font-size:.93rem;color:var(--mut);white-space:nowrap;transition:background .2s,color .2s}
+nav a:hover,nav a.on{background:var(--grn2);color:#0b6e48}
+#bar{height:3px;background:var(--grn);width:0}
+section{padding:70px 0}.alt{background:#fff;border-block:1px solid var(--line)}
+.sh{max-width:38rem;margin-bottom:30px}.sh h2{font-size:clamp(1.8rem,3.7vw,2.7rem);font-weight:800}.sh p{color:var(--mut);margin-top:12px}
+.btn{display:inline-block;padding:13px 24px;border-radius:14px;font:700 1rem var(--b);text-decoration:none;border:2px solid var(--ink);background:#fff;color:var(--ink);cursor:pointer;transition:transform .2s}
+.btn:hover:not(:disabled){transform:translateY(-3px)}.btn.p{background:var(--grn);border-color:var(--grn);color:#fff;box-shadow:0 10px 22px -10px rgba(18,163,107,.8)}
+.box{background:#fff;border:1px solid var(--line);border-radius:24px;padding:26px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:24px;transition:transform .3s,box-shadow .3s}
+.card:hover{transform:translateY(-5px);box-shadow:0 20px 38px -26px rgba(13,43,36,.5)}
+.card h3{font-size:1.15rem;margin:8px 0 6px}.card p{color:var(--mut);font-size:.98rem}
+.rv{opacity:0;transform:translateY(22px);transition:opacity .7s,transform .7s}.rv.in{opacity:1;transform:none}
+/* hero */
+.hero{padding:56px 0 36px;display:grid;grid-template-columns:1.05fr 1fr;gap:40px;align-items:center}
+.hero h1{font-size:clamp(2.3rem,5.4vw,4rem);font-weight:800}
+.hero h1 em{font-style:normal;color:var(--grn)}
+.lead{font-size:1.15rem;color:var(--mut);margin:20px 0 28px;max-width:30em}
+.hc{position:relative;background:#fff;border:1px solid var(--line);border-radius:30px;padding:26px;box-shadow:0 26px 50px -30px rgba(13,43,36,.4);text-align:center}
+.hc svg{width:min(100%,280px);display:block;margin:0 auto}
+.sg{transition:stroke-dasharray 1s cubic-bezier(.3,.7,.2,1)}
+.lg{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:14px;font-weight:700;font-size:.92rem}
+.lg span::before{content:"";display:inline-block;width:12px;height:12px;border-radius:50%;background:var(--c);margin-right:6px}
+.coin{position:absolute;width:38px;height:38px;border-radius:50%;background:var(--gold);border:3px solid #d9941a;display:grid;place-items:center;font:800 1rem var(--d);animation:fl 4.5s ease-in-out infinite}
+@keyframes fl{50%{transform:translateY(-12px) rotate(10deg)}}
+/* balance */
+.row{display:grid;grid-template-columns:14px 1fr 120px;gap:10px;align-items:center;padding:6px 0}
+.row i{width:14px;height:14px;border-radius:50%;background:var(--c)}.row span{font-weight:600}
+input.n{width:100%;padding:10px 12px;border:2px solid var(--line);border-radius:12px;font:700 1rem var(--b);color:var(--ink);background:#fff;text-align:right}
+input.n:focus,.search:focus{outline:none;border-color:var(--grn)}
+.sum{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0}
+.sum div{background:var(--bg);border-radius:14px;padding:12px 14px}.sum small{color:var(--mut);display:block;font-size:.85rem}.sum b{font:800 1.25rem var(--d)}
+.meter{display:grid;grid-template-columns:104px 1fr 56px;gap:10px;align-items:center;margin-top:10px;font-weight:700;font-size:.92rem}
+.bar{height:12px;border-radius:99px;background:#e2ede7;overflow:hidden}.bar i{display:block;height:100%;width:0;border-radius:inherit;transition:width .7s,background .3s}
+.note{margin-top:14px;padding:14px 16px;border-radius:14px;background:var(--gold2);font-size:.97rem}
+.range{width:100%;accent-color:var(--grn)}
+.lb{display:flex;justify-content:space-between;font-weight:700;margin:12px 0 4px}
+/* chips and tips */
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.chip{border:2px solid var(--line);background:#fff;padding:8px 16px;border-radius:999px;font:700 .92rem var(--b);cursor:pointer;color:var(--mut)}.chip.on{background:var(--ink);border-color:var(--ink);color:#fff}
+.tip{border-top:6px solid var(--c);animation:pin .4s both}.tip em{font-style:normal;font:700 .85rem var(--b);background:var(--c2);color:var(--c);padding:3px 11px;border-radius:999px}
+@keyframes pin{from{opacity:0;transform:translateY(10px)}}
+/* wallet flow */
+.flow{position:relative;display:grid;grid-template-columns:repeat(4,1fr);padding-top:6px}
+.flow::before{content:"";position:absolute;left:12.5%;right:12.5%;top:38px;border-top:4px dashed #c4d8cf}
+.fn{all:unset;box-sizing:border-box;cursor:pointer;text-align:center;font-weight:700;position:relative;z-index:1;padding:4px}
+.fn:focus-visible{outline:3px solid var(--blue);border-radius:12px}
+.fn b{display:grid;place-items:center;width:64px;height:64px;margin:0 auto 8px;border-radius:50%;background:#fff;border:3px solid var(--line);font-size:1.8rem;transition:all .3s}
+.fn.on b{border-color:var(--grn);background:var(--grn2);transform:scale(1.12)}
+.dotp{position:absolute;top:32px;left:12.5%;width:16px;height:16px;margin-left:-8px;border-radius:50%;background:var(--gold);border:3px solid #d9941a;z-index:2;transition:left .7s cubic-bezier(.5,0,.2,1)}
+.stp{background:var(--grn2);border-radius:14px;padding:14px 18px;margin:16px 0;min-height:4em}
+/* blocks */
+.chain{display:flex;gap:0;overflow-x:auto;padding:6px 2px 14px;align-items:stretch}
+.bk{flex:none;width:210px;background:#fff;border:3px solid var(--grn);border-radius:16px;padding:12px;font-size:.88rem;transition:border-color .3s,background .3s;animation:pin .5s both}
+.bk.bad{border-color:var(--red);background:var(--red2)}
+.bk b{font:800 .98rem var(--d)}.bk input{width:100%;margin:6px 0;padding:7px 9px;border:2px solid var(--line);border-radius:9px;font:600 .88rem var(--b);color:var(--ink)}
+.bk code{display:block;background:rgba(13,43,36,.07);border-radius:6px;padding:1px 6px;font-size:.84rem}
+.bk .st{display:block;margin-top:6px;font-weight:700}
+.ar{flex:none;align-self:center;font-size:1.4rem;padding:0 6px;color:var(--mut)}
+.warn{margin-top:22px;padding:18px 20px;border-radius:18px;background:var(--red2);border-left:8px solid var(--red)}
+/* glossary */
+.search{width:100%;max-width:440px;padding:14px 18px;border:2px solid var(--line);border-radius:14px;font:600 1rem var(--b);background:#fff;color:var(--ink);margin-bottom:16px}
+.gl{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:start}
+.term{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.term button{all:unset;box-sizing:border-box;width:100%;padding:15px 20px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;font:700 1.05rem var(--d)}
+.term button:focus-visible{outline:3px solid var(--blue);outline-offset:-3px}
+.term button i{width:26px;height:26px;border-radius:50%;background:var(--grn2);color:#0b6e48;display:grid;place-items:center;font-style:normal;flex:none;transition:transform .3s}
+.term[open] button i{transform:rotate(45deg)}
+.def{display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s}.term[open] .def{grid-template-rows:1fr}.def div{overflow:hidden}.def p{padding:0 20px 16px;color:var(--mut);font-size:.97rem}
+footer{padding:36px 0 48px;border-top:1px solid var(--line);color:var(--mut);font-size:.93rem}
+footer .wrap{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+@media(max-width:900px){.hero,.two{grid-template-columns:1fr}.grid3{grid-template-columns:1fr 1fr}.gl{grid-template-columns:1fr}}
+@media(max-width:620px){.grid3{grid-template-columns:1fr}.logo b{display:none}.sum{grid-template-columns:1fr}.meter{grid-template-columns:90px 1fr 50px}.fn{font-size:.85rem}.fn b{width:52px;height:52px;font-size:1.4rem}.dotp{top:26px}.flow::before{top:32px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#inicio" aria-label="Finanzas del hogar, inicio"><i>$</i><b>Finanzas del hogar</b></a>
+    <nav aria-label="Secciones"><ul>
+      <li><a href="#balance">Balance</a></li><li><a href="#ahorro">Ahorro</a></li><li><a href="#banco">Banco</a></li><li><a href="#billeteras">Billeteras</a></li><li><a href="#cripto">Cripto</a></li><li><a href="#glosario">Glosario</a></li>
+    </ul></nav>
+  </div>
+  <div id="bar"></div>
+</header>
+
+<main>
+<div class="wrap" id="inicio"><div class="hero">
+  <div>
+    <h1>Tu dinero, <em>bajo control</em>: aprende finanzas del hogar paso a paso.</h1>
+    <p class="lead">Arma tu balance de gastos, entiende cómo crece el ahorro, usa mejor el banco y las billeteras virtuales, y conoce los riesgos de las criptomonedas, sin tecnicismos.</p>
+    <div class="btns"><a class="btn p" href="#balance">Armar mi balance</a> <a class="btn" href="#glosario">Ver glosario</a></div>
+  </div>
+  <div class="hc">
+    <div class="coin" style="top:14px;left:16px">$</div><div class="coin" style="top:50px;right:14px;animation-delay:-1.5s;width:30px;height:30px;font-size:.85rem">$</div>
+    <h3 style="font-size:1.1rem;margin-bottom:10px">Un reparto de referencia: 50/30/20</h3>
+    <svg id="hd" viewBox="0 0 200 200" role="img" aria-label="Gráfico: 50% necesidades, 30% deseos, 20% ahorro"></svg>
+    <div class="lg"><span style="--c:var(--blue)">50% necesidades</span><span style="--c:var(--gold)">30% deseos</span><span style="--c:var(--grn)">20% ahorro</span></div>
+  </div>
+</div></div>
+
+<section id="balance"><div class="wrap">
+  <div class="sh rv"><h2>Tu balance de gastos</h2><p>Escribe tu ingreso mensual y tus gastos. El gráfico y las alertas se actualizan al instante. Los datos quedan solo en tu navegador.</p></div>
+  <div class="two">
+    <div class="box"><div class="row" style="grid-template-columns:1fr 130px"><b>Ingreso mensual</b><input class="n" id="inc" type="number" min="0" step="10" inputmode="decimal" aria-label="Ingreso mensual"></div><hr style="border:0;border-top:1px solid var(--line);margin:8px 0"><div id="rows"></div><button class="btn" id="rst" style="margin-top:14px;padding:9px 18px">Restablecer ejemplo</button></div>
+    <div class="box"><svg id="bd" viewBox="0 0 200 200" style="width:min(100%,230px);display:block;margin:0 auto" role="img" aria-label="Distribución de tus gastos"></svg>
+      <div class="sum"><div><small>Gastos</small><b id="s1"></b></div><div><small>Te queda</small><b id="s2"></b></div><div><small>Ahorro</small><b id="s3"></b></div></div>
+      <div id="ms"></div><div class="note" id="nt" aria-live="polite"></div></div>
+  </div>
+</div></section>
+
+<section id="ahorro" class="alt"><div class="wrap">
+  <div class="sh rv"><h2>El tiempo trabaja a tu favor</h2><p>Con el interés compuesto, los intereses también generan intereses. Mueve los controles y mira cómo crece un ahorro constante.</p></div>
+  <div class="two"><div class="box">
+    <div class="lb"><label for="dep">Ahorro mensual</label><input class="n" id="dep" type="number" min="0" step="10" value="100" style="width:120px"></div>
+    <div class="lb"><label for="rate">Rendimiento anual</label><span id="rv"></span></div><input class="range" id="rate" type="range" min="0" max="30" step=".5" value="8">
+    <div class="lb"><label for="yrs">Plazo</label><span id="yv"></span></div><input class="range" id="yrs" type="range" min="1" max="30" value="10">
+    <div class="sum"><div><small>Aportaste</small><b id="c1"></b></div><div><small>Intereses</small><b id="c2"></b></div><div><small>Total</small><b id="c3"></b></div></div>
+    <p style="color:var(--mut);font-size:.92rem">Es una simulación: el rendimiento real puede variar y la inflación reduce lo que podrás comprar con ese dinero.</p></div>
+    <div class="box"><svg id="cg" viewBox="0 0 600 200" style="width:100%;height:auto;display:block" role="img" aria-label="Crecimiento del ahorro año por año"></svg>
+      <div class="lg"><span style="--c:var(--blue)">Lo que aportas</span><span style="--c:var(--grn)">Intereses ganados</span></div></div></div>
+</div></section>
+
+<section id="banco"><div class="wrap">
+  <div class="sh rv"><h2>Consejos bancarios que ahorran dinero</h2><p>Pequeñas decisiones con tu cuenta, tus tarjetas y tus préstamos evitan costos y sustos.</p></div>
+  <div class="chips" id="chips" role="group" aria-label="Filtrar consejos"></div>
+  <div class="grid3" id="tips"></div>
+</div></section>
+
+<section id="billeteras" class="alt"><div class="wrap">
+  <div class="sh rv"><h2>Billeteras virtuales</h2><p>Son aplicaciones donde guardas dinero y pagas desde el celular. Toca cada paso para ver qué pasa cuando pagas con un código QR.</p></div>
+  <div class="box"><div class="flow" id="flow"><div class="dotp" id="dp"></div></div><div class="stp" id="fs" aria-live="polite"></div><button class="btn p" id="play">Ver el pago completo</button></div>
+  <div class="grid3" id="wl" style="margin-top:20px"></div>
+</div></section>
+
+<section id="cripto"><div class="wrap">
+  <div class="sh rv"><h2>Criptomonedas sin misterio</h2><p>Son dinero digital que no emite un banco. Se registra en una cadena de bloques: una libreta compartida que nadie puede cambiar sin que se note. Pruébalo.</p></div>
+  <div class="box"><div class="ctrl" style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px"><button class="btn p" id="ab">Agregar bloque</button><button class="btn" id="tm">Alterar el bloque 2</button><button class="btn" id="rp">Reparar</button></div>
+    <div class="chain" id="chain" aria-live="polite"></div>
+    <p style="color:var(--mut);font-size:.95rem">Cada bloque guarda su huella y la del anterior. Si cambias un dato, la huella cambia y rompe todos los enlaces siguientes. También puedes escribir tú en los bloques.</p></div>
+  <div class="grid3" id="cc" style="margin-top:20px"></div>
+  <div class="warn"><h3 style="font-size:1.1rem;margin-bottom:6px">Antes de acercarte a las criptomonedas</h3><p>Su precio puede subir o caer con mucha fuerza en pocos días, y no hay garantía ni seguro como en un banco. Abundan las estafas que prometen ganancias seguras. Si pierdes tu frase semilla, pierdes tu dinero. Nunca pongas dinero que necesites para vivir, y desconfía de quien te asegure que no hay riesgo.</p></div>
+</div></section>
+
+<section id="glosario" class="alt"><div class="wrap">
+  <div class="sh rv"><h2>Glosario financiero</h2><p>Los términos que más se usan, explicados fácil.</p></div>
+  <input class="search" id="q" type="search" placeholder="Buscar: por ejemplo, inflación o stablecoin" aria-label="Buscar en el glosario">
+  <div class="gl" id="gl"></div>
+</div></section>
+</main>
+<footer><div class="wrap"><span>Finanzas del hogar: material educativo.</span><span>No es asesoramiento financiero. Consulta a un profesional para decisiones importantes.</span></div></footer>
+
+<script>
+const $=s=>document.querySelector(s),RM=matchMedia('(prefers-reduced-motion:reduce)').matches,fm=n=>'$ '+Math.round(n).toLocaleString('es');
+addEventListener('scroll',()=>{const h=document.documentElement;$('#bar').style.width=h.scrollTop/(h.scrollHeight-h.clientHeight)*100+'%'},{passive:true});
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+const rv=()=>document.querySelectorAll('.rv:not(.in)').forEach(e=>io.observe(e));
+/* Donut */
+function donut(el,parts,anim){const C=2*Math.PI*70,T=parts.reduce((a,p)=>a+p[1],0)||1;let o=0;
+ el.innerHTML='<circle cx="100" cy="100" r="70" fill="none" stroke="#e2ede7" stroke-width="28"/>'+parts.filter(p=>p[1]>0).map(p=>{const L=p[1]/T*C,s=`<circle class="sg" cx="100" cy="100" r="70" fill="none" stroke="${p[2]}" stroke-width="28" stroke-dasharray="${anim?'0 '+C:L+' '+(C-L)}" data-l="${L}" data-c="${C}" stroke-dashoffset="${-o}" transform="rotate(-90 100 100)"><title>${p[0]}</title></circle>`;o+=L;return s}).join('');
+ if(anim)requestAnimationFrame(()=>requestAnimationFrame(()=>el.querySelectorAll('.sg').forEach(c=>c.setAttribute('stroke-dasharray',c.dataset.l+' '+(c.dataset.c-c.dataset.l)))))}
+donut($('#hd'),[['Necesidades',50,'#2b6cff'],['Deseos',30,'#f2b01e'],['Ahorro',20,'#12a36b']],1);
+/* Balance */
+const CT=[['Vivienda','n','#2b6cff',600],['Comida','n','#12a36b',350],['Transporte','n','#7c5cff',150],['Servicios','n','#00a6b8',120],['Salud','n','#f0605d',80],['Deudas','n','#8a94a6',100],['Ocio','d','#f2b01e',180],['Compras y otros','d','#ff8a3d',120]];
+const DEF=()=>({i:2000,v:CT.map(c=>c[3])});let st=DEF(),first=1;
+try{const s=JSON.parse(localStorage.getItem('fh1'));if(s&&s.v&&s.v.length===CT.length)st=s}catch(e){}
+$('#rows').innerHTML=CT.map((c,k)=>`<label class="row" style="--c:${c[2]}"><i></i><span>${c[0]}</span><input class="n gi" type="number" min="0" step="10" inputmode="decimal" data-k="${k}" aria-label="${c[0]}"></label>`).join('');
+function fill(){$('#inc').value=st.i;document.querySelectorAll('.gi').forEach(e=>e.value=st.v[e.dataset.k])}
+function calc(){const inc=Math.max(0,+st.i||0),v=st.v.map(x=>Math.max(0,+x||0)),tot=v.reduce((a,b)=>a+b,0),left=inc-tot,P=x=>inc>0?x/inc*100:0;
+ const nd=CT.reduce((a,c,k)=>a+(c[1]==='n'?v[k]:0),0),wt=CT.reduce((a,c,k)=>a+(c[1]==='d'?v[k]:0),0);
+ donut($('#bd'),[...CT.map((c,k)=>[c[0],v[k],c[2]]),['Te queda',Math.max(0,left),'#bfe8d4']],first);first=0;
+ $('#s1').textContent=fm(tot);$('#s2').textContent=fm(left);$('#s2').style.color=left<0?'var(--red)':'var(--grn)';$('#s3').textContent=Math.max(0,P(left)).toFixed(0)+'%';
+ const M=[['Necesidades',P(nd),50,'var(--blue)',1],['Deseos',P(wt),30,'var(--gold)',1],['Ahorro',Math.max(0,P(left)),20,'var(--grn)',0]];
+ $('#ms').innerHTML=M.map(m=>`<div class="meter"><span>${m[0]}</span><div class="bar"><i style="width:${Math.min(100,m[1])}%;background:${m[3]}"></i></div><span>${m[1].toFixed(0)}%</span></div>`).join('')+'<p style="color:var(--mut);font-size:.85rem;margin-top:6px">Referencia: 50% necesidades, 30% deseos, 20% ahorro.</p>';
+ let t;if(inc<=0)t='Escribe tu ingreso mensual para comenzar.';
+ else if(left<0)t='Gastas '+fm(-left)+' más de lo que ingresas. Empieza recortando los deseos y revisa si puedes bajar alguna deuda o servicio.';
+ else if(P(left)>=20)t='Muy bien: ahorras más del 20% de tu ingreso. Un fondo de emergencia de 3 a 6 meses de gastos sería '+fm(tot*3)+' a '+fm(tot*6)+(left>0?'. A este ritmo juntarías los primeros 3 meses en '+Math.ceil(tot*3/left)+' meses.':'.');
+ else t='Te queda '+fm(left)+' al mes. Intenta acercarte al 20% de ahorro'+(P(wt)>30?': tus deseos superan el 30% y es el lugar más fácil para ajustar.':'. Ahorra apenas cobras, antes de gastar.');
+ $('#nt').textContent=t;try{localStorage.setItem('fh1',JSON.stringify(st))}catch(e){}}
+fill();calc();
+$('#inc').oninput=e=>{st.i=e.target.value;calc()};document.querySelectorAll('.gi').forEach(e=>e.oninput=()=>{st.v[e.dataset.k]=e.value;calc()});
+$('#rst').onclick=()=>{st=DEF();fill();calc()};
+/* Interés compuesto */
+function ci(){const d=Math.max(0,+$('#dep').value||0),r=+$('#rate').value,y=+$('#yrs').value;$('#rv').textContent=r+' %';$('#yv').textContent=y+(y===1?' año':' años');
+ let b=0,a=0;const pts=[];for(let m=1;m<=y*12;m++){b=b*(1+r/1200)+d;a+=d;if(m%12===0)pts.push([a,b])}
+ const mx=pts[pts.length-1][1]||1,w=570/y;
+ $('#cg').innerHTML=pts.map((p,i)=>{const x=15+i*w+w*.1,bw=w*.8,hA=p[0]/mx*170,hI=(p[1]-p[0])/mx*170;return `<rect x="${x}" y="${190-hA}" width="${bw}" height="${hA}" fill="#2b6cff" rx="2"/><rect x="${x}" y="${190-hA-hI}" width="${bw}" height="${hI}" fill="#12a36b" rx="2"/>`}).join('')+'<path d="M10 190H590" stroke="#c4d8cf" stroke-width="2"/>';
+ $('#c1').textContent=fm(a);$('#c2').textContent=fm(b-a);$('#c3').textContent=fm(b)}
+['dep','rate','yrs'].forEach(i=>$('#'+i).oninput=ci);ci();
+/* Consejos */
+const CA={Cuentas:['--blue','--blue2'],Tarjetas:['--gold','--gold2'],Préstamos:['--vio','--vio2'],Seguridad:['--red','--red2']};
+const TP=[['Cuentas','Elige una cuenta sin comisiones','Compara el costo de mantenimiento y de las transferencias antes de abrir una. Muchas cuentas básicas son gratis.'],['Cuentas','Separa tu dinero en dos cuentas','Una para gastos del mes y otra solo para ahorrar. Pasa el ahorro el día que cobras.'],['Cuentas','Revisa tu resumen cada mes','Es la forma más rápida de detectar cargos que no reconoces o suscripciones olvidadas.'],['Tarjetas','Paga el total, no el mínimo','El pago mínimo deja casi toda la deuda activa y el interés se acumula rápido.'],['Tarjetas','Conoce tus fechas de cierre y vencimiento','Pagar tarde genera intereses y recargos. Programa un recordatorio o el débito automático.'],['Tarjetas','Usa débito para el día a día','Con débito gastas lo que tienes. El crédito úsalo solo si sabes que podrás pagarlo completo.'],['Préstamos','Compara el costo total, no solo la cuota','Pide la tasa efectiva con comisiones y seguros incluidos, para comparar ofertas de verdad.'],['Préstamos','Cuida el peso de tus cuotas','Como regla práctica, que todas tus cuotas juntas no superen cerca del 30% de tus ingresos.'],['Seguridad','Nunca compartas claves ni códigos','Tu banco no te los pedirá por mensaje, llamada ni correo. Si alguien insiste, corta y llama tú al número oficial.'],['Seguridad','Activa las alertas de consumo','Un aviso en tu celular por cada movimiento permite frenar un fraude en minutos.']];
+let cur='Todos';
+function dt(){$('#chips').innerHTML=['Todos',...Object.keys(CA)].map(c=>`<button class="chip ${c===cur?'on':''}" aria-pressed="${c===cur}">${c}</button>`).join('');
+ [...$('#chips').children].forEach(b=>b.onclick=()=>{cur=b.textContent;dt()});
+ $('#tips').innerHTML=TP.filter(t=>cur==='Todos'||t[0]===cur).map((t,i)=>`<article class="card tip" style="--c:var(${CA[t[0]][0]});--c2:var(${CA[t[0]][1]});animation-delay:${i*45}ms"><em>${t[0]}</em><h3>${t[1]}</h3><p>${t[2]}</p></article>`).join('')}
+dt();
+/* Billeteras */
+const FS=[['📱','Tú','Abres la app y escaneas el código QR del comercio o escribes su alias.'],['👛','Billetera','La app confirma que eres tú con PIN, huella o rostro y revisa el monto.'],['🏦','Banco o red','Se verifica que tengas saldo y el dinero pasa de tu cuenta a la del comercio.'],['🏪','Comercio','El comercio recibe el aviso en segundos y tú recibes el comprobante.']];
+$('#flow').insertAdjacentHTML('beforeend',FS.map((f,i)=>`<button class="fn" data-i="${i}"><b>${f[0]}</b>${f[1]}</button>`).join(''));
+let tm=0;const fn=[...document.querySelectorAll('.fn')];
+function fst(i){fn.forEach((n,k)=>n.classList.toggle('on',k===i));$('#dp').style.left=(12.5+i*25)+'%';$('#fs').textContent=FS[i][1]+': '+FS[i][2]}
+fn.forEach((n,i)=>n.onclick=()=>{clearInterval(tm);fst(i)});fst(0);
+$('#play').onclick=()=>{clearInterval(tm);let i=0;fst(0);tm=setInterval(()=>{i++;if(i>3){clearInterval(tm);return}fst(i)},RM?300:1700)};
+const cd=(e,t,p)=>`<article class="card rv"><div style="font-size:2rem">${e}</div><h3>${t}</h3><p>${p}</p></article>`;
+$('#wl').innerHTML=[['✅','Ventajas','Pagas y transfieres en segundos, 24 horas, sin llevar efectivo. Muchas permiten pagar servicios y dividir gastos.'],['⚠️','Cuidados','Activa el bloqueo con huella o PIN, revisa a quién transfieres antes de confirmar y no compartas códigos de verificación.'],['🔍','Billetera o banco','Una billetera facilita pagos diarios, pero revisa quién la respalda, qué comisiones cobra y si tu saldo está protegido.']].map(c=>cd(...c)).join('');
+/* Cadena de bloques */
+const h=s=>{let x=5381;for(const c of s)x=(x*33^c.charCodeAt(0))>>>0;return x.toString(16).padStart(8,'0')};
+const TX=['Génesis: inicio de la cadena','Ana paga 5 a Luis','Luis paga 2 a Marta','Marta paga 1 a Ana','Ana paga 3 a Pedro','Pedro paga 4 a Luis'];
+let ch=[];
+function mk(i){const p=i?ch[i-1].hs:'00000000';ch.push({d:TX[i],p,hs:h(i+TX[i]+p)})}
+function rc(){const c=$('#chain');c.innerHTML=ch.map((b,i)=>`${i?'<span class="ar" aria-hidden="true">→</span>':''}<div class="bk" id="k${i}"><b>Bloque ${i+1}</b><input data-i="${i}" value="${b.d}" aria-label="Datos del bloque ${i+1}"><small>Huella anterior</small><code>${b.p}</code><small>Huella propia</small><code class="hh"></code><span class="st"></span></div>`).join('');
+ c.querySelectorAll('input').forEach(e=>e.oninput=up);up();$('#ab').disabled=ch.length>=6}
+function up(){let ok=1;ch.forEach((b,i)=>{const v=document.querySelector(`#k${i} input`).value,n=h(i+v+b.p),g=n===b.hs&&ok,el=$('#k'+i);if(!g)ok=0;el.classList.toggle('bad',!g);el.querySelector('.hh').textContent=n;el.querySelector('.st').textContent=g?'✓ Válido':(n!==b.hs?'✗ Datos alterados':'✗ Enlace roto')})}
+function rs(){ch=[];for(let i=0;i<3;i++)mk(i);rc()}
+$('#ab').onclick=()=>{mk(ch.length);rc()};
+$('#tm').onclick=()=>{const e=document.querySelector('#k1 input');e.value='Ana paga 500 a Luis';up()};
+$('#rp').onclick=rs;rs();
+$('#cc').innerHTML=[['₿','Bitcoin','La primera y más conocida criptomoneda. Se usa sobre todo como reserva de valor, con precio muy variable.'],['⟠','Ethereum','Además de moneda, permite crear programas y otras monedas sobre su cadena de bloques.'],['💲','Stablecoins','Monedas pensadas para valer lo mismo que una moneda tradicional, como el dólar. Dependen de que su emisor cumpla.']].map(c=>cd(...c)).join('');
+/* Glosario */
+const G=[['Ahorro','Parte de tu ingreso que no gastas y reservas para el futuro.'],['Balance','Resumen de lo que ingresa y lo que sale de tu dinero en un período.'],['Billetera virtual','Aplicación para guardar dinero, pagar y transferir desde el celular.'],['Bitcoin','La primera criptomoneda, creada en 2009.'],['Blockchain','Cadena de bloques: registro compartido de operaciones difícil de alterar.'],['Comisión','Cobro que hace un banco o una plataforma por un servicio.'],['Criptomoneda','Dinero digital que funciona con criptografía y sin un banco central.'],['Cuota','Pago periódico con el que se devuelve un préstamo o una compra.'],['Deuda','Dinero que debes y tienes que devolver, normalmente con intereses.'],['Diversificar','Repartir tu dinero en distintos lugares para no depender de uno solo.'],['Fondo de emergencia','Dinero reservado para imprevistos. Se recomienda cubrir entre 3 y 6 meses de gastos.'],['Frase semilla','Lista de palabras que da acceso a una billetera cripto. Quien la tenga controla tu dinero.'],['Gastos fijos','Los que se repiten con el mismo valor, como alquiler o internet.'],['Gastos variables','Los que cambian cada mes, como comida, salidas o ropa.'],['Inflación','Aumento general de los precios: con el tiempo, el mismo dinero compra menos.'],['Ingreso','Dinero que recibes, como sueldo, ventas o ayudas.'],['Interés compuesto','Interés que se calcula sobre el capital más los intereses ya acumulados.'],['Interés simple','Interés calculado solo sobre el capital inicial.'],['Liquidez','Qué tan rápido puedes convertir algo en efectivo sin perder valor.'],['Minería','Proceso por el cual algunas redes validan operaciones y crean nuevas monedas.'],['Pago mínimo','Monto más bajo que puedes pagar de una tarjeta; el resto genera intereses.'],['Phishing','Engaño con mensajes o sitios falsos para robar claves y datos.'],['Presupuesto','Plan de cuánto vas a ganar, gastar y ahorrar.'],['Préstamo','Dinero que recibes ahora y devuelves en cuotas con intereses.'],['Código QR','Imagen que, al escanearla con el celular, inicia un pago o abre un enlace.'],['Rendimiento','Ganancia que produce un ahorro o una inversión en un período.'],['Riesgo','Posibilidad de perder parte o todo el dinero, o de ganar menos de lo esperado.'],['Score crediticio','Puntaje que resume qué tan bien pagas tus deudas.'],['Stablecoin','Criptomoneda diseñada para mantener un valor estable.'],['Tarjeta de crédito','Te permite pagar hoy con dinero prestado y devolverlo después.'],['Tarjeta de débito','Descuenta el dinero de tu cuenta al momento de pagar.'],['Tasa efectiva','Costo real de un préstamo, con comisiones y seguros incluidos.'],['Token','Unidad digital registrada en una cadena de bloques que puede representar un valor.'],['Volatilidad','Qué tanto y qué rápido sube o baja un precio.']].sort((a,b)=>a[0].localeCompare(b[0],'es'));
+function dg(f=''){const r=G.filter(g=>(g[0]+g[1]).toLowerCase().includes(f.toLowerCase()));
+ $('#gl').innerHTML=r.length?r.map(g=>`<div class="term"><button aria-expanded="false">${g[0]}<i aria-hidden="true">+</i></button><div class="def"><div><p>${g[1]}</p></div></div></div>`).join(''):'<p style="grid-column:1/-1;padding:20px;border-radius:16px;background:var(--gold2)">No encontramos ese término. Prueba con otra palabra.</p>';
+ document.querySelectorAll('.term button').forEach(b=>b.onclick=()=>b.setAttribute('aria-expanded',b.parentElement.toggleAttribute('open')))}
+dg();$('#q').oninput=e=>dg(e.target.value);rv();
+const lk=[...document.querySelectorAll('nav a')],so=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)lk.forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id))}),{rootMargin:'-45% 0px -50% 0px'});
+document.querySelectorAll('main section[id]').forEach(s=>so.observe(s));
+</script>
+</body>
+</html>
