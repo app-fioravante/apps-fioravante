@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<title>Redes y servidores explicados fácil</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:light;--bg:#f1f7f7;--card:#fff;--ink:#0f2a3d;--mut:#4f6677;--line:#d6e5e5;--teal:#0e9aa7;--teal2:#d9f3f5;--vio:#6c4cf1;--vio2:#e9e4ff;--org:#ff8a3d;--org2:#ffe9d9;--grn:#22b573;--grn2:#dbf6e8;--red:#ef4b5f;--red2:#ffe1e5;
+--d:"Sora","Trebuchet MS",system-ui,sans-serif;--b:"Nunito Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-behavior:smooth;scroll-padding-top:calc(78px + env(safe-area-inset-top,0px))}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.65 var(--b);-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:rgba(241,247,247,.92);z-index:30}
+h1,h2,h3{font-family:var(--d);line-height:1.15;margin:0;letter-spacing:-.02em}
+p{margin:0}
+:focus-visible{outline:3px solid var(--vio);outline-offset:3px;border-radius:8px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 22px}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:40;background:rgba(241,247,247,.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:66px;gap:14px}
+.logo{font:800 1.2rem var(--d);text-decoration:none;color:var(--ink);display:flex;align-items:center;gap:10px;white-space:nowrap}
+.logo i{width:32px;height:32px;border-radius:10px;background:linear-gradient(135deg,var(--teal),var(--vio));display:grid;place-items:center}
+nav ul{display:flex;gap:2px;list-style:none;margin:0;padding:0;overflow-x:auto}
+nav a{display:block;padding:8px 13px;border-radius:999px;text-decoration:none;font-weight:700;font-size:.92rem;color:var(--mut);white-space:nowrap;transition:background .2s,color .2s}
+nav a:hover,nav a.on{background:var(--teal2);color:#07707a}
+#bar{height:3px;background:linear-gradient(90deg,var(--teal),var(--vio));width:0}
+section{padding:70px 0}
+.alt{background:#fff;border-block:1px solid var(--line)}
+.sh{max-width:38rem;margin-bottom:32px}
+.sh h2{font-size:clamp(1.8rem,3.7vw,2.7rem);font-weight:800}
+.sh p{color:var(--mut);margin-top:12px}
+.btn{display:inline-block;padding:13px 24px;border-radius:14px;font:700 1rem var(--b);text-decoration:none;border:2px solid var(--ink);background:#fff;color:var(--ink);cursor:pointer;transition:transform .2s,box-shadow .2s}
+.btn:hover:not(:disabled){transform:translateY(-3px)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.btn.p{background:var(--teal);border-color:var(--teal);color:#fff;box-shadow:0 10px 22px -10px rgba(14,154,167,.8)}
+/* hero */
+.hero{padding:56px 0 36px;display:grid;grid-template-columns:1fr 1.05fr;gap:40px;align-items:center}
+.hero h1{font-size:clamp(2.3rem,5.4vw,4rem);font-weight:800}
+.hero h1 b{background:linear-gradient(90deg,var(--teal),var(--vio));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{font-size:1.15rem;color:var(--mut);margin:20px 0 28px;max-width:30em}
+.btns{display:flex;gap:12px;flex-wrap:wrap}
+.net{background:var(--card);border:1px solid var(--line);border-radius:30px;padding:10px;box-shadow:0 26px 50px -30px rgba(15,42,61,.4)}
+.net svg{width:100%;height:auto;display:block}
+.led{animation:bl 1.6s infinite}.led:nth-child(2n){animation-delay:.5s}.led:nth-child(3n){animation-delay:1s}
+@keyframes bl{50%{opacity:.2}}
+.ring{transform-box:fill-box;transform-origin:center;animation:rg 3s ease-out infinite}
+@keyframes rg{0%{opacity:.6;transform:scale(.7)}100%{opacity:0;transform:scale(2)}}
+.dev{animation:fl 5s ease-in-out infinite}.dev:nth-of-type(2n){animation-delay:-2s}
+@keyframes fl{50%{transform:translateY(-6px)}}
+/* cards */
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:24px;transition:transform .3s,box-shadow .3s}
+.card:hover{transform:translateY(-5px);box-shadow:0 20px 38px -26px rgba(15,42,61,.5)}
+.card svg{width:62px;height:62px;margin-bottom:12px}
+.card h3{font-size:1.25rem;margin-bottom:6px}
+.card p{color:var(--mut);font-size:.97rem}
+.rv{opacity:0;transform:translateY(22px);transition:opacity .7s,transform .7s}.rv.in{opacity:1;transform:none}
+/* simulator */
+.sim{background:var(--card);border:1px solid var(--line);border-radius:28px;padding:24px}
+.sim svg{width:100%;height:auto;display:block}
+.nd rect{fill:#fff;stroke:#c3d6d8;stroke-width:2.5;transition:all .25s}
+.nd.on rect{fill:var(--teal2);stroke:var(--teal)}
+.nd.bad rect{fill:var(--red2);stroke:var(--red)}
+.nd text{font:700 13px var(--b);fill:var(--ink)}
+.ctrl{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:14px 0}
+.tg{display:flex;align-items:center;gap:8px;font-weight:700;margin-left:auto;cursor:pointer}
+.tg input{width:20px;height:20px;accent-color:var(--red)}
+.log{display:grid;gap:8px;min-height:120px;margin:0;padding:0;list-style:none}
+.log li{padding:10px 14px;border-radius:12px;background:var(--teal2);font-size:.96rem;animation:pin .4s ease}
+.log li.s{background:var(--grn2)}.log li.e{background:var(--red2)}
+@keyframes pin{from{opacity:0;transform:translateX(-12px)}}
+/* packets */
+.pk{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start}
+.pk input{width:100%;padding:14px 16px;border:2px solid var(--line);border-radius:14px;font:600 1rem var(--b);color:var(--ink);background:#fff;margin:14px 0}
+.pk input:focus{outline:none;border-color:var(--teal)}
+.lane{border-radius:18px;padding:14px 16px;margin-bottom:12px;min-height:76px}
+.lane small{display:block;font-weight:700;color:var(--mut);margin-bottom:8px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.pc{background:#fff;border:2px solid var(--vio);border-radius:10px;padding:3px 10px;font:700 .95rem monospace;position:relative;animation:pop .45s both}
+.pc sup{position:absolute;top:-9px;right:-7px;background:var(--vio);color:#fff;border-radius:50%;width:19px;height:19px;font:700 .7rem var(--b);display:grid;place-items:center}
+@keyframes pop{from{opacity:0;transform:scale(.4) translateY(-14px)}}
+.fly .pc{animation:fy 1.2s both;border-color:var(--org)}
+@keyframes fy{0%{opacity:0;transform:translateX(-60px) rotate(-12deg)}60%{transform:translateX(12px) rotate(8deg)}100%{opacity:1;transform:none}}
+/* servers flip */
+.fl{perspective:900px;border:0;background:none;padding:0;cursor:pointer;height:190px;font:inherit;color:inherit;text-align:left}
+.fi{position:relative;width:100%;height:100%;transition:transform .6s;transform-style:preserve-3d}
+.fl.on .fi{transform:rotateY(180deg)}
+.fa,.fb{position:absolute;inset:0;border-radius:22px;padding:22px;backface-visibility:hidden;border:1px solid var(--line)}
+.fa{background:var(--card);display:flex;flex-direction:column;justify-content:space-between}
+.fa span{font-size:2.2rem;width:62px;height:62px;border-radius:18px;display:grid;place-items:center}
+.fa h3{font-size:1.2rem}.fa em{font-style:normal;color:var(--mut);font-size:.88rem}
+.fb{transform:rotateY(180deg);background:var(--ink);color:#fff;font-size:.95rem}
+.fb b{font:700 1.05rem var(--d);display:block;margin-bottom:6px}
+/* ports */
+.ports{display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:center}
+.bld{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:18px 18px 0;text-align:center}
+.roof{background:var(--vio);color:#fff;border-radius:14px 14px 4px 4px;padding:10px;font:700 .98rem var(--d);margin-bottom:12px}
+.doors{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding-bottom:18px}
+.dr{border:3px solid var(--ink);border-radius:10px 10px 0 0;background:var(--vio2);height:84px;cursor:pointer;font:800 1rem var(--d);color:var(--ink);position:relative;overflow:hidden;transition:background .3s}
+.dr::after{content:"";position:absolute;inset:0;background:var(--org);transform-origin:left;transform:scaleX(1);transition:transform .45s}
+.dr.on::after{transform:scaleX(.12)}
+.dr.on{background:#fff4e8}
+.dr span{position:relative;z-index:2;text-shadow:0 0 4px #fff}
+.pinfo{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:26px;border-left:8px solid var(--org);min-height:190px}
+.pinfo h3{font-size:1.4rem;margin-bottom:8px}.pinfo p{color:var(--mut)}
+/* tips */
+.tip{border-top:6px solid var(--c)}
+.tip em{font-style:normal;font:700 .85rem var(--b);background:var(--c2);color:var(--c);padding:3px 11px;border-radius:999px}
+.tip h3{margin:12px 0 6px;font-size:1.15rem}
+/* glossary */
+.search{width:100%;max-width:440px;padding:14px 18px;border:2px solid var(--line);border-radius:14px;font:600 1rem var(--b);background:#fff;color:var(--ink);margin-bottom:16px}
+.search:focus{outline:none;border-color:var(--teal)}
+.gl{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:start}
+.term{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.term button{all:unset;box-sizing:border-box;width:100%;padding:15px 20px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;font:700 1.05rem var(--d)}
+.term button:focus-visible{outline:3px solid var(--vio);outline-offset:-3px}
+.term button i{width:26px;height:26px;border-radius:50%;background:var(--teal2);color:#07707a;display:grid;place-items:center;font-style:normal;flex:none;transition:transform .3s}
+.term[open] button i{transform:rotate(45deg)}
+.def{display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s}.term[open] .def{grid-template-rows:1fr}
+.def div{overflow:hidden}.def p{padding:0 20px 16px;color:var(--mut);font-size:.96rem}
+/* quiz */
+.quiz{background:var(--ink);color:#fff;border-radius:28px;padding:36px;display:grid;grid-template-columns:1fr 1.2fr;gap:34px;align-items:center}
+.quiz h2{font-size:clamp(1.8rem,3.4vw,2.5rem)}.quiz>div:first-child p{color:#b8cbd8;margin-top:12px}
+.qbox{background:#fff;color:var(--ink);border-radius:20px;padding:24px;min-height:300px}
+.qbox h3{font-size:1.2rem;margin:6px 0 16px}.qbox small{color:var(--mut);font-weight:700}
+.opt{display:block;width:100%;text-align:left;padding:12px 16px;margin-bottom:9px;border-radius:12px;border:2px solid var(--line);background:#fff;font:600 .98rem var(--b);color:var(--ink);cursor:pointer;transition:border-color .2s}
+.opt:hover:not(:disabled){border-color:var(--teal)}.opt.ok{background:var(--grn2);border-color:var(--grn)}.opt.no{background:var(--red2);border-color:var(--red)}
+.fbk{font-size:.92rem;color:var(--mut);margin:6px 0 12px;min-height:2.8em}
+footer{padding:36px 0 48px;border-top:1px solid var(--line);color:var(--mut);font-size:.93rem}
+footer .wrap{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start}.box{background:#fff;border:1px solid var(--line);border-radius:24px;padding:26px}.box h3{font-size:1.3rem}.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.bands{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}.cb{border:2px solid var(--line);background:#fff;padding:9px 18px;border-radius:999px;font:700 .95rem var(--b);cursor:pointer;color:var(--mut);transition:all .2s}.cb.on{background:var(--ink);border-color:var(--ink);color:#fff}
+.meter{display:grid;grid-template-columns:86px 1fr;gap:12px;align-items:center;margin-top:12px;font-weight:700;font-size:.92rem}.bar{height:12px;border-radius:99px;background:#e1ecec;overflow:hidden}.bar i{display:block;height:100%;width:0;border-radius:inherit;transition:width .8s,background .3s}.in .bar i{width:var(--w,0)}
+.wv{transform-box:fill-box;transform-origin:center;animation:wv 3s ease-out infinite}@keyframes wv{0%{opacity:.7;transform:scale(.3)}100%{opacity:0;transform:scale(var(--s,2))}}
+.mn rect{fill:#fff;stroke:#c3d6d8;stroke-width:2.5;transition:all .25s;cursor:pointer}.mn.on rect{fill:var(--org2);stroke:var(--org)}.mn text{font:700 13px var(--b);fill:var(--ink)}.stp{background:var(--org2);border-radius:12px;padding:12px 16px;margin-top:10px;min-height:3.6em}
+.ck{list-style:none;margin:14px 0 0;padding:0;display:grid;gap:6px;font-size:.95rem;color:var(--mut)}.ck li::before{content:'○';margin-right:8px}.ck li.y{color:var(--ink)}.ck li.y::before{content:'✓';color:var(--grn);font-weight:800}
+.enc{display:grid;gap:10px}.er{display:grid;grid-template-columns:62px 1fr;gap:10px;align-items:center;padding:12px 14px;border-radius:14px;animation:pin .5s both}.er b{font:800 1.05rem var(--d)}.er span{font-size:.94rem}
+@media(prefers-reduced-motion:reduce){.wv{transform:scale(var(--s,2));opacity:.3}}
+@media(max-width:900px){.hero,.pk,.ports,.quiz,.two{grid-template-columns:1fr}.grid3{grid-template-columns:1fr 1fr}.g4{grid-template-columns:1fr 1fr}.gl{grid-template-columns:1fr}}@media(max-width:620px){.g4{grid-template-columns:1fr}}
+@media(max-width:620px){.grid3{grid-template-columns:1fr}.logo b{display:none}.quiz{padding:22px}.tg{margin-left:0}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}.mv{display:none}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#inicio" aria-label="Redes y servidores, inicio"><i><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="5" r="2.5"/><circle cx="5" cy="19" r="2.5"/><circle cx="19" cy="19" r="2.5"/><path d="M12 8v4M12 12 6 17M12 12l6 5"/></svg></i><b>Redes fáciles</b></a>
+    <nav aria-label="Secciones"><ul>
+      <li><a href="#conceptos">Conceptos</a></li><li><a href="#simulador">Simulador</a></li><li><a href="#paquetes">Paquetes</a></li><li><a href="#servidores">Servidores</a></li><li><a href="#puertos">Puertos</a></li><li><a href="#inalambricas">Inalámbricas</a></li><li><a href="#modems">Módems</a></li><li><a href="#seguridad">Seguridad</a></li><li><a href="#glosario">Glosario</a></li><li><a href="#quiz">Quiz</a></li>
+    </ul></nav>
+  </div>
+  <div id="bar"></div>
+</header>
+
+<main>
+<div class="wrap" id="inicio"><div class="hero">
+  <div>
+    <h1>Así se hablan los computadores: <b>redes y servidores</b> sin complicaciones.</h1>
+    <p class="lead">Descubre cómo se conectan tus dispositivos, qué hace un servidor y por qué tus mensajes llegan en segundos. Con animaciones que puedes tocar.</p>
+    <div class="btns"><a class="btn p" href="#simulador">Probar el simulador</a><a class="btn" href="#conceptos">Ver conceptos</a></div>
+  </div>
+  <div class="net">
+    <svg viewBox="0 0 480 400" role="img" aria-label="Cuatro dispositivos conectados a un servidor central, con paquetes de datos viajando">
+      <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#d9f3f5"/><stop offset="1" stop-color="#e9e4ff"/></linearGradient></defs>
+      <rect width="480" height="400" rx="22" fill="url(#g)"/>
+      <g stroke="#9fb8c6" stroke-width="3" stroke-dasharray="2 9" stroke-linecap="round" fill="none">
+        <path id="p1" d="M85 90 240 200"/><path id="p2" d="M395 90 240 200"/><path id="p3" d="M85 320 240 200"/><path id="p4" d="M395 320 240 200"/>
+      </g>
+      <circle class="ring" cx="240" cy="200" r="60" fill="none" stroke="#6c4cf1" stroke-width="3"/>
+      <g><rect x="190" y="140" width="100" height="120" rx="14" fill="#0f2a3d"/>
+        <g fill="#1d4560"><rect x="200" y="152" width="80" height="26" rx="6"/><rect x="200" y="186" width="80" height="26" rx="6"/><rect x="200" y="220" width="80" height="26" rx="6"/></g>
+        <g><circle class="led" cx="214" cy="165" r="4" fill="#22b573"/><circle class="led" cx="214" cy="199" r="4" fill="#ff8a3d"/><circle class="led" cx="214" cy="233" r="4" fill="#22b573"/><rect x="230" y="162" width="40" height="6" rx="3" fill="#2d6a8c"/><rect x="230" y="196" width="40" height="6" rx="3" fill="#2d6a8c"/><rect x="230" y="230" width="40" height="6" rx="3" fill="#2d6a8c"/></g></g>
+      <text x="240" y="282" text-anchor="middle" font-family="Sora,sans-serif" font-weight="700" font-size="15" fill="#0f2a3d">Servidor</text>
+      <g class="dev"><rect x="45" y="62" width="80" height="54" rx="9" fill="#fff" stroke="#0e9aa7" stroke-width="3.5"/><rect x="30" y="118" width="110" height="8" rx="4" fill="#0f2a3d"/></g>
+      <g class="dev"><rect x="372" y="50" width="46" height="82" rx="9" fill="#fff" stroke="#6c4cf1" stroke-width="3.5"/><circle cx="395" cy="120" r="3" fill="#6c4cf1"/></g>
+      <g class="dev"><rect x="40" y="294" width="90" height="62" rx="9" fill="#fff" stroke="#ff8a3d" stroke-width="3.5"/><circle cx="85" cy="325" r="4" fill="#ff8a3d"/></g>
+      <g class="dev"><rect x="355" y="296" width="80" height="48" rx="9" fill="#fff" stroke="#22b573" stroke-width="3.5"/><rect x="380" y="350" width="30" height="6" rx="3" fill="#0f2a3d"/></g>
+      <g class="mv">
+        <circle r="7" fill="#ff8a3d"><animateMotion dur="3s" repeatCount="indefinite" keyPoints="0;1;0" keyTimes="0;.5;1" calcMode="linear"><mpath href="#p1"/></animateMotion></circle>
+        <circle r="7" fill="#6c4cf1"><animateMotion dur="3.6s" repeatCount="indefinite" keyPoints="0;1;0" keyTimes="0;.5;1" calcMode="linear"><mpath href="#p2"/></animateMotion></circle>
+        <circle r="7" fill="#0e9aa7"><animateMotion dur="4s" repeatCount="indefinite" keyPoints="0;1;0" keyTimes="0;.5;1" calcMode="linear"><mpath href="#p3"/></animateMotion></circle>
+        <circle r="7" fill="#22b573"><animateMotion dur="3.3s" repeatCount="indefinite" keyPoints="0;1;0" keyTimes="0;.5;1" calcMode="linear"><mpath href="#p4"/></animateMotion></circle>
+      </g>
+    </svg>
+  </div>
+</div></div>
+
+<section id="conceptos"><div class="wrap">
+  <div class="sh rv"><h2>Las piezas del rompecabezas</h2><p>Seis ideas que necesitas para entender cualquier red, desde la de tu casa hasta internet.</p></div>
+  <div class="grid3" id="cc"></div>
+</div></section>
+
+<section id="simulador" class="alt"><div class="wrap">
+  <div class="sh rv"><h2>Cliente y servidor en acción</h2><p>Tu dispositivo (el cliente) pide algo y el servidor responde. Elige una solicitud y mira el viaje.</p></div>
+  <div class="sim">
+    <svg viewBox="0 0 760 190" role="img" aria-label="Recorrido entre cliente, router, internet y servidor">
+      <path id="line" d="M70 90H690" stroke="#c3d6d8" stroke-width="4" stroke-dasharray="3 10" stroke-linecap="round"/>
+      <g class="nd on" data-x="70"><rect x="20" y="52" width="100" height="76" rx="16"/><rect x="48" y="66" width="44" height="28" rx="4" fill="#0e9aa7"/><rect x="40" y="98" width="60" height="5" rx="2.5" fill="#0f2a3d"/><text x="70" y="156" text-anchor="middle">Cliente</text></g>
+      <g class="nd" data-x="270"><rect x="226" y="58" width="88" height="64" rx="16"/><circle cx="248" cy="90" r="5" fill="#22b573"/><circle cx="270" cy="90" r="5" fill="#ffb81f"/><circle cx="292" cy="90" r="5" fill="#ff8a3d"/><text x="270" y="156" text-anchor="middle">Router</text></g>
+      <g class="nd" data-x="470"><rect x="420" y="56" width="100" height="68" rx="34"/><path d="M445 98a14 14 0 0 1 4-24 18 18 0 0 1 34-2 14 14 0 0 1 10 26z" fill="#6c4cf1"/><text x="470" y="156" text-anchor="middle">Internet</text></g>
+      <g class="nd" id="srv" data-x="690"><rect x="640" y="40" width="100" height="100" rx="16"/><rect x="654" y="52" width="72" height="24" rx="5" fill="#0f2a3d"/><rect x="654" y="82" width="72" height="24" rx="5" fill="#0f2a3d"/><circle id="srvled" cx="666" cy="64" r="4" fill="#22b573"/><circle cx="666" cy="94" r="4" fill="#22b573"/><rect x="654" y="112" width="72" height="16" rx="5" fill="#1d4560"/><text x="690" y="162" text-anchor="middle">Servidor</text></g>
+      <circle id="pkt" cx="70" cy="90" r="9" fill="#ff8a3d" opacity="0"/>
+    </svg>
+    <div class="ctrl" id="ctrl"><label class="tg"><input type="checkbox" id="down"> Simular servidor apagado</label></div>
+    <ul class="log" id="log" aria-live="polite"><li>Elige una solicitud para comenzar.</li></ul>
+  </div>
+</div></section>
+
+<section id="paquetes"><div class="wrap">
+  <div class="sh rv"><h2>Los mensajes viajan en paquetes</h2><p>Internet no envía un mensaje entero: lo corta en trozos pequeños, los manda por rutas distintas y el destino los vuelve a ordenar.</p></div>
+  <div class="pk">
+    <div><label for="msg"><b>Escribe un mensaje corto</b></label>
+      <input id="msg" maxlength="40" value="Hola desde mi computador" autocomplete="off">
+      <button class="btn p" id="send">Enviar por la red</button>
+      <p style="color:var(--mut);margin-top:14px;font-size:.95rem">El número de cada paquete permite reconstruir el mensaje aunque lleguen desordenados.</p></div>
+    <div>
+      <div class="lane" style="background:var(--teal2)"><small>1. Origen: el mensaje se divide</small><div class="chips" id="l1"></div></div>
+      <div class="lane" style="background:var(--org2)"><small>2. En la red: llegan desordenados</small><div class="chips" id="l2"></div></div>
+      <div class="lane" style="background:var(--grn2)"><small>3. Destino: se ordenan y se leen</small><div class="chips" id="l3" style="font-weight:700"></div></div>
+    </div>
+  </div>
+</div></section>
+
+<section id="servidores" class="alt"><div class="wrap">
+  <div class="sh rv"><h2>Un servidor, muchos trabajos</h2><p>Un servidor es un computador que atiende pedidos de otros. Toca cada tarjeta para ver qué hace.</p></div>
+  <div class="grid3" id="sv"></div>
+</div></section>
+
+<section id="puertos"><div class="wrap">
+  <div class="sh rv"><h2>IP y puertos: el edificio y sus puertas</h2><p>La dirección IP es la calle y el número del edificio. Los puertos son las puertas: cada servicio atiende en una distinta.</p></div>
+  <div class="ports">
+    <div class="bld"><div class="roof">Servidor 203.0.113.10</div><div class="doors" id="doors"></div></div>
+    <div class="pinfo" id="pinfo"></div>
+  </div>
+</div></section>
+
+<section id='inalambricas' class='alt'><div class='wrap'>
+<div class='sh rv'><h2>Redes inalámbricas: datos en el aire</h2><p>Wi-Fi, Bluetooth y datos móviles viajan como ondas de radio, sin cables. Cambia la frecuencia y mira hasta dónde llega la señal.</p></div>
+<div class='two'>
+<div class='box'><svg viewBox='0 0 400 300' style='width:100%;height:auto;display:block' role='img' aria-label='Router con ondas de señal y tres dispositivos a distintas distancias'><g id='rings' fill='none' stroke='#0e9aa7' stroke-width='3'><circle class='wv' cx='200' cy='150' r='60'/><circle class='wv' style='animation-delay:-1s' cx='200' cy='150' r='60'/><circle class='wv' style='animation-delay:-2s' cx='200' cy='150' r='60'/></g><path d='M182 140 176 116M218 140l6-24' stroke='#0f2a3d' stroke-width='4' stroke-linecap='round'/><rect x='168' y='138' width='64' height='24' rx='8' fill='#0f2a3d'/><circle cx='186' cy='150' r='3.5' fill='#22b573'/><circle cx='200' cy='150' r='3.5' fill='#ffb81f'/><g id='wd' style='font-family:Nunito Sans,sans-serif'></g></svg></div>
+<div class='box'><div class='bands' id='bands'></div><h3 id='bt'></h3><p id='bp' style='color:var(--mut);margin-top:8px'></p><div class='meter'><span>Alcance</span><div class='bar'><i id='b1' style='background:var(--teal)'></i></div></div><div class='meter'><span>Velocidad</span><div class='bar'><i id='b2' style='background:var(--vio)'></i></div></div></div>
+</div>
+<div class='grid3' id='wc' style='margin-top:20px'></div>
+</div></section>
+
+<section id='modems'><div class='wrap'>
+<div class='sh rv'><h2>Módem y router: dos trabajos distintos</h2><p>El módem se conecta con tu proveedor de internet. El router reparte esa conexión entre tus dispositivos. Muchos equipos modernos traen los dos en una sola caja.</p></div>
+<div class='box'><svg viewBox='0 0 760 180' style='width:100%;height:auto;display:block' role='group' aria-label='Cadena de conexión: proveedor, módem, router y dispositivos'>
+<path id='mline' d='M70 80H690' stroke='#c3d6d8' stroke-width='4' stroke-dasharray='3 10' stroke-linecap='round'/>
+<g class='mn'><rect x='20' y='42' width='100' height='76' rx='16'/><path d='M45 96a14 14 0 0 1 4-24 18 18 0 0 1 34-2 14 14 0 0 1 10 26z' fill='#6c4cf1'/><text x='70' y='150' text-anchor='middle'>Proveedor</text></g>
+<g class='mn'><rect x='220' y='52' width='100' height='56' rx='14'/><rect x='236' y='66' width='68' height='10' rx='4' fill='#0f2a3d'/><circle cx='244' cy='92' r='4' fill='#22b573'/><circle cx='258' cy='92' r='4' fill='#22b573'/><circle cx='272' cy='92' r='4' fill='#ffb81f'/><text x='270' y='150' text-anchor='middle'>Módem</text></g>
+<g class='mn'><rect x='420' y='52' width='100' height='56' rx='14'/><path d='M436 52 430 30M504 52l6-22' stroke='#0f2a3d' stroke-width='4' stroke-linecap='round'/><circle cx='444' cy='80' r='4' fill='#22b573'/><circle cx='458' cy='80' r='4' fill='#ffb81f'/><circle cx='472' cy='80' r='4' fill='#ff8a3d'/><text x='470' y='150' text-anchor='middle'>Router</text></g>
+<g class='mn'><rect x='640' y='42' width='100' height='76' rx='16'/><text x='690' y='90' text-anchor='middle' style='font-size:28px'>💻📱</text><text x='690' y='150' text-anchor='middle'>Tus dispositivos</text></g>
+<g class='mv'><circle r='8' fill='#ff8a3d'><animateMotion dur='4s' repeatCount='indefinite' keyPoints='0;1;0' keyTimes='0;.5;1' calcMode='linear'><mpath href='#mline'/></animateMotion></circle></g>
+</svg><div class='stp' id='mstep'></div></div>
+<h3 style='font-size:1.4rem;margin:36px 0 16px'>¿Cómo llega internet a tu casa?</h3>
+<div class='g4' id='cx'></div>
+</div></section>
+
+<section id='seguridad' class='alt'><div class='wrap'>
+<div class='sh rv'><h2>Seguridad: protege tu red y tus cuentas</h2><p>La mayoría de los ataques buscan claves débiles o personas distraídas. Prueba tu criterio.</p></div>
+<div class='two'>
+<div class='box'><h3>Probador de contraseñas</h3><p style='color:var(--mut);font-size:.95rem;margin:6px 0 12px'>Escribe una clave de ejemplo, no una real. No se guarda ni se envía a ningún lado.</p><input class='search' id='pw' type='text' placeholder='Escribe una clave de prueba' aria-label='Contraseña de prueba' autocomplete='off' spellcheck='false' style='max-width:none;margin-bottom:12px'><div class='bar'><i id='pb'></i></div><p id='pt' style='margin-top:10px;font-weight:700'></p><ul class='ck' id='ck'></ul></div>
+<div class='box'><h3>Niveles de cifrado Wi-Fi</h3><p style='color:var(--mut);font-size:.95rem;margin:6px 0 14px'>El cifrado mezcla los datos para que nadie pueda leerlos. Elige el más moderno que admita tu router.</p><div class='enc' id='enc'></div></div>
+</div>
+<h3 style='font-size:1.4rem;margin:36px 0 16px'>Amenazas frecuentes</h3>
+<div class='grid3' id='th'></div>
+<h3 style='font-size:1.4rem;margin:40px 0 6px'>Cuida tu red</h3><p style='color:var(--mut);margin-bottom:18px'>Medidas simples que protegen tu casa u oficina.</p>
+  <div class="grid3" id="tp"></div>
+</div></section>
+
+<section id="glosario"><div class="wrap">
+  <div class="sh rv"><h2>Glosario</h2><p>Palabras de redes en lenguaje sencillo.</p></div>
+  <input class="search" id="q" type="search" placeholder="Buscar: por ejemplo, ping o LAN" aria-label="Buscar en el glosario">
+  <div class="gl" id="gl"></div>
+</div></section>
+
+<section id="quiz" class="alt"><div class="wrap"><div class="quiz rv">
+  <div><h2>¿Cuánto aprendiste?</h2><p>Siete preguntas rápidas. Después de cada una verás la explicación.</p></div>
+  <div class="qbox" id="qbox" aria-live="polite"></div>
+</div></div></section>
+</main>
+<footer><div class="wrap"><span>Redes fáciles: material educativo.</span><span>Aprende a tu ritmo.</span></div></footer>
+
+<script>
+const $=s=>document.querySelector(s),RM=matchMedia('(prefers-reduced-motion:reduce)').matches;
+addEventListener('scroll',()=>{const h=document.documentElement;$('#bar').style.width=h.scrollTop/(h.scrollHeight-h.clientHeight)*100+'%'},{passive:true});
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+function rv(){document.querySelectorAll('.rv:not(.in)').forEach(e=>io.observe(e))}
+/* Conceptos */
+const S=(c,b)=>`<svg viewBox="0 0 64 64" fill="none" stroke="${c}" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${b}</svg>`;
+const C=[
+['Red','Un grupo de dispositivos conectados para compartir datos, archivos o internet.',S('#0e9aa7','<circle cx="32" cy="12" r="7"/><circle cx="12" cy="50" r="7"/><circle cx="52" cy="50" r="7"/><path d="M32 19v12M32 31 16 44M32 31l16 13"/>')],
+['Cliente','El dispositivo que pide algo: tu celular o tu computador al abrir una web.',S('#6c4cf1','<rect x="10" y="12" width="44" height="30" rx="4"/><path d="M4 52h56"/>')],
+['Servidor','Un computador potente que está siempre encendido para responder pedidos.',S('#ff8a3d','<rect x="12" y="8" width="40" height="14" rx="3"/><rect x="12" y="26" width="40" height="14" rx="3"/><rect x="12" y="44" width="40" height="12" rx="3"/><path d="M20 15h.1M20 33h.1"/>')],
+['Router','Reparte internet entre tus dispositivos y los conecta con el exterior.',S('#22b573','<rect x="8" y="34" width="48" height="16" rx="4"/><path d="M18 34 12 14M46 34l6-20M24 42h.1M32 42h.1"/>')],
+['Switch','Conecta con cables varios equipos de una misma red local y envía los datos al correcto.',S('#ef4b5f','<rect x="6" y="22" width="52" height="20" rx="4"/><path d="M16 32h.1M26 32h.1M36 32h.1M46 32h.1"/>')],
+['Dirección IP','El número que identifica a cada dispositivo, como el domicilio de una casa.',S('#0e9aa7','<rect x="6" y="20" width="52" height="24" rx="6"/><path d="M18 32h.1M28 32h.1M38 32h.1M48 32h.1"/>')]];
+$('#cc').innerHTML=C.map(c=>`<article class="card rv">${c[2]}<h3>${c[0]}</h3><p>${c[1]}</p></article>`).join('');
+/* Simulador */
+const nodes=[...document.querySelectorAll('.nd')],pk=$('#pkt'),log=$('#log');
+const SC=[['Abrir una página web','Pido la página al servidor web (puerto 443).','Recibí la página y el navegador la dibuja.'],['Enviar un correo','Entrego el mensaje al servidor de correo (puerto 587).','El correo quedó en la bandeja de destino.'],['Pedir un archivo','Pido el archivo al servidor de archivos.','El archivo se descargó completo.']];
+$('#ctrl').insertAdjacentHTML('afterbegin',SC.map((s,i)=>`<button class="btn p run" data-i="${i}">${s[0]}</button>`).join(''));
+const wait=ms=>new Promise(r=>setTimeout(r,RM?0:ms));
+const say=(t,c='')=>{if(log.firstElementChild&&log.firstElementChild.dataset.ph)log.innerHTML='';log.insertAdjacentHTML('beforeend',`<li class="${c}">${t}</li>`)};
+log.firstElementChild.dataset.ph=1;
+function mv(a,b,col,ms){pk.setAttribute('fill',col);pk.setAttribute('opacity',1);return new Promise(res=>{if(RM){pk.setAttribute('cx',b);return res()}const t0=performance.now();(function f(t){let k=Math.min(1,(t-t0)/ms);const e=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2,x=a+(b-a)*e;pk.setAttribute('cx',x);nodes.forEach(n=>{if(!n.classList.contains('bad'))n.classList.toggle('on',Math.abs(+n.dataset.x-x)<45)});k<1?requestAnimationFrame(f):res()})(t0)})}
+document.querySelectorAll('.run').forEach(b=>b.onclick=async()=>{
+ const s=SC[+b.dataset.i],off=$('#down').checked;document.querySelectorAll('.run').forEach(x=>x.disabled=true);
+ nodes.forEach(n=>n.classList.remove('bad'));log.innerHTML='';$('#srvled').setAttribute('fill',off?'#ef4b5f':'#22b573');
+ say('Cliente: '+s[1]);await mv(70,690,'#ff8a3d',2600);
+ if(off){$('#srv').classList.add('bad');say('El servidor no responde. Es como llamar a un local cerrado.','e');await mv(690,70,'#ef4b5f',1800);say('Error: el servicio no está disponible. Intenta más tarde.','e')}
+ else{say('Servidor: recibí la solicitud y preparo la respuesta.');await wait(900);await mv(690,70,'#22b573',2200);say('Cliente: '+s[2],'s')}
+ pk.setAttribute('opacity',0);document.querySelectorAll('.run').forEach(x=>x.disabled=false)});
+/* Paquetes */
+const rnd=a=>[...a].sort(()=>Math.random()-.5),chip=(t,i)=>`<span class="pc" style="animation-delay:${i*80}ms">${t.replace(/ /g,'·')}<sup>${i+1}</sup></span>`;
+let busy=0;
+$('#send').onclick=async()=>{if(busy)return;busy=1;const m=$('#msg').value.trim()||'Hola';const P=m.match(/.{1,4}/g).map((t,i)=>[t,i]);
+ ['#l2','#l3'].forEach(s=>$(s).innerHTML='');$('#l1').innerHTML=P.map((p,i)=>chip(p[0],p[1])).join('');
+ await wait(1200);let r=rnd(P);if(P.length>1&&r.every((p,i)=>p[1]===i))r.reverse();
+ $('#l2').className='chips fly';$('#l2').innerHTML=r.map((p,i)=>chip(p[0],p[1])).join('');
+ await wait(1800);const L=$('#l3');L.textContent='';
+ for(let i=0;i<m.length;i++){L.textContent+=m[i];await wait(45)}busy=0};
+$('#send').click();
+/* Servidores */
+const V=[['🌐','Servidor web','Guarda páginas y las entrega a tu navegador.','Ejemplo: al entrar a una tienda en línea.','--teal2'],['✉️','Servidor de correo','Recibe, guarda y envía tus mensajes de email.','Ejemplo: tu bandeja de entrada.','--vio2'],['📁','Servidor de archivos','Almacena documentos compartidos por varias personas.','Ejemplo: la carpeta común de una oficina.','--org2'],['🗄️','Base de datos','Guarda información ordenada y la entrega al instante.','Ejemplo: tus pedidos y tu perfil.','--grn2'],['🧭','Servidor DNS','Traduce nombres de sitios en direcciones IP.','Ejemplo: de ejemplo.com a un número.','--red2'],['🎮','Servidor de juegos','Coordina a los jugadores de una partida en línea.','Ejemplo: partidas multijugador.','--teal2']];
+$('#sv').innerHTML=V.map(v=>`<button class="fl" aria-pressed="false" aria-label="${v[1]}: tocar para ver detalles"><div class="fi"><div class="fa"><span style="background:var(${v[4]})">${v[0]}</span><div><h3>${v[1]}</h3><em>Toca para girar</em></div></div><div class="fb"><b>${v[1]}</b>${v[2]}<br><br>${v[3]}</div></div></button>`).join('');
+document.querySelectorAll('.fl').forEach(b=>b.onclick=()=>b.setAttribute('aria-pressed',b.classList.toggle('on')));
+/* Puertos */
+const PT=[[80,'HTTP','Páginas web sin cifrar. Hoy casi todo usa el puerto 443.'],[443,'HTTPS','Páginas web seguras, con el candado del navegador y datos cifrados.'],[25,'Correo (SMTP)','Envío de correos entre servidores.'],[22,'SSH','Acceso remoto seguro para administrar un servidor.'],[53,'DNS','Responde qué dirección IP corresponde a cada nombre.'],[21,'FTP','Transferencia de archivos, una forma antigua y poco segura.']];
+$('#doors').innerHTML=PT.map((p,i)=>`<button class="dr" data-i="${i}" aria-label="Puerto ${p[0]}"><span>${p[0]}</span></button>`).join('');
+function door(i){document.querySelectorAll('.dr').forEach((d,k)=>d.classList.toggle('on',k===i));const p=PT[i];$('#pinfo').innerHTML=`<h3>Puerta ${p[0]}: ${p[1]}</h3><p>${p[2]}</p><p style="margin-top:12px">Un cliente que llega a este servidor por esta puerta recibe el servicio de ${p[1]}.</p>`}
+document.querySelectorAll('.dr').forEach(d=>d.onclick=()=>door(+d.dataset.i));door(1);
+/* Seguridad */
+const T=[['Firewall','Activa el cortafuegos','Filtra las conexiones que entran y salen y bloquea las sospechosas.','--red','--red2'],['Wi-Fi','Cambia la clave del router','Las claves de fábrica son conocidas. Usa una larga y el cifrado WPA3 o WPA2.','--teal','--teal2'],['Actualizar','Actualiza el router y los equipos','Corrige fallos que los atacantes aprovechan.','--vio','--vio2'],['Redes públicas','Cuidado con el Wi-Fi abierto','Evita entrar al banco ahí o usa una VPN que cifre tu conexión.','--org','--org2'],['Invitados','Crea una red para invitados','Mantiene a las visitas separadas de tus equipos y archivos.','--grn','--grn2'],['Copias','Haz copias de seguridad','Si un servidor falla o te atacan, tus datos siguen a salvo.','--teal','--teal2']];
+$('#tp').innerHTML=T.map(t=>`<article class="card tip rv" style="--c:var(${t[3]});--c2:var(${t[4]})"><em>${t[0]}</em><h3>${t[1]}</h3><p>${t[2]}</p></article>`).join('');
+/* Glosario */
+const G=[['Ancho de banda','Cantidad de datos que tu conexión puede transportar por segundo.'],['Cliente','Dispositivo o programa que solicita un servicio a un servidor.'],['DHCP','Servicio que le asigna una dirección IP automática a cada dispositivo que se conecta.'],['DNS','Agenda de internet: traduce nombres de sitios en direcciones IP.'],['Ethernet','Tecnología para conectar equipos con cable de red.'],['Firewall','Barrera que filtra el tráfico y bloquea lo peligroso.'],['Hosting','Servicio que te presta espacio en un servidor para alojar tu sitio.'],['IP','Dirección numérica única de un dispositivo en una red.'],['LAN','Red local: la de tu casa, escuela u oficina.'],['Latencia','Tiempo que tarda un dato en ir y volver. Se mide en milisegundos.'],['Paquete','Trozo pequeño de datos que viaja por la red.'],['Ping','Prueba que mide si otro equipo responde y cuánto tarda.'],['Protocolo','Conjunto de reglas para que dos equipos se entiendan.'],['Puerto','Punto de entrada de un servidor para un servicio concreto.'],['Router','Dispositivo que conecta tu red con otras redes, como internet.'],['Servidor','Computador que ofrece servicios o datos a otros equipos.'],['Switch','Equipo que conecta dispositivos de una red local por cable.'],['VPN','Túnel cifrado que protege tu conexión en redes poco confiables.'],['WAN','Red de área amplia que une redes lejanas, como internet.'],['Wi-Fi','Conexión inalámbrica a una red local.'],['Bluetooth','Conexión inalámbrica de corto alcance para auriculares, teclados y relojes.'],['Fibra óptica','Cable de hilos de vidrio que transmite datos con luz. Es muy rápido y estable.'],['GHz','Gigahercio: unidad de frecuencia. El Wi-Fi usa bandas de 2,4, 5 y 6 GHz.'],['Módem','Equipo que conecta tu casa con la red de tu proveedor de internet.'],['Phishing','Engaño con un mensaje o web falsa para robar tus datos.'],['Repetidor','Equipo que amplía el alcance de tu señal Wi-Fi.'],['SSID','Nombre de tu red Wi-Fi, el que ves al buscar redes.'],['WPA3','Cifrado Wi-Fi más moderno y seguro.']];
+function drawG(f=''){const r=G.filter(g=>(g[0]+g[1]).toLowerCase().includes(f.toLowerCase()));
+ $('#gl').innerHTML=r.length?r.map(g=>`<div class="term"><button aria-expanded="false">${g[0]}<i aria-hidden="true">+</i></button><div class="def"><div><p>${g[1]}</p></div></div></div>`).join(''):'<p style="grid-column:1/-1;padding:20px;border-radius:16px;background:var(--org2)">No encontramos ese término. Prueba con otra palabra.</p>';
+ document.querySelectorAll('.term button').forEach(b=>b.onclick=()=>b.setAttribute('aria-expanded',b.parentElement.toggleAttribute('open')))}
+drawG();$('#q').oninput=e=>drawG(e.target.value);
+/* Quiz */
+const Q=[['¿Qué es un servidor?',['Un computador que atiende pedidos de otros','Un cable de internet','Un tipo de antena'],0,'Un servidor está siempre disponible para responder a los clientes.'],['¿Para qué sirve la dirección IP?',['Para cifrar archivos','Para identificar a un dispositivo en la red','Para ver videos más rápido'],1,'La IP funciona como el domicilio de cada equipo.'],['¿Por qué los mensajes se dividen en paquetes?',['Para viajar por varias rutas y reconstruirse al llegar','Para gastar más datos','Para que nadie los lea'],0,'Los paquetes viajan por rutas distintas y se ordenan con su número.'],['¿Qué puerto usa normalmente una web segura?',['21','443','25'],1,'El 443 corresponde a HTTPS, la versión segura de la web.'],['Estás en un Wi-Fi público. ¿Qué es lo más prudente?',['Entrar al banco sin problema','Evitar datos sensibles o usar una VPN','Compartir tu clave del correo'],1,'Las redes abiertas pueden ser espiadas; una VPN cifra tu conexión.'],['¿Qué banda de Wi-Fi llega más lejos pero es más lenta?',['2,4 GHz','5 GHz','6 GHz'],0,'La banda de 2,4 GHz atraviesa mejor las paredes, aunque ofrece menos velocidad.'],['¿Cuál es el trabajo del módem?',['Conectar tu casa con el proveedor de internet','Acelerar el Wi-Fi','Guardar tus archivos'],0,'El módem traduce la señal del proveedor y el router la reparte entre tus equipos.']];
+let qi=0,sc=0;
+function drawQ(){const b=$('#qbox');if(qi>=Q.length){b.innerHTML=`<small>Resultado</small><h3>${sc} de ${Q.length} correctas</h3><p class="fbk">${sc>=4?'Excelente, ya entiendes lo esencial de las redes.':'Buen comienzo. Repasa las secciones y vuelve a intentarlo.'}</p><button class="btn p" id="rs">Reintentar</button>`;$('#rs').onclick=()=>{qi=0;sc=0;drawQ()};return}
+ const q=Q[qi];b.innerHTML=`<small>Pregunta ${qi+1} de ${Q.length}</small><h3>${q[0]}</h3>${q[1].map((o,i)=>`<button class="opt" data-i="${i}">${o}</button>`).join('')}<p class="fbk" id="fb"></p>`;
+ b.querySelectorAll('.opt').forEach(o=>o.onclick=()=>{const i=+o.dataset.i,all=b.querySelectorAll('.opt');all.forEach(x=>x.disabled=true);all[q[2]].classList.add('ok');if(i===q[2])sc++;else o.classList.add('no');
+ $('#fb').textContent=(i===q[2]?'Correcto. ':'No exactamente. ')+q[3];const n=document.createElement('button');n.className='btn p';n.textContent=qi<Q.length-1?'Siguiente pregunta':'Ver resultado';n.onclick=()=>{qi++;drawQ()};b.append(n)})}
+drawQ();
+/* Ampliación: inalámbricas, módems y seguridad */
+const B=[['2,4 GHz',190,40,'llega lejos','Atraviesa paredes y cubre toda la casa, pero es más lenta y se satura con vecinos y electrodomésticos.'],['5 GHz',150,75,'equilibrada','Más rápida y con menos interferencias, pero se debilita antes con la distancia y las paredes.'],['6 GHz',100,100,'la más veloz','La más rápida y limpia. Ideal si estás en la misma habitación que el router.']];
+const WD=[[270,150,'💻','Sala'],[75,90,'📱','Dormitorio'],[345,215,'📺','Patio']];
+function band(i){const b=B[i];document.querySelectorAll('#bands .cb').forEach((x,k)=>x.classList.toggle('on',k===i));$('#rings').style.setProperty('--s',b[1]/60);$('#bt').textContent=b[0]+': '+b[3];$('#bp').textContent=b[4];$('#b1').style.width=b[1]/1.9+'%';$('#b2').style.width=b[2]+'%';
+ $('#wd').innerHTML=WD.map(d=>{const ok=Math.hypot(d[0]-200,d[1]-150)<=b[1];return `<g><circle cx='${d[0]}' cy='${d[1]}' r='19' fill='${ok?'#dbf6e8':'#ffe1e5'}' stroke='${ok?'#22b573':'#ef4b5f'}' stroke-width='3'/><text x='${d[0]}' y='${d[1]+6}' text-anchor='middle' font-size='18'>${d[2]}</text><text x='${d[0]}' y='${d[1]+38}' text-anchor='middle' font-size='12' font-weight='700' fill='#0f2a3d'>${d[3]}${ok?'':': sin señal'}</text></g>`}).join('')}
+$('#bands').innerHTML=B.map((b,i)=>`<button class='cb' data-i='${i}'>${b[0]}</button>`).join('');
+document.querySelectorAll('#bands .cb').forEach(b=>b.onclick=()=>band(+b.dataset.i));band(1);
+const card=(e,t,p,x='')=>`<article class='card rv'><div style='font-size:2.1rem'>${e}</div><h3 style='font-size:1.15rem'>${t}</h3><p>${p}</p>${x}</article>`;
+$('#wc').innerHTML=[['📶','Wi-Fi','Conecta tus dispositivos a un router cercano. Alcanza entre 10 y 50 metros según las paredes y la banda.'],['🎧','Bluetooth','Conexión de corto alcance, de unos 10 metros, para auriculares, teclados o relojes.'],['📱','Datos móviles: 4G y 5G','Usan las antenas de tu operadora y cubren ciudades enteras. Consumen tu plan de datos.']].map(c=>card(...c)).join('');
+const MS=['Proveedor: la empresa que te vende internet. Envía la señal por fibra, cable o línea telefónica hasta tu casa.','Módem: traduce la señal del proveedor a datos que tu red entiende. Sin módem no hay conexión con el exterior.','Router: reparte la conexión por cable y Wi-Fi, da una dirección IP a cada equipo y decide hacia dónde va cada paquete.','Tus dispositivos: se conectan al router para navegar, jugar o hacer videollamadas.'];
+const mn=[...document.querySelectorAll('.mn')];
+mn.forEach((n,i)=>{const f=()=>{mn.forEach((x,k)=>x.classList.toggle('on',k===i));$('#mstep').textContent=MS[i]};n.tabIndex=0;n.setAttribute('role','button');n.setAttribute('aria-label',n.textContent.trim());n.onclick=f;n.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();f()}};n.f=f});mn[1].f();
+$('#cx').innerHTML=[['💡','Fibra óptica','Envía luz por hilos de vidrio.','Muy rápida y estable',100],['📺','Cable coaxial','Usa el cable de la TV por cable.','Rápida, pero se comparte con vecinos',70],['☎️','ADSL','Viaja por la línea telefónica de cobre.','Más lenta, llega a casi todos lados',25],['📡','Móvil o satélite','Usa antenas o satélites, sin cables.','Útil en zonas remotas, con más demora',50]].map(c=>card(c[0],c[1],c[2],`<p style='margin-top:8px;font-weight:700;color:var(--ink);font-size:.9rem'>${c[3]}</p><div class='bar' style='margin-top:10px'><i style='--w:${c[4]}%;background:var(--org)'></i></div>`)).join('');
+const CK=[['Al menos 12 caracteres',p=>p.length>=12],['Mayúsculas y minúsculas',p=>/[a-z]/.test(p)&&/[A-Z]/.test(p)],['Números',p=>/[0-9]/.test(p)],['Símbolos como ! o #',p=>/[^A-Za-z0-9]/.test(p)]];
+function pw(){const p=$('#pw').value;$('#ck').innerHTML=CK.map(c=>`<li class='${c[1](p)?'y':''}'>${c[0]}</li>`).join('');if(!p){$('#pb').style.width='0';$('#pt').textContent='Escribe algo para evaluarlo.';return}
+ const pool=(/[a-z]/.test(p)?26:0)+(/[A-Z]/.test(p)?26:0)+(/[0-9]/.test(p)?10:0)+(/[^A-Za-z0-9]/.test(p)?33:0),s=Math.pow(2,p.length*Math.log2(pool))/2e10;
+ const t=s<1?'un instante':s<60?Math.round(s)+' segundos':s<3600?Math.round(s/60)+' minutos':s<86400?Math.round(s/3600)+' horas':s<3.15e7?Math.round(s/86400)+' días':s<3.15e9?Math.round(s/3.15e7)+' años':'siglos';
+ const L=s<3600?['Débil','var(--red)',25]:s<3.15e7?['Regular','var(--org)',55]:s<3.15e9?['Buena','var(--teal)',80]:['Excelente','var(--grn)',100];
+ $('#pb').style.width=L[2]+'%';$('#pb').style.background=L[1];$('#pt').textContent=L[0]+': un ataque automático tardaría '+t+' en adivinarla (estimación aproximada). Evita palabras comunes y datos personales.'}
+$('#pw').oninput=pw;pw();
+$('#enc').innerHTML=[['WEP','Inseguro','Se rompe en minutos. Evítalo.','--red2'],['WPA','Débil','Anticuado y con fallos conocidos.','--org2'],['WPA2','Bueno','Estándar actual, seguro con una clave larga.','--teal2'],['WPA3','Mejor','Protege incluso contra intentos de adivinar la clave.','--grn2']].map((e,i)=>`<div class='er' style='background:var(${e[3]});animation-delay:${i*120}ms'><b>${e[0]}</b><span><strong>${e[1]}.</strong> ${e[2]}</span></div>`).join('');
+$('#th').innerHTML=[['🎣','Phishing','Mensajes falsos que imitan a un banco o una tienda para robar tus datos. Revisa el remitente y no hagas clic con prisa.'],['📡','Wi-Fi falso','Alguien crea una red con nombre parecido al de un café para espiar a quien se conecta. Confirma el nombre con el local.'],['🦠','Malware','Programas dañinos que llegan en archivos o descargas dudosas. Descarga solo de sitios oficiales y usa antivirus.']].map(c=>card(...c)).join('');
+G.sort((a,b)=>a[0].localeCompare(b[0],'es'));drawG($('#q').value);rv();
+/* Menú activo */
+const lk=[...document.querySelectorAll('nav a')],so=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)lk.forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id))}),{rootMargin:'-45% 0px -50% 0px'});
+document.querySelectorAll('main section[id]').forEach(s=>so.observe(s));
+</script>
+</body>
+</html>
