@@ -1,0 +1,1179 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Geografía Simple — Aprende el mundo en palabras claras</title>
+<meta name="description" content="Glosario, continentes y quiz de geografía mundial explicados en lenguaje sencillo.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============ TOKENS ============ */
+:root{
+  --font-display:'Space Grotesk','Segoe UI',system-ui,sans-serif;
+  --font-body:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --radius:20px;
+  --radius-sm:12px;
+  --maxw:1180px;
+  --ease:cubic-bezier(.22,.75,.25,1);
+}
+html[data-theme="dark"]{
+  --bg:#070b13;
+  --bg-soft:#0a1120;
+  --surface:rgba(19,28,46,.66);
+  --surface-solid:#111a2b;
+  --surface-2:rgba(255,255,255,.04);
+  --border:rgba(255,255,255,.09);
+  --border-strong:rgba(255,255,255,.18);
+  --text:#e9eff9;
+  --muted:#8fa1bd;
+  --accent:#5b8cff;
+  --accent-2:#22d3ee;
+  --accent-3:#a855f7;
+  --good:#34d399;
+  --bad:#fb7185;
+  --shadow:0 24px 60px -24px rgba(0,0,0,.85);
+  --orb-op:.42;
+}
+html[data-theme="light"]{
+  --bg:#f4f7fc;
+  --bg-soft:#eaf0fa;
+  --surface:rgba(255,255,255,.78);
+  --surface-solid:#ffffff;
+  --surface-2:rgba(12,25,48,.035);
+  --border:rgba(12,25,48,.10);
+  --border-strong:rgba(12,25,48,.20);
+  --text:#0c1729;
+  --muted:#5a6b85;
+  --accent:#2f6bff;
+  --accent-2:#0891b2;
+  --accent-3:#7c3aed;
+  --good:#059669;
+  --bad:#e11d48;
+  --shadow:0 24px 60px -30px rgba(16,36,72,.35);
+  --orb-op:.30;
+}
+
+/* ============ BASE ============ */
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  font-family:var(--font-body);
+  background:var(--bg);
+  color:var(--text);
+  min-height:100vh;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  transition:background .45s var(--ease), color .45s var(--ease);
+  overflow-x:hidden;
+}
+h1,h2,h3,h4{font-family:var(--font-display);line-height:1.15;letter-spacing:-.02em;margin:0}
+p{margin:0}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--accent);color:#fff}
+
+/* ============ FONDO ANIMADO ============ */
+.orbs{position:fixed;inset:0;z-index:-2;overflow:hidden;pointer-events:none}
+.orb{position:absolute;border-radius:50%;filter:blur(90px);opacity:var(--orb-op);animation:float 22s ease-in-out infinite alternate}
+.orb.o1{width:52vw;height:52vw;background:var(--accent);top:-16vw;left:-12vw}
+.orb.o2{width:44vw;height:44vw;background:var(--accent-3);bottom:-18vw;right:-10vw;animation-delay:-7s}
+.orb.o3{width:36vw;height:36vw;background:var(--accent-2);top:38%;left:52%;animation-delay:-13s}
+@keyframes float{
+  0%{transform:translate3d(0,0,0) scale(1)}
+  50%{transform:translate3d(4vw,-3vw,0) scale(1.12)}
+  100%{transform:translate3d(-3vw,4vw,0) scale(.94)}
+}
+.grain{
+  position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.035;
+  background-image:radial-gradient(currentColor 1px,transparent 1px);
+  background-size:3px 3px;
+}
+
+/* ============ HEADER ============ */
+.site-header{
+  position:sticky;top:0;z-index:50;
+  backdrop-filter:blur(18px) saturate(160%);
+  -webkit-backdrop-filter:blur(18px) saturate(160%);
+  background:color-mix(in srgb,var(--bg) 72%, transparent);
+  border-bottom:1px solid var(--border);
+  transition:border-color .4s var(--ease);
+}
+.header-inner{
+  max-width:var(--maxw);margin:0 auto;padding:14px 22px;
+  display:flex;align-items:center;gap:22px;
+}
+.brand{display:flex;align-items:center;gap:11px;font-family:var(--font-display);font-weight:700;font-size:1.02rem;letter-spacing:-.02em;white-space:nowrap}
+.brand-mark{
+  width:36px;height:36px;border-radius:11px;flex:none;
+  background:linear-gradient(140deg,var(--accent),var(--accent-3) 60%,var(--accent-2));
+  display:grid;place-items:center;color:#fff;
+  box-shadow:0 8px 22px -8px var(--accent);
+  transition:transform .5s var(--ease);
+}
+.brand:hover .brand-mark{transform:rotate(-12deg) scale(1.06)}
+.brand-mark svg{width:20px;height:20px}
+
+.nav{display:flex;gap:4px;margin-left:auto;overflow-x:auto;scrollbar-width:none}
+.nav::-webkit-scrollbar{display:none}
+.nav-link{
+  position:relative;padding:9px 15px;border-radius:11px;font-size:.9rem;font-weight:500;
+  color:var(--muted);white-space:nowrap;
+  transition:color .3s var(--ease),background .3s var(--ease);
+}
+.nav-link:hover{color:var(--text);background:var(--surface-2)}
+.nav-link.active{color:var(--text);background:var(--surface-2)}
+.nav-link.active::after{
+  content:'';position:absolute;left:15px;right:15px;bottom:4px;height:2px;border-radius:2px;
+  background:linear-gradient(90deg,var(--accent),var(--accent-2));
+  animation:navIn .4s var(--ease) both;
+}
+@keyframes navIn{from{transform:scaleX(0);opacity:0}to{transform:scaleX(1);opacity:1}}
+
+.theme-toggle{
+  width:40px;height:40px;border-radius:12px;flex:none;
+  border:1px solid var(--border);background:var(--surface-2);
+  display:grid;place-items:center;
+  transition:transform .35s var(--ease),border-color .3s,background .3s;
+}
+.theme-toggle:hover{transform:translateY(-2px) rotate(8deg);border-color:var(--border-strong)}
+.theme-toggle svg{width:19px;height:19px}
+html[data-theme="dark"] .icon-sun{display:block}
+html[data-theme="dark"] .icon-moon{display:none}
+html[data-theme="light"] .icon-sun{display:none}
+html[data-theme="light"] .icon-moon{display:block}
+
+/* ============ LAYOUT / VIEWS ============ */
+main{max-width:var(--maxw);margin:0 auto;padding:0 22px 90px}
+.view{display:none}
+.view.active{display:block;animation:viewIn .55s var(--ease) both}
+@keyframes viewIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+
+/* ============ HERO ============ */
+.hero{padding:76px 0 46px;max-width:820px}
+.pill{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:7px 15px;border-radius:999px;font-size:.79rem;font-weight:600;
+  letter-spacing:.04em;text-transform:uppercase;
+  border:1px solid var(--border);background:var(--surface);
+  color:var(--muted);margin-bottom:26px;
+  animation:viewIn .6s var(--ease) both;
+}
+.pill .dot{width:7px;height:7px;border-radius:50%;background:var(--good);box-shadow:0 0 0 0 var(--good);animation:pulse 2.4s infinite}
+@keyframes pulse{
+  0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--good) 60%,transparent)}
+  70%{box-shadow:0 0 0 9px transparent}
+  100%{box-shadow:0 0 0 0 transparent}
+}
+h1.hero-title{font-size:clamp(2.3rem,5.6vw,4.05rem);font-weight:700;letter-spacing:-.035em;margin-bottom:22px}
+.grad{
+  background:linear-gradient(100deg,var(--accent),var(--accent-2) 45%,var(--accent-3));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  background-size:220% auto;animation:shimmer 7s linear infinite;
+}
+@keyframes shimmer{to{background-position:220% center}}
+.lead{font-size:clamp(1rem,1.6vw,1.16rem);color:var(--muted);max-width:620px;margin-bottom:36px}
+.hero-actions{display:flex;flex-wrap:wrap;gap:13px}
+
+/* ============ BOTONES ============ */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  padding:13px 25px;border-radius:13px;font-size:.94rem;font-weight:600;
+  border:1px solid transparent;
+  transition:transform .28s var(--ease),box-shadow .3s var(--ease),background .3s,border-color .3s,color .3s;
+  will-change:transform;
+}
+.btn:active{transform:scale(.97)}
+.btn svg{width:17px;height:17px}
+.btn-primary{
+  background:linear-gradient(120deg,var(--accent),var(--accent-3));
+  color:#fff;box-shadow:0 14px 34px -14px var(--accent);
+  position:relative;overflow:hidden;
+}
+.btn-primary::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,.4),transparent 70%);
+  transform:translateX(-130%);
+  transition:transform .7s var(--ease);
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 20px 42px -14px var(--accent)}
+.btn-primary:hover::after{transform:translateX(130%)}
+.btn-ghost{border-color:var(--border);background:var(--surface);color:var(--text)}
+.btn-ghost:hover{transform:translateY(-2px);border-color:var(--border-strong);background:var(--surface-2)}
+
+/* ============ STATS ============ */
+.stats{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(158px,1fr));gap:14px;
+  margin:12px 0 60px;
+}
+.stat{
+  padding:22px 20px;border-radius:var(--radius);
+  background:var(--surface);border:1px solid var(--border);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  transition:transform .35s var(--ease),border-color .3s,box-shadow .35s;
+}
+.stat:hover{transform:translateY(-5px);border-color:var(--border-strong);box-shadow:var(--shadow)}
+.stat .num{
+  font-family:var(--font-display);font-size:1.9rem;font-weight:700;letter-spacing:-.03em;
+  background:linear-gradient(120deg,var(--accent),var(--accent-2));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.stat .lbl{font-size:.83rem;color:var(--muted);font-weight:500;margin-top:2px}
+
+/* ============ SECTION HEAD ============ */
+.sec-head{margin:0 0 28px}
+.sec-head h2{font-size:clamp(1.6rem,3vw,2.1rem);font-weight:700;margin-bottom:8px}
+.sec-head p{color:var(--muted);max-width:600px;font-size:.96rem}
+
+/* ============ MÓDULOS (HOME) ============ */
+.module-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(258px,1fr));gap:18px}
+.module{
+  position:relative;overflow:hidden;text-align:left;
+  padding:28px 24px;border-radius:var(--radius);
+  background:var(--surface);border:1px solid var(--border);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  transition:transform .4s var(--ease),border-color .35s,box-shadow .4s;
+}
+.module::before{
+  content:'';position:absolute;inset:0;opacity:0;
+  background:radial-gradient(420px circle at var(--mx,50%) var(--my,0%),color-mix(in srgb,var(--accent) 22%,transparent),transparent 65%);
+  transition:opacity .45s var(--ease);
+}
+.module:hover{transform:translateY(-6px);border-color:var(--border-strong);box-shadow:var(--shadow)}
+.module:hover::before{opacity:1}
+.module-ico{
+  width:46px;height:46px;border-radius:14px;display:grid;place-items:center;margin-bottom:18px;
+  background:linear-gradient(140deg,color-mix(in srgb,var(--accent) 22%,transparent),color-mix(in srgb,var(--accent-3) 18%,transparent));
+  border:1px solid var(--border);color:var(--accent);
+  transition:transform .4s var(--ease);
+}
+.module:hover .module-ico{transform:scale(1.08) rotate(-6deg)}
+.module-ico svg{width:22px;height:22px}
+.module h3{font-size:1.06rem;margin-bottom:8px;font-weight:600}
+.module p{font-size:.9rem;color:var(--muted);line-height:1.6}
+.module .arrow{
+  display:inline-flex;align-items:center;gap:6px;margin-top:16px;
+  font-size:.85rem;font-weight:600;color:var(--accent);
+}
+.module .arrow svg{width:14px;height:14px;transition:transform .35s var(--ease)}
+.module:hover .arrow svg{transform:translateX(5px)}
+
+/* ============ GLOSARIO ============ */
+.toolbar{
+  display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-bottom:26px;
+  position:sticky;top:69px;z-index:20;padding:14px 0;
+  background:linear-gradient(var(--bg) 55%,transparent);
+}
+.search-wrap{position:relative;flex:1;min-width:220px}
+.search-wrap svg{
+  position:absolute;left:15px;top:50%;transform:translateY(-50%);
+  width:17px;height:17px;color:var(--muted);pointer-events:none;
+}
+#searchInput{
+  width:100%;padding:13px 16px 13px 44px;border-radius:13px;
+  background:var(--surface);border:1px solid var(--border);
+  color:var(--text);font-size:.93rem;font-family:inherit;
+  outline:none;transition:border-color .3s,box-shadow .3s,background .3s;
+}
+#searchInput::placeholder{color:var(--muted)}
+#searchInput:focus{
+  border-color:var(--accent);
+  box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 18%,transparent);
+}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{
+  padding:8px 15px;border-radius:999px;font-size:.82rem;font-weight:600;
+  border:1px solid var(--border);background:var(--surface);color:var(--muted);
+  transition:all .3s var(--ease);
+}
+.chip:hover{color:var(--text);border-color:var(--border-strong);transform:translateY(-1px)}
+.chip.active{
+  background:linear-gradient(120deg,var(--accent),var(--accent-3));
+  color:#fff;border-color:transparent;box-shadow:0 10px 26px -12px var(--accent);
+}
+.term-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(292px,1fr));gap:15px}
+.term{
+  padding:22px;border-radius:var(--radius);
+  background:var(--surface);border:1px solid var(--border);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  animation:termIn .5s var(--ease) both;animation-delay:var(--d,0ms);
+  transition:border-color .3s,transform .3s var(--ease),box-shadow .3s;
+}
+@keyframes termIn{from{opacity:0;transform:translateY(14px) scale(.98)}to{opacity:1;transform:none}}
+.term:hover{transform:translateY(-4px);border-color:var(--border-strong);box-shadow:var(--shadow)}
+.term-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:9px}
+.term h3{font-size:1rem;font-weight:600;letter-spacing:-.01em}
+.tag{
+  font-size:.68rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  padding:4px 9px;border-radius:7px;white-space:nowrap;
+  background:color-mix(in srgb,var(--accent) 15%,transparent);
+  color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 26%,transparent);
+}
+.term p{font-size:.89rem;color:var(--muted);line-height:1.65}
+.empty{padding:50px 20px;text-align:center;color:var(--muted);font-size:.95rem;grid-column:1/-1}
+
+/* ============ CONTINENTES ============ */
+.cont-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px}
+.cont{
+  position:relative;overflow:hidden;border-radius:var(--radius);
+  background:var(--surface);border:1px solid var(--border);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  animation:termIn .55s var(--ease) both;animation-delay:var(--d,0ms);
+  transition:border-color .35s,transform .35s var(--ease),box-shadow .35s;
+}
+.cont:hover{border-color:var(--border-strong);transform:translateY(-4px);box-shadow:var(--shadow)}
+.cont::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--c1),var(--c2));
+}
+.cont-top{padding:24px 24px 18px;display:flex;align-items:center;gap:14px}
+.cont-badge{
+  width:44px;height:44px;border-radius:13px;flex:none;display:grid;place-items:center;
+  font-family:var(--font-display);font-weight:700;font-size:1.05rem;color:#fff;
+  background:linear-gradient(140deg,var(--c1),var(--c2));
+  box-shadow:0 10px 26px -12px var(--c1);
+}
+.cont h3{font-size:1.12rem;font-weight:600}
+.cont .sub{font-size:.8rem;color:var(--muted);font-weight:500}
+.cont-body{padding:0 24px 22px}
+.cont-body p{font-size:.89rem;color:var(--muted);line-height:1.65}
+.cont-facts{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.fact{
+  font-size:.75rem;font-weight:600;padding:6px 11px;border-radius:9px;
+  background:var(--surface-2);border:1px solid var(--border);color:var(--muted);
+}
+.cont-more{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s var(--ease)}
+.cont.open .cont-more{grid-template-rows:1fr}
+.cont-more > div{overflow:hidden}
+.cont-more p{
+  margin:0 24px;padding:16px 0 0;
+  font-size:.86rem;color:var(--muted);border-top:1px solid var(--border);
+  margin-top:16px;padding-top:16px;
+}
+.cont-more strong{color:var(--text);font-weight:600}
+.cont-toggle{
+  width:100%;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;
+  font-size:.85rem;font-weight:600;color:var(--accent);
+  border-top:1px solid var(--border);margin-top:18px;
+  transition:background .3s;
+}
+.cont-toggle:hover{background:var(--surface-2)}
+.cont-toggle svg{width:15px;height:15px;transition:transform .4s var(--ease)}
+.cont.open .cont-toggle svg{transform:rotate(180deg)}
+.note{
+  margin-top:26px;padding:16px 20px;border-radius:14px;font-size:.85rem;color:var(--muted);
+  border:1px solid var(--border);background:var(--surface-2);
+  border-left:3px solid var(--accent);
+}
+
+/* ============ QUIZ ============ */
+.quiz-shell{max-width:760px;margin:0 auto}
+.quiz-card{
+  padding:34px;border-radius:var(--radius);
+  background:var(--surface);border:1px solid var(--border);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  box-shadow:var(--shadow);
+}
+.quiz-meta{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:12px;font-size:.82rem;font-weight:600;color:var(--muted)}
+.progress{height:6px;border-radius:99px;background:var(--surface-2);overflow:hidden;margin-bottom:30px;border:1px solid var(--border)}
+.progress-bar{
+  height:100%;width:0%;border-radius:99px;
+  background:linear-gradient(90deg,var(--accent),var(--accent-2));
+  transition:width .55s var(--ease);
+}
+.q-text{font-family:var(--font-display);font-size:clamp(1.15rem,2.4vw,1.45rem);font-weight:600;line-height:1.35;margin-bottom:26px}
+.options{display:grid;gap:11px}
+.option{
+  display:flex;align-items:center;gap:14px;text-align:left;
+  padding:16px 18px;border-radius:14px;font-size:.94rem;font-weight:500;
+  background:var(--surface-2);border:1px solid var(--border);color:var(--text);
+  transition:transform .25s var(--ease),border-color .25s,background .25s,box-shadow .25s;
+}
+.option:hover:not(:disabled){transform:translateX(4px);border-color:var(--accent);background:color-mix(in srgb,var(--accent) 8%,transparent)}
+.option:disabled{cursor:default}
+.option .letter{
+  width:28px;height:28px;border-radius:9px;flex:none;display:grid;place-items:center;
+  font-size:.78rem;font-weight:700;font-family:var(--font-display);
+  background:var(--surface-solid);border:1px solid var(--border);color:var(--muted);
+  transition:all .25s var(--ease);
+}
+.option.correct{background:color-mix(in srgb,var(--good) 15%,transparent);border-color:var(--good)}
+.option.correct .letter{background:var(--good);color:#fff;border-color:var(--good)}
+.option.wrong{background:color-mix(in srgb,var(--bad) 13%,transparent);border-color:var(--bad)}
+.option.wrong .letter{background:var(--bad);color:#fff;border-color:var(--bad)}
+.feedback{
+  margin-top:22px;padding:16px 18px;border-radius:14px;font-size:.89rem;line-height:1.6;
+  border:1px solid var(--border);background:var(--surface-2);
+  animation:termIn .4s var(--ease) both;
+}
+.feedback strong{color:var(--text)}
+.quiz-actions{display:flex;justify-content:flex-end;margin-top:24px}
+
+.result{text-align:center;padding:20px 6px}
+.result .score{
+  font-family:var(--font-display);font-size:clamp(3rem,9vw,4.6rem);font-weight:700;letter-spacing:-.05em;
+  background:linear-gradient(120deg,var(--accent),var(--accent-2) 50%,var(--accent-3));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  line-height:1;margin-bottom:10px;
+}
+.result h3{font-size:1.3rem;margin-bottom:10px}
+.result p{color:var(--muted);margin-bottom:26px}
+
+/* ============ DATOS ============ */
+.dato-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(272px,1fr));gap:16px}
+.dato{
+  padding:24px;border-radius:var(--radius);
+  background:var(--surface);border:1px solid var(--border);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  animation:termIn .5s var(--ease) both;animation-delay:var(--d,0ms);
+  transition:transform .35s var(--ease),border-color .3s,box-shadow .35s;
+  position:relative;overflow:hidden;
+}
+.dato:hover{transform:translateY(-5px);border-color:var(--border-strong);box-shadow:var(--shadow)}
+.dato .idx{
+  font-family:var(--font-display);font-size:.72rem;font-weight:700;letter-spacing:.1em;
+  color:var(--accent);margin-bottom:12px;display:block;
+}
+.dato h3{font-size:.98rem;margin-bottom:8px;font-weight:600}
+.dato p{font-size:.87rem;color:var(--muted);line-height:1.65}
+
+/* ============ REVEAL ============ */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s var(--ease),transform .7s var(--ease);transition-delay:var(--d,0ms)}
+.reveal.in{opacity:1;transform:none}
+
+/* ============ FOOTER ============ */
+.site-footer{
+  border-top:1px solid var(--border);padding:34px 22px;
+  text-align:center;font-size:.85rem;color:var(--muted);
+}
+.site-footer strong{color:var(--text);font-weight:600}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width:820px){
+  .header-inner{padding:12px 16px;gap:14px;flex-wrap:wrap}
+  .nav{order:3;width:100%;margin-left:0;padding-bottom:2px}
+  .theme-toggle{margin-left:auto}
+  main{padding:0 16px 70px}
+  .hero{padding:48px 0 34px}
+  .toolbar{top:auto;position:static;background:none;padding:0 0 20px}
+  .quiz-card{padding:24px 20px}
+  .stats{grid-template-columns:repeat(2,1fr);gap:11px}
+  .stat{padding:17px 15px}
+  .stat .num{font-size:1.5rem}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<div class="orbs" aria-hidden="true">
+  <div class="orb o1"></div>
+  <div class="orb o2"></div>
+  <div class="orb o3"></div>
+</div>
+<div class="grain" aria-hidden="true"></div>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="#inicio" data-route="inicio">
+      <span class="brand-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="9"/>
+          <path d="M3 12h18M12 3c2.6 2.5 4 5.7 4 9s-1.4 6.5-4 9c-2.6-2.5-4-5.7-4-9s1.4-6.5 4-9z"/>
+        </svg>
+      </span>
+      <span>Geografía Simple</span>
+    </a>
+
+    <nav class="nav" aria-label="Navegación principal">
+      <button class="nav-link active" data-route="inicio">Inicio</button>
+      <button class="nav-link" data-route="glosario">Glosario</button>
+      <button class="nav-link" data-route="continentes">Continentes</button>
+      <button class="nav-link" data-route="quiz">Quiz</button>
+      <button class="nav-link" data-route="datos">Datos</button>
+    </nav>
+
+    <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema">
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round">
+        <circle cx="12" cy="12" r="4"/>
+        <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>
+      </svg>
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<main>
+
+  <!-- ================= INICIO ================= -->
+  <section class="view active" data-view="inicio">
+    <div class="hero">
+      <span class="pill"><span class="dot"></span>Geografía explicada en lenguaje sencillo</span>
+      <h1 class="hero-title">El mundo entero, <span class="grad">en palabras claras</span></h1>
+      <p class="lead">
+        Un glosario sin tecnicismos, los continentes con sus datos esenciales y un quiz para
+        comprobar lo aprendido. Sin emojis, sin ruido: solo geografía bien explicada.
+      </p>
+      <div class="hero-actions">
+        <button class="btn btn-primary" data-route="glosario">
+          Explorar el glosario
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+        <button class="btn btn-ghost" data-route="quiz">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9 9a3 3 0 1 1 4.5 2.6c-.9.6-1.5 1.4-1.5 2.4"/><circle cx="12" cy="17.5" r="1" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="9"/></svg>
+          Pon a prueba tu conocimiento
+        </button>
+      </div>
+    </div>
+
+    <div class="stats reveal">
+      <div class="stat"><div class="num" data-count="6" data-suffix="">0</div><div class="lbl">Continentes</div></div>
+      <div class="stat"><div class="num" data-count="5" data-suffix="">0</div><div class="lbl">Océanos</div></div>
+      <div class="stat"><div class="num" data-count="195" data-suffix="">0</div><div class="lbl">Países reconocidos</div></div>
+      <div class="stat"><div class="num" data-count="8100" data-suffix=" M">0</div><div class="lbl">Habitantes en el mundo</div></div>
+    </div>
+
+    <div class="sec-head reveal">
+      <h2>Módulos de aprendizaje</h2>
+      <p>Cuatro formas distintas de acercarte a la geografía. Empieza por donde prefieras.</p>
+    </div>
+
+    <div class="module-grid">
+      <button class="module reveal" data-route="glosario" style="--d:0ms">
+        <span class="module-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21.5z"/><path d="M4 5.5v16"/></svg>
+        </span>
+        <h3>Glosario de términos</h3>
+        <p>Más de cincuenta conceptos clave explicados en una o dos frases, con buscador y filtros por categoría.</p>
+        <span class="arrow">Abrir glosario
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </button>
+
+      <button class="module reveal" data-route="continentes" style="--d:70ms">
+        <span class="module-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h20"/><path d="M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20z"/><circle cx="12" cy="12" r="10"/></svg>
+        </span>
+        <h3>Los continentes</h3>
+        <p>Superficie, población y número de países de cada continente, con un dato curioso en cada tarjeta.</p>
+        <span class="arrow">Ver continentes
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </button>
+
+      <button class="module reveal" data-route="quiz" style="--d:140ms">
+        <span class="module-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l2 2 4-4"/><rect x="3" y="4" width="18" height="16" rx="3"/></svg>
+        </span>
+        <h3>Quiz interactivo</h3>
+        <p>Ocho preguntas al azar con corrección inmediata, explicación y puntuación final.</p>
+        <span class="arrow">Empezar el quiz
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </button>
+
+      <button class="module reveal" data-route="datos" style="--d:210ms">
+        <span class="module-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M3 12h18"/><circle cx="12" cy="12" r="9"/></svg>
+        </span>
+        <h3>Datos del planeta</h3>
+        <p>Récords y curiosidades geográficas que ayudan a entender la escala real del mundo.</p>
+        <span class="arrow">Ver los datos
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </button>
+    </div>
+  </section>
+
+  <!-- ================= GLOSARIO ================= -->
+  <section class="view" data-view="glosario">
+    <div class="sec-head" style="padding-top:52px">
+      <h2>Glosario de geografía</h2>
+      <p>Definiciones breves, escritas para entender sin diccionario en mano. Busca un término o filtra por categoría.</p>
+    </div>
+
+    <div class="toolbar">
+      <div class="search-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+        <input id="searchInput" type="search" placeholder="Buscar un término o una palabra de la definición..." autocomplete="off" aria-label="Buscar término">
+      </div>
+      <div class="chips" id="chips"></div>
+    </div>
+
+    <div class="term-grid" id="glosarioList"></div>
+  </section>
+
+  <!-- ================= CONTINENTES ================= -->
+  <section class="view" data-view="continentes">
+    <div class="sec-head" style="padding-top:52px">
+      <h2>Los continentes</h2>
+      <p>Grandes extensiones de tierra separadas por océanos. Aquí usamos el modelo de seis continentes, el más extendido en América Latina y España.</p>
+    </div>
+    <div class="cont-grid" id="contList"></div>
+    <div class="note">
+      <strong>Nota:</strong> existen distintos modelos continentales según la región. Algunos países enseñan siete continentes
+      (separando América del Norte y América del Sur) y otros consideran la Antártida y Oceanía de forma distinta.
+      Ningún modelo es incorrecto: son formas diferentes de organizar el mismo planeta.
+    </div>
+  </section>
+
+  <!-- ================= QUIZ ================= -->
+  <section class="view" data-view="quiz">
+    <div class="sec-head" style="padding-top:52px">
+      <h2>Quiz de geografía</h2>
+      <p>Ocho preguntas seleccionadas al azar. Cada respuesta viene con su explicación.</p>
+    </div>
+    <div class="quiz-shell">
+      <div class="quiz-card" id="quizCard"></div>
+    </div>
+  </section>
+
+  <!-- ================= DATOS ================= -->
+  <section class="view" data-view="datos">
+    <div class="sec-head" style="padding-top:52px">
+      <h2>Datos del planeta</h2>
+      <p>Récords y cifras que dan perspectiva sobre el tamaño y la diversidad del mundo.</p>
+    </div>
+    <div class="dato-grid" id="datoList"></div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <p><strong>Geografía Simple</strong> — Material educativo abierto. Aprende, comparte y sigue explorando el mundo.</p>
+</footer>
+
+<script>
+/* ============================================================
+   UTILIDADES
+   ============================================================ */
+const $  = (sel, root = document) => root.querySelector(sel);
+const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+
+/* ============================================================
+   DATOS: GLOSARIO
+   ============================================================ */
+const GLOSARIO = [
+  // ---- Relieve
+  { t:'Relieve', c:'Relieve', d:'Conjunto de formas que tiene la superficie terrestre: montañas, valles, llanuras y mesetas.' },
+  { t:'Altitud', c:'Relieve', d:'Altura de un punto medida desde el nivel del mar hacia arriba.' },
+  { t:'Cordillera', c:'Relieve', d:'Cadena de montañas unidas que forman una gran alineación continua.' },
+  { t:'Llanura', c:'Relieve', d:'Extensión de terreno plano o casi plano, sin subidas ni bajadas importantes.' },
+  { t:'Meseta', c:'Relieve', d:'Zona elevada y plana, como una llanura situada en lo alto.' },
+  { t:'Valle', c:'Relieve', d:'Depresión alargada entre montañas, casi siempre recorrida por un río.' },
+  { t:'Cañón', c:'Relieve', d:'Valle muy profundo y estrecho, con paredes casi verticales.' },
+  { t:'Penísula', c:'Relieve', d:'Porción de tierra rodeada de agua por todos lados menos por uno, que la une al continente.' },
+  { t:'Istmo', c:'Relieve', d:'Franja estrecha de tierra que une dos porciones de tierra mayores.' },
+  { t:'Cabo', c:'Relieve', d:'Punto de tierra que se adentra en el mar.' },
+  { t:'Golfo', c:'Relieve', d:'Entrada grande del mar en la costa, de mayor tamaño que una bahía.' },
+  { t:'Bahía', c:'Relieve', d:'Entrada de mar en la costa, más pequeña y cerrada que un golfo.' },
+  { t:'Archipiélago', c:'Relieve', d:'Conjunto de islas cercanas entre sí que suelen tener un origen geológico común.' },
+  { t:'Volcán', c:'Relieve', d:'Abertura de la corteza terrestre por la que sale magma, ceniza y gases.' },
+  { t:'Placa tectónica', c:'Relieve', d:'Bloque enorme de la corteza terrestre que se desplaza muy lentamente sobre el manto.' },
+  { t:'Erosión', c:'Relieve', d:'Desgaste y transporte del terreno por la acción del agua, el viento o el hielo.' },
+  { t:'Delta', c:'Relieve', d:'Terreno con forma de triángulo que se forma donde un río se divide antes de llegar al mar.' },
+  { t:'Fiordo', c:'Relieve', d:'Valle excavado por un glaciar que quedó inundado por el mar, con paredes altas y agua profunda.' },
+
+  // ---- Agua
+  { t:'Afluente', c:'Agua', d:'Río o arroyo que desemboca en otro río de mayor tamaño.' },
+  { t:'Cuenca hidrográfica', c:'Agua', d:'Territorio cuyas aguas de lluvia van a parar a un mismo río, lago o mar.' },
+  { t:'Estrecho', c:'Agua', d:'Paso de agua estrecho que conecta dos mares y separa dos porciones de tierra.' },
+  { t:'Glaciar', c:'Agua', d:'Masa de hielo que se desplaza lentamente por su propio peso.' },
+  { t:'Humedal', c:'Agua', d:'Terreno cubierto de agua de forma permanente o temporal, como una marisma o una laguna.' },
+  { t:'Acuífero', c:'Agua', d:'Reserva de agua subterránea almacenada en los huecos de las rocas.' },
+  { t:'Marea', c:'Agua', d:'Subida y bajada del nivel del mar provocada por la atracción del Sol y la Luna.' },
+  { t:'Salinidad', c:'Agua', d:'Cantidad de sal disuelta en el agua. Es mayor en mares cálidos y cerrados.' },
+  { t:'Corriente marina', c:'Agua', d:'Movimiento de agua del océano con una dirección y una velocidad propias.' },
+  { t:'Desembocadura', c:'Agua', d:'Lugar donde un río entrega sus aguas a otro río, a un lago o al mar.' },
+
+  // ---- Clima
+  { t:'Clima', c:'Clima', d:'Conjunto de condiciones atmosféricas habituales de un lugar a lo largo de muchos años.' },
+  { t:'Tiempo atmosférico', c:'Clima', d:'Estado de la atmósfera en un momento concreto: hoy, mañana o esta tarde.' },
+  { t:'Monzón', c:'Clima', d:'Viento estacional que cambia de dirección y trae lluvias muy intensas.' },
+  { t:'Anticiclón', c:'Clima', d:'Zona de alta presión atmosférica que suele producir tiempo estable y seco.' },
+  { t:'Precipitación', c:'Clima', d:'Agua que cae del cielo en forma de lluvia, nieve o granizo.' },
+  { t:'Zona climática', c:'Clima', d:'Franja del planeta con un clima parecido, determinada sobre todo por la latitud.' },
+  { t:'Trópico', c:'Clima', d:'Cada una de las dos líneas imaginarias que delimitan la franja cálida del planeta.' },
+  { t:'Sequía', c:'Clima', d:'Periodo largo en el que llueve mucho menos de lo habitual.' },
+  { t:'Amplitud térmica', c:'Clima', d:'Diferencia entre la temperatura más alta y la más baja de un lugar en un periodo.' },
+  { t:'Isla de calor', c:'Clima', d:'Fenómeno por el que una ciudad está más caliente que el campo que la rodea.' },
+
+  // ---- Biosfera
+  { t:'Biosfera', c:'Biosfera', d:'Conjunto de todos los seres vivos del planeta y los lugares donde habitan.' },
+  { t:'Ecosistema', c:'Biosfera', d:'Comunidad de seres vivos junto con el medio físico donde interactúan.' },
+  { t:'Biodiversidad', c:'Biosfera', d:'Variedad de especies, genes y ecosistemas que existen en un lugar.' },
+  { t:'Selva', c:'Biosfera', d:'Bosque denso y húmedo de zonas cálidas, con enorme variedad de especies.' },
+  { t:'Sabana', c:'Biosfera', d:'Llanura tropical de hierbas altas con árboles dispersos y una estación seca marcada.' },
+  { t:'Taiga', c:'Biosfera', d:'Bosque de coníferas típico de las zonas frías del hemisferio norte.' },
+  { t:'Tundra', c:'Biosfera', d:'Terreno frío sin árboles, con el suelo helado durante gran parte del año.' },
+  { t:'Desierto', c:'Biosfera', d:'Zona muy seca con vegetación escasa y precipitaciones mínimas.' },
+  { t:'Estepa', c:'Biosfera', d:'Llanura extensa de clima seco, cubierta de vegetación baja y herbácea.' },
+
+  // ---- Mapas
+  { t:'Latitud', c:'Mapas', d:'Distancia de un punto al ecuador, medida en grados hacia el norte o hacia el sur.' },
+  { t:'Longitud', c:'Mapas', d:'Distancia de un punto al meridiano de Greenwich, medida en grados hacia el este o el oeste.' },
+  { t:'Meridiano', c:'Mapas', d:'Línea imaginaria que va de polo a polo y sirve para medir la longitud.' },
+  { t:'Ecuador', c:'Mapas', d:'Línea imaginaria que rodea la Tierra y la divide en hemisferio norte y hemisferio sur.' },
+  { t:'Hemisferio', c:'Mapas', d:'Cada una de las dos mitades en que se divide la Tierra: norte y sur, o este y oeste.' },
+  { t:'Escala', c:'Mapas', d:'Relación entre el tamaño de un mapa y el tamaño real del territorio representado.' },
+  { t:'Brújula', c:'Mapas', d:'Instrumento con una aguja imantada que señala siempre el norte magnético.' },
+  { t:'Proyección cartográfica', c:'Mapas', d:'Método para representar la superficie curva de la Tierra sobre un plano.' },
+  { t:'Mapa temático', c:'Mapas', d:'Mapa que representa un tema concreto, como el clima, la población o los cultivos.' },
+
+  // ---- Población
+  { t:'Densidad de población', c:'Población', d:'Número de habitantes que viven de media en cada kilómetro cuadrado de un territorio.' },
+  { t:'Censo', c:'Población', d:'Recuento oficial y periódico de la población de un país o región.' },
+  { t:'Migración', c:'Población', d:'Desplazamiento de personas de un lugar a otro para establecerse y vivir allí.' },
+  { t:'Urbanización', c:'Población', d:'Proceso por el que crecen las ciudades y aumenta la proporción de población urbana.' },
+  { t:'Éxodo rural', c:'Población', d:'Salida masiva de habitantes del campo hacia las ciudades en busca de trabajo.' },
+  { t:'Megaciudad', c:'Población', d:'Ciudad que supera los diez millones de habitantes en su área metropolitana.' },
+  { t:'Esperanza de vida', c:'Población', d:'Número medio de años que se espera que viva una persona en un lugar determinado.' }
+];
+
+/* ============================================================
+   DATOS: CONTINENTES
+   ============================================================ */
+const CONTINENTES = [
+  {
+    n:'África', c1:'#f59e0b', c2:'#ef4444', ini:'AF',
+    sub:'El continente de la diversidad',
+    desc:'Se extiende a ambos lados del ecuador, por lo que alberga desde desiertos extremos hasta selvas húmedas. Es el continente con más países del mundo.',
+    area:'30,4 M km²', pob:'1.480 M', paises:'54',
+    extra:'Aquí se encuentran el desierto cálido más grande del planeta, el Sahara, y el río más largo del mundo, el Nilo, con unos 6.650 kilómetros.'
+  },
+  {
+    n:'América', c1:'#22c55e', c2:'#0ea5e9', ini:'AM',
+    sub:'Un continente de norte a sur',
+    desc:'Se extiende desde el Ártico hasta la Antártida. Une sus dos grandes masas de tierra el istmo de Panamá, un puente natural estrecho entre océanos.',
+    area:'42,5 M km²', pob:'1.050 M', paises:'35',
+    extra:'Contiene la cordillera más larga del mundo, los Andes, y la selva tropical más extensa, la Amazonía, que produce una parte enorme del oxígeno del planeta.'
+  },
+  {
+    n:'Asia', c1:'#a855f7', c2:'#6366f1', ini:'AS',
+    sub:'El continente más grande y poblado',
+    desc:'Ocupa cerca de un tercio de las tierras emergidas y concentra a más de la mitad de la humanidad. Sus paisajes van del desierto a la tundra siberiana.',
+    area:'44,6 M km²', pob:'4.800 M', paises:'49',
+    extra:'En Asia están el punto más alto de la Tierra (el Everest, 8.849 m) y el lago más profundo (el Baikal, con más de 1.600 metros).'
+  },
+  {
+    n:'Europa', c1:'#3b82f6', c2:'#06b6d4', ini:'EU',
+    sub:'Pequeño en tamaño, denso en historia',
+    desc:'Es el segundo continente más pequeño, pero uno de los más densamente poblados. Su costa recortada da lugar a penínsulas, golfos y mares interiores.',
+    area:'10,2 M km²', pob:'745 M', paises:'44',
+    extra:'No tiene desiertos cálidos y su clima está fuertemente suavizado por la corriente del Atlántico Norte, que transporta calor desde el trópico.'
+  },
+  {
+    n:'Oceanía', c1:'#14b8a6', c2:'#22d3ee', ini:'OC',
+    sub:'Miles de islas en el Pacífico',
+    desc:'Está formada por Australia, Nueva Zelanda y una enorme cantidad de islas pequeñas repartidas por el océano Pacífico.',
+    area:'8,5 M km²', pob:'46 M', paises:'14',
+    extra:'Australia es el país que ocupa un continente entero. Además, Oceanía contiene países formados por cientos de islas, como Indonesia o Filipinas en su entorno.'
+  },
+  {
+    n:'Antártida', c1:'#94a3b8', c2:'#e2e8f0', ini:'AN',
+    sub:'El continente de hielo',
+    desc:'Es el lugar más frío, ventoso y seco del planeta. No tiene población permanente, solo bases científicas que se turnan durante el año.',
+    area:'14 M km²', pob:'Sin población estable', paises:'0',
+    extra:'Guarda cerca del 70 % del agua dulce del mundo en forma de hielo. Si se derritiera por completo, el nivel del mar subiría decenas de metros.'
+  }
+];
+
+/* ============================================================
+   DATOS: CURIOSIDADES
+   ============================================================ */
+const DATOS = [
+  { h:'El océano más grande', p:'El Pacífico cubre cerca de un tercio de la superficie del planeta y es más extenso que todas las tierras emergidas juntas.' },
+  { h:'El punto más profundo', p:'La fosa de las Marianas, en el Pacífico, desciende unos 11.000 metros. Cabe el Everest completo y todavía sobra espacio.' },
+  { h:'El río más caudaloso', p:'El Amazonas vierte al océano más agua que los siete ríos más grandes del mundo siguientes sumados.' },
+  { h:'El país más extenso', p:'Rusia ocupa 17,1 millones de kilómetros cuadrados y se reparte entre dos continentes: Europa y Asia.' },
+  { h:'La montaña más alta', p:'El Everest mide 8.849 metros sobre el nivel del mar. Aun así, el volcán Mauna Kea es más alto medido desde su base submarina.' },
+  { h:'Un continente sin países', p:'La Antártida no pertenece a ningún país y se dedica a la investigación científica mediante un tratado internacional.' },
+  { h:'El lago más profundo', p:'El lago Baikal, en Siberia, contiene cerca del 20 % del agua dulce no congelada del mundo.' },
+  { h:'El desierto más seco', p:'El desierto de Atacama, en Chile, registra lugares donde no se ha medido lluvia significativa durante décadas.' },
+  { h:'La isla más grande', p:'Groenlandia es la isla más grande del mundo, aunque su población apenas supera los 56.000 habitantes.' },
+  { h:'El estrecho más transitado', p:'El estrecho de Gibraltar separa Europa de África por apenas 14 kilómetros en su punto más angosto.' },
+  { h:'Más agua que tierra', p:'Cerca del 71 % de la superficie terrestre está cubierta por agua, pero solo el 2,5 % de toda esa agua es dulce.' },
+  { h:'La capital más alta', p:'La Paz, en Bolivia, se sitúa a unos 3.600 metros de altitud y es la capital administrativa más alta del mundo.' }
+];
+
+/* ============================================================
+   DATOS: QUIZ
+   ============================================================ */
+const QUIZ = [
+  { q:'¿Cuál es el océano más grande del planeta?', o:['Atlántico','Índico','Pacífico','Ártico'], c:2,
+    e:'El Pacífico cubre cerca de un tercio de la superficie terrestre y es más extenso que todas las tierras emergidas juntas.' },
+  { q:'¿Cuál es el río más caudaloso del mundo?', o:['Nilo','Amazonas','Yangtsé','Misisipi'], c:1,
+    e:'El Amazonas transporta más agua que los siete ríos más grandes del mundo siguientes sumados.' },
+  { q:'¿Cuál es el desierto cálido más grande del planeta?', o:['Gobi','Atacama','Kalahari','Sahara'], c:3,
+    e:'El Sahara ocupa unos 9 millones de kilómetros cuadrados en el norte de África, un tamaño cercano al de Estados Unidos.' },
+  { q:'¿Qué continente tiene más países?', o:['Asia','África','Europa','América'], c:1,
+    e:'África reúne 54 países, más que cualquier otro continente.' },
+  { q:'¿Cuál es la montaña más alta sobre el nivel del mar?', o:['K2','Everest','Aconcagua','Kilimanjaro'], c:1,
+    e:'El Everest alcanza 8.849 metros. El Aconcagua es el más alto de América y el Kilimanjaro el más alto de África.' },
+  { q:'¿Qué línea imaginaria divide la Tierra en hemisferio norte y hemisferio sur?', o:['El meridiano de Greenwich','El trópico de Cáncer','El ecuador','La línea internacional de cambio de fecha'], c:2,
+    e:'El ecuador es la línea imaginaria que rodea la Tierra a igual distancia de ambos polos.' },
+  { q:'¿Cuál es el país más extenso del mundo?', o:['China','Canadá','Estados Unidos','Rusia'], c:3,
+    e:'Rusia ocupa 17,1 millones de kilómetros cuadrados y se extiende por Europa y Asia.' },
+  { q:'¿Qué estrecho separa Europa de África?', o:['Bósforo','Gibraltar','Bering','Magallanes'], c:1,
+    e:'El estrecho de Gibraltar une el océano Atlántico con el mar Mediterráneo y separa España de Marruecos.' },
+  { q:'¿Cuál es la capital de Australia?', o:['Sídney','Melbourne','Canberra','Perth'], c:2,
+    e:'Canberra es la capital. Sídney y Melbourne son mucho más grandes, pero la capital se eligió como punto intermedio entre ambas.' },
+  { q:'¿Cuál es el océano más pequeño del mundo?', o:['Ártico','Antártico','Índico','Atlántico'], c:0,
+    e:'El océano Ártico rodea el polo norte y es el más pequeño y superficial de todos.' },
+  { q:'¿Qué es un istmo?', o:['Una isla volcánica','Una franja de tierra que une dos masas de tierra','Una entrada de mar en la costa','Una montaña aislada'], c:1,
+    e:'El istmo de Panamá y el de Suez son los ejemplos más conocidos: unen tierras y separan mares.' },
+  { q:'¿Cuál es el punto más profundo del océano?', o:['Fosa de las Marianas','Fosa de Tonga','Dorsal Mesoatlántica','Mar Muerto'], c:0,
+    e:'La fosa de las Marianas, en el Pacífico, desciende unos 11.000 metros bajo el nivel del mar.' },
+  { q:'¿Qué instrumento señala el norte magnético?', o:['El sextante','El barómetro','La brújula','El altímetro'], c:2,
+    e:'La brújula usa una aguja imantada que se orienta por el campo magnético terrestre.' },
+  { q:'¿Cuál es el lago de agua dulce más grande por superficie?', o:['Victoria','Superior','Titicaca','Baikal'], c:1,
+    e:'El lago Superior, entre Estados Unidos y Canadá, es el mayor lago de agua dulce por superficie. El Baikal es el más profundo y el que más agua contiene.' },
+  { q:'¿En qué continente se encuentra el río Nilo?', o:['Asia','África','Europa','Oceanía'], c:1,
+    e:'El Nilo recorre el noreste de África y es uno de los ríos más largos del mundo, con unos 6.650 kilómetros.' },
+  { q:'¿Qué mide la densidad de población?', o:['El total de habitantes de un país','Los habitantes por kilómetro cuadrado','El crecimiento anual de la población','La cantidad de ciudades de un país'], c:1,
+    e:'La densidad relaciona población y superficie: habitantes divididos entre kilómetros cuadrados.' }
+];
+
+/* ============================================================
+   TEMA
+   ============================================================ */
+const htmlEl = document.documentElement;
+function setTheme(t){
+  htmlEl.setAttribute('data-theme', t);
+  try { localStorage.setItem('geo-theme', t); } catch(e){}
+}
+(function initTheme(){
+  let saved = null;
+  try { saved = localStorage.getItem('geo-theme'); } catch(e){}
+  if (saved) { setTheme(saved); return; }
+  const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+  setTheme(prefersLight ? 'light' : 'dark');
+})();
+$('#themeToggle').addEventListener('click', () => {
+  setTheme(htmlEl.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+});
+
+/* ============================================================
+   ROUTER
+   ============================================================ */
+const ROUTES = ['inicio','glosario','continentes','quiz','datos'];
+let currentRoute = 'inicio';
+
+function go(route, push = true){
+  if (!ROUTES.includes(route)) route = 'inicio';
+  currentRoute = route;
+
+  $$('.view').forEach(v => v.classList.toggle('active', v.dataset.view === route));
+  $$('.nav-link').forEach(b => b.classList.toggle('active', b.dataset.route === route));
+
+  if (push && location.hash.slice(1) !== route) {
+    history.pushState(null, '', '#' + route);
+  }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  // reiniciar animaciones de aparición
+  requestAnimationFrame(() => {
+    $$('.view.active .reveal').forEach(el => el.classList.remove('in'));
+    checkReveal();
+    if (route === 'datos') animateCounters();
+  });
+}
+
+document.addEventListener('click', e => {
+  const trigger = e.target.closest('[data-route]');
+  if (trigger) {
+    e.preventDefault();
+    go(trigger.dataset.route);
+  }
+});
+
+window.addEventListener('popstate', () => {
+  go(location.hash.slice(1) || 'inicio', false);
+});
+
+/* ============================================================
+   REVEAL AL SCROLL + CONTADORES
+   ============================================================ */
+const revealObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('in');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+function checkReveal(){
+  $$('.view.active .reveal:not(.in)').forEach(el => revealObserver.observe(el));
+}
+
+function animateCounters(){
+  $$('.num[data-count]').forEach(el => {
+    if (el.dataset.done === '1') return;
+    el.dataset.done = '1';
+    const target = parseFloat(el.dataset.count);
+    const suffix = el.dataset.suffix || '';
+    const dur = 1400;
+    const start = performance.now();
+    function tick(now){
+      const p = Math.min((now - start) / dur, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      const val = Math.round(target * eased);
+      el.textContent = val.toLocaleString('es-ES') + suffix;
+      if (p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  });
+}
+
+/* ============================================================
+   GLOSARIO: RENDER + FILTROS
+   ============================================================ */
+const CATEGORIAS = ['Todos','Relieve','Agua','Clima','Biosfera','Mapas','Población'];
+let activeCat = 'Todos';
+let query = '';
+
+const chipsEl = $('#chips');
+chipsEl.innerHTML = CATEGORIAS.map(c =>
+  `<button class="chip${c === 'Todos' ? ' active' : ''}" data-cat="${c}">${c}</button>`
+).join('');
+
+chipsEl.addEventListener('click', e => {
+  const chip = e.target.closest('.chip');
+  if (!chip) return;
+  activeCat = chip.dataset.cat;
+  $$('.chip', chipsEl).forEach(c => c.classList.toggle('active', c === chip));
+  renderGlosario();
+});
+
+$('#searchInput').addEventListener('input', e => {
+  query = e.target.value;
+  renderGlosario();
+});
+
+function renderGlosario(){
+  const q = query.trim().toLowerCase();
+  const items = GLOSARIO.filter(g => {
+    const okCat = activeCat === 'Todos' || g.c === activeCat;
+    const okQ = !q || g.t.toLowerCase().includes(q) || g.d.toLowerCase().includes(q);
+    return okCat && okQ;
+  });
+
+  const list = $('#glosarioList');
+  if (!items.length){
+    list.innerHTML = `<p class="empty">No encontramos términos con esa búsqueda. Prueba con otra palabra o cambia de categoría.</p>`;
+    return;
+  }
+
+  list.innerHTML = items.map((g, i) => `
+    <article class="term" style="--d:${Math.min(i, 14) * 35}ms">
+      <div class="term-head">
+        <h3>${g.t}</h3>
+        <span class="tag">${g.c}</span>
+      </div>
+      <p>${g.d}</p>
+    </article>
+  `).join('');
+}
+renderGlosario();
+
+/* ============================================================
+   CONTINENTES: RENDER
+   ============================================================ */
+$('#contList').innerHTML = CONTINENTES.map((c, i) => `
+  <article class="cont" style="--c1:${c.c1};--c2:${c.c2};--d:${i * 70}ms">
+    <div class="cont-top">
+      <span class="cont-badge">${c.ini}</span>
+      <div>
+        <h3>${c.n}</h3>
+        <span class="sub">${c.sub}</span>
+      </div>
+    </div>
+    <div class="cont-body">
+      <p>${c.desc}</p>
+      <div class="cont-facts">
+        <span class="fact">Superficie: ${c.area}</span>
+        <span class="fact">Población: ${c.pob}</span>
+        <span class="fact">Países: ${c.paises}</span>
+      </div>
+    </div>
+    <div class="cont-more"><div><p><strong>Dato curioso:</strong> ${c.extra}</p></div></div>
+    <button class="cont-toggle" aria-expanded="false">
+      <span>Ver dato curioso</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+    </button>
+  </article>
+`).join('');
+
+$('#contList').addEventListener('click', e => {
+  const btn = e.target.closest('.cont-toggle');
+  if (!btn) return;
+  const card = btn.closest('.cont');
+  const open = card.classList.toggle('open');
+  btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  btn.querySelector('span').textContent = open ? 'Ocultar dato curioso' : 'Ver dato curioso';
+});
+
+/* ============================================================
+   DATOS: RENDER
+   ============================================================ */
+$('#datoList').innerHTML = DATOS.map((d, i) => `
+  <article class="dato" style="--d:${i * 45}ms">
+    <span class="idx">${String(i + 1).padStart(2, '0')}</span>
+    <h3>${d.h}</h3>
+    <p>${d.p}</p>
+  </article>
+`).join('');
+
+/* ============================================================
+   QUIZ
+   ============================================================ */
+const TOTAL_PREGUNTAS = 8;
+const LETRAS = ['A','B','C','D'];
+
+let quizState = { questions: [], index: 0, score: 0, answered: false, finished: false };
+
+function shuffle(arr){
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function startQuiz(){
+  quizState = {
+    questions: shuffle(QUIZ).slice(0, TOTAL_PREGUNTAS),
+    index: 0,
+    score: 0,
+    answered: false,
+    finished: false
+  };
+  renderQuiz();
+}
+
+function renderQuiz(){
+  const card = $('#quizCard');
+
+  if (quizState.finished){
+    const total = quizState.questions.length;
+    const pct = Math.round((quizState.score / total) * 100);
+    let mensaje = 'Sigue practicando: la geografía se aprende repasando.';
+    if (pct === 100) mensaje = 'Perfecto. Dominas estos conceptos por completo.';
+    else if (pct >= 75) mensaje = 'Muy buen resultado. Te falta muy poco para el pleno.';
+    else if (pct >= 50) mensaje = 'Buen comienzo. Repasa el glosario y vuelve a intentarlo.';
+
+    card.innerHTML = `
+      <div class="result">
+        <div class="score">${quizState.score}/${total}</div>
+        <h3>${mensaje}</h3>
+        <p>Has acertado el ${pct} % de las preguntas de esta ronda.</p>
+        <button class="btn btn-primary" id="restartQuiz">
+          Jugar otra vez
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>
+        </button>
+      </div>
+    `;
+    $('#restartQuiz').addEventListener('click', startQuiz);
+    return;
+  }
+
+  const q = quizState.questions[quizState.index];
+  const total = quizState.questions.length;
+  const progress = (quizState.index / total) * 100;
+
+  card.innerHTML = `
+    <div class="quiz-meta">
+      <span>Pregunta ${quizState.index + 1} de ${total}</span>
+      <span>Aciertos: ${quizState.score}</span>
+    </div>
+    <div class="progress"><div class="progress-bar" style="width:${progress}%"></div></div>
+    <h3 class="q-text">${q.q}</h3>
+    <div class="options" id="options">
+      ${q.o.map((opt, i) => `
+        <button class="option" data-i="${i}">
+          <span class="letter">${LETRAS[i]}</span>
+          <span>${opt}</span>
+        </button>
+      `).join('')}
+    </div>
+    <div id="feedbackSlot"></div>
+    <div class="quiz-actions" id="actionsSlot"></div>
+  `;
+
+  $('#options').addEventListener('click', e => {
+    const btn = e.target.closest('.option');
+    if (!btn || quizState.answered) return;
+    answerQuestion(parseInt(btn.dataset.i, 10));
+  });
+}
+
+function answerQuestion(chosen){
+  quizState.answered = true;
+  const q = quizState.questions[quizState.index];
+  const options = $$('#options .option');
+
+  options.forEach((btn, i) => {
+    btn.disabled = true;
+    if (i === q.c) btn.classList.add('correct');
+    else if (i === chosen) btn.classList.add('wrong');
+  });
+
+  const acerto = chosen === q.c;
+  if (acerto) quizState.score++;
+
+  const slot = $('#feedbackSlot');
+  slot.innerHTML = `
+    <div class="feedback">
+      <strong>${acerto ? 'Correcto.' : 'No exactamente.'}</strong> ${q.e}
+    </div>
+  `;
+
+  const isLast = quizState.index === quizState.questions.length - 1;
+  $('#actionsSlot').innerHTML = `
+    <button class="btn btn-primary" id="nextBtn">
+      ${isLast ? 'Ver resultado' : 'Siguiente pregunta'}
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </button>
+  `;
+
+  $('#nextBtn').addEventListener('click', () => {
+    if (isLast){
+      quizState.finished = true;
+    } else {
+      quizState.index++;
+      quizState.answered = false;
+    }
+    renderQuiz();
+  });
+}
+
+/* ============================================================
+   ARRANQUE
+   ============================================================ */
+(function boot(){
+  const initial = (location.hash.slice(1) || 'inicio');
+  go(ROUTES.includes(initial) ? initial : 'inicio', false);
+  checkReveal();
+  setTimeout(() => { if (currentRoute === 'inicio') animateCounters(); }, 350);
+})();
+
+// Pausa las animaciones de fondo si la pestaña no está visible (ahorro de batería)
+document.addEventListener('visibilitychange', () => {
+  document.querySelectorAll('.orb').forEach(o => {
+    o.style.animationPlayState = document.hidden ? 'paused' : 'running';
+  });
+});
+
+startQuiz();
+</script>
+</body>
+</html>

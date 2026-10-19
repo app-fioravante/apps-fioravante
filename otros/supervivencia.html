@@ -1,0 +1,1519 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Supervivencia en catástrofes — Guía práctica para principiantes</title>
+<meta name="description" content="Guía simple de supervivencia ante apagones, inundaciones, ataques militares y eventos nucleares. Consejos prácticos, kit de emergencia y quiz.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --font-display:'Space Grotesk','Segoe UI',system-ui,sans-serif;
+  --font-body:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --radius:20px;
+  --radius-sm:12px;
+  --maxw:1180px;
+  --ease:cubic-bezier(.22,.75,.25,1);
+}
+html[data-theme="light"]{
+  --bg:#f8fafc;
+  --bg-soft:#eef2f7;
+  --surface:rgba(255,255,255,.86);
+  --surface-solid:#ffffff;
+  --surface-2:rgba(20,40,80,.045);
+  --surface-3:rgba(20,40,80,.08);
+  --border:rgba(20,40,80,.12);
+  --border-strong:rgba(20,40,80,.24);
+  --text:#0a1628;
+  --muted:#5a6b80;
+  --accent:#f59e0b;
+  --accent-2:#8b5cf6;
+  --accent-3:#06b6d4;
+  --accent-4:#10b981;
+  --good:#059669;
+  --bad:#e11d48;
+  --shadow:0 22px 55px -28px rgba(20,40,80,.28);
+  --orb-op:.14;
+  --dot-color:rgba(20,40,80,.055);
+  --star:rgba(20,40,80,.3);
+}
+html[data-theme="dark"]{
+  --bg:#04060d;
+  --bg-soft:#0a0f1a;
+  --surface:rgba(18,24,38,.66);
+  --surface-solid:#131a28;
+  --surface-2:rgba(255,255,255,.045);
+  --surface-3:rgba(255,255,255,.08);
+  --border:rgba(255,255,255,.10);
+  --border-strong:rgba(255,255,255,.20);
+  --text:#e8eef8;
+  --muted:#8f9bb3;
+  --accent:#fbbf24;
+  --accent-2:#a78bfa;
+  --accent-3:#22d3ee;
+  --accent-4:#34d399;
+  --good:#34d399;
+  --bad:#fb7185;
+  --shadow:0 24px 60px -24px rgba(0,0,0,.9);
+  --orb-op:.28;
+  --dot-color:rgba(255,255,255,.03);
+  --star:rgba(255,255,255,.8);
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;font-family:var(--font-body);background:var(--bg);color:var(--text);
+  min-height:100vh;line-height:1.65;-webkit-font-smoothing:antialiased;
+  transition:background .45s var(--ease),color .45s var(--ease);
+  overflow-x:hidden;
+}
+h1,h2,h3,h4,h5{font-family:var(--font-display);line-height:1.15;letter-spacing:-.02em;margin:0}
+p{margin:0}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+a{color:inherit;text-decoration:none}
+ul{margin:0}
+::selection{background:var(--accent);color:#0a0a0a}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
+
+.bg-stars{position:fixed;inset:0;z-index:-4;pointer-events:none;overflow:hidden}
+.bg-stars .star{
+  position:absolute;width:2px;height:2px;border-radius:50%;
+  background:var(--star);opacity:.6;
+  animation:twinkle var(--tw-dur,4s) ease-in-out infinite;
+  animation-delay:var(--tw-delay,0s);
+}
+@keyframes twinkle{
+  0%,100%{opacity:.15;transform:scale(.8)}
+  50%{opacity:1;transform:scale(1.3)}
+}
+.bg-dots{position:fixed;inset:0;z-index:-3;pointer-events:none;background-image:radial-gradient(var(--dot-color) 1px,transparent 1px);background-size:26px 26px}
+.orbs{position:fixed;inset:0;z-index:-2;overflow:hidden;pointer-events:none}
+.orb{position:absolute;border-radius:50%;filter:blur(110px);opacity:var(--orb-op);animation:float 28s ease-in-out infinite alternate}
+.orb.o1{width:52vw;height:52vw;background:var(--accent);top:-16vw;left:-12vw}
+.orb.o2{width:42vw;height:42vw;background:var(--accent-2);bottom:-18vw;right:-10vw;animation-delay:-10s}
+.orb.o3{width:34vw;height:34vw;background:var(--accent-3);top:44%;left:58%;animation-delay:-17s}
+.orb.o4{width:26vw;height:26vw;background:var(--accent-4);top:20%;right:24%;animation-delay:-5s}
+@keyframes float{
+  0%{transform:translate3d(0,0,0) scale(1)}
+  50%{transform:translate3d(4vw,-3vw,0) scale(1.1)}
+  100%{transform:translate3d(-3vw,4vw,0) scale(.95)}
+}
+
+.site-header{
+  position:sticky;top:0;z-index:50;
+  backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);
+  background:color-mix(in srgb,var(--bg) 78%, transparent);
+  border-bottom:1px solid var(--border);
+}
+.header-inner{max-width:var(--maxw);margin:0 auto;padding:13px 22px;display:flex;align-items:center;gap:20px}
+.brand{display:flex;align-items:center;gap:11px;font-family:var(--font-display);font-weight:700;font-size:1rem;letter-spacing:-.02em;white-space:nowrap}
+.brand-mark{
+  width:38px;height:38px;border-radius:12px;flex:none;
+  background:linear-gradient(140deg,var(--accent),var(--accent-2) 55%,var(--accent-3));
+  display:grid;place-items:center;color:#fff;
+  box-shadow:0 8px 22px -8px var(--accent);
+  transition:transform .5s var(--ease);
+}
+.brand:hover .brand-mark{transform:rotate(-10deg) scale(1.06)}
+.brand-mark svg{width:22px;height:22px}
+
+.nav{display:flex;gap:2px;margin-left:auto;overflow-x:auto;scrollbar-width:none}
+.nav::-webkit-scrollbar{display:none}
+.nav-link{
+  position:relative;padding:9px 11px;border-radius:11px;font-size:.8rem;font-weight:500;
+  color:var(--muted);white-space:nowrap;transition:color .3s var(--ease),background .3s var(--ease);
+}
+.nav-link:hover{color:var(--text);background:var(--surface-2)}
+.nav-link.active{color:var(--text);background:var(--surface-2)}
+.nav-link.active::after{
+  content:'';position:absolute;left:11px;right:11px;bottom:4px;height:2px;border-radius:2px;
+  background:linear-gradient(90deg,var(--accent),var(--accent-2));
+  animation:navIn .4s var(--ease) both;
+}
+@keyframes navIn{from{transform:scaleX(0);opacity:0}to{transform:scaleX(1);opacity:1}}
+
+.theme-toggle{
+  width:40px;height:40px;border-radius:12px;flex:none;
+  border:1px solid var(--border);background:var(--surface-2);
+  display:grid;place-items:center;
+  transition:transform .35s var(--ease),border-color .3s,background .3s;
+}
+.theme-toggle:hover{transform:translateY(-2px) rotate(8deg);border-color:var(--border-strong)}
+.theme-toggle svg{width:19px;height:19px}
+html[data-theme="dark"] .icon-sun{display:block}
+html[data-theme="dark"] .icon-moon{display:none}
+html[data-theme="light"] .icon-sun{display:none}
+html[data-theme="light"] .icon-moon{display:block}
+
+main{max-width:var(--maxw);margin:0 auto;padding:0 22px 90px}
+.view{display:none}
+.view.active{display:block;animation:viewIn .55s var(--ease) both}
+@keyframes viewIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+
+.hero{padding:74px 0 42px;max-width:940px;position:relative}
+.pill{
+  display:inline-flex;align-items:center;gap:8px;padding:7px 15px;border-radius:999px;
+  font-size:.78rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;
+  border:1px solid var(--border);background:var(--surface);color:var(--muted);margin-bottom:26px;
+}
+.pill .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);animation:pulse 2.4s infinite}
+@keyframes pulse{
+  0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--accent) 60%,transparent)}
+  70%{box-shadow:0 0 0 9px transparent}
+  100%{box-shadow:0 0 0 0 transparent}
+}
+h1.hero-title{font-size:clamp(2.1rem,5.2vw,4rem);font-weight:700;letter-spacing:-.035em;margin-bottom:22px}
+.grad{
+  background:linear-gradient(100deg,var(--accent),var(--accent-2) 40%,var(--accent-3) 70%,var(--accent-4));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  background-size:220% auto;animation:shimmer 8s linear infinite;
+}
+@keyframes shimmer{to{background-position:220% center}}
+.lead{font-size:clamp(1rem,1.6vw,1.15rem);color:var(--muted);max-width:720px;margin-bottom:34px}
+.hero-actions{display:flex;flex-wrap:wrap;gap:13px}
+
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  padding:13px 25px;border-radius:13px;font-size:.93rem;font-weight:600;
+  border:1px solid transparent;
+  transition:transform .28s var(--ease),box-shadow .3s var(--ease),background .3s,border-color .3s,color .3s;
+  will-change:transform;
+}
+.btn:active{transform:scale(.97)}
+.btn svg{width:17px;height:17px}
+.btn-primary{
+  background:linear-gradient(120deg,var(--accent),var(--accent-2));
+  color:#fff;box-shadow:0 14px 34px -14px var(--accent);
+  position:relative;overflow:hidden;
+}
+.btn-primary::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,.45),transparent 70%);
+  transform:translateX(-130%);transition:transform .7s var(--ease);
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 20px 42px -14px var(--accent)}
+.btn-primary:hover::after{transform:translateX(130%)}
+.btn-ghost{border-color:var(--border);background:var(--surface);color:var(--text)}
+.btn-ghost:hover{transform:translateY(-2px);border-color:var(--border-strong);background:var(--surface-2)}
+.btn.small{padding:8px 16px;font-size:.85rem}
+
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin:12px 0 58px}
+.stat{
+  padding:22px 20px;border-radius:var(--radius);
+  background:var(--surface);border:1px solid var(--border);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  transition:transform .35s var(--ease),border-color .3s,box-shadow .35s;
+}
+.stat:hover{transform:translateY(-5px);border-color:var(--border-strong);box-shadow:var(--shadow)}
+.stat .num{
+  font-family:var(--font-display);font-size:1.8rem;font-weight:700;letter-spacing:-.03em;
+  background:linear-gradient(120deg,var(--accent),var(--accent-2));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.stat .lbl{font-size:.82rem;color:var(--muted);font-weight:500;margin-top:2px}
+
+.sec-head{margin:0 0 28px}
+.sec-head h2{font-size:clamp(1.55rem,3vw,2.05rem);font-weight:700;margin-bottom:8px}
+.sec-head p{color:var(--muted);max-width:740px;font-size:.95rem}
+.section{padding-top:52px}
+
+.module-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(258px,1fr));gap:18px}
+.module{
+  position:relative;overflow:hidden;text-align:left;padding:28px 24px;border-radius:var(--radius);
+  background:var(--surface);border:1px solid var(--border);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  transition:transform .4s var(--ease),border-color .35s,box-shadow .4s;
+}
+.module::before{
+  content:'';position:absolute;inset:0;opacity:0;
+  background:radial-gradient(420px circle at var(--mx,50%) var(--my,0%),color-mix(in srgb,var(--accent) 22%,transparent),transparent 65%);
+  transition:opacity .45s var(--ease);
+}
+.module:hover{transform:translateY(-6px);border-color:var(--border-strong);box-shadow:var(--shadow)}
+.module:hover::before{opacity:1}
+.module-ico{
+  width:46px;height:46px;border-radius:14px;display:grid;place-items:center;margin-bottom:18px;
+  background:linear-gradient(140deg,color-mix(in srgb,var(--accent) 22%,transparent),color-mix(in srgb,var(--accent-2) 18%,transparent));
+  border:1px solid var(--border);color:var(--accent);
+  transition:transform .4s var(--ease);
+}
+.module:hover .module-ico{transform:scale(1.08) rotate(-6deg)}
+.module-ico svg{width:22px;height:22px}
+.module h3{font-size:1.04rem;margin-bottom:8px;font-weight:600}
+.module p{font-size:.89rem;color:var(--muted);line-height:1.6}
+.module .arrow{display:inline-flex;align-items:center;gap:6px;margin-top:16px;font-size:.84rem;font-weight:600;color:var(--accent)}
+.module .arrow svg{width:14px;height:14px;transition:transform .35s var(--ease)}
+.module:hover .arrow svg{transform:translateX(5px)}
+
+.card{
+  padding:24px 26px;border-radius:var(--radius);
+  background:var(--surface);border:1px solid var(--border);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  transition:transform .35s var(--ease),border-color .3s,box-shadow .35s;
+}
+.card:hover{transform:translateY(-4px);border-color:var(--border-strong);box-shadow:var(--shadow)}
+.card h3{font-size:1.02rem;margin-bottom:10px;font-weight:600}
+.card p{font-size:.9rem;color:var(--muted);line-height:1.68}
+.card .kicker{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;display:block}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(258px,1fr))}
+.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{
+  padding:8px 15px;border-radius:999px;font-size:.81rem;font-weight:600;
+  border:1px solid var(--border);background:var(--surface);color:var(--muted);
+  transition:all .3s var(--ease);
+}
+.chip:hover{color:var(--text);border-color:var(--border-strong);transform:translateY(-1px)}
+.chip.active{background:linear-gradient(120deg,var(--accent),var(--accent-2));color:#fff;border-color:transparent;box-shadow:0 10px 26px -12px var(--accent)}
+
+.vt{position:relative;margin-top:26px}
+.vt::before{
+  content:'';position:absolute;left:13px;top:10px;bottom:10px;width:2px;border-radius:2px;
+  background:linear-gradient(180deg,var(--accent),var(--accent-2) 55%,var(--accent-3));
+  opacity:.55;
+}
+.vt-item{position:relative;padding-left:46px;margin-bottom:18px;animation:termIn .5s var(--ease) both;animation-delay:var(--d,0ms)}
+@keyframes termIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.vt-dot{position:absolute;left:7px;top:24px;width:14px;height:14px;border-radius:50%;background:var(--c);border:3px solid var(--bg);box-shadow:0 0 0 3px color-mix(in srgb,var(--c) 30%,transparent);transition:transform .3s var(--ease)}
+.vt-item:hover .vt-dot{transform:scale(1.3)}
+.vt-card{padding:20px 22px;border-radius:var(--radius-sm);background:var(--surface);border:1px solid var(--border);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);transition:border-color .3s,transform .3s var(--ease),box-shadow .3s}
+.vt-item:hover .vt-card{border-color:var(--border-strong);transform:translateX(3px);box-shadow:var(--shadow)}
+.vt-top{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:8px}
+.vt-year{font-family:var(--font-display);font-size:.86rem;font-weight:700;color:var(--accent);padding:3px 10px;border-radius:7px;background:color-mix(in srgb,var(--accent) 13%,transparent);border:1px solid color-mix(in srgb,var(--accent) 26%,transparent);white-space:nowrap}
+.vt-era{font-size:.68rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.vt-card h4{font-size:1rem;font-weight:600;margin-bottom:7px;line-height:1.3}
+.vt-card > p{font-size:.88rem;color:var(--muted);line-height:1.66}
+.vt-more{display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:.79rem;font-weight:600;color:var(--accent);padding:4px 0;transition:gap .3s var(--ease)}
+.vt-more:hover{gap:9px}
+.vt-more svg{width:12px;height:12px;transition:transform .4s var(--ease)}
+.vt-item.open .vt-more svg{transform:rotate(180deg)}
+.vt-extra{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s var(--ease)}
+.vt-item.open .vt-extra{grid-template-rows:1fr}
+.vt-extra > div{overflow:hidden}
+.vt-extra p{font-size:.85rem;color:var(--muted);line-height:1.7;border-top:1px solid var(--border);margin-top:12px;padding-top:12px}
+
+.diagram-wrap{
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+  padding:22px 20px;box-shadow:var(--shadow);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+}
+.diagram-wrap h4{font-size:1.02rem;margin-bottom:8px;font-weight:600}
+.diagram-wrap .sub{font-size:.87rem;color:var(--muted);margin-bottom:16px;line-height:1.55}
+.diagram-wrap svg{display:block;width:100%;max-width:520px;height:auto;margin:0 auto}
+
+.info-panel{
+  margin-top:16px;padding:16px 18px;border-radius:var(--radius-sm);
+  background:var(--surface-2);border:1px solid var(--border);
+  min-height:100px;transition:border-color .3s,background .3s;
+}
+.info-panel.active{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 7%,var(--surface-2))}
+.info-panel .ip-name{font-family:var(--font-display);font-weight:700;font-size:1.02rem;color:var(--accent);margin-bottom:6px}
+.info-panel .ip-func{font-size:.9rem;color:var(--text);margin-bottom:6px;line-height:1.6}
+.info-panel .ip-desc{font-size:.85rem;color:var(--muted);line-height:1.6}
+.info-panel .ip-hint{color:var(--muted);font-size:.86rem;font-style:italic}
+
+.tbl{width:100%;border-collapse:collapse;font-size:.86rem;border-radius:12px;overflow:hidden;border:1px solid var(--border)}
+.tbl th, .tbl td{padding:11px 14px;text-align:left;border-bottom:1px solid var(--border)}
+.tbl th{background:var(--surface-2);font-weight:600;font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.tbl tr:last-child td{border-bottom:none}
+.tbl tr:hover td{background:var(--surface-2)}
+.tbl td{color:var(--text)}
+
+.note{
+  margin-top:26px;padding:16px 20px;border-radius:14px;font-size:.85rem;color:var(--muted);
+  border:1px solid var(--border);background:var(--surface-2);border-left:3px solid var(--accent);
+  line-height:1.65;
+}
+.note strong{color:var(--text);font-weight:600}
+.note.danger{border-left-color:var(--bad);background:color-mix(in srgb,var(--bad) 8%,var(--surface-2))}
+.note.danger strong{color:var(--bad)}
+.note.good{border-left-color:var(--good);background:color-mix(in srgb,var(--good) 8%,var(--surface-2))}
+.note.good strong{color:var(--good)}
+
+.progress-item{margin:14px 0}
+.progress-item .pi-label{display:flex;justify-content:space-between;font-size:.82rem;font-weight:600;margin-bottom:6px}
+.progress-item .pi-label span:last-child{color:var(--accent)}
+.progress-track{height:8px;border-radius:999px;background:var(--surface-2);overflow:hidden;border:1px solid var(--border)}
+.progress-fill{
+  height:100%;border-radius:999px;
+  background:linear-gradient(90deg,var(--accent),var(--accent-2));
+  width:0;transition:width 1.5s var(--ease);
+  animation:progressIn 1.5s var(--ease) forwards;
+  animation-delay:var(--d,0.2s);
+}
+@keyframes progressIn{to{width:var(--pct)}}
+
+/* Alertas y peligros */
+.alert-strip{
+  display:flex;align-items:center;gap:14px;
+  padding:16px 20px;border-radius:14px;
+  background:color-mix(in srgb,var(--bad) 12%,var(--surface));
+  border:1px solid color-mix(in srgb,var(--bad) 35%,var(--border));
+  margin-bottom:18px;
+}
+.alert-strip .ai{
+  width:38px;height:38px;border-radius:10px;flex:none;display:grid;place-items:center;
+  background:var(--bad);color:#fff;
+}
+.alert-strip .ai svg{width:22px;height:22px}
+.alert-strip .at{font-size:.92rem;line-height:1.5}
+.alert-strip .at strong{color:var(--bad);font-weight:700}
+
+/* Check-list estilo kit */
+.check-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px}
+.check-list li{
+  display:flex;align-items:flex-start;gap:10px;
+  padding:10px 12px;border-radius:10px;
+  background:var(--surface-2);border:1px solid var(--border);
+  font-size:.87rem;line-height:1.5;
+  transition:background .25s,border-color .25s,transform .25s;
+}
+.check-list li:hover{background:var(--surface-3);border-color:var(--border-strong);transform:translateX(2px)}
+.check-list .ck{
+  width:22px;height:22px;border-radius:6px;flex:none;
+  display:grid;place-items:center;font-size:.75rem;font-weight:700;
+  background:var(--surface-solid);border:1px solid var(--border);color:var(--muted);
+  margin-top:1px;
+}
+.check-list li.priority .ck{background:var(--accent);color:#0a0a0a;border-color:var(--accent)}
+.check-list .ck svg{width:13px;height:13px}
+.check-list .ctx{flex:1}
+.check-list .ctx strong{color:var(--text);font-weight:600}
+
+/* Niveles de peligro */
+.level{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:3px 10px;border-radius:999px;
+  font-size:.7rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+}
+.level.high{background:color-mix(in srgb,var(--bad) 18%,transparent);color:var(--bad);border:1px solid color-mix(in srgb,var(--bad) 35%,transparent)}
+.level.mid{background:color-mix(in srgb,var(--accent) 18%,transparent);color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 35%,transparent)}
+.level.low{background:color-mix(in srgb,var(--good) 18%,transparent);color:var(--good);border:1px solid color-mix(in srgb,var(--good) 35%,transparent)}
+
+.quiz-shell{max-width:760px;margin:0 auto}
+.quiz-card{
+  padding:34px;border-radius:var(--radius);
+  background:var(--surface);border:1px solid var(--border);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  box-shadow:var(--shadow);
+}
+.quiz-meta{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:12px;font-size:.81rem;font-weight:600;color:var(--muted)}
+.progress{height:6px;border-radius:99px;background:var(--surface-2);overflow:hidden;margin-bottom:30px;border:1px solid var(--border)}
+.progress-bar{height:100%;width:0%;border-radius:99px;background:linear-gradient(90deg,var(--accent),var(--accent-2));transition:width .55s var(--ease)}
+.q-text{font-family:var(--font-display);font-size:clamp(1.12rem,2.4vw,1.42rem);font-weight:600;line-height:1.35;margin-bottom:26px}
+.options{display:grid;gap:11px}
+.option{
+  display:flex;align-items:center;gap:14px;text-align:left;
+  padding:16px 18px;border-radius:14px;font-size:.93rem;font-weight:500;
+  background:var(--surface-2);border:1px solid var(--border);color:var(--text);
+  transition:transform .25s var(--ease),border-color .25s,background .25s;
+}
+.option:hover:not(:disabled){transform:translateX(4px);border-color:var(--accent);background:color-mix(in srgb,var(--accent) 8%,transparent)}
+.option:disabled{cursor:default}
+.option .letter{
+  width:28px;height:28px;border-radius:9px;flex:none;display:grid;place-items:center;
+  font-size:.77rem;font-weight:700;font-family:var(--font-display);
+  background:var(--surface-solid);border:1px solid var(--border);color:var(--muted);
+}
+.option.correct{background:color-mix(in srgb,var(--good) 15%,transparent);border-color:var(--good)}
+.option.correct .letter{background:var(--good);color:#fff;border-color:var(--good)}
+.option.wrong{background:color-mix(in srgb,var(--bad) 13%,transparent);border-color:var(--bad)}
+.option.wrong .letter{background:var(--bad);color:#fff;border-color:var(--bad)}
+.feedback{margin-top:22px;padding:16px 18px;border-radius:14px;font-size:.88rem;line-height:1.6;border:1px solid var(--border);background:var(--surface-2);animation:termIn .4s var(--ease) both}
+.feedback strong{color:var(--text)}
+.quiz-actions{display:flex;justify-content:flex-end;margin-top:24px}
+.result{text-align:center;padding:20px 6px}
+.result .score{font-family:var(--font-display);font-size:clamp(3rem,9vw,4.6rem);font-weight:700;letter-spacing:-.05em;background:linear-gradient(120deg,var(--accent),var(--accent-2) 50%,var(--accent-3));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1;margin-bottom:10px}
+.result h3{font-size:1.28rem;margin-bottom:10px}
+.result p{color:var(--muted);margin-bottom:26px}
+
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s var(--ease),transform .7s var(--ease);transition-delay:var(--d,0ms)}
+.reveal.in{opacity:1;transform:none}
+
+.site-footer{border-top:1px solid var(--border);padding:34px 22px;text-align:center;font-size:.85rem;color:var(--muted)}
+.site-footer strong{color:var(--text);font-weight:600}
+
+@media (max-width:1040px){.nav-link{padding:9px 9px;font-size:.76rem}}
+@media (max-width:900px){
+  .header-inner{padding:12px 16px;gap:14px;flex-wrap:wrap}
+  .nav{order:3;width:100%;margin-left:0;padding-bottom:2px}
+  .theme-toggle{margin-left:auto}
+  main{padding:0 16px 70px}
+  .hero{padding:44px 0 32px}
+  .stats{grid-template-columns:repeat(2,1fr);gap:11px}
+  .stat{padding:17px 15px}
+  .stat .num{font-size:1.45rem}
+  .vt-item{padding-left:38px}
+  .quiz-card{padding:24px 20px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<div class="bg-stars" id="bgStars" aria-hidden="true"></div>
+<div class="bg-dots" aria-hidden="true"></div>
+<div class="orbs" aria-hidden="true">
+  <div class="orb o1"></div>
+  <div class="orb o2"></div>
+  <div class="orb o3"></div>
+  <div class="orb o4"></div>
+</div>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="#inicio" data-route="inicio">
+      <span class="brand-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          <path d="M9 12l2 2 4-4"/>
+        </svg>
+      </span>
+      <span>Preparado</span>
+    </a>
+
+    <nav class="nav" aria-label="Navegación principal">
+      <button class="nav-link active" data-route="inicio">Inicio</button>
+      <button class="nav-link" data-route="apagon">Apagón</button>
+      <button class="nav-link" data-route="inundacion">Inundación</button>
+      <button class="nav-link" data-route="militar">Ataque</button>
+      <button class="nav-link" data-route="nuclear">Nuclear</button>
+      <button class="nav-link" data-route="kit">Kit</button>
+      <button class="nav-link" data-route="quiz">Quiz</button>
+    </nav>
+
+    <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema">
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round">
+        <circle cx="12" cy="12" r="4"/>
+        <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>
+      </svg>
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<main>
+
+  <!-- ================= INICIO ================= -->
+  <section class="view active" data-view="inicio">
+    <div class="hero">
+      <span class="pill"><span class="dot"></span>Guía práctica para personas sin experiencia</span>
+      <h1 class="hero-title">Supervivencia en catástrofes, <span class="grad">explicada simple</span></h1>
+      <p class="lead">
+        Qué hacer ante un apagón prolongado, una inundación, un ataque militar o un evento nuclear.
+        Consejos concretos, listas de verificación y errores que debes evitar. Sin alarmismo y sin tecnicismos.
+      </p>
+      <div class="hero-actions">
+        <button class="btn btn-primary" data-route="kit">
+          Preparar mi kit
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+        <button class="btn btn-ghost" data-route="apagon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg>
+          Empezar por el apagón
+        </button>
+      </div>
+    </div>
+
+    <div class="stats reveal">
+      <div class="stat"><div class="num" data-count="72" data-suffix=" h">0</div><div class="lbl">Autonomía mínima recomendada</div></div>
+      <div class="stat"><div class="num" data-count="4" data-suffix="">0</div><div class="lbl">Escenarios cubiertos</div></div>
+      <div class="stat"><div class="num" data-count="3" data-suffix=" L">0</div><div class="lbl">Agua por persona y día</div></div>
+      <div class="stat"><div class="num" data-count="10" data-suffix="">0</div><div class="lbl">Reglas que salvan vidas</div></div>
+    </div>
+
+    <div class="sec-head reveal">
+      <h2>Cuatro escenarios, una misma lógica</h2>
+      <p>En todas las emergencias se repiten los mismos pasos: mantener la calma, asegurar el refugio, gestionar agua y comida, y comunicarse. Cambia el orden y los detalles.</p>
+    </div>
+
+    <div class="module-grid">
+      <button class="module reveal" data-route="apagon" style="--d:0ms">
+        <span class="module-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg>
+        </span>
+        <h3>Apagón prolongado</h3>
+        <p>Cortes de luz de horas o días. Cómo conservar comida, iluminar sin riesgo y mantener el contacto.</p>
+        <span class="arrow">Ver guía
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </button>
+
+      <button class="module reveal" data-route="inundacion" style="--d:40ms">
+        <span class="module-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12c2-2 4-2 6 0s4 2 6 0 4-2 6 0M2 18c2-2 4-2 6 0s4 2 6 0 4-2 6 0M2 6c2-2 4-2 6 0s4 2 6 0 4-2 6 0"/></svg>
+        </span>
+        <h3>Inundación</h3>
+        <p>Agua que sube, rutas de evacuación y qué hacer antes, durante y después. La regla de oro del agua.</p>
+        <span class="arrow">Ver guía
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </button>
+
+      <button class="module reveal" data-route="militar" style="--d:80ms">
+        <span class="module-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l9 4v6c0 5-4 8-9 10-5-2-9-5-9-10V6l9-4z"/><path d="M12 8v4M12 16h.01"/></svg>
+        </span>
+        <h3>Ataque militar</h3>
+        <p>Refugiarse en el lugar, evitar bulos, proteger documentos y saber cuándo moverse o quedarse.</p>
+        <span class="arrow">Ver guía
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </button>
+
+      <button class="module reveal" data-route="nuclear" style="--d:120ms">
+        <span class="module-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><path d="M12 2v6M12 16v6M2 12h6M16 12h6M4.9 4.9l4.2 4.2M14.9 14.9l4.2 4.2M4.9 19.1l4.2-4.2M14.9 9.1l4.2-4.2"/></svg>
+        </span>
+        <h3>Evento nuclear</h3>
+        <p>Tiempo, distancia y blindaje. Cómo refugiarse 24–48 h y descontaminarse sin exponerse.</p>
+        <span class="arrow">Ver guía
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </button>
+
+      <button class="module reveal" data-route="kit" style="--d:160ms">
+        <span class="module-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="14" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 13h18"/></svg>
+        </span>
+        <h3>Kit de emergencia</h3>
+        <p>Qué guardar, cuánto durar y cómo revisarlo. La lista mínima de 72 horas explicada.</p>
+        <span class="arrow">Ver kit
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </button>
+
+      <button class="module reveal" data-route="quiz" style="--d:200ms">
+        <span class="module-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l2 2 4-4"/><rect x="3" y="4" width="18" height="16" rx="3"/></svg>
+        </span>
+        <h3>Quiz</h3>
+        <p>Diez preguntas al azar sobre supervivencia. Comprueba lo que has aprendido.</p>
+        <span class="arrow">Empezar quiz
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </button>
+    </div>
+
+    <div class="note reveal">
+      <strong>Una idea clave:</strong> no necesitas ser un experto. La mayoría de las muertes en catástrofes se deben a decisiones
+      rápidas mal tomadas (cruzar agua, salir al exterior, intoxicarse con un generador). Con unos pocos conceptos claros,
+      tus probabilidades mejoran muchísimo.
+    </div>
+  </section>
+
+  <!-- ================= APAGÓN ================= -->
+  <section class="view" data-view="apagon">
+    <div class="sec-head section">
+      <h2>Apagón prolongado</h2>
+      <p>Un corte de luz de horas es una molestia. De días, es una emergencia. Lo importante: iluminar sin riesgo, conservar comida y no quedarse sin información.</p>
+    </div>
+
+    <div class="alert-strip reveal">
+      <div class="ai">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01"/><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg>
+      </div>
+      <div class="at"><strong>Nunca uses generadores, parrillas o braseros dentro de casa.</strong> El monóxido de carbono mata en silencio, sin olor ni color.</div>
+    </div>
+
+    <h3 style="font-size:1.15rem;font-weight:600;margin:18px 0 14px">Los primeros 10 minutos</h3>
+    <div class="vt" id="apagonSteps"></div>
+
+    <div class="grid-2" style="margin-top:24px">
+      <div class="diagram-wrap reveal">
+        <h4>Iluminación segura</h4>
+        <p class="sub">Lo que debes usar y lo que debes evitar durante un apagón.</p>
+        <svg id="lightSvg" viewBox="0 0 400 240" aria-label="Iluminación segura vs insegura"></svg>
+        <div class="info-panel" id="lightInfo">
+          <div class="ip-hint">Pasa el cursor sobre los iconos para ver el detalle.</div>
+        </div>
+      </div>
+      <div class="diagram-wrap reveal">
+        <h4>Conservación de alimentos</h4>
+        <p class="sub">Cuánto aguanta la comida en nevera y congelador sin luz.</p>
+        <div id="foodTimer"></div>
+      </div>
+    </div>
+
+    <h3 style="font-size:1.15rem;font-weight:600;margin:28px 0 14px">Qué hacer y qué evitar</h3>
+    <div class="grid-2">
+      <div class="card reveal">
+        <span class="kicker" style="color:var(--good)">Sí</span>
+        <h3>Buenas prácticas</h3>
+        <ul class="check-list" style="margin-top:12px">
+          <li class="priority"><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg></span><span class="ctx"><strong>Linterna de LED o frontal</strong> con pilas de repuesto.</span></li>
+          <li class="priority"><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg></span><span class="ctx"><strong>Radio a pilas o de manivela</strong> para recibir avisos oficiales.</span></li>
+          <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg></span><span class="ctx"><strong>Cierra nevera y congelador.</strong> No los abras sin necesidad.</span></li>
+          <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg></span><span class="ctx"><strong>Modo ahorro en móvil.</strong> Baja brillo, apaga datos y GPS si no los usas.</span></li>
+          <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg></span><span class="ctx"><strong>Reúne a la familia</strong> en una habitación. El calor corporal ayuda.</span></li>
+        </ul>
+      </div>
+      <div class="card reveal">
+        <span class="kicker" style="color:var(--bad)">No</span>
+        <h3>Errores peligrosos</h3>
+        <ul class="check-list" style="margin-top:12px">
+          <li class="priority"><span class="ck" style="background:var(--bad);color:#fff;border-color:var(--bad)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></span><span class="ctx"><strong>Velas sin supervisión.</strong> Son la primera causa de incendios en apagones.</span></li>
+          <li class="priority"><span class="ck" style="background:var(--bad);color:#fff;border-color:var(--bad)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></span><span class="ctx"><strong>Generador dentro de casa o garaje.</strong> Va siempre fuera, lejos de ventanas.</span></li>
+          <li><span class="ck" style="background:var(--bad);color:#fff;border-color:var(--bad)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></span><span class="ctx"><strong>Abrir la nevera cada rato</strong> para ver si hay algo rico. Pierdes el frío.</span></li>
+          <li><span class="ck" style="background:var(--bad);color:#fff;border-color:var(--bad)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></span><span class="ctx"><strong>Usar el ascensor.</strong> Puede quedarse parado y sin ventilación.</span></li>
+          <li><span class="ck" style="background:var(--bad);color:#fff;border-color:var(--bad)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></span><span class="ctx"><strong>Tocar cables caídos.</strong> Aunque parezca que no hay corriente.</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="note reveal good">
+      <strong>Truco del congelador:</strong> llena una botella con agua, ciérrala y métela en el congelador. Si al volver la luz
+      está medio descongelada, sabrás que la comida lleva horas sin frío y deberás revisarla.
+    </div>
+  </section>
+
+  <!-- ================= INUNDACIÓN ================= -->
+  <section class="view" data-view="inundacion">
+    <div class="sec-head section">
+      <h2>Inundación</h2>
+      <p>El agua parece inofensiva hasta que arrastra un coche. La mayoría de las muertes en inundaciones ocurren por cruzar zonas inundadas a pie o en vehículo.</p>
+    </div>
+
+    <div class="alert-strip reveal">
+      <div class="ai">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v6M12 16v6M4.9 4.9l4.2 4.2M14.9 14.9l4.2 4.2"/><circle cx="12" cy="12" r="3"/></svg>
+      </div>
+      <div class="at"><strong>Regla de oro: "Ve a lo alto, no cruces el agua".</strong> 30 cm de agua en movimiento pueden tumbar a un adulto; 60 cm pueden arrastrar un coche.</div>
+    </div>
+
+    <h3 style="font-size:1.15rem;font-weight:600;margin:18px 0 14px">Señales de que el agua puede llegar</h3>
+    <div class="chips reveal" style="margin-bottom:26px">
+      <span class="chip">Lluvia intensa y persistente</span>
+      <span class="chip">Avisos oficiales de la AEMET</span>
+      <span class="chip">Ríos que suben rápido</span>
+      <span class="chip">Ruido de agua en sótanos</span>
+      <span class="chip">Cortes de luz por zonas</span>
+      <span class="chip">Sirenas o avisos de Protección Civil</span>
+    </div>
+
+    <h3 style="font-size:1.15rem;font-weight:600;margin:28px 0 14px">Protocolo: antes, durante y después</h3>
+    <div class="vt" id="floodSteps"></div>
+
+    <div class="grid-2" style="margin-top:24px">
+      <div class="diagram-wrap reveal">
+        <h4>Niveles de peligro del agua</h4>
+        <p class="sub">No es lo mismo mojarse los tobillos que verse arrastrado. Estos son los umbrales aproximados.</p>
+        <svg id="floodSvg" viewBox="0 0 420 260" aria-label="Niveles de agua y peligro"></svg>
+        <div class="info-panel" id="floodInfo">
+          <div class="ip-hint">Toca cada nivel para ver la recomendación.</div>
+        </div>
+      </div>
+      <div class="diagram-wrap reveal">
+        <h4>Evacuación segura de una vivienda</h4>
+        <p class="sub">Ruta recomendada frente a rutas peligrosas durante una inundación.</p>
+        <svg id="evacSvg" viewBox="0 0 420 300" aria-label="Ruta de evacuación"></svg>
+      </div>
+    </div>
+
+    <div class="grid-2" style="margin-top:24px">
+      <div class="card reveal">
+        <span class="kicker" style="color:var(--good)">Sí</span>
+        <h3>Qué hacer</h3>
+        <ul class="check-list" style="margin-top:12px">
+          <li class="priority"><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg></span><span class="ctx"><strong>Sube a la planta más alta</strong> y llévate agua, documentos y móvil.</span></li>
+          <li class="priority"><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg></span><span class="ctx"><strong>Corta la electricidad y el gas</strong> si el agua puede entrar en casa.</span></li>
+          <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg></span><span class="ctx"><strong>Escucha la radio</strong> o sigue canales oficiales para la ruta de evacuación.</span></li>
+          <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg></span><span class="ctx"><strong>Si estás en el coche</strong> y el agua sube, sal por la ventana y busca altura.</span></li>
+        </ul>
+      </div>
+      <div class="card reveal">
+        <span class="kicker" style="color:var(--bad)">No</span>
+        <h3>Errores que matan</h3>
+        <ul class="check-list" style="margin-top:12px">
+          <li class="priority"><span class="ck" style="background:var(--bad);color:#fff;border-color:var(--bad)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></span><span class="ctx"><strong>Cruzar a pie</strong> agua que te llega a la rodilla. Una corriente fuerte te arrastra.</span></li>
+          <li class="priority"><span class="ck" style="background:var(--bad);color:#fff;border-color:var(--bad)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></span><span class="ctx"><strong>Conducir por agua</strong> que cubre la calzada. El coche flota y la puerta no abre.</span></li>
+          <li><span class="ck" style="background:var(--bad);color:#fff;border-color:var(--bad)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></span><span class="ctx"><strong>Bajar al sótano o garaje</strong> a "salvar cosas". Es la trampa más común.</span></li>
+          <li><span class="ck" style="background:var(--bad);color:#fff;border-color:var(--bad)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></span><span class="ctx"><strong>Beber agua de la inundación</strong> o usarla para cocinar. Está contaminada.</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="note reveal danger">
+      <strong>El agua de inundación no es agua limpia:</strong> arrastra aguas residuales, productos químicos y objetos punzantes.
+      Aunque parezca clara, no la bebas, no la uses para lavar comida y no dejes que los niños jueguen en ella.
+    </div>
+  </section>
+
+  <!-- ================= ATAQUE MILITAR ================= -->
+  <section class="view" data-view="militar">
+    <div class="sec-head section">
+      <h2>Ataque militar</h2>
+      <p>Ante un ataque aéreo, bombardeo o incidente armado, la prioridad es refugiarse, informarse por canales oficiales y no exponerse. El pánico y la desinformación causan tantos problemas como el propio ataque.</p>
+    </div>
+
+    <div class="alert-strip reveal">
+      <div class="ai">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l9 4v6c0 5-4 8-9 10-5-2-9-5-9-10V6l9-4z"/><path d="M12 8v4M12 16h.01"/></svg>
+      </div>
+      <div class="at"><strong>Refugiarse primero, informarse después.</strong> Busca un lugar sin ventanas, bajo estructura sólida, y apaga luces que puedan delatarte.</div>
+    </div>
+
+    <h3 style="font-size:1.15rem;font-weight:600;margin:18px 0 14px">Los primeros pasos</h3>
+    <div class="vt" id="militarySteps"></div>
+
+    <div class="grid-2" style="margin-top:24px">
+      <div class="diagram-wrap reveal">
+        <h4>Refugio en el interior de un edificio</h4>
+        <p class="sub">Las zonas más seguras y las más peligrosas de una vivienda durante un ataque.</p>
+        <svg id="shelterSvg" viewBox="0 0 420 300" aria-label="Refugio interior"></svg>
+      </div>
+      <div class="diagram-wrap reveal">
+        <h4>¿Quedarse o moverse?</h4>
+        <p class="sub">Regla simple según la situación. Ante la duda, refugiarse en el lugar.</p>
+        <div style="margin-top:14px">
+          <div class="progress-item">
+            <div class="pi-label"><span>Hay ataque activo cerca</span><span style="color:var(--bad)">Quedarse</span></div>
+            <div class="progress-track"><div class="progress-fill" style="--pct:95%;background:linear-gradient(90deg,var(--bad),#7f1d1d)"></div></div>
+          </div>
+          <div class="progress-item">
+            <div class="pi-label"><span>Evacuación oficial en curso</span><span style="color:var(--accent)">Moverse</span></div>
+            <div class="progress-track"><div class="progress-fill" style="--pct:70%;background:linear-gradient(90deg,var(--accent),var(--accent-2))"></div></div>
+          </div>
+          <div class="progress-item">
+            <div class="pi-label"><span>Todo en calma, sin avisos</span><span style="color:var(--good)">Normal</span></div>
+            <div class="progress-track"><div class="progress-fill" style="--pct:25%;background:linear-gradient(90deg,var(--good),var(--accent-4))"></div></div>
+          </div>
+        </div>
+        <p style="font-size:.85rem;color:var(--muted);margin-top:16px;line-height:1.6">
+          Si las autoridades ordenan evacuación, hazlo. Si no hay orden y hay peligro inmediato, refugiarse suele ser lo más seguro.
+        </p>
+      </div>
+    </div>
+
+    <h3 style="font-size:1.15rem;font-weight:600;margin:28px 0 14px">Comunicación y documentos</h3>
+    <div class="grid-3">
+      <div class="card reveal">
+        <span class="kicker">Documentos</span>
+        <h3>En bolsa impermeable</h3>
+        <p>DNI, pasaporte, tarjeta sanitaria, escrituras, pólizas y contactos importantes. Copia digital en un USB o en la nube.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Comunicación</span>
+        <h3>Plan familiar</h3>
+        <p>Acuerda un punto de encuentro y una persona de contacto fuera de la ciudad. Los mensajes de texto suelen pasar mejor que las llamadas.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Información</span>
+        <h3>Fuentes oficiales</h3>
+        <p>Solo canales oficiales (Protección Civil, radio pública). Los bulos en redes sociales matan: no los reenvíes sin verificar.</p>
+      </div>
+    </div>
+
+    <div class="note reveal danger">
+      <strong>No grabes ni difundas</strong> posiciones de tropas, refugios o víctimas. Puedes poner en peligro a otras personas y a ti mismo.
+      La información en una emergencia se gestiona, no se improvisa.
+    </div>
+  </section>
+
+  <!-- ================= NUCLEAR ================= -->
+  <section class="view" data-view="nuclear">
+    <div class="sec-head section">
+      <h2>Evento nuclear</h2>
+      <p>Ante una explosión nuclear o un accidente radiactivo, tres conceptos lo resumen casi todo: <strong>tiempo, distancia y blindaje</strong>. Si estás lejos, protégete igualmente y espera instrucciones.</p>
+    </div>
+
+    <div class="alert-strip reveal">
+      <div class="ai">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><path d="M12 2v6M12 16v6M2 12h6M16 12h6M4.9 4.9l4.2 4.2M14.9 14.9l4.2 4.2M4.9 19.1l4.2-4.2M14.9 9.1l4.2-4.2"/></svg>
+      </div>
+      <div class="at"><strong>Refúgiate 24–48 horas.</strong> La radiactividad cae muy rápido las primeras horas. Salir antes de tiempo es lo más peligroso.</div>
+    </div>
+
+    <div class="grid-3" style="margin-top:24px">
+      <div class="card reveal" style="border-top:3px solid var(--accent-3)">
+        <span class="kicker" style="color:var(--accent-3)">Regla 1</span>
+        <h3>Tiempo</h3>
+        <p>Cuanto menos tiempo estés expuesto, mejor. Las primeras 24–48 h son las más críticas. Permanece dentro.</p>
+      </div>
+      <div class="card reveal" style="border-top:3px solid var(--accent-2)">
+        <span class="kicker" style="color:var(--accent-2)">Regla 2</span>
+        <h3>Distancia</h3>
+        <p>Cuanto más lejos del foco, menor dosis. Aléjate de ventanas, tejados y paredes exteriores. Ve al sótano o al centro del edificio.</p>
+      </div>
+      <div class="card reveal" style="border-top:3px solid var(--accent-4)">
+        <span class="kicker" style="color:var(--accent-4)">Regla 3</span>
+        <h3>Blindaje</h3>
+        <p>Cuanto más material entre tú y la fuente, mejor. Hormigón, ladrillo, tierra y sótanos reducen la radiación de forma notable.</p>
+      </div>
+    </div>
+
+    <div class="diagram-wrap reveal" style="margin-top:24px">
+      <h4>Zonas de riesgo tras una explosión</h4>
+      <p class="sub">Las distancias son aproximadas y dependen de la potencia. Pasa el cursor sobre cada zona.</p>
+      <svg id="nuclearZonesSvg" viewBox="0 0 520 360" aria-label="Zonas de radiación"></svg>
+      <div class="info-panel" id="nuclearInfo">
+        <div class="ip-hint">Pasa el cursor sobre las zonas para ver recomendaciones.</div>
+      </div>
+    </div>
+
+    <h3 style="font-size:1.15rem;font-weight:600;margin:28px 0 14px">Protocolo de refugio y descontaminación</h3>
+    <div class="vt" id="nuclearSteps"></div>
+
+    <div class="note reveal">
+      <strong>Yoduro de potasio (KI):</strong> solo debe tomarse si las autoridades lo indican expresamente. No protege de la radiación externa:
+      solo reduce la absorción de yodo radiactivo por la tiroides. No lo tomes "por si acaso".
+    </div>
+  </section>
+
+  <!-- ================= KIT ================= -->
+  <section class="view" data-view="kit">
+    <div class="sec-head section">
+      <h2>Kit de emergencia de 72 horas</h2>
+      <p>La recomendación estándar es tener suministros para al menos 72 horas (3 días). Debe ser ligero, estar en un sitio accesible y revisarse cada 6–12 meses.</p>
+    </div>
+
+    <div class="diagram-wrap reveal" style="margin-bottom:24px">
+      <h4>Progreso de un kit completo</h4>
+      <p class="sub">Cada barra representa cuánto cubre una categoría de las recomendaciones estándar. Llega al 100 % en todas.</p>
+      <div id="kitProgress"></div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card reveal">
+        <span class="kicker">Lo esencial</span>
+        <h3>Agua y comida</h3>
+        <ul class="check-list" style="margin-top:12px">
+          <li class="priority"><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg></span><span class="ctx"><strong>3–4 litros de agua por persona y día</strong> para 3 días (mínimo).</span></li>
+          <li class="priority"><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg></span><span class="ctx"><strong>Comida no perecedera:</strong> conservas, barritas, frutos secos, liofilizados.</span></li>
+          <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg></span><span class="ctx"><strong>Abrelatas manual</strong> (no eléctrico) y cubiertos reutilizables.</span></li>
+          <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg></span><span class="ctx"><strong>Pastillas potabilizadoras</strong> o filtro de agua portátil.</span></li>
+        </ul>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Salud</span>
+        <h3>Botiquín y aseo</h3>
+        <ul class="check-list" style="margin-top:12px">
+          <li class="priority"><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg></span><span class="ctx"><strong>Botiquín básico:</strong> gasas, vendas, antiséptico, tiritas, tijeras, guantes.</span></li>
+          <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg></span><span class="ctx"><strong>Medicación personal</strong> para 7 días como mínimo, con receta.</span></li>
+          <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg></span><span class="ctx"><strong>Mascarillas FFP2/FFP3</strong> y guantes de nitrilo.</span></li>
+          <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg></span><span class="ctx"><strong>Gel hidroalcohólico, jabón</strong> y bolsas de basura resistentes.</span></li>
+        </ul>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Energía</span>
+        <h3>Luz y comunicación</h3>
+        <ul class="check-list" style="margin-top:12px">
+          <li class="priority"><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg></span><span class="ctx"><strong>Linterna LED</strong> + pilas de repuesto + frontal.</span></li>
+          <li class="priority"><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg></span><span class="ctx"><strong>Radio a pilas o de manivela</strong> (FM/AM y, si puedes, DAB).</span></li>
+          <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg></span><span class="ctx"><strong>Batería portátil</strong> cargada y cable de carga.</span></li>
+          <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg></span><span class="ctx"><strong>Silbato</strong> para señalar tu posición sin gastar voz.</span></li>
+        </ul>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Documentos</span>
+        <h3>Papeles y dinero</h3>
+        <ul class="check-list" style="margin-top:12px">
+          <li class="priority"><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg></span><span class="ctx"><strong>Copias de DNI, pasaporte, tarjeta sanitaria</strong> en bolsa impermeable.</span></li>
+          <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg></span><span class="ctx"><strong>Dinero en efectivo</strong> en billetes pequeños. Los datáfonos no funcionan sin luz.</span></li>
+          <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg></span><span class="ctx"><strong>Lista de contactos</strong> en papel, no solo en el móvil.</span></li>
+          <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg></span><span class="ctx"><strong>Fotos recientes</strong> de los miembros de la familia.</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="note reveal good">
+      <strong>Revisa el kit cada 6 meses:</strong> cambia el agua, revisa las pilas, comprueba las fechas de caducidad de la comida y la medicación.
+      Un kit caducado es casi como no tener kit.
+    </div>
+  </section>
+
+  <!-- ================= QUIZ ================= -->
+  <section class="view" data-view="quiz">
+    <div class="sec-head section">
+      <h2>Quiz de supervivencia</h2>
+      <p>Diez preguntas al azar sobre apagones, inundaciones, ataques, eventos nucleares y el kit de emergencia.</p>
+    </div>
+    <div class="quiz-shell">
+      <div class="quiz-card" id="quizCard"></div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <p><strong>Preparado</strong> — Guía educativa de supervivencia. No sustituye a las indicaciones de las autoridades.</p>
+</footer>
+
+<script>
+const $  = (sel, root = document) => root.querySelector(sel);
+const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+const SVGNS = 'http://www.w3.org/2000/svg';
+const el = (tag, attrs = {}, parent) => {
+  const e = document.createElementNS(SVGNS, tag);
+  for (const k in attrs) e.setAttribute(k, attrs[k]);
+  if (parent) parent.appendChild(e);
+  return e;
+};
+const theme = name => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+const accent = () => theme('--accent') || '#fbbf24';
+const accent2 = () => theme('--accent-2') || '#a78bfa';
+const accent3 = () => theme('--accent-3') || '#22d3ee';
+const accent4 = () => theme('--accent-4') || '#34d399';
+const badC = () => theme('--bad') || '#fb7185';
+const goodC = () => theme('--good') || '#34d399';
+const mutedC = () => theme('--muted') || '#8f9bb3';
+const textC  = () => theme('--text') || '#e8eef8';
+const borderC = () => theme('--border') || 'rgba(255,255,255,.1)';
+
+const htmlEl = document.documentElement;
+function setTheme(t){
+  htmlEl.setAttribute('data-theme', t);
+  try { localStorage.setItem('preparado-theme', t); } catch(e){}
+}
+(function initTheme(){
+  let saved = null;
+  try { saved = localStorage.getItem('preparado-theme'); } catch(e){}
+  setTheme(saved || 'dark');
+})();
+
+function buildStars(){
+  const cont = $('#bgStars');
+  if (!cont) return;
+  cont.innerHTML = '';
+  const n = 90;
+  for (let i = 0; i < n; i++){
+    const s = document.createElement('div');
+    s.className = 'star';
+    s.style.left = Math.random() * 100 + '%';
+    s.style.top = Math.random() * 100 + '%';
+    const size = 1 + Math.random() * 2;
+    s.style.width = size + 'px';
+    s.style.height = size + 'px';
+    s.style.setProperty('--tw-dur', (2 + Math.random() * 4) + 's');
+    s.style.setProperty('--tw-delay', (Math.random() * 4) + 's');
+    cont.appendChild(s);
+  }
+}
+buildStars();
+
+$('#themeToggle').addEventListener('click', () => {
+  setTheme(htmlEl.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+  rerenderAll();
+});
+
+const ROUTES = ['inicio','apagon','inundacion','militar','nuclear','kit','quiz'];
+let currentRoute = 'inicio';
+function go(route, push = true){
+  if (!ROUTES.includes(route)) route = 'inicio';
+  currentRoute = route;
+  $$('.view').forEach(v => v.classList.toggle('active', v.dataset.view === route));
+  $$('.nav-link').forEach(b => b.classList.toggle('active', b.dataset.route === route));
+  if (push && location.hash.slice(1) !== route) history.pushState(null, '', '#' + route);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  requestAnimationFrame(() => {
+    $$('.view.active .reveal').forEach(el => el.classList.remove('in'));
+    checkReveal();
+    if (route === 'inicio') animateCounters();
+    if (route === 'apagon'){ renderLightSvg(); renderFoodTimer(); }
+    if (route === 'inundacion'){ renderFloodSvg(); renderEvacSvg(); }
+    if (route === 'militar'){ renderShelterSvg(); }
+    if (route === 'nuclear'){ renderNuclearZones(); }
+    if (route === 'kit'){ renderKitProgress(); }
+    if (route === 'quiz') startQuiz();
+  });
+}
+document.addEventListener('click', e => {
+  const t = e.target.closest('[data-route]');
+  if (t) { e.preventDefault(); go(t.dataset.route); }
+});
+window.addEventListener('popstate', () => go(location.hash.slice(1) || 'inicio', false));
+
+const revealObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('in');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+function checkReveal(){ $$('.view.active .reveal:not(.in)').forEach(el => revealObserver.observe(el)); }
+function animateCounters(){
+  $$('.num[data-count]').forEach(el => {
+    if (el.dataset.done === '1') return;
+    el.dataset.done = '1';
+    const target = parseFloat(el.dataset.count);
+    const suffix = el.dataset.suffix || '';
+    const dur = 1600;
+    const start = performance.now();
+    function tick(now){
+      const p = Math.min((now - start) / dur, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      const val = Math.round(target * eased);
+      el.textContent = val.toLocaleString('es-ES') + suffix;
+      if (p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  });
+}
+
+/* ============================================================
+   TIPOS DE PASO (timeline reutilizable)
+   ============================================================ */
+function renderTimeline(container, steps){
+  if (!container) return;
+  container.innerHTML = steps.map((s, i) => `
+    <div class="vt-item" style="--c:${s.color || accent()};--d:${i*50}ms">
+      <span class="vt-dot"></span>
+      <div class="vt-card">
+        <div class="vt-top">
+          <span class="vt-year">${s.time}</span>
+          <span class="vt-era">${s.tag || 'Paso ' + (i+1)}</span>
+        </div>
+        <h4>${s.title}</h4>
+        <p>${s.desc}</p>
+        ${s.extra ? `
+          <button class="vt-more" type="button">
+            <span>Más detalle</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="vt-extra"><div><p>${s.extra}</p></div></div>` : ''}
+      </div>
+    </div>
+  `).join('');
+
+  container.onclick = e => {
+    const btn = e.target.closest('.vt-more');
+    if (!btn) return;
+    const item = btn.closest('.vt-item');
+    const open = item.classList.toggle('open');
+    btn.querySelector('span').textContent = open ? 'Ocultar detalle' : 'Más detalle';
+  };
+}
+
+/* ============================================================
+   APAGÓN
+   ============================================================ */
+const APAGON_STEPS = [
+  { time:'0–2 min', tag:'Seguridad', title:'Mantén la calma y verifica el alcance', desc:'Mira por la ventana. Si los edificios de alrededor también están a oscuras, es un apagón general. Si solo es tu casa, revisa el cuadro eléctrico.', extra:'No enciendas cerillas ni velas al principio: puede haber una fuga de gas.', color:'#fbbf24' },
+  { time:'2–5 min', tag:'Iluminación', title:'Localiza linterna y radio', desc:'Usa la linterna del móvil solo para encontrarlas. Enciende una linterna de LED y una radio a pilas o de manivela.', color:'#a78bfa' },
+  { time:'5–10 min', tag:'Suministros', title:'Comprueba agua y comida', desc:'Llena la bañera y algunos recipientes si el agua sigue saliendo. Revisa el kit de emergencia: agua, comida, medicamentos.', color:'#22d3ee' },
+  { time:'10–30 min', tag:'Energía', title:'Desconecta aparatos sensibles', desc:'Apaga y desenchufa ordenadores, televisores y electrodomésticos para evitar picos de tensión cuando vuelva la luz.', color:'#34d399' },
+  { time:'Durante', tag:'Información', title:'Escucha la radio', desc:'Sigue la radio pública y las cuentas oficiales. Evita rumores y llamadas que colapsen la red.', color:'#fbbf24' },
+  { time:'Después', tag:'Vuelta a la normalidad', title:'Revisa la nevera y el congelador', desc:'Si el corte duró más de 4 horas, revisa la comida. Desecha lo que haya estado a temperatura ambiente más de 2 horas.', color:'#a78bfa' }
+];
+
+function renderLightSvg(){
+  const svg = $('#lightSvg');
+  const info = $('#lightInfo');
+  if (!svg) return;
+  svg.innerHTML = '';
+
+  const items = [
+    { x: 80, y: 120, label:'Linterna LED', ok:true, desc:'La mejor opción: no calienta, no hace llama y dura mucho.' },
+    { x: 200, y: 120, label:'Frontal', ok:true, desc:'Libera las manos y es ideal para tareas y para moverse por casa.' },
+    { x: 320, y: 120, label:'Vela', ok:false, desc:'Riesgo alto de incendio, sobre todo con niños o mascotas.' }
+  ];
+
+  items.forEach(it => {
+    const g = el('g', { class:'hit', style:'cursor:pointer' }, svg);
+    const fill = it.ok ? goodC() : badC();
+    el('circle', { cx: it.x, cy: it.y, r: 30, fill: fill, opacity: 0.15 }, g);
+    el('circle', { cx: it.x, cy: it.y, r: 22, fill: fill, opacity: 0.85 }, g);
+    el('text', { x: it.x, y: it.y + 5, 'text-anchor':'middle', 'font-family':'Inter,sans-serif', 'font-size':14, 'font-weight':700, fill:'#fff' }, g).textContent = it.ok ? '✓' : '✗';
+    el('text', { x: it.x, y: it.y + 60, 'text-anchor':'middle', 'font-family':'Inter,sans-serif', 'font-size':12, 'font-weight':600, fill: textC() }, svg).textContent = it.label;
+
+    g.addEventListener('mouseenter', () => {
+      info.classList.add('active');
+      info.innerHTML = `
+        <div class="ip-name" style="color:${fill}">${it.ok ? 'Recomendado' : 'No recomendado'} — ${it.label}</div>
+        <div class="ip-desc">${it.desc}</div>
+      `;
+    });
+  });
+
+  el('text', { x:200, y: 40, 'text-anchor':'middle', 'font-family':'Space Grotesk,sans-serif', 'font-size':13, 'font-weight':700, fill: mutedC(), 'letter-spacing':'.08em' }, svg).textContent = 'ILUMINACIÓN EN APAGÓN';
+}
+
+const FOOD_DATA = [
+  { t:'Nevera cerrada', v:'4 horas', pct:25, c:'#fbbf24' },
+  { t:'Congelador lleno y cerrado', v:'48 horas', pct:80, c:'#22d3ee' },
+  { t:'Congelador medio lleno', v:'24 horas', pct:50, c:'#a78bfa' },
+  { t:'Comida a temperatura ambiente', v:'2 horas máximo', pct:15, c:'#fb7185' }
+];
+function renderFoodTimer(){
+  const cont = $('#foodTimer');
+  if (!cont) return;
+  cont.innerHTML = FOOD_DATA.map((d, i) => `
+    <div class="progress-item">
+      <div class="pi-label"><span>${d.t}</span><span style="color:${d.c}">${d.v}</span></div>
+      <div class="progress-track">
+        <div class="progress-fill" style="--pct:${d.pct}%;--d:${0.2 + i*0.1}s;background:linear-gradient(90deg,${d.c},${d.c}99)"></div>
+      </div>
+    </div>
+  `).join('');
+}
+
+/* ============================================================
+   INUNDACIÓN
+   ============================================================ */
+const FLOOD_STEPS = [
+  { time:'Aviso', tag:'Antes', title:'Prepara y decide', desc:'Si hay aviso de inundación, sube objetos de valor, desconecta la luz y el gas, y prepara una mochila con lo esencial.', color:'#fbbf24' },
+  { time:'Aguas subiendo', tag:'Durante', title:'Sube a la planta más alta', desc:'No bajes al sótano ni al garaje. Llévate agua potable, documentos, móvil y un silbato.', color:'#22d3ee' },
+  { time:'Si estás en el coche', tag:'Durante', title:'Sal por la ventana', desc:'Si el agua empieza a subir alrededor del coche, sal por la ventanilla y busca un punto alto. No esperes a que flote.', color:'#a78bfa' },
+  { time:'Aguas bajando', tag:'Después', title:'No vuelvas aún', desc:'Espera la orden oficial. El agua puede arrastrar y las carreteras pueden estar cortadas.', color:'#34d399' },
+  { time:'Vuelta a casa', tag:'Después', title:'Revisa la estructura', desc:'No enciendas la luz si huele a gas. Ventila, revisa grietas y desconfía de la comida mojada.', color:'#fbbf24' },
+  { time:'Limpieza', tag:'Después', title:'Descontamina lo mojado', desc:'Usa guantes y botas. Tira lo que haya estado en contacto con agua sucia: comida, colchones y ropa interior.', color:'#fb7185' }
+];
+
+function renderFloodSvg(){
+  const svg = $('#floodSvg');
+  const info = $('#floodInfo');
+  if (!svg) return;
+  svg.innerHTML = '';
+
+  const levels = [
+    { y: 60, h: 40, label:'30 cm', danger:'Puede tumbar a un adulto', color:'#fbbf24', desc:'Una corriente de 30 cm ya desestabiliza a una persona. No cruces a pie.' },
+    { y: 100, h: 40, label:'60 cm', danger:'Arrastra un coche', color:'#f97316', desc:'Con 60 cm de agua en movimiento, un coche pequeño flota y se va.' },
+    { y: 140, h: 40, label:'1 m', danger:'Peligro alto', color:'#e11d48', desc:'A esta altura ya no se puede caminar. Sube a una planta alta o al tejado.' }
+  ];
+
+  // Suelo
+  el('rect', { x: 40, y: 200, width: 340, height: 8, fill: mutedC(), opacity: 0.4 }, svg);
+  // Casa
+  el('rect', { x: 60, y: 100, width: 60, height: 100, fill: accent2(), opacity: 0.35, stroke: accent2(), 'stroke-width': 1.5 }, svg);
+  el('rect', { x: 120, y: 60, width: 60, height: 140, fill: accent2(), opacity: 0.35, stroke: accent2(), 'stroke-width': 1.5 }, svg);
+  el('text', { x: 90, y: 90, 'text-anchor':'middle', 'font-family':'Inter,sans-serif', 'font-size':10, fill: textC() }, svg).textContent = 'Planta baja';
+  el('text', { x: 150, y: 50, 'text-anchor':'middle', 'font-family':'Inter,sans-serif', 'font-size':10, fill: textC() }, svg).textContent = 'Planta alta';
+
+  levels.forEach((lv, i) => {
+    const g = el('g', { class:'hit', style:'cursor:pointer' }, svg);
+    el('rect', { x: 200, y: lv.y, width: 180, height: lv.h, fill: lv.color, opacity: 0.7, rx: 6 }, g);
+    el('text', { x: 290, y: lv.y + lv.h/2 + 5, 'text-anchor':'middle', 'font-family':'Space Grotesk,sans-serif', 'font-size':13, 'font-weight':700, fill:'#0a0a0a' }, g).textContent = lv.label + ' — ' + lv.danger;
+
+    g.addEventListener('mouseenter', () => {
+      info.classList.add('active');
+      info.innerHTML = `
+        <div class="ip-name" style="color:${lv.color}">${lv.label} — ${lv.danger}</div>
+        <div class="ip-desc">${lv.desc}</div>
+      `;
+    });
+  });
+
+  el('text', { x: 210, y: 30, 'text-anchor':'middle', 'font-family':'Space Grotesk,sans-serif', 'font-size':12, 'font-weight':700, fill: mutedC() }, svg).textContent = 'NIVEL DEL AGUA';
+  el('text', { x: 210, y: 235, 'text-anchor':'middle', 'font-family':'Inter,sans-serif', 'font-size':10, fill: mutedC() }, svg).textContent = 'Niveles orientativos · varía según corriente y terreno';
+}
+
+function renderEvacSvg(){
+  const svg = $('#evacSvg');
+  if (!svg) return;
+  svg.innerHTML = '';
+
+  // Casa
+  el('rect', { x: 160, y: 180, width: 100, height: 70, fill: accent2(), opacity: 0.35, stroke: accent2(), 'stroke-width': 1.5, rx: 4 }, svg);
+  el('text', { x: 210, y: 215, 'text-anchor':'middle', 'font-family':'Inter,sans-serif', 'font-size':11, 'font-weight':600, fill: textC() }, svg).textContent = 'Casa';
+
+  // Zona inundada
+  el('rect', { x: 60, y: 250, width: 300, height: 40, fill: badC(), opacity: 0.25, rx: 6 }, svg);
+  el('text', { x: 210, y: 275, 'text-anchor':'middle', 'font-family':'Inter,sans-serif', 'font-size':10, 'font-weight':600, fill: badC() }, svg).textContent = 'Zona inundada · NO cruzar';
+
+  // Ruta segura
+  const path = 'M 210 180 C 210 140 130 120 130 70';
+  el('path', { d: path, fill:'none', stroke: goodC(), 'stroke-width': 3, 'stroke-dasharray':'6 4' }, svg);
+  el('circle', { cx: 130, cy: 65, r: 14, fill: goodC() }, svg);
+  el('text', { x: 130, y: 69, 'text-anchor':'middle', 'font-family':'Inter,sans-serif', 'font-size':13, 'font-weight':700, fill:'#fff' }, svg).textContent = '↑';
+  el('text', { x: 130, y: 40, 'text-anchor':'middle', 'font-family':'Inter,sans-serif', 'font-size':11, 'font-weight':700, fill: goodC() }, svg).textContent = 'Punto alto';
+
+  // Ruta peligrosa
+  el('path', { d: 'M 210 250 L 210 320', fill:'none', stroke: badC(), 'stroke-width': 3, 'stroke-dasharray':'4 4' }, svg);
+  el('text', { x: 210, y: 335, 'text-anchor':'middle', 'font-family':'Inter,sans-serif', 'font-size':10, 'font-weight':600, fill: badC() }, svg).textContent = '✗ Ruta cortada';
+
+  el('text', { x: 210, y: 20, 'text-anchor':'middle', 'font-family':'Space Grotesk,sans-serif', 'font-size':12, 'font-weight':700, fill: mutedC() }, svg).textContent = 'RUTA DE EVACUACIÓN';
+}
+
+/* ============================================================
+   MILITAR
+   ============================================================ */
+const MILITARY_STEPS = [
+  { time:'0–1 min', tag:'Protección', title:'Al suelo, lejos de ventanas', desc:'Túmbate en el suelo junto a un muro interior, bajo una mesa robusta si es posible. Aléjate de ventanas, espejos y objetos que puedan caer.', color:'#fb7185' },
+  { time:'1–5 min', tag:'Refugio', title:'Ve al punto más interior', desc:'Un baño sin ventanas, un pasillo interior o el sótano. Cuanto más muro entre tú y el exterior, mejor.', color:'#fbbf24' },
+  { time:'5–15 min', tag:'Silencio', title:'No salgas aún', desc:'Espera a que cesen los ruidos. No enciendas luces que puedan delatarte si hay riesgo de saqueo o de nuevos ataques.', color:'#a78bfa' },
+  { time:'15–60 min', tag:'Información', title:'Busca fuentes oficiales', desc:'Radio a pilas o canales oficiales. No difundas mensajes no verificados ni posiciones de personas.', color:'#22d3ee' },
+  { time:'Después', tag:'Evacuación', title:'Sigue instrucciones oficiales', desc:'Si te ordenan evacuar, hazlo con calma. Lleva documentos, agua, medicación y una muda. No vuelvas hasta que lo indiquen.', color:'#34d399' }
+];
+
+function renderShelterSvg(){
+  const svg = $('#shelterSvg');
+  if (!svg) return;
+  svg.innerHTML = '';
+
+  // Edificio
+  el('rect', { x: 40, y: 60, width: 340, height: 210, fill: accent2(), opacity: 0.12, stroke: accent2(), 'stroke-width': 1.5, rx: 6 }, svg);
+
+  // Habitaciones peligrosas
+  const peligrosas = [
+    { x: 50, y: 70, w: 90, h: 80, label:'Ventanal' },
+    { x: 50, y: 160, w: 90, h: 100, label:'Fachada' },
+    { x: 290, y: 70, w: 80, h: 190, label:'Exterior' }
+  ];
+  peligrosas.forEach(p => {
+    el('rect', { x: p.x, y: p.y, width: p.w, height: p.h, fill: badC(), opacity: 0.25, stroke: badC(), 'stroke-width': 1, rx: 4 }, svg);
+    el('text', { x: p.x + p.w/2, y: p.y + p.h/2 + 4, 'text-anchor':'middle', 'font-family':'Inter,sans-serif', 'font-size':10, 'font-weight':600, fill: badC() }, svg).textContent = '✗ ' + p.label;
+  });
+
+  // Refugio seguro
+  el('rect', { x: 160, y: 160, width: 110, height: 80, fill: goodC(), opacity: 0.3, stroke: goodC(), 'stroke-width': 2, rx: 6 }, svg);
+  el('text', { x: 215, y: 200, 'text-anchor':'middle', 'font-family':'Inter,sans-serif', 'font-size':12, 'font-weight':700, fill: goodC() }, svg).textContent = '✓ Refugio';
+  el('text', { x: 215, y: 216, 'text-anchor':'middle', 'font-family':'Inter,sans-serif', 'font-size':9, fill: goodC() }, svg).textContent = 'Interior · sin ventanas';
+
+  el('text', { x: 210, y: 40, 'text-anchor':'middle', 'font-family':'Space Grotesk,sans-serif', 'font-size':12, 'font-weight':700, fill: mutedC() }, svg).textContent = 'PLANO DE REFUGIO INTERIOR';
+}
+
+/* ============================================================
+   NUCLEAR
+   ============================================================ */
+const NUCLEAR_STEPS = [
+  { time:'0–10 min', tag:'Refugio inmediato', title:'Entra y cierra todo', desc:'Métete en el edificio más cercano. Cierra puertas, ventanas y persianas. Apaga ventilación y aire acondicionado.', color:'#fb7185' },
+  { time:'10–60 min', tag:'Zona interior', title:'Sótano o cuarto sin ventanas', desc:'Cuanto más bajo y más interior, mejor. Si hay sótano, úsalo. Si no, una habitación central sin ventanas.', color:'#fbbf24' },
+  { time:'1–24 h', tag:'Aislamiento', title:'No salgas. Escucha la radio', desc:'Espera instrucciones oficiales. No vayas a buscar a nadie: las calles pueden estar contaminadas.', color:'#a78bfa' },
+  { time:'24–48 h', tag:'Descontaminación', title:'Quítate la ropa exterior', desc:'Si has estado fuera, quítate la ropa y métela en una bolsa doble. Dúchate con agua tibia y jabón, sin frotar fuerte.', color:'#22d3ee' },
+  { time:'48 h +', tag:'Salida', title:'Sigue instrucciones oficiales', desc:'Las autoridades indicarán cuándo y cómo evacuar. No tomes yoduro de potasio salvo que lo ordenen.', color:'#34d399' }
+];
+
+function renderNuclearZones(){
+  const svg = $('#nuclearZonesSvg');
+  const info = $('#nuclearInfo');
+  if (!svg) return;
+  svg.innerHTML = '';
+
+  const cx = 260, cy = 190;
+
+  const zones = [
+    { r: 55, color:'#dc2626', label:'Zona 0–5 km', name:'Destrucción total', desc:'Refugio inmediato. No salir bajo ningún concepto hasta que lo indiquen las autoridades.' },
+    { r: 95, color:'#f97316', label:'Zona 5–20 km', name:'Daño severo + radiación', desc:'Refugiarse 24–48 h en sótano o interior sin ventanas. No salir a la calle.' },
+    { r: 140, color:'#fbbf24', label:'Zona 20–50 km', name:'Radiación moderada', desc:'Cerrar ventanas y ventilación. Escuchar radio. Evacuar solo si lo ordenan.' },
+    { r: 180, color:'#22d3ee', label:'Zona > 50 km', name:'Riesgo bajo', desc:'Probabilidad baja de exposición directa. Mantente informado y sigue instrucciones.' }
+  ];
+
+  // Fondo
+  el('rect', { x: 0, y: 0, width: 520, height: 360, fill: accent2(), opacity: 0.04, rx: 10 }, svg);
+
+  zones.forEach((z, i) => {
+    const g = el('g', { class:'hit', style:'cursor:pointer' }, svg);
+    el('circle', { cx, cy, r: z.r, fill: z.color, opacity: 0.28 + i * 0.04, stroke: z.color, 'stroke-width': 1.5 }, g);
+    el('text', { x: cx, y: cy - z.r + 18, 'text-anchor':'middle', 'font-family':'Inter,sans-serif', 'font-size':10, 'font-weight':600, fill: textC() }, g).textContent = z.label;
+
+    g.addEventListener('mouseenter', () => {
+      info.classList.add('active');
+      info.innerHTML = `
+        <div class="ip-name" style="color:${z.color}">${z.name}</div>
+        <div class="ip-func"><strong style="color:var(--text)">${z.label}</strong></div>
+        <div class="ip-desc">${z.desc}</div>
+      `;
+    });
+  });
+
+  // Centro
+  el('circle', { cx, cy, r: 12, fill: badC() }, svg);
+  el('text', { x: cx, y: cy + 4, 'text-anchor':'middle', 'font-family':'Inter,sans-serif', 'font-size':9, 'font-weight':700, fill:'#fff' }, svg).textContent = '☢';
+
+  el('text', { x: cx, y: 30, 'text-anchor':'middle', 'font-family':'Space Grotesk,sans-serif', 'font-size':12, 'font-weight':700, fill: mutedC() }, svg).textContent = 'ZONAS DE RIESGO (orientativas)';
+}
+
+/* ============================================================
+   KIT
+   ============================================================ */
+const KIT_DATA = [
+  { t:'Agua (3 días)', pct:100, c:'#22d3ee', note:'9–12 litros por persona' },
+  { t:'Comida no perecedera', pct:90, c:'#fbbf24', note:'Conservas, barritas, frutos secos' },
+  { t:'Botiquín', pct:100, c:'#fb7185', note:'Gasas, antiséptico, medicación' },
+  { t:'Iluminación', pct:100, c:'#a78bfa', note:'Linterna + frontal + pilas' },
+  { t:'Comunicación', pct:80, c:'#34d399', note:'Radio a pilas + batería portátil' },
+  { t:'Documentos', pct:75, c:'#fbbf24', note:'Copias en bolsa impermeable' },
+  { t:'Higiene', pct:70, c:'#22d3ee', note:'Jabón, gel, bolsas de basura' },
+  { t:'Herramientas', pct:60, c:'#a78bfa', note:'Navaja, cinta, cuerda, silbato' }
+];
+function renderKitProgress(){
+  const cont = $('#kitProgress');
+  if (!cont) return;
+  cont.innerHTML = KIT_DATA.map((k, i) => `
+    <div class="progress-item">
+      <div class="pi-label"><span>${k.t} <span style="color:var(--muted);font-weight:500;font-size:.78rem">— ${k.note}</span></span><span style="color:${k.c}">${k.pct}%</span></div>
+      <div class="progress-track">
+        <div class="progress-fill" style="--pct:${k.pct}%;--d:${0.2 + i*0.1}s;background:linear-gradient(90deg,${k.c},${k.c}99)"></div>
+      </div>
+    </div>
+  `).join('');
+}
+
+/* ============================================================
+   QUIZ
+   ============================================================ */
+const QUIZ_DATA = [
+  { q:'¿Cuánta agua se recomienda por persona y día en una emergencia?', o:['1 litro','3–4 litros','10 litros','Solo la que bebas'], c:1,
+    e:'Se recomiendan 3–4 litros por persona y día para beber, cocinar y una higiene mínima.' },
+  { q:'¿Cuánto dura como mínimo un kit de emergencia estándar?', o:['24 horas','72 horas','7 días','1 mes'], c:1,
+    e:'La recomendación estándar es de al menos 72 horas (3 días), aunque muchos países amplían a 5–7 días.' },
+  { q:'Durante un apagón, ¿qué es lo primero que debes hacer?', o:['Encender velas','Verificar el alcance y buscar linterna','Llamar a todos tus contactos','Abrir la nevera'], c:1,
+    e:'Comprueba si es un apagón general o solo de tu casa y localiza la linterna. Nunca enciendas velas al principio por riesgo de gas.' },
+  { q:'¿Cuánto tiempo hay que refugiarse tras una explosión nuclear?', o:['5 minutos','1 hora','24–48 horas','1 semana'], c:2,
+    e:'Las primeras 24–48 horas son las más críticas. La radiactividad cae muy rápido y salir antes de tiempo es lo más peligroso.' },
+  { q:'¿Qué significa la regla "tiempo, distancia y blindaje"?', o:['Un protocolo de evacuación','Los tres factores que reducen la radiación','Las tres fases de un apagón','Los tres tipos de kit'], c:1,
+    e:'Son los tres factores clave para reducir la exposición a la radiación: menos tiempo, más distancia y más blindaje.' },
+  { q:'¿Cuál es la regla de oro en una inundación?', o:['Cruzar rápido el agua','Subir a lo alto y no cruzar el agua','Bajar al sótano','Encender las luces'], c:1,
+    e:'Nunca cruces agua en movimiento. 30 cm pueden tumbar a un adulto y 60 cm pueden arrastrar un coche.' },
+  { q:'¿Qué NO debes hacer con un generador durante un apagón?', o:['Ponerlo fuera de casa','Usarlo en el garaje cerrado','Vigilarlo mientras funciona','Guardarlo con combustible'], c:1,
+    e:'El generador va siempre al exterior, lejos de ventanas. En un garaje cerrado el monóxido de carbono mata en silencio.' },
+  { q:'¿Qué debes hacer ante un ataque militar con peligro inmediato?', o:['Salir a la calle','Refugiarte en el interior, lejos de ventanas','Grabar un vídeo','Llamar a todos tus contactos'], c:1,
+    e:'Refugiarse en el interior, lejos de ventanas y paredes exteriores, es lo prioritario. Información y grabaciones después.' },
+  { q:'¿Cuándo debes tomar yoduro de potasio?', o:['En cuanto oigas una sirena','Solo si las autoridades lo indican','Todos los días por prevención','Nunca'], c:1,
+    e:'El KI solo se toma si las autoridades lo indican expresamente. No protege de la radiación externa: solo reduce la absorción de yodo radiactivo por la tiroides.' },
+  { q:'¿Qué debes hacer con la ropa exterior tras una exposición radiactiva?', o:['Guardarla en el armario','Quitártela y meterla en bolsa doble','Lavarla con lejía','Volver a ponértela'], c:1,
+    e:'Quítate la ropa exterior y métela en una bolsa doble, lejos de las personas. Después dúchate con agua tibia y jabón.' },
+  { q:'¿Cuál es la mejor fuente de información en una emergencia?', o:['Redes sociales','Grupos de mensajería','Canales oficiales y radio pública','Vecinos'], c:2,
+    e:'Los canales oficiales y la radio pública son la fuente fiable. Los bulos en redes sociales matan: no los difundas.' },
+  { q:'¿Qué debe incluir un kit de emergencia además de agua y comida?', o:['Solo ropa','Botiquín, linterna, radio y documentos','Solo dinero','Solo el móvil'], c:1,
+    e:'Un kit completo incluye agua, comida, botiquín, iluminación, radio, documentos, higiene y herramientas básicas.' }
+];
+
+const TOTAL_PREGUNTAS = 10;
+const LETRAS = ['A','B','C','D'];
+let quizState = { questions: [], index: 0, score: 0, answered: false, finished: false };
+
+function shuffle(arr){
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+function startQuiz(){
+  quizState = {
+    questions: shuffle(QUIZ_DATA).slice(0, TOTAL_PREGUNTAS),
+    index: 0, score: 0, answered: false, finished: false
+  };
+  renderQuiz();
+}
+function renderQuiz(){
+  const card = $('#quizCard');
+  if (!card) return;
+  if (quizState.finished){
+    const total = quizState.questions.length;
+    const pct = Math.round((quizState.score / total) * 100);
+    let m = 'Conviene repasar las guías: en una emergencia, cada decisión cuenta.';
+    if (pct === 100) m = 'Perfecto. Estás preparado para lo básico.';
+    else if (pct >= 75) m = 'Muy buen resultado. Te falta muy poco para el pleno.';
+    else if (pct >= 50) m = 'Buen comienzo. Repasa las guías y prueba otra vez.';
+    card.innerHTML = `
+      <div class="result">
+        <div class="score">${quizState.score}/${total}</div>
+        <h3>${m}</h3>
+        <p>Has acertado el ${pct} % de las preguntas de esta ronda.</p>
+        <button class="btn btn-primary" id="restartQuiz">
+          Jugar otra vez
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>
+        </button>
+      </div>`;
+    $('#restartQuiz').addEventListener('click', startQuiz);
+    return;
+  }
+  const q = quizState.questions[quizState.index];
+  const total = quizState.questions.length;
+  const progress = (quizState.index / total) * 100;
+  card.innerHTML = `
+    <div class="quiz-meta">
+      <span>Pregunta ${quizState.index + 1} de ${total}</span>
+      <span>Aciertos: ${quizState.score}</span>
+    </div>
+    <div class="progress"><div class="progress-bar" style="width:${progress}%"></div></div>
+    <h3 class="q-text">${q.q}</h3>
+    <div class="options" id="options">
+      ${q.o.map((opt, i) => `
+        <button class="option" data-i="${i}">
+          <span class="letter">${LETRAS[i]}</span>
+          <span>${opt}</span>
+        </button>`).join('')}
+    </div>
+    <div id="feedbackSlot"></div>
+    <div class="quiz-actions" id="actionsSlot"></div>`;
+  $('#options').addEventListener('click', e => {
+    const btn = e.target.closest('.option');
+    if (!btn || quizState.answered) return;
+    answerQuestion(parseInt(btn.dataset.i, 10));
+  });
+}
+function answerQuestion(chosen){
+  quizState.answered = true;
+  const q = quizState.questions[quizState.index];
+  const options = $$('#options .option');
+  options.forEach((btn, i) => {
+    btn.disabled = true;
+    if (i === q.c) btn.classList.add('correct');
+    else if (i === chosen) btn.classList.add('wrong');
+  });
+  const acerto = chosen === q.c;
+  if (acerto) quizState.score++;
+  $('#feedbackSlot').innerHTML = `
+    <div class="feedback">
+      <strong>${acerto ? 'Correcto.' : 'No exactamente.'}</strong> ${q.e}
+    </div>`;
+  const isLast = quizState.index === quizState.questions.length - 1;
+  $('#actionsSlot').innerHTML = `
+    <button class="btn btn-primary" id="nextBtn">
+      ${isLast ? 'Ver resultado' : 'Siguiente pregunta'}
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </button>`;
+  $('#nextBtn').addEventListener('click', () => {
+    if (isLast) quizState.finished = true;
+    else { quizState.index++; quizState.answered = false; }
+    renderQuiz();
+  });
+}
+
+/* ============================================================
+   RENDER INICIAL Y UTILIDADES
+   ============================================================ */
+function rerenderAll(){
+  if (currentRoute === 'apagon'){ renderLightSvg(); renderFoodTimer(); }
+  if (currentRoute === 'inundacion'){ renderFloodSvg(); renderEvacSvg(); }
+  if (currentRoute === 'militar'){ renderShelterSvg(); }
+  if (currentRoute === 'nuclear'){ renderNuclearZones(); }
+  if (currentRoute === 'kit'){ renderKitProgress(); }
+}
+
+$$('.module').forEach(m => {
+  m.addEventListener('mousemove', e => {
+    const r = m.getBoundingClientRect();
+    m.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
+    m.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
+  });
+});
+
+document.addEventListener('visibilitychange', () => {
+  document.querySelectorAll('.orb').forEach(o => {
+    o.style.animationPlayState = document.hidden ? 'paused' : 'running';
+  });
+});
+
+/* Arranque de las líneas de tiempo */
+renderTimeline($('#apagonSteps'), APAGON_STEPS);
+renderTimeline($('#floodSteps'), FLOOD_STEPS);
+renderTimeline($('#militarySteps'), MILITARY_STEPS);
+renderTimeline($('#nuclearSteps'), NUCLEAR_STEPS);
+
+(function boot(){
+  const initial = (location.hash.slice(1) || 'inicio');
+  go(ROUTES.includes(initial) ? initial : 'inicio', false);
+  checkReveal();
+  setTimeout(() => {
+    if (currentRoute === 'inicio') animateCounters();
+  }, 300);
+})();
+</script>
+</body>
+</html>

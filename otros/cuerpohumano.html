@@ -1,0 +1,1921 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>El cuerpo humano explicado en lenguaje sencillo</title>
+<meta name="description" content="Aprende cómo funciona el cuerpo humano: genes, ADN, diferencia sexual, concepción, enfermedades, esqueleto, sangre, músculos, órganos y vacunas, con diagramas interactivos.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============ TOKENS ============ */
+:root{
+  --font-display:'Space Grotesk','Segoe UI',system-ui,sans-serif;
+  --font-body:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --radius:20px;
+  --radius-sm:12px;
+  --maxw:1180px;
+  --ease:cubic-bezier(.22,.75,.25,1);
+}
+html[data-theme="light"]{
+  --bg:#faf9f6;
+  --bg-soft:#f3f1ea;
+  --surface:rgba(255,255,255,.86);
+  --surface-solid:#ffffff;
+  --surface-2:rgba(20,60,70,.045);
+  --surface-3:rgba(20,60,70,.08);
+  --border:rgba(20,60,70,.12);
+  --border-strong:rgba(20,60,70,.24);
+  --text:#0c1a22;
+  --muted:#5d6b73;
+  --accent:#0891b2;
+  --accent-2:#db2777;
+  --accent-3:#10b981;
+  --good:#059669;
+  --bad:#e11d48;
+  --shadow:0 22px 55px -28px rgba(20,60,80,.22);
+  --orb-op:.16;
+  --dot-color:rgba(20,60,70,.055);
+  --grid:rgba(20,60,70,.10);
+}
+html[data-theme="dark"]{
+  --bg:#080c10;
+  --bg-soft:#0f141a;
+  --surface:rgba(24,32,40,.66);
+  --surface-solid:#161d26;
+  --surface-2:rgba(255,255,255,.045);
+  --surface-3:rgba(255,255,255,.08);
+  --border:rgba(255,255,255,.10);
+  --border-strong:rgba(255,255,255,.20);
+  --text:#eaf1f5;
+  --muted:#9aa7b2;
+  --accent:#22d3ee;
+  --accent-2:#fb7185;
+  --accent-3:#34d399;
+  --good:#34d399;
+  --bad:#fb7185;
+  --shadow:0 24px 60px -24px rgba(0,0,0,.9);
+  --orb-op:.30;
+  --dot-color:rgba(255,255,255,.03);
+  --grid:rgba(255,255,255,.10);
+}
+
+/* ============ BASE ============ */
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;font-family:var(--font-body);background:var(--bg);color:var(--text);
+  min-height:100vh;line-height:1.65;-webkit-font-smoothing:antialiased;
+  transition:background .45s var(--ease),color .45s var(--ease);
+  overflow-x:hidden;
+}
+h1,h2,h3,h4,h5{font-family:var(--font-display);line-height:1.15;letter-spacing:-.02em;margin:0}
+p{margin:0}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+a{color:inherit;text-decoration:none}
+ul{margin:0}
+::selection{background:var(--accent);color:#fff}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
+
+/* ============ FONDO ============ */
+.bg-dots{
+  position:fixed;inset:0;z-index:-3;pointer-events:none;
+  background-image:radial-gradient(var(--dot-color) 1px,transparent 1px);
+  background-size:26px 26px;
+}
+.orbs{position:fixed;inset:0;z-index:-2;overflow:hidden;pointer-events:none}
+.orb{position:absolute;border-radius:50%;filter:blur(100px);opacity:var(--orb-op);animation:float 28s ease-in-out infinite alternate}
+.orb.o1{width:52vw;height:52vw;background:var(--accent);top:-16vw;left:-12vw}
+.orb.o2{width:42vw;height:42vw;background:var(--accent-2);bottom:-18vw;right:-10vw;animation-delay:-10s}
+.orb.o3{width:34vw;height:34vw;background:var(--accent-3);top:44%;left:58%;animation-delay:-17s}
+@keyframes float{
+  0%{transform:translate3d(0,0,0) scale(1)}
+  50%{transform:translate3d(4vw,-3vw,0) scale(1.1)}
+  100%{transform:translate3d(-3vw,4vw,0) scale(.95)}
+}
+
+/* ============ HEADER ============ */
+.site-header{
+  position:sticky;top:0;z-index:50;
+  backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);
+  background:color-mix(in srgb,var(--bg) 78%, transparent);
+  border-bottom:1px solid var(--border);
+}
+.header-inner{max-width:var(--maxw);margin:0 auto;padding:13px 22px;display:flex;align-items:center;gap:20px}
+.brand{display:flex;align-items:center;gap:11px;font-family:var(--font-display);font-weight:700;font-size:1rem;letter-spacing:-.02em;white-space:nowrap}
+.brand-mark{
+  width:38px;height:38px;border-radius:12px;flex:none;
+  background:linear-gradient(140deg,var(--accent),var(--accent-2) 55%,var(--accent-3));
+  display:grid;place-items:center;color:#fff;
+  box-shadow:0 8px 22px -8px var(--accent);
+  transition:transform .5s var(--ease);
+}
+.brand:hover .brand-mark{transform:rotate(-10deg) scale(1.06)}
+.brand-mark svg{width:22px;height:22px}
+
+.nav{display:flex;gap:2px;margin-left:auto;overflow-x:auto;scrollbar-width:none}
+.nav::-webkit-scrollbar{display:none}
+.nav-link{
+  position:relative;padding:9px 11px;border-radius:11px;font-size:.8rem;font-weight:500;
+  color:var(--muted);white-space:nowrap;transition:color .3s var(--ease),background .3s var(--ease);
+}
+.nav-link:hover{color:var(--text);background:var(--surface-2)}
+.nav-link.active{color:var(--text);background:var(--surface-2)}
+.nav-link.active::after{
+  content:'';position:absolute;left:11px;right:11px;bottom:4px;height:2px;border-radius:2px;
+  background:linear-gradient(90deg,var(--accent),var(--accent-2));
+  animation:navIn .4s var(--ease) both;
+}
+@keyframes navIn{from{transform:scaleX(0);opacity:0}to{transform:scaleX(1);opacity:1}}
+
+.theme-toggle{
+  width:40px;height:40px;border-radius:12px;flex:none;
+  border:1px solid var(--border);background:var(--surface-2);
+  display:grid;place-items:center;
+  transition:transform .35s var(--ease),border-color .3s,background .3s;
+}
+.theme-toggle:hover{transform:translateY(-2px) rotate(8deg);border-color:var(--border-strong)}
+.theme-toggle svg{width:19px;height:19px}
+html[data-theme="dark"] .icon-sun{display:block}
+html[data-theme="dark"] .icon-moon{display:none}
+html[data-theme="light"] .icon-sun{display:none}
+html[data-theme="light"] .icon-moon{display:block}
+
+/* ============ LAYOUT ============ */
+main{max-width:var(--maxw);margin:0 auto;padding:0 22px 90px}
+.view{display:none}
+.view.active{display:block;animation:viewIn .55s var(--ease) both}
+@keyframes viewIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+
+/* ============ HERO ============ */
+.hero{padding:72px 0 42px;max-width:920px}
+.pill{
+  display:inline-flex;align-items:center;gap:8px;padding:7px 15px;border-radius:999px;
+  font-size:.78rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;
+  border:1px solid var(--border);background:var(--surface);color:var(--muted);margin-bottom:26px;
+}
+.pill .dot{width:7px;height:7px;border-radius:50%;background:var(--good);animation:pulse 2.4s infinite}
+@keyframes pulse{
+  0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--good) 60%,transparent)}
+  70%{box-shadow:0 0 0 9px transparent}
+  100%{box-shadow:0 0 0 0 transparent}
+}
+h1.hero-title{font-size:clamp(2.1rem,5.2vw,3.9rem);font-weight:700;letter-spacing:-.035em;margin-bottom:22px}
+.grad{
+  background:linear-gradient(100deg,var(--accent),var(--accent-2) 48%,var(--accent-3));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  background-size:220% auto;animation:shimmer 8s linear infinite;
+}
+@keyframes shimmer{to{background-position:220% center}}
+.lead{font-size:clamp(1rem,1.6vw,1.15rem);color:var(--muted);max-width:700px;margin-bottom:34px}
+.hero-actions{display:flex;flex-wrap:wrap;gap:13px}
+
+/* ============ BOTONES ============ */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  padding:13px 25px;border-radius:13px;font-size:.93rem;font-weight:600;
+  border:1px solid transparent;
+  transition:transform .28s var(--ease),box-shadow .3s var(--ease),background .3s,border-color .3s,color .3s;
+  will-change:transform;
+}
+.btn:active{transform:scale(.97)}
+.btn svg{width:17px;height:17px}
+.btn-primary{
+  background:linear-gradient(120deg,var(--accent),var(--accent-2));
+  color:#fff;box-shadow:0 14px 34px -14px var(--accent);
+  position:relative;overflow:hidden;
+}
+.btn-primary::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,.45),transparent 70%);
+  transform:translateX(-130%);transition:transform .7s var(--ease);
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 20px 42px -14px var(--accent)}
+.btn-primary:hover::after{transform:translateX(130%)}
+.btn-ghost{border-color:var(--border);background:var(--surface);color:var(--text)}
+.btn-ghost:hover{transform:translateY(-2px);border-color:var(--border-strong);background:var(--surface-2)}
+.btn.small{padding:8px 16px;font-size:.85rem}
+
+/* ============ STATS ============ */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin:12px 0 58px}
+.stat{
+  padding:22px 20px;border-radius:var(--radius);
+  background:var(--surface);border:1px solid var(--border);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  transition:transform .35s var(--ease),border-color .3s,box-shadow .35s;
+}
+.stat:hover{transform:translateY(-5px);border-color:var(--border-strong);box-shadow:var(--shadow)}
+.stat .num{
+  font-family:var(--font-display);font-size:1.8rem;font-weight:700;letter-spacing:-.03em;
+  background:linear-gradient(120deg,var(--accent),var(--accent-2));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.stat .lbl{font-size:.82rem;color:var(--muted);font-weight:500;margin-top:2px}
+
+/* ============ SECCIONES ============ */
+.sec-head{margin:0 0 28px}
+.sec-head h2{font-size:clamp(1.55rem,3vw,2.05rem);font-weight:700;margin-bottom:8px}
+.sec-head p{color:var(--muted);max-width:720px;font-size:.95rem}
+.section{padding-top:52px}
+
+/* ============ MÓDULOS ============ */
+.module-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(258px,1fr));gap:18px}
+.module{
+  position:relative;overflow:hidden;text-align:left;padding:28px 24px;border-radius:var(--radius);
+  background:var(--surface);border:1px solid var(--border);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  transition:transform .4s var(--ease),border-color .35s,box-shadow .4s;
+}
+.module::before{
+  content:'';position:absolute;inset:0;opacity:0;
+  background:radial-gradient(420px circle at var(--mx,50%) var(--my,0%),color-mix(in srgb,var(--accent) 22%,transparent),transparent 65%);
+  transition:opacity .45s var(--ease);
+}
+.module:hover{transform:translateY(-6px);border-color:var(--border-strong);box-shadow:var(--shadow)}
+.module:hover::before{opacity:1}
+.module-ico{
+  width:46px;height:46px;border-radius:14px;display:grid;place-items:center;margin-bottom:18px;
+  background:linear-gradient(140deg,color-mix(in srgb,var(--accent) 22%,transparent),color-mix(in srgb,var(--accent-2) 18%,transparent));
+  border:1px solid var(--border);color:var(--accent);
+  transition:transform .4s var(--ease);
+}
+.module:hover .module-ico{transform:scale(1.08) rotate(-6deg)}
+.module-ico svg{width:22px;height:22px}
+.module h3{font-size:1.04rem;margin-bottom:8px;font-weight:600}
+.module p{font-size:.89rem;color:var(--muted);line-height:1.6}
+.module .arrow{display:inline-flex;align-items:center;gap:6px;margin-top:16px;font-size:.84rem;font-weight:600;color:var(--accent)}
+.module .arrow svg{width:14px;height:14px;transition:transform .35s var(--ease)}
+.module:hover .arrow svg{transform:translateX(5px)}
+
+/* ============ CARDS ============ */
+.card{
+  padding:24px 26px;border-radius:var(--radius);
+  background:var(--surface);border:1px solid var(--border);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  transition:transform .35s var(--ease),border-color .3s,box-shadow .35s;
+}
+.card:hover{transform:translateY(-4px);border-color:var(--border-strong);box-shadow:var(--shadow)}
+.card h3{font-size:1.02rem;margin-bottom:10px;font-weight:600}
+.card p{font-size:.9rem;color:var(--muted);line-height:1.68}
+.card .kicker{
+  font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:12px;display:block;
+}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(258px,1fr))}
+.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+
+/* ============ CHIPS ============ */
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{
+  padding:8px 15px;border-radius:999px;font-size:.81rem;font-weight:600;
+  border:1px solid var(--border);background:var(--surface);color:var(--muted);
+  transition:all .3s var(--ease);
+}
+.chip:hover{color:var(--text);border-color:var(--border-strong);transform:translateY(-1px)}
+.chip.active{background:linear-gradient(120deg,var(--accent),var(--accent-2));color:#fff;border-color:transparent;box-shadow:0 10px 26px -12px var(--accent)}
+
+/* ============ TIMELINE VERTICAL ============ */
+.vt{position:relative;margin-top:26px}
+.vt::before{
+  content:'';position:absolute;left:13px;top:10px;bottom:10px;width:2px;border-radius:2px;
+  background:linear-gradient(180deg,var(--accent),var(--accent-2) 55%,var(--accent-3));
+  opacity:.55;
+}
+.vt-item{
+  position:relative;padding-left:46px;margin-bottom:18px;
+  animation:termIn .5s var(--ease) both;animation-delay:var(--d,0ms);
+}
+.vt-item.hidden{display:none}
+@keyframes termIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.vt-dot{
+  position:absolute;left:7px;top:24px;width:14px;height:14px;border-radius:50%;
+  background:var(--c);border:3px solid var(--bg);
+  box-shadow:0 0 0 3px color-mix(in srgb,var(--c) 30%,transparent);
+  transition:transform .3s var(--ease);
+}
+.vt-item:hover .vt-dot{transform:scale(1.3)}
+.vt-card{
+  padding:20px 22px;border-radius:var(--radius-sm);
+  background:var(--surface);border:1px solid var(--border);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  transition:border-color .3s,transform .3s var(--ease),box-shadow .3s;
+}
+.vt-item:hover .vt-card{border-color:var(--border-strong);transform:translateX(3px);box-shadow:var(--shadow)}
+.vt-top{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:8px}
+.vt-year{
+  font-family:var(--font-display);font-size:.86rem;font-weight:700;
+  color:var(--accent);letter-spacing:-.01em;
+  padding:3px 10px;border-radius:7px;
+  background:color-mix(in srgb,var(--accent) 13%,transparent);
+  border:1px solid color-mix(in srgb,var(--accent) 26%,transparent);
+  white-space:nowrap;
+}
+.vt-era{
+  font-size:.68rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
+  color:var(--muted);
+}
+.vt-card h4{font-size:1rem;font-weight:600;margin-bottom:7px;line-height:1.3}
+.vt-card > p{font-size:.88rem;color:var(--muted);line-height:1.66}
+.vt-more{
+  display:inline-flex;align-items:center;gap:6px;margin-top:12px;
+  font-size:.79rem;font-weight:600;color:var(--accent);
+  padding:4px 0;transition:gap .3s var(--ease);
+}
+.vt-more:hover{gap:9px}
+.vt-more svg{width:12px;height:12px;transition:transform .4s var(--ease)}
+.vt-item.open .vt-more svg{transform:rotate(180deg)}
+.vt-extra{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s var(--ease)}
+.vt-item.open .vt-extra{grid-template-rows:1fr}
+.vt-extra > div{overflow:hidden}
+.vt-extra p{
+  font-size:.85rem;color:var(--muted);line-height:1.7;
+  border-top:1px solid var(--border);margin-top:12px;padding-top:12px;
+}
+
+/* ============ SVG INTERACTIVOS ============ */
+.diagram-wrap{
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+  padding:18px 16px;box-shadow:var(--shadow);
+}
+.diagram-wrap svg{display:block;width:100%;max-width:440px;height:auto;margin:0 auto}
+.hit{cursor:pointer;transition:filter .2s,opacity .2s}
+.hit:hover{filter:brightness(1.15) drop-shadow(0 0 8px color-mix(in srgb,var(--accent) 60%,transparent))}
+.hit.sel{filter:drop-shadow(0 0 10px var(--accent))}
+.hit.sel > *:first-child{stroke:var(--accent);stroke-width:3}
+
+.info-panel{
+  margin-top:16px;padding:16px 18px;border-radius:var(--radius-sm);
+  background:var(--surface-2);border:1px solid var(--border);
+  min-height:110px;transition:border-color .3s,background .3s;
+}
+.info-panel.active{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 7%,var(--surface-2))}
+.info-panel .ip-name{
+  font-family:var(--font-display);font-weight:700;font-size:1.02rem;
+  color:var(--accent);margin-bottom:6px;
+}
+.info-panel .ip-func{font-size:.9rem;color:var(--text);margin-bottom:6px;line-height:1.6}
+.info-panel .ip-desc{font-size:.85rem;color:var(--muted);line-height:1.6}
+.info-panel .ip-hint{color:var(--muted);font-size:.86rem;font-style:italic}
+
+/* ============ TABLA ============ */
+.tbl{
+  width:100%;border-collapse:collapse;font-size:.86rem;
+  border-radius:12px;overflow:hidden;
+  border:1px solid var(--border);
+}
+.tbl th, .tbl td{padding:11px 14px;text-align:left;border-bottom:1px solid var(--border)}
+.tbl th{
+  background:var(--surface-2);font-weight:600;font-size:.78rem;
+  text-transform:uppercase;letter-spacing:.06em;color:var(--muted);
+}
+.tbl tr:last-child td{border-bottom:none}
+.tbl tr:hover td{background:var(--surface-2)}
+.tbl td{color:var(--text)}
+
+/* ============ DNA HELIX ============ */
+.dna-wrap{
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+  padding:20px 16px;box-shadow:var(--shadow);
+}
+.dna-wrap svg{display:block;width:100%;height:auto}
+
+/* ============ DONUT ============ */
+.donut-wrap{display:flex;gap:20px;flex-wrap:wrap;align-items:center;justify-content:center}
+.donut-legend{display:flex;flex-direction:column;gap:10px;font-size:.86rem}
+.donut-legend .lg{display:flex;align-items:center;gap:10px}
+.donut-legend .lg .sw{width:14px;height:14px;border-radius:4px;flex:none}
+.donut-legend .lg .pct{font-weight:700;font-family:var(--font-display);color:var(--text);min-width:44px}
+
+/* ============ PASOS ============ */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin:20px 0}
+.step-box{
+  padding:20px 18px;border-radius:var(--radius-sm);
+  background:var(--surface);border:1px solid var(--border);
+  position:relative;
+}
+.step-box .step-n{
+  position:absolute;top:-12px;left:16px;
+  width:30px;height:30px;border-radius:50%;
+  background:linear-gradient(140deg,var(--accent),var(--accent-2));
+  color:#fff;font-family:var(--font-display);font-weight:700;
+  display:grid;place-items:center;font-size:.9rem;
+  box-shadow:0 6px 16px -6px var(--accent);
+}
+.step-box h4{font-size:.95rem;margin:10px 0 6px;font-weight:600}
+.step-box p{font-size:.83rem;color:var(--muted);line-height:1.6}
+
+/* ============ NOTA ============ */
+.note{
+  margin-top:26px;padding:16px 20px;border-radius:14px;font-size:.85rem;color:var(--muted);
+  border:1px solid var(--border);background:var(--surface-2);border-left:3px solid var(--accent);
+  line-height:1.65;
+}
+.note strong{color:var(--text);font-weight:600}
+
+/* ============ QUIZ ============ */
+.quiz-shell{max-width:760px;margin:0 auto}
+.quiz-card{
+  padding:34px;border-radius:var(--radius);
+  background:var(--surface);border:1px solid var(--border);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  box-shadow:var(--shadow);
+}
+.quiz-meta{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:12px;font-size:.81rem;font-weight:600;color:var(--muted)}
+.progress{height:6px;border-radius:99px;background:var(--surface-2);overflow:hidden;margin-bottom:30px;border:1px solid var(--border)}
+.progress-bar{height:100%;width:0%;border-radius:99px;background:linear-gradient(90deg,var(--accent),var(--accent-2));transition:width .55s var(--ease)}
+.q-text{font-family:var(--font-display);font-size:clamp(1.12rem,2.4vw,1.42rem);font-weight:600;line-height:1.35;margin-bottom:26px}
+.options{display:grid;gap:11px}
+.option{
+  display:flex;align-items:center;gap:14px;text-align:left;
+  padding:16px 18px;border-radius:14px;font-size:.93rem;font-weight:500;
+  background:var(--surface-2);border:1px solid var(--border);color:var(--text);
+  transition:transform .25s var(--ease),border-color .25s,background .25s;
+}
+.option:hover:not(:disabled){transform:translateX(4px);border-color:var(--accent);background:color-mix(in srgb,var(--accent) 8%,transparent)}
+.option:disabled{cursor:default}
+.option .letter{
+  width:28px;height:28px;border-radius:9px;flex:none;display:grid;place-items:center;
+  font-size:.77rem;font-weight:700;font-family:var(--font-display);
+  background:var(--surface-solid);border:1px solid var(--border);color:var(--muted);
+}
+.option.correct{background:color-mix(in srgb,var(--good) 15%,transparent);border-color:var(--good)}
+.option.correct .letter{background:var(--good);color:#fff;border-color:var(--good)}
+.option.wrong{background:color-mix(in srgb,var(--bad) 13%,transparent);border-color:var(--bad)}
+.option.wrong .letter{background:var(--bad);color:#fff;border-color:var(--bad)}
+.feedback{
+  margin-top:22px;padding:16px 18px;border-radius:14px;font-size:.88rem;line-height:1.6;
+  border:1px solid var(--border);background:var(--surface-2);
+  animation:termIn .4s var(--ease) both;
+}
+.feedback strong{color:var(--text)}
+.quiz-actions{display:flex;justify-content:flex-end;margin-top:24px}
+.result{text-align:center;padding:20px 6px}
+.result .score{
+  font-family:var(--font-display);font-size:clamp(3rem,9vw,4.6rem);font-weight:700;letter-spacing:-.05em;
+  background:linear-gradient(120deg,var(--accent),var(--accent-2) 50%,var(--accent-3));
+  -webkit-background-clip:text;background-clip:text;color:transparent;line-height:1;margin-bottom:10px;
+}
+.result h3{font-size:1.28rem;margin-bottom:10px}
+.result p{color:var(--muted);margin-bottom:26px}
+
+/* ============ REVEAL ============ */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s var(--ease),transform .7s var(--ease);transition-delay:var(--d,0ms)}
+.reveal.in{opacity:1;transform:none}
+
+/* ============ FOOTER ============ */
+.site-footer{border-top:1px solid var(--border);padding:34px 22px;text-align:center;font-size:.85rem;color:var(--muted)}
+.site-footer strong{color:var(--text);font-weight:600}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width:1040px){
+  .nav-link{padding:9px 9px;font-size:.76rem}
+}
+@media (max-width:900px){
+  .header-inner{padding:12px 16px;gap:14px;flex-wrap:wrap}
+  .nav{order:3;width:100%;margin-left:0;padding-bottom:2px}
+  .theme-toggle{margin-left:auto}
+  main{padding:0 16px 70px}
+  .hero{padding:44px 0 32px}
+  .stats{grid-template-columns:repeat(2,1fr);gap:11px}
+  .stat{padding:17px 15px}
+  .stat .num{font-size:1.45rem}
+  .vt-item{padding-left:38px}
+  .quiz-card{padding:24px 20px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<div class="bg-dots" aria-hidden="true"></div>
+<div class="orbs" aria-hidden="true">
+  <div class="orb o1"></div>
+  <div class="orb o2"></div>
+  <div class="orb o3"></div>
+</div>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="#inicio" data-route="inicio">
+      <span class="brand-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 3v18"/><path d="M5 8c2 0 3 1.5 3 3s-1 3-3 3M19 8c-2 0-3 1.5-3 3s1 3 3 3"/>
+        </svg>
+      </span>
+      <span>Cuerpo Simple</span>
+    </a>
+
+    <nav class="nav" aria-label="Navegación principal">
+      <button class="nav-link active" data-route="inicio">Inicio</button>
+      <button class="nav-link" data-route="adn">ADN</button>
+      <button class="nav-link" data-route="sexo">Sexo</button>
+      <button class="nav-link" data-route="concepcion">Concepción</button>
+      <button class="nav-link" data-route="enfermedades">Enfermedades</button>
+      <button class="nav-link" data-route="esqueleto">Esqueleto</button>
+      <button class="nav-link" data-route="sangre">Sangre</button>
+      <button class="nav-link" data-route="musculos">Músculos</button>
+      <button class="nav-link" data-route="organos">Órganos</button>
+      <button class="nav-link" data-route="vacunas">Vacunas</button>
+      <button class="nav-link" data-route="quiz">Quiz</button>
+    </nav>
+
+    <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema">
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round">
+        <circle cx="12" cy="12" r="4"/>
+        <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>
+      </svg>
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<main>
+
+  <!-- ================= INICIO ================= -->
+  <section class="view active" data-view="inicio">
+    <div class="hero">
+      <span class="pill"><span class="dot"></span>De la célula al organismo</span>
+      <h1 class="hero-title">El cuerpo humano explicado en <span class="grad">lenguaje sencillo</span></h1>
+      <p class="lead">
+        Qué es el ADN, cómo se forman las personas, de qué estamos hechos por dentro, cómo funcionan los sistemas
+        y por qué las vacunas nos protegen. Todo con diagramas interactivos y explicaciones claras.
+      </p>
+      <div class="hero-actions">
+        <button class="btn btn-primary" data-route="adn">
+          Empezar por el ADN
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+        <button class="btn btn-ghost" data-route="organos">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg>
+          Explorar órganos
+        </button>
+      </div>
+    </div>
+
+    <div class="stats reveal">
+      <div class="stat"><div class="num" data-count="37" data-suffix=" B">0</div><div class="lbl">Células en el cuerpo</div></div>
+      <div class="stat"><div class="num" data-count="206" data-suffix="">0</div><div class="lbl">Huesos en un adulto</div></div>
+      <div class="stat"><div class="num" data-count="600" data-suffix="+">0</div><div class="lbl">Músculos esqueléticos</div></div>
+      <div class="stat"><div class="num" data-count="23" data-suffix=" pares">0</div><div class="lbl">Cromosomas humanos</div></div>
+    </div>
+
+    <div class="sec-head reveal">
+      <h2>Cómo está organizada</h2>
+      <p>Diez secciones que van de lo más pequeño (genes y células) a lo más visible (órganos y sistemas), con diagramas que se pueden tocar.</p>
+    </div>
+
+    <div class="module-grid">
+      <button class="module reveal" data-route="adn" style="--d:0ms">
+        <span class="module-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3c0 4 10 4 10 8s-10 4-10 8M17 3c0 4-10 4-10 8s10 4 10 8"/><path d="M8 6h8M8 10h8M8 14h8M8 18h8"/></svg>
+        </span>
+        <h3>Genes y ADN</h3>
+        <p>La molécula que guarda las instrucciones de la vida, cómo se copia y cómo se hereda.</p>
+        <span class="arrow">Explorar el ADN
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </button>
+
+      <button class="module reveal" data-route="sexo" style="--d:40ms">
+        <span class="module-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="5"/><path d="M13 13l6 6M16 19h3v-3"/><circle cx="16" cy="7" r="5"/><path d="M16 12v3M13 10l-3-3"/></svg>
+        </span>
+        <h3>Diferencia sexual</h3>
+        <p>Cromosomas, hormonas y anatomía. Qué es biológico y qué es identidad.</p>
+        <span class="arrow">Ver diferencias
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </button>
+
+      <button class="module reveal" data-route="concepcion" style="--d:80ms">
+        <span class="module-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/></svg>
+        </span>
+        <h3>Concepción</h3>
+        <p>El recorrido desde la fecundación hasta el nacimiento, en nueve etapas.</p>
+        <span class="arrow">Ver el proceso
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </button>
+
+      <button class="module reveal" data-route="enfermedades" style="--d:120ms">
+        <span class="module-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M3 12h18"/><circle cx="12" cy="12" r="9"/></svg>
+        </span>
+        <h3>Enfermedades</h3>
+        <p>Qué las causa y cómo se clasifican: infecciosas, genéticas, crónicas, autoinmunes.</p>
+        <span class="arrow">Ver enfermedades
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </button>
+
+      <button class="module reveal" data-route="esqueleto" style="--d:160ms">
+        <span class="module-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="3"/><path d="M12 8v8M6 11l6-2 6 2M6 20l6-4 6 4"/></svg>
+        </span>
+        <h3>Esqueleto</h3>
+        <p>Los 206 huesos, sus funciones y un diagrama interactivo para explorarlos.</p>
+        <span class="arrow">Ver esqueleto
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </button>
+
+      <button class="module reveal" data-route="sangre" style="--d:200ms">
+        <span class="module-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c-3 4-6 7-6 11a6 6 0 0 0 12 0c0-4-3-7-6-11z"/></svg>
+        </span>
+        <h3>Sangre</h3>
+        <p>Su composición, los grupos sanguíneos y las células que la forman.</p>
+        <span class="arrow">Ver sangre
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </button>
+
+      <button class="module reveal" data-route="musculos" style="--d:240ms">
+        <span class="module-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8c2-2 5-2 7 0s5 2 7 0v8c-2 2-5 2-7 0s-5-2-7 0z"/></svg>
+        </span>
+        <h3>Músculos</h3>
+        <p>Los tres tipos de músculo y un diagrama con los principales grupos musculares.</p>
+        <span class="arrow">Ver músculos
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </button>
+
+      <button class="module reveal" data-route="organos" style="--d:280ms">
+        <span class="module-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4-7-10a4 4 0 0 1 7-2 4 4 0 0 1 7 2c0 6-7 10-7 10z"/></svg>
+        </span>
+        <h3>Órganos internos</h3>
+        <p>Un cuerpo interactivo para descubrir qué hace cada órgano y dónde está.</p>
+        <span class="arrow">Explorar órganos
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </button>
+
+      <button class="module reveal" data-route="vacunas" style="--d:320ms">
+        <span class="module-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3l7 7-3 3-7-7z"/><path d="M11 6l-6 6 7 7 6-6"/><path d="M9 12l3 3"/></svg>
+        </span>
+        <h3>Vacunas</h3>
+        <p>Cómo entrenan al sistema inmunitario y las que cambiaron la historia.</p>
+        <span class="arrow">Ver vacunas
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </button>
+
+      <button class="module reveal" data-route="quiz" style="--d:360ms">
+        <span class="module-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l2 2 4-4"/><rect x="3" y="4" width="18" height="16" rx="3"/></svg>
+        </span>
+        <h3>Quiz</h3>
+        <p>Diez preguntas al azar con corrección y explicación de cada respuesta.</p>
+        <span class="arrow">Empezar el quiz
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </button>
+    </div>
+
+    <div class="note reveal">
+      <strong>Una aclaración importante:</strong> este material es divulgación educativa general. No sustituye la consulta
+      con profesionales de la salud. Cada cuerpo es único y las decisiones médicas deben tomarse con información
+      personalizada.
+    </div>
+  </section>
+
+  <!-- ================= ADN ================= -->
+  <section class="view" data-view="adn">
+    <div class="sec-head section">
+      <h2>Genes y ADN</h2>
+      <p>El ADN es la molécula que contiene las instrucciones para construir y hacer funcionar un ser vivo. Los genes son fragmentos de ese ADN con una función concreta.</p>
+    </div>
+
+    <div class="dna-wrap reveal" style="margin-bottom:24px">
+      <svg id="dnaSvg" viewBox="0 0 600 260" aria-label="Doble hélice de ADN"></svg>
+    </div>
+
+    <div class="grid">
+      <div class="card reveal">
+        <span class="kicker">Qué es</span>
+        <h3>El ADN en una frase</h3>
+        <p>Es una molécula larguísima con forma de doble hélice. Contiene cuatro letras químicas que, ordenadas, forman las instrucciones de la vida.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Qué es</span>
+        <h3>Un gen</h3>
+        <p>Un fragmento de ADN que contiene la receta para fabricar una proteína o regular otras funciones. Tenemos unos 20.000 genes, aunque no todos se activan siempre.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Dónde está</span>
+        <h3>Cromosomas</h3>
+        <p>El ADN se enrolla en 23 pares de cromosomas dentro del núcleo de cada célula. Un cromosoma de cada par viene del padre y otro de la madre.</p>
+      </div>
+    </div>
+
+    <div class="card reveal" style="margin-top:20px">
+      <span class="kicker">Las cuatro letras</span>
+      <h3>Bases nitrogenadas</h3>
+      <p>El ADN usa solo cuatro "letras": adenina (A), timina (T), citosina (C) y guanina (G). Siempre se emparejan igual: A con T y C con G. Ese emparejamiento es lo que permite copiar el ADN con precisión.</p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px">
+        <span class="chip" style="cursor:default;background:color-mix(in srgb,var(--accent) 14%,transparent);color:var(--accent);border-color:color-mix(in srgb,var(--accent) 30%,transparent)">A — T</span>
+        <span class="chip" style="cursor:default;background:color-mix(in srgb,var(--accent-2) 14%,transparent);color:var(--accent-2);border-color:color-mix(in srgb,var(--accent-2) 30%,transparent)">C — G</span>
+        <span class="chip" style="cursor:default;background:color-mix(in srgb,var(--accent-3) 14%,transparent);color:var(--accent-3);border-color:color-mix(in srgb,var(--accent-3) 30%,transparent)">~3.000 millones de pares</span>
+      </div>
+    </div>
+
+    <div class="grid-2" style="margin-top:20px">
+      <div class="card reveal">
+        <span class="kicker">Proceso</span>
+        <h3>Cómo se copia</h3>
+        <p>Antes de dividirse, la célula abre la doble hélice y cada mitad sirve de molde para construir la mitad complementaria. El resultado son dos copias idénticas.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Variación</span>
+        <h3>Mutaciones</h3>
+        <p>Un cambio en una letra del ADN. Muchas no tienen efecto, otras causan enfermedades y algunas, muy rara vez, aportan ventajas. Son la materia prima de la evolución.</p>
+      </div>
+    </div>
+
+    <div class="note reveal">
+      <strong>ADN no es destino:</strong> dos personas pueden compartir el 99,9 % de su ADN. La forma en que se expresa
+      ese ADN depende también del ambiente, la alimentación, el sueño y la experiencia.
+    </div>
+  </section>
+
+  <!-- ================= SEXO ================= -->
+  <section class="view" data-view="sexo">
+    <div class="sec-head section">
+      <h2>Diferencia sexual</h2>
+      <p>El sexo biológico se define por cromosomas, hormonas y anatomía. La identidad de género y la orientación son dimensiones distintas que conviene no confundir con el sexo.</p>
+    </div>
+
+    <div class="grid-2" style="margin-bottom:20px">
+      <div class="card reveal">
+        <span class="kicker">Cromosomas</span>
+        <h3>XX y XY</h3>
+        <p>El par 23 determina el sexo cromosómico. XX suele asociarse a sexo femenino y XY a sexo masculino. Existen también variaciones cromosómicas (XXY, X0, mosaicos) que enriquecen la realidad biológica.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Hormonas</span>
+        <h3>Testosterona y estrógenos</h3>
+        <p>Todos los cuerpos producen ambas en distintas cantidades. La testosterona predomina en cuerpos masculinos y los estrógenos en femeninos, pero las proporciones varían con la edad y entre personas.</p>
+      </div>
+    </div>
+
+    <div class="card reveal" style="margin-bottom:20px">
+      <div class="kicker">Comparación cromosómica</div>
+      <div class="chips" style="margin:14px 0">
+        <button class="chip active" data-karyo="XX">XX — Sexo femenino</button>
+        <button class="chip" data-karyo="XY">XY — Sexo masculino</button>
+      </div>
+      <svg id="karyoSvg" viewBox="0 0 600 160" style="width:100%;height:auto;display:block" aria-label="Cariotipo humano"></svg>
+    </div>
+
+    <h3 style="font-size:1.15rem;font-weight:600;margin:26px 0 14px">Caracteres sexuales secundarios</h3>
+    <table class="tbl reveal">
+      <thead>
+        <tr><th>Rasgo</th><th>Sexo femenino</th><th>Sexo masculino</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Voz</td><td>Más aguda</td><td>Más grave</td></tr>
+        <tr><td>Vello facial</td><td>Escaso o nulo</td><td>Abundante</td></tr>
+        <tr><td>Distribución de grasa</td><td>Caderas y muslos</td><td>Abdomen</td></tr>
+        <tr><td>Masa muscular</td><td>En promedio menor</td><td>En promedio mayor</td></tr>
+        <tr><td>Pecho</td><td>Desarrollo mamario</td><td>Sin desarrollo mamario</td></tr>
+        <tr><td>Estatura</td><td>En promedio menor</td><td>En promedio mayor</td></tr>
+      </tbody>
+    </table>
+
+    <div class="grid-3" style="margin-top:24px">
+      <div class="card reveal">
+        <span class="kicker">Biológico</span>
+        <h3>Sexo</h3>
+        <p>Cromosomas, gónadas, hormonas y anatomía. Se asigna al nacer según criterios biológicos y puede presentar variaciones.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Personal</span>
+        <h3>Identidad de género</h3>
+        <p>Cómo se percibe y se identifica cada persona. Puede coincidir o no con el sexo asignado al nacer.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Relacional</span>
+        <h3>Orientación sexual</h3>
+        <p>Hacia quién se siente atracción. Es independiente del sexo biológico y de la identidad de género.</p>
+      </div>
+    </div>
+
+    <div class="note reveal">
+      <strong>Dimensiones distintas:</strong> sexo, identidad y orientación son aspectos diferentes de la experiencia humana.
+      La ciencia describe la variabilidad biológica; el respeto y el cuidado de cada persona son un piso ético común.
+    </div>
+  </section>
+
+  <!-- ================= CONCEPCIÓN ================= -->
+  <section class="view" data-view="concepcion">
+    <div class="sec-head section">
+      <h2>La concepción, paso a paso</h2>
+      <p>Desde la fecundación hasta el nacimiento, el desarrollo humano atraviesa etapas con hitos bien definidos. Dura unas 40 semanas contadas desde el último período menstrual.</p>
+    </div>
+
+    <div class="vt" id="conceptionList"></div>
+
+    <div class="note reveal">
+      <strong>Fechas aproximadas:</strong> cada embarazo es único. Los hitos aquí descritos son promedios y pueden variar
+      según la persona y las circunstancias. El seguimiento médico es fundamental durante todo el proceso.
+    </div>
+  </section>
+
+  <!-- ================= ENFERMEDADES ================= -->
+  <section class="view" data-view="enfermedades">
+    <div class="sec-head section">
+      <h2>Enfermedades</h2>
+      <p>Una enfermedad es una alteración del funcionamiento normal del cuerpo. Se clasifican según su causa principal, aunque muchas tienen factores múltiples.</p>
+    </div>
+
+    <div class="chips" id="diseaseChips" style="margin-bottom:24px"></div>
+    <div class="grid" id="diseaseGrid"></div>
+
+    <div class="note reveal">
+      <strong>Correlación no es causa:</strong> que dos cosas ocurran juntas no significa que una provoque la otra. La investigación
+      médica distingue con cuidado entre asociación y causalidad.
+    </div>
+  </section>
+
+  <!-- ================= ESQUELETO ================= -->
+  <section class="view" data-view="esqueleto">
+    <div class="sec-head section">
+      <h2>Sistema óseo</h2>
+      <p>El esqueleto sostiene el cuerpo, protege los órganos y permite el movimiento. Un adulto tiene 206 huesos; un recién nacido tiene cerca de 300 que luego se fusionan.</p>
+    </div>
+
+    <div class="grid-2">
+      <div class="diagram-wrap reveal">
+        <svg id="skeletonSvg" viewBox="0 0 400 560" aria-label="Esqueleto interactivo"></svg>
+        <div class="info-panel" id="skeletonInfo">
+          <div class="ip-hint">Toca cualquier hueso del diagrama para ver su función.</div>
+        </div>
+      </div>
+
+      <div>
+        <div class="card reveal" style="margin-bottom:14px">
+          <span class="kicker">Funciones</span>
+          <h3>Para qué sirve el esqueleto</h3>
+          <p>Sostén del cuerpo, protección de órganos vitales (cráneo, caja torácica), movimiento junto a los músculos, reserva de minerales como el calcio y producción de células sanguíneas en la médula ósea.</p>
+        </div>
+        <div class="card reveal" style="margin-bottom:14px">
+          <span class="kicker">Tipos</span>
+          <h3>Clases de huesos</h3>
+          <p>Largos (fémur, húmero), cortos (vértebras, muñeca), planos (cráneo, esternón) e irregulares (mandíbula, pelvis).</p>
+        </div>
+        <div class="card reveal">
+          <span class="kicker">Dato</span>
+          <h3>Huesos vivos</h3>
+          <p>Los huesos son tejido vivo: se remodelan continuamente. La densidad ósea crece hasta los 25-30 años y luego decrece; el ejercicio y el calcio ayudan a mantenerla.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SANGRE ================= -->
+  <section class="view" data-view="sangre">
+    <div class="sec-head section">
+      <h2>Sistema sanguíneo</h2>
+      <p>La sangre transporta oxígeno, nutrientes, hormonas y desechos. También participa en la defensa del cuerpo y en la coagulación.</p>
+    </div>
+
+    <div class="grid-2" style="margin-bottom:20px">
+      <div class="card reveal">
+        <span class="kicker">Composición</span>
+        <h3>Qué hay dentro de una gota</h3>
+        <div class="donut-wrap" style="margin-top:14px">
+          <svg id="bloodDonut" viewBox="0 0 160 160" style="width:160px;height:160px" aria-label="Composición de la sangre"></svg>
+          <div class="donut-legend" id="bloodLegend"></div>
+        </div>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Células</span>
+        <h3>Los tres tipos principales</h3>
+        <div style="margin-top:14px">
+          <svg id="bloodCells" viewBox="0 0 380 130" style="width:100%;height:auto" aria-label="Células de la sangre"></svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="card reveal" style="margin-bottom:20px">
+      <span class="kicker">Grupos</span>
+      <h3>Los grupos sanguíneos</h3>
+      <p>El sistema ABO y el factor Rh determinan la compatibilidad en las transfusiones. Recibir un grupo incompatible puede ser grave.</p>
+      <div style="overflow-x:auto;margin-top:16px">
+        <table class="tbl">
+          <thead>
+            <tr><th>Grupo</th><th>Puede donar a</th><th>Puede recibir de</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>O−</td><td>Todos</td><td>O−</td></tr>
+            <tr><td>O+</td><td>O+, A+, B+, AB+</td><td>O−, O+</td></tr>
+            <tr><td>A−</td><td>A−, A+, AB−, AB+</td><td>O−, A−</td></tr>
+            <tr><td>A+</td><td>A+, AB+</td><td>O−, O+, A−, A+</td></tr>
+            <tr><td>B−</td><td>B−, B+, AB−, AB+</td><td>O−, B−</td></tr>
+            <tr><td>B+</td><td>B+, AB+</td><td>O−, O+, B−, B+</td></tr>
+            <tr><td>AB−</td><td>AB−, AB+</td><td>Todos los negativos</td></tr>
+            <tr><td>AB+</td><td>AB+</td><td>Todos</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="grid-3">
+      <div class="card reveal">
+        <span class="kicker">Transporte</span>
+        <h3>Oxígeno</h3>
+        <p>Los glóbulos rojos llevan oxígeno desde los pulmones a todos los tejidos y traen dióxido de carbono de vuelta.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Defensa</span>
+        <h3>Inmunidad</h3>
+        <p>Los glóbulos blancos identifican y atacan bacterias, virus y células anómalas.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Coagulación</span>
+        <h3>Plaquetas</h3>
+        <p>Cuando hay una herida, las plaquetas se agrupan y forman un tapón que detiene la hemorragia.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= MÚSCULOS ================= -->
+  <section class="view" data-view="musculos">
+    <div class="sec-head section">
+      <h2>Sistema muscular</h2>
+      <p>Los músculos producen movimiento, mantienen la postura y generan calor. En el cuerpo humano hay más de 600 músculos esqueléticos, además del músculo liso y el cardíaco.</p>
+    </div>
+
+    <div class="grid-2">
+      <div class="diagram-wrap reveal">
+        <svg id="muscleSvg" viewBox="0 0 400 560" aria-label="Músculos interactivos"></svg>
+        <div class="info-panel" id="muscleInfo">
+          <div class="ip-hint">Toca cualquier grupo muscular para ver su función.</div>
+        </div>
+      </div>
+
+      <div>
+        <div class="card reveal" style="margin-bottom:14px">
+          <span class="kicker">Tipos</span>
+          <h3>Tres clases de músculo</h3>
+          <p><b style="color:var(--text)">Esquelético:</b> voluntario, une huesos y permite el movimiento. <b style="color:var(--text)">Liso:</b> involuntario, en órganos internos como el estómago o los vasos. <b style="color:var(--text)">Cardíaco:</b> involuntario, exclusivo del corazón.</p>
+        </div>
+        <div class="card reveal" style="margin-bottom:14px">
+          <span class="kicker">Funciones</span>
+          <h3>Para qué sirven</h3>
+          <p>Movimiento, postura, estabilidad articular, producción de calor y protección de órganos. También permiten funciones involuntarias como la digestión o el latido.</p>
+        </div>
+        <div class="card reveal">
+          <span class="kicker">Dato</span>
+          <h3>Cómo crecen</h3>
+          <p>El músculo esquelético no aumenta en número de fibras tras la infancia: crece en grosor con el ejercicio. El descanso y la proteína son tan importantes como el entrenamiento.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ÓRGANOS ================= -->
+  <section class="view" data-view="organos">
+    <div class="sec-head section">
+      <h2>Órganos internos</h2>
+      <p>Cada órgano cumple una o varias funciones vitales. Toca cualquiera del diagrama para ver su nombre y su función principal.</p>
+    </div>
+
+    <div class="grid-2">
+      <div class="diagram-wrap reveal">
+        <svg id="organSvg" viewBox="0 0 400 560" aria-label="Órganos internos interactivos"></svg>
+        <div class="info-panel" id="organInfo">
+          <div class="ip-hint">Toca cualquier órgano del diagrama para ver su función.</div>
+        </div>
+      </div>
+
+      <div id="organList"></div>
+    </div>
+  </section>
+
+  <!-- ================= VACUNAS ================= -->
+  <section class="view" data-view="vacunas">
+    <div class="sec-head section">
+      <h2>Vacunas</h2>
+      <p>Una vacuna entrena al sistema inmunitario para reconocer un patógeno sin que la persona tenga que pasar la enfermedad. Es una de las intervenciones de salud pública más eficaces de la historia.</p>
+    </div>
+
+    <div class="steps reveal">
+      <div class="step-box">
+        <span class="step-n">1</span>
+        <h4>Se introduce el antígeno</h4>
+        <p>Un fragmento inactivado o debilitado del patógeno entra en el cuerpo.</p>
+      </div>
+      <div class="step-box">
+        <span class="step-n">2</span>
+        <h4>El sistema responde</h4>
+        <p>Las células inmunitarias lo reconocen como extraño y producen anticuerpos.</p>
+      </div>
+      <div class="step-box">
+        <span class="step-n">3</span>
+        <h4>Se crea memoria</h4>
+        <p>Quedan células de memoria que reconocen ese patógeno durante años.</p>
+      </div>
+      <div class="step-box">
+        <span class="step-n">4</span>
+        <h4>Protección real</h4>
+        <p>Si el patógeno vuelve, la respuesta es rápida y suele evitar la enfermedad.</p>
+      </div>
+    </div>
+
+    <div class="grid" style="margin-bottom:24px">
+      <div class="card reveal">
+        <span class="kicker">Tipos</span>
+        <h3>Clases de vacunas</h3>
+        <p>Atenuadas (virus debilitado), inactivadas (microorganismo muerto), de subunidades (solo una parte), de toxoides (toxina inactivada) y de ARNm / vectores virales (instrucciones para producir el antígeno).</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Beneficio colectivo</span>
+        <h3>Inmunidad de grupo</h3>
+        <p>Cuando una gran parte de la población está vacunada, el patógeno circula menos y protege también a quienes no pueden vacunarse.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Erradicación</span>
+        <h3>La viruela</h3>
+        <p>Es la única enfermedad humana erradicada gracias a la vacunación global. La polio está casi eliminada del planeta.</p>
+      </div>
+    </div>
+
+    <h3 style="font-size:1.15rem;font-weight:600;margin:26px 0 14px">Hitos de la vacunación</h3>
+    <div class="vt" id="vaccineList"></div>
+
+    <div class="note reveal">
+      <strong>Las vacunas no son perfectas, pero son muy seguras:</strong> pasan por ensayos clínicos rigurosos y se monitorizan
+      continuamente. Sus efectos secundarios graves son rarísimos comparados con los riesgos de las enfermedades que previenen.
+    </div>
+  </section>
+
+  <!-- ================= QUIZ ================= -->
+  <section class="view" data-view="quiz">
+    <div class="sec-head section">
+      <h2>Quiz del cuerpo humano</h2>
+      <p>Diez preguntas al azar sobre ADN, sistemas, órganos y salud. Cada respuesta viene con su explicación.</p>
+    </div>
+    <div class="quiz-shell">
+      <div class="quiz-card" id="quizCard"></div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <p><strong>Cuerpo Simple</strong> — Material educativo abierto sobre el cuerpo humano. No sustituye la consulta médica profesional.</p>
+</footer>
+
+<script>
+/* ============================================================
+   UTILIDADES
+   ============================================================ */
+const $  = (sel, root = document) => root.querySelector(sel);
+const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+const SVGNS = 'http://www.w3.org/2000/svg';
+const el = (tag, attrs = {}, parent) => {
+  const e = document.createElementNS(SVGNS, tag);
+  for (const k in attrs) e.setAttribute(k, attrs[k]);
+  if (parent) parent.appendChild(e);
+  return e;
+};
+
+/* ============================================================
+   TEMA
+   ============================================================ */
+const htmlEl = document.documentElement;
+function setTheme(t){
+  htmlEl.setAttribute('data-theme', t);
+  try { localStorage.setItem('cuerpo-theme', t); } catch(e){}
+}
+(function initTheme(){
+  let saved = null;
+  try { saved = localStorage.getItem('cuerpo-theme'); } catch(e){}
+  setTheme(saved || 'light');
+})();
+$('#themeToggle').addEventListener('click', () => {
+  setTheme(htmlEl.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+});
+
+/* ============================================================
+   ROUTER
+   ============================================================ */
+const ROUTES = ['inicio','adn','sexo','concepcion','enfermedades','esqueleto','sangre','musculos','organos','vacunas','quiz'];
+let currentRoute = 'inicio';
+
+function go(route, push = true){
+  if (!ROUTES.includes(route)) route = 'inicio';
+  currentRoute = route;
+  $$('.view').forEach(v => v.classList.toggle('active', v.dataset.view === route));
+  $$('.nav-link').forEach(b => b.classList.toggle('active', b.dataset.route === route));
+  if (push && location.hash.slice(1) !== route) history.pushState(null, '', '#' + route);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  requestAnimationFrame(() => {
+    $$('.view.active .reveal').forEach(el => el.classList.remove('in'));
+    checkReveal();
+    if (route === 'inicio') animateCounters();
+    if (route === 'adn') renderDNA();
+    if (route === 'sexo') renderKaryotype();
+    if (route === 'concepcion') renderConception();
+    if (route === 'enfermedades') renderDiseases();
+    if (route === 'esqueleto') renderSkeleton();
+    if (route === 'sangre'){ renderBloodDonut(); renderBloodCells(); }
+    if (route === 'musculos') renderMuscles();
+    if (route === 'organos') renderOrgans();
+    if (route === 'vacunas') renderVaccines();
+    if (route === 'quiz') startQuiz();
+  });
+}
+document.addEventListener('click', e => {
+  const trigger = e.target.closest('[data-route]');
+  if (trigger) { e.preventDefault(); go(trigger.dataset.route); }
+});
+window.addEventListener('popstate', () => go(location.hash.slice(1) || 'inicio', false));
+
+/* ============================================================
+   REVEAL + CONTADORES
+   ============================================================ */
+const revealObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('in');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+function checkReveal(){ $$('.view.active .reveal:not(.in)').forEach(el => revealObserver.observe(el)); }
+function animateCounters(){
+  $$('.num[data-count]').forEach(el => {
+    if (el.dataset.done === '1') return;
+    el.dataset.done = '1';
+    const target = parseFloat(el.dataset.count);
+    const suffix = el.dataset.suffix || '';
+    const dur = 1500;
+    const start = performance.now();
+    function tick(now){
+      const p = Math.min((now - start) / dur, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      const val = Math.round(target * eased);
+      el.textContent = val.toLocaleString('es-ES') + suffix;
+      if (p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  });
+}
+
+/* ============================================================
+   1. ADN — DOBLE HÉLICE
+   ============================================================ */
+function renderDNA(){
+  const svg = $('#dnaSvg');
+  if (!svg) return;
+  svg.innerHTML = '';
+
+  const c1 = getComputedStyle(htmlEl).getPropertyValue('--accent').trim() || '#0891b2';
+  const c2 = getComputedStyle(htmlEl).getPropertyValue('--accent-2').trim() || '#db2777';
+  const c3 = getComputedStyle(htmlEl).getPropertyValue('--accent-3').trim() || '#10b981';
+
+  const W = 600, H = 260, N = 24;
+  const stepX = W / (N - 1);
+  const amp = 70, midY = H / 2;
+
+  // Definir rungs (travesaños) con colores alternos
+  for (let i = 0; i < N; i++){
+    const t = i / (N - 1);
+    const x = 20 + t * (W - 40);
+    const yTop = midY + Math.sin(t * Math.PI * 4) * amp;
+    const yBot = midY + Math.sin(t * Math.PI * 4 + Math.PI) * amp;
+    const isAT = i % 2 === 0;
+    el('line', {
+      x1: x, y1: yTop, x2: x, y2: yBot,
+      stroke: isAT ? c1 : c2,
+      'stroke-width': 3,
+      'stroke-linecap': 'round',
+      opacity: 0.85
+    }, svg);
+  }
+
+  // Hebras
+  const path1 = [];
+  const path2 = [];
+  for (let i = 0; i < N; i++){
+    const t = i / (N - 1);
+    const x = 20 + t * (W - 40);
+    const yTop = midY + Math.sin(t * Math.PI * 4) * amp;
+    const yBot = midY + Math.sin(t * Math.PI * 4 + Math.PI) * amp;
+    path1.push(i === 0 ? `M ${x} ${yTop}` : `L ${x} ${yTop}`);
+    path2.push(i === 0 ? `M ${x} ${yBot}` : `L ${x} ${yBot}`);
+  }
+  el('path', { d: path1.join(' '), fill: 'none', stroke: c3, 'stroke-width': 5, 'stroke-linecap': 'round' }, svg);
+  el('path', { d: path2.join(' '), fill: 'none', stroke: c3, 'stroke-width': 5, 'stroke-linecap': 'round', opacity: 0.6 }, svg);
+
+  // Etiqueta
+  el('text', {
+    x: W / 2, y: H - 10, 'text-anchor': 'middle',
+    'font-family': 'Inter,sans-serif', 'font-size': 11,
+    fill: getComputedStyle(htmlEl).getPropertyValue('--muted').trim() || '#5d6b73',
+    'font-weight': 600, 'letter-spacing': '.08em'
+  }, svg).textContent = 'DOBLE HÉLICE DE ADN';
+}
+
+/* ============================================================
+   2. CARIOTIPO
+   ============================================================ */
+function renderKaryotype(){
+  const svg = $('#karyoSvg');
+  if (!svg) return;
+  svg.innerHTML = '';
+
+  const isXX = ($('.chip.active[data-karyo]') || {dataset:{karyo:'XX'}}).dataset.karyo === 'XX';
+  const c1 = getComputedStyle(htmlEl).getPropertyValue('--accent').trim() || '#0891b2';
+  const c2 = getComputedStyle(htmlEl).getPropertyValue('--accent-2').trim() || '#db2777';
+  const muted = getComputedStyle(htmlEl).getPropertyValue('--muted').trim() || '#5d6b73';
+  const text = getComputedStyle(htmlEl).getPropertyValue('--text').trim() || '#0c1a22';
+
+  const W = 600, H = 160;
+  const padX = 20, gap = (W - padX * 2) / 23;
+
+  for (let i = 0; i < 23; i++){
+    const x = padX + gap * i + gap / 2;
+    const isSexChrom = i === 22;
+
+    if (isSexChrom){
+      // Cromosomas sexuales
+      const label = isXX ? 'XX' : 'XY';
+      const h1 = 50, h2 = isXX ? 50 : 35;
+      el('rect', { x: x - 10, y: 40, width: 8, height: h1, rx: 3, fill: c2 }, svg);
+      if (isXX){
+        el('rect', { x: x + 2, y: 40, width: 8, height: h2, rx: 3, fill: c2 }, svg);
+      } else {
+        el('rect', { x: x + 2, y: 55, width: 8, height: h2, rx: 3, fill: c2, opacity: 0.7 }, svg);
+      }
+      el('text', {
+        x, y: 120, 'text-anchor': 'middle',
+        'font-family': 'Space Grotesk,sans-serif', 'font-size': 12,
+        fill: c2, 'font-weight': 700
+      }, svg).textContent = label;
+    } else {
+      const h = 40 + Math.sin(i * 0.7) * 10 + 15;
+      el('rect', { x: x - 4, y: 50 - h / 2 + 20, width: 8, height: h, rx: 3, fill: c1, opacity: 0.85 }, svg);
+      el('text', {
+        x, y: 120, 'text-anchor': 'middle',
+        'font-family': 'Inter,sans-serif', 'font-size': 10,
+        fill: muted, 'font-weight': 600
+      }, svg).textContent = i + 1;
+    }
+  }
+
+  el('text', {
+    x: W / 2, y: 145, 'text-anchor': 'middle',
+    'font-family': 'Inter,sans-serif', 'font-size': 11,
+    fill: muted, 'font-weight': 500
+  }, svg).textContent = isXX
+    ? '23 pares de cromosomas · par 23: XX (sexo femenino típico)'
+    : '23 pares de cromosomas · par 23: XY (sexo masculino típico)';
+}
+
+document.addEventListener('click', e => {
+  const chip = e.target.closest('[data-karyo]');
+  if (!chip) return;
+  $$('[data-karyo]').forEach(c => c.classList.toggle('active', c === chip));
+  renderKaryotype();
+});
+
+/* ============================================================
+   3. CONCEPCIÓN
+   ============================================================ */
+const CONCEPCION = [
+  { w:'Día 1', t:'Ovulación', d:'Un óvulo maduro sale del ovario y viaja por la trompa de Falopio.', x:'La ovulación ocurre aproximadamente a mitad del ciclo menstrual. El óvulo vive unas 24 horas; los espermatozoides pueden sobrevivir hasta 5 días en el tracto reproductivo, por eso el período fértil es más amplio de lo que parece.' },
+  { w:'Día 1', t:'Fecundación', d:'Un espermatozoide entra al óvulo y se fusionan los núcleos. Se forma el cigoto.', x:'Solo uno de los cientos de millones de espermatozoides logra penetrar el óvulo. A partir de ese momento, el cigoto contiene 46 cromosomas: 23 del padre y 23 de la madre, en una combinación única.' },
+  { w:'Día 4-7', t:'Implantación', d:'El cigoto se divide, forma el blastocisto y se adhiere al útero.', x:'El blastocisto se implanta en el endometrio, la capa interna del útero. Allí empieza a formarse la placenta, que conectará al embrión con la circulación materna para alimentarlo y oxigenarlo.' },
+  { w:'Semana 4-8', t:'Etapa embrionaria', d:'Se forman los principales órganos, el corazón late, aparecen los esbozos de brazos y piernas.', x:'En esta etapa se define el plan corporal: sistema nervioso, corazón, hígado, riñones y extremidades. Es el período más vulnerable a factores externos como alcohol, medicamentos o infecciones.' },
+  { w:'Semana 9-12', t:'Fin de la etapa embrionaria', d:'El embrión pasa a llamarse feto. Se pueden distinguir los rasgos faciales.', x:'A partir de aquí los órganos ya están formados y empiezan a madurar. La ecografía de las 12 semanas puede detectar algunas anomalías y confirmar el desarrollo.' },
+  { w:'Semana 16-20', t:'Movimientos perceptibles', d:'La persona gestante empieza a notar los movimientos del feto.', x:'Los huesos se endurecen, se forman las huellas dactilares y el feto puede oír sonidos. En esta etapa suele realizarse la ecografía morfológica para revisar los órganos.' },
+  { w:'Semana 24-28', t:'Viabilidad', d:'El feto tiene posibilidades de sobrevivir fuera del útero con cuidados intensivos.', x:'El sistema respiratorio empieza a producir surfactante, una sustancia que permite inflar los pulmones. Los ojos se abren y el feto responde a estímulos externos.' },
+  { w:'Semana 32-37', t:'Preparación para el nacimiento', d:'El feto gana peso, se coloca cabeza abajo y los pulmones maduran.', x:'El cerebro crece rápidamente. Muchos bebés se encajan en la pelvis. A partir de la semana 37 se considera que el embarazo llegó a término.' },
+  { w:'Semana 38-42', t:'Nacimiento', d:'Trabajo de parto, expulsión del bebé y de la placenta. Comienza la vida fuera del útero.', x:'El parto puede ser vaginal o por cesárea, según las circunstancias. Los primeros minutos son decisivos: el bebé pasa de respirar por el cordón a hacerlo por los pulmones, y empieza la lactancia.' }
+];
+
+function renderConception(){
+  const list = $('#conceptionList');
+  if (!list) return;
+  const c1 = getComputedStyle(htmlEl).getPropertyValue('--accent').trim() || '#0891b2';
+  list.innerHTML = CONCEPCION.map((s, i) => `
+    <div class="vt-item" style="--c:${c1};--d:${i * 40}ms">
+      <span class="vt-dot"></span>
+      <div class="vt-card">
+        <div class="vt-top">
+          <span class="vt-year">${s.w}</span>
+        </div>
+        <h4>${s.t}</h4>
+        <p>${s.d}</p>
+        <button class="vt-more" type="button">
+          <span>Más detalle</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="vt-extra"><div><p>${s.x}</p></div></div>
+      </div>
+    </div>
+  `).join('');
+
+  list.addEventListener('click', ev => {
+    const btn = ev.target.closest('.vt-more');
+    if (!btn) return;
+    const item = btn.closest('.vt-item');
+    const open = item.classList.toggle('open');
+    btn.querySelector('span').textContent = open ? 'Ocultar detalle' : 'Más detalle';
+  });
+}
+
+/* ============================================================
+   4. ENFERMEDADES
+   ============================================================ */
+const DISEASES = [
+  { n:'Gripe', cat:'infecciosas', c:'#0891b2', d:'Infección viral de las vías respiratorias. Se previene con vacuna anual y se trata con reposo e hidratación.' },
+  { n:'Tuberculosis', cat:'infecciosas', c:'#0891b2', d:'Infección bacteriana de los pulmones. Requiere tratamiento antibiótico prolongado.' },
+  { n:'Malaria', cat:'infecciosas', c:'#0891b2', d:'Enfermedad parasitaria transmitida por mosquitos. Endémica en zonas tropicales.' },
+  { n:'VIH / SIDA', cat:'infecciosas', c:'#0891b2', d:'Virus que afecta al sistema inmunitario. Con tratamiento antirretroviral se vuelve una enfermedad crónica manejable.' },
+  { n:'Fibrosis quística', cat:'geneticas', c:'#db2777', d:'Enfermedad hereditaria que afecta a pulmones y páncreas. Requiere manejo multidisciplinario.' },
+  { n:'Anemia falciforme', cat:'geneticas', c:'#db2777', d:'Alteración de la hemoglobina que deforma los glóbulos rojos. Más frecuente en personas de ascendencia africana.' },
+  { n:'Síndrome de Down', cat:'geneticas', c:'#db2777', d:'Condición causada por una copia extra del cromosoma 21. No es una enfermedad, sino una variación genética.' },
+  { n:'Hemofilia', cat:'geneticas', c:'#db2777', d:'Trastorno de la coagulación por falta de un factor sanguíneo. Requiere tratamiento específico.' },
+  { n:'Diabetes tipo 2', cat:'cronicas', c:'#f59e0b', d:'Alteración en el uso de la insulina. Se maneja con dieta, ejercicio y medicación.' },
+  { n:'Hipertensión', cat:'cronicas', c:'#f59e0b', d:'Presión arterial elevada mantenida. Factor de riesgo para infartos y ACV.' },
+  { n:'Asma', cat:'cronicas', c:'#f59e0b', d:'Inflamación crónica de las vías respiratorias. Se controla con inhaladores.' },
+  { n:'Artritis reumatoide', cat:'autoinmunes', c:'#7c3aed', d:'El sistema inmunitario ataca las articulaciones. Requiere tratamiento inmunomodulador.' },
+  { n:'Lupus', cat:'autoinmunes', c:'#7c3aed', d:'Enfermedad autoinmune sistémica que puede afectar piel, articulaciones y órganos.' },
+  { n:'Esclerosis múltiple', cat:'autoinmunes', c:'#7c3aed', d:'El sistema inmunitario daña la mielina de las neuronas. Curso variable y tratamientos disponibles.' },
+  { n:'Cáncer de pulmón', cat:'cancer', c:'#dc2626', d:'Crecimiento descontrolado de células pulmonares. El tabaquismo es el principal factor de riesgo.' },
+  { n:'Cáncer de mama', cat:'cancer', c:'#dc2626', d:'Tumor maligno en la glándula mamaria. La detección temprana mejora mucho el pronóstico.' },
+  { n:'Leucemia', cat:'cancer', c:'#dc2626', d:'Cáncer de las células sanguíneas. Existen varios tipos con tratamientos distintos.' }
+];
+
+const DISEASE_CATS = {
+  todas:{ n:'Todas', color:'#0891b2' },
+  infecciosas:{ n:'Infecciosas', color:'#0891b2' },
+  geneticas:{ n:'Genéticas', color:'#db2777' },
+  cronicas:{ n:'Crónicas', color:'#f59e0b' },
+  autoinmunes:{ n:'Autoinmunes', color:'#7c3aed' },
+  cancer:{ n:'Cáncer', color:'#dc2626' }
+};
+
+let diseaseFilter = 'todas';
+
+function renderDiseases(){
+  const chips = $('#diseaseChips');
+  const grid = $('#diseaseGrid');
+  if (!chips || !grid) return;
+
+  chips.innerHTML = Object.keys(DISEASE_CATS).map(k =>
+    `<button class="chip${k === diseaseFilter ? ' active' : ''}" data-cat="${k}">${DISEASE_CATS[k].n}</button>`
+  ).join('');
+
+  function paint(){
+    grid.innerHTML = DISEASES
+      .filter(d => diseaseFilter === 'todas' || d.cat === diseaseFilter)
+      .map((d, i) => `
+        <article class="card reveal" style="--d:${Math.min(i, 10) * 30}ms">
+          <span class="kicker" style="color:${d.c}">${DISEASE_CATS[d.cat].n}</span>
+          <h3>${d.n}</h3>
+          <p>${d.d}</p>
+        </article>
+      `).join('');
+    grid.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+  }
+
+  chips.onclick = e => {
+    const chip = e.target.closest('.chip');
+    if (!chip) return;
+    diseaseFilter = chip.dataset.cat;
+    chips.querySelectorAll('.chip').forEach(c => c.classList.toggle('active', c === chip));
+    paint();
+  };
+  paint();
+}
+
+/* ============================================================
+   5. ESQUELETO
+   ============================================================ */
+const BONES = [
+  { id:'craneo', name:'Cráneo', func:'Protege el cerebro y da forma a la cabeza.', desc:'Formado por 22 huesos fusionados. La mandíbula es el único hueso móvil de la cabeza.', x:200, y:60, w:70, h:80, rx:35, color:'#cbd5e1' },
+  { id:'columna', name:'Columna vertebral', func:'Sostiene el cuerpo y protege la médula espinal.', desc:'33 vértebras organizadas en cinco regiones: cervical, dorsal, lumbar, sacra y coxígea.', x:200, y:200, w:20, h:160, rx:8, color:'#94a3b8' },
+  { id:'esternon', name:'Esternón', func:'Protege el corazón y los grandes vasos.', desc:'Hueso plano del centro del pecho. Las costillas se unen a él por cartílago.', x:200, y:170, w:28, h:60, rx:8, color:'#cbd5e1' },
+  { id:'costillas', name:'Costillas', func:'Forman la caja torácica que protege pulmones y corazón.', desc:'12 pares de huesos curvos. Las tres últimas se llaman flotantes porque no llegan al esternón.', x:160, y:170, w:80, h:60, rx:20, color:'#cbd5e1' },
+  { id:'humero', name:'Húmero', func:'Permite mover el brazo y el antebrazo.', desc:'Hueso largo del brazo. Se articula con la escápula en el hombro y con el cúbito y el radio en el codo.', x:120, y:200, w:18, h:120, rx:9, color:'#cbd5e1' },
+  { id:'cubito', name:'Cúbito y radio', func:'Permiten girar el antebrazo y mover la muñeca.', desc:'Dos huesos paralelos que se cruzan cuando rotamos la mano.', x:120, y:330, w:18, h:110, rx:9, color:'#94a3b8' },
+  { id:'pelvis', name:'Pelvis', func:'Sostiene los órganos abdominales y conecta el torso con las piernas.', desc:'Formada por los huesos ilíacos, el sacro y el cóccix. Su forma varía entre sexos.', x:175, y:340, w:50, h:50, rx:16, color:'#94a3b8' },
+  { id:'femur', name:'Fémur', func:'Permite caminar, correr y saltar.', desc:'Es el hueso más largo y fuerte del cuerpo. Se articula con la cadera y con la tibia.', x:175, y:390, w:22, h:130, rx:10, color:'#cbd5e1' },
+  { id:'tibia', name:'Tibia y peroné', func:'Sostienen el peso del cuerpo al caminar.', desc:'La tibia es el hueso grande; el peroné es paralelo y más delgado, ayuda a estabilizar el tobillo.', x:175, y:520, w:22, h:30, rx:10, color:'#94a3b8' }
+];
+
+function renderSkeleton(){
+  const svg = $('#skeletonSvg');
+  const panel = $('#skeletonInfo');
+  if (!svg) return;
+  svg.innerHTML = '';
+
+  const text = getComputedStyle(htmlEl).getPropertyValue('--text').trim() || '#0c1a22';
+  const muted = getComputedStyle(htmlEl).getPropertyValue('--muted').trim() || '#5d6b73';
+  const accent = getComputedStyle(htmlEl).getPropertyValue('--accent').trim() || '#0891b2';
+
+  // Silueta de referencia
+  el('ellipse', { cx:200, cy:60, rx:48, ry:55, fill:'none', stroke: muted, 'stroke-width':1.5, 'stroke-dasharray':'4 4', opacity:0.35 }, svg);
+  el('ellipse', { cx:200, cy:240, rx:90, ry:120, fill:'none', stroke: muted, 'stroke-width':1.5, 'stroke-dasharray':'4 4', opacity:0.35 }, svg);
+  el('rect', { x:95, y:150, width:35, height:200, rx:17, fill:'none', stroke: muted, 'stroke-width':1.5, 'stroke-dasharray':'4 4', opacity:0.35 }, svg);
+  el('rect', { x:270, y:150, width:35, height:200, rx:17, fill:'none', stroke: muted, 'stroke-width':1.5, 'stroke-dasharray':'4 4', opacity:0.35 }, svg);
+  el('rect', { x:150, y:360, width:40, height:200, rx:20, fill:'none', stroke: muted, 'stroke-width':1.5, 'stroke-dasharray':'4 4', opacity:0.35 }, svg);
+  el('rect', { x:210, y:360, width:40, height:200, rx:20, fill:'none', stroke: muted, 'stroke-width':1.5, 'stroke-dasharray':'4 4', opacity:0.35 }, svg);
+
+  // Dibujar cada hueso
+  BONES.forEach(b => {
+    const g = el('g', { class:'hit', 'data-id':b.id, 'aria-label':b.name }, svg);
+    if (b.rx && b.w >= 40){
+      el('ellipse', { cx:b.x, cy:b.y, rx:b.w/2, ry:b.h/2, fill:b.color, stroke:'#475569', 'stroke-width':2, opacity:0.92 }, g);
+    } else {
+      el('rect', { x:b.x - b.w/2, y:b.y, width:b.w, height:b.h, rx:b.rx, fill:b.color, stroke:'#475569', 'stroke-width':2, opacity:0.92 }, g);
+    }
+  });
+
+  // Esqueleto simplificado de huesos largos de brazos y piernas
+  [120, 280].forEach(cx => {
+    el('rect', { x:cx-4, y:150, width:8, height:120, rx:4, fill:'#94a3b8', stroke:'#475569','stroke-width':1.5 }, svg);
+    el('rect', { x:cx-4, y:280, width:8, height:100, rx:4, fill:'#94a3b8', stroke:'#475569','stroke-width':1.5 }, svg);
+  });
+  [170, 230].forEach(cx => {
+    el('rect', { x:cx-5, y:380, width:10, height:150, rx:5, fill:'#94a3b8', stroke:'#475569','stroke-width':1.5 }, svg);
+    el('rect', { x:cx-5, y:535, width:10, height:50, rx:5, fill:'#94a3b8', stroke:'#475569','stroke-width':1.5 }, svg);
+  });
+
+  svg.onclick = e => {
+    const g = e.target.closest('.hit');
+    if (!g) return;
+    const b = BONES.find(x => x.id === g.dataset.id);
+    if (!b) return;
+    $$('#skeletonSvg .hit').forEach(h => h.classList.toggle('sel', h === g));
+    panel.classList.add('active');
+    panel.innerHTML = `
+      <div class="ip-name">${b.name}</div>
+      <div class="ip-func"><strong style="color:var(--text)">Función:</strong> ${b.func}</div>
+      <div class="ip-desc">${b.desc}</div>
+    `;
+  };
+}
+
+/* ============================================================
+   6. SANGRE
+   ============================================================ */
+const BLOOD_COMP = [
+  { n:'Plasma', pct:55, color:'#fbbf24' },
+  { n:'Glóbulos rojos', pct:43, color:'#dc2626' },
+  { n:'Glóbulos blancos y plaquetas', pct:2, color:'#e0e7ff' }
+];
+
+function renderBloodDonut(){
+  const svg = $('#bloodDonut');
+  const legend = $('#bloodLegend');
+  if (!svg) return;
+  svg.innerHTML = '';
+
+  const cx = 80, cy = 80, r = 60, rInner = 38;
+  let a0 = -Math.PI / 2;
+
+  BLOOD_COMP.forEach(c => {
+    const a1 = a0 + (c.pct / 100) * Math.PI * 2;
+    const x0 = cx + Math.cos(a0) * r, y0 = cy + Math.sin(a0) * r;
+    const x1 = cx + Math.cos(a1) * r, y1 = cy + Math.sin(a1) * r;
+    const xi0 = cx + Math.cos(a0) * rInner, yi0 = cy + Math.sin(a0) * rInner;
+    const xi1 = cx + Math.cos(a1) * rInner, yi1 = cy + Math.sin(a1) * rInner;
+    const large = a1 - a0 > Math.PI ? 1 : 0;
+    const d = `M ${x0} ${y0} A ${r} ${r} 0 ${large} 1 ${x1} ${y1} L ${xi1} ${yi1} A ${rInner} ${rInner} 0 ${large} 0 ${xi0} ${yi0} Z`;
+    el('path', { d, fill: c.color, stroke: '#fff', 'stroke-width': 1.5 }, svg);
+    a0 = a1;
+  });
+
+  el('text', {
+    x: cx, y: cy - 4, 'text-anchor': 'middle',
+    'font-family': 'Space Grotesk,sans-serif', 'font-size': 18, 'font-weight': 700,
+    fill: getComputedStyle(htmlEl).getPropertyValue('--text').trim() || '#0c1a22'
+  }, svg).textContent = '55%';
+  el('text', {
+    x: cx, y: cy + 14, 'text-anchor': 'middle',
+    'font-family': 'Inter,sans-serif', 'font-size': 10, 'font-weight': 600,
+    fill: getComputedStyle(htmlEl).getPropertyValue('--muted').trim() || '#5d6b73'
+  }, svg).textContent = 'plasma';
+
+  if (legend){
+    legend.innerHTML = BLOOD_COMP.map(c => `
+      <div class="lg">
+        <span class="sw" style="background:${c.color}"></span>
+        <span class="pct">${c.pct}%</span>
+        <span>${c.n}</span>
+      </div>
+    `).join('');
+  }
+}
+
+function renderBloodCells(){
+  const svg = $('#bloodCells');
+  if (!svg) return;
+  svg.innerHTML = '';
+
+  const muted = getComputedStyle(htmlEl).getPropertyValue('--muted').trim() || '#5d6b73';
+
+  // Glóbulo rojo
+  el('ellipse', { cx:60, cy:60, rx:40, ry:30, fill:'#dc2626', stroke:'#7f1d1d', 'stroke-width':2 }, svg);
+  el('ellipse', { cx:60, cy:60, rx:24, ry:16, fill:'none', stroke:'#7f1d1d', 'stroke-width':1.5, opacity:0.6 }, svg);
+  el('text', { x:60, y:115, 'text-anchor':'middle', 'font-family':'Inter,sans-serif', 'font-size':11, 'font-weight':600, fill:muted }, svg).textContent = 'Glóbulo rojo';
+
+  // Glóbulo blanco
+  el('circle', { cx:190, cy:60, r:32, fill:'#e0e7ff', stroke:'#4338ca', 'stroke-width':2 }, svg);
+  el('circle', { cx:185, cy:55, r:10, fill:'#a5b4fc', opacity:0.6 }, svg);
+  el('circle', { cx:198, cy:68, r:8, fill:'#a5b4fc', opacity:0.6 }, svg);
+  el('text', { x:190, y:115, 'text-anchor':'middle', 'font-family':'Inter,sans-serif', 'font-size':11, 'font-weight':600, fill:muted }, svg).textContent = 'Glóbulo blanco';
+
+  // Plaqueta
+  el('ellipse', { cx:320, cy:60, rx:22, ry:14, fill:'#fbbf24', stroke:'#b45309', 'stroke-width':2, transform:'rotate(-20 320 60)' }, svg);
+  el('text', { x:320, y:115, 'text-anchor':'middle', 'font-family':'Inter,sans-serif', 'font-size':11, 'font-weight':600, fill:muted }, svg).textContent = 'Plaqueta';
+}
+
+/* ============================================================
+   7. MÚSCULOS
+   ============================================================ */
+const MUSCLES = [
+  { id:'pectoral', name:'Pectoral', func:'Mueve el brazo hacia el cuerpo y hacia delante.', desc:'Músculo grande del pecho. Se trabaja con flexiones y press de banca.', x:200, y:165, w:80, h:40, rx:12, color:'#db2777' },
+  { id:'deltoides', name:'Deltoides', func:'Levanta el brazo hacia los lados y hacia delante.', desc:'Músculo del hombro, con tres porciones: anterior, media y posterior.', x:130, y:150, w:30, h:40, rx:15, color:'#db2777' },
+  { id:'biceps', name:'Bíceps', func:'Flexiona el codo y ayuda a girar el antebrazo.', desc:'Músculo de la parte anterior del brazo. Se trabaja con curls.', x:120, y:220, w:22, h:70, rx:11, color:'#db2777' },
+  { id:'abdominales', name:'Abdominales', func:'Flexionan el tronco y estabilizan el core.', desc:'Conjunto de músculos del abdomen. Incluyen el recto anterior y los oblicuos.', x:200, y:225, w:60, h:60, rx:14, color:'#db2777' },
+  { id:'dorsal', name:'Dorsal ancho', func:'Tira del brazo hacia abajo y hacia atrás.', desc:'El músculo más grande de la espalda. Se trabaja con dominadas y remo.', x:280, y:200, w:22, h:80, rx:11, color:'#db2777' },
+  { id:'gluteo', name:'Glúteo', func:'Extiende la cadera y estabiliza la pelvis.', desc:'Formado por tres músculos: mayor, medio y menor. Fundamental para caminar y correr.', x:180, y:310, w:50, h:40, rx:15, color:'#db2777' },
+  { id:'cuadriceps', name:'Cuádriceps', func:'Extiende la rodilla.', desc:'Cuatro músculos en la parte anterior del muslo. Se trabaja con sentadillas.', x:175, y:400, w:24, h:90, rx:12, color:'#db2777' },
+  { id:'isquios', name:'Isquiotibiales', func:'Flexionan la rodilla y extienden la cadera.', desc:'Grupo de músculos en la parte posterior del muslo. Se trabajan con peso muerto.', x:225, y:400, w:24, h:90, rx:12, color:'#db2777' },
+  { id:'gemelos', name:'Gemelos', func:'Permiten ponerse de puntillas y empujar al caminar.', desc:'Dos músculos en la pantorrilla: gastrocnemio y sóleo. Se trabajan con elevación de talones.', x:175, y:530, w:24, h:60, rx:12, color:'#db2777' }
+];
+
+function renderMuscles(){
+  const svg = $('#muscleSvg');
+  const panel = $('#muscleInfo');
+  if (!svg) return;
+  svg.innerHTML = '';
+
+  const muted = getComputedStyle(htmlEl).getPropertyValue('--muted').trim() || '#5d6b73';
+
+  el('ellipse', { cx:200, cy:60, rx:48, ry:55, fill:'none', stroke: muted, 'stroke-width':1.5, 'stroke-dasharray':'4 4', opacity:0.35 }, svg);
+  el('ellipse', { cx:200, cy:240, rx:90, ry:120, fill:'none', stroke: muted, 'stroke-width':1.5, 'stroke-dasharray':'4 4', opacity:0.35 }, svg);
+  el('rect', { x:105, y:150, width:35, height:200, rx:17, fill:'none', stroke: muted, 'stroke-width':1.5, 'stroke-dasharray':'4 4', opacity:0.35 }, svg);
+  el('rect', { x:260, y:150, width:35, height:200, rx:17, fill:'none', stroke: muted, 'stroke-width':1.5, 'stroke-dasharray':'4 4', opacity:0.35 }, svg);
+  el('rect', { x:150, y:360, width:40, height:220, rx:20, fill:'none', stroke: muted, 'stroke-width':1.5, 'stroke-dasharray':'4 4', opacity:0.35 }, svg);
+  el('rect', { x:210, y:360, width:40, height:220, rx:20, fill:'none', stroke: muted, 'stroke-width':1.5, 'stroke-dasharray':'4 4', opacity:0.35 }, svg);
+
+  MUSCLES.forEach(m => {
+    const g = el('g', { class:'hit', 'data-id':m.id, 'aria-label':m.name }, svg);
+    el('rect', { x:m.x - m.w/2, y:m.y - m.h/2, width:m.w, height:m.h, rx:m.rx, fill:m.color, stroke:'#831843', 'stroke-width':1.5, opacity:0.85 }, g);
+  });
+
+  svg.onclick = e => {
+    const g = e.target.closest('.hit');
+    if (!g) return;
+    const m = MUSCLES.find(x => x.id === g.dataset.id);
+    if (!m) return;
+    $$('#muscleSvg .hit').forEach(h => h.classList.toggle('sel', h === g));
+    panel.classList.add('active');
+    panel.innerHTML = `
+      <div class="ip-name">${m.name}</div>
+      <div class="ip-func"><strong style="color:var(--text)">Función:</strong> ${m.func}</div>
+      <div class="ip-desc">${m.desc}</div>
+    `;
+  };
+}
+
+/* ============================================================
+   8. ÓRGANOS
+   ============================================================ */
+const ORGANS = [
+  { id:'cerebro', name:'Cerebro', func:'Coordina el pensamiento, el movimiento, las emociones y las funciones vitales.', desc:'Es el órgano más complejo del cuerpo. Consume alrededor del 20 % de la energía total, aunque solo representa el 2 % del peso corporal.', cx:200, cy:55, r:32, color:'#fbbf24', shape:'circle' },
+  { id:'pulmones', name:'Pulmones', func:'Intercambian oxígeno y dióxido de carbono con la sangre.', desc:'El pulmón derecho tiene tres lóbulos; el izquierdo solo dos, para dejarle espacio al corazón. Contienen unos 300 millones de alvéolos.', cx:200, cy:185, rx:60, ry:45, color:'#22d3ee', shape:'ellipse' },
+  { id:'corazon', name:'Corazón', func:'Bombea la sangre a todo el cuerpo.', desc:'Late unas 100.000 veces al día. Tiene cuatro cámaras: dos aurículas y dos ventrículos. Está ligeramente a la izquierda del centro del pecho.', cx:180, cy:195, r:26, color:'#dc2626', shape:'heart' },
+  { id:'higado', name:'Hígado', func:'Filtra la sangre, procesa nutrientes y produce bilis.', desc:'Es el órgano interno más grande. Cumple más de 500 funciones distintas. Se regenera parcialmente si se daña.', cx:230, cy:225, rx:32, ry:22, color:'#92400e', shape:'ellipse' },
+  { id:'estomago', name:'Estómago', func:'Digiere los alimentos con ácido y enzimas.', desc:'Su ácido es tan fuerte que podría disolver metal. La mucosa se renueva cada pocos días para no autodigerirse.', cx:170, cy:235, rx:26, ry:22, color:'#f59e0b', shape:'ellipse' },
+  { id:'pancreas', name:'Páncreas', func:'Produce enzimas digestivas e insulina.', desc:'Sus células beta fabrican insulina, la hormona que regula el azúcar en sangre. Su falla causa diabetes.', cx:200, cy:258, rx:30, ry:10, color:'#eab308', shape:'ellipse' },
+  { id:'rinones', name:'Riñones', func:'Filtran la sangre y producen orina.', desc:'Filtran unos 180 litros de sangre al día y devuelven la mayor parte al cuerpo. Regulan también la presión arterial.', cx:200, cy:270, rx:55, ry:14, color:'#a855f7', shape:'pair' },
+  { id:'intestinos', name:'Intestinos', func:'Absorben los nutrientes y forman las heces.', desc:'El intestino delgado mide unos 6 metros; el grueso, 1,5. Juntos albergan una microbiota esencial para la salud.', cx:200, cy:300, rx:42, ry:24, color:'#ec4899', shape:'ellipse' },
+  { id:'bazo', name:'Bazo', func:'Filtra la sangre y participa en la defensa inmunitaria.', desc:'Está a la izquierda del estómago. Ayuda a reciclar glóbulos rojos viejos y a producir anticuerpos.', cx:245, cy:210, r:14, color:'#7c3aed', shape:'circle' }
+];
+
+function renderOrgans(){
+  const svg = $('#organSvg');
+  const panel = $('#organInfo');
+  const list = $('#organList');
+  if (!svg) return;
+  svg.innerHTML = '';
+
+  const muted = getComputedStyle(htmlEl).getPropertyValue('--muted').trim() || '#5d6b73';
+  const accent = getComputedStyle(htmlEl).getPropertyValue('--accent').trim() || '#0891b2';
+
+  // Silueta
+  el('ellipse', { cx:200, cy:60, rx:48, ry:55, fill:'none', stroke: muted, 'stroke-width':1.5, 'stroke-dasharray':'4 4', opacity:0.4 }, svg);
+  el('ellipse', { cx:200, cy:240, rx:90, ry:120, fill:'none', stroke: muted, 'stroke-width':1.5, 'stroke-dasharray':'4 4', opacity:0.4 }, svg);
+  el('rect', { x:105, y:150, width:35, height:200, rx:17, fill:'none', stroke: muted, 'stroke-width':1.5, 'stroke-dasharray':'4 4', opacity:0.4 }, svg);
+  el('rect', { x:260, y:150, width:35, height:200, rx:17, fill:'none', stroke: muted, 'stroke-width':1.5, 'stroke-dasharray':'4 4', opacity:0.4 }, svg);
+  el('rect', { x:150, y:360, width:40, height:200, rx:20, fill:'none', stroke: muted, 'stroke-width':1.5, 'stroke-dasharray':'4 4', opacity:0.4 }, svg);
+  el('rect', { x:210, y:360, width:40, height:200, rx:20, fill:'none', stroke: muted, 'stroke-width':1.5, 'stroke-dasharray':'4 4', opacity:0.4 }, svg);
+
+  // Riñones (par)
+  ORGANS.filter(o => o.shape === 'pair').forEach(o => {
+    const g = el('g', { class:'hit', 'data-id':o.id, 'aria-label':o.name }, svg);
+    el('ellipse', { cx:o.cx - 30, cy:o.cy, rx:o.rx/2, ry:o.ry, fill:o.color, stroke:'#4c1d95', 'stroke-width':1.5, opacity:0.85 }, g);
+    el('ellipse', { cx:o.cx + 30, cy:o.cy, rx:o.rx/2, ry:o.ry, fill:o.color, stroke:'#4c1d95', 'stroke-width':1.5, opacity:0.85 }, g);
+  });
+
+  // Corazón (forma especial)
+  ORGANS.filter(o => o.shape === 'heart').forEach(o => {
+    const g = el('g', { class:'hit', 'data-id':o.id, 'aria-label':o.name }, svg);
+    const path = `M ${o.cx} ${o.cy + o.r*0.6}
+                  C ${o.cx - o.r*1.2} ${o.cy - o.r*0.4}, ${o.cx - o.r*0.9} ${o.cy - o.r}, ${o.cx} ${o.cy - o.r*0.5}
+                  C ${o.cx + o.r*0.9} ${o.cy - o.r}, ${o.cx + o.r*1.2} ${o.cy - o.r*0.4}, ${o.cx} ${o.cy + o.r*0.6} Z`;
+    el('path', { d:path, fill:o.color, stroke:'#7f1d1d', 'stroke-width':1.5, opacity:0.9 }, g);
+  });
+
+  // Resto
+  ORGANS.filter(o => o.shape !== 'pair' && o.shape !== 'heart').forEach(o => {
+    const g = el('g', { class:'hit', 'data-id':o.id, 'aria-label':o.name }, svg);
+    if (o.shape === 'circle'){
+      el('circle', { cx:o.cx, cy:o.cy, r:o.r, fill:o.color, stroke:'#1e293b', 'stroke-width':1.5, opacity:0.85 }, g);
+    } else {
+      el('ellipse', { cx:o.cx, cy:o.cy, rx:o.rx, ry:o.ry, fill:o.color, stroke:'#1e293b', 'stroke-width':1.5, opacity:0.85 }, g);
+    }
+  });
+
+  svg.onclick = e => {
+    const g = e.target.closest('.hit');
+    if (!g) return;
+    const o = ORGANS.find(x => x.id === g.dataset.id);
+    if (!o) return;
+    $$('#organSvg .hit').forEach(h => h.classList.toggle('sel', h === g));
+    panel.classList.add('active');
+    panel.innerHTML = `
+      <div class="ip-name">${o.name}</div>
+      <div class="ip-func"><strong style="color:var(--text)">Función:</strong> ${o.func}</div>
+      <div class="ip-desc">${o.desc}</div>
+    `;
+    // Resaltar en la lista
+    $$('#organList .card').forEach(c => {
+      c.style.borderColor = c.dataset.id === o.id ? accent : '';
+    });
+  };
+
+  // Lista lateral
+  if (list){
+    list.innerHTML = ORGANS.map(o => `
+      <div class="card reveal" data-id="${o.id}" style="cursor:pointer;margin-bottom:10px;border-left:3px solid ${o.color}">
+        <h3 style="margin-bottom:4px;font-size:.95rem">${o.name}</h3>
+        <p style="font-size:.83rem;margin:0">${o.func}</p>
+      </div>
+    `).join('');
+    list.addEventListener('click', e => {
+      const card = e.target.closest('.card[data-id]');
+      if (!card) return;
+      const o = ORGANS.find(x => x.id === card.dataset.id);
+      if (!o) return;
+      $$('#organSvg .hit').forEach(h => h.classList.toggle('sel', h.dataset.id === o.id));
+      panel.classList.add('active');
+      panel.innerHTML = `
+        <div class="ip-name">${o.name}</div>
+        <div class="ip-func"><strong style="color:var(--text)">Función:</strong> ${o.func}</div>
+        <div class="ip-desc">${o.desc}</div>
+      `;
+    });
+    list.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+  }
+}
+
+/* ============================================================
+   9. VACUNAS
+   ============================================================ */
+const VACCINES = [
+  { y:1796, t:'Vacuna contra la viruela', d:'Edward Jenner demuestra que la viruela vacuna protege contra la viruela humana.', x:'Fue el nacimiento de la vacunación. La viruela fue erradicada oficialmente en 1980, el primer caso de una enfermedad humana eliminada por la ciencia.', c:'#0891b2' },
+  { y:1885, t:'Vacuna contra la rabia', d:'Louis Pasteur aplica con éxito la primera vacuna antirrábica en un niño mordido por un perro.', x:'Marcó un hito: por primera vez una vacuna se usó después de la exposición al virus, para evitar que la enfermedad se desarrollara.', c:'#0891b2' },
+  { y:1921, t:'BCG contra la tuberculosis', d:'Se desarrolla la vacuna BCG, aún hoy utilizada en muchos países.', x:'Su eficacia varía frente a distintas formas de tuberculosis, pero sigue siendo clave en países con alta incidencia.', c:'#0891b2' },
+  { y:1955, t:'Vacuna contra la polio', d:'Se aprueba la vacuna de Salk, seguida por la de Sabin en 1961.', x:'La polio pasó de causar epidemias anuales a estar casi erradicada en el mundo. Solo quedan focos en muy pocos países.', c:'#10b981' },
+  { y:1963, t:'Vacuna contra el sarampión', d:'Se aprueba la primera vacuna contra el sarampión.', x:'El sarampión es extremadamente contagioso. La vacuna triple viral (sarampión, paperas y rubéola) se aplica desde los años 70.', c:'#10b981' },
+  { y:1986, t:'Vacuna contra la hepatitis B', d:'Se introduce una vacuna recombinante, una de las primeras hechas con ingeniería genética.', x:'La hepatitis B puede causar cirrosis y cáncer de hígado. La vacuna se aplica en muchos países al nacer.', c:'#10b981' },
+  { y:2006, t:'Vacuna contra el VPH', d:'Se aprueba la primera vacuna contra el virus del papiloma humano.', x:'Previene la mayoría de los cánceres de cuello de útero. Se recomienda en la adolescencia, antes del inicio de la vida sexual.', c:'#7c3aed' },
+  { y:2020, t:'Vacunas de ARNm contra la COVID-19', d:'Se aprueban las primeras vacunas de ARN mensajero a gran escala.', x:'Fue un salto tecnológico: en lugar de introducir el antígeno, se introducen instrucciones para que el cuerpo lo fabrique. La tecnología se investigaba desde hacía décadas.', c:'#7c3aed' }
+];
+
+function renderVaccines(){
+  const list = $('#vaccineList');
+  if (!list) return;
+  list.innerHTML = VACCINES.map((v, i) => `
+    <div class="vt-item" style="--c:${v.c};--d:${i * 40}ms">
+      <span class="vt-dot"></span>
+      <div class="vt-card">
+        <div class="vt-top">
+          <span class="vt-year">${v.y}</span>
+        </div>
+        <h4>${v.t}</h4>
+        <p>${v.d}</p>
+        <button class="vt-more" type="button">
+          <span>Más detalle</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="vt-extra"><div><p>${v.x}</p></div></div>
+      </div>
+    </div>
+  `).join('');
+
+  list.addEventListener('click', ev => {
+    const btn = ev.target.closest('.vt-more');
+    if (!btn) return;
+    const item = btn.closest('.vt-item');
+    const open = item.classList.toggle('open');
+    btn.querySelector('span').textContent = open ? 'Ocultar detalle' : 'Más detalle';
+  });
+}
+
+/* ============================================================
+   10. QUIZ
+   ============================================================ */
+const QUIZ_DATA = [
+  { q:'¿Cuántos pares de cromosomas tiene una célula humana típica?', o:['21','23','26','46'], c:1,
+    e:'Tenemos 23 pares de cromosomas: 22 pares autosómicos y un par sexual (XX o XY). En total, 46 cromosomas.' },
+  { q:'¿Qué bases nitrogenadas se emparejan siempre en el ADN?', o:['A con G y C con T','A con T y C con G','A con C y T con G','A con U y C con G'], c:1,
+    e:'En el ADN, la adenina (A) se empareja con la timina (T), y la citosina (C) con la guanina (G). En el ARN, la A se empareja con uracilo (U).' },
+  { q:'¿Qué par de cromosomas suele asociarse al sexo masculino?', o:['XX','XY','YY','XO'], c:1,
+    e:'El par XY suele asociarse al sexo masculino. El par XX al sexo femenino. Existen otras variaciones cromosómicas posibles.' },
+  { q:'¿Cuántos huesos tiene un adulto, aproximadamente?', o:['106','156','206','306'], c:2,
+    e:'Un adulto tiene 206 huesos. Un recién nacido tiene cerca de 300, pero muchos se fusionan durante el crecimiento.' },
+  { q:'¿Cuál es el hueso más largo del cuerpo humano?', o:['El húmero','El fémur','La tibia','El peroné'], c:1,
+    e:'El fémur, en el muslo, es el hueso más largo y fuerte del cuerpo. Puede soportar hasta 30 veces el peso corporal.' },
+  { q:'¿Qué componente de la sangre transporta el oxígeno?', o:['El plasma','Las plaquetas','Los glóbulos rojos','Los glóbulos blancos'], c:2,
+    e:'Los glóbulos rojos contienen hemoglobina, una proteína que se une al oxígeno en los pulmones y lo libera en los tejidos.' },
+  { q:'¿Qué tipo de músculo es involuntario y exclusivo del corazón?', o:['Esquelético','Liso','Cardíaco','Estriado'], c:2,
+    e:'El músculo cardíaco es exclusivo del corazón. Es involuntario y tiene una estructura estriada particular, distinta del músculo esquelético.' },
+  { q:'¿Cuál de estos órganos produce insulina?', o:['El hígado','El estómago','El páncreas','El bazo'], c:2,
+    e:'El páncreas produce insulina a través de sus células beta. Esta hormona regula el azúcar en sangre. Su falla causa diabetes.' },
+  { q:'¿Cuál de estos órganos filtra la sangre y produce orina?', o:['Los pulmones','Los riñones','El hígado','El bazo'], c:1,
+    e:'Los riñones filtran la sangre, eliminan desechos en forma de orina y regulan el equilibrio de agua y sales del cuerpo.' },
+  { q:'¿Qué hace una vacuna?', o:['Mata directamente al patógeno','Entrena al sistema inmunitario sin causar la enfermedad','Sustituye a los antibióticos','Elimina los genes de la enfermedad'], c:1,
+    e:'Una vacuna entrena al sistema inmunitario para reconocer un patógeno. Así, si el cuerpo se encuentra con el patógeno real, responde rápido y evita la enfermedad.' },
+  { q:'¿Cuál fue la primera enfermedad humana erradicada por vacunación?', o:['La polio','El sarampión','La viruela','La tuberculosis'], c:2,
+    e:'La viruela se declaró erradicada en 1980, tras una campaña global de vacunación. Es la única enfermedad humana erradicada hasta hoy.' },
+  { q:'¿Cuántas etapas tiene un embarazo típico, contadas por trimestres?', o:['2','3','4','5'], c:1,
+    e:'El embarazo se divide en tres trimestres. Cada uno tiene hitos propios: formación de órganos, crecimiento y preparación para el parto.' }
+];
+
+const TOTAL_PREGUNTAS = 10;
+const LETRAS = ['A','B','C','D'];
+let quizState = { questions: [], index: 0, score: 0, answered: false, finished: false };
+
+function shuffle(arr){
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function startQuiz(){
+  quizState = {
+    questions: shuffle(QUIZ_DATA).slice(0, TOTAL_PREGUNTAS),
+    index: 0,
+    score: 0,
+    answered: false,
+    finished: false
+  };
+  renderQuiz();
+}
+
+function renderQuiz(){
+  const card = $('#quizCard');
+  if (!card) return;
+
+  if (quizState.finished){
+    const total = quizState.questions.length;
+    const pct = Math.round((quizState.score / total) * 100);
+    let mensaje = 'Sigue repasando: la biología se entiende mejor conectando sistemas.';
+    if (pct === 100) mensaje = 'Perfecto. Dominas los conceptos básicos.';
+    else if (pct >= 75) mensaje = 'Muy buen resultado. Te falta muy poco para el pleno.';
+    else if (pct >= 50) mensaje = 'Buen comienzo. Repasa y prueba otra vez.';
+
+    card.innerHTML = `
+      <div class="result">
+        <div class="score">${quizState.score}/${total}</div>
+        <h3>${mensaje}</h3>
+        <p>Has acertado el ${pct} % de las preguntas de esta ronda.</p>
+        <button class="btn btn-primary" id="restartQuiz">
+          Jugar otra vez
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>
+        </button>
+      </div>
+    `;
+    $('#restartQuiz').addEventListener('click', startQuiz);
+    return;
+  }
+
+  const q = quizState.questions[quizState.index];
+  const total = quizState.questions.length;
+  const progress = (quizState.index / total) * 100;
+
+  card.innerHTML = `
+    <div class="quiz-meta">
+      <span>Pregunta ${quizState.index + 1} de ${total}</span>
+      <span>Aciertos: ${quizState.score}</span>
+    </div>
+    <div class="progress"><div class="progress-bar" style="width:${progress}%"></div></div>
+    <h3 class="q-text">${q.q}</h3>
+    <div class="options" id="options">
+      ${q.o.map((opt, i) => `
+        <button class="option" data-i="${i}">
+          <span class="letter">${LETRAS[i]}</span>
+          <span>${opt}</span>
+        </button>
+      `).join('')}
+    </div>
+    <div id="feedbackSlot"></div>
+    <div class="quiz-actions" id="actionsSlot"></div>
+  `;
+
+  $('#options').addEventListener('click', e => {
+    const btn = e.target.closest('.option');
+    if (!btn || quizState.answered) return;
+    answerQuestion(parseInt(btn.dataset.i, 10));
+  });
+}
+
+function answerQuestion(chosen){
+  quizState.answered = true;
+  const q = quizState.questions[quizState.index];
+  const options = $$('#options .option');
+
+  options.forEach((btn, i) => {
+    btn.disabled = true;
+    if (i === q.c) btn.classList.add('correct');
+    else if (i === chosen) btn.classList.add('wrong');
+  });
+
+  const acerto = chosen === q.c;
+  if (acerto) quizState.score++;
+
+  $('#feedbackSlot').innerHTML = `
+    <div class="feedback">
+      <strong>${acerto ? 'Correcto.' : 'No exactamente.'}</strong> ${q.e}
+    </div>
+  `;
+
+  const isLast = quizState.index === quizState.questions.length - 1;
+  $('#actionsSlot').innerHTML = `
+    <button class="btn btn-primary" id="nextBtn">
+      ${isLast ? 'Ver resultado' : 'Siguiente pregunta'}
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </button>
+  `;
+
+  $('#nextBtn').addEventListener('click', () => {
+    if (isLast) quizState.finished = true;
+    else { quizState.index++; quizState.answered = false; }
+    renderQuiz();
+  });
+}
+
+/* ============================================================
+   EFECTOS INTERACTIVOS
+   ============================================================ */
+$$('.module').forEach(m => {
+  m.addEventListener('mousemove', e => {
+    const r = m.getBoundingClientRect();
+    m.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
+    m.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
+  });
+});
+
+document.addEventListener('visibilitychange', () => {
+  document.querySelectorAll('.orb').forEach(o => {
+    o.style.animationPlayState = document.hidden ? 'paused' : 'running';
+  });
+});
+
+/* ============================================================
+   ARRANQUE
+   ============================================================ */
+(function boot(){
+  const initial = (location.hash.slice(1) || 'inicio');
+  go(ROUTES.includes(initial) ? initial : 'inicio', false);
+  checkReveal();
+  setTimeout(() => { if (currentRoute === 'inicio') animateCounters(); }, 300);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,1271 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Roma · Guía interactiva — cronología, derecho, personajes, escritura y legado</title>
+<meta name="description" content="Guía interactiva de la antigua Roma: cronología desde Rómulo hasta la caída del Imperio, pensamiento y derecho romano, personajes históricos, el alfabeto latino y su influencia en el mundo antiguo y actual.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --font-display:'Space Grotesk','Segoe UI',system-ui,sans-serif;
+  --font-body:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --font-mono:'JetBrains Mono','SF Mono',Consolas,monospace;
+  --radius:20px;
+  --radius-sm:12px;
+  --maxw:1180px;
+  --ease:cubic-bezier(.22,.75,.25,1);
+}
+html[data-theme="light"]{
+  --bg:#f8f4ee;
+  --bg-soft:#efe7dc;
+  --surface:rgba(255,255,255,.84);
+  --surface-solid:#ffffff;
+  --surface-2:rgba(124,45,18,.05);
+  --surface-3:rgba(124,45,18,.09);
+  --border:rgba(124,45,18,.14);
+  --border-strong:rgba(124,45,18,.28);
+  --text:#150c08;
+  --muted:#6b5648;
+  --accent:#991b1b;
+  --accent-2:#7c3aed;
+  --accent-3:#b45309;
+  --accent-4:#4d7c0f;
+  --good:#15803d;
+  --bad:#b91c1c;
+  --shadow:0 22px 55px -28px rgba(124,45,18,.32);
+  --orb-op:.13;
+  --dot-color:rgba(124,45,18,.055);
+  --star:rgba(124,45,18,.25);
+  --code-bg:rgba(124,45,18,.06);
+  --gold:#ca8a04;
+  --bronze:#a16207;
+  --imperial:#7c2d12;
+  --travertine:#f3ead8;
+}
+html[data-theme="dark"]{
+  --bg:#0a0605;
+  --bg-soft:#120a08;
+  --surface:rgba(28,18,14,.68);
+  --surface-solid:#1a100c;
+  --surface-2:rgba(255,255,255,.045);
+  --surface-3:rgba(255,255,255,.08);
+  --border:rgba(255,255,255,.10);
+  --border-strong:rgba(255,255,255,.20);
+  --text:#f2e8e0;
+  --muted:#a08b7e;
+  --accent:#f87171;
+  --accent-2:#c084fc;
+  --accent-3:#fbbf24;
+  --accent-4:#a3e635;
+  --good:#34d399;
+  --bad:#fb7185;
+  --shadow:0 24px 60px -24px rgba(0,0,0,.9);
+  --orb-op:.26;
+  --dot-color:rgba(255,255,255,.03);
+  --star:rgba(255,255,255,.8);
+  --code-bg:rgba(255,255,255,.06);
+  --gold:#fbbf24;
+  --bronze:#d97706;
+  --imperial:#7c2d12;
+  --travertine:#2a1c14;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;font-family:var(--font-body);background:var(--bg);color:var(--text);
+  min-height:100vh;line-height:1.65;-webkit-font-smoothing:antialiased;
+  transition:background .45s var(--ease),color .45s var(--ease);
+  overflow-x:hidden;
+}
+h1,h2,h3,h4,h5{font-family:var(--font-display);line-height:1.15;letter-spacing:-.02em;margin:0}
+p{margin:0}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+a{color:inherit;text-decoration:none}
+ul{margin:0}
+::selection{background:var(--accent);color:#fff}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
+
+.bg-stars{position:fixed;inset:0;z-index:-4;pointer-events:none;overflow:hidden}
+.bg-stars .star{
+  position:absolute;width:2px;height:2px;border-radius:50%;
+  background:var(--star);opacity:.55;
+  animation:twinkle var(--tw-dur,4s) ease-in-out infinite;
+  animation-delay:var(--tw-delay,0s);
+}
+@keyframes twinkle{0%,100%{opacity:.1;transform:scale(.8)}50%{opacity:1;transform:scale(1.3)}}
+.bg-dots{position:fixed;inset:0;z-index:-3;pointer-events:none;background-image:radial-gradient(var(--dot-color) 1px,transparent 1px);background-size:26px 26px}
+.orbs{position:fixed;inset:0;z-index:-2;overflow:hidden;pointer-events:none}
+.orb{position:absolute;border-radius:50%;filter:blur(110px);opacity:var(--orb-op);animation:float 28s ease-in-out infinite alternate}
+.orb.o1{width:48vw;height:48vw;background:var(--accent);top:-16vw;left:-12vw}
+.orb.o2{width:42vw;height:42vw;background:var(--accent-2);bottom:-18vw;right:-10vw;animation-delay:-10s}
+.orb.o3{width:34vw;height:34vw;background:var(--accent-3);top:44%;left:58%;animation-delay:-17s}
+@keyframes float{0%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(4vw,-3vw,0) scale(1.1)}100%{transform:translate3d(-3vw,4vw,0) scale(.95)}}
+
+.site-header{
+  position:sticky;top:0;z-index:50;
+  backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);
+  background:color-mix(in srgb,var(--bg) 78%, transparent);
+  border-bottom:1px solid var(--border);
+}
+.header-inner{max-width:var(--maxw);margin:0 auto;padding:13px 22px;display:flex;align-items:center;gap:20px}
+.brand{display:flex;align-items:center;gap:11px;font-family:var(--font-display);font-weight:700;font-size:1rem;letter-spacing:-.02em;white-space:nowrap}
+.brand-mark{
+  width:38px;height:38px;border-radius:12px;flex:none;
+  background:linear-gradient(140deg,var(--accent),var(--accent-2) 55%,var(--accent-3));
+  display:grid;place-items:center;color:#fff;
+  box-shadow:0 8px 22px -8px var(--accent);
+  transition:transform .5s var(--ease);
+}
+.brand:hover .brand-mark{transform:rotate(-10deg) scale(1.06)}
+.brand-mark svg{width:22px;height:22px}
+
+.nav{display:flex;gap:2px;margin-left:auto;overflow-x:auto;scrollbar-width:none}
+.nav::-webkit-scrollbar{display:none}
+.nav-link{
+  position:relative;padding:9px 11px;border-radius:11px;font-size:.8rem;font-weight:500;
+  color:var(--muted);white-space:nowrap;transition:color .3s var(--ease),background .3s var(--ease);
+}
+.nav-link:hover{color:var(--text);background:var(--surface-2)}
+.nav-link.active{color:var(--text);background:var(--surface-2)}
+.nav-link.active::after{
+  content:'';position:absolute;left:11px;right:11px;bottom:4px;height:2px;border-radius:2px;
+  background:linear-gradient(90deg,var(--accent),var(--accent-2));
+  animation:navIn .4s var(--ease) both;
+}
+@keyframes navIn{from{transform:scaleX(0);opacity:0}to{transform:scaleX(1);opacity:1}}
+
+.theme-toggle{
+  width:40px;height:40px;border-radius:12px;flex:none;
+  border:1px solid var(--border);background:var(--surface-2);
+  display:grid;place-items:center;
+  transition:transform .35s var(--ease),border-color .3s,background .3s;
+}
+.theme-toggle:hover{transform:translateY(-2px) rotate(8deg);border-color:var(--border-strong)}
+.theme-toggle svg{width:19px;height:19px}
+html[data-theme="dark"] .icon-sun{display:block}
+html[data-theme="dark"] .icon-moon{display:none}
+html[data-theme="light"] .icon-sun{display:none}
+html[data-theme="light"] .icon-moon{display:block}
+
+main{max-width:var(--maxw);margin:0 auto;padding:0 22px 90px}
+.view{display:none}
+.view.active{display:block;animation:viewIn .55s var(--ease) both}
+@keyframes viewIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+
+.hero{padding:74px 0 42px;max-width:940px;position:relative}
+.pill{
+  display:inline-flex;align-items:center;gap:8px;padding:7px 15px;border-radius:999px;
+  font-size:.78rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;
+  border:1px solid var(--border);background:var(--surface);color:var(--muted);margin-bottom:26px;
+}
+.pill .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);animation:pulse 2.4s infinite}
+@keyframes pulse{
+  0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--accent) 60%,transparent)}
+  70%{box-shadow:0 0 0 9px transparent}
+  100%{box-shadow:0 0 0 0 transparent}
+}
+h1.hero-title{font-size:clamp(2.1rem,5.2vw,4rem);font-weight:700;letter-spacing:-.035em;margin-bottom:22px}
+.grad{
+  background:linear-gradient(100deg,var(--accent),var(--accent-2) 45%,var(--accent-3) 75%,var(--accent-4));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  background-size:220% auto;animation:shimmer 8s linear infinite;
+}
+@keyframes shimmer{to{background-position:220% center}}
+.lead{font-size:clamp(1rem,1.6vw,1.15rem);color:var(--muted);max-width:720px;margin-bottom:34px}
+.hero-actions{display:flex;flex-wrap:wrap;gap:13px}
+
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  padding:13px 25px;border-radius:13px;font-size:.93rem;font-weight:600;
+  border:1px solid transparent;
+  transition:transform .28s var(--ease),box-shadow .3s var(--ease),background .3s,border-color .3s,color .3s;
+  will-change:transform;
+}
+.btn:active{transform:scale(.97)}
+.btn svg{width:17px;height:17px}
+.btn-primary{
+  background:linear-gradient(120deg,var(--accent),var(--accent-2));
+  color:#fff;box-shadow:0 14px 34px -14px var(--accent);
+  position:relative;overflow:hidden;
+}
+.btn-primary::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,.45),transparent 70%);
+  transform:translateX(-130%);transition:transform .7s var(--ease);
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 20px 42px -14px var(--accent)}
+.btn-primary:hover::after{transform:translateX(130%)}
+.btn-ghost{border-color:var(--border);background:var(--surface);color:var(--text)}
+.btn-ghost:hover{transform:translateY(-2px);border-color:var(--border-strong);background:var(--surface-2)}
+
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin:12px 0 58px}
+.stat{
+  padding:22px 20px;border-radius:var(--radius);
+  background:var(--surface);border:1px solid var(--border);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  transition:transform .35s var(--ease),border-color .3s,box-shadow .35s;
+}
+.stat:hover{transform:translateY(-5px);border-color:var(--border-strong);box-shadow:var(--shadow)}
+.stat .num{
+  font-family:var(--font-display);font-size:1.8rem;font-weight:700;letter-spacing:-.03em;
+  background:linear-gradient(120deg,var(--accent),var(--accent-2));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.stat .lbl{font-size:.82rem;color:var(--muted);font-weight:500;margin-top:2px}
+
+.sec-head{margin:0 0 28px}
+.sec-head h2{font-size:clamp(1.55rem,3vw,2.05rem);font-weight:700;margin-bottom:8px}
+.sec-head p{color:var(--muted);max-width:740px;font-size:.95rem}
+.section{padding-top:52px}
+.subhead{font-family:var(--font-display);font-size:1.18rem;font-weight:700;margin:34px 0 16px;color:var(--text)}
+
+.module-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(258px,1fr));gap:18px}
+.module{
+  position:relative;overflow:hidden;text-align:left;padding:28px 24px;border-radius:var(--radius);
+  background:var(--surface);border:1px solid var(--border);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  transition:transform .4s var(--ease),border-color .35s,box-shadow .4s;
+}
+.module::before{
+  content:'';position:absolute;inset:0;opacity:0;
+  background:radial-gradient(420px circle at var(--mx,50%) var(--my,0%),color-mix(in srgb,var(--accent) 22%,transparent),transparent 65%);
+  transition:opacity .45s var(--ease);
+}
+.module:hover{transform:translateY(-6px);border-color:var(--border-strong);box-shadow:var(--shadow)}
+.module:hover::before{opacity:1}
+.module-ico{
+  width:46px;height:46px;border-radius:14px;display:grid;place-items:center;margin-bottom:18px;
+  background:linear-gradient(140deg,color-mix(in srgb,var(--accent) 22%,transparent),color-mix(in srgb,var(--accent-2) 18%,transparent));
+  border:1px solid var(--border);color:var(--accent);
+  transition:transform .4s var(--ease);
+}
+.module:hover .module-ico{transform:scale(1.08) rotate(-6deg)}
+.module-ico svg{width:22px;height:22px}
+.module h3{font-size:1.04rem;margin-bottom:8px;font-weight:600}
+.module p{font-size:.89rem;color:var(--muted);line-height:1.6}
+.module .arrow{display:inline-flex;align-items:center;gap:6px;margin-top:16px;font-size:.84rem;font-weight:600;color:var(--accent)}
+.module .arrow svg{width:14px;height:14px;transition:transform .35s var(--ease)}
+.module:hover .arrow svg{transform:translateX(5px)}
+
+.card{
+  padding:24px 26px;border-radius:var(--radius);
+  background:var(--surface);border:1px solid var(--border);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  transition:transform .35s var(--ease),border-color .3s,box-shadow .35s;
+}
+.card:hover{transform:translateY(-4px);border-color:var(--border-strong);box-shadow:var(--shadow)}
+.card h3{font-size:1.02rem;margin-bottom:10px;font-weight:600}
+.card p{font-size:.9rem;color:var(--muted);line-height:1.68}
+.card .kicker{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;display:block}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(258px,1fr))}
+.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.grid-3{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+
+.vt{position:relative;margin-top:26px}
+.vt::before{
+  content:'';position:absolute;left:13px;top:10px;bottom:10px;width:2px;border-radius:2px;
+  background:linear-gradient(180deg,var(--accent),var(--accent-2) 55%,var(--accent-3));
+  opacity:.55;
+}
+.vt-item{position:relative;padding-left:46px;margin-bottom:18px;animation:termIn .5s var(--ease) both;animation-delay:var(--d,0ms)}
+@keyframes termIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.vt-dot{position:absolute;left:7px;top:24px;width:14px;height:14px;border-radius:50%;background:var(--c);border:3px solid var(--bg);box-shadow:0 0 0 3px color-mix(in srgb,var(--c) 30%,transparent);transition:transform .3s var(--ease)}
+.vt-item:hover .vt-dot{transform:scale(1.3)}
+.vt-card{padding:20px 22px;border-radius:var(--radius-sm);background:var(--surface);border:1px solid var(--border);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);transition:border-color .3s,transform .3s var(--ease),box-shadow .3s}
+.vt-item:hover .vt-card{border-color:var(--border-strong);transform:translateX(3px);box-shadow:var(--shadow)}
+.vt-top{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:8px}
+.vt-year{font-family:var(--font-display);font-size:.86rem;font-weight:700;color:var(--accent);padding:3px 10px;border-radius:7px;background:color-mix(in srgb,var(--accent) 13%,transparent);border:1px solid color-mix(in srgb,var(--accent) 26%,transparent);white-space:nowrap}
+.vt-era{font-size:.68rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.vt-card h4{font-size:1rem;font-weight:600;margin-bottom:7px;line-height:1.3}
+.vt-card > p{font-size:.88rem;color:var(--muted);line-height:1.66}
+.vt-more{display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:.79rem;font-weight:600;color:var(--accent);padding:4px 0;transition:gap .3s var(--ease)}
+.vt-more:hover{gap:9px}
+.vt-more svg{width:12px;height:12px;transition:transform .4s var(--ease)}
+.vt-item.open .vt-more svg{transform:rotate(180deg)}
+.vt-extra{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s var(--ease)}
+.vt-item.open .vt-extra{grid-template-rows:1fr}
+.vt-extra > div{overflow:hidden}
+.vt-extra p{font-size:.85rem;color:var(--muted);line-height:1.7;border-top:1px solid var(--border);margin-top:12px;padding-top:12px}
+
+.diagram-wrap{
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+  padding:22px 20px;box-shadow:var(--shadow);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+}
+.diagram-wrap h4{font-size:1.02rem;margin-bottom:8px;font-weight:600}
+.diagram-wrap .sub{font-size:.87rem;color:var(--muted);margin-bottom:16px;line-height:1.55}
+.diagram-wrap svg{display:block;width:100%;max-width:560px;height:auto;margin:0 auto;border-radius:12px}
+
+.note{
+  margin-top:26px;padding:16px 20px;border-radius:14px;font-size:.85rem;color:var(--muted);
+  border:1px solid var(--border);background:var(--surface-2);border-left:3px solid var(--accent);
+  line-height:1.65;
+}
+.note strong{color:var(--text);font-weight:600}
+.note.ref{border-left-color:var(--accent-2);background:color-mix(in srgb,var(--accent-2) 8%,var(--surface-2))}
+.note.ref strong{color:var(--accent-2)}
+.note.good{border-left-color:var(--good);background:color-mix(in srgb,var(--good) 8%,var(--surface-2))}
+.note.good strong{color:var(--good)}
+.note.danger{border-left-color:var(--bad);background:color-mix(in srgb,var(--bad) 8%,var(--surface-2))}
+.note.danger strong{color:var(--bad)}
+
+.gloss-shell{max-width:900px;margin:0 auto}
+.search-wrap{position:relative;margin-bottom:18px}
+.search-wrap svg{position:absolute;left:16px;top:50%;transform:translateY(-50%);color:var(--muted);pointer-events:none}
+.gloss-search{
+  width:100%;padding:14px 18px 14px 44px;border-radius:14px;
+  border:1px solid var(--border);background:var(--surface);
+  color:var(--text);font-size:.95rem;font-family:inherit;
+  transition:border-color .3s,box-shadow .3s;
+}
+.gloss-search:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 25%,transparent)}
+.gloss-grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.gloss-item{
+  padding:16px 18px;border-radius:14px;
+  background:var(--surface);border:1px solid var(--border);
+  transition:transform .3s var(--ease),border-color .3s,box-shadow .3s;
+}
+.gloss-item:hover{transform:translateY(-3px);border-color:var(--border-strong);box-shadow:var(--shadow)}
+.gloss-item .gi-term{
+  font-family:var(--font-display);font-size:.98rem;font-weight:700;color:var(--accent);
+  margin-bottom:6px;display:flex;align-items:center;gap:8px;
+}
+.gloss-item .gi-def{font-size:.86rem;color:var(--muted);line-height:1.6}
+.gloss-empty{text-align:center;padding:30px;color:var(--muted);font-size:.9rem;font-style:italic}
+
+.quiz-shell{max-width:760px;margin:0 auto}
+.quiz-card{
+  padding:34px;border-radius:var(--radius);
+  background:var(--surface);border:1px solid var(--border);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  box-shadow:var(--shadow);
+}
+.quiz-meta{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:12px;font-size:.81rem;font-weight:600;color:var(--muted)}
+.progress{height:6px;border-radius:99px;background:var(--surface-2);overflow:hidden;margin-bottom:30px;border:1px solid var(--border)}
+.progress-bar{height:100%;width:0%;border-radius:99px;background:linear-gradient(90deg,var(--accent),var(--accent-2));transition:width .55s var(--ease)}
+.q-text{font-family:var(--font-display);font-size:clamp(1.12rem,2.4vw,1.42rem);font-weight:600;line-height:1.35;margin-bottom:26px}
+.options{display:grid;gap:11px}
+.option{
+  display:flex;align-items:center;gap:14px;text-align:left;
+  padding:16px 18px;border-radius:14px;font-size:.93rem;font-weight:500;
+  background:var(--surface-2);border:1px solid var(--border);color:var(--text);
+  transition:transform .25s var(--ease),border-color .25s,background .25s;
+}
+.option:hover:not(:disabled){transform:translateX(4px);border-color:var(--accent);background:color-mix(in srgb,var(--accent) 8%,transparent)}
+.option:disabled{cursor:default}
+.option .letter{
+  width:28px;height:28px;border-radius:9px;flex:none;display:grid;place-items:center;
+  font-size:.77rem;font-weight:700;font-family:var(--font-display);
+  background:var(--surface-solid);border:1px solid var(--border);color:var(--muted);
+}
+.option.correct{background:color-mix(in srgb,var(--good) 15%,transparent);border-color:var(--good)}
+.option.correct .letter{background:var(--good);color:#fff;border-color:var(--good)}
+.option.wrong{background:color-mix(in srgb,var(--bad) 13%,transparent);border-color:var(--bad)}
+.option.wrong .letter{background:var(--bad);color:#fff;border-color:var(--bad)}
+.feedback{margin-top:22px;padding:16px 18px;border-radius:14px;font-size:.88rem;line-height:1.6;border:1px solid var(--border);background:var(--surface-2);animation:termIn .4s var(--ease) both}
+.feedback strong{color:var(--text)}
+.quiz-actions{display:flex;justify-content:flex-end;margin-top:24px}
+.result{text-align:center;padding:20px 6px}
+.result .score{font-family:var(--font-display);font-size:clamp(3rem,9vw,4.6rem);font-weight:700;letter-spacing:-.05em;background:linear-gradient(120deg,var(--accent),var(--accent-2) 50%,var(--accent-3));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1;margin-bottom:10px}
+.result h3{font-size:1.28rem;margin-bottom:10px}
+.result p{color:var(--muted);margin-bottom:26px}
+
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s var(--ease),transform .7s var(--ease);transition-delay:var(--d,0ms)}
+.reveal.in{opacity:1;transform:none}
+
+.site-footer{border-top:1px solid var(--border);padding:34px 22px;text-align:center;font-size:.85rem;color:var(--muted)}
+.site-footer strong{color:var(--text);font-weight:600}
+
+@media (max-width:1040px){.nav-link{padding:9px 9px;font-size:.76rem}}
+@media (max-width:900px){
+  .header-inner{padding:12px 16px;gap:14px;flex-wrap:wrap}
+  .nav{order:3;width:100%;margin-left:0;padding-bottom:2px}
+  .theme-toggle{margin-left:auto}
+  main{padding:0 16px 70px}
+  .hero{padding:44px 0 32px}
+  .stats{grid-template-columns:repeat(2,1fr);gap:11px}
+  .stat{padding:17px 15px}
+  .stat .num{font-size:1.45rem}
+  .vt-item{padding-left:38px}
+  .quiz-card{padding:24px 20px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<div class="bg-stars" id="bgStars" aria-hidden="true"></div>
+<div class="bg-dots" aria-hidden="true"></div>
+<div class="orbs" aria-hidden="true">
+  <div class="orb o1"></div>
+  <div class="orb o2"></div>
+  <div class="orb o3"></div>
+</div>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="#inicio" data-route="inicio">
+      <span class="brand-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 21h18M4 21V10l4-2 4 2 4-2 4 2v11"/>
+          <path d="M8 21v-6M12 21v-6M16 21v-6"/>
+          <path d="M12 3l3 3H9z"/>
+        </svg>
+      </span>
+      <span>Roma · Guía</span>
+    </a>
+
+    <nav class="nav" aria-label="Navegación principal">
+      <button class="nav-link active" data-route="inicio">Inicio</button>
+      <button class="nav-link" data-route="cronologia">Cronología</button>
+      <button class="nav-link" data-route="derecho">Derecho y pensamiento</button>
+      <button class="nav-link" data-route="personajes">Personajes</button>
+      <button class="nav-link" data-route="escritura">Escritura</button>
+      <button class="nav-link" data-route="influencia">Influencia</button>
+      <button class="nav-link" data-route="glosario">Glosario</button>
+      <button class="nav-link" data-route="quiz">Quiz</button>
+    </nav>
+
+    <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema">
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round">
+        <circle cx="12" cy="12" r="4"/>
+        <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>
+      </svg>
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<main>
+
+  <!-- =============== INICIO =============== -->
+  <section class="view active" data-view="inicio">
+    <div class="hero">
+      <span class="pill"><span class="dot"></span>Mil años de historia mediterránea</span>
+      <h1 class="hero-title">La antigua Roma, <span class="grad">explicada</span></h1>
+      <p class="lead">
+        Desde los siete reyes legendarios hasta la caída del Imperio de Occidente. Derecho, pensamiento,
+        personajes históricos, el alfabeto latino y el legado que dio forma al mundo antiguo y al nuestro.
+      </p>
+      <div class="hero-actions">
+        <button class="btn btn-primary" data-route="cronologia">
+          Ver la cronología
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+        <button class="btn btn-ghost" data-route="derecho">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M5 8h14M7 8l-3 6a3 3 0 0 0 6 0L7 8zM17 8l-3 6a3 3 0 0 0 6 0l-3-6z"/></svg>
+          Explorar el derecho romano
+        </button>
+      </div>
+    </div>
+
+    <div class="stats reveal">
+      <div class="stat"><div class="num" data-count="753" data-suffix=" a.C.">0</div><div class="lbl">Fundación de Roma</div></div>
+      <div class="stat"><div class="num" data-count="509" data-suffix=" a.C.">0</div><div class="lbl">Nace la República</div></div>
+      <div class="stat"><div class="num" data-count="27" data-suffix=" a.C.">0</div><div class="lbl">Augusto, primer emperador</div></div>
+      <div class="stat"><div class="num" data-count="476" data-suffix=" d.C.">0</div><div class="lbl">Caída del Imperio de Occidente</div></div>
+    </div>
+
+    <div class="sec-head reveal">
+      <h2>Un recorrido por la civilización romana</h2>
+      <p>Desde la aldea del Palatino hasta el mayor imperio del Mediterráneo. Con líneas del tiempo, diagramas y explicaciones claras.</p>
+    </div>
+
+    <div class="module-grid">
+      <button class="module reveal" data-route="cronologia">
+        <span class="module-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span>
+        <h3>Cronología</h3>
+        <p>De los reyes legendarios a Rómulo Augústulo: monarquía, república, imperio y caída.</p>
+        <span class="arrow">Ver cronología<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </button>
+      <button class="module reveal" data-route="derecho" style="--d:40ms">
+        <span class="module-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M5 8h14M7 8l-3 6a3 3 0 0 0 6 0L7 8zM17 8l-3 6a3 3 0 0 0 6 0l-3-6z"/></svg></span>
+        <h3>Derecho y pensamiento</h3>
+        <p>La Ley de las XII Tablas, Cicerón, Séneca, Marco Aurelio y el estoicismo romano.</p>
+        <span class="arrow">Ver derecho<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </button>
+      <button class="module reveal" data-route="personajes" style="--d:80ms">
+        <span class="module-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/><path d="M16 3.1a4 4 0 0 1 0 7.8"/><path d="M21 21v-2a4 4 0 0 0-3-3.9"/></svg></span>
+        <h3>Personajes</h3>
+        <p>Rómulo, Aníbal, los Gracos, César, Augusto, Trajano, Constantino…</p>
+        <span class="arrow">Ver personajes<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </button>
+      <button class="module reveal" data-route="escritura" style="--d:120ms">
+        <span class="module-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg></span>
+        <h3>Escritura</h3>
+        <p>Del alfabeto etrusco al latín: la escritura que hoy usa media humanidad.</p>
+        <span class="arrow">Ver escritura<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </button>
+      <button class="module reveal" data-route="influencia" style="--d:160ms">
+        <span class="module-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span>
+        <h3>Influencia</h3>
+        <p>Cómo Roma moldeó el derecho, las lenguas, la política y la civilización occidental.</p>
+        <span class="arrow">Ver influencia<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </button>
+      <button class="module reveal" data-route="glosario" style="--d:200ms">
+        <span class="module-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5V5a2 2 0 0 1 2-2h14v16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/><path d="M4 15h16"/></svg></span>
+        <h3>Glosario</h3>
+        <p>Patricio, plebeyo, cónsul, senado, legión, limes… todos los términos clave.</p>
+        <span class="arrow">Abrir glosario<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </button>
+      <button class="module reveal" data-route="quiz" style="--d:240ms">
+        <span class="module-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l2 2 4-4"/><rect x="3" y="4" width="18" height="16" rx="3"/></svg></span>
+        <h3>Quiz</h3>
+        <p>Diez preguntas al azar sobre cronología, derecho, personajes y legado.</p>
+        <span class="arrow">Empezar quiz<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </button>
+    </div>
+
+    <div class="note ref reveal">
+      <strong>Dato curioso:</strong> la civilización romana duró más de mil años. Si contamos el Imperio de Oriente (Bizancio),
+      que cayó en 1453, la herencia política de Roma se prolongó durante más de dos milenios.
+    </div>
+  </section>
+
+  <!-- =============== CRONOLOGÍA =============== -->
+  <section class="view" data-view="cronologia">
+    <div class="sec-head section">
+      <h2>Cronología de la antigua Roma</h2>
+      <p>Desde la fundación legendaria hasta la caída del Imperio de Occidente. Los grandes períodos y los acontecimientos clave.</p>
+    </div>
+    <div class="vt" id="timelineList"></div>
+    <div class="note reveal ref">
+      <strong>Nota:</strong> las fechas de la Roma arcaica son aproximadas y mezclan historia y leyenda. La cronología tradicional,
+      fijada por los propios romanos (Varrón), sitúa la fundación de la ciudad en el 753 a.C.
+    </div>
+  </section>
+
+  <!-- =============== DERECHO Y PENSAMIENTO =============== -->
+  <section class="view" data-view="derecho">
+    <div class="sec-head section">
+      <h2>Derecho y pensamiento romanos</h2>
+      <p>Roma no inventó la filosofía, pero sí el derecho tal como lo entendemos hoy, y adaptó el pensamiento griego a su propia mentalidad práctica.</p>
+    </div>
+
+    <div class="diagram-wrap reveal" style="margin-bottom:24px">
+      <h4>Las fuentes del derecho romano</h4>
+      <p class="sub">De la costumbre oral a la compilación de Justiniano: cómo se construyó el sistema jurídico más influyente de la historia.</p>
+      <svg viewBox="0 0 520 300" role="img" aria-label="Diagrama: fuentes del derecho romano desde la costumbre hasta el Corpus Iuris Civilis">
+        <defs>
+          <marker id="arrowLaw" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--muted)"/>
+          </marker>
+        </defs>
+        <g font-family="var(--font-display)" text-anchor="middle">
+          <rect x="60" y="30" width="120" height="42" rx="8" fill="var(--surface-solid)" stroke="var(--accent)" stroke-width="1.8"/>
+          <text x="120" y="48" font-size="11" fill="var(--text)">Costumbre</text>
+          <text x="120" y="62" font-size="9" fill="var(--muted)">mos maiorum</text>
+
+          <rect x="220" y="30" width="120" height="42" rx="8" fill="var(--surface-solid)" stroke="var(--accent)" stroke-width="1.8"/>
+          <text x="280" y="48" font-size="11" fill="var(--text)">Ley escrita</text>
+          <text x="280" y="62" font-size="9" fill="var(--muted)">XII Tablas (451 a.C.)</text>
+
+          <rect x="380" y="30" width="120" height="42" rx="8" fill="var(--surface-solid)" stroke="var(--accent-2)" stroke-width="1.8"/>
+          <text x="440" y="48" font-size="11" fill="var(--text)">Plebiscitos</text>
+          <text x="440" y="62" font-size="9" fill="var(--muted)">concilia plebis</text>
+
+          <rect x="60" y="120" width="120" height="42" rx="8" fill="var(--surface-solid)" stroke="var(--accent-2)" stroke-width="1.8"/>
+          <text x="120" y="138" font-size="11" fill="var(--text)">Senadoconsultos</text>
+          <text x="120" y="152" font-size="9" fill="var(--muted)">senatus consulta</text>
+
+          <rect x="220" y="120" width="120" height="42" rx="8" fill="var(--surface-solid)" stroke="var(--accent-3)" stroke-width="1.8"/>
+          <text x="280" y="138" font-size="11" fill="var(--text)">Edictos</text>
+          <text x="280" y="152" font-size="9" fill="var(--muted)">de los pretores</text>
+
+          <rect x="380" y="120" width="120" height="42" rx="8" fill="var(--surface-solid)" stroke="var(--accent-3)" stroke-width="1.8"/>
+          <text x="440" y="138" font-size="11" fill="var(--text)">Constituciones</text>
+          <text x="440" y="152" font-size="9" fill="var(--muted)">imperiales</text>
+
+          <rect x="140" y="220" width="240" height="52" rx="10" fill="var(--surface-solid)" stroke="var(--accent-4)" stroke-width="2.4"/>
+          <text x="260" y="242" font-size="13" font-weight="700" fill="var(--accent-4)">Corpus Iuris Civilis</text>
+          <text x="260" y="258" font-size="9" fill="var(--muted)">Justiniano, 529–534 d.C.</text>
+        </g>
+        <g stroke="var(--muted)" stroke-width="1.4" fill="none" opacity=".7">
+          <line x1="180" y1="52" x2="218" y2="52" marker-end="url(#arrowLaw)"/>
+          <line x1="340" y1="52" x2="378" y2="52" marker-end="url(#arrowLaw)"/>
+          <line x1="120" y1="72" x2="120" y2="118" marker-end="url(#arrowLaw)"/>
+          <line x1="280" y1="72" x2="280" y2="118" marker-end="url(#arrowLaw)"/>
+          <line x1="440" y1="72" x2="440" y2="118" marker-end="url(#arrowLaw)"/>
+          <line x1="120" y1="162" x2="220" y2="220" marker-end="url(#arrowLaw)"/>
+          <line x1="280" y1="162" x2="270" y2="218" marker-end="url(#arrowLaw)"/>
+          <line x1="440" y1="162" x2="320" y2="220" marker-end="url(#arrowLaw)"/>
+        </g>
+      </svg>
+    </div>
+
+    <h3 class="subhead">El derecho romano</h3>
+    <div class="grid-2">
+      <div class="card reveal">
+        <span class="kicker">451 a.C.</span>
+        <h3>La Ley de las XII Tablas</h3>
+        <p>Primera codificación escrita del derecho romano. Hasta entonces, las leyes eran orales y las interpretaban los pontífices patricios. Las XII Tablas pusieron por escrito las normas y las expusieron en el Foro, de modo que todos los ciudadanos pudieran conocerlas.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">s. II a.C. — s. III d.C.</span>
+        <h3>Juristas y escuelas</h3>
+        <p>Roma desarrolló una verdadera ciencia jurídica. Juristas como Gayo, Papiniano, Ulpiano y Paulo escribieron tratados, comentarios y dictámenes. Sus escritos fueron la base del derecho posterior y se recopilaron en el <em>Digesto</em> de Justiniano.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">529–534 d.C.</span>
+        <h3>El Corpus Iuris Civilis</h3>
+        <p>Justiniano, emperador de Oriente, ordenó compilar todo el derecho romano en cuatro obras: el <em>Código</em>, el <em>Digesto</em>, las <em>Instituciones</em> y las <em>Novelas</em>. Es la base del derecho civil moderno en Europa y América Latina.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Legado</span>
+        <h3>Derecho público y privado</h3>
+        <p>Los romanos distinguieron entre <em>ius publicum</em> (derecho público, que regula el Estado) y <em>ius privatum</em> (derecho privado, que regula las relaciones entre particulares). Conceptos como propiedad, contrato, obligación, persona jurídica y usufructo provienen directamente de Roma.</p>
+      </div>
+    </div>
+
+    <h3 class="subhead">Filosofía y literatura</h3>
+    <div class="grid-2">
+      <div class="card reveal">
+        <span class="kicker">106–43 a.C. · Orador y filósofo</span>
+        <h3>Cicerón</h3>
+        <p>El gran divulgador del pensamiento griego en Roma. Escribió tratados sobre ética, política y retórica (<em>De officiis</em>, <em>De re publica</em>, <em>Tusculanae disputationes</em>). Defendió la República y la concordia entre las clases. Su prosa es modelo del latín clásico.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">99–55 a.C. · Poeta y filósofo</span>
+        <h3>Lucrecio</h3>
+        <p>Autor del poema didáctico <em>De rerum natura</em> ("Sobre la naturaleza de las cosas"), que expone el epicureísmo y el atomismo de Demócrito. Es una de las obras más importantes de la literatura latina y un antecedente del materialismo moderno.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">4 a.C.–65 d.C. · Filósofo</span>
+        <h3>Séneca</h3>
+        <p>Hispano-romano, tutor y consejero de Nerón. Escribió cartas, diálogos y tragedias. Es el gran representante del estoicismo romano: la serenidad ante la fortuna, el dominio de las pasiones y la preparación para la muerte.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">121–180 d.C. · Emperador filósofo</span>
+        <h3>Marco Aurelio</h3>
+        <p>Emperador y filósofo estoico. Sus <em>Meditaciones</em> son un diario personal escrito en campaña militar. En ellas reflexiona sobre la fugacidad de la vida, el deber, la virtud y la serenidad interior. Es el testamento espiritual del estoicismo.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">70–19 a.C. · Poeta</span>
+        <h3>Virgilio</h3>
+        <p>Autor de la <em>Eneida</em>, poema épico que enlaza la fundación de Roma con la huida de Eneas de Troya. Es la gran epopeya nacional romana y una de las obras más influyentes de la literatura occidental (Dante lo tomó como guía en la <em>Divina Comedia</em>).</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">43 a.C.–17 d.C. · Poeta</span>
+        <h3>Ovidio</h3>
+        <p>Autor de las <em>Metamorfosis</em>, quince libros que recogen más de 250 mitos de transformación. Su obra ha inspirado a pintores, escultores y escritores de todas las épocas. Murió desterrado en Tomis, a orillas del mar Negro.</p>
+      </div>
+    </div>
+
+    <div class="note reveal ref">
+      <strong>La frase:</strong> <em>"Ubi societas, ibi ius"</em> ("donde hay sociedad, hay derecho"). Los romanos entendieron que no puede
+      existir una comunidad organizada sin normas que regulen la convivencia. Ese principio sigue siendo la base de todo Estado de derecho.
+    </div>
+  </section>
+
+  <!-- =============== PERSONAJES =============== -->
+  <section class="view" data-view="personajes">
+    <div class="sec-head section">
+      <h2>Personajes históricos</h2>
+      <p>Reyes, cónsules, generales y emperadores que construyeron —y a veces destruyeron— el mayor imperio del Mediterráneo.</p>
+    </div>
+
+    <div class="grid-2">
+      <div class="card reveal">
+        <span class="kicker">s. VIII a.C. · Legendario</span>
+        <h3>Rómulo</h3>
+        <p>Fundador legendario de Roma junto a su hermano Remo. Según la tradición, los gemelos fueron amamantados por una loba y educados por un pastor. Rómulo mató a Remo en una disputa y dio nombre a la ciudad. Fue su primer rey.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">247–183 a.C. · General cartaginés</span>
+        <h3>Aníbal Barca</h3>
+        <p>El gran enemigo de Roma. Cruzó los Alpes con elefantes y derrotó a los romanos en Cannas (216 a.C.), una de las mayores victorias tácticas de la historia. Pero no supo explotar el triunfo y terminó derrotado por Escipión en Zama (202 a.C.).</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">236–183 a.C. · General romano</span>
+        <h3>Escipión el Africano</h3>
+        <p>El vencedor de Aníbal. Llevó la guerra a África y derrotó a Cartago en Zama (202 a.C.), poniendo fin a la Segunda Guerra Púnica. Fue el primer romano en recibir un cognomen por una conquista.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">s. II a.C. · Tribunos</span>
+        <h3>Los Gracos</h3>
+        <p>Tiberio y Cayo Sempronio Graco, dos hermanos que intentaron reformar la República para repartir tierras entre los pobres. Ambos fueron asesinados por la aristocracia. Su muerte abrió un siglo de guerras civiles.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">157–86 a.C. · General y político</span>
+        <h3>Cayo Mario</h3>
+        <p>Reformó el ejército romano: permitió alistar a los proletarios y profesionalizó la legión. Venció a los cimbrios y teutones. Su enfrentamiento con Sila desató la primera gran guerra civil romana.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">138–78 a.C. · General y dictador</span>
+        <h3>Sila</h3>
+        <p>Rival de Mario. Se proclamó dictador con poderes ilimitados (<em>dictator legibus faciendis</em>) y llevó a cabo sangrientas proscripciones. Su ejemplo mostró que un ejército fiel podía tomar Roma por la fuerza.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">100–44 a.C. · General y dictador</span>
+        <h3>Julio César</h3>
+        <p>Conquistó la Galia, cruzó el Rubicón ("alea iacta est"), venció a Pompeyo y se hizo nombrar dictador perpetuo. Reformó el calendario y el Estado. Fue asesinado en el Senado el 15 de marzo del 44 a.C. por una conspiración de senadores.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">106–48 a.C. · General</span>
+        <h3>Pompeyo Magno</h3>
+        <p>El gran rival de César. Limpió el Mediterráneo de piratas, conquistó Oriente y formó con Craso y César el Primer Triunvirato. Derrotado en Farsalia, huyó a Egipto, donde fue asesinado.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">63 a.C.–14 d.C. · Primer emperador</span>
+        <h3>Augusto</h3>
+        <p>Sobrino-nieto y heredero de César. Tras vencer a Marco Antonio y Cleopatra en Accio (31 a.C.), instauró el Principado y gobernó con mano firme durante más de cuarenta años. Bajo su mandato nació la <em>Pax Romana</em> y se embelleció Roma.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">53–117 d.C. · Emperador</span>
+        <h3>Trajano</h3>
+        <p>Nacido en Hispania, fue el primer emperador no itálico. Llevó el Imperio a su máxima extensión (Dacia, Arabia, Mesopotamia) y embelleció Roma con el Foro de Trajano y su famosa columna. Fue llamado <em>optimus princeps</em>.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">76–138 d.C. · Emperador</span>
+        <h3>Adriano</h3>
+        <p>Viajero incansable, recorrió todo el Imperio. Mandó construir el muro que lleva su nombre en Britania y reconstruyó el Panteón. Consolidó las fronteras en lugar de expandirlas y fomentó la cultura griega (filohelenismo).</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">272–337 d.C. · Emperador</span>
+        <h3>Constantino</h3>
+        <p>El primer emperador cristiano. En el 313 d.C. promulgó el Edicto de Milán, que otorgó libertad de culto a los cristianos. Fundó Constantinopla (actual Estambul) como nueva capital del Imperio. Convocó el Concilio de Nicea (325).</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">244–311 d.C. · Emperador</span>
+        <h3>Diocleciano</h3>
+        <p>Reorganizó el Imperio tras la crisis del siglo III. Dividió el poder en la Tetrarquía (dos augustos y dos césares), reformó la fiscalidad y el ejército, y persiguió a los cristianos. Su reforma fue la base del Bajo Imperio.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">c. 459–476 d.C. · Último emperador</span>
+        <h3>Rómulo Augústulo</h3>
+        <p>Último emperador de Occidente. Fue depuesto por el bárbaro Odoacro en el 476 d.C., fecha que marca tradicionalmente el fin del Imperio Romano de Occidente. Su nombre, irónicamente, une al fundador mítico y al primer emperador.</p>
+      </div>
+    </div>
+
+    <div class="note reveal ref">
+      <strong>Mujeres en Roma:</strong> aunque sin derechos políticos, muchas mujeres tuvieron una influencia decisiva: Cornelia, madre de los Gracos;
+      Livia, esposa de Augusto; Agripina, madre de Nerón; y la emperatriz Helena, madre de Constantino y gran impulsora del cristianismo.
+    </div>
+  </section>
+
+  <!-- =============== ESCRITURA =============== -->
+  <section class="view" data-view="escritura">
+    <div class="sec-head section">
+      <h2>La escritura romana</h2>
+      <p>Del alfabeto etrusco al latín clásico, y de ahí a los alfabetos que hoy usan más de la mitad de la humanidad.</p>
+    </div>
+
+    <div class="diagram-wrap reveal" style="margin-bottom:24px">
+      <h4>La evolución del alfabeto latino</h4>
+      <p class="sub">Del griego al etrusco, del etrusco al latín arcaico, y del latín monumental a los alfabetos modernos.</p>
+      <svg viewBox="0 0 520 170" role="img" aria-label="Evolución del alfabeto: griego, etrusco, latín arcaico, latín clásico y alfabetos modernos">
+        <defs>
+          <marker id="arrowScript2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--muted)"/>
+          </marker>
+        </defs>
+        <g font-family="var(--font-display)" text-anchor="middle">
+          <rect x="10" y="45" width="86" height="50" rx="8" fill="var(--surface-solid)" stroke="var(--accent)" stroke-width="1.5"/>
+          <text x="53" y="75" font-size="10" fill="var(--text)">Griego</text>
+
+          <rect x="110" y="45" width="86" height="50" rx="8" fill="var(--surface-solid)" stroke="var(--accent)" stroke-width="1.5"/>
+          <text x="153" y="75" font-size="10" fill="var(--text)">Etrusco</text>
+
+          <rect x="210" y="45" width="86" height="50" rx="8" fill="var(--surface-solid)" stroke="var(--accent-2)" stroke-width="1.5"/>
+          <text x="253" y="68" font-size="10" fill="var(--text)">Latín</text>
+          <text x="253" y="82" font-size="9" fill="var(--muted)">arcaico</text>
+
+          <rect x="310" y="45" width="86" height="50" rx="8" fill="var(--surface-solid)" stroke="var(--accent-2)" stroke-width="2"/>
+          <text x="353" y="68" font-size="10" font-weight="700" fill="var(--accent-2)">Latín</text>
+          <text x="353" y="82" font-size="9" font-weight="700" fill="var(--accent-2)">clásico</text>
+
+          <rect x="410" y="45" width="100" height="50" rx="8" fill="var(--surface-solid)" stroke="var(--accent-4)" stroke-width="1.5"/>
+          <text x="460" y="68" font-size="9" fill="var(--text)">Alfabetos</text>
+          <text x="460" y="82" font-size="9" fill="var(--text)">modernos</text>
+        </g>
+
+        <g stroke="var(--muted)" stroke-width="1.5" fill="none">
+          <line x1="96" y1="70" x2="108" y2="70" marker-end="url(#arrowScript2)"/>
+          <line x1="196" y1="70" x2="208" y2="70" marker-end="url(#arrowScript2)"/>
+          <line x1="296" y1="70" x2="308" y2="70" marker-end="url(#arrowScript2)"/>
+          <line x1="396" y1="70" x2="408" y2="70" marker-end="url(#arrowScript2)"/>
+        </g>
+
+        <g font-family="var(--font-mono)" font-size="8" fill="var(--muted)" text-anchor="middle">
+          <text x="153" y="125">S. VII a.C.</text>
+          <text x="253" y="125">S. VI a.C.</text>
+          <text x="353" y="125">S. I a.C.</text>
+          <text x="460" y="125">ACTUAL</text>
+        </g>
+      </svg>
+    </div>
+
+    <div class="grid-2">
+      <div class="card reveal">
+        <span class="kicker">s. VII a.C.</span>
+        <h3>Del griego al etrusco</h3>
+        <p>Los etruscos adoptaron el alfabeto griego (en su variante calcídica) y lo transmitieron a los pueblos itálicos. Del etrusco lo tomaron los latinos, que hacia el siglo VII a.C. empezaron a escribir en su propia lengua.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">s. III a.C. — s. I d.C.</span>
+        <h3>La escritura monumental</h3>
+        <p>En inscripciones públicas (epígrafes, arcos, columnas) se desarrolló la <em>capitalis monumentalis</em>, precursora de nuestras mayúsculas. Su forma geométrica y equilibrada se basaba en el uso del cincel sobre piedra.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">s. I — IV d.C.</span>
+        <h3>La escritura cotidiana</h3>
+        <p>Para la vida diaria se usaban tablillas de cera (con un punzón llamado <em>stilus</em>) y papiros. De ahí surgieron la <em>cursiva romana</em> (rápida, para documentos) y la <em>uncial</em> (más redondeada, para libros).</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">s. IV — XV d.C.</span>
+        <h3>La minúscula carolingia</h3>
+        <p>En la Edad Media, la escritura latina evolucionó hacia la <em>minúscula carolingia</em>, base de nuestras letras minúsculas actuales. De ella derivan tanto la escritura gótica como la humanística del Renacimiento.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">1450</span>
+        <h3>La imprenta</h3>
+        <p>Gutenberg imprimió la Biblia con tipos móviles basados en la escritura gótica. La difusión del alfabeto latino fue total: todas las lenguas de Europa occidental lo adoptaron y lo exportaron a América, África y Asia.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Legado</span>
+        <h3>El alfabeto más usado del mundo</h3>
+        <p>El alfabeto latino, con sus 26 letras, es hoy el sistema de escritura más extendido del planeta: lo usan más de 4.000 millones de personas. Del latín derivan las lenguas romances (español, portugués, francés, italiano, rumano, catalán, gallego…).</p>
+      </div>
+    </div>
+
+    <div class="note reveal good">
+      <strong>La gran herencia:</strong> el alfabeto que usamos para escribir esta página es el mismo que tallaron los romanos en sus monumentos
+      hace más de dos mil años. Solo han cambiado algunas formas y se han añadido letras (J, U, W) en la Edad Media y la Modernidad.
+    </div>
+  </section>
+
+  <!-- =============== INFLUENCIA =============== -->
+  <section class="view" data-view="influencia">
+    <div class="sec-head section">
+      <h2>La influencia de Roma</h2>
+      <p>Roma no fue solo un imperio militar: fue el molde jurídico, lingüístico y político sobre el que se construyó Occidente.</p>
+    </div>
+
+    <div class="grid-2">
+      <div class="card reveal">
+        <span class="kicker">Derecho</span>
+        <h3>El derecho civil moderno</h3>
+        <p>El <em>Corpus Iuris Civilis</em> de Justiniano es la base del derecho civil en Europa continental, América Latina, Asia oriental y Escocia. Conceptos como propiedad, contrato, obligación, persona jurídica o prescripción provienen directamente del derecho romano.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Lenguas</span>
+        <h3>Las lenguas romances</h3>
+        <p>Del latín vulgar nacieron el español, el portugués, el francés, el italiano, el rumano, el catalán, el gallego y el romanche. Además, el latín sigue siendo la base del vocabulario científico, técnico y jurídico de Occidente.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Política</span>
+        <h3>La República y el imperio</h3>
+        <p>Las instituciones romanas (senado, cónsules, tribunos, asambleas) inspiraron las repúblicas modernas. Los padres fundadores de EE. UU. y los revolucionarios franceses se miraron en el espejo de Roma. La palabra "república" viene del latín <em>res publica</em>.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Religión</span>
+        <h3>El cristianismo</h3>
+        <p>El cristianismo nació en una provincia del Imperio y se expandió gracias a la red de calzadas y a la lengua común (el griego, primero, y el latín, después). Tras el Edicto de Milán (313), se convirtió en la religión oficial del Imperio (380).</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Ingeniería</span>
+        <h3>Calzadas, acueductos y arcos</h3>
+        <p>Los romanos construyeron más de 400.000 km de calzadas, acueductos, termas, puentes, anfiteatros y basílicas. El uso del arco, la bóveda y el hormigón revolucionó la arquitectura y sigue presente en nuestras ciudades.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Cultura</span>
+        <h3>Arte, literatura y calendario</h3>
+        <p>El calendario juliano (reformado por César) duró hasta 1582. Los nombres de nuestros meses (enero, marzo, julio, agosto…) recuerdan a dioses y emperadores romanos. El latín sigue siendo la lengua de la Iglesia, la ciencia y el derecho.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Mundo moderno</span>
+        <h3>Renacimiento y neoclasicismo</h3>
+        <p>El Renacimiento redescubrió a los autores latinos. El neoclasicismo (s. XVIII–XIX) imitó el arte y la arquitectura romanos en edificios como el Capitolio de Washington o la Puerta de Brandeburgo. El fascismo italiano se apropió de símbolos romanos.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Actualidad</span>
+        <h3>Roma en la vida diaria</h3>
+        <p>Cada vez que usamos el alfabeto, decimos "senado", "república" o "justicia", pasamos por un acueducto, vemos una película de romanos o consultamos el calendario, estamos conectados con Roma. Su legado no es un museo: es el suelo de nuestra civilización.</p>
+      </div>
+    </div>
+
+    <div class="note reveal good">
+      <strong>Reflexión:</strong> se dice que Roma cayó en el 476 d.C., pero su herencia nunca desapareció. El Imperio de Oriente
+      (Bizancio) sobrevivió hasta 1453, y el derecho, la lengua y las instituciones romanas siguen moldeando nuestra vida cotidiana.
+    </div>
+  </section>
+
+  <!-- =============== GLOSARIO =============== -->
+  <section class="view" data-view="glosario">
+    <div class="sec-head section">
+      <h2>Glosario romano</h2>
+      <p>Los términos clave para entender la civilización romana. Busca cualquier palabra para filtrar.</p>
+    </div>
+    <div class="gloss-shell">
+      <div class="search-wrap">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        <input type="text" class="gloss-search" id="glossSearch" placeholder="Buscar término… (ej: patricio, legión, senado)" aria-label="Buscar término">
+      </div>
+      <div class="gloss-grid" id="glossGrid"></div>
+      <div id="glossEmpty" class="gloss-empty" style="display:none">No se encontraron términos con esa búsqueda.</div>
+    </div>
+  </section>
+
+  <!-- =============== QUIZ =============== -->
+  <section class="view" data-view="quiz">
+    <div class="sec-head section">
+      <h2>Quiz de la antigua Roma</h2>
+      <p>Diez preguntas al azar sobre cronología, derecho, personajes, escritura y legado.</p>
+    </div>
+    <div class="quiz-shell">
+      <div class="quiz-card" id="quizCard"></div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <p><strong>Roma · Guía interactiva</strong> — Material educativo sobre la civilización romana.</p>
+</footer>
+
+<script>
+const $  = (sel, root = document) => root.querySelector(sel);
+const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+const htmlEl = document.documentElement;
+
+function setTheme(t){
+  htmlEl.setAttribute('data-theme', t);
+  try { localStorage.setItem('rome-theme', t); } catch(e){}
+}
+(function initTheme(){
+  let saved = null;
+  try { saved = localStorage.getItem('rome-theme'); } catch(e){}
+  setTheme(saved || 'light');
+})();
+$('#themeToggle').addEventListener('click', () => {
+  setTheme(htmlEl.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+});
+
+(function buildStars(){
+  const cont = $('#bgStars');
+  if (!cont) return;
+  for (let i = 0; i < 80; i++){
+    const s = document.createElement('div');
+    s.className = 'star';
+    s.style.left = Math.random() * 100 + '%';
+    s.style.top = Math.random() * 100 + '%';
+    const size = 1 + Math.random() * 2;
+    s.style.width = size + 'px';
+    s.style.height = size + 'px';
+    s.style.setProperty('--tw-dur', (2 + Math.random() * 4) + 's');
+    s.style.setProperty('--tw-delay', (Math.random() * 4) + 's');
+    cont.appendChild(s);
+  }
+})();
+
+const ROUTES = ['inicio','cronologia','derecho','personajes','escritura','influencia','glosario','quiz'];
+let currentRoute = 'inicio';
+
+function go(route, push = true){
+  if (!ROUTES.includes(route)) route = 'inicio';
+  currentRoute = route;
+  $$('.view').forEach(v => v.classList.toggle('active', v.dataset.view === route));
+  $$('.nav-link').forEach(b => b.classList.toggle('active', b.dataset.route === route));
+  if (push && location.hash.slice(1) !== route) history.pushState(null, '', '#' + route);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  requestAnimationFrame(() => {
+    $$('.view.active .reveal').forEach(el => el.classList.remove('in'));
+    checkReveal();
+    if (route === 'inicio') animateCounters();
+    if (route === 'cronologia') renderTimeline();
+    if (route === 'glosario') renderGlossary();
+    if (route === 'quiz') startQuiz();
+  });
+}
+document.addEventListener('click', e => {
+  const t = e.target.closest('[data-route]');
+  if (t){ e.preventDefault(); go(t.dataset.route); }
+});
+window.addEventListener('popstate', () => go(location.hash.slice(1) || 'inicio', false));
+
+const revealObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting){
+      entry.target.classList.add('in');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+function checkReveal(){ $$('.view.active .reveal:not(.in)').forEach(el => revealObserver.observe(el)); }
+
+function animateCounters(){
+  $$('.num[data-count]').forEach(el => {
+    if (el.dataset.done === '1') return;
+    el.dataset.done = '1';
+    const target = parseFloat(el.dataset.count);
+    const suffix = el.dataset.suffix || '';
+    const dur = 1600;
+    const start = performance.now();
+    function tick(now){
+      const p = Math.min((now - start) / dur, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      const val = target * eased;
+      el.textContent = Math.round(val).toLocaleString('es-ES') + suffix;
+      if (p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  });
+}
+
+/* CRONOLOGÍA */
+const TIMELINE = [
+  { year:'753–509 a.C.', tag:'Monarquía', color:'#991b1b', title:'Monarquía romana', desc:'Según la tradición, Roma fue fundada por Rómulo en el 753 a.C. y gobernada por siete reyes, alternando latinos, sabinos y etruscos. El último, Tarquinio el Soberbio, fue expulsado en el 509 a.C.', extra:'La arqueología ha confirmado la existencia de asentamientos en el Palatino desde el siglo VIII a.C., aunque la historia de los reyes es en gran parte legendaria.' },
+  { year:'509–287 a.C.', tag:'República temprana', color:'#b45309', title:'Nacimiento de la República', desc:'Tras la expulsión del último rey se instaura la República: dos cónsules elegidos anualmente, un Senado aristocrático y asambleas populares. Patricios y plebeyos luchan por el poder (conflicto de los órdenes).', extra:'La Ley de las XII Tablas (451 a.C.) fue la primera codificación escrita del derecho romano y un hito en la conquista de derechos por parte de los plebeyos.' },
+  { year:'264–146 a.C.', tag:'Expansión', color:'#7c3aed', title:'Guerras Púnicas', desc:'Roma se enfrenta a Cartago en tres guerras. Tras la victoria de Escipión sobre Aníbal en Zama (202 a.C.), Roma domina el Mediterráneo occidental. En el 146 a.C. destruye Cartago y Corinto.', extra:'La victoria sobre Cartago convirtió a Roma en la primera potencia del Mediterráneo y desencadenó una profunda transformación social y económica.' },
+  { year:'133–27 a.C.', tag:'Crisis de la República', color:'#0e7490', title:'La crisis de la República', desc:'Las reformas de los Gracos, la guerra social, las dictaduras de Mario y Sila, el Primer Triunvirato (César, Pompeyo y Craso) y la guerra civil entre César y Pompeyo desembocan en el asesinato de César (44 a.C.) y, después, en la guerra entre Octavio y Marco Antonio.', extra:'Fue un siglo de violencia política casi continua, que mostró la incapacidad de la República para gobernar un imperio tan vasto.' },
+  { year:'27 a.C.–235 d.C.', tag:'Alto Imperio', color:'#c2410c', title:'El Principado y la Pax Romana', desc:'Augusto instaura el Principado (27 a.C.). El Imperio alcanza su máxima extensión con Trajano (117 d.C.) y vive dos siglos de relativa estabilidad. Se consolidan las instituciones, las calzadas y el derecho.', extra:'A esta época pertenecen emperadores como Augusto, Tiberio, Claudio, Vespasiano, Tito, Trajano, Adriano, Antonino Pío y Marco Aurelio.' },
+  { year:'235–284 d.C.', tag:'Crisis del s. III', color:'#b91c1c', title:'La crisis del siglo III', desc:'Durante cincuenta años, el Imperio sufre invasiones bárbaras, guerras civiles, epidemias y una grave crisis económica. Se suceden más de veinte emperadores, muchos de ellos asesinados.', extra:'La crisis estuvo a punto de desintegrar el Imperio. Solo la llegada de Diocleciano (284) lograría estabilizarlo.' },
+  { year:'284–395 d.C.', tag:'Bajo Imperio', color:'#7c3aed', title:'El Dominado', desc:'Diocleciano y Constantino reorganizan el Imperio: Tetrarquía, reformas fiscales y militares, fundación de Constantinopla (330) y legalización del cristianismo (313). En el 395, Teodosio divide el Imperio entre sus dos hijos.', extra:'El cristianismo pasó de religión perseguida a religión oficial del Imperio con el Edicto de Tesalónica (380).' },
+  { year:'395–476 d.C.', tag:'Imperio de Occidente', color:'#a16207', title:'La caída de Occidente', desc:'El Imperio de Occidente, debilitado por las invasiones bárbaras y las crisis internas, se desmorona. En el 476, Odoacro depone a Rómulo Augústulo. El Imperio de Oriente (Bizancio) sobrevivirá hasta 1453.', extra:'La fecha del 476 es simbólica: en la práctica, el proceso de descomposición fue gradual y afectó a todo el siglo V.' },
+  { year:'476–1453 d.C.', tag:'Bizancio', color:'#4d7c0f', title:'El Imperio Romano de Oriente', desc:'Constantinopla se convierte en la capital del mundo bizantino. Justiniano (527–565) intenta recuperar Occidente y compila el <em>Corpus Iuris Civilis</em>. El Imperio sobrevive casi mil años, hasta la toma de Constantinopla por los turcos en 1453.', extra:'Bizancio conservó y transmitió la herencia greco-romana a la Europa medieval y al mundo islámico.' }
+];
+
+function renderTimeline(){
+  const c = $('#timelineList');
+  if (!c) return;
+  c.innerHTML = TIMELINE.map((t, i) => `
+    <div class="vt-item" style="--c:${t.color};--d:${i * 40}ms">
+      <span class="vt-dot"></span>
+      <div class="vt-card">
+        <div class="vt-top">
+          <span class="vt-year">${t.year}</span>
+          <span class="vt-era">${t.tag}</span>
+        </div>
+        <h4>${t.title}</h4>
+        <p>${t.desc}</p>
+        <button class="vt-more" type="button"><span>Más detalle</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="vt-extra"><div><p>${t.extra}</p></div></div>
+      </div>
+    </div>
+  `).join('');
+  c.onclick = e => {
+    const btn = e.target.closest('.vt-more');
+    if (!btn) return;
+    const item = btn.closest('.vt-item');
+    const open = item.classList.toggle('open');
+    btn.querySelector('span').textContent = open ? 'Ocultar detalle' : 'Más detalle';
+  };
+}
+
+/* GLOSARIO */
+const GLOSSARY = [
+  { t:'Patricio', d:'Miembro de la aristocracia romana primitiva. Los patricios monopolizaron las magistraturas y el Senado durante los primeros siglos de la República.' },
+  { t:'Plebeyo', d:'Ciudadano romano no patricio. Los plebeyos lucharon durante siglos por la igualdad de derechos (conflicto de los órdenes).' },
+  { t:'Senado', d:'Consejo de ancianos (<em>senex</em>) que asesoraba a los magistrados. En la República fue el órgano más influyente; en el Imperio, perdió poder real.' },
+  { t:'Cónsul', d:'Magistrado supremo de la República. Dos cónsules eran elegidos cada año y dirigían el ejército y la política.' },
+  { t:'Tribuno de la plebe', d:'Magistrado plebeyo con poder de veto (<em>intercessio</em>) sobre las decisiones de los demás magistrados. Era sacrosanto.' },
+  { t:'Dictador', d:'Magistrado extraordinario nombrado en caso de emergencia por un máximo de seis meses. Sila y César rompieron esta limitación.' },
+  { t:'Pretor', d:'Magistrado encargado de la administración de justicia. Su edicto anual fue una de las fuentes del derecho romano.' },
+  { t:'Censor', d:'Magistrado encargado del censo y de la moral pública (<em>cura morum</em>). Su cargo era muy prestigioso.' },
+  { t:'Legión', d:'Unidad básica del ejército romano, compuesta por unos 5.000 soldados de infantería. La disciplina y la organización la hicieron casi invencible.' },
+  { t:'Centurión', d:'Oficial al mando de una centuria (unos 80 soldados). Era el profesional experimentado que sostenía la legión.' },
+  { t:'Lictor', d:'Guardián que acompañaba a los magistrados con fasces (haces de varas y un hacha), símbolo del poder de castigar.' },
+  { t:'Fasces', d:'Haces de varas atadas alrededor de un hacha. Simbolizaban el poder de los magistrados romanos.' },
+  { t:'Imperium', d:'Poder supremo de mando militar y civil de los magistrados romanos. De esta palabra deriva "imperio".' },
+  { t:'Auctoritas', d:'Prestigio moral y político, distinto del poder formal (<em>potestas</em>). Augusto basó su poder en la auctoritas.' },
+  { t:'Provincia', d:'Territorio conquistado fuera de Italia, administrado por un gobernador (procónsul o propreto).' },
+  { t:'Limes', d:'Frontera fortificada del Imperio. El más famoso es el Muro de Adriano, en Britania.' },
+  { t:'Pax Romana', d:'Larga etapa de paz y estabilidad en el Mediterráneo bajo el Imperio (s. I–II d.C.).' },
+  { t:'Romanización', d:'Proceso de asimilación de la cultura, la lengua y las costumbres romanas por parte de los pueblos conquistados.' },
+  { t:'Municipio', d:'Ciudad provincial con derechos romanos, aunque sin derecho a voto en Roma.' },
+  { t:'Colonia', d:'Asentamiento de ciudadanos romanos en territorio conquistado, con plenos derechos.' },
+  { t:'Clientelismo', d:'Relación de dependencia entre un patrón poderoso y sus clientes, que le ofrecían apoyo político y militar a cambio de protección.' },
+  { t:'Gens', d:'Grupo de familias que compartían un antepasado común y un culto doméstico. La <em>gens</em> era la base de la organización social primitiva.' },
+  { t:'Paterfamilias', d:'Cabeza de familia con autoridad legal sobre su esposa, hijos y esclavos. Era el ciudadano autónomo por excelencia.' },
+  { t:'Dote', d:'Bienes que la mujer aportaba al matrimonio. En Roma, el matrimonio era una institución social y jurídica, no religiosa.' },
+  { t:'Liberto', d:'Esclavo liberado por su amo. Conservaba obligaciones hacia su antiguo dueño (patrón).' },
+  { t:'Amphora', d:'Recipiente de cerámica usado para transportar y almacenar vino, aceite y otros productos. Es un símbolo del comercio romano.' },
+  { t:'Termas', d:'Baños públicos romanos, con piscinas de agua fría, templada y caliente. Eran centros sociales y de higiene.' },
+  { t:'Foro', d:'Plaza central de la ciudad romana, donde se celebraban los mercados, los juicios y las asambleas.' },
+  { t:'Basílica', d:'Edificio público romano de planta rectangular, usado como tribunal y mercado. El modelo pasó a la arquitectura cristiana.' },
+  { t:'Anfiteatro', d:'Edificio circular o elíptico para espectáculos como las luchas de gladiadores. El más famoso es el Coliseo.' },
+  { t:'Acueducto', d:'Conducción de agua que abastecía a las ciudades romanas. Muchos siguen en pie hoy, como el de Segovia.' },
+  { t:'Vía', d:'Calzada romana. La red de vías alcanzó más de 400.000 km y unía todo el Imperio.' },
+  { t:'Cursus honorum', d:'Carrera política de los magistrados romanos: cuestor, edil, pretor, cónsul y censor. Cada cargo tenía una edad mínima.' },
+  { t:'Triunvirato', d:'Alianza de tres políticos poderosos. Hubo dos: el de César, Pompeyo y Craso (60 a.C.) y el de Octavio, Marco Antonio y Lépido (43 a.C.).' },
+  { t:'Idus de marzo', d:'El 15 de marzo del 44 a.C., día en que Julio César fue asesinado en el Senado.' },
+  { t:'Alea iacta est', d:'"La suerte está echada": frase que, según Suetonio, pronunció César al cruzar el Rubicón en el 49 a.C., iniciando la guerra civil.' },
+  { t:'Corpus Iuris Civilis', d:'Compilación del derecho romano ordenada por Justiniano (529–534 d.C.). Es la base del derecho civil moderno.' }
+];
+
+function renderGlossary(){
+  const grid = $('#glossGrid');
+  const empty = $('#glossEmpty');
+  const search = $('#glossSearch');
+  if (!grid) return;
+  function render(filter = ''){
+    const q = filter.trim().toLowerCase();
+    const items = GLOSSARY.filter(g =>
+      !q || g.t.toLowerCase().includes(q) || g.d.toLowerCase().includes(q)
+    );
+    if (items.length === 0){
+      grid.innerHTML = '';
+      empty.style.display = 'block';
+      return;
+    }
+    empty.style.display = 'none';
+    grid.innerHTML = items.map(g => `
+      <div class="gloss-item">
+        <div class="gi-term">${g.t}</div>
+        <div class="gi-def">${g.d}</div>
+      </div>
+    `).join('');
+  }
+  render();
+  if (search && !search.dataset.bound){
+    search.dataset.bound = '1';
+    search.addEventListener('input', e => render(e.target.value));
+  }
+}
+
+/* QUIZ */
+const QUIZ_DATA = [
+  { q:'¿En qué año se sitúa tradicionalmente la fundación de Roma?', o:['753 a.C.','509 a.C.','476 d.C.','27 a.C.'], c:0, e:'Según la tradición, Rómulo fundó Roma en el 753 a.C. sobre el monte Palatino.' },
+  { q:'¿Qué forma de gobierno tenía Roma antes del Imperio?', o:['Monarquía absoluta','República','Democracia directa','Oligarquía militar'], c:1, e:'Tras la expulsión del último rey (509 a.C.), Roma instauró la República.' },
+  { q:'¿Quién fue el primer emperador romano?', o:['Julio César','Augusto','Trajano','Constantino'], c:1, e:'Augusto, adoptado por César, instauró el Principado en el 27 a.C. y fue el primer emperador.' },
+  { q:'¿Qué general cartaginés cruzó los Alpes con elefantes?', o:['Escipión','Aníbal','Mario','Pompeyo'], c:1, e:'Aníbal Barca cruzó los Alpes en el 218 a.C. y derrotó a los romanos en Cannas.' },
+  { q:'¿Cuándo fue asesinado Julio César?', o:['Idus de marzo del 44 a.C.','Idus de marzo del 27 a.C.','Calendas de enero del 49 a.C.','En la batalla de Farsalia'], c:0, e:'César fue asesinado el 15 de marzo del 44 a.C. (idus de marzo) en el Senado.' },
+  { q:'¿Quién compiló el Corpus Iuris Civilis?', o:['Augusto','Justiniano','Trajano','Adriano'], c:1, e:'Justiniano, emperador de Oriente, ordenó compilar el derecho romano entre el 529 y el 534 d.C.' },
+  { q:'¿Cuál es la primera codificación escrita del derecho romano?', o:['Las XII Tablas','El Digesto','Las Instituciones','El Código Teodosiano'], c:0, e:'La Ley de las XII Tablas (451 a.C.) fue la primera codificación escrita del derecho romano.' },
+  { q:'¿Qué emperador dividió el Imperio entre sus dos hijos en el 395 d.C.?', o:['Diocleciano','Constantino','Teodosio','Augusto'], c:2, e:'Teodosio dividió el Imperio entre Arcadio (Oriente) y Honorio (Occidente) en el 395.' },
+  { q:'¿Cuál fue el último emperador de Occidente?', o:['Rómulo Augústulo','Julio Nepote','Rómulo','Honorio'], c:0, e:'Rómulo Augústulo fue depuesto por Odoacro en el 476 d.C.' },
+  { q:'¿En qué año cayó Constantinopla, fin del Imperio de Oriente?', o:['476 d.C.','1204 d.C.','1453 d.C.','1492 d.C.'], c:2, e:'Constantinopla fue tomada por los turcos otomanos en 1453, poniendo fin al Imperio bizantino.' },
+  { q:'¿Qué emperador legalizó el cristianismo con el Edicto de Milán?', o:['Nerón','Diocleciano','Constantino','Teodosio'], c:2, e:'Constantino promulgó el Edicto de Milán (313) que otorgó libertad de culto a los cristianos.' },
+  { q:'¿Qué emperador llevó el Imperio a su máxima extensión?', o:['Augusto','Trajano','Adriano','Marco Aurelio'], c:1, e:'Trajano (98–117 d.C.) llevó el Imperio a su máxima extensión territorial.' },
+  { q:'¿Qué filósofo romano escribió las Meditaciones?', o:['Séneca','Cicerón','Marco Aurelio','Lucrecio'], c:2, e:'Marco Aurelio escribió las Meditaciones, obra cumbre del estoicismo romano.' },
+  { q:'¿De qué lenguas antiguas deriva el alfabeto latino?', o:['Del fenicio directamente','Del griego a través del etrusco','Del egipcio demótico','Del arameo'], c:1, e:'Los romanos adoptaron el alfabeto griego a través de los etruscos hacia el siglo VII a.C.' },
+  { q:'¿Qué concepto jurídico romano significa "donde hay sociedad, hay derecho"?', o:['Ubi societas, ibi ius','Alea iacta est','Panem et circenses','Divide et impera'], c:0, e:'Ubi societas, ibi ius es un principio romano que afirma que toda sociedad necesita derecho.' }
+];
+
+const TOTAL_PREGUNTAS = 10;
+const LETRAS = ['A','B','C','D'];
+let quizState = { questions: [], index: 0, score: 0, answered: false, finished: false };
+
+function shuffle(arr){
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+function startQuiz(){
+  quizState = {
+    questions: shuffle(QUIZ_DATA).slice(0, TOTAL_PREGUNTAS),
+    index: 0, score: 0, answered: false, finished: false
+  };
+  renderQuiz();
+}
+function renderQuiz(){
+  const card = $('#quizCard');
+  if (!card) return;
+  if (quizState.finished){
+    const total = quizState.questions.length;
+    const pct = Math.round((quizState.score / total) * 100);
+    let m = 'Conviene repasar la cronología, el derecho y los personajes.';
+    if (pct === 100) m = '¡Perfecto! Dominas la historia de Roma.';
+    else if (pct >= 75) m = 'Muy buen resultado. Te falta muy poco para el pleno.';
+    else if (pct >= 50) m = 'Buen comienzo. Repasa las secciones y prueba otra vez.';
+    card.innerHTML = `
+      <div class="result">
+        <div class="score">${quizState.score}/${total}</div>
+        <h3>${m}</h3>
+        <p>Has acertado el ${pct}% de las preguntas de esta ronda.</p>
+        <button class="btn btn-primary" id="restartQuiz">Jugar otra vez
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>
+        </button>
+      </div>`;
+    $('#restartQuiz').addEventListener('click', startQuiz);
+    return;
+  }
+  const q = quizState.questions[quizState.index];
+  const total = quizState.questions.length;
+  const progress = (quizState.index / total) * 100;
+  card.innerHTML = `
+    <div class="quiz-meta">
+      <span>Pregunta ${quizState.index + 1} de ${total}</span>
+      <span>Aciertos: ${quizState.score}</span>
+    </div>
+    <div class="progress"><div class="progress-bar" style="width:${progress}%"></div></div>
+    <h3 class="q-text">${q.q}</h3>
+    <div class="options" id="options">
+      ${q.o.map((opt, i) => `
+        <button class="option" data-i="${i}">
+          <span class="letter">${LETRAS[i]}</span>
+          <span>${opt}</span>
+        </button>`).join('')}
+    </div>
+    <div id="feedbackSlot"></div>
+    <div class="quiz-actions" id="actionsSlot"></div>`;
+  $('#options').addEventListener('click', e => {
+    const btn = e.target.closest('.option');
+    if (!btn || quizState.answered) return;
+    answerQuestion(parseInt(btn.dataset.i, 10));
+  });
+}
+function answerQuestion(chosen){
+  quizState.answered = true;
+  const q = quizState.questions[quizState.index];
+  const options = $$('#options .option');
+  options.forEach((btn, i) => {
+    btn.disabled = true;
+    if (i === q.c) btn.classList.add('correct');
+    else if (i === chosen) btn.classList.add('wrong');
+  });
+  const acerto = chosen === q.c;
+  if (acerto) quizState.score++;
+  $('#feedbackSlot').innerHTML = `
+    <div class="feedback">
+      <strong>${acerto ? 'Correcto.' : 'No exactamente.'}</strong> ${q.e}
+    </div>`;
+  const isLast = quizState.index === quizState.questions.length - 1;
+  $('#actionsSlot').innerHTML = `
+    <button class="btn btn-primary" id="nextBtn">
+      ${isLast ? 'Ver resultado' : 'Siguiente pregunta'}
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </button>`;
+  $('#nextBtn').addEventListener('click', () => {
+    if (isLast) quizState.finished = true;
+    else { quizState.index++; quizState.answered = false; }
+    renderQuiz();
+  });
+}
+
+$$('.module').forEach(m => {
+  m.addEventListener('mousemove', e => {
+    const r = m.getBoundingClientRect();
+    m.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
+    m.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
+  });
+});
+
+document.addEventListener('visibilitychange', () => {
+  document.querySelectorAll('.orb').forEach(o => {
+    o.style.animationPlayState = document.hidden ? 'paused' : 'running';
+  });
+});
+
+(function boot(){
+  const initial = (location.hash.slice(1) || 'inicio');
+  go(ROUTES.includes(initial) ? initial : 'inicio', false);
+  checkReveal();
+  setTimeout(() => { if (currentRoute === 'inicio') animateCounters(); }, 300);
+})();
+</script>
+</body>
+</html>

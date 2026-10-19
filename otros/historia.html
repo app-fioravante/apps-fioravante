@@ -1,0 +1,2380 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Historia Simple — La humanidad explicada con líneas del tiempo</title>
+<meta name="description" content="Recorre la historia de la humanidad: prehistoria, antigüedad, edad media, moderna y contemporánea con líneas del tiempo, gráficos y hechos clave.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============ TOKENS ============ */
+:root{
+  --font-display:'Space Grotesk','Segoe UI',system-ui,sans-serif;
+  --font-body:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --radius:20px;
+  --radius-sm:12px;
+  --maxw:1180px;
+  --ease:cubic-bezier(.22,.75,.25,1);
+}
+html[data-theme="dark"]{
+  --bg:#0a0806;
+  --bg-soft:#12100c;
+  --surface:rgba(30,25,20,.66);
+  --surface-solid:#1b1712;
+  --surface-2:rgba(255,255,255,.045);
+  --surface-3:rgba(255,255,255,.08);
+  --border:rgba(255,255,255,.10);
+  --border-strong:rgba(255,255,255,.20);
+  --text:#f3ede4;
+  --muted:#a49a8b;
+  --accent:#f59e0b;
+  --accent-2:#fb7185;
+  --accent-3:#22d3ee;
+  --good:#34d399;
+  --bad:#fb7185;
+  --shadow:0 24px 60px -24px rgba(0,0,0,.9);
+  --orb-op:.34;
+  --dot-color:rgba(255,255,255,.03);
+  --grid:rgba(255,255,255,.10);
+}
+html[data-theme="light"]{
+  --bg:#faf7f2;
+  --bg-soft:#f2ece2;
+  --surface:rgba(255,255,255,.82);
+  --surface-solid:#ffffff;
+  --surface-2:rgba(60,40,15,.04);
+  --surface-3:rgba(60,40,15,.07);
+  --border:rgba(60,40,15,.12);
+  --border-strong:rgba(60,40,15,.24);
+  --text:#1e1810;
+  --muted:#7a6c58;
+  --accent:#d97706;
+  --accent-2:#e11d48;
+  --accent-3:#0891b2;
+  --good:#059669;
+  --bad:#e11d48;
+  --shadow:0 24px 60px -30px rgba(80,50,10,.28);
+  --orb-op:.22;
+  --dot-color:rgba(60,40,15,.05);
+  --grid:rgba(60,40,15,.13);
+}
+
+/* ============ BASE ============ */
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;font-family:var(--font-body);background:var(--bg);color:var(--text);
+  min-height:100vh;line-height:1.65;-webkit-font-smoothing:antialiased;
+  transition:background .45s var(--ease),color .45s var(--ease);
+  overflow-x:hidden;
+}
+h1,h2,h3,h4,h5{font-family:var(--font-display);line-height:1.15;letter-spacing:-.02em;margin:0}
+p{margin:0}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+a{color:inherit;text-decoration:none}
+ul{margin:0}
+::selection{background:var(--accent);color:#1a1206}
+
+/* ============ FONDO ============ */
+.bg-dots{
+  position:fixed;inset:0;z-index:-3;pointer-events:none;
+  background-image:radial-gradient(var(--dot-color) 1px,transparent 1px);
+  background-size:26px 26px;
+}
+.orbs{position:fixed;inset:0;z-index:-2;overflow:hidden;pointer-events:none}
+.orb{position:absolute;border-radius:50%;filter:blur(100px);opacity:var(--orb-op);animation:float 28s ease-in-out infinite alternate}
+.orb.o1{width:54vw;height:54vw;background:var(--accent);top:-18vw;left:-14vw}
+.orb.o2{width:42vw;height:42vw;background:var(--accent-2);bottom:-20vw;right:-12vw;animation-delay:-10s}
+.orb.o3{width:34vw;height:34vw;background:var(--accent-3);top:46%;left:58%;animation-delay:-17s}
+@keyframes float{
+  0%{transform:translate3d(0,0,0) scale(1)}
+  50%{transform:translate3d(4vw,-3vw,0) scale(1.12)}
+  100%{transform:translate3d(-3vw,4vw,0) scale(.94)}
+}
+
+/* ============ HEADER ============ */
+.site-header{
+  position:sticky;top:0;z-index:50;
+  backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);
+  background:color-mix(in srgb,var(--bg) 76%, transparent);
+  border-bottom:1px solid var(--border);
+}
+.header-inner{max-width:var(--maxw);margin:0 auto;padding:13px 22px;display:flex;align-items:center;gap:20px}
+.brand{display:flex;align-items:center;gap:11px;font-family:var(--font-display);font-weight:700;font-size:1rem;letter-spacing:-.02em;white-space:nowrap}
+.brand-mark{
+  width:36px;height:36px;border-radius:11px;flex:none;
+  background:linear-gradient(140deg,var(--accent),var(--accent-2) 55%,var(--accent-3));
+  display:grid;place-items:center;color:#fff;
+  box-shadow:0 8px 22px -8px var(--accent);
+  transition:transform .5s var(--ease);
+}
+.brand:hover .brand-mark{transform:rotate(-12deg) scale(1.06)}
+.brand-mark svg{width:20px;height:20px}
+
+.nav{display:flex;gap:2px;margin-left:auto;overflow-x:auto;scrollbar-width:none}
+.nav::-webkit-scrollbar{display:none}
+.nav-link{
+  position:relative;padding:9px 12px;border-radius:11px;font-size:.82rem;font-weight:500;
+  color:var(--muted);white-space:nowrap;transition:color .3s var(--ease),background .3s var(--ease);
+}
+.nav-link:hover{color:var(--text);background:var(--surface-2)}
+.nav-link.active{color:var(--text);background:var(--surface-2)}
+.nav-link.active::after{
+  content:'';position:absolute;left:12px;right:12px;bottom:4px;height:2px;border-radius:2px;
+  background:linear-gradient(90deg,var(--accent),var(--accent-2));
+  animation:navIn .4s var(--ease) both;
+}
+@keyframes navIn{from{transform:scaleX(0);opacity:0}to{transform:scaleX(1);opacity:1}}
+
+.theme-toggle{
+  width:40px;height:40px;border-radius:12px;flex:none;
+  border:1px solid var(--border);background:var(--surface-2);
+  display:grid;place-items:center;
+  transition:transform .35s var(--ease),border-color .3s,background .3s;
+}
+.theme-toggle:hover{transform:translateY(-2px) rotate(8deg);border-color:var(--border-strong)}
+.theme-toggle svg{width:19px;height:19px}
+html[data-theme="dark"] .icon-sun{display:block}
+html[data-theme="dark"] .icon-moon{display:none}
+html[data-theme="light"] .icon-sun{display:none}
+html[data-theme="light"] .icon-moon{display:block}
+
+/* ============ LAYOUT ============ */
+main{max-width:var(--maxw);margin:0 auto;padding:0 22px 90px}
+.view{display:none}
+.view.active{display:block;animation:viewIn .55s var(--ease) both}
+@keyframes viewIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+
+/* ============ HERO ============ */
+.hero{padding:74px 0 42px;max-width:860px}
+.pill{
+  display:inline-flex;align-items:center;gap:8px;padding:7px 15px;border-radius:999px;
+  font-size:.78rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;
+  border:1px solid var(--border);background:var(--surface);color:var(--muted);margin-bottom:26px;
+  animation:viewIn .6s var(--ease) both;
+}
+.pill .dot{width:7px;height:7px;border-radius:50%;background:var(--good);animation:pulse 2.4s infinite}
+@keyframes pulse{
+  0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--good) 60%,transparent)}
+  70%{box-shadow:0 0 0 9px transparent}
+  100%{box-shadow:0 0 0 0 transparent}
+}
+h1.hero-title{font-size:clamp(2.2rem,5.4vw,3.95rem);font-weight:700;letter-spacing:-.035em;margin-bottom:22px}
+.grad{
+  background:linear-gradient(100deg,var(--accent),var(--accent-2) 48%,var(--accent-3));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  background-size:220% auto;animation:shimmer 8s linear infinite;
+}
+@keyframes shimmer{to{background-position:220% center}}
+.lead{font-size:clamp(1rem,1.6vw,1.15rem);color:var(--muted);max-width:660px;margin-bottom:34px}
+.hero-actions{display:flex;flex-wrap:wrap;gap:13px}
+
+/* ============ BOTONES ============ */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  padding:13px 25px;border-radius:13px;font-size:.93rem;font-weight:600;
+  border:1px solid transparent;
+  transition:transform .28s var(--ease),box-shadow .3s var(--ease),background .3s,border-color .3s,color .3s;
+  will-change:transform;
+}
+.btn:active{transform:scale(.97)}
+.btn svg{width:17px;height:17px}
+.btn-primary{
+  background:linear-gradient(120deg,var(--accent),var(--accent-2));
+  color:#1a1206;box-shadow:0 14px 34px -14px var(--accent);
+  position:relative;overflow:hidden;
+}
+.btn-primary::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,.45),transparent 70%);
+  transform:translateX(-130%);transition:transform .7s var(--ease);
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 20px 42px -14px var(--accent)}
+.btn-primary:hover::after{transform:translateX(130%)}
+.btn-ghost{border-color:var(--border);background:var(--surface);color:var(--text)}
+.btn-ghost:hover{transform:translateY(-2px);border-color:var(--border-strong);background:var(--surface-2)}
+
+/* ============ STATS ============ */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(156px,1fr));gap:14px;margin:12px 0 58px}
+.stat{
+  padding:22px 20px;border-radius:var(--radius);
+  background:var(--surface);border:1px solid var(--border);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  transition:transform .35s var(--ease),border-color .3s,box-shadow .35s;
+}
+.stat:hover{transform:translateY(-5px);border-color:var(--border-strong);box-shadow:var(--shadow)}
+.stat .num{
+  font-family:var(--font-display);font-size:1.8rem;font-weight:700;letter-spacing:-.03em;
+  background:linear-gradient(120deg,var(--accent),var(--accent-2));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.stat .lbl{font-size:.82rem;color:var(--muted);font-weight:500;margin-top:2px}
+
+/* ============ SECCIONES ============ */
+.sec-head{margin:0 0 28px}
+.sec-head h2{font-size:clamp(1.55rem,3vw,2.05rem);font-weight:700;margin-bottom:8px}
+.sec-head p{color:var(--muted);max-width:660px;font-size:.95rem}
+.section{padding-top:52px}
+
+/* ============ MÓDULOS HOME ============ */
+.module-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(258px,1fr));gap:18px}
+.module{
+  position:relative;overflow:hidden;text-align:left;padding:28px 24px;border-radius:var(--radius);
+  background:var(--surface);border:1px solid var(--border);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  transition:transform .4s var(--ease),border-color .35s,box-shadow .4s;
+}
+.module::before{
+  content:'';position:absolute;inset:0;opacity:0;
+  background:radial-gradient(420px circle at var(--mx,50%) var(--my,0%),color-mix(in srgb,var(--accent) 22%,transparent),transparent 65%);
+  transition:opacity .45s var(--ease);
+}
+.module:hover{transform:translateY(-6px);border-color:var(--border-strong);box-shadow:var(--shadow)}
+.module:hover::before{opacity:1}
+.module-ico{
+  width:46px;height:46px;border-radius:14px;display:grid;place-items:center;margin-bottom:18px;
+  background:linear-gradient(140deg,color-mix(in srgb,var(--accent) 22%,transparent),color-mix(in srgb,var(--accent-2) 18%,transparent));
+  border:1px solid var(--border);color:var(--accent);
+  transition:transform .4s var(--ease);
+}
+.module:hover .module-ico{transform:scale(1.08) rotate(-6deg)}
+.module-ico svg{width:22px;height:22px}
+.module h3{font-size:1.04rem;margin-bottom:8px;font-weight:600}
+.module p{font-size:.89rem;color:var(--muted);line-height:1.6}
+.module .arrow{display:inline-flex;align-items:center;gap:6px;margin-top:16px;font-size:.84rem;font-weight:600;color:var(--accent)}
+.module .arrow svg{width:14px;height:14px;transition:transform .35s var(--ease)}
+.module:hover .arrow svg{transform:translateX(5px)}
+
+/* ============ CARDS ============ */
+.card{
+  padding:26px;border-radius:var(--radius);
+  background:var(--surface);border:1px solid var(--border);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  transition:transform .35s var(--ease),border-color .3s,box-shadow .35s;
+}
+.card:hover{transform:translateY(-4px);border-color:var(--border-strong);box-shadow:var(--shadow)}
+.card h3{font-size:1.04rem;margin-bottom:10px;font-weight:600}
+.card p{font-size:.9rem;color:var(--muted);line-height:1.68}
+.card .kicker{
+  font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:12px;display:block;
+}
+.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:16px}
+.grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+
+/* ============ OVERVIEW TIMELINE BAR ============ */
+.tl-overview{
+  border-radius:var(--radius);border:1px solid var(--border);
+  background:var(--surface);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  padding:24px 22px 20px;overflow:hidden;
+}
+.tl-bar{
+  display:flex;height:64px;border-radius:14px;overflow:hidden;
+  border:1px solid var(--border-strong);
+}
+.tl-seg{
+  flex:1;position:relative;display:flex;flex-direction:column;justify-content:center;
+  align-items:center;gap:2px;color:#1a1206;font-weight:700;
+  transition:flex .4s var(--ease),filter .3s,transform .3s var(--ease);
+  border-right:1px solid rgba(0,0,0,.18);
+  padding:6px 4px;overflow:hidden;
+}
+.tl-seg:last-child{border-right:none}
+.tl-seg:hover{filter:brightness(1.14);transform:scaleY(1.04)}
+.tl-seg.dim{filter:grayscale(.55) brightness(.85);opacity:.6}
+.tl-seg .seg-name{font-family:var(--font-display);font-size:.8rem;letter-spacing:-.01em;line-height:1.15;text-align:center}
+.tl-seg .seg-range{font-size:.62rem;font-weight:600;opacity:.8;font-family:var(--font-body);text-align:center;line-height:1.2}
+.tl-legend{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  margin-top:16px;font-size:.78rem;color:var(--muted);flex-wrap:wrap;
+}
+.tl-legend .arrowline{display:flex;align-items:center;gap:8px;font-weight:600}
+.tl-legend .arrowline svg{width:60px;height:8px}
+
+/* ============ CHIPS ============ */
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{
+  padding:8px 15px;border-radius:999px;font-size:.81rem;font-weight:600;
+  border:1px solid var(--border);background:var(--surface);color:var(--muted);
+  transition:all .3s var(--ease);
+}
+.chip:hover{color:var(--text);border-color:var(--border-strong);transform:translateY(-1px)}
+.chip.active{background:linear-gradient(120deg,var(--accent),var(--accent-2));color:#1a1206;border-color:transparent;box-shadow:0 10px 26px -12px var(--accent)}
+
+/* ============ TIMELINE VERTICAL ============ */
+.vt{position:relative;margin-top:26px}
+.vt::before{
+  content:'';position:absolute;left:13px;top:10px;bottom:10px;width:2px;border-radius:2px;
+  background:linear-gradient(180deg,var(--accent),var(--accent-2) 55%,var(--accent-3));
+  opacity:.55;
+}
+.vt-item{
+  position:relative;padding-left:46px;margin-bottom:18px;
+  animation:termIn .5s var(--ease) both;animation-delay:var(--d,0ms);
+  transition:opacity .35s var(--ease),transform .35s var(--ease);
+}
+.vt-item.hidden{display:none}
+@keyframes termIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.vt-dot{
+  position:absolute;left:7px;top:24px;width:14px;height:14px;border-radius:50%;
+  background:var(--c);border:3px solid var(--bg);
+  box-shadow:0 0 0 3px color-mix(in srgb,var(--c) 30%,transparent);
+  transition:transform .3s var(--ease),box-shadow .3s;
+}
+.vt-item:hover .vt-dot{transform:scale(1.3);box-shadow:0 0 0 6px color-mix(in srgb,var(--c) 24%,transparent)}
+.vt-card{
+  padding:20px 22px;border-radius:var(--radius-sm);
+  background:var(--surface);border:1px solid var(--border);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  transition:border-color .3s,transform .3s var(--ease),box-shadow .3s;
+}
+.vt-item:hover .vt-card{border-color:var(--border-strong);transform:translateX(3px);box-shadow:var(--shadow)}
+.vt-top{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:8px}
+.vt-year{
+  font-family:var(--font-display);font-size:.86rem;font-weight:700;
+  color:var(--accent);letter-spacing:-.01em;
+  padding:3px 10px;border-radius:7px;
+  background:color-mix(in srgb,var(--accent) 13%,transparent);
+  border:1px solid color-mix(in srgb,var(--accent) 26%,transparent);
+  white-space:nowrap;
+}
+.vt-era{
+  font-size:.68rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
+  color:var(--muted);
+}
+.vt-card h4{font-size:1rem;font-weight:600;margin-bottom:7px;line-height:1.3}
+.vt-card > p{font-size:.88rem;color:var(--muted);line-height:1.66}
+.vt-more{
+  display:inline-flex;align-items:center;gap:6px;margin-top:12px;
+  font-size:.79rem;font-weight:600;color:var(--accent);
+  padding:4px 0;transition:gap .3s var(--ease);
+}
+.vt-more:hover{gap:9px}
+.vt-more svg{width:12px;height:12px;transition:transform .4s var(--ease)}
+.vt-item.open .vt-more svg{transform:rotate(180deg)}
+.vt-extra{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s var(--ease)}
+.vt-item.open .vt-extra{grid-template-rows:1fr}
+.vt-extra > div{overflow:hidden}
+.vt-extra p{
+  font-size:.85rem;color:var(--muted);line-height:1.7;
+  border-top:1px solid var(--border);margin-top:12px;padding-top:12px;
+}
+.vt-extra strong{color:var(--text);font-weight:600}
+
+/* ============ ERAS ACCORDION ============ */
+.era-card{
+  border-radius:var(--radius);overflow:hidden;
+  background:var(--surface);border:1px solid var(--border);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  margin-bottom:14px;
+  animation:termIn .5s var(--ease) both;animation-delay:var(--d,0ms);
+  transition:border-color .3s,box-shadow .3s;
+}
+.era-card.open{border-color:var(--border-strong);box-shadow:var(--shadow)}
+.era-head{
+  width:100%;display:grid;grid-template-columns:auto 1fr auto;gap:16px;align-items:center;
+  padding:22px 24px;text-align:left;transition:background .3s;
+}
+.era-head:hover{background:var(--surface-2)}
+.era-badge{
+  width:52px;height:52px;border-radius:15px;flex:none;display:grid;place-items:center;
+  font-family:var(--font-display);font-size:.74rem;font-weight:700;letter-spacing:.02em;
+  color:#1a1206;background:linear-gradient(140deg,var(--c1),var(--c2));
+  box-shadow:0 10px 26px -14px var(--c1);
+  transition:transform .4s var(--ease);
+}
+.era-head:hover .era-badge{transform:rotate(-6deg) scale(1.06)}
+.era-title{font-size:1.05rem;font-weight:600;margin-bottom:3px}
+.era-range{font-size:.79rem;color:var(--muted);font-weight:500}
+.era-chev{width:16px;height:16px;color:var(--muted);transition:transform .4s var(--ease);flex:none}
+.era-card.open .era-chev{transform:rotate(180deg)}
+.era-body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .5s var(--ease)}
+.era-card.open .era-body{grid-template-rows:1fr}
+.era-body > div{overflow:hidden}
+.era-content{padding:0 24px 24px}
+.era-content > p{font-size:.9rem;color:var(--muted);line-height:1.7;margin-bottom:18px}
+.era-sub{
+  font-size:.71rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:10px;display:block;
+}
+.era-list{list-style:none;padding:0;display:flex;flex-direction:column;gap:8px;margin-bottom:18px}
+.era-list li{
+  display:flex;gap:10px;font-size:.87rem;color:var(--muted);line-height:1.6;
+  padding-left:2px;
+}
+.era-list li::before{
+  content:'';width:6px;height:6px;border-radius:50%;flex:none;margin-top:8px;
+  background:linear-gradient(140deg,var(--c1),var(--c2));
+}
+.era-legacy{
+  padding:14px 16px;border-radius:12px;font-size:.86rem;line-height:1.65;
+  background:color-mix(in srgb,var(--accent) 8%,transparent);
+  border:1px solid color-mix(in srgb,var(--accent) 22%,transparent);
+  color:var(--muted);
+}
+.era-legacy strong{color:var(--text);font-weight:600}
+
+/* ============ GRÁFICOS ============ */
+.chart-card{
+  padding:24px;border-radius:var(--radius);
+  background:var(--surface);border:1px solid var(--border);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  transition:border-color .3s,box-shadow .3s;
+}
+.chart-card:hover{border-color:var(--border-strong);box-shadow:var(--shadow)}
+.chart-card h3{font-size:1.02rem;margin-bottom:5px;font-weight:600}
+.chart-card .sub{font-size:.84rem;color:var(--muted);margin-bottom:18px;line-height:1.55}
+.chart-card svg{width:100%;height:auto;display:block;overflow:visible}
+.chart-note{
+  margin-top:14px;font-size:.78rem;color:var(--muted);
+  padding-top:12px;border-top:1px solid var(--border);line-height:1.55;
+}
+
+/* Día de la historia */
+.day-bar{
+  position:relative;height:52px;border-radius:12px;overflow:hidden;
+  border:1px solid var(--border-strong);margin:22px 0 10px;
+  background:linear-gradient(90deg,#1e293b,#334155 60%,#475569);
+}
+.day-fill{
+  position:absolute;inset:0;
+  background:linear-gradient(90deg,#f59e0b,#fb7185 55%,#22d3ee);
+}
+.day-mark{position:absolute;top:0;bottom:0;width:2px;background:rgba(0,0,0,.5)}
+.day-labels{display:flex;justify-content:space-between;font-size:.72rem;color:var(--muted);font-weight:600}
+.day-events{display:flex;flex-direction:column;gap:9px;margin-top:20px}
+.day-ev{
+  display:grid;grid-template-columns:74px 1fr;gap:14px;align-items:start;
+  padding:11px 14px;border-radius:11px;
+  background:var(--surface-2);border:1px solid var(--border);
+  font-size:.85rem;
+}
+.day-ev .t{
+  font-family:var(--font-display);font-weight:700;font-size:.82rem;color:var(--accent);
+  white-space:nowrap;
+}
+.day-ev .d{color:var(--muted);line-height:1.55}
+.day-ev .d b{color:var(--text);font-weight:600}
+
+/* ============ GLOSARIO ============ */
+.toolbar{
+  display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-bottom:26px;
+  position:sticky;top:69px;z-index:20;padding:14px 0;
+  background:linear-gradient(var(--bg) 55%,transparent);
+}
+.search-wrap{position:relative;flex:1;min-width:220px}
+.search-wrap svg{position:absolute;left:15px;top:50%;transform:translateY(-50%);width:17px;height:17px;color:var(--muted);pointer-events:none}
+#searchInput{
+  width:100%;padding:13px 16px 13px 44px;border-radius:13px;
+  background:var(--surface);border:1px solid var(--border);color:var(--text);
+  font-size:.93rem;font-family:inherit;outline:none;
+  transition:border-color .3s,box-shadow .3s,background .3s;
+}
+#searchInput::placeholder{color:var(--muted)}
+#searchInput:focus{border-color:var(--accent);box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 18%,transparent)}
+.term-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:15px}
+.term{
+  padding:22px;border-radius:var(--radius);
+  background:var(--surface);border:1px solid var(--border);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  animation:termIn .5s var(--ease) both;animation-delay:var(--d,0ms);
+  transition:border-color .3s,transform .3s var(--ease),box-shadow .3s;
+}
+.term:hover{transform:translateY(-4px);border-color:var(--border-strong);box-shadow:var(--shadow)}
+.term-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:9px}
+.term h3{font-size:.98rem;font-weight:600;letter-spacing:-.01em}
+.tag{
+  font-size:.67rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  padding:4px 9px;border-radius:7px;white-space:nowrap;
+  background:color-mix(in srgb,var(--accent) 15%,transparent);
+  color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 26%,transparent);
+}
+.term p{font-size:.88rem;color:var(--muted);line-height:1.65}
+.empty{padding:50px 20px;text-align:center;color:var(--muted);font-size:.95rem;grid-column:1/-1}
+
+/* ============ QUIZ ============ */
+.quiz-shell{max-width:760px;margin:0 auto}
+.quiz-card{
+  padding:34px;border-radius:var(--radius);
+  background:var(--surface);border:1px solid var(--border);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  box-shadow:var(--shadow);
+}
+.quiz-meta{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:12px;font-size:.81rem;font-weight:600;color:var(--muted)}
+.progress{height:6px;border-radius:99px;background:var(--surface-2);overflow:hidden;margin-bottom:30px;border:1px solid var(--border)}
+.progress-bar{height:100%;width:0%;border-radius:99px;background:linear-gradient(90deg,var(--accent),var(--accent-2));transition:width .55s var(--ease)}
+.q-text{font-family:var(--font-display);font-size:clamp(1.12rem,2.4vw,1.42rem);font-weight:600;line-height:1.35;margin-bottom:26px}
+.options{display:grid;gap:11px}
+.option{
+  display:flex;align-items:center;gap:14px;text-align:left;
+  padding:16px 18px;border-radius:14px;font-size:.93rem;font-weight:500;
+  background:var(--surface-2);border:1px solid var(--border);color:var(--text);
+  transition:transform .25s var(--ease),border-color .25s,background .25s,box-shadow .25s;
+}
+.option:hover:not(:disabled){transform:translateX(4px);border-color:var(--accent);background:color-mix(in srgb,var(--accent) 8%,transparent)}
+.option:disabled{cursor:default}
+.option .letter{
+  width:28px;height:28px;border-radius:9px;flex:none;display:grid;place-items:center;
+  font-size:.77rem;font-weight:700;font-family:var(--font-display);
+  background:var(--surface-solid);border:1px solid var(--border);color:var(--muted);
+  transition:all .25s var(--ease);
+}
+.option.correct{background:color-mix(in srgb,var(--good) 15%,transparent);border-color:var(--good)}
+.option.correct .letter{background:var(--good);color:#08140f;border-color:var(--good)}
+.option.wrong{background:color-mix(in srgb,var(--bad) 13%,transparent);border-color:var(--bad)}
+.option.wrong .letter{background:var(--bad);color:#1a0608;border-color:var(--bad)}
+.feedback{
+  margin-top:22px;padding:16px 18px;border-radius:14px;font-size:.88rem;line-height:1.6;
+  border:1px solid var(--border);background:var(--surface-2);
+  animation:termIn .4s var(--ease) both;
+}
+.feedback strong{color:var(--text)}
+.quiz-actions{display:flex;justify-content:flex-end;margin-top:24px}
+.result{text-align:center;padding:20px 6px}
+.result .score{
+  font-family:var(--font-display);font-size:clamp(3rem,9vw,4.6rem);font-weight:700;letter-spacing:-.05em;
+  background:linear-gradient(120deg,var(--accent),var(--accent-2) 50%,var(--accent-3));
+  -webkit-background-clip:text;background-clip:text;color:transparent;line-height:1;margin-bottom:10px;
+}
+.result h3{font-size:1.28rem;margin-bottom:10px}
+.result p{color:var(--muted);margin-bottom:26px}
+
+/* ============ NOTA ============ */
+.note{
+  margin-top:24px;padding:16px 20px;border-radius:14px;font-size:.85rem;color:var(--muted);
+  border:1px solid var(--border);background:var(--surface-2);border-left:3px solid var(--accent);
+  line-height:1.65;
+}
+.note strong{color:var(--text)}
+
+/* ============ REVEAL ============ */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s var(--ease),transform .7s var(--ease);transition-delay:var(--d,0ms)}
+.reveal.in{opacity:1;transform:none}
+
+/* ============ FOOTER ============ */
+.site-footer{border-top:1px solid var(--border);padding:34px 22px;text-align:center;font-size:.85rem;color:var(--muted)}
+.site-footer strong{color:var(--text);font-weight:600}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width:1040px){
+  .nav-link{padding:9px 10px;font-size:.78rem}
+}
+@media (max-width:900px){
+  .header-inner{padding:12px 16px;gap:14px;flex-wrap:wrap}
+  .nav{order:3;width:100%;margin-left:0;padding-bottom:2px}
+  .theme-toggle{margin-left:auto}
+  main{padding:0 16px 70px}
+  .hero{padding:46px 0 32px}
+  .toolbar{top:auto;position:static;background:none;padding:0 0 20px}
+  .quiz-card{padding:24px 20px}
+  .stats{grid-template-columns:repeat(2,1fr);gap:11px}
+  .stat{padding:17px 15px}
+  .stat .num{font-size:1.45rem}
+  .tl-seg .seg-range{display:none}
+  .tl-seg .seg-name{font-size:.68rem}
+  .vt-item{padding-left:38px}
+  .era-head{padding:18px 18px;gap:12px}
+  .era-content{padding:0 18px 20px}
+  .era-badge{width:44px;height:44px;font-size:.68rem}
+  .day-ev{grid-template-columns:1fr;gap:4px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<div class="bg-dots" aria-hidden="true"></div>
+<div class="orbs" aria-hidden="true">
+  <div class="orb o1"></div>
+  <div class="orb o2"></div>
+  <div class="orb o3"></div>
+</div>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="#inicio" data-route="inicio">
+      <span class="brand-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 3v18"/><circle cx="12" cy="7" r="2.6"/><circle cx="12" cy="17" r="2.6"/><path d="M14.6 7H18M6 17h2.4"/>
+        </svg>
+      </span>
+      <span>Historia Simple</span>
+    </a>
+
+    <nav class="nav" aria-label="Navegación principal">
+      <button class="nav-link active" data-route="inicio">Inicio</button>
+      <button class="nav-link" data-route="linea">Línea del tiempo</button>
+      <button class="nav-link" data-route="guerras">Guerras</button>
+      <button class="nav-link" data-route="ciencia">Ciencia</button>
+      <button class="nav-link" data-route="descubrimientos">Descubrimientos</button>
+      <button class="nav-link" data-route="eras">Eras</button>
+      <button class="nav-link" data-route="graficos">Gráficos</button>
+      <button class="nav-link" data-route="glosario">Glosario</button>
+      <button class="nav-link" data-route="quiz">Quiz</button>
+    </nav>
+
+    <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema">
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round">
+        <circle cx="12" cy="12" r="4"/>
+        <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>
+      </svg>
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<main>
+
+  <!-- ================= INICIO ================= -->
+  <section class="view active" data-view="inicio">
+    <div class="hero">
+      <span class="pill"><span class="dot"></span>300.000 años en cinco etapas</span>
+      <h1 class="hero-title">La historia de la humanidad <span class="grad">sin fechas sueltas</span></h1>
+      <p class="lead">
+        Un recorrido desde las primeras herramientas de piedra hasta el mundo de hoy, con líneas del tiempo
+        detalladas, gráficos que muestran cómo cambiamos y explicaciones en lenguaje sencillo.
+      </p>
+      <div class="hero-actions">
+        <button class="btn btn-primary" data-route="linea">
+          Recorrer la línea del tiempo
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+        <button class="btn btn-ghost" data-route="graficos">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20h18M6 20V9M12 20V4M18 20v-7"/></svg>
+          Ver los gráficos
+        </button>
+      </div>
+    </div>
+
+    <div class="stats reveal">
+      <div class="stat"><div class="num" data-count="300000" data-suffix="">0</div><div class="lbl">Años de historia humana</div></div>
+      <div class="stat"><div class="num" data-count="5" data-suffix="">0</div><div class="lbl">Grandes etapas</div></div>
+      <div class="stat"><div class="num" data-count="130" data-suffix="">0</div><div class="lbl">Hitos en total</div></div>
+      <div class="stat"><div class="num" data-count="8100" data-suffix=" M">0</div><div class="lbl">Personas en el mundo hoy</div></div>
+    </div>
+
+    <div class="sec-head reveal">
+      <h2>Cómo está organizada</h2>
+      <p>La historia se divide en etapas para poder estudiarla. No son compartimentos estancos: los cambios llegan poco a poco y a distinto ritmo en cada región.</p>
+    </div>
+
+    <div class="module-grid">
+      <button class="module reveal" data-route="linea" style="--d:0ms">
+        <span class="module-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h18"/><circle cx="7" cy="12" r="2.4"/><circle cx="17" cy="12" r="2.4"/><path d="M7 9.6V5M17 14.4V19"/></svg>
+        </span>
+        <h3>Línea del tiempo general</h3>
+        <p>Cincuenta hitos ordenados y filtrables por etapa, con el detalle de cada acontecimiento.</p>
+        <span class="arrow">Recorrer la historia
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </button>
+
+      <button class="module reveal" data-route="guerras" style="--d:40ms">
+        <span class="module-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20L18 6M18 6l-2-2M18 6l2-2M4 4l14 14M4 4l2 2M4 4L2 6"/></svg>
+        </span>
+        <h3>Guerras y conflictos</h3>
+        <p>Las batallas y guerras que cambiaron fronteras, poderes y sociedades, desde Qadesh hasta hoy.</p>
+        <span class="arrow">Ver guerras
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </button>
+
+      <button class="module reveal" data-route="ciencia" style="--d:80ms">
+        <span class="module-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6M10 3v5l-5 9a3 3 0 0 0 2.7 4.4h8.6A3 3 0 0 0 19 17l-5-9V3"/><path d="M7.5 14h9"/></svg>
+        </span>
+        <h3>Ciencia y tecnología</h3>
+        <p>Del fuego y la rueda a la inteligencia artificial: los inventos que transformaron la vida.</p>
+        <span class="arrow">Ver avances
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </button>
+
+      <button class="module reveal" data-route="descubrimientos" style="--d:120ms">
+        <span class="module-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/><path d="M11 8v6M8 11h6"/></svg>
+        </span>
+        <h3>Descubrimientos</h3>
+        <p>Nuevas tierras, nuevas especies, nuevas leyes de la naturaleza: lo que fuimos encontrando.</p>
+        <span class="arrow">Ver descubrimientos
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </button>
+
+      <button class="module reveal" data-route="eras" style="--d:160ms">
+        <span class="module-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
+        </span>
+        <h3>Las cinco eras</h3>
+        <p>Prehistoria, Antigüedad, Edad Media, Edad Moderna y Contemporánea, con sus rasgos y su legado.</p>
+        <span class="arrow">Conocer las eras
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </button>
+
+      <button class="module reveal" data-route="graficos" style="--d:200ms">
+        <span class="module-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20h18M6 20V9M12 20V4M18 20v-7"/></svg>
+        </span>
+        <h3>Gráficos</h3>
+        <p>Cómo creció la población, cuánto vivimos y cuántos saben leer, desde el año 1 hasta hoy.</p>
+        <span class="arrow">Ver los datos
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </button>
+
+      <button class="module reveal" data-route="glosario" style="--d:240ms">
+        <span class="module-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21.5z"/><path d="M4 5.5v16"/></svg>
+        </span>
+        <h3>Glosario</h3>
+        <p>Más de cincuenta términos históricos con buscador y filtro por etapa.</p>
+        <span class="arrow">Abrir glosario
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </button>
+
+      <button class="module reveal" data-route="quiz" style="--d:280ms">
+        <span class="module-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l2 2 4-4"/><rect x="3" y="4" width="18" height="16" rx="3"/></svg>
+        </span>
+        <h3>Quiz de historia</h3>
+        <p>Diez preguntas al azar con corrección inmediata y explicación de cada respuesta.</p>
+        <span class="arrow">Empezar el quiz
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </button>
+    </div>
+
+    <div class="note reveal">
+      <strong>Una advertencia útil:</strong> las fechas antiguas son aproximadas y las fronteras entre etapas son convencionales.
+      La Prehistoria termina cuando aparece la escritura, pero eso ocurrió en Mesopotamia hacia el 3.500 a. C. mientras en otras
+      regiones se siguió sin escribir durante siglos. La historia no avanza igual en todas partes.
+    </div>
+  </section>
+
+  <!-- ================= LÍNEA DEL TIEMPO ================= -->
+  <section class="view" data-view="linea">
+    <div class="sec-head section">
+      <h2>Línea del tiempo de la humanidad</h2>
+      <p>Pulsa sobre cualquier etapa para filtrar los hitos. Cada acontecimiento se puede desplegar para leer el detalle.</p>
+    </div>
+
+    <div class="tl-overview reveal">
+      <div class="tl-bar" id="tlBar"></div>
+      <div class="tl-legend">
+        <span class="arrowline">
+          <svg viewBox="0 0 60 8" aria-hidden="true"><line x1="0" y1="4" x2="52" y2="4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><polygon points="60,4 50,0 50,8" fill="currentColor"/></svg>
+          Más antiguo → más reciente
+        </span>
+        <span>La barra tiene segmentos de igual ancho para poder pulsarlos con comodidad; no está a escala temporal.</span>
+      </div>
+    </div>
+
+    <div style="margin-top:24px;display:flex;gap:12px;flex-wrap:wrap;align-items:center">
+      <div class="chips" id="tlChips"></div>
+      <span id="tlCount" style="font-size:.82rem;color:var(--muted);font-weight:600;margin-left:auto"></span>
+    </div>
+
+    <div class="vt" id="vtList"></div>
+  </section>
+
+  <!-- ================= GUERRAS ================= -->
+  <section class="view" data-view="guerras">
+    <div class="sec-head section">
+      <h2>Línea del tiempo de guerras y conflictos</h2>
+      <p>Las guerras han redibujado fronteras, derribado imperios y transformado sociedades. Esta selección recoge los conflictos más influyentes de cada etapa.</p>
+    </div>
+
+    <div style="margin-top:8px;display:flex;gap:12px;flex-wrap:wrap;align-items:center">
+      <div class="chips" id="warChips"></div>
+      <span id="warCount" style="font-size:.82rem;color:var(--muted);font-weight:600;margin-left:auto"></span>
+    </div>
+
+    <div class="vt" id="warList"></div>
+
+    <div class="note reveal">
+      <strong>Sobre las cifras:</strong> las estimaciones de muertos en guerras antiguas varían mucho entre fuentes.
+      Aquí se usan órdenes de magnitud para comparar, no cifras exactas. Además, la mayoría de las guerras históricas
+      mataron más por hambre y enfermedad que por las armas.
+    </div>
+  </section>
+
+  <!-- ================= CIENCIA Y TECNOLOGÍA ================= -->
+  <section class="view" data-view="ciencia">
+    <div class="sec-head section">
+      <h2>Ciencia y tecnología</h2>
+      <p>Los avances científicos y técnicos transforman la vida cotidiana. Aquí están los que más cambiaron la historia humana, ordenados por etapas.</p>
+    </div>
+
+    <div class="grid-3 reveal" style="margin-bottom:26px">
+      <div class="card">
+        <span class="kicker">Diferencia clave</span>
+        <h3>Ciencia y técnica</h3>
+        <p><b style="color:var(--text)">Ciencia</b> es el conocimiento que se construye con el método científico: observar, proponer hipótesis y comprobar.</p>
+        <p style="margin-top:10px"><b style="color:var(--text)">Tecnología</b> es la aplicación práctica de ese conocimiento para resolver problemas.</p>
+      </div>
+      <div class="card">
+        <span class="kicker">Ritmo</span>
+        <h3>De siglos a meses</h3>
+        <p>La Prehistoria duró cientos de miles de años con cambios técnicos lentos. En los últimos dos siglos, cada generación ha visto inventos que sus abuelos no podían imaginar.</p>
+      </div>
+      <div class="card">
+        <span class="kicker">Efecto</span>
+        <h3>Nada es neutral</h3>
+        <p>Cada avance tiene consecuencias buenas y malas: la imprenta difundió ideas y también propaganda; la energía nuclear da electricidad y también bombas.</p>
+      </div>
+    </div>
+
+    <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center">
+      <div class="chips" id="sciChips"></div>
+      <span id="sciCount" style="font-size:.82rem;color:var(--muted);font-weight:600;margin-left:auto"></span>
+    </div>
+
+    <div class="vt" id="sciList"></div>
+  </section>
+
+  <!-- ================= DESCUBRIMIENTOS ================= -->
+  <section class="view" data-view="descubrimientos">
+    <div class="sec-head section">
+      <h2>Descubrimientos que cambiaron el mundo</h2>
+      <p>Desde nuevas tierras hasta nuevas leyes de la naturaleza. Algunos descubrimientos fueron accidentes; otros, el resultado de décadas de trabajo.</p>
+    </div>
+
+    <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center">
+      <div class="chips" id="discChips"></div>
+      <span id="discCount" style="font-size:.82rem;color:var(--muted);font-weight:600;margin-left:auto"></span>
+    </div>
+
+    <div class="vt" id="discList"></div>
+
+    <div class="note reveal">
+      <strong>Descubrir no es inventar:</strong> un invento crea algo que no existía (la bombilla), mientras que un descubrimiento
+      revela algo que ya estaba ahí (América para los europeos, la penicilina, la estructura del ADN).
+      A veces la frontera es difusa y muchos avances son ambas cosas a la vez.
+    </div>
+  </section>
+
+  <!-- ================= ERAS ================= -->
+  <section class="view" data-view="eras">
+    <div class="sec-head section">
+      <h2>Las cinco grandes eras</h2>
+      <p>Cada etapa tiene rasgos propios. Pulsa sobre cada una para desplegar sus características y el legado que dejó.</p>
+    </div>
+
+    <div id="eraList"></div>
+
+    <div class="note reveal">
+      <strong>Ojo con la palabra «edad»:</strong> en historia, «Edad Media» o «Edad Moderna» no se refieren a la edad de las personas,
+      sino a periodos largos de la historia europea. Los nombres nacieron en Europa y por eso encajan peor en otras regiones del mundo.
+    </div>
+  </section>
+
+  <!-- ================= GRÁFICOS ================= -->
+  <section class="view" data-view="graficos">
+    <div class="sec-head section">
+      <h2>La historia en datos</h2>
+      <p>Los números ayudan a ver la magnitud de los cambios. Todos los gráficos son aproximados y sirven para comparar, no para dar cifras exactas.</p>
+    </div>
+
+    <div class="grid-2 reveal" style="margin-bottom:16px">
+      <div class="chart-card">
+        <h3>Crecimiento de la población mundial</h3>
+        <p class="sub">Del año 10.000 a. C. a la actualidad. El eje vertical es logarítmico: cada marca es diez veces la anterior.</p>
+        <svg id="popChart" viewBox="0 0 680 360" role="img" aria-label="Gráfico del crecimiento de la población mundial"></svg>
+        <p class="chart-note">Durante casi toda la historia fuimos pocos. La gran explosión llega con la Revolución Industrial y se acelera en el siglo XX: en solo cien años la población pasó de 1.600 a más de 6.000 millones.</p>
+      </div>
+
+      <div class="chart-card">
+        <h3>Esperanza de vida al nacer</h3>
+        <p class="sub">Años que se espera vivir de media, según la época. Valores aproximados.</p>
+        <svg id="lifeChart" viewBox="0 0 680 360" role="img" aria-label="Gráfico de barras de la esperanza de vida por época"></svg>
+        <p class="chart-note">La media histórica ronda los 30 años, pero eso no significa que nadie llegara a viejo: lo que ocurría era una mortalidad infantil muy alta, que hundía el promedio.</p>
+      </div>
+    </div>
+
+    <div class="grid-2 reveal" style="margin-bottom:16px">
+      <div class="chart-card">
+        <h3>Alfabetización de la población mundial</h3>
+        <p class="sub">Porcentaje de personas que saben leer y escribir, aproximadamente.</p>
+        <svg id="litChart" viewBox="0 0 680 320" role="img" aria-label="Gráfico de barras horizontales sobre alfabetización"></svg>
+        <p class="chart-note">Saber leer fue durante milenios un privilegio de muy pocas personas. La escolarización obligatoria y la imprenta cambiaron esa realidad en apenas dos siglos.</p>
+      </div>
+
+      <div class="chart-card">
+        <h3>Toda la historia en un día</h3>
+        <p class="sub">Si los 300.000 años del ser humano fueran 24 horas, casi todo lo que llamamos «historia» cabría en los últimos minutos.</p>
+        <div class="day-bar" aria-hidden="true">
+          <div class="day-fill"></div>
+          <div class="day-mark" style="left:96%"></div>
+          <div class="day-mark" style="left:98.2%"></div>
+          <div class="day-mark" style="left:99.7%"></div>
+        </div>
+        <div class="day-labels"><span>00:00</span><span>12:00</span><span>23:59</span></div>
+
+        <div class="day-events">
+          <div class="day-ev"><span class="t">00:00</span><span class="d"><b>Aparece el Homo sapiens</b> en África. Comienza el reloj.</span></div>
+          <div class="day-ev"><span class="t">~23:02</span><span class="d"><b>Agricultura y primeras ciudades.</b> Ocurre a las 23 horas y 2 minutos del día.</span></div>
+          <div class="day-ev"><span class="t">~23:34</span><span class="d"><b>Invención de la escritura.</b> Aquí se suele decir que empieza «la historia».</span></div>
+          <div class="day-ev"><span class="t">~23:50</span><span class="d"><b>Imperio Romano</b> en su máximo esplendor.</span></div>
+          <div class="day-ev"><span class="t">~23:59</span><span class="d"><b>Revolución Industrial.</b> A menos de un minuto de la medianoche.</span></div>
+          <div class="day-ev"><span class="t">23:59:59</span><span class="d"><b>Internet y era digital.</b> El último segundo del día.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="chart-card reveal">
+      <h3>Duración real de cada etapa</h3>
+      <p class="sub">Si se dibujara a escala, la Prehistoria ocuparía prácticamente toda la línea y las demás etapas serían una franja finísima al final.</p>
+      <svg id="eraDurChart" viewBox="0 0 680 200" role="img" aria-label="Gráfico de la duración proporcional de las etapas históricas"></svg>
+      <p class="chart-note">Prehistoria: unos 2.496.500 años. Edad Antigua: unos 3.976. Edad Media: unos 1.016. Edad Moderna: unos 297. Edad Contemporánea: unos 236 años hasta hoy. La diferencia es abrumadora.</p>
+    </div>
+  </section>
+
+  <!-- ================= GLOSARIO ================= -->
+  <section class="view" data-view="glosario">
+    <div class="sec-head section">
+      <h2>Glosario de historia</h2>
+      <p>Todos los términos de la aplicación reunidos. Busca por nombre o por palabra dentro de la definición.</p>
+    </div>
+
+    <div class="toolbar">
+      <div class="search-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+        <input id="searchInput" type="search" placeholder="Buscar un término o una palabra de la definición..." autocomplete="off" aria-label="Buscar término">
+      </div>
+      <div class="chips" id="chips"></div>
+    </div>
+
+    <div class="term-grid" id="glosarioList"></div>
+  </section>
+
+  <!-- ================= QUIZ ================= -->
+  <section class="view" data-view="quiz">
+    <div class="sec-head section">
+      <h2>Quiz de historia</h2>
+      <p>Diez preguntas seleccionadas al azar entre todas las etapas. Cada respuesta viene con su explicación.</p>
+    </div>
+    <div class="quiz-shell">
+      <div class="quiz-card" id="quizCard"></div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <p><strong>Historia Simple</strong> — Material educativo abierto sobre la historia de la humanidad.</p>
+</footer>
+
+<script>
+/* ============================================================
+   UTILIDADES
+   ============================================================ */
+const $  = (sel, root = document) => root.querySelector(sel);
+const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+const fmtNum = n => n.toLocaleString('es-ES');
+
+/* ============================================================
+   DATOS: ERAS
+   ============================================================ */
+const ERAS = [
+  {
+    id:'prehistoria', n:'Prehistoria', rango:'2.500.000 – 3.500 a. C.', corto:'Antes de la escritura',
+    ini:'PRE', c1:'#a78bfa', c2:'#7c3aed',
+    desc:'Es el periodo más largo de la historia humana y el menos documentado, porque no hay textos: solo restos materiales. Abarca desde los primeros homínidos que fabricaron herramientas hasta la aparición de la escritura.',
+    feats:[
+      'Fabricación de herramientas de piedra cada vez más elaboradas.',
+      'Dominio del fuego, clave para cocinar, calentarse y protegerse.',
+      'Vida nómada: grupos pequeños que se desplazaban siguiendo a los animales.',
+      'Aparición del arte rupestre y de las primeras creencias sobre la muerte.',
+      'Revolución neolítica: agricultura, ganadería y primeras aldeas.',
+      'Desarrollo de la cerámica, el tejido y la metalurgia.'
+    ],
+    legado:'La agricultura y la ganadería cambiaron todo: permitieron excedentes de comida, asentamientos permanentes, especialización del trabajo y, con el tiempo, ciudades y jerarquías sociales.'
+  },
+  {
+    id:'antigua', n:'Edad Antigua', rango:'3.500 a. C. – 476 d. C.', corto:'Primeras civilizaciones',
+    ini:'ANT', c1:'#f59e0b', c2:'#ea580c',
+    desc:'Empieza con la escritura y termina con la caída del Imperio Romano de Occidente. Es la época de las grandes civilizaciones fluviales: Mesopotamia, Egipto, India y China, y más tarde Grecia y Roma.',
+    feats:[
+      'Invención de la escritura en Mesopotamia (cuneiforme) y en Egipto (jeroglífica).',
+      'Grandes obras: pirámides, canales, murallas y templos.',
+      'Primeros códigos legales escritos, como el de Hammurabi.',
+      'Nacimiento de la filosofía, la historia y el teatro en Grecia.',
+      'Expansión de Roma y creación de un derecho que aún influye hoy.',
+      'Aparición de religiones que siguen vivas: judaísmo, hinduismo, budismo, cristianismo.'
+    ],
+    legado:'El alfabeto, la moneda, el derecho romano, la democracia ateniense y la filosofía griega son herencias directas de esta etapa.'
+  },
+  {
+    id:'media', n:'Edad Media', rango:'476 – 1492', corto:'Entre dos mundos',
+    ini:'MED', c1:'#14b8a6', c2:'#0d9488',
+    desc:'Mil años que en Europa se asocian al feudalismo, los castillos y la influencia de la Iglesia, pero que en el resto del mundo fueron una época de enorme dinamismo: esplendor del islam, imperio mongol, dinastías chinas y reinos africanos.',
+    feats:[
+      'Feudalismo en Europa: señores, vasallos y campesinos ligados a la tierra.',
+      'Expansión del islam desde Arabia hasta la península ibérica y Asia central.',
+      'Imperio mongol, el más extenso de la historia en tierras continuas.',
+      'Rutas comerciales como la Ruta de la Seda conectan Asia, África y Europa.',
+      'Nacen las primeras universidades europeas.',
+      'La Peste Negra mata a un tercio de la población europea.'
+    ],
+    legado:'Las universidades, los hospitales, la imprenta de tipos móviles (China) y gran parte de la ciencia y las matemáticas que Europa heredó llegaron a través del mundo islámico.'
+  },
+  {
+    id:'moderna', n:'Edad Moderna', rango:'1492 – 1789', corto:'Expansión y ciencia',
+    ini:'MOD', c1:'#22d3ee', c2:'#0891b2',
+    desc:'Comienza con la llegada europea a América y termina con la Revolución Francesa. Es la época de los grandes viajes oceánicos, los imperios coloniales, la Reforma religiosa y la revolución científica.',
+    feats:[
+      'Exploraciones marítimas y encuentro entre Europa y América.',
+      'Formación de imperios coloniales en América, África y Asia.',
+      'Reforma protestante y Contrarreforma católica.',
+      'Revolución científica: Copérnico, Galileo, Kepler y Newton.',
+      'Desarrollo del método científico y de la imprenta de Gutenberg.',
+      'Absolutismo monárquico y, al final, la Ilustración.'
+    ],
+    legado:'El método científico, la idea de que la razón puede explicar el mundo, y el comercio global tal como lo conocemos.'
+  },
+  {
+    id:'contemporanea', n:'Edad Contemporánea', rango:'1789 – hoy', corto:'Revoluciones y tecnología',
+    ini:'CON', c1:'#fb7185', c2:'#e11d48',
+    desc:'Desde la Revolución Francesa hasta el presente. Es la etapa más corta y la de cambios más rápidos: revoluciones políticas, industrialización, guerras mundiales, descolonización y era digital.',
+    feats:[
+      'Revolución Industrial: máquina de vapor, fábricas y ferrocarril.',
+      'Revoluciones políticas y nacimiento de los estados modernos.',
+      'Dos guerras mundiales y la bomba atómica.',
+      'Guerra Fría entre Estados Unidos y la Unión Soviética.',
+      'Descolonización de Asia y África.',
+      'Globalización, internet, inteligencia artificial y cambio climático.'
+    ],
+    legado:'Derechos humanos, democracia representativa, medicina moderna, telecomunicaciones y también los grandes problemas globales actuales.'
+  }
+];
+
+const ERA_MAP = {};
+ERAS.forEach(e => { ERA_MAP[e.id] = e; });
+
+/* ============================================================
+   DATOS: HITOS GENERALES
+   ============================================================ */
+const HITOS = [
+  { era:'prehistoria', y:'2.500.000 a. C.', t:'Primeras herramientas de piedra',
+    d:'Los primeros homínidos tallan piedras para cortar, raspar y romper. Es el inicio tecnológico de la especie.',
+    x:'Estas herramientas, llamadas de modo 1 u olduvayenses, eran cantos rodados golpeados para obtener un filo. No se sabe con certeza qué especie las fabricó primero, pero supuso un salto enorme: por primera vez un ser vivo modificaba su entorno con un objeto pensado.' },
+  { era:'prehistoria', y:'1.000.000 a. C.', t:'Dominio del fuego',
+    d:'El control del fuego permite cocinar, calentarse, iluminar la noche y defenderse de los animales.',
+    x:'Cocinar los alimentos hace que sean más fáciles de digerir y elimina parásitos. Muchos investigadores creen que este descubrimiento fue decisivo para el desarrollo del cerebro humano y para la vida en grupo alrededor de la hoguera.' },
+  { era:'prehistoria', y:'300.000 a. C.', t:'Aparición del Homo sapiens',
+    d:'Nuestra especie surge en África. Todos los seres humanos actuales descendemos de aquellas poblaciones.',
+    x:'El nombre significa «hombre sabio». No fuimos la única especie humana: convivimos con neandertales, denisovanos y otras, que se extinguieron. Los sapiens llevamos dentro pequeños fragmentos de su ADN.' },
+  { era:'prehistoria', y:'70.000 a. C.', t:'Gran migración fuera de África',
+    d:'Grupos humanos salen de África y se extienden por Asia, Europa y, más tarde, Oceanía y América.',
+    x:'La ruta principal pasó por Oriente Medio. La llegada a América se produjo cruzando el estrecho de Bering, aprovechando que el nivel del mar era más bajo por las glaciaciones.' },
+  { era:'prehistoria', y:'40.000 a. C.', t:'Arte rupestre y primeras creencias',
+    d:'Aparecen pinturas en cuevas y enterramientos con objetos, señal de pensamiento simbólico.',
+    x:'Las pinturas de Altamira, Lascaux o Chauvet muestran animales, manos y signos. El arte indica que ya existía capacidad de abstracción y probablemente relatos y creencias sobre la muerte.' },
+  { era:'prehistoria', y:'10.000 a. C.', t:'Revolución neolítica',
+    d:'Se empieza a cultivar trigo, cebada y otros cereales, y a domesticar animales. Aparecen las primeras aldeas.',
+    x:'Es uno de los cambios más profundos de la historia: de nómadas cazadores a campesinos sedentarios. Trajo excedentes de comida, pero también más trabajo, dietas menos variadas y enfermedades contagiosas por la convivencia con animales.' },
+  { era:'prehistoria', y:'3.500 a. C.', t:'Invención de la escritura',
+    d:'En Mesopotamia se empieza a escribir con signos sobre tablillas de arcilla. Con ella termina la Prehistoria.',
+    x:'La escritura nació para llevar cuentas: registrar cosechas, deudas y mercancías. Solo después se usó para narrar leyes, mitos e historias. Marca el paso de la prehistoria a la historia porque permite conocer el pensamiento de quienes vivieron entonces.' },
+
+  { era:'antigua', y:'3.500 a. C.', t:'Escritura cuneiforme en Sumeria',
+    d:'Los sumerios crean uno de los primeros sistemas de escritura: signos con forma de cuña sobre arcilla.',
+    x:'Se escribía con una caña presionada sobre tablillas de barro húmedo. Empezó siendo pictográfica y fue evolucionando hacia signos más abstractos. Gracias a estas tablillas conocemos leyes, contratos, poemas y recetas médicas.' },
+  { era:'antigua', y:'3.100 a. C.', t:'Unificación de Egipto',
+    d:'El Alto y el Bajo Egipto se unen bajo un solo rey, el faraón. Comienza una civilización de tres mil años.',
+    x:'La escritura egipcia, los jeroglíficos, estuvo en uso durante milenios. El Nilo era el motor del país: sus crecidas anuales fertilizaban las tierras y permitían alimentar a una población enorme.' },
+  { era:'antigua', y:'2.560 a. C.', t:'Gran Pirámide de Giza',
+    d:'Se construye la pirámide de Keops, la única de las siete maravillas del mundo antiguo que sigue en pie.',
+    x:'Mide unos 146 metros de altura original y está formada por millones de bloques de piedra. Su construcción exigió organización, transporte, alimentación y coordinación de miles de trabajadores durante décadas.' },
+  { era:'antigua', y:'1.792 a. C.', t:'Código de Hammurabi',
+    d:'El rey de Babilonia hace grabar en piedra un conjunto de leyes aplicables a todo su territorio.',
+    x:'Es uno de los primeros códigos legales escritos que se conservan. Su principio es desigual: las penas dependían del estatus social de quien cometía el delito y de quien lo sufría. Aun así, supone fijar normas por escrito para todos.' },
+  { era:'antigua', y:'776 a. C.', t:'Primeros Juegos Olímpicos',
+    d:'Se celebran en Olimpia, en Grecia, en honor a Zeus. Se repetirán cada cuatro años durante siglos.',
+    x:'Durante los juegos se declaraba una tregua entre ciudades en guerra. Solo podían competir hombres griegos libres. Los juegos modernos, recuperados en 1896, se inspiraron directamente en ellos.' },
+  { era:'antigua', y:'753 a. C.', t:'Fundación de Roma',
+    d:'Según la tradición, Rómulo funda Roma. La ciudad llegará a dominar el Mediterráneo entero.',
+    x:'La leyenda cuenta que Rómulo y Remo fueron amamantados por una loba. La arqueología confirma que en esa época había aldeas en las colinas junto al río Tíber, que se unieron para formar la ciudad.' },
+  { era:'antigua', y:'336 a. C.', t:'Alejandro Magno llega al poder',
+    d:'Con 20 años hereda el trono de Macedonia y en una década conquista desde Grecia hasta la India.',
+    x:'Murió a los 32 años, sin haber perdido una sola batalla importante. Su imperio se deshizo casi de inmediato, pero extendió la cultura griega por Oriente en un proceso llamado helenización.' },
+  { era:'antigua', y:'221 a. C.', t:'Unificación de China',
+    d:'El rey de Qin unifica los reinos chinos y se proclama primer emperador: Qin Shi Huang.',
+    x:'Unificó pesos, medidas, moneda y escritura, y ordenó construir la primera Gran Muralla. Su mausoleo, con el famoso ejército de terracota, fue descubierto en 1974 por unos campesinos que cavaban un pozo.' },
+  { era:'antigua', y:'27 a. C.', t:'Augusto, primer emperador romano',
+    d:'Octavio recibe el título de Augusto y da comienzo al Imperio Romano, que durará siglos.',
+    x:'Con Augusto empieza la «paz romana», un periodo de estabilidad en el Mediterráneo. Roma llegó a tener más de un millón de habitantes y construyó acueductos, calzadas, termas y anfiteatros en todo su territorio.' },
+  { era:'antigua', y:'476 d. C.', t:'Caída del Imperio Romano de Occidente',
+    d:'El último emperador de Occidente es depuesto. Se considera el final de la Edad Antigua.',
+    x:'No fue un colapso repentino: el imperio llevaba décadas en crisis por presión en las fronteras, problemas económicos y luchas internas. El Imperio Romano de Oriente, Bizancio, sobrevivió casi mil años más.' },
+
+  { era:'media', y:'622', t:'La Hégira de Mahoma',
+    d:'Mahoma se traslada de La Meca a Medina. Esta fecha marca el inicio del calendario islámico.',
+    x:'En pocas décadas el islam se extendió desde Arabia hasta Persia, el norte de África y la península ibérica. Fue también un motor cultural: en Bagdad, Córdoba o El Cairo florecieron la medicina, las matemáticas y la astronomía.' },
+  { era:'media', y:'800', t:'Coronación de Carlomagno',
+    d:'El papa corona a Carlomagno emperador en Roma. Nace una referencia política para la Europa cristiana.',
+    x:'Carlomagno unió gran parte de Europa occidental bajo su mando y fomentó la educación con la llamada «renovación carolingia»: escuelas junto a monasterios, copia de manuscritos y recuperación de textos antiguos.' },
+  { era:'media', y:'1066', t:'Batalla de Hastings',
+    d:'Guillermo de Normandía conquista Inglaterra. El inglés moderno conserva huellas de ese cambio.',
+    x:'Tras la conquista, el francés normando se convirtió en la lengua de la nobleza inglesa durante siglos. Por eso el inglés tiene palabras de doble origen: «pig» (cerdo vivo, germánico) y «pork» (carne, francés).' },
+  { era:'media', y:'1096', t:'Primera Cruzada',
+    d:'Se lanza una expedición militar desde Europa para tomar Jerusalén. Se abren dos siglos de cruzadas.',
+    x:'Las cruzadas mezclaron religión, política y comercio. Trajeron a Europa productos, técnicas y conocimientos del mundo islámico, y dejaron un legado de desconfianza y violencia que duró generaciones.' },
+  { era:'media', y:'1206', t:'Imperio Mongol de Gengis Kan',
+    d:'Gengis Kan unifica las tribus mongolas y empieza a construir el imperio terrestre más extenso de la historia.',
+    x:'En su apogeo llegó desde China hasta Europa del Este. Los mongoles facilitaron el comercio y la circulación de ideas a través de Asia, aunque a costa de enormes matanzas en las ciudades que resistían.' },
+  { era:'media', y:'1215', t:'Carta Magna en Inglaterra',
+    d:'Los nobles obligan al rey Juan a firmar un documento que limita su poder.',
+    x:'Aunque nació como un acuerdo entre nobles y rey, con el tiempo se convirtió en símbolo de que el poder no es ilimitado. Algunos de sus principios inspiraron las constituciones modernas.' },
+  { era:'media', y:'1347', t:'La Peste Negra',
+    d:'Una epidemia de peste arrasa Europa y mata a un tercio de su población en pocos años.',
+    x:'Llegó en barcos procedentes del mar Negro. La falta de mano de obra encareció el trabajo y debilitó el sistema feudal. Las cuarentenas y las primeras medidas de salud pública nacieron de esta experiencia.' },
+  { era:'media', y:'1453', t:'Caída de Constantinopla',
+    d:'Los turcos otomanos toman la capital bizantina. Termina el Imperio Romano de Oriente.',
+    x:'Se usaron cañones que derribaron murallas que habían resistido mil años. Muchos sabios huyeron a Italia llevando manuscritos griegos, lo que impulsó el Renacimiento.' },
+  { era:'media', y:'1492', t:'Llegada europea a América',
+    d:'Colón alcanza las Antillas. Es el punto final convencional de la Edad Media.',
+    x:'El encuentro entre dos mundos que llevaban milenios separados transformó la alimentación, la economía y la demografía del planeta. También trajo consigo enfermedades que diezmaron a la población americana.' },
+
+  { era:'moderna', y:'1498', t:'Vasco de Gama llega a la India',
+    d:'Rodea África y abre una ruta marítima directa entre Europa y Asia.',
+    x:'Esta ruta rompió el monopolio del comercio terrestre y desplazó el centro económico hacia el Atlántico. Portugal, y luego España, Países Bajos e Inglaterra, construyeron imperios marítimos.' },
+  { era:'moderna', y:'1517', t:'Reforma protestante',
+    d:'Lutero publica sus tesis contra la venta de indulgencias. La cristiandad occidental se divide.',
+    x:'La imprenta permitió que sus ideas circularan por Europa en semanas. Surgieron nuevas iglesias y estallaron guerras religiosas que duraron más de un siglo y cambiaron el mapa político del continente.' },
+  { era:'moderna', y:'1519', t:'Expedición de Magallanes y Elcano',
+    d:'Se completa la primera vuelta al mundo. Queda demostrado que los océanos están conectados.',
+    x:'Salieron cinco naves y volvió una, con solo 18 supervivientes de unos 250 tripulantes. Magallanes murió en el viaje; Elcano terminó la travesía. Fue una prueba práctica de que la Tierra es esférica.' },
+  { era:'moderna', y:'1521', t:'Caída de Tenochtitlán',
+    d:'Los conquistadores españoles y sus aliados indígenas toman la capital mexica.',
+    x:'La conquista no fue solo obra de un puñado de españoles: contaron con miles de aliados de pueblos sometidos por los mexicas. Las enfermedades y la superioridad tecnológica fueron decisivas.' },
+  { era:'moderna', y:'1543', t:'Copérnico publica su teoría heliocéntrica',
+    d:'Se propone que es el Sol, y no la Tierra, el centro del sistema planetario.',
+    x:'Contradecía siglos de astronomía aceptada y a la interpretación dominante de las escrituras. La obra se publicó el año en que murió su autor, y fue el punto de partida de una revolución científica que tardó más de un siglo en asentarse.' },
+  { era:'moderna', y:'1687', t:'Newton publica los «Principia»',
+    d:'Se formulan las leyes del movimiento y de la gravitación universal.',
+    x:'Por primera vez, una misma ley explica la caída de una manzana y el movimiento de los planetas. Esta unificación es una de las mayores hazañas intelectuales de la historia y dominó la física durante más de doscientos años.' },
+  { era:'moderna', y:'1776', t:'Independencia de Estados Unidos',
+    d:'Trece colonias británicas se declaran independientes y crean una república con constitución escrita.',
+    x:'La declaración de 1776 proclama que todos los seres humanos tienen derechos inalienables. A la vez, muchas de las personas que la firmaron poseían esclavos: la contradicción marcó el futuro del país.' },
+  { era:'moderna', y:'1789', t:'Revolución Francesa',
+    d:'Con la toma de la Bastilla cae el Antiguo Régimen y termina convencionalmente la Edad Moderna.',
+    x:'La revolución abolió los privilegios feudales y proclamó la igualdad ante la ley. Sus lemas —libertad, igualdad, fraternidad— recorrieron el mundo, aunque el proceso derivó en el Terror y luego en el imperio de Napoleón.' },
+
+  { era:'contemporanea', y:'1815', t:'Congreso de Viena',
+    d:'Tras derrotar a Napoleón, las potencias europeas rediseñan el mapa del continente.',
+    x:'El objetivo era restaurar el equilibrio entre monarquías y evitar otra guerra general. Lo consiguieron en Europa durante casi un siglo, pero ignoraron los sentimientos nacionales que acabarían estallando en 1848 y en 1914.' },
+  { era:'contemporanea', y:'1859', t:'Darwin publica «El origen de las especies»',
+    d:'Se presenta la teoría de la evolución por selección natural.',
+    x:'La obra cambió por completo la manera de entender la vida y el lugar del ser humano en la naturaleza. Generó un debate científico, filosófico y religioso que sigue abierto en algunos ámbitos.' },
+  { era:'contemporanea', y:'1871', t:'Unificación de Alemania',
+    d:'Tras la guerra franco-prusiana nace el Imperio Alemán. Cambia el equilibrio de poder en Europa.',
+    x:'Alemania pasó de ser un conjunto de estados a una potencia industrial y militar en pocas décadas. Ese crecimiento acelerado alteró las alianzas europeas y contribuyó al estallido de la Primera Guerra Mundial.' },
+  { era:'contemporanea', y:'1914', t:'Primera Guerra Mundial',
+    d:'Un conflicto europeo se convierte en guerra mundial. Mueren unos 17 millones de personas.',
+    x:'Fue la primera guerra industrial: ametralladoras, gases, aviones y trincheras. Terminó con cuatro imperios disueltos y con un tratado de paz tan duro con Alemania que muchos historiadores lo ven como antecedente de la Segunda Guerra.' },
+  { era:'contemporanea', y:'1939', t:'Segunda Guerra Mundial',
+    d:'El conflicto más destructivo de la historia: más de 60 millones de muertos.',
+    x:'Incluyó el Holocausto, el bombardeo masivo de ciudades y el uso de armas nucleares por primera vez. De sus cenizas nacieron la ONU y un nuevo orden mundial basado en dos superpotencias.' },
+  { era:'contemporanea', y:'1945', t:'Fundación de la ONU',
+    d:'Se crea la Organización de las Naciones Unidas para evitar otra guerra mundial.',
+    x:'Ese mismo año se aprueba la Declaración Universal de los Derechos Humanos, en 1948. La ONU tiene limitaciones evidentes, pero ha servido de marco para la cooperación internacional y las misiones de paz.' },
+  { era:'contemporanea', y:'1969', t:'Llegada a la Luna',
+    d:'La misión Apolo 11 lleva a dos personas a la superficie lunar.',
+    x:'Fue el resultado de una carrera espacial entre Estados Unidos y la Unión Soviética que también produjo satélites, ordenadores y materiales con aplicaciones cotidianas. Unas 600 millones de personas siguieron la retransmisión.' },
+  { era:'contemporanea', y:'1989', t:'Caída del Muro de Berlín',
+    d:'Se abre la frontera que dividía la ciudad desde 1961. Simboliza el fin de la Guerra Fría.',
+    x:'El muro se levantó en una sola noche y cayó en otra. Su desaparición abrió paso a la reunificación alemana y a la transformación política del este de Europa en pocos años.' },
+  { era:'contemporanea', y:'1991', t:'Disolución de la Unión Soviética',
+    d:'El bloque soviético se desintegra y aparecen quince estados independientes.',
+    x:'Terminó la bipolaridad que había organizado el mundo desde 1945. Estados Unidos quedó como única superpotencia, en un periodo que algunos llamaron «fin de la historia» y que duró poco: pronto surgieron nuevos conflictos y potencias.' },
+  { era:'contemporanea', y:'2008', t:'Crisis financiera global',
+    d:'La quiebra de un banco de inversión estadounidense desata una recesión mundial.',
+    x:'Mostró la interdependencia de la economía global: una hipoteca impagada en Estados Unidos podía afectar a un ayuntamiento en España. Los Estados rescataron bancos y aplicaron medidas de estímulo sin precedentes.' },
+  { era:'contemporanea', y:'2020', t:'Pandemia de COVID-19',
+    d:'Un virus se extiende por el planeta y provoca confinamientos, millones de muertes y una crisis económica.',
+    x:'Fue la primera pandemia verdaderamente globalizada: el virus viajó en avión y la información circuló a la vez que la enfermedad. Las vacunas se desarrollaron en tiempo récord gracias a décadas de investigación previa.' }
+];
+
+/* ============================================================
+   DATOS: GUERRAS
+   ============================================================ */
+const GUERRAS = [
+  { era:'antigua', y:'~1274 a. C.', t:'Batalla de Qadesh',
+    d:'Egipcios e hititas se enfrentan en la primera batalla con registro detallado de la historia.',
+    x:'Terminó con un tratado de paz, el más antiguo que se conserva por escrito. Ninguno de los dos bandos logró una victoria clara, y ambos se atribuyeron el triunfo. Participaron miles de carros de guerra.' },
+  { era:'antigua', y:'490–479 a. C.', t:'Guerras Médicas',
+    d:'Las ciudades griegas resisten la invasión del Imperio Persa en Maratón, Termópilas y Salamina.',
+    x:'La victoria griega salvó su independencia y permitió el desarrollo de la democracia ateniense y del teatro. La batalla de Maratón dio nombre a la carrera moderna de 42 kilómetros.' },
+  { era:'antigua', y:'431–404 a. C.', t:'Guerra del Peloponeso',
+    d:'Atenas y Esparta, al frente de sus aliados, se enfrentan durante casi treinta años.',
+    x:'Terminó con la derrota de Atenas. Tucídides la narró en detalle y es considerada la primera obra de historia política rigurosa. Debilitó a Grecia frente a la amenaza posterior de Macedonia.' },
+  { era:'antigua', y:'334–323 a. C.', t:'Conquistas de Alejandro Magno',
+    d:'Macedonia conquista el Imperio Persa en una década de campañas casi ininterrumpidas.',
+    x:'Alejandro murió a los 32 años sin perder una batalla importante. Su imperio se fragmentó entre sus generales, pero extendió la lengua y la cultura griegas desde Egipto hasta la India.' },
+  { era:'antigua', y:'264–146 a. C.', t:'Guerras Púnicas',
+    d:'Roma y Cartago se enfrentan en tres guerras por el control del Mediterráneo occidental.',
+    x:'La segunda guerra es famosa por Aníbal, que cruzó los Alpes con elefantes. Roma terminó destruyendo Cartago en 146 a. C. y se convirtió en la potencia dominante del Mediterráneo.' },
+  { era:'antigua', y:'58–50 a. C.', t:'Guerras de las Galias',
+    d:'Julio César conquista los territorios que hoy son Francia y Bélgica.',
+    x:'César escribió él mismo un relato de la campaña, «La guerra de las Galias», que sigue siendo una fuente histórica fundamental. La conquista le dio fama, riqueza y un ejército leal, lo que le permitió desafiar al Senado romano.' },
+
+  { era:'media', y:'1066', t:'Batalla de Hastings',
+    d:'Guillermo el Conquistador derrota al último rey anglosajón y se hace con Inglaterra.',
+    x:'El tapiz de Bayeux narra la batalla en 70 metros de tela bordada. La conquista normanda transformó la lengua, la arquitectura y la sociedad inglesas durante siglos.' },
+  { era:'media', y:'1096–1291', t:'Las Cruzadas',
+    d:'Ocho grandes expediciones militares europeas intentan recuperar Jerusalén y los lugares santos.',
+    x:'Mezclaron religión, política feudal y ambición económica. Trajeron a Europa productos y conocimientos del mundo islámico, y dejaron una herencia de desconfianza que persiste en parte hasta hoy.' },
+  { era:'media', y:'722–1492', t:'Reconquista',
+    d:'Los reinos cristianos del norte de la península ibérica recuperan poco a poco el territorio musulmán.',
+    x:'No fue un proceso continuo ni homogéneo: hubo largos periodos de paz y convivencia. Terminó con la toma de Granada en 1492, el mismo año de la llegada a América.' },
+  { era:'media', y:'1337–1453', t:'Guerra de los Cien Años',
+    d:'Inglaterra y Francia se enfrentan en una serie de campañas por el trono francés.',
+    x:'En realidad duró 116 años, con treguas largas. En ella aparecieron el arco largo inglés, la artillería y figuras como Juana de Arco. Francia terminó expulsando a los ingleses de casi todo su territorio.' },
+  { era:'media', y:'1453', t:'Caída de Constantinopla',
+    d:'El Imperio Otomano toma la capital bizantina con cañones capaces de derribar sus murallas.',
+    x:'Fue el final simbólico de la Edad Media. Los sabios que huyeron a Italia con manuscritos griegos contribuyeron al Renacimiento. Los otomanos dominaron el Mediterráneo oriental durante siglos.' },
+
+  { era:'moderna', y:'1519–1521', t:'Conquista de México',
+    d:'Hernán Cortés y sus aliados indígenas derrocan al Imperio Mexica.',
+    x:'La conquista fue posible sobre todo por la alianza con pueblos sometidos por los mexicas. Las enfermedades europeas, para las que la población americana no tenía defensas, causaron más muertes que las armas.' },
+  { era:'moderna', y:'1618–1648', t:'Guerra de los Treinta Años',
+    d:'Un conflicto religioso en el Sacro Imperio se convierte en una guerra europea general.',
+    x:'Terminó con la Paz de Westfalia, que estableció el principio de soberanía de los Estados y es considerada el nacimiento del sistema internacional moderno. Algunas regiones de Alemania perdieron más de un tercio de su población.' },
+  { era:'moderna', y:'1701–1714', t:'Guerra de Sucesión española',
+    d:'Europa se enfrenta por quién debe ocupar el trono de España tras la muerte de Carlos II.',
+    x:'Terminó con el Tratado de Utrecht. España perdió sus territorios europeos y Gibraltar pasó a manos británicas. El equilibrio europeo se reordenó en beneficio de Inglaterra y Austria.' },
+  { era:'moderna', y:'1756–1763', t:'Guerra de los Siete Años',
+    d:'Considerada por algunos la primera guerra verdaderamente global: se combate en Europa, América y Asia.',
+    x:'Enfrentó a Gran Bretaña y Prusia contra Francia, Austria y España. La victoria británica le dio el control de Canadá y la India, y preparó el terreno para la independencia de las colonias americanas.' },
+
+  { era:'contemporanea', y:'1775–1783', t:'Independencia de Estados Unidos',
+    d:'Trece colonias británicas se rebelan y consiguen su independencia con apoyo de Francia.',
+    x:'Fue la primera gran revolución colonial moderna. La declaración de 1776 y la constitución de 1787 inspiraron movimientos independentistas en todo el mundo.' },
+  { era:'contemporanea', y:'1803–1815', t:'Guerras Napoleónicas',
+    d:'Napoleón domina Europa durante más de una década hasta su derrota final en Waterloo.',
+    x:'Sus campañas difundieron ideas de la Revolución Francesa por Europa, aunque a la vez provocaron millones de muertos. El Congreso de Viena rediseñó el mapa europeo en 1815.' },
+  { era:'contemporanea', y:'1853–1856', t:'Guerra de Crimea',
+    d:'Rusia se enfrenta a una coalición de británicos, franceses, otomanos y sardos.',
+    x:'Fue una de las primeras guerras fotografiadas y con cobertura periodística por telégrafo. En ella trabajó Florence Nightingale, que transformó la enfermería militar y redujo drásticamente la mortalidad en los hospitales.' },
+  { era:'contemporanea', y:'1861–1865', t:'Guerra Civil Estadounidense',
+    d:'Los estados del norte y del sur se enfrentan por la esclavitud y el modelo económico.',
+    x:'Fue el conflicto más mortífero de la historia de Estados Unidos, con más de 600.000 muertos. Terminó con la abolición de la esclavitud y el fortalecimiento del poder federal.' },
+  { era:'contemporanea', y:'1914–1918', t:'Primera Guerra Mundial',
+    d:'La «Gran Guerra» moviliza a más de 70 millones de soldados y deja unos 17 millones de muertos.',
+    x:'Fue la primera guerra industrial a gran escala: ametralladoras, gas venenoso, tanques y aviones. Terminó con cuatro imperios disueltos y un tratado de Versalles tan duro con Alemania que muchos historiadores lo ven como antecedente del siguiente conflicto.' },
+  { era:'contemporanea', y:'1936–1939', t:'Guerra Civil Española',
+    d:'Un golpe militar contra la República deriva en tres años de guerra y en la dictadura de Franco.',
+    x:'Sirvió de ensayo para la Segunda Guerra Mundial: Alemania e Italia apoyaron al bando sublevado y la Unión Soviética a la República. Fue una guerra de propaganda y de ensayo de nuevas tácticas militares.' },
+  { era:'contemporanea', y:'1939–1945', t:'Segunda Guerra Mundial',
+    d:'El conflicto más destructivo de la historia: más de 60 millones de muertos, la mayoría civiles.',
+    x:'Incluyó el Holocausto, el bombardeo masivo de ciudades y el uso de armas nucleares por primera vez. De sus cenizas nacieron la ONU, la Declaración Universal de Derechos Humanos y el orden mundial de la Guerra Fría.' },
+  { era:'contemporanea', y:'1950–1953', t:'Guerra de Corea',
+    d:'Corea del Norte, apoyada por China y la URSS, invade Corea del Sur, respaldada por la ONU.',
+    x:'Terminó en tablas con un armisticio, no con un tratado de paz. La península quedó dividida por una zona desmilitarizada que sigue existiendo hoy, y el conflicto sigue técnicamente abierto.' },
+  { era:'contemporanea', y:'1955–1975', t:'Guerra de Vietnam',
+    d:'Vietnam del Norte y el Viet Cong se enfrentan a Vietnam del Sur y a Estados Unidos.',
+    x:'Fue la primera guerra retransmitida por televisión a diario, lo que influyó en la opinión pública estadounidense. Terminó con la reunificación de Vietnam bajo un gobierno comunista en 1975.' },
+  { era:'contemporanea', y:'1990–1991', t:'Guerra del Golfo',
+    d:'Una coalición internacional liderada por Estados Unidos expulsa a Irak de Kuwait.',
+    x:'Fue una guerra breve y muy televisada: las imágenes de bombas guiadas por láser dieron la vuelta al mundo. No derrocó a Sadam Husein, algo que sí ocurriría en la invasión de 2003.' },
+  { era:'contemporanea', y:'2001–2021', t:'Guerra de Afganistán',
+    d:'Tras los atentados del 11-S, una coalición internacional invade Afganistán y derroca a los talibanes.',
+    x:'Fue la guerra más larga en la que ha participado Estados Unidos, con casi veinte años de duración. Terminó con la retirada occidental en 2021 y el regreso de los talibanes al poder.' },
+  { era:'contemporanea', y:'2022–hoy', t:'Invasión de Ucrania',
+    d:'Rusia invade Ucrania y desencadena el mayor conflicto armado en Europa desde 1945.',
+    x:'Ha provocado millones de desplazados, sanciones económicas masivas y una crisis energética y alimentaria global. Su desarrollo y su desenlace siguen abiertos en el momento de escribir estas líneas.' }
+];
+
+/* ============================================================
+   DATOS: CIENCIA Y TECNOLOGÍA
+   ============================================================ */
+const CIENCIA = [
+  { era:'prehistoria', y:'~1.000.000 a. C.', t:'Dominio del fuego',
+    d:'El control del fuego permite cocinar, calentarse, iluminar y protegerse de los animales.',
+    x:'Cocinar hace los alimentos más digeribles y elimina parásitos. Muchos investigadores lo consideran un paso decisivo para el desarrollo del cerebro humano. El fuego también sirvió para endurecer puntas de madera y para ahuyentar a los depredadores.' },
+  { era:'prehistoria', y:'~10.000 a. C.', t:'Agricultura y ganadería',
+    d:'El ser humano empieza a cultivar plantas y a domesticar animales.',
+    x:'Fue la base de las primeras civilizaciones. Permitió excedentes de comida, asentamientos permanentes y una división del trabajo más compleja. A cambio, trajo más horas de trabajo, dietas menos variadas y enfermedades nuevas por la convivencia con animales.' },
+  { era:'prehistoria', y:'~3.500 a. C.', t:'La rueda',
+    d:'Aparece en Mesopotamia para la alfarería y poco después para el transporte.',
+    x:'La rueda con eje y radios revolucionó el transporte y la guerra (carros de combate). Durante milenios no se usó en América, donde se conocía el principio pero no se aplicó al transporte por la falta de animales de tiro adecuados.' },
+  { era:'prehistoria', y:'~3.300 a. C.', t:'Metalurgia del bronce',
+    d:'Se descubre que aleando cobre y estaño se obtiene un metal más duro y fácil de trabajar.',
+    x:'La metalurgia del bronce dio nombre a una era entera. Permitió mejores herramientas, armas y objetos de prestigio, y generó rutas comerciales a larga distancia para conseguir el estaño, que era escaso.' },
+
+  { era:'antigua', y:'~3.500 a. C.', t:'Invención de la escritura',
+    d:'En Mesopotamia se escriben los primeros textos en tablillas de arcilla.',
+    x:'Nació para llevar cuentas comerciales. Con el tiempo se usó para leyes, mitos, poesía y ciencia. Es el punto de partida convencional de la historia, porque permite conocer directamente el pensamiento de quienes vivieron entonces.' },
+  { era:'antigua', y:'~1800 a. C.', t:'Geometría y astronomía babilónicas',
+    d:'Los babilonios elaboran tablas matemáticas y predicen eclipses con notable precisión.',
+    x:'Conocían el teorema de Pitágoras siglos antes de Pitágoras y manejaban sistemas de numeración posicional. La base 60 que usaban sigue viva en la manera de medir ángulos y horas.' },
+  { era:'antigua', y:'~450 a. C.', t:'Filosofía natural griega',
+    d:'Tales, Anaximandro y otros intentan explicar el mundo por causas naturales, sin mitos.',
+    x:'Fue un cambio radical: por primera vez se propuso que el universo tiene leyes que pueden descubrirse con la razón. Demócrito propuso la existencia de átomos indivisibles, una intuición correcta sin pruebas entonces.' },
+  { era:'antigua', y:'~300 a. C.', t:'Escuela de Alejandría',
+    d:'Euclides sistematiza la geometría, Arquímedes estudia la palanca y Eratóstenes mide el radio de la Tierra.',
+    x:'Eratóstenes calculó el tamaño de la Tierra con un error menor al 15 % usando la sombra de un palo y la distancia entre dos ciudades. La geometría de Euclides fue la base de las matemáticas durante más de dos mil años.' },
+  { era:'antigua', y:'~400 a. C.', t:'Medicina de Hipócrates',
+    d:'La enfermedad deja de atribuirse a los dioses y se busca en causas naturales.',
+    x:'Hipócrates y su escuela separaron la medicina de la religión y establecieron la observación clínica. El juramento hipocrático, que aún recitan muchos médicos, es una herencia directa de este enfoque.' },
+  { era:'antigua', y:'~100 d. C.', t:'Papel en China',
+    d:'Se desarrolla un procedimiento para fabricar papel a partir de fibras vegetales.',
+    x:'Fue un invento revolucionario: mucho más barato que el papiro y el pergamino. Tardó más de mil años en llegar a Europa, a través del mundo islámico, donde se perfeccionó la técnica.' },
+
+  { era:'media', y:'~820', t:'Álgebra de Al-Juarismi',
+    d:'El matemático persa escribe un tratado que sistematiza el álgebra y difunde los números indios.',
+    x:'Su nombre latinizado, «Algoritmi», dio origen a la palabra algoritmo. Los números indoarábigos que difundió, con el cero, sustituyeron a los numerales romanos y facilitaron enormemente los cálculos.' },
+  { era:'media', y:'~1000', t:'Brújula magnética',
+    d:'China y el mundo islámico empiezan a usar la brújula para la navegación.',
+    x:'Permitió navegar sin depender de la posición de las estrellas y abrió la era de los grandes viajes oceánicos. Sin ella no habrían sido posibles las expediciones de Colón, Vasco de Gama o Magallanes.' },
+  { era:'media', y:'~1040', t:'Imprenta de tipos móviles',
+    d:'Bi Sheng inventa en China un sistema de impresión con caracteres móviles de arcilla.',
+    x:'Fue un precedente de la imprenta de Gutenberg, aunque los miles de caracteres chinos hacían el proceso mucho más lento que con el alfabeto latino. La idea llegó a Europa a través de las rutas comerciales.' },
+  { era:'media', y:'~1200', t:'Nacen las universidades',
+    d:'Se fundan las primeras instituciones europeas de estudios superiores en Bolonia, París y Oxford.',
+    x:'Las universidades nacieron como comunidades de maestros y estudiantes con estatutos propios. El sistema de grados (bachiller, maestro, doctor) y la organización en facultades vienen directamente de esa época.' },
+  { era:'media', y:'~1202', t:'Fibonacci y los números arábigos',
+    d:'El matemático italiano publica el «Liber Abaci» y difunde en Europa los números indoarábigos.',
+    x:'La obra enseñó a los comerciantes europeos a calcular con el sistema decimal posicional. La famosa sucesión de Fibonacci apareció en un problema sobre cría de conejos planteado en este libro.' },
+
+  { era:'moderna', y:'~1450', t:'Imprenta de Gutenberg',
+    d:'La imprenta de tipos móviles metálicos llega a Europa y revoluciona la difusión de ideas.',
+    x:'Antes de la imprenta, un libro copiado a mano podía costar el sueldo de meses. En cincuenta años se imprimieron más libros que en los mil años anteriores. La Reforma, la ciencia moderna y la Ilustración no se explican sin ella.' },
+  { era:'moderna', y:'1543', t:'Anatomía de Vesalio',
+    d:'Se publica «De humani corporis fabrica», una anatomía basada en disecciones propias.',
+    x:'Vesalio corrigió errores de Galeno que se habían transmitido durante siglos. Sus ilustraciones, de enorme calidad, transformaron la enseñanza de la medicina y fundaron la anatomía moderna.' },
+  { era:'moderna', y:'1608', t:'Telescopio',
+    d:'Se inventa en los Países Bajos y Galileo lo perfecciona y lo apunta al cielo.',
+    x:'Con él descubrió las lunas de Júpiter, las fases de Venus y las manchas solares. Fue la primera prueba observacional clara de que la Tierra no era el centro del universo.' },
+  { era:'moderna', y:'1687', t:'Newton y la ley de la gravitación',
+    d:'Newton publica los «Principia» y unifica la física terrestre y la celeste.',
+    x:'Por primera vez, una misma ley explica la caída de una manzana y la órbita de la Luna. Esta unificación fue una de las mayores hazañas intelectuales de la historia y dominó la física durante más de doscientos años.' },
+  { era:'moderna', y:'1642', t:'Calculadora de Pascal',
+    d:'Blaise Pascal construye una máquina que suma y resta para ayudar a su padre recaudador de impuestos.',
+    x:'Fue uno de los primeros dispositivos de cálculo mecánico. Aunque solo realizaba operaciones sencillas, abrió el camino de las máquinas calculadoras que culminarían en los ordenadores del siglo XX.' },
+
+  { era:'contemporanea', y:'1769', t:'Máquina de vapor de Watt',
+    d:'James Watt mejora la máquina de vapor y la hace eficiente para usarla en fábricas.',
+    x:'Fue el motor de la Revolución Industrial. Las fábricas dejaron de depender de ríos y molinos de viento y pudieron instalarse en cualquier lugar. Cambió la organización del trabajo, la ciudad y el paisaje.' },
+  { era:'contemporanea', y:'1796', t:'Primera vacuna',
+    d:'Edward Jenner comprueba que la viruela vacuna protege contra la viruela humana.',
+    x:'Fue el inicio de la vacunación, una de las intervenciones de salud pública más eficaces de la historia. La viruela se declaró erradicada en 1980, el primer caso de una enfermedad humana eliminada por la ciencia.' },
+  { era:'contemporanea', y:'1837', t:'Telégrafo eléctrico',
+    d:'Se desarrollan los primeros sistemas prácticos de comunicación a distancia por cable.',
+    x:'Por primera vez, la información podía viajar más rápido que una persona. Los periódicos empezaron a recibir noticias en horas, y el código Morse se convirtió en el primer lenguaje universal de comunicación tecnológica.' },
+  { era:'contemporanea', y:'1865', t:'Genética de Mendel',
+    d:'Gregor Mendel publica sus experimentos con guisantes y descubre las leyes de la herencia.',
+    x:'Su trabajo pasó casi desapercibido y fue redescubierto en 1900. Estableció que los caracteres se heredan mediante unidades discretas, lo que hoy llamamos genes. Es el punto de partida de la genética moderna.' },
+  { era:'contemporanea', y:'1879', t:'Bombilla eléctrica',
+    d:'Edison y Swan desarrollan bombillas incandescentes prácticas y duraderas.',
+    x:'La luz eléctrica transformó la vida cotidiana: las ciudades dejaron de detenerse al anochecer y las jornadas laborales se reorganizaron. También impulsó la creación de redes eléctricas urbanas.' },
+  { era:'contemporanea', y:'1895', t:'Rayos X',
+    d:'Roentgen descubre una radiación capaz de atravesar tejidos y ver los huesos.',
+    x:'Fue el primer método para ver el interior del cuerpo humano sin cirugía. Su aplicación médica fue inmediata, y también abrió el camino a la física nuclear y a la comprensión de la radiactividad.' },
+  { era:'contemporanea', y:'1903', t:'Primer vuelo de los hermanos Wright',
+    d:'Un avión con motor y control se mantiene en el aire durante doce segundos.',
+    x:'En apenas sesenta y seis años se pasó de ese vuelo de doce segundos al de la misión Apolo 11 a la Luna. La aviación transformó el transporte, el comercio y la guerra durante el siglo XX.' },
+  { era:'contemporanea', y:'1928', t:'Penicilina',
+    d:'Alexander Fleming descubre por accidente que un hongo mata bacterias.',
+    x:'La penicilina y los antibióticos que le siguieron transformaron la medicina y salvaron cientos de millones de vidas. Su uso masivo en ganadería ha favorecido la aparición de bacterias resistentes, un problema sanitario global en la actualidad.' },
+  { era:'contemporanea', y:'1945', t:'Primera computadora electrónica',
+    d:'El ENIAC, con miles de tubos de vacío, calcula trayectorias de artillería.',
+    x:'Ocupaba una habitación entera y pesaba 27 toneladas. Su capacidad de cálculo era inferior a la de una calculadora de bolsillo actual, pero demostró que las máquinas podían realizar operaciones lógicas a gran velocidad.' },
+  { era:'contemporanea', y:'1947', t:'El transistor',
+    d:'Se inventa el transistor, el componente que reemplazará a los tubos de vacío.',
+    x:'Es el invento más importante del siglo XX para la electrónica. Los transistores son la base de radios, televisores, ordenadores y móviles. Cada teléfono actual contiene miles de millones de ellos miniaturizados.' },
+  { era:'contemporanea', y:'1953', t:'Estructura del ADN',
+    d:'Watson, Crick, Franklin y Wilkins describen la doble hélice del ADN.',
+    x:'El descubrimiento abrió la puerta a la biología molecular y a la medicina genética. Rosalind Franklin, cuya imagen de difracción de rayos X fue clave, no recibió el reconocimiento en vida. El Nobel se otorgó a los tres hombres.' },
+  { era:'contemporanea', y:'1969', t:'Nace internet',
+    d:'Se conectan las primeras cuatro universidades en la red ARPANET, antecedente de internet.',
+    x:'La red creció lentamente durante dos décadas. La World Wide Web, inventada por Tim Berners-Lee en 1989, la hizo accesible al público. Hoy internet mueve la economía, la política y la cultura globales.' },
+  { era:'contemporanea', y:'2007', t:'Primer smartphone moderno',
+    d:'La aparición del teléfono inteligente con pantalla táctil populariza internet móvil.',
+    x:'En pocos años, más personas accedieron a internet desde el móvil que desde el ordenador. Cambió la manera de comunicarse, de comprar, de informarse y de trabajar. También planteó problemas nuevos de privacidad y adicción.' },
+  { era:'contemporanea', y:'2020', t:'Vacunas ARNm',
+    d:'Se aprueban las primeras vacunas de ARN mensajero contra la COVID-19.',
+    x:'La tecnología llevaba décadas investigándose, y la pandemia permitió aplicarla a gran escala. Su eficacia y rapidez abrieron una nueva vía para combatir enfermedades. Es también un ejemplo de cómo la ciencia básica tarda años en dar frutos.' },
+  { era:'contemporanea', y:'2022–hoy', t:'Inteligencia artificial generativa',
+    d:'Modelos de lenguaje y de imagen capaces de producir texto y contenido visual se popularizan.',
+    x:'Estos sistemas aprenden de enormes cantidades de datos y generan respuestas, imágenes o código. Plantean preguntas profundas sobre el trabajo, la autoría, la educación y la veracidad de la información.' }
+];
+
+/* ============================================================
+   DATOS: DESCUBRIMIENTOS
+   ============================================================ */
+const DESCUBRIMIENTOS = [
+  { era:'antigua', y:'~600 a. C.', t:'La Tierra es esférica',
+    d:'Pitágoras y otros filósofos griegos proponen que la Tierra es una esfera.',
+    x:'No fue una idea religiosa ni mágica: se basaba en la sombra circular de la Tierra durante los eclipses lunares y en cómo desaparecen los barcos en el horizonte. En la Edad Media los marineros cultos no creían que la Tierra fuera plana.' },
+  { era:'antigua', y:'~240 a. C.', t:'Eratóstenes mide el radio terrestre',
+    d:'Comparando sombras en dos ciudades, calcula el tamaño de la Tierra con notable precisión.',
+    x:'Su resultado, unos 39.000 km de circunferencia, se acerca al valor real de 40.075 km. Lo hizo con un palo, una regla y razonamiento geométrico, sin instrumentos modernos. Es un ejemplo clásico de la potencia del método científico.' },
+  { era:'antigua', y:'~400 a. C.', t:'El átomo de Demócrito',
+    d:'Demócrito propone que la materia está formada por partículas indivisibles.',
+    x:'Fue una intuición filosófica, no una teoría comprobada. Tuvieron que pasar más de 2.200 años para que la existencia de los átomos se demostrara experimentalmente. Aun así, la idea de que todo está hecho de unidades básicas resultó correcta.' },
+
+  { era:'media', y:'~1000', t:'Llegada vikinga a América',
+    d:'Leif Erikson y otros exploradores nórdicos alcanzan las costas de Norteamérica.',
+    x:'Se establecieron brevemente en Terranova, en el actual Canadá. Los restos arqueológicos de L\'Anse aux Meadows lo confirman. No tuvo consecuencias permanentes para el continente, a diferencia de la llegada de Colón casi quinientos años después.' },
+  { era:'media', y:'~1088', t:'La brújula llega al Mediterráneo',
+    d:'La brújula magnética china se difunde por el mundo islámico y luego por Europa.',
+    x:'Permitió navegar sin depender de la posición de las estrellas y abrió la era de las grandes travesías oceánicas. Sin la brújula no habrían sido posibles los viajes de Colón, Vasco de Gama o Magallanes.' },
+
+  { era:'moderna', y:'1492', t:'Llegada a América',
+    d:'Colón alcanza las Antillas y abre el contacto permanente entre Europa y América.',
+    x:'Para los europeos fue un descubrimiento; para los pueblos americanos fue el inicio de una catástrofe demográfica y cultural. El intercambio de plantas, animales y enfermedades transformó la alimentación y la población de todo el planeta.' },
+  { era:'moderna', y:'1498', t:'Ruta marítima a la India',
+    d:'Vasco de Gama rodea África y llega a la India por mar.',
+    x:'Abrió una ruta comercial directa entre Europa y Asia, sin intermediarios. Portugal construyó un imperio marítimo en el Índico. El centro económico del mundo empezó a desplazarse hacia el Atlántico.' },
+  { era:'moderna', y:'1519–1522', t:'Primera vuelta al mundo',
+    d:'La expedición de Magallanes y Elcano completa la circunnavegación del planeta.',
+    x:'Demostró de forma práctica que los océanos están conectados y que la Tierra es una esfera. De cinco naves y unos 250 tripulantes regresó una sola nave con 18 supervivientes.' },
+  { era:'moderna', y:'1609', t:'Leyes de Kepler',
+    d:'Kepler describe las órbitas planetarias como elipses, no como círculos perfectos.',
+    x:'Acabó con dos mil años de idea de que los astros se movían en círculos. Sus tres leyes permitieron a Newton formular la gravitación universal y describir el movimiento de los planetas con precisión.' },
+  { era:'moderna', y:'1674', t:'El mundo microscópico',
+    d:'Leeuwenhoek observa por primera vez bacterias y protozoos con microscopios de su invención.',
+    x:'Reveló un universo invisible de seres vivos que nadie había imaginado. Sus descripciones, enviadas a la Royal Society, abrieron el campo de la microbiología y prepararon el camino para Pasteur y Koch, dos siglos después.' },
+
+  { era:'contemporanea', y:'1781', t:'Descubrimiento de Urano',
+    d:'Herschel observa un nuevo planeta con su telescopio.',
+    x:'Fue el primer planeta descubierto con telescopio en la historia. Amplió los límites conocidos del sistema solar y animó a construir instrumentos más potentes. Neptuno se descubriría poco después, en 1846, gracias a cálculos matemáticos.' },
+  { era:'contemporanea', y:'1859', t:'Teoría de la evolución',
+    d:'Darwin publica «El origen de las especies» con la teoría de la selección natural.',
+    x:'Explicó la diversidad de la vida mediante un mecanismo sencillo: los individuos mejor adaptados dejan más descendencia. Cambió por completo la biología y la manera de entender el lugar del ser humano en la naturaleza.' },
+  { era:'contemporanea', y:'1865', t:'Los microbios causan enfermedades',
+    d:'Pasteur y Koch demuestran que muchas enfermedades infecciosas son causadas por microorganismos.',
+    x:'Esta idea, hoy obvia, no lo era en el siglo XIX. Llevó a la pasteurización, a la antisepsia quirúrgica y a la identificación de los agentes de la tuberculosis, el cólera o el ántrax. Salvó millones de vidas.' },
+  { era:'contemporanea', y:'1895', t:'Rayos X',
+    d:'Roentgen descubre una radiación que atraviesa el cuerpo y permite ver los huesos.',
+    x:'Fue el primer método para ver el interior del cuerpo sin cirugía. Se aplicó a la medicina casi de inmediato y abrió el camino a la física atómica y a la comprensión de la radiactividad.' },
+  { era:'contemporanea', y:'1896–1898', t:'Radiactividad',
+    d:'Becquerel, Marie y Pierre Curie descubren la radiactividad natural y aíslan el radio y el polonio.',
+    x:'Reveló que los átomos no eran indivisibles y podían transformarse. Abrió la puerta a la física nuclear, a la medicina nuclear y a la energía atómica. Marie Curie recibió dos premios Nobel, en física y en química.' },
+  { era:'contemporanea', y:'1905–1915', t:'Relatividad de Einstein',
+    d:'Einstein publica la relatividad especial y la general, que transforman la física.',
+    x:'Cambió la manera de entender el espacio, el tiempo, la gravedad y la energía. Sus predicciones se han comprobado con enorme precisión. El GPS de los móviles no funcionaría sin corregir los efectos relativistas.' },
+  { era:'contemporanea', y:'1928', t:'Penicilina',
+    d:'Fleming descubre que un hongo mata bacterias, abriendo la era de los antibióticos.',
+    x:'Salvó cientos de millones de vidas y transformó la medicina. Su uso masivo en ganadería y en medicina ha favorecido la aparición de bacterias resistentes, un problema sanitario global en la actualidad.' },
+  { era:'contemporanea', y:'1953', t:'Estructura del ADN',
+    d:'Se describe la doble hélice del ADN, la molécula que contiene la información genética.',
+    x:'Fundó la biología molecular y la genética moderna. Permitió después secuenciar genomas, diagnosticar enfermedades hereditarias y desarrollar terapias génicas. La contribución de Rosalind Franklin fue decisiva pero tardó en reconocerse.' },
+  { era:'contemporanea', y:'1964', t:'Fondo cósmico de microondas',
+    d:'Se detecta por accidente la radiación fósil del Big Bang.',
+    x:'Fue una prueba clave de que el universo tuvo un origen caliente y denso. Penzias y Wilson recibieron el Nobel por un descubrimiento que al principio confundieron con un ruido de su antena.' },
+  { era:'contemporanea', y:'1995', t:'Primer exoplaneta',
+    d:'Se confirma el primer planeta orbitando una estrella distinta del Sol.',
+    x:'Desde entonces se han descubierto miles de exoplanetas, algunos potencialmente habitables. Ha cambiado la manera de buscar vida en el universo y ha mostrado cuán común es que las estrellas tengan planetas.' },
+  { era:'contemporanea', y:'2001', t:'Genoma humano',
+    d:'Se publica el primer borrador completo del genoma humano.',
+    x:'Permitió leer los aproximadamente 3.000 millones de pares de bases del ADN humano. Abrió el camino a la medicina personalizada y a comprender mejor las enfermedades hereditarias. También planteó nuevos dilemas éticos.' },
+  { era:'contemporanea', y:'2012', t:'Bosón de Higgs',
+    d:'El CERN confirma la existencia del bosón de Higgs, la partícula asociada al campo que da masa a las demás.',
+    x:'Fue la confirmación de una predicción hecha casi cincuenta años antes. Completó el modelo estándar de la física de partículas y explicó por qué las partículas elementales tienen masa. Se necesitaron un acelerador de 27 kilómetros y miles de científicos.' },
+  { era:'contemporanea', y:'2019', t:'Primera imagen de un agujero negro',
+    d:'La colaboración internacional Event Horizon Telescope publica la imagen del agujero negro de la galaxia M87.',
+    x:'Se logró combinando radiotelescopios de todo el planeta para formar un telescopio virtual del tamaño de la Tierra. Confirmó de forma visual una predicción de la relatividad general formulada un siglo antes.' }
+];
+
+/* ============================================================
+   DATOS: GLOSARIO
+   ============================================================ */
+const GLOSARIO = [
+  { t:'Prehistoria', c:'Prehistoria', d:'Etapa anterior a la invención de la escritura. Se conoce solo por restos materiales: herramientas, huesos, pinturas.' },
+  { t:'Paleolítico', c:'Prehistoria', d:'Etapa más antigua de la Prehistoria, caracterizada por la piedra tallada y una vida nómada de caza y recolección.' },
+  { t:'Neolítico', c:'Prehistoria', d:'Etapa en la que aparecen la agricultura y la ganadería. La piedra se pule y las personas se vuelven sedentarias.' },
+  { t:'Nómada', c:'Prehistoria', d:'Grupo humano que se desplaza continuamente en busca de alimento, sin asentamiento fijo.' },
+  { t:'Sedentario', c:'Prehistoria', d:'Grupo que vive de forma permanente en un mismo lugar, normalmente gracias a la agricultura.' },
+  { t:'Revolución neolítica', c:'Prehistoria', d:'Cambio profundo que supone pasar de la caza y la recolección a la agricultura y la ganadería.' },
+  { t:'Arte rupestre', c:'Prehistoria', d:'Pinturas y grabados realizados sobre paredes de cuevas. Suelen representar animales, manos y signos.' },
+  { t:'Civilización', c:'Antigüedad', d:'Sociedad compleja con ciudades, escritura, instituciones y división del trabajo.' },
+  { t:'Escritura cuneiforme', c:'Antigüedad', d:'Sistema de escritura sumerio que usaba signos con forma de cuña grabados sobre arcilla.' },
+  { t:'Jeroglífico', c:'Antigüedad', d:'Escritura egipcia basada en dibujos y signos con significado propio o fonético.' },
+  { t:'Faraón', c:'Antigüedad', d:'Rey del antiguo Egipto, considerado también una figura religiosa.' },
+  { t:'Mesopotamia', c:'Antigüedad', d:'Región entre los ríos Tigris y Éufrates, considerada cuna de las primeras ciudades y de la escritura.' },
+  { t:'Polis', c:'Antigüedad', d:'Ciudad-estado griega independiente, con sus propias leyes y gobierno. Atenas y Esparta son ejemplos.' },
+  { t:'Democracia ateniense', c:'Antigüedad', d:'Sistema de gobierno de Atenas en el que los ciudadanos varones libres votaban las decisiones. Excluía a mujeres, esclavos y extranjeros.' },
+  { t:'Imperio', c:'Antigüedad', d:'Organización política en la que un poder central domina numerosos territorios y pueblos.' },
+  { t:'Helenización', c:'Antigüedad', d:'Expansión de la lengua y la cultura griegas por Oriente tras las conquistas de Alejandro Magno.' },
+  { t:'Derecho romano', c:'Antigüedad', d:'Conjunto de normas jurídicas de Roma que ha influido en casi todos los sistemas legales actuales.' },
+  { t:'Edad Media', c:'Edad Media', d:'Periodo entre la caída de Roma y la llegada a América. En Europa se asocia al feudalismo; en el resto del mundo fue una época muy dinámica.' },
+  { t:'Feudalismo', c:'Edad Media', d:'Sistema social y económico basado en la tierra: un señor la cede a un vasallo a cambio de servicio y fidelidad.' },
+  { t:'Señor feudal', c:'Edad Media', d:'Dueño de tierras que ejerce poder sobre los campesinos que las trabajan.' },
+  { t:'Vasallo', c:'Edad Media', d:'Persona que recibe tierras de un señor y se compromete a servirle y serle leal.' },
+  { t:'Siervo', c:'Edad Media', d:'Campesino ligado a la tierra que trabaja. No puede abandonarla libremente.' },
+  { t:'Gremio', c:'Edad Media', d:'Asociación de artesanos de un mismo oficio que controla la producción y la formación en las ciudades.' },
+  { t:'Cruzada', c:'Edad Media', d:'Expedición militar organizada desde Europa cristiana para recuperar lugares santos.' },
+  { t:'Califato', c:'Edad Media', d:'Forma de gobierno del mundo islámico en la que un califa ejerce como líder político y religioso.' },
+  { t:'Ruta de la Seda', c:'Edad Media', d:'Conjunto de rutas terrestres y marítimas que conectaban Asia con Europa y África a través del comercio.' },
+  { t:'Peste Negra', c:'Edad Media', d:'Epidemia de peste que devastó Europa a mediados del siglo XIV y mató a un tercio de su población.' },
+  { t:'Bizancio', c:'Edad Media', d:'Nombre del Imperio Romano de Oriente, con capital en Constantinopla, que sobrevivió hasta 1453.' },
+  { t:'Edad Moderna', c:'Edad Moderna', d:'Periodo entre la llegada a América y la Revolución Francesa, marcado por la expansión europea y la revolución científica.' },
+  { t:'Renacimiento', c:'Edad Moderna', d:'Movimiento cultural que recupera el arte y el pensamiento de la Antigüedad clásica y coloca al ser humano en el centro.' },
+  { t:'Humanismo', c:'Edad Moderna', d:'Corriente de pensamiento que valora la razón, la educación y la dignidad humana por encima de la autoridad tradicional.' },
+  { t:'Reforma', c:'Edad Moderna', d:'Movimiento religioso del siglo XVI que rompe la unidad del cristianismo occidental y da origen a las iglesias protestantes.' },
+  { t:'Contrarreforma', c:'Edad Moderna', d:'Conjunto de medidas de la Iglesia católica para responder a la Reforma protestante.' },
+  { t:'Absolutismo', c:'Edad Moderna', d:'Sistema de gobierno en el que el rey concentra todo el poder sin límites institucionales.' },
+  { t:'Ilustración', c:'Edad Moderna', d:'Movimiento intelectual del siglo XVIII que defiende la razón, la ciencia, la libertad y la igualdad ante la ley.' },
+  { t:'Mercantilismo', c:'Edad Moderna', d:'Política económica que busca acumular metales preciosos y favorecer las exportaciones sobre las importaciones.' },
+  { t:'Colonia', c:'Edad Moderna', d:'Territorio dominado por otro país, que lo explota económicamente y lo gobierna.' },
+  { t:'Heliocentrismo', c:'Edad Moderna', d:'Modelo que sitúa al Sol en el centro del sistema planetario, propuesto por Copérnico y confirmado por Galileo y Kepler.' },
+  { t:'Método científico', c:'Edad Moderna', d:'Forma de obtener conocimiento basada en la observación, la hipótesis y la comprobación experimental.' },
+  { t:'Edad Contemporánea', c:'Contemporánea', d:'Etapa que va desde la Revolución Francesa hasta hoy, caracterizada por la industrialización y los cambios acelerados.' },
+  { t:'Revolución Industrial', c:'Contemporánea', d:'Proceso iniciado en el siglo XVIII en el que la producción pasa del taller artesanal a la fábrica mecanizada.' },
+  { t:'Industrialización', c:'Contemporánea', d:'Proceso por el que un país desarrolla fábricas, infraestructuras y producción en masa.' },
+  { t:'Imperialismo', c:'Contemporánea', d:'Política de expansión de las potencias europeas sobre África y Asia a finales del siglo XIX.' },
+  { t:'Descolonización', c:'Contemporánea', d:'Proceso por el que los territorios coloniales alcanzan la independencia, sobre todo tras la Segunda Guerra Mundial.' },
+  { t:'Guerra Fría', c:'Contemporánea', d:'Enfrentamiento indirecto entre Estados Unidos y la Unión Soviética entre 1947 y 1991, sin guerra directa entre ambos.' },
+  { t:'Totalitarismo', c:'Contemporánea', d:'Régimen político que controla todos los aspectos de la vida social y anula las libertades individuales.' },
+  { t:'Holocausto', c:'Contemporánea', d:'Genocidio sistemático de unos seis millones de judíos por parte de la Alemania nazi durante la Segunda Guerra Mundial.' },
+  { t:'Derechos humanos', c:'Contemporánea', d:'Conjunto de derechos básicos que corresponden a toda persona por el hecho de serlo, recogidos en la declaración de 1948.' },
+  { t:'Globalización', c:'Contemporánea', d:'Proceso de creciente interconexión económica, cultural y tecnológica entre todos los países del mundo.' },
+  { t:'ONU', c:'Contemporánea', d:'Organización de las Naciones Unidas, creada en 1945 para mantener la paz y fomentar la cooperación internacional.' },
+  { t:'Guerra Mundial', c:'Contemporánea', d:'Conflicto armado en el que participan países de varios continentes, como ocurrió en 1914 y en 1939.' }
+];
+
+/* ============================================================
+   DATOS: QUIZ
+   ============================================================ */
+const QUIZ = [
+  { q:'¿Qué acontecimiento marca tradicionalmente el final de la Prehistoria?', o:['El descubrimiento del fuego','La invención de la escritura','La Revolución Industrial','La caída de Roma'], c:1,
+    e:'La Prehistoria termina cuando aparece la escritura, hacia el 3.500 a. C. en Mesopotamia, porque a partir de ahí existen documentos que nos hablan directamente del pasado.' },
+  { q:'¿Cuál fue uno de los cambios principales de la Revolución neolítica?', o:['La invención del teléfono','El paso de la caza y la recolección a la agricultura','La caída del Imperio Romano','El descubrimiento de América'], c:1,
+    e:'La agricultura y la ganadería permitieron excedentes de comida, asentamientos permanentes y, con el tiempo, las primeras ciudades.' },
+  { q:'¿En qué civilización se desarrolló la escritura cuneiforme?', o:['Egipto','Grecia','Mesopotamia','China'], c:2,
+    e:'La escritura cuneiforme nació en Sumeria, en Mesopotamia, sobre tablillas de arcilla grabadas con una caña.' },
+  { q:'¿Qué fue el feudalismo?', o:['Un sistema de gobierno democrático','Un sistema social basado en la tierra y la lealtad entre señores y vasallos','Una religión de la Edad Media','Un tipo de arte medieval'], c:1,
+    e:'En el feudalismo, el señor cedía tierras a un vasallo a cambio de servicio militar y fidelidad, y los campesinos trabajaban esas tierras.' },
+  { q:'¿Cuál fue uno de los efectos de la Peste Negra en Europa?', o:['Aumentó la población','Faltó mano de obra y el sistema feudal se debilitó','Terminó la Edad Media inmediatamente','Se inventó la imprenta'], c:1,
+    e:'Al morir un tercio de la población, el trabajo se volvió escaso y valioso. Los campesinos pudieron exigir mejores condiciones y el sistema feudal se resquebrajó.' },
+  { q:'¿Qué hecho marca convencionalmente el inicio de la Edad Moderna?', o:['La caída de Constantinopla','La llegada europea a América en 1492','La Revolución Francesa','La invención de la imprenta'], c:1,
+    e:'Se toma 1492 como punto de partida porque supone el encuentro entre dos mundos que habían estado separados durante milenios.' },
+  { q:'¿Quién propuso que el Sol, y no la Tierra, era el centro del sistema planetario?', o:['Newton','Galileo','Copérnico','Kepler'], c:2,
+    e:'Copérnico publicó su teoría heliocéntrica en 1543, el mismo año de su muerte. Galileo y Kepler la confirmaron y ampliaron después.' },
+  { q:'¿Qué caracteriza a la Revolución Industrial?', o:['El paso de la fábrica mecanizada al taller artesanal','El paso del taller artesanal a la fábrica mecanizada','La desaparición de las ciudades','El fin del comercio'], c:1,
+    e:'La máquina de vapor y la organización fabril multiplicaron la producción y transformaron la economía, la sociedad y el paisaje.' },
+  { q:'¿Cuándo terminó la Segunda Guerra Mundial?', o:['1918','1939','1945','1948'], c:2,
+    e:'La guerra terminó en 1945, con la rendición de Alemania en mayo y la de Japón en septiembre tras los bombardeos atómicos.' },
+  { q:'¿Qué simboliza la caída del Muro de Berlín en 1989?', o:['El inicio de la Primera Guerra Mundial','El fin de la Guerra Fría','La fundación de la ONU','El descubrimiento de América'], c:1,
+    e:'La apertura del muro supuso el símbolo más visible del derrumbe del bloque soviético, que culminaría con la disolución de la URSS en 1991.' },
+  { q:'¿Qué fue la batalla de Qadesh?', o:['Una batalla naval griega','Un enfrentamiento entre egipcios e hititas con el primer tratado de paz conocido','La derrota de Napoleón','La toma de Constantinopla'], c:1,
+    e:'Se libró hacia 1274 a. C. y terminó con un tratado de paz que se conserva. Es la batalla con registro documental más antiguo que se conoce.' },
+  { q:'¿Qué invento permitió a los europeos navegar sin depender de las estrellas?', o:['El telescopio','La brújula','El reloj mecánico','El telescopio'], c:1,
+    e:'La brújula magnética, llegada desde China a través del mundo islámico, hizo posible la navegación oceánica y los grandes viajes de exploración.' },
+  { q:'¿Quién midió por primera vez el radio de la Tierra con notable precisión?', o:['Ptolomeo','Eratóstenes','Aristóteles','Newton'], c:1,
+    e:'Eratóstenes lo hizo en el siglo III a. C. comparando sombras en dos ciudades egipcias. Su cálculo se acercó mucho al valor real.' },
+  { q:'¿Qué descubrió Fleming por accidente?', o:['Los rayos X','La penicilina','La radiactividad','La estructura del ADN'], c:1,
+    e:'Observó que un hongo del género Penicillium mataba bacterias en una placa de cultivo. Ese hallazgo abrió la era de los antibióticos.' },
+  { q:'¿Qué tecnología ha permitido el funcionamiento del GPS moderno?', o:['La relatividad de Einstein','La penicilina','La imprenta','El telescopio de Galileo'], c:0,
+    e:'Los satélites del GPS llevan relojes atómicos y sus señales deben corregirse por los efectos de la relatividad especial y general. Sin esas correcciones, el sistema acumularía errores enormes en pocas horas.' },
+  { q:'¿Qué fue el Holocausto?', o:['Un bombardeo de la Primera Guerra Mundial','El genocidio de unos seis millones de judíos por la Alemania nazi','Una epidemia medieval','Una batalla naval de la Antigüedad'], c:1,
+    e:'Fue un genocidio sistemático organizado por el régimen nazi durante la Segunda Guerra Mundial, en el que también fueron asesinados gitanos, discapacitados, homosexuales y opositores políticos.' }
+];
+
+/* ============================================================
+   TEMA
+   ============================================================ */
+const htmlEl = document.documentElement;
+function setTheme(t){
+  htmlEl.setAttribute('data-theme', t);
+  try { localStorage.setItem('hist-theme', t); } catch(e){}
+}
+(function initTheme(){
+  let saved = null;
+  try { saved = localStorage.getItem('hist-theme'); } catch(e){}
+  if (saved) { setTheme(saved); return; }
+  const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+  setTheme(prefersLight ? 'light' : 'dark');
+})();
+$('#themeToggle').addEventListener('click', () => {
+  setTheme(htmlEl.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+  if (currentRoute === 'graficos') setTimeout(renderAllCharts, 60);
+});
+
+/* ============================================================
+   ROUTER
+   ============================================================ */
+const ROUTES = ['inicio','linea','guerras','ciencia','descubrimientos','eras','graficos','glosario','quiz'];
+let currentRoute = 'inicio';
+
+function go(route, push = true){
+  if (!ROUTES.includes(route)) route = 'inicio';
+  currentRoute = route;
+
+  $$('.view').forEach(v => v.classList.toggle('active', v.dataset.view === route));
+  $$('.nav-link').forEach(b => b.classList.toggle('active', b.dataset.route === route));
+
+  if (push && location.hash.slice(1) !== route) {
+    history.pushState(null, '', '#' + route);
+  }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  requestAnimationFrame(() => {
+    $$('.view.active .reveal').forEach(el => el.classList.remove('in'));
+    checkReveal();
+    if (route === 'inicio') animateCounters();
+    if (route === 'graficos') setTimeout(renderAllCharts, 120);
+  });
+}
+
+document.addEventListener('click', e => {
+  const trigger = e.target.closest('[data-route]');
+  if (trigger) {
+    e.preventDefault();
+    go(trigger.dataset.route);
+  }
+});
+
+window.addEventListener('popstate', () => {
+  go(location.hash.slice(1) || 'inicio', false);
+});
+
+/* ============================================================
+   REVEAL + CONTADORES
+   ============================================================ */
+const revealObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('in');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+function checkReveal(){
+  $$('.view.active .reveal:not(.in)').forEach(el => revealObserver.observe(el));
+}
+
+function animateCounters(){
+  $$('.num[data-count]').forEach(el => {
+    if (el.dataset.done === '1') return;
+    el.dataset.done = '1';
+    const target = parseFloat(el.dataset.count);
+    const suffix = el.dataset.suffix || '';
+    const dur = 1500;
+    const start = performance.now();
+    function tick(now){
+      const p = Math.min((now - start) / dur, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      const val = Math.round(target * eased);
+      el.textContent = val.toLocaleString('es-ES') + suffix;
+      if (p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  });
+}
+
+/* ============================================================
+   TIMELINE GENERAL
+   ============================================================ */
+(function renderBar(){
+  const cont = $('#tlBar');
+  if (!cont) return;
+  cont.innerHTML = ERAS.map(e => `
+    <button class="tl-seg" data-era="${e.id}"
+      style="background:linear-gradient(150deg,${e.c1},${e.c2})"
+      aria-label="Filtrar ${e.n}">
+      <span class="seg-name">${e.n}</span>
+      <span class="seg-range">${e.rango}</span>
+    </button>
+  `).join('');
+
+  cont.addEventListener('click', ev => {
+    const btn = ev.target.closest('.tl-seg');
+    if (!btn) return;
+    setEraFilter(btn.dataset.era);
+    const list = $('#vtList');
+    if (list) window.scrollTo({ top: list.getBoundingClientRect().top + window.scrollY - 120, behavior: 'smooth' });
+  });
+})();
+
+let eraFilter = 'todas';
+
+(function renderChips(){
+  const cont = $('#tlChips');
+  if (!cont) return;
+  const opts = [{id:'todas', n:'Todas las etapas'}].concat(ERAS.map(e => ({id:e.id, n:e.n})));
+  cont.innerHTML = opts.map(o =>
+    `<button class="chip${o.id === 'todas' ? ' active' : ''}" data-era="${o.id}">${o.n}</button>`
+  ).join('');
+
+  cont.addEventListener('click', ev => {
+    const chip = ev.target.closest('.chip');
+    if (!chip) return;
+    setEraFilter(chip.dataset.era);
+  });
+})();
+
+function setEraFilter(era){
+  eraFilter = era;
+  $$('#tlChips .chip').forEach(c => c.classList.toggle('active', c.dataset.era === era));
+  $$('#tlBar .tl-seg').forEach(s => s.classList.toggle('dim', era !== 'todas' && s.dataset.era !== era));
+  let visibles = 0;
+  $$('#vtList .vt-item').forEach(item => {
+    const show = era === 'todas' || item.dataset.era === era;
+    item.classList.toggle('hidden', !show);
+    if (show) visibles++;
+  });
+  const counter = $('#tlCount');
+  if (counter) counter.textContent = visibles + (visibles === 1 ? ' hito visible' : ' hitos visibles');
+}
+
+(function renderTimeline(){
+  const cont = $('#vtList');
+  if (!cont) return;
+  const orden = ERAS.map(e => e.id);
+  const items = HITOS.slice().sort((a, b) => orden.indexOf(a.era) - orden.indexOf(b.era));
+
+  cont.innerHTML = items.map((h, i) => {
+    const era = ERA_MAP[h.era];
+    return `
+      <div class="vt-item" data-era="${h.era}" style="--c:${era.c1};--d:${Math.min(i, 12) * 25}ms">
+        <span class="vt-dot"></span>
+        <div class="vt-card">
+          <div class="vt-top">
+            <span class="vt-year">${h.y}</span>
+            <span class="vt-era">${era.n}</span>
+          </div>
+          <h4>${h.t}</h4>
+          <p>${h.d}</p>
+          <button class="vt-more" type="button">
+            <span>Más detalle</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="vt-extra"><div><p>${h.x}</p></div></div>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  cont.addEventListener('click', ev => {
+    const btn = ev.target.closest('.vt-more');
+    if (!btn) return;
+    const item = btn.closest('.vt-item');
+    const open = item.classList.toggle('open');
+    btn.querySelector('span').textContent = open ? 'Ocultar detalle' : 'Más detalle';
+  });
+
+  setEraFilter('todas');
+})();
+
+/* ============================================================
+   TIMELINES AUXILIARES: GUERRAS, CIENCIA, DESCUBRIMIENTOS
+   ============================================================ */
+function setupTimeline({listId, chipsId, countId, data}){
+  const list = document.getElementById(listId);
+  const chips = document.getElementById(chipsId);
+  const count = document.getElementById(countId);
+  if (!list || !chips) return;
+
+  // chips
+  const opts = [{id:'todas', n:'Todas las etapas'}].concat(ERAS.map(e => ({id:e.id, n:e.n})));
+  chips.innerHTML = opts.map(o =>
+    `<button class="chip${o.id === 'todas' ? ' active' : ''}" data-era="${o.id}">${o.n}</button>`
+  ).join('');
+
+  // items ordenados por era
+  const orden = ERAS.map(e => e.id);
+  const items = data.slice().sort((a, b) => orden.indexOf(a.era) - orden.indexOf(b.era));
+
+  list.innerHTML = items.map((h, i) => {
+    const era = ERA_MAP[h.era];
+    return `
+      <div class="vt-item" data-era="${h.era}" style="--c:${era.c1};--d:${Math.min(i, 12) * 22}ms">
+        <span class="vt-dot"></span>
+        <div class="vt-card">
+          <div class="vt-top">
+            <span class="vt-year">${h.y}</span>
+            <span class="vt-era">${era.n}</span>
+          </div>
+          <h4>${h.t}</h4>
+          <p>${h.d}</p>
+          <button class="vt-more" type="button">
+            <span>Más detalle</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="vt-extra"><div><p>${h.x}</p></div></div>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  // click en chip
+  chips.addEventListener('click', ev => {
+    const chip = ev.target.closest('.chip');
+    if (!chip) return;
+    const era = chip.dataset.era;
+    chips.querySelectorAll('.chip').forEach(c => c.classList.toggle('active', c === chip));
+    let visibles = 0;
+    list.querySelectorAll('.vt-item').forEach(item => {
+      const show = era === 'todas' || item.dataset.era === era;
+      item.classList.toggle('hidden', !show);
+      if (show) visibles++;
+    });
+    if (count) count.textContent = visibles + (visibles === 1 ? ' hito visible' : ' hitos visibles');
+  });
+
+  // click en "más detalle"
+  list.addEventListener('click', ev => {
+    const btn = ev.target.closest('.vt-more');
+    if (!btn) return;
+    const item = btn.closest('.vt-item');
+    const open = item.classList.toggle('open');
+    btn.querySelector('span').textContent = open ? 'Ocultar detalle' : 'Más detalle';
+  });
+
+  // conteo inicial
+  if (count) count.textContent = items.length + (items.length === 1 ? ' hito visible' : ' hitos visibles');
+}
+
+setupTimeline({ listId:'warList', chipsId:'warChips', countId:'warCount', data: GUERRAS });
+setupTimeline({ listId:'sciList', chipsId:'sciChips', countId:'sciCount', data: CIENCIA });
+setupTimeline({ listId:'discList', chipsId:'discChips', countId:'discCount', data: DESCUBRIMIENTOS });
+
+/* ============================================================
+   ERAS: ACORDEÓN
+   ============================================================ */
+(function renderEras(){
+  const cont = $('#eraList');
+  if (!cont) return;
+
+  cont.innerHTML = ERAS.map((e, i) => `
+    <article class="era-card" style="--d:${i * 60}ms">
+      <button class="era-head" aria-expanded="false">
+        <span class="era-badge" style="--c1:${e.c1};--c2:${e.c2}">${e.ini}</span>
+        <span>
+          <span class="era-title">${e.n}</span>
+          <span class="era-range">${e.rango} · ${e.corto}</span>
+        </span>
+        <svg class="era-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <div class="era-body">
+        <div>
+          <div class="era-content" style="--c1:${e.c1};--c2:${e.c2}">
+            <p>${e.desc}</p>
+            <span class="era-sub">Características principales</span>
+            <ul class="era-list">
+              ${e.feats.map(f => `<li>${f}</li>`).join('')}
+            </ul>
+            <div class="era-legacy"><strong>Legado:</strong> ${e.legado}</div>
+          </div>
+        </div>
+      </div>
+    </article>
+  `).join('');
+
+  cont.addEventListener('click', ev => {
+    const head = ev.target.closest('.era-head');
+    if (!head) return;
+    const card = head.closest('.era-card');
+    const open = card.classList.toggle('open');
+    head.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+
+  const first = cont.querySelector('.era-card');
+  if (first) {
+    first.classList.add('open');
+    first.querySelector('.era-head').setAttribute('aria-expanded', 'true');
+  }
+})();
+
+/* ============================================================
+   GRÁFICOS SVG
+   ============================================================ */
+const SVG_NS = 'http://www.w3.org/2000/svg';
+
+function cssVar(name){
+  return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+}
+
+const POP = [
+  { l:'10.000 a.C.', v:4e6 },
+  { l:'3.000 a.C.', v:5e7 },
+  { l:'1 d.C.', v:2e8 },
+  { l:'1000', v:3e8 },
+  { l:'1500', v:5e8 },
+  { l:'1800', v:1e9 },
+  { l:'1900', v:1.6e9 },
+  { l:'1950', v:2.5e9 },
+  { l:'2000', v:6.1e9 },
+  { l:'2024', v:8.1e9 }
+];
+
+function renderPopChart(){
+  const svg = document.getElementById('popChart');
+  if (!svg) return;
+
+  const W = 680, H = 360;
+  const padL = 76, padR = 26, padT = 26, padB = 62;
+  const innerW = W - padL - padR;
+  const innerH = H - padT - padB;
+
+  const logMin = Math.log10(1e6);
+  const logMax = Math.log10(1e10);
+
+  const X = i => padL + (i / (POP.length - 1)) * innerW;
+  const Y = v => padT + (1 - (Math.log10(v) - logMin) / (logMax - logMin)) * innerH;
+
+  const accent = cssVar('--accent') || '#f59e0b';
+  const accent2 = cssVar('--accent-2') || '#fb7185';
+  const gridCol = cssVar('--grid') || 'rgba(255,255,255,.1)';
+  const muted = cssVar('--muted') || '#a49a8b';
+  const textCol = cssVar('--text') || '#f3ede4';
+  const bg = cssVar('--bg') || '#0a0806';
+
+  let s = '';
+  s += `<defs>
+    <linearGradient id="popGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="${accent}" stop-opacity=".45"/>
+      <stop offset="100%" stop-color="${accent}" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="popLine" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="${accent}"/>
+      <stop offset="60%" stop-color="${accent2}"/>
+      <stop offset="100%" stop-color="${cssVar('--accent-3') || '#22d3ee'}"/>
+    </linearGradient>
+  </defs>`;
+
+  const yTicks = [1e6, 1e7, 1e8, 1e9, 1e10];
+  const yLabels = ['1 M', '10 M', '100 M', '1.000 M', '10.000 M'];
+  yTicks.forEach((t, i) => {
+    const y = Y(t);
+    s += `<line x1="${padL}" y1="${y}" x2="${W - padR}" y2="${y}" stroke="${gridCol}" stroke-width="1" stroke-dasharray="3 4"/>`;
+    s += `<text x="${padL - 12}" y="${y + 4}" text-anchor="end" font-family="Inter,sans-serif" font-size="10.5" fill="${muted}" font-weight="600">${yLabels[i]}</text>`;
+  });
+
+  let areaD = `M ${X(0)} ${Y(POP[0].v)}`;
+  POP.forEach((p, i) => { if (i > 0) areaD += ` L ${X(i)} ${Y(p.v)}`; });
+  areaD += ` L ${X(POP.length - 1)} ${padT + innerH} L ${X(0)} ${padT + innerH} Z`;
+  s += `<path d="${areaD}" fill="url(#popGrad)"/>`;
+
+  let lineD = `M ${X(0)} ${Y(POP[0].v)}`;
+  POP.forEach((p, i) => { if (i > 0) lineD += ` L ${X(i)} ${Y(p.v)}`; });
+  s += `<path d="${lineD}" fill="none" stroke="url(#popLine)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>`;
+
+  POP.forEach((p, i) => {
+    const cx = X(i), cy = Y(p.v);
+    s += `<circle cx="${cx}" cy="${cy}" r="5" fill="${accent}" stroke="${bg}" stroke-width="2.5"/>`;
+    s += `<text x="${cx}" y="${H - padB + 22}" text-anchor="middle" font-family="Inter,sans-serif" font-size="9.5" fill="${muted}" font-weight="600">${p.l}</text>`;
+  });
+
+  const lastX = X(POP.length - 1), lastY = Y(POP[POP.length - 1].v);
+  s += `<text x="${lastX - 6}" y="${lastY - 14}" text-anchor="end" font-family="Space Grotesk,sans-serif" font-size="12.5" fill="${accent2}" font-weight="700">8.100 M</text>`;
+
+  s += `<line x1="${padL}" y1="${padT + innerH}" x2="${W - padR}" y2="${padT + innerH}" stroke="${textCol}" stroke-opacity=".35" stroke-width="1.4"/>`;
+
+  svg.innerHTML = s;
+}
+
+const LIFE = [
+  { l:'Prehistoria', v:30 }, { l:'Antigua', v:28 }, { l:'Media', v:31 },
+  { l:'Moderna', v:35 }, { l:'1800', v:29 }, { l:'1900', v:32 },
+  { l:'1950', v:48 }, { l:'2000', v:67 }, { l:'2024', v:73 }
+];
+
+function renderLifeChart(){
+  const svg = document.getElementById('lifeChart');
+  if (!svg) return;
+
+  const W = 680, H = 360;
+  const padL = 46, padR = 22, padT = 30, padB = 66;
+  const innerW = W - padL - padR;
+  const innerH = H - padT - padB;
+
+  const max = 80;
+  const n = LIFE.length;
+  const gap = innerW / n;
+  const barW = Math.min(46, gap * 0.58);
+
+  const accent = cssVar('--accent') || '#f59e0b';
+  const accent2 = cssVar('--accent-2') || '#fb7185';
+  const gridCol = cssVar('--grid') || 'rgba(255,255,255,.1)';
+  const muted = cssVar('--muted') || '#a49a8b';
+  const textCol = cssVar('--text') || '#f3ede4';
+
+  let s = '';
+  s += `<defs>
+    <linearGradient id="lifeGrad" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="${accent2}" stop-opacity=".75"/>
+      <stop offset="100%" stop-color="${accent}"/>
+    </linearGradient>
+  </defs>`;
+
+  [0, 20, 40, 60, 80].forEach(t => {
+    const y = padT + innerH - (t / max) * innerH;
+    s += `<line x1="${padL}" y1="${y}" x2="${W - padR}" y2="${y}" stroke="${gridCol}" stroke-width="1" stroke-dasharray="3 4"/>`;
+    s += `<text x="${padL - 10}" y="${y + 4}" text-anchor="end" font-family="Inter,sans-serif" font-size="10" fill="${muted}" font-weight="600">${t}</text>`;
+  });
+
+  LIFE.forEach((d, i) => {
+    const x = padL + gap * i + (gap - barW) / 2;
+    const h = (d.v / max) * innerH;
+    const y = padT + innerH - h;
+    s += `<rect x="${x}" y="${y}" width="${barW}" height="${h}" rx="6" fill="url(#lifeGrad)" opacity=".92"/>`;
+    s += `<text x="${x + barW / 2}" y="${y - 8}" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="11" font-weight="700" fill="${accent}">${d.v}</text>`;
+    const lx = x + barW / 2;
+    const ly = H - padB + 18;
+    s += `<text x="${lx}" y="${ly}" text-anchor="end" font-family="Inter,sans-serif" font-size="9.5" font-weight="600" fill="${muted}" transform="rotate(-38 ${lx} ${ly})">${d.l}</text>`;
+  });
+
+  s += `<line x1="${padL}" y1="${padT + innerH}" x2="${W - padR}" y2="${padT + innerH}" stroke="${textCol}" stroke-opacity=".35" stroke-width="1.4"/>`;
+  s += `<text x="${padL - 10}" y="${padT - 12}" text-anchor="end" font-family="Inter,sans-serif" font-size="9.5" fill="${muted}" font-weight="700">años</text>`;
+
+  svg.innerHTML = s;
+}
+
+const LIT = [
+  { l:'1800', v:12 }, { l:'1900', v:21 }, { l:'1950', v:56 },
+  { l:'2000', v:82 }, { l:'2024', v:87 }
+];
+
+function renderLitChart(){
+  const svg = document.getElementById('litChart');
+  if (!svg) return;
+
+  const W = 680, H = 320;
+  const padL = 74, padR = 60, padT = 26, padB = 42;
+  const innerW = W - padL - padR;
+  const innerH = H - padT - padB;
+
+  const n = LIT.length;
+  const rowH = innerH / n;
+  const barH = Math.min(26, rowH * 0.5);
+
+  const accent = cssVar('--accent') || '#f59e0b';
+  const accent2 = cssVar('--accent-2') || '#fb7185';
+  const accent3 = cssVar('--accent-3') || '#22d3ee';
+  const gridCol = cssVar('--grid') || 'rgba(255,255,255,.1)';
+  const muted = cssVar('--muted') || '#a49a8b';
+
+  let s = '';
+  s += `<defs>
+    <linearGradient id="litGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="${accent2}" stop-opacity=".85"/>
+      <stop offset="55%" stop-color="${accent}"/>
+      <stop offset="100%" stop-color="${accent3}"/>
+    </linearGradient>
+  </defs>`;
+
+  [0, 25, 50, 75, 100].forEach(t => {
+    const x = padL + (t / 100) * innerW;
+    s += `<line x1="${x}" y1="${padT - 6}" x2="${x}" y2="${padT + innerH + 4}" stroke="${gridCol}" stroke-width="1" stroke-dasharray="3 4"/>`;
+    s += `<text x="${x}" y="${padT + innerH + 24}" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="${muted}" font-weight="600">${t}%</text>`;
+  });
+
+  LIT.forEach((d, i) => {
+    const y = padT + rowH * i + (rowH - barH) / 2;
+    const w = (d.v / 100) * innerW;
+    s += `<rect x="${padL}" y="${y}" width="${innerW}" height="${barH}" rx="7" fill="${gridCol}" opacity=".5"/>`;
+    s += `<rect x="${padL}" y="${y}" width="${w}" height="${barH}" rx="7" fill="url(#litGrad)"/>`;
+    s += `<text x="${padL - 12}" y="${y + barH / 2 + 4}" text-anchor="end" font-family="Space Grotesk,sans-serif" font-size="11.5" font-weight="700" fill="${muted}">${d.l}</text>`;
+    s += `<text x="${padL + w + 10}" y="${y + barH / 2 + 4}" text-anchor="start" font-family="Space Grotesk,sans-serif" font-size="11.5" font-weight="700" fill="${accent}">${d.v}%</text>`;
+  });
+
+  svg.innerHTML = s;
+}
+
+const DURACIONES = [
+  { n:'Prehistoria', v:2496500, c1:'#a78bfa', c2:'#7c3aed' },
+  { n:'Antigua', v:3976, c1:'#f59e0b', c2:'#ea580c' },
+  { n:'Media', v:1016, c1:'#14b8a6', c2:'#0d9488' },
+  { n:'Moderna', v:297, c1:'#22d3ee', c2:'#0891b2' },
+  { n:'Contemporánea', v:236, c1:'#fb7185', c2:'#e11d48' }
+];
+
+function renderEraDurChart(){
+  const svg = document.getElementById('eraDurChart');
+  if (!svg) return;
+
+  const W = 680, H = 200;
+  const padL = 18, padR = 18, padT = 34, padB = 78;
+  const innerW = W - padL - padR;
+
+  const total = DURACIONES.reduce((a, b) => a + b.v, 0);
+  const muted = cssVar('--muted') || '#a49a8b';
+  const gridCol = cssVar('--grid') || 'rgba(255,255,255,.1)';
+
+  let s = '';
+  let x = padL;
+
+  s += `<defs>`;
+  DURACIONES.forEach((d, i) => {
+    s += `<linearGradient id="dur${i}" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="${d.c1}"/>
+      <stop offset="100%" stop-color="${d.c2}"/>
+    </linearGradient>`;
+  });
+  s += `</defs>`;
+
+  const barY = padT;
+  const barH = 48;
+
+  s += `<rect x="${padL}" y="${barY}" width="${innerW}" height="${barH}" rx="12" fill="${gridCol}" opacity=".35"/>`;
+
+  const prehistPct = DURACIONES[0].v / total;
+  const prehistW = prehistPct * innerW;
+
+  s += `<rect x="${x}" y="${barY}" width="${prehistW}" height="${barH}" rx="12" fill="url(#dur0)"/>`;
+  s += `<text x="${x + prehistW / 2}" y="${barY + barH / 2 + 5}" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="13" font-weight="700" fill="#1a1206">Prehistoria · 99,8 %</text>`;
+  x += prehistW;
+
+  const restoY = barY + barH + 16;
+  const restoH = 34;
+  const restoTotal = total - DURACIONES[0].v;
+  let rx = padL;
+  const restoData = DURACIONES.slice(1);
+
+  s += `<rect x="${padL}" y="${restoY}" width="${innerW}" height="${restoH}" rx="10" fill="${gridCol}" opacity=".35"/>`;
+
+  restoData.forEach((d, i) => {
+    const w = (d.v / restoTotal) * innerW;
+    s += `<rect x="${rx}" y="${restoY}" width="${w}" height="${restoH}" rx="10" fill="url(#dur${i + 1})"/>`;
+    if (w > 70) {
+      s += `<text x="${rx + w / 2}" y="${restoY + restoH / 2 + 4}" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="10.5" font-weight="700" fill="#1a1206">${d.n}</text>`;
+    }
+    rx += w;
+  });
+
+  s += `<text x="${padL}" y="${barY - 12}" font-family="Inter,sans-serif" font-size="10.5" font-weight="700" fill="${muted}">ESCALA REAL · 2,5 millones de años</text>`;
+  s += `<text x="${padL}" y="${restoY + restoH + 20}" font-family="Inter,sans-serif" font-size="10.5" font-weight="700" fill="${muted}">DETALLE DEL 0,2 % RESTANTE (ampliado)</text>`;
+
+  let lx = padL;
+  const ly = restoY + restoH + 44;
+  DURACIONES.forEach((d, i) => {
+    s += `<circle cx="${lx + 5}" cy="${ly}" r="5" fill="${d.c1}"/>`;
+    s += `<text x="${lx + 16}" y="${ly + 4}" font-family="Inter,sans-serif" font-size="10" font-weight="600" fill="${muted}">${d.n}</text>`;
+    lx += 118;
+  });
+
+  svg.innerHTML = s;
+}
+
+function renderAllCharts(){
+  renderPopChart();
+  renderLifeChart();
+  renderLitChart();
+  renderEraDurChart();
+}
+
+/* ============================================================
+   GLOSARIO
+   ============================================================ */
+const CATEGORIAS = ['Todos','Prehistoria','Antigüedad','Edad Media','Edad Moderna','Contemporánea'];
+let activeCat = 'Todos';
+let query = '';
+
+const chipsEl = $('#chips');
+chipsEl.innerHTML = CATEGORIAS.map(c =>
+  `<button class="chip${c === 'Todos' ? ' active' : ''}" data-cat="${c}">${c}</button>`
+).join('');
+
+chipsEl.addEventListener('click', e => {
+  const chip = e.target.closest('.chip');
+  if (!chip) return;
+  activeCat = chip.dataset.cat;
+  $$('.chip', chipsEl).forEach(c => c.classList.toggle('active', c === chip));
+  renderGlosario();
+});
+
+$('#searchInput').addEventListener('input', e => {
+  query = e.target.value;
+  renderGlosario();
+});
+
+function renderGlosario(){
+  const q = query.trim().toLowerCase();
+  const items = GLOSARIO.filter(g => {
+    const okCat = activeCat === 'Todos' || g.c === activeCat;
+    const okQ = !q || g.t.toLowerCase().includes(q) || g.d.toLowerCase().includes(q);
+    return okCat && okQ;
+  });
+
+  const list = $('#glosarioList');
+  if (!items.length){
+    list.innerHTML = `<p class="empty">No encontramos términos con esa búsqueda. Prueba con otra palabra o cambia de categoría.</p>`;
+    return;
+  }
+
+  list.innerHTML = items.map((g, i) => `
+    <article class="term" style="--d:${Math.min(i, 14) * 30}ms">
+      <div class="term-head">
+        <h3>${g.t}</h3>
+        <span class="tag">${g.c}</span>
+      </div>
+      <p>${g.d}</p>
+    </article>
+  `).join('');
+}
+renderGlosario();
+
+/* ============================================================
+   QUIZ
+   ============================================================ */
+const TOTAL_PREGUNTAS = 10;
+const LETRAS = ['A','B','C','D'];
+let quizState = { questions: [], index: 0, score: 0, answered: false, finished: false };
+
+function shuffle(arr){
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function startQuiz(){
+  quizState = {
+    questions: shuffle(QUIZ).slice(0, TOTAL_PREGUNTAS),
+    index: 0,
+    score: 0,
+    answered: false,
+    finished: false
+  };
+  renderQuiz();
+}
+
+function renderQuiz(){
+  const card = $('#quizCard');
+  if (!card) return;
+
+  if (quizState.finished){
+    const total = quizState.questions.length;
+    const pct = Math.round((quizState.score / total) * 100);
+    let mensaje = 'Sigue repasando: la historia se entiende mejor conectando etapas.';
+    if (pct === 100) mensaje = 'Perfecto. Dominas las etapas y sus hitos principales.';
+    else if (pct >= 75) mensaje = 'Muy buen resultado. Te falta muy poco para el pleno.';
+    else if (pct >= 50) mensaje = 'Buen comienzo. Vuelve a la línea del tiempo y prueba otra vez.';
+
+    card.innerHTML = `
+      <div class="result">
+        <div class="score">${quizState.score}/${total}</div>
+        <h3>${mensaje}</h3>
+        <p>Has acertado el ${pct} % de las preguntas de esta ronda.</p>
+        <button class="btn btn-primary" id="restartQuiz">
+          Jugar otra vez
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>
+        </button>
+      </div>
+    `;
+    $('#restartQuiz').addEventListener('click', startQuiz);
+    return;
+  }
+
+  const q = quizState.questions[quizState.index];
+  const total = quizState.questions.length;
+  const progress = (quizState.index / total) * 100;
+
+  card.innerHTML = `
+    <div class="quiz-meta">
+      <span>Pregunta ${quizState.index + 1} de ${total}</span>
+      <span>Aciertos: ${quizState.score}</span>
+    </div>
+    <div class="progress"><div class="progress-bar" style="width:${progress}%"></div></div>
+    <h3 class="q-text">${q.q}</h3>
+    <div class="options" id="options">
+      ${q.o.map((opt, i) => `
+        <button class="option" data-i="${i}">
+          <span class="letter">${LETRAS[i]}</span>
+          <span>${opt}</span>
+        </button>
+      `).join('')}
+    </div>
+    <div id="feedbackSlot"></div>
+    <div class="quiz-actions" id="actionsSlot"></div>
+  `;
+
+  $('#options').addEventListener('click', e => {
+    const btn = e.target.closest('.option');
+    if (!btn || quizState.answered) return;
+    answerQuestion(parseInt(btn.dataset.i, 10));
+  });
+}
+
+function answerQuestion(chosen){
+  quizState.answered = true;
+  const q = quizState.questions[quizState.index];
+  const options = $$('#options .option');
+
+  options.forEach((btn, i) => {
+    btn.disabled = true;
+    if (i === q.c) btn.classList.add('correct');
+    else if (i === chosen) btn.classList.add('wrong');
+  });
+
+  const acerto = chosen === q.c;
+  if (acerto) quizState.score++;
+
+  $('#feedbackSlot').innerHTML = `
+    <div class="feedback">
+      <strong>${acerto ? 'Correcto.' : 'No exactamente.'}</strong> ${q.e}
+    </div>
+  `;
+
+  const isLast = quizState.index === quizState.questions.length - 1;
+  $('#actionsSlot').innerHTML = `
+    <button class="btn btn-primary" id="nextBtn">
+      ${isLast ? 'Ver resultado' : 'Siguiente pregunta'}
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </button>
+  `;
+
+  $('#nextBtn').addEventListener('click', () => {
+    if (isLast){
+      quizState.finished = true;
+    } else {
+      quizState.index++;
+      quizState.answered = false;
+    }
+    renderQuiz();
+  });
+}
+
+/* ============================================================
+   HOVER EN MÓDULOS
+   ============================================================ */
+$$('.module').forEach(m => {
+  m.addEventListener('mousemove', e => {
+    const r = m.getBoundingClientRect();
+    m.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
+    m.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
+  });
+});
+
+/* ============================================================
+   ARRANQUE
+   ============================================================ */
+(function boot(){
+  const initial = (location.hash.slice(1) || 'inicio');
+  go(ROUTES.includes(initial) ? initial : 'inicio', false);
+  checkReveal();
+  setTimeout(() => {
+    if (currentRoute === 'inicio') animateCounters();
+    if (currentRoute === 'graficos') renderAllCharts();
+  }, 350);
+})();
+
+startQuiz();
+
+document.addEventListener('visibilitychange', () => {
+  document.querySelectorAll('.orb').forEach(o => {
+    o.style.animationPlayState = document.hidden ? 'paused' : 'running';
+  });
+});
+</script>
+</body>
+</html>

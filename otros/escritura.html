@@ -1,0 +1,1730 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Escritura · Guía interactiva — orígenes, estilos y nuevas formas</title>
+<meta name="description" content="Guía interactiva sobre la escritura humana: orígenes, cuneiforme, jeroglíficos, chino, árabe, cirílico, mesoamérica, línea del tiempo y nuevas formas digitales.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;600&family=Noto+Serif+SC:wght@400;700&family=Noto+Naskh+Arabic:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --font-display:'Space Grotesk','Segoe UI',system-ui,sans-serif;
+  --font-body:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --font-mono:'JetBrains Mono','SF Mono',Consolas,monospace;
+  --radius:20px;
+  --radius-sm:12px;
+  --maxw:1180px;
+  --ease:cubic-bezier(.22,.75,.25,1);
+}
+html[data-theme="light"]{
+  --bg:#f7f9fc;
+  --bg-soft:#eef2f8;
+  --surface:rgba(255,255,255,.85);
+  --surface-solid:#ffffff;
+  --surface-2:rgba(20,40,80,.045);
+  --surface-3:rgba(20,40,80,.08);
+  --border:rgba(20,40,80,.12);
+  --border-strong:rgba(20,40,80,.24);
+  --text:#0a1628;
+  --muted:#5a6b80;
+  --accent:#b45309;
+  --accent-2:#7c3aed;
+  --accent-3:#0e7490;
+  --accent-4:#15803d;
+  --good:#15803d;
+  --bad:#b91c1c;
+  --shadow:0 22px 55px -28px rgba(20,40,80,.28);
+  --orb-op:.14;
+  --dot-color:rgba(20,40,80,.055);
+  --star:rgba(20,40,80,.25);
+  --code-bg:rgba(20,40,80,.06);
+  --ink:#3a2818;
+  --ink-soft:#5d4630;
+  --paper:#e8d5a8;
+  --paper-2:#d4b896;
+  --paper-3:#f4e4c1;
+}
+html[data-theme="dark"]{
+  --bg:#04060d;
+  --bg-soft:#0a0f1a;
+  --surface:rgba(18,24,38,.66);
+  --surface-solid:#131a28;
+  --surface-2:rgba(255,255,255,.045);
+  --surface-3:rgba(255,255,255,.08);
+  --border:rgba(255,255,255,.10);
+  --border-strong:rgba(255,255,255,.20);
+  --text:#e8eef8;
+  --muted:#8f9bb3;
+  --accent:#f59e0b;
+  --accent-2:#a78bfa;
+  --accent-3:#22d3ee;
+  --accent-4:#34d399;
+  --good:#34d399;
+  --bad:#fb7185;
+  --shadow:0 24px 60px -24px rgba(0,0,0,.9);
+  --orb-op:.28;
+  --dot-color:rgba(255,255,255,.03);
+  --star:rgba(255,255,255,.8);
+  --code-bg:rgba(255,255,255,.06);
+  --ink:#e8d5a8;
+  --ink-soft:#c9a87c;
+  --paper:#3a2818;
+  --paper-2:#4a3828;
+  --paper-3:#2a1810;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;font-family:var(--font-body);background:var(--bg);color:var(--text);
+  min-height:100vh;line-height:1.65;-webkit-font-smoothing:antialiased;
+  transition:background .45s var(--ease),color .45s var(--ease);
+  overflow-x:hidden;
+}
+h1,h2,h3,h4,h5{font-family:var(--font-display);line-height:1.15;letter-spacing:-.02em;margin:0}
+p{margin:0}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+a{color:inherit;text-decoration:none}
+ul{margin:0}
+::selection{background:var(--accent);color:#fff}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
+
+.bg-stars{position:fixed;inset:0;z-index:-4;pointer-events:none;overflow:hidden}
+.bg-stars .star{
+  position:absolute;width:2px;height:2px;border-radius:50%;
+  background:var(--star);opacity:.55;
+  animation:twinkle var(--tw-dur,4s) ease-in-out infinite;
+  animation-delay:var(--tw-delay,0s);
+}
+@keyframes twinkle{0%,100%{opacity:.1;transform:scale(.8)}50%{opacity:1;transform:scale(1.3)}}
+.bg-dots{position:fixed;inset:0;z-index:-3;pointer-events:none;background-image:radial-gradient(var(--dot-color) 1px,transparent 1px);background-size:26px 26px}
+.orbs{position:fixed;inset:0;z-index:-2;overflow:hidden;pointer-events:none}
+.orb{position:absolute;border-radius:50%;filter:blur(110px);opacity:var(--orb-op);animation:float 28s ease-in-out infinite alternate}
+.orb.o1{width:48vw;height:48vw;background:var(--accent);top:-16vw;left:-12vw}
+.orb.o2{width:42vw;height:42vw;background:var(--accent-2);bottom:-18vw;right:-10vw;animation-delay:-10s}
+.orb.o3{width:34vw;height:34vw;background:var(--accent-3);top:44%;left:58%;animation-delay:-17s}
+@keyframes float{0%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(4vw,-3vw,0) scale(1.1)}100%{transform:translate3d(-3vw,4vw,0) scale(.95)}}
+
+.site-header{
+  position:sticky;top:0;z-index:50;
+  backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);
+  background:color-mix(in srgb,var(--bg) 78%, transparent);
+  border-bottom:1px solid var(--border);
+}
+.header-inner{max-width:var(--maxw);margin:0 auto;padding:13px 22px;display:flex;align-items:center;gap:20px}
+.brand{display:flex;align-items:center;gap:11px;font-family:var(--font-display);font-weight:700;font-size:1rem;letter-spacing:-.02em;white-space:nowrap}
+.brand-mark{
+  width:38px;height:38px;border-radius:12px;flex:none;
+  background:linear-gradient(140deg,var(--accent),var(--accent-2) 55%,var(--accent-3));
+  display:grid;place-items:center;color:#fff;
+  box-shadow:0 8px 22px -8px var(--accent);
+  transition:transform .5s var(--ease);
+}
+.brand:hover .brand-mark{transform:rotate(-10deg) scale(1.06)}
+.brand-mark svg{width:22px;height:22px}
+
+.nav{display:flex;gap:2px;margin-left:auto;overflow-x:auto;scrollbar-width:none}
+.nav::-webkit-scrollbar{display:none}
+.nav-link{
+  position:relative;padding:9px 11px;border-radius:11px;font-size:.8rem;font-weight:500;
+  color:var(--muted);white-space:nowrap;transition:color .3s var(--ease),background .3s var(--ease);
+}
+.nav-link:hover{color:var(--text);background:var(--surface-2)}
+.nav-link.active{color:var(--text);background:var(--surface-2)}
+.nav-link.active::after{
+  content:'';position:absolute;left:11px;right:11px;bottom:4px;height:2px;border-radius:2px;
+  background:linear-gradient(90deg,var(--accent),var(--accent-2));
+  animation:navIn .4s var(--ease) both;
+}
+@keyframes navIn{from{transform:scaleX(0);opacity:0}to{transform:scaleX(1);opacity:1}}
+
+.theme-toggle{
+  width:40px;height:40px;border-radius:12px;flex:none;
+  border:1px solid var(--border);background:var(--surface-2);
+  display:grid;place-items:center;
+  transition:transform .35s var(--ease),border-color .3s,background .3s;
+}
+.theme-toggle:hover{transform:translateY(-2px) rotate(8deg);border-color:var(--border-strong)}
+.theme-toggle svg{width:19px;height:19px}
+html[data-theme="dark"] .icon-sun{display:block}
+html[data-theme="dark"] .icon-moon{display:none}
+html[data-theme="light"] .icon-sun{display:none}
+html[data-theme="light"] .icon-moon{display:block}
+
+main{max-width:var(--maxw);margin:0 auto;padding:0 22px 90px}
+.view{display:none}
+.view.active{display:block;animation:viewIn .55s var(--ease) both}
+@keyframes viewIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+
+.hero{padding:74px 0 42px;max-width:940px;position:relative}
+.pill{
+  display:inline-flex;align-items:center;gap:8px;padding:7px 15px;border-radius:999px;
+  font-size:.78rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;
+  border:1px solid var(--border);background:var(--surface);color:var(--muted);margin-bottom:26px;
+}
+.pill .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);animation:pulse 2.4s infinite}
+@keyframes pulse{
+  0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--accent) 60%,transparent)}
+  70%{box-shadow:0 0 0 9px transparent}
+  100%{box-shadow:0 0 0 0 transparent}
+}
+h1.hero-title{font-size:clamp(2.1rem,5.2vw,4rem);font-weight:700;letter-spacing:-.035em;margin-bottom:22px}
+.grad{
+  background:linear-gradient(100deg,var(--accent),var(--accent-2) 45%,var(--accent-3) 75%,var(--accent-4));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  background-size:220% auto;animation:shimmer 8s linear infinite;
+}
+@keyframes shimmer{to{background-position:220% center}}
+.lead{font-size:clamp(1rem,1.6vw,1.15rem);color:var(--muted);max-width:720px;margin-bottom:34px}
+.hero-actions{display:flex;flex-wrap:wrap;gap:13px}
+
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  padding:13px 25px;border-radius:13px;font-size:.93rem;font-weight:600;
+  border:1px solid transparent;
+  transition:transform .28s var(--ease),box-shadow .3s var(--ease),background .3s,border-color .3s,color .3s;
+  will-change:transform;
+}
+.btn:active{transform:scale(.97)}
+.btn svg{width:17px;height:17px}
+.btn-primary{
+  background:linear-gradient(120deg,var(--accent),var(--accent-2));
+  color:#fff;box-shadow:0 14px 34px -14px var(--accent);
+  position:relative;overflow:hidden;
+}
+.btn-primary::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,.45),transparent 70%);
+  transform:translateX(-130%);transition:transform .7s var(--ease);
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 20px 42px -14px var(--accent)}
+.btn-primary:hover::after{transform:translateX(130%)}
+.btn-ghost{border-color:var(--border);background:var(--surface);color:var(--text)}
+.btn-ghost:hover{transform:translateY(-2px);border-color:var(--border-strong);background:var(--surface-2)}
+
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin:12px 0 58px}
+.stat{
+  padding:22px 20px;border-radius:var(--radius);
+  background:var(--surface);border:1px solid var(--border);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  transition:transform .35s var(--ease),border-color .3s,box-shadow .35s;
+}
+.stat:hover{transform:translateY(-5px);border-color:var(--border-strong);box-shadow:var(--shadow)}
+.stat .num{
+  font-family:var(--font-display);font-size:1.8rem;font-weight:700;letter-spacing:-.03em;
+  background:linear-gradient(120deg,var(--accent),var(--accent-2));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.stat .lbl{font-size:.82rem;color:var(--muted);font-weight:500;margin-top:2px}
+
+.sec-head{margin:0 0 28px}
+.sec-head h2{font-size:clamp(1.55rem,3vw,2.05rem);font-weight:700;margin-bottom:8px}
+.sec-head p{color:var(--muted);max-width:740px;font-size:.95rem}
+.section{padding-top:52px}
+
+.module-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(258px,1fr));gap:18px}
+.module{
+  position:relative;overflow:hidden;text-align:left;padding:28px 24px;border-radius:var(--radius);
+  background:var(--surface);border:1px solid var(--border);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  transition:transform .4s var(--ease),border-color .35s,box-shadow .4s;
+}
+.module::before{
+  content:'';position:absolute;inset:0;opacity:0;
+  background:radial-gradient(420px circle at var(--mx,50%) var(--my,0%),color-mix(in srgb,var(--accent) 22%,transparent),transparent 65%);
+  transition:opacity .45s var(--ease);
+}
+.module:hover{transform:translateY(-6px);border-color:var(--border-strong);box-shadow:var(--shadow)}
+.module:hover::before{opacity:1}
+.module-ico{
+  width:46px;height:46px;border-radius:14px;display:grid;place-items:center;margin-bottom:18px;
+  background:linear-gradient(140deg,color-mix(in srgb,var(--accent) 22%,transparent),color-mix(in srgb,var(--accent-2) 18%,transparent));
+  border:1px solid var(--border);color:var(--accent);
+  transition:transform .4s var(--ease);
+}
+.module:hover .module-ico{transform:scale(1.08) rotate(-6deg)}
+.module-ico svg{width:22px;height:22px}
+.module h3{font-size:1.04rem;margin-bottom:8px;font-weight:600}
+.module p{font-size:.89rem;color:var(--muted);line-height:1.6}
+.module .arrow{display:inline-flex;align-items:center;gap:6px;margin-top:16px;font-size:.84rem;font-weight:600;color:var(--accent)}
+.module .arrow svg{width:14px;height:14px;transition:transform .35s var(--ease)}
+.module:hover .arrow svg{transform:translateX(5px)}
+
+.card{
+  padding:24px 26px;border-radius:var(--radius);
+  background:var(--surface);border:1px solid var(--border);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  transition:transform .35s var(--ease),border-color .3s,box-shadow .35s;
+}
+.card:hover{transform:translateY(-4px);border-color:var(--border-strong);box-shadow:var(--shadow)}
+.card h3{font-size:1.02rem;margin-bottom:10px;font-weight:600}
+.card p{font-size:.9rem;color:var(--muted);line-height:1.68}
+.card .kicker{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;display:block}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(258px,1fr))}
+.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.grid-3{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+
+.vt{position:relative;margin-top:26px}
+.vt::before{
+  content:'';position:absolute;left:13px;top:10px;bottom:10px;width:2px;border-radius:2px;
+  background:linear-gradient(180deg,var(--accent),var(--accent-2) 55%,var(--accent-3));
+  opacity:.55;
+}
+.vt-item{position:relative;padding-left:46px;margin-bottom:18px;animation:termIn .5s var(--ease) both;animation-delay:var(--d,0ms)}
+@keyframes termIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.vt-dot{position:absolute;left:7px;top:24px;width:14px;height:14px;border-radius:50%;background:var(--c);border:3px solid var(--bg);box-shadow:0 0 0 3px color-mix(in srgb,var(--c) 30%,transparent);transition:transform .3s var(--ease)}
+.vt-item:hover .vt-dot{transform:scale(1.3)}
+.vt-card{padding:20px 22px;border-radius:var(--radius-sm);background:var(--surface);border:1px solid var(--border);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);transition:border-color .3s,transform .3s var(--ease),box-shadow .3s}
+.vt-item:hover .vt-card{border-color:var(--border-strong);transform:translateX(3px);box-shadow:var(--shadow)}
+.vt-top{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:8px}
+.vt-year{font-family:var(--font-display);font-size:.86rem;font-weight:700;color:var(--accent);padding:3px 10px;border-radius:7px;background:color-mix(in srgb,var(--accent) 13%,transparent);border:1px solid color-mix(in srgb,var(--accent) 26%,transparent);white-space:nowrap}
+.vt-era{font-size:.68rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.vt-card h4{font-size:1rem;font-weight:600;margin-bottom:7px;line-height:1.3}
+.vt-card > p{font-size:.88rem;color:var(--muted);line-height:1.66}
+.vt-more{display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:.79rem;font-weight:600;color:var(--accent);padding:4px 0;transition:gap .3s var(--ease)}
+.vt-more:hover{gap:9px}
+.vt-more svg{width:12px;height:12px;transition:transform .4s var(--ease)}
+.vt-item.open .vt-more svg{transform:rotate(180deg)}
+.vt-extra{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s var(--ease)}
+.vt-item.open .vt-extra{grid-template-rows:1fr}
+.vt-extra > div{overflow:hidden}
+.vt-extra p{font-size:.85rem;color:var(--muted);line-height:1.7;border-top:1px solid var(--border);margin-top:12px;padding-top:12px}
+
+.diagram-wrap{
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+  padding:22px 20px;box-shadow:var(--shadow);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+}
+.diagram-wrap h4{font-size:1.02rem;margin-bottom:8px;font-weight:600}
+.diagram-wrap .sub{font-size:.87rem;color:var(--muted);margin-bottom:16px;line-height:1.55}
+
+.writing-svg{
+  display:block;width:100%;max-width:520px;height:auto;margin:0 auto;
+  border-radius:12px;
+  background:linear-gradient(180deg,var(--paper-3) 0%,var(--paper-2) 100%);
+  box-shadow:inset 0 0 30px rgba(0,0,0,.08);
+  padding:8px;
+}
+.writing-svg.wide{max-width:640px}
+.writing-svg.tall{max-width:280px}
+.writing-svg.dark{background:linear-gradient(180deg,#2a1e14 0%,#1a1208 100%);box-shadow:inset 0 0 30px rgba(0,0,0,.3)}
+
+.info-panel{
+  margin-top:16px;padding:16px 18px;border-radius:var(--radius-sm);
+  background:var(--surface-2);border:1px solid var(--border);
+  min-height:100px;transition:border-color .3s,background .3s;
+}
+.info-panel.active{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 7%,var(--surface-2))}
+.info-panel .ip-name{font-family:var(--font-display);font-weight:700;font-size:1.02rem;color:var(--accent);margin-bottom:6px}
+.info-panel .ip-desc{font-size:.85rem;color:var(--muted);line-height:1.6}
+.info-panel .ip-hint{color:var(--muted);font-size:.86rem;font-style:italic}
+
+.note{
+  margin-top:26px;padding:16px 20px;border-radius:14px;font-size:.85rem;color:var(--muted);
+  border:1px solid var(--border);background:var(--surface-2);border-left:3px solid var(--accent);
+  line-height:1.65;
+}
+.note strong{color:var(--text);font-weight:600}
+.note.ref{border-left-color:var(--accent-2);background:color-mix(in srgb,var(--accent-2) 8%,var(--surface-2))}
+.note.ref strong{color:var(--accent-2)}
+.note.good{border-left-color:var(--good);background:color-mix(in srgb,var(--good) 8%,var(--surface-2))}
+.note.good strong{color:var(--good)}
+.note.danger{border-left-color:var(--bad);background:color-mix(in srgb,var(--bad) 8%,var(--surface-2))}
+.note.danger strong{color:var(--bad)}
+
+.gloss-shell{max-width:900px;margin:0 auto}
+.search-wrap{position:relative;margin-bottom:18px}
+.search-wrap svg{position:absolute;left:16px;top:50%;transform:translateY(-50%);color:var(--muted);pointer-events:none}
+.gloss-search{
+  width:100%;padding:14px 18px 14px 44px;border-radius:14px;
+  border:1px solid var(--border);background:var(--surface);
+  color:var(--text);font-size:.95rem;font-family:inherit;
+  transition:border-color .3s,box-shadow .3s;
+}
+.gloss-search:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 25%,transparent)}
+.gloss-grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.gloss-item{
+  padding:16px 18px;border-radius:14px;
+  background:var(--surface);border:1px solid var(--border);
+  transition:transform .3s var(--ease),border-color .3s,box-shadow .3s;
+}
+.gloss-item:hover{transform:translateY(-3px);border-color:var(--border-strong);box-shadow:var(--shadow)}
+.gloss-item .gi-term{
+  font-family:var(--font-display);font-size:.98rem;font-weight:700;color:var(--accent);
+  margin-bottom:6px;display:flex;align-items:center;gap:8px;
+}
+.gloss-item .gi-def{font-size:.86rem;color:var(--muted);line-height:1.6}
+.gloss-empty{text-align:center;padding:30px;color:var(--muted);font-size:.9rem;font-style:italic}
+
+.explorer-shell{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);padding:24px;
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  box-shadow:var(--shadow);
+}
+.explorer-tabs{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
+.explorer-tab{
+  padding:10px 18px;border-radius:11px;font-size:.85rem;font-weight:700;
+  background:var(--surface-2);color:var(--muted);border:1px solid var(--border);
+  cursor:pointer;font-family:var(--font-display);transition:.25s;
+}
+.explorer-tab:hover{color:var(--text);border-color:var(--border-strong)}
+.explorer-tab.active{
+  background:linear-gradient(120deg,var(--accent),var(--accent-2));
+  color:#fff;border-color:transparent;
+  box-shadow:0 10px 26px -12px var(--accent);
+}
+.explorer-display{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:14px;
+  margin-top:20px;
+}
+.glyph-card{
+  padding:20px 14px;border-radius:14px;
+  background:var(--surface-2);border:1px solid var(--border);
+  text-align:center;transition:.3s;
+}
+.glyph-card:hover{border-color:var(--accent);transform:translateY(-3px);box-shadow:var(--shadow)}
+.glyph-card .glyph{
+  font-size:2.6rem;line-height:1.2;margin-bottom:8px;
+  font-family:'Noto Sans Cuneiform','Noto Sans Egyptian Hieroglyphs','Noto Serif SC',var(--font-display);
+}
+.glyph-card .name{font-family:var(--font-mono);font-size:.78rem;color:var(--accent);font-weight:600;margin-bottom:4px}
+.glyph-card .meaning{font-size:.82rem;color:var(--muted)}
+
+.quiz-shell{max-width:760px;margin:0 auto}
+.quiz-card{
+  padding:34px;border-radius:var(--radius);
+  background:var(--surface);border:1px solid var(--border);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  box-shadow:var(--shadow);
+}
+.quiz-meta{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:12px;font-size:.81rem;font-weight:600;color:var(--muted)}
+.progress{height:6px;border-radius:99px;background:var(--surface-2);overflow:hidden;margin-bottom:30px;border:1px solid var(--border)}
+.progress-bar{height:100%;width:0%;border-radius:99px;background:linear-gradient(90deg,var(--accent),var(--accent-2));transition:width .55s var(--ease)}
+.q-text{font-family:var(--font-display);font-size:clamp(1.12rem,2.4vw,1.42rem);font-weight:600;line-height:1.35;margin-bottom:26px}
+.options{display:grid;gap:11px}
+.option{
+  display:flex;align-items:center;gap:14px;text-align:left;
+  padding:16px 18px;border-radius:14px;font-size:.93rem;font-weight:500;
+  background:var(--surface-2);border:1px solid var(--border);color:var(--text);
+  transition:transform .25s var(--ease),border-color .25s,background .25s;
+}
+.option:hover:not(:disabled){transform:translateX(4px);border-color:var(--accent);background:color-mix(in srgb,var(--accent) 8%,transparent)}
+.option:disabled{cursor:default}
+.option .letter{
+  width:28px;height:28px;border-radius:9px;flex:none;display:grid;place-items:center;
+  font-size:.77rem;font-weight:700;font-family:var(--font-display);
+  background:var(--surface-solid);border:1px solid var(--border);color:var(--muted);
+}
+.option.correct{background:color-mix(in srgb,var(--good) 15%,transparent);border-color:var(--good)}
+.option.correct .letter{background:var(--good);color:#fff;border-color:var(--good)}
+.option.wrong{background:color-mix(in srgb,var(--bad) 13%,transparent);border-color:var(--bad)}
+.option.wrong .letter{background:var(--bad);color:#fff;border-color:var(--bad)}
+.feedback{margin-top:22px;padding:16px 18px;border-radius:14px;font-size:.88rem;line-height:1.6;border:1px solid var(--border);background:var(--surface-2);animation:termIn .4s var(--ease) both}
+.feedback strong{color:var(--text)}
+.quiz-actions{display:flex;justify-content:flex-end;margin-top:24px}
+.result{text-align:center;padding:20px 6px}
+.result .score{font-family:var(--font-display);font-size:clamp(3rem,9vw,4.6rem);font-weight:700;letter-spacing:-.05em;background:linear-gradient(120deg,var(--accent),var(--accent-2) 50%,var(--accent-3));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1;margin-bottom:10px}
+.result h3{font-size:1.28rem;margin-bottom:10px}
+.result p{color:var(--muted);margin-bottom:26px}
+
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s var(--ease),transform .7s var(--ease);transition-delay:var(--d,0ms)}
+.reveal.in{opacity:1;transform:none}
+
+.site-footer{border-top:1px solid var(--border);padding:34px 22px;text-align:center;font-size:.85rem;color:var(--muted)}
+.site-footer strong{color:var(--text);font-weight:600}
+
+@media (max-width:1040px){.nav-link{padding:9px 9px;font-size:.76rem}}
+@media (max-width:900px){
+  .header-inner{padding:12px 16px;gap:14px;flex-wrap:wrap}
+  .nav{order:3;width:100%;margin-left:0;padding-bottom:2px}
+  .theme-toggle{margin-left:auto}
+  main{padding:0 16px 70px}
+  .hero{padding:44px 0 32px}
+  .stats{grid-template-columns:repeat(2,1fr);gap:11px}
+  .stat{padding:17px 15px}
+  .stat .num{font-size:1.45rem}
+  .vt-item{padding-left:38px}
+  .quiz-card{padding:24px 20px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<div class="bg-stars" id="bgStars" aria-hidden="true"></div>
+<div class="bg-dots" aria-hidden="true"></div>
+<div class="orbs" aria-hidden="true">
+  <div class="orb o1"></div>
+  <div class="orb o2"></div>
+  <div class="orb o3"></div>
+</div>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="#inicio" data-route="inicio">
+      <span class="brand-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
+        </svg>
+      </span>
+      <span>Escritura · Guía</span>
+    </a>
+
+    <nav class="nav" aria-label="Navegación principal">
+      <button class="nav-link active" data-route="inicio">Inicio</button>
+      <button class="nav-link" data-route="origenes">Orígenes</button>
+      <button class="nav-link" data-route="cuneiforme">Cuneiforme</button>
+      <button class="nav-link" data-route="jeroglificos">Jeroglíficos</button>
+      <button class="nav-link" data-route="china">China</button>
+      <button class="nav-link" data-route="arabe">Árabe</button>
+      <button class="nav-link" data-route="cirilico">Cirílico</button>
+      <button class="nav-link" data-route="mesoamerica">Mesoamérica</button>
+      <button class="nav-link" data-route="linea-tiempo">Línea del tiempo</button>
+      <button class="nav-link" data-route="nuevas">Nuevas formas</button>
+      <button class="nav-link" data-route="glosario">Glosario</button>
+      <button class="nav-link" data-route="explorador">Explorador</button>
+      <button class="nav-link" data-route="quiz">Quiz</button>
+    </nav>
+
+    <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema">
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round">
+        <circle cx="12" cy="12" r="4"/>
+        <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>
+      </svg>
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<main>
+
+  <!-- =============== INICIO =============== -->
+  <section class="view active" data-view="inicio">
+    <div class="hero">
+      <span class="pill"><span class="dot"></span>De las tablillas de arcilla a los emojis</span>
+      <h1 class="hero-title">La escritura humana, <span class="grad">explicada</span></h1>
+      <p class="lead">
+        Cómo nacieron los primeros signos, cómo evolucionaron los grandes sistemas de escritura
+        —cuneiforme, jeroglífico, chino, árabe, cirílico, maya— con sus trazos originales,
+        y cómo estamos escribiendo hoy en la era digital.
+      </p>
+      <div class="hero-actions">
+        <button class="btn btn-primary" data-route="origenes">
+          Empezar por los orígenes
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+        <button class="btn btn-ghost" data-route="explorador">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          Explorador de escrituras
+        </button>
+      </div>
+    </div>
+
+    <div class="stats reveal">
+      <div class="stat"><div class="num" data-count="3500" data-suffix=" a.C.">0</div><div class="lbl">Primera escritura (cuneiforme)</div></div>
+      <div class="stat"><div class="num" data-count="4" data-suffix="">0</div><div class="lbl">Invenciones independientes</div></div>
+      <div class="stat"><div class="num" data-count="22" data-suffix="">0</div><div class="lbl">Signos del alfabeto fenicio</div></div>
+      <div class="stat"><div class="num" data-count="50000" data-suffix="+">0</div><div class="lbl">Caracteres chinos actuales</div></div>
+    </div>
+
+    <div class="sec-head reveal">
+      <h2>Un recorrido por los grandes sistemas de escritura</h2>
+      <p>Desde las primeras marcas en arcilla hasta los teclados y los emojis. Con ilustraciones de los trazos originales, línea del tiempo, explorador interactivo y quiz.</p>
+    </div>
+
+    <div class="module-grid">
+      <button class="module reveal" data-route="origenes">
+        <span class="module-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M2 12h20"/></svg></span>
+        <h3>Orígenes</h3>
+        <p>Cuándo, dónde y por qué surgió la escritura. Los cuatro focos independientes.</p>
+        <span class="arrow">Ver orígenes<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </button>
+      <button class="module reveal" data-route="cuneiforme" style="--d:40ms">
+        <span class="module-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>
+        <h3>Cuneiforme</h3>
+        <p>La escritura de cuña de los sumerios: la primera de la historia.</p>
+        <span class="arrow">Ver cuneiforme<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </button>
+      <button class="module reveal" data-route="jeroglificos" style="--d:80ms">
+        <span class="module-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3 7h7l-6 4 2 7-6-4-6 4 2-7-6-4h7z"/></svg></span>
+        <h3>Jeroglíficos</h3>
+        <p>Los signos sagrados de Egipto y el misterio de la Piedra Rosetta.</p>
+        <span class="arrow">Ver jeroglíficos<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </button>
+      <button class="module reveal" data-route="china" style="--d:120ms">
+        <span class="module-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></span>
+        <h3>Escritura china</h3>
+        <p>La única escritura antigua que sigue viva sin interrupción.</p>
+        <span class="arrow">Ver china<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </button>
+      <button class="module reveal" data-route="arabe" style="--d:160ms">
+        <span class="module-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12c2-3 5-3 7 0s5 3 7 0 5-3 4 0"/></svg></span>
+        <h3>Escritura árabe</h3>
+        <p>Caligrafía, cursividad y el arte de la palabra escrita.</p>
+        <span class="arrow">Ver árabe<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </button>
+      <button class="module reveal" data-route="cirilico" style="--d:200ms">
+        <span class="module-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M8 7v10M16 7v10"/></svg></span>
+        <h3>Alfabeto cirílico</h3>
+        <p>De Cirilo y Metodio al ruso moderno: la escritura eslava.</p>
+        <span class="arrow">Ver cirílico<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </button>
+      <button class="module reveal" data-route="mesoamerica" style="--d:240ms">
+        <span class="module-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l4 8-4 8-4-8z"/></svg></span>
+        <h3>Mesoamérica</h3>
+        <p>La escritura maya: glifos, códices y el sistema más complejo de América.</p>
+        <span class="arrow">Ver Mesoamérica<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </button>
+      <button class="module reveal" data-route="linea-tiempo" style="--d:280ms">
+        <span class="module-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span>
+        <h3>Línea del tiempo</h3>
+        <p>Todos los hitos de la escritura, desde el 3500 a.C. hasta hoy.</p>
+        <span class="arrow">Ver línea<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </button>
+      <button class="module reveal" data-route="nuevas" style="--d:320ms">
+        <span class="module-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><circle cx="9" cy="9" r="1"/><circle cx="15" cy="9" r="1"/></svg></span>
+        <h3>Nuevas formas</h3>
+        <p>Emojis, abreviaturas y escritura digital: cómo escribe el siglo XXI.</p>
+        <span class="arrow">Ver nuevas formas<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </button>
+      <button class="module reveal" data-route="quiz" style="--d:360ms">
+        <span class="module-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l2 2 4-4"/><rect x="3" y="4" width="18" height="16" rx="3"/></svg></span>
+        <h3>Quiz</h3>
+        <p>Diez preguntas al azar sobre orígenes, sistemas y escritura digital.</p>
+        <span class="arrow">Empezar quiz<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </button>
+    </div>
+
+    <div class="note ref reveal">
+      <strong>Dato curioso:</strong> la escritura se inventó de forma independiente al menos cuatro veces:
+      en Mesopotamia, Egipto, China y Mesoamérica. No fue un invento único que se difundió, sino
+      una solución que distintas civilizaciones encontraron por separado para necesidades similares.
+    </div>
+  </section>
+
+  <!-- =============== ORÍGENES =============== -->
+  <section class="view" data-view="origenes">
+    <div class="sec-head section">
+      <h2>Los orígenes de la escritura</h2>
+      <p>La escritura no nació de la literatura, sino de la contabilidad. Las primeras marcas servían para registrar mercancías, deudas y propiedades.</p>
+    </div>
+
+    <div class="grid-2">
+      <div class="card reveal">
+        <span class="kicker">Antes de la escritura</span>
+        <h3>Prehistoria y protoescritura</h3>
+        <p>Antes de los primeros textos, ya había comunicación visual: muescas en huesos, piedras pintadas, quipus incas. Pero la escritura propiamente dicha implica un sistema convencional de signos que representan una lengua.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">El primer foco</span>
+        <h3>Mesopotamia (c. 3500–3000 a.C.)</h3>
+        <p>Los sumerios de Uruk inventaron el cuneiforme para registrar transacciones. Primero fueron pictogramas; después, signos abstractos en forma de cuña.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">El segundo foco</span>
+        <h3>Egipto (c. 3250 a.C.)</h3>
+        <p>Los jeroglíficos egipcios surgieron casi al mismo tiempo. Eran signos figurativos con valores ideográficos y fonéticos. Se escribían en piedra, papiro y ostraca.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Los otros focos</span>
+        <h3>China y Mesoamérica</h3>
+        <p>En China, la escritura aparece hacia el 1200 a.C. (inscripciones oraculares). En Mesoamérica, la escritura maya se desarrolla hacia el 300 a.C., con un sistema logosilábico muy complejo.</p>
+      </div>
+    </div>
+
+    <div class="diagram-wrap reveal" style="margin-top:24px">
+      <h4>La evolución de los signos</h4>
+      <p class="sub">De pictograma a ideograma, de ideograma a fonograma. Este es el camino que siguieron casi todos los sistemas.</p>
+      <div class="vt" id="evolutionList"></div>
+    </div>
+
+    <div class="note reveal good">
+      <strong>La gran innovación:</strong> el paso del pictograma (un dibujo que representa un objeto) al
+      fonograma (un signo que representa un sonido) permitió escribir cualquier palabra, incluso las abstractas.
+      Ese salto es la base de todos los alfabetos.
+    </div>
+  </section>
+
+  <!-- =============== CUNEIFORME =============== -->
+  <section class="view" data-view="cuneiforme">
+    <div class="sec-head section">
+      <h2>La escritura cuneiforme</h2>
+      <p>La primera escritura de la historia. Nació en Sumeria y se usó durante más de tres mil años en decenas de lenguas.</p>
+    </div>
+
+    <div class="diagram-wrap reveal" style="margin-bottom:24px">
+      <h4>Tablilla cuneiforme</h4>
+      <p class="sub">Los signos en forma de cuña se grababan con una caña de punta biselada sobre arcilla húmeda.</p>
+      <svg class="writing-svg wide" viewBox="0 0 400 260" role="img" aria-label="Ilustración de una tablilla cuneiforme con signos en forma de cuña">
+        <defs>
+          <g id="cunW">
+            <path d="M0 0 L18 0 L9 7 Z" fill="var(--ink-soft)"/>
+            <line x1="9" y1="7" x2="9" y2="16" stroke="var(--ink-soft)" stroke-width="2.4" stroke-linecap="round"/>
+          </g>
+          <g id="cunV">
+            <path d="M-6 0 L6 0 L0 8 Z" fill="var(--ink-soft)"/>
+            <line x1="0" y1="-9" x2="0" y2="0" stroke="var(--ink-soft)" stroke-width="2.4" stroke-linecap="round"/>
+          </g>
+          <radialGradient id="cunShade" cx="35%" cy="30%">
+            <stop offset="0" stop-color="#e8d5a8"/>
+            <stop offset="1" stop-color="#b08a55"/>
+          </radialGradient>
+        </defs>
+        <ellipse cx="200" cy="130" rx="185" ry="115" fill="url(#cunShade)" stroke="#8b6f47" stroke-width="3"/>
+        <ellipse cx="200" cy="130" rx="168" ry="100" fill="none" stroke="#8b6f47" stroke-width="1" opacity=".4"/>
+
+        <!-- Fila 1 -->
+        <use href="#cunW" x="55" y="55"/>
+        <use href="#cunW" x="95" y="55"/>
+        <use href="#cunV" x="140" y="60"/>
+        <use href="#cunW" x="160" y="55"/>
+        <use href="#cunW" x="200" y="55"/>
+        <use href="#cunV" x="245" y="60"/>
+        <use href="#cunW" x="265" y="55"/>
+        <use href="#cunW" x="305" y="55"/>
+        <!-- Fila 2 -->
+        <use href="#cunW" x="65" y="95"/>
+        <use href="#cunV" x="105" y="100"/>
+        <use href="#cunW" x="125" y="95"/>
+        <use href="#cunW" x="165" y="95"/>
+        <use href="#cunW" x="205" y="95"/>
+        <use href="#cunV" x="250" y="100"/>
+        <use href="#cunW" x="270" y="95"/>
+        <use href="#cunW" x="310" y="95"/>
+        <!-- Fila 3 -->
+        <use href="#cunV" x="75" y="140"/>
+        <use href="#cunW" x="95" y="135"/>
+        <use href="#cunW" x="135" y="135"/>
+        <use href="#cunV" x="180" y="140"/>
+        <use href="#cunW" x="200" y="135"/>
+        <use href="#cunW" x="240" y="135"/>
+        <use href="#cunW" x="280" y="135"/>
+        <use href="#cunV" x="325" y="140"/>
+        <!-- Fila 4 -->
+        <use href="#cunW" x="60" y="175"/>
+        <use href="#cunW" x="100" y="175"/>
+        <use href="#cunV" x="145" y="180"/>
+        <use href="#cunW" x="165" y="175"/>
+        <use href="#cunW" x="205" y="175"/>
+        <use href="#cunW" x="245" y="175"/>
+        <use href="#cunV" x="290" y="180"/>
+        <use href="#cunW" x="310" y="175"/>
+        <!-- Fila 5 -->
+        <use href="#cunW" x="80" y="215"/>
+        <use href="#cunV" x="125" y="220"/>
+        <use href="#cunW" x="145" y="215"/>
+        <use href="#cunW" x="185" y="215"/>
+        <use href="#cunW" x="225" y="215"/>
+        <use href="#cunV" x="270" y="220"/>
+        <use href="#cunW" x="290" y="215"/>
+      </svg>
+    </div>
+
+    <div class="grid-2">
+      <div class="card reveal">
+        <span class="kicker">Origen</span>
+        <h3>De la contabilidad al texto</h3>
+        <p>Hacia el 3500 a.C., los sumerios usaban fichas de arcilla para contar ovejas y sacos de grano. Con el tiempo, esas fichas se aplanaron en tablillas y las marcas se hicieron con una caña en bisel, produciendo trazos en forma de cuña.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Sistema</span>
+        <h3>Logográfico, silábico y alfabético</h3>
+        <p>El cuneiforme pasó por tres fases: primero un signo por palabra (logográfico), luego un signo por sílaba (silábico) y finalmente, en algunos contextos, un uso alfabético. Se usó para escribir sumerio, acadio, hitita y otras lenguas.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Soporte</span>
+        <h3>Tablillas de arcilla</h3>
+        <p>El soporte más común era la tablilla de arcilla húmeda, que se grababa con un punzón y luego se cocía al sol o en un horno. También se usó piedra y metal para inscripciones monumentales.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Legado</span>
+        <h3>La primera biblioteca</h3>
+        <p>La biblioteca de Asurbanipal en Nínive contenía miles de tablillas cuneiformes, incluida la epopeya de Gilgamesh. Es uno de los mayores tesoros escritos de la Antigüedad.</p>
+      </div>
+    </div>
+
+    <div class="note reveal">
+      <strong>¿Sabías que…?</strong> la palabra "cuneiforme" viene del latín <em>cuneus</em>, que significa "cuña".
+      Los escribas usaban una caña con la punta cortada en bisel para presionar la arcilla y crear los trazos
+      triangulares característicos.
+    </div>
+  </section>
+
+  <!-- =============== JEROGLÍFICOS =============== -->
+  <section class="view" data-view="jeroglificos">
+    <div class="sec-head section">
+      <h2>Los jeroglíficos egipcios</h2>
+      <p>Signos sagrados que durante siglos se creyeron puramente simbólicos. La Piedra Rosetta reveló que también representaban sonidos.</p>
+    </div>
+
+    <div class="diagram-wrap reveal" style="margin-bottom:24px">
+      <h4>Columna jeroglífica</h4>
+      <p class="sub">Los jeroglíficos se disponían en columnas o líneas. Cada signo podía ser ideograma, fonograma o determinativo.</p>
+      <svg class="writing-svg tall" viewBox="0 0 260 420" role="img" aria-label="Columna de jeroglíficos egipcios: ankh, ojo de Horus, disco solar, agua y ave">
+        <rect x="20" y="20" width="220" height="380" fill="var(--paper-3)" stroke="#8b6f47" stroke-width="3"/>
+        <line x1="40" y1="20" x2="40" y2="400" stroke="#8b6f47" stroke-width="1"/>
+        <line x1="220" y1="20" x2="220" y2="400" stroke="#8b6f47" stroke-width="1"/>
+
+        <!-- Ankh -->
+        <g transform="translate(130, 75)" stroke="var(--ink)" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <ellipse cx="0" cy="-14" rx="13" ry="17"/>
+          <line x1="-19" y1="10" x2="19" y2="10"/>
+          <line x1="0" y1="10" x2="0" y2="38"/>
+        </g>
+
+        <!-- Ojo de Horus -->
+        <g transform="translate(130, 155)" stroke="var(--ink)" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M-38 0 Q0 -24 38 0 Q0 16 -38 0 Z"/>
+          <circle cx="0" cy="0" r="9" fill="var(--ink)"/>
+          <path d="M-16 13 L-24 32"/>
+          <path d="M-5 16 L-8 30"/>
+          <path d="M22 5 Q28 26 16 34"/>
+        </g>
+
+        <!-- Disco solar -->
+        <g transform="translate(130, 240)" stroke="var(--ink)" stroke-width="3.5" fill="none">
+          <circle cx="0" cy="0" r="23"/>
+          <circle cx="0" cy="0" r="6" fill="var(--ink)"/>
+        </g>
+
+        <!-- Agua (zigzag) -->
+        <g transform="translate(130, 310)" stroke="var(--ink)" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M-32 0 L-21 -11 L-10 0 L1 -11 L12 0 L23 -11 L34 0"/>
+          <path d="M-32 11 L-21 0 L-10 11 L1 0 L12 11 L23 0 L34 11"/>
+        </g>
+
+        <!-- Ave -->
+        <g transform="translate(130, 375)" stroke="var(--ink)" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M-22 15 Q-34 4 -22 -7 Q-4 -18 12 -1 Q22 10 16 25 L28 32 L12 32 Z"/>
+          <circle cx="-10" cy="-3" r="2.5" fill="var(--ink)"/>
+        </g>
+      </svg>
+    </div>
+
+    <div class="grid-2">
+      <div class="card reveal">
+        <span class="kicker">Origen</span>
+        <h3>Escritura sagrada</h3>
+        <p>Los egipcios llamaban a sus jeroglíficos "las palabras de los dioses". Aparecieron hacia el 3250 a.C. y se usaron durante más de tres mil años. Eran signos figurativos: un sol podía significar el sol o la idea de brillo, pero también podía representar un sonido.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Evolución</span>
+        <h3>Jeroglífico, hierático y demótico</h3>
+        <p>Con el tiempo, la escritura egipcia desarrolló formas cursivas: el hierático (para textos religiosos y literarios) y el demótico (para la vida cotidiana). Las tres formas coexistieron durante siglos.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Descifrado</span>
+        <h3>Champollion y la Piedra Rosetta</h3>
+        <p>En 1799, la expedición de Napoleón descubrió la Piedra Rosetta, un decreto en tres escrituras: jeroglífica, demótica y griega. Jean-François Champollion descifró los jeroglíficos en 1822, abriendo la egiptología moderna.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Dirección</span>
+        <h3>Se lee hacia donde miran los animales</h3>
+        <p>Los jeroglíficos podían escribirse en columnas o en líneas horizontales, de izquierda a derecha o de derecha a izquierda. La dirección se deduce por la orientación de los signos con figuras: se lee hacia donde miran los animales y las personas.</p>
+      </div>
+    </div>
+
+    <div class="note reveal ref">
+      <strong>Dato:</strong> la Piedra Rosetta no fue descifrada por un solo hombre. Thomas Young hizo avances
+      cruciales identificando el nombre de Ptolomeo, y Champollion completó el descifrado al comprender que
+      los jeroglíficos podían ser a la vez ideográficos y fonéticos.
+    </div>
+  </section>
+
+  <!-- =============== CHINA =============== -->
+  <section class="view" data-view="china">
+    <div class="sec-head section">
+      <h2>La escritura china</h2>
+      <p>El único sistema de escritura antiguo que ha permanecido en uso ininterrumpido hasta hoy. Más de 3.500 años de historia.</p>
+    </div>
+
+    <div class="diagram-wrap reveal" style="margin-bottom:24px">
+      <h4>Tiras de bambú con caracteres</h4>
+      <p class="sub">Antes del papel, los chinos escribían en tiras verticales de bambú unidas con cordones. Cada tira contenía una columna de caracteres.</p>
+      <svg class="writing-svg wide" viewBox="0 0 420 280" role="img" aria-label="Ilustración de tiras de bambú con caracteres chinos en columnas verticales">
+        <defs>
+          <linearGradient id="bamboo" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#d4b896"/>
+            <stop offset=".5" stop-color="#e8d5a8"/>
+            <stop offset="1" stop-color="#b08a55"/>
+          </linearGradient>
+        </defs>
+        <!-- Cordón superior -->
+        <line x1="35" y1="30" x2="385" y2="30" stroke="#5d4630" stroke-width="2"/>
+        <line x1="35" y1="250" x2="385" y2="250" stroke="#5d4630" stroke-width="2"/>
+        <!-- Tiras -->
+        <g stroke="#8b6f47" stroke-width="1.5">
+          <rect x="45" y="20" width="42" height="240" fill="url(#bamboo)" rx="3"/>
+          <rect x="97" y="20" width="42" height="240" fill="url(#bamboo)" rx="3"/>
+          <rect x="149" y="20" width="42" height="240" fill="url(#bamboo)" rx="3"/>
+          <rect x="201" y="20" width="42" height="240" fill="url(#bamboo)" rx="3"/>
+          <rect x="253" y="20" width="42" height="240" fill="url(#bamboo)" rx="3"/>
+          <rect x="305" y="20" width="42" height="240" fill="url(#bamboo)" rx="3"/>
+          <rect x="357" y="20" width="30" height="240" fill="url(#bamboo)" rx="3"/>
+        </g>
+        <!-- Caracteres: columna 1 (日月山) -->
+        <g fill="var(--ink)" font-family="'Noto Serif SC','Songti SC',serif" text-anchor="middle">
+          <text x="66" y="90" font-size="32">日</text>
+          <text x="66" y="150" font-size="32">月</text>
+          <text x="66" y="210" font-size="32">山</text>
+
+          <text x="118" y="90" font-size="32">水</text>
+          <text x="118" y="150" font-size="32">火</text>
+          <text x="118" y="210" font-size="32">木</text>
+
+          <text x="170" y="90" font-size="32">人</text>
+          <text x="170" y="150" font-size="32">大</text>
+          <text x="170" y="210" font-size="32">小</text>
+
+          <text x="222" y="90" font-size="32">上</text>
+          <text x="222" y="150" font-size="32">下</text>
+          <text x="222" y="210" font-size="32">中</text>
+
+          <text x="274" y="90" font-size="32">田</text>
+          <text x="274" y="150" font-size="32">口</text>
+          <text x="274" y="210" font-size="32">心</text>
+
+          <text x="326" y="90" font-size="32">手</text>
+          <text x="326" y="150" font-size="32">足</text>
+          <text x="326" y="210" font-size="32">目</text>
+        </g>
+      </svg>
+    </div>
+
+    <div class="grid-2">
+      <div class="card reveal">
+        <span class="kicker">Origen</span>
+        <h3>Inscripciones oraculares</h3>
+        <p>Los textos chinos más antiguos son inscripciones en caparazones de tortuga y huesos de animales, usadas para la adivinación hacia el siglo XIV a.C. Los caracteres eran pictogramas que representaban objetos y conceptos.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Evolución</span>
+        <h3>De pictograma a trazo</h3>
+        <p>La escritura china pasó por cuatro etapas: pictográfica, subpictográfica, escritura oficial (hacia el siglo III a.C.) y escritura regular (a partir del siglo III d.C.). La reforma de Li Si bajo el emperador Qin Shihuang estandarizó 3.000 caracteres.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Cantidad</span>
+        <h3>Miles de caracteres</h3>
+        <p>Un diccionario moderno contiene más de 50.000 caracteres, pero para leer un periódico se necesitan entre 3.000 y 6.000. Cada carácter representa una sílaba y un significado.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Legado</span>
+        <h3>Unidad cultural</h3>
+        <p>La escritura china ha unificado un territorio enorme durante milenios. Aunque las lenguas habladas son mutuamente ininteligibles (mandarín, cantonés, etc.), todos comparten el mismo sistema de escritura.</p>
+      </div>
+    </div>
+
+    <div class="note reveal good">
+      <strong>Dato:</strong> la escritura china es logográfica: cada carácter representa una palabra o un morfema.
+      No es alfabética. Por eso, un mismo texto puede ser leído en distintas lenguas, aunque se pronuncien de forma
+      completamente distinta.
+    </div>
+  </section>
+
+  <!-- =============== ÁRABE =============== -->
+  <section class="view" data-view="arabe">
+    <div class="sec-head section">
+      <h2>La escritura árabe</h2>
+      <p>Una escritura cursiva, ligada y de derecha a izquierda. Su caligrafía es considerada una de las artes mayores del islam.</p>
+    </div>
+
+    <div class="diagram-wrap reveal" style="margin-bottom:24px">
+      <h4>Caligrafía árabe</h4>
+      <p class="sub">La palabra escrita se convierte en imagen. El flujo cursivo une las letras y crea ritmo visual.</p>
+      <svg class="writing-svg wide" viewBox="0 0 520 220" role="img" aria-label="Caligrafía árabe con la basmala escrita de derecha a izquierda">
+        <defs>
+          <linearGradient id="arabeBg" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#f4e4c1"/>
+            <stop offset="1" stop-color="#e8d5a8"/>
+          </linearGradient>
+          <linearGradient id="arabeInk" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#3a2818"/>
+            <stop offset=".5" stop-color="#8b4513"/>
+            <stop offset="1" stop-color="#3a2818"/>
+          </linearGradient>
+        </defs>
+        <rect x="0" y="0" width="520" height="220" fill="url(#arabeBg)"/>
+        <!-- Marco decorativo -->
+        <rect x="12" y="12" width="496" height="196" fill="none" stroke="#8b6f47" stroke-width="1.5" opacity=".6"/>
+        <rect x="20" y="20" width="480" height="180" fill="none" stroke="#8b6f47" stroke-width=".7" opacity=".4"/>
+        <!-- Texto árabe: basmala -->
+        <text x="260" y="105" text-anchor="middle" font-size="42" font-family="'Noto Naskh Arabic','Amiri',serif" fill="url(#arabeInk)">بِسْمِ ٱللَّٰهِ</text>
+        <text x="260" y="155" text-anchor="middle" font-size="32" font-family="'Noto Naskh Arabic','Amiri',serif" fill="url(#arabeInk)">ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</text>
+        <!-- Adornos -->
+        <g stroke="#8b6f47" stroke-width="1.5" fill="none" opacity=".7">
+          <path d="M40 60 Q60 50 80 60"/>
+          <path d="M440 60 Q460 50 480 60"/>
+          <path d="M40 170 Q60 180 80 170"/>
+          <path d="M440 170 Q460 180 480 170"/>
+          <circle cx="260" cy="185" r="3" fill="#8b6f47"/>
+        </g>
+      </svg>
+    </div>
+
+    <div class="grid-2">
+      <div class="card reveal">
+        <span class="kicker">Características</span>
+        <h3>Cursiva y contextual</h3>
+        <p>El alfabeto árabe tiene 28 consonantes. Su forma es ligada y cursiva: cada letra cambia de forma según su posición en la palabra (inicial, medial, final o aislada). Se escribe de derecha a izquierda.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Origen</span>
+        <h3>De la Arabia preislámica al Corán</h3>
+        <p>La escritura árabe existía antes del islam, pero fue la necesidad de fijar el texto del Corán la que impulsó su desarrollo y su conversión en un arte sagrado. El calígrafo se convirtió en una figura de prestigio.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Estilos</span>
+        <h3>Cúfico y nasjí</h3>
+        <p>El estilo más antiguo es el cúfico, de formas geométricas y angulares, usado en monumentos. El nasjí, más redondeado y cursivo, se convirtió en la base de la escritura moderna. También destacan el thuluth y el diwani.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Arte</span>
+        <h3>La palabra como imagen</h3>
+        <p>La caligrafía árabe no solo transmite texto: es una forma de arte visual. Se encuentra en mezquitas, manuscritos, cerámica y arquitectura. La escritura se convierte en ornamento y en expresión de devoción.</p>
+      </div>
+    </div>
+
+    <div class="note reveal ref">
+      <strong>Dato:</strong> la palabra "alifato" se usa a veces para referirse al alfabeto árabe, porque su primera
+      letra es el alif (ا). El alfabeto árabe se escribe de derecha a izquierda y no distingue mayúsculas de minúsculas.
+    </div>
+  </section>
+
+  <!-- =============== CIRÍLICO =============== -->
+  <section class="view" data-view="cirilico">
+    <div class="sec-head section">
+      <h2>El alfabeto cirílico</h2>
+      <p>La escritura de los pueblos eslavos, creada en el siglo IX y hoy usada por más de 250 millones de personas.</p>
+    </div>
+
+    <div class="diagram-wrap reveal" style="margin-bottom:24px">
+      <h4>Manuscrito cirílico</h4>
+      <p class="sub">El cirílico antiguo tenía 43 letras. La reforma de Pedro el Grande lo simplificó y dio lugar al alfabeto civil ruso de 33 letras.</p>
+      <svg class="writing-svg wide" viewBox="0 0 460 260" role="img" aria-label="Manuscrito cirílico con letras mayúsculas decoradas y texto en ruso">
+        <defs>
+          <linearGradient id="cirBg" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#f4e4c1"/>
+            <stop offset="1" stop-color="#d4b896"/>
+          </linearGradient>
+          <linearGradient id="cirInk" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#8b1a1a"/>
+            <stop offset=".5" stop-color="#c2410c"/>
+            <stop offset="1" stop-color="#8b1a1a"/>
+          </linearGradient>
+        </defs>
+        <rect x="0" y="0" width="460" height="260" fill="url(#cirBg)"/>
+        <!-- Marco decorativo -->
+        <rect x="12" y="12" width="436" height="236" fill="none" stroke="#8b6f47" stroke-width="1.5" opacity=".6"/>
+        <rect x="20" y="20" width="420" height="220" fill="none" stroke="#8b6f47" stroke-width=".7" opacity=".4"/>
+        <!-- Letra decorada А -->
+        <text x="70" y="130" text-anchor="middle" font-size="90" font-family="'Space Grotesk',serif" font-weight="700" fill="url(#cirInk)">А</text>
+        <text x="180" y="130" text-anchor="middle" font-size="90" font-family="'Space Grotesk',serif" font-weight="700" fill="url(#cirInk)">Б</text>
+        <text x="290" y="130" text-anchor="middle" font-size="90" font-family="'Space Grotesk',serif" font-weight="700" fill="url(#cirInk)">В</text>
+        <text x="390" y="130" text-anchor="middle" font-size="90" font-family="'Space Grotesk',serif" font-weight="700" fill="url(#cirInk)">Г</text>
+        <!-- Texto inferior -->
+        <text x="230" y="215" text-anchor="middle" font-size="28" font-family="'Space Grotesk',serif" font-weight="600" fill="var(--ink)" letter-spacing="4">АЗ БУКИ ВЕДИ</text>
+        <line x1="80" y1="235" x2="380" y2="235" stroke="#8b6f47" stroke-width="1" opacity=".5"/>
+      </svg>
+    </div>
+
+    <div class="grid-2">
+      <div class="card reveal">
+        <span class="kicker">Origen</span>
+        <h3>Cirilo y Metodio</h3>
+        <p>En el siglo IX, los misioneros bizantinos Cirilo y Metodio crearon un alfabeto para traducir los textos religiosos al eslavo. Desarrollaron primero el glagolítico, y más tarde sus discípulos crearon el cirílico, basado en el alfabeto griego.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Evolución</span>
+        <h3>Del eslavo eclesiástico al ruso moderno</h3>
+        <p>El cirílico antiguo tenía 43 letras. Pedro el Grande lo reformó entre 1708 y 1710 para crear un alfabeto civil. La reforma de 1917-1918 eliminó letras obsoletas, dejando el ruso moderno en 33 letras.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Expansión</span>
+        <h3>Mucho más que el ruso</h3>
+        <p>El cirílico se usa en búlgaro, serbio, ucraniano, bielorruso, macedonio y muchos otros idiomas. Durante la era soviética se impuso en decenas de lenguas de Asia Central y el Cáucaso.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Curiosidad</span>
+        <h3>Letras con historia</h3>
+        <p>La letra "Ж" (zhe) se parece a un escarabajo o a una mariposa. La "Я" (ya) es la última letra del alfabeto ruso y también la primera persona del singular ("yo").</p>
+      </div>
+    </div>
+
+    <div class="note reveal good">
+      <strong>Dato:</strong> el alfabeto cirílico no fue inventado por Cirilo, sino por sus discípulos. Cirilo creó
+      el glagolítico, un alfabeto anterior y más complejo. El cirílico es una adaptación del griego con letras
+      adicionales para los sonidos eslavos.
+    </div>
+  </section>
+
+  <!-- =============== MESOAMÉRICA =============== -->
+  <section class="view" data-view="mesoamerica">
+    <div class="sec-head section">
+      <h2>La escritura maya</h2>
+      <p>El sistema de escritura más complejo de la América precolombina. Glifos, códices y una historia que aún se sigue descifrando.</p>
+    </div>
+
+    <div class="diagram-wrap reveal" style="margin-bottom:24px">
+      <h4>Bloque glífico maya</h4>
+      <p class="sub">Los mayas agrupaban sus glifos en bloques cuadrados. Cada bloque solía contener un glifo principal con afijos que completaban la palabra.</p>
+      <svg class="writing-svg" viewBox="0 0 320 320" role="img" aria-label="Ilustración de un bloque glífico maya con glifo principal y numerales de barras y puntos">
+        <defs>
+          <linearGradient id="mayaBg" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#f4e4c1"/>
+            <stop offset="1" stop-color="#d4b896"/>
+          </linearGradient>
+          <linearGradient id="mayaStone" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#a68a5d"/>
+            <stop offset="1" stop-color="#7a6040"/>
+          </linearGradient>
+        </defs>
+        <rect x="0" y="0" width="320" height="320" fill="url(#mayaBg)"/>
+        <!-- Bloque principal (cartucho) -->
+        <rect x="30" y="30" width="180" height="180" rx="12" fill="url(#mayaStone)" stroke="#3a2818" stroke-width="2.5"/>
+        <rect x="42" y="42" width="156" height="156" rx="8" fill="none" stroke="#3a2818" stroke-width="1.5" opacity=".5"/>
+
+        <!-- Glifo principal: cara de Ajaw estilizada -->
+        <g transform="translate(120, 120)" fill="none" stroke="#f4e4c1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+          <!-- Contorno de la cara -->
+          <path d="M-55 -30 Q-60 -50 -40 -55 L40 -55 Q60 -50 55 -30 L55 30 Q60 50 40 55 L-40 55 Q-60 50 -55 30 Z"/>
+          <!-- Ojo izquierdo -->
+          <path d="M-35 -20 Q-25 -30 -15 -20 Q-25 -10 -35 -20 Z" fill="#f4e4c1"/>
+          <circle cx="-25" cy="-20" r="3" fill="#3a2818"/>
+          <!-- Ojo derecho -->
+          <path d="M15 -20 Q25 -30 35 -20 Q25 -10 15 -20 Z" fill="#f4e4c1"/>
+          <circle cx="25" cy="-20" r="3" fill="#3a2818"/>
+          <!-- Nariz -->
+          <path d="M0 -20 L-5 10 L5 10 Z"/>
+          <!-- Boca con colmillos -->
+          <path d="M-20 25 Q0 35 20 25"/>
+          <path d="M-10 25 L-10 35"/>
+          <path d="M10 25 L10 35"/>
+          <!-- Adornos laterales -->
+          <circle cx="-50" cy="0" r="4" fill="#f4e4c1"/>
+          <circle cx="50" cy="0" r="4" fill="#f4e4c1"/>
+        </g>
+
+        <!-- Afijo superior (numeral) -->
+        <g transform="translate(120, 15)" stroke="#3a2818" stroke-width="3" fill="#3a2818">
+          <rect x="-25" y="0" width="50" height="6"/>
+          <circle cx="-20" cy="12" r="4"/>
+          <circle cx="0" cy="12" r="4"/>
+          <circle cx="20" cy="12" r="4"/>
+        </g>
+
+        <!-- Afijo inferior -->
+        <g transform="translate(120, 235)" stroke="#3a2818" stroke-width="2.5" fill="none">
+          <path d="M-40 10 Q-30 0 -20 10 Q-10 0 0 10 Q10 0 20 10 Q30 0 40 10"/>
+          <path d="M-40 25 Q-30 15 -20 25 Q-10 15 0 25 Q10 15 20 25 Q30 15 40 25"/>
+        </g>
+
+        <!-- Numeral de barras y puntos al lado -->
+        <g transform="translate(255, 100)" fill="#3a2818">
+          <rect x="-20" y="0" width="40" height="6"/>
+          <rect x="-20" y="12" width="40" height="6"/>
+          <rect x="-20" y="24" width="40" height="6"/>
+          <circle cx="-15" cy="44" r="4"/>
+          <circle cx="0" cy="44" r="4"/>
+          <circle cx="15" cy="44" r="4"/>
+          <circle cx="-15" cy="58" r="4"/>
+          <circle cx="0" cy="58" r="4"/>
+          <circle cx="15" cy="58" r="4"/>
+          <circle cx="-15" cy="72" r="4"/>
+          <circle cx="0" cy="72" r="4"/>
+          <circle cx="15" cy="72" r="4"/>
+        </g>
+        <text x="255" y="160" text-anchor="middle" font-size="12" fill="var(--ink)" font-family="var(--font-mono)">19</text>
+
+        <!-- Texto inferior -->
+        <text x="120" y="290" text-anchor="middle" font-size="14" fill="var(--ink)" font-family="var(--font-mono)">GLIFO AJAW</text>
+      </svg>
+    </div>
+
+    <div class="grid-2">
+      <div class="card reveal">
+        <span class="kicker">Origen</span>
+        <h3>Hacia el 300 a.C.</h3>
+        <p>La escritura maya surgió en el primer milenio a.C., probablemente a partir de la tradición olmeca. Los textos mayas más antiguos conservados datan de alrededor del 300 a.C. y se encuentran en estelas y cerámica.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Sistema</span>
+        <h3>Logográfico y silábico</h3>
+        <p>La escritura maya combina logogramas (un glifo para una palabra) y silabogramas (un glifo para una sílaba). Es un sistema mixto, como el cuneiforme o los jeroglíficos egipcios, pero con un grado de correspondencia fonética muy alto.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Soportes</span>
+        <h3>Códices, estelas y cerámica</h3>
+        <p>Los mayas escribían en códices de papel amate, en estelas de piedra, en dinteles, en cerámica y en objetos de hueso y concha. La mayoría de los códices fueron destruidos durante la conquista española.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Descifrado</span>
+        <h3>Un enigma aún abierto</h3>
+        <p>Aunque se ha avanzado mucho en las últimas décadas, la escritura maya sigue siendo parcialmente descifrada. Yuri Knórozov fue pionero en los años 50 al demostrar que era un sistema logosilábico.</p>
+      </div>
+    </div>
+
+    <div class="note reveal ref">
+      <strong>Dato:</strong> solo cuatro códices mayas prehispánicos sobrevivieron a la conquista: el Códice de Dresde,
+      el de Madrid, el de París y el Grolier. El de Dresde es el más importante y contiene tablas astronómicas.
+    </div>
+  </section>
+
+  <!-- =============== LÍNEA DEL TIEMPO =============== -->
+  <section class="view" data-view="linea-tiempo">
+    <div class="sec-head section">
+      <h2>Línea del tiempo de la escritura</h2>
+      <p>Desde las primeras tablillas de arcilla hasta los emojis. Los hitos fundamentales en la historia de la escritura humana.</p>
+    </div>
+    <div class="vt" id="timelineList"></div>
+    <div class="note reveal">
+      <strong>Reflexión:</strong> la escritura ha pasado de ser un privilegio de unos pocos escribas a una habilidad
+      universal. Hoy, gran parte de la humanidad escribe más que nunca, aunque sea en mensajes cortos y con emojis.
+    </div>
+  </section>
+
+  <!-- =============== NUEVAS FORMAS =============== -->
+  <section class="view" data-view="nuevas">
+    <div class="sec-head section">
+      <h2>Las nuevas formas de escritura</h2>
+      <p>La escritura no ha muerto: se ha transformado. Emojis, abreviaturas, memes y escritura multimodal son las formas del siglo XXI.</p>
+    </div>
+
+    <div class="grid-2">
+      <div class="card reveal">
+        <span class="kicker">Emojis</span>
+        <h3>Ideogramas digitales</h3>
+        <p>Los emojis son signos visuales que representan ideas, objetos o emociones. Algunos lingüistas los consideran una nueva forma de escritura pictográfica o ideográfica, que convive con el alfabeto en la comunicación digital.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Abreviaturas</span>
+        <h3>Economía del lenguaje</h3>
+        <p>En Twitter, WhatsApp y SMS, la escritura se comprime: "xq" por "porque", "tb" por "también", "k" por "que". Son formas de escritura rápida que priorizan la eficiencia sobre la norma.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Multimodalidad</span>
+        <h3>Texto + imagen + audio</h3>
+        <p>La escritura digital ya no es solo texto: convive con imágenes, GIFs, stickers y notas de voz. Es una escritura híbrida, donde el significado se construye con múltiples códigos a la vez.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Futuro</span>
+        <h3>¿Hacia una nueva gramática visual?</h3>
+        <p>Algunos investigadores sostienen que los emojis están desarrollando una gramática propia: se combinan, se modifican y adquieren significados estables. Podrían estar naciendo las bases de un nuevo sistema de escritura.</p>
+      </div>
+    </div>
+
+    <div class="note reveal good">
+      <strong>Reflexión:</strong> la escritura siempre ha evolucionado. Del cuneiforme al alfabeto, del pergamino al papel,
+      del papel a la pantalla. Los emojis no son una degeneración, sino una nueva adaptación a un nuevo medio.
+    </div>
+  </section>
+
+  <!-- =============== GLOSARIO =============== -->
+  <section class="view" data-view="glosario">
+    <div class="sec-head section">
+      <h2>Glosario de escritura</h2>
+      <p>Los términos clave para entender los sistemas de escritura. Busca cualquier palabra para filtrar.</p>
+    </div>
+    <div class="gloss-shell">
+      <div class="search-wrap">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        <input type="text" class="gloss-search" id="glossSearch" placeholder="Buscar término… (ej: pictograma, alfabeto, logograma)" aria-label="Buscar término">
+      </div>
+      <div class="gloss-grid" id="glossGrid"></div>
+      <div id="glossEmpty" class="gloss-empty" style="display:none">No se encontraron términos con esa búsqueda.</div>
+    </div>
+  </section>
+
+  <!-- =============== EXPLORADOR =============== -->
+  <section class="view" data-view="explorador">
+    <div class="sec-head section">
+      <h2>Explorador de escrituras</h2>
+      <p>Selecciona un sistema y observa algunos de sus signos más representativos, con su nombre y significado.</p>
+    </div>
+    <div class="explorer-shell reveal">
+      <div class="explorer-tabs">
+        <button class="explorer-tab active" data-sys="cuneiforme">Cuneiforme</button>
+        <button class="explorer-tab" data-sys="jeroglifico">Jeroglífico</button>
+        <button class="explorer-tab" data-sys="chino">Chino</button>
+        <button class="explorer-tab" data-sys="arabe">Árabe</button>
+        <button class="explorer-tab" data-sys="cirilico">Cirílico</button>
+      </div>
+      <div class="explorer-display" id="explorerDisplay"></div>
+      <div class="info-panel active" style="margin-top:20px" id="explorerInfo">
+        <div class="ip-name" id="explorerName">Cuneiforme</div>
+        <div class="ip-desc" id="explorerDesc">La primera escritura de la historia. Signos en forma de cuña grabados en tablillas de arcilla.</div>
+      </div>
+    </div>
+    <div class="note reveal">
+      <strong>Nota:</strong> algunos caracteres pueden no mostrarse correctamente si tu sistema no tiene instaladas
+      las fuentes adecuadas. Los caracteres cuneiformes y jeroglíficos son especialmente sensibles a esto.
+    </div>
+  </section>
+
+  <!-- =============== QUIZ =============== -->
+  <section class="view" data-view="quiz">
+    <div class="sec-head section">
+      <h2>Quiz de escritura</h2>
+      <p>Diez preguntas al azar sobre orígenes, sistemas de escritura y nuevas formas digitales.</p>
+    </div>
+    <div class="quiz-shell">
+      <div class="quiz-card" id="quizCard"></div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <p><strong>Escritura · Guía interactiva</strong> — Material educativo sobre la historia y evolución de la escritura humana.</p>
+</footer>
+
+<script>
+const $  = (sel, root = document) => root.querySelector(sel);
+const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+const htmlEl = document.documentElement;
+
+function setTheme(t){
+  htmlEl.setAttribute('data-theme', t);
+  try { localStorage.setItem('escritura-theme', t); } catch(e){}
+}
+(function initTheme(){
+  let saved = null;
+  try { saved = localStorage.getItem('escritura-theme'); } catch(e){}
+  setTheme(saved || 'light');
+})();
+$('#themeToggle').addEventListener('click', () => {
+  setTheme(htmlEl.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+});
+
+(function buildStars(){
+  const cont = $('#bgStars');
+  if (!cont) return;
+  for (let i = 0; i < 80; i++){
+    const s = document.createElement('div');
+    s.className = 'star';
+    s.style.left = Math.random() * 100 + '%';
+    s.style.top = Math.random() * 100 + '%';
+    const size = 1 + Math.random() * 2;
+    s.style.width = size + 'px';
+    s.style.height = size + 'px';
+    s.style.setProperty('--tw-dur', (2 + Math.random() * 4) + 's');
+    s.style.setProperty('--tw-delay', (Math.random() * 4) + 's');
+    cont.appendChild(s);
+  }
+})();
+
+const ROUTES = ['inicio','origenes','cuneiforme','jeroglificos','china','arabe','cirilico','mesoamerica','linea-tiempo','nuevas','glosario','explorador','quiz'];
+let currentRoute = 'inicio';
+
+function go(route, push = true){
+  if (!ROUTES.includes(route)) route = 'inicio';
+  currentRoute = route;
+  $$('.view').forEach(v => v.classList.toggle('active', v.dataset.view === route));
+  $$('.nav-link').forEach(b => b.classList.toggle('active', b.dataset.route === route));
+  if (push && location.hash.slice(1) !== route) history.pushState(null, '', '#' + route);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  requestAnimationFrame(() => {
+    $$('.view.active .reveal').forEach(el => el.classList.remove('in'));
+    checkReveal();
+    if (route === 'inicio') animateCounters();
+    if (route === 'origenes') renderEvolution();
+    if (route === 'linea-tiempo') renderTimeline();
+    if (route === 'glosario') renderGlossary();
+    if (route === 'explorador') renderExplorer('cuneiforme');
+    if (route === 'quiz') startQuiz();
+  });
+}
+document.addEventListener('click', e => {
+  const t = e.target.closest('[data-route]');
+  if (t){ e.preventDefault(); go(t.dataset.route); }
+});
+window.addEventListener('popstate', () => go(location.hash.slice(1) || 'inicio', false));
+
+const revealObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting){
+      entry.target.classList.add('in');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+function checkReveal(){ $$('.view.active .reveal:not(.in)').forEach(el => revealObserver.observe(el)); }
+
+function animateCounters(){
+  $$('.num[data-count]').forEach(el => {
+    if (el.dataset.done === '1') return;
+    el.dataset.done = '1';
+    const target = parseFloat(el.dataset.count);
+    const suffix = el.dataset.suffix || '';
+    const dur = 1600;
+    const start = performance.now();
+    function tick(now){
+      const p = Math.min((now - start) / dur, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      const val = target * eased;
+      el.textContent = Math.round(val).toLocaleString('es-ES') + suffix;
+      if (p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  });
+}
+
+const EVOLUTION = [
+  { tag:'Pictograma', color:'#b45309', title:'El dibujo del objeto', desc:'Los primeros signos eran dibujos simplificados del objeto que representaban: una oveja, un sol, una montaña. Eran fáciles de entender, pero no permitían escribir ideas abstractas.', extra:'Los pictogramas todavía se usan hoy: señales de tráfico, iconos de aplicaciones, emojis.' },
+  { tag:'Ideograma', color:'#7c3aed', title:'La idea detrás del dibujo', desc:'Un sol ya no solo significa "sol", sino también "día", "brillo" o "calor". El signo representa una idea asociada al objeto, no el objeto mismo.', extra:'Los ideogramas permiten expresar conceptos abstractos, pero siguen siendo limitados y ambiguos.' },
+  { tag:'Logograma', color:'#0e7490', title:'Un signo, una palabra', desc:'Cada signo representa una palabra completa. El chino y el cuneiforme en su fase logográfica funcionan así. Es un sistema muy eficiente para lenguas con muchas palabras monosílabas.', extra:'El problema: se necesitan miles de signos para escribir todo el vocabulario.' },
+  { tag:'Silabario', color:'#15803d', title:'Un signo, una sílaba', desc:'Los signos representan sílabas (por ejemplo, "ba", "be", "bi"). Es el sistema del cuneiforme acadio y de la escritura maya. Reduce el número de signos necesarios.', extra:'Los silabarios son más eficientes que los logogramas, pero aún requieren cientos de signos.' },
+  { tag:'Alfabeto', color:'#b91c1c', title:'Un signo, un sonido', desc:'El alfabeto representa fonemas individuales (consonantes y vocales). Con 20-30 signos se puede escribir cualquier palabra. Es el sistema más eficiente y el que usamos hoy.', extra:'El alfabeto se inventó una sola vez, en el Oriente Próximo, hacia el 2000-1500 a.C. Todos los alfabetos actuales derivan de él.' }
+];
+
+function renderEvolution(){
+  const c = $('#evolutionList');
+  if (!c) return;
+  c.innerHTML = EVOLUTION.map((e, i) => `
+    <div class="vt-item" style="--c:${e.color};--d:${i * 60}ms">
+      <span class="vt-dot"></span>
+      <div class="vt-card">
+        <div class="vt-top"><span class="vt-year">${e.tag}</span></div>
+        <h4>${e.title}</h4>
+        <p>${e.desc}</p>
+        <button class="vt-more" type="button"><span>Más detalle</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="vt-extra"><div><p>${e.extra}</p></div></div>
+      </div>
+    </div>
+  `).join('');
+  c.onclick = e => {
+    const btn = e.target.closest('.vt-more');
+    if (!btn) return;
+    const item = btn.closest('.vt-item');
+    const open = item.classList.toggle('open');
+    btn.querySelector('span').textContent = open ? 'Ocultar detalle' : 'Más detalle';
+  };
+}
+
+const TIMELINE = [
+  { year:'3500 a.C.', tag:'Mesopotamia', color:'#b45309', title:'Nace el cuneiforme', desc:'Los sumerios de Uruk inventan la primera escritura de la historia para registrar transacciones comerciales. Los pictogramas se graban en tablillas de arcilla.', extra:'Las primeras tablillas son registros de ovejas, grano y textiles. La escritura nace de la contabilidad.' },
+  { year:'3250 a.C.', tag:'Egipto', color:'#7c3aed', title:'Primeros jeroglíficos', desc:'Aparecen los jeroglíficos egipcios, un sistema figurativo con valores ideográficos y fonéticos. Se usará durante más de tres mil años.', extra:'Los egipcios llamaban a su escritura "las palabras de los dioses".' },
+  { year:'1200 a.C.', tag:'China', color:'#0e7490', title:'Inscripciones oraculares', desc:'Los primeros textos chinos conservados son inscripciones en caparazones de tortuga y huesos, usadas para la adivinación.', extra:'Los caracteres chinos son la única escritura antigua en uso ininterrumpido hasta hoy.' },
+  { year:'1000 a.C.', tag:'Fenicia', color:'#15803d', title:'El alfabeto fenicio', desc:'Los fenicios crean un alfabeto de 22 consonantes. Es el origen de la mayoría de los alfabetos actuales.', extra:'El alfabeto fenicio se difundió por el Mediterráneo gracias al comercio marítimo.' },
+  { year:'800 a.C.', tag:'Grecia', color:'#b91c1c', title:'El alfabeto griego', desc:'Los griegos adaptan el alfabeto fenicio y añaden vocales. Crean el primer alfabeto completo.', extra:'Los griegos fijaron la dirección de escritura de izquierda a derecha.' },
+  { year:'400 a.C.', tag:'Roma', color:'#a16207', title:'El alfabeto latino', desc:'Los romanos adaptan el alfabeto griego a través de los etruscos. Con el Imperio, el latín y su alfabeto se imponen en Europa Occidental.', extra:'El alfabeto latino es hoy el más usado del mundo: más de 4.000 millones de personas.' },
+  { year:'300 a.C.', tag:'Mesoamérica', color:'#7c2d12', title:'Escritura maya', desc:'La escritura maya alcanza su pleno desarrollo. Es un sistema logosilábico, el más complejo de América precolombina.', extra:'Solo cuatro códices mayas prehispánicos sobrevivieron a la conquista española.' },
+  { year:'105 d.C.', tag:'China', color:'#0e7490', title:'Invención del papel', desc:'En China se perfecciona la fabricación de papel a partir de fibras vegetales. Sustituirá al bambú y a la seda.', extra:'El papel llegó a Europa a través del mundo árabe, siglos después.' },
+  { year:'600 d.C.', tag:'Arabia', color:'#15803d', title:'El árabe se convierte en arte', desc:'Con la expansión del islam, la escritura árabe se desarrolla y la caligrafía se convierte en la principal arte del mundo islámico.', extra:'El Corán impulsó la necesidad de fijar y embellecer el texto.' },
+  { year:'863 d.C.', tag:'Bizancio', color:'#7c3aed', title:'Nace el alfabeto cirílico', desc:'Los discípulos de Cirilo y Metodio crean el alfabeto cirílico, basado en el griego, para escribir las lenguas eslavas.', extra:'Se extendió por Bulgaria, Serbia, Rusia y otros territorios eslavos ortodoxos.' },
+  { year:'1440', tag:'Europa', color:'#b45309', title:'La imprenta de Gutenberg', desc:'Johannes Gutenberg inventa la imprenta de tipos móviles en Europa. La escritura deja de ser un privilegio de unos pocos.', extra:'La imprenta fue clave para la Reforma, la alfabetización masiva y el desarrollo científico.' },
+  { year:'1822', tag:'Egipto', color:'#b91c1c', title:'Champollion descifra los jeroglíficos', desc:'Jean-François Champollion descifra los jeroglíficos egipcios gracias a la Piedra Rosetta, abriendo la egiptología moderna.', extra:'La Piedra Rosetta contenía el mismo decreto en jeroglífico, demótico y griego.' },
+  { year:'1999', tag:'Digital', color:'#0e7490', title:'Nacen los emojis', desc:'Shigetaka Kurita diseña los primeros emojis para la plataforma japonesa i-mode. Son 176 pictogramas de 12×12 píxeles.', extra:'Los emojis se expandieron globalmente con los smartphones.' },
+  { year:'2010', tag:'Unicode', color:'#15803d', title:'Los emojis se estandarizan', desc:'Unicode incorpora los emojis a su estándar, permitiendo que se muestren en cualquier dispositivo y plataforma.', extra:'Hoy existen más de 3.600 emojis oficiales, y se añaden nuevos cada año.' },
+  { year:'2020s', tag:'Digital', color:'#7c3aed', title:'Escritura multimodal', desc:'La escritura digital combina texto, emojis, imágenes, GIFs y audio. La comunicación escrita es más híbrida y visual que nunca.', extra:'Lejos de desaparecer, la escritura se ha transformado y adaptado a los nuevos medios.' }
+];
+
+function renderTimeline(){
+  const c = $('#timelineList');
+  if (!c) return;
+  c.innerHTML = TIMELINE.map((t, i) => `
+    <div class="vt-item" style="--c:${t.color};--d:${i * 40}ms">
+      <span class="vt-dot"></span>
+      <div class="vt-card">
+        <div class="vt-top">
+          <span class="vt-year">${t.year}</span>
+          <span class="vt-era">${t.tag}</span>
+        </div>
+        <h4>${t.title}</h4>
+        <p>${t.desc}</p>
+        <button class="vt-more" type="button"><span>Más detalle</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="vt-extra"><div><p>${t.extra}</p></div></div>
+      </div>
+    </div>
+  `).join('');
+  c.onclick = e => {
+    const btn = e.target.closest('.vt-more');
+    if (!btn) return;
+    const item = btn.closest('.vt-item');
+    const open = item.classList.toggle('open');
+    btn.querySelector('span').textContent = open ? 'Ocultar detalle' : 'Más detalle';
+  };
+}
+
+const GLOSSARY = [
+  { t:'Pictograma', d:'Signo que representa un objeto mediante un dibujo simplificado. Es la etapa más antigua de la escritura.' },
+  { t:'Ideograma', d:'Signo que representa una idea o un concepto, no un objeto concreto. Un sol puede significar "día" o "brillo".' },
+  { t:'Logograma', d:'Signo que representa una palabra completa. El chino y el cuneiforme en su fase logográfica usan logogramas.' },
+  { t:'Silabario', d:'Conjunto de signos que representan sílabas. La escritura maya y el cuneiforme acadio son silabarios.' },
+  { t:'Alfabeto', d:'Sistema de escritura en el que cada signo representa un fonema (consonante o vocal).' },
+  { t:'Fonema', d:'Unidad mínima de sonido que distingue significados en una lengua.' },
+  { t:'Grafema', d:'Unidad mínima de escritura. Puede ser una letra, un carácter o un signo.' },
+  { t:'Cuneiforme', d:'Escritura de la antigua Mesopotamia, con signos en forma de cuña grabados en tablillas de arcilla.' },
+  { t:'Jeroglífico', d:'Escritura figurativa del antiguo Egipto. Combina ideogramas y fonogramas.' },
+  { t:'Hierático', d:'Forma cursiva de los jeroglíficos egipcios, usada para textos religiosos y literarios.' },
+  { t:'Demótico', d:'Forma aún más cursiva y simplificada de la escritura egipcia, usada para la vida cotidiana.' },
+  { t:'Piedra Rosetta', d:'Estela egipcia con un decreto en tres escrituras: jeroglífica, demótica y griega. Clave para descifrar los jeroglíficos.' },
+  { t:'Alfabeto fenicio', d:'Alfabeto de 22 consonantes creado por los fenicios. Origen de la mayoría de los alfabetos actuales.' },
+  { t:'Alfabeto cirílico', d:'Alfabeto creado en el siglo IX para las lenguas eslavas. Se usa en ruso, búlgaro, serbio y otros idiomas.' },
+  { t:'Caligrafía', d:'Arte de escribir con belleza y precisión. En el mundo árabe y en China es una de las artes mayores.' },
+  { t:'Códice', d:'Libro manuscrito antiguo, especialmente los mayas y los medievales europeos.' },
+  { t:'Emoji', d:'Pictograma digital usado en la comunicación escrita. Algunos lingüistas lo consideran una nueva forma de escritura ideográfica.' },
+  { t:'Escritura logográfica', d:'Sistema en el que cada signo representa una palabra o morfema, como el chino.' },
+  { t:'Escritura alfabética', d:'Sistema en el que cada signo representa un fonema, como el latino o el cirílico.' },
+  { t:'Bustrófedon', d:'Escritura en líneas alternas: una de izquierda a derecha y la siguiente de derecha a izquierda.' }
+];
+
+function renderGlossary(){
+  const grid = $('#glossGrid');
+  const empty = $('#glossEmpty');
+  const search = $('#glossSearch');
+  if (!grid) return;
+  function render(filter = ''){
+    const q = filter.trim().toLowerCase();
+    const items = GLOSSARY.filter(g =>
+      !q || g.t.toLowerCase().includes(q) || g.d.toLowerCase().includes(q)
+    );
+    if (items.length === 0){
+      grid.innerHTML = '';
+      empty.style.display = 'block';
+      return;
+    }
+    empty.style.display = 'none';
+    grid.innerHTML = items.map(g => `
+      <div class="gloss-item">
+        <div class="gi-term">${g.t}</div>
+        <div class="gi-def">${g.d}</div>
+      </div>
+    `).join('');
+  }
+  render();
+  if (search && !search.dataset.bound){
+    search.dataset.bound = '1';
+    search.addEventListener('input', e => render(e.target.value));
+  }
+}
+
+const EXPLORER_DATA = {
+  cuneiforme: {
+    name: 'Cuneiforme',
+    desc: 'La primera escritura de la historia. Signos en forma de cuña grabados en tablillas de arcilla.',
+    glyphs: [
+      { g:'𒀀', n:'A', m:'Agua' },
+      { g:'𒁀', n:'BA', m:'Asignar' },
+      { g:'𒂗', n:'EN', m:'Señor' },
+      { g:'𒃲', n:'GAL', m:'Grande' },
+      { g:'𒄑', n:'GIŠ', m:'Madera' },
+      { g:'𒈗', n:'LUGAL', m:'Rey' }
+    ]
+  },
+  jeroglifico: {
+    name: 'Jeroglífico egipcio',
+    desc: 'Escritura figurativa del antiguo Egipto. Combina ideogramas y fonogramas.',
+    glyphs: [
+      { g:'𓀀', n:'Hombre', m:'Persona' },
+      { g:'𓁀', n:'Mujer', m:'Persona' },
+      { g:'𓅓', n:'Búho', m:'Sonido "m"' },
+      { g:'𓆣', n:'Escarabajo', m:'Sol, devenir' },
+      { g:'𓂀', n:'Ojo', m:'Ver, proteger' },
+      { g:'𓋹', n:'Ankh', m:'Vida' }
+    ]
+  },
+  chino: {
+    name: 'Chino',
+    desc: 'Escritura logográfica con más de 3.500 años de historia ininterrumpida.',
+    glyphs: [
+      { g:'日', n:'Rì', m:'Sol' },
+      { g:'月', n:'Yuè', m:'Luna' },
+      { g:'水', n:'Shuǐ', m:'Agua' },
+      { g:'火', n:'Huǒ', m:'Fuego' },
+      { g:'山', n:'Shān', m:'Montaña' },
+      { g:'人', n:'Rén', m:'Persona' }
+    ]
+  },
+  arabe: {
+    name: 'Árabe',
+    desc: 'Escritura cursiva de derecha a izquierda, con 28 consonantes.',
+    glyphs: [
+      { g:'ا', n:'Alif', m:'A' },
+      { g:'ب', n:'Ba', m:'B' },
+      { g:'ت', n:'Ta', m:'T' },
+      { g:'ن', n:'Nun', m:'N' },
+      { g:'م', n:'Mim', m:'M' },
+      { g:'ل', n:'Lam', m:'L' }
+    ]
+  },
+  cirilico: {
+    name: 'Cirílico',
+    desc: 'Alfabeto de las lenguas eslavas, creado en el siglo IX.',
+    glyphs: [
+      { g:'А', n:'A', m:'A' },
+      { g:'Б', n:'Be', m:'B' },
+      { g:'В', n:'Ve', m:'V' },
+      { g:'Г', n:'Ge', m:'G' },
+      { g:'Д', n:'De', m:'D' },
+      { g:'Ж', n:'Zhe', m:'Ž' }
+    ]
+  }
+};
+
+function renderExplorer(sys){
+  const data = EXPLORER_DATA[sys];
+  if (!data) return;
+  $('#explorerName').textContent = data.name;
+  $('#explorerDesc').textContent = data.desc;
+  const display = $('#explorerDisplay');
+  display.innerHTML = data.glyphs.map(g => `
+    <div class="glyph-card">
+      <div class="glyph">${g.g}</div>
+      <div class="name">${g.n}</div>
+      <div class="meaning">${g.m}</div>
+    </div>
+  `).join('');
+}
+
+$$('.explorer-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    $$('.explorer-tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    renderExplorer(tab.dataset.sys);
+  });
+});
+
+const QUIZ_DATA = [
+  { q:'¿Cuál es la primera escritura de la historia?', o:['Jeroglíficos egipcios','Cuneiforme sumerio','Escritura china','Alfabeto fenicio'], c:1, e:'El cuneiforme sumerio, surgido hacia el 3500 a.C. en Mesopotamia, es la primera escritura conocida.' },
+  { q:'¿Dónde se inventó la escritura de forma independiente?', o:['Solo en Mesopotamia','En Mesopotamia, Egipto, China y Mesoamérica','Solo en Egipto y China','En Grecia y Roma'], c:1, e:'La escritura se inventó de forma independiente al menos en cuatro lugares: Mesopotamia, Egipto, China y Mesoamérica.' },
+  { q:'¿Qué es un pictograma?', o:['Un signo que representa un sonido','Un dibujo que representa un objeto','Un tipo de alfabeto','Un sistema de escritura'], c:1, e:'Un pictograma es un dibujo simplificado que representa un objeto o una idea.' },
+  { q:'¿Qué significa "cuneiforme"?', o:['Escritura sagrada','En forma de cuña','Escritura cursiva','Signos alfabéticos'], c:1, e:'Cuneiforme viene del latín "cuneus", que significa cuña, por la forma de los trazos.' },
+  { q:'¿Quién descifró los jeroglíficos egipcios?', o:['Howard Carter','Jean-François Champollion','Thomas Young','Napoleón'], c:1, e:'Champollion descifró los jeroglíficos en 1822 gracias a la Piedra Rosetta.' },
+  { q:'¿Qué escritura es logográfica?', o:['El alfabeto latino','El chino','El cirílico','El árabe'], c:1, e:'El chino es logográfico: cada carácter representa una palabra o un morfema, no un sonido individual.' },
+  { q:'¿Cuántas consonantes tiene el alfabeto árabe?', o:['22','26','28','33'], c:2, e:'El alfabeto árabe tiene 28 consonantes. Se escribe de derecha a izquierda.' },
+  { q:'¿Quién creó el alfabeto cirílico?', o:['Pedro el Grande','Cirilo y Metodio','Los discípulos de Cirilo','Los griegos'], c:2, e:'Fueron los discípulos de Cirilo y Metodio quienes crearon el cirílico, basado en el griego.' },
+  { q:'¿Qué escritura mesoamericana fue la más compleja?', o:['Zapoteca','Maya','Azteca','Olmeca'], c:1, e:'La escritura maya fue el sistema más complejo de Mesoamérica, con logogramas y silabogramas.' },
+  { q:'¿Qué son los emojis?', o:['Un tipo de letra','Pictogramas digitales','Un alfabeto antiguo','Un sistema de escritura'], c:1, e:'Los emojis son pictogramas digitales que se usan en la comunicación escrita moderna.' },
+  { q:'¿Qué alfabeto está en el origen de la mayoría de los actuales?', o:['El griego','El latino','El fenicio','El cirílico'], c:2, e:'El alfabeto fenicio, de 22 consonantes, es el origen de los alfabetos griego, latino, cirílico y árabe.' },
+  { q:'¿Cuándo se inventó el papel en China?', o:['1000 a.C.','105 d.C.','1440 d.C.','500 a.C.'], c:1, e:'El papel se perfeccionó en China hacia el 105 d.C., y llegó a Europa siglos después a través del mundo árabe.' },
+  { q:'¿Qué es la escritura hierática?', o:['Una forma cursiva de los jeroglíficos','Un tipo de cuneiforme','El alfabeto árabe','La escritura china'], c:0, e:'El hierático es una forma cursiva y simplificada de los jeroglíficos egipcios, usada para textos religiosos y literarios.' }
+];
+
+const TOTAL_PREGUNTAS = 10;
+const LETRAS = ['A','B','C','D'];
+let quizState = { questions: [], index: 0, score: 0, answered: false, finished: false };
+
+function shuffle(arr){
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+function startQuiz(){
+  quizState = {
+    questions: shuffle(QUIZ_DATA).slice(0, TOTAL_PREGUNTAS),
+    index: 0, score: 0, answered: false, finished: false
+  };
+  renderQuiz();
+}
+function renderQuiz(){
+  const card = $('#quizCard');
+  if (!card) return;
+  if (quizState.finished){
+    const total = quizState.questions.length;
+    const pct = Math.round((quizState.score / total) * 100);
+    let m = 'Conviene repasar los sistemas de escritura y su historia.';
+    if (pct === 100) m = '¡Perfecto! Dominas la historia de la escritura.';
+    else if (pct >= 75) m = 'Muy buen resultado. Te falta muy poco para el pleno.';
+    else if (pct >= 50) m = 'Buen comienzo. Repasa las secciones y prueba otra vez.';
+    card.innerHTML = `
+      <div class="result">
+        <div class="score">${quizState.score}/${total}</div>
+        <h3>${m}</h3>
+        <p>Has acertado el ${pct}% de las preguntas de esta ronda.</p>
+        <button class="btn btn-primary" id="restartQuiz">Jugar otra vez
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>
+        </button>
+      </div>`;
+    $('#restartQuiz').addEventListener('click', startQuiz);
+    return;
+  }
+  const q = quizState.questions[quizState.index];
+  const total = quizState.questions.length;
+  const progress = (quizState.index / total) * 100;
+  card.innerHTML = `
+    <div class="quiz-meta">
+      <span>Pregunta ${quizState.index + 1} de ${total}</span>
+      <span>Aciertos: ${quizState.score}</span>
+    </div>
+    <div class="progress"><div class="progress-bar" style="width:${progress}%"></div></div>
+    <h3 class="q-text">${q.q}</h3>
+    <div class="options" id="options">
+      ${q.o.map((opt, i) => `
+        <button class="option" data-i="${i}">
+          <span class="letter">${LETRAS[i]}</span>
+          <span>${opt}</span>
+        </button>`).join('')}
+    </div>
+    <div id="feedbackSlot"></div>
+    <div class="quiz-actions" id="actionsSlot"></div>`;
+  $('#options').addEventListener('click', e => {
+    const btn = e.target.closest('.option');
+    if (!btn || quizState.answered) return;
+    answerQuestion(parseInt(btn.dataset.i, 10));
+  });
+}
+function answerQuestion(chosen){
+  quizState.answered = true;
+  const q = quizState.questions[quizState.index];
+  const options = $$('#options .option');
+  options.forEach((btn, i) => {
+    btn.disabled = true;
+    if (i === q.c) btn.classList.add('correct');
+    else if (i === chosen) btn.classList.add('wrong');
+  });
+  const acerto = chosen === q.c;
+  if (acerto) quizState.score++;
+  $('#feedbackSlot').innerHTML = `
+    <div class="feedback">
+      <strong>${acerto ? 'Correcto.' : 'No exactamente.'}</strong> ${q.e}
+    </div>`;
+  const isLast = quizState.index === quizState.questions.length - 1;
+  $('#actionsSlot').innerHTML = `
+    <button class="btn btn-primary" id="nextBtn">
+      ${isLast ? 'Ver resultado' : 'Siguiente pregunta'}
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </button>`;
+  $('#nextBtn').addEventListener('click', () => {
+    if (isLast) quizState.finished = true;
+    else { quizState.index++; quizState.answered = false; }
+    renderQuiz();
+  });
+}
+
+$$('.module').forEach(m => {
+  m.addEventListener('mousemove', e => {
+    const r = m.getBoundingClientRect();
+    m.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
+    m.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
+  });
+});
+
+document.addEventListener('visibilitychange', () => {
+  document.querySelectorAll('.orb').forEach(o => {
+    o.style.animationPlayState = document.hidden ? 'paused' : 'running';
+  });
+});
+
+(function boot(){
+  const initial = (location.hash.slice(1) || 'inicio');
+  go(ROUTES.includes(initial) ? initial : 'inicio', false);
+  checkReveal();
+  setTimeout(() => { if (currentRoute === 'inicio') animateCounters(); }, 300);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,1343 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Egipto · Guía interactiva — cronología, dioses, momias, pirámides y legado</title>
+<meta name="description" content="Guía interactiva del antiguo Egipto: cronología completa desde el origen hasta Cleopatra, dioses y mitos, momificación, Libro de los Muertos, pirámides, templos, obeliscos e influencia en el mundo.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --font-display:'Space Grotesk','Segoe UI',system-ui,sans-serif;
+  --font-body:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --font-mono:'JetBrains Mono','SF Mono',Consolas,monospace;
+  --radius:20px;
+  --radius-sm:12px;
+  --maxw:1180px;
+  --ease:cubic-bezier(.22,.75,.25,1);
+}
+html[data-theme="light"]{
+  --bg:#f7f9fc;
+  --bg-soft:#eef2f8;
+  --surface:rgba(255,255,255,.85);
+  --surface-solid:#ffffff;
+  --surface-2:rgba(20,40,80,.045);
+  --surface-3:rgba(20,40,80,.08);
+  --border:rgba(20,40,80,.12);
+  --border-strong:rgba(20,40,80,.24);
+  --text:#0a1628;
+  --muted:#5a6b80;
+  --accent:#b45309;
+  --accent-2:#7c3aed;
+  --accent-3:#0e7490;
+  --accent-4:#15803d;
+  --good:#15803d;
+  --bad:#b91c1c;
+  --shadow:0 22px 55px -28px rgba(20,40,80,.28);
+  --orb-op:.14;
+  --dot-color:rgba(20,40,80,.055);
+  --star:rgba(20,40,80,.25);
+  --code-bg:rgba(20,40,80,.06);
+  --sand:#e8d5a8;
+  --sand-dark:#c9a87c;
+  --gold:#d4a017;
+  --lapis:#1e3a8a;
+  --turquoise:#0d9488;
+}
+html[data-theme="dark"]{
+  --bg:#04060d;
+  --bg-soft:#0a0f1a;
+  --surface:rgba(18,24,38,.66);
+  --surface-solid:#131a28;
+  --surface-2:rgba(255,255,255,.045);
+  --surface-3:rgba(255,255,255,.08);
+  --border:rgba(255,255,255,.10);
+  --border-strong:rgba(255,255,255,.20);
+  --text:#e8eef8;
+  --muted:#8f9bb3;
+  --accent:#f59e0b;
+  --accent-2:#a78bfa;
+  --accent-3:#22d3ee;
+  --accent-4:#34d399;
+  --good:#34d399;
+  --bad:#fb7185;
+  --shadow:0 24px 60px -24px rgba(0,0,0,.9);
+  --orb-op:.28;
+  --dot-color:rgba(255,255,255,.03);
+  --star:rgba(255,255,255,.8);
+  --code-bg:rgba(255,255,255,.06);
+  --sand:#3a2818;
+  --sand-dark:#4a3828;
+  --gold:#fbbf24;
+  --lapis:#3b82f6;
+  --turquoise:#2dd4bf;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;font-family:var(--font-body);background:var(--bg);color:var(--text);
+  min-height:100vh;line-height:1.65;-webkit-font-smoothing:antialiased;
+  transition:background .45s var(--ease),color .45s var(--ease);
+  overflow-x:hidden;
+}
+h1,h2,h3,h4,h5{font-family:var(--font-display);line-height:1.15;letter-spacing:-.02em;margin:0}
+p{margin:0}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+a{color:inherit;text-decoration:none}
+ul{margin:0}
+::selection{background:var(--accent);color:#fff}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
+
+.bg-stars{position:fixed;inset:0;z-index:-4;pointer-events:none;overflow:hidden}
+.bg-stars .star{
+  position:absolute;width:2px;height:2px;border-radius:50%;
+  background:var(--star);opacity:.55;
+  animation:twinkle var(--tw-dur,4s) ease-in-out infinite;
+  animation-delay:var(--tw-delay,0s);
+}
+@keyframes twinkle{0%,100%{opacity:.1;transform:scale(.8)}50%{opacity:1;transform:scale(1.3)}}
+.bg-dots{position:fixed;inset:0;z-index:-3;pointer-events:none;background-image:radial-gradient(var(--dot-color) 1px,transparent 1px);background-size:26px 26px}
+.orbs{position:fixed;inset:0;z-index:-2;overflow:hidden;pointer-events:none}
+.orb{position:absolute;border-radius:50%;filter:blur(110px);opacity:var(--orb-op);animation:float 28s ease-in-out infinite alternate}
+.orb.o1{width:48vw;height:48vw;background:var(--accent);top:-16vw;left:-12vw}
+.orb.o2{width:42vw;height:42vw;background:var(--accent-2);bottom:-18vw;right:-10vw;animation-delay:-10s}
+.orb.o3{width:34vw;height:34vw;background:var(--accent-3);top:44%;left:58%;animation-delay:-17s}
+@keyframes float{0%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(4vw,-3vw,0) scale(1.1)}100%{transform:translate3d(-3vw,4vw,0) scale(.95)}}
+
+.site-header{
+  position:sticky;top:0;z-index:50;
+  backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);
+  background:color-mix(in srgb,var(--bg) 78%, transparent);
+  border-bottom:1px solid var(--border);
+}
+.header-inner{max-width:var(--maxw);margin:0 auto;padding:13px 22px;display:flex;align-items:center;gap:20px}
+.brand{display:flex;align-items:center;gap:11px;font-family:var(--font-display);font-weight:700;font-size:1rem;letter-spacing:-.02em;white-space:nowrap}
+.brand-mark{
+  width:38px;height:38px;border-radius:12px;flex:none;
+  background:linear-gradient(140deg,var(--accent),var(--accent-2) 55%,var(--accent-3));
+  display:grid;place-items:center;color:#fff;
+  box-shadow:0 8px 22px -8px var(--accent);
+  transition:transform .5s var(--ease);
+}
+.brand:hover .brand-mark{transform:rotate(-10deg) scale(1.06)}
+.brand-mark svg{width:22px;height:22px}
+
+.nav{display:flex;gap:2px;margin-left:auto;overflow-x:auto;scrollbar-width:none}
+.nav::-webkit-scrollbar{display:none}
+.nav-link{
+  position:relative;padding:9px 11px;border-radius:11px;font-size:.8rem;font-weight:500;
+  color:var(--muted);white-space:nowrap;transition:color .3s var(--ease),background .3s var(--ease);
+}
+.nav-link:hover{color:var(--text);background:var(--surface-2)}
+.nav-link.active{color:var(--text);background:var(--surface-2)}
+.nav-link.active::after{
+  content:'';position:absolute;left:11px;right:11px;bottom:4px;height:2px;border-radius:2px;
+  background:linear-gradient(90deg,var(--accent),var(--accent-2));
+  animation:navIn .4s var(--ease) both;
+}
+@keyframes navIn{from{transform:scaleX(0);opacity:0}to{transform:scaleX(1);opacity:1}}
+
+.theme-toggle{
+  width:40px;height:40px;border-radius:12px;flex:none;
+  border:1px solid var(--border);background:var(--surface-2);
+  display:grid;place-items:center;
+  transition:transform .35s var(--ease),border-color .3s,background .3s;
+}
+.theme-toggle:hover{transform:translateY(-2px) rotate(8deg);border-color:var(--border-strong)}
+.theme-toggle svg{width:19px;height:19px}
+html[data-theme="dark"] .icon-sun{display:block}
+html[data-theme="dark"] .icon-moon{display:none}
+html[data-theme="light"] .icon-sun{display:none}
+html[data-theme="light"] .icon-moon{display:block}
+
+main{max-width:var(--maxw);margin:0 auto;padding:0 22px 90px}
+.view{display:none}
+.view.active{display:block;animation:viewIn .55s var(--ease) both}
+@keyframes viewIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+
+.hero{padding:74px 0 42px;max-width:940px;position:relative}
+.pill{
+  display:inline-flex;align-items:center;gap:8px;padding:7px 15px;border-radius:999px;
+  font-size:.78rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;
+  border:1px solid var(--border);background:var(--surface);color:var(--muted);margin-bottom:26px;
+}
+.pill .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);animation:pulse 2.4s infinite}
+@keyframes pulse{
+  0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--accent) 60%,transparent)}
+  70%{box-shadow:0 0 0 9px transparent}
+  100%{box-shadow:0 0 0 0 transparent}
+}
+h1.hero-title{font-size:clamp(2.1rem,5.2vw,4rem);font-weight:700;letter-spacing:-.035em;margin-bottom:22px}
+.grad{
+  background:linear-gradient(100deg,var(--accent),var(--accent-2) 45%,var(--accent-3) 75%,var(--accent-4));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  background-size:220% auto;animation:shimmer 8s linear infinite;
+}
+@keyframes shimmer{to{background-position:220% center}}
+.lead{font-size:clamp(1rem,1.6vw,1.15rem);color:var(--muted);max-width:720px;margin-bottom:34px}
+.hero-actions{display:flex;flex-wrap:wrap;gap:13px}
+
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  padding:13px 25px;border-radius:13px;font-size:.93rem;font-weight:600;
+  border:1px solid transparent;
+  transition:transform .28s var(--ease),box-shadow .3s var(--ease),background .3s,border-color .3s,color .3s;
+  will-change:transform;
+}
+.btn:active{transform:scale(.97)}
+.btn svg{width:17px;height:17px}
+.btn-primary{
+  background:linear-gradient(120deg,var(--accent),var(--accent-2));
+  color:#fff;box-shadow:0 14px 34px -14px var(--accent);
+  position:relative;overflow:hidden;
+}
+.btn-primary::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,.45),transparent 70%);
+  transform:translateX(-130%);transition:transform .7s var(--ease);
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 20px 42px -14px var(--accent)}
+.btn-primary:hover::after{transform:translateX(130%)}
+.btn-ghost{border-color:var(--border);background:var(--surface);color:var(--text)}
+.btn-ghost:hover{transform:translateY(-2px);border-color:var(--border-strong);background:var(--surface-2)}
+
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin:12px 0 58px}
+.stat{
+  padding:22px 20px;border-radius:var(--radius);
+  background:var(--surface);border:1px solid var(--border);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  transition:transform .35s var(--ease),border-color .3s,box-shadow .35s;
+}
+.stat:hover{transform:translateY(-5px);border-color:var(--border-strong);box-shadow:var(--shadow)}
+.stat .num{
+  font-family:var(--font-display);font-size:1.8rem;font-weight:700;letter-spacing:-.03em;
+  background:linear-gradient(120deg,var(--accent),var(--accent-2));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.stat .lbl{font-size:.82rem;color:var(--muted);font-weight:500;margin-top:2px}
+
+.sec-head{margin:0 0 28px}
+.sec-head h2{font-size:clamp(1.55rem,3vw,2.05rem);font-weight:700;margin-bottom:8px}
+.sec-head p{color:var(--muted);max-width:740px;font-size:.95rem}
+.section{padding-top:52px}
+
+.module-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(258px,1fr));gap:18px}
+.module{
+  position:relative;overflow:hidden;text-align:left;padding:28px 24px;border-radius:var(--radius);
+  background:var(--surface);border:1px solid var(--border);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  transition:transform .4s var(--ease),border-color .35s,box-shadow .4s;
+}
+.module::before{
+  content:'';position:absolute;inset:0;opacity:0;
+  background:radial-gradient(420px circle at var(--mx,50%) var(--my,0%),color-mix(in srgb,var(--accent) 22%,transparent),transparent 65%);
+  transition:opacity .45s var(--ease);
+}
+.module:hover{transform:translateY(-6px);border-color:var(--border-strong);box-shadow:var(--shadow)}
+.module:hover::before{opacity:1}
+.module-ico{
+  width:46px;height:46px;border-radius:14px;display:grid;place-items:center;margin-bottom:18px;
+  background:linear-gradient(140deg,color-mix(in srgb,var(--accent) 22%,transparent),color-mix(in srgb,var(--accent-2) 18%,transparent));
+  border:1px solid var(--border);color:var(--accent);
+  transition:transform .4s var(--ease);
+}
+.module:hover .module-ico{transform:scale(1.08) rotate(-6deg)}
+.module-ico svg{width:22px;height:22px}
+.module h3{font-size:1.04rem;margin-bottom:8px;font-weight:600}
+.module p{font-size:.89rem;color:var(--muted);line-height:1.6}
+.module .arrow{display:inline-flex;align-items:center;gap:6px;margin-top:16px;font-size:.84rem;font-weight:600;color:var(--accent)}
+.module .arrow svg{width:14px;height:14px;transition:transform .35s var(--ease)}
+.module:hover .arrow svg{transform:translateX(5px)}
+
+.card{
+  padding:24px 26px;border-radius:var(--radius);
+  background:var(--surface);border:1px solid var(--border);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  transition:transform .35s var(--ease),border-color .3s,box-shadow .35s;
+}
+.card:hover{transform:translateY(-4px);border-color:var(--border-strong);box-shadow:var(--shadow)}
+.card h3{font-size:1.02rem;margin-bottom:10px;font-weight:600}
+.card p{font-size:.9rem;color:var(--muted);line-height:1.68}
+.card .kicker{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;display:block}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(258px,1fr))}
+.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.grid-3{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+
+.vt{position:relative;margin-top:26px}
+.vt::before{
+  content:'';position:absolute;left:13px;top:10px;bottom:10px;width:2px;border-radius:2px;
+  background:linear-gradient(180deg,var(--accent),var(--accent-2) 55%,var(--accent-3));
+  opacity:.55;
+}
+.vt-item{position:relative;padding-left:46px;margin-bottom:18px;animation:termIn .5s var(--ease) both;animation-delay:var(--d,0ms)}
+@keyframes termIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.vt-dot{position:absolute;left:7px;top:24px;width:14px;height:14px;border-radius:50%;background:var(--c);border:3px solid var(--bg);box-shadow:0 0 0 3px color-mix(in srgb,var(--c) 30%,transparent);transition:transform .3s var(--ease)}
+.vt-item:hover .vt-dot{transform:scale(1.3)}
+.vt-card{padding:20px 22px;border-radius:var(--radius-sm);background:var(--surface);border:1px solid var(--border);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);transition:border-color .3s,transform .3s var(--ease),box-shadow .3s}
+.vt-item:hover .vt-card{border-color:var(--border-strong);transform:translateX(3px);box-shadow:var(--shadow)}
+.vt-top{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:8px}
+.vt-year{font-family:var(--font-display);font-size:.86rem;font-weight:700;color:var(--accent);padding:3px 10px;border-radius:7px;background:color-mix(in srgb,var(--accent) 13%,transparent);border:1px solid color-mix(in srgb,var(--accent) 26%,transparent);white-space:nowrap}
+.vt-era{font-size:.68rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.vt-card h4{font-size:1rem;font-weight:600;margin-bottom:7px;line-height:1.3}
+.vt-card > p{font-size:.88rem;color:var(--muted);line-height:1.66}
+.vt-more{display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:.79rem;font-weight:600;color:var(--accent);padding:4px 0;transition:gap .3s var(--ease)}
+.vt-more:hover{gap:9px}
+.vt-more svg{width:12px;height:12px;transition:transform .4s var(--ease)}
+.vt-item.open .vt-more svg{transform:rotate(180deg)}
+.vt-extra{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s var(--ease)}
+.vt-item.open .vt-extra{grid-template-rows:1fr}
+.vt-extra > div{overflow:hidden}
+.vt-extra p{font-size:.85rem;color:var(--muted);line-height:1.7;border-top:1px solid var(--border);margin-top:12px;padding-top:12px}
+
+.diagram-wrap{
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+  padding:22px 20px;box-shadow:var(--shadow);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+}
+.diagram-wrap h4{font-size:1.02rem;margin-bottom:8px;font-weight:600}
+.diagram-wrap .sub{font-size:.87rem;color:var(--muted);margin-bottom:16px;line-height:1.55}
+.diagram-wrap svg{display:block;width:100%;max-width:520px;height:auto;margin:0 auto;border-radius:12px}
+
+.info-panel{
+  margin-top:16px;padding:16px 18px;border-radius:var(--radius-sm);
+  background:var(--surface-2);border:1px solid var(--border);
+  min-height:100px;transition:border-color .3s,background .3s;
+}
+.info-panel.active{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 7%,var(--surface-2))}
+.info-panel .ip-name{font-family:var(--font-display);font-weight:700;font-size:1.02rem;color:var(--accent);margin-bottom:6px}
+.info-panel .ip-desc{font-size:.85rem;color:var(--muted);line-height:1.6}
+.info-panel .ip-hint{color:var(--muted);font-size:.86rem;font-style:italic}
+
+.note{
+  margin-top:26px;padding:16px 20px;border-radius:14px;font-size:.85rem;color:var(--muted);
+  border:1px solid var(--border);background:var(--surface-2);border-left:3px solid var(--accent);
+  line-height:1.65;
+}
+.note strong{color:var(--text);font-weight:600}
+.note.ref{border-left-color:var(--accent-2);background:color-mix(in srgb,var(--accent-2) 8%,var(--surface-2))}
+.note.ref strong{color:var(--accent-2)}
+.note.good{border-left-color:var(--good);background:color-mix(in srgb,var(--good) 8%,var(--surface-2))}
+.note.good strong{color:var(--good)}
+.note.danger{border-left-color:var(--bad);background:color-mix(in srgb,var(--bad) 8%,var(--surface-2))}
+.note.danger strong{color:var(--bad)}
+
+.progress-item{margin:14px 0}
+.progress-item .pi-label{display:flex;justify-content:space-between;font-size:.82rem;font-weight:600;margin-bottom:6px}
+.progress-item .pi-label span:last-child{color:var(--accent)}
+.progress-track{height:8px;border-radius:999px;background:var(--surface-2);overflow:hidden;border:1px solid var(--border)}
+.progress-fill{
+  height:100%;border-radius:999px;
+  background:linear-gradient(90deg,var(--accent),var(--accent-2));
+  width:0;transition:width 1.5s var(--ease);
+  animation:progressIn 1.5s var(--ease) forwards;
+  animation-delay:var(--d,0.2s);
+}
+@keyframes progressIn{to{width:var(--pct)}}
+
+.gloss-shell{max-width:900px;margin:0 auto}
+.search-wrap{position:relative;margin-bottom:18px}
+.search-wrap svg{position:absolute;left:16px;top:50%;transform:translateY(-50%);color:var(--muted);pointer-events:none}
+.gloss-search{
+  width:100%;padding:14px 18px 14px 44px;border-radius:14px;
+  border:1px solid var(--border);background:var(--surface);
+  color:var(--text);font-size:.95rem;font-family:inherit;
+  transition:border-color .3s,box-shadow .3s;
+}
+.gloss-search:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 25%,transparent)}
+.gloss-grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.gloss-item{
+  padding:16px 18px;border-radius:14px;
+  background:var(--surface);border:1px solid var(--border);
+  transition:transform .3s var(--ease),border-color .3s,box-shadow .3s;
+}
+.gloss-item:hover{transform:translateY(-3px);border-color:var(--border-strong);box-shadow:var(--shadow)}
+.gloss-item .gi-term{
+  font-family:var(--font-display);font-size:.98rem;font-weight:700;color:var(--accent);
+  margin-bottom:6px;display:flex;align-items:center;gap:8px;
+}
+.gloss-item .gi-def{font-size:.86rem;color:var(--muted);line-height:1.6}
+.gloss-empty{text-align:center;padding:30px;color:var(--muted);font-size:.9rem;font-style:italic}
+
+.quiz-shell{max-width:760px;margin:0 auto}
+.quiz-card{
+  padding:34px;border-radius:var(--radius);
+  background:var(--surface);border:1px solid var(--border);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  box-shadow:var(--shadow);
+}
+.quiz-meta{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:12px;font-size:.81rem;font-weight:600;color:var(--muted)}
+.progress{height:6px;border-radius:99px;background:var(--surface-2);overflow:hidden;margin-bottom:30px;border:1px solid var(--border)}
+.progress-bar{height:100%;width:0%;border-radius:99px;background:linear-gradient(90deg,var(--accent),var(--accent-2));transition:width .55s var(--ease)}
+.q-text{font-family:var(--font-display);font-size:clamp(1.12rem,2.4vw,1.42rem);font-weight:600;line-height:1.35;margin-bottom:26px}
+.options{display:grid;gap:11px}
+.option{
+  display:flex;align-items:center;gap:14px;text-align:left;
+  padding:16px 18px;border-radius:14px;font-size:.93rem;font-weight:500;
+  background:var(--surface-2);border:1px solid var(--border);color:var(--text);
+  transition:transform .25s var(--ease),border-color .25s,background .25s;
+}
+.option:hover:not(:disabled){transform:translateX(4px);border-color:var(--accent);background:color-mix(in srgb,var(--accent) 8%,transparent)}
+.option:disabled{cursor:default}
+.option .letter{
+  width:28px;height:28px;border-radius:9px;flex:none;display:grid;place-items:center;
+  font-size:.77rem;font-weight:700;font-family:var(--font-display);
+  background:var(--surface-solid);border:1px solid var(--border);color:var(--muted);
+}
+.option.correct{background:color-mix(in srgb,var(--good) 15%,transparent);border-color:var(--good)}
+.option.correct .letter{background:var(--good);color:#fff;border-color:var(--good)}
+.option.wrong{background:color-mix(in srgb,var(--bad) 13%,transparent);border-color:var(--bad)}
+.option.wrong .letter{background:var(--bad);color:#fff;border-color:var(--bad)}
+.feedback{margin-top:22px;padding:16px 18px;border-radius:14px;font-size:.88rem;line-height:1.6;border:1px solid var(--border);background:var(--surface-2);animation:termIn .4s var(--ease) both}
+.feedback strong{color:var(--text)}
+.quiz-actions{display:flex;justify-content:flex-end;margin-top:24px}
+.result{text-align:center;padding:20px 6px}
+.result .score{font-family:var(--font-display);font-size:clamp(3rem,9vw,4.6rem);font-weight:700;letter-spacing:-.05em;background:linear-gradient(120deg,var(--accent),var(--accent-2) 50%,var(--accent-3));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1;margin-bottom:10px}
+.result h3{font-size:1.28rem;margin-bottom:10px}
+.result p{color:var(--muted);margin-bottom:26px}
+
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s var(--ease),transform .7s var(--ease);transition-delay:var(--d,0ms)}
+.reveal.in{opacity:1;transform:none}
+
+.site-footer{border-top:1px solid var(--border);padding:34px 22px;text-align:center;font-size:.85rem;color:var(--muted)}
+.site-footer strong{color:var(--text);font-weight:600}
+
+@media (max-width:1040px){.nav-link{padding:9px 9px;font-size:.76rem}}
+@media (max-width:900px){
+  .header-inner{padding:12px 16px;gap:14px;flex-wrap:wrap}
+  .nav{order:3;width:100%;margin-left:0;padding-bottom:2px}
+  .theme-toggle{margin-left:auto}
+  main{padding:0 16px 70px}
+  .hero{padding:44px 0 32px}
+  .stats{grid-template-columns:repeat(2,1fr);gap:11px}
+  .stat{padding:17px 15px}
+  .stat .num{font-size:1.45rem}
+  .vt-item{padding-left:38px}
+  .quiz-card{padding:24px 20px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<div class="bg-stars" id="bgStars" aria-hidden="true"></div>
+<div class="bg-dots" aria-hidden="true"></div>
+<div class="orbs" aria-hidden="true">
+  <div class="orb o1"></div>
+  <div class="orb o2"></div>
+  <div class="orb o3"></div>
+</div>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="#inicio" data-route="inicio">
+      <span class="brand-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2l3 7h7l-6 4 2 7-6-4-6 4 2-7-6-4h7z"/>
+        </svg>
+      </span>
+      <span>Egipto · Guía</span>
+    </a>
+
+    <nav class="nav" aria-label="Navegación principal">
+      <button class="nav-link active" data-route="inicio">Inicio</button>
+      <button class="nav-link" data-route="cronologia">Cronología</button>
+      <button class="nav-link" data-route="dioses">Dioses y mitos</button>
+      <button class="nav-link" data-route="momias">Momias</button>
+      <button class="nav-link" data-route="libro">Libro de los Muertos</button>
+      <button class="nav-link" data-route="piramides">Pirámides</button>
+      <button class="nav-link" data-route="edificios">Otros edificios</button>
+      <button class="nav-link" data-route="influencia">Influencia</button>
+      <button class="nav-link" data-route="glosario">Glosario</button>
+      <button class="nav-link" data-route="quiz">Quiz</button>
+    </nav>
+
+    <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema">
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round">
+        <circle cx="12" cy="12" r="4"/>
+        <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>
+      </svg>
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<main>
+
+  <!-- =============== INICIO =============== -->
+  <section class="view active" data-view="inicio">
+    <div class="hero">
+      <span class="pill"><span class="dot"></span>Más de 3.000 años de civilización</span>
+      <h1 class="hero-title">El antiguo Egipto, <span class="grad">explicado</span></h1>
+      <p class="lead">
+        Desde la unificación de las Dos Tierras hasta Cleopatra. Dioses y mitos, momificación,
+        el Libro de los Muertos, las pirámides, los grandes templos y el legado que aún vive entre nosotros.
+      </p>
+      <div class="hero-actions">
+        <button class="btn btn-primary" data-route="cronologia">
+          Ver la cronología
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+        <button class="btn btn-ghost" data-route="piramides">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 22h20L12 2z"/></svg>
+          Explorar pirámides
+        </button>
+      </div>
+    </div>
+
+    <div class="stats reveal">
+      <div class="stat"><div class="num" data-count="3100" data-suffix=" a.C.">0</div><div class="lbl">Unificación de Egipto</div></div>
+      <div class="stat"><div class="num" data-count="30" data-suffix=" dinastías">0</div><div class="lbl">Desde Narmer hasta Cleopatra</div></div>
+      <div class="stat"><div class="num" data-count="146" data-suffix=" m">0</div><div class="lbl">Altura original de la Gran Pirámide</div></div>
+      <div class="stat"><div class="num" data-count="70" data-suffix=" días">0</div><div class="lbl">Duración de la momificación</div></div>
+    </div>
+
+    <div class="sec-head reveal">
+      <h2>Un recorrido por la civilización faraónica</h2>
+      <p>Desde los primeros asentamientos del Nilo hasta el Egipto ptolemaico. Con líneas del tiempo, ilustraciones y explicaciones claras.</p>
+    </div>
+
+    <div class="module-grid">
+      <button class="module reveal" data-route="cronologia">
+        <span class="module-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span>
+        <h3>Cronología</h3>
+        <p>Desde el período predinástico hasta Cleopatra VII y la anexión romana.</p>
+        <span class="arrow">Ver cronología<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </button>
+      <button class="module reveal" data-route="dioses" style="--d:40ms">
+        <span class="module-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3 7h7l-6 4 2 7-6-4-6 4 2-7-6-4h7z"/></svg></span>
+        <h3>Dioses y mitos</h3>
+        <p>La Enéada, Osiris, Isis, Horus, Seth y los grandes relatos del origen.</p>
+        <span class="arrow">Ver dioses<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </button>
+      <button class="module reveal" data-route="momias" style="--d:80ms">
+        <span class="module-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C8 2 6 6 6 10v10h12V10c0-4-2-8-6-8z"/><path d="M9 14h6"/></svg></span>
+        <h3>Momias</h3>
+        <p>El proceso de momificación en 70 días, los amuletos y la vida eterna.</p>
+        <span class="arrow">Ver momias<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </button>
+      <button class="module reveal" data-route="libro" style="--d:120ms">
+        <span class="module-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5V5a2 2 0 0 1 2-2h14v16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/><path d="M4 15h16"/></svg></span>
+        <h3>Libro de los Muertos</h3>
+        <p>El juicio de Osiris, la balanza del corazón y los hechizos para el más allá.</p>
+        <span class="arrow">Ver libro<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </button>
+      <button class="module reveal" data-route="piramides" style="--d:160ms">
+        <span class="module-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 22h20L12 2z"/></svg></span>
+        <h3>Pirámides</h3>
+        <p>De la mastaba a la pirámide perfecta: Djoser, Snefru, Guiza y los grandes faraones.</p>
+        <span class="arrow">Ver pirámides<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </button>
+      <button class="module reveal" data-route="edificios" style="--d:200ms">
+        <span class="module-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V9l7-6 7 6v12M9 21v-6h6v6"/></svg></span>
+        <h3>Otros edificios</h3>
+        <p>Templos, obeliscos, hipogeos, speos y la arquitectura del poder.</p>
+        <span class="arrow">Ver edificios<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </button>
+      <button class="module reveal" data-route="influencia" style="--d:240ms">
+        <span class="module-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span>
+        <h3>Influencia</h3>
+        <p>Cómo Egipto moldeó a Grecia, Roma y el mundo moderno.</p>
+        <span class="arrow">Ver influencia<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </button>
+      <button class="module reveal" data-route="glosario" style="--d:280ms">
+        <span class="module-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5V5a2 2 0 0 1 2-2h14v16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/><path d="M4 15h16"/></svg></span>
+        <h3>Glosario</h3>
+        <p>Faraón, nomo, mastaba, sarcófago, canope, ushebti… todo explicado.</p>
+        <span class="arrow">Abrir glosario<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </button>
+      <button class="module reveal" data-route="quiz" style="--d:320ms">
+        <span class="module-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l2 2 4-4"/><rect x="3" y="4" width="18" height="16" rx="3"/></svg></span>
+        <h3>Quiz</h3>
+        <p>Diez preguntas al azar sobre cronología, dioses, momias, pirámides y legado.</p>
+        <span class="arrow">Empezar quiz<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </button>
+    </div>
+
+    <div class="note ref reveal">
+      <strong>Dato curioso:</strong> la civilización egipcia duró más de 3.000 años. Para ponerlo en perspectiva,
+      desde el primer faraón hasta Cleopatra pasó más tiempo que desde Cleopatra hasta hoy.
+    </div>
+  </section>
+
+  <!-- =============== CRONOLOGÍA =============== -->
+  <section class="view" data-view="cronologia">
+    <div class="sec-head section">
+      <h2>Cronología del antiguo Egipto</h2>
+      <p>Desde los primeros asentamientos neolíticos hasta la anexión romana. Los grandes períodos y los faraones más destacados.</p>
+    </div>
+    <div class="vt" id="timelineList"></div>
+    <div class="note reveal ref">
+      <strong>Nota:</strong> las fechas anteriores a la Dinastía XXVI son aproximadas. Los egiptólogos siguen debatiendo
+      algunos detalles, y distintas dinastías pudieron gobernar simultáneamente en diferentes partes del país.
+    </div>
+  </section>
+
+  <!-- =============== DIOSES =============== -->
+  <section class="view" data-view="dioses">
+    <div class="sec-head section">
+      <h2>Dioses y mitos</h2>
+      <p>Los egipcios adoraban a cientos de dioses. Cada uno tenía un papel en el mantenimiento del orden cósmico y social.</p>
+    </div>
+
+    <div class="diagram-wrap reveal" style="margin-bottom:24px">
+      <h4>La Enéada de Heliópolis</h4>
+      <p class="sub">El grupo de nueve dioses que, según el mito de la creación, dieron forma al mundo.</p>
+      <svg viewBox="0 0 520 340" role="img" aria-label="Árbol genealógico de la Enéada egipcia: Atum, Shu, Tefnut, Geb, Nut, Osiris, Isis, Seth y Neftis">
+        <defs>
+          <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--muted)"/>
+          </marker>
+        </defs>
+        <!-- Conexiones -->
+        <g stroke="var(--border-strong)" stroke-width="1.5" fill="none" opacity=".6">
+          <line x1="260" y1="50" x2="260" y2="90"/>
+          <line x1="260" y1="90" x2="180" y2="130"/>
+          <line x1="260" y1="90" x2="340" y2="130"/>
+          <line x1="180" y1="130" x2="260" y2="180"/>
+          <line x1="340" y1="130" x2="260" y2="180"/>
+          <line x1="260" y1="180" x2="260" y2="230"/>
+          <line x1="260" y1="230" x2="150" y2="280"/>
+          <line x1="260" y1="230" x2="220" y2="280"/>
+          <line x1="260" y1="230" x2="300" y2="280"/>
+          <line x1="260" y1="230" x2="370" y2="280"/>
+        </g>
+        <!-- Nodos -->
+        <g font-family="var(--font-display)" text-anchor="middle">
+          <!-- Atum -->
+          <rect x="220" y="25" width="80" height="34" rx="8" fill="var(--surface-solid)" stroke="var(--accent)" stroke-width="2"/>
+          <text x="260" y="46" font-size="13" font-weight="700" fill="var(--accent)">Atum</text>
+
+          <!-- Shu y Tefnut -->
+          <rect x="140" y="108" width="80" height="34" rx="8" fill="var(--surface-solid)" stroke="var(--accent-2)" stroke-width="2"/>
+          <text x="180" y="129" font-size="12" fill="var(--text)">Shu</text>
+          <rect x="300" y="108" width="80" height="34" rx="8" fill="var(--surface-solid)" stroke="var(--accent-2)" stroke-width="2"/>
+          <text x="340" y="129" font-size="12" fill="var(--text)">Tefnut</text>
+
+          <!-- Geb y Nut -->
+          <rect x="220" y="160" width="80" height="34" rx="8" fill="var(--surface-solid)" stroke="var(--accent-3)" stroke-width="2"/>
+          <text x="260" y="181" font-size="12" fill="var(--text)">Geb</text>
+          <rect x="220" y="210" width="80" height="34" rx="8" fill="var(--surface-solid)" stroke="var(--accent-3)" stroke-width="2"/>
+          <text x="260" y="231" font-size="12" fill="var(--text)">Nut</text>
+
+          <!-- Hijos de Geb y Nut -->
+          <rect x="110" y="260" width="80" height="34" rx="8" fill="var(--surface-solid)" stroke="var(--good)" stroke-width="2"/>
+          <text x="150" y="281" font-size="12" fill="var(--text)">Osiris</text>
+          <rect x="190" y="260" width="80" height="34" rx="8" fill="var(--surface-solid)" stroke="var(--good)" stroke-width="2"/>
+          <text x="230" y="281" font-size="12" fill="var(--text)">Isis</text>
+          <rect x="270" y="260" width="80" height="34" rx="8" fill="var(--surface-solid)" stroke="var(--bad)" stroke-width="2"/>
+          <text x="310" y="281" font-size="12" fill="var(--text)">Seth</text>
+          <rect x="350" y="260" width="80" height="34" rx="8" fill="var(--surface-solid)" stroke="var(--muted)" stroke-width="2"/>
+          <text x="390" y="281" font-size="11" fill="var(--muted)">Neftis</text>
+        </g>
+      </svg>
+    </div>
+
+    <div class="grid-2">
+      <div class="card reveal">
+        <span class="kicker">Dios supremo</span>
+        <h3>Ra / Amón-Ra</h3>
+        <p>El dios del sol y creador. Navega el cielo en su barca solar y combate a la serpiente Apofis cada noche. Se fusionó con Amón para convertirse en Amón-Ra, el rey de los dioses.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Más allá</span>
+        <h3>Osiris</h3>
+        <p>Dios de la muerte, la resurrección y la fertilidad. Asesinado por su hermano Seth, resucitó gracias a Isis y se convirtió en el señor del inframundo y juez de los muertos.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Magia y maternidad</span>
+        <h3>Isis</h3>
+        <p>Esposa de Osiris y madre de Horus. Diosa de la magia, la sabiduría y la fidelidad. Su culto se extendió por todo el Mediterráneo y compitió con el cristianismo primitivo.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Rey y venganza</span>
+        <h3>Horus</h3>
+        <p>Hijo de Osiris e Isis. Con cabeza de halcón, simboliza la realeza y el orden. Venció a Seth en una larga contienda y se convirtió en el modelo de todo faraón.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Caos</span>
+        <h3>Seth</h3>
+        <p>Dios de la tormenta, el desierto y el caos. Hermano y asesino de Osiris. Representa las fuerzas desordenadas que el faraón debe mantener a raya.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Sabiduría</span>
+        <h3>Thot</h3>
+        <p>Dios de la escritura, la sabiduría y la luna. Con cabeza de ibis, inventó los jeroglíficos y registra el resultado del juicio de los muertos.</p>
+      </div>
+    </div>
+
+    <div class="note reveal ref">
+      <strong>El mito de Osiris:</strong> Seth encerró a Osiris en un sarcófago y lo arrojó al Nilo. Isis recuperó el cuerpo,
+      pero Seth lo descuartizó en 14 trozos. Isis reunió los trozos, y con la ayuda de Anubis y Thot, devolvió la vida a Osiris.
+      Antes de partir al inframundo, Osiris engendró a Horus, que vengará a su padre y reinará en la Tierra.
+    </div>
+  </section>
+
+  <!-- =============== MOMIAS =============== -->
+  <section class="view" data-view="momias">
+    <div class="sec-head section">
+      <h2>La momificación</h2>
+      <p>Los egipcios creían que el cuerpo debía conservarse para que el alma pudiera vivir en el más allá. La momificación era un proceso ritual de 70 días.</p>
+    </div>
+
+    <div class="diagram-wrap reveal" style="margin-bottom:24px">
+      <h4>El proceso de momificación</h4>
+      <p class="sub">Las etapas principales, desde la extracción de órganos hasta el vendaje final.</p>
+      <div class="progress-item">
+        <div class="pi-label"><span>Extracción del cerebro y órganos</span><span>Días 1–10</span></div>
+        <div class="progress-track"><div class="progress-fill" style="--pct:15%"></div></div>
+      </div>
+      <div class="progress-item">
+        <div class="pi-label"><span>Deshidratación con natrón</span><span>Días 10–40</span></div>
+        <div class="progress-track"><div class="progress-fill" style="--pct:55%;background:linear-gradient(90deg,var(--accent-2),var(--accent-3))"></div></div>
+      </div>
+      <div class="progress-item">
+        <div class="pi-label"><span>Vendaje y amuletos</span><span>Días 40–70</span></div>
+        <div class="progress-track"><div class="progress-fill" style="--pct:85%;background:linear-gradient(90deg,var(--accent-3),var(--good))"></div></div>
+      </div>
+      <div class="progress-item">
+        <div class="pi-label"><span>Ritual de la "Apertura de la Boca"</span><span>Día 70</span></div>
+        <div class="progress-track"><div class="progress-fill" style="--pct:100%;background:linear-gradient(90deg,var(--accent),var(--accent-2))"></div></div>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card reveal">
+        <span class="kicker">Paso 1</span>
+        <h3>Extracción de órganos</h3>
+        <p>El cerebro se extraía por la nariz con ganchos. Los órganos abdominales se sacaban por una incisión en el costado izquierdo. Solo el corazón se dejaba en su sitio, pues era el centro de la inteligencia y la memoria.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Paso 2</span>
+        <h3>Deshidratación</h3>
+        <p>El cuerpo se cubría con natrón (sal natural) durante 40 días para eliminar toda la humedad. Después se lavaba y se ungía con aceites y resinas.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Paso 3</span>
+        <h3>Vendaje y amuletos</h3>
+        <p>Se envolvían cientos de metros de lino alrededor del cuerpo, colocando amuletos entre las capas para proteger al difunto. La máscara funeraria se colocaba sobre el rostro.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Paso 4</span>
+        <h3>La "Apertura de la Boca"</h3>
+        <p>El ritual final devolvía simbólicamente los sentidos al difunto para que pudiera ver, oír, hablar y comer en el más allá. Era realizado por un sacerdote en la entrada de la tumba.</p>
+      </div>
+    </div>
+
+    <div class="note reveal good">
+      <strong>Dato:</strong> la momificación de calidad variaba según el precio. Las momias mejor conservadas son las del
+      Reino Nuevo (dinastías XVIII–XX), como la de Tutankamón. Los animales también eran momificados: gatos, ibis, cocodrilos y hasta escarabajos.
+    </div>
+  </section>
+
+  <!-- =============== LIBRO DE LOS MUERTOS =============== -->
+  <section class="view" data-view="libro">
+    <div class="sec-head section">
+      <h2>El Libro de los Muertos</h2>
+      <p>Su nombre original era <em>Libro de la Salida al Día</em>. No era un libro único, sino una colección de hechizos y fórmulas para guiar al difunto en el más allá.</p>
+    </div>
+
+    <div class="diagram-wrap reveal" style="margin-bottom:24px">
+      <h4>El juicio de Osiris</h4>
+      <p class="sub">El momento central: el corazón del difunto se pesa contra la pluma de la verdad (Maat).</p>
+      <svg viewBox="0 0 520 260" role="img" aria-label="Ilustración del juicio de Osiris: la balanza con el corazón y la pluma de Maat, Thot registrando y Ammit esperando">
+        <defs>
+          <linearGradient id="scaleGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="var(--gold)"/>
+            <stop offset="1" stop-color="var(--sand-dark)"/>
+          </linearGradient>
+        </defs>
+        <!-- Fondo -->
+        <rect x="0" y="0" width="520" height="260" fill="var(--surface-2)" rx="10"/>
+
+        <!-- Balanza -->
+        <g transform="translate(260, 130)">
+          <line x1="0" y1="-80" x2="0" y2="60" stroke="var(--gold)" stroke-width="4"/>
+          <line x1="-60" y1="-80" x2="60" y2="-80" stroke="var(--gold)" stroke-width="3"/>
+          <!-- Plato izquierdo -->
+          <line x1="-60" y1="-80" x2="-60" y2="-40" stroke="var(--gold)" stroke-width="2"/>
+          <path d="M-85 -40 Q-60 -25 -35 -40" fill="none" stroke="var(--gold)" stroke-width="2"/>
+          <!-- Corazón -->
+          <path d="M-60 -55 C-70 -65 -80 -50 -70 -40 C-60 -30 -50 -40 -60 -55" fill="var(--bad)" opacity=".8"/>
+          <!-- Plato derecho -->
+          <line x1="60" y1="-80" x2="60" y2="-40" stroke="var(--gold)" stroke-width="2"/>
+          <path d="M35 -40 Q60 -25 85 -40" fill="none" stroke="var(--gold)" stroke-width="2"/>
+          <!-- Pluma de Maat -->
+          <path d="M60 -70 L60 -35 M55 -65 Q60 -75 65 -65" stroke="var(--accent-3)" stroke-width="2" fill="none"/>
+        </g>
+
+        <!-- Thot escribiendo -->
+        <g transform="translate(400, 160)">
+          <rect x="-20" y="-10" width="40" height="30" rx="4" fill="var(--surface-solid)" stroke="var(--border-strong)" stroke-width="1.5"/>
+          <path d="M-10 -25 L-10 -10 M10 -25 L10 -10" stroke="var(--muted)" stroke-width="1.5"/>
+          <text x="0" y="10" text-anchor="middle" font-size="10" fill="var(--muted)" font-family="var(--font-mono)">THOT</text>
+        </g>
+
+        <!-- Ammit -->
+        <g transform="translate(90, 180)">
+          <path d="M-25 10 Q-30 -10 -10 -20 Q10 -30 25 -10 Q30 10 10 20 Q-10 25 -25 10 Z" fill="var(--surface-solid)" stroke="var(--bad)" stroke-width="2"/>
+          <circle cx="-8" cy="-5" r="2" fill="var(--bad)"/>
+          <circle cx="8" cy="-5" r="2" fill="var(--bad)"/>
+          <path d="M-10 10 Q0 15 10 10" stroke="var(--bad)" stroke-width="1.5" fill="none"/>
+          <text x="0" y="40" text-anchor="middle" font-size="9" fill="var(--bad)" font-family="var(--font-mono)">AMMIT</text>
+        </g>
+
+        <!-- Texto -->
+        <text x="260" y="240" text-anchor="middle" font-size="11" fill="var(--muted)" font-family="var(--font-mono)">PESADO DEL CORAZÓN</text>
+      </svg>
+    </div>
+
+    <div class="grid-2">
+      <div class="card reveal">
+        <span class="kicker">Contenido</span>
+        <h3>Hechizos y fórmulas</h3>
+        <p>El libro contenía unos 192 hechizos, aunque ningún manuscrito los tenía todos. Servían para proteger al difunto, darle conocimiento del más allá, identificarlo con los dioses y asegurar su paso al paraíso (Aaru).</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">El juicio</span>
+        <h3>La balanza del corazón</h3>
+        <p>El difunto era llevado ante Osiris. Su corazón se pesaba contra la pluma de Maat (la verdad y la justicia). Si el corazón era más pesado, Ammit lo devoraba y el difunto moría definitivamente. Si era más ligero, accedía a la vida eterna.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Soporte</span>
+        <h3>Papiros ilustrados</h3>
+        <p>Se escribía en jeroglíficos o hierático sobre rollos de papiro, a menudo con viñetas que representaban al difunto y su viaje. Algunos se colocaban dentro del sarcófago.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Evolución</span>
+        <h3>De los Textos de las Pirámides al Libro</h3>
+        <p>Sus antecedentes son los Textos de las Pirámides (III milenio a.C.) y los Textos de los Sarcófagos. El Libro de los Muertos se usó desde el inicio del Reino Nuevo (c. 1540 a.C.) hasta el 60 a.C.</p>
+      </div>
+    </div>
+
+    <div class="note reveal ref">
+      <strong>El conjuro 125:</strong> es el más famoso. Contiene la "confesión negativa", una lista de pecados que el difunto
+      jura no haber cometido (no maté, no robé, no mentí…). Es la base de la ética egipcia y del juicio final.
+    </div>
+  </section>
+
+  <!-- =============== PIRÁMIDES =============== -->
+  <section class="view" data-view="piramides">
+    <div class="sec-head section">
+      <h2>Las pirámides</h2>
+      <p>De las mastabas primitivas a la Gran Pirámide de Guiza. La evolución de la arquitectura funeraria egipcia.</p>
+    </div>
+
+    <div class="diagram-wrap reveal" style="margin-bottom:24px">
+      <h4>Evolución de la pirámide</h4>
+      <p class="sub">Mastaba → Pirámide escalonada → Pirámide romboidal → Pirámide perfecta.</p>
+      <svg viewBox="0 0 520 280" role="img" aria-label="Evolución de las pirámides: mastaba, pirámide escalonada de Djoser, pirámide romboidal de Snefru y Gran Pirámide de Guiza">
+        <!-- Mastaba -->
+        <g transform="translate(70, 200)">
+          <rect x="-35" y="-40" width="70" height="40" fill="var(--sand)" stroke="var(--sand-dark)" stroke-width="2"/>
+          <text x="0" y="20" text-anchor="middle" font-size="9" fill="var(--muted)" font-family="var(--font-mono)">MASTABA</text>
+        </g>
+        <!-- Escalonada -->
+        <g transform="translate(180, 200)">
+          <rect x="-35" y="-20" width="70" height="20" fill="var(--sand)" stroke="var(--sand-dark)" stroke-width="1.5"/>
+          <rect x="-28" y="-35" width="56" height="15" fill="var(--sand)" stroke="var(--sand-dark)" stroke-width="1.5"/>
+          <rect x="-21" y="-50" width="42" height="15" fill="var(--sand)" stroke="var(--sand-dark)" stroke-width="1.5"/>
+          <rect x="-14" y="-65" width="28" height="15" fill="var(--sand)" stroke="var(--sand-dark)" stroke-width="1.5"/>
+          <text x="0" y="20" text-anchor="middle" font-size="9" fill="var(--muted)" font-family="var(--font-mono)">DJOSER</text>
+        </g>
+        <!-- Romboidal -->
+        <g transform="translate(300, 200)">
+          <path d="M-45 0 L-30 -50 L0 -70 L30 -50 L45 0 Z" fill="var(--sand)" stroke="var(--sand-dark)" stroke-width="2"/>
+          <text x="0" y="20" text-anchor="middle" font-size="9" fill="var(--muted)" font-family="var(--font-mono)">SNEFRU</text>
+        </g>
+        <!-- Gran Pirámide -->
+        <g transform="translate(430, 200)">
+          <path d="M-55 0 L0 -90 L55 0 Z" fill="var(--gold)" stroke="var(--sand-dark)" stroke-width="2" opacity=".9"/>
+          <text x="0" y="20" text-anchor="middle" font-size="9" fill="var(--muted)" font-family="var(--font-mono)">GUIZA</text>
+        </g>
+      </svg>
+    </div>
+
+    <div class="vt" id="pyramidList"></div>
+
+    <div class="note reveal good">
+      <strong>La Gran Pirámide:</strong> construida por el faraón Keops (Jufu) hacia el 2560 a.C., fue la estructura
+      más alta del mundo durante casi 4.000 años. Contiene unos 2,3 millones de bloques de piedra, con un peso medio de 2,5 toneladas cada uno.
+    </div>
+  </section>
+
+  <!-- =============== OTROS EDIFICIOS =============== -->
+  <section class="view" data-view="edificios">
+    <div class="sec-head section">
+      <h2>Otros edificios egipcios</h2>
+      <p>Además de las pirámides, los egipcios construyeron templos colosales, obeliscos, tumbas excavadas en la roca y palacios.</p>
+    </div>
+
+    <div class="grid-2">
+      <div class="card reveal">
+        <span class="kicker">Templos</span>
+        <h3>Karnak y Luxor</h3>
+        <p>El complejo de Karnak es el mayor conjunto religioso del mundo antiguo. Dedicado a Amón-Ra, creció durante más de 2.000 años con aportaciones de distintos faraones. La sala hipóstila tiene 134 columnas colosales.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Templos</span>
+        <h3>Abu Simbel</h3>
+        <p>Excavado en la roca por Ramsés II, está custodiado por cuatro colosos de casi 20 metros. Fue trasladado piedra a piedra en los años 60 para salvarlo de la inundación del lago Nasser.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Templos funerarios</span>
+        <h3>Deir el-Bahari</h3>
+        <p>El templo de Hatshepsut, con sus terrazas superpuestas contra el acantilado, es una obra maestra de la arquitectura integrada en el paisaje. Diseñado por el arquitecto Senenmut.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Obeliscos</span>
+        <h3>Agujas de piedra</h3>
+        <p>Monolitos de granito de hasta 30 metros, coronados por una punta dorada (piramidión). Simbolizaban el rayo del sol. Muchos fueron llevados a Roma, París, Londres y Nueva York en la Antigüedad y la era moderna.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Hipogeos</span>
+        <h3>Tumbas excavadas</h3>
+        <p>En el Valle de los Reyes, los faraones del Reino Nuevo abandonaron las pirámides y excavaron sus tumbas en la roca, ocultas y profundas, para evitar los saqueos.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Speos</span>
+        <h3>Templos rupestres</h3>
+        <p>Templos excavados directamente en la roca, como Abu Simbel o el de Ramsés II en Gerf Hussein. Combinan la arquitectura con la escultura monumental.</p>
+      </div>
+    </div>
+
+    <div class="note reveal ref">
+      <strong>El obelisco inacabado:</strong> en las canteras de Asuán hay un obelisco de 42 metros que nunca se terminó
+      porque aparecieron grietas en la piedra. Nos muestra exactamente cómo trabajaban los canteros egipcios.
+    </div>
+  </section>
+
+  <!-- =============== INFLUENCIA =============== -->
+  <section class="view" data-view="influencia">
+    <div class="sec-head section">
+      <h2>La influencia de Egipto</h2>
+      <p>Egipto no fue un caso aislado. Su arte, religión, ciencia y arquitectura influyeron en Grecia, Roma y, a través de ellas, en el mundo moderno.</p>
+    </div>
+
+    <div class="grid-2">
+      <div class="card reveal">
+        <span class="kicker">Mundo antiguo</span>
+        <h3>Grecia y Roma</h3>
+        <p>Los griegos consideraban a Egipto la cuna de la sabiduría. Pitágoras, Platón y Herodoto viajaron allí. El culto a Isis se extendió por todo el Mediterráneo romano. La arquitectura egipcia inspiró columnas, obeliscos y templos.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Religión</span>
+        <h3>Judaísmo, cristianismo e islam</h3>
+        <p>Egipto aparece en la Biblia (José, Moisés, el Éxodo). La iconografía de Isis amamantando a Horus influyó en las representaciones de la Virgen con el Niño. El monacato cristiano nació en el desierto egipcio.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Ciencia</span>
+        <h3>Medicina, geometría y calendario</h3>
+        <p>Los egipcios desarrollaron un calendario de 365 días, técnicas de geometría para medir tierras y tratados médicos. Su conocimiento pasó a Grecia y luego al mundo islámico.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Mundo moderno</span>
+        <h3>Arqueología y cultura popular</h3>
+        <p>La egiptología nació con la campaña de Napoleón y el descifrado de la Piedra Rosetta. Hoy, Egipto inspira el cine, la literatura, la moda y el turismo. Tutankamón y Cleopatra son íconos globales.</p>
+      </div>
+    </div>
+
+    <div class="note reveal good">
+      <strong>Reflexión:</strong> aunque la civilización faraónica terminó, su legado sigue vivo. Cada vez que usamos un calendario
+      de 365 días, admiramos un obelisco en una plaza europea o vemos una película sobre momias, estamos conectando con Egipto.
+    </div>
+  </section>
+
+  <!-- =============== GLOSARIO =============== -->
+  <section class="view" data-view="glosario">
+    <div class="sec-head section">
+      <h2>Glosario egipcio</h2>
+      <p>Los términos clave para entender la civilización faraónica. Busca cualquier palabra para filtrar.</p>
+    </div>
+    <div class="gloss-shell">
+      <div class="search-wrap">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        <input type="text" class="gloss-search" id="glossSearch" placeholder="Buscar término… (ej: faraón, mastaba, sarcófago)" aria-label="Buscar término">
+      </div>
+      <div class="gloss-grid" id="glossGrid"></div>
+      <div id="glossEmpty" class="gloss-empty" style="display:none">No se encontraron términos con esa búsqueda.</div>
+    </div>
+  </section>
+
+  <!-- =============== QUIZ =============== -->
+  <section class="view" data-view="quiz">
+    <div class="sec-head section">
+      <h2>Quiz del antiguo Egipto</h2>
+      <p>Diez preguntas al azar sobre cronología, dioses, momias, pirámides y legado.</p>
+    </div>
+    <div class="quiz-shell">
+      <div class="quiz-card" id="quizCard"></div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <p><strong>Egipto · Guía interactiva</strong> — Material educativo sobre la civilización faraónica.</p>
+</footer>
+
+<script>
+const $  = (sel, root = document) => root.querySelector(sel);
+const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+const htmlEl = document.documentElement;
+
+function setTheme(t){
+  htmlEl.setAttribute('data-theme', t);
+  try { localStorage.setItem('egypt-theme', t); } catch(e){}
+}
+(function initTheme(){
+  let saved = null;
+  try { saved = localStorage.getItem('egypt-theme'); } catch(e){}
+  setTheme(saved || 'light');
+})();
+$('#themeToggle').addEventListener('click', () => {
+  setTheme(htmlEl.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+});
+
+(function buildStars(){
+  const cont = $('#bgStars');
+  if (!cont) return;
+  for (let i = 0; i < 80; i++){
+    const s = document.createElement('div');
+    s.className = 'star';
+    s.style.left = Math.random() * 100 + '%';
+    s.style.top = Math.random() * 100 + '%';
+    const size = 1 + Math.random() * 2;
+    s.style.width = size + 'px';
+    s.style.height = size + 'px';
+    s.style.setProperty('--tw-dur', (2 + Math.random() * 4) + 's');
+    s.style.setProperty('--tw-delay', (Math.random() * 4) + 's');
+    cont.appendChild(s);
+  }
+})();
+
+const ROUTES = ['inicio','cronologia','dioses','momias','libro','piramides','edificios','influencia','glosario','quiz'];
+let currentRoute = 'inicio';
+
+function go(route, push = true){
+  if (!ROUTES.includes(route)) route = 'inicio';
+  currentRoute = route;
+  $$('.view').forEach(v => v.classList.toggle('active', v.dataset.view === route));
+  $$('.nav-link').forEach(b => b.classList.toggle('active', b.dataset.route === route));
+  if (push && location.hash.slice(1) !== route) history.pushState(null, '', '#' + route);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  requestAnimationFrame(() => {
+    $$('.view.active .reveal').forEach(el => el.classList.remove('in'));
+    checkReveal();
+    if (route === 'inicio') animateCounters();
+    if (route === 'cronologia') renderTimeline();
+    if (route === 'piramides') renderPyramids();
+    if (route === 'glosario') renderGlossary();
+    if (route === 'quiz') startQuiz();
+  });
+}
+document.addEventListener('click', e => {
+  const t = e.target.closest('[data-route]');
+  if (t){ e.preventDefault(); go(t.dataset.route); }
+});
+window.addEventListener('popstate', () => go(location.hash.slice(1) || 'inicio', false));
+
+const revealObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting){
+      entry.target.classList.add('in');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+function checkReveal(){ $$('.view.active .reveal:not(.in)').forEach(el => revealObserver.observe(el)); }
+
+function animateCounters(){
+  $$('.num[data-count]').forEach(el => {
+    if (el.dataset.done === '1') return;
+    el.dataset.done = '1';
+    const target = parseFloat(el.dataset.count);
+    const suffix = el.dataset.suffix || '';
+    const dur = 1600;
+    const start = performance.now();
+    function tick(now){
+      const p = Math.min((now - start) / dur, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      const val = target * eased;
+      el.textContent = Math.round(val).toLocaleString('es-ES') + suffix;
+      if (p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  });
+}
+
+/* CRONOLOGÍA */
+const TIMELINE = [
+  { year:'5300–3000 a.C.', tag:'Predinástico', color:'#b45309', title:'Período Predinástico', desc:'Primeros asentamientos neolíticos a orillas del Nilo. Cultura badariense y Naqada. Se desarrollan la agricultura, la cerámica y los primeros signos de escritura.', extra:'La cultura de Naqada II sentó las bases del arte y la religión del Egipto dinástico.' },
+  { year:'3000–2686 a.C.', tag:'Época Tinita', color:'#7c3aed', title:'Dinastías I y II', desc:'Unificación del Alto y Bajo Egipto por Narmer (Menes). Capital en Menfis. Se establecen las bases del Estado faraónico.', extra:'La Paleta de Narmer es el documento histórico más antiguo que representa la unificación.' },
+  { year:'2686–2181 a.C.', tag:'Reino Antiguo', color:'#0e7490', title:'Reino Antiguo (Dinastías III–VI)', desc:'La era de las pirámides. Djoser construye la primera pirámide escalonada. Snefru, Keops, Kefrén y Micerino levantan las pirámides de Guiza. El poder faraónico alcanza su cenit.', extra:'Imhotep, arquitecto de Djoser, fue el primer científico conocido por su nombre.' },
+  { year:'2181–2055 a.C.', tag:'Primer Periodo Intermedio', color:'#15803d', title:'Primer Periodo Intermedio (Dinastías VII–XI)', desc:'Descentralización y caos. Los nomarcas gobiernan sus territorios. Egipto se divide, pero surgen nuevas formas literarias y artísticas.', extra:'Los Textos de los Sarcófagos se popularizan en esta época.' },
+  { year:'2055–1650 a.C.', tag:'Reino Medio', color:'#b91c1c', title:'Reino Medio (Dinastías XI–XIII)', desc:'Reunificación bajo Mentuhotep II. Florecimiento del arte, la literatura y la arquitectura. Amenemhat III construye el Lago Fayum. Se fortalece el ejército.', extra:'La historia de Sinuhé, obra maestra de la literatura egipcia, es de esta época.' },
+  { year:'1650–1550 a.C.', tag:'Segundo Periodo Intermedio', color:'#a16207', title:'Segundo Periodo Intermedio (Dinastías XV–XVII)', desc:'Los hicsos, pueblo de origen asiático, dominan el delta del Nilo e introducen el caballo y el carro de guerra. Los faraones tebanos resisten en el sur.', extra:'Los hicsos gobernaron Egipto durante más de un siglo.' },
+  { year:'1550–1069 a.C.', tag:'Reino Nuevo', color:'#7c2d12', title:'Reino Nuevo (Dinastías XVIII–XX)', desc:'La época imperial. Amosis expulsa a los hicsos. Hatshepsut, Tutmosis III, Akenatón, Tutankamón y Ramsés II construyen un imperio que se extiende desde Nubia hasta Siria.', extra:'Aquí se concentran los faraones más famosos: Tutankamón, Ramsés II y Hatshepsut.' },
+  { year:'1069–664 a.C.', tag:'Tercer Periodo Intermedio', color:'#0e7490', title:'Tercer Periodo Intermedio (Dinastías XXI–XXV)', desc:'Fragmentación del poder. Los sumos sacerdotes de Amón gobiernan desde Tebas. Los reyes de Kush (Nubia) invaden Egipto y fundan la Dinastía XXV.', extra:'Los faraones negros de Kush restauraron templos y tradiciones antiguas.' },
+  { year:'664–332 a.C.', tag:'Periodo Tardío', color:'#7c3aed', title:'Periodo Tardío (Dinastías XXVI–XXX)', desc:'Renacimiento saíta. Psamtek I unifica el país con ayuda de mercenarios griegos. Luego, la conquista persa (Dinastía XXVII). Los últimos faraones nativos: Nectanebo I y II.', extra:'Nectanebo II (360–343 a.C.) fue el último faraón egipcio nativo.' },
+  { year:'332–30 a.C.', tag:'Época Ptolemaica', color:'#b45309', title:'Época Ptolemaica', desc:'Alejandro Magno conquista Egipto. Tras su muerte, Ptolomeo I funda la dinastía ptolemaica. Alejandría se convierte en el centro cultural del Mediterráneo. Cleopatra VII es la última gobernante.', extra:'Cleopatra VII (51–30 a.C.) fue la última faraona de Egipto. Tras su muerte, Egipto se convirtió en provincia romana.' },
+  { year:'30 a.C.', tag:'Roma', color:'#15803d', title:'Anexión romana', desc:'Octavio (futuro Augusto) derrota a Marco Antonio y Cleopatra. Egipto se convierte en provincia romana. Termina la era de los faraones.', extra:'Egipto se convirtió en el granero de Roma y mantuvo su cultura y religión durante siglos.' }
+];
+
+function renderTimeline(){
+  const c = $('#timelineList');
+  if (!c) return;
+  c.innerHTML = TIMELINE.map((t, i) => `
+    <div class="vt-item" style="--c:${t.color};--d:${i * 40}ms">
+      <span class="vt-dot"></span>
+      <div class="vt-card">
+        <div class="vt-top">
+          <span class="vt-year">${t.year}</span>
+          <span class="vt-era">${t.tag}</span>
+        </div>
+        <h4>${t.title}</h4>
+        <p>${t.desc}</p>
+        <button class="vt-more" type="button"><span>Más detalle</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="vt-extra"><div><p>${t.extra}</p></div></div>
+      </div>
+    </div>
+  `).join('');
+  c.onclick = e => {
+    const btn = e.target.closest('.vt-more');
+    if (!btn) return;
+    const item = btn.closest('.vt-item');
+    const open = item.classList.toggle('open');
+    btn.querySelector('span').textContent = open ? 'Ocultar detalle' : 'Más detalle';
+  };
+}
+
+/* PIRÁMIDES */
+const PYRAMIDS = [
+  { name:'Pirámide de Djoser', year:'c. 2660 a.C.', color:'#b45309', desc:'La primera pirámide de la historia. El arquitecto Imhotep apiló seis mastabas para crear una pirámide escalonada de 60 metros.', extra:'Se encuentra en Saqqara y está rodeada por un enorme complejo funerario.' },
+  { name:'Pirámide Romboidal', year:'c. 2600 a.C.', color:'#7c3aed', desc:'Construida por Snefru en Dahshur. Tiene dos pendientes distintas: comienza con 54° y cambia a 43° a mitad de altura.', extra:'También se llama Pirámide Acodada. Fue el primer intento de pirámide de caras lisas.' },
+  { name:'Pirámide Roja', year:'c. 2590 a.C.', color:'#0e7490', desc:'También de Snefru. Es la primera pirámide de caras lisas con éxito. Debe su nombre al color rojizo de la piedra caliza.', extra:'Fue la estructura más alta del mundo en su momento, con 105 metros.' },
+  { name:'Gran Pirámide de Guiza', year:'c. 2560 a.C.', color:'#15803d', desc:'Construida por Keops (Jufu). Originalmente tenía 146 metros de altura y 2,3 millones de bloques. Es la única de las Siete Maravillas del Mundo Antiguo que sigue en pie.', extra:'Estuvo revestida de caliza blanca pulida, que brillaba bajo el sol.' },
+  { name:'Pirámide de Kefrén', year:'c. 2530 a.C.', color:'#b91c1c', desc:'Hijo de Keops. Aunque es ligeramente más pequeña que la de su padre, se encuentra en un nivel más alto, por lo que parece más alta. Conserva parte del revestimiento original en la cúspide.', extra:'La Esfinge, tallada en la roca, se encuentra junto a su templo funerario.' },
+  { name:'Pirámide de Micerino', year:'c. 2510 a.C.', color:'#a16207', desc:'Nieto de Keops. Es la más pequeña de las tres grandes pirámides de Guiza. Parte de su revestimiento era de granito rosa.', extra:'Su complejo funerario incluía tres pirámides más pequeñas para las reinas.' }
+];
+
+function renderPyramids(){
+  const c = $('#pyramidList');
+  if (!c) return;
+  c.innerHTML = PYRAMIDS.map((p, i) => `
+    <div class="vt-item" style="--c:${p.color};--d:${i * 60}ms">
+      <span class="vt-dot"></span>
+      <div class="vt-card">
+        <div class="vt-top"><span class="vt-year">${p.year}</span></div>
+        <h4>${p.name}</h4>
+        <p>${p.desc}</p>
+        <button class="vt-more" type="button"><span>Más detalle</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="vt-extra"><div><p>${p.extra}</p></div></div>
+      </div>
+    </div>
+  `).join('');
+  c.onclick = e => {
+    const btn = e.target.closest('.vt-more');
+    if (!btn) return;
+    const item = btn.closest('.vt-item');
+    const open = item.classList.toggle('open');
+    btn.querySelector('span').textContent = open ? 'Ocultar detalle' : 'Más detalle';
+  };
+}
+
+/* GLOSARIO */
+const GLOSSARY = [
+  { t:'Faraón', d:'Título del rey de Egipto. Era considerado un dios viviente en la Tierra, mediador entre los dioses y los hombres.' },
+  { t:'Nomo', d:'División administrativa del antiguo Egipto. Cada nomo tenía su propio gobernador (nomarca) y su deidad protectora.' },
+  { t:'Mastaba', d:'Tumba rectangular de adobe con una cámara subterránea. Antecesora de las pirámides.' },
+  { t:'Sarcófago', d:'Ataúd de piedra o madera donde se depositaba la momia. A menudo decorado con textos funerarios.' },
+  { t:'Canope', d:'Jarras que contenían los órganos internos del difunto (hígado, pulmones, estómago e intestinos).' },
+  { t:'Ushebti', d:'Figurillas funerarias que, según la creencia, trabajaban por el difunto en el más allá.' },
+  { t:'Natrón', d:'Sal natural usada para deshidratar el cuerpo durante la momificación.' },
+  { t:'Amuleto', d:'Objeto mágico colocado entre las vendas de la momia para proteger al difunto.' },
+  { t:'Papiro', d:'Soporte de escritura hecho con tallos de la planta del mismo nombre. Se usaba para textos religiosos y administrativos.' },
+  { t:'Jeroglífico', d:'Escritura sagrada egipcia. Combina signos figurativos con valores ideográficos y fonéticos.' },
+  { t:'Hierático', d:'Forma cursiva de los jeroglíficos, usada para textos religiosos y literarios.' },
+  { t:'Demótico', d:'Escritura egipcia cursiva y simplificada, usada para la vida cotidiana.' },
+  { t:'Piedra Rosetta', d:'Estela con un decreto en jeroglífico, demótico y griego. Permitió descifrar los jeroglíficos en 1822.' },
+  { t:'Obelisco', d:'Monolito de piedra de cuatro caras, coronado por una punta piramidal. Símbolo del sol.' },
+  { t:'Hipogeo', d:'Tumba o templo excavado en la roca, como las del Valle de los Reyes.' },
+  { t:'Speos', d:'Templo excavado en la roca, como Abu Simbel.' },
+  { t:'Pilono', d:'Puerta monumental de los templos egipcios, formada por dos torres macizas.' },
+  { t:'Esfinge', d:'Estatua con cuerpo de león y cabeza humana (o de carnero). Simboliza la fuerza y la sabiduría.' },
+  { t:'Maat', d:'Diosa de la verdad, la justicia y el orden cósmico. Su pluma se usaba en el juicio de los muertos.' },
+  { t:'Duat', d:'El inframundo egipcio, el lugar por el que viajaba el sol durante la noche y las almas de los difuntos.' },
+  { t:'Aaru', d:'El paraíso egipcio, los campos de juncos donde vivían las almas justificadas.' },
+  { t:'Enéada', d:'Grupo de nueve dioses de la creación según la teología de Heliópolis.' }
+];
+
+function renderGlossary(){
+  const grid = $('#glossGrid');
+  const empty = $('#glossEmpty');
+  const search = $('#glossSearch');
+  if (!grid) return;
+  function render(filter = ''){
+    const q = filter.trim().toLowerCase();
+    const items = GLOSSARY.filter(g =>
+      !q || g.t.toLowerCase().includes(q) || g.d.toLowerCase().includes(q)
+    );
+    if (items.length === 0){
+      grid.innerHTML = '';
+      empty.style.display = 'block';
+      return;
+    }
+    empty.style.display = 'none';
+    grid.innerHTML = items.map(g => `
+      <div class="gloss-item">
+        <div class="gi-term">${g.t}</div>
+        <div class="gi-def">${g.d}</div>
+      </div>
+    `).join('');
+  }
+  render();
+  if (search && !search.dataset.bound){
+    search.dataset.bound = '1';
+    search.addEventListener('input', e => render(e.target.value));
+  }
+}
+
+/* QUIZ */
+const QUIZ_DATA = [
+  { q:'¿Quién unificó el Alto y Bajo Egipto?', o:['Keops','Narmer (Menes)','Ramsés II','Cleopatra'], c:1, e:'Narmer, también llamado Menes, unificó Egipto hacia el 3100 a.C. y fundó la Dinastía I.' },
+  { q:'¿Qué faraón construyó la primera pirámide escalonada?', o:['Keops','Djoser','Snefru','Tutankamón'], c:1, e:'Djoser, con su arquitecto Imhotep, construyó la pirámide escalonada de Saqqara hacia el 2660 a.C.' },
+  { q:'¿Cuál es la única maravilla del mundo antiguo que aún se conserva?', o:['Los jardines colgantes','La Gran Pirámide de Guiza','El faro de Alejandría','El templo de Artemisa'], c:1, e:'La Gran Pirámide de Guiza, construida por Keops, es la única de las Siete Maravillas que sigue en pie.' },
+  { q:'¿Quién era el dios de la muerte y la resurrección?', o:['Ra','Osiris','Horus','Seth'], c:1, e:'Osiris, asesinado por su hermano Seth, resucitó y se convirtió en señor del inframundo.' },
+  { q:'¿Cuánto duraba el proceso de momificación?', o:['7 días','40 días','70 días','100 días'], c:2, e:'El proceso completo de momificación duraba 70 días.' },
+  { q:'¿Qué se pesaba contra la pluma de Maat en el juicio de Osiris?', o:['El alma','El corazón','La cabeza','Las manos'], c:1, e:'El corazón del difunto se pesaba contra la pluma de Maat, que representaba la verdad y la justicia.' },
+  { q:'¿Cómo se llamaba el libro que guiaba a los muertos en el más allá?', o:['Libro de los Reyes','Libro de los Muertos','Textos de las Pirámides','Libro de Thot'], c:1, e:'El Libro de los Muertos (cuyo nombre original era "Libro de la Salida al Día") contenía hechizos para el más allá.' },
+  { q:'¿Quién fue el último faraón egipcio nativo?', o:['Cleopatra VII','Nectanebo II','Tutankamón','Ramsés III'], c:1, e:'Nectanebo II (360–343 a.C.) fue el último faraón egipcio nativo antes de la conquista persa y la dinastía ptolemaica.' },
+  { q:'¿Qué faraona gobernó Egipto como mujer-faraón?', o:['Nefertiti','Hatshepsut','Cleopatra','Nefertari'], c:1, e:'Hatshepsut gobernó como faraón mujer en la Dinastía XVIII y construyó el templo de Deir el-Bahari.' },
+  { q:'¿Qué complejo religioso es el mayor del mundo antiguo?', o:['Abu Simbel','Karnak','Luxor','Filae'], c:1, e:'El complejo de Karnak, dedicado a Amón-Ra, es el mayor conjunto religioso del mundo antiguo.' },
+  { q:'¿Quién descifró los jeroglíficos egipcios?', o:['Howard Carter','Champollion','Herodoto','Napoleón'], c:1, e:'Jean-François Champollion descifró los jeroglíficos en 1822 gracias a la Piedra Rosetta.' },
+  { q:'¿Qué significa "faraón"?', o:['Rey de reyes','Casa grande','Hijo del sol','Señor del Nilo'], c:1, e:'La palabra "faraón" proviene del egipcio "per-aa", que significa "casa grande" o "palacio".' }
+];
+
+const TOTAL_PREGUNTAS = 10;
+const LETRAS = ['A','B','C','D'];
+let quizState = { questions: [], index: 0, score: 0, answered: false, finished: false };
+
+function shuffle(arr){
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+function startQuiz(){
+  quizState = {
+    questions: shuffle(QUIZ_DATA).slice(0, TOTAL_PREGUNTAS),
+    index: 0, score: 0, answered: false, finished: false
+  };
+  renderQuiz();
+}
+function renderQuiz(){
+  const card = $('#quizCard');
+  if (!card) return;
+  if (quizState.finished){
+    const total = quizState.questions.length;
+    const pct = Math.round((quizState.score / total) * 100);
+    let m = 'Conviene repasar la cronología, los dioses y las pirámides.';
+    if (pct === 100) m = '¡Perfecto! Dominas la historia de Egipto.';
+    else if (pct >= 75) m = 'Muy buen resultado. Te falta muy poco para el pleno.';
+    else if (pct >= 50) m = 'Buen comienzo. Repasa las secciones y prueba otra vez.';
+    card.innerHTML = `
+      <div class="result">
+        <div class="score">${quizState.score}/${total}</div>
+        <h3>${m}</h3>
+        <p>Has acertado el ${pct}% de las preguntas de esta ronda.</p>
+        <button class="btn btn-primary" id="restartQuiz">Jugar otra vez
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>
+        </button>
+      </div>`;
+    $('#restartQuiz').addEventListener('click', startQuiz);
+    return;
+  }
+  const q = quizState.questions[quizState.index];
+  const total = quizState.questions.length;
+  const progress = (quizState.index / total) * 100;
+  card.innerHTML = `
+    <div class="quiz-meta">
+      <span>Pregunta ${quizState.index + 1} de ${total}</span>
+      <span>Aciertos: ${quizState.score}</span>
+    </div>
+    <div class="progress"><div class="progress-bar" style="width:${progress}%"></div></div>
+    <h3 class="q-text">${q.q}</h3>
+    <div class="options" id="options">
+      ${q.o.map((opt, i) => `
+        <button class="option" data-i="${i}">
+          <span class="letter">${LETRAS[i]}</span>
+          <span>${opt}</span>
+        </button>`).join('')}
+    </div>
+    <div id="feedbackSlot"></div>
+    <div class="quiz-actions" id="actionsSlot"></div>`;
+  $('#options').addEventListener('click', e => {
+    const btn = e.target.closest('.option');
+    if (!btn || quizState.answered) return;
+    answerQuestion(parseInt(btn.dataset.i, 10));
+  });
+}
+function answerQuestion(chosen){
+  quizState.answered = true;
+  const q = quizState.questions[quizState.index];
+  const options = $$('#options .option');
+  options.forEach((btn, i) => {
+    btn.disabled = true;
+    if (i === q.c) btn.classList.add('correct');
+    else if (i === chosen) btn.classList.add('wrong');
+  });
+  const acerto = chosen === q.c;
+  if (acerto) quizState.score++;
+  $('#feedbackSlot').innerHTML = `
+    <div class="feedback">
+      <strong>${acerto ? 'Correcto.' : 'No exactamente.'}</strong> ${q.e}
+    </div>`;
+  const isLast = quizState.index === quizState.questions.length - 1;
+  $('#actionsSlot').innerHTML = `
+    <button class="btn btn-primary" id="nextBtn">
+      ${isLast ? 'Ver resultado' : 'Siguiente pregunta'}
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </button>`;
+  $('#nextBtn').addEventListener('click', () => {
+    if (isLast) quizState.finished = true;
+    else { quizState.index++; quizState.answered = false; }
+    renderQuiz();
+  });
+}
+
+$$('.module').forEach(m => {
+  m.addEventListener('mousemove', e => {
+    const r = m.getBoundingClientRect();
+    m.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
+    m.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
+  });
+});
+
+document.addEventListener('visibilitychange', () => {
+  document.querySelectorAll('.orb').forEach(o => {
+    o.style.animationPlayState = document.hidden ? 'paused' : 'running';
+  });
+});
+
+(function boot(){
+  const initial = (location.hash.slice(1) || 'inicio');
+  go(ROUTES.includes(initial) ? initial : 'inicio', false);
+  checkReveal();
+  setTimeout(() => { if (currentRoute === 'inicio') animateCounters(); }, 300);
+})();
+</script>
+</body>
+</html>

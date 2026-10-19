@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>El Apocalipsis según la Biblia — Eventos del fin de los tiempos</title>
+<meta name="description" content="Explicación sencilla de los eventos escatológicos bíblicos: rapto de la iglesia, anticristo, gran tribulación, milenio y nueva Jerusalén. Con referencias bíblicas.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --font-display:'Space Grotesk','Segoe UI',system-ui,sans-serif;
+  --font-body:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --radius:20px;
+  --radius-sm:12px;
+  --maxw:1180px;
+  --ease:cubic-bezier(.22,.75,.25,1);
+}
+html[data-theme="light"]{
+  --bg:#f8fafc;
+  --bg-soft:#eef2f7;
+  --surface:rgba(255,255,255,.86);
+  --surface-solid:#ffffff;
+  --surface-2:rgba(20,40,80,.045);
+  --surface-3:rgba(20,40,80,.08);
+  --border:rgba(20,40,80,.12);
+  --border-strong:rgba(20,40,80,.24);
+  --text:#0a1628;
+  --muted:#5a6b80;
+  --accent:#f59e0b;
+  --accent-2:#8b5cf6;
+  --accent-3:#06b6d4;
+  --accent-4:#10b981;
+  --good:#059669;
+  --bad:#e11d48;
+  --shadow:0 22px 55px -28px rgba(20,40,80,.28);
+  --orb-op:.14;
+  --dot-color:rgba(20,40,80,.055);
+  --star:rgba(20,40,80,.3);
+}
+html[data-theme="dark"]{
+  --bg:#04060d;
+  --bg-soft:#0a0f1a;
+  --surface:rgba(18,24,38,.66);
+  --surface-solid:#131a28;
+  --surface-2:rgba(255,255,255,.045);
+  --surface-3:rgba(255,255,255,.08);
+  --border:rgba(255,255,255,.10);
+  --border-strong:rgba(255,255,255,.20);
+  --text:#e8eef8;
+  --muted:#8f9bb3;
+  --accent:#fbbf24;
+  --accent-2:#a78bfa;
+  --accent-3:#22d3ee;
+  --accent-4:#34d399;
+  --good:#34d399;
+  --bad:#fb7185;
+  --shadow:0 24px 60px -24px rgba(0,0,0,.9);
+  --orb-op:.28;
+  --dot-color:rgba(255,255,255,.03);
+  --star:rgba(255,255,255,.8);
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;font-family:var(--font-body);background:var(--bg);color:var(--text);
+  min-height:100vh;line-height:1.65;-webkit-font-smoothing:antialiased;
+  transition:background .45s var(--ease),color .45s var(--ease);
+  overflow-x:hidden;
+}
+h1,h2,h3,h4,h5{font-family:var(--font-display);line-height:1.15;letter-spacing:-.02em;margin:0}
+p{margin:0}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+a{color:inherit;text-decoration:none}
+ul{margin:0}
+::selection{background:var(--accent);color:#0a0a0a}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
+
+.bg-stars{position:fixed;inset:0;z-index:-4;pointer-events:none;overflow:hidden}
+.bg-stars .star{
+  position:absolute;width:2px;height:2px;border-radius:50%;
+  background:var(--star);opacity:.6;
+  animation:twinkle var(--tw-dur,4s) ease-in-out infinite;
+  animation-delay:var(--tw-delay,0s);
+}
+@keyframes twinkle{
+  0%,100%{opacity:.15;transform:scale(.8)}
+  50%{opacity:1;transform:scale(1.3)}
+}
+.bg-dots{position:fixed;inset:0;z-index:-3;pointer-events:none;background-image:radial-gradient(var(--dot-color) 1px,transparent 1px);background-size:26px 26px}
+.orbs{position:fixed;inset:0;z-index:-2;overflow:hidden;pointer-events:none}
+.orb{position:absolute;border-radius:50%;filter:blur(110px);opacity:var(--orb-op);animation:float 28s ease-in-out infinite alternate}
+.orb.o1{width:52vw;height:52vw;background:var(--accent);top:-16vw;left:-12vw}
+.orb.o2{width:42vw;height:42vw;background:var(--accent-2);bottom:-18vw;right:-10vw;animation-delay:-10s}
+.orb.o3{width:34vw;height:34vw;background:var(--accent-3);top:44%;left:58%;animation-delay:-17s}
+.orb.o4{width:26vw;height:26vw;background:var(--accent-4);top:20%;right:24%;animation-delay:-5s}
+@keyframes float{
+  0%{transform:translate3d(0,0,0) scale(1)}
+  50%{transform:translate3d(4vw,-3vw,0) scale(1.1)}
+  100%{transform:translate3d(-3vw,4vw,0) scale(.95)}
+}
+
+.site-header{
+  position:sticky;top:0;z-index:50;
+  backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);
+  background:color-mix(in srgb,var(--bg) 78%, transparent);
+  border-bottom:1px solid var(--border);
+}
+.header-inner{max-width:var(--maxw);margin:0 auto;padding:13px 22px;display:flex;align-items:center;gap:20px}
+.brand{display:flex;align-items:center;gap:11px;font-family:var(--font-display);font-weight:700;font-size:1rem;letter-spacing:-.02em;white-space:nowrap}
+.brand-mark{
+  width:38px;height:38px;border-radius:12px;flex:none;
+  background:linear-gradient(140deg,var(--accent),var(--accent-2) 55%,var(--accent-3));
+  display:grid;place-items:center;color:#fff;
+  box-shadow:0 8px 22px -8px var(--accent);
+  transition:transform .5s var(--ease);
+}
+.brand:hover .brand-mark{transform:rotate(-10deg) scale(1.06)}
+.brand-mark svg{width:22px;height:22px}
+
+.nav{display:flex;gap:2px;margin-left:auto;overflow-x:auto;scrollbar-width:none}
+.nav::-webkit-scrollbar{display:none}
+.nav-link{
+  position:relative;padding:9px 11px;border-radius:11px;font-size:.8rem;font-weight:500;
+  color:var(--muted);white-space:nowrap;transition:color .3s var(--ease),background .3s var(--ease);
+}
+.nav-link:hover{color:var(--text);background:var(--surface-2)}
+.nav-link.active{color:var(--text);background:var(--surface-2)}
+.nav-link.active::after{
+  content:'';position:absolute;left:11px;right:11px;bottom:4px;height:2px;border-radius:2px;
+  background:linear-gradient(90deg,var(--accent),var(--accent-2));
+  animation:navIn .4s var(--ease) both;
+}
+@keyframes navIn{from{transform:scaleX(0);opacity:0}to{transform:scaleX(1);opacity:1}}
+
+.theme-toggle{
+  width:40px;height:40px;border-radius:12px;flex:none;
+  border:1px solid var(--border);background:var(--surface-2);
+  display:grid;place-items:center;
+  transition:transform .35s var(--ease),border-color .3s,background .3s;
+}
+.theme-toggle:hover{transform:translateY(-2px) rotate(8deg);border-color:var(--border-strong)}
+.theme-toggle svg{width:19px;height:19px}
+html[data-theme="dark"] .icon-sun{display:block}
+html[data-theme="dark"] .icon-moon{display:none}
+html[data-theme="light"] .icon-sun{display:none}
+html[data-theme="light"] .icon-moon{display:block}
+
+main{max-width:var(--maxw);margin:0 auto;padding:0 22px 90px}
+.view{display:none}
+.view.active{display:block;animation:viewIn .55s var(--ease) both}
+@keyframes viewIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+
+.hero{padding:74px 0 42px;max-width:940px;position:relative}
+.pill{
+  display:inline-flex;align-items:center;gap:8px;padding:7px 15px;border-radius:999px;
+  font-size:.78rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;
+  border:1px solid var(--border);background:var(--surface);color:var(--muted);margin-bottom:26px;
+}
+.pill .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);animation:pulse 2.4s infinite}
+@keyframes pulse{
+  0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--accent) 60%,transparent)}
+  70%{box-shadow:0 0 0 9px transparent}
+  100%{box-shadow:0 0 0 0 transparent}
+}
+h1.hero-title{font-size:clamp(2.1rem,5.2vw,4rem);font-weight:700;letter-spacing:-.035em;margin-bottom:22px}
+.grad{
+  background:linear-gradient(100deg,var(--accent),var(--accent-2) 40%,var(--accent-3) 70%,var(--accent-4));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  background-size:220% auto;animation:shimmer 8s linear infinite;
+}
+@keyframes shimmer{to{background-position:220% center}}
+.lead{font-size:clamp(1rem,1.6vw,1.15rem);color:var(--muted);max-width:720px;margin-bottom:34px}
+.hero-actions{display:flex;flex-wrap:wrap;gap:13px}
+
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  padding:13px 25px;border-radius:13px;font-size:.93rem;font-weight:600;
+  border:1px solid transparent;
+  transition:transform .28s var(--ease),box-shadow .3s var(--ease),background .3s,border-color .3s,color .3s;
+  will-change:transform;
+}
+.btn:active{transform:scale(.97)}
+.btn svg{width:17px;height:17px}
+.btn-primary{
+  background:linear-gradient(120deg,var(--accent),var(--accent-2));
+  color:#fff;box-shadow:0 14px 34px -14px var(--accent);
+  position:relative;overflow:hidden;
+}
+.btn-primary::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,.45),transparent 70%);
+  transform:translateX(-130%);transition:transform .7s var(--ease);
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 20px 42px -14px var(--accent)}
+.btn-primary:hover::after{transform:translateX(130%)}
+.btn-ghost{border-color:var(--border);background:var(--surface);color:var(--text)}
+.btn-ghost:hover{transform:translateY(-2px);border-color:var(--border-strong);background:var(--surface-2)}
+.btn.small{padding:8px 16px;font-size:.85rem}
+
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin:12px 0 58px}
+.stat{
+  padding:22px 20px;border-radius:var(--radius);
+  background:var(--surface);border:1px solid var(--border);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  transition:transform .35s var(--ease),border-color .3s,box-shadow .35s;
+}
+.stat:hover{transform:translateY(-5px);border-color:var(--border-strong);box-shadow:var(--shadow)}
+.stat .num{
+  font-family:var(--font-display);font-size:1.8rem;font-weight:700;letter-spacing:-.03em;
+  background:linear-gradient(120deg,var(--accent),var(--accent-2));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.stat .lbl{font-size:.82rem;color:var(--muted);font-weight:500;margin-top:2px}
+
+.sec-head{margin:0 0 28px}
+.sec-head h2{font-size:clamp(1.55rem,3vw,2.05rem);font-weight:700;margin-bottom:8px}
+.sec-head p{color:var(--muted);max-width:740px;font-size:.95rem}
+.section{padding-top:52px}
+
+.module-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(258px,1fr));gap:18px}
+.module{
+  position:relative;overflow:hidden;text-align:left;padding:28px 24px;border-radius:var(--radius);
+  background:var(--surface);border:1px solid var(--border);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  transition:transform .4s var(--ease),border-color .35s,box-shadow .4s;
+}
+.module::before{
+  content:'';position:absolute;inset:0;opacity:0;
+  background:radial-gradient(420px circle at var(--mx,50%) var(--my,0%),color-mix(in srgb,var(--accent) 22%,transparent),transparent 65%);
+  transition:opacity .45s var(--ease);
+}
+.module:hover{transform:translateY(-6px);border-color:var(--border-strong);box-shadow:var(--shadow)}
+.module:hover::before{opacity:1}
+.module-ico{
+  width:46px;height:46px;border-radius:14px;display:grid;place-items:center;margin-bottom:18px;
+  background:linear-gradient(140deg,color-mix(in srgb,var(--accent) 22%,transparent),color-mix(in srgb,var(--accent-2) 18%,transparent));
+  border:1px solid var(--border);color:var(--accent);
+  transition:transform .4s var(--ease);
+}
+.module:hover .module-ico{transform:scale(1.08) rotate(-6deg)}
+.module-ico svg{width:22px;height:22px}
+.module h3{font-size:1.04rem;margin-bottom:8px;font-weight:600}
+.module p{font-size:.89rem;color:var(--muted);line-height:1.6}
+.module .arrow{display:inline-flex;align-items:center;gap:6px;margin-top:16px;font-size:.84rem;font-weight:600;color:var(--accent)}
+.module .arrow svg{width:14px;height:14px;transition:transform .35s var(--ease)}
+.module:hover .arrow svg{transform:translateX(5px)}
+
+.card{
+  padding:24px 26px;border-radius:var(--radius);
+  background:var(--surface);border:1px solid var(--border);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  transition:transform .35s var(--ease),border-color .3s,box-shadow .35s;
+}
+.card:hover{transform:translateY(-4px);border-color:var(--border-strong);box-shadow:var(--shadow)}
+.card h3{font-size:1.02rem;margin-bottom:10px;font-weight:600}
+.card p{font-size:.9rem;color:var(--muted);line-height:1.68}
+.card .kicker{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;display:block}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(258px,1fr))}
+.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{
+  padding:8px 15px;border-radius:999px;font-size:.81rem;font-weight:600;
+  border:1px solid var(--border);background:var(--surface);color:var(--muted);
+  transition:all .3s var(--ease);
+}
+.chip:hover{color:var(--text);border-color:var(--border-strong);transform:translateY(-1px)}
+.chip.active{background:linear-gradient(120deg,var(--accent),var(--accent-2));color:#fff;border-color:transparent;box-shadow:0 10px 26px -12px var(--accent)}
+
+.vt{position:relative;margin-top:26px}
+.vt::before{
+  content:'';position:absolute;left:13px;top:10px;bottom:10px;width:2px;border-radius:2px;
+  background:linear-gradient(180deg,var(--accent),var(--accent-2) 55%,var(--accent-3));
+  opacity:.55;
+}
+.vt-item{position:relative;padding-left:46px;margin-bottom:18px;animation:termIn .5s var(--ease) both;animation-delay:var(--d,0ms)}
+@keyframes termIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.vt-dot{position:absolute;left:7px;top:24px;width:14px;height:14px;border-radius:50%;background:var(--c);border:3px solid var(--bg);box-shadow:0 0 0 3px color-mix(in srgb,var(--c) 30%,transparent);transition:transform .3s var(--ease)}
+.vt-item:hover .vt-dot{transform:scale(1.3)}
+.vt-card{padding:20px 22px;border-radius:var(--radius-sm);background:var(--surface);border:1px solid var(--border);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);transition:border-color .3s,transform .3s var(--ease),box-shadow .3s}
+.vt-item:hover .vt-card{border-color:var(--border-strong);transform:translateX(3px);box-shadow:var(--shadow)}
+.vt-top{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:8px}
+.vt-year{font-family:var(--font-display);font-size:.86rem;font-weight:700;color:var(--accent);padding:3px 10px;border-radius:7px;background:color-mix(in srgb,var(--accent) 13%,transparent);border:1px solid color-mix(in srgb,var(--accent) 26%,transparent);white-space:nowrap}
+.vt-era{font-size:.68rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.vt-card h4{font-size:1rem;font-weight:600;margin-bottom:7px;line-height:1.3}
+.vt-card > p{font-size:.88rem;color:var(--muted);line-height:1.66}
+.vt-more{display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:.79rem;font-weight:600;color:var(--accent);padding:4px 0;transition:gap .3s var(--ease)}
+.vt-more:hover{gap:9px}
+.vt-more svg{width:12px;height:12px;transition:transform .4s var(--ease)}
+.vt-item.open .vt-more svg{transform:rotate(180deg)}
+.vt-extra{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s var(--ease)}
+.vt-item.open .vt-extra{grid-template-rows:1fr}
+.vt-extra > div{overflow:hidden}
+.vt-extra p{font-size:.85rem;color:var(--muted);line-height:1.7;border-top:1px solid var(--border);margin-top:12px;padding-top:12px}
+
+.diagram-wrap{
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+  padding:22px 20px;box-shadow:var(--shadow);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+}
+.diagram-wrap h4{font-size:1.02rem;margin-bottom:8px;font-weight:600}
+.diagram-wrap .sub{font-size:.87rem;color:var(--muted);margin-bottom:16px;line-height:1.55}
+.diagram-wrap svg{display:block;width:100%;max-width:520px;height:auto;margin:0 auto}
+
+.info-panel{
+  margin-top:16px;padding:16px 18px;border-radius:var(--radius-sm);
+  background:var(--surface-2);border:1px solid var(--border);
+  min-height:100px;transition:border-color .3s,background .3s;
+}
+.info-panel.active{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 7%,var(--surface-2))}
+.info-panel .ip-name{font-family:var(--font-display);font-weight:700;font-size:1.02rem;color:var(--accent);margin-bottom:6px}
+.info-panel .ip-func{font-size:.9rem;color:var(--text);margin-bottom:6px;line-height:1.6}
+.info-panel .ip-desc{font-size:.85rem;color:var(--muted);line-height:1.6}
+.info-panel .ip-hint{color:var(--muted);font-size:.86rem;font-style:italic}
+
+.note{
+  margin-top:26px;padding:16px 20px;border-radius:14px;font-size:.85rem;color:var(--muted);
+  border:1px solid var(--border);background:var(--surface-2);border-left:3px solid var(--accent);
+  line-height:1.65;
+}
+.note strong{color:var(--text);font-weight:600}
+.note.ref{border-left-color:var(--accent-2);background:color-mix(in srgb,var(--accent-2) 8%,var(--surface-2))}
+.note.ref strong{color:var(--accent-2)}
+
+.ref-tag{
+  display:inline-block;padding:2px 8px;border-radius:6px;
+  font-size:.72rem;font-weight:700;letter-spacing:.02em;
+  background:color-mix(in srgb,var(--accent-2) 15%,transparent);
+  color:var(--accent-2);border:1px solid color-mix(in srgb,var(--accent-2) 30%,transparent);
+  margin:2px 3px 2px 0;white-space:nowrap;
+}
+
+.progress-item{margin:14px 0}
+.progress-item .pi-label{display:flex;justify-content:space-between;font-size:.82rem;font-weight:600;margin-bottom:6px}
+.progress-item .pi-label span:last-child{color:var(--accent)}
+.progress-track{height:8px;border-radius:999px;background:var(--surface-2);overflow:hidden;border:1px solid var(--border)}
+.progress-fill{
+  height:100%;border-radius:999px;
+  background:linear-gradient(90deg,var(--accent),var(--accent-2));
+  width:0;transition:width 1.5s var(--ease);
+  animation:progressIn 1.5s var(--ease) forwards;
+  animation-delay:var(--d,0.2s);
+}
+@keyframes progressIn{to{width:var(--pct)}}
+
+.quiz-shell{max-width:760px;margin:0 auto}
+.quiz-card{
+  padding:34px;border-radius:var(--radius);
+  background:var(--surface);border:1px solid var(--border);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  box-shadow:var(--shadow);
+}
+.quiz-meta{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:12px;font-size:.81rem;font-weight:600;color:var(--muted)}
+.progress{height:6px;border-radius:99px;background:var(--surface-2);overflow:hidden;margin-bottom:30px;border:1px solid var(--border)}
+.progress-bar{height:100%;width:0%;border-radius:99px;background:linear-gradient(90deg,var(--accent),var(--accent-2));transition:width .55s var(--ease)}
+.q-text{font-family:var(--font-display);font-size:clamp(1.12rem,2.4vw,1.42rem);font-weight:600;line-height:1.35;margin-bottom:26px}
+.options{display:grid;gap:11px}
+.option{
+  display:flex;align-items:center;gap:14px;text-align:left;
+  padding:16px 18px;border-radius:14px;font-size:.93rem;font-weight:500;
+  background:var(--surface-2);border:1px solid var(--border);color:var(--text);
+  transition:transform .25s var(--ease),border-color .25s,background .25s;
+}
+.option:hover:not(:disabled){transform:translateX(4px);border-color:var(--accent);background:color-mix(in srgb,var(--accent) 8%,transparent)}
+.option:disabled{cursor:default}
+.option .letter{
+  width:28px;height:28px;border-radius:9px;flex:none;display:grid;place-items:center;
+  font-size:.77rem;font-weight:700;font-family:var(--font-display);
+  background:var(--surface-solid);border:1px solid var(--border);color:var(--muted);
+}
+.option.correct{background:color-mix(in srgb,var(--good) 15%,transparent);border-color:var(--good)}
+.option.correct .letter{background:var(--good);color:#fff;border-color:var(--good)}
+.option.wrong{background:color-mix(in srgb,var(--bad) 13%,transparent);border-color:var(--bad)}
+.option.wrong .letter{background:var(--bad);color:#fff;border-color:var(--bad)}
+.feedback{margin-top:22px;padding:16px 18px;border-radius:14px;font-size:.88rem;line-height:1.6;border:1px solid var(--border);background:var(--surface-2);animation:termIn .4s var(--ease) both}
+.feedback strong{color:var(--text)}
+.quiz-actions{display:flex;justify-content:flex-end;margin-top:24px}
+.result{text-align:center;padding:20px 6px}
+.result .score{font-family:var(--font-display);font-size:clamp(3rem,9vw,4.6rem);font-weight:700;letter-spacing:-.05em;background:linear-gradient(120deg,var(--accent),var(--accent-2) 50%,var(--accent-3));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1;margin-bottom:10px}
+.result h3{font-size:1.28rem;margin-bottom:10px}
+.result p{color:var(--muted);margin-bottom:26px}
+
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s var(--ease),transform .7s var(--ease);transition-delay:var(--d,0ms)}
+.reveal.in{opacity:1;transform:none}
+
+.site-footer{border-top:1px solid var(--border);padding:34px 22px;text-align:center;font-size:.85rem;color:var(--muted)}
+.site-footer strong{color:var(--text);font-weight:600}
+
+@media (max-width:1040px){.nav-link{padding:9px 9px;font-size:.76rem}}
+@media (max-width:900px){
+  .header-inner{padding:12px 16px;gap:14px;flex-wrap:wrap}
+  .nav{order:3;width:100%;margin-left:0;padding-bottom:2px}
+  .theme-toggle{margin-left:auto}
+  main{padding:0 16px 70px}
+  .hero{padding:44px 0 32px}
+  .stats{grid-template-columns:repeat(2,1fr);gap:11px}
+  .stat{padding:17px 15px}
+  .stat .num{font-size:1.45rem}
+  .vt-item{padding-left:38px}
+  .quiz-card{padding:24px 20px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<div class="bg-stars" id="bgStars" aria-hidden="true"></div>
+<div class="bg-dots" aria-hidden="true"></div>
+<div class="orbs" aria-hidden="true">
+  <div class="orb o1"></div>
+  <div class="orb o2"></div>
+  <div class="orb o3"></div>
+  <div class="orb o4"></div>
+</div>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="#inicio" data-route="inicio">
+      <span class="brand-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+          <path d="M2 17l10 5 10-5M2 12l10 5 10-5"/>
+        </svg>
+      </span>
+      <span>Escatología</span>
+    </a>
+
+    <nav class="nav" aria-label="Navegación principal">
+      <button class="nav-link active" data-route="inicio">Inicio</button>
+      <button class="nav-link" data-route="rapto">Rapto</button>
+      <button class="nav-link" data-route="anticristo">Anticristo</button>
+      <button class="nav-link" data-route="tribulacion">Tribulación</button>
+      <button class="nav-link" data-route="milenio">Milenio</button>
+      <button class="nav-link" data-route="nueva">Nueva Jerusalén</button>
+      <button class="nav-link" data-route="linea">Línea de tiempo</button>
+      <button class="nav-link" data-route="quiz">Quiz</button>
+    </nav>
+
+    <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema">
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round">
+        <circle cx="12" cy="12" r="4"/>
+        <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>
+      </svg>
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<main>
+
+  <!-- ================= INICIO ================= -->
+  <section class="view active" data-view="inicio">
+    <div class="hero">
+      <span class="pill"><span class="dot"></span>Los últimos tiempos según la Biblia</span>
+      <h1 class="hero-title">El Apocalipsis, <span class="grad">explicado simple</span></h1>
+      <p class="lead">
+        Qué dice la Biblia sobre el rapto de la iglesia, el anticristo, la gran tribulación, el milenio y la nueva Jerusalén.
+        Un recorrido por los textos clave, con sus referencias, sin interpretaciones oscuras.
+      </p>
+      <div class="hero-actions">
+        <button class="btn btn-primary" data-route="linea">
+          Ver la línea de tiempo
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+        <button class="btn btn-ghost" data-route="rapto">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M5 9l7-7 7 7"/></svg>
+          Empezar por el rapto
+        </button>
+      </div>
+    </div>
+
+    <div class="stats reveal">
+      <div class="stat"><div class="num" data-count="5" data-suffix="">0</div><div class="lbl">Eventos principales</div></div>
+      <div class="stat"><div class="num" data-count="7" data-suffix=" años">0</div><div class="lbl">Duración de la tribulación</div></div>
+      <div class="stat"><div class="num" data-count="1000" data-suffix=" años">0</div><div class="lbl">Reinado milenial</div></div>
+      <div class="stat"><div class="num" data-count="3" data-suffix="">0</div><div class="lbl">Posturas sobre el milenio</div></div>
+    </div>
+
+    <div class="sec-head reveal">
+      <h2>Los cinco eventos clave</h2>
+      <p>La escatología bíblica estudia el futuro según la Biblia. Estos son los hitos que aparecen con más claridad en los textos proféticos.</p>
+    </div>
+
+    <div class="module-grid">
+      <button class="module reveal" data-route="rapto" style="--d:0ms">
+        <span class="module-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M5 9l7-7 7 7"/></svg>
+        </span>
+        <h3>Rapto de la iglesia</h3>
+        <p>El arrebatamiento de los creyentes para recibir al Señor en el aire. 1 Tesalonicenses 4:15-17.</p>
+        <span class="arrow">Ver texto
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </button>
+
+      <button class="module reveal" data-route="anticristo" style="--d:40ms">
+        <span class="module-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l9 4v6c0 5-4 8-9 10-5-2-9-5-9-10V6l9-4z"/><path d="M12 8v4M12 16h.01"/></svg>
+        </span>
+        <h3>El anticristo</h3>
+        <p>El líder mundial que se opone a Dios. Daniel 9:27; 2 Tesalonicenses 2:3-4; Apocalipsis 13.</p>
+        <span class="arrow">Ver texto
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </button>
+
+      <button class="module reveal" data-route="tribulacion" style="--d:80ms">
+        <span class="module-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg>
+        </span>
+        <h3>Gran tribulación</h3>
+        <p>Siete años de juicio y persecución. Mateo 24:21; Apocalipsis 7:14.</p>
+        <span class="arrow">Ver texto
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </button>
+
+      <button class="module reveal" data-route="milenio" style="--d:120ms">
+        <span class="module-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"/><path d="M12 6v6l4 2"/></svg>
+        </span>
+        <h3>El milenio</h3>
+        <p>El reinado de Cristo de 1.000 años. Apocalipsis 20:1-6.</p>
+        <span class="arrow">Ver texto
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </button>
+
+      <button class="module reveal" data-route="nueva" style="--d:160ms">
+        <span class="module-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M3 10h18M5 6l7-3 7 3M4 10v11M20 10v11"/></svg>
+        </span>
+        <h3>Nueva Jerusalén</h3>
+        <p>La ciudad santa que desciende del cielo. Apocalipsis 21-22.</p>
+        <span class="arrow">Ver texto
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </button>
+
+      <button class="module reveal" data-route="quiz" style="--d:200ms">
+        <span class="module-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l2 2 4-4"/><rect x="3" y="4" width="18" height="16" rx="3"/></svg>
+        </span>
+        <h3>Quiz</h3>
+        <p>Diez preguntas al azar sobre los eventos escatológicos y sus referencias bíblicas.</p>
+        <span class="arrow">Empezar quiz
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </button>
+    </div>
+
+    <div class="note ref reveal">
+      <strong>Nota importante:</strong> los textos bíblicos se citan según la Reina-Valera 1960 (RVR1960), salvo indicación.
+      Las interpretaciones escatológicas varían entre tradiciones cristianas; aquí se presentan las lecturas más extendidas,
+      señalando las diferencias principales.
+    </div>
+  </section>
+
+  <!-- ================= RAPTO ================= -->
+  <section class="view" data-view="rapto">
+    <div class="sec-head section">
+      <h2>El rapto de la iglesia</h2>
+      <p>El "rapto" o "arrebatamiento" es el evento en el que los creyentes vivos y resucitados son llevados al encuentro del Señor en el aire. Es uno de los puntos más debatidos de la escatología.</p>
+    </div>
+
+    <div class="diagram-wrap reveal">
+      <h4>Texto clave</h4>
+      <p class="sub">1 Tesalonicenses 4:15-17 (RVR1960)</p>
+      <blockquote style="margin:0;padding:18px 20px;border-left:3px solid var(--accent);background:var(--surface-2);border-radius:0 var(--radius-sm) var(--radius-sm) 0;font-size:.95rem;line-height:1.75;color:var(--text)">
+        "Por lo cual os decimos esto en palabra del Señor: que nosotros que vivimos, que habremos quedado hasta la venida del Señor, no precederemos a los que durmieron. Porque el Señor mismo con voz de mando, con voz de arcángel, y con trompeta de Dios, descenderá del cielo; y los muertos en Cristo resucitarán primero. Luego nosotros los que vivimos, los que hayamos quedado, seremos arrebatados juntamente con ellos en las nubes para recibir al Señor en el aire, y así estaremos siempre con el Señor."
+        <br><span class="ref-tag" style="margin-top:12px">1 Ts 4:15-17</span>
+      </blockquote>
+    </div>
+
+    <div class="grid-2" style="margin-top:24px">
+      <div class="card reveal">
+        <span class="kicker">Otros textos</span>
+        <h3>Referencias complementarias</h3>
+        <p style="margin-bottom:10px">1 Corintios 15:51-52 — "He aquí, os digo un misterio: No todos dormiremos; pero todos seremos transformados, en un momento, en un abrir y cerrar de ojos, a la final trompeta; porque se tocará la trompeta, y los muertos serán resucitados incorruptibles, y nosotros seremos transformados."</p>
+        <span class="ref-tag">1 Co 15:51-52</span>
+        <p style="margin-top:14px">Mateo 24:30-31 — "Entonces aparecerá la señal del Hijo del Hombre en el cielo... y enviará sus ángeles con gran voz de trompeta, y juntarán a sus escogidos, de los cuatro vientos, desde un extremo del cielo hasta el otro."</p>
+        <span class="ref-tag">Mt 24:30-31</span>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Debate</span>
+        <h3>¿Cuándo ocurre?</h3>
+        <p>Existen tres posturas principales sobre el momento del rapto:</p>
+        <ul style="list-style:none;padding:0;margin-top:12px;display:flex;flex-direction:column;gap:10px">
+          <li style="display:flex;gap:10px"><span style="width:8px;height:8px;border-radius:50%;background:var(--accent);flex:none;margin-top:8px"></span><span style="font-size:.88rem;color:var(--muted)"><strong style="color:var(--text)">Pretribulacional:</strong> antes de la gran tribulación (7 años).</span></li>
+          <li style="display:flex;gap:10px"><span style="width:8px;height:8px;border-radius:50%;background:var(--accent-2);flex:none;margin-top:8px"></span><span style="font-size:.88rem;color:var(--muted)"><strong style="color:var(--text)">Mesotribulacional:</strong> a la mitad de la tribulación (3,5 años).</span></li>
+          <li style="display:flex;gap:10px"><span style="width:8px;height:8px;border-radius:50%;background:var(--accent-3);flex:none;margin-top:8px"></span><span style="font-size:.88rem;color:var(--muted)"><strong style="color:var(--text)">Postribulacional:</strong> al final de la tribulación, junto con la segunda venida.</span></li>
+        </ul>
+        <p style="margin-top:14px;font-size:.85rem">Muchos teólogos católicos y reformados señalan que 1 Tesalonicenses 4 no menciona un rapto secreto ni una tribulación de siete años posterior, sino la segunda venida de Cristo al final de los tiempos.[reference:0]</p>
+      </div>
+    </div>
+
+    <div class="note ref reveal">
+      <strong>Diferencia clave:</strong> el rapto se describe como un "arrebatamiento" para recibir al Señor "en el aire".
+      La segunda venida (Apocalipsis 19:11-16) lo presenta como un regreso glorioso a la tierra para reinar.
+      Algunas tradiciones los distinguen; otras los consideran el mismo evento.
+    </div>
+  </section>
+
+  <!-- ================= ANTICRISTO ================= -->
+  <section class="view" data-view="anticristo">
+    <div class="sec-head section">
+      <h2>El anticristo</h2>
+      <p>La figura del anticristo aparece en Daniel, en las cartas de Pablo y en Apocalipsis. Es un líder mundial que se opone a Dios, engaña a las naciones y persigue a los creyentes.</p>
+    </div>
+
+    <div class="grid-2">
+      <div class="card reveal">
+        <span class="kicker">Daniel</span>
+        <h3>El pacto de siete años</h3>
+        <p>Daniel 9:27 describe a "un príncipe que ha de venir" que hará un pacto con muchos durante una semana (siete años), pero a la mitad la romperá y pondrá fin a los sacrificios.</p>
+        <span class="ref-tag">Dn 9:27</span>
+        <p style="margin-top:12px;font-size:.85rem">Es la base del esquema de los siete años de tribulación: tres años y medio de falsa paz, seguidos de tres años y medio de gran tribulación.[reference:1]</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Pablo</span>
+        <h3>El hombre de pecado</h3>
+        <p>2 Tesalonicenses 2:3-4 lo llama "el hombre de pecado, el hijo de perdición", que se opone y se levanta contra todo lo que se llama Dios, y se sienta en el templo de Dios haciéndose pasar por Dios.</p>
+        <span class="ref-tag">2 Ts 2:3-4</span>
+        <p style="margin-top:12px;font-size:.85rem">Pablo aclara que el misterio de iniquidad ya opera, pero será detenido hasta que se quite de en medio el que lo detiene (2 Ts 2:6-7).</p>
+      </div>
+    </div>
+
+    <div class="diagram-wrap reveal" style="margin-top:24px">
+      <h4>La bestia de Apocalipsis 13</h4>
+      <p class="sub">Apocalipsis 13 describe a la bestia que sube del mar, con diez cuernos y siete cabezas, a la que el dragón (Satanás) da su poder y autoridad.</p>
+      <blockquote style="margin:0;padding:18px 20px;border-left:3px solid var(--accent-2);background:var(--surface-2);border-radius:0 var(--radius-sm) var(--radius-sm) 0;font-size:.92rem;line-height:1.75;color:var(--text)">
+        "Vi subir del mar una bestia que tenía siete cabezas y diez cuernos; y en sus cuernos diez diademas; y sobre sus cabezas, un nombre blasfemo... Y el dragón le dio su poder y su trono, y grande autoridad. Vi una de sus cabezas como herida de muerte, pero su herida mortal fue sanada; y se maravilló toda la tierra en pos de la bestia."
+        <br><span class="ref-tag" style="margin-top:12px">Ap 13:1-3</span>
+      </blockquote>
+      <p style="margin-top:14px;font-size:.85rem;color:var(--muted)">La bestia blasfema contra Dios, hace guerra contra los santos y recibe autoridad sobre todas las naciones durante 42 meses (Ap 13:5-7). También se menciona una segunda bestia, el falso profeta, que hace señales y obliga a adorar a la primera (Ap 13:11-15).[reference:2]</p>
+    </div>
+
+    <div class="note ref reveal">
+      <strong>El "número de la bestia":</strong> Apocalipsis 13:18 dice: "Aquí hay sabiduría. El que tiene entendimiento, cuente el número de la bestia, pues es número de hombre. Y su número es seiscientos sesenta y seis" (666). A lo largo de la historia se han propuesto muchas identificaciones; la mayoría de los estudiosos lo interpretan como un símbolo de la imperfección humana frente a la perfección divina (777).
+    </div>
+  </section>
+
+  <!-- ================= TRIBULACIÓN ================= -->
+  <section class="view" data-view="tribulacion">
+    <div class="sec-head section">
+      <h2>La gran tribulación</h2>
+      <p>La gran tribulación es el período de juicio y persecución más intenso de la historia, que precede al regreso de Cristo. Su duración se asocia a los siete años de la última semana de Daniel, con especial intensidad en los últimos tres años y medio.</p>
+    </div>
+
+    <div class="diagram-wrap reveal">
+      <h4>Texto clave</h4>
+      <p class="sub">Mateo 24:21-22 (RVR1960)</p>
+      <blockquote style="margin:0;padding:18px 20px;border-left:3px solid var(--bad);background:color-mix(in srgb,var(--bad) 6%,var(--surface-2));border-radius:0 var(--radius-sm) var(--radius-sm) 0;font-size:.95rem;line-height:1.75;color:var(--text)">
+        "porque habrá entonces gran tribulación, cual no la ha habido desde el principio del mundo hasta ahora, ni la habrá. Y si aquellos días no fuesen acortados, nadie sería salvo; mas por causa de los escogidos, aquellos días serán acortados."
+        <br><span class="ref-tag" style="margin-top:12px">Mt 24:21-22</span>
+      </blockquote>
+    </div>
+
+    <div class="grid-3" style="margin-top:24px">
+      <div class="card reveal">
+        <span class="kicker">Apocalipsis 7</span>
+        <h3>La multitud vestida de blanco</h3>
+        <p>"Estos son los que han salido de la gran tribulación, y han lavado sus ropas, y las han emblanquecido en la sangre del Cordero."</p>
+        <span class="ref-tag">Ap 7:14</span>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Daniel 12</span>
+        <h3>Tiempo de angustia</h3>
+        <p>"Será tiempo de angustia, cual nunca fue desde que hubo gente hasta entonces; pero en aquel tiempo será libertado tu pueblo."</p>
+        <span class="ref-tag">Dn 12:1</span>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Apocalipsis 13</span>
+        <h3>Persecución y marca</h3>
+        <p>La bestia hace guerra contra los santos y exige una marca para comprar o vender. Quien no la tenga es perseguido.</p>
+        <span class="ref-tag">Ap 13:7, 16-17</span>
+      </div>
+    </div>
+
+    <div class="diagram-wrap reveal" style="margin-top:24px">
+      <h4>Estructura de los siete años</h4>
+      <p class="sub">Según la interpretación más extendida (Daniel 9:27), la última semana se divide en dos mitades.</p>
+      <div style="display:flex;height:70px;border-radius:12px;overflow:hidden;border:1px solid var(--border-strong);margin:16px 0 8px">
+        <div style="flex:1;background:color-mix(in srgb,var(--accent) 30%,var(--surface));display:flex;flex-direction:column;justify-content:center;align-items:center;padding:6px;border-right:1px solid var(--border)">
+          <span style="font-family:var(--font-display);font-size:.82rem;font-weight:700;color:var(--accent)">3,5 años</span>
+          <span style="font-size:.72rem;color:var(--muted);text-align:center">Falsa paz / pacto</span>
+        </div>
+        <div style="flex:1;background:color-mix(in srgb,var(--bad) 30%,var(--surface));display:flex;flex-direction:column;justify-content:center;align-items:center;padding:6px">
+          <span style="font-family:var(--font-display);font-size:.82rem;font-weight:700;color:var(--bad)">3,5 años</span>
+          <span style="font-size:.72rem;color:var(--muted);text-align:center">Gran tribulación</span>
+        </div>
+      </div>
+      <p style="font-size:.82rem;color:var(--muted);text-align:center">La ruptura del pacto a la mitad marca el inicio de la gran tribulación propiamente dicha (Dn 9:27; Mt 24:15).</p>
+    </div>
+
+    <div class="note ref reveal">
+      <strong>Los sellos, trompetas y copas:</strong> Apocalipsis 6-16 describe una serie de juicios divinos (siete sellos, siete trompetas y siete copas) que se derraman sobre la tierra durante este período. Muchos los consideran el contenido de la tribulación.
+    </div>
+  </section>
+
+  <!-- ================= MILENIO ================= -->
+  <section class="view" data-view="milenio">
+    <div class="sec-head section">
+      <h2>El milenio</h2>
+      <p>El milenio es el reinado de Cristo de 1.000 años mencionado en Apocalipsis 20. Es uno de los temas más debatidos de la escatología: hay tres posturas principales sobre cuándo y cómo ocurre.</p>
+    </div>
+
+    <div class="diagram-wrap reveal">
+      <h4>Texto base</h4>
+      <p class="sub">Apocalipsis 20:1-6 (RVR1960, resumen)</p>
+      <blockquote style="margin:0;padding:18px 20px;border-left:3px solid var(--accent-4);background:color-mix(in srgb,var(--accent-4) 6%,var(--surface-2));border-radius:0 var(--radius-sm) var(--radius-sm) 0;font-size:.95rem;line-height:1.75;color:var(--text)">
+        "Vi a un ángel que descendía del cielo, con la llave del abismo, y una gran cadena en la mano. Y prendió al dragón, la serpiente antigua, que es el diablo y Satanás, y lo ató por mil años... y reinarán con Cristo mil años... Esta es la primera resurrección. Bienaventurado y santo el que tiene parte en la primera resurrección; la segunda muerte no tiene potestad sobre estos, sino que serán sacerdotes de Dios y de Cristo, y reinarán con él mil años."
+        <br><span class="ref-tag" style="margin-top:12px">Ap 20:1-6</span>
+      </blockquote>
+    </div>
+
+    <h3 style="font-size:1.15rem;font-weight:600;margin:28px 0 14px">Las tres posturas principales</h3>
+    <div class="grid-3">
+      <div class="card reveal" style="border-top:3px solid var(--accent-2)">
+        <span class="kicker" style="color:var(--accent-2)">Premilenialismo</span>
+        <h3>Cristo vuelve antes</h3>
+        <p>Cristo regresará antes del milenio y establecerá un reino literal de 1.000 años en la tierra. Es la lectura más literal de Apocalipsis 20.</p>
+        <span class="ref-tag">Ap 20:1-6</span>
+      </div>
+      <div class="card reveal" style="border-top:3px solid var(--accent-3)">
+        <span class="kicker" style="color:var(--accent-3)">Amilenialismo</span>
+        <h3>Reinado simbólico</h3>
+        <p>El milenio representa el reinado actual de Cristo con sus santos entre su primera y segunda venida. No espera un reino terrenal literal de 1.000 años.</p>
+        <span class="ref-tag">Ap 20:1-6</span>
+      </div>
+      <div class="card reveal" style="border-top:3px solid var(--accent-4)">
+        <span class="kicker" style="color:var(--accent-4)">Postmilenialismo</span>
+        <h3>Cristo vuelve después</h3>
+        <p>El milenio será una era dorada de paz y prosperidad impulsada por la difusión del evangelio, y Cristo regresará al final de ella.</p>
+        <span class="ref-tag">Ap 20:1-6</span>
+      </div>
+    </div>
+
+    <div class="note ref reveal">
+      <strong>Resumen:</strong> el premilenialismo espera a Cristo antes del milenio; el amilenialismo lo interpreta como el reinado actual de Cristo; el postmilenialismo espera una era dorada antes del regreso de Cristo.[reference:3][reference:4]
+    </div>
+
+    <div class="diagram-wrap reveal" style="margin-top:24px">
+      <h4>Después del milenio</h4>
+      <p class="sub">Apocalipsis 20:7-15 describe el fin del milenio y el juicio final.</p>
+      <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:10px">
+        <li style="display:flex;gap:10px"><span style="width:8px;height:8px;border-radius:50%;background:var(--bad);flex:none;margin-top:8px"></span><span style="font-size:.88rem;color:var(--muted)"><strong style="color:var(--text)">Satanás es liberado</strong> y engaña a las naciones para la batalla final (Ap 20:7-8).</span></li>
+        <li style="display:flex;gap:10px"><span style="width:8px;height:8px;border-radius:50%;background:var(--bad);flex:none;margin-top:8px"></span><span style="font-size:.88rem;color:var(--muted)"><strong style="color:var(--text)">Derrota final</strong> de Satanás, que es lanzado al lago de fuego (Ap 20:10).</span></li>
+        <li style="display:flex;gap:10px"><span style="width:8px;height:8px;border-radius:50%;background:var(--accent);flex:none;margin-top:8px"></span><span style="font-size:.88rem;color:var(--muted)"><strong style="color:var(--text)">Juicio del gran trono blanco</strong>: los muertos son juzgados según sus obras (Ap 20:11-15).</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ================= NUEVA JERUSALÉN ================= -->
+  <section class="view" data-view="nueva">
+    <div class="sec-head section">
+      <h2>La nueva Jerusalén</h2>
+      <p>Después del juicio final, Juan ve "un nuevo cielo y una nueva tierra" y la ciudad santa, la nueva Jerusalén, que desciende del cielo. Es la culminación de la historia: Dios habita con los hombres.</p>
+    </div>
+
+    <div class="diagram-wrap reveal">
+      <h4>Texto clave</h4>
+      <p class="sub">Apocalipsis 21:1-4 (RVR1960)</p>
+      <blockquote style="margin:0;padding:18px 20px;border-left:3px solid var(--accent);background:color-mix(in srgb,var(--accent) 6%,var(--surface-2));border-radius:0 var(--radius-sm) var(--radius-sm) 0;font-size:.95rem;line-height:1.75;color:var(--text)">
+        "Vi un cielo nuevo y una tierra nueva; porque el primer cielo y la primera tierra pasaron, y el mar ya no existía más. Y yo Juan vi la santa ciudad, la nueva Jerusalén, descender del cielo, de Dios, dispuesta como una esposa ataviada para su marido. Y oí una gran voz del cielo que decía: He aquí el tabernáculo de Dios con los hombres, y él morará con ellos; y ellos serán su pueblo, y Dios mismo estará con ellos como su Dios. Enjugará Dios toda lágrima de los ojos de ellos; y ya no habrá muerte, ni habrá más llanto, ni clamor, ni dolor; porque las primeras cosas pasaron."
+        <br><span class="ref-tag" style="margin-top:12px">Ap 21:1-4</span>
+      </blockquote>
+    </div>
+
+    <div class="grid-2" style="margin-top:24px">
+      <div class="card reveal">
+        <span class="kicker">Descripción</span>
+        <h3>La ciudad santa</h3>
+        <p>Apocalipsis 21:9-21 describe la nueva Jerusalén con detalles simbólicos:</p>
+        <ul style="list-style:none;padding:0;margin-top:12px;display:flex;flex-direction:column;gap:8px">
+          <li style="display:flex;gap:10px"><span style="width:6px;height:6px;border-radius:50%;background:var(--accent);flex:none;margin-top:9px"></span><span style="font-size:.86rem;color:var(--muted)">Brilla con la gloria de Dios, como piedra de jaspe.</span></li>
+          <li style="display:flex;gap:10px"><span style="width:6px;height:6px;border-radius:50%;background:var(--accent);flex:none;margin-top:9px"></span><span style="font-size:.86rem;color:var(--muted)">Tiene un muro grande y alto con doce puertas y doce cimientos.</span></li>
+          <li style="display:flex;gap:10px"><span style="width:6px;height:6px;border-radius:50%;background:var(--accent);flex:none;margin-top:9px"></span><span style="font-size:.86rem;color:var(--muted)">Es cuadrada; su longitud, anchura y altura son iguales (un cubo perfecto).</span></li>
+          <li style="display:flex;gap:10px"><span style="width:6px;height:6px;border-radius:50%;background:var(--accent);flex:none;margin-top:9px"></span><span style="font-size:.86rem;color:var(--muted)">La ciudad es de oro puro, transparente como el vidrio.</span></li>
+        </ul>
+        <span class="ref-tag" style="margin-top:12px">Ap 21:9-21</span>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Presencia de Dios</span>
+        <h3>No hay templo</h3>
+        <p>Apocalipsis 21:22-27 dice: "No vi en ella templo; porque el Señor Dios Todopoderoso es el templo de ella, y el Cordero. La ciudad no tiene necesidad de sol ni de luna que brillen en ella; porque la gloria de Dios la ilumina, y el Cordero es su lumbrera."</p>
+        <span class="ref-tag">Ap 21:22-23</span>
+        <p style="margin-top:12px;font-size:.85rem">El río de agua de vida y el árbol de la vida aparecen en Apocalipsis 22:1-5. "No habrá más maldición; y el trono de Dios y del Cordero estará en ella, y sus siervos le servirán."</p>
+        <span class="ref-tag">Ap 22:1-5</span>
+      </div>
+    </div>
+
+    <div class="note ref reveal">
+      <strong>El fin de la historia:</strong> la nueva Jerusalén representa la comunión plena y definitiva de Dios con la humanidad.
+      Ya no hay muerte, llanto, dolor ni maldición. Es el estado eterno de los redimidos.
+    </div>
+  </section>
+
+  <!-- ================= LÍNEA DE TIEMPO ================= -->
+  <section class="view" data-view="linea">
+    <div class="sec-head section">
+      <h2>Línea de tiempo escatológica</h2>
+      <p>Una secuencia habitual de los eventos del fin de los tiempos, según la lectura más extendida (premilenialista dispensacionalista). Otras tradiciones ordenan los eventos de forma diferente.</p>
+    </div>
+
+    <div class="vt" id="timelineList"></div>
+
+    <div class="note ref reveal">
+      <strong>Importante:</strong> esta secuencia es una de las varias interpretaciones posibles. Los textos bíblicos no siempre indican un orden cronológico estricto, y las tradiciones cristianas difieren en puntos clave, especialmente en la relación entre el rapto y la tribulación.
+    </div>
+  </section>
+
+  <!-- ================= QUIZ ================= -->
+  <section class="view" data-view="quiz">
+    <div class="sec-head section">
+      <h2>Quiz escatológico</h2>
+      <p>Diez preguntas al azar sobre los eventos del fin de los tiempos y sus referencias bíblicas.</p>
+    </div>
+    <div class="quiz-shell">
+      <div class="quiz-card" id="quizCard"></div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <p><strong>Escatología</strong> — Estudio educativo de los eventos del fin de los tiempos según la Biblia. Las citas bíblicas son de dominio público (RVR1960).</p>
+</footer>
+
+<script>
+const $  = (sel, root = document) => root.querySelector(sel);
+const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+const SVGNS = 'http://www.w3.org/2000/svg';
+const el = (tag, attrs = {}, parent) => {
+  const e = document.createElementNS(SVGNS, tag);
+  for (const k in attrs) e.setAttribute(k, attrs[k]);
+  if (parent) parent.appendChild(e);
+  return e;
+};
+const theme = name => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+const accent = () => theme('--accent') || '#fbbf24';
+const accent2 = () => theme('--accent-2') || '#a78bfa';
+const accent3 = () => theme('--accent-3') || '#22d3ee';
+const accent4 = () => theme('--accent-4') || '#34d399';
+const mutedC = () => theme('--muted') || '#8f9bb3';
+const textC  = () => theme('--text') || '#e8eef8';
+const borderC = () => theme('--border') || 'rgba(255,255,255,.1)';
+
+const htmlEl = document.documentElement;
+function setTheme(t){
+  htmlEl.setAttribute('data-theme', t);
+  try { localStorage.setItem('escatologia-theme', t); } catch(e){}
+}
+(function initTheme(){
+  let saved = null;
+  try { saved = localStorage.getItem('escatologia-theme'); } catch(e){}
+  setTheme(saved || 'dark');
+})();
+
+function buildStars(){
+  const cont = $('#bgStars');
+  if (!cont) return;
+  cont.innerHTML = '';
+  const n = 90;
+  for (let i = 0; i < n; i++){
+    const s = document.createElement('div');
+    s.className = 'star';
+    s.style.left = Math.random() * 100 + '%';
+    s.style.top = Math.random() * 100 + '%';
+    const size = 1 + Math.random() * 2;
+    s.style.width = size + 'px';
+    s.style.height = size + 'px';
+    s.style.setProperty('--tw-dur', (2 + Math.random() * 4) + 's');
+    s.style.setProperty('--tw-delay', (Math.random() * 4) + 's');
+    cont.appendChild(s);
+  }
+}
+buildStars();
+
+$('#themeToggle').addEventListener('click', () => {
+  setTheme(htmlEl.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+  if (currentRoute === 'linea') renderTimeline();
+});
+
+const ROUTES = ['inicio','rapto','anticristo','tribulacion','milenio','nueva','linea','quiz'];
+let currentRoute = 'inicio';
+function go(route, push = true){
+  if (!ROUTES.includes(route)) route = 'inicio';
+  currentRoute = route;
+  $$('.view').forEach(v => v.classList.toggle('active', v.dataset.view === route));
+  $$('.nav-link').forEach(b => b.classList.toggle('active', b.dataset.route === route));
+  if (push && location.hash.slice(1) !== route) history.pushState(null, '', '#' + route);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  requestAnimationFrame(() => {
+    $$('.view.active .reveal').forEach(el => el.classList.remove('in'));
+    checkReveal();
+    if (route === 'inicio') animateCounters();
+    if (route === 'linea') renderTimeline();
+    if (route === 'quiz') startQuiz();
+  });
+}
+document.addEventListener('click', e => {
+  const t = e.target.closest('[data-route]');
+  if (t) { e.preventDefault(); go(t.dataset.route); }
+});
+window.addEventListener('popstate', () => go(location.hash.slice(1) || 'inicio', false));
+
+const revealObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('in');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+function checkReveal(){ $$('.view.active .reveal:not(.in)').forEach(el => revealObserver.observe(el)); }
+function animateCounters(){
+  $$('.num[data-count]').forEach(el => {
+    if (el.dataset.done === '1') return;
+    el.dataset.done = '1';
+    const target = parseFloat(el.dataset.count);
+    const suffix = el.dataset.suffix || '';
+    const dur = 1600;
+    const start = performance.now();
+    function tick(now){
+      const p = Math.min((now - start) / dur, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      const val = Math.round(target * eased);
+      el.textContent = val.toLocaleString('es-ES') + suffix;
+      if (p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  });
+}
+
+/* ============================================================
+   LÍNEA DE TIEMPO
+   ============================================================ */
+const TIMELINE_EVENTS = [
+  {
+    time:'Antes de la tribulación',
+    tag:'Evento 1',
+    title:'Rapto de la iglesia',
+    desc:'Los creyentes vivos y resucitados son arrebatados para recibir al Señor en el aire. Es el punto de partida de la secuencia premilenialista.',
+    refs:'1 Ts 4:15-17; 1 Co 15:51-52',
+    color:'#fbbf24'
+  },
+  {
+    time:'Inicio de los 7 años',
+    tag:'Evento 2',
+    title:'Pacto del anticristo',
+    desc:'Un líder mundial (el anticristo) hace un pacto con muchos durante una semana (siete años). Comienza un período de falsa paz.',
+    refs:'Dn 9:27; 2 Ts 2:3-4',
+    color:'#a78bfa'
+  },
+  {
+    time:'Primeros 3,5 años',
+    tag:'Evento 3',
+    title:'Falsa paz y engaño',
+    desc:'El anticristo se fortalece y engaña a las naciones. Se produce una aparente estabilidad, pero es preparatoria para la gran tribulación.',
+    refs:'Ap 6:1-2; Dn 8:25',
+    color:'#22d3ee'
+  },
+  {
+    time:'Mitad de la semana',
+    tag:'Evento 4',
+    title:'Ruptura del pacto',
+    desc:'El anticristo rompe el pacto, pone fin a los sacrificios, se sienta en el templo y se hace pasar por Dios. Comienza la gran tribulación.',
+    refs:'Dn 9:27; Mt 24:15; 2 Ts 2:4',
+    color:'#fb7185'
+  },
+  {
+    time:'Últimos 3,5 años',
+    tag:'Evento 5',
+    title:'Gran tribulación',
+    desc:'El período más terrible de la historia: persecución, juicios divinos, la marca de la bestia y la guerra contra los santos.',
+    refs:'Mt 24:21; Ap 7:14; Ap 13:5-7',
+    color:'#e11d48'
+  },
+  {
+    time:'Final de la tribulación',
+    tag:'Evento 6',
+    title:'Batalla de Armagedón',
+    desc:'Las naciones se reúnen contra Jerusalén. Cristo regresa gloriosamente, derrota a las fuerzas del mal y establece su reino.',
+    refs:'Ap 16:16; Ap 19:11-21',
+    color:'#f97316'
+  },
+  {
+    time:'Después de la victoria',
+    tag:'Evento 7',
+    title:'El milenio',
+    desc:'Cristo reina en la tierra durante 1.000 años. Satanás está atado. Los santos resucitados reinan con Cristo.',
+    refs:'Ap 20:1-6',
+    color:'#34d399'
+  },
+  {
+    time:'Fin del milenio',
+    tag:'Evento 8',
+    title:'Juicio final',
+    desc:'Satanás es liberado, derrotado definitivamente y lanzado al lago de fuego. Se celebra el juicio del gran trono blanco.',
+    refs:'Ap 20:7-15',
+    color:'#8b5cf6'
+  },
+  {
+    time:'Eternidad',
+    tag:'Evento 9',
+    title:'Nueva Jerusalén',
+    desc:'Un nuevo cielo y una nueva tierra. La ciudad santa desciende del cielo. Dios habita con los hombres para siempre.',
+    refs:'Ap 21:1-22:5',
+    color:'#fbbf24'
+  }
+];
+
+function renderTimeline(){
+  const container = $('#timelineList');
+  if (!container) return;
+  container.innerHTML = TIMELINE_EVENTS.map((e, i) => `
+    <div class="vt-item" style="--c:${e.color};--d:${i*50}ms">
+      <span class="vt-dot"></span>
+      <div class="vt-card">
+        <div class="vt-top">
+          <span class="vt-year">${e.time}</span>
+          <span class="vt-era">${e.tag}</span>
+        </div>
+        <h4>${e.title}</h4>
+        <p>${e.desc}</p>
+        <p style="margin-top:10px;font-size:.78rem;color:var(--muted)">
+          <strong style="color:var(--text)">Referencias:</strong> ${e.refs}
+        </p>
+      </div>
+    </div>
+  `).join('');
+}
+
+/* ============================================================
+   QUIZ
+   ============================================================ */
+const QUIZ_DATA = [
+  { q:'¿Qué texto describe el "arrebatamiento" de los creyentes para recibir al Señor en el aire?', o:['Mateo 24:21','1 Tesalonicenses 4:15-17','Apocalipsis 20:1-6','Daniel 9:27'], c:1,
+    e:'1 Tesalonicenses 4:15-17 describe que los muertos en Cristo resucitarán primero y luego los vivos serán arrebatados juntamente con ellos en las nubes.' },
+  { q:'¿Qué profeta habla de un pacto de siete años que se rompe a la mitad?', o:['Isaías','Jeremías','Daniel','Ezequiel'], c:2,
+    e:'Daniel 9:27 describe a un príncipe que confirmará un pacto por una semana (siete años) y a la mitad hará cesar el sacrificio y la ofrenda.' },
+  { q:'¿Cómo se llama el líder mundial que se opone a Dios en Apocalipsis 13?', o:['El falso profeta','La bestia','El dragón','El ángel caído'], c:1,
+    e:'Apocalipsis 13 describe a la bestia que sube del mar, a la que el dragón (Satanás) da su poder y autoridad.' },
+  { q:'¿Cuánto dura la gran tribulación según el esquema más extendido?', o:['3,5 años','7 años','1.000 años','40 días'], c:0,
+    e:'La gran tribulación propiamente dicha dura los últimos 3,5 años de la semana de siete años, tras la ruptura del pacto (Dn 9:27; Mt 24:15).' },
+  { q:'¿Qué texto dice que habrá "gran tribulación, cual no la ha habido desde el principio del mundo"?', o:['Apocalipsis 7:14','Mateo 24:21','Daniel 12:1','Marcos 13:19'], c:1,
+    e:'Mateo 24:21 registra las palabras de Jesús sobre la gran tribulación futura.' },
+  { q:'¿Cuántos años reina Cristo en el milenio según Apocalipsis 20?', o:['100 años','500 años','1.000 años','7.000 años'], c:2,
+    e:'Apocalipsis 20:1-6 menciona repetidamente un reinado de mil años.' },
+  { q:'¿Cuál de estas NO es una postura sobre el milenio?', o:['Premilenialismo','Amilenialismo','Postmilenialismo','Supermilenialismo'], c:3,
+    e:'Las tres posturas principales son premilenialismo, amilenialismo y postmilenialismo. "Supermilenialismo" no es una categoría estándar.' },
+  { q:'¿Qué describe Apocalipsis 21:1-4?', o:['La batalla de Armagedón','El juicio del gran trono blanco','La nueva Jerusalén','La resurrección de los muertos'], c:2,
+    e:'Apocalipsis 21:1-4 describe el nuevo cielo y la nueva tierra, y la ciudad santa, la nueva Jerusalén, que desciende del cielo.' },
+  { q:'¿Qué sucede con Satanás al final del milenio?', o:['Es destruido para siempre','Es liberado y luego derrotado definitivamente','Se arrepiente','Es encerrado en el cielo'], c:1,
+    e:'Apocalipsis 20:7-10 dice que Satanás será liberado al final del milenio, engañará a las naciones, pero será derrotado y lanzado al lago de fuego.' },
+  { q:'¿Qué evento marca el inicio de la gran tribulación según Daniel 9:27?', o:['El rapto de la iglesia','La ruptura del pacto por el anticristo','La batalla de Armagedón','El juicio final'], c:1,
+    e:'Daniel 9:27 dice que a la mitad de la semana el anticristo hará cesar el sacrificio y la ofrenda, lo que marca el inicio de la gran tribulación.' },
+  { q:'¿En qué texto se menciona el "número de la bestia", 666?', o:['Apocalipsis 13:18','Apocalipsis 20:11','1 Tesalonicenses 4:16','Daniel 7:25'], c:0,
+    e:'Apocalipsis 13:18 dice: "El que tiene entendimiento, cuente el número de la bestia, pues es número de hombre. Y su número es seiscientos sesenta y seis."' },
+  { q:'¿Qué postura cree que el milenio es el reinado actual de Cristo entre su primera y segunda venida?', o:['Premilenialismo','Amilenialismo','Postmilenialismo','Dispensacionalismo'], c:1,
+    e:'El amilenialismo interpreta el milenio como el reinado simbólico de Cristo con sus santos durante la era actual de la iglesia.' }
+];
+
+const TOTAL_PREGUNTAS = 10;
+const LETRAS = ['A','B','C','D'];
+let quizState = { questions: [], index: 0, score: 0, answered: false, finished: false };
+
+function shuffle(arr){
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+function startQuiz(){
+  quizState = {
+    questions: shuffle(QUIZ_DATA).slice(0, TOTAL_PREGUNTAS),
+    index: 0, score: 0, answered: false, finished: false
+  };
+  renderQuiz();
+}
+function renderQuiz(){
+  const card = $('#quizCard');
+  if (!card) return;
+  if (quizState.finished){
+    const total = quizState.questions.length;
+    const pct = Math.round((quizState.score / total) * 100);
+    let m = 'Conviene repasar los textos bíblicos y las interpretaciones principales.';
+    if (pct === 100) m = 'Perfecto. Dominas los eventos escatológicos y sus referencias.';
+    else if (pct >= 75) m = 'Muy buen resultado. Te falta muy poco para el pleno.';
+    else if (pct >= 50) m = 'Buen comienzo. Repasa las referencias y prueba otra vez.';
+    card.innerHTML = `
+      <div class="result">
+        <div class="score">${quizState.score}/${total}</div>
+        <h3>${m}</h3>
+        <p>Has acertado el ${pct} % de las preguntas de esta ronda.</p>
+        <button class="btn btn-primary" id="restartQuiz">
+          Jugar otra vez
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>
+        </button>
+      </div>`;
+    $('#restartQuiz').addEventListener('click', startQuiz);
+    return;
+  }
+  const q = quizState.questions[quizState.index];
+  const total = quizState.questions.length;
+  const progress = (quizState.index / total) * 100;
+  card.innerHTML = `
+    <div class="quiz-meta">
+      <span>Pregunta ${quizState.index + 1} de ${total}</span>
+      <span>Aciertos: ${quizState.score}</span>
+    </div>
+    <div class="progress"><div class="progress-bar" style="width:${progress}%"></div></div>
+    <h3 class="q-text">${q.q}</h3>
+    <div class="options" id="options">
+      ${q.o.map((opt, i) => `
+        <button class="option" data-i="${i}">
+          <span class="letter">${LETRAS[i]}</span>
+          <span>${opt}</span>
+        </button>`).join('')}
+    </div>
+    <div id="feedbackSlot"></div>
+    <div class="quiz-actions" id="actionsSlot"></div>`;
+  $('#options').addEventListener('click', e => {
+    const btn = e.target.closest('.option');
+    if (!btn || quizState.answered) return;
+    answerQuestion(parseInt(btn.dataset.i, 10));
+  });
+}
+function answerQuestion(chosen){
+  quizState.answered = true;
+  const q = quizState.questions[quizState.index];
+  const options = $$('#options .option');
+  options.forEach((btn, i) => {
+    btn.disabled = true;
+    if (i === q.c) btn.classList.add('correct');
+    else if (i === chosen) btn.classList.add('wrong');
+  });
+  const acerto = chosen === q.c;
+  if (acerto) quizState.score++;
+  $('#feedbackSlot').innerHTML = `
+    <div class="feedback">
+      <strong>${acerto ? 'Correcto.' : 'No exactamente.'}</strong> ${q.e}
+    </div>`;
+  const isLast = quizState.index === quizState.questions.length - 1;
+  $('#actionsSlot').innerHTML = `
+    <button class="btn btn-primary" id="nextBtn">
+      ${isLast ? 'Ver resultado' : 'Siguiente pregunta'}
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </button>`;
+  $('#nextBtn').addEventListener('click', () => {
+    if (isLast) quizState.finished = true;
+    else { quizState.index++; quizState.answered = false; }
+    renderQuiz();
+  });
+}
+
+/* ============================================================
+   EFECTOS Y ARRANQUE
+   ============================================================ */
+$$('.module').forEach(m => {
+  m.addEventListener('mousemove', e => {
+    const r = m.getBoundingClientRect();
+    m.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
+    m.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
+  });
+});
+
+document.addEventListener('visibilitychange', () => {
+  document.querySelectorAll('.orb').forEach(o => {
+    o.style.animationPlayState = document.hidden ? 'paused' : 'running';
+  });
+});
+
+(function boot(){
+  const initial = (location.hash.slice(1) || 'inicio');
+  go(ROUTES.includes(initial) ? initial : 'inicio', false);
+  checkReveal();
+  setTimeout(() => {
+    if (currentRoute === 'inicio') animateCounters();
+  }, 300);
+})();
+</script>
+</body>
+</html>

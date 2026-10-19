@@ -1,0 +1,1789 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Televisión · Guía interactiva — señales, estándares, pantallas y simulador</title>
+<meta name="description" content="Guía interactiva sobre televisión: cómo funciona, señales analógicas y digitales, estándares NTSC/PAL/SECAM/DVB/ATSC, pantallas, historia, experimentos y simulador.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --font-display:'Space Grotesk','Segoe UI',system-ui,sans-serif;
+  --font-body:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --font-mono:'JetBrains Mono','SF Mono',Consolas,monospace;
+  --radius:20px;
+  --radius-sm:12px;
+  --maxw:1180px;
+  --ease:cubic-bezier(.22,.75,.25,1);
+}
+html[data-theme="light"]{
+  --bg:#f7f9fc;
+  --bg-soft:#eef2f8;
+  --surface:rgba(255,255,255,.85);
+  --surface-solid:#ffffff;
+  --surface-2:rgba(20,40,80,.045);
+  --surface-3:rgba(20,40,80,.08);
+  --border:rgba(20,40,80,.12);
+  --border-strong:rgba(20,40,80,.24);
+  --text:#0a1628;
+  --muted:#5a6b80;
+  --accent:#2563eb;
+  --accent-2:#7c3aed;
+  --accent-3:#db2777;
+  --accent-4:#059669;
+  --good:#059669;
+  --bad:#e11d48;
+  --shadow:0 22px 55px -28px rgba(20,40,80,.28);
+  --orb-op:.14;
+  --dot-color:rgba(20,40,80,.055);
+  --star:rgba(20,40,80,.25);
+  --code-bg:rgba(20,40,80,.06);
+}
+html[data-theme="dark"]{
+  --bg:#04060d;
+  --bg-soft:#0a0f1a;
+  --surface:rgba(18,24,38,.66);
+  --surface-solid:#131a28;
+  --surface-2:rgba(255,255,255,.045);
+  --surface-3:rgba(255,255,255,.08);
+  --border:rgba(255,255,255,.10);
+  --border-strong:rgba(255,255,255,.20);
+  --text:#e8eef8;
+  --muted:#8f9bb3;
+  --accent:#60a5fa;
+  --accent-2:#a78bfa;
+  --accent-3:#f472b6;
+  --accent-4:#34d399;
+  --good:#34d399;
+  --bad:#fb7185;
+  --shadow:0 24px 60px -24px rgba(0,0,0,.9);
+  --orb-op:.28;
+  --dot-color:rgba(255,255,255,.03);
+  --star:rgba(255,255,255,.8);
+  --code-bg:rgba(255,255,255,.06);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;font-family:var(--font-body);background:var(--bg);color:var(--text);
+  min-height:100vh;line-height:1.65;-webkit-font-smoothing:antialiased;
+  transition:background .45s var(--ease),color .45s var(--ease);
+  overflow-x:hidden;
+}
+h1,h2,h3,h4,h5{font-family:var(--font-display);line-height:1.15;letter-spacing:-.02em;margin:0}
+p{margin:0}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+a{color:inherit;text-decoration:none}
+ul{margin:0}
+::selection{background:var(--accent);color:#fff}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
+
+.bg-stars{position:fixed;inset:0;z-index:-4;pointer-events:none;overflow:hidden}
+.bg-stars .star{
+  position:absolute;width:2px;height:2px;border-radius:50%;
+  background:var(--star);opacity:.55;
+  animation:twinkle var(--tw-dur,4s) ease-in-out infinite;
+  animation-delay:var(--tw-delay,0s);
+}
+@keyframes twinkle{0%,100%{opacity:.1;transform:scale(.8)}50%{opacity:1;transform:scale(1.3)}}
+.bg-dots{position:fixed;inset:0;z-index:-3;pointer-events:none;background-image:radial-gradient(var(--dot-color) 1px,transparent 1px);background-size:26px 26px}
+.orbs{position:fixed;inset:0;z-index:-2;overflow:hidden;pointer-events:none}
+.orb{position:absolute;border-radius:50%;filter:blur(110px);opacity:var(--orb-op);animation:float 28s ease-in-out infinite alternate}
+.orb.o1{width:48vw;height:48vw;background:var(--accent);top:-16vw;left:-12vw}
+.orb.o2{width:42vw;height:42vw;background:var(--accent-2);bottom:-18vw;right:-10vw;animation-delay:-10s}
+.orb.o3{width:34vw;height:34vw;background:var(--accent-3);top:44%;left:58%;animation-delay:-17s}
+@keyframes float{0%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(4vw,-3vw,0) scale(1.1)}100%{transform:translate3d(-3vw,4vw,0) scale(.95)}}
+
+.site-header{
+  position:sticky;top:0;z-index:50;
+  backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);
+  background:color-mix(in srgb,var(--bg) 78%, transparent);
+  border-bottom:1px solid var(--border);
+}
+.header-inner{max-width:var(--maxw);margin:0 auto;padding:13px 22px;display:flex;align-items:center;gap:20px}
+.brand{display:flex;align-items:center;gap:11px;font-family:var(--font-display);font-weight:700;font-size:1rem;letter-spacing:-.02em;white-space:nowrap}
+.brand-mark{
+  width:38px;height:38px;border-radius:12px;flex:none;
+  background:linear-gradient(140deg,var(--accent),var(--accent-2) 55%,var(--accent-3));
+  display:grid;place-items:center;color:#fff;
+  box-shadow:0 8px 22px -8px var(--accent);
+  transition:transform .5s var(--ease);
+}
+.brand:hover .brand-mark{transform:rotate(-10deg) scale(1.06)}
+.brand-mark svg{width:22px;height:22px}
+
+.nav{display:flex;gap:2px;margin-left:auto;overflow-x:auto;scrollbar-width:none}
+.nav::-webkit-scrollbar{display:none}
+.nav-link{
+  position:relative;padding:9px 11px;border-radius:11px;font-size:.8rem;font-weight:500;
+  color:var(--muted);white-space:nowrap;transition:color .3s var(--ease),background .3s var(--ease);
+}
+.nav-link:hover{color:var(--text);background:var(--surface-2)}
+.nav-link.active{color:var(--text);background:var(--surface-2)}
+.nav-link.active::after{
+  content:'';position:absolute;left:11px;right:11px;bottom:4px;height:2px;border-radius:2px;
+  background:linear-gradient(90deg,var(--accent),var(--accent-2));
+  animation:navIn .4s var(--ease) both;
+}
+@keyframes navIn{from{transform:scaleX(0);opacity:0}to{transform:scaleX(1);opacity:1}}
+
+.theme-toggle{
+  width:40px;height:40px;border-radius:12px;flex:none;
+  border:1px solid var(--border);background:var(--surface-2);
+  display:grid;place-items:center;
+  transition:transform .35s var(--ease),border-color .3s,background .3s;
+}
+.theme-toggle:hover{transform:translateY(-2px) rotate(8deg);border-color:var(--border-strong)}
+.theme-toggle svg{width:19px;height:19px}
+html[data-theme="dark"] .icon-sun{display:block}
+html[data-theme="dark"] .icon-moon{display:none}
+html[data-theme="light"] .icon-sun{display:none}
+html[data-theme="light"] .icon-moon{display:block}
+
+main{max-width:var(--maxw);margin:0 auto;padding:0 22px 90px}
+.view{display:none}
+.view.active{display:block;animation:viewIn .55s var(--ease) both}
+@keyframes viewIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+
+.hero{padding:74px 0 42px;max-width:940px;position:relative}
+.pill{
+  display:inline-flex;align-items:center;gap:8px;padding:7px 15px;border-radius:999px;
+  font-size:.78rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;
+  border:1px solid var(--border);background:var(--surface);color:var(--muted);margin-bottom:26px;
+}
+.pill .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);animation:pulse 2.4s infinite}
+@keyframes pulse{
+  0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--accent) 60%,transparent)}
+  70%{box-shadow:0 0 0 9px transparent}
+  100%{box-shadow:0 0 0 0 transparent}
+}
+h1.hero-title{font-size:clamp(2.1rem,5.2vw,4rem);font-weight:700;letter-spacing:-.035em;margin-bottom:22px}
+.grad{
+  background:linear-gradient(100deg,var(--accent),var(--accent-2) 45%,var(--accent-3) 75%,var(--accent-4));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  background-size:220% auto;animation:shimmer 8s linear infinite;
+}
+@keyframes shimmer{to{background-position:220% center}}
+.lead{font-size:clamp(1rem,1.6vw,1.15rem);color:var(--muted);max-width:720px;margin-bottom:34px}
+.hero-actions{display:flex;flex-wrap:wrap;gap:13px}
+
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  padding:13px 25px;border-radius:13px;font-size:.93rem;font-weight:600;
+  border:1px solid transparent;
+  transition:transform .28s var(--ease),box-shadow .3s var(--ease),background .3s,border-color .3s,color .3s;
+  will-change:transform;
+}
+.btn:active{transform:scale(.97)}
+.btn svg{width:17px;height:17px}
+.btn-primary{
+  background:linear-gradient(120deg,var(--accent),var(--accent-2));
+  color:#fff;box-shadow:0 14px 34px -14px var(--accent);
+  position:relative;overflow:hidden;
+}
+.btn-primary::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,.45),transparent 70%);
+  transform:translateX(-130%);transition:transform .7s var(--ease);
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 20px 42px -14px var(--accent)}
+.btn-primary:hover::after{transform:translateX(130%)}
+.btn-ghost{border-color:var(--border);background:var(--surface);color:var(--text)}
+.btn-ghost:hover{transform:translateY(-2px);border-color:var(--border-strong);background:var(--surface-2)}
+.btn.small{padding:8px 16px;font-size:.85rem}
+
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin:12px 0 58px}
+.stat{
+  padding:22px 20px;border-radius:var(--radius);
+  background:var(--surface);border:1px solid var(--border);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  transition:transform .35s var(--ease),border-color .3s,box-shadow .35s;
+}
+.stat:hover{transform:translateY(-5px);border-color:var(--border-strong);box-shadow:var(--shadow)}
+.stat .num{
+  font-family:var(--font-display);font-size:1.8rem;font-weight:700;letter-spacing:-.03em;
+  background:linear-gradient(120deg,var(--accent),var(--accent-2));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.stat .lbl{font-size:.82rem;color:var(--muted);font-weight:500;margin-top:2px}
+
+.sec-head{margin:0 0 28px}
+.sec-head h2{font-size:clamp(1.55rem,3vw,2.05rem);font-weight:700;margin-bottom:8px}
+.sec-head p{color:var(--muted);max-width:740px;font-size:.95rem}
+.section{padding-top:52px}
+
+.module-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(258px,1fr));gap:18px}
+.module{
+  position:relative;overflow:hidden;text-align:left;padding:28px 24px;border-radius:var(--radius);
+  background:var(--surface);border:1px solid var(--border);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  transition:transform .4s var(--ease),border-color .35s,box-shadow .4s;
+}
+.module::before{
+  content:'';position:absolute;inset:0;opacity:0;
+  background:radial-gradient(420px circle at var(--mx,50%) var(--my,0%),color-mix(in srgb,var(--accent) 22%,transparent),transparent 65%);
+  transition:opacity .45s var(--ease);
+}
+.module:hover{transform:translateY(-6px);border-color:var(--border-strong);box-shadow:var(--shadow)}
+.module:hover::before{opacity:1}
+.module-ico{
+  width:46px;height:46px;border-radius:14px;display:grid;place-items:center;margin-bottom:18px;
+  background:linear-gradient(140deg,color-mix(in srgb,var(--accent) 22%,transparent),color-mix(in srgb,var(--accent-2) 18%,transparent));
+  border:1px solid var(--border);color:var(--accent);
+  transition:transform .4s var(--ease);
+}
+.module:hover .module-ico{transform:scale(1.08) rotate(-6deg)}
+.module-ico svg{width:22px;height:22px}
+.module h3{font-size:1.04rem;margin-bottom:8px;font-weight:600}
+.module p{font-size:.89rem;color:var(--muted);line-height:1.6}
+.module .arrow{display:inline-flex;align-items:center;gap:6px;margin-top:16px;font-size:.84rem;font-weight:600;color:var(--accent)}
+.module .arrow svg{width:14px;height:14px;transition:transform .35s var(--ease)}
+.module:hover .arrow svg{transform:translateX(5px)}
+
+.card{
+  padding:24px 26px;border-radius:var(--radius);
+  background:var(--surface);border:1px solid var(--border);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  transition:transform .35s var(--ease),border-color .3s,box-shadow .35s;
+}
+.card:hover{transform:translateY(-4px);border-color:var(--border-strong);box-shadow:var(--shadow)}
+.card h3{font-size:1.02rem;margin-bottom:10px;font-weight:600}
+.card p{font-size:.9rem;color:var(--muted);line-height:1.68}
+.card .kicker{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;display:block}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(258px,1fr))}
+.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+
+.vt{position:relative;margin-top:26px}
+.vt::before{
+  content:'';position:absolute;left:13px;top:10px;bottom:10px;width:2px;border-radius:2px;
+  background:linear-gradient(180deg,var(--accent),var(--accent-2) 55%,var(--accent-3));
+  opacity:.55;
+}
+.vt-item{position:relative;padding-left:46px;margin-bottom:18px;animation:termIn .5s var(--ease) both;animation-delay:var(--d,0ms)}
+@keyframes termIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.vt-dot{position:absolute;left:7px;top:24px;width:14px;height:14px;border-radius:50%;background:var(--c);border:3px solid var(--bg);box-shadow:0 0 0 3px color-mix(in srgb,var(--c) 30%,transparent);transition:transform .3s var(--ease)}
+.vt-item:hover .vt-dot{transform:scale(1.3)}
+.vt-card{padding:20px 22px;border-radius:var(--radius-sm);background:var(--surface);border:1px solid var(--border);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);transition:border-color .3s,transform .3s var(--ease),box-shadow .3s}
+.vt-item:hover .vt-card{border-color:var(--border-strong);transform:translateX(3px);box-shadow:var(--shadow)}
+.vt-top{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:8px}
+.vt-year{font-family:var(--font-display);font-size:.86rem;font-weight:700;color:var(--accent);padding:3px 10px;border-radius:7px;background:color-mix(in srgb,var(--accent) 13%,transparent);border:1px solid color-mix(in srgb,var(--accent) 26%,transparent);white-space:nowrap}
+.vt-era{font-size:.68rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.vt-card h4{font-size:1rem;font-weight:600;margin-bottom:7px;line-height:1.3}
+.vt-card > p{font-size:.88rem;color:var(--muted);line-height:1.66}
+.vt-more{display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:.79rem;font-weight:600;color:var(--accent);padding:4px 0;transition:gap .3s var(--ease)}
+.vt-more:hover{gap:9px}
+.vt-more svg{width:12px;height:12px;transition:transform .4s var(--ease)}
+.vt-item.open .vt-more svg{transform:rotate(180deg)}
+.vt-extra{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s var(--ease)}
+.vt-item.open .vt-extra{grid-template-rows:1fr}
+.vt-extra > div{overflow:hidden}
+.vt-extra p{font-size:.85rem;color:var(--muted);line-height:1.7;border-top:1px solid var(--border);margin-top:12px;padding-top:12px}
+
+.diagram-wrap{
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+  padding:22px 20px;box-shadow:var(--shadow);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+}
+.diagram-wrap h4{font-size:1.02rem;margin-bottom:8px;font-weight:600}
+.diagram-wrap .sub{font-size:.87rem;color:var(--muted);margin-bottom:16px;line-height:1.55}
+.diagram-wrap canvas, .diagram-wrap svg{display:block;width:100%;height:auto;border-radius:12px}
+
+.info-panel{
+  margin-top:16px;padding:16px 18px;border-radius:var(--radius-sm);
+  background:var(--surface-2);border:1px solid var(--border);
+  min-height:100px;transition:border-color .3s,background .3s;
+}
+.info-panel.active{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 7%,var(--surface-2))}
+.info-panel .ip-name{font-family:var(--font-display);font-weight:700;font-size:1.02rem;color:var(--accent);margin-bottom:6px}
+.info-panel .ip-desc{font-size:.85rem;color:var(--muted);line-height:1.6}
+.info-panel .ip-hint{color:var(--muted);font-size:.86rem;font-style:italic}
+
+.note{
+  margin-top:26px;padding:16px 20px;border-radius:14px;font-size:.85rem;color:var(--muted);
+  border:1px solid var(--border);background:var(--surface-2);border-left:3px solid var(--accent);
+  line-height:1.65;
+}
+.note strong{color:var(--text);font-weight:600}
+.note.ref{border-left-color:var(--accent-2);background:color-mix(in srgb,var(--accent-2) 8%,var(--surface-2))}
+.note.ref strong{color:var(--accent-2)}
+.note.good{border-left-color:var(--good);background:color-mix(in srgb,var(--good) 8%,var(--surface-2))}
+.note.good strong{color:var(--good)}
+.note.danger{border-left-color:var(--bad);background:color-mix(in srgb,var(--bad) 8%,var(--surface-2))}
+.note.danger strong{color:var(--bad)}
+
+.gloss-shell{max-width:900px;margin:0 auto}
+.search-wrap{position:relative;margin-bottom:18px}
+.search-wrap svg{position:absolute;left:16px;top:50%;transform:translateY(-50%);color:var(--muted);pointer-events:none}
+.gloss-search{
+  width:100%;padding:14px 18px 14px 44px;border-radius:14px;
+  border:1px solid var(--border);background:var(--surface);
+  color:var(--text);font-size:.95rem;font-family:inherit;
+  transition:border-color .3s,box-shadow .3s;
+}
+.gloss-search:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 25%,transparent)}
+.gloss-grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.gloss-item{
+  padding:16px 18px;border-radius:14px;
+  background:var(--surface);border:1px solid var(--border);
+  transition:transform .3s var(--ease),border-color .3s,box-shadow .3s;
+}
+.gloss-item:hover{transform:translateY(-3px);border-color:var(--border-strong);box-shadow:var(--shadow)}
+.gloss-item .gi-term{
+  font-family:var(--font-display);font-size:.98rem;font-weight:700;color:var(--accent);
+  margin-bottom:6px;display:flex;align-items:center;gap:8px;
+}
+.gloss-item .gi-def{font-size:.86rem;color:var(--muted);line-height:1.6}
+.gloss-empty{text-align:center;padding:30px;color:var(--muted);font-size:.9rem;font-style:italic}
+
+.table-wrap{border:1px solid var(--border);border-radius:16px;overflow:hidden;background:var(--surface)}
+table{width:100%;border-collapse:collapse;font-size:.92rem}
+thead{background:var(--surface-2)}
+th{text-align:left;padding:14px 18px;font-weight:600;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+td{padding:13px 18px;border-top:1px solid var(--border)}
+td:first-child{font-family:var(--font-mono);color:var(--accent);font-weight:600;white-space:nowrap}
+tbody tr{transition:.2s}
+tbody tr:hover{background:var(--surface-2)}
+
+.experiment{
+  display:grid;grid-template-columns:1fr 1fr;gap:32px;
+  background:linear-gradient(135deg,color-mix(in srgb,var(--accent) 8%,transparent),color-mix(in srgb,var(--accent-3) 8%,transparent));
+  border:1px solid var(--border);border-radius:var(--radius);padding:36px;
+}
+.experiment ol{padding-left:20px;color:var(--muted)}
+.experiment ol li{margin-bottom:10px}
+.experiment ol li strong{color:var(--text)}
+.experiment ul{list-style:none;padding:0;display:grid;gap:8px;color:var(--muted)}
+.steps-title{
+  font-family:var(--font-display);font-size:1.15rem;margin-bottom:16px;
+  display:flex;align-items:center;gap:10px;font-weight:600;
+}
+
+/* SIMULADOR */
+.sim-shell{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);padding:24px;
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  box-shadow:var(--shadow);
+}
+.sim-tabs{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
+.sim-tab{
+  padding:10px 20px;border-radius:11px;font-size:.88rem;font-weight:700;
+  background:var(--surface-2);color:var(--muted);border:1px solid var(--border);
+  cursor:pointer;font-family:var(--font-display);transition:.25s;
+  letter-spacing:.02em;
+}
+.sim-tab:hover{color:var(--text);border-color:var(--border-strong)}
+.sim-tab.active{
+  background:linear-gradient(120deg,var(--accent),var(--accent-2));
+  color:#fff;border-color:transparent;
+  box-shadow:0 10px 26px -12px var(--accent);
+}
+.sim-canvas-wrap{
+  background:#000;border:1px solid var(--border);
+  border-radius:14px;padding:12px;overflow:hidden;position:relative;
+  aspect-ratio:16/9;
+}
+.sim-canvas-wrap canvas{display:block;width:100%;height:100%;border-radius:8px}
+.sim-controls{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:20px;margin-top:22px;
+}
+.sim-ctrl{display:flex;flex-direction:column;gap:8px}
+.sim-ctrl label{
+  font-size:.8rem;font-weight:600;color:var(--muted);
+  display:flex;justify-content:space-between;align-items:center;gap:10px;
+  text-transform:uppercase;letter-spacing:.06em;
+}
+.sim-ctrl label span:last-child{color:var(--accent);font-family:var(--font-mono);font-weight:600;text-transform:none;letter-spacing:0;font-size:.85rem}
+input[type=range]{
+  -webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:99px;
+  background:var(--surface-3);outline:none;transition:background .3s;
+}
+input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none;appearance:none;width:20px;height:20px;border-radius:50%;
+  background:linear-gradient(135deg,var(--accent),var(--accent-2));
+  cursor:pointer;border:2px solid var(--surface-solid);
+  box-shadow:0 4px 12px -4px var(--accent);
+  transition:transform .2s;
+}
+input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.15)}
+input[type=range]::-moz-range-thumb{
+  width:20px;height:20px;border-radius:50%;
+  background:linear-gradient(135deg,var(--accent),var(--accent-2));
+  cursor:pointer;border:2px solid var(--surface-solid);
+  box-shadow:0 4px 12px -4px var(--accent);
+}
+.sim-stats{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-top:20px;
+}
+.sim-stat{
+  padding:14px 16px;border-radius:12px;
+  background:var(--surface-2);border:1px solid var(--border);
+  transition:.3s;
+}
+.sim-stat .lbl{font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:600}
+.sim-stat .val{font-family:var(--font-mono);font-size:1rem;font-weight:600;color:var(--text);margin-top:2px}
+.sim-stat.warn .val{color:var(--bad)}
+.sim-stat.warn{border-color:color-mix(in srgb,var(--bad) 40%,var(--border));background:color-mix(in srgb,var(--bad) 8%,var(--surface-2))}
+.sim-stat.good .val{color:var(--good)}
+.sim-stat.good{border-color:color-mix(in srgb,var(--good) 40%,var(--border));background:color-mix(in srgb,var(--good) 8%,var(--surface-2))}
+
+/* QUIZ */
+.quiz-shell{max-width:760px;margin:0 auto}
+.quiz-card{
+  padding:34px;border-radius:var(--radius);
+  background:var(--surface);border:1px solid var(--border);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  box-shadow:var(--shadow);
+}
+.quiz-meta{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:12px;font-size:.81rem;font-weight:600;color:var(--muted)}
+.progress{height:6px;border-radius:99px;background:var(--surface-2);overflow:hidden;margin-bottom:30px;border:1px solid var(--border)}
+.progress-bar{height:100%;width:0%;border-radius:99px;background:linear-gradient(90deg,var(--accent),var(--accent-2));transition:width .55s var(--ease)}
+.q-text{font-family:var(--font-display);font-size:clamp(1.12rem,2.4vw,1.42rem);font-weight:600;line-height:1.35;margin-bottom:26px}
+.options{display:grid;gap:11px}
+.option{
+  display:flex;align-items:center;gap:14px;text-align:left;
+  padding:16px 18px;border-radius:14px;font-size:.93rem;font-weight:500;
+  background:var(--surface-2);border:1px solid var(--border);color:var(--text);
+  transition:transform .25s var(--ease),border-color .25s,background .25s;
+}
+.option:hover:not(:disabled){transform:translateX(4px);border-color:var(--accent);background:color-mix(in srgb,var(--accent) 8%,transparent)}
+.option:disabled{cursor:default}
+.option .letter{
+  width:28px;height:28px;border-radius:9px;flex:none;display:grid;place-items:center;
+  font-size:.77rem;font-weight:700;font-family:var(--font-display);
+  background:var(--surface-solid);border:1px solid var(--border);color:var(--muted);
+}
+.option.correct{background:color-mix(in srgb,var(--good) 15%,transparent);border-color:var(--good)}
+.option.correct .letter{background:var(--good);color:#fff;border-color:var(--good)}
+.option.wrong{background:color-mix(in srgb,var(--bad) 13%,transparent);border-color:var(--bad)}
+.option.wrong .letter{background:var(--bad);color:#fff;border-color:var(--bad)}
+.feedback{margin-top:22px;padding:16px 18px;border-radius:14px;font-size:.88rem;line-height:1.6;border:1px solid var(--border);background:var(--surface-2);animation:termIn .4s var(--ease) both}
+.feedback strong{color:var(--text)}
+.quiz-actions{display:flex;justify-content:flex-end;margin-top:24px}
+.result{text-align:center;padding:20px 6px}
+.result .score{font-family:var(--font-display);font-size:clamp(3rem,9vw,4.6rem);font-weight:700;letter-spacing:-.05em;background:linear-gradient(120deg,var(--accent),var(--accent-2) 50%,var(--accent-3));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1;margin-bottom:10px}
+.result h3{font-size:1.28rem;margin-bottom:10px}
+.result p{color:var(--muted);margin-bottom:26px}
+
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s var(--ease),transform .7s var(--ease);transition-delay:var(--d,0ms)}
+.reveal.in{opacity:1;transform:none}
+
+.site-footer{border-top:1px solid var(--border);padding:34px 22px;text-align:center;font-size:.85rem;color:var(--muted)}
+.site-footer strong{color:var(--text);font-weight:600}
+
+@media (max-width:1040px){.nav-link{padding:9px 9px;font-size:.76rem}}
+@media (max-width:900px){
+  .header-inner{padding:12px 16px;gap:14px;flex-wrap:wrap}
+  .nav{order:3;width:100%;margin-left:0;padding-bottom:2px}
+  .theme-toggle{margin-left:auto}
+  main{padding:0 16px 70px}
+  .hero{padding:44px 0 32px}
+  .stats{grid-template-columns:repeat(2,1fr);gap:11px}
+  .stat{padding:17px 15px}
+  .stat .num{font-size:1.45rem}
+  .vt-item{padding-left:38px}
+  .quiz-card{padding:24px 20px}
+  .experiment{grid-template-columns:1fr;padding:26px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<div class="bg-stars" id="bgStars" aria-hidden="true"></div>
+<div class="bg-dots" aria-hidden="true"></div>
+<div class="orbs" aria-hidden="true">
+  <div class="orb o1"></div>
+  <div class="orb o2"></div>
+  <div class="orb o3"></div>
+</div>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="#inicio" data-route="inicio">
+      <span class="brand-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="7" width="20" height="13" rx="2"/>
+          <path d="M8 3l4 4 4-4"/>
+        </svg>
+      </span>
+      <span>Televisión · Guía</span>
+    </a>
+
+    <nav class="nav" aria-label="Navegación principal">
+      <button class="nav-link active" data-route="inicio">Inicio</button>
+      <button class="nav-link" data-route="funciona">Cómo funciona</button>
+      <button class="nav-link" data-route="senales">Señales</button>
+      <button class="nav-link" data-route="estandares">Estándares</button>
+      <button class="nav-link" data-route="pantallas">Pantallas</button>
+      <button class="nav-link" data-route="historia">Historia</button>
+      <button class="nav-link" data-route="ninos">Niños</button>
+      <button class="nav-link" data-route="glosario">Glosario</button>
+      <button class="nav-link" data-route="simulador">Simulador</button>
+      <button class="nav-link" data-route="quiz">Quiz</button>
+    </nav>
+
+    <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema">
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round">
+        <circle cx="12" cy="12" r="4"/>
+        <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>
+      </svg>
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<main>
+
+  <!-- =============== INICIO =============== -->
+  <section class="view active" data-view="inicio">
+    <div class="hero">
+      <span class="pill"><span class="dot"></span>De la caja tonta a la pantalla inteligente</span>
+      <h1 class="hero-title">Descubre el <span class="grad">mundo de la televisión</span></h1>
+      <p class="lead">
+        Cómo se captan y transmiten las imágenes, qué diferencia la señal analógica de la digital,
+        los estándares mundiales, la evolución de las pantallas, la historia completa y un simulador
+        para experimentar con la señal.
+      </p>
+      <div class="hero-actions">
+        <button class="btn btn-primary" data-route="funciona">
+          ¿Cómo funciona la TV?
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+        <button class="btn btn-ghost" data-route="simulador">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="13" rx="2"/><path d="M8 3l4 4 4-4"/></svg>
+          Abrir simulador de señal
+        </button>
+      </div>
+    </div>
+
+    <div class="stats reveal">
+      <div class="stat"><div class="num" data-count="1925" data-suffix="">0</div><div class="lbl">Primera imagen de TV (Baird)</div></div>
+      <div class="stat"><div class="num" data-count="8" data-suffix="K">0</div><div class="lbl">Resolución máxima actual</div></div>
+      <div class="stat"><div class="num" data-count="1936" data-suffix="">0</div><div class="lbl">Primeras emisiones regulares (BBC)</div></div>
+      <div class="stat"><div class="num" data-count="4" data-suffix="K">0</div><div class="lbl">Resolución estándar moderna</div></div>
+    </div>
+
+    <div class="sec-head reveal">
+      <h2>Una guía completa por la televisión</h2>
+      <p>Desde la física de la luz y el barrido de electrones hasta el streaming y las pantallas OLED. Con historia, estándares y simulador.</p>
+    </div>
+
+    <div class="module-grid">
+      <button class="module reveal" data-route="funciona">
+        <span class="module-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><path d="M2 12h20"/></svg>
+        </span>
+        <h3>Cómo funciona</h3>
+        <p>Del lente de la cámara a tu pantalla: captación, transmisión, recepción y visualización.</p>
+        <span class="arrow">Ver proceso
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </button>
+      <button class="module reveal" data-route="senales" style="--d:40ms">
+        <span class="module-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h3l2-7 4 14 3-9 2 5 3-3h3"/></svg>
+        </span>
+        <h3>Señales</h3>
+        <p>Analógica vs digital, el efecto "cliff" y por qué el ruido afecta distinto a cada una.</p>
+        <span class="arrow">Ver señales
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </button>
+      <button class="module reveal" data-route="estandares" style="--d:80ms">
+        <span class="module-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        </span>
+        <h3>Estándares</h3>
+        <p>NTSC, PAL, SECAM, DVB, ATSC, ISDB: qué se usa en cada región del mundo.</p>
+        <span class="arrow">Ver estándares
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </button>
+      <button class="module reveal" data-route="pantallas" style="--d:120ms">
+        <span class="module-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        </span>
+        <h3>Pantallas</h3>
+        <p>CRT, plasma, LCD, LED, OLED, QLED y MicroLED: cómo ha evolucionado la tecnología.</p>
+        <span class="arrow">Ver pantallas
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </button>
+      <button class="module reveal" data-route="historia" style="--d:160ms">
+        <span class="module-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        </span>
+        <h3>Historia</h3>
+        <p>De Nipkow a las Smart TV: todos los hitos de la televisión en una línea del tiempo.</p>
+        <span class="arrow">Ver historia
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </button>
+      <button class="module reveal" data-route="ninos" style="--d:200ms">
+        <span class="module-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v2"/></svg>
+        </span>
+        <h3>Para niños</h3>
+        <p>Cámara oscura, disco de Newton y mezcla de colores: la TV explicada experimentando.</p>
+        <span class="arrow">Ver experimentos
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </button>
+      <button class="module reveal" data-route="glosario" style="--d:240ms">
+        <span class="module-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5V5a2 2 0 0 1 2-2h14v16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/><path d="M4 15h16"/></svg>
+        </span>
+        <h3>Glosario</h3>
+        <p>Píxel, resolución, bitrate, HDR, FPS… todos los términos de la TV explicados.</p>
+        <span class="arrow">Abrir glosario
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </button>
+      <button class="module reveal" data-route="simulador" style="--d:280ms">
+        <span class="module-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h3l2-7 4 14 3-9 2 5 3-3h3"/></svg>
+        </span>
+        <h3>Simulador de señal</h3>
+        <p>Ajusta potencia, ruido y resolución para ver cómo se degrada la señal en analógico y digital.</p>
+        <span class="arrow">Abrir simulador
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </button>
+      <button class="module reveal" data-route="quiz" style="--d:320ms">
+        <span class="module-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l2 2 4-4"/><rect x="3" y="4" width="18" height="16" rx="3"/></svg>
+        </span>
+        <h3>Quiz</h3>
+        <p>Diez preguntas al azar sobre señales, estándares, pantallas e historia de la TV.</p>
+        <span class="arrow">Empezar quiz
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </button>
+    </div>
+
+    <div class="note ref reveal">
+      <strong>Dato curioso:</strong> una pantalla 8K tiene 7.680 × 4.320 píxeles, es decir, 33 millones de píxeles.
+      La primera imagen de televisión de Baird (1925) tenía solo 30 líneas: unos pocos cientos de puntos.
+    </div>
+  </section>
+
+  <!-- =============== CÓMO FUNCIONA =============== -->
+  <section class="view" data-view="funciona">
+    <div class="sec-head section">
+      <h2>¿Cómo funciona la televisión?</h2>
+      <p>La TV es una cadena de cinco pasos: captar la imagen, convertirla en señal, transmitirla, recibirla y mostrarla. Cada paso puede hacerse de varias formas.</p>
+    </div>
+
+    <div class="vt" id="chainList"></div>
+
+    <div class="diagram-wrap reveal" style="margin-top:24px">
+      <h4>Del lente al píxel</h4>
+      <p class="sub">Así se transforma la luz que entra por la cámara en una señal que viaja hasta tu casa.</p>
+      <div class="vt" id="pipelineList"></div>
+    </div>
+
+    <div class="note reveal good">
+      <strong>La clave:</strong> la TV no transmite "imágenes" en el sentido literal, sino información codificada.
+      Primero en forma de señal eléctrica (analógica), luego en bits (digital). La pantalla reconstruye la imagen
+      a partir de esa información.
+    </div>
+  </section>
+
+  <!-- =============== SEÑALES =============== -->
+  <section class="view" data-view="senales">
+    <div class="sec-head section">
+      <h2>Señales: analógica vs digital</h2>
+      <p>La televisión analógica y la digital se comportan de forma muy distinta frente al ruido. La primera se degrada gradualmente; la segunda tiene un "acantilado": o se ve perfecta, o no se ve.</p>
+    </div>
+
+    <div class="grid-2">
+      <div class="card reveal">
+        <span class="kicker">Analógica</span>
+        <h3>Se degrada con el ruido</h3>
+        <p>La señal analógica representa la imagen como una variación continua de voltaje. Con interferencia, la imagen se llena de nieve, aparecen fantasmas y el color se desplaza. Pero mientras haya algo de señal, la imagen se ve, aunque sea mal.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Digital</span>
+        <h3>Efecto "cliff"</h3>
+        <p>La señal digital se codifica en bits. Mientras la tasa de error sea baja, la imagen se reconstruye perfecta. Pero si baja del umbral, la imagen se congela, aparecen bloques o se pierde por completo. Es el famoso "todo o nada".</p>
+      </div>
+    </div>
+
+    <div class="diagram-wrap reveal" style="margin-top:24px">
+      <h4>Comparativa visual</h4>
+      <p class="sub">Observa cómo se degrada una señal analógica al bajar la potencia, y cómo responde una digital.</p>
+      <div class="grid-2">
+        <div style="text-align:center">
+          <div style="font-family:var(--font-display);font-weight:700;color:var(--accent);margin-bottom:10px">Analógica</div>
+          <svg viewBox="0 0 200 120" style="width:100%;max-width:260px;margin:0 auto;display:block;border-radius:10px;background:#0a0a0a">
+            <rect width="200" height="120" fill="#0a0a0a"/>
+            <rect x="10" y="20" width="60" height="40" fill="#22c55e" opacity=".85"/>
+            <rect x="80" y="20" width="60" height="40" fill="#3b82f6" opacity=".85"/>
+            <rect x="150" y="20" width="40" height="40" fill="#eab308" opacity=".85"/>
+            <rect x="10" y="70" width="90" height="40" fill="#ef4444" opacity=".85"/>
+            <rect x="110" y="70" width="80" height="40" fill="#a855f7" opacity=".85"/>
+            <g opacity=".5">
+              <circle cx="40" cy="45" r="1.5" fill="#fff"/>
+              <circle cx="90" cy="30" r="1.5" fill="#fff"/>
+              <circle cx="130" cy="50" r="1.5" fill="#fff"/>
+              <circle cx="70" cy="90" r="1.5" fill="#fff"/>
+              <circle cx="160" cy="85" r="1.5" fill="#fff"/>
+            </g>
+            <text x="100" y="115" text-anchor="middle" font-family="Inter,sans-serif" font-size="8" fill="#888">nieve · fantasmas · color desplazado</text>
+          </svg>
+        </div>
+        <div style="text-align:center">
+          <div style="font-family:var(--font-display);font-weight:700;color:var(--accent-2);margin-bottom:10px">Digital</div>
+          <svg viewBox="0 0 200 120" style="width:100%;max-width:260px;margin:0 auto;display:block;border-radius:10px;background:#0a0a0a">
+            <rect width="200" height="120" fill="#0a0a0a"/>
+            <rect x="10" y="20" width="60" height="40" fill="#22c55e" opacity=".4"/>
+            <rect x="80" y="20" width="60" height="40" fill="#3b82f6" opacity=".4"/>
+            <rect x="150" y="20" width="40" height="40" fill="#eab308" opacity=".4"/>
+            <rect x="10" y="70" width="90" height="40" fill="#ef4444" opacity=".4"/>
+            <rect x="110" y="70" width="80" height="40" fill="#a855f7" opacity=".4"/>
+            <g fill="#fff" opacity=".18">
+              <rect x="40" y="20" width="20" height="20"/>
+              <rect x="100" y="60" width="25" height="25"/>
+              <rect x="150" y="30" width="30" height="15"/>
+            </g>
+            <text x="100" y="115" text-anchor="middle" font-family="Inter,sans-serif" font-size="8" fill="#888">bloques · congelación · pérdida total</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="note reveal danger">
+      <strong>El "cliff effect":</strong> en TV digital, cuando la señal baja de un umbral (aprox. 15–20 dB de SNR),
+      la imagen no se ve mal, se deja de ver. Esto sorprendió a muchos usuarios en la transición digital:
+      antes había nieve, ahora hay pantalla negra.
+    </div>
+  </section>
+
+  <!-- =============== ESTÁNDARES =============== -->
+  <section class="view" data-view="estandares">
+    <div class="sec-head section">
+      <h2>Estándares de televisión</h2>
+      <p>A lo largo del siglo XX, distintos países adoptaron sistemas incompatibles entre sí. Aún hoy no hay un único estándar mundial.</p>
+    </div>
+
+    <div class="table-wrap reveal">
+      <table>
+        <thead><tr><th>Estándar</th><th>Tipo</th><th>Región</th><th>Líneas</th></tr></thead>
+        <tbody id="standardsTable"></tbody>
+      </table>
+    </div>
+
+    <div class="vt" id="standardsList" style="margin-top:26px"></div>
+
+    <div class="note reveal ref">
+      <strong>Dato:</strong> los tres sistemas analógicos principales fueron NTSC (EE. UU., Japón, parte de América),
+      PAL (Europa, Australia, Sudamérica) y SECAM (Francia, Rusia). Un VHS grabado en NTSC no se podía reproducir
+      en un televisor PAL, y viceversa. La digitalización ha reducido el problema con los estándares DVB, ATSC, ISDB y DTMB.
+    </div>
+  </section>
+
+  <!-- =============== PANTALLAS =============== -->
+  <section class="view" data-view="pantallas">
+    <div class="sec-head section">
+      <h2>Tecnologías de pantalla</h2>
+      <p>Desde los pesados tubos de rayos catódicos hasta los paneles OLED ultrafinos: la pantalla ha cambiado más que cualquier otra parte del televisor.</p>
+    </div>
+
+    <div class="grid-3">
+      <div class="card reveal">
+        <span class="kicker">CRT</span>
+        <h3>Tubo de rayos catódicos</h3>
+        <p>Un cañón de electrones barre la pantalla línea a línea. Pesado, voluminoso, pero con negros profundos y sin retardo. Dominó la TV hasta los 2000.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Plasma</span>
+        <h3>Plasma</h3>
+        <p>Cada píxel es una pequeña celda de gas que se ioniza y emite luz ultravioleta. Colores vivos y negros profundos, pero consumía mucha energía y sufría retención de imagen.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">LCD</span>
+        <h3>LCD</h3>
+        <p>Cristal líquido que se ilumina desde atrás. Ligera, barata y versátil. Su punto débil son los negros, que no son del todo negros porque la luz siempre está encendida.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">LED</span>
+        <h3>LED</h3>
+        <p>Un LCD cuya luz de fondo son LED en lugar de lámparas fluorescentes. Más eficiente y con mejor contraste. Muchas "TV LED" son en realidad LCD con retroiluminación LED.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">OLED</span>
+        <h3>OLED</h3>
+        <p>Cada píxel emite su propia luz. Negros perfectos, ángulos de visión amplios y colores intensos. Es la tecnología de referencia actual, aunque sufre de "burn-in".</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">QLED</span>
+        <h3>QLED</h3>
+        <p>LCD con puntos cuánticos que mejoran el color y el brillo. Buena para habitaciones muy iluminadas, pero no tiene los negros puros del OLED.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">MicroLED</span>
+        <h3>MicroLED</h3>
+        <p>Cada píxel es un LED microscópico. Combina lo mejor del OLED y del LED: brillo alto, negros perfectos y sin burn-in. Es la tecnología del futuro, aún muy cara.</p>
+      </div>
+    </div>
+
+    <div class="note reveal good">
+      <strong>Regla rápida:</strong> en habitaciones oscuras, OLED gana. En habitaciones muy iluminadas o con mucho
+      reflejo, QLED o LED de gama alta rinden mejor. MicroLED combina ambas ventajas, pero su precio es todavía muy alto.
+    </div>
+  </section>
+
+  <!-- =============== HISTORIA =============== -->
+  <section class="view" data-view="historia">
+    <div class="sec-head section">
+      <h2>Línea del tiempo de la televisión</h2>
+      <p>De los primeros discos giratorios a las pantallas inteligentes. Los hitos más importantes en la historia de la TV.</p>
+    </div>
+
+    <div class="vt" id="historyList"></div>
+
+    <div class="note reveal ref">
+      <strong>Dato curioso:</strong> la primera transmisión de TV que dio la vuelta al mundo fue la del alunizaje del Apolo 11,
+      en 1969. Se estima que la vieron 600 millones de personas, cuando la población mundial era de unos 3.600 millones.
+    </div>
+  </section>
+
+  <!-- =============== NIÑOS =============== -->
+  <section class="view" data-view="ninos">
+    <div class="sec-head section">
+      <h2>Experimentos para niños</h2>
+      <p>La televisión se entiende mejor experimentando. Estos experimentos explican por sí solos los principios básicos de la imagen en movimiento y el color.</p>
+    </div>
+
+    <div class="grid-2">
+      <div class="card reveal">
+        <span class="kicker">Óptica</span>
+        <h3>Cámara oscura</h3>
+        <p>Una caja cerrada con un pequeño orificio proyecta la imagen del exterior invertida en su interior. Es el principio de la cámara fotográfica y de la TV.</p>
+        <p style="margin-top:10px"><strong style="color:var(--text)">Materiales:</strong> caja de zapatos, papel de aluminio, alfiler, papel vegetal.</p>
+        <p style="margin-top:6px"><strong style="color:var(--text)">Procedimiento:</strong> haz un agujero con el alfiler en el aluminio que cubre un extremo. Forra el otro extremo con papel vegetal. Apunta hacia un objeto luminoso y observa la imagen invertida.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Color</span>
+        <h3>Disco de Newton</h3>
+        <p>Al girar rápidamente un disco con los colores del arcoíris, los colores se mezclan y se ve blanco. Es el principio de la mezcla aditiva de color que usa la TV.</p>
+        <p style="margin-top:10px"><strong style="color:var(--text)">Materiales:</strong> cartón, compás, tijeras, rotuladores de colores, cuerda o palillo.</p>
+        <p style="margin-top:6px"><strong style="color:var(--text)">Procedimiento:</strong> dibuja un círculo dividido en 7 sectores y pinta cada uno de un color. Haz un agujero en el centro y gíralo. Observa cómo se ve blanquecino.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Persistencia</span>
+        <h3>Taumátropo</h3>
+        <p>Un cartón con dos dibujos distintos en cada cara que, al girar rápidamente, se funden en uno solo. Es el principio de la imagen en movimiento.</p>
+        <p style="margin-top:10px"><strong style="color:var(--text)">Materiales:</strong> cartón, lápiz, tijeras, rotuladores.</p>
+        <p style="margin-top:6px"><strong style="color:var(--text)">Procedimiento:</strong> recorta un círculo de cartón. Dibuja un pájaro en una cara y una jaula en la otra. Pega un palillo en el centro y gíralo entre las manos.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">RGB</span>
+        <h3>Mezcla de colores con linternas</h3>
+        <p>Con tres linternas y filtros rojo, verde y azul, se puede demostrar que la TV usa solo esos tres colores para crear todos los demás.</p>
+        <p style="margin-top:10px"><strong style="color:var(--text)">Materiales:</strong> 3 linternas, papel celofán rojo, verde y azul, una pared blanca.</p>
+        <p style="margin-top:6px"><strong style="color:var(--text)">Procedimiento:</strong> cubre cada linterna con un filtro y proyecta los tres círculos sobre la pared. Donde se superponen, verás amarillo, cian, magenta y blanco.</p>
+      </div>
+    </div>
+
+    <div class="note reveal good">
+      <strong>Consejo didáctico:</strong> antes de cada experimento, pide a los niños que predigan qué va a pasar.
+      La hipótesis es lo que convierte la actividad en ciencia.
+    </div>
+  </section>
+
+  <!-- =============== GLOSARIO =============== -->
+  <section class="view" data-view="glosario">
+    <div class="sec-head section">
+      <h2>Glosario esencial</h2>
+      <p>Los términos que todo el mundo debería conocer al hablar de televisión. Busca cualquier palabra para filtrar.</p>
+    </div>
+
+    <div class="gloss-shell">
+      <div class="search-wrap">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        <input type="text" class="gloss-search" id="glossSearch" placeholder="Buscar término… (ej: píxel, HDR, bitrate)" aria-label="Buscar término">
+      </div>
+      <div class="gloss-grid" id="glossGrid"></div>
+      <div id="glossEmpty" class="gloss-empty" style="display:none">No se encontraron términos con esa búsqueda.</div>
+    </div>
+  </section>
+
+  <!-- =============== SIMULADOR =============== -->
+  <section class="view" data-view="simulador">
+    <div class="sec-head section">
+      <h2>Simulador de señal de TV</h2>
+      <p>Ajusta la potencia, el ruido y la resolución para ver cómo se degrada la imagen en analógico y en digital. Observa el famoso "efecto cliff".</p>
+    </div>
+
+    <div class="sim-shell reveal">
+      <div class="sim-tabs" role="tablist">
+        <button class="sim-tab active" data-mode="analog" role="tab">Analógica</button>
+        <button class="sim-tab" data-mode="digital" role="tab">Digital</button>
+      </div>
+
+      <div class="sim-canvas-wrap">
+        <canvas id="simCanvas" width="640" height="360"></canvas>
+      </div>
+
+      <div class="sim-controls">
+        <div class="sim-ctrl">
+          <label>Potencia de señal <span id="simPowerVal">70%</span></label>
+          <input type="range" id="simPower" min="0" max="100" step="1" value="70">
+        </div>
+        <div class="sim-ctrl">
+          <label>Ruido / interferencia <span id="simNoiseVal">20%</span></label>
+          <input type="range" id="simNoise" min="0" max="100" step="1" value="20">
+        </div>
+        <div class="sim-ctrl">
+          <label>Resolución <span id="simResVal">HD</span></label>
+          <input type="range" id="simRes" min="0" max="3" step="1" value="1">
+        </div>
+      </div>
+
+      <div class="sim-stats" id="simStats">
+        <div class="sim-stat"><div class="lbl">Modo</div><div class="val" id="statMode">Analógica</div></div>
+        <div class="sim-stat"><div class="lbl">Calidad</div><div class="val" id="statQuality">Buena</div></div>
+        <div class="sim-stat"><div class="lbl">SNR</div><div class="val" id="statSNR">—</div></div>
+        <div class="sim-stat"><div class="lbl">Resolución efectiva</div><div class="val" id="statRes">—</div></div>
+      </div>
+
+      <div class="info-panel active" style="margin-top:20px" id="simInfo">
+        <div class="ip-name" id="simInfoName">Analógica</div>
+        <div class="ip-desc" id="simInfoDesc">La señal analógica se degrada gradualmente con el ruido. Aunque la imagen se vea mal, mientras haya algo de señal sigue visible.</div>
+      </div>
+    </div>
+
+    <div class="note reveal">
+      <strong>Observa con atención:</strong> en analógico, baja la potencia y verás nieve, fantasmas y colores desplazados.
+      En digital, baja la potencia hasta el umbral y verás cómo la imagen se congela o desaparece por completo.
+      Ese salto brusco es el "efecto cliff".
+    </div>
+  </section>
+
+  <!-- =============== QUIZ =============== -->
+  <section class="view" data-view="quiz">
+    <div class="sec-head section">
+      <h2>Quiz de televisión</h2>
+      <p>Diez preguntas al azar sobre señales, estándares, pantallas e historia de la TV.</p>
+    </div>
+    <div class="quiz-shell">
+      <div class="quiz-card" id="quizCard"></div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <p><strong>Televisión · Guía interactiva</strong> — Material educativo sobre señales, estándares, pantallas e historia de la TV.</p>
+</footer>
+
+<script>
+const $  = (sel, root = document) => root.querySelector(sel);
+const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+const htmlEl = document.documentElement;
+
+/* TEMA */
+function setTheme(t){
+  htmlEl.setAttribute('data-theme', t);
+  try { localStorage.setItem('tv-theme', t); } catch(e){}
+}
+(function initTheme(){
+  let saved = null;
+  try { saved = localStorage.getItem('tv-theme'); } catch(e){}
+  setTheme(saved || 'light');
+})();
+$('#themeToggle').addEventListener('click', () => {
+  setTheme(htmlEl.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+});
+
+/* ESTRELLAS */
+(function buildStars(){
+  const cont = $('#bgStars');
+  if (!cont) return;
+  for (let i = 0; i < 80; i++){
+    const s = document.createElement('div');
+    s.className = 'star';
+    s.style.left = Math.random() * 100 + '%';
+    s.style.top = Math.random() * 100 + '%';
+    const size = 1 + Math.random() * 2;
+    s.style.width = size + 'px';
+    s.style.height = size + 'px';
+    s.style.setProperty('--tw-dur', (2 + Math.random() * 4) + 's');
+    s.style.setProperty('--tw-delay', (Math.random() * 4) + 's');
+    cont.appendChild(s);
+  }
+})();
+
+/* RUTAS */
+const ROUTES = ['inicio','funciona','senales','estandares','pantallas','historia','ninos','glosario','simulador','quiz'];
+let currentRoute = 'inicio';
+
+function go(route, push = true){
+  if (!ROUTES.includes(route)) route = 'inicio';
+  currentRoute = route;
+  $$('.view').forEach(v => v.classList.toggle('active', v.dataset.view === route));
+  $$('.nav-link').forEach(b => b.classList.toggle('active', b.dataset.route === route));
+  if (push && location.hash.slice(1) !== route) history.pushState(null, '', '#' + route);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  requestAnimationFrame(() => {
+    $$('.view.active .reveal').forEach(el => el.classList.remove('in'));
+    checkReveal();
+    if (route === 'inicio') animateCounters();
+    if (route === 'funciona'){ renderChain(); renderPipeline(); }
+    if (route === 'estandares'){ renderStandardsTable(); renderStandardsList(); }
+    if (route === 'historia') renderHistory();
+    if (route === 'glosario') renderGlossary();
+    if (route === 'simulador') startSimulator();
+    else stopSimulator();
+    if (route === 'quiz') startQuiz();
+  });
+}
+document.addEventListener('click', e => {
+  const t = e.target.closest('[data-route]');
+  if (t){ e.preventDefault(); go(t.dataset.route); }
+});
+window.addEventListener('popstate', () => go(location.hash.slice(1) || 'inicio', false));
+
+/* REVEAL */
+const revealObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting){
+      entry.target.classList.add('in');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+function checkReveal(){ $$('.view.active .reveal:not(.in)').forEach(el => revealObserver.observe(el)); }
+
+function animateCounters(){
+  $$('.num[data-count]').forEach(el => {
+    if (el.dataset.done === '1') return;
+    el.dataset.done = '1';
+    const target = parseFloat(el.dataset.count);
+    const suffix = el.dataset.suffix || '';
+    const isDecimal = String(el.dataset.count).includes('.');
+    const dur = 1600;
+    const start = performance.now();
+    function tick(now){
+      const p = Math.min((now - start) / dur, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      const val = target * eased;
+      el.textContent = (isDecimal ? val.toFixed(1) : Math.round(val)).toLocaleString('es-ES') + suffix;
+      if (p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  });
+}
+
+/* CADENA TV */
+const CHAIN = [
+  { tag:'Paso 1', color:'#2563eb', title:'Captación', desc:'Una cámara capta la luz del mundo real y la convierte en una señal eléctrica. Los sensores (CCD o CMOS) transforman cada píxel de la imagen en un valor de voltaje.' },
+  { tag:'Paso 2', color:'#7c3aed', title:'Producción', desc:'Las señales de varias cámaras se mezclan en un control de realización. Se añaden gráficos, sonido y efectos. El resultado es la señal de programa que se emite.' },
+  { tag:'Paso 3', color:'#db2777', title:'Transmisión', desc:'La señal se modula y se envía por antena (terrestre), cable, satélite o internet (IPTV). Cada medio tiene sus ventajas y limitaciones.' },
+  { tag:'Paso 4', color:'#f472b6', title:'Recepción', desc:'La antena o el módem capta la señal y el sintonizador la selecciona. En digital, el decodificador convierte los bits en imagen y sonido.' },
+  { tag:'Paso 5', color:'#059669', title:'Visualización', desc:'La pantalla reconstruye la imagen píxel a píxel. Cuanto mejor sea el panel (OLED, QLED, MicroLED), más fiel será la reproducción del color y el contraste.' }
+];
+
+function renderChain(){
+  const c = $('#chainList');
+  if (!c) return;
+  c.innerHTML = CHAIN.map((p, i) => `
+    <div class="vt-item" style="--c:${p.color};--d:${i * 60}ms">
+      <span class="vt-dot"></span>
+      <div class="vt-card">
+        <div class="vt-top">
+          <span class="vt-year">${p.tag}</span>
+        </div>
+        <h4>${p.title}</h4>
+        <p>${p.desc}</p>
+      </div>
+    </div>
+  `).join('');
+}
+
+const PIPELINE = [
+  { tag:'1', color:'#2563eb', title:'Luz', desc:'La luz entra por el lente y llega al sensor. Cada fotón se convierte en electrones.' },
+  { tag:'2', color:'#7c3aed', title:'Sensor', desc:'El sensor CCD o CMOS genera una señal eléctrica proporcional a la intensidad de la luz en cada punto.' },
+  { tag:'3', color:'#db2777', title:'Codificación', desc:'La señal analógica se convierte en digital (bits) mediante un conversor A/D. Se codifica con un códec (H.264, H.265, AV1).' },
+  { tag:'4', color:'#f472b6', title:'Modulación', desc:'Los bits se modulan sobre una portadora (OFDM en DVB-T, 8VSB en ATSC) y se emiten por la antena.' },
+  { tag:'5', color:'#059669', title:'Pantalla', desc:'El receptor decodifica los bits y enciende los píxeles correspondientes. Cada píxel tiene subpíxeles R, G y B.' }
+];
+
+function renderPipeline(){
+  const c = $('#pipelineList');
+  if (!c) return;
+  c.innerHTML = PIPELINE.map((p, i) => `
+    <div class="vt-item" style="--c:${p.color};--d:${i * 50}ms">
+      <span class="vt-dot"></span>
+      <div class="vt-card">
+        <div class="vt-top">
+          <span class="vt-year">${p.tag}</span>
+        </div>
+        <h4>${p.title}</h4>
+        <p>${p.desc}</p>
+      </div>
+    </div>
+  `).join('');
+}
+
+/* ESTÁNDARES */
+const STANDARDS = [
+  { code:'NTSC', type:'Analógico', region:'EE. UU., Japón, México, Corea del Sur', lines:'525 líneas · 60 Hz', color:'#2563eb',
+    desc:'El primer estándar de TV a color, adoptado en 1953. Su tasa de refresco de 60 Hz está ligada a la frecuencia de la red eléctrica estadounidense.',
+    extra:'NTSC se conocía popularmente como "Never The Same Color" por sus problemas de estabilidad de color.' },
+  { code:'PAL', type:'Analógico', region:'Europa, Australia, Sudamérica (excepto Brasil)', lines:'625 líneas · 50 Hz', color:'#7c3aed',
+    desc:'Desarrollado en Alemania en 1963. Corrige la inestabilidad de color de NTSC y ofrece mayor resolución vertical (625 líneas frente a 525).',
+    extra:'PAL y NTSC eran incompatibles: un VHS NTSC no se podía reproducir en un televisor PAL sin un conversor.' },
+  { code:'SECAM', type:'Analógico', region:'Francia, Rusia, partes de África', lines:'625 líneas · 50 Hz', color:'#db2777',
+    desc:'Desarrollado en Francia en 1967. Usa una técnica distinta de codificación de color. Fue adoptado por Francia y la URSS por razones políticas y técnicas.',
+    extra:'SECAM significa "Séquentiel couleur à mémoire". Fue el sistema analógico más robusto frente al ruido, pero también el más complejo.' },
+  { code:'DVB-T/T2', type:'Digital', region:'Europa, Australia, India, partes de África', lines:'Hasta 1080p / 4K', color:'#f472b6',
+    desc:'El estándar digital europeo, basado en OFDM. DVB-T2 permite 4K y mayor capacidad. Es el sistema digital más extendido del mundo.',
+    extra:'DVB también incluye variantes para cable (DVB-C), satélite (DVB-S) y móvil (DVB-H).' },
+  { code:'ATSC', type:'Digital', region:'EE. UU., Canadá, México, Corea del Sur', lines:'Hasta 1080p / 4K', color:'#059669',
+    desc:'El estándar digital estadounidense, basado en 8VSB. ATSC 3.0 (también llamado NextGen TV) añade 4K, HDR e interactividad.',
+    extra:'ATSC 3.0 usa OFDM, a diferencia de ATSC 1.0, que usaba 8VSB. Es el primer estándar que combina TV e internet de forma nativa.' },
+  { code:'ISDB', type:'Digital', region:'Japón, Brasil, partes de Sudamérica', lines:'Hasta 1080i / 4K', color:'#e11d48',
+    desc:'El estándar japonés, pensado para recepción móvil. Su variante ISDB-T permite ver TV en el móvil. Brasil desarrolló su propia variante (ISDB-Tb).',
+    extra:'ISDB-T fue pionero en la recepción en dispositivos móviles, con la norma "One-Seg" para teléfonos.' },
+  { code:'DTMB', type:'Digital', region:'China, Cuba, partes de Asia y África', lines:'Hasta 1080p / 4K', color:'#0891b2',
+    desc:'El estándar digital chino, basado en TDS-OFDM. Se ha expandido a varios países de Asia, África y América Latina.',
+    extra:'DTMB es el estándar digital más reciente y uno de los más avanzados técnicamente en recepción móvil.' }
+];
+
+function renderStandardsTable(){
+  const t = $('#standardsTable');
+  if (!t) return;
+  t.innerHTML = STANDARDS.map(s => `
+    <tr><td>${s.code}</td><td>${s.type}</td><td>${s.region}</td><td>${s.lines}</td></tr>
+  `).join('');
+}
+
+function renderStandardsList(){
+  const c = $('#standardsList');
+  if (!c) return;
+  c.innerHTML = STANDARDS.map((s, i) => `
+    <div class="vt-item" style="--c:${s.color};--d:${i * 40}ms">
+      <span class="vt-dot"></span>
+      <div class="vt-card">
+        <div class="vt-top">
+          <span class="vt-year">${s.code}</span>
+          <span class="vt-era">${s.type}</span>
+        </div>
+        <h4>${s.region}</h4>
+        <p>${s.desc}</p>
+        <button class="vt-more" type="button">
+          <span>Más detalle</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="vt-extra"><div><p>${s.extra}</p></div></div>
+      </div>
+    </div>
+  `).join('');
+  c.onclick = e => {
+    const btn = e.target.closest('.vt-more');
+    if (!btn) return;
+    const item = btn.closest('.vt-item');
+    const open = item.classList.toggle('open');
+    btn.querySelector('span').textContent = open ? 'Ocultar detalle' : 'Más detalle';
+  };
+}
+
+/* HISTORIA */
+const HISTORY = [
+  { year:'1884', tag:'Antecedente', color:'#2563eb', title:'El disco de Nipkow', desc:'Paul Nipkow patenta un disco giratorio con agujeros en espiral que permite explorar una imagen línea a línea. Es el primer sistema mecánico de TV.', extra:'El disco de Nipkow se usó en las primeras emisiones experimentales de los años 20 y 30, antes de la TV electrónica.' },
+  { year:'1900', tag:'Nombre', color:'#7c3aed', title:'La palabra "televisión"', desc:'El ruso Constantin Perskyi acuña el término "televisión" en una conferencia en París. La palabra empieza a usarse en todo el mundo.', extra:'Antes se la llamaba "televista", "foto-telegrafía" o "transmisión de imágenes a distancia".' },
+  { year:'1925', tag:'Baird', color:'#db2777', title:'Primera imagen de TV', desc:'John Logie Baird transmite en Londres la primera imagen de televisión: el rostro de una marioneta, usando el disco de Nipkow.', extra:'La imagen tenía solo 30 líneas y se movía a 5 imágenes por segundo. Baird era un inventor escocés autodidacta.' },
+  { year:'1927', tag:'Farnsworth', color:'#f472b6', title:'Nace la TV electrónica', desc:'Philo Farnsworth, un inventor autodidacta de 21 años, logra transmitir la primera imagen electrónica, sin partes móviles. Es la base de la TV moderna.', extra:'Farnsworth concibió la idea a los 14 años, arando un campo de patatas, imaginando cómo un haz de electrones podía "leer" una imagen línea por línea.' },
+  { year:'1936', tag:'BBC', color:'#059669', title:'Primeras emisiones regulares', desc:'La BBC inicia las primeras emisiones regulares de televisión del mundo, alternando los sistemas de Baird (mecánico) y Marconi-EMI (electrónico).', extra:'Las emisiones se interrumpieron durante la Segunda Guerra Mundial y se reanudaron en 1946.' },
+  { year:'1941', tag:'NTSC', color:'#e11d48', title:'Estándar NTSC', desc:'Estados Unidos adopta el estándar NTSC de 525 líneas y 60 Hz. Se convierte en el primer estándar de TV del mundo.', extra:'NTSC se mantuvo vigente hasta la transición digital en 2009.' },
+  { year:'1951', tag:'Color', color:'#0891b2', title:'Primera TV a color (EE. UU.)', desc:'CBS emite la primera transmisión experimental en color. Dos años después, se adopta el sistema NTSC a color como estándar.', extra:'La CBS usaba un sistema mecánico que no era compatible con los televisores en blanco y negro. RCA impuso su sistema electrónico compatible.' },
+  { year:'1954', tag:'Color', color:'#2563eb', title:'Color comercial', desc:'La RCA lanza el primer televisor a color de producción masiva (el CT-100). El color se populariza lentamente durante los 60.', extra:'El CT-100 costaba unos 1.000 dólares de la época (más de 10.000 actuales) y pesaba casi 40 kg.' },
+  { year:'1962', tag:'Satélite', color:'#7c3aed', title:'Telstar y la TV transatlántica', desc:'El satélite Telstar retransmite las primeras imágenes de TV en directo entre América y Europa. Comienza la era de las comunicaciones globales por satélite.', extra:'Telstar fue un proyecto conjunto de AT&T, Bell Labs, NASA y los servicios postales británico y francés.' },
+  { year:'1964', tag:'PAL', color:'#db2777', title:'Nace el estándar PAL', desc:'Alemania desarrolla el sistema PAL, que corrige los problemas de color de NTSC. Se adoptará en Europa, Australia y Sudamérica.', extra:'PAL tiene 625 líneas y 50 Hz, lo que le da mayor resolución vertical que NTSC.' },
+  { year:'1967', tag:'SECAM', color:'#f472b6', title:'Francia estrena SECAM', desc:'Francia adopta el sistema SECAM, desarrollado por Henri de France. La URSS también lo adoptará, creando una división técnica en Europa.', extra:'La división PAL/SECAM fue en parte técnica y en parte política: Francia quería un sistema propio.' },
+  { year:'1969', tag:'Mundial', color:'#059669', title:'El Apolo 11 en TV', desc:'El alunizaje se retransmite en directo a todo el mundo. Se estima que lo vieron 600 millones de personas.', extra:'La cámara del Apolo 11 era de baja resolución (320 líneas, 10 fps) y en blanco y negro, pero hizo historia.' },
+  { year:'1981', tag:'MTV', color:'#e11d48', title:'Nace MTV', desc:'MTV comienza a emitir en Estados Unidos, marcando un antes y un después en la cultura popular y en la relación entre la música y la imagen.', extra:'El primer videoclip que emitió MTV fue "Video Killed the Radio Star", de The Buggles.' },
+  { year:'1996', tag:'Digital', color:'#0891b2', title:'Mandato digital en EE. UU.', desc:'La FCC ordena la transición a la TV digital en Estados Unidos. Se fija 2006 como fecha límite (que luego se retrasaría a 2009).', extra:'La transición digital liberó espectro radioeléctrico que se subastó para telefonía móvil y otros servicios.' },
+  { year:'1998', tag:'HDTV', color:'#2563eb', title:'Primeras emisiones HDTV', desc:'Comienzan las primeras emisiones experimentales en alta definición en Estados Unidos, Japón y Europa. La TV empieza a dejar atrás las líneas por píxeles.', extra:'La HDTV supuso un salto de calidad enorme: de 480 líneas a 720p o 1080i.' },
+  { year:'2009', tag:'Transición', color:'#7c3aed', title:'Apagón analógico en EE. UU.', desc:'Estados Unidos completa la transición a la TV digital. Millones de hogares tienen que adaptar sus antenas o comprar decodificadores.', extra:'En España el apagón analógico fue en 2010; en Argentina y otros países sudamericanos, entre 2010 y 2020.' },
+  { year:'2012', tag:'Smart TV', color:'#db2777', title:'La era de la Smart TV', desc:'Se popularizan los televisores con conexión a internet, aplicaciones y streaming integrado. La TV deja de ser solo un receptor de emisiones.', extra:'Netflix, YouTube y otras plataformas empiezan a competir directamente con la TV tradicional.' },
+  { year:'2015', tag:'4K', color:'#f472b6', title:'4K se populariza', desc:'Los televisores 4K (3.840 × 2.160 píxeles) bajan de precio y se popularizan. El streaming en 4K se vuelve común.', extra:'El 4K también se llama UHD (Ultra High Definition) y cuadruplica la resolución del Full HD (1080p).' },
+  { year:'2019', tag:'8K', color:'#059669', title:'Primeros televisores 8K', desc:'Los primeros televisores 8K (7.680 × 4.320 píxeles) llegan al mercado. Su contenido es aún escaso pero la tecnología avanza.', extra:'Una pantalla 8K tiene 33 millones de píxeles. A la distancia normal de visionado, el ojo humano apenas distingue 8K de 4K.' },
+  { year:'2020s', tag:'Streaming', color:'#e11d48', title:'El streaming supera a la TV por cable', desc:'Plataformas como Netflix, Disney+, HBO Max y Prime Video superan en audiencia a la TV por cable en muchos países. La TV tradicional se reinventa.', extra:'La TV por internet (IPTV y streaming) ha transformado la forma de ver la televisión: ya no hay horarios fijos.' }
+];
+
+function renderHistory(){
+  const c = $('#historyList');
+  if (!c) return;
+  c.innerHTML = HISTORY.map((h, i) => `
+    <div class="vt-item" style="--c:${h.color};--d:${i * 40}ms">
+      <span class="vt-dot"></span>
+      <div class="vt-card">
+        <div class="vt-top">
+          <span class="vt-year">${h.year}</span>
+          <span class="vt-era">${h.tag}</span>
+        </div>
+        <h4>${h.title}</h4>
+        <p>${h.desc}</p>
+        <button class="vt-more" type="button">
+          <span>Más detalle</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="vt-extra"><div><p>${h.extra}</p></div></div>
+      </div>
+    </div>
+  `).join('');
+  c.onclick = e => {
+    const btn = e.target.closest('.vt-more');
+    if (!btn) return;
+    const item = btn.closest('.vt-item');
+    const open = item.classList.toggle('open');
+    btn.querySelector('span').textContent = open ? 'Ocultar detalle' : 'Más detalle';
+  };
+}
+
+/* GLOSARIO */
+const GLOSSARY = [
+  { t:'Píxel', d:'La unidad más pequeña de una imagen digital. Cada píxel tiene un color y una intensidad. Una pantalla 4K tiene 8,3 millones de píxeles.' },
+  { t:'Resolución', d:'Número de píxeles de ancho por alto. SD (720×480), HD (1280×720), Full HD (1920×1080), 4K (3840×2160), 8K (7680×4320).' },
+  { t:'FPS', d:'Frames per second (imágenes por segundo). Cuanto mayor, más fluido se ve el movimiento. El cine usa 24 fps; la TV moderna, 50 o 60 fps.' },
+  { t:'Relación de aspecto', d:'Proporción entre ancho y alto de la pantalla. El 16:9 es el estándar actual. El 4:3 era el de la TV analógica.' },
+  { t:'SNR', d:'Signal-to-Noise Ratio (relación señal-ruido). Mide la calidad de la señal respecto al ruido. En TV digital, por debajo de ~15 dB no se recibe.' },
+  { t:'Bitrate', d:'Cantidad de datos por segundo que transporta una señal de video. A mayor bitrate, mejor calidad, pero más ancho de banda necesario.' },
+  { t:'Códec', d:'Algoritmo que comprime y descomprime el video. H.264, H.265 (HEVC), AV1 y VP9 son los más usados.' },
+  { t:'HDR', d:'High Dynamic Range. Aumenta el contraste y la gama de colores, haciendo las imágenes más realistas. Existen HDR10, Dolby Vision y HLG.' },
+  { t:'Tasa de refresco', d:'Número de veces por segundo que la pantalla actualiza la imagen. Se mide en Hz. 60 Hz, 120 Hz y 144 Hz son comunes en TV y monitores.' },
+  { t:'Tiempo de respuesta', d:'Tiempo que tarda un píxel en cambiar de color. A menor tiempo, menos estela en escenas rápidas. Se mide en milisegundos (ms).' },
+  { t:'Contraste', d:'Diferencia entre el blanco más brillante y el negro más oscuro. Un buen contraste da imágenes más vivas.' },
+  { t:'Luminancia', d:'Brillo de un color, independiente de su tono. En TV analógica, se transmite por separado de la crominancia.' },
+  { t:'Crominancia', d:'Información de color de una señal de video. Se transmite junto con la luminancia para reconstruir la imagen en color.' },
+  { t:'Barrido', d:'Recorrido del haz de electrones o del proceso digital que "lee" la imagen línea por línea. Puede ser entrelazado o progresivo.' },
+  { t:'Entrelazado', d:'Técnica que dibuja las líneas pares en un campo y las impares en otro. Duplica la sensación de movimiento con la mitad de ancho de banda.' },
+  { t:'Progresivo', d:'Cada fotograma contiene todas las líneas. Es la forma moderna (1080p, 2160p). Ofrece mejor calidad en escenas de movimiento.' },
+  { t:'Ángulo de visión', d:'Ángulo desde el cual se puede ver la pantalla sin pérdida notable de color o contraste. Los OLED tienen ángulos muy amplios.' },
+  { t:'Persistencia de la visión', d:'Fenómeno por el cual el ojo retiene una imagen durante una fracción de segundo. Es la base de la percepción del movimiento en cine y TV.' },
+  { t:'IPTV', d:'Televisión por protocolo de internet. La señal se transmite por la red como datos, no por antena o cable coaxial tradicional.' },
+  { t:'OTT', d:'Over The Top. Servicios de video que se distribuyen por internet sin depender de un operador de TV (Netflix, YouTube, Disney+).' }
+];
+
+function renderGlossary(){
+  const grid = $('#glossGrid');
+  const empty = $('#glossEmpty');
+  const search = $('#glossSearch');
+  if (!grid) return;
+
+  function render(filter = ''){
+    const q = filter.trim().toLowerCase();
+    const items = GLOSSARY.filter(g =>
+      !q || g.t.toLowerCase().includes(q) || g.d.toLowerCase().includes(q)
+    );
+    if (items.length === 0){
+      grid.innerHTML = '';
+      empty.style.display = 'block';
+      return;
+    }
+    empty.style.display = 'none';
+    grid.innerHTML = items.map(g => `
+      <div class="gloss-item">
+        <div class="gi-term">${g.t}</div>
+        <div class="gi-def">${g.d}</div>
+      </div>
+    `).join('');
+  }
+  render();
+  if (search && !search.dataset.bound){
+    search.dataset.bound = '1';
+    search.addEventListener('input', e => render(e.target.value));
+  }
+}
+
+/* ============================================================
+   SIMULADOR DE SEÑAL DE TV
+============================================================ */
+let simRAF = null;
+let simState = {
+  mode: 'analog',
+  power: 70,
+  noise: 20,
+  resIndex: 1,
+  t: 0
+};
+const RES_OPTIONS = ['SD', 'HD', 'Full HD', '4K'];
+const RES_DIMENSIONS = [
+  { name:'SD', w:720, h:480 },
+  { name:'HD', w:1280, h:720 },
+  { name:'Full HD', w:1920, h:1080 },
+  { name:'4K', w:3840, h:2160 }
+];
+
+function startSimulator(){
+  const canvas = $('#simCanvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+
+  function drawTestPattern(w, h, t){
+    // Fondo negro
+    ctx.fillStyle = '#000';
+    ctx.fillRect(0, 0, w, h);
+
+    // Barras verticales de color (patrón SMPTE simplificado)
+    const bars = ['#c0c0c0','#c0c000','#00c0c0','#00c000','#c000c0','#c00000','#0000c0'];
+    const barW = w / 7;
+    const barH = h * 0.7;
+    bars.forEach((c, i) => {
+      ctx.fillStyle = c;
+      ctx.fillRect(i * barW, 0, barW + 1, barH);
+    });
+
+    // Sección inferior con barras más oscuras
+    const darkBars = ['#0000c0','#131313','#c000c0','#131313','#00c0c0','#131313','#c0c0c0'];
+    const bottomH = h * 0.1;
+    darkBars.forEach((c, i) => {
+      ctx.fillStyle = c;
+      ctx.fillRect(i * barW, barH, barW + 1, bottomH);
+    });
+
+    // Sección negra inferior
+    ctx.fillStyle = '#131313';
+    ctx.fillRect(0, barH + bottomH, w, h - barH - bottomH);
+
+    // Pluge (niveles de negro)
+    const plugeY = barH + bottomH + (h - barH - bottomH) * 0.3;
+    const plugeH = (h - barH - bottomH) * 0.4;
+    const plugeW = w / 20;
+    const plugeStart = w / 2 - plugeW * 1.5;
+    ctx.fillStyle = '#000';
+    ctx.fillRect(plugeStart, plugeY, plugeW, plugeH);
+    ctx.fillStyle = '#0a0a0a';
+    ctx.fillRect(plugeStart + plugeW, plugeY, plugeW, plugeH);
+    ctx.fillStyle = '#151515';
+    ctx.fillRect(plugeStart + plugeW * 2, plugeY, plugeW, plugeH);
+
+    // Elemento en movimiento (círculo) para mostrar animación
+    const cx = w/2 + Math.cos(t) * w * 0.35;
+    const cy = barH * 0.5 + Math.sin(t * 1.3) * barH * 0.25;
+    ctx.fillStyle = '#fff';
+    ctx.beginPath();
+    ctx.arc(cx, cy, Math.min(w, h) * 0.04, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.strokeStyle = '#000';
+    ctx.lineWidth = 3;
+    ctx.stroke();
+
+    // Línea de barrido (efecto CRT)
+    const scanY = (t * 40) % h;
+    ctx.fillStyle = 'rgba(255,255,255,0.06)';
+    ctx.fillRect(0, scanY, w, 2);
+  }
+
+  function addNoise(w, h, intensity){
+    if (intensity <= 0) return;
+    const numPixels = Math.floor(w * h * intensity * 0.08);
+    for (let i = 0; i < numPixels; i++){
+      const x = Math.random() * w;
+      const y = Math.random() * h;
+      const gray = Math.floor(Math.random() * 255);
+      ctx.fillStyle = `rgba(${gray},${gray},${gray},${0.4 + Math.random() * 0.4})`;
+      ctx.fillRect(x, y, 2, 2);
+    }
+  }
+
+  function applyGhosting(w, h, signal){
+    // Fantasma desplazado
+    const ghostAlpha = Math.max(0, (0.7 - signal) * 0.6);
+    if (ghostAlpha <= 0) return;
+    try {
+      ctx.globalAlpha = ghostAlpha;
+      // Copia desplazada usando drawImage del mismo canvas
+      const tmp = document.createElement('canvas');
+      tmp.width = w;
+      tmp.height = h;
+      const tmpCtx = tmp.getContext('2d');
+      tmpCtx.drawImage(canvas, 0, 0, w, h);
+      ctx.drawImage(tmp, 20, 0, w, h);
+      ctx.globalAlpha = 1;
+    } catch(e){
+      ctx.globalAlpha = 1;
+    }
+  }
+
+  function applyPixelation(w, h, blockSize){
+    const smallW = Math.max(1, Math.floor(w / blockSize));
+    const smallH = Math.max(1, Math.floor(h / blockSize));
+    const small = document.createElement('canvas');
+    small.width = smallW;
+    small.height = smallH;
+    const sctx = small.getContext('2d');
+    sctx.drawImage(canvas, 0, 0, smallW, smallH);
+    ctx.imageSmoothingEnabled = false;
+    ctx.drawImage(small, 0, 0, w, h);
+    ctx.imageSmoothingEnabled = true;
+  }
+
+  function applyHorizontalGlitch(w, h, signal){
+    if (signal > 0.35) return;
+    const numBands = Math.floor((0.35 - signal) * 12);
+    for (let i = 0; i < numBands; i++){
+      const y = Math.random() * h;
+      const bandH = 4 + Math.random() * 20;
+      const shift = (Math.random() - 0.5) * 60;
+      try {
+        const tmp = document.createElement('canvas');
+        tmp.width = w;
+        tmp.height = bandH;
+        tmp.getContext('2d').drawImage(canvas, 0, y, w, bandH, 0, 0, w, bandH);
+        ctx.drawImage(tmp, shift, y);
+      } catch(e){}
+    }
+  }
+
+  function draw(){
+    const w = canvas.width;
+    const h = canvas.height;
+
+    const signal = simState.power / 100;
+    const noiseLevel = simState.noise / 100;
+    const resDim = RES_DIMENSIONS[simState.resIndex];
+
+    // Dibujar patrón base
+    drawTestPattern(w, h, simState.t);
+
+    if (simState.mode === 'analog'){
+      // Sin señal casi total
+      if (signal < 0.05){
+        ctx.fillStyle = '#0a0a0a';
+        ctx.fillRect(0, 0, w, h);
+        addNoise(w, h, 0.9);
+      } else {
+        // Ruido proporcional a la debilidad de la señal
+        const noiseIntensity = noiseLevel * (1 - signal * 0.6) + (1 - signal) * 0.3;
+        addNoise(w, h, noiseIntensity);
+
+        // Fantasmas
+        applyGhosting(w, h, signal);
+
+        // Glitches horizontales (pérdida de sincronismo)
+        if (signal < 0.35){
+          applyHorizontalGlitch(w, h, signal);
+        }
+
+        // Color bleeding / desaturación a baja señal
+        if (signal < 0.5){
+          ctx.fillStyle = `rgba(255,255,255,${(0.5 - signal) * 0.3})`;
+          ctx.fillRect(0, 0, w, h);
+        }
+
+        // Reducción de resolución aparente
+        if (signal < 0.6){
+          const blur = Math.floor((1 - signal) * 8) + 2;
+          applyPixelation(w, h, blur);
+        }
+      }
+    } else {
+      // DIGITAL
+      const threshold = 0.30;
+      if (signal < threshold){
+        // Sin señal
+        ctx.fillStyle = '#000';
+        ctx.fillRect(0, 0, w, h);
+        ctx.fillStyle = '#fff';
+        ctx.font = 'bold 32px "Space Grotesk", sans-serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('SIN SEÑAL', w/2, h/2 - 10);
+        ctx.font = '16px "Inter", sans-serif';
+        ctx.fillStyle = '#888';
+        ctx.fillText('Señal demasiado débil', w/2, h/2 + 30);
+      } else if (signal < 0.55){
+        // Pixelación fuerte (artefactos de compresión)
+        const blockSize = Math.floor((0.55 - signal) * 40) + 8;
+        applyPixelation(w, h, blockSize);
+
+        // Añadir bloques negros aleatorios
+        const numBlocks = Math.floor((0.55 - signal) * 30);
+        for (let i = 0; i < numBlocks; i++){
+          const bx = Math.random() * w;
+          const by = Math.random() * h;
+          const bw = 10 + Math.random() * 40;
+          const bh = 10 + Math.random() * 40;
+          ctx.fillStyle = 'rgba(0,0,0,0.7)';
+          ctx.fillRect(bx, by, bw, bh);
+        }
+      } else if (signal < 0.75){
+        // Ocasional congelación (simulada con un frame estático)
+        // En este simulador lo mostramos como artefactos ligeros
+        if (Math.random() < 0.3){
+          const blockSize = Math.floor((1 - signal) * 15) + 4;
+          applyPixelation(w, h, blockSize);
+        }
+      }
+      // Por encima de 0.75: imagen perfecta
+    }
+
+    // Info de resolución real
+    const effectiveResIndex = simState.mode === 'analog'
+      ? Math.max(0, Math.floor(simState.resIndex * Math.min(1, signal * 1.5)))
+      : (signal < 0.3 ? -1 : simState.resIndex);
+
+    // Actualizar stats
+    const snr = Math.max(0, Math.round(signal * 40 - noiseLevel * 15));
+    const quality = simState.mode === 'analog'
+      ? (signal > 0.8 && noiseLevel < 0.3 ? 'Excelente' :
+         signal > 0.6 ? 'Buena' :
+         signal > 0.35 ? 'Aceptable' :
+         signal > 0.15 ? 'Mala' : 'Sin señal')
+      : (signal < 0.3 ? 'Sin señal' :
+         signal < 0.55 ? 'Artefactos' :
+         signal < 0.75 ? 'Aceptable' : 'Excelente');
+
+    $('#statMode').textContent = simState.mode === 'analog' ? 'Analógica' : 'Digital';
+    $('#statQuality').textContent = quality;
+    $('#statSNR').textContent = snr + ' dB';
+    $('#statRes').textContent = effectiveResIndex < 0 ? '—' : RES_OPTIONS[effectiveResIndex];
+
+    const qStat = $('#statQuality').parentElement;
+    if (quality === 'Excelente' || quality === 'Buena') qStat.className = 'sim-stat good';
+    else if (quality === 'Sin señal' || quality === 'Mala' || quality === 'Artefactos') qStat.className = 'sim-stat warn';
+    else qStat.className = 'sim-stat';
+
+    simState.t += 0.03;
+    simRAF = requestAnimationFrame(draw);
+  }
+
+  // Controles
+  const powerInput = $('#simPower');
+  const noiseInput = $('#simNoise');
+  const resInput = $('#simRes');
+
+  powerInput.value = simState.power;
+  $('#simPowerVal').textContent = simState.power + '%';
+  powerInput.oninput = () => {
+    simState.power = parseInt(powerInput.value, 10);
+    $('#simPowerVal').textContent = simState.power + '%';
+  };
+
+  noiseInput.value = simState.noise;
+  $('#simNoiseVal').textContent = simState.noise + '%';
+  noiseInput.oninput = () => {
+    simState.noise = parseInt(noiseInput.value, 10);
+    $('#simNoiseVal').textContent = simState.noise + '%';
+  };
+
+  resInput.value = simState.resIndex;
+  $('#simResVal').textContent = RES_OPTIONS[simState.resIndex];
+  resInput.oninput = () => {
+    simState.resIndex = parseInt(resInput.value, 10);
+    $('#simResVal').textContent = RES_OPTIONS[simState.resIndex];
+  };
+
+  // Tabs de modo
+  $$('.sim-tab').forEach(tab => {
+    tab.classList.toggle('active', tab.dataset.mode === simState.mode);
+    tab.onclick = () => {
+      $$('.sim-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      simState.mode = tab.dataset.mode;
+      simState.t = 0;
+      if (simState.mode === 'analog'){
+        $('#simInfoName').textContent = 'Analógica';
+        $('#simInfoDesc').textContent = 'La señal analógica se degrada gradualmente con el ruido. Aunque la imagen se vea mal, mientras haya algo de señal sigue visible.';
+        // el ruido sí afecta
+        noiseInput.disabled = false;
+      } else {
+        $('#simInfoName').textContent = 'Digital';
+        $('#simInfoDesc').textContent = 'La señal digital tiene un efecto "cliff": por encima del umbral se ve perfecta, por debajo se pierde por completo. El ruido apenas afecta mientras haya señal suficiente.';
+        noiseInput.disabled = false;
+      }
+    };
+  });
+
+  // Info inicial
+  $('#simInfoName').textContent = 'Analógica';
+  $('#simInfoDesc').textContent = 'La señal analógica se degrada gradualmente con el ruido. Aunque la imagen se vea mal, mientras haya algo de señal sigue visible.';
+
+  draw();
+}
+
+function stopSimulator(){
+  if (simRAF){ cancelAnimationFrame(simRAF); simRAF = null; }
+}
+
+/* QUIZ */
+const QUIZ_DATA = [
+  { q:'¿Qué es un píxel?', o:['Una unidad de medida de pantalla','La unidad más pequeña de una imagen digital','Un tipo de conector','Un formato de video'], c:1, e:'Un píxel es la unidad más pequeña de una imagen digital. Cada píxel tiene un color y una intensidad.' },
+  { q:'¿Cuántos píxeles tiene una pantalla 4K?', o:['1920 × 1080','3840 × 2160','7680 × 4320','1280 × 720'], c:1, e:'4K (UHD) tiene 3840 × 2160 píxeles, es decir, 8,3 millones de píxeles.' },
+  { q:'¿Qué significa NTSC?', o:['National Television System Committee','New Television Standard Code','Network TV Signal Cable','Numeric Television System Code'], c:0, e:'NTSC son las siglas de National Television System Committee, el primer estándar de TV a color (EE. UU., 1953).' },
+  { q:'¿Qué estándar usa Europa para TV digital?', o:['ATSC','ISDB','DVB-T/T2','NTSC'], c:2, e:'Europa usa DVB-T/T2, el estándar de TV digital más extendido del mundo.' },
+  { q:'¿Qué significa el "efecto cliff" en TV digital?', o:['La imagen se degrada gradualmente','La imagen se ve perfecta o no se ve','El sonido se distorsiona','La pantalla se apaga'], c:1, e:'En digital, por encima del umbral la imagen se ve perfecta; por debajo, se pierde por completo. No hay degradación gradual como en analógico.' },
+  { q:'¿Qué tecnología de pantalla emite su propia luz?', o:['LCD','OLED','LED','Plasma'], c:1, e:'En OLED, cada píxel emite su propia luz, lo que permite negros perfectos. En LCD y LED, la luz viene de una retroiluminación.' },
+  { q:'¿Cuándo fue la primera emisión regular de TV?', o:['1925','1936','1941','1954'], c:1, e:'La BBC inició las primeras emisiones regulares de TV del mundo en 1936.' },
+  { q:'¿Qué sistema usó Francia para su TV analógica?', o:['NTSC','PAL','SECAM','DVB'], c:2, e:'Francia adoptó el sistema SECAM, desarrollado por Henri de France, en 1967.' },
+  { q:'¿Qué significa HDR?', o:['High Definition Radio','High Dynamic Range','High Density Resolution','Hard Drive Recording'], c:1, e:'HDR (High Dynamic Range) aumenta el contraste y la gama de colores, haciendo las imágenes más realistas.' },
+  { q:'¿Qué es el entrelazado?', o:['Un tipo de conector','Una técnica de barrido que dibuja líneas pares e impares por separado','Un formato de compresión','Un sistema de color'], c:1, e:'El entrelazado dibuja las líneas pares en un campo y las impares en otro, duplicando la sensación de movimiento con la mitad de ancho de banda.' },
+  { q:'¿Qué significa IPTV?', o:['Internet Protocol Television','International Public TV','Interactive Personal Television','Integrated Program TV'], c:0, e:'IPTV significa Internet Protocol Television: la TV se transmite por la red como datos, no por antena o cable tradicional.' },
+  { q:'¿Cuántos fps usa el cine tradicionalmente?', o:['24','30','50','60'], c:0, e:'El cine usa 24 fps desde los años 20. La TV usa 25, 30, 50 o 60 fps según el sistema.' },
+  { q:'¿Qué estándar digital se usa en Estados Unidos?', o:['DVB-T','ISDB','ATSC','DTMB'], c:2, e:'Estados Unidos usa ATSC, y su versión más moderna es ATSC 3.0 (NextGen TV).' },
+  { q:'¿Quién inventó la TV electrónica?', o:['John Logie Baird','Philo Farnsworth','Guglielmo Marconi','Nikola Tesla'], c:1, e:'Philo Farnsworth desarrolló la TV electrónica en 1927, con solo 21 años.' },
+  { q:'¿Qué es la persistencia de la visión?', o:['Un tipo de pantalla','El fenómeno por el cual el ojo retiene una imagen brevemente','Un formato de video','Un estándar de color'], c:1, e:'Es el fenómeno por el cual el ojo retiene una imagen durante una fracción de segundo, base de la percepción del movimiento en cine y TV.' },
+  { q:'¿Qué resolución es mayor?', o:['Full HD','4K','HD','SD'], c:1, e:'4K (3840 × 2160) es cuatro veces la resolución de Full HD (1920 × 1080).' },
+  { q:'¿Cuándo se popularizaron las Smart TV?', o:['Años 90','Años 2000','A partir de 2012','A partir de 2020'], c:2, e:'A partir de 2012 se popularizaron las Smart TV con apps y streaming integrado.' }
+];
+
+const TOTAL_PREGUNTAS = 10;
+const LETRAS = ['A','B','C','D'];
+let quizState = { questions: [], index: 0, score: 0, answered: false, finished: false };
+
+function shuffle(arr){
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+function startQuiz(){
+  quizState = {
+    questions: shuffle(QUIZ_DATA).slice(0, TOTAL_PREGUNTAS),
+    index: 0, score: 0, answered: false, finished: false
+  };
+  renderQuiz();
+}
+function renderQuiz(){
+  const card = $('#quizCard');
+  if (!card) return;
+  if (quizState.finished){
+    const total = quizState.questions.length;
+    const pct = Math.round((quizState.score / total) * 100);
+    let m = 'Conviene repasar señales, estándares e historia.';
+    if (pct === 100) m = '¡Perfecto! Dominas la TV.';
+    else if (pct >= 75) m = 'Muy buen resultado. Te falta muy poco para el pleno.';
+    else if (pct >= 50) m = 'Buen comienzo. Repasa las secciones y prueba otra vez.';
+    card.innerHTML = `
+      <div class="result">
+        <div class="score">${quizState.score}/${total}</div>
+        <h3>${m}</h3>
+        <p>Has acertado el ${pct}% de las preguntas de esta ronda.</p>
+        <button class="btn btn-primary" id="restartQuiz">
+          Jugar otra vez
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>
+        </button>
+      </div>`;
+    $('#restartQuiz').addEventListener('click', startQuiz);
+    return;
+  }
+  const q = quizState.questions[quizState.index];
+  const total = quizState.questions.length;
+  const progress = (quizState.index / total) * 100;
+  card.innerHTML = `
+    <div class="quiz-meta">
+      <span>Pregunta ${quizState.index + 1} de ${total}</span>
+      <span>Aciertos: ${quizState.score}</span>
+    </div>
+    <div class="progress"><div class="progress-bar" style="width:${progress}%"></div></div>
+    <h3 class="q-text">${q.q}</h3>
+    <div class="options" id="options">
+      ${q.o.map((opt, i) => `
+        <button class="option" data-i="${i}">
+          <span class="letter">${LETRAS[i]}</span>
+          <span>${opt}</span>
+        </button>`).join('')}
+    </div>
+    <div id="feedbackSlot"></div>
+    <div class="quiz-actions" id="actionsSlot"></div>`;
+  $('#options').addEventListener('click', e => {
+    const btn = e.target.closest('.option');
+    if (!btn || quizState.answered) return;
+    answerQuestion(parseInt(btn.dataset.i, 10));
+  });
+}
+function answerQuestion(chosen){
+  quizState.answered = true;
+  const q = quizState.questions[quizState.index];
+  const options = $$('#options .option');
+  options.forEach((btn, i) => {
+    btn.disabled = true;
+    if (i === q.c) btn.classList.add('correct');
+    else if (i === chosen) btn.classList.add('wrong');
+  });
+  const acerto = chosen === q.c;
+  if (acerto) quizState.score++;
+  $('#feedbackSlot').innerHTML = `
+    <div class="feedback">
+      <strong>${acerto ? 'Correcto.' : 'No exactamente.'}</strong> ${q.e}
+    </div>`;
+  const isLast = quizState.index === quizState.questions.length - 1;
+  $('#actionsSlot').innerHTML = `
+    <button class="btn btn-primary" id="nextBtn">
+      ${isLast ? 'Ver resultado' : 'Siguiente pregunta'}
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </button>`;
+  $('#nextBtn').addEventListener('click', () => {
+    if (isLast) quizState.finished = true;
+    else { quizState.index++; quizState.answered = false; }
+    renderQuiz();
+  });
+}
+
+/* TOAST */
+let toastTimer;
+function toast(msg){
+  let t = $('#toast');
+  if (!t){
+    t = document.createElement('div');
+    t.id = 'toast';
+    t.style.cssText = `
+      position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(100px);
+      background:var(--surface-solid);border:1px solid var(--border-strong);
+      color:var(--text);padding:12px 22px;border-radius:12px;
+      font-size:.88rem;font-weight:500;backdrop-filter:blur(12px);
+      transition:.4s cubic-bezier(.2,.7,.3,1);z-index:200;
+      box-shadow:0 20px 40px -12px rgba(0,0,0,.3);`;
+    document.body.appendChild(t);
+  }
+  t.textContent = msg;
+  requestAnimationFrame(() => t.style.transform = 'translateX(-50%) translateY(0)');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => {
+    t.style.transform = 'translateX(-50%) translateY(100px)';
+  }, 2200);
+}
+
+/* EFECTOS */
+$$('.module').forEach(m => {
+  m.addEventListener('mousemove', e => {
+    const r = m.getBoundingClientRect();
+    m.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
+    m.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
+  });
+});
+
+document.addEventListener('visibilitychange', () => {
+  document.querySelectorAll('.orb').forEach(o => {
+    o.style.animationPlayState = document.hidden ? 'paused' : 'running';
+  });
+  if (document.hidden) stopSimulator();
+  else if (currentRoute === 'simulador') startSimulator();
+});
+
+/* BOOT */
+(function boot(){
+  const initial = (location.hash.slice(1) || 'inicio');
+  go(ROUTES.includes(initial) ? initial : 'inicio', false);
+  checkReveal();
+  setTimeout(() => { if (currentRoute === 'inicio') animateCounters(); }, 300);
+})();
+</script>
+</body>
+</html>

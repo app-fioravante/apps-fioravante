@@ -1,0 +1,1989 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Matemática Simple — Números, álgebra y geometría explicados claro</title>
+<meta name="description" content="Aprende números, álgebra, geometría y funciones con lenguaje sencillo, gráficos, ecuaciones y calculadoras interactivas.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============ TOKENS ============ */
+:root{
+  --font-display:'Space Grotesk','Segoe UI',system-ui,sans-serif;
+  --font-body:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --font-math:'Space Grotesk','Cambria Math',Georgia,serif;
+  --radius:20px;
+  --radius-sm:12px;
+  --maxw:1180px;
+  --ease:cubic-bezier(.22,.75,.25,1);
+}
+html[data-theme="dark"]{
+  --bg:#070a12;
+  --bg-soft:#0a1120;
+  --surface:rgba(19,26,44,.66);
+  --surface-solid:#111a2b;
+  --surface-2:rgba(255,255,255,.04);
+  --surface-3:rgba(255,255,255,.07);
+  --border:rgba(255,255,255,.09);
+  --border-strong:rgba(255,255,255,.18);
+  --text:#e9eff9;
+  --muted:#8fa1bd;
+  --accent:#8b5cf6;
+  --accent-2:#14b8a6;
+  --accent-3:#f59e0b;
+  --good:#34d399;
+  --bad:#fb7185;
+  --shadow:0 24px 60px -24px rgba(0,0,0,.85);
+  --orb-op:.38;
+  --dot-color:rgba(255,255,255,.035);
+  --grid-color:rgba(255,255,255,.028);
+}
+html[data-theme="light"]{
+  --bg:#f4f6fc;
+  --bg-soft:#e9eefa;
+  --surface:rgba(255,255,255,.82);
+  --surface-solid:#ffffff;
+  --surface-2:rgba(12,25,48,.035);
+  --surface-3:rgba(12,25,48,.06);
+  --border:rgba(12,25,48,.10);
+  --border-strong:rgba(12,25,48,.20);
+  --text:#0c1729;
+  --muted:#586a85;
+  --accent:#7c3aed;
+  --accent-2:#0d9488;
+  --accent-3:#d97706;
+  --good:#059669;
+  --bad:#e11d48;
+  --shadow:0 24px 60px -30px rgba(16,36,72,.35);
+  --orb-op:.24;
+  --dot-color:rgba(12,25,48,.05);
+  --grid-color:rgba(12,25,48,.035);
+}
+
+/* ============ BASE ============ */
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;font-family:var(--font-body);background:var(--bg);color:var(--text);
+  min-height:100vh;line-height:1.65;-webkit-font-smoothing:antialiased;
+  transition:background .45s var(--ease),color .45s var(--ease);
+  overflow-x:hidden;
+}
+h1,h2,h3,h4{font-family:var(--font-display);line-height:1.15;letter-spacing:-.02em;margin:0}
+p{margin:0}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--accent);color:#fff}
+
+/* ============ FONDO ============ */
+.bg-dots{
+  position:fixed;inset:0;z-index:-3;pointer-events:none;
+  background-image:radial-gradient(var(--dot-color) 1px,transparent 1px);
+  background-size:24px 24px;
+}
+.orbs{position:fixed;inset:0;z-index:-2;overflow:hidden;pointer-events:none}
+.orb{position:absolute;border-radius:50%;filter:blur(95px);opacity:var(--orb-op);animation:float 26s ease-in-out infinite alternate}
+.orb.o1{width:52vw;height:52vw;background:var(--accent);top:-18vw;left:-14vw}
+.orb.o2{width:42vw;height:42vw;background:var(--accent-2);bottom:-20vw;right:-12vw;animation-delay:-9s}
+.orb.o3{width:34vw;height:34vw;background:var(--accent-3);top:44%;left:56%;animation-delay:-16s}
+@keyframes float{
+  0%{transform:translate3d(0,0,0) scale(1)}
+  50%{transform:translate3d(4vw,-3vw,0) scale(1.12)}
+  100%{transform:translate3d(-3vw,4vw,0) scale(.94)}
+}
+
+/* ============ HEADER ============ */
+.site-header{
+  position:sticky;top:0;z-index:50;
+  backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);
+  background:color-mix(in srgb,var(--bg) 74%, transparent);
+  border-bottom:1px solid var(--border);
+}
+.header-inner{max-width:var(--maxw);margin:0 auto;padding:13px 22px;display:flex;align-items:center;gap:20px}
+.brand{display:flex;align-items:center;gap:11px;font-family:var(--font-display);font-weight:700;font-size:1rem;letter-spacing:-.02em;white-space:nowrap}
+.brand-mark{
+  width:36px;height:36px;border-radius:11px;flex:none;
+  background:linear-gradient(140deg,var(--accent),var(--accent-2) 55%,var(--accent-3));
+  display:grid;place-items:center;color:#fff;
+  box-shadow:0 8px 22px -8px var(--accent);
+  transition:transform .5s var(--ease);
+}
+.brand:hover .brand-mark{transform:rotate(-12deg) scale(1.06)}
+.brand-mark svg{width:20px;height:20px}
+
+.nav{display:flex;gap:3px;margin-left:auto;overflow-x:auto;scrollbar-width:none}
+.nav::-webkit-scrollbar{display:none}
+.nav-link{
+  position:relative;padding:9px 13px;border-radius:11px;font-size:.85rem;font-weight:500;
+  color:var(--muted);white-space:nowrap;transition:color .3s var(--ease),background .3s var(--ease);
+}
+.nav-link:hover{color:var(--text);background:var(--surface-2)}
+.nav-link.active{color:var(--text);background:var(--surface-2)}
+.nav-link.active::after{
+  content:'';position:absolute;left:13px;right:13px;bottom:4px;height:2px;border-radius:2px;
+  background:linear-gradient(90deg,var(--accent),var(--accent-2));
+  animation:navIn .4s var(--ease) both;
+}
+@keyframes navIn{from{transform:scaleX(0);opacity:0}to{transform:scaleX(1);opacity:1}}
+
+.theme-toggle{
+  width:40px;height:40px;border-radius:12px;flex:none;
+  border:1px solid var(--border);background:var(--surface-2);
+  display:grid;place-items:center;
+  transition:transform .35s var(--ease),border-color .3s,background .3s;
+}
+.theme-toggle:hover{transform:translateY(-2px) rotate(8deg);border-color:var(--border-strong)}
+.theme-toggle svg{width:19px;height:19px}
+html[data-theme="dark"] .icon-sun{display:block}
+html[data-theme="dark"] .icon-moon{display:none}
+html[data-theme="light"] .icon-sun{display:none}
+html[data-theme="light"] .icon-moon{display:block}
+
+/* ============ LAYOUT ============ */
+main{max-width:var(--maxw);margin:0 auto;padding:0 22px 90px}
+.view{display:none}
+.view.active{display:block;animation:viewIn .55s var(--ease) both}
+@keyframes viewIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+
+/* ============ HERO ============ */
+.hero{padding:74px 0 42px;max-width:840px}
+.pill{
+  display:inline-flex;align-items:center;gap:8px;padding:7px 15px;border-radius:999px;
+  font-size:.78rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;
+  border:1px solid var(--border);background:var(--surface);color:var(--muted);margin-bottom:26px;
+  animation:viewIn .6s var(--ease) both;
+}
+.pill .dot{width:7px;height:7px;border-radius:50%;background:var(--good);animation:pulse 2.4s infinite}
+@keyframes pulse{
+  0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--good) 60%,transparent)}
+  70%{box-shadow:0 0 0 9px transparent}
+  100%{box-shadow:0 0 0 0 transparent}
+}
+h1.hero-title{font-size:clamp(2.2rem,5.4vw,3.95rem);font-weight:700;letter-spacing:-.035em;margin-bottom:22px}
+.grad{
+  background:linear-gradient(100deg,var(--accent),var(--accent-2) 48%,var(--accent-3));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  background-size:220% auto;animation:shimmer 7s linear infinite;
+}
+@keyframes shimmer{to{background-position:220% center}}
+.lead{font-size:clamp(1rem,1.6vw,1.15rem);color:var(--muted);max-width:640px;margin-bottom:34px}
+.hero-actions{display:flex;flex-wrap:wrap;gap:13px}
+
+/* ============ BOTONES ============ */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  padding:13px 25px;border-radius:13px;font-size:.93rem;font-weight:600;
+  border:1px solid transparent;
+  transition:transform .28s var(--ease),box-shadow .3s var(--ease),background .3s,border-color .3s,color .3s;
+  will-change:transform;
+}
+.btn:active{transform:scale(.97)}
+.btn svg{width:17px;height:17px}
+.btn-primary{
+  background:linear-gradient(120deg,var(--accent),var(--accent-3));
+  color:#fff;box-shadow:0 14px 34px -14px var(--accent);
+  position:relative;overflow:hidden;
+}
+.btn-primary::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,.4),transparent 70%);
+  transform:translateX(-130%);transition:transform .7s var(--ease);
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 20px 42px -14px var(--accent)}
+.btn-primary:hover::after{transform:translateX(130%)}
+.btn-ghost{border-color:var(--border);background:var(--surface);color:var(--text)}
+.btn-ghost:hover{transform:translateY(-2px);border-color:var(--border-strong);background:var(--surface-2)}
+
+/* ============ STATS ============ */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(156px,1fr));gap:14px;margin:12px 0 58px}
+.stat{
+  padding:22px 20px;border-radius:var(--radius);
+  background:var(--surface);border:1px solid var(--border);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  transition:transform .35s var(--ease),border-color .3s,box-shadow .35s;
+}
+.stat:hover{transform:translateY(-5px);border-color:var(--border-strong);box-shadow:var(--shadow)}
+.stat .num{
+  font-family:var(--font-display);font-size:1.85rem;font-weight:700;letter-spacing:-.03em;
+  background:linear-gradient(120deg,var(--accent),var(--accent-2));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.stat .lbl{font-size:.82rem;color:var(--muted);font-weight:500;margin-top:2px}
+
+/* ============ SECCIONES ============ */
+.sec-head{margin:0 0 28px}
+.sec-head h2{font-size:clamp(1.55rem,3vw,2.05rem);font-weight:700;margin-bottom:8px}
+.sec-head p{color:var(--muted);max-width:640px;font-size:.95rem}
+.section{padding-top:52px}
+
+/* ============ MÓDULOS HOME ============ */
+.module-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(258px,1fr));gap:18px}
+.module{
+  position:relative;overflow:hidden;text-align:left;padding:28px 24px;border-radius:var(--radius);
+  background:var(--surface);border:1px solid var(--border);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  transition:transform .4s var(--ease),border-color .35s,box-shadow .4s;
+}
+.module::before{
+  content:'';position:absolute;inset:0;opacity:0;
+  background:radial-gradient(420px circle at var(--mx,50%) var(--my,0%),color-mix(in srgb,var(--accent) 22%,transparent),transparent 65%);
+  transition:opacity .45s var(--ease);
+}
+.module:hover{transform:translateY(-6px);border-color:var(--border-strong);box-shadow:var(--shadow)}
+.module:hover::before{opacity:1}
+.module-ico{
+  width:46px;height:46px;border-radius:14px;display:grid;place-items:center;margin-bottom:18px;
+  background:linear-gradient(140deg,color-mix(in srgb,var(--accent) 22%,transparent),color-mix(in srgb,var(--accent-3) 18%,transparent));
+  border:1px solid var(--border);color:var(--accent);
+  transition:transform .4s var(--ease);
+}
+.module:hover .module-ico{transform:scale(1.08) rotate(-6deg)}
+.module-ico svg{width:22px;height:22px}
+.module h3{font-size:1.04rem;margin-bottom:8px;font-weight:600}
+.module p{font-size:.89rem;color:var(--muted);line-height:1.6}
+.module .arrow{display:inline-flex;align-items:center;gap:6px;margin-top:16px;font-size:.84rem;font-weight:600;color:var(--accent)}
+.module .arrow svg{width:14px;height:14px;transition:transform .35s var(--ease)}
+.module:hover .arrow svg{transform:translateX(5px)}
+
+/* ============ CARDS ============ */
+.card{
+  padding:26px;border-radius:var(--radius);
+  background:var(--surface);border:1px solid var(--border);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  transition:transform .35s var(--ease),border-color .3s,box-shadow .35s;
+}
+.card:hover{transform:translateY(-4px);border-color:var(--border-strong);box-shadow:var(--shadow)}
+.card h3{font-size:1.04rem;margin-bottom:10px;font-weight:600}
+.card p{font-size:.9rem;color:var(--muted);line-height:1.68}
+.card .kicker{
+  font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:12px;display:block;
+}
+.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+
+/* ============ ECUACIONES ============ */
+.eq{
+  font-family:var(--font-math);
+  font-size:clamp(1.15rem,2.2vw,1.45rem);
+  line-height:1.9;
+  text-align:center;
+  padding:22px 18px;
+  background:var(--surface-2);
+  border:1px solid var(--border);
+  border-radius:14px;
+  overflow-x:auto;
+  letter-spacing:.01em;
+}
+.eq var,.eq .v{font-style:italic;color:var(--accent-3);font-weight:600;padding:0 1px}
+.eq b{font-weight:700}
+.frac{
+  display:inline-flex;flex-direction:column;vertical-align:middle;
+  text-align:center;margin:0 4px;
+}
+.frac .num{padding:0 8px 2px;border-bottom:1.5px solid currentColor}
+.frac .den{padding:2px 8px 0}
+.sqrt{position:relative;border-top:1.5px solid currentColor;padding:0 4px;margin-left:10px;display:inline-block}
+.sqrt::before{content:'√';position:absolute;left:-13px;top:-2px;font-size:1.1em}
+
+/* ============ PASOS ============ */
+.steps{display:flex;flex-direction:column;gap:8px;margin:18px 0}
+.step{
+  display:flex;align-items:center;gap:14px;
+  padding:12px 16px;border-radius:12px;
+  background:var(--surface-2);border:1px solid var(--border);
+  font-family:var(--font-math);font-size:1rem;
+  animation:termIn .5s var(--ease) both;animation-delay:var(--d,0ms);
+}
+.step .n{
+  width:26px;height:26px;border-radius:8px;flex:none;display:grid;place-items:center;
+  font-family:var(--font-display);font-size:.78rem;font-weight:700;color:#fff;
+  background:linear-gradient(140deg,var(--accent),var(--accent-3));
+}
+.step .op{margin-left:auto;font-size:.78rem;color:var(--muted);font-family:var(--font-body);font-weight:500;white-space:nowrap}
+
+/* ============ CALCULADORAS ============ */
+.calc{
+  padding:24px;border-radius:var(--radius);
+  background:var(--surface);border:1px solid var(--border);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+}
+.calc-row{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:16px}
+.calc-field{display:flex;flex-direction:column;gap:6px;flex:1;min-width:82px}
+.calc-field span{
+  font-family:var(--font-math);font-size:.95rem;font-weight:600;
+  color:var(--accent-3);text-align:center;
+}
+.calc-field input{
+  width:100%;padding:11px 12px;border-radius:10px;text-align:center;
+  background:var(--surface-solid);border:1px solid var(--border);
+  color:var(--text);font-size:.98rem;font-family:var(--font-display);font-weight:600;
+  outline:none;transition:border-color .25s,box-shadow .25s;
+}
+.calc-field input:focus{border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 20%,transparent)}
+.calc-out{
+  padding:16px 18px;border-radius:12px;
+  background:color-mix(in srgb,var(--accent) 10%,transparent);
+  border:1px solid color-mix(in srgb,var(--accent) 25%,transparent);
+  font-family:var(--font-math);font-size:1.05rem;text-align:center;
+  min-height:56px;display:flex;align-items:center;justify-content:center;
+  transition:background .3s,border-color .3s;
+}
+.calc-out strong{color:var(--accent);font-size:1.2em;font-weight:700}
+.calc-out .hint{color:var(--muted);font-family:var(--font-body);font-size:.88rem}
+.calc-out .warn{color:var(--bad);font-family:var(--font-body);font-size:.88rem;font-weight:500}
+
+/* ============ TIPOS DE NÚMEROS ============ */
+.num-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:14px}
+.num-card{
+  padding:22px;border-radius:var(--radius);
+  background:var(--surface);border:1px solid var(--border);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  position:relative;overflow:hidden;
+  transition:transform .35s var(--ease),border-color .3s,box-shadow .35s;
+  animation:termIn .5s var(--ease) both;animation-delay:var(--d,0ms);
+}
+.num-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--c1),var(--c2));
+}
+.num-card:hover{transform:translateY(-5px);border-color:var(--border-strong);box-shadow:var(--shadow)}
+.num-sym{
+  font-family:var(--font-math);font-size:2.4rem;font-weight:700;line-height:1;
+  background:linear-gradient(140deg,var(--c1),var(--c2));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  margin-bottom:8px;display:block;
+}
+.num-card h3{font-size:.98rem;margin-bottom:8px;font-weight:600}
+.num-card .examples{
+  font-family:var(--font-math);font-size:.92rem;color:var(--accent-3);
+  margin-bottom:9px;font-weight:500;
+}
+.num-card p{font-size:.85rem;color:var(--muted);line-height:1.6}
+
+/* ============ JERARQUÍA ============ */
+.hierarchy{display:flex;flex-direction:column;gap:8px}
+.hier-step{
+  display:flex;align-items:center;gap:14px;
+  padding:14px 18px;border-radius:12px;
+  background:var(--surface-2);border:1px solid var(--border);
+  transition:transform .3s var(--ease),border-color .3s;
+}
+.hier-step:hover{transform:translateX(4px);border-color:var(--border-strong)}
+.hier-badge{
+  width:32px;height:32px;border-radius:9px;flex:none;display:grid;place-items:center;
+  font-family:var(--font-display);font-size:.82rem;font-weight:700;color:#fff;
+  background:linear-gradient(140deg,var(--c1),var(--c2));
+}
+.hier-step .label{font-weight:600;font-size:.92rem}
+.hier-step .sym{
+  margin-left:auto;font-family:var(--font-math);font-size:1rem;
+  color:var(--muted);font-weight:500;
+}
+
+/* ============ FRACCIONES VISUALES ============ */
+.frac-vis{display:flex;align-items:center;gap:14px;margin:16px 0;flex-wrap:wrap}
+.frac-bar{
+  display:flex;border-radius:8px;overflow:hidden;
+  border:1.5px solid var(--border-strong);height:44px;
+  width:100%;max-width:260px;
+}
+.frac-bar span{flex:1;transition:background .3s}
+.frac-bar .filled{background:linear-gradient(140deg,var(--accent),var(--accent-2))}
+.frac-bar .empty{background:var(--surface-2)}
+.frac-label{font-family:var(--font-math);font-size:1.15rem;font-weight:600;color:var(--accent-3)}
+
+/* ============ FIGURAS GEOMÉTRICAS ============ */
+.fig-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+.fig-card{
+  padding:22px;border-radius:var(--radius);
+  background:var(--surface);border:1px solid var(--border);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  transition:transform .35s var(--ease),border-color .3s,box-shadow .35s;
+}
+.fig-card:hover{border-color:var(--border-strong);box-shadow:var(--shadow)}
+.fig-svg{
+  width:100%;max-width:150px;height:auto;display:block;margin:0 auto 18px;
+  color:var(--accent);
+}
+.fig-card h3{font-size:1.02rem;margin-bottom:6px;font-weight:600;text-align:center}
+.fig-formula{
+  font-family:var(--font-math);font-size:.92rem;color:var(--accent-3);
+  text-align:center;margin-bottom:16px;font-weight:500;
+}
+.fig-calc{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.fig-calc .calc-field{min-width:64px}
+.fig-calc .calc-field input{padding:9px 8px;font-size:.9rem}
+.fig-out{
+  padding:11px 14px;border-radius:10px;
+  background:color-mix(in srgb,var(--accent) 9%,transparent);
+  border:1px solid color-mix(in srgb,var(--accent) 22%,transparent);
+  font-family:var(--font-math);font-size:.92rem;text-align:center;
+  min-height:44px;display:flex;align-items:center;justify-content:center;
+  transition:background .3s,border-color .3s;
+}
+.fig-out strong{color:var(--accent);font-weight:700}
+
+/* ============ PITÁGORAS ============ */
+.pyth-visual{
+  max-width:440px;margin:0 auto 20px;
+  color:var(--accent);
+}
+.pyth-visual svg{width:100%;height:auto;display:block}
+
+/* ============ GRÁFICAS ============ */
+.graph-box{
+  padding:18px;border-radius:var(--radius);
+  background:var(--surface);border:1px solid var(--border);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+}
+.graph-box svg{width:100%;height:auto;display:block}
+.graph-caption{
+  text-align:center;font-size:.85rem;color:var(--muted);margin-top:12px;
+}
+.graph-caption b{color:var(--text);font-weight:600}
+
+/* ============ GLOSARIO ============ */
+.toolbar{
+  display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-bottom:26px;
+  position:sticky;top:69px;z-index:20;padding:14px 0;
+  background:linear-gradient(var(--bg) 55%,transparent);
+}
+.search-wrap{position:relative;flex:1;min-width:220px}
+.search-wrap svg{position:absolute;left:15px;top:50%;transform:translateY(-50%);width:17px;height:17px;color:var(--muted);pointer-events:none}
+#searchInput{
+  width:100%;padding:13px 16px 13px 44px;border-radius:13px;
+  background:var(--surface);border:1px solid var(--border);color:var(--text);
+  font-size:.93rem;font-family:inherit;outline:none;
+  transition:border-color .3s,box-shadow .3s,background .3s;
+}
+#searchInput::placeholder{color:var(--muted)}
+#searchInput:focus{border-color:var(--accent);box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 18%,transparent)}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{
+  padding:8px 15px;border-radius:999px;font-size:.81rem;font-weight:600;
+  border:1px solid var(--border);background:var(--surface);color:var(--muted);
+  transition:all .3s var(--ease);
+}
+.chip:hover{color:var(--text);border-color:var(--border-strong);transform:translateY(-1px)}
+.chip.active{background:linear-gradient(120deg,var(--accent),var(--accent-3));color:#fff;border-color:transparent;box-shadow:0 10px 26px -12px var(--accent)}
+.term-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:15px}
+.term{
+  padding:22px;border-radius:var(--radius);
+  background:var(--surface);border:1px solid var(--border);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  animation:termIn .5s var(--ease) both;animation-delay:var(--d,0ms);
+  transition:border-color .3s,transform .3s var(--ease),box-shadow .3s;
+}
+@keyframes termIn{from{opacity:0;transform:translateY(14px) scale(.98)}to{opacity:1;transform:none}}
+.term:hover{transform:translateY(-4px);border-color:var(--border-strong);box-shadow:var(--shadow)}
+.term-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:9px}
+.term h3{font-size:.98rem;font-weight:600;letter-spacing:-.01em}
+.tag{
+  font-size:.67rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  padding:4px 9px;border-radius:7px;white-space:nowrap;
+  background:color-mix(in srgb,var(--accent) 15%,transparent);
+  color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 26%,transparent);
+}
+.term p{font-size:.88rem;color:var(--muted);line-height:1.65}
+.empty{padding:50px 20px;text-align:center;color:var(--muted);font-size:.95rem;grid-column:1/-1}
+
+/* ============ QUIZ ============ */
+.quiz-shell{max-width:760px;margin:0 auto}
+.quiz-card{
+  padding:34px;border-radius:var(--radius);
+  background:var(--surface);border:1px solid var(--border);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  box-shadow:var(--shadow);
+}
+.quiz-meta{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:12px;font-size:.81rem;font-weight:600;color:var(--muted)}
+.progress{height:6px;border-radius:99px;background:var(--surface-2);overflow:hidden;margin-bottom:30px;border:1px solid var(--border)}
+.progress-bar{height:100%;width:0%;border-radius:99px;background:linear-gradient(90deg,var(--accent),var(--accent-2));transition:width .55s var(--ease)}
+.q-text{font-family:var(--font-display);font-size:clamp(1.12rem,2.4vw,1.42rem);font-weight:600;line-height:1.35;margin-bottom:26px}
+.options{display:grid;gap:11px}
+.option{
+  display:flex;align-items:center;gap:14px;text-align:left;
+  padding:16px 18px;border-radius:14px;font-size:.93rem;font-weight:500;
+  background:var(--surface-2);border:1px solid var(--border);color:var(--text);
+  transition:transform .25s var(--ease),border-color .25s,background .25s,box-shadow .25s;
+}
+.option:hover:not(:disabled){transform:translateX(4px);border-color:var(--accent);background:color-mix(in srgb,var(--accent) 8%,transparent)}
+.option:disabled{cursor:default}
+.option .letter{
+  width:28px;height:28px;border-radius:9px;flex:none;display:grid;place-items:center;
+  font-size:.77rem;font-weight:700;font-family:var(--font-display);
+  background:var(--surface-solid);border:1px solid var(--border);color:var(--muted);
+  transition:all .25s var(--ease);
+}
+.option.correct{background:color-mix(in srgb,var(--good) 15%,transparent);border-color:var(--good)}
+.option.correct .letter{background:var(--good);color:#fff;border-color:var(--good)}
+.option.wrong{background:color-mix(in srgb,var(--bad) 13%,transparent);border-color:var(--bad)}
+.option.wrong .letter{background:var(--bad);color:#fff;border-color:var(--bad)}
+.feedback{
+  margin-top:22px;padding:16px 18px;border-radius:14px;font-size:.88rem;line-height:1.6;
+  border:1px solid var(--border);background:var(--surface-2);
+  animation:termIn .4s var(--ease) both;
+}
+.feedback strong{color:var(--text)}
+.quiz-actions{display:flex;justify-content:flex-end;margin-top:24px}
+.result{text-align:center;padding:20px 6px}
+.result .score{
+  font-family:var(--font-display);font-size:clamp(3rem,9vw,4.6rem);font-weight:700;letter-spacing:-.05em;
+  background:linear-gradient(120deg,var(--accent),var(--accent-2) 50%,var(--accent-3));
+  -webkit-background-clip:text;background-clip:text;color:transparent;line-height:1;margin-bottom:10px;
+}
+.result h3{font-size:1.28rem;margin-bottom:10px}
+.result p{color:var(--muted);margin-bottom:26px}
+
+/* ============ NOTA ============ */
+.note{
+  margin-top:24px;padding:16px 20px;border-radius:14px;font-size:.85rem;color:var(--muted);
+  border:1px solid var(--border);background:var(--surface-2);border-left:3px solid var(--accent);
+}
+.note strong{color:var(--text)}
+
+/* ============ REVEAL ============ */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s var(--ease),transform .7s var(--ease);transition-delay:var(--d,0ms)}
+.reveal.in{opacity:1;transform:none}
+
+/* ============ FOOTER ============ */
+.site-footer{border-top:1px solid var(--border);padding:34px 22px;text-align:center;font-size:.85rem;color:var(--muted)}
+.site-footer strong{color:var(--text);font-weight:600}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width:880px){
+  .header-inner{padding:12px 16px;gap:14px;flex-wrap:wrap}
+  .nav{order:3;width:100%;margin-left:0;padding-bottom:2px}
+  .theme-toggle{margin-left:auto}
+  main{padding:0 16px 70px}
+  .hero{padding:46px 0 32px}
+  .toolbar{top:auto;position:static;background:none;padding:0 0 20px}
+  .quiz-card{padding:24px 20px}
+  .stats{grid-template-columns:repeat(2,1fr);gap:11px}
+  .stat{padding:17px 15px}
+  .stat .num{font-size:1.5rem}
+  .calc-row{gap:8px}
+  .calc-field{min-width:64px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<div class="bg-dots" aria-hidden="true"></div>
+<div class="orbs" aria-hidden="true">
+  <div class="orb o1"></div>
+  <div class="orb o2"></div>
+  <div class="orb o3"></div>
+</div>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="#inicio" data-route="inicio">
+      <span class="brand-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 20L11 4"/><path d="M13 20L20 4"/><path d="M6 20h4M14 20h4M8 13h8"/>
+        </svg>
+      </span>
+      <span>Matemática Simple</span>
+    </a>
+
+    <nav class="nav" aria-label="Navegación principal">
+      <button class="nav-link active" data-route="inicio">Inicio</button>
+      <button class="nav-link" data-route="numeros">Números</button>
+      <button class="nav-link" data-route="algebra">Álgebra</button>
+      <button class="nav-link" data-route="geometria">Geometría</button>
+      <button class="nav-link" data-route="funciones">Funciones</button>
+      <button class="nav-link" data-route="glosario">Glosario</button>
+      <button class="nav-link" data-route="quiz">Quiz</button>
+    </nav>
+
+    <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema">
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round">
+        <circle cx="12" cy="12" r="4"/>
+        <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>
+      </svg>
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<main>
+
+  <!-- ================= INICIO ================= -->
+  <section class="view active" data-view="inicio">
+    <div class="hero">
+      <span class="pill"><span class="dot"></span>Matemática con lenguaje sencillo</span>
+      <h1 class="hero-title">Los números, el álgebra y las figuras <span class="grad">sin misterio</span></h1>
+      <p class="lead">
+        Explicaciones claras, gráficos hechos a mano y calculadoras que responden al instante.
+        Ideal para repasar, entender o aprender desde cero sin fórmulas interminables.
+      </p>
+      <div class="hero-actions">
+        <button class="btn btn-primary" data-route="numeros">
+          Empezar por los números
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+        <button class="btn btn-ghost" data-route="quiz">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9 9a3 3 0 1 1 4.5 2.6c-.9.6-1.5 1.4-1.5 2.4"/><circle cx="12" cy="17.5" r="1" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="9"/></svg>
+          Probar el quiz
+        </button>
+      </div>
+    </div>
+
+    <div class="stats reveal">
+      <div class="stat"><div class="num" data-count="5" data-suffix="">0</div><div class="lbl">Tipos de números</div></div>
+      <div class="stat"><div class="num" data-count="4" data-suffix="">0</div><div class="lbl">Figuras con calculadora</div></div>
+      <div class="stat"><div class="num" data-count="7" data-suffix="">0</div><div class="lbl">Calculadoras interactivas</div></div>
+      <div class="stat"><div class="num" data-count="15" data-suffix="">0</div><div class="lbl">Preguntas en el quiz</div></div>
+    </div>
+
+    <div class="sec-head reveal">
+      <h2>Módulos de aprendizaje</h2>
+      <p>Cinco recorridos independientes, más el glosario y el quiz. Entra por donde prefieras.</p>
+    </div>
+
+    <div class="module-grid">
+      <button class="module reveal" data-route="numeros" style="--d:0ms">
+        <span class="module-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h10"/></svg>
+        </span>
+        <h3>Números y operaciones</h3>
+        <p>Tipos de números, jerarquía de operaciones, fracciones y porcentajes con calculadora.</p>
+        <span class="arrow">Explorar números
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </button>
+
+      <button class="module reveal" data-route="algebra" style="--d:60ms">
+        <span class="module-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17c3 0 4-10 7-10s4 10 7 10"/><path d="M3 12h18" opacity=".4"/></svg>
+        </span>
+        <h3>Álgebra</h3>
+        <p>Qué es una variable, cómo se resuelve una ecuación paso a paso y la fórmula cuadrática.</p>
+        <span class="arrow">Ver álgebra
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </button>
+
+      <button class="module reveal" data-route="geometria" style="--d:120ms">
+        <span class="module-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 16H3z"/><path d="M12 3v16" opacity=".4"/></svg>
+        </span>
+        <h3>Geometría</h3>
+        <p>Figuras con área y perímetro, calculadora integrada y el teorema de Pitágoras.</p>
+        <span class="arrow">Ver figuras
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </button>
+
+      <button class="module reveal" data-route="funciones" style="--d:180ms">
+        <span class="module-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20h18M3 20V4"/><path d="M6 16c3-1 5-8 8-9s4 1 6 2"/></svg>
+        </span>
+        <h3>Funciones</h3>
+        <p>El plano cartesiano, la recta y la parábola. Qué significa la pendiente y cómo se ve.</p>
+        <span class="arrow">Ver gráficas
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </button>
+
+      <button class="module reveal" data-route="glosario" style="--d:240ms">
+        <span class="module-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21.5z"/><path d="M4 5.5v16"/></svg>
+        </span>
+        <h3>Glosario</h3>
+        <p>Todos los términos matemáticos reunidos, con buscador y filtro por tema.</p>
+        <span class="arrow">Abrir glosario
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </button>
+
+      <button class="module reveal" data-route="quiz" style="--d:300ms">
+        <span class="module-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l2 2 4-4"/><rect x="3" y="4" width="18" height="16" rx="3"/></svg>
+        </span>
+        <h3>Quiz interactivo</h3>
+        <p>Diez preguntas al azar con corrección inmediata, explicación y puntuación final.</p>
+        <span class="arrow">Empezar el quiz
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </button>
+    </div>
+  </section>
+
+  <!-- ================= NÚMEROS ================= -->
+  <section class="view" data-view="numeros">
+    <div class="sec-head section">
+      <h2>Números y operaciones</h2>
+      <p>Los números son las herramientas básicas de la matemática. Hay varios tipos y cada uno sirve para cosas distintas.</p>
+    </div>
+
+    <div class="num-cards reveal" id="numCards"></div>
+
+    <div class="sec-head reveal" style="margin-top:40px">
+      <h2 style="font-size:1.35rem">Orden de las operaciones</h2>
+      <p>Cuando en una cuenta hay varias operaciones, no se resuelven de izquierda a derecha sin más. Hay un orden establecido.</p>
+    </div>
+
+    <div class="grid-2 reveal">
+      <div>
+        <div class="hierarchy" id="hierarchy"></div>
+      </div>
+      <div class="card">
+        <span class="kicker">Ejemplo</span>
+        <h3>Resolver 2 + 3 × 4²</h3>
+        <div class="steps">
+          <div class="step" style="--d:0ms"><span class="n">1</span><span>3 × 4²</span><span class="op">potencia primero</span></div>
+          <div class="step" style="--d:80ms"><span class="n">2</span><span>3 × 16</span><span class="op">multiplicación</span></div>
+          <div class="step" style="--d:160ms"><span class="n">3</span><span>2 + 48</span><span class="op">suma</span></div>
+          <div class="step" style="--d:240ms"><span class="n">4</span><span>= 50</span><span class="op">resultado</span></div>
+        </div>
+        <p style="margin-top:12px;font-size:.85rem">Las potencias se resuelven antes que las multiplicaciones, y estas antes que las sumas.</p>
+      </div>
+    </div>
+
+    <div class="sec-head reveal" style="margin-top:40px">
+      <h2 style="font-size:1.35rem">Fracciones</h2>
+      <p>Una fracción es una parte de un todo. El número de abajo indica en cuántas partes se divide, y el de arriba cuántas tomas.</p>
+    </div>
+
+    <div class="grid-2 reveal">
+      <div class="card">
+        <span class="kicker">Visual</span>
+        <h3>Tres cuartos (3/4)</h3>
+        <div class="frac-vis">
+          <div class="frac-bar">
+            <span class="filled"></span>
+            <span class="filled"></span>
+            <span class="filled"></span>
+            <span class="empty"></span>
+          </div>
+          <span class="frac-label">3 / 4</span>
+        </div>
+        <p>El todo se divide en 4 partes iguales y se toman 3. Queda una cuarta parte sin tomar.</p>
+      </div>
+
+      <div class="card">
+        <span class="kicker">Operaciones</span>
+        <h3>Sumar fracciones</h3>
+        <p>Para sumar fracciones hay que igualar los denominadores. Por ejemplo, 1/2 + 1/4:</p>
+        <div class="eq" style="font-size:1.05rem">
+          <span class="frac"><span class="num">1</span><span class="den">2</span></span> +
+          <span class="frac"><span class="num">1</span><span class="den">4</span></span>
+          = <span class="frac"><span class="num">2</span><span class="den">4</span></span> +
+          <span class="frac"><span class="num">1</span><span class="den">4</span></span>
+          = <span class="frac"><span class="num">3</span><span class="den">4</span></span>
+        </div>
+        <p style="margin-top:12px">Se convierte 1/2 en 2/4 para que ambas tengan el mismo denominador, y luego se suman los numeradores.</p>
+      </div>
+    </div>
+
+    <div class="sec-head reveal" style="margin-top:40px">
+      <h2 style="font-size:1.35rem">Porcentajes</h2>
+      <p>Un porcentaje es una fracción con denominador 100. Decir 25 % es lo mismo que decir 25 de cada 100.</p>
+    </div>
+
+    <div class="grid-2 reveal">
+      <div class="calc">
+        <span class="kicker">Calculadora</span>
+        <h3 style="margin-bottom:18px">¿Cuánto es X % de Y?</h3>
+        <div class="calc-row">
+          <label class="calc-field">
+            <span>X %</span>
+            <input type="number" id="pct_x" value="25" step="any">
+          </label>
+          <label class="calc-field">
+            <span>de Y</span>
+            <input type="number" id="pct_y" value="200" step="any">
+          </label>
+        </div>
+        <div class="calc-out" id="pct_result"><span class="hint">Introduce valores</span></div>
+      </div>
+
+      <div class="card">
+        <span class="kicker">Para recordar</span>
+        <h3>Fórmula del porcentaje</h3>
+        <div class="eq" style="font-size:1.15rem">
+          parte = <span class="frac"><span class="num">X</span><span class="den">100</span></span> × Y
+        </div>
+        <p style="margin-top:14px">Por ejemplo, el 25 % de 200 es 200 × 25 ÷ 100 = 50. Es decir, una cuarta parte de 200.</p>
+        <p style="margin-top:10px;font-size:.85rem">Los porcentajes aparecen en descuentos, estadísticas, notas e intereses. Son fracciones disfrazadas.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ÁLGEBRA ================= -->
+  <section class="view" data-view="algebra">
+    <div class="sec-head section">
+      <h2>Álgebra</h2>
+      <p>El álgebra es la parte de la matemática que usa letras para representar números desconocidos. Sirve para resolver adivinanzas numéricas.</p>
+    </div>
+
+    <div class="grid-2 reveal" style="margin-bottom:22px">
+      <div class="card">
+        <span class="kicker">La idea</span>
+        <h3>Qué es una variable</h3>
+        <p>Una variable es como una caja vacía con una etiqueta. Dentro puedes poner cualquier número. Se representa con letras, casi siempre x, y o z.</p>
+        <p style="margin-top:12px">Cuando escribimos <b>3x</b>, significa 3 veces el número que hay dentro de la caja x. Si x vale 2, entonces 3x vale 6.</p>
+      </div>
+      <div class="card">
+        <span class="kicker">La meta</span>
+        <h3>Qué es una ecuación</h3>
+        <p>Una ecuación es una igualdad con una incógnita. Resolverla significa encontrar el valor de la letra que hace que la igualdad sea verdadera.</p>
+        <div class="eq" style="font-size:1.2rem;margin-top:14px">
+          <var>x</var> + 3 = 7
+        </div>
+        <p style="margin-top:12px;font-size:.85rem">En este caso, x tiene que valer 4, porque 4 + 3 = 7.</p>
+      </div>
+    </div>
+
+    <div class="sec-head reveal" style="margin-top:36px">
+      <h2 style="font-size:1.35rem">Resolver paso a paso</h2>
+      <p>Una ecuación de primer grado se resuelve despejando la letra. Veamos un ejemplo completo.</p>
+    </div>
+
+    <div class="card reveal">
+      <span class="kicker">Ejemplo</span>
+      <h3>Resolver 3x + 5 = 20</h3>
+      <div class="steps">
+        <div class="step" style="--d:0ms"><span class="n">1</span><span>3x = 20 − 5</span><span class="op">restar 5</span></div>
+        <div class="step" style="--d:80ms"><span class="n">2</span><span>3x = 15</span><span class="op">simplificar</span></div>
+        <div class="step" style="--d:160ms"><span class="n">3</span><span>x = 15 ÷ 3</span><span class="op">dividir entre 3</span></div>
+        <div class="step" style="--d:240ms"><span class="n">4</span><span>x = 5</span><span class="op">resultado</span></div>
+      </div>
+      <p style="margin-top:12px;font-size:.86rem">Cada operación se hace a los dos lados del igual para mantener el equilibrio. Al final, x queda sola.</p>
+    </div>
+
+    <div class="sec-head reveal" style="margin-top:36px">
+      <h2 style="font-size:1.35rem">Calculadora de ecuaciones</h2>
+      <p>Resuelve cualquier ecuación de la forma <b>a·x + b = c</b>. Los valores se actualizan al instante.</p>
+    </div>
+
+    <div class="calc reveal" style="max-width:640px;margin:0 auto">
+      <div class="eq" style="margin-bottom:20px;font-size:1.2rem">
+        <var>a</var>·x + <var>b</var> = <var>c</var>
+      </div>
+      <div class="calc-row">
+        <label class="calc-field">
+          <span>a</span>
+          <input type="number" id="lin_a" value="3" step="any">
+        </label>
+        <label class="calc-field">
+          <span>b</span>
+          <input type="number" id="lin_b" value="5" step="any">
+        </label>
+        <label class="calc-field">
+          <span>c</span>
+          <input type="number" id="lin_c" value="20" step="any">
+        </label>
+      </div>
+      <div class="calc-out" id="lin_result"><span class="hint">Introduce valores</span></div>
+    </div>
+
+    <div class="sec-head reveal" style="margin-top:40px">
+      <h2 style="font-size:1.35rem">Ecuación cuadrática</h2>
+      <p>Cuando la incógnita aparece elevada al cuadrado, la ecuación es cuadrática. Su forma general es <b>a·x² + b·x + c = 0</b>.</p>
+    </div>
+
+    <div class="card reveal">
+      <span class="kicker">Fórmula</span>
+      <h3>La famosa fórmula cuadrática</h3>
+      <div class="eq" style="font-size:1.15rem;margin:18px 0">
+        x =
+        <span class="frac">
+          <span class="num">−b ± <span class="sqrt">b² − 4ac</span></span>
+          <span class="den">2a</span>
+        </span>
+      </div>
+      <p>El símbolo ± significa que hay dos soluciones posibles: una con más y otra con menos. La parte de dentro de la raíz se llama <b>discriminante</b> y determina cuántas soluciones hay.</p>
+      <ul style="margin:14px 0 0 20px;padding:0;font-size:.87rem;color:var(--muted);line-height:1.7">
+        <li>Si el discriminante es positivo, hay dos soluciones reales.</li>
+        <li>Si es exactamente cero, hay una solución doble.</li>
+        <li>Si es negativo, no hay soluciones en los números reales.</li>
+      </ul>
+    </div>
+
+    <div class="calc reveal" style="max-width:640px;margin:22px auto 0">
+      <span class="kicker" style="display:block;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:16px">Calculadora cuadrática</span>
+      <div class="eq" style="margin-bottom:18px;font-size:1.15rem">
+        <var>a</var>·x² + <var>b</var>·x + <var>c</var> = 0
+      </div>
+      <div class="calc-row">
+        <label class="calc-field">
+          <span>a</span>
+          <input type="number" id="quad_a" value="1" step="any">
+        </label>
+        <label class="calc-field">
+          <span>b</span>
+          <input type="number" id="quad_b" value="-5" step="any">
+        </label>
+        <label class="calc-field">
+          <span>c</span>
+          <input type="number" id="quad_c" value="6" step="any">
+        </label>
+      </div>
+      <div class="calc-out" id="quad_result"><span class="hint">Introduce valores</span></div>
+    </div>
+
+    <div class="note reveal">
+      <strong>Truco:</strong> x² − 5x + 6 = 0 se resuelve fácilmente pensando en dos números que multiplicados den 6 y sumados den 5. Esos números son 2 y 3, así que las soluciones son x = 2 y x = 3. La fórmula siempre funciona, pero a veces se puede razonar.
+    </div>
+  </section>
+
+  <!-- ================= GEOMETRÍA ================= -->
+  <section class="view" data-view="geometria">
+    <div class="sec-head section">
+      <h2>Geometría</h2>
+      <p>La geometría estudia las formas, sus medidas y sus propiedades. Cada figura tiene fórmulas para calcular su perímetro y su área.</p>
+    </div>
+
+    <div class="grid-2 reveal" style="margin-bottom:22px">
+      <div class="card">
+        <span class="kicker">Perímetro</span>
+        <h3>El borde de la figura</h3>
+        <p>El perímetro es la longitud de todo el contorno. Si caminaras alrededor de la figura, esa sería la distancia recorrida. Se mide en unidades lineales: centímetros, metros, etc.</p>
+      </div>
+      <div class="card">
+        <span class="kicker">Área</span>
+        <h3>La superficie de la figura</h3>
+        <p>El área es la cantidad de superficie que ocupa. Si pintaras la figura, esa sería la cantidad de pintura necesaria. Se mide en unidades cuadradas: cm², m², etc.</p>
+      </div>
+    </div>
+
+    <div class="sec-head reveal" style="margin-top:36px">
+      <h2 style="font-size:1.35rem">Figuras y calculadoras</h2>
+      <p>Cada figura tiene su propia calculadora. Cambia los valores y el resultado se actualiza solo.</p>
+    </div>
+
+    <div class="fig-grid reveal" id="figGrid"></div>
+
+    <div class="sec-head reveal" style="margin-top:44px">
+      <h2 style="font-size:1.35rem">Teorema de Pitágoras</h2>
+      <p>En cualquier triángulo rectángulo, la suma de los cuadrados de los catetos es igual al cuadrado de la hipotenusa.</p>
+    </div>
+
+    <div class="grid-2 reveal">
+      <div class="pyth-visual">
+        <svg viewBox="0 0 440 320" role="img" aria-label="Triángulo rectángulo con cuadrados sobre sus lados">
+          <defs>
+            <linearGradient id="pythA" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#8b5cf6"/>
+              <stop offset="100%" stop-color="#6366f1"/>
+            </linearGradient>
+            <linearGradient id="pythB" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#14b8a6"/>
+              <stop offset="100%" stop-color="#22d3ee"/>
+            </linearGradient>
+            <linearGradient id="pythC" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#f59e0b"/>
+              <stop offset="100%" stop-color="#f97316"/>
+            </linearGradient>
+          </defs>
+
+          <!-- Cateto a: 120px horizontal, desde (120,220) a (240,220) -->
+          <!-- Cateto b: 160px vertical, desde (120,220) a (120,60) -->
+          <!-- Hipotenusa: de (120,60) a (240,220) -->
+
+          <!-- Cuadrado sobre cateto a (abajo) -->
+          <rect x="120" y="220" width="120" height="120" fill="url(#pythA)" opacity=".28" stroke="url(#pythA)" stroke-width="2"/>
+          <text x="180" y="285" text-anchor="middle" fill="#8b5cf6" font-family="Space Grotesk,sans-serif" font-size="15" font-weight="700">a²</text>
+
+          <!-- Cuadrado sobre cateto b (izquierda) -->
+          <rect x="0" y="60" width="120" height="160" fill="url(#pythB)" opacity=".28" stroke="url(#pythB)" stroke-width="2"/>
+          <text x="60" y="146" text-anchor="middle" fill="#14b8a6" font-family="Space Grotesk,sans-serif" font-size="15" font-weight="700">b²</text>
+
+          <!-- Cuadrado sobre hipotenusa (rotado) -->
+          <g transform="translate(120,60) rotate(-53.13)">
+            <rect x="0" y="0" width="200" height="200" fill="url(#pythC)" opacity=".24" stroke="url(#pythC)" stroke-width="2"/>
+            <text x="100" y="110" text-anchor="middle" fill="#f59e0b" font-family="Space Grotesk,sans-serif" font-size="15" font-weight="700">c²</text>
+          </g>
+
+          <!-- Triángulo rectángulo -->
+          <polygon points="120,60 120,220 240,220" fill="none" stroke="currentColor" stroke-width="2.5"/>
+
+          <!-- Ángulo recto -->
+          <rect x="120" y="205" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.5"/>
+
+          <!-- Etiquetas -->
+          <text x="108" y="145" text-anchor="end" fill="currentColor" font-family="Space Grotesk,sans-serif" font-size="14" font-weight="600">b</text>
+          <text x="180" y="240" text-anchor="middle" fill="currentColor" font-family="Space Grotesk,sans-serif" font-size="14" font-weight="600">a</text>
+          <text x="195" y="130" text-anchor="start" fill="currentColor" font-family="Space Grotesk,sans-serif" font-size="14" font-weight="600">c</text>
+        </svg>
+      </div>
+
+      <div>
+        <div class="card" style="margin-bottom:16px">
+          <span class="kicker">Fórmula</span>
+          <h3>La relación entre los tres lados</h3>
+          <div class="eq" style="font-size:1.25rem;margin-top:14px">
+            <var>a</var>² + <var>b</var>² = <var>c</var>²
+          </div>
+          <p style="margin-top:14px;font-size:.87rem">Donde <b>a</b> y <b>b</b> son los catetos (los lados que forman el ángulo recto) y <b>c</b> es la hipotenusa (el lado opuesto).</p>
+        </div>
+
+        <div class="calc">
+          <span class="kicker" style="display:block;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:16px">Calculadora de hipotenusa</span>
+          <div class="calc-row">
+            <label class="calc-field">
+              <span>cateto a</span>
+              <input type="number" id="pyth_a" value="3" step="any" min="0">
+            </label>
+            <label class="calc-field">
+              <span>cateto b</span>
+              <input type="number" id="pyth_b" value="4" step="any" min="0">
+            </label>
+          </div>
+          <div class="calc-out" id="pyth_result"><span class="hint">Introduce valores</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FUNCIONES ================= -->
+  <section class="view" data-view="funciones">
+    <div class="sec-head section">
+      <h2>Funciones y gráficas</h2>
+      <p>Una función relaciona dos cantidades: por cada valor de una, se obtiene un valor de la otra. Su representación en el plano ayuda a ver cómo cambia.</p>
+    </div>
+
+    <div class="grid-2 reveal" style="margin-bottom:22px">
+      <div class="card">
+        <span class="kicker">El plano cartesiano</span>
+        <h3>Dos ejes y un punto</h3>
+        <p>El plano cartesiano está formado por dos rectas perpendiculares. La horizontal es el eje X y la vertical el eje Y. Se cruzan en el origen (0, 0).</p>
+        <p style="margin-top:12px">Cada punto se indica con dos coordenadas: primero la X (cuánto avanzar hacia la derecha) y luego la Y (cuánto subir). Por ejemplo, el punto (2, 3) está dos unidades a la derecha y tres arriba.</p>
+      </div>
+      <div class="card">
+        <span class="kicker">Las funciones</span>
+        <h3>Una máquina de transformar</h3>
+        <p>Una función toma un número de entrada (x) y devuelve un número de salida (y). Se escribe y = f(x), que se lee «y es función de x».</p>
+        <p style="margin-top:12px">Si f(x) = 2x + 1, entonces f(3) = 7, porque 2×3 + 1 = 7. Le das un 3 y te devuelve un 7.</p>
+      </div>
+    </div>
+
+    <div class="sec-head reveal" style="margin-top:36px">
+      <h2 style="font-size:1.35rem">Función lineal</h2>
+      <p>Su gráfica es una recta. La forma general es <b>y = m·x + b</b>, donde m es la pendiente y b la ordenada al origen.</p>
+    </div>
+
+    <div class="grid-2 reveal">
+      <div class="graph-box">
+        <svg viewBox="0 0 320 240" role="img" aria-label="Gráfica de la función lineal y = 2x + 1">
+          <!-- Cuadrícula -->
+          <g stroke="var(--border)" stroke-width="1" opacity=".6">
+            <line x1="40" y1="40" x2="40" y2="200"/><line x1="80" y1="40" x2="80" y2="200"/>
+            <line x1="120" y1="40" x2="120" y2="200"/><line x1="200" y1="40" x2="200" y2="200"/>
+            <line x1="240" y1="40" x2="240" y2="200"/><line x1="280" y1="40" x2="280" y2="200"/>
+            <line x1="40" y1="40" x2="280" y2="40"/><line x1="40" y1="80" x2="280" y2="80"/>
+            <line x1="40" y1="120" x2="280" y2="120"/><line x1="40" y1="160" x2="280" y2="160"/>
+          </g>
+          <!-- Ejes -->
+          <line x1="40" y1="120" x2="290" y2="120" stroke="var(--text)" stroke-width="1.6"/>
+          <line x1="160" y1="30" x2="160" y2="210" stroke="var(--text)" stroke-width="1.6"/>
+          <polygon points="290,120 282,116 282,124" fill="var(--text)"/>
+          <polygon points="160,30 156,38 164,38" fill="var(--text)"/>
+          <text x="295" y="124" fill="var(--muted)" font-family="Space Grotesk,sans-serif" font-size="11" font-weight="600">x</text>
+          <text x="166" y="28" fill="var(--muted)" font-family="Space Grotesk,sans-serif" font-size="11" font-weight="600">y</text>
+          <!-- Recta y = 2x + 1, visible de (80,240) a (200,0) -->
+          <line x1="80" y1="240" x2="200" y2="0" stroke="url(#lineGrad)" stroke-width="2.8" stroke-linecap="round"/>
+          <defs>
+            <linearGradient id="lineGrad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#8b5cf6"/>
+              <stop offset="100%" stop-color="#f59e0b"/>
+            </linearGradient>
+          </defs>
+          <!-- Punto de corte en y -->
+          <circle cx="160" cy="80" r="5" fill="#f59e0b" stroke="var(--bg)" stroke-width="2"/>
+          <text x="168" y="76" fill="#f59e0b" font-family="Space Grotesk,sans-serif" font-size="11" font-weight="700">(0, 1)</text>
+          <!-- Etiqueta de la función -->
+          <text x="210" y="65" fill="var(--accent)" font-family="Space Grotesk,sans-serif" font-size="12" font-weight="700">y = 2x + 1</text>
+        </svg>
+        <div class="graph-caption">Recta con pendiente <b>m = 2</b> y ordenada al origen <b>b = 1</b>.</div>
+      </div>
+
+      <div class="card">
+        <span class="kicker">Conceptos</span>
+        <h3>Qué significan m y b</h3>
+        <p><b style="color:var(--accent-3)">m (pendiente)</b>: cuánto sube la recta por cada unidad que avanza a la derecha. Si m = 2, sube 2 por cada 1. Si m es negativa, baja. Si m = 0, es horizontal.</p>
+        <p style="margin-top:12px"><b style="color:var(--accent-3)">b (ordenada al origen)</b>: el valor de y cuando x = 0. Es el punto donde la recta corta el eje vertical.</p>
+        <div class="eq" style="font-size:1rem;margin-top:16px;text-align:left;padding:14px 16px">
+          pendiente m = <span class="frac"><span class="num">Δy</span><span class="den">Δx</span></span>
+          = <span class="frac"><span class="num">y₂ − y₁</span><span class="den">x₂ − x₁</span></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sec-head reveal" style="margin-top:36px">
+      <h2 style="font-size:1.35rem">Calculadora de pendiente</h2>
+      <p>Dados dos puntos, calcula la pendiente de la recta que los une.</p>
+    </div>
+
+    <div class="calc reveal" style="max-width:640px;margin:0 auto">
+      <div class="calc-row">
+        <label class="calc-field">
+          <span>x₁</span>
+          <input type="number" id="slope_x1" value="1" step="any">
+        </label>
+        <label class="calc-field">
+          <span>y₁</span>
+          <input type="number" id="slope_y1" value="2" step="any">
+        </label>
+        <label class="calc-field">
+          <span>x₂</span>
+          <input type="number" id="slope_x2" value="4" step="any">
+        </label>
+        <label class="calc-field">
+          <span>y₂</span>
+          <input type="number" id="slope_y2" value="8" step="any">
+        </label>
+      </div>
+      <div class="calc-out" id="slope_result"><span class="hint">Introduce valores</span></div>
+    </div>
+
+    <div class="sec-head reveal" style="margin-top:40px">
+      <h2 style="font-size:1.35rem">Función cuadrática</h2>
+      <p>Su gráfica es una parábola. La forma general es <b>y = a·x² + b·x + c</b>. El signo de a decide si abre hacia arriba o hacia abajo.</p>
+    </div>
+
+    <div class="grid-2 reveal">
+      <div class="graph-box">
+        <svg viewBox="0 0 320 240" role="img" aria-label="Gráfica de la función cuadrática y = x² - 2">
+          <g stroke="var(--border)" stroke-width="1" opacity=".6">
+            <line x1="40" y1="40" x2="40" y2="200"/><line x1="80" y1="40" x2="80" y2="200"/>
+            <line x1="120" y1="40" x2="120" y2="200"/><line x1="200" y1="40" x2="200" y2="200"/>
+            <line x1="240" y1="40" x2="240" y2="200"/><line x1="280" y1="40" x2="280" y2="200"/>
+            <line x1="40" y1="40" x2="280" y2="40"/><line x1="40" y1="80" x2="280" y2="80"/>
+            <line x1="40" y1="120" x2="280" y2="120"/><line x1="40" y1="160" x2="280" y2="160"/>
+          </g>
+          <line x1="40" y1="120" x2="290" y2="120" stroke="var(--text)" stroke-width="1.6"/>
+          <line x1="160" y1="30" x2="160" y2="210" stroke="var(--text)" stroke-width="1.6"/>
+          <polygon points="290,120 282,116 282,124" fill="var(--text)"/>
+          <polygon points="160,30 156,38 164,38" fill="var(--text)"/>
+          <text x="295" y="124" fill="var(--muted)" font-family="Space Grotesk,sans-serif" font-size="11" font-weight="600">x</text>
+          <text x="166" y="28" fill="var(--muted)" font-family="Space Grotesk,sans-serif" font-size="11" font-weight="600">y</text>
+          <path id="parabolaPath" fill="none" stroke="url(#parabolaGrad)" stroke-width="2.8" stroke-linecap="round"/>
+          <defs>
+            <linearGradient id="parabolaGrad" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="#8b5cf6"/>
+              <stop offset="50%" stop-color="#14b8a6"/>
+              <stop offset="100%" stop-color="#f59e0b"/>
+            </linearGradient>
+          </defs>
+          <circle cx="160" cy="200" r="5" fill="#f59e0b" stroke="var(--bg)" stroke-width="2"/>
+          <text x="168" y="214" fill="#f59e0b" font-family="Space Grotesk,sans-serif" font-size="11" font-weight="700">(0, −2)</text>
+          <text x="200" y="55" fill="var(--accent)" font-family="Space Grotesk,sans-serif" font-size="12" font-weight="700">y = x² − 2</text>
+        </svg>
+        <div class="graph-caption">Parábola con vértice en <b>(0, −2)</b> y apertura hacia arriba.</div>
+      </div>
+
+      <div class="card">
+        <span class="kicker">Conceptos</span>
+        <h3>Qué significan a, b y c</h3>
+        <p><b style="color:var(--accent-3)">a</b>: decide la apertura. Si a es positiva, la parábola abre hacia arriba y tiene un mínimo. Si es negativa, abre hacia abajo y tiene un máximo. Cuanto mayor sea el valor absoluto de a, más estrecha es.</p>
+        <p style="margin-top:12px"><b style="color:var(--accent-3)">b</b>: inclina la parábola hacia un lado u otro.</p>
+        <p style="margin-top:12px"><b style="color:var(--accent-3)">c</b>: es el punto donde la parábola corta el eje vertical.</p>
+        <p style="margin-top:12px;font-size:.85rem">El vértice (el punto más alto o más bajo) se encuentra en <b>x = −b / (2a)</b>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= GLOSARIO ================= -->
+  <section class="view" data-view="glosario">
+    <div class="sec-head section">
+      <h2>Glosario matemático</h2>
+      <p>Todos los términos de la aplicación reunidos. Busca por nombre o por palabra dentro de la definición.</p>
+    </div>
+
+    <div class="toolbar">
+      <div class="search-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+        <input id="searchInput" type="search" placeholder="Buscar un término o una palabra de la definición..." autocomplete="off" aria-label="Buscar término">
+      </div>
+      <div class="chips" id="chips"></div>
+    </div>
+
+    <div class="term-grid" id="glosarioList"></div>
+  </section>
+
+  <!-- ================= QUIZ ================= -->
+  <section class="view" data-view="quiz">
+    <div class="sec-head section">
+      <h2>Quiz de matemática</h2>
+      <p>Diez preguntas seleccionadas al azar entre todos los temas. Cada respuesta viene con su explicación.</p>
+    </div>
+    <div class="quiz-shell">
+      <div class="quiz-card" id="quizCard"></div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <p><strong>Matemática Simple</strong> — Material educativo abierto sobre números, álgebra, geometría y funciones.</p>
+</footer>
+
+<script>
+/* ============================================================
+   UTILIDADES
+   ============================================================ */
+const $  = (sel, root = document) => root.querySelector(sel);
+const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+
+function getNum(id){
+  const el = document.getElementById(id);
+  if (!el) return NaN;
+  const v = el.value.trim();
+  if (v === '') return NaN;
+  const n = parseFloat(v);
+  return isNaN(n) ? NaN : n;
+}
+function fmt(n){
+  if (!isFinite(n)) return '—';
+  if (Number.isInteger(n)) return n.toString();
+  const r = Math.round(n * 10000) / 10000;
+  return r.toString().replace('.', ',');
+}
+
+/* ============================================================
+   TEMA
+   ============================================================ */
+const htmlEl = document.documentElement;
+function setTheme(t){
+  htmlEl.setAttribute('data-theme', t);
+  try { localStorage.setItem('mate-theme', t); } catch(e){}
+}
+(function initTheme(){
+  let saved = null;
+  try { saved = localStorage.getItem('mate-theme'); } catch(e){}
+  if (saved) { setTheme(saved); return; }
+  const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+  setTheme(prefersLight ? 'light' : 'dark');
+})();
+$('#themeToggle').addEventListener('click', () => {
+  setTheme(htmlEl.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+});
+
+/* ============================================================
+   ROUTER
+   ============================================================ */
+const ROUTES = ['inicio','numeros','algebra','geometria','funciones','glosario','quiz'];
+let currentRoute = 'inicio';
+
+function go(route, push = true){
+  if (!ROUTES.includes(route)) route = 'inicio';
+  currentRoute = route;
+
+  $$('.view').forEach(v => v.classList.toggle('active', v.dataset.view === route));
+  $$('.nav-link').forEach(b => b.classList.toggle('active', b.dataset.route === route));
+
+  if (push && location.hash.slice(1) !== route) {
+    history.pushState(null, '', '#' + route);
+  }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  requestAnimationFrame(() => {
+    $$('.view.active .reveal').forEach(el => el.classList.remove('in'));
+    checkReveal();
+    if (route === 'inicio') animateCounters();
+    if (route === 'funciones') buildParabola();
+  });
+}
+
+document.addEventListener('click', e => {
+  const trigger = e.target.closest('[data-route]');
+  if (trigger) {
+    e.preventDefault();
+    go(trigger.dataset.route);
+  }
+});
+
+window.addEventListener('popstate', () => {
+  go(location.hash.slice(1) || 'inicio', false);
+});
+
+/* ============================================================
+   REVEAL + CONTADORES
+   ============================================================ */
+const revealObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('in');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+function checkReveal(){
+  $$('.view.active .reveal:not(.in)').forEach(el => revealObserver.observe(el));
+}
+
+function animateCounters(){
+  $$('.num[data-count]').forEach(el => {
+    if (el.dataset.done === '1') return;
+    el.dataset.done = '1';
+    const target = parseFloat(el.dataset.count);
+    const suffix = el.dataset.suffix || '';
+    const dur = 1400;
+    const start = performance.now();
+    function tick(now){
+      const p = Math.min((now - start) / dur, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      const val = Math.round(target * eased);
+      el.textContent = val.toLocaleString('es-ES') + suffix;
+      if (p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  });
+}
+
+/* ============================================================
+   TIPOS DE NÚMEROS
+   ============================================================ */
+const NUM_TIPOS = [
+  { sym:'ℕ', n:'Naturales', ex:'0, 1, 2, 3, 4…', c1:'#22c55e', c2:'#10b981',
+    d:'Los que usamos para contar. Empiezan en cero o en uno, según el criterio, y siguen indefinidamente.' },
+  { sym:'ℤ', n:'Enteros', ex:'…, −2, −1, 0, 1, 2, …', c1:'#14b8a6', c2:'#0891b2',
+    d:'Incluyen a los naturales y añaden los negativos. Sirven para representar deudas, temperaturas bajo cero o pisos de un edificio.' },
+  { sym:'ℚ', n:'Racionales', ex:'½, 0,25, −¾, 7', c1:'#6366f1', c2:'#8b5cf6',
+    d:'Se pueden escribir como una fracción de dos enteros. Incluyen a todos los enteros, a los decimales exactos y a los periódicos.' },
+  { sym:'𝕀', n:'Irracionales', ex:'√2, π, e', c1:'#a855f7', c2:'#ec4899',
+    d:'No se pueden escribir como fracción. Tienen infinitos decimales que no se repiten de forma periódica.' },
+  { sym:'ℝ', n:'Reales', ex:'Todos los anteriores', c1:'#f59e0b', c2:'#f97316',
+    d:'El conjunto que reúne a todos los tipos anteriores. Se representan como puntos sobre una recta infinita: la recta real.' }
+];
+
+(function renderNumCards(){
+  const cont = $('#numCards');
+  if (!cont) return;
+  cont.innerHTML = NUM_TIPOS.map((t, i) => `
+    <article class="num-card" style="--c1:${t.c1};--c2:${t.c2};--d:${i * 60}ms">
+      <span class="num-sym">${t.sym}</span>
+      <h3>${t.n}</h3>
+      <div class="examples">${t.ex}</div>
+      <p>${t.d}</p>
+    </article>
+  `).join('');
+})();
+
+/* ============================================================
+   JERARQUÍA DE OPERACIONES
+   ============================================================ */
+const JERARQUIA = [
+  { n:'1', l:'Paréntesis y corchetes', s:'( )  [ ]', c1:'#f59e0b', c2:'#f97316' },
+  { n:'2', l:'Potencias y raíces', s:'xⁿ  √', c1:'#8b5cf6', c2:'#a855f7' },
+  { n:'3', l:'Multiplicación y división', s:'×  ÷', c1:'#14b8a6', c2:'#0d9488' },
+  { n:'4', l:'Suma y resta', s:'+  −', c1:'#6366f1', c2:'#4f46e5' }
+];
+
+(function renderHierarchy(){
+  const cont = $('#hierarchy');
+  if (!cont) return;
+  cont.innerHTML = JERARQUIA.map(j => `
+    <div class="hier-step" style="--c1:${j.c1};--c2:${j.c2}">
+      <span class="hier-badge">${j.n}</span>
+      <span class="label">${j.l}</span>
+      <span class="sym">${j.s}</span>
+    </div>
+  `).join('');
+})();
+
+/* ============================================================
+   CALCULADORA: PORCENTAJE
+   ============================================================ */
+function calcPorcentaje(){
+  const x = getNum('pct_x');
+  const y = getNum('pct_y');
+  const out = $('#pct_result');
+  if (!out) return;
+  if (isNaN(x) || isNaN(y)) {
+    out.innerHTML = '<span class="hint">Introduce valores numéricos</span>';
+    return;
+  }
+  const res = (x / 100) * y;
+  out.innerHTML = `<strong>${fmt(res)}</strong>`;
+}
+['pct_x','pct_y'].forEach(id => {
+  const el = document.getElementById(id);
+  if (el) el.addEventListener('input', calcPorcentaje);
+});
+calcPorcentaje();
+
+/* ============================================================
+   CALCULADORA: ECUACIÓN LINEAL ax + b = c
+   ============================================================ */
+function calcLineal(){
+  const a = getNum('lin_a');
+  const b = getNum('lin_b');
+  const c = getNum('lin_c');
+  const out = $('#lin_result');
+  if (!out) return;
+  if (isNaN(a) || isNaN(b) || isNaN(c)) {
+    out.innerHTML = '<span class="hint">Introduce valores numéricos</span>';
+    return;
+  }
+  if (a === 0) {
+    if (b === c) out.innerHTML = '<strong>Infinitas soluciones</strong><br><span class="hint" style="display:block;margin-top:4px">Cualquier x cumple la ecuación</span>';
+    else out.innerHTML = '<span class="warn">Sin solución: no existe ningún x que cumpla la ecuación</span>';
+    return;
+  }
+  const x = (c - b) / a;
+  out.innerHTML = `<strong>x = ${fmt(x)}</strong>`;
+}
+['lin_a','lin_b','lin_c'].forEach(id => {
+  const el = document.getElementById(id);
+  if (el) el.addEventListener('input', calcLineal);
+});
+calcLineal();
+
+/* ============================================================
+   CALCULADORA: CUADRÁTICA
+   ============================================================ */
+function calcCuadratica(){
+  const a = getNum('quad_a');
+  const b = getNum('quad_b');
+  const c = getNum('quad_c');
+  const out = $('#quad_result');
+  if (!out) return;
+  if (isNaN(a) || isNaN(b) || isNaN(c)) {
+    out.innerHTML = '<span class="hint">Introduce valores numéricos</span>';
+    return;
+  }
+  if (a === 0) {
+    out.innerHTML = '<span class="warn">Si a = 0 no es cuadrática: usa la calculadora lineal</span>';
+    return;
+  }
+  const disc = b*b - 4*a*c;
+  if (disc < 0) {
+    out.innerHTML = '<span class="warn">No hay soluciones reales: el discriminante es negativo</span>';
+    return;
+  }
+  const sq = Math.sqrt(disc);
+  const x1 = (-b + sq) / (2*a);
+  const x2 = (-b - sq) / (2*a);
+  if (Math.abs(x1 - x2) < 1e-9) {
+    out.innerHTML = `<strong>x = ${fmt(x1)}</strong><br><span class="hint" style="display:block;margin-top:4px">Solución doble (discriminante = 0)</span>`;
+  } else {
+    out.innerHTML = `<strong>x₁ = ${fmt(x1)}</strong> &nbsp;·&nbsp; <strong>x₂ = ${fmt(x2)}</strong>`;
+  }
+}
+['quad_a','quad_b','quad_c'].forEach(id => {
+  const el = document.getElementById(id);
+  if (el) el.addEventListener('input', calcCuadratica);
+});
+calcCuadratica();
+
+/* ============================================================
+   FIGURAS GEOMÉTRICAS
+   ============================================================ */
+const FIGURAS = [
+  {
+    id:'cuadrado', n:'Cuadrado',
+    formulas:'A = lado²  ·  P = 4·lado',
+    svg:`<svg class="fig-svg" viewBox="0 0 140 140">
+      <rect x="25" y="25" width="90" height="90" fill="rgba(139,92,246,.15)" stroke="currentColor" stroke-width="2.2" rx="3"/>
+      <text x="70" y="18" text-anchor="middle" fill="currentColor" font-family="Space Grotesk,sans-serif" font-size="11" font-weight="600" opacity=".7">lado</text>
+      <text x="70" y="132" text-anchor="middle" fill="currentColor" font-family="Space Grotesk,sans-serif" font-size="11" font-weight="600" opacity=".7">lado</text>
+    </svg>`,
+    inputs:[{id:'sq_lado', label:'lado', val:5}],
+    calc:(v) => {
+      const l = v[0];
+      if (l <= 0) return null;
+      return { area: l*l, per: 4*l };
+    }
+  },
+  {
+    id:'rectangulo', n:'Rectángulo',
+    formulas:'A = base × altura  ·  P = 2(base + altura)',
+    svg:`<svg class="fig-svg" viewBox="0 0 140 140">
+      <rect x="15" y="40" width="110" height="65" fill="rgba(20,184,166,.15)" stroke="currentColor" stroke-width="2.2" rx="3"/>
+      <text x="70" y="32" text-anchor="middle" fill="currentColor" font-family="Space Grotesk,sans-serif" font-size="11" font-weight="600" opacity=".7">base</text>
+      <text x="8" y="75" text-anchor="middle" fill="currentColor" font-family="Space Grotesk,sans-serif" font-size="11" font-weight="600" opacity=".7" transform="rotate(-90 8 75)">altura</text>
+    </svg>`,
+    inputs:[{id:'rect_base', label:'base', val:6},{id:'rect_alt', label:'altura', val:4}],
+    calc:(v) => {
+      const b = v[0], h = v[1];
+      if (b <= 0 || h <= 0) return null;
+      return { area: b*h, per: 2*(b+h) };
+    }
+  },
+  {
+    id:'triangulo', n:'Triángulo',
+    formulas:'A = (base × altura) ÷ 2',
+    svg:`<svg class="fig-svg" viewBox="0 0 140 140">
+      <polygon points="70,25 125,110 15,110" fill="rgba(99,102,241,.15)" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
+      <line x1="70" y1="25" x2="70" y2="110" stroke="currentColor" stroke-width="1.4" stroke-dasharray="4 3" opacity=".5"/>
+      <text x="70" y="128" text-anchor="middle" fill="currentColor" font-family="Space Grotesk,sans-serif" font-size="11" font-weight="600" opacity=".7">base</text>
+      <text x="78" y="72" text-anchor="start" fill="currentColor" font-family="Space Grotesk,sans-serif" font-size="11" font-weight="600" opacity=".7">altura</text>
+    </svg>`,
+    inputs:[{id:'tri_base', label:'base', val:6},{id:'tri_alt', label:'altura', val:4}],
+    calc:(v) => {
+      const b = v[0], h = v[1];
+      if (b <= 0 || h <= 0) return null;
+      return { area: (b*h)/2 };
+    }
+  },
+  {
+    id:'circulo', n:'Círculo',
+    formulas:'A = π·r²  ·  L = 2π·r',
+    svg:`<svg class="fig-svg" viewBox="0 0 140 140">
+      <circle cx="70" cy="70" r="50" fill="rgba(245,158,11,.15)" stroke="currentColor" stroke-width="2.2"/>
+      <line x1="70" y1="70" x2="120" y2="70" stroke="currentColor" stroke-width="1.8" stroke-dasharray="4 3"/>
+      <circle cx="70" cy="70" r="3" fill="currentColor"/>
+      <text x="95" y="64" text-anchor="middle" fill="currentColor" font-family="Space Grotesk,sans-serif" font-size="11" font-weight="600" opacity=".8">r</text>
+    </svg>`,
+    inputs:[{id:'circ_radio', label:'radio', val:3}],
+    calc:(v) => {
+      const r = v[0];
+      if (r <= 0) return null;
+      return { area: Math.PI*r*r, per: 2*Math.PI*r };
+    }
+  }
+];
+
+(function renderFiguras(){
+  const cont = $('#figGrid');
+  if (!cont) return;
+  cont.innerHTML = FIGURAS.map((f, i) => `
+    <div class="fig-card reveal" style="--d:${i*60}ms">
+      ${f.svg}
+      <h3>${f.n}</h3>
+      <div class="fig-formula">${f.formulas}</div>
+      <div class="fig-calc">
+        ${f.inputs.map(inp => `
+          <label class="calc-field">
+            <span>${inp.label}</span>
+            <input type="number" id="${inp.id}" value="${inp.val}" step="any" min="0">
+          </label>
+        `).join('')}
+      </div>
+      <div class="fig-out" id="fig_out_${f.id}"><span class="hint">Introduce valores</span></div>
+    </div>
+  `).join('');
+
+  FIGURAS.forEach(f => {
+    const update = () => {
+      const vals = f.inputs.map(inp => getNum(inp.id));
+      const out = document.getElementById('fig_out_' + f.id);
+      if (!out) return;
+      if (vals.some(isNaN)) {
+        out.innerHTML = '<span class="hint">Introduce valores</span>';
+        return;
+      }
+      const res = f.calc(vals);
+      if (!res) {
+        out.innerHTML = '<span class="hint">Los valores deben ser positivos</span>';
+        return;
+      }
+      let html = '';
+      if (res.area !== undefined) html += `Área = <strong>${fmt(res.area)}</strong>`;
+      if (res.per !== undefined) {
+        if (html) html += '<br>';
+        html += `Perímetro = <strong>${fmt(res.per)}</strong>`;
+      }
+      out.innerHTML = html;
+    };
+    f.inputs.forEach(inp => {
+      const el = document.getElementById(inp.id);
+      if (el) el.addEventListener('input', update);
+    });
+    update();
+  });
+})();
+
+/* ============================================================
+   CALCULADORA: PITÁGORAS
+   ============================================================ */
+function calcPitagoras(){
+  const a = getNum('pyth_a');
+  const b = getNum('pyth_b');
+  const out = $('#pyth_result');
+  if (!out) return;
+  if (isNaN(a) || isNaN(b)) {
+    out.innerHTML = '<span class="hint">Introduce valores numéricos</span>';
+    return;
+  }
+  if (a <= 0 || b <= 0) {
+    out.innerHTML = '<span class="hint">Los catetos deben ser positivos</span>';
+    return;
+  }
+  const c = Math.sqrt(a*a + b*b);
+  out.innerHTML = `hipotenusa c = <strong>${fmt(c)}</strong>`;
+}
+['pyth_a','pyth_b'].forEach(id => {
+  const el = document.getElementById(id);
+  if (el) el.addEventListener('input', calcPitagoras);
+});
+calcPitagoras();
+
+/* ============================================================
+   CALCULADORA: PENDIENTE
+   ============================================================ */
+function calcPendiente(){
+  const x1 = getNum('slope_x1');
+  const y1 = getNum('slope_y1');
+  const x2 = getNum('slope_x2');
+  const y2 = getNum('slope_y2');
+  const out = $('#slope_result');
+  if (!out) return;
+  if ([x1,y1,x2,y2].some(isNaN)) {
+    out.innerHTML = '<span class="hint">Introduce los cuatro valores</span>';
+    return;
+  }
+  if (x1 === x2) {
+    out.innerHTML = '<span class="warn">La pendiente es indefinida: los dos puntos tienen la misma x</span>';
+    return;
+  }
+  const m = (y2 - y1) / (x2 - x1);
+  out.innerHTML = `pendiente m = <strong>${fmt(m)}</strong>`;
+}
+['slope_x1','slope_y1','slope_x2','slope_y2'].forEach(id => {
+  const el = document.getElementById(id);
+  if (el) el.addEventListener('input', calcPendiente);
+});
+calcPendiente();
+
+/* ============================================================
+   GRÁFICA: PARÁBOLA
+   ============================================================ */
+function buildParabola(){
+  const path = document.getElementById('parabolaPath');
+  if (!path) return;
+  const ox = 160, oy = 120, scale = 40;
+  const a = 1, b = 0, c = -2;
+  let d = '';
+  for (let x = -2.236; x <= 2.2361; x += 0.05){
+    const y = a*x*x + b*x + c;
+    const px = ox + x*scale;
+    const py = oy - y*scale;
+    if (py < 0 || py > 240) continue;
+    d += (d ? ' L ' : 'M ') + px.toFixed(1) + ' ' + py.toFixed(1);
+  }
+  if (d) path.setAttribute('d', d);
+}
+buildParabola();
+
+/* ============================================================
+   GLOSARIO
+   ============================================================ */
+const GLOSARIO = [
+  // Números
+  { t:'Número natural', c:'Números', d:'Número que se usa para contar: 0, 1, 2, 3… Se representa con el símbolo ℕ.' },
+  { t:'Número entero', c:'Números', d:'Los naturales más sus opuestos negativos: …, −2, −1, 0, 1, 2, … Se representa con ℤ.' },
+  { t:'Número racional', c:'Números', d:'Número que se puede escribir como fracción de dos enteros. Incluye decimales exactos y periódicos. Símbolo ℚ.' },
+  { t:'Número irracional', c:'Números', d:'Número que no se puede escribir como fracción. Tiene infinitos decimales sin periodo. Ejemplos: √2, π, e.' },
+  { t:'Número real', c:'Números', d:'Conjunto de todos los números racionales e irracionales. Se representa con ℝ.' },
+  { t:'Fracción', c:'Números', d:'Forma de representar una parte de un todo mediante dos números: numerador arriba y denominador abajo.' },
+  { t:'Numerador', c:'Números', d:'Número de arriba de una fracción. Indica cuántas partes se toman.' },
+  { t:'Denominador', c:'Números', d:'Número de abajo de una fracción. Indica en cuántas partes se divide el todo.' },
+  { t:'Porcentaje', c:'Números', d:'Fracción con denominador 100. El 25 % equivale a 25/100, es decir, 25 de cada 100.' },
+  { t:'Potencia', c:'Números', d:'Producto de multiplicar un número por sí mismo varias veces. 2³ = 2×2×2 = 8.' },
+  { t:'Raíz cuadrada', c:'Números', d:'Número que, multiplicado por sí mismo, da el número original. √9 = 3 porque 3×3 = 9.' },
+  { t:'Valor absoluto', c:'Números', d:'Distancia de un número al cero, sin importar el signo. El valor absoluto de −5 es 5.' },
+  { t:'Número primo', c:'Números', d:'Número mayor que 1 que solo es divisible por 1 y por sí mismo. Ejemplos: 2, 3, 5, 7, 11.' },
+  { t:'Jerarquía de operaciones', c:'Números', d:'Orden en que se resuelven las operaciones: paréntesis, potencias, multiplicación/división y suma/resta.' },
+
+  // Álgebra
+  { t:'Variable', c:'Álgebra', d:'Letra que representa un número desconocido o que puede cambiar. Se suele usar x, y, z.' },
+  { t:'Constante', c:'Álgebra', d:'Número fijo que no cambia dentro de una expresión o ecuación.' },
+  { t:'Coeficiente', c:'Álgebra', d:'Número que multiplica a una variable. En 3x, el coeficiente es 3.' },
+  { t:'Término', c:'Álgebra', d:'Cada una de las partes de una expresión algebraica separadas por sumas o restas.' },
+  { t:'Expresión algebraica', c:'Álgebra', d:'Combinación de números, variables y operaciones. Ejemplo: 3x² + 2x − 5.' },
+  { t:'Ecuación', c:'Álgebra', d:'Igualdad matemática con una o más incógnitas. Resolverla es encontrar los valores que la hacen verdadera.' },
+  { t:'Incógnita', c:'Álgebra', d:'Valor desconocido de una ecuación que hay que averiguar.' },
+  { t:'Solución', c:'Álgebra', d:'Valor de la incógnita que hace verdadera la ecuación.' },
+  { t:'Despejar', c:'Álgebra', d:'Dejar sola la incógnita a un lado de la igualdad aplicando operaciones a ambos lados.' },
+  { t:'Ecuación de primer grado', c:'Álgebra', d:'Ecuación en la que la incógnita aparece elevada a 1. Su forma general es ax + b = c.' },
+  { t:'Ecuación cuadrática', c:'Álgebra', d:'Ecuación en la que la incógnita aparece elevada al cuadrado. Forma general: ax² + bx + c = 0.' },
+  { t:'Discriminante', c:'Álgebra', d:'Expresión b² − 4ac dentro de la fórmula cuadrática. Indica cuántas soluciones reales tiene la ecuación.' },
+  { t:'Factorizar', c:'Álgebra', d:'Escribir una expresión como producto de factores más simples. x² − 1 = (x−1)(x+1).' },
+  { t:'Producto notable', c:'Álgebra', d:'Expresión que se puede resolver con una fórmula fija. (a+b)² = a² + 2ab + b².' },
+  { t:'Término semejante', c:'Álgebra', d:'Términos con la misma parte literal. 3x y 5x son semejantes y se pueden sumar.' },
+
+  // Geometría
+  { t:'Punto', c:'Geometría', d:'Lugar del espacio sin dimensiones. Se representa con un pequeño círculo y una letra mayúscula.' },
+  { t:'Recta', c:'Geometría', d:'Línea infinita en ambas direcciones, sin grosor ni extremos.' },
+  { t:'Segmento', c:'Geometría', d:'Parte de una recta limitada por dos puntos extremos.' },
+  { t:'Ángulo', c:'Geometría', d:'Abertura entre dos rectas que se cortan en un punto. Se mide en grados.' },
+  { t:'Ángulo recto', c:'Geometría', d:'Ángulo de 90 grados. Es el que forman las paredes de una habitación.' },
+  { t:'Triángulo', c:'Geometría', d:'Polígono de tres lados. La suma de sus ángulos siempre es 180 grados.' },
+  { t:'Triángulo rectángulo', c:'Geometría', d:'Triángulo que tiene un ángulo recto (90°). Sus lados tienen nombres especiales: catetos e hipotenusa.' },
+  { t:'Cateto', c:'Geometría', d:'Cada uno de los dos lados que forman el ángulo recto en un triángulo rectángulo.' },
+  { t:'Hipotenusa', c:'Geometría', d:'Lado más largo de un triángulo rectángulo. Es el opuesto al ángulo recto.' },
+  { t:'Teorema de Pitágoras', c:'Geometría', d:'En un triángulo rectángulo, la suma de los cuadrados de los catetos es igual al cuadrado de la hipotenusa.' },
+  { t:'Cuadrado', c:'Geometría', d:'Cuadrilátero con cuatro lados iguales y cuatro ángulos rectos.' },
+  { t:'Rectángulo', c:'Geometría', d:'Cuadrilátero con cuatro ángulos rectos. Sus lados opuestos son iguales.' },
+  { t:'Círculo', c:'Geometría', d:'Región del plano delimitada por una circunferencia. Es la figura que contiene la circunferencia.' },
+  { t:'Circunferencia', c:'Geometría', d:'Curva cerrada cuyos puntos están todos a la misma distancia del centro.' },
+  { t:'Radio', c:'Geometría', d:'Distancia desde el centro de un círculo hasta cualquier punto de su borde.' },
+  { t:'Diámetro', c:'Geometría', d:'Segmento que pasa por el centro y une dos puntos del borde. Es el doble del radio.' },
+  { t:'Perímetro', c:'Geometría', d:'Longitud del contorno de una figura. Se mide en unidades lineales.' },
+  { t:'Área', c:'Geometría', d:'Cantidad de superficie que ocupa una figura. Se mide en unidades cuadradas.' },
+  { t:'Volumen', c:'Geometría', d:'Espacio tridimensional que ocupa un cuerpo. Se mide en unidades cúbicas.' },
+  { t:'Polígono', c:'Geometría', d:'Figura plana cerrada formada por segmentos rectos. Triángulos, cuadrados y pentágonos son polígonos.' },
+  { t:'Vértice', c:'Geometría', d:'Punto donde se encuentran dos lados de una figura o dos aristas de un cuerpo.' },
+
+  // Funciones
+  { t:'Función', c:'Funciones', d:'Relación que asigna a cada valor de entrada exactamente un valor de salida.' },
+  { t:'Variable independiente', c:'Funciones', d:'Valor de entrada de una función. Normalmente se representa con x.' },
+  { t:'Variable dependiente', c:'Funciones', d:'Valor de salida de una función. Depende del valor que tome la variable independiente. Se representa con y.' },
+  { t:'Dominio', c:'Funciones', d:'Conjunto de valores que puede tomar la variable independiente de una función.' },
+  { t:'Rango', c:'Funciones', d:'Conjunto de valores que puede tomar la variable dependiente de una función.' },
+  { t:'Plano cartesiano', c:'Funciones', d:'Plano formado por dos ejes perpendiculares que permite ubicar puntos mediante coordenadas.' },
+  { t:'Coordenada', c:'Funciones', d:'Cada uno de los números que indican la posición de un punto en el plano. Se escriben (x, y).' },
+  { t:'Origen', c:'Funciones', d:'Punto (0, 0) donde se cruzan los dos ejes del plano cartesiano.' },
+  { t:'Pendiente', c:'Funciones', d:'Inclinación de una recta. Indica cuánto sube o baja por cada unidad que avanza a la derecha.' },
+  { t:'Ordenada al origen', c:'Funciones', d:'Valor de y cuando x = 0. Es el punto donde la recta corta el eje vertical.' },
+  { t:'Función lineal', c:'Funciones', d:'Función cuya gráfica es una recta. Su forma es y = mx + b.' },
+  { t:'Función cuadrática', c:'Funciones', d:'Función cuya gráfica es una parábola. Su forma es y = ax² + bx + c.' },
+  { t:'Parábola', c:'Funciones', d:'Curva con forma de U que representa una función cuadrática.' },
+  { t:'Vértice de la parábola', c:'Funciones', d:'Punto más alto o más bajo de una parábola. Se encuentra en x = −b/(2a).' }
+];
+
+const CATEGORIAS = ['Todos','Números','Álgebra','Geometría','Funciones'];
+let activeCat = 'Todos';
+let query = '';
+
+const chipsEl = $('#chips');
+chipsEl.innerHTML = CATEGORIAS.map(c =>
+  `<button class="chip${c === 'Todos' ? ' active' : ''}" data-cat="${c}">${c}</button>`
+).join('');
+
+chipsEl.addEventListener('click', e => {
+  const chip = e.target.closest('.chip');
+  if (!chip) return;
+  activeCat = chip.dataset.cat;
+  $$('.chip', chipsEl).forEach(c => c.classList.toggle('active', c === chip));
+  renderGlosario();
+});
+
+$('#searchInput').addEventListener('input', e => {
+  query = e.target.value;
+  renderGlosario();
+});
+
+function renderGlosario(){
+  const q = query.trim().toLowerCase();
+  const items = GLOSARIO.filter(g => {
+    const okCat = activeCat === 'Todos' || g.c === activeCat;
+    const okQ = !q || g.t.toLowerCase().includes(q) || g.d.toLowerCase().includes(q);
+    return okCat && okQ;
+  });
+
+  const list = $('#glosarioList');
+  if (!items.length){
+    list.innerHTML = `<p class="empty">No encontramos términos con esa búsqueda. Prueba con otra palabra o cambia de categoría.</p>`;
+    return;
+  }
+
+  list.innerHTML = items.map((g, i) => `
+    <article class="term" style="--d:${Math.min(i, 14) * 30}ms">
+      <div class="term-head">
+        <h3>${g.t}</h3>
+        <span class="tag">${g.c}</span>
+      </div>
+      <p>${g.d}</p>
+    </article>
+  `).join('');
+}
+renderGlosario();
+
+/* ============================================================
+   QUIZ
+   ============================================================ */
+const QUIZ = [
+  { q:'¿Cuánto es 2³?', o:['6','8','9','16'], c:1,
+    e:'2³ significa 2 × 2 × 2 = 8. El exponente indica cuántas veces se multiplica la base por sí misma.' },
+  { q:'Resuelve x + 5 = 12.', o:['x = 5','x = 7','x = 17','x = 60'], c:1,
+    e:'Hay que restar 5 a los dos lados: x = 12 − 5 = 7.' },
+  { q:'¿Cuál es el área de un cuadrado de lado 4?', o:['8','12','16','20'], c:2,
+    e:'El área de un cuadrado es lado × lado = 4 × 4 = 16.' },
+  { q:'¿Cuánto es el 25 % de 80?', o:['16','20','25','40'], c:1,
+    e:'25 % de 80 = (25/100) × 80 = 20. Es una cuarta parte de 80.' },
+  { q:'Resuelve 3x = 21.', o:['x = 6','x = 7','x = 8','x = 24'], c:1,
+    e:'Se divide entre 3 a los dos lados: x = 21 ÷ 3 = 7.' },
+  { q:'¿Cuál es el perímetro de un rectángulo de 5 × 3?', o:['8','15','16','30'], c:2,
+    e:'Perímetro = 2 × (base + altura) = 2 × (5 + 3) = 16.' },
+  { q:'¿Cuál es la fórmula del área del círculo?', o:['2πr','πr²','πd','r²'], c:1,
+    e:'El área del círculo es π multiplicado por el radio al cuadrado. La longitud de la circunferencia es 2πr.' },
+  { q:'Si los catetos miden 3 y 4, ¿cuánto mide la hipotenusa?', o:['5','6','7','12'], c:0,
+    e:'Por Pitágoras: c² = 3² + 4² = 9 + 16 = 25, así que c = 5. Es la terna pitagórica más famosa.' },
+  { q:'¿Qué es una variable en álgebra?', o:['Un número fijo','Una letra que representa un número desconocido','Una operación','Una figura geométrica'], c:1,
+    e:'Una variable es una letra que puede tomar distintos valores. Se usa para plantear ecuaciones y expresiones.' },
+  { q:'El número −5 es un número…', o:['Natural','Irracional','Entero','Complejo'], c:2,
+    e:'Los enteros incluyen los negativos, el cero y los positivos. −5 es entero pero no natural.' },
+  { q:'El número ½ es un número…', o:['Irracional','Racional','Natural','Primo'], c:1,
+    e:'Es racional porque se puede escribir como fracción de dos enteros. Todo número que se exprese así es racional.' },
+  { q:'¿Cuánto es 1/2 + 1/4?', o:['2/6','3/4','1/6','2/4'], c:1,
+    e:'Se igualan denominadores: 1/2 = 2/4. Luego 2/4 + 1/4 = 3/4.' },
+  { q:'¿Qué indica el discriminante de una ecuación cuadrática?', o:['El valor de a','Cuántas soluciones reales tiene','La pendiente de la recta','El área del triángulo'], c:1,
+    e:'El discriminante es b² − 4ac. Si es positivo hay dos soluciones, si es cero hay una doble, y si es negativo no hay soluciones reales.' },
+  { q:'En la función y = 2x + 3, ¿cuál es la pendiente?', o:['3','2','5','x'], c:1,
+    e:'En la forma y = mx + b, la pendiente es m. Aquí m = 2 y b = 3.' },
+  { q:'¿Cuál es el área de un triángulo de base 6 y altura 4?', o:['10','12','24','48'], c:1,
+    e:'Área = (base × altura) ÷ 2 = (6 × 4) ÷ 2 = 12.' },
+  { q:'¿Cuál es la longitud de una circunferencia de radio 5?', o:['5π','10π','25π','50π'], c:1,
+    e:'La longitud es 2πr = 2 × π × 5 = 10π. El área sería πr² = 25π.' }
+];
+
+const TOTAL_PREGUNTAS = 10;
+const LETRAS = ['A','B','C','D'];
+let quizState = { questions: [], index: 0, score: 0, answered: false, finished: false };
+
+function shuffle(arr){
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function startQuiz(){
+  quizState = {
+    questions: shuffle(QUIZ).slice(0, TOTAL_PREGUNTAS),
+    index: 0,
+    score: 0,
+    answered: false,
+    finished: false
+  };
+  renderQuiz();
+}
+
+function renderQuiz(){
+  const card = $('#quizCard');
+  if (!card) return;
+
+  if (quizState.finished){
+    const total = quizState.questions.length;
+    const pct = Math.round((quizState.score / total) * 100);
+    let mensaje = 'Sigue practicando: la matemática se aprende con la práctica.';
+    if (pct === 100) mensaje = 'Perfecto. Dominas estos conceptos por completo.';
+    else if (pct >= 75) mensaje = 'Muy buen resultado. Te falta muy poco para el pleno.';
+    else if (pct >= 50) mensaje = 'Buen comienzo. Repasa algún tema y vuelve a intentarlo.';
+
+    card.innerHTML = `
+      <div class="result">
+        <div class="score">${quizState.score}/${total}</div>
+        <h3>${mensaje}</h3>
+        <p>Has acertado el ${pct} % de las preguntas de esta ronda.</p>
+        <button class="btn btn-primary" id="restartQuiz">
+          Jugar otra vez
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>
+        </button>
+      </div>
+    `;
+    $('#restartQuiz').addEventListener('click', startQuiz);
+    return;
+  }
+
+  const q = quizState.questions[quizState.index];
+  const total = quizState.questions.length;
+  const progress = (quizState.index / total) * 100;
+
+  card.innerHTML = `
+    <div class="quiz-meta">
+      <span>Pregunta ${quizState.index + 1} de ${total}</span>
+      <span>Aciertos: ${quizState.score}</span>
+    </div>
+    <div class="progress"><div class="progress-bar" style="width:${progress}%"></div></div>
+    <h3 class="q-text">${q.q}</h3>
+    <div class="options" id="options">
+      ${q.o.map((opt, i) => `
+        <button class="option" data-i="${i}">
+          <span class="letter">${LETRAS[i]}</span>
+          <span>${opt}</span>
+        </button>
+      `).join('')}
+    </div>
+    <div id="feedbackSlot"></div>
+    <div class="quiz-actions" id="actionsSlot"></div>
+  `;
+
+  $('#options').addEventListener('click', e => {
+    const btn = e.target.closest('.option');
+    if (!btn || quizState.answered) return;
+    answerQuestion(parseInt(btn.dataset.i, 10));
+  });
+}
+
+function answerQuestion(chosen){
+  quizState.answered = true;
+  const q = quizState.questions[quizState.index];
+  const options = $$('#options .option');
+
+  options.forEach((btn, i) => {
+    btn.disabled = true;
+    if (i === q.c) btn.classList.add('correct');
+    else if (i === chosen) btn.classList.add('wrong');
+  });
+
+  const acerto = chosen === q.c;
+  if (acerto) quizState.score++;
+
+  $('#feedbackSlot').innerHTML = `
+    <div class="feedback">
+      <strong>${acerto ? 'Correcto.' : 'No exactamente.'}</strong> ${q.e}
+    </div>
+  `;
+
+  const isLast = quizState.index === quizState.questions.length - 1;
+  $('#actionsSlot').innerHTML = `
+    <button class="btn btn-primary" id="nextBtn">
+      ${isLast ? 'Ver resultado' : 'Siguiente pregunta'}
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </button>
+  `;
+
+  $('#nextBtn').addEventListener('click', () => {
+    if (isLast){
+      quizState.finished = true;
+    } else {
+      quizState.index++;
+      quizState.answered = false;
+    }
+    renderQuiz();
+  });
+}
+
+/* ============================================================
+   HOVER EN MÓDULOS
+   ============================================================ */
+$$('.module').forEach(m => {
+  m.addEventListener('mousemove', e => {
+    const r = m.getBoundingClientRect();
+    m.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
+    m.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
+  });
+});
+
+/* ============================================================
+   ARRANQUE
+   ============================================================ */
+(function boot(){
+  const initial = (location.hash.slice(1) || 'inicio');
+  go(ROUTES.includes(initial) ? initial : 'inicio', false);
+  checkReveal();
+  setTimeout(() => {
+    if (currentRoute === 'inicio') animateCounters();
+    buildParabola();
+  }, 350);
+})();
+
+startQuiz();
+
+document.addEventListener('visibilitychange', () => {
+  document.querySelectorAll('.orb').forEach(o => {
+    o.style.animationPlayState = document.hidden ? 'paused' : 'running';
+  });
+});
+</script>
+</body>
+</html>

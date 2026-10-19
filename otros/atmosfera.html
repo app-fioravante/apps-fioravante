@@ -1,0 +1,1698 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Atmósfera y Cielo — Del suelo al espacio explicado claro</title>
+<meta name="description" content="Cómo funciona la atmósfera, qué hay en el espacio, cómo vuelan los aviones, por qué se forman las nubes, la lluvia y las tormentas, y qué es el clima.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============ TOKENS ============ */
+:root{
+  --font-display:'Space Grotesk','Segoe UI',system-ui,sans-serif;
+  --font-body:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --radius:20px;
+  --radius-sm:12px;
+  --maxw:1180px;
+  --ease:cubic-bezier(.22,.75,.25,1);
+}
+html[data-theme="dark"]{
+  --bg:#060a12;
+  --bg-soft:#0a1220;
+  --surface:rgba(18,28,46,.66);
+  --surface-solid:#111a2b;
+  --surface-2:rgba(255,255,255,.04);
+  --border:rgba(255,255,255,.09);
+  --border-strong:rgba(255,255,255,.18);
+  --text:#e9eff9;
+  --muted:#8fa1bd;
+  --accent:#4f8cff;
+  --accent-2:#22d3ee;
+  --accent-3:#a78bfa;
+  --good:#34d399;
+  --bad:#fb7185;
+  --shadow:0 24px 60px -24px rgba(0,0,0,.85);
+  --orb-op:.40;
+}
+html[data-theme="light"]{
+  --bg:#f3f7fd;
+  --bg-soft:#e9f0fa;
+  --surface:rgba(255,255,255,.80);
+  --surface-solid:#ffffff;
+  --surface-2:rgba(12,25,48,.035);
+  --border:rgba(12,25,48,.10);
+  --border-strong:rgba(12,25,48,.20);
+  --text:#0c1729;
+  --muted:#586a85;
+  --accent:#2563eb;
+  --accent-2:#0891b2;
+  --accent-3:#7c3aed;
+  --good:#059669;
+  --bad:#e11d48;
+  --shadow:0 24px 60px -30px rgba(16,36,72,.35);
+  --orb-op:.26;
+}
+
+/* ============ BASE ============ */
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;font-family:var(--font-body);background:var(--bg);color:var(--text);
+  min-height:100vh;line-height:1.65;-webkit-font-smoothing:antialiased;
+  transition:background .45s var(--ease),color .45s var(--ease);
+  overflow-x:hidden;
+}
+h1,h2,h3,h4{font-family:var(--font-display);line-height:1.15;letter-spacing:-.02em;margin:0}
+p{margin:0}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--accent);color:#fff}
+
+/* ============ FONDO ============ */
+.orbs{position:fixed;inset:0;z-index:-2;overflow:hidden;pointer-events:none}
+.orb{position:absolute;border-radius:50%;filter:blur(95px);opacity:var(--orb-op);animation:float 24s ease-in-out infinite alternate}
+.orb.o1{width:54vw;height:54vw;background:var(--accent);top:-18vw;left:-14vw}
+.orb.o2{width:42vw;height:42vw;background:var(--accent-3);bottom:-20vw;right:-12vw;animation-delay:-8s}
+.orb.o3{width:34vw;height:34vw;background:var(--accent-2);top:42%;left:55%;animation-delay:-15s}
+@keyframes float{
+  0%{transform:translate3d(0,0,0) scale(1)}
+  50%{transform:translate3d(4vw,-3vw,0) scale(1.12)}
+  100%{transform:translate3d(-3vw,4vw,0) scale(.94)}
+}
+.grain{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.035;
+  background-image:radial-gradient(currentColor 1px,transparent 1px);background-size:3px 3px}
+
+/* ============ HEADER ============ */
+.site-header{
+  position:sticky;top:0;z-index:50;
+  backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);
+  background:color-mix(in srgb,var(--bg) 74%, transparent);
+  border-bottom:1px solid var(--border);
+}
+.header-inner{max-width:var(--maxw);margin:0 auto;padding:13px 22px;display:flex;align-items:center;gap:20px}
+.brand{display:flex;align-items:center;gap:11px;font-family:var(--font-display);font-weight:700;font-size:1rem;letter-spacing:-.02em;white-space:nowrap}
+.brand-mark{
+  width:36px;height:36px;border-radius:11px;flex:none;
+  background:linear-gradient(140deg,var(--accent),var(--accent-2) 55%,var(--accent-3));
+  display:grid;place-items:center;color:#fff;
+  box-shadow:0 8px 22px -8px var(--accent);
+  transition:transform .5s var(--ease);
+}
+.brand:hover .brand-mark{transform:rotate(-12deg) scale(1.06)}
+.brand-mark svg{width:20px;height:20px}
+
+.nav{display:flex;gap:3px;margin-left:auto;overflow-x:auto;scrollbar-width:none}
+.nav::-webkit-scrollbar{display:none}
+.nav-link{
+  position:relative;padding:9px 13px;border-radius:11px;font-size:.86rem;font-weight:500;
+  color:var(--muted);white-space:nowrap;transition:color .3s var(--ease),background .3s var(--ease);
+}
+.nav-link:hover{color:var(--text);background:var(--surface-2)}
+.nav-link.active{color:var(--text);background:var(--surface-2)}
+.nav-link.active::after{
+  content:'';position:absolute;left:13px;right:13px;bottom:4px;height:2px;border-radius:2px;
+  background:linear-gradient(90deg,var(--accent),var(--accent-2));
+  animation:navIn .4s var(--ease) both;
+}
+@keyframes navIn{from{transform:scaleX(0);opacity:0}to{transform:scaleX(1);opacity:1}}
+
+.theme-toggle{
+  width:40px;height:40px;border-radius:12px;flex:none;
+  border:1px solid var(--border);background:var(--surface-2);
+  display:grid;place-items:center;
+  transition:transform .35s var(--ease),border-color .3s,background .3s;
+}
+.theme-toggle:hover{transform:translateY(-2px) rotate(8deg);border-color:var(--border-strong)}
+.theme-toggle svg{width:19px;height:19px}
+html[data-theme="dark"] .icon-sun{display:block}
+html[data-theme="dark"] .icon-moon{display:none}
+html[data-theme="light"] .icon-sun{display:none}
+html[data-theme="light"] .icon-moon{display:block}
+
+/* ============ LAYOUT ============ */
+main{max-width:var(--maxw);margin:0 auto;padding:0 22px 90px}
+.view{display:none}
+.view.active{display:block;animation:viewIn .55s var(--ease) both}
+@keyframes viewIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+
+/* ============ HERO ============ */
+.hero{padding:74px 0 42px;max-width:840px}
+.pill{
+  display:inline-flex;align-items:center;gap:8px;padding:7px 15px;border-radius:999px;
+  font-size:.78rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;
+  border:1px solid var(--border);background:var(--surface);color:var(--muted);margin-bottom:26px;
+  animation:viewIn .6s var(--ease) both;
+}
+.pill .dot{width:7px;height:7px;border-radius:50%;background:var(--good);animation:pulse 2.4s infinite}
+@keyframes pulse{
+  0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--good) 60%,transparent)}
+  70%{box-shadow:0 0 0 9px transparent}
+  100%{box-shadow:0 0 0 0 transparent}
+}
+h1.hero-title{font-size:clamp(2.2rem,5.4vw,3.95rem);font-weight:700;letter-spacing:-.035em;margin-bottom:22px}
+.grad{
+  background:linear-gradient(100deg,var(--accent),var(--accent-2) 48%,var(--accent-3));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  background-size:220% auto;animation:shimmer 7s linear infinite;
+}
+@keyframes shimmer{to{background-position:220% center}}
+.lead{font-size:clamp(1rem,1.6vw,1.15rem);color:var(--muted);max-width:640px;margin-bottom:34px}
+.hero-actions{display:flex;flex-wrap:wrap;gap:13px}
+
+/* ============ BOTONES ============ */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  padding:13px 25px;border-radius:13px;font-size:.93rem;font-weight:600;
+  border:1px solid transparent;
+  transition:transform .28s var(--ease),box-shadow .3s var(--ease),background .3s,border-color .3s,color .3s;
+  will-change:transform;
+}
+.btn:active{transform:scale(.97)}
+.btn svg{width:17px;height:17px}
+.btn-primary{
+  background:linear-gradient(120deg,var(--accent),var(--accent-3));
+  color:#fff;box-shadow:0 14px 34px -14px var(--accent);
+  position:relative;overflow:hidden;
+}
+.btn-primary::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,.4),transparent 70%);
+  transform:translateX(-130%);transition:transform .7s var(--ease);
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 20px 42px -14px var(--accent)}
+.btn-primary:hover::after{transform:translateX(130%)}
+.btn-ghost{border-color:var(--border);background:var(--surface);color:var(--text)}
+.btn-ghost:hover{transform:translateY(-2px);border-color:var(--border-strong);background:var(--surface-2)}
+
+/* ============ STATS ============ */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(156px,1fr));gap:14px;margin:12px 0 58px}
+.stat{
+  padding:22px 20px;border-radius:var(--radius);
+  background:var(--surface);border:1px solid var(--border);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  transition:transform .35s var(--ease),border-color .3s,box-shadow .35s;
+}
+.stat:hover{transform:translateY(-5px);border-color:var(--border-strong);box-shadow:var(--shadow)}
+.stat .num{
+  font-family:var(--font-display);font-size:1.85rem;font-weight:700;letter-spacing:-.03em;
+  background:linear-gradient(120deg,var(--accent),var(--accent-2));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.stat .lbl{font-size:.82rem;color:var(--muted);font-weight:500;margin-top:2px}
+
+/* ============ SECCIONES ============ */
+.sec-head{margin:0 0 28px}
+.sec-head h2{font-size:clamp(1.55rem,3vw,2.05rem);font-weight:700;margin-bottom:8px}
+.sec-head p{color:var(--muted);max-width:640px;font-size:.95rem}
+.section{padding-top:52px}
+
+/* ============ MÓDULOS HOME ============ */
+.module-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(258px,1fr));gap:18px}
+.module{
+  position:relative;overflow:hidden;text-align:left;padding:28px 24px;border-radius:var(--radius);
+  background:var(--surface);border:1px solid var(--border);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  transition:transform .4s var(--ease),border-color .35s,box-shadow .4s;
+}
+.module::before{
+  content:'';position:absolute;inset:0;opacity:0;
+  background:radial-gradient(420px circle at var(--mx,50%) var(--my,0%),color-mix(in srgb,var(--accent) 22%,transparent),transparent 65%);
+  transition:opacity .45s var(--ease);
+}
+.module:hover{transform:translateY(-6px);border-color:var(--border-strong);box-shadow:var(--shadow)}
+.module:hover::before{opacity:1}
+.module-ico{
+  width:46px;height:46px;border-radius:14px;display:grid;place-items:center;margin-bottom:18px;
+  background:linear-gradient(140deg,color-mix(in srgb,var(--accent) 22%,transparent),color-mix(in srgb,var(--accent-3) 18%,transparent));
+  border:1px solid var(--border);color:var(--accent);
+  transition:transform .4s var(--ease);
+}
+.module:hover .module-ico{transform:scale(1.08) rotate(-6deg)}
+.module-ico svg{width:22px;height:22px}
+.module h3{font-size:1.04rem;margin-bottom:8px;font-weight:600}
+.module p{font-size:.89rem;color:var(--muted);line-height:1.6}
+.module .arrow{display:inline-flex;align-items:center;gap:6px;margin-top:16px;font-size:.84rem;font-weight:600;color:var(--accent)}
+.module .arrow svg{width:14px;height:14px;transition:transform .35s var(--ease)}
+.module:hover .arrow svg{transform:translateX(5px)}
+
+/* ============ CARDS GENÉRICAS ============ */
+.card{
+  padding:26px;border-radius:var(--radius);
+  background:var(--surface);border:1px solid var(--border);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  transition:transform .35s var(--ease),border-color .3s,box-shadow .35s;
+}
+.card:hover{transform:translateY(-4px);border-color:var(--border-strong);box-shadow:var(--shadow)}
+.card h3{font-size:1.05rem;margin-bottom:10px;font-weight:600}
+.card p{font-size:.9rem;color:var(--muted);line-height:1.68}
+.card .kicker{
+  font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:12px;display:block;
+}
+
+/* ============ ATMÓSFERA: CAPAS ============ */
+.atm-visual{border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);background:var(--surface)}
+.atm-sky{
+  position:relative;height:150px;
+  background:linear-gradient(180deg,#05070f 0%,#0b1a3a 42%,#1e4d8f 76%,#4f8cff 100%);
+  display:flex;align-items:flex-end;justify-content:center;
+  overflow:hidden;
+}
+.atm-sky::after{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(circle at 50% 120%,rgba(120,200,255,.35),transparent 60%);
+}
+.atm-stars{position:absolute;inset:0;opacity:.9}
+.atm-stars span{position:absolute;width:2px;height:2px;border-radius:50%;background:#fff;animation:twinkle 3.6s infinite}
+@keyframes twinkle{0%,100%{opacity:.15}50%{opacity:.95}}
+.atm-earth{
+  position:absolute;bottom:-70px;left:50%;transform:translateX(-50%);
+  width:220px;height:220px;border-radius:50%;
+  background:radial-gradient(circle at 35% 30%,#3f8ee8,#1b4f9e 55%,#0b2a55);
+  box-shadow:0 0 70px rgba(79,140,255,.55),inset 0 0 60px rgba(0,0,0,.45);
+}
+.atm-earth::after{
+  content:'';position:absolute;inset:0;border-radius:50%;
+  background:radial-gradient(circle at 62% 65%,rgba(52,211,153,.42),transparent 34%),
+             radial-gradient(circle at 30% 70%,rgba(52,211,153,.30),transparent 28%),
+             radial-gradient(circle at 70% 22%,rgba(120,180,255,.35),transparent 30%);
+}
+.atm-label{
+  position:relative;z-index:2;padding:12px 16px;margin-bottom:44px;
+  font-family:var(--font-display);font-size:.78rem;font-weight:600;letter-spacing:.14em;
+  text-transform:uppercase;color:rgba(255,255,255,.72);
+}
+
+.layer-list{display:flex;flex-direction:column}
+.layer{
+  border-top:1px solid var(--border);
+  transition:background .3s;
+}
+.layer:first-child{border-top:none}
+.layer-head{
+  width:100%;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:14px;
+  padding:16px 20px;text-align:left;transition:background .3s;
+}
+.layer-head:hover{background:var(--surface-2)}
+.layer-swatch{width:10px;height:34px;border-radius:6px;flex:none;transition:transform .35s var(--ease)}
+.layer-head:hover .layer-swatch{transform:scaleY(1.12)}
+.layer-name{font-family:var(--font-display);font-size:.98rem;font-weight:600}
+.layer-alt{font-size:.78rem;color:var(--muted);font-weight:500;margin-top:1px}
+.layer-chev{width:15px;height:15px;color:var(--muted);transition:transform .4s var(--ease);flex:none}
+.layer.open .layer-chev{transform:rotate(180deg)}
+.layer-body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s var(--ease)}
+.layer.open .layer-body{grid-template-rows:1fr}
+.layer-body > div{overflow:hidden}
+.layer-body p{
+  padding:0 20px 20px 44px;font-size:.88rem;color:var(--muted);line-height:1.68;
+}
+.layer-body strong{color:var(--text);font-weight:600}
+
+/* ============ GRIDS DE CONTENIDO ============ */
+.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+
+/* ============ COMPOSICIÓN DEL AIRE ============ */
+.comp-bar{height:16px;border-radius:99px;overflow:hidden;display:flex;border:1px solid var(--border);margin:18px 0 16px}
+.comp-bar span{height:100%;transition:flex .5s var(--ease)}
+.comp-legend{display:flex;flex-wrap:wrap;gap:14px;font-size:.82rem;color:var(--muted)}
+.comp-legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:7px;vertical-align:-1px}
+.comp-legend b{color:var(--text);font-weight:600}
+
+/* ============ ÓRBITAS ============ */
+.orbit-list{display:flex;flex-direction:column;gap:12px}
+.orbit{
+  display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:start;
+  padding:20px;border-radius:var(--radius-sm);
+  background:var(--surface);border:1px solid var(--border);
+  transition:border-color .3s,transform .3s var(--ease),box-shadow .3s;
+}
+.orbit:hover{border-color:var(--border-strong);transform:translateX(4px);box-shadow:var(--shadow)}
+.orbit-badge{
+  width:52px;height:52px;border-radius:14px;flex:none;display:grid;place-items:center;
+  font-family:var(--font-display);font-size:.8rem;font-weight:700;letter-spacing:.02em;color:#fff;
+  background:linear-gradient(140deg,var(--c1),var(--c2));
+  box-shadow:0 10px 26px -14px var(--c1);
+}
+.orbit h3{font-size:.98rem;margin-bottom:4px}
+.orbit .meta{font-size:.77rem;color:var(--accent);font-weight:600;margin-bottom:7px}
+.orbit p{font-size:.86rem;color:var(--muted);line-height:1.65}
+
+/* ============ FUERZAS DEL VUELO ============ */
+.forces{
+  border-radius:var(--radius);border:1px solid var(--border);
+  background:var(--surface);padding:26px;overflow:hidden;
+}
+.forces svg{width:100%;height:auto;max-width:460px;display:block;margin:0 auto}
+.forces-legend{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-top:22px}
+.force-item{display:flex;gap:10px;align-items:flex-start;font-size:.85rem;color:var(--muted)}
+.force-item i{width:11px;height:11px;border-radius:50%;flex:none;margin-top:6px}
+.force-item b{color:var(--text);font-weight:600;display:block;font-size:.87rem;margin-bottom:1px}
+
+/* ============ NUBES ============ */
+.cloud-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px}
+.cloud{
+  padding:24px;border-radius:var(--radius);
+  background:var(--surface);border:1px solid var(--border);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  animation:termIn .5s var(--ease) both;animation-delay:var(--d,0ms);
+  transition:transform .35s var(--ease),border-color .3s,box-shadow .35s;
+  position:relative;overflow:hidden;
+}
+.cloud::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--c1),var(--c2));
+}
+.cloud:hover{transform:translateY(-5px);border-color:var(--border-strong);box-shadow:var(--shadow)}
+.cloud-ico{
+  width:52px;height:42px;margin-bottom:16px;color:var(--c1);
+  transition:transform .4s var(--ease);
+}
+.cloud:hover .cloud-ico{transform:translateX(4px) scale(1.05)}
+.cloud-ico svg{width:100%;height:100%}
+.cloud h3{font-size:1rem;margin-bottom:4px}
+.cloud .where{font-size:.75rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:10px}
+.cloud p{font-size:.86rem;color:var(--muted);line-height:1.65}
+
+/* ============ CLIMA: ZONAS ============ */
+.zone-list{display:flex;flex-direction:column;gap:10px}
+.zone{
+  display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:center;
+  padding:18px 20px;border-radius:var(--radius-sm);
+  background:var(--surface);border:1px solid var(--border);
+  transition:border-color .3s,transform .3s var(--ease);
+}
+.zone:hover{border-color:var(--border-strong);transform:translateX(4px)}
+.zone-band{width:6px;height:44px;border-radius:6px;flex:none}
+.zone h3{font-size:.95rem;margin-bottom:3px}
+.zone p{font-size:.85rem;color:var(--muted);line-height:1.6}
+
+/* ============ GLOSARIO ============ */
+.toolbar{
+  display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-bottom:26px;
+  position:sticky;top:69px;z-index:20;padding:14px 0;
+  background:linear-gradient(var(--bg) 55%,transparent);
+}
+.search-wrap{position:relative;flex:1;min-width:220px}
+.search-wrap svg{position:absolute;left:15px;top:50%;transform:translateY(-50%);width:17px;height:17px;color:var(--muted);pointer-events:none}
+#searchInput{
+  width:100%;padding:13px 16px 13px 44px;border-radius:13px;
+  background:var(--surface);border:1px solid var(--border);color:var(--text);
+  font-size:.93rem;font-family:inherit;outline:none;
+  transition:border-color .3s,box-shadow .3s,background .3s;
+}
+#searchInput::placeholder{color:var(--muted)}
+#searchInput:focus{border-color:var(--accent);box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 18%,transparent)}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{
+  padding:8px 15px;border-radius:999px;font-size:.81rem;font-weight:600;
+  border:1px solid var(--border);background:var(--surface);color:var(--muted);
+  transition:all .3s var(--ease);
+}
+.chip:hover{color:var(--text);border-color:var(--border-strong);transform:translateY(-1px)}
+.chip.active{background:linear-gradient(120deg,var(--accent),var(--accent-3));color:#fff;border-color:transparent;box-shadow:0 10px 26px -12px var(--accent)}
+.term-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:15px}
+.term{
+  padding:22px;border-radius:var(--radius);
+  background:var(--surface);border:1px solid var(--border);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  animation:termIn .5s var(--ease) both;animation-delay:var(--d,0ms);
+  transition:border-color .3s,transform .3s var(--ease),box-shadow .3s;
+}
+@keyframes termIn{from{opacity:0;transform:translateY(14px) scale(.98)}to{opacity:1;transform:none}}
+.term:hover{transform:translateY(-4px);border-color:var(--border-strong);box-shadow:var(--shadow)}
+.term-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:9px}
+.term h3{font-size:.98rem;font-weight:600;letter-spacing:-.01em}
+.tag{
+  font-size:.67rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  padding:4px 9px;border-radius:7px;white-space:nowrap;
+  background:color-mix(in srgb,var(--accent) 15%,transparent);
+  color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 26%,transparent);
+}
+.term p{font-size:.88rem;color:var(--muted);line-height:1.65}
+.empty{padding:50px 20px;text-align:center;color:var(--muted);font-size:.95rem;grid-column:1/-1}
+
+/* ============ QUIZ ============ */
+.quiz-shell{max-width:760px;margin:0 auto}
+.quiz-card{
+  padding:34px;border-radius:var(--radius);
+  background:var(--surface);border:1px solid var(--border);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  box-shadow:var(--shadow);
+}
+.quiz-meta{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:12px;font-size:.81rem;font-weight:600;color:var(--muted)}
+.progress{height:6px;border-radius:99px;background:var(--surface-2);overflow:hidden;margin-bottom:30px;border:1px solid var(--border)}
+.progress-bar{height:100%;width:0%;border-radius:99px;background:linear-gradient(90deg,var(--accent),var(--accent-2));transition:width .55s var(--ease)}
+.q-text{font-family:var(--font-display);font-size:clamp(1.12rem,2.4vw,1.42rem);font-weight:600;line-height:1.35;margin-bottom:26px}
+.options{display:grid;gap:11px}
+.option{
+  display:flex;align-items:center;gap:14px;text-align:left;
+  padding:16px 18px;border-radius:14px;font-size:.93rem;font-weight:500;
+  background:var(--surface-2);border:1px solid var(--border);color:var(--text);
+  transition:transform .25s var(--ease),border-color .25s,background .25s,box-shadow .25s;
+}
+.option:hover:not(:disabled){transform:translateX(4px);border-color:var(--accent);background:color-mix(in srgb,var(--accent) 8%,transparent)}
+.option:disabled{cursor:default}
+.option .letter{
+  width:28px;height:28px;border-radius:9px;flex:none;display:grid;place-items:center;
+  font-size:.77rem;font-weight:700;font-family:var(--font-display);
+  background:var(--surface-solid);border:1px solid var(--border);color:var(--muted);
+  transition:all .25s var(--ease);
+}
+.option.correct{background:color-mix(in srgb,var(--good) 15%,transparent);border-color:var(--good)}
+.option.correct .letter{background:var(--good);color:#fff;border-color:var(--good)}
+.option.wrong{background:color-mix(in srgb,var(--bad) 13%,transparent);border-color:var(--bad)}
+.option.wrong .letter{background:var(--bad);color:#fff;border-color:var(--bad)}
+.feedback{
+  margin-top:22px;padding:16px 18px;border-radius:14px;font-size:.88rem;line-height:1.6;
+  border:1px solid var(--border);background:var(--surface-2);
+  animation:termIn .4s var(--ease) both;
+}
+.feedback strong{color:var(--text)}
+.quiz-actions{display:flex;justify-content:flex-end;margin-top:24px}
+.result{text-align:center;padding:20px 6px}
+.result .score{
+  font-family:var(--font-display);font-size:clamp(3rem,9vw,4.6rem);font-weight:700;letter-spacing:-.05em;
+  background:linear-gradient(120deg,var(--accent),var(--accent-2) 50%,var(--accent-3));
+  -webkit-background-clip:text;background-clip:text;color:transparent;line-height:1;margin-bottom:10px;
+}
+.result h3{font-size:1.28rem;margin-bottom:10px}
+.result p{color:var(--muted);margin-bottom:26px}
+
+/* ============ NOTA ============ */
+.note{
+  margin-top:24px;padding:16px 20px;border-radius:14px;font-size:.85rem;color:var(--muted);
+  border:1px solid var(--border);background:var(--surface-2);border-left:3px solid var(--accent);
+}
+.note strong{color:var(--text)}
+
+/* ============ REVEAL ============ */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s var(--ease),transform .7s var(--ease);transition-delay:var(--d,0ms)}
+.reveal.in{opacity:1;transform:none}
+
+/* ============ FOOTER ============ */
+.site-footer{border-top:1px solid var(--border);padding:34px 22px;text-align:center;font-size:.85rem;color:var(--muted)}
+.site-footer strong{color:var(--text);font-weight:600}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width:860px){
+  .header-inner{padding:12px 16px;gap:14px;flex-wrap:wrap}
+  .nav{order:3;width:100%;margin-left:0;padding-bottom:2px}
+  .theme-toggle{margin-left:auto}
+  main{padding:0 16px 70px}
+  .hero{padding:46px 0 32px}
+  .toolbar{top:auto;position:static;background:none;padding:0 0 20px}
+  .quiz-card{padding:24px 20px}
+  .stats{grid-template-columns:repeat(2,1fr);gap:11px}
+  .stat{padding:17px 15px}
+  .stat .num{font-size:1.5rem}
+  .layer-body p{padding-left:20px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<div class="orbs" aria-hidden="true">
+  <div class="orb o1"></div>
+  <div class="orb o2"></div>
+  <div class="orb o3"></div>
+</div>
+<div class="grain" aria-hidden="true"></div>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="#inicio" data-route="inicio">
+      <span class="brand-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M2 17h20"/><path d="M5 17a3 3 0 0 1 3-3h8a3 3 0 0 1 3 3"/><circle cx="12" cy="6" r="2.4"/>
+        </svg>
+      </span>
+      <span>Atmósfera y Cielo</span>
+    </a>
+
+    <nav class="nav" aria-label="Navegación principal">
+      <button class="nav-link active" data-route="inicio">Inicio</button>
+      <button class="nav-link" data-route="atmosfera">Atmósfera</button>
+      <button class="nav-link" data-route="espacio">Espacio</button>
+      <button class="nav-link" data-route="aviacion">Aviación</button>
+      <button class="nav-link" data-route="meteo">Meteorología</button>
+      <button class="nav-link" data-route="clima">Clima</button>
+      <button class="nav-link" data-route="glosario">Glosario</button>
+      <button class="nav-link" data-route="quiz">Quiz</button>
+    </nav>
+
+    <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema">
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round">
+        <circle cx="12" cy="12" r="4"/>
+        <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>
+      </svg>
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<main>
+
+  <!-- ================= INICIO ================= -->
+  <section class="view active" data-view="inicio">
+    <div class="hero">
+      <span class="pill"><span class="dot"></span>Del suelo al espacio, explicado claro</span>
+      <h1 class="hero-title">Todo lo que ocurre <span class="grad">sobre tu cabeza</span></h1>
+      <p class="lead">
+        Por qué el cielo es azul, dónde termina la atmósfera y empieza el espacio, cómo se sostiene
+        un avión, por qué llueve y qué diferencia hay entre tiempo y clima. Sin tecnicismos innecesarios.
+      </p>
+      <div class="hero-actions">
+        <button class="btn btn-primary" data-route="atmosfera">
+          Empezar por la atmósfera
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+        <button class="btn btn-ghost" data-route="quiz">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9 9a3 3 0 1 1 4.5 2.6c-.9.6-1.5 1.4-1.5 2.4"/><circle cx="12" cy="17.5" r="1" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="9"/></svg>
+          Probar el quiz
+        </button>
+      </div>
+    </div>
+
+    <div class="stats reveal">
+      <div class="stat"><div class="num" data-count="100" data-suffix=" km">0</div><div class="lbl">Altura de la línea de Kármán</div></div>
+      <div class="stat"><div class="num" data-count="78" data-suffix=" %">0</div><div class="lbl">Nitrógeno en el aire</div></div>
+      <div class="stat"><div class="num" data-count="12" data-suffix=" km">0</div><div class="lbl">Altura media de la troposfera</div></div>
+      <div class="stat"><div class="num" data-count="400" data-suffix=" km">0</div><div class="lbl">Órbita de la Estación Espacial</div></div>
+    </div>
+
+    <div class="sec-head reveal">
+      <h2>Módulos de aprendizaje</h2>
+      <p>Seis recorridos independientes. Puedes hacerlos en orden o entrar directamente al que te interese.</p>
+    </div>
+
+    <div class="module-grid">
+      <button class="module reveal" data-route="atmosfera" style="--d:0ms">
+        <span class="module-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h13a3 3 0 1 0-3-3"/><path d="M3 13h17a3 3 0 1 1-3 3"/><path d="M3 18h9"/></svg>
+        </span>
+        <h3>La atmósfera</h3>
+        <p>De qué está hecha el aire, cómo se divide en capas y por qué cada una se comporta de forma distinta.</p>
+        <span class="arrow">Explorar capas
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </button>
+
+      <button class="module reveal" data-route="espacio" style="--d:60ms">
+        <span class="module-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><ellipse cx="12" cy="12" rx="10" ry="4.2" transform="rotate(-28 12 12)"/><circle cx="19" cy="6" r="1.3" fill="currentColor" stroke="none"/></svg>
+        </span>
+        <h3>El espacio y los satélites</h3>
+        <p>Dónde empieza el espacio, por qué un satélite no se cae y qué tipos de órbita existen.</p>
+        <span class="arrow">Salir a la órbita
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </button>
+
+      <button class="module reveal" data-route="aviacion" style="--d:120ms">
+        <span class="module-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M2 16l20-6-4 5-6 1-3 4-1-3z"/></svg>
+        </span>
+        <h3>Cómo vuela un avión</h3>
+        <p>Las cuatro fuerzas del vuelo, por qué se vuela tan alto y qué son esas estelas blancas.</p>
+        <span class="arrow">Despegar
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </button>
+
+      <button class="module reveal" data-route="meteo" style="--d:180ms">
+        <span class="module-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M6 15a3.5 3.5 0 0 1 .5-7 5 5 0 0 1 9.4 1.2A3 3 0 0 1 17 15z"/><path d="M8 18l-1 2M12 18l-1 2M16 18l-1 2"/></svg>
+        </span>
+        <h3>Nubes, lluvia y tormentas</h3>
+        <p>Cómo se forma una nube, los tipos principales y qué ocurre dentro de una tormenta eléctrica.</p>
+        <span class="arrow">Mirar al cielo
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </button>
+
+      <button class="module reveal" data-route="clima" style="--d:240ms">
+        <span class="module-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.5 4 5.7 4 9s-1.4 6.5-4 9c-2.6-2.5-4-5.7-4-9s1.4-6.5 4-9z"/></svg>
+        </span>
+        <h3>El clima terrestre</h3>
+        <p>Qué diferencia el tiempo del clima, qué factores lo moldean y qué son las zonas climáticas.</p>
+        <span class="arrow">Entender el clima
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </button>
+
+      <button class="module reveal" data-route="glosario" style="--d:300ms">
+        <span class="module-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21.5z"/><path d="M4 5.5v16"/></svg>
+        </span>
+        <h3>Glosario completo</h3>
+        <p>Todos los términos de la aplicación reunidos, con buscador y filtro por tema.</p>
+        <span class="arrow">Abrir glosario
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </button>
+    </div>
+  </section>
+
+  <!-- ================= ATMÓSFERA ================= -->
+  <section class="view" data-view="atmosfera">
+    <div class="sec-head section">
+      <h2>La atmósfera terrestre</h2>
+      <p>Es la capa de gases que envuelve el planeta. Nos protege de la radiación, regula la temperatura y hace posible la vida. Tiene unos 10.000 kilómetros de espesor, pero casi todo el aire se concentra en los primeros doce.</p>
+    </div>
+
+    <div class="grid-2 reveal" style="margin-bottom:18px">
+      <div class="card">
+        <span class="kicker">Composición</span>
+        <h3>De qué está hecho el aire</h3>
+        <p>El aire es una mezcla de gases. No es oxígeno puro: el oxígeno es solo una quinta parte.</p>
+        <div class="comp-bar">
+          <span style="width:78%;background:linear-gradient(90deg,#4f8cff,#6366f1)"></span>
+          <span style="width:21%;background:linear-gradient(90deg,#22d3ee,#14b8a6)"></span>
+          <span style="width:1%;background:linear-gradient(90deg,#a78bfa,#f472b6)"></span>
+        </div>
+        <div class="comp-legend">
+          <span><i style="background:#4f8cff"></i>Nitrógeno <b>78 %</b></span>
+          <span><i style="background:#22d3ee"></i>Oxígeno <b>21 %</b></span>
+          <span><i style="background:#a78bfa"></i>Otros <b>1 %</b></span>
+        </div>
+        <p style="margin-top:16px;font-size:.85rem">Ese 1 % restante incluye argón, dióxido de carbono, vapor de agua y trazas de otros gases. Es una proporción diminuta, pero el dióxido de carbono y el vapor de agua son decisivos para el clima.</p>
+      </div>
+
+      <div class="card">
+        <span class="kicker">Presión</span>
+        <h3>El aire pesa</h3>
+        <p>Aunque no lo notemos, el aire tiene masa. La columna de aire que hay sobre tu cabeza pesa lo mismo que una columna de mercurio de 76 centímetros: eso es una atmósfera de presión.</p>
+        <p style="margin-top:12px">Cuanto más alto subes, menos aire queda por encima y menor es la presión. A 5.500 metros de altitud la presión ya es la mitad que al nivel del mar. Por eso los aviones presurizan la cabina y los alpinistas necesitan oxígeno suplementario.</p>
+      </div>
+    </div>
+
+    <div class="sec-head reveal" style="margin-top:36px">
+      <h2 style="font-size:1.35rem">Las cinco capas</h2>
+      <p>Pulsa sobre cada capa para ver qué ocurre dentro de ella.</p>
+    </div>
+
+    <div class="atm-visual reveal">
+      <div class="atm-sky">
+        <div class="atm-stars" id="atmStars"></div>
+        <div class="atm-earth"></div>
+        <div class="atm-label">Espacio exterior</div>
+      </div>
+      <div class="layer-list" id="layerList"></div>
+    </div>
+
+    <div class="note reveal">
+      <strong>Un detalle importante:</strong> la temperatura no baja de forma constante al subir. En la troposfera baja, en la estratósfera sube (por el ozono),
+      en la mesósfera vuelve a bajar y en la termósfera se dispara. Por eso se dice que la atmósfera está «a capas».
+    </div>
+  </section>
+
+  <!-- ================= ESPACIO ================= -->
+  <section class="view" data-view="espacio">
+    <div class="sec-head section">
+      <h2>El espacio y los satélites</h2>
+      <p>La frontera entre el cielo y el espacio no es una línea física, sino una convención. Por encima de ella ya no hay aire suficiente para sostener un avión, y un objeto en movimiento puede mantenerse en órbita.</p>
+    </div>
+
+    <div class="grid-2 reveal" style="margin-bottom:22px">
+      <div class="card">
+        <span class="kicker">La frontera</span>
+        <h3>La línea de Kármán</h3>
+        <p>Se acepta internacionalmente que el espacio empieza a 100 kilómetros de altura. A esa altitud el aire es tan tenue que un avión necesitaría volar más rápido que la velocidad orbital para generar sustentación.</p>
+        <p style="margin-top:12px">Aun así, la atmósfera no termina ahí: quedan restos de gases hasta varios miles de kilómetros, pero son tan dispersos que se comportan casi como vacío.</p>
+      </div>
+
+      <div class="card">
+        <span class="kicker">Gravedad y órbita</span>
+        <h3>Por qué un satélite no se cae</h3>
+        <p>En realidad sí está cayendo constantemente hacia la Tierra. Lo que ocurre es que se mueve de lado tan rápido que la curvatura del planeta se aleja bajo él a la misma velocidad a la que cae.</p>
+        <p style="margin-top:12px">Es la misma idea que lanzar una piedra muy fuerte: cuanto más rápido la lanzas, más lejos llega antes de tocar el suelo. A unos 28.000 km/h, la piedra nunca llega.</p>
+      </div>
+    </div>
+
+    <div class="sec-head reveal" style="margin-top:36px">
+      <h2 style="font-size:1.35rem">Tipos de órbita</h2>
+      <p>La altura determina para qué sirve un satélite. No es lo mismo uno de comunicaciones que uno de observación.</p>
+    </div>
+
+    <div class="orbit-list reveal" id="orbitList"></div>
+
+    <div class="grid-3 reveal" style="margin-top:22px">
+      <div class="card">
+        <span class="kicker">Velocidad</span>
+        <h3>Una vuelta cada 90 minutos</h3>
+        <p>La Estación Espacial Internacional orbita a unos 400 km y da una vuelta al planeta cada hora y media. Sus tripulantes ven 16 amaneceres al día.</p>
+      </div>
+      <div class="card">
+        <span class="kicker">Basura espacial</span>
+        <h3>Chatarra en órbita</h3>
+        <p>Restos de cohetes, satélites fuera de servicio y fragmentos de colisiones giran alrededor de la Tierra. A gran velocidad, un trozo de pocos centímetros puede dañar seriamente un satélite activo.</p>
+      </div>
+      <div class="card">
+        <span class="kicker">Silencio</span>
+        <h3>El espacio no suena</h3>
+        <p>El sonido necesita un medio material para propagarse. En el vacío no hay moléculas que transmitan la vibración, así que una explosión sería completamente silenciosa.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= AVIACIÓN ================= -->
+  <section class="view" data-view="aviacion">
+    <div class="sec-head section">
+      <h2>Cómo vuela un avión</h2>
+      <p>Un avión comercial pesa cientos de toneladas y aun así se sostiene en el aire. No hay magia: hay cuatro fuerzas que deben compensarse entre sí.</p>
+    </div>
+
+    <div class="forces reveal">
+      <svg viewBox="0 0 460 300" role="img" aria-label="Diagrama de las cuatro fuerzas del vuelo">
+        <defs>
+          <linearGradient id="planeGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#4f8cff"/>
+            <stop offset="100%" stop-color="#a78bfa"/>
+          </linearGradient>
+          <marker id="arrowUp" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+            <path d="M0,0 L8,4 L0,8 Z" fill="#34d399"/>
+          </marker>
+          <marker id="arrowDown" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+            <path d="M0,0 L8,4 L0,8 Z" fill="#fb7185"/>
+          </marker>
+          <marker id="arrowRight" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+            <path d="M0,0 L8,4 L0,8 Z" fill="#22d3ee"/>
+          </marker>
+          <marker id="arrowLeft" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+            <path d="M0,0 L8,4 L0,8 Z" fill="#f59e0b"/>
+          </marker>
+        </defs>
+
+        <!-- avión simplificado -->
+        <g transform="translate(230,150)">
+          <path d="M-70,0 L-10,-9 L40,-9 L70,0 L40,9 L-10,9 Z" fill="url(#planeGrad)" opacity=".95"/>
+          <path d="M-10,-9 L10,-46 L24,-46 L14,-9 Z" fill="url(#planeGrad)" opacity=".75"/>
+          <path d="M-10,9 L10,46 L24,46 L14,9 Z" fill="url(#planeGrad)" opacity=".75"/>
+          <circle cx="52" cy="0" r="4" fill="#fff" opacity=".9"/>
+        </g>
+
+        <!-- sustentación -->
+        <line x1="230" y1="150" x2="230" y2="48" stroke="#34d399" stroke-width="2.6" stroke-linecap="round" marker-end="url(#arrowUp)" stroke-dasharray="6 5">
+          <animate attributeName="stroke-dashoffset" from="22" to="0" dur="1.6s" repeatCount="indefinite"/>
+        </line>
+        <text x="230" y="34" text-anchor="middle" fill="#34d399" font-family="Space Grotesk,sans-serif" font-size="12" font-weight="700">SUSTENTACIÓN</text>
+
+        <!-- peso -->
+        <line x1="230" y1="150" x2="230" y2="252" stroke="#fb7185" stroke-width="2.6" stroke-linecap="round" marker-end="url(#arrowDown)" stroke-dasharray="6 5">
+          <animate attributeName="stroke-dashoffset" from="22" to="0" dur="1.6s" repeatCount="indefinite"/>
+        </line>
+        <text x="230" y="274" text-anchor="middle" fill="#fb7185" font-family="Space Grotesk,sans-serif" font-size="12" font-weight="700">PESO</text>
+
+        <!-- empuje -->
+        <line x1="230" y1="150" x2="392" y2="150" stroke="#22d3ee" stroke-width="2.6" stroke-linecap="round" marker-end="url(#arrowRight)" stroke-dasharray="6 5">
+          <animate attributeName="stroke-dashoffset" from="22" to="0" dur="1.6s" repeatCount="indefinite"/>
+        </line>
+        <text x="404" y="154" text-anchor="middle" fill="#22d3ee" font-family="Space Grotesk,sans-serif" font-size="11" font-weight="700" transform="rotate(90 404 154)">EMPUJE</text>
+
+        <!-- resistencia -->
+        <line x1="230" y1="150" x2="68" y2="150" stroke="#f59e0b" stroke-width="2.6" stroke-linecap="round" marker-end="url(#arrowLeft)" stroke-dasharray="6 5">
+          <animate attributeName="stroke-dashoffset" from="22" to="0" dur="1.6s" repeatCount="indefinite"/>
+        </line>
+        <text x="56" y="154" text-anchor="middle" fill="#f59e0b" font-family="Space Grotesk,sans-serif" font-size="11" font-weight="700" transform="rotate(-90 56 154)">RESISTENCIA</text>
+      </svg>
+
+      <div class="forces-legend">
+        <div class="force-item"><i style="background:#34d399"></i><span><b>Sustentación</b>Empuja el avión hacia arriba. La genera el ala al desviar el aire hacia abajo.</span></div>
+        <div class="force-item"><i style="background:#fb7185"></i><span><b>Peso</b>Tira hacia abajo. Es la gravedad actuando sobre toda la masa del avión.</span></div>
+        <div class="force-item"><i style="background:#22d3ee"></i><span><b>Empuje</b>Empuja hacia delante. Lo producen los motores al expulsar aire o gases acelerados.</span></div>
+        <div class="force-item"><i style="background:#f59e0b"></i><span><b>Resistencia</b>Frena el avance. Es la fricción del aire contra toda la superficie del aparato.</span></div>
+      </div>
+    </div>
+
+    <div class="grid-2 reveal" style="margin-top:22px">
+      <div class="card">
+        <span class="kicker">El ala</span>
+        <h3>Por qué el ala tiene esa forma</h3>
+        <p>El ala está curvada por arriba y más plana por abajo. Al pasar el aire, este recorre un camino distinto por cada lado y sale desviado hacia abajo. Por reacción, el ala recibe una fuerza hacia arriba.</p>
+        <p style="margin-top:12px">Cuanto mayor es el ángulo del ala respecto al aire (hasta cierto punto), mayor es la sustentación. Si se pasa de ese ángulo, el flujo se despega y el avión entra en pérdida.</p>
+      </div>
+
+      <div class="card">
+        <span class="kicker">Altitud de crucero</span>
+        <h3>Por qué se vuela a 10 o 12 kilómetros</h3>
+        <p>A gran altura el aire es menos denso, así que el avión encuentra menos resistencia y gasta menos combustible para mantener la misma velocidad. Además, allí arriba hay menos turbulencia y el tráfico aéreo es más ordenado.</p>
+        <p style="margin-top:12px">El límite lo pone el motor: si el aire es demasiado tenue, no hay suficiente oxígeno para la combustión. Por eso los aviones comerciales se mueven en la parte alta de la troposfera y la baja estratósfera.</p>
+      </div>
+    </div>
+
+    <div class="grid-3 reveal" style="margin-top:18px">
+      <div class="card">
+        <span class="kicker">Estelas</span>
+        <h3>Las rayas blancas del cielo</h3>
+        <p>Son estelas de condensación: los gases calientes del motor se mezclan con aire muy frío y el vapor se condensa en pequeñas gotas o cristales de hielo. Si el aire es seco, desaparecen rápido; si es húmedo, se quedan y se ensanchan.</p>
+      </div>
+      <div class="card">
+        <span class="kicker">Cabina</span>
+        <h3>Por qué se presuriza</h3>
+        <p>A 11.000 metros la presión exterior es demasiado baja para respirar con normalidad. La cabina se mantiene a una presión equivalente a unos 2.000 metros de altitud, cómoda y segura para los pasajeros.</p>
+      </div>
+      <div class="card">
+        <span class="kicker">Corrientes</span>
+        <h3>La corriente en chorro</h3>
+        <p>Son bandas de viento muy fuerte que circulan a gran altura. Los pilotos las aprovechan: volar a favor acorta el viaje y ahorra combustible, y en contra lo alarga notablemente.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= METEOROLOGÍA ================= -->
+  <section class="view" data-view="meteo">
+    <div class="sec-head section">
+      <h2>Nubes, lluvia y tormentas</h2>
+      <p>Casi todo el tiempo meteorológico ocurre en la troposfera, la capa más baja y también la más húmeda. Es allí donde el agua cambia de estado una y otra vez.</p>
+    </div>
+
+    <div class="card reveal" style="margin-bottom:22px">
+      <span class="kicker">El ciclo básico</span>
+      <h3>Cómo nace una nube</h3>
+      <p>El Sol calienta el suelo, el agua se evapora y asciende en forma de vapor invisible. Al subir, la presión baja y el aire se enfría. Cuando alcanza cierta temperatura, el vapor se condensa sobre diminutas partículas de polvo, sal o polen llamadas núcleos de condensación, y forma gotitas microscópicas. Miles de millones de esas gotitas juntas son lo que vemos como una nube.</p>
+    </div>
+
+    <div class="sec-head reveal" style="margin-top:36px">
+      <h2 style="font-size:1.35rem">Tipos de nubes</h2>
+      <p>Los nombres se construyen combinando raíces: cirro (hielo, alto), cúmulo (montón), estrato (capa) y nimbo (lluvia).</p>
+    </div>
+
+    <div class="cloud-grid" id="cloudGrid"></div>
+
+    <div class="sec-head reveal" style="margin-top:40px">
+      <h2 style="font-size:1.35rem">Cómo cae el agua</h2>
+      <p>Dentro de una nube las gotitas chocan entre sí y crecen. Cuando pesan demasiado para sostenerse, caen.</p>
+    </div>
+
+    <div class="grid-3 reveal">
+      <div class="card">
+        <span class="kicker">Llovizna</span>
+        <h3>Gotas menores de medio milímetro</h3>
+        <p>Caen de nubes estratos y apenas mojan. Son tan pequeñas que la resistencia del aire casi las frena: parecen flotar más que caer.</p>
+      </div>
+      <div class="card">
+        <span class="kicker">Lluvia</span>
+        <h3>Gotas de hasta cinco milímetros</h3>
+        <p>Cuanto más grandes, más rápido caen. Por encima de cierto tamaño las gotas se deforman y se rompen por la presión del aire.</p>
+      </div>
+      <div class="card">
+        <span class="kicker">Nieve</span>
+        <h3>Cristales en lugar de gotas</h3>
+        <p>Si la nube está por debajo de cero grados, el vapor se convierte directamente en hielo. Cada cristal crece con una forma hexagonal distinta.</p>
+      </div>
+      <div class="card">
+        <span class="kicker">Granizo</span>
+        <h3>Bolas de hielo</h3>
+        <p>Se forma en cumulonimbos con fuertes corrientes ascendentes que empujan las gotas heladas hacia arriba una y otra vez, añadiendo capas de hielo hasta que pesan demasiado.</p>
+      </div>
+      <div class="card">
+        <span class="kicker">Aguanieve</span>
+        <h3>Un poco de cada cosa</h3>
+        <p>Ocurre cuando el copo de nieve atraviesa una capa de aire más cálida antes de llegar al suelo y se funde solo en parte.</p>
+      </div>
+      <div class="card">
+        <span class="kicker">Rocío</span>
+        <h3>Lluvia que no cae del cielo</h3>
+        <p>El vapor del aire se condensa directamente sobre superficies frías, como la hierba al amanecer, sin haber formado una nube.</p>
+      </div>
+    </div>
+
+    <div class="sec-head reveal" style="margin-top:40px">
+      <h2 style="font-size:1.35rem">Dentro de una tormenta</h2>
+      <p>Una tormenta eléctrica es una fábrica de energía: en pocos minutos libera más que una pequeña central.</p>
+    </div>
+
+    <div class="grid-2 reveal">
+      <div class="card">
+        <span class="kicker">Formación</span>
+        <h3>El cumulonimbo</h3>
+        <p>Es la nube de tormenta. Puede crecer hasta los 15 kilómetros de altura y atravesar la troposfera entera. Dentro conviven corrientes ascendentes muy fuertes y descendentes, cristales de hielo y agua subenfriada.</p>
+      </div>
+      <div class="card">
+        <span class="kicker">Electricidad</span>
+        <h3>Rayo y trueno</h3>
+        <p>Los choques entre partículas de hielo separan cargas eléctricas: las negativas abajo y las positivas arriba. Cuando la diferencia es enorme, se produce una descarga que busca el camino de menor resistencia hacia el suelo. El aire se calienta al instante y se expande con violencia: ese estruendo es el trueno.</p>
+      </div>
+      <div class="card">
+        <span class="kicker">Velocidad</span>
+        <h3>Luz antes que sonido</h3>
+        <p>La luz viaja a unos 300.000 km/s y el sonido a unos 343 m/s. Por eso primero vemos el relámpago y después oímos el trueno. Cada tres segundos de diferencia equivalen aproximadamente a un kilómetro de distancia.</p>
+      </div>
+      <div class="card">
+        <span class="kicker">Grandes sistemas</span>
+        <h3>Ciclones y tornados</h3>
+        <p>Un ciclón tropical es una tormenta gigante que gira alrededor de un centro de baja presión y se alimenta de agua cálida del mar. Un tornado es mucho más pequeño, pero concentra vientos extremos en un embudo que baja de la nube.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CLIMA ================= -->
+  <section class="view" data-view="clima">
+    <div class="sec-head section">
+      <h2>El clima terrestre</h2>
+      <p>El clima no es el tiempo de hoy. Es el patrón que se repite durante décadas en un lugar. Dos ciudades pueden tener el mismo tiempo un martes y climas completamente distintos.</p>
+    </div>
+
+    <div class="grid-2 reveal" style="margin-bottom:22px">
+      <div class="card">
+        <span class="kicker">Tiempo</span>
+        <h3>Lo que ves por la ventana</h3>
+        <p>El tiempo atmosférico es el estado de la atmósfera en un momento concreto y en un lugar concreto. Cambia en horas: hoy llueve, mañana hace sol. La meteorología lo estudia y lo predice a corto plazo.</p>
+      </div>
+      <div class="card">
+        <span class="kicker">Clima</span>
+        <h3>Lo que se repite durante décadas</h3>
+        <p>El clima es el conjunto de condiciones habituales de un lugar a lo largo de al menos treinta años. Responde a preguntas como «¿cómo son los veranos aquí?». La climatología lo estudia.</p>
+      </div>
+    </div>
+
+    <div class="sec-head reveal" style="margin-top:36px">
+      <h2 style="font-size:1.35rem">Factores que moldean el clima</h2>
+      <p>Cinco elementos explican la mayor parte de la diversidad climática del planeta.</p>
+    </div>
+
+    <div class="grid-3 reveal">
+      <div class="card">
+        <span class="kicker">01</span>
+        <h3>La latitud</h3>
+        <p>Es la distancia al ecuador. Cuanto más cerca del ecuador, más directamente llega la radiación solar y más calor hace. Es el factor más importante.</p>
+      </div>
+      <div class="card">
+        <span class="kicker">02</span>
+        <h3>La altitud</h3>
+        <p>Por cada 100 metros que subes, la temperatura baja aproximadamente medio grado. Por eso hay nieve en montañas situadas en zonas cálidas.</p>
+      </div>
+      <div class="card">
+        <span class="kicker">03</span>
+        <h3>La cercanía al mar</h3>
+        <p>El agua se calienta y se enfría mucho más despacio que la tierra. Las costas tienen inviernos suaves y veranos frescos; el interior continental, extremos.</p>
+      </div>
+      <div class="card">
+        <span class="kicker">04</span>
+        <h3>Las corrientes oceánicas</h3>
+        <p>Transportan calor de un lugar a otro. Una corriente cálida puede hacer que una costa fría tenga inviernos mucho más suaves de lo esperado.</p>
+      </div>
+      <div class="card">
+        <span class="kicker">05</span>
+        <h3>El relieve</h3>
+        <p>Las montañas frenan las masas de aire y obligan al aire húmedo a subir y soltar lluvia. Por eso un lado de la montaña puede ser verde y el otro, desértico.</p>
+      </div>
+      <div class="card">
+        <span class="kicker">Extra</span>
+        <h3>El viento</h3>
+        <p>Distribuye humedad y temperatura. Los vientos alisios, los monzones y las corrientes en chorro determinan qué zonas reciben lluvia y cuáles quedan secas.</p>
+      </div>
+    </div>
+
+    <div class="sec-head reveal" style="margin-top:40px">
+      <h2 style="font-size:1.35rem">Zonas climáticas</h2>
+      <p>Como consecuencia de todo lo anterior, el planeta se organiza en grandes franjas climáticas.</p>
+    </div>
+
+    <div class="zone-list reveal" id="zoneList"></div>
+
+    <div class="grid-2 reveal" style="margin-top:22px">
+      <div class="card">
+        <span class="kicker">Equilibrio</span>
+        <h3>El efecto invernadero</h3>
+        <p>No es algo negativo en sí mismo. Sin él, la temperatura media del planeta sería de unos -18 °C en lugar de los 15 °C actuales. Ciertos gases de la atmósfera retienen parte del calor que la Tierra emite hacia el espacio y lo devuelven a la superficie.</p>
+      </div>
+      <div class="card">
+        <span class="kicker">Cambio</span>
+        <h3>Qué está cambiando</h3>
+        <p>La actividad humana ha aumentado la concentración de gases de efecto invernadero, sobre todo dióxido de carbono. El resultado es un aumento de la temperatura media global que altera precipitaciones, glaciares y niveles del mar.</p>
+      </div>
+    </div>
+
+    <div class="note reveal">
+      <strong>Para recordar:</strong> el tiempo se mide en horas y días; el clima, en décadas. Una ola de frío puntual no contradice el calentamiento global,
+      del mismo modo que un día caluroso de mayo no demuestra por sí solo un cambio de clima.
+    </div>
+  </section>
+
+  <!-- ================= GLOSARIO ================= -->
+  <section class="view" data-view="glosario">
+    <div class="sec-head section">
+      <h2>Glosario completo</h2>
+      <p>Todos los conceptos de la aplicación en un solo lugar. Busca por nombre o por palabra dentro de la definición.</p>
+    </div>
+
+    <div class="toolbar">
+      <div class="search-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+        <input id="searchInput" type="search" placeholder="Buscar un término o una palabra de la definición..." autocomplete="off" aria-label="Buscar término">
+      </div>
+      <div class="chips" id="chips"></div>
+    </div>
+
+    <div class="term-grid" id="glosarioList"></div>
+  </section>
+
+  <!-- ================= QUIZ ================= -->
+  <section class="view" data-view="quiz">
+    <div class="sec-head section">
+      <h2>Quiz del cielo</h2>
+      <p>Diez preguntas seleccionadas al azar entre todos los temas. Cada respuesta viene con su explicación.</p>
+    </div>
+    <div class="quiz-shell">
+      <div class="quiz-card" id="quizCard"></div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <p><strong>Atmósfera y Cielo</strong> — Material educativo abierto sobre la atmósfera, el espacio y el clima.</p>
+</footer>
+
+<script>
+/* ============================================================
+   UTILIDADES
+   ============================================================ */
+const $  = (sel, root = document) => root.querySelector(sel);
+const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+
+/* ============================================================
+   DATOS: CAPAS DE LA ATMÓSFERA
+   ============================================================ */
+const CAPAS = [
+  {
+    n:'Exósfera', alt:'600 km en adelante', color:'#a78bfa',
+    d:'Es la capa más externa y se confunde poco a poco con el espacio. Las partículas de gas están tan separadas que prácticamente no chocan entre sí. Aquí orbitan muchos satélites y la atmósfera ya no ofrece protección alguna frente a la radiación.'
+  },
+  {
+    n:'Termósfera', alt:'85 – 600 km', color:'#818cf8',
+    d:'A pesar de su nombre, aquí el aire es tan tenue que no sentirías calor: la temperatura se mide por la energía de las pocas partículas que hay, y pueden alcanzar más de 1.000 °C. En esta capa se producen las auroras boreales y orbita la Estación Espacial Internacional, a unos 400 km.'
+  },
+  {
+    n:'Mesósfera', alt:'50 – 85 km', color:'#60a5fa',
+    d:'Es la capa más fría de la atmósfera: en su parte alta se alcanzan unos -90 °C. Aquí se desintegran la mayoría de los meteoritos, que se convierten en estrellas fugaces al chocar con las moléculas de aire a gran velocidad.'
+  },
+  {
+    n:'Estratósfera', alt:'12 – 50 km', color:'#38bdf8',
+    d:'Contiene la capa de ozono, que absorbe la mayor parte de la radiación ultravioleta del Sol. Por eso la temperatura sube a medida que se asciende. Los aviones comerciales vuelan en su parte baja para evitar las turbulencias de la troposfera.'
+  },
+  {
+    n:'Troposfera', alt:'0 – 12 km', color:'#22d3ee',
+    d:'Es la capa donde vivimos y donde ocurre casi todo el tiempo meteorológico. Contiene cerca del 80 % del aire de toda la atmósfera y casi todo el vapor de agua. La temperatura desciende con la altura: unos 6,5 °C por kilómetro.'
+  }
+];
+
+/* ============================================================
+   DATOS: ÓRBITAS
+   ============================================================ */
+const ORBITAS = [
+  {
+    ini:'LEO', c1:'#22d3ee', c2:'#0ea5e9',
+    name:'Órbita baja terrestre', meta:'160 – 2.000 km · una vuelta cada 90 minutos',
+    d:'Es la órbita de la Estación Espacial Internacional, del telescopio Hubble y de muchos satélites de observación. Estar cerca permite ver el suelo con gran detalle, pero el satélite pasa rápido sobre cada punto y necesita constelaciones enteras para dar cobertura continua.'
+  },
+  {
+    ini:'MEO', c1:'#4f8cff', c2:'#6366f1',
+    name:'Órbita media', meta:'2.000 – 35.786 km · una vuelta cada 12 horas',
+    d:'Es la franja típica de los satélites de navegación como el GPS, Galileo o GLONASS. Ofrecen un buen equilibrio: cubren grandes zonas del planeta y necesitan menos aparatos que una constelación de órbita baja.'
+  },
+  {
+    ini:'GEO', c1:'#a78bfa', c2:'#c084fc',
+    name:'Órbita geoestacionaria', meta:'35.786 km · una vuelta cada 24 horas',
+    d:'A esa altura el satélite tarda exactamente lo mismo que la Tierra en girar, así que parece inmóvil en el cielo. Es la órbita de los grandes satélites de comunicación y de meteorología, que pueden vigilar siempre la misma región. La desventaja es la distancia: la señal tarda más en ir y volver.'
+  }
+];
+
+/* ============================================================
+   DATOS: NUBES
+   ============================================================ */
+const NUBES = [
+  {
+    n:'Cirros', where:'Muy alto · 8 – 12 km', c1:'#93c5fd', c2:'#c4b5fd',
+    ico:'<svg viewBox="0 0 64 52" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M8 34c10-10 20-6 28-14"/><path d="M14 42c11-9 21-6 30-13"/><path d="M22 24c8-7 16-5 24-11"/></svg>',
+    d:'Son nubes de hielo, finas y alargadas, con aspecto de pluma o pincelada. No producen lluvia y su presencia suele indicar que el tiempo se mantendrá estable, aunque a veces anuncian la llegada de un frente en las horas siguientes.'
+  },
+  {
+    n:'Cúmulos', where:'Bajos · 1 – 3 km', c1:'#22d3ee', c2:'#34d399',
+    ico:'<svg viewBox="0 0 64 52" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M16 40a10 10 0 0 1 1-20 14 14 0 0 1 26 3 9 9 0 0 1 5 17z"/></svg>',
+    d:'Son las nubes con forma de montón de algodón, de bordes bien definidos y base plana. Cuando son pequeñas y dispersas indican buen tiempo. Si empiezan a crecer en altura y a oscurecer, pueden convertirse en cumulonimbos.'
+  },
+  {
+    n:'Estratos', where:'Bajos · 0,5 – 2 km', c1:'#94a3b8', c2:'#64748b',
+    ico:'<svg viewBox="0 0 64 52" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 20h52"/><path d="M10 30h44"/><path d="M16 40h32"/></svg>',
+    d:'Son capas grises y continuas que cubren el cielo como una manta. Suelen producir un cielo gris uniforme y, en ocasiones, llovizna. No tienen forma definida porque se extienden horizontalmente en lugar de crecer en vertical.'
+  },
+  {
+    n:'Nimbos', where:'Bajos · hasta 2 km', c1:'#64748b', c2:'#475569',
+    ico:'<svg viewBox="0 0 64 52" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M16 32a9 9 0 0 1 1-18 13 13 0 0 1 24 3 8 8 0 0 1 4 15z"/><path d="M22 38l-2 7"/><path d="M32 38l-2 7"/><path d="M42 38l-2 7"/></svg>',
+    d:'Son nubes de lluvia por excelencia: gruesas, oscuras y de base difusa. Su nombre combina «estrato» y «nimbo», y efectivamente son capas bajas cargadas de agua que descargan de forma continua y prolongada.'
+  },
+  {
+    n:'Cumulonimbos', where:'Verticales · 2 – 15 km', c1:'#a855f7', c2:'#6366f1',
+    ico:'<svg viewBox="0 0 64 52" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 28a8 8 0 0 1 2-16 14 14 0 0 1 26-2 9 9 0 0 1 4 18z"/><path d="M26 34l-2 8"/><path d="M36 34l-2 8"/><path d="M20 30l-3 4"/><path d="M44 30l-3 4"/></svg>',
+    d:'Son las nubes de tormenta. Crecen como una torre y pueden atravesar toda la troposfera. En su interior conviven fuertes corrientes ascendentes y descendentes, cristales de hielo y agua subenfriada, y son capaces de generar rayos, granizo y lluvias torrenciales.'
+  },
+  {
+    n:'Nubes lenticulares', where:'Altas · sobre montañas', c1:'#f59e0b', c2:'#f97316',
+    ico:'<svg viewBox="0 0 64 52" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="32" cy="20" rx="18" ry="7"/><ellipse cx="32" cy="32" rx="22" ry="8"/><ellipse cx="32" cy="43" rx="15" ry="5"/></svg>',
+    d:'Tienen forma de lente o de platillo apilado y aparecen cuando el viento choca contra una montaña y el aire sube en ondas. Son muy vistosas y a veces se confunden con objetos voladores, pero su origen es puramente meteorológico.'
+  }
+];
+
+/* ============================================================
+   DATOS: ZONAS CLIMÁTICAS
+   ============================================================ */
+const ZONAS = [
+  {
+    c:'#22c55e', n:'Zona tropical', sub:'Entre los trópicos',
+    d:'Temperaturas altas todo el año, con muy poca variación estacional. Las lluvias pueden ser constantes (selva) o concentrarse en una estación húmeda (sabana).'
+  },
+  {
+    c:'#f59e0b', n:'Zona seca o árida', sub:'Alrededor de los 30° de latitud',
+    d:'Precipitaciones muy escasas y gran amplitud térmica entre el día y la noche. Los desiertos cálidos y las estepas son sus paisajes más característicos.'
+  },
+  {
+    c:'#4f8cff', n:'Zona templada', sub:'Entre los 30° y los 60° de latitud',
+    d:'Cuatro estaciones bien marcadas y precipitaciones moderadas. Es la franja más habitada del planeta y donde se concentran la mayoría de las grandes ciudades.'
+  },
+  {
+    c:'#a78bfa', n:'Zona polar', sub:'Por encima de los 60° de latitud',
+    d:'Frío extremo durante todo el año y precipitaciones muy escasas, casi siempre en forma de nieve. En invierno el Sol puede no salir durante semanas.'
+  },
+  {
+    c:'#94a3b8', n:'Zona de alta montaña', sub:'Cualquier latitud, en altitud',
+    d:'El clima depende sobre todo de la altura. Por cada 100 metros que se asciende la temperatura baja alrededor de medio grado, así que la vegetación cambia en franjas.'
+  }
+];
+
+/* ============================================================
+   DATOS: GLOSARIO
+   ============================================================ */
+const GLOSARIO = [
+  // ---- Atmósfera
+  { t:'Atmósfera', c:'Atmósfera', d:'Capa de gases que envuelve la Tierra y que hace posible la vida tal como la conocemos.' },
+  { t:'Troposfera', c:'Atmósfera', d:'La capa más baja de la atmósfera, donde vivimos y ocurre casi todo el tiempo meteorológico. Llega hasta unos 12 km.' },
+  { t:'Estratósfera', c:'Atmósfera', d:'Capa situada entre los 12 y los 50 km. Contiene la capa de ozono y en su parte baja vuelan los aviones comerciales.' },
+  { t:'Mesósfera', c:'Atmósfera', d:'Capa entre los 50 y los 85 km. Es la más fría de la atmósfera y donde se desintegran la mayoría de los meteoritos.' },
+  { t:'Termósfera', c:'Atmósfera', d:'Capa entre los 85 y los 600 km. Allí se producen las auroras y orbita la Estación Espacial Internacional.' },
+  { t:'Exósfera', c:'Atmósfera', d:'La capa más externa, a partir de los 600 km. Se confunde gradualmente con el espacio exterior.' },
+  { t:'Presión atmosférica', c:'Atmósfera', d:'Fuerza que ejerce el peso del aire sobre una superficie. Disminuye al aumentar la altitud.' },
+  { t:'Capa de ozono', c:'Atmósfera', d:'Franja de la estratósfera rica en ozono que absorbe la mayor parte de la radiación ultravioleta del Sol.' },
+  { t:'Vapor de agua', c:'Atmósfera', d:'Agua en estado gaseoso presente en el aire. Es invisible y su cantidad varía mucho de un lugar a otro.' },
+  { t:'Núcleo de condensación', c:'Atmósfera', d:'Partícula diminuta de polvo, sal o polen sobre la que el vapor de agua se condensa para formar gotitas.' },
+  { t:'Efecto invernadero', c:'Atmósfera', d:'Fenómeno natural por el que ciertos gases retienen parte del calor que la Tierra emite y lo devuelven a la superficie.' },
+
+  // ---- Espacio
+  { t:'Espacio exterior', c:'Espacio', d:'Región situada más allá de la atmósfera terrestre, donde prácticamente no hay materia.' },
+  { t:'Línea de Kármán', c:'Espacio', d:'Frontera convencional situada a 100 km de altura que marca el inicio del espacio exterior.' },
+  { t:'Órbita', c:'Espacio', d:'Trayectoria curva que sigue un objeto alrededor de un cuerpo celeste debido a la gravedad.' },
+  { t:'Satélite', c:'Espacio', d:'Objeto que gira alrededor de otro de mayor masa. Puede ser natural, como la Luna, o artificial, como los de comunicación.' },
+  { t:'Órbita baja (LEO)', c:'Espacio', d:'Órbita situada entre 160 y 2.000 km de altura. La usan la Estación Espacial y los satélites de observación.' },
+  { t:'Órbita media (MEO)', c:'Espacio', d:'Órbita entre 2.000 y 35.786 km. Es la franja típica de los satélites de navegación como el GPS.' },
+  { t:'Órbita geoestacionaria (GEO)', c:'Espacio', d:'Órbita a 35.786 km en la que el satélite tarda 24 horas en dar una vuelta y parece inmóvil en el cielo.' },
+  { t:'Velocidad orbital', c:'Espacio', d:'Velocidad mínima que necesita un objeto para mantenerse en órbita sin caer a la Tierra. En órbita baja ronda los 28.000 km/h.' },
+  { t:'Basura espacial', c:'Espacio', d:'Restos de satélites, cohetes y fragmentos que giran alrededor de la Tierra sin utilidad y suponen un riesgo.' },
+  { t:'Vacío', c:'Espacio', d:'Ausencia casi total de materia. En el vacío no se propaga el sonido porque no hay moléculas que lo transmitan.' },
+
+  // ---- Aviación
+  { t:'Sustentación', c:'Aviación', d:'Fuerza hacia arriba que genera el ala al desviar el aire hacia abajo. Es la que sostiene al avión.' },
+  { t:'Empuje', c:'Aviación', d:'Fuerza hacia delante producida por los motores al expulsar aire o gases acelerados.' },
+  { t:'Resistencia', c:'Aviación', d:'Fuerza que frena el avance del avión, causada por la fricción y la presión del aire.' },
+  { t:'Peso', c:'Aviación', d:'Fuerza hacia abajo que ejerce la gravedad sobre la masa total del avión.' },
+  { t:'Ángulo de ataque', c:'Aviación', d:'Ángulo que forma el ala respecto a la dirección del aire que la atraviesa. Determina cuánta sustentación se genera.' },
+  { t:'Pérdida (stall)', c:'Aviación', d:'Situación en la que el aire deja de fluir de forma ordenada sobre el ala y la sustentación cae bruscamente.' },
+  { t:'Altitud de crucero', c:'Aviación', d:'Altura a la que un avión comercial realiza la mayor parte del vuelo, normalmente entre 10 y 12 km.' },
+  { t:'Presurización', c:'Aviación', d:'Sistema que mantiene la cabina a una presión similar a la de unos 2.000 metros de altitud para que se pueda respirar con normalidad.' },
+  { t:'Estela de condensación', c:'Aviación', d:'Rastro blanco que dejan los motores de los aviones cuando el vapor se condensa al mezclarse con aire muy frío.' },
+  { t:'Corriente en chorro', c:'Aviación', d:'Banda de vientos muy fuertes a gran altura. Volar a favor ahorra combustible; en contra, lo encarece.' },
+  { t:'Turbulencia', c:'Aviación', d:'Movimiento irregular del aire que provoca sacudidas en el avión. No suele ser peligrosa, pero sí incómoda.' },
+
+  // ---- Meteorología
+  { t:'Nube', c:'Meteorología', d:'Conjunto visible de gotitas de agua o cristales de hielo suspendidos en la atmósfera.' },
+  { t:'Evaporación', c:'Meteorología', d:'Paso del agua líquida a vapor. Ocurre cuando el agua recibe calor suficiente.' },
+  { t:'Condensación', c:'Meteorología', d:'Paso del vapor de agua a estado líquido. Es el proceso que forma las nubes y el rocío.' },
+  { t:'Cirro', c:'Meteorología', d:'Nube alta, fina y alargada, formada por cristales de hielo. No produce precipitación.' },
+  { t:'Cúmulo', c:'Meteorología', d:'Nube con forma de montón de algodón, de bordes definidos. Pequeña indica buen tiempo.' },
+  { t:'Estrato', c:'Meteorología', d:'Nube baja en forma de capa gris continua que cubre el cielo de forma uniforme.' },
+  { t:'Nimbo', c:'Meteorología', d:'Prefijo o sufijo que indica que una nube produce precipitación, como en nimboestrato o cumulonimbo.' },
+  { t:'Cumulonimbo', c:'Meteorología', d:'Nube de gran desarrollo vertical que produce tormentas, rayos, granizo y lluvias intensas.' },
+  { t:'Lluvia', c:'Meteorología', d:'Precipitación de gotas de agua que caen desde una nube y llegan al suelo en estado líquido.' },
+  { t:'Llovizna', c:'Meteorología', d:'Precipitación de gotas muy pequeñas, de menos de medio milímetro, que caen de forma casi flotante.' },
+  { t:'Granizo', c:'Meteorología', d:'Precipitación de bolas de hielo que se forman en cumulonimbos con fuertes corrientes ascendentes.' },
+  { t:'Nieve', c:'Meteorología', d:'Precipitación de cristales de hielo que se agrupan en copos y caen sin fundirse.' },
+  { t:'Tormenta eléctrica', c:'Meteorología', d:'Fenómeno asociado a un cumulonimbo en el que se producen rayos, truenos y precipitaciones intensas.' },
+  { t:'Rayo', c:'Meteorología', d:'Descarga eléctrica que se produce cuando la diferencia de carga dentro de una nube o entre la nube y el suelo es muy grande.' },
+  { t:'Trueno', c:'Meteorología', d:'Sonido producido por la expansión violenta del aire que calienta un rayo a su paso.' },
+  { t:'Ciclón tropical', c:'Meteorología', d:'Gran tormenta giratoria que se forma sobre aguas cálidas y se alimenta del vapor del mar.' },
+  { t:'Tornado', c:'Meteorología', d:'Embudo de viento que desciende de una nube de tormenta hasta el suelo con gran capacidad destructiva.' },
+  { t:'Frente', c:'Meteorología', d:'Línea donde se encuentran dos masas de aire con temperaturas distintas. Suele provocar cambios de tiempo.' },
+  { t:'Borrasca', c:'Meteorología', d:'Zona de baja presión atmosférica asociada a nubes, viento y precipitaciones.' },
+  { t:'Anticiclón', c:'Meteorología', d:'Zona de alta presión atmosférica que suele traer tiempo estable y seco.' },
+  { t:'Humedad relativa', c:'Meteorología', d:'Porcentaje de vapor de agua que contiene el aire respecto al máximo que podría contener a esa temperatura.' },
+  { t:'Punto de rocío', c:'Meteorología', d:'Temperatura a la que el aire debe enfriarse para que el vapor de agua empiece a condensarse.' },
+
+  // ---- Clima
+  { t:'Clima', c:'Clima', d:'Conjunto de condiciones atmosféricas habituales de un lugar, calculado a lo largo de al menos treinta años.' },
+  { t:'Tiempo atmosférico', c:'Clima', d:'Estado de la atmósfera en un momento y lugar concretos. Cambia en horas o días.' },
+  { t:'Zona climática', c:'Clima', d:'Franja del planeta con un clima parecido, determinada principalmente por la latitud.' },
+  { t:'Latitud', c:'Clima', d:'Distancia de un punto al ecuador medida en grados. Determina en gran medida cuánta radiación solar recibe.' },
+  { t:'Altitud', c:'Clima', d:'Altura de un punto sobre el nivel del mar. Influye en la temperatura y en las precipitaciones.' },
+  { t:'Corriente oceánica', c:'Clima', d:'Movimiento de agua en el océano que transporta calor de unas regiones a otras y suaviza o endurece el clima.' },
+  { t:'Clima tropical', c:'Clima', d:'Clima cálido durante todo el año, propio de las zonas cercanas al ecuador, con lluvias abundantes o estación húmeda.' },
+  { t:'Clima desértico', c:'Clima', d:'Clima muy seco, con precipitaciones escasas y grandes oscilaciones de temperatura entre el día y la noche.' },
+  { t:'Clima templado', c:'Clima', d:'Clima con cuatro estaciones marcadas y temperaturas moderadas, propio de las latitudes medias.' },
+  { t:'Clima polar', c:'Clima', d:'Clima de temperaturas muy bajas durante todo el año, con precipitaciones escasas, casi siempre en forma de nieve.' },
+  { t:'Cambio climático', c:'Clima', d:'Variación duradera del clima del planeta. El término suele referirse al cambio actual causado por la actividad humana.' },
+  { t:'Calentamiento global', c:'Clima', d:'Aumento de la temperatura media de la superficie terrestre observado desde finales del siglo XIX.' },
+  { t:'Huella de carbono', c:'Clima', d:'Cantidad total de gases de efecto invernadero que genera una persona, una empresa o un producto.' },
+  { t:'Microclima', c:'Clima', d:'Conjunto de condiciones climáticas propias de un espacio muy reducido, distinto del clima general de la zona.' }
+];
+
+/* ============================================================
+   DATOS: QUIZ
+   ============================================================ */
+const QUIZ = [
+  { q:'¿Cuál es el gas más abundante en la atmósfera terrestre?', o:['Oxígeno','Nitrógeno','Dióxido de carbono','Argón'], c:1,
+    e:'El nitrógeno supone aproximadamente el 78 % del aire. El oxígeno es el segundo, con un 21 %.' },
+  { q:'¿A qué altura se sitúa convencionalmente la línea de Kármán, frontera del espacio?', o:['10 km','100 km','400 km','1.000 km'], c:1,
+    e:'La línea de Kármán está a 100 km. A partir de ahí el aire es tan tenue que un avión no podría sostenerse por medios aerodinámicos.' },
+  { q:'¿En qué capa de la atmósfera ocurre casi todo el tiempo meteorológico?', o:['Estratósfera','Mesósfera','Troposfera','Exósfera'], c:2,
+    e:'La troposfera concentra cerca del 80 % del aire y casi todo el vapor de agua, así que es donde se forman las nubes y las precipitaciones.' },
+  { q:'¿Por qué un satélite en órbita no cae a la Tierra?', o:['Porque la gravedad no llega hasta allí','Porque se mueve muy rápido de lado mientras cae','Porque los motores lo mantienen arriba','Porque el vacío lo empuja'], c:1,
+    e:'El satélite está en caída libre permanente, pero su velocidad lateral hace que la curvatura del planeta se aleje a la misma velocidad a la que cae.' },
+  { q:'¿Cuál es la principal función de la capa de ozono?', o:['Retener el calor','Absorber la radiación ultravioleta','Generar viento','Producir oxígeno'], c:1,
+    e:'El ozono de la estratósfera absorbe la mayor parte de la radiación ultravioleta del Sol, protegiendo a los seres vivos.' },
+  { q:'¿Cuál de estas cuatro fuerzas empuja el avión hacia arriba?', o:['El peso','La resistencia','El empuje','La sustentación'], c:3,
+    e:'La sustentación la genera el ala al desviar el aire hacia abajo. El empuje es horizontal y lo producen los motores.' },
+  { q:'¿Por qué los aviones comerciales vuelan a unos 10 o 12 kilómetros de altura?', o:['Para evitar a los pájaros','Porque el aire menos denso reduce la resistencia','Porque allí la gravedad es menor','Porque es obligatorio por ley'], c:1,
+    e:'A mayor altitud el aire es más tenue, el avión encuentra menos resistencia y gasta menos combustible para mantener la velocidad.' },
+  { q:'¿Cómo se llama la nube típica de tormenta, de gran desarrollo vertical?', o:['Cirro','Estrato','Cumulonimbo','Nimboestrato'], c:2,
+    e:'El cumulonimbo puede superar los 15 km de altura y es el responsable de los rayos, el granizo y las lluvias torrenciales.' },
+  { q:'¿Por qué vemos el relámpago antes de oír el trueno?', o:['Porque el trueno ocurre después','Porque la luz viaja mucho más rápido que el sonido','Porque el sonido rebota en las nubes','Porque el rayo se produce antes'], c:1,
+    e:'La luz viaja a unos 300.000 km/s y el sonido a unos 343 m/s. Ambos se producen a la vez, pero la luz nos llega casi al instante.' },
+  { q:'¿Cuál es la diferencia principal entre tiempo y clima?', o:['No hay diferencia real','El tiempo es a corto plazo; el clima, a largo plazo','El clima solo existe en el ecuador','El tiempo se mide en grados y el clima en milímetros'], c:1,
+    e:'El tiempo atmosférico describe un momento concreto; el clima es el patrón habitual calculado a lo largo de décadas.' },
+  { q:'¿Qué proceso convierte el vapor de agua en gotitas que forman las nubes?', o:['Evaporación','Condensación','Sublimación','Precipitación'], c:1,
+    e:'La condensación ocurre cuando el aire se enfría y el vapor se agrupa sobre diminutas partículas llamadas núcleos de condensación.' },
+  { q:'¿A qué altura orbita aproximadamente la Estación Espacial Internacional?', o:['100 km','400 km','35.786 km','1.000.000 km'], c:1,
+    e:'La ISS orbita a unos 400 km, en órbita baja. Da una vuelta al planeta cada 90 minutos aproximadamente.' },
+  { q:'¿Qué órbita ocupan los satélites de comunicación que parecen inmóviles en el cielo?', o:['Órbita baja','Órbita media','Órbita geoestacionaria','Órbita polar'], c:2,
+    e:'En la órbita geoestacionaria, a 35.786 km, el satélite tarda 24 horas en dar una vuelta y gira al mismo ritmo que la Tierra.' },
+  { q:'¿Qué produce el granizo dentro de un cumulonimbo?', o:['El viento solar','Las corrientes ascendentes que suben y bajan el hielo varias veces','La condensación sobre el suelo','El choque de dos nubes'], c:1,
+    e:'Las gotas heladas suben y bajan varias veces dentro de la nube, añadiendo capas de hielo hasta que pesan demasiado y caen.' },
+  { q:'¿Qué factor climático explica que haga más frío en la cima de una montaña que en su base?', o:['La latitud','La altitud','La cercanía al mar','Las corrientes oceánicas'], c:1,
+    e:'La temperatura desciende aproximadamente medio grado por cada 100 metros de ascenso.' },
+  { q:'¿Cómo se llama el rastro blanco que dejan los aviones en el cielo?', o:['Estela de condensación','Nube artificial','Cirro de motor','Rastro de empuje'], c:0,
+    e:'Son estelas de condensación: el vapor caliente del motor se condensa al contacto con aire muy frío y forma gotitas o cristales de hielo.' },
+  { q:'¿Cuál es el nombre del límite entre dos masas de aire de distinta temperatura?', o:['Borrasca','Anticiclón','Frente','Isobara'], c:2,
+    e:'Un frente es la línea donde chocan dos masas de aire distintas y suele provocar nubosidad, viento y precipitaciones.' },
+  { q:'¿Qué mide la humedad relativa del aire?', o:['La temperatura del aire','El porcentaje de vapor respecto al máximo posible','La velocidad del viento','La cantidad de oxígeno'], c:1,
+    e:'La humedad relativa compara el vapor que hay en el aire con el máximo que podría contener a esa temperatura. Al 100 % se condensa.' }
+];
+
+/* ============================================================
+   TEMA
+   ============================================================ */
+const htmlEl = document.documentElement;
+function setTheme(t){
+  htmlEl.setAttribute('data-theme', t);
+  try { localStorage.setItem('cielo-theme', t); } catch(e){}
+}
+(function initTheme(){
+  let saved = null;
+  try { saved = localStorage.getItem('cielo-theme'); } catch(e){}
+  if (saved) { setTheme(saved); return; }
+  const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+  setTheme(prefersLight ? 'light' : 'dark');
+})();
+$('#themeToggle').addEventListener('click', () => {
+  setTheme(htmlEl.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+});
+
+/* ============================================================
+   ROUTER
+   ============================================================ */
+const ROUTES = ['inicio','atmosfera','espacio','aviacion','meteo','clima','glosario','quiz'];
+let currentRoute = 'inicio';
+
+function go(route, push = true){
+  if (!ROUTES.includes(route)) route = 'inicio';
+  currentRoute = route;
+
+  $$('.view').forEach(v => v.classList.toggle('active', v.dataset.view === route));
+  $$('.nav-link').forEach(b => b.classList.toggle('active', b.dataset.route === route));
+
+  if (push && location.hash.slice(1) !== route) {
+    history.pushState(null, '', '#' + route);
+  }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  requestAnimationFrame(() => {
+    $$('.view.active .reveal').forEach(el => el.classList.remove('in'));
+    checkReveal();
+    if (route === 'inicio') animateCounters();
+  });
+}
+
+document.addEventListener('click', e => {
+  const trigger = e.target.closest('[data-route]');
+  if (trigger) {
+    e.preventDefault();
+    go(trigger.dataset.route);
+  }
+});
+
+window.addEventListener('popstate', () => {
+  go(location.hash.slice(1) || 'inicio', false);
+});
+
+/* ============================================================
+   REVEAL + CONTADORES
+   ============================================================ */
+const revealObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('in');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+function checkReveal(){
+  $$('.view.active .reveal:not(.in)').forEach(el => revealObserver.observe(el));
+}
+
+function animateCounters(){
+  $$('.num[data-count]').forEach(el => {
+    if (el.dataset.done === '1') return;
+    el.dataset.done = '1';
+    const target = parseFloat(el.dataset.count);
+    const suffix = el.dataset.suffix || '';
+    const dur = 1400;
+    const start = performance.now();
+    function tick(now){
+      const p = Math.min((now - start) / dur, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      const val = Math.round(target * eased);
+      el.textContent = val.toLocaleString('es-ES') + suffix;
+      if (p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  });
+}
+
+/* ============================================================
+   RENDER: CAPAS DE LA ATMÓSFERA
+   ============================================================ */
+(function renderLayers(){
+  const cont = $('#layerList');
+  cont.innerHTML = CAPAS.map((c, i) => `
+    <div class="layer" data-i="${i}">
+      <button class="layer-head" aria-expanded="false">
+        <span class="layer-swatch" style="background:linear-gradient(180deg,${c.color},color-mix(in srgb,${c.color} 45%,transparent))"></span>
+        <span>
+          <span class="layer-name">${c.n}</span>
+          <span class="layer-alt">${c.alt}</span>
+        </span>
+        <svg class="layer-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <div class="layer-body"><div><p>${c.d}</p></div></div>
+    </div>
+  `).join('');
+
+  cont.addEventListener('click', e => {
+    const head = e.target.closest('.layer-head');
+    if (!head) return;
+    const layer = head.closest('.layer');
+    const open = layer.classList.toggle('open');
+    head.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+})();
+
+/* Estrellas del cielo de la animación */
+(function renderStars(){
+  const cont = $('#atmStars');
+  if (!cont) return;
+  let html = '';
+  for (let i = 0; i < 46; i++){
+    const x = Math.random() * 100;
+    const y = Math.random() * 65;
+    const delay = (Math.random() * 4).toFixed(2);
+    const size = Math.random() < 0.2 ? 3 : 2;
+    html += `<span style="left:${x}%;top:${y}%;width:${size}px;height:${size}px;animation-delay:${delay}s"></span>`;
+  }
+  cont.innerHTML = html;
+})();
+
+/* ============================================================
+   RENDER: ÓRBITAS
+   ============================================================ */
+(function renderOrbits(){
+  const cont = $('#orbitList');
+  if (!cont) return;
+  cont.innerHTML = ORBITAS.map(o => `
+    <div class="orbit" style="--c1:${o.c1};--c2:${o.c2}">
+      <span class="orbit-badge">${o.ini}</span>
+      <div>
+        <h3>${o.name}</h3>
+        <div class="meta">${o.meta}</div>
+        <p>${o.d}</p>
+      </div>
+    </div>
+  `).join('');
+})();
+
+/* ============================================================
+   RENDER: NUBES
+   ============================================================ */
+(function renderClouds(){
+  const cont = $('#cloudGrid');
+  if (!cont) return;
+  cont.innerHTML = NUBES.map((n, i) => `
+    <article class="cloud" style="--c1:${n.c1};--c2:${n.c2};--d:${i * 60}ms">
+      <div class="cloud-ico">${n.ico}</div>
+      <h3>${n.n}</h3>
+      <div class="where">${n.where}</div>
+      <p>${n.d}</p>
+    </article>
+  `).join('');
+})();
+
+/* ============================================================
+   RENDER: ZONAS CLIMÁTICAS
+   ============================================================ */
+(function renderZones(){
+  const cont = $('#zoneList');
+  if (!cont) return;
+  cont.innerHTML = ZONAS.map(z => `
+    <div class="zone">
+      <span class="zone-band" style="background:linear-gradient(180deg,${z.c},color-mix(in srgb,${z.c} 40%,transparent))"></span>
+      <div>
+        <h3>${z.n}</h3>
+        <div class="where" style="font-size:.74rem;color:var(--muted);font-weight:600;letter-spacing:.05em;text-transform:uppercase;margin-bottom:4px">${z.sub}</div>
+        <p>${z.d}</p>
+      </div>
+    </div>
+  `).join('');
+})();
+
+/* ============================================================
+   GLOSARIO
+   ============================================================ */
+const CATEGORIAS = ['Todos','Atmósfera','Espacio','Aviación','Meteorología','Clima'];
+let activeCat = 'Todos';
+let query = '';
+
+const chipsEl = $('#chips');
+chipsEl.innerHTML = CATEGORIAS.map(c =>
+  `<button class="chip${c === 'Todos' ? ' active' : ''}" data-cat="${c}">${c}</button>`
+).join('');
+
+chipsEl.addEventListener('click', e => {
+  const chip = e.target.closest('.chip');
+  if (!chip) return;
+  activeCat = chip.dataset.cat;
+  $$('.chip', chipsEl).forEach(c => c.classList.toggle('active', c === chip));
+  renderGlosario();
+});
+
+$('#searchInput').addEventListener('input', e => {
+  query = e.target.value;
+  renderGlosario();
+});
+
+function renderGlosario(){
+  const q = query.trim().toLowerCase();
+  const items = GLOSARIO.filter(g => {
+    const okCat = activeCat === 'Todos' || g.c === activeCat;
+    const okQ = !q || g.t.toLowerCase().includes(q) || g.d.toLowerCase().includes(q);
+    return okCat && okQ;
+  });
+
+  const list = $('#glosarioList');
+  if (!items.length){
+    list.innerHTML = `<p class="empty">No encontramos términos con esa búsqueda. Prueba con otra palabra o cambia de categoría.</p>`;
+    return;
+  }
+
+  list.innerHTML = items.map((g, i) => `
+    <article class="term" style="--d:${Math.min(i, 14) * 30}ms">
+      <div class="term-head">
+        <h3>${g.t}</h3>
+        <span class="tag">${g.c}</span>
+      </div>
+      <p>${g.d}</p>
+    </article>
+  `).join('');
+}
+renderGlosario();
+
+/* ============================================================
+   QUIZ
+   ============================================================ */
+const TOTAL_PREGUNTAS = 10;
+const LETRAS = ['A','B','C','D'];
+let quizState = { questions: [], index: 0, score: 0, answered: false, finished: false };
+
+function shuffle(arr){
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function startQuiz(){
+  quizState = {
+    questions: shuffle(QUIZ).slice(0, TOTAL_PREGUNTAS),
+    index: 0,
+    score: 0,
+    answered: false,
+    finished: false
+  };
+  renderQuiz();
+}
+
+function renderQuiz(){
+  const card = $('#quizCard');
+
+  if (quizState.finished){
+    const total = quizState.questions.length;
+    const pct = Math.round((quizState.score / total) * 100);
+    let mensaje = 'Sigue practicando: estos temas se entienden mejor repasando.';
+    if (pct === 100) mensaje = 'Perfecto. Dominas la atmósfera, el espacio y el clima.';
+    else if (pct >= 75) mensaje = 'Muy buen resultado. Te falta muy poco para el pleno.';
+    else if (pct >= 50) mensaje = 'Buen comienzo. Repasa alguna sección y vuelve a intentarlo.';
+
+    card.innerHTML = `
+      <div class="result">
+        <div class="score">${quizState.score}/${total}</div>
+        <h3>${mensaje}</h3>
+        <p>Has acertado el ${pct} % de las preguntas de esta ronda.</p>
+        <button class="btn btn-primary" id="restartQuiz">
+          Jugar otra vez
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>
+        </button>
+      </div>
+    `;
+    $('#restartQuiz').addEventListener('click', startQuiz);
+    return;
+  }
+
+  const q = quizState.questions[quizState.index];
+  const total = quizState.questions.length;
+  const progress = (quizState.index / total) * 100;
+
+  card.innerHTML = `
+    <div class="quiz-meta">
+      <span>Pregunta ${quizState.index + 1} de ${total}</span>
+      <span>Aciertos: ${quizState.score}</span>
+    </div>
+    <div class="progress"><div class="progress-bar" style="width:${progress}%"></div></div>
+    <h3 class="q-text">${q.q}</h3>
+    <div class="options" id="options">
+      ${q.o.map((opt, i) => `
+        <button class="option" data-i="${i}">
+          <span class="letter">${LETRAS[i]}</span>
+          <span>${opt}</span>
+        </button>
+      `).join('')}
+    </div>
+    <div id="feedbackSlot"></div>
+    <div class="quiz-actions" id="actionsSlot"></div>
+  `;
+
+  $('#options').addEventListener('click', e => {
+    const btn = e.target.closest('.option');
+    if (!btn || quizState.answered) return;
+    answerQuestion(parseInt(btn.dataset.i, 10));
+  });
+}
+
+function answerQuestion(chosen){
+  quizState.answered = true;
+  const q = quizState.questions[quizState.index];
+  const options = $$('#options .option');
+
+  options.forEach((btn, i) => {
+    btn.disabled = true;
+    if (i === q.c) btn.classList.add('correct');
+    else if (i === chosen) btn.classList.add('wrong');
+  });
+
+  const acerto = chosen === q.c;
+  if (acerto) quizState.score++;
+
+  $('#feedbackSlot').innerHTML = `
+    <div class="feedback">
+      <strong>${acerto ? 'Correcto.' : 'No exactamente.'}</strong> ${q.e}
+    </div>
+  `;
+
+  const isLast = quizState.index === quizState.questions.length - 1;
+  $('#actionsSlot').innerHTML = `
+    <button class="btn btn-primary" id="nextBtn">
+      ${isLast ? 'Ver resultado' : 'Siguiente pregunta'}
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </button>
+  `;
+
+  $('#nextBtn').addEventListener('click', () => {
+    if (isLast){
+      quizState.finished = true;
+    } else {
+      quizState.index++;
+      quizState.answered = false;
+    }
+    renderQuiz();
+  });
+}
+
+/* ============================================================
+   ARRANQUE
+   ============================================================ */
+(function boot(){
+  const initial = (location.hash.slice(1) || 'inicio');
+  go(ROUTES.includes(initial) ? initial : 'inicio', false);
+  checkReveal();
+  setTimeout(() => { if (currentRoute === 'inicio') animateCounters(); }, 350);
+})();
+
+startQuiz();
+
+/* Pausar animaciones de fondo si la pestaña no está visible */
+document.addEventListener('visibilitychange', () => {
+  document.querySelectorAll('.orb').forEach(o => {
+    o.style.animationPlayState = document.hidden ? 'paused' : 'running';
+  });
+});
+</script>
+</body>
+</html>

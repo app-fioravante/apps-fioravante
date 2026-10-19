@@ -1,0 +1,1613 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Astronáutica para todos — Cohetes, viajes espaciales, satélites y modelos caseros</title>
+<meta name="description" content="Explicación sencilla de la astronautica: cómo funcionan los cohetes, viajes espaciales, satélites, línea histórica, glosario y modelos caseros de cohetes para niños.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --font-display:'Space Grotesk','Segoe UI',system-ui,sans-serif;
+  --font-body:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --radius:20px;
+  --radius-sm:12px;
+  --maxw:1180px;
+  --ease:cubic-bezier(.22,.75,.25,1);
+}
+html[data-theme="light"]{
+  --bg:#f8fafc;
+  --bg-soft:#eef2f7;
+  --surface:rgba(255,255,255,.86);
+  --surface-solid:#ffffff;
+  --surface-2:rgba(20,40,80,.045);
+  --surface-3:rgba(20,40,80,.08);
+  --border:rgba(20,40,80,.12);
+  --border-strong:rgba(20,40,80,.24);
+  --text:#0a1628;
+  --muted:#5a6b80;
+  --accent:#f59e0b;
+  --accent-2:#8b5cf6;
+  --accent-3:#06b6d4;
+  --accent-4:#10b981;
+  --good:#059669;
+  --bad:#e11d48;
+  --shadow:0 22px 55px -28px rgba(20,40,80,.28);
+  --orb-op:.14;
+  --dot-color:rgba(20,40,80,.055);
+  --star:rgba(20,40,80,.3);
+}
+html[data-theme="dark"]{
+  --bg:#04060d;
+  --bg-soft:#0a0f1a;
+  --surface:rgba(18,24,38,.66);
+  --surface-solid:#131a28;
+  --surface-2:rgba(255,255,255,.045);
+  --surface-3:rgba(255,255,255,.08);
+  --border:rgba(255,255,255,.10);
+  --border-strong:rgba(255,255,255,.20);
+  --text:#e8eef8;
+  --muted:#8f9bb3;
+  --accent:#fbbf24;
+  --accent-2:#a78bfa;
+  --accent-3:#22d3ee;
+  --accent-4:#34d399;
+  --good:#34d399;
+  --bad:#fb7185;
+  --shadow:0 24px 60px -24px rgba(0,0,0,.9);
+  --orb-op:.28;
+  --dot-color:rgba(255,255,255,.03);
+  --star:rgba(255,255,255,.8);
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;font-family:var(--font-body);background:var(--bg);color:var(--text);
+  min-height:100vh;line-height:1.65;-webkit-font-smoothing:antialiased;
+  transition:background .45s var(--ease),color .45s var(--ease);
+  overflow-x:hidden;
+}
+h1,h2,h3,h4,h5{font-family:var(--font-display);line-height:1.15;letter-spacing:-.02em;margin:0}
+p{margin:0}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+a{color:inherit;text-decoration:none}
+ul{margin:0}
+::selection{background:var(--accent);color:#0a0a0a}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
+
+.bg-stars{position:fixed;inset:0;z-index:-4;pointer-events:none;overflow:hidden}
+.bg-stars .star{
+  position:absolute;width:2px;height:2px;border-radius:50%;
+  background:var(--star);opacity:.6;
+  animation:twinkle var(--tw-dur,4s) ease-in-out infinite;
+  animation-delay:var(--tw-delay,0s);
+}
+@keyframes twinkle{
+  0%,100%{opacity:.15;transform:scale(.8)}
+  50%{opacity:1;transform:scale(1.3)}
+}
+.bg-dots{position:fixed;inset:0;z-index:-3;pointer-events:none;background-image:radial-gradient(var(--dot-color) 1px,transparent 1px);background-size:26px 26px}
+.orbs{position:fixed;inset:0;z-index:-2;overflow:hidden;pointer-events:none}
+.orb{position:absolute;border-radius:50%;filter:blur(110px);opacity:var(--orb-op);animation:float 28s ease-in-out infinite alternate}
+.orb.o1{width:52vw;height:52vw;background:var(--accent);top:-16vw;left:-12vw}
+.orb.o2{width:42vw;height:42vw;background:var(--accent-2);bottom:-18vw;right:-10vw;animation-delay:-10s}
+.orb.o3{width:34vw;height:34vw;background:var(--accent-3);top:44%;left:58%;animation-delay:-17s}
+.orb.o4{width:26vw;height:26vw;background:var(--accent-4);top:20%;right:24%;animation-delay:-5s}
+@keyframes float{
+  0%{transform:translate3d(0,0,0) scale(1)}
+  50%{transform:translate3d(4vw,-3vw,0) scale(1.1)}
+  100%{transform:translate3d(-3vw,4vw,0) scale(.95)}
+}
+
+.site-header{
+  position:sticky;top:0;z-index:50;
+  backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);
+  background:color-mix(in srgb,var(--bg) 78%, transparent);
+  border-bottom:1px solid var(--border);
+}
+.header-inner{max-width:var(--maxw);margin:0 auto;padding:13px 22px;display:flex;align-items:center;gap:20px}
+.brand{display:flex;align-items:center;gap:11px;font-family:var(--font-display);font-weight:700;font-size:1rem;letter-spacing:-.02em;white-space:nowrap}
+.brand-mark{
+  width:38px;height:38px;border-radius:12px;flex:none;
+  background:linear-gradient(140deg,var(--accent),var(--accent-2) 55%,var(--accent-3));
+  display:grid;place-items:center;color:#fff;
+  box-shadow:0 8px 22px -8px var(--accent);
+  transition:transform .5s var(--ease);
+}
+.brand:hover .brand-mark{transform:rotate(-10deg) scale(1.06)}
+.brand-mark svg{width:22px;height:22px}
+
+.nav{display:flex;gap:2px;margin-left:auto;overflow-x:auto;scrollbar-width:none}
+.nav::-webkit-scrollbar{display:none}
+.nav-link{
+  position:relative;padding:9px 11px;border-radius:11px;font-size:.8rem;font-weight:500;
+  color:var(--muted);white-space:nowrap;transition:color .3s var(--ease),background .3s var(--ease);
+}
+.nav-link:hover{color:var(--text);background:var(--surface-2)}
+.nav-link.active{color:var(--text);background:var(--surface-2)}
+.nav-link.active::after{
+  content:'';position:absolute;left:11px;right:11px;bottom:4px;height:2px;border-radius:2px;
+  background:linear-gradient(90deg,var(--accent),var(--accent-2));
+  animation:navIn .4s var(--ease) both;
+}
+@keyframes navIn{from{transform:scaleX(0);opacity:0}to{transform:scaleX(1);opacity:1}}
+
+.theme-toggle{
+  width:40px;height:40px;border-radius:12px;flex:none;
+  border:1px solid var(--border);background:var(--surface-2);
+  display:grid;place-items:center;
+  transition:transform .35s var(--ease),border-color .3s,background .3s;
+}
+.theme-toggle:hover{transform:translateY(-2px) rotate(8deg);border-color:var(--border-strong)}
+.theme-toggle svg{width:19px;height:19px}
+html[data-theme="dark"] .icon-sun{display:block}
+html[data-theme="dark"] .icon-moon{display:none}
+html[data-theme="light"] .icon-sun{display:none}
+html[data-theme="light"] .icon-moon{display:block}
+
+main{max-width:var(--maxw);margin:0 auto;padding:0 22px 90px}
+.view{display:none}
+.view.active{display:block;animation:viewIn .55s var(--ease) both}
+@keyframes viewIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+
+.hero{padding:74px 0 42px;max-width:940px;position:relative}
+.pill{
+  display:inline-flex;align-items:center;gap:8px;padding:7px 15px;border-radius:999px;
+  font-size:.78rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;
+  border:1px solid var(--border);background:var(--surface);color:var(--muted);margin-bottom:26px;
+}
+.pill .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);animation:pulse 2.4s infinite}
+@keyframes pulse{
+  0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--accent) 60%,transparent)}
+  70%{box-shadow:0 0 0 9px transparent}
+  100%{box-shadow:0 0 0 0 transparent}
+}
+h1.hero-title{font-size:clamp(2.1rem,5.2vw,4rem);font-weight:700;letter-spacing:-.035em;margin-bottom:22px}
+.grad{
+  background:linear-gradient(100deg,var(--accent),var(--accent-2) 40%,var(--accent-3) 70%,var(--accent-4));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  background-size:220% auto;animation:shimmer 8s linear infinite;
+}
+@keyframes shimmer{to{background-position:220% center}}
+.lead{font-size:clamp(1rem,1.6vw,1.15rem);color:var(--muted);max-width:720px;margin-bottom:34px}
+.hero-actions{display:flex;flex-wrap:wrap;gap:13px}
+
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  padding:13px 25px;border-radius:13px;font-size:.93rem;font-weight:600;
+  border:1px solid transparent;
+  transition:transform .28s var(--ease),box-shadow .3s var(--ease),background .3s,border-color .3s,color .3s;
+  will-change:transform;
+}
+.btn:active{transform:scale(.97)}
+.btn svg{width:17px;height:17px}
+.btn-primary{
+  background:linear-gradient(120deg,var(--accent),var(--accent-2));
+  color:#fff;box-shadow:0 14px 34px -14px var(--accent);
+  position:relative;overflow:hidden;
+}
+.btn-primary::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,.45),transparent 70%);
+  transform:translateX(-130%);transition:transform .7s var(--ease);
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 20px 42px -14px var(--accent)}
+.btn-primary:hover::after{transform:translateX(130%)}
+.btn-ghost{border-color:var(--border);background:var(--surface);color:var(--text)}
+.btn-ghost:hover{transform:translateY(-2px);border-color:var(--border-strong);background:var(--surface-2)}
+.btn.small{padding:8px 16px;font-size:.85rem}
+
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin:12px 0 58px}
+.stat{
+  padding:22px 20px;border-radius:var(--radius);
+  background:var(--surface);border:1px solid var(--border);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  transition:transform .35s var(--ease),border-color .3s,box-shadow .35s;
+}
+.stat:hover{transform:translateY(-5px);border-color:var(--border-strong);box-shadow:var(--shadow)}
+.stat .num{
+  font-family:var(--font-display);font-size:1.8rem;font-weight:700;letter-spacing:-.03em;
+  background:linear-gradient(120deg,var(--accent),var(--accent-2));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.stat .lbl{font-size:.82rem;color:var(--muted);font-weight:500;margin-top:2px}
+
+.sec-head{margin:0 0 28px}
+.sec-head h2{font-size:clamp(1.55rem,3vw,2.05rem);font-weight:700;margin-bottom:8px}
+.sec-head p{color:var(--muted);max-width:740px;font-size:.95rem}
+.section{padding-top:52px}
+
+.module-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(258px,1fr));gap:18px}
+.module{
+  position:relative;overflow:hidden;text-align:left;padding:28px 24px;border-radius:var(--radius);
+  background:var(--surface);border:1px solid var(--border);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  transition:transform .4s var(--ease),border-color .35s,box-shadow .4s;
+}
+.module::before{
+  content:'';position:absolute;inset:0;opacity:0;
+  background:radial-gradient(420px circle at var(--mx,50%) var(--my,0%),color-mix(in srgb,var(--accent) 22%,transparent),transparent 65%);
+  transition:opacity .45s var(--ease);
+}
+.module:hover{transform:translateY(-6px);border-color:var(--border-strong);box-shadow:var(--shadow)}
+.module:hover::before{opacity:1}
+.module-ico{
+  width:46px;height:46px;border-radius:14px;display:grid;place-items:center;margin-bottom:18px;
+  background:linear-gradient(140deg,color-mix(in srgb,var(--accent) 22%,transparent),color-mix(in srgb,var(--accent-2) 18%,transparent));
+  border:1px solid var(--border);color:var(--accent);
+  transition:transform .4s var(--ease);
+}
+.module:hover .module-ico{transform:scale(1.08) rotate(-6deg)}
+.module-ico svg{width:22px;height:22px}
+.module h3{font-size:1.04rem;margin-bottom:8px;font-weight:600}
+.module p{font-size:.89rem;color:var(--muted);line-height:1.6}
+.module .arrow{display:inline-flex;align-items:center;gap:6px;margin-top:16px;font-size:.84rem;font-weight:600;color:var(--accent)}
+.module .arrow svg{width:14px;height:14px;transition:transform .35s var(--ease)}
+.module:hover .arrow svg{transform:translateX(5px)}
+
+.card{
+  padding:24px 26px;border-radius:var(--radius);
+  background:var(--surface);border:1px solid var(--border);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  transition:transform .35s var(--ease),border-color .3s,box-shadow .35s;
+}
+.card:hover{transform:translateY(-4px);border-color:var(--border-strong);box-shadow:var(--shadow)}
+.card h3{font-size:1.02rem;margin-bottom:10px;font-weight:600}
+.card p{font-size:.9rem;color:var(--muted);line-height:1.68}
+.card .kicker{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;display:block}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(258px,1fr))}
+.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{
+  padding:8px 15px;border-radius:999px;font-size:.81rem;font-weight:600;
+  border:1px solid var(--border);background:var(--surface);color:var(--muted);
+  transition:all .3s var(--ease);
+}
+.chip:hover{color:var(--text);border-color:var(--border-strong);transform:translateY(-1px)}
+.chip.active{background:linear-gradient(120deg,var(--accent),var(--accent-2));color:#fff;border-color:transparent;box-shadow:0 10px 26px -12px var(--accent)}
+
+.vt{position:relative;margin-top:26px}
+.vt::before{
+  content:'';position:absolute;left:13px;top:10px;bottom:10px;width:2px;border-radius:2px;
+  background:linear-gradient(180deg,var(--accent),var(--accent-2) 55%,var(--accent-3));
+  opacity:.55;
+}
+.vt-item{position:relative;padding-left:46px;margin-bottom:18px;animation:termIn .5s var(--ease) both;animation-delay:var(--d,0ms)}
+@keyframes termIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.vt-dot{position:absolute;left:7px;top:24px;width:14px;height:14px;border-radius:50%;background:var(--c);border:3px solid var(--bg);box-shadow:0 0 0 3px color-mix(in srgb,var(--c) 30%,transparent);transition:transform .3s var(--ease)}
+.vt-item:hover .vt-dot{transform:scale(1.3)}
+.vt-card{padding:20px 22px;border-radius:var(--radius-sm);background:var(--surface);border:1px solid var(--border);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);transition:border-color .3s,transform .3s var(--ease),box-shadow .3s}
+.vt-item:hover .vt-card{border-color:var(--border-strong);transform:translateX(3px);box-shadow:var(--shadow)}
+.vt-top{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:8px}
+.vt-year{font-family:var(--font-display);font-size:.86rem;font-weight:700;color:var(--accent);padding:3px 10px;border-radius:7px;background:color-mix(in srgb,var(--accent) 13%,transparent);border:1px solid color-mix(in srgb,var(--accent) 26%,transparent);white-space:nowrap}
+.vt-era{font-size:.68rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.vt-card h4{font-size:1rem;font-weight:600;margin-bottom:7px;line-height:1.3}
+.vt-card > p{font-size:.88rem;color:var(--muted);line-height:1.66}
+.vt-more{display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:.79rem;font-weight:600;color:var(--accent);padding:4px 0;transition:gap .3s var(--ease)}
+.vt-more:hover{gap:9px}
+.vt-more svg{width:12px;height:12px;transition:transform .4s var(--ease)}
+.vt-item.open .vt-more svg{transform:rotate(180deg)}
+.vt-extra{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s var(--ease)}
+.vt-item.open .vt-extra{grid-template-rows:1fr}
+.vt-extra > div{overflow:hidden}
+.vt-extra p{font-size:.85rem;color:var(--muted);line-height:1.7;border-top:1px solid var(--border);margin-top:12px;padding-top:12px}
+
+.diagram-wrap{
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+  padding:22px 20px;box-shadow:var(--shadow);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+}
+.diagram-wrap h4{font-size:1.02rem;margin-bottom:8px;font-weight:600}
+.diagram-wrap .sub{font-size:.87rem;color:var(--muted);margin-bottom:16px;line-height:1.55}
+.diagram-wrap svg{display:block;width:100%;max-width:520px;height:auto;margin:0 auto}
+
+.info-panel{
+  margin-top:16px;padding:16px 18px;border-radius:var(--radius-sm);
+  background:var(--surface-2);border:1px solid var(--border);
+  min-height:100px;transition:border-color .3s,background .3s;
+}
+.info-panel.active{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 7%,var(--surface-2))}
+.info-panel .ip-name{font-family:var(--font-display);font-weight:700;font-size:1.02rem;color:var(--accent);margin-bottom:6px}
+.info-panel .ip-func{font-size:.9rem;color:var(--text);margin-bottom:6px;line-height:1.6}
+.info-panel .ip-desc{font-size:.85rem;color:var(--muted);line-height:1.6}
+.info-panel .ip-hint{color:var(--muted);font-size:.86rem;font-style:italic}
+
+.note{
+  margin-top:26px;padding:16px 20px;border-radius:14px;font-size:.85rem;color:var(--muted);
+  border:1px solid var(--border);background:var(--surface-2);border-left:3px solid var(--accent);
+  line-height:1.65;
+}
+.note strong{color:var(--text);font-weight:600}
+.note.ref{border-left-color:var(--accent-2);background:color-mix(in srgb,var(--accent-2) 8%,var(--surface-2))}
+.note.ref strong{color:var(--accent-2)}
+.note.good{border-left-color:var(--good);background:color-mix(in srgb,var(--good) 8%,var(--surface-2))}
+.note.good strong{color:var(--good)}
+.note.danger{border-left-color:var(--bad);background:color-mix(in srgb,var(--bad) 8%,var(--surface-2))}
+.note.danger strong{color:var(--bad)}
+
+.ref-tag{
+  display:inline-block;padding:2px 8px;border-radius:6px;
+  font-size:.72rem;font-weight:700;letter-spacing:.02em;
+  background:color-mix(in srgb,var(--accent-2) 15%,transparent);
+  color:var(--accent-2);border:1px solid color-mix(in srgb,var(--accent-2) 30%,transparent);
+  margin:2px 3px 2px 0;white-space:nowrap;
+}
+
+.progress-item{margin:14px 0}
+.progress-item .pi-label{display:flex;justify-content:space-between;font-size:.82rem;font-weight:600;margin-bottom:6px}
+.progress-item .pi-label span:last-child{color:var(--accent)}
+.progress-track{height:8px;border-radius:999px;background:var(--surface-2);overflow:hidden;border:1px solid var(--border)}
+.progress-fill{
+  height:100%;border-radius:999px;
+  background:linear-gradient(90deg,var(--accent),var(--accent-2));
+  width:0;transition:width 1.5s var(--ease);
+  animation:progressIn 1.5s var(--ease) forwards;
+  animation-delay:var(--d,0.2s);
+}
+@keyframes progressIn{to{width:var(--pct)}}
+
+/* ============ GLOSARIO ============ */
+.gloss-shell{max-width:900px;margin:0 auto}
+.gloss-search{
+  width:100%;padding:14px 18px;border-radius:14px;
+  border:1px solid var(--border);background:var(--surface);
+  color:var(--text);font-size:.95rem;font-family:inherit;
+  margin-bottom:18px;
+  transition:border-color .3s,box-shadow .3s;
+}
+.gloss-search:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 25%,transparent)}
+.gloss-grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.gloss-item{
+  padding:16px 18px;border-radius:14px;
+  background:var(--surface);border:1px solid var(--border);
+  transition:transform .3s var(--ease),border-color .3s,box-shadow .3s;
+}
+.gloss-item:hover{transform:translateY(-3px);border-color:var(--border-strong);box-shadow:var(--shadow)}
+.gloss-item .gi-term{
+  font-family:var(--font-display);font-size:.98rem;font-weight:700;color:var(--accent);
+  margin-bottom:6px;display:flex;align-items:center;gap:8px;
+}
+.gloss-item .gi-def{font-size:.86rem;color:var(--muted);line-height:1.6}
+.gloss-empty{
+  text-align:center;padding:30px;color:var(--muted);font-size:.9rem;font-style:italic;
+}
+
+/* ============ MODELOS CASEROS ============ */
+.model-grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.model-card{
+  padding:0;border-radius:var(--radius);overflow:hidden;
+  background:var(--surface);border:1px solid var(--border);
+  transition:transform .35s var(--ease),border-color .3s,box-shadow .35s;
+}
+.model-card:hover{transform:translateY(-5px);border-color:var(--border-strong);box-shadow:var(--shadow)}
+.model-head{
+  padding:20px 22px 16px;
+  background:linear-gradient(140deg,color-mix(in srgb,var(--mc,var(--accent)) 25%,transparent),transparent);
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:14px;
+}
+.model-icon{
+  width:48px;height:48px;border-radius:14px;flex:none;
+  display:grid;place-items:center;
+  background:linear-gradient(140deg,color-mix(in srgb,var(--mc,var(--accent)) 40%,transparent),color-mix(in srgb,var(--mc,var(--accent)) 15%,transparent));
+  border:1px solid color-mix(in srgb,var(--mc,var(--accent)) 45%,transparent);
+  color:var(--mc,var(--accent));
+}
+.model-icon svg{width:26px;height:26px}
+.model-head h3{font-size:1.06rem;font-weight:700;margin:0;line-height:1.2}
+.model-head .model-sub{font-size:.78rem;color:var(--muted);margin-top:2px;font-weight:500}
+.model-body{padding:18px 22px 22px}
+.model-body > p{font-size:.87rem;color:var(--muted);line-height:1.65;margin-bottom:14px}
+.model-meta{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
+.model-meta span{
+  padding:4px 10px;border-radius:999px;font-size:.72rem;font-weight:600;
+  background:var(--surface-2);border:1px solid var(--border);color:var(--muted);
+}
+.model-body ol{padding-left:18px;margin:0;display:flex;flex-direction:column;gap:8px}
+.model-body ol li{font-size:.85rem;color:var(--muted);line-height:1.55}
+.model-body ol li strong{color:var(--text);font-weight:600}
+.model-tip{
+  margin-top:14px;padding:10px 12px;border-radius:10px;
+  font-size:.8rem;line-height:1.55;
+  background:color-mix(in srgb,var(--accent) 8%,var(--surface-2));
+  border:1px solid color-mix(in srgb,var(--accent) 22%,var(--border));
+  color:var(--muted);
+}
+.model-tip strong{color:var(--accent)}
+
+/* ============ QUIZ ============ */
+.quiz-shell{max-width:760px;margin:0 auto}
+.quiz-card{
+  padding:34px;border-radius:var(--radius);
+  background:var(--surface);border:1px solid var(--border);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  box-shadow:var(--shadow);
+}
+.quiz-meta{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:12px;font-size:.81rem;font-weight:600;color:var(--muted)}
+.progress{height:6px;border-radius:99px;background:var(--surface-2);overflow:hidden;margin-bottom:30px;border:1px solid var(--border)}
+.progress-bar{height:100%;width:0%;border-radius:99px;background:linear-gradient(90deg,var(--accent),var(--accent-2));transition:width .55s var(--ease)}
+.q-text{font-family:var(--font-display);font-size:clamp(1.12rem,2.4vw,1.42rem);font-weight:600;line-height:1.35;margin-bottom:26px}
+.options{display:grid;gap:11px}
+.option{
+  display:flex;align-items:center;gap:14px;text-align:left;
+  padding:16px 18px;border-radius:14px;font-size:.93rem;font-weight:500;
+  background:var(--surface-2);border:1px solid var(--border);color:var(--text);
+  transition:transform .25s var(--ease),border-color .25s,background .25s;
+}
+.option:hover:not(:disabled){transform:translateX(4px);border-color:var(--accent);background:color-mix(in srgb,var(--accent) 8%,transparent)}
+.option:disabled{cursor:default}
+.option .letter{
+  width:28px;height:28px;border-radius:9px;flex:none;display:grid;place-items:center;
+  font-size:.77rem;font-weight:700;font-family:var(--font-display);
+  background:var(--surface-solid);border:1px solid var(--border);color:var(--muted);
+}
+.option.correct{background:color-mix(in srgb,var(--good) 15%,transparent);border-color:var(--good)}
+.option.correct .letter{background:var(--good);color:#fff;border-color:var(--good)}
+.option.wrong{background:color-mix(in srgb,var(--bad) 13%,transparent);border-color:var(--bad)}
+.option.wrong .letter{background:var(--bad);color:#fff;border-color:var(--bad)}
+.feedback{margin-top:22px;padding:16px 18px;border-radius:14px;font-size:.88rem;line-height:1.6;border:1px solid var(--border);background:var(--surface-2);animation:termIn .4s var(--ease) both}
+.feedback strong{color:var(--text)}
+.quiz-actions{display:flex;justify-content:flex-end;margin-top:24px}
+.result{text-align:center;padding:20px 6px}
+.result .score{font-family:var(--font-display);font-size:clamp(3rem,9vw,4.6rem);font-weight:700;letter-spacing:-.05em;background:linear-gradient(120deg,var(--accent),var(--accent-2) 50%,var(--accent-3));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1;margin-bottom:10px}
+.result h3{font-size:1.28rem;margin-bottom:10px}
+.result p{color:var(--muted);margin-bottom:26px}
+
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s var(--ease),transform .7s var(--ease);transition-delay:var(--d,0ms)}
+.reveal.in{opacity:1;transform:none}
+
+.site-footer{border-top:1px solid var(--border);padding:34px 22px;text-align:center;font-size:.85rem;color:var(--muted)}
+.site-footer strong{color:var(--text);font-weight:600}
+
+@media (max-width:1040px){.nav-link{padding:9px 9px;font-size:.76rem}}
+@media (max-width:900px){
+  .header-inner{padding:12px 16px;gap:14px;flex-wrap:wrap}
+  .nav{order:3;width:100%;margin-left:0;padding-bottom:2px}
+  .theme-toggle{margin-left:auto}
+  main{padding:0 16px 70px}
+  .hero{padding:44px 0 32px}
+  .stats{grid-template-columns:repeat(2,1fr);gap:11px}
+  .stat{padding:17px 15px}
+  .stat .num{font-size:1.45rem}
+  .vt-item{padding-left:38px}
+  .quiz-card{padding:24px 20px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<div class="bg-stars" id="bgStars" aria-hidden="true"></div>
+<div class="bg-dots" aria-hidden="true"></div>
+<div class="orbs" aria-hidden="true">
+  <div class="orb o1"></div>
+  <div class="orb o2"></div>
+  <div class="orb o3"></div>
+  <div class="orb o4"></div>
+</div>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="#inicio" data-route="inicio">
+      <span class="brand-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/>
+          <path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/>
+          <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/>
+          <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/>
+        </svg>
+      </span>
+      <span>Astronáutica</span>
+    </a>
+
+    <nav class="nav" aria-label="Navegación principal">
+      <button class="nav-link active" data-route="inicio">Inicio</button>
+      <button class="nav-link" data-route="cohetes">Cohetes</button>
+      <button class="nav-link" data-route="viajes">Viajes</button>
+      <button class="nav-link" data-route="satelites">Satélites</button>
+      <button class="nav-link" data-route="linea">Historia</button>
+      <button class="nav-link" data-route="glosario">Glosario</button>
+      <button class="nav-link" data-route="modelos">Modelos</button>
+      <button class="nav-link" data-route="quiz">Quiz</button>
+    </nav>
+
+    <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema">
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round">
+        <circle cx="12" cy="12" r="4"/>
+        <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>
+      </svg>
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<main>
+
+  <!-- ================= INICIO ================= -->
+  <section class="view active" data-view="inicio">
+    <div class="hero">
+      <span class="pill"><span class="dot"></span>Del sueño de Ícaro a la Luna y Marte</span>
+      <h1 class="hero-title">Astronáutica, <span class="grad">explicada simple</span></h1>
+      <p class="lead">
+        Cómo funcionan los cohetes, cómo viajan las naves, qué hacen los satélites, la historia de la carrera espacial,
+        un glosario para no perderte y modelos caseros para construir con niños.
+      </p>
+      <div class="hero-actions">
+        <button class="btn btn-primary" data-route="cohetes">
+          ¿Cómo funciona un cohete?
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+        <button class="btn btn-ghost" data-route="modelos">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9l6 6-3 3-6-6M10 15l-6-6 3-3 6 6M3 21l6-6"/></svg>
+          Modelos caseros
+        </button>
+      </div>
+    </div>
+
+    <div class="stats reveal">
+      <div class="stat"><div class="num" data-count="7" data-suffix=" km/s">0</div><div class="lbl">Velocidad orbital baja</div></div>
+      <div class="stat"><div class="num" data-count="11.2" data-suffix=" km/s">0</div><div class="lbl">Velocidad de escape terrestre</div></div>
+      <div class="stat"><div class="num" data-count="400" data-suffix=" km">0</div><div class="lbl">Altitud de la ISS</div></div>
+      <div class="stat"><div class="num" data-count="5500" data-suffix="">0</div><div class="lbl">Satélites activos (2025)</div></div>
+    </div>
+
+    <div class="sec-head reveal">
+      <h2>Un recorrido por la aventura espacial</h2>
+      <p>Desde la física más básica hasta los proyectos para volver a la Luna. Todo con diagramas, cronologías y actividades para hacer en casa.</p>
+    </div>
+
+    <div class="module-grid">
+      <button class="module reveal" data-route="cohetes" style="--d:0ms">
+        <span class="module-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/></svg>
+        </span>
+        <h3>Cohetes</h3>
+        <p>Cómo funcionan, sus partes y por qué la tercera ley de Newton lo hace todo posible.</p>
+        <span class="arrow">Ver cohetes
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </button>
+
+      <button class="module reveal" data-route="viajes" style="--d:40ms">
+        <span class="module-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><ellipse cx="12" cy="12" rx="10" ry="4"/><ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(60 12 12)"/></svg>
+        </span>
+        <h3>Viajes espaciales</h3>
+        <p>Órbitas, trayectorias, maniobras y cómo se llega a otro planeta sin quedarse sin combustible.</p>
+        <span class="arrow">Ver viajes
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </button>
+
+      <button class="module reveal" data-route="satelites" style="--d:80ms">
+        <span class="module-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="6" height="6" rx="1"/><path d="M5 5l4 4M15 15l4 4M19 5l-4 4M5 19l4-4"/></svg>
+        </span>
+        <h3>Satélites</h3>
+        <p>Tipos, órbitas y para qué sirven: GPS, clima, comunicaciones, ciencia y espionaje.</p>
+        <span class="arrow">Ver satélites
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </button>
+
+      <button class="module reveal" data-route="linea" style="--d:120ms">
+        <span class="module-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h18M6 8v8M12 4v16M18 8v8"/></svg>
+        </span>
+        <h3>Línea histórica</h3>
+        <p>De Tsiolkovski a Starship: la carrera espacial en una cronología clara.</p>
+        <span class="arrow">Ver historia
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </button>
+
+      <button class="module reveal" data-route="glosario" style="--d:160ms">
+        <span class="module-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5V5a2 2 0 0 1 2-2h14v16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/><path d="M4 15h16"/></svg>
+        </span>
+        <h3>Glosario</h3>
+        <p>Empuje, delta-v, perigeo, apogeo, escudo térmico… Todos los términos que necesitas.</p>
+        <span class="arrow">Abrir glosario
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </button>
+
+      <button class="module reveal" data-route="modelos" style="--d:200ms">
+        <span class="module-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9l6 6-3 3-6-6M10 15l-6-6 3-3 6 6M3 21l6-6"/></svg>
+        </span>
+        <h3>Modelos caseros</h3>
+        <p>Cohete de agua, globo propulsado, paracaídas y otros experimentos para hacer con niños.</p>
+        <span class="arrow">Ver modelos
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </button>
+
+      <button class="module reveal" data-route="quiz" style="--d:240ms">
+        <span class="module-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l2 2 4-4"/><rect x="3" y="4" width="18" height="16" rx="3"/></svg>
+        </span>
+        <h3>Quiz</h3>
+        <p>Diez preguntas al azar sobre cohetes, satélites, historia espacial y modelos caseros.</p>
+        <span class="arrow">Empezar quiz
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </button>
+    </div>
+
+    <div class="note ref reveal">
+      <strong>El espacio no es tan lejos:</strong> la línea de Kármán, considerada el límite del espacio,
+      está a solo 100 km de altura. En coche, a 100 km/h, tardaríamos una hora en llegar.
+      El problema no es subir, sino <em>subir lo suficientemente rápido</em> para no caer.
+    </div>
+  </section>
+
+  <!-- ================= COHETES ================= -->
+  <section class="view" data-view="cohetes">
+    <div class="sec-head section">
+      <h2>¿Cómo funciona un cohete?</h2>
+      <p>Un cohete no necesita "empujarse contra el aire". Funciona en el vacío gracias a la tercera ley de Newton: si expulsa gas hacia abajo, el cohete recibe un empuje hacia arriba.</p>
+    </div>
+
+    <div class="diagram-wrap reveal">
+      <h4>Partes de un cohete</h4>
+      <p class="sub">Pasa el cursor sobre cada parte para ver su función.</p>
+      <svg id="rocketSvg" viewBox="0 0 400 520" aria-label="Partes de un cohete"></svg>
+      <div class="info-panel" id="rocketInfo">
+        <div class="ip-hint">Pasa el cursor sobre cada parte del cohete.</div>
+      </div>
+    </div>
+
+    <div class="grid-3" style="margin-top:24px">
+      <div class="card reveal">
+        <span class="kicker">1ª ley</span>
+        <h3>Inercia</h3>
+        <p>Un cuerpo en reposo o en movimiento rectilíneo uniforme sigue así hasta que una fuerza actúe sobre él. Un cohete en el espacio no se detiene solo: sigue su trayectoria hasta que algo lo frena.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">2ª ley</span>
+        <h3>F = m · a</h3>
+        <p>La fuerza es igual a la masa por la aceleración. Cuanto más masa tenga un cohete, más empuje necesita para acelerar. Por eso los cohetes pierden etapas y se hacen cada vez más ligeros.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">3ª ley</span>
+        <h3>Acción y reacción</h3>
+        <p>Cada acción tiene una reacción igual y opuesta. El cohete expulsa gas caliente hacia abajo y recibe un empuje hacia arriba. Funciona igual en el vacío, porque no necesita aire.</p>
+      </div>
+    </div>
+
+    <div class="diagram-wrap reveal" style="margin-top:24px">
+      <h4>Propulsión: los tres tipos de motor</h4>
+      <p class="sub">Los motores de cohete se clasifican por el tipo de combustible que queman.</p>
+      <div class="vt" id="propulsionList"></div>
+    </div>
+
+    <div class="note reveal good">
+      <strong>Ecuación de Tsiolkovski:</strong> la velocidad final de un cohete depende de dos cosas:
+      la velocidad del gas que expulsa y la relación entre el peso inicial con combustible y el peso final sin él.
+      Por eso los cohetes son casi todo combustible en el momento del lanzamiento.
+    </div>
+  </section>
+
+  <!-- ================= VIAJES ================= -->
+  <section class="view" data-view="viajes">
+    <div class="sec-head section">
+      <h2>Viajes espaciales</h2>
+      <p>Poner algo en órbita no es solo cuestión de subir: hay que darle velocidad lateral suficiente para que la caída libre nunca termine. Y para ir a otro planeta hay que elegir la trayectoria y la maniobra correcta.</p>
+    </div>
+
+    <div class="diagram-wrap reveal">
+      <h4>¿Por qué orbitan los satélites?</h4>
+      <p class="sub">Si lanzas un objeto lo suficientemente rápido de forma horizontal, cae al suelo pero la Tierra se curva antes de que toque el suelo. Eso es una órbita.</p>
+      <svg id="orbitSvg" viewBox="0 0 520 320" aria-label="Cómo funciona una órbita"></svg>
+    </div>
+
+    <div class="grid-2" style="margin-top:24px">
+      <div class="card reveal">
+        <span class="kicker">Velocidad</span>
+        <h3>¿A qué velocidad se viaja?</h3>
+        <div class="progress-item">
+          <div class="pi-label"><span>Órbita baja (LEO)</span><span>~7,8 km/s</span></div>
+          <div class="progress-track"><div class="progress-fill" style="--pct:78%"></div></div>
+        </div>
+        <div class="progress-item">
+          <div class="pi-label"><span>Órbita geoestacionaria</span><span>~3,1 km/s</span></div>
+          <div class="progress-track"><div class="progress-fill" style="--pct:31%;background:linear-gradient(90deg,var(--accent-2),var(--accent-3))"></div></div>
+        </div>
+        <div class="progress-item">
+          <div class="pi-label"><span>Escape terrestre</span><span>~11,2 km/s</span></div>
+          <div class="progress-track"><div class="progress-fill" style="--pct:100%;background:linear-gradient(90deg,var(--accent-4),var(--accent-3))"></div></div>
+        </div>
+        <div class="progress-item">
+          <div class="pi-label"><span>Transferencia a Marte</span><span>~11,6 km/s</span></div>
+          <div class="progress-track"><div class="progress-fill" style="--pct:100%;background:linear-gradient(90deg,var(--bad),#7f1d1d)"></div></div>
+        </div>
+        <p style="font-size:.85rem;color:var(--muted);margin-top:14px">
+          Son velocidades relativas al centro de la Tierra. En la práctica, se suman las velocidades de rotación
+          y las maniobras de asistencia gravitatoria.
+        </p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Maniobras</span>
+        <h3>Asistencia gravitatoria</h3>
+        <p>Una nave puede "robar" energía a un planeta al pasar cerca de él. Esto le permite cambiar de dirección y ganar velocidad sin gastar combustible. Las Voyager y las New Horizons usaron esta técnica para llegar a los confines del sistema solar.</p>
+        <p style="margin-top:12px">También se usa para frenar, no solo para acelerar: una nave puede llegar a la órbita de un planeta con mucha velocidad relativa y usar su gravedad para "curvar" la trayectoria.</p>
+      </div>
+    </div>
+
+    <div class="diagram-wrap reveal" style="margin-top:24px">
+      <h4>Tipos de trayectoria</h4>
+      <p class="sub">Las misiones espaciales no van en línea recta. Estas son las trayectorias más usadas.</p>
+      <div class="vt" id="trajectoryList"></div>
+    </div>
+
+    <div class="note reveal">
+      <strong>El "punto de no retorno":</strong> en las misiones Apolo, cuando la nave pasaba cierto punto de la trayectoria hacia la Luna,
+      ya no podía volver a la Tierra sin usar el motor del módulo de servicio. Los controladores lo llamaban el punto de no retorno.
+    </div>
+  </section>
+
+  <!-- ================= SATÉLITES ================= -->
+  <section class="view" data-view="satelites">
+    <div class="sec-head section">
+      <h2>Satélites</h2>
+      <p>Un satélite es cualquier objeto que orbita alrededor de otro más grande. Los hay naturales (la Luna) y artificiales (los que hemos puesto en órbita). Aquí nos centramos en los artificiales.</p>
+    </div>
+
+    <div class="diagram-wrap reveal">
+      <h4>Órbitas principales</h4>
+      <p class="sub">Cada órbita tiene una altitud y una función distinta. Pasa el cursor para ver el detalle.</p>
+      <svg id="orbitTypesSvg" viewBox="0 0 520 400" aria-label="Tipos de órbitas"></svg>
+      <div class="info-panel" id="orbitInfo">
+        <div class="ip-hint">Pasa el cursor sobre cada órbita.</div>
+      </div>
+    </div>
+
+    <div class="grid-2" style="margin-top:24px">
+      <div class="card reveal">
+        <span class="kicker">Tipos de satélite</span>
+        <h3>¿Para qué sirven?</h3>
+        <ul style="list-style:none;padding:0;margin-top:10px;display:flex;flex-direction:column;gap:8px">
+          <li style="display:flex;gap:10px"><span style="width:6px;height:6px;border-radius:50%;background:var(--accent);flex:none;margin-top:9px"></span><span style="font-size:.86rem;color:var(--muted)"><strong style="color:var(--text)">Comunicaciones:</strong> telefonía, internet, televisión.</span></li>
+          <li style="display:flex;gap:10px"><span style="width:6px;height:6px;border-radius:50%;background:var(--accent-2);flex:none;margin-top:9px"></span><span style="font-size:.86rem;color:var(--muted)"><strong style="color:var(--text)">Navegación:</strong> GPS, Galileo, GLONASS, Beidou.</span></li>
+          <li style="display:flex;gap:10px"><span style="width:6px;height:6px;border-radius:50%;background:var(--accent-3);flex:none;margin-top:9px"></span><span style="font-size:.86rem;color:var(--muted)"><strong style="color:var(--text)">Meteorología:</strong> satélites geoestacionarios y polares.</span></li>
+          <li style="display:flex;gap:10px"><span style="width:6px;height:6px;border-radius:50%;background:var(--accent-4);flex:none;margin-top:9px"></span><span style="font-size:.86rem;color:var(--muted)"><strong style="color:var(--text)">Observación:</strong> cartografía, incendios, cultivos.</span></li>
+          <li style="display:flex;gap:10px"><span style="width:6px;height:6px;border-radius:50%;background:var(--good);flex:none;margin-top:9px"></span><span style="font-size:.86rem;color:var(--muted)"><strong style="color:var(--text)">Ciencia:</strong> telescopios, sondas interplanetarias.</span></li>
+          <li style="display:flex;gap:10px"><span style="width:6px;height:6px;border-radius:50%;background:var(--bad);flex:none;margin-top:9px"></span><span style="font-size:.86rem;color:var(--muted)"><strong style="color:var(--text)">Espionaje:</strong> reconocimiento militar y vigilancia.</span></li>
+        </ul>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Récords</span>
+        <h3>Datos curiosos</h3>
+        <ul style="list-style:none;padding:0;margin-top:10px;display:flex;flex-direction:column;gap:8px">
+          <li style="display:flex;gap:10px"><span style="width:6px;height:6px;border-radius:50%;background:var(--accent);flex:none;margin-top:9px"></span><span style="font-size:.86rem;color:var(--muted)"><strong style="color:var(--text)">Satélite más antiguo:</strong> Vanguard 1 (1958), aún en órbita aunque ya no funciona.</span></li>
+          <li style="display:flex;gap:10px"><span style="width:6px;height:6px;border-radius:50%;background:var(--accent-2);flex:none;margin-top:9px"></span><span style="font-size:.86rem;color:var(--muted)"><strong style="color:var(--text)">Mayor constelación:</strong> Starlink, con miles de satélites en órbita baja.</span></li>
+          <li style="display:flex;gap:10px"><span style="width:6px;height:6px;border-radius:50%;background:var(--accent-3);flex:none;margin-top:9px"></span><span style="font-size:.86rem;color:var(--muted)"><strong style="color:var(--text)">Más lejos:</strong> las Voyager, ya en el espacio interestelar.</span></li>
+          <li style="display:flex;gap:10px"><span style="width:6px;height:6px;border-radius:50%;background:var(--accent-4);flex:none;margin-top:9px"></span><span style="font-size:.86rem;color:var(--muted)"><strong style="color:var(--text)">Basura espacial:</strong> más de 30.000 objetos grandes catalogados, y millones de fragmentos pequeños.</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="note reveal danger">
+      <strong>El problema de la basura espacial:</strong> un fragmento de apenas 1 cm puede dañar gravemente un satélite.
+      A 7 km/s, el impacto equivale al de un coche a 100 km/h. Por eso se diseñan satélites que se desintegren al reentrar en la atmósfera
+      y se buscan soluciones para limpiar las órbitas.
+    </div>
+  </section>
+
+  <!-- ================= LÍNEA HISTÓRICA ================= -->
+  <section class="view" data-view="linea">
+    <div class="sec-head section">
+      <h2>Línea histórica de la astronautica</h2>
+      <p>De los primeros estudios teóricos a las misiones actuales. Los hitos más importantes en la historia de los viajes espaciales.</p>
+    </div>
+
+    <div class="vt" id="historyList"></div>
+
+    <div class="note ref reveal">
+      <strong>Dato curioso:</strong> el primer objeto humano que llegó al espacio no fue un satélite, sino una bomba V-2 alemana
+      que cruzó la línea de Kármán en 1944. La primera misión espacial propiamente dicha fue el Sputnik 1, en 1957.
+    </div>
+  </section>
+
+  <!-- ================= GLOSARIO ================= -->
+  <section class="view" data-view="glosario">
+    <div class="sec-head section">
+      <h2>Glosario espacial</h2>
+      <p>Los términos que más se usan en astronáutica, explicados de forma sencilla. Busca cualquier palabra para filtrar.</p>
+    </div>
+
+    <div class="gloss-shell">
+      <input type="text" id="glossSearch" class="gloss-search" placeholder="Buscar término… (ej: órbita, empuje, delta-v)" aria-label="Buscar término">
+      <div class="gloss-grid" id="glossGrid"></div>
+      <div id="glossEmpty" class="gloss-empty" style="display:none">No se encontraron términos con esa búsqueda.</div>
+    </div>
+
+    <div class="note ref reveal">
+      <strong>¿Falta algún término?</strong> Astronomía, astronautica y aeronáutica comparten muchos términos.
+      Si quieres añadir uno, la lista está pensada para ser ampliable.
+    </div>
+  </section>
+
+  <!-- ================= MODELOS CASEROS ================= -->
+  <section class="view" data-view="modelos">
+    <div class="sec-head section">
+      <h2>Modelos caseros para niños</h2>
+      <p>Experimentos sencillos para entender los principios de la astronáutica construyendo. Todos usan materiales cotidianos y se hacen con supervisión de un adulto.</p>
+    </div>
+
+    <div class="alert-strip reveal" style="display:flex;align-items:center;gap:14px;padding:16px 20px;border-radius:14px;background:color-mix(in srgb,var(--accent) 12%,var(--surface));border:1px solid color-mix(in srgb,var(--accent) 35%,var(--border));margin-bottom:18px">
+      <div style="width:38px;height:38px;border-radius:10px;flex:none;display:grid;place-items:center;background:var(--accent);color:#0a0a0a">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:22px;height:22px"><path d="M12 9v4M12 17h.01"/><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg>
+      </div>
+      <div style="font-size:.92rem;line-height:1.5"><strong style="color:var(--accent);font-weight:700">Antes de empezar:</strong> los experimentos con agua a presión o fuego deben hacerse siempre al aire libre y con un adulto. No apuntes nunca a personas ni a animales.</div>
+    </div>
+
+    <div class="model-grid" id="modelGrid"></div>
+
+    <div class="note reveal good">
+      <strong>Consejo didáctico:</strong> después de cada experimento, pregunta a los niños qué creen que pasará
+      antes de hacerlo. Ese pequeño paso de "predicción" es lo que convierte una manualidad en ciencia.
+    </div>
+  </section>
+
+  <!-- ================= QUIZ ================= -->
+  <section class="view" data-view="quiz">
+    <div class="sec-head section">
+      <h2>Quiz de astronautica</h2>
+      <p>Diez preguntas al azar sobre cohetes, viajes espaciales, satélites, historia y modelos caseros.</p>
+    </div>
+    <div class="quiz-shell">
+      <div class="quiz-card" id="quizCard"></div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <p><strong>Astronáutica</strong> — Material educativo sobre cohetes, viajes espaciales y satélites. Datos de NASA, ESA y agencias espaciales internacionales.</p>
+</footer>
+
+<script>
+const $  = (sel, root = document) => root.querySelector(sel);
+const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+const SVGNS = 'http://www.w3.org/2000/svg';
+const el = (tag, attrs = {}, parent) => {
+  const e = document.createElementNS(SVGNS, tag);
+  for (const k in attrs) e.setAttribute(k, attrs[k]);
+  if (parent) parent.appendChild(e);
+  return e;
+};
+const theme = name => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+const accent = () => theme('--accent') || '#fbbf24';
+const accent2 = () => theme('--accent-2') || '#a78bfa';
+const accent3 = () => theme('--accent-3') || '#22d3ee';
+const accent4 = () => theme('--accent-4') || '#34d399';
+const badC = () => theme('--bad') || '#fb7185';
+const goodC = () => theme('--good') || '#34d399';
+const mutedC = () => theme('--muted') || '#8f9bb3';
+const textC  = () => theme('--text') || '#e8eef8';
+const borderC = () => theme('--border') || 'rgba(255,255,255,.1)';
+
+const htmlEl = document.documentElement;
+function setTheme(t){
+  htmlEl.setAttribute('data-theme', t);
+  try { localStorage.setItem('astro-theme', t); } catch(e){}
+}
+(function initTheme(){
+  let saved = null;
+  try { saved = localStorage.getItem('astro-theme'); } catch(e){}
+  setTheme(saved || 'dark');
+})();
+
+function buildStars(){
+  const cont = $('#bgStars');
+  if (!cont) return;
+  cont.innerHTML = '';
+  const n = 90;
+  for (let i = 0; i < n; i++){
+    const s = document.createElement('div');
+    s.className = 'star';
+    s.style.left = Math.random() * 100 + '%';
+    s.style.top = Math.random() * 100 + '%';
+    const size = 1 + Math.random() * 2;
+    s.style.width = size + 'px';
+    s.style.height = size + 'px';
+    s.style.setProperty('--tw-dur', (2 + Math.random() * 4) + 's');
+    s.style.setProperty('--tw-delay', (Math.random() * 4) + 's');
+    cont.appendChild(s);
+  }
+}
+buildStars();
+
+$('#themeToggle').addEventListener('click', () => {
+  setTheme(htmlEl.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+  if (currentRoute === 'cohetes') renderRocketSvg();
+  if (currentRoute === 'viajes') renderOrbitSvg();
+  if (currentRoute === 'satelites') renderOrbitTypes();
+});
+
+const ROUTES = ['inicio','cohetes','viajes','satelites','linea','glosario','modelos','quiz'];
+let currentRoute = 'inicio';
+function go(route, push = true){
+  if (!ROUTES.includes(route)) route = 'inicio';
+  currentRoute = route;
+  $$('.view').forEach(v => v.classList.toggle('active', v.dataset.view === route));
+  $$('.nav-link').forEach(b => b.classList.toggle('active', b.dataset.route === route));
+  if (push && location.hash.slice(1) !== route) history.pushState(null, '', '#' + route);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  requestAnimationFrame(() => {
+    $$('.view.active .reveal').forEach(el => el.classList.remove('in'));
+    checkReveal();
+    if (route === 'inicio') animateCounters();
+    if (route === 'cohetes'){ renderRocketSvg(); renderPropulsionList(); }
+    if (route === 'viajes'){ renderOrbitSvg(); renderTrajectoryList(); }
+    if (route === 'satelites') renderOrbitTypes();
+    if (route === 'linea') renderHistory();
+    if (route === 'glosario') renderGlossary();
+    if (route === 'modelos') renderModels();
+    if (route === 'quiz') startQuiz();
+  });
+}
+document.addEventListener('click', e => {
+  const t = e.target.closest('[data-route]');
+  if (t) { e.preventDefault(); go(t.dataset.route); }
+});
+window.addEventListener('popstate', () => go(location.hash.slice(1) || 'inicio', false));
+
+const revealObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('in');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+function checkReveal(){ $$('.view.active .reveal:not(.in)').forEach(el => revealObserver.observe(el)); }
+function animateCounters(){
+  $$('.num[data-count]').forEach(el => {
+    if (el.dataset.done === '1') return;
+    el.dataset.done = '1';
+    const target = parseFloat(el.dataset.count);
+    const suffix = el.dataset.suffix || '';
+    const isDecimal = String(el.dataset.count).includes('.');
+    const dur = 1600;
+    const start = performance.now();
+    function tick(now){
+      const p = Math.min((now - start) / dur, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      const val = target * eased;
+      el.textContent = (isDecimal ? val.toFixed(1) : Math.round(val)).toLocaleString('es-ES') + suffix;
+      if (p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  });
+}
+
+/* ============================================================
+   COHETE SVG
+   ============================================================ */
+const ROCKET_PARTS = [
+  { id:'nose', name:'Ojiva (cofia)', desc:'Protege la carga útil durante el ascenso. Suele ser puntiaguda para reducir la resistencia del aire. En las misiones tripuladas incluye el sistema de escape.' },
+  { id:'payload', name:'Carga útil', desc:'Es la parte más importante: el satélite, la nave o la sonda. Todo lo demás existe para ponerla en el lugar correcto con la velocidad correcta.' },
+  { id:'fuel', name:'Tanques de combustible', desc:'Contienen el combustible y el comburente. Ocupan la mayor parte del volumen del cohete: entre el 80 y el 90 % de su masa total.' },
+  { id:'engine', name:'Motores', desc:'Expulsan gas a alta velocidad hacia abajo y generan empuje. Pueden ser de combustible sólido, líquido o híbrido.' },
+  { id:'boosters', name:'Propulsores laterales', desc:'Cohetes auxiliares que se encienden al principio para dar un empuje extra al despegar. Se desprenden cuando se agotan.' },
+  { id:'fins', name:'Aletas', desc:'Superficies que estabilizan el cohete durante el vuelo atmosférico. Evitan que gire o se desvíe de la trayectoria.' }
+];
+
+function renderRocketSvg(){
+  const svg = $('#rocketSvg');
+  const info = $('#rocketInfo');
+  if (!svg) return;
+  svg.innerHTML = '';
+
+  // Cuerpo del cohete
+  el('rect', { x: 150, y: 120, width: 100, height: 300, rx: 8, fill:'#d4d4d8', stroke:'#52525b', 'stroke-width':2 }, svg);
+  // Ojiva
+  const nose = el('path', { d:'M 150 120 Q 200 20 250 120 Z', fill:'#e4e4e7', stroke:'#52525b', 'stroke-width':2, class:'hit' }, svg);
+  el('text', { x:200, y: 90, 'text-anchor':'middle', 'font-family':'Inter,sans-serif', 'font-size':11, 'font-weight':700, fill:'#18181b' }, svg).textContent = 'Ojiva';
+  nose.addEventListener('mouseenter', () => showPartInfo('nose'));
+
+  // Carga útil (banda superior)
+  const payload = el('rect', { x: 150, y: 130, width: 100, height: 60, fill:'#a78bfa', opacity:0.7, class:'hit' }, svg);
+  el('text', { x:200, y: 165, 'text-anchor':'middle', 'font-family':'Inter,sans-serif', 'font-size':11, 'font-weight':700, fill:'#fff' }, svg).textContent = 'Carga útil';
+  payload.addEventListener('mouseenter', () => showPartInfo('payload'));
+
+  // Tanques
+  const fuel = el('rect', { x: 150, y: 190, width: 100, height: 150, fill:'#22d3ee', opacity:0.55, class:'hit' }, svg);
+  el('text', { x:200, y: 270, 'text-anchor':'middle', 'font-family':'Inter,sans-serif', 'font-size':11, 'font-weight':700, fill:'#0a0a0a' }, svg).textContent = 'Combustible';
+  fuel.addEventListener('mouseenter', () => showPartInfo('fuel'));
+
+  // Motores
+  const engine = el('rect', { x: 170, y: 340, width: 60, height: 60, rx: 6, fill:'#52525b', class:'hit' }, svg);
+  el('text', { x:200, y: 375, 'text-anchor':'middle', 'font-family':'Inter,sans-serif', 'font-size':10, 'font-weight':700, fill:'#fff' }, svg).textContent = 'Motor';
+  engine.addEventListener('mouseenter', () => showPartInfo('engine'));
+
+  // Llama
+  const flame = el('path', { d:'M 175 400 Q 200 480 225 400 Q 220 440 200 470 Q 180 440 175 400 Z', fill:'#f97316', opacity:0.85 }, svg);
+  el('animate', { attributeName:'opacity', values:'0.85;0.55;0.85', dur:'0.6s', repeatCount:'indefinite' }, flame);
+
+  // Propulsores laterales
+  const bL = el('rect', { x: 105, y: 250, width: 40, height: 110, rx: 6, fill:'#a1a1aa', stroke:'#52525b', 'stroke-width':2, class:'hit' }, svg);
+  const bR = el('rect', { x: 255, y: 250, width: 40, height: 110, rx: 6, fill:'#a1a1aa', stroke:'#52525b', 'stroke-width':2, class:'hit' }, svg);
+  el('text', { x:125, y: 310, 'text-anchor':'middle', 'font-family':'Inter,sans-serif', 'font-size':9, 'font-weight':700, fill:'#18181b' }, svg).textContent = 'Booster';
+  el('text', { x:275, y: 310, 'text-anchor':'middle', 'font-family':'Inter,sans-serif', 'font-size':9, 'font-weight':700, fill:'#18181b' }, svg).textContent = 'Booster';
+  bL.addEventListener('mouseenter', () => showPartInfo('boosters'));
+  bR.addEventListener('mouseenter', () => showPartInfo('boosters'));
+
+  // Aletas
+  const finL = el('path', { d:'M 150 380 L 110 420 L 150 420 Z', fill:'#71717a', stroke:'#3f3f46', 'stroke-width':2, class:'hit' }, svg);
+  const finR = el('path', { d:'M 250 380 L 290 420 L 250 420 Z', fill:'#71717a', stroke:'#3f3f46', 'stroke-width':2, class:'hit' }, svg);
+  finL.addEventListener('mouseenter', () => showPartInfo('fins'));
+  finR.addEventListener('mouseenter', () => showPartInfo('fins'));
+
+  // Etiqueta
+  el('text', { x:200, y: 505, 'text-anchor':'middle', 'font-family':'Space Grotesk,sans-serif', 'font-size':12, 'font-weight':700, fill: mutedC() }, svg).textContent = 'PARTES DE UN COHETE';
+
+  function showPartInfo(id){
+    const p = ROCKET_PARTS.find(p => p.id === id);
+    if (!p) return;
+    info.classList.add('active');
+    info.innerHTML = `
+      <div class="ip-name">${p.name}</div>
+      <div class="ip-desc">${p.desc}</div>
+    `;
+  }
+}
+
+function renderPropulsionList(){
+  const container = $('#propulsionList');
+  if (!container) return;
+  const types = [
+    { time:'Combustible sólido', tag:'SRB', title:'Sólido', desc:'Mezcla de combustible y oxidante ya combinada. No se puede apagar una vez encendido. Se usa en propulsores laterales y en misiles.', color:'#fbbf24', extra:'Ejemplo: los propulsores laterales del transbordador espacial o los cohetes de la familia Ariane.' },
+    { time:'Combustible líquido', tag:'LRE', title:'Líquido', desc:'Combustible y oxidante almacenados por separado, mezclados en la cámara de combustión. Más complejo, pero más controlable y eficiente.', color:'#a78bfa', extra:'Ejemplo: el motor RS-25 del transbordador o los motores Merlin de SpaceX, que usan queroseno y oxígeno líquido.' },
+    { time:'Híbrido', tag:'HRE', title:'Híbrido', desc:'Combina un combustible sólido con un oxidante líquido o gaseoso. Más sencillo que el líquido y más seguro que el sólido.', color:'#22d3ee', extra:'Ejemplo: el motor de la SpaceShipOne de Virgin Galactic, que usaba caucho sólido y óxido nitroso.' }
+  ];
+  container.innerHTML = types.map((t, i) => `
+    <div class="vt-item" style="--c:${t.color};--d:${i*60}ms">
+      <span class="vt-dot"></span>
+      <div class="vt-card">
+        <div class="vt-top">
+          <span class="vt-year">${t.time}</span>
+          <span class="vt-era">${t.tag}</span>
+        </div>
+        <h4>Motor de ${t.title.toLowerCase()}</h4>
+        <p>${t.desc}</p>
+        <button class="vt-more" type="button">
+          <span>Más detalle</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="vt-extra"><div><p>${t.extra}</p></div></div>
+      </div>
+    </div>
+  `).join('');
+  container.onclick = e => {
+    const btn = e.target.closest('.vt-more');
+    if (!btn) return;
+    const item = btn.closest('.vt-item');
+    const open = item.classList.toggle('open');
+    btn.querySelector('span').textContent = open ? 'Ocultar detalle' : 'Más detalle';
+  };
+}
+
+/* ============================================================
+   ÓRBITA SVG (viajes)
+   ============================================================ */
+function renderOrbitSvg(){
+  const svg = $('#orbitSvg');
+  if (!svg) return;
+  svg.innerHTML = '';
+
+  const cx = 260, cy = 160;
+  // Tierra
+  const earth = el('circle', { cx, cy, r: 60, fill: '#06b6d4', opacity: 0.7 }, svg);
+  el('circle', { cx: cx - 20, cy: cy - 15, r: 15, fill:'#10b981', opacity:0.7 }, svg);
+  el('circle', { cx: cx + 25, cy: cy + 10, r: 20, fill:'#10b981', opacity:0.5 }, svg);
+
+  // Trayectorias curvas
+  const trajectories = [
+    { d:'M 100 60 Q 260 100 420 60', color:'#fb7185', label:'Caída corta' },
+    { d:'M 100 40 Q 260 60 420 20', color:'#fbbf24', label:'Caída más lejos' },
+    { d:'M 80 20 Q 260 0 440 -20', color:'#a78bfa', label:'Órbita' }
+  ];
+
+  trajectories.forEach((t, i) => {
+    el('path', { d: t.d, fill:'none', stroke: t.color, 'stroke-width': 2.5, 'stroke-dasharray': i === 2 ? 'none' : '6 4', opacity: 0.9 }, svg);
+  });
+
+  // Flechas indicando velocidad
+  el('text', { x: 40, y: 30, 'font-family':'Inter,sans-serif', 'font-size':11, 'font-weight':700, fill: badC() }, svg).textContent = 'Lento → cae';
+  el('text', { x: 40, y: 130, 'font-family':'Inter,sans-serif', 'font-size':11, 'font-weight':700, fill: accent() }, svg).textContent = 'Rápido → orbita';
+  el('text', { x: 340, y: 300, 'font-family':'Inter,sans-serif', 'font-size':11, 'font-weight':600, fill: mutedC() }, svg).textContent = 'Solo hay que ir lo bastante rápido';
+
+  el('text', { x: 260, y: 310, 'text-anchor':'middle', 'font-family':'Space Grotesk,sans-serif', 'font-size':12, 'font-weight':700, fill: mutedC() }, svg).textContent = 'CÓMO FUNCIONA UNA ÓRBITA';
+}
+
+function renderTrajectoryList(){
+  const container = $('#trajectoryList');
+  if (!container) return;
+  const trajs = [
+    { time:'Órbita baja (LEO)', tag:'~400 km', title:'Órbita baja', desc:'La más usada para la ISS, satélites de observación y constelaciones de internet. Requiere unos 7,8 km/s.', color:'#22d3ee', extra:'A esta altitud, una vuelta completa a la Tierra dura unos 90 minutos.' },
+    { time:'Órbita geoestacionaria', tag:'~35.786 km', title:'Órbita geoestacionaria', desc:'El satélite tarda lo mismo que la Tierra en girar, así que parece quieto en el cielo. Ideal para comunicaciones y meteorología.', color:'#a78bfa', extra:'Se sitúa sobre el ecuador, de modo que cubre siempre la misma región del planeta.' },
+    { time:'Órbita polar', tag:'~800 km', title:'Órbita polar', desc:'El satélite pasa por los polos y cubre toda la Tierra a medida que esta gira. Es la órbita típica de los satélites meteorológicos y de observación.', color:'#34d399', extra:'Un satélite polar puede ver cualquier punto del planeta al menos una vez al día.' },
+    { time:'Trayectoria de transferencia', tag:'Hohmann', title:'Transferencia de Hohmann', desc:'La maniobra más eficiente para viajar entre dos órbitas. Consiste en dos encendidos: uno para salir de la órbita de origen y otro para entrar en la de destino.', color:'#fbbf24', extra:'Es la base de las misiones a Marte, Venus y los planetas exteriores. La ventana de lanzamiento se abre cada cierto tiempo.' },
+    { time:'Asistencia gravitatoria', tag:'Flyby', title:'Asistencia gravitatoria', desc:'Usar la gravedad de un planeta para cambiar de dirección o ganar velocidad sin gastar combustible.', color:'#f97316', extra:'Las Voyager usaron asistencias de Júpiter y Saturno para llegar a los confines del sistema solar.' }
+  ];
+  container.innerHTML = trajs.map((t, i) => `
+    <div class="vt-item" style="--c:${t.color};--d:${i*50}ms">
+      <span class="vt-dot"></span>
+      <div class="vt-card">
+        <div class="vt-top">
+          <span class="vt-year">${t.time}</span>
+          <span class="vt-era">${t.tag}</span>
+        </div>
+        <h4>${t.title}</h4>
+        <p>${t.desc}</p>
+        <button class="vt-more" type="button">
+          <span>Más detalle</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="vt-extra"><div><p>${t.extra}</p></div></div>
+      </div>
+    </div>
+  `).join('');
+  container.onclick = e => {
+    const btn = e.target.closest('.vt-more');
+    if (!btn) return;
+    const item = btn.closest('.vt-item');
+    const open = item.classList.toggle('open');
+    btn.querySelector('span').textContent = open ? 'Ocultar detalle' : 'Más detalle';
+  };
+}
+
+/* ============================================================
+   SATÉLITES: TIPOS DE ÓRBITA
+   ============================================================ */
+const ORBIT_TYPES = [
+  { n:'LEO', label:'Órbita baja', r:70, color:'#22d3ee', desc:'De 160 a 2.000 km de altitud. Se usa para la ISS, satélites de observación y constelaciones de internet. Una vuelta dura unos 90 minutos.' },
+  { n:'MEO', label:'Órbita media', r:110, color:'#a78bfa', desc:'De 2.000 a 35.786 km. Es la órbita típica de los sistemas de navegación como GPS, Galileo o GLONASS. Cada satélite tarda unas 12 horas.' },
+  { n:'GEO', label:'Órbita geoestacionaria', r:150, color:'#34d399', desc:'A 35.786 km sobre el ecuador. El satélite gira al mismo ritmo que la Tierra, así que parece quieto. Ideal para comunicaciones y meteorología.' },
+  { n:'HEO', label:'Órbita alta elíptica', r:190, color:'#fbbf24', desc:'Órbitas muy elípticas que pasan cerca de la Tierra y se alejan mucho. Se usan para cubrir latitudes altas, como los satélites Molniya rusos.' }
+];
+
+function renderOrbitTypes(){
+  const svg = $('#orbitTypesSvg');
+  const info = $('#orbitInfo');
+  if (!svg) return;
+  svg.innerHTML = '';
+
+  const cx = 260, cy = 200;
+
+  // Tierra
+  el('circle', { cx, cy, r: 30, fill:'#06b6d4', opacity: 0.8 }, svg);
+  el('text', { x: cx, y: cy + 4, 'text-anchor':'middle', 'font-family':'Inter,sans-serif', 'font-size':10, 'font-weight':700, fill:'#fff' }, svg).textContent = 'Tierra';
+
+  ORBIT_TYPES.forEach((o, i) => {
+    const g = el('g', { class:'hit', style:'cursor:pointer' }, svg);
+    el('circle', { cx, cy, r: o.r, fill:'none', stroke: o.color, 'stroke-width': 2, 'stroke-dasharray': '5 4', opacity: 0.85 }, g);
+    // Punto orbital
+    const angle = (i * 70 + 30) * Math.PI / 180;
+    const px = cx + Math.cos(angle) * o.r;
+    const py = cy + Math.sin(angle) * o.r;
+    el('circle', { cx: px, cy: py, r: 6, fill: o.color }, g);
+    el('text', { x: px + 10, y: py + 4, 'font-family':'Inter,sans-serif', 'font-size':11, 'font-weight':700, fill: o.color }, g).textContent = o.n;
+
+    g.addEventListener('mouseenter', () => {
+      info.classList.add('active');
+      info.innerHTML = `
+        <div class="ip-name" style="color:${o.color}">${o.n} — ${o.label}</div>
+        <div class="ip-desc">${o.desc}</div>
+      `;
+    });
+  });
+
+  el('text', { x: cx, y: 30, 'text-anchor':'middle', 'font-family':'Space Grotesk,sans-serif', 'font-size':12, 'font-weight':700, fill: mutedC() }, svg).textContent = 'TIPOS DE ÓRBITA';
+}
+
+/* ============================================================
+   HISTORIA
+   ============================================================ */
+const HISTORY_EVENTS = [
+  { time:'1903', tag:'Teoría', title:'Tsiolkovski y la ecuación del cohete', desc:'Konstantin Tsiolkovski publica la ecuación que relaciona la velocidad de un cohete con la velocidad del gas expulsado y la masa. Es el fundamento de toda la astronautica moderna.', color:'#fbbf24', extra:'Tsiolkovski era maestro de escuela y sordo. Nunca construyó un cohete, pero su trabajo matemático fue esencial para los ingenieros soviéticos.' },
+  { time:'1926', tag:'Primer vuelo', title:'Robert Goddard y el primer cohete líquido', desc:'El ingeniero estadounidense Robert Goddard lanza el primer cohete de combustible líquido. Solo voló 12 metros, pero demostró que la propulsión líquida era viable.', color:'#a78bfa', extra:'Goddard fue ridiculizado por la prensa de su época. Hoy es considerado uno de los padres de la astronautica.' },
+  { time:'1944', tag:'Espacio', title:'El primer objeto en el espacio', desc:'Un cohete V-2 alemán alcanza los 176 km de altitud, superando la línea de Kármán (100 km). Es el primer objeto humano que llega al espacio.', color:'#fb7185', extra:'El V-2 era un misil de guerra. Su tecnología fue la base de los cohetes espaciales de la posguerra, tanto en EE. UU. como en la URSS.' },
+  { time:'1957', tag:'Sputnik', title:'El Sputnik 1 inaugura la era espacial', desc:'La URSS pone en órbita el primer satélite artificial, el Sputnik 1. Emite un simple pitido que se escucha en todo el mundo y da inicio a la carrera espacial.', color:'#22d3ee', extra:'El Sputnik 1 pesaba 83,6 kg y transmitió durante 21 días. Su lanzamiento sorprendió a Occidente y desencadenó la creación de la NASA.' },
+  { time:'1961', tag:'Gagarin', title:'Yuri Gagarin, primer humano en el espacio', desc:'El cosmonauta soviético Yuri Gagarin orbita la Tierra una vez a bordo del Vostok 1. Es el primer ser humano en el espacio.', color:'#34d399', extra:'El vuelo duró 108 minutos. Gagarin eyectó de la cápsula antes del aterrizaje, algo que se mantuvo en secreto durante años.' },
+  { time:'1969', tag:'Apolo 11', title:'El hombre llega a la Luna', desc:'Neil Armstrong y Buzz Aldrin caminan sobre la Luna. Michael Collins los espera en órbita. Es el hito más famoso de la historia espacial.', color:'#fbbf24', extra:'"Un pequeño paso para el hombre, un gran salto para la humanidad". Seis misiones Apolo llegaron a la Luna entre 1969 y 1972.' },
+  { time:'1981', tag:'Transbordador', title:'Nace el transbordador espacial', desc:'El Columbia inaugura el programa del transbordador espacial de la NASA: la primera nave reutilizable que va y vuelve del espacio en un solo vehículo.', color:'#a78bfa', extra:'El programa duró 30 años y realizó 135 misiones. Dos accidentes (Challenger en 1986 y Columbia en 2003) costaron la vida a 14 astronautas.' },
+  { time:'1998', tag:'ISS', title:'Comienza la Estación Espacial Internacional', desc:'Se lanza el primer módulo de la ISS. Desde entonces, la estación ha estado habitada de forma continua desde el año 2000.', color:'#22d3ee', extra:'Es un proyecto conjunto de EE. UU., Rusia, Europa, Japón y Canadá. Orbita a unos 400 km de altitud y tarda 90 minutos en dar una vuelta a la Tierra.' },
+  { time:'2004', tag:'Privado', title:'SpaceShipOne y el turismo espacial', desc:'La nave privada SpaceShipOne realiza el primer vuelo suborbital tripulado financiado con fondos privados. Gana el premio Ansari X Prize.', color:'#34d399', extra:'Fue el primer paso hacia la industria del turismo espacial, que hoy incluye empresas como Virgin Galactic o Blue Origin.' },
+  { time:'2012', tag:'Marte', title:'Curiosity aterriza en Marte', desc:'El rover Curiosity de la NASA aterriza en el cráter Gale. Es el laboratorio móvil más grande jamás enviado a otro planeta.', color:'#f97316', extra:'El descenso fue tan complejo que los ingenieros lo llamaron "los siete minutos de terror". Funcionó a la perfección.' },
+  { time:'2015', tag:'Reutilización', title:'SpaceX recupera un cohete', desc:'SpaceX consigue aterrizar por primera vez la primera etapa de un cohete Falcon 9 tras un lanzamiento orbital. Comienza la era de los cohetes reutilizables.', color:'#fbbf24', extra:'Reutilizar el cohete reduce drásticamente el coste del acceso al espacio. Es la base de los cohetes actuales.' },
+  { time:'2024', tag:'Starship', title:'Starship y la vuelta a la Luna', desc:'SpaceX prueba Starship, el cohete más grande y potente jamás construido. Está diseñado para llevar personas a la Luna y a Marte, y es parte del programa Artemis de la NASA.', color:'#a78bfa', extra:'Starship es totalmente reutilizable y puede transportar más de 100 toneladas a la órbita baja.' }
+];
+
+function renderHistory(){
+  const container = $('#historyList');
+  if (!container) return;
+  container.innerHTML = HISTORY_EVENTS.map((h, i) => `
+    <div class="vt-item" style="--c:${h.color};--d:${i*40}ms">
+      <span class="vt-dot"></span>
+      <div class="vt-card">
+        <div class="vt-top">
+          <span class="vt-year">${h.time}</span>
+          <span class="vt-era">${h.tag}</span>
+        </div>
+        <h4>${h.title}</h4>
+        <p>${h.desc}</p>
+        <button class="vt-more" type="button">
+          <span>Más detalle</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="vt-extra"><div><p>${h.extra}</p></div></div>
+      </div>
+    </div>
+  `).join('');
+  container.onclick = e => {
+    const btn = e.target.closest('.vt-more');
+    if (!btn) return;
+    const item = btn.closest('.vt-item');
+    const open = item.classList.toggle('open');
+    btn.querySelector('span').textContent = open ? 'Ocultar detalle' : 'Más detalle';
+  };
+}
+
+/* ============================================================
+   GLOSARIO
+   ============================================================ */
+const GLOSSARY = [
+  { t:'Aceleración', d:'Cambio de velocidad por unidad de tiempo. En un cohete, se mide en g (1 g = 9,8 m/s²). Los astronautas sienten varias g durante el lanzamiento.' },
+  { t:'Apogeo', d:'Punto más alto de una órbita elíptica alrededor de la Tierra. Su opuesto es el perigeo.' },
+  { t:'Atmósfera', d:'Capa de gases que rodea un planeta. La atmósfera terrestre se divide en troposfera, estratosfera, mesosfera, termosfera y exosfera.' },
+  { t:'Carga útil', d:'Todo lo que un cohete transporta al espacio: satélites, naves, sondas o experimentos. Es la razón de ser de todo el lanzamiento.' },
+  { t:'Cápsula', d:'Vehículo tripulado que regresa a la Tierra. Suele tener forma de cono o de campana para protegerse del calor de la reentrada.' },
+  { t:'Cohete', d:'Vehículo que se mueve expulsando masa a alta velocidad. Funciona por la tercera ley de Newton y no necesita aire.' },
+  { t:'Comburente', d:'Sustancia que permite la combustión. En los cohetes, el oxígeno líquido es el comburente más habitual.' },
+  { t:'Delta-v', d:'Cambio de velocidad que puede realizar una nave. Es una medida de la cantidad de maniobras posibles. Cada viaje espacial tiene un delta-v asociado.' },
+  { t:'Empuje', d:'Fuerza que ejerce el motor de un cohete al expulsar gas. Se mide en newton (N) o en kilopondios (kgf).' },
+  { t:'Escudo térmico', d:'Material que protege una nave del calor extremo durante la reentrada atmosférica. Puede ser ablative (se desgasta) o reutilizable (como las losetas del transbordador).' },
+  { t:'Escape gravitatorio', d:'Velocidad mínima para alejarse indefinidamente de un cuerpo celeste. En la Tierra es de 11,2 km/s.' },
+  { t:'Geoestacionaria', d:'Órbita en la que un satélite tarda lo mismo que la Tierra en girar, por lo que parece quieto en el cielo. Está a 35.786 km sobre el ecuador.' },
+  { t:'Gravedad cero', d:'Expresión coloquial para la microgravedad. En órbita no hay ausencia de gravedad, sino caída libre constante: todo cae al mismo ritmo.' },
+  { t:'Impulso específico', d:'Medida de la eficiencia de un motor de cohete. Se mide en segundos y representa cuánto empuje se obtiene por unidad de combustible.' },
+  { t:'Inercia', d:'Tendencia de un cuerpo a mantener su estado de reposo o de movimiento. Es la primera ley de Newton.' },
+  { t:'Kármán, línea de', d:'Límite convencional del espacio, situado a 100 km de altitud. Por encima de esa altura, el aire es tan tenue que una aeronave no puede volar.' },
+  { t:'Lanzadera', d:'Cohete o vehículo diseñado para poner satélites u otras cargas en órbita. Se suele llamar "lanzador".' },
+  { t:'Órbita', d:'Trayectoria curva que describe un objeto alrededor de otro por efecto de la gravedad. Para mantenerse en órbita baja, hay que ir a unos 7,8 km/s.' },
+  { t:'Perigeo', d:'Punto más bajo de una órbita elíptica alrededor de la Tierra. Su opuesto es el apogeo.' },
+  { t:'Propulsor', d:'Motor que genera empuje. En los cohetes, puede ser de combustible sólido, líquido o híbrido.' },
+  { t:'Reentrada', d:'Regreso de una nave a la atmósfera terrestre. Genera temperaturas de hasta 1.500 °C por la compresión del aire.' },
+  { t:'Satélite', d:'Objeto que orbita alrededor de otro. Los hay naturales (la Luna) y artificiales (los que hemos puesto en órbita).' },
+  { t:'Sonda', d:'Nave espacial no tripulada enviada a explorar otros planetas, lunas o el espacio interestelar. Ejemplos: Voyager, Cassini, New Horizons.' },
+  { t:'Suborbital', d:'Vuelo que alcanza el espacio pero no llega a completar una órbita. Los cohetes de sondeo y el turismo espacial realizan vuelos suborbitales.' },
+  { t:'Tercera ley de Newton', d:'A toda acción corresponde una reacción igual y opuesta. Es el principio que explica el funcionamiento de los cohetes.' },
+  { t:'Transferencia de Hohmann', d:'Maniobra de dos encendidos para pasar de una órbita a otra. Es la forma más eficiente de viajar entre planetas.' },
+  { t:'Ventana de lanzamiento', d:'Período de tiempo en el que las condiciones son óptimas para lanzar una misión. Depende de la posición relativa de los planetas y del clima.' },
+  { t:'Voyager', d:'Programa de la NASA que lanzó dos sondas en 1977. Ambas han salido del sistema solar y siguen enviando datos desde el espacio interestelar.' }
+];
+
+function renderGlossary(){
+  const grid = $('#glossGrid');
+  const empty = $('#glossEmpty');
+  const search = $('#glossSearch');
+  if (!grid) return;
+
+  function render(filter = ''){
+    const q = filter.trim().toLowerCase();
+    const items = GLOSSARY.filter(g => !q || g.t.toLowerCase().includes(q) || g.d.toLowerCase().includes(q));
+    if (items.length === 0){
+      grid.innerHTML = '';
+      empty.style.display = 'block';
+      return;
+    }
+    empty.style.display = 'none';
+    grid.innerHTML = items.map(g => `
+      <div class="gloss-item">
+        <div class="gi-term">${g.t}</div>
+        <div class="gi-def">${g.d}</div>
+      </div>
+    `).join('');
+  }
+
+  render();
+  if (search){
+    search.addEventListener('input', e => render(e.target.value));
+  }
+}
+
+/* ============================================================
+   MODELOS CASEROS
+   ============================================================ */
+const MODELS = [
+  {
+    t:'Cohete de agua', sub:'Presión de aire y agua', icon:'rocket', c:'#22d3ee',
+    meta:['20–30 min','Fácil','Aire libre'],
+    desc:'El cohete de agua es el experimento clásico de astronáutica. Una botella de plástico con agua y aire a presión sale disparada por la tercera ley de Newton.',
+    steps:[
+      '<strong>Materiales:</strong> botella de refresco de 1,5 L, tapón de corcho o tapón especial, bomba de bicicleta, agua, cartón y cinta adhesiva.',
+      '<strong>Prepara el cuerpo:</strong> decora la botella con cartón y cinta para que parezca un cohete. Añade aletas de cartón en la base.',
+      '<strong>Llena la botella:</strong> añade agua hasta un tercio de su capacidad. Cuanta más agua, más impulso, pero menos duración.',
+      '<strong>Coloca el tapón:</strong> inserta el tapón con la válvula de la bomba. Asegúrate de que está bien sellado.',
+      '<strong>Presuriza:</strong> bombea aire con la bomba de bicicleta. El tapón saldrá disparado cuando la presión sea suficiente.',
+      '<strong>Lanza:</strong> coloca el cohete en una rampa improvisada (un tubo o una caja) y apunta hacia arriba. ¡Al aire!'
+    ],
+    tip:'Hazlo siempre al aire libre, con un adulto y sin apuntar a nadie. Añade un paracaídas de bolsa de plástico para que caiga suavemente.'
+  },
+  {
+    t:'Globo propulsado', sub:'Acción y reacción', icon:'balloon', c:'#fbbf24',
+    meta:['5 min','Muy fácil','Interior'],
+    desc:'Un globo que se desinfla empuja el aire hacia atrás y avanza hacia delante. Es la forma más sencilla de entender la tercera ley de Newton.',
+    steps:[
+      '<strong>Materiales:</strong> un globo, una pajita, hilo de coser y cinta adhesiva.',
+      '<strong>Prepara la guía:</strong> pasa el hilo por dentro de la pajita y tensa el hilo entre dos sillas o puntos fijos.',
+      '<strong>Infla el globo:</strong> sin cerrarlo del todo, pégalo a la pajita con cinta adhesiva.',
+      '<strong>Suelta el aire:</strong> cuando sueltes el globo, el aire sale por la boquilla y el globo avanza por el hilo.',
+      '<strong>Compara:</strong> prueba con globos más grandes o más pequeños para ver cómo cambia el recorrido.'
+    ],
+    tip:'Puedes decorar el globo como un cohete. Mide cuánto avanza con diferentes tamaños de globo para hacer un experimento comparativo.'
+  },
+  {
+    t:'Paracaídas de bolsa', sub:'Caída controlada', icon:'parachute', c:'#a78bfa',
+    meta:['15 min','Fácil','Interior / exterior'],
+    desc:'Los paracaídas aumentan la resistencia del aire y frenan la caída. Es el mismo principio que usan las cápsulas espaciales al regresar a la Tierra.',
+    steps:[
+      '<strong>Materiales:</strong> bolsa de plástico, tijeras, hilo, un pequeño peso (una tuerca o una piedra) y un vaso de papel.',
+      '<strong>Recorta el paracaídas:</strong> corta un cuadrado de 40 × 40 cm de la bolsa. Haz un pequeño agujero en el centro.',
+      '<strong>Ata los hilos:</strong> une las cuatro esquinas con hilos de igual longitud al vaso de papel.',
+      '<strong>Coloca el peso:</strong> pon la piedra o la tuerca dentro del vaso. Asegúrate de que esté bien sujeto.',
+      '<strong>Lánzalo:</strong> desde una altura segura, deja caer el paracaídas. Compara con una caída libre sin paracaídas.'
+    ],
+    tip:'Haz varios paracaídas de distintos tamaños y compara cuál cae más despacio. La ciencia está en la comparación.'
+  },
+  {
+    t:'Maqueta del sistema solar', sub:'Escala y órbitas', icon:'solar', c:'#34d399',
+    meta:['1 hora','Fácil','Interior'],
+    desc:'Una maqueta ayuda a visualizar la estructura del sistema solar, aunque es imposible hacerla a escala real (los planetas serían invisibles).',
+    steps:[
+      '<strong>Materiales:</strong> cartulina negra, bolas de porexpán de distintos tamaños, pintura, palillos, hilo y tijeras.',
+      '<strong>Pinta las bolas:</strong> una grande para el Sol, otras más pequeñas para los planetas. Usa colores reconocibles.',
+      '<strong>Monta el Sol:</strong> coloca el Sol en el centro de la cartulina con un palillo.',
+      '<strong>Añade los planetas:</strong> fija los planetas con palillos alrededor, respetando el orden: Mercurio, Venus, Tierra, Marte, Júpiter, Saturno, Urano, Neptuno.',
+      '<strong>Decora las órbitas:</strong> dibuja círculos con rotulador plateado o blanco para marcar las órbitas.',
+      '<strong>Añade detalles:</strong> anillos de cartón para Saturno, una luna pequeña para la Tierra.'
+    ],
+    tip:'Para hacerla más realista, usa una escala: si el Sol tiene 10 cm de diámetro, la Tierra tendría 1 mm y estaría a 10 metros. No cabe en una cartulina, pero puedes explicarlo.'
+  },
+  {
+    t:'Botella cohete de vinagre', sub:'Reacción química', icon:'chemical', c:'#f97316',
+    meta:['15 min','Fácil','Aire libre'],
+    desc:'Una reacción entre bicarbonato y vinagre genera gas CO₂ que presuriza una botella. Es una versión química del cohete de agua.',
+    steps:[
+      '<strong>Materiales:</strong> botella de plástico, vinagre, bicarbonato de sodio, corcho, papel de cocina.',
+      '<strong>Prepara el corcho:</strong> envuelve una cucharada de bicarbonato en un trozo de papel de cocina y colócalo dentro de la botella sin que toque el vinagre.',
+      '<strong>Añade vinagre:</strong> pon un poco de vinagre en la botella.',
+      '<strong>Cierra con el corcho:</strong> tapa la botella con el corcho y agítala suavemente para que el bicarbonato entre en contacto con el vinagre.',
+      '<strong>Aléjate:</strong> la reacción genera gas y la presión expulsa el corcho. ¡El cohete despega!'
+    ],
+    tip:'Añade aletas de cartón para que el vuelo sea más estable. No uses botellas de vidrio: siempre plástico flexible.'
+  },
+  {
+    t:'Brazo hidráulico', sub:'Transmisión de fuerza', icon:'hydraulic', c:'#fb7185',
+    meta:['40 min','Media','Interior'],
+    desc:'Un brazo hidráulico muestra cómo se transmite la fuerza mediante jeringuillas y tubos. Es el mismo principio de muchos sistemas espaciales.',
+    steps:[
+      '<strong>Materiales:</strong> palitos de helado, jeringuillas de plástico, tubo flexible, agua y cinta adhesiva.',
+      '<strong>Monta la base:</strong> une varios palitos con cinta para formar una base triangular.',
+      '<strong>Añade el brazo:</strong> construye dos segmentos articulados con palitos y un punto de unión.',
+      '<strong>Prepara las jeringuillas:</strong> llena dos jeringuillas con agua y conéctalas con el tubo. Una será el émbolo motor y otra el receptor.',
+      '<strong>Fija las jeringuillas:</strong> sujeta una al brazo y la otra a la base, de modo que al empujar una se mueva el brazo.',
+      '<strong>Prueba:</strong> empuja suavemente el émbolo y observa cómo el brazo se mueve.'
+    ],
+    tip:'Explica la diferencia entre fuerza y presión: el agua transmite la presión por igual en todas las direcciones (principio de Pascal).'
+  }
+];
+
+function renderModels(){
+  const grid = $('#modelGrid');
+  if (!grid) return;
+  const icons = {
+    rocket:'<path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/>',
+    balloon:'<ellipse cx="12" cy="10" rx="6" ry="8"/><path d="M12 18l-2 4M12 18l2 4"/>',
+    parachute:'<path d="M3 10a9 9 0 0 1 18 0z"/><path d="M12 10v8M8 18h8"/>',
+    solar:'<circle cx="12" cy="12" r="3"/><ellipse cx="12" cy="12" rx="10" ry="4"/><ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(60 12 12)"/>',
+    chemical:'<path d="M9 3h6v4l4 12a2 2 0 0 1-2 3H7a2 2 0 0 1-2-3L9 7z"/><path d="M9 7h6"/>',
+    hydraulic:'<path d="M3 12h6M15 12h6M9 9v6M15 9v6"/><circle cx="12" cy="12" r="2"/>'
+  };
+  grid.innerHTML = MODELS.map((m, i) => `
+    <article class="model-card reveal" style="--mc:${m.c};--d:${i*50}ms">
+      <div class="model-head">
+        <div class="model-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">${icons[m.icon] || icons.rocket}</svg>
+        </div>
+        <div>
+          <h3>${m.t}</h3>
+          <div class="model-sub">${m.sub}</div>
+        </div>
+      </div>
+      <div class="model-body">
+        <p>${m.desc}</p>
+        <div class="model-meta">
+          ${m.meta.map(x => `<span>${x}</span>`).join('')}
+        </div>
+        <ol>
+          ${m.steps.map(s => `<li>${s}</li>`).join('')}
+        </ol>
+        <div class="model-tip"><strong>Consejo:</strong> ${m.tip}</div>
+      </div>
+    </article>
+  `).join('');
+  grid.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+}
+
+/* ============================================================
+   QUIZ
+   ============================================================ */
+const QUIZ_DATA = [
+  { q:'¿Por qué funciona un cohete en el vacío del espacio?', o:['Porque empuja el aire','Por la tercera ley de Newton','Porque tiene alas','Por la gravedad'], c:1,
+    e:'El cohete expulsa gas hacia abajo y recibe un empuje hacia arriba. No necesita aire: la acción y reacción ocurren entre el cohete y el gas que expulsa.' },
+  { q:'¿Cuál es la velocidad aproximada para mantenerse en órbita baja terrestre?', o:['0,5 km/s','3 km/s','7,8 km/s','30 km/s'], c:2,
+    e:'Para mantener una órbita baja (LEO) hace falta una velocidad horizontal de unos 7,8 km/s respecto al centro de la Tierra.' },
+  { q:'¿Qué es la línea de Kármán?', o:['El ecuador de la Tierra','El límite del espacio a 100 km','La órbita de la Luna','El cinturón de asteroides'], c:1,
+    e:'La línea de Kármán, a 100 km de altitud, es el límite convencional del espacio: por encima, el aire es tan tenue que una aeronave no puede volar.' },
+  { q:'¿Qué satélite inauguró la era espacial en 1957?', o:['Vanguard 1','Sputnik 1','Explorer 1','Telstar'], c:1,
+    e:'El Sputnik 1, lanzado por la URSS en 1957, fue el primer satélite artificial de la historia y dio inicio a la carrera espacial.' },
+  { q:'¿Quién fue el primer ser humano en el espacio?', o:['Neil Armstrong','Yuri Gagarin','Alan Shepard','John Glenn'], c:1,
+    e:'Yuri Gagarin orbitó la Tierra a bordo del Vostok 1 el 12 de abril de 1961. Su vuelo duró 108 minutos.' },
+  { q:'¿En qué año llegó el ser humano a la Luna?', o:['1961','1965','1969','1972'], c:2,
+    e:'La misión Apolo 11 llegó a la Luna en julio de 1969. Neil Armstrong y Buzz Aldrin caminaron sobre su superficie.' },
+  { q:'¿Qué órbita usa la mayoría de los satélites de comunicaciones?', o:['Órbita baja (LEO)','Órbita polar','Órbita geoestacionaria (GEO)','Órbita de transferencia'], c:2,
+    e:'La órbita geoestacionaria, a 35.786 km sobre el ecuador, permite que el satélite parezca quieto en el cielo, ideal para comunicaciones y meteorología.' },
+  { q:'¿Qué es la asistencia gravitatoria?', o:['Usar la gravedad de un planeta para cambiar de trayectoria','Un tipo de motor iónico','Una maniobra de frenado','El despegue asistido por cohetes'], c:0,
+    e:'Consiste en pasar cerca de un planeta para "robarle" energía gravitatoria y cambiar de dirección o ganar velocidad sin gastar combustible.' },
+  { q:'¿Por qué los cohetes tienen varias etapas?', o:['Para decorar','Porque pierden masa y necesitan menos combustible','Para volar más despacio','Para llevar más pasajeros'], c:1,
+    e:'Al desprenderse de las etapas vacías, el cohete se hace más ligero y la misma cantidad de empuje acelera más. Es una consecuencia de la ecuación de Tsiolkovski.' },
+  { q:'¿Qué experimento casero demuestra la tercera ley de Newton?', o:['La maqueta del sistema solar','El globo propulsado','El brazo hidráulico','El paracaídas'], c:1,
+    e:'El globo propulsado: al soltar el aire hacia atrás, el globo avanza hacia delante. Es el mismo principio que usa un cohete.' },
+  { q:'¿Qué significa "delta-v"?', o:['La velocidad de la luz','El cambio de velocidad que puede realizar una nave','La masa del cohete','La distancia a la Luna'], c:1,
+    e:'El delta-v es una medida de la cantidad de maniobras posibles: cada cambio de órbita requiere un cierto delta-v.' },
+  { q:'¿Cuál es la velocidad de escape de la Tierra?', o:['7,8 km/s','11,2 km/s','30 km/s','3,1 km/s'], c:1,
+    e:'La velocidad de escape terrestre es de unos 11,2 km/s. Por debajo, cualquier objeto lanzado volverá a caer.' },
+  { q:'¿Qué sonda fue la primera en salir del sistema solar?', o:['Voyager 1','Cassini','New Horizons','Pioneer 10'], c:0,
+    e:'La Voyager 1 cruzó la heliopausa en 2012 y es el objeto humano más lejano del Sol. Sigue enviando datos desde el espacio interestelar.' },
+  { q:'¿Qué efecto tiene la microgravedad en los astronautas?', o:['Ninguno','Pérdida de masa ósea y muscular','Aumento de peso','Mejora de la visión'], c:1,
+    e:'En microgravedad, los huesos y músculos se debilitan por falta de uso. Por eso los astronautas hacen ejercicio diario en la ISS.' },
+  { q:'¿Qué es un cohete reutilizable?', o:['Un cohete que nunca despega','Un cohete que puede volver y usarse otra vez','Un cohete de papel','Un satélite'], c:1,
+    e:'Un cohete reutilizable puede recuperarse tras el lanzamiento y volver a usarse. SpaceX lo consiguió por primera vez con el Falcon 9 en 2015.' },
+  { q:'¿Qué es la ventana de lanzamiento?', o:['El período óptimo para lanzar una misión','El lugar del despegue','El tipo de combustible','La hora de aterrizaje'], c:0,
+    e:'La ventana de lanzamiento es el período en el que la posición relativa de los planetas y las condiciones climáticas son óptimas para una misión.' }
+];
+
+const TOTAL_PREGUNTAS = 10;
+const LETRAS = ['A','B','C','D'];
+let quizState = { questions: [], index: 0, score: 0, answered: false, finished: false };
+
+function shuffle(arr){
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+function startQuiz(){
+  quizState = {
+    questions: shuffle(QUIZ_DATA).slice(0, TOTAL_PREGUNTAS),
+    index: 0, score: 0, answered: false, finished: false
+  };
+  renderQuiz();
+}
+function renderQuiz(){
+  const card = $('#quizCard');
+  if (!card) return;
+  if (quizState.finished){
+    const total = quizState.questions.length;
+    const pct = Math.round((quizState.score / total) * 100);
+    let m = 'Conviene repasar cohetes, órbitas e historia espacial.';
+    if (pct === 100) m = 'Perfecto. Dominas la astronautica básica.';
+    else if (pct >= 75) m = 'Muy buen resultado. Te falta muy poco para el pleno.';
+    else if (pct >= 50) m = 'Buen comienzo. Repasa las secciones y prueba otra vez.';
+    card.innerHTML = `
+      <div class="result">
+        <div class="score">${quizState.score}/${total}</div>
+        <h3>${m}</h3>
+        <p>Has acertado el ${pct} % de las preguntas de esta ronda.</p>
+        <button class="btn btn-primary" id="restartQuiz">
+          Jugar otra vez
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>
+        </button>
+      </div>`;
+    $('#restartQuiz').addEventListener('click', startQuiz);
+    return;
+  }
+  const q = quizState.questions[quizState.index];
+  const total = quizState.questions.length;
+  const progress = (quizState.index / total) * 100;
+  card.innerHTML = `
+    <div class="quiz-meta">
+      <span>Pregunta ${quizState.index + 1} de ${total}</span>
+      <span>Aciertos: ${quizState.score}</span>
+    </div>
+    <div class="progress"><div class="progress-bar" style="width:${progress}%"></div></div>
+    <h3 class="q-text">${q.q}</h3>
+    <div class="options" id="options">
+      ${q.o.map((opt, i) => `
+        <button class="option" data-i="${i}">
+          <span class="letter">${LETRAS[i]}</span>
+          <span>${opt}</span>
+        </button>`).join('')}
+    </div>
+    <div id="feedbackSlot"></div>
+    <div class="quiz-actions" id="actionsSlot"></div>`;
+  $('#options').addEventListener('click', e => {
+    const btn = e.target.closest('.option');
+    if (!btn || quizState.answered) return;
+    answerQuestion(parseInt(btn.dataset.i, 10));
+  });
+}
+function answerQuestion(chosen){
+  quizState.answered = true;
+  const q = quizState.questions[quizState.index];
+  const options = $$('#options .option');
+  options.forEach((btn, i) => {
+    btn.disabled = true;
+    if (i === q.c) btn.classList.add('correct');
+    else if (i === chosen) btn.classList.add('wrong');
+  });
+  const acerto = chosen === q.c;
+  if (acerto) quizState.score++;
+  $('#feedbackSlot').innerHTML = `
+    <div class="feedback">
+      <strong>${acerto ? 'Correcto.' : 'No exactamente.'}</strong> ${q.e}
+    </div>`;
+  const isLast = quizState.index === quizState.questions.length - 1;
+  $('#actionsSlot').innerHTML = `
+    <button class="btn btn-primary" id="nextBtn">
+      ${isLast ? 'Ver resultado' : 'Siguiente pregunta'}
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </button>`;
+  $('#nextBtn').addEventListener('click', () => {
+    if (isLast) quizState.finished = true;
+    else { quizState.index++; quizState.answered = false; }
+    renderQuiz();
+  });
+}
+
+/* ============================================================
+   EFECTOS Y ARRANQUE
+   ============================================================ */
+$$('.module').forEach(m => {
+  m.addEventListener('mousemove', e => {
+    const r = m.getBoundingClientRect();
+    m.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
+    m.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
+  });
+});
+
+document.addEventListener('visibilitychange', () => {
+  document.querySelectorAll('.orb').forEach(o => {
+    o.style.animationPlayState = document.hidden ? 'paused' : 'running';
+  });
+});
+
+(function boot(){
+  const initial = (location.hash.slice(1) || 'inicio');
+  go(ROUTES.includes(initial) ? initial : 'inicio', false);
+  checkReveal();
+  setTimeout(() => {
+    if (currentRoute === 'inicio') animateCounters();
+  }, 300);
+})();
+</script>
+</body>
+</html>
