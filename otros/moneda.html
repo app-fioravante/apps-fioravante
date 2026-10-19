@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>Del trueque al bit: moneda, historia y futuro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700;1,9..144,600&family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme:light;
+  --bg:#f6f8fd;--card:#ffffff;--line:#e3e8f2;
+  --ink:#1a2238;--mut:#6a7793;
+  --gold:#c98a10;--goldSoft:rgba(201,138,16,.12);
+  --teal:#0e9d78;--tealSoft:rgba(14,157,120,.11);
+  --violet:#7551d6;--violetSoft:rgba(117,81,214,.11);
+  --rose:#e0455e;--roseSoft:rgba(224,69,94,.10);
+  --sky:#2b7de0;--skySoft:rgba(43,125,224,.10);
+  --d:"Fraunces",Georgia,"Times New Roman",serif;
+  --b:"Manrope",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:92px;background:var(--bg)}
+body{margin:0;color:var(--ink);font:400 17px/1.65 var(--b);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{
+  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:
+    radial-gradient(900px 700px at 88% -8%,rgba(201,138,16,.09),transparent 62%),
+    radial-gradient(820px 620px at -8% 18%,rgba(43,125,224,.07),transparent 60%),
+    radial-gradient(760px 700px at 55% 108%,rgba(117,81,214,.06),transparent 62%);
+}
+h1,h2,h3,h4{font-family:var(--d);line-height:1.08;margin:0;letter-spacing:-.018em;font-weight:700}
+p{margin:0}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--sky);outline-offset:3px;border-radius:10px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 22px}
+
+/* header */
+header{position:sticky;top:0;z-index:50;background:rgba(246,248,253,.85);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:16px;height:70px}
+.logo{display:flex;align-items:center;gap:11px;text-decoration:none;white-space:nowrap;font:700 1.12rem var(--d);color:var(--ink)}
+.logo i{width:38px;height:38px;border-radius:12px;font-style:normal;display:grid;place-items:center;
+  background:linear-gradient(135deg,#ffe3a1,#e8a72a 50%,#b8780d);color:#fff;font:800 1.25rem var(--b);
+  box-shadow:0 10px 22px -12px rgba(201,138,16,.85)}
+nav ul{display:flex;gap:2px;list-style:none;margin:0;padding:0;overflow-x:auto;scrollbar-width:none}
+nav ul::-webkit-scrollbar{display:none}
+nav a{display:block;padding:8px 13px;border-radius:10px;text-decoration:none;font-weight:700;font-size:.89rem;color:var(--mut);white-space:nowrap;transition:background .2s,color .2s}
+nav a:hover{background:rgba(26,34,56,.05);color:var(--ink)}
+nav a.on{background:var(--goldSoft);color:var(--gold)}
+#bar{height:3px;width:0;background:linear-gradient(90deg,var(--gold),var(--teal) 55%,var(--violet))}
+
+/* estructura */
+section{padding:84px 0;position:relative}
+.alt{background:rgba(255,255,255,.55);border-block:1px solid var(--line)}
+.sh{max-width:44rem;margin-bottom:38px}
+.eyebrow{display:inline-flex;align-items:center;gap:9px;font:800 .76rem var(--b);letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+.eyebrow::before{content:"";width:26px;height:2px;background:var(--gold);border-radius:2px}
+h2{font-size:clamp(1.85rem,4vw,2.85rem)}
+.sh p{color:var(--mut);margin-top:14px;font-size:1.03rem}
+.lead{font-size:1.16rem;color:var(--mut);max-width:32em}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.box{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:26px;box-shadow:0 18px 40px -34px rgba(26,34,56,.25)}
+
+/* botones */
+.btn{display:inline-block;padding:13px 24px;border-radius:13px;font:800 .96rem var(--b);text-decoration:none;border:1px solid var(--line);background:#fff;color:var(--ink);cursor:pointer;transition:transform .22s,background .22s,border-color .22s,box-shadow .22s}
+.btn:hover{transform:translateY(-3px);background:#fff;border-color:rgba(201,138,16,.55);box-shadow:0 16px 32px -22px rgba(26,34,56,.3)}
+.btn.p{background:linear-gradient(135deg,#f6cb6a,#d99a1c 55%,#b8780d);border-color:transparent;color:#fff;box-shadow:0 16px 32px -18px rgba(201,138,16,.85)}
+
+/* tarjetas genéricas */
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px;transition:transform .3s,border-color .3s,box-shadow .3s}
+.card:hover{transform:translateY(-5px);border-color:rgba(201,138,16,.45);box-shadow:0 28px 46px -34px rgba(26,34,56,.28)}
+.card .ico{font-size:1.9rem;line-height:1;margin-bottom:10px}
+.card h3{font-size:1.12rem;margin-bottom:8px}
+.card p{color:var(--mut);font-size:.95rem}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(26px);transition:opacity .75s cubic-bezier(.2,.7,.3,1),transform .75s cubic-bezier(.2,.7,.3,1)}
+.rv.in{opacity:1;transform:none}
+
+/* hero */
+.hero{display:grid;grid-template-columns:1.08fr .92fr;gap:44px;align-items:center;padding:56px 0 30px}
+.hero h1{font-size:clamp(2.35rem,5.6vw,4.15rem)}
+.hero h1 em{font-style:italic;color:var(--gold)}
+.hero .lead{margin:20px 0 28px}
+.heroBtns{display:flex;gap:12px;flex-wrap:wrap}
+.heroStats{display:flex;gap:30px;flex-wrap:wrap;margin-top:38px;padding-top:24px;border-top:1px solid var(--line)}
+.heroStats b{display:block;font:700 1.7rem var(--d);color:var(--gold)}
+.heroStats small{color:var(--mut);font-size:.82rem;line-height:1.35;display:block;max-width:11rem}
+.coinStage{position:relative;display:grid;place-items:center;min-height:320px}
+.coinStage::after{content:"";position:absolute;width:330px;height:330px;border-radius:50%;border:1px dashed rgba(201,138,16,.28);animation:slowspin 40s linear infinite}
+@keyframes slowspin{to{transform:rotate(360deg)}}
+.coin{all:unset;box-sizing:border-box;cursor:pointer;width:min(64vw,236px);aspect-ratio:1;border-radius:50%;
+  display:grid;place-items:center;position:relative;
+  background:radial-gradient(circle at 32% 26%,#ffe9b3 0%,#f0bb4a 42%,#b8780d 100%);
+  box-shadow:0 30px 60px -30px rgba(201,138,16,.7),inset 0 -12px 24px rgba(0,0,0,.22),inset 0 10px 20px rgba(255,255,255,.4);
+  transition:transform .35s;transform-style:preserve-3d}
+.coin:hover{transform:scale(1.045)}
+.coin.spin{animation:spin .9s cubic-bezier(.45,0,.2,1)}
+@keyframes spin{from{transform:rotateY(0)}to{transform:rotateY(360deg)}}
+.coin::before{content:"";position:absolute;inset:13px;border-radius:50%;border:2px dashed rgba(90,55,10,.35)}
+.coin::after{content:"";position:absolute;inset:27px;border-radius:50%;border:2px solid rgba(90,55,10,.2)}
+.cFace{display:grid;place-items:center;gap:4px;color:#3a2506;z-index:1;text-align:center}
+.cIcon{font-size:3.5rem;line-height:1}
+.cFace b{font:800 .92rem var(--b);letter-spacing:.02em}
+.spark{position:absolute;color:var(--gold);opacity:.75;font-size:1.1rem;animation:fl 5s ease-in-out infinite}
+@keyframes fl{50%{transform:translateY(-13px) rotate(12deg)}}
+.coinInfo{margin-top:6px;text-align:center;max-width:20rem;margin-inline:auto}
+.coinInfo small{display:block;color:var(--gold);font:800 .76rem var(--b);letter-spacing:.13em;text-transform:uppercase;margin-bottom:6px}
+.coinInfo p{color:var(--mut);font-size:.95rem}
+.coinTip{display:inline-block;margin-top:12px;font-size:.82rem;color:var(--mut);border:1px dashed var(--line);border-radius:99px;padding:5px 14px;background:#fff}
+
+/* línea de tiempo */
+.tlScroll{overflow-x:auto;padding:6px 2px 22px;scrollbar-width:thin}
+.tlScroll::-webkit-scrollbar{height:6px}
+.tlScroll::-webkit-scrollbar-thumb{background:var(--line);border-radius:99px}
+.tlTrack{display:flex;min-width:max-content;position:relative;padding-top:2px}
+.tlTrack::before{content:"";position:absolute;left:64px;right:64px;top:10px;height:2px;background:linear-gradient(90deg,var(--gold),var(--teal) 50%,var(--violet));opacity:.45;border-radius:2px}
+.tlNode{all:unset;box-sizing:border-box;cursor:pointer;width:132px;flex:none;display:grid;justify-items:center;gap:9px;text-align:center;padding:0 4px;color:var(--mut);position:relative}
+.tlNode .tlDot{width:20px;height:20px;border-radius:50%;background:#fff;border:3px solid var(--line);transition:.3s;position:relative;z-index:1}
+.tlNode b{font:800 .84rem var(--b);letter-spacing:.02em;color:var(--ink);transition:color .3s}
+.tlNode small{font-size:.78rem;line-height:1.25;color:var(--mut)}
+.tlNode:hover .tlDot{border-color:rgba(201,138,16,.65)}
+.tlNode[aria-selected="true"] .tlDot{background:var(--gold);border-color:var(--gold);box-shadow:0 0 0 7px rgba(201,138,16,.16)}
+.tlNode[aria-selected="true"] b{color:var(--gold)}
+.tlCard{display:grid;grid-template-columns:1fr;gap:14px;animation:pin .4s ease}
+@keyframes pin{from{opacity:0;transform:translateY(10px)}}
+.tlHead{display:flex;align-items:center;gap:16px}
+.tlEmoji{font-size:2.1rem;width:60px;height:60px;flex:none;display:grid;place-items:center;border-radius:18px;background:var(--goldSoft);border:1px solid rgba(201,138,16,.3)}
+.tlHead small{color:var(--gold);font:800 .74rem var(--b);letter-spacing:.14em;text-transform:uppercase}
+.tlHead h3{font-size:1.55rem;margin-top:2px}
+.tlCard p{color:var(--mut)}
+.nt{border-radius:14px;padding:14px 18px;font-size:.94rem;background:var(--tealSoft);border-left:4px solid var(--teal);color:var(--ink)}
+.nt.warn{background:var(--roseSoft);border-left-color:var(--rose)}
+.nt b{color:var(--teal)}
+.nt.warn b{color:var(--rose)}
+
+/* comparador */
+.cmp{display:grid;gap:8px}
+.cmpH,.cmpR{display:grid;grid-template-columns:158px 1fr 1fr;gap:14px;align-items:center}
+.cmpH{padding:0 18px 6px;font:800 .73rem var(--b);letter-spacing:.12em;text-transform:uppercase;color:var(--mut)}
+.cmpH span:first-child{opacity:0}
+.cmpH .hA{color:var(--gold)}.cmpH .hB{color:var(--teal)}
+.cmpR{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:15px 18px;transition:transform .25s,border-color .25s,box-shadow .25s}
+.cmpR:hover{transform:translateX(4px);border-color:rgba(201,138,16,.45);box-shadow:0 18px 32px -26px rgba(26,34,56,.25)}
+.cmpK{font:800 .72rem var(--b);letter-spacing:.1em;text-transform:uppercase;color:var(--mut)}
+.cmpV{font-size:.95rem}
+.cmpV.a{color:#a06c08}
+.cmpV.b{color:#0b7a5d}
+
+/* segmentado */
+.seg{display:inline-flex;flex-wrap:wrap;gap:4px;padding:5px;border:1px solid var(--line);border-radius:15px;background:#eef2fa;margin-bottom:22px}
+.segBtn{all:unset;box-sizing:border-box;cursor:pointer;padding:9px 18px;border-radius:11px;font:800 .9rem var(--b);color:var(--mut);transition:background .2s,color .2s}
+.segBtn:hover{color:var(--ink);background:rgba(255,255,255,.7)}
+.segBtn[aria-selected="true"]{background:var(--gold);color:#fff;box-shadow:0 8px 18px -10px rgba(201,138,16,.8)}
+.moPanel{display:grid;grid-template-columns:1.05fr 1fr;gap:26px;animation:pin .4s ease}
+.moPanel h3{font-size:1.5rem;margin-bottom:10px;display:flex;align-items:center;gap:10px}
+.moPanel p{color:var(--mut)}
+.attrs{display:grid;gap:9px;margin-top:16px}
+.attr{display:grid;grid-template-columns:118px 1fr;gap:10px;font-size:.92rem;padding:9px 13px;border-radius:12px;background:#f7f9fd;border:1px solid var(--line)}
+.attr b{color:var(--mut);font:800 .71rem var(--b);letter-spacing:.09em;text-transform:uppercase;align-self:center}
+.careBox{background:var(--violetSoft);border:1px solid rgba(117,81,214,.28);border-radius:18px;padding:20px;align-self:start}
+.careBox b{display:block;font:700 1.05rem var(--d);margin-bottom:7px;color:var(--violet)}
+.careBox p{font-size:.94rem;color:var(--ink)}
+
+/* checklist */
+.chkList{display:grid;gap:9px;margin-top:16px}
+.chk{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;gap:12px;padding:12px 15px;border-radius:14px;border:1px solid var(--line);background:#fff;font-size:.94rem;font-weight:600;color:var(--ink);transition:.22s}
+.chk:hover{border-color:rgba(14,157,120,.5);background:#fbfdfe}
+.chk i{width:22px;height:22px;flex:none;border-radius:50%;border:2px solid var(--line);display:grid;place-items:center;font-style:normal;font-size:.72rem;color:transparent;transition:.22s}
+.chk[aria-pressed="true"]{border-color:rgba(14,157,120,.55);background:var(--tealSoft)}
+.chk[aria-pressed="true"] i{background:var(--teal);border-color:var(--teal);color:#fff}
+.pbar{height:8px;border-radius:99px;background:#e9eef7;overflow:hidden;margin-top:16px}
+.pbar i{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--teal),#5fd9b5);transition:width .45s}
+
+/* proyectos */
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}
+.chip{all:unset;box-sizing:border-box;cursor:pointer;padding:8px 16px;border-radius:99px;border:1px solid var(--line);background:#fff;font:800 .86rem var(--b);color:var(--mut);transition:.22s}
+.chip:hover{color:var(--ink);border-color:rgba(201,138,16,.5);background:#fff}
+.chip.on{background:var(--gold);border-color:var(--gold);color:#fff;box-shadow:0 10px 22px -14px rgba(201,138,16,.85)}
+.pg{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.pc{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px;transition:transform .3s,border-color .3s,box-shadow .3s;animation:pin .4s ease}
+.pc:hover{transform:translateY(-5px);border-color:rgba(201,138,16,.45);box-shadow:0 28px 46px -34px rgba(26,34,56,.28)}
+.pcTop{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.pcFlag{font-size:1.7rem;line-height:1}
+.pcTop b{display:block;font:700 1.08rem var(--d)}
+.pcTop small{color:var(--mut);font-size:.79rem}
+.badge{display:inline-block;margin-top:12px;font:800 .68rem var(--b);letter-spacing:.11em;text-transform:uppercase;padding:4px 11px;border-radius:99px;background:var(--violetSoft);color:var(--violet);border:1px solid rgba(117,81,214,.3)}
+.pc p{color:var(--mut);font-size:.93rem;margin-top:4px}
+.pc .st{display:inline-flex;align-items:center;gap:6px;margin-top:14px;font-size:.79rem;font-weight:800;color:var(--teal)}
+.pc .st::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--teal)}
+
+/* sueldo */
+.lbl{display:block;font:800 .78rem var(--b);letter-spacing:.12em;text-transform:uppercase;color:var(--mut);margin-bottom:8px}
+.inp{width:100%;padding:14px 16px;border-radius:14px;border:1px solid var(--line);background:#fff;color:var(--ink);font:800 1.4rem var(--b);margin-bottom:20px;transition:border-color .2s,background .2s}
+.inp:focus{outline:none;border-color:var(--gold);background:#fffdf7}
+.bud{display:grid;gap:16px;margin-top:6px}
+.budRow{display:grid;gap:7px}
+.budTop{display:flex;align-items:center;gap:10px;font-size:.92rem}
+.budTop .dot{width:10px;height:10px;border-radius:50%;flex:none}
+.budTop b{font-weight:800}
+.budTop .pct{color:var(--mut);font-size:.84rem;margin-left:auto}
+.budTop .amt{font:800 1rem var(--b);min-width:6.5rem;text-align:right}
+.budBar{height:10px;border-radius:99px;background:#e9eef7;overflow:hidden}
+.budBar i{display:block;height:100%;border-radius:99px;transition:width .55s cubic-bezier(.3,.7,.2,1)}
+.meth{display:grid;gap:14px;margin-top:6px}
+.methItem{display:flex;gap:12px;align-items:flex-start;font-size:.95rem;color:var(--mut)}
+.methItem .dot{width:10px;height:10px;border-radius:50%;flex:none;margin-top:8px}
+.methItem b{color:var(--ink);display:block;font-size:.98rem}
+
+/* privacidad */
+.tip{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px;transition:.3s;position:relative;overflow:hidden}
+.tip::before{content:"";position:absolute;inset:0 auto 0 0;width:3px;background:var(--gold);opacity:0;transition:opacity .3s}
+.tip:hover{border-color:rgba(201,138,16,.45);transform:translateY(-4px);box-shadow:0 28px 46px -34px rgba(26,34,56,.25)}
+.tip:hover::before{opacity:1}
+.tip .ico{font-size:1.7rem;margin-bottom:10px;display:block}
+.tip h3{font-size:1.05rem;margin-bottom:7px}
+.tip p{color:var(--mut);font-size:.92rem}
+.quote{margin-top:26px;padding:26px 28px;border-radius:22px;background:linear-gradient(120deg,rgba(201,138,16,.12),rgba(255,255,255,.6));border:1px solid rgba(201,138,16,.35)}
+.quote p{font:600 1.2rem/1.45 var(--d);color:var(--ink)}
+.quote small{display:block;margin-top:10px;color:var(--gold);font:800 .76rem var(--b);letter-spacing:.13em;text-transform:uppercase}
+
+/* glosario */
+.search{width:100%;max-width:440px;padding:13px 16px;border-radius:14px;border:1px solid var(--line);background:#fff;color:var(--ink);font:600 1rem var(--b);margin-bottom:20px;transition:border-color .2s,background .2s}
+.search:focus{outline:none;border-color:var(--gold);background:#fffdf7}
+.gls{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:start}
+.term{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;transition:border-color .3s,box-shadow .3s}
+.term[open]{border-color:rgba(201,138,16,.45);box-shadow:0 18px 32px -28px rgba(26,34,56,.25)}
+.term button{all:unset;box-sizing:border-box;width:100%;padding:15px 20px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;font:700 1.02rem var(--d);color:var(--ink)}
+.term button i{width:26px;height:26px;flex:none;border-radius:50%;background:var(--goldSoft);color:var(--gold);display:grid;place-items:center;font:800 1rem var(--b);font-style:normal;transition:transform .3s}
+.term[open] button i{transform:rotate(45deg)}
+.def{display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s}
+.term[open] .def{grid-template-rows:1fr}
+.def div{overflow:hidden}
+.def p{padding:0 20px 17px;color:var(--mut);font-size:.94rem}
+
+/* footer */
+footer{padding:42px 0 52px;border-top:1px solid var(--line);color:var(--mut);font-size:.9rem;background:rgba(255,255,255,.5)}
+footer .wrap{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+
+/* responsive */
+@media(max-width:900px){
+  .hero,.two,.moPanel{grid-template-columns:1fr}
+  .grid3,.pg{grid-template-columns:1fr 1fr}
+  .gls{grid-template-columns:1fr}
+  .coinStage{min-height:280px;margin-top:10px}
+  .logo b{display:none}
+}
+@media(max-width:760px){
+  .cmpH{display:none}
+  .cmpR{grid-template-columns:1fr 1fr;gap:6px 14px}
+  .cmpK{grid-column:1/-1}
+  .cmpV::before{content:attr(data-c);display:block;font:800 .66rem var(--b);letter-spacing:.11em;text-transform:uppercase;color:var(--mut);margin-bottom:2px}
+}
+@media(max-width:620px){
+  .grid3,.pg{grid-template-columns:1fr}
+  .heroStats{gap:20px}
+  .attr{grid-template-columns:1fr}
+  .budTop .amt{min-width:auto}
+  section{padding:64px 0}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  .rv{opacity:1;transform:none}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#inicio" aria-label="Del trueque al bit, inicio"><i>¤</i><b>Del trueque al bit</b></a>
+    <nav aria-label="Secciones"><ul>
+      <li><a href="#linea">Línea de tiempo</a></li>
+      <li><a href="#comparar">Física vs digital</a></li>
+      <li><a href="#cbdc">CBDC y cripto</a></li>
+      <li><a href="#proyectos">Proyectos</a></li>
+      <li><a href="#sueldo">Sueldo</a></li>
+      <li><a href="#privacidad">Privacidad</a></li>
+      <li><a href="#glosario">Glosario</a></li>
+    </ul></nav>
+  </div>
+  <div id="bar"></div>
+</header>
+
+<main>
+
+<!-- HERO -->
+<div class="wrap" id="inicio">
+  <div class="hero">
+    <div>
+      <span class="eyebrow">Moneda · historia · futuro</span>
+      <h1>Del trueque al <em>bit</em>: cómo cambió el dinero.</h1>
+      <p class="lead">Un recorrido por la historia de la moneda, las diferencias entre el efectivo y el dinero digital, qué son las CBDC y las criptomonedas, y cómo cuidar tu privacidad y tu sueldo.</p>
+      <div class="heroBtns">
+        <a class="btn p" href="#linea">Ver la línea de tiempo</a>
+        <a class="btn" href="#sueldo">Repartir mi sueldo</a>
+      </div>
+      <div class="heroStats">
+        <div><b>9</b><small>etapas en la historia del dinero</small></div>
+        <div><b>100+</b><small>bancos centrales estudian una CBDC</small></div>
+        <div><b>6</b><small>consejos de privacidad y control</small></div>
+      </div>
+    </div>
+
+    <div>
+      <div class="coinStage">
+        <span class="spark" style="top:14%;left:12%">✦</span>
+        <span class="spark" style="top:66%;right:10%;animation-delay:-1.6s">✦</span>
+        <span class="spark" style="bottom:8%;left:22%;animation-delay:-3.1s">✦</span>
+        <button class="coin" id="coin" aria-label="Girar la moneda y cambiar de época">
+          <span class="cFace"><span class="cIcon" id="cIcon">🐚</span><b id="cName">Conchas</b></span>
+        </button>
+      </div>
+      <div class="coinInfo" aria-live="polite">
+        <small id="cHint">Dinero mercancía</small>
+        <p id="cText">Conchas, sal y cacao: objetos escasos y aceptados por todos.</p>
+        <span class="coinTip">Toca la moneda para girar</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- LÍNEA DE TIEMPO -->
+<section id="linea">
+  <div class="wrap">
+    <div class="sh rv">
+      <span class="eyebrow">Línea de tiempo</span>
+      <h2>Cinco mil años de confianza</h2>
+      <p>El dinero no siempre existió: se inventó para resolver un problema del trueque. Recorre las etapas y toca cada punto para ver qué cambió.</p>
+    </div>
+    <div class="tlScroll rv"><div class="tlTrack" id="tlTrack" role="tablist" aria-label="Etapas de la historia del dinero"></div></div>
+    <div class="box rv" id="tlDetail" aria-live="polite"></div>
+  </div>
+</section>
+
+<!-- FÍSICA VS DIGITAL -->
+<section id="comparar" class="alt">
+  <div class="wrap">
+    <div class="sh rv">
+      <span class="eyebrow">Comparación</span>
+      <h2>Moneda física y moneda digital</h2>
+      <p>Ambas son dinero, pero no se comportan igual. Estas son las diferencias que más te afectan en el día a día.</p>
+    </div>
+    <div class="cmp rv" id="cmp" role="table" aria-label="Diferencias entre moneda física y digital"></div>
+    <div class="nt warn" style="margin-top:22px"><b>Ojo:</b> «digital» no significa automáticamente «más seguro» ni «más cómodo para todos». Cada formato tiene riesgos propios, y mucha gente necesita ambos.</div>
+  </div>
+</section>
+
+<!-- CBDC -->
+<section id="cbdc">
+  <div class="wrap">
+    <div class="sh rv">
+      <span class="eyebrow">Tres formas de dinero</span>
+      <h2>Efectivo, CBDC y criptomonedas</h2>
+      <p>Suenan parecido, pero responden a lógicas muy distintas. Elige una opción para ver cómo funciona.</p>
+    </div>
+    <div class="seg rv" id="moTabs" role="tablist" aria-label="Tipos de dinero"></div>
+    <div class="box rv"><div class="moPanel" id="moPanel" role="tabpanel"></div></div>
+
+    <div class="grid3 rv" style="margin-top:22px" id="walletCards"></div>
+    <div class="two rv" style="margin-top:24px">
+      <div class="box">
+        <h3 style="font-size:1.25rem">Revisa tu propia seguridad</h3>
+        <p style="color:var(--mut);font-size:.94rem;margin-top:6px">Marca las protecciones que ya tienes activas en tus billeteras virtuales.</p>
+        <div class="chkList" id="chkList"></div>
+        <div class="pbar"><i id="chkBar"></i></div>
+        <p id="chkOut" style="font-weight:800;margin-top:10px" aria-live="polite"></p>
+      </div>
+      <div class="box">
+        <h3 style="font-size:1.25rem">Billeteras virtuales: lo básico</h3>
+        <div class="meth" style="margin-top:14px">
+          <div class="methItem"><span class="dot" style="background:var(--gold)"></span><div><b>Son una cuenta, no un billete</b>Tu saldo vive en un servidor. Si pierdes el teléfono, puedes recuperarlo con tu identidad.</div></div>
+          <div class="methItem"><span class="dot" style="background:var(--teal)"></span><div><b>Revisa comisiones y límites</b>Algunas son gratuitas para transferir y cobran al retirar efectivo o al convertir moneda.</div></div>
+          <div class="methItem"><span class="dot" style="background:var(--violet)"></span><div><b>Autocustodia = responsabilidad total</b>Si guardas tus claves, nadie puede recuperarlas por ti. Ni el banco, ni el soporte técnico.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FUTURO -->
+<section id="futuro" class="alt">
+  <div class="wrap">
+    <div class="sh rv">
+      <span class="eyebrow">Futuro</span>
+      <h2>Hacia dónde va la economía monetaria</h2>
+      <p>Ninguna de estas tendencias está decidida: son las discusiones abiertas hoy en bancos centrales, empresas y reguladores.</p>
+    </div>
+    <div class="grid3 rv" id="futureCards"></div>
+  </div>
+</section>
+
+<!-- PROYECTOS -->
+<section id="proyectos">
+  <div class="wrap">
+    <div class="sh rv">
+      <span class="eyebrow">Casos reales</span>
+      <h2>Proyectos que ya funcionan</h2>
+      <p>El futuro del dinero no es solo una promesa: hay sistemas en producción y pilotos activos. Filtra por tipo.</p>
+    </div>
+    <div class="chips rv" id="pChips" role="group" aria-label="Filtrar proyectos por tipo"></div>
+    <div class="pg" id="pGrid" aria-live="polite"></div>
+  </div>
+</section>
+
+<!-- SUELDO -->
+<section id="sueldo" class="alt">
+  <div class="wrap">
+    <div class="sh rv">
+      <span class="eyebrow">Administración</span>
+      <h2>Tu sueldo, con método</h2>
+      <p>Repartir el sueldo antes de gastarlo es la forma más simple de ordenar las finanzas. Escribe un monto y elige una regla.</p>
+    </div>
+    <div class="two rv">
+      <div class="box">
+        <label class="lbl" for="sueldo">Sueldo mensual neto</label>
+        <input class="inp" id="sueldo" type="number" min="0" step="100" value="1200" inputmode="decimal">
+        <div class="seg" id="rules" role="tablist" aria-label="Regla de reparto"></div>
+        <div class="bud" id="budOut" aria-live="polite"></div>
+      </div>
+      <div class="box">
+        <h3 style="font-size:1.3rem">Cómo leer el reparto</h3>
+        <div class="meth" style="margin-top:16px">
+          <div class="methItem"><span class="dot" style="background:var(--gold)"></span><div><b>Necesidades</b>Vivienda, comida, transporte, salud, servicios y deudas. Lo que no puedes dejar de pagar.</div></div>
+          <div class="methItem"><span class="dot" style="background:var(--violet)"></span><div><b>Gustos</b>Salidas, suscripciones, ropa, viajes. Es válido gastar aquí: solo debe tener un límite claro.</div></div>
+          <div class="methItem"><span class="dot" style="background:var(--teal)"></span><div><b>Ahorro</b>Fondo de emergencia primero, luego objetivos. Separarlo el mismo día que cobras es lo que mejor funciona.</div></div>
+        </div>
+        <div class="nt" style="margin-top:20px"><b>Fondo de emergencia:</b> intenta reunir el equivalente a 3–6 meses de gastos esenciales antes de invertir en productos con riesgo.</div>
+        <div class="nt warn" style="margin-top:12px"><b>Los porcentajes son una guía.</b> Si tu sueldo es variable, calcula sobre el promedio de los últimos tres meses y ajusta cada mes.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRIVACIDAD -->
+<section id="privacidad">
+  <div class="wrap">
+    <div class="sh rv">
+      <span class="eyebrow">Privacidad y control</span>
+      <h2>Que tu dinero no te controle</h2>
+      <p>Cada pago digital deja un registro. No se trata de esconderse, sino de decidir qué información compartes y con quién.</p>
+    </div>
+    <div class="grid3 rv" id="tipsGrid"></div>
+    <div class="quote rv">
+      <p>«La privacidad no es tener algo que esconder: es decidir qué parte de tu vida es pública.»</p>
+      <small>Regla de oro · nadie legítimo te pedirá tu clave ni un código por teléfono</small>
+    </div>
+  </div>
+</section>
+
+<!-- GLOSARIO -->
+<section id="glosario" class="alt">
+  <div class="wrap">
+    <div class="sh rv">
+      <span class="eyebrow">Glosario</span>
+      <h2>Palabras del dinero digital</h2>
+      <p>Términos que aparecen en etiquetas, contratos y noticias, explicados sin vueltas.</p>
+    </div>
+    <input class="search" id="q" type="search" placeholder="Buscar: por ejemplo, CBDC o inflación" aria-label="Buscar en el glosario">
+    <div class="gls" id="gls"></div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Del trueque al bit · material educativo.</span>
+    <span>No es asesoramiento financiero ni legal.</span>
+  </div>
+</footer>
+
+<script>
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const fmt = n => new Intl.NumberFormat('es-ES', {maximumFractionDigits:0}).format(Math.round(n));
+
+/* progreso + reveal */
+addEventListener('scroll', () => {
+  const h = document.documentElement;
+  $('#bar').style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight) * 100) + '%';
+}, {passive:true});
+
+const io = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+}), {threshold:.12});
+const rv = () => $$('.rv:not(.in)').forEach(e => io.observe(e));
+
+/* moneda del hero */
+const COINS = [
+  ['🐚','Conchas','Dinero mercancía','Objetos escasos y aceptados por todos, como conchas, sal o cacao.'],
+  ['🪙','Monedas','Lidia, siglo VII a.C.','El sello del emisor garantiza peso y pureza: ya no hace falta pesar el metal.'],
+  ['📜','Papel','China, siglo XI','Recibos de depósito que circulan como dinero: el valor está guardado en otro lado.'],
+  ['💳','Plástico','Banca electrónica','Tarjetas y banca en línea convierten el dinero en registros de un servidor.'],
+  ['📱','Digital','Billeteras y pagos instantáneos','Transferencias en segundos con un alias, desde el teléfono y a cualquier hora.'],
+  ['₿','Cripto','Bitcoin, 2009','Redes descentralizadas que validan transacciones sin un banco central de por medio.']
+];
+let ci = 0;
+const coinEl = $('#coin');
+function paintCoin(){
+  const c = COINS[ci];
+  $('#cIcon').textContent = c[0];
+  $('#cName').textContent = c[1];
+  $('#cHint').textContent = c[2];
+  $('#cText').textContent = c[3];
+}
+function spinCoin(){
+  if (RM) return;
+  coinEl.classList.remove('spin');
+  void coinEl.offsetWidth;
+  coinEl.classList.add('spin');
+}
+coinEl.addEventListener('click', () => { ci = (ci + 1) % COINS.length; paintCoin(); spinCoin(); });
+coinEl.addEventListener('animationend', () => coinEl.classList.remove('spin'));
+coinEl.addEventListener('keydown', e => {
+  if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); coinEl.click(); }
+});
+paintCoin();
+
+/* línea de tiempo */
+const TL = [
+  {y:'Antes del 6000 a.C.', t:'Trueque', e:'🤝',
+   d:'El intercambio directo de bienes funcionaba en comunidades pequeñas, pero exigía que ambas partes quisieran exactamente lo mismo al mismo tiempo.',
+   k:'El problema: no existe una medida común de valor.'},
+  {y:'3000–1000 a.C.', t:'Dinero mercancía', e:'🐚',
+   d:'Conchas, sal, cacao, ganado o metales preciosos se usaron como dinero porque eran escasos, duraderos y aceptados por la comunidad.',
+   k:'El valor venía del propio objeto, no de una promesa.'},
+  {y:'Siglo VII a.C.', t:'Primeras monedas', e:'🪙',
+   d:'En Lidia (actual Turquía) se acuñaron piezas de electro con un sello que garantizaba su peso y su pureza. Nace la moneda tal como la conocemos.',
+   k:'El sello del emisor sustituye a la balanza.'},
+  {y:'Siglo XI', t:'Papel moneda', e:'📜',
+   d:'En China, los comerciantes comenzaron a usar recibos de depósito para no cargar monedas pesadas. El Estado luego emitió billetes oficiales.',
+   k:'El papel representa un valor guardado en otro lugar.'},
+  {y:'Siglos XIX–XX', t:'Patrón oro y bancos centrales', e:'🏦',
+   d:'Los billetes quedaron respaldados por oro y los bancos centrales pasaron a regular la cantidad de dinero en circulación.',
+   k:'La confianza se institucionaliza.'},
+  {y:'1971', t:'Dinero fiduciario', e:'📄',
+   d:'Estados Unidos abandona la convertibilidad del dólar en oro. Desde entonces el dinero vale por la confianza en quien lo emite.',
+   k:'Fiducia significa confianza: el respaldo es la ley y la economía.'},
+  {y:'Década de 1990', t:'Plástico y banca en línea', e:'💳',
+   d:'Las tarjetas y luego la banca por internet convierten el dinero en registros electrónicos. El billete sigue existiendo, pero se usa menos.',
+   k:'El dinero pasa a ser un dato.'},
+  {y:'2009', t:'Criptomonedas', e:'₿',
+   d:'Bitcoin propone dinero sin intermediarios: una red de computadoras valida las transacciones y mantiene un registro público.',
+   k:'Descentralización y seudonimia, no anonimato.'},
+  {y:'Hoy', t:'CBDC y pagos instantáneos', e:'📲',
+   d:'Más de cien bancos centrales estudian monedas digitales propias, mientras sistemas como Pix o UPI mueven pagos en segundos.',
+   k:'El futuro ya está en el bolsillo, pero no es igual para todos.'}
+];
+$('#tlTrack').innerHTML = TL.map((e, i) =>
+  `<button class="tlNode" role="tab" aria-selected="${i === 0}" data-i="${i}"><span class="tlDot"></span><b>${e.y}</b><small>${e.t}</small></button>`
+).join('');
+
+function selTL(i){
+  $$('#tlTrack .tlNode').forEach((n, k) => n.setAttribute('aria-selected', k === i));
+  const e = TL[i];
+  $('#tlDetail').innerHTML = `
+    <div class="tlCard">
+      <div class="tlHead">
+        <span class="tlEmoji">${e.e}</span>
+        <div><small>${e.y}</small><h3>${e.t}</h3></div>
+      </div>
+      <p>${e.d}</p>
+      <div class="nt"><b>Clave:</b> ${e.k}</div>
+    </div>`;
+}
+$$('#tlTrack .tlNode').forEach(n => n.addEventListener('click', () => {
+  selTL(+n.dataset.i);
+  n.scrollIntoView({block:'nearest', inline:'center', behavior: RM ? 'auto' : 'smooth'});
+}));
+selTL(0);
+
+/* comparación física vs digital */
+const CMP = [
+  ['Soporte','Papel y metal','Registro electrónico en servidores o en una red'],
+  ['Quién lo emite','El banco central','Banco central (CBDC) o redes privadas (cripto)'],
+  ['Cómo se verifica','Se ve y se toca','Claves, firmas digitales y validación en red'],
+  ['Velocidad','Inmediata cuando es en mano','Segundos, incluso entre países'],
+  ['Rastreo','Bajo: el efectivo es prácticamente anónimo','Alto: cada movimiento deja un registro'],
+  ['Riesgo principal','Robo o pérdida física','Fraude digital y pérdida de claves'],
+  ['Acceso','No necesita electricidad ni conexión','Depende de dispositivo, batería y señal'],
+  ['Privacidad','Alta por defecto','Baja por defecto: hay que configurarla']
+];
+$('#cmp').innerHTML =
+  `<div class="cmpH" role="row"><span>—</span><span class="hA">Moneda física</span><span class="hB">Moneda digital</span></div>` +
+  CMP.map(r => `
+    <div class="cmpR" role="row">
+      <div class="cmpK">${r[0]}</div>
+      <div class="cmpV a" data-c="Física">${r[1]}</div>
+      <div class="cmpV b" data-c="Digital">${r[2]}</div>
+    </div>`).join('');
+
+/* efectivo / CBDC / cripto */
+const MO = [
+  {n:'Efectivo', e:'💵',
+   d:'Billetes y monedas emitidos por el banco central. Se usan sin intermediarios, sin conexión y sin dejar rastro digital.',
+   a:[['Emisor','Banco central'],['Respaldo','El Estado'],['Validez','Obligatoria: nadie puede rechazarlo'],['Privacidad','Alta, como el efectivo'],['Riesgo','Robo o pérdida física']],
+   c:'Es el único dinero que no deja registro digital. Su uso cae en muchos países, y eso preocupa a quien valora la privacidad y el acceso sin tecnología.'},
+  {n:'CBDC', e:'🏛️',
+   d:'Moneda digital de banco central: el equivalente digital del efectivo, emitido y respaldado por el Estado, no por una empresa.',
+   a:[['Emisor','Banco central'],['Respaldo','El Estado'],['Validez','Curso legal, igual que el efectivo'],['Privacidad','Definida por diseño y por ley'],['Riesgo','Depende de quién accede a los datos']],
+   c:'Más de cien bancos centrales las estudian, pero la mayoría todavía no las emite. Los pilotos sirven justamente para probar tecnología, límites y privacidad.'},
+  {n:'Criptomoneda', e:'₿',
+   d:'Dinero digital emitido por redes privadas, sin banco central, que se valida entre pares mediante criptografía.',
+   a:[['Emisor','Ninguno: red descentralizada'],['Respaldo','La confianza en la red'],['Validez','No es de curso legal en casi ningún país'],['Privacidad','Seudónima: no es anónima'],['Riesgo','Alta volatilidad y pérdida de claves']],
+   c:'No todo es igual: las stablecoins intentan mantener paridad con una moneda, y existen miles de proyectos con riesgos muy distintos entre sí.'}
+];
+$('#moTabs').innerHTML = MO.map((m, i) =>
+  `<button class="segBtn" role="tab" aria-selected="${i === 0}" data-i="${i}">${m.e} ${m.n}</button>`).join('');
+
+function selMO(i){
+  $$('#moTabs .segBtn').forEach((b, k) => b.setAttribute('aria-selected', k === i));
+  const m = MO[i];
+  $('#moPanel').innerHTML = `
+    <div>
+      <h3><span>${m.e}</span>${m.n}</h3>
+      <p>${m.d}</p>
+      <div class="attrs">${m.a.map(x => `<div class="attr"><b>${x[0]}</b><span>${x[1]}</span></div>`).join('')}</div>
+    </div>
+    <div class="careBox"><b>Qué cuidar</b><p>${m.c}</p></div>`;
+}
+$$('#moTabs .segBtn').forEach(b => b.addEventListener('click', () => selMO(+b.dataset.i)));
+selMO(0);
+
+/* billeteras + checklist */
+const WALLETS = [
+  ['🏦','Billetera bancaria','La app de tu banco. Tu saldo está protegido por la regulación y puedes recuperar el acceso si pierdes el teléfono.'],
+  ['📲','Billetera fintech','Cuentas de pago con transferencias inmediatas y alias. Revisa comisiones, límites y quién respalda tu saldo.'],
+  ['🔑','Billetera de autocustodia','Las claves son tuyas y nadie puede recuperarlas por ti. Más control y mucha más responsabilidad.'],
+  ['🧊','Billetera fría (hardware)','Un dispositivo sin conexión para guardar claves a largo plazo. Útil para montos grandes, incómoda para el día a día.']
+];
+$('#walletCards').innerHTML = WALLETS.map(w => `
+  <article class="card"><div class="ico">${w[0]}</div><h3>${w[1]}</h3><p>${w[2]}</p></article>`).join('');
+
+const CHK = [
+  'Activo el doble factor (2FA) en todas mis cuentas',
+  'Uso una clave distinta para cada servicio',
+  'Nunca comparto códigos ni mi frase semilla',
+  'Verifico el alias o la cuenta antes de transferir',
+  'Configuré límites y alertas de movimiento',
+  'Mantengo actualizadas la app y el sistema operativo'
+];
+$('#chkList').innerHTML = CHK.map((c, i) =>
+  `<button class="chk" aria-pressed="false" data-i="${i}"><i>✓</i><span>${c}</span></button>`).join('');
+const chkEls = $$('#chkList .chk');
+function updChk(){
+  const on = chkEls.filter(b => b.getAttribute('aria-pressed') === 'true').length;
+  $('#chkBar').style.width = (on / CHK.length * 100) + '%';
+  $('#chkOut').textContent = on === CHK.length
+    ? '¡Listo! Tienes las 6 protecciones activas.'
+    : on + ' de ' + CHK.length + ' protecciones activas.';
+}
+chkEls.forEach(b => b.addEventListener('click', () => {
+  b.setAttribute('aria-pressed', b.getAttribute('aria-pressed') === 'true' ? 'false' : 'true');
+  updChk();
+}));
+updChk();
+
+/* futuro */
+const FUT = [
+  ['⚙️','Pagos programables','Dinero que se ejecuta solo cuando se cumple una condición: pagos por uso, suscripciones o liquidaciones automáticas.'],
+  ['🪙','Dinero tokenizado','Depósitos, bonos y activos convertidos en tokens que se mueven en segundos y se liquidan sin intermediarios.'],
+  ['🪪','Identidad digital','Demostrar quién eres sin entregar todos tus datos: verificaciones mínimas y reutilizables.'],
+  ['🌍','Inclusión financiera','Pagos instantáneos con requisitos bajos acercan a quien nunca tuvo una cuenta bancaria formal.'],
+  ['🕵️','Privacidad por diseño','Técnicas criptográficas que permiten validar una operación sin revelar el detalle de cada movimiento.'],
+  ['💵','¿El fin del efectivo?','El debate no es tecnológico sino social: acceso, libertad individual y qué pasa con quien no puede usar una app.']
+];
+$('#futureCards').innerHTML = FUT.map(f => `
+  <article class="card"><div class="ico">${f[0]}</div><h3>${f[1]}</h3><p>${f[2]}</p></article>`).join('');
+
+/* proyectos */
+const PR = [
+  {n:'Pix', f:'🇧🇷', p:'Brasil · 2020', t:'Pagos instantáneos',
+   d:'Sistema del Banco Central de Brasil: transferencias en segundos, todos los días y con un alias. Se convirtió en el medio de pago más usado del país.', s:'En uso masivo'},
+  {n:'UPI', f:'🇮🇳', p:'India · 2016', t:'Pagos instantáneos',
+   d:'Interfaz unificada que conecta varias apps de pago bajo un mismo estándar. Mueve miles de millones de operaciones por mes.', s:'En uso masivo'},
+  {n:'e-CNY (yuan digital)', f:'🇨🇳', p:'China · 2020', t:'CBDC',
+   d:'La CBDC más avanzada del mundo: se prueba en ciudades y eventos a gran escala, todavía sin fecha de lanzamiento general.', s:'En fase piloto'},
+  {n:'Sand Dollar', f:'🇧🇸', p:'Bahamas · 2020', t:'CBDC',
+   d:'Primera CBDC emitida oficialmente. Está pensada para islas donde acceder a la banca tradicional es caro y lento.', s:'En uso'},
+  {n:'eNaira', f:'🇳🇬', p:'Nigeria · 2021', t:'CBDC',
+   d:'CBDC de Nigeria, uno de los países con mayor adopción de cripto. Su uso todavía es bajo frente a las billeteras privadas.', s:'En uso'},
+  {n:'Euro digital', f:'🇪🇺', p:'Zona euro · en preparación', t:'CBDC',
+   d:'El Banco Central Europeo investiga y prepara un euro digital complementario al efectivo, con foco explícito en la privacidad.', s:'En preparación'},
+  {n:'Bitcoin como curso legal', f:'🇸🇻', p:'El Salvador · 2021', t:'Cripto',
+   d:'El país adoptó bitcoin como moneda de curso legal junto al dólar. Es el caso más citado y también el más discutido.', s:'Experiencia en curso'},
+  {n:'Billeteras fintech', f:'🌎', p:'América Latina · 2010s', t:'Billeteras',
+   d:'Apps como Mercado Pago o Nequi acercan cuentas y pagos a personas que no usaban la banca tradicional.', s:'En uso masivo'},
+  {n:'Dólar digital de Bahamas...', f:'🏝️', p:'Varias islas del Caribe', t:'CBDC',
+   d:'Varios países pequeños del Caribe lanzaron monedas digitales propias para reducir costos de transferencia entre islas.', s:'En uso'}
+];
+const PTYPES = ['Todos','Pagos instantáneos','CBDC','Cripto','Billeteras'];
+let psel = 'Todos';
+function renderChips(){
+  $('#pChips').innerHTML = PTYPES.map(t =>
+    `<button class="chip ${t === psel ? 'on' : ''}" aria-pressed="${t === psel}">${t}</button>`).join('');
+  $$('#pChips .chip').forEach(b => b.addEventListener('click', () => { psel = b.textContent; renderChips(); renderProjects(); }));
+}
+function renderProjects(){
+  const list = PR.filter(p => psel === 'Todos' || p.t === psel);
+  $('#pGrid').innerHTML = list.map(p => `
+    <article class="pc">
+      <div class="pcTop"><span class="pcFlag">${p.f}</span><div><b>${p.n}</b><small>${p.p}</small></div></div>
+      <span class="badge">${p.t}</span>
+      <p>${p.d}</p>
+      <span class="st">${p.s}</span>
+    </article>`).join('');
+}
+renderChips();
+renderProjects();
+
+/* sueldo */
+const RULES = [
+  {n:'50 / 30 / 20', v:[50,30,20]},
+  {n:'60 / 30 / 10', v:[60,30,10]},
+  {n:'70 / 20 / 10', v:[70,20,10]}
+];
+const CATS = [
+  {n:'Necesidades', c:'var(--gold)'},
+  {n:'Gustos', c:'var(--violet)'},
+  {n:'Ahorro', c:'var(--teal)'}
+];
+let rsel = 0;
+$('#rules').innerHTML = RULES.map((r, i) =>
+  `<button class="segBtn" role="tab" aria-selected="${i === 0}" data-i="${i}">${r.n}</button>`).join('');
+
+function calcBudget(){
+  $$('#rules .segBtn').forEach((b, k) => b.setAttribute('aria-selected', k === rsel));
+  const raw = +$('#sueldo').value;
+  const total = isFinite(raw) && raw > 0 ? raw : 0;
+  const v = RULES[rsel].v;
+  $('#budOut').innerHTML = CATS.map((c, i) => `
+    <div class="budRow">
+      <div class="budTop">
+        <span class="dot" style="background:${c.c}"></span>
+        <b>${c.n}</b>
+        <span class="pct">${v[i]}%</span>
+        <span class="amt" style="color:${c.c}">$${fmt(total * v[i] / 100)}</span>
+      </div>
+      <div class="budBar"><i style="width:${v[i]}%;background:${c.c}"></i></div>
+    </div>`).join('');
+}
+$$('#rules .segBtn').forEach(b => b.addEventListener('click', () => { rsel = +b.dataset.i; calcBudget(); }));
+$('#sueldo').addEventListener('input', calcBudget);
+calcBudget();
+
+/* privacidad */
+const TIPS = [
+  ['🔐','Doble factor siempre','Actívalo en el banco, en la billetera y en el correo. Es la protección con mejor relación entre esfuerzo y resultado.'],
+  ['🧩','Claves únicas','Una contraseña distinta por servicio y, si puedes, un gestor de contraseñas. Reutilizar es el error más común.'],
+  ['🚫','Nadie te pide códigos','Ni el banco, ni el soporte, ni un supuesto premio. Si te lo piden por teléfono o mensaje, es fraude.'],
+  ['🧾','Verifica antes de enviar','Confirma el alias, la cuenta y el monto. Una transferencia confirmada no siempre se puede deshacer.'],
+  ['🗂️','Separa tus cuentas','Una cuenta para el día a día y otra solo para ahorro. Así el dinero que no gastas no está a un toque de distancia.'],
+  ['📵','Cuidado en redes públicas','Evita operar desde wifi abierto y desconfía de enlaces que llegan por mensaje, incluso si parecen de tu banco.']
+];
+$('#tipsGrid').innerHTML = TIPS.map(t => `
+  <article class="tip"><span class="ico">${t[0]}</span><h3>${t[1]}</h3><p>${t[2]}</p></article>`).join('');
+
+/* glosario */
+const G = [
+  ['Activo','Todo bien o derecho con valor que se puede comprar, vender o generar ingresos.'],
+  ['Alias','Nombre corto y fácil de recordar que reemplaza a un número de cuenta largo al transferir.'],
+  ['Autocustodia','Guardar tus claves privadas tú mismo, sin un intermediario que custodie tus fondos.'],
+  ['Banco central','Institución pública que emite la moneda de un país y regula el sistema financiero.'],
+  ['Billetera digital','Aplicación o dispositivo donde se guarda dinero digital o las claves para usarlo.'],
+  ['Blockchain','Registro de transacciones encadenadas y compartido entre muchas computadoras.'],
+  ['Bruto y neto','Bruto es lo que se paga antes de descuentos; neto es lo que efectivamente cobras.'],
+  ['CBDC','Moneda digital de banco central: dinero digital emitido y respaldado por el Estado.'],
+  ['Criptomoneda','Dinero digital emitido por una red privada y validado con criptografía, sin banco central.'],
+  ['Custodia','Quién guarda y controla tus fondos: un intermediario o tú mismo.'],
+  ['Dinero fiduciario','Dinero que vale por la confianza y la ley, no por un metal que lo respalde.'],
+  ['Doble factor (2FA)','Segundo paso de verificación, además de la contraseña, para entrar a una cuenta.'],
+  ['Emisor','Quien crea y pone en circulación el dinero: un banco central o una red privada.'],
+  ['Frase semilla','Serie de palabras que permite recuperar una billetera de criptomonedas. Nunca se comparte.'],
+  ['Inflación','Aumento sostenido de los precios, que reduce lo que se puede comprar con el mismo dinero.'],
+  ['Interés compuesto','Interés que se calcula sobre el capital más los intereses acumulados. Crece en el tiempo.'],
+  ['Liquidez','Facilidad para convertir algo en dinero disponible sin perder valor.'],
+  ['Minería','Proceso por el que algunas redes de criptomonedas validan transacciones y crean nuevas unidades.'],
+  ['Moneda de curso legal','Dinero que, por ley, debe aceptarse como medio de pago en un país.'],
+  ['Open banking','Sistema que permite compartir datos bancarios con otras apps, siempre con tu autorización.'],
+  ['Phishing','Intento de fraude que suplanta a una entidad para que entregues tus claves o datos.'],
+  ['Privacidad','Control sobre qué información personal se comparte y con quién.'],
+  ['Stablecoin','Criptomoneda diseñada para mantener un valor estable respecto a otra moneda o activo.'],
+  ['Tokenización','Convertir un activo del mundo real en un token digital que puede transferirse.'],
+  ['Volatilidad','Velocidad e intensidad con que cambia el precio de un activo.']
+].sort((a, b) => a[0].localeCompare(b[0], 'es'));
+
+function renderGlossary(f = ''){
+  const q = f.trim().toLowerCase();
+  const list = G.filter(g => (g[0] + ' ' + g[1]).toLowerCase().includes(q));
+  $('#gls').innerHTML = list.length
+    ? list.map(g => `
+      <div class="term">
+        <button aria-expanded="false">${g[0]}<i aria-hidden="true">+</i></button>
+        <div class="def"><div><p>${g[1]}</p></div></div>
+      </div>`).join('')
+    : `<p style="grid-column:1/-1;padding:20px;border-radius:16px;background:var(--goldSoft);border:1px solid rgba(201,138,16,.35)">No encontramos ese término. Prueba con otra palabra.</p>`;
+
+  $$('.term button').forEach(b => b.addEventListener('click', () => {
+    const open = b.parentElement.toggleAttribute('open');
+    b.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }));
+}
+renderGlossary();
+$('#q').addEventListener('input', e => renderGlossary(e.target.value));
+
+/* nav activo */
+const links = $$('nav a');
+const so = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting) links.forEach(a => a.classList.toggle('on', a.getAttribute('href') === '#' + e.target.id));
+}), {rootMargin:'-45% 0px -50% 0px'});
+$$('main section[id]').forEach(s => so.observe(s));
+
+rv();
+</script>
+</body>
+</html>
