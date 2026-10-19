@@ -1,0 +1,1633 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Libros Sagrados de las Religiones explicados</title>
+<meta name="description" content="Recorre los libros sagrados del Cristianismo, Judaísmo, Islam y otras religiones: línea del tiempo, sectas, diferencias y glosario, con diagramas interactivos.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --font-display:'Space Grotesk','Segoe UI',system-ui,sans-serif;
+  --font-body:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --radius:20px;
+  --radius-sm:12px;
+  --maxw:1180px;
+  --ease:cubic-bezier(.22,.75,.25,1);
+}
+html[data-theme="light"]{
+  --bg:#fbf9f5;
+  --bg-soft:#f4f0e8;
+  --surface:rgba(255,255,255,.86);
+  --surface-solid:#ffffff;
+  --surface-2:rgba(60,40,20,.045);
+  --surface-3:rgba(60,40,20,.08);
+  --border:rgba(60,40,20,.12);
+  --border-strong:rgba(60,40,20,.24);
+  --text:#1a1410;
+  --muted:#6f6252;
+  --accent:#e11d48;
+  --accent-2:#7c3aed;
+  --accent-3:#0891b2;
+  --good:#059669;
+  --bad:#e11d48;
+  --shadow:0 22px 55px -28px rgba(60,30,10,.22);
+  --orb-op:.16;
+  --dot-color:rgba(60,40,20,.055);
+}
+html[data-theme="dark"]{
+  --bg:#0a0806;
+  --bg-soft:#12100c;
+  --surface:rgba(30,25,20,.66);
+  --surface-solid:#1b1712;
+  --surface-2:rgba(255,255,255,.045);
+  --surface-3:rgba(255,255,255,.08);
+  --border:rgba(255,255,255,.10);
+  --border-strong:rgba(255,255,255,.20);
+  --text:#f5ede2;
+  --muted:#a89a86;
+  --accent:#fb7185;
+  --accent-2:#a78bfa;
+  --accent-3:#22d3ee;
+  --good:#34d399;
+  --bad:#fb7185;
+  --shadow:0 24px 60px -24px rgba(0,0,0,.9);
+  --orb-op:.30;
+  --dot-color:rgba(255,255,255,.03);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;font-family:var(--font-body);background:var(--bg);color:var(--text);
+  min-height:100vh;line-height:1.65;-webkit-font-smoothing:antialiased;
+  transition:background .45s var(--ease),color .45s var(--ease);
+  overflow-x:hidden;
+}
+h1,h2,h3,h4,h5{font-family:var(--font-display);line-height:1.15;letter-spacing:-.02em;margin:0}
+p{margin:0}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+a{color:inherit;text-decoration:none}
+ul{margin:0}
+::selection{background:var(--accent);color:#fff}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
+
+.bg-dots{position:fixed;inset:0;z-index:-3;pointer-events:none;background-image:radial-gradient(var(--dot-color) 1px,transparent 1px);background-size:26px 26px}
+.orbs{position:fixed;inset:0;z-index:-2;overflow:hidden;pointer-events:none}
+.orb{position:absolute;border-radius:50%;filter:blur(100px);opacity:var(--orb-op);animation:float 28s ease-in-out infinite alternate}
+.orb.o1{width:52vw;height:52vw;background:var(--accent);top:-16vw;left:-12vw}
+.orb.o2{width:42vw;height:42vw;background:var(--accent-2);bottom:-18vw;right:-10vw;animation-delay:-10s}
+.orb.o3{width:34vw;height:34vw;background:var(--accent-3);top:44%;left:58%;animation-delay:-17s}
+@keyframes float{0%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(4vw,-3vw,0) scale(1.1)}100%{transform:translate3d(-3vw,4vw,0) scale(.95)}}
+
+.site-header{
+  position:sticky;top:0;z-index:50;
+  backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);
+  background:color-mix(in srgb,var(--bg) 78%, transparent);
+  border-bottom:1px solid var(--border);
+}
+.header-inner{max-width:var(--maxw);margin:0 auto;padding:13px 22px;display:flex;align-items:center;gap:20px}
+.brand{display:flex;align-items:center;gap:11px;font-family:var(--font-display);font-weight:700;font-size:1rem;letter-spacing:-.02em;white-space:nowrap}
+.brand-mark{
+  width:38px;height:38px;border-radius:12px;flex:none;
+  background:linear-gradient(140deg,var(--accent),var(--accent-2) 55%,var(--accent-3));
+  display:grid;place-items:center;color:#fff;
+  box-shadow:0 8px 22px -8px var(--accent);
+  transition:transform .5s var(--ease);
+}
+.brand:hover .brand-mark{transform:rotate(-10deg) scale(1.06)}
+.brand-mark svg{width:22px;height:22px}
+
+.nav{display:flex;gap:2px;margin-left:auto;overflow-x:auto;scrollbar-width:none}
+.nav::-webkit-scrollbar{display:none}
+.nav-link{position:relative;padding:9px 11px;border-radius:11px;font-size:.8rem;font-weight:500;color:var(--muted);white-space:nowrap;transition:color .3s var(--ease),background .3s var(--ease)}
+.nav-link:hover{color:var(--text);background:var(--surface-2)}
+.nav-link.active{color:var(--text);background:var(--surface-2)}
+.nav-link.active::after{content:'';position:absolute;left:11px;right:11px;bottom:4px;height:2px;border-radius:2px;background:linear-gradient(90deg,var(--accent),var(--accent-2));animation:navIn .4s var(--ease) both}
+@keyframes navIn{from{transform:scaleX(0);opacity:0}to{transform:scaleX(1);opacity:1}}
+
+.theme-toggle{width:40px;height:40px;border-radius:12px;flex:none;border:1px solid var(--border);background:var(--surface-2);display:grid;place-items:center;transition:transform .35s var(--ease),border-color .3s,background .3s}
+.theme-toggle:hover{transform:translateY(-2px) rotate(8deg);border-color:var(--border-strong)}
+.theme-toggle svg{width:19px;height:19px}
+html[data-theme="dark"] .icon-sun{display:block}
+html[data-theme="dark"] .icon-moon{display:none}
+html[data-theme="light"] .icon-sun{display:none}
+html[data-theme="light"] .icon-moon{display:block}
+
+main{max-width:var(--maxw);margin:0 auto;padding:0 22px 90px}
+.view{display:none}
+.view.active{display:block;animation:viewIn .55s var(--ease) both}
+@keyframes viewIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+
+.hero{padding:72px 0 42px;max-width:920px}
+.pill{display:inline-flex;align-items:center;gap:8px;padding:7px 15px;border-radius:999px;font-size:.78rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;border:1px solid var(--border);background:var(--surface);color:var(--muted);margin-bottom:26px}
+.pill .dot{width:7px;height:7px;border-radius:50%;background:var(--good);animation:pulse 2.4s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--good) 60%,transparent)}70%{box-shadow:0 0 0 9px transparent}100%{box-shadow:0 0 0 0 transparent}}
+h1.hero-title{font-size:clamp(2.1rem,5.2vw,3.9rem);font-weight:700;letter-spacing:-.035em;margin-bottom:22px}
+.grad{background:linear-gradient(100deg,var(--accent),var(--accent-2) 48%,var(--accent-3));-webkit-background-clip:text;background-clip:text;color:transparent;background-size:220% auto;animation:shimmer 8s linear infinite}
+@keyframes shimmer{to{background-position:220% center}}
+.lead{font-size:clamp(1rem,1.6vw,1.15rem);color:var(--muted);max-width:700px;margin-bottom:34px}
+.hero-actions{display:flex;flex-wrap:wrap;gap:13px}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:13px 25px;border-radius:13px;font-size:.93rem;font-weight:600;border:1px solid transparent;transition:transform .28s var(--ease),box-shadow .3s var(--ease),background .3s,border-color .3s,color .3s;will-change:transform}
+.btn:active{transform:scale(.97)}
+.btn svg{width:17px;height:17px}
+.btn-primary{background:linear-gradient(120deg,var(--accent),var(--accent-2));color:#fff;box-shadow:0 14px 34px -14px var(--accent);position:relative;overflow:hidden}
+.btn-primary::after{content:'';position:absolute;inset:0;background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,.45),transparent 70%);transform:translateX(-130%);transition:transform .7s var(--ease)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 20px 42px -14px var(--accent)}
+.btn-primary:hover::after{transform:translateX(130%)}
+.btn-ghost{border-color:var(--border);background:var(--surface);color:var(--text)}
+.btn-ghost:hover{transform:translateY(-2px);border-color:var(--border-strong);background:var(--surface-2)}
+.btn.small{padding:8px 16px;font-size:.85rem}
+
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin:12px 0 58px}
+.stat{padding:22px 20px;border-radius:var(--radius);background:var(--surface);border:1px solid var(--border);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);transition:transform .35s var(--ease),border-color .3s,box-shadow .35s}
+.stat:hover{transform:translateY(-5px);border-color:var(--border-strong);box-shadow:var(--shadow)}
+.stat .num{font-family:var(--font-display);font-size:1.8rem;font-weight:700;letter-spacing:-.03em;background:linear-gradient(120deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.stat .lbl{font-size:.82rem;color:var(--muted);font-weight:500;margin-top:2px}
+
+.sec-head{margin:0 0 28px}
+.sec-head h2{font-size:clamp(1.55rem,3vw,2.05rem);font-weight:700;margin-bottom:8px}
+.sec-head p{color:var(--muted);max-width:720px;font-size:.95rem}
+.section{padding-top:52px}
+
+.module-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(258px,1fr));gap:18px}
+.module{position:relative;overflow:hidden;text-align:left;padding:28px 24px;border-radius:var(--radius);background:var(--surface);border:1px solid var(--border);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);transition:transform .4s var(--ease),border-color .35s,box-shadow .4s}
+.module::before{content:'';position:absolute;inset:0;opacity:0;background:radial-gradient(420px circle at var(--mx,50%) var(--my,0%),color-mix(in srgb,var(--accent) 22%,transparent),transparent 65%);transition:opacity .45s var(--ease)}
+.module:hover{transform:translateY(-6px);border-color:var(--border-strong);box-shadow:var(--shadow)}
+.module:hover::before{opacity:1}
+.module-ico{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;margin-bottom:18px;background:linear-gradient(140deg,color-mix(in srgb,var(--accent) 22%,transparent),color-mix(in srgb,var(--accent-2) 18%,transparent));border:1px solid var(--border);color:var(--accent);transition:transform .4s var(--ease)}
+.module:hover .module-ico{transform:scale(1.08) rotate(-6deg)}
+.module-ico svg{width:22px;height:22px}
+.module h3{font-size:1.04rem;margin-bottom:8px;font-weight:600}
+.module p{font-size:.89rem;color:var(--muted);line-height:1.6}
+.module .arrow{display:inline-flex;align-items:center;gap:6px;margin-top:16px;font-size:.84rem;font-weight:600;color:var(--accent)}
+.module .arrow svg{width:14px;height:14px;transition:transform .35s var(--ease)}
+.module:hover .arrow svg{transform:translateX(5px)}
+
+.card{padding:24px 26px;border-radius:var(--radius);background:var(--surface);border:1px solid var(--border);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);transition:transform .35s var(--ease),border-color .3s,box-shadow .35s}
+.card:hover{transform:translateY(-4px);border-color:var(--border-strong);box-shadow:var(--shadow)}
+.card h3{font-size:1.02rem;margin-bottom:10px;font-weight:600}
+.card p{font-size:.9rem;color:var(--muted);line-height:1.68}
+.card .kicker{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;display:block}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(258px,1fr))}
+.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{padding:8px 15px;border-radius:999px;font-size:.81rem;font-weight:600;border:1px solid var(--border);background:var(--surface);color:var(--muted);transition:all .3s var(--ease)}
+.chip:hover{color:var(--text);border-color:var(--border-strong);transform:translateY(-1px)}
+.chip.active{background:linear-gradient(120deg,var(--accent),var(--accent-2));color:#fff;border-color:transparent;box-shadow:0 10px 26px -12px var(--accent)}
+
+.vt{position:relative;margin-top:26px}
+.vt::before{content:'';position:absolute;left:13px;top:10px;bottom:10px;width:2px;border-radius:2px;background:linear-gradient(180deg,var(--accent),var(--accent-2) 55%,var(--accent-3));opacity:.55}
+.vt-item{position:relative;padding-left:46px;margin-bottom:18px;animation:termIn .5s var(--ease) both;animation-delay:var(--d,0ms)}
+.vt-item.hidden{display:none}
+@keyframes termIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.vt-dot{position:absolute;left:7px;top:24px;width:14px;height:14px;border-radius:50%;background:var(--c);border:3px solid var(--bg);box-shadow:0 0 0 3px color-mix(in srgb,var(--c) 30%,transparent);transition:transform .3s var(--ease)}
+.vt-item:hover .vt-dot{transform:scale(1.3)}
+.vt-card{padding:20px 22px;border-radius:var(--radius-sm);background:var(--surface);border:1px solid var(--border);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);transition:border-color .3s,transform .3s var(--ease),box-shadow .3s}
+.vt-item:hover .vt-card{border-color:var(--border-strong);transform:translateX(3px);box-shadow:var(--shadow)}
+.vt-top{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:8px}
+.vt-year{font-family:var(--font-display);font-size:.86rem;font-weight:700;color:var(--accent);padding:3px 10px;border-radius:7px;background:color-mix(in srgb,var(--accent) 13%,transparent);border:1px solid color-mix(in srgb,var(--accent) 26%,transparent);white-space:nowrap}
+.vt-era{font-size:.68rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.vt-card h4{font-size:1rem;font-weight:600;margin-bottom:7px;line-height:1.3}
+.vt-card > p{font-size:.88rem;color:var(--muted);line-height:1.66}
+.vt-more{display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:.79rem;font-weight:600;color:var(--accent);padding:4px 0;transition:gap .3s var(--ease)}
+.vt-more:hover{gap:9px}
+.vt-more svg{width:12px;height:12px;transition:transform .4s var(--ease)}
+.vt-item.open .vt-more svg{transform:rotate(180deg)}
+.vt-extra{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s var(--ease)}
+.vt-item.open .vt-extra{grid-template-rows:1fr}
+.vt-extra > div{overflow:hidden}
+.vt-extra p{font-size:.85rem;color:var(--muted);line-height:1.7;border-top:1px solid var(--border);margin-top:12px;padding-top:12px}
+
+.diagram-wrap{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px 16px;box-shadow:var(--shadow)}
+.diagram-wrap svg{display:block;width:100%;height:auto;max-width:520px;margin:0 auto}
+.hit{cursor:pointer;transition:filter .2s,opacity .2s}
+.hit:hover{filter:brightness(1.15)}
+.hit.sel{filter:drop-shadow(0 0 10px var(--accent))}
+
+.info-panel{margin-top:16px;padding:16px 18px;border-radius:var(--radius-sm);background:var(--surface-2);border:1px solid var(--border);min-height:110px;transition:border-color .3s,background .3s}
+.info-panel.active{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 7%,var(--surface-2))}
+.info-panel .ip-name{font-family:var(--font-display);font-weight:700;font-size:1.02rem;color:var(--accent);margin-bottom:6px}
+.info-panel .ip-func{font-size:.9rem;color:var(--text);margin-bottom:6px;line-height:1.6}
+.info-panel .ip-desc{font-size:.85rem;color:var(--muted);line-height:1.6}
+.info-panel .ip-hint{color:var(--muted);font-size:.86rem;font-style:italic}
+
+.tbl{width:100%;border-collapse:collapse;font-size:.86rem;border-radius:12px;overflow:hidden;border:1px solid var(--border)}
+.tbl th, .tbl td{padding:11px 14px;text-align:left;border-bottom:1px solid var(--border)}
+.tbl th{background:var(--surface-2);font-weight:600;font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.tbl tr:last-child td{border-bottom:none}
+.tbl tr:hover td{background:var(--surface-2)}
+.tbl td{color:var(--text)}
+
+.note{margin-top:26px;padding:16px 20px;border-radius:14px;font-size:.85rem;color:var(--muted);border:1px solid var(--border);background:var(--surface-2);border-left:3px solid var(--accent);line-height:1.65}
+.note strong{color:var(--text);font-weight:600}
+.note.warn{border-left-color:var(--bad);background:color-mix(in srgb,var(--bad) 6%,var(--surface-2))}
+
+.verse{
+  padding:18px 20px 16px 22px;
+  border-radius:14px;
+  background:var(--surface-2);
+  border-left:3px solid var(--accent);
+  font-style:italic;
+  color:var(--text);
+  font-size:.9rem;
+  line-height:1.7;
+  margin:16px 0 0;
+  position:relative;
+}
+.verse::before{
+  content:'"';
+  position:absolute;
+  top:-6px;
+  right:16px;
+  font-family:var(--font-display);
+  font-size:3.2rem;
+  line-height:1;
+  color:color-mix(in srgb,var(--accent) 28%,transparent);
+  font-style:normal;
+  font-weight:700;
+}
+.verse-ref{
+  display:block;
+  margin-top:8px;
+  font-size:.78rem;
+  font-weight:600;
+  color:var(--accent);
+  font-style:normal;
+  letter-spacing:.03em;
+}
+
+.search-box{
+  width:100%;
+  padding:14px 18px;
+  border-radius:13px;
+  border:1px solid var(--border);
+  background:var(--surface);
+  color:var(--text);
+  font-family:inherit;
+  font-size:.93rem;
+  margin-bottom:18px;
+  transition:border-color .3s, background .3s, box-shadow .3s;
+}
+.search-box:focus{
+  outline:none;
+  border-color:var(--accent);
+  background:var(--surface-solid);
+  box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 15%,transparent);
+}
+.search-box::placeholder{color:var(--muted)}
+
+.book-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(150px,1fr));
+  gap:8px;
+  margin-top:10px;
+}
+.book-item{
+  padding:10px 12px;
+  border-radius:10px;
+  background:var(--surface-2);
+  border:1px solid var(--border);
+  font-size:.82rem;
+  font-weight:500;
+  transition:all .25s var(--ease);
+  text-align:center;
+  color:var(--text);
+}
+.book-item:hover{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 8%,transparent);transform:translateY(-1px)}
+.book-item small{display:block;font-size:.68rem;font-weight:600;color:var(--muted);margin-top:2px;letter-spacing:.02em;text-transform:uppercase}
+
+.tag{
+  display:inline-block;
+  padding:3px 9px;
+  border-radius:6px;
+  font-size:.7rem;
+  font-weight:700;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+  background:color-mix(in srgb,var(--accent-3) 16%,transparent);
+  color:var(--accent-3);
+  border:1px solid color-mix(in srgb,var(--accent-3) 30%,transparent);
+  margin-right:6px;
+  margin-bottom:6px;
+}
+.tag.danger{background:color-mix(in srgb,var(--bad) 16%,transparent);color:var(--bad);border-color:color-mix(in srgb,var(--bad) 30%,transparent)}
+.tag.good{background:color-mix(in srgb,var(--good) 16%,transparent);color:var(--good);border-color:color-mix(in srgb,var(--good) 30%,transparent)}
+
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s var(--ease),transform .7s var(--ease);transition-delay:var(--d,0ms)}
+.reveal.in{opacity:1;transform:none}
+
+.site-footer{border-top:1px solid var(--border);padding:34px 22px;text-align:center;font-size:.85rem;color:var(--muted)}
+.site-footer strong{color:var(--text);font-weight:600}
+
+@media (max-width:1040px){.nav-link{padding:9px 9px;font-size:.76rem}}
+@media (max-width:900px){
+  .header-inner{padding:12px 16px;gap:14px;flex-wrap:wrap}
+  .nav{order:3;width:100%;margin-left:0;padding-bottom:2px}
+  .theme-toggle{margin-left:auto}
+  main{padding:0 16px 70px}
+  .hero{padding:44px 0 32px}
+  .stats{grid-template-columns:repeat(2,1fr);gap:11px}
+  .stat{padding:17px 15px}
+  .stat .num{font-size:1.45rem}
+  .vt-item{padding-left:38px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<div class="bg-dots" aria-hidden="true"></div>
+<div class="orbs" aria-hidden="true">
+  <div class="orb o1"></div>
+  <div class="orb o2"></div>
+  <div class="orb o3"></div>
+</div>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="#inicio" data-route="inicio">
+      <span class="brand-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 5a2 2 0 0 1 2-2h5v18H6a2 2 0 0 1-2-2z"/>
+          <path d="M20 5a2 2 0 0 0-2-2h-5v18h5a2 2 0 0 0 2-2z"/>
+        </svg>
+      </span>
+      <span>Libros Sagrados</span>
+    </a>
+
+    <nav class="nav" aria-label="Navegación principal">
+      <button class="nav-link active" data-route="inicio">Inicio</button>
+      <button class="nav-link" data-route="timeline">Línea del tiempo</button>
+      <button class="nav-link" data-route="cristianismo">Cristianismo</button>
+      <button class="nav-link" data-route="judaismo">Judaísmo</button>
+      <button class="nav-link" data-route="islam">Islam</button>
+      <button class="nav-link" data-route="otras">Otras religiones</button>
+      <button class="nav-link" data-route="sectas">Sectas</button>
+      <button class="nav-link" data-route="glosario">Glosario</button>
+    </nav>
+
+    <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema">
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round">
+        <circle cx="12" cy="12" r="4"/>
+        <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>
+      </svg>
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<main>
+
+  <!-- ================= INICIO ================= -->
+  <section class="view active" data-view="inicio">
+    <div class="hero">
+      <span class="pill"><span class="dot"></span>De los Vedas al Corán</span>
+      <h1 class="hero-title">Los libros sagrados <span class="grad">de las religiones</span></h1>
+      <p class="lead">
+        Un recorrido por los textos que han moldeado la fe de miles de millones de personas:
+        la Biblia cristiana, el Tanaj judío, el Corán islámico, los Vedas hindúes, el Canon Pali
+        budista y otros muchos. Con línea del tiempo, sectas y glosario.
+      </p>
+      <div class="hero-actions">
+        <button class="btn btn-primary" data-route="timeline">
+          Ver la línea del tiempo
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+        <button class="btn btn-ghost" data-route="glosario">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>
+          Abrir glosario
+        </button>
+      </div>
+    </div>
+
+    <div class="stats reveal">
+      <div class="stat"><div class="num" data-count="7" data-suffix="">0</div><div class="lbl">Tradiciones principales</div></div>
+      <div class="stat"><div class="num" data-count="3500" data-suffix="+">0</div><div class="lbl">Años de textos escritos</div></div>
+      <div class="stat"><div class="num" data-count="114" data-suffix="">0</div><div class="lbl">Suras del Corán</div></div>
+      <div class="stat"><div class="num" data-count="4300" data-suffix="+">0</div><div class="lbl">Lenguas con Biblia traducida</div></div>
+    </div>
+
+    <div class="sec-head reveal">
+      <h2>Cómo está organizada</h2>
+      <p>Siete secciones que recorren los libros sagrados de las grandes tradiciones religiosas, sus diferencias, su historia y el fenómeno de las sectas.</p>
+    </div>
+
+    <div class="module-grid">
+      <button class="module reveal" data-route="timeline" style="--d:0ms">
+        <span class="module-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+        </span>
+        <h3>Línea del tiempo</h3>
+        <p>Del Rigveda al Libro de Mormón: los hitos de los textos sagrados en orden cronológico.</p>
+        <span class="arrow">Recorrer la historia
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </button>
+
+      <button class="module reveal" data-route="cristianismo" style="--d:40ms">
+        <span class="module-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M6 9h12"/></svg>
+        </span>
+        <h3>Cristianismo</h3>
+        <p>La Biblia: 66 o 73 libros, Antiguo y Nuevo Testamento, canon y versiones históricas.</p>
+        <span class="arrow">Ver la Biblia
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </button>
+
+      <button class="module reveal" data-route="judaismo" style="--d:80ms">
+        <span class="module-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l3 6h6l-5 4 2 6-6-4-6 4 2-6-5-4h6z"/></svg>
+        </span>
+        <h3>Judaísmo</h3>
+        <p>El Tanaj (Torá, Neviim, Ketuvim), el Talmud, el Midrash y la Cábala.</p>
+        <span class="arrow">Ver el Tanaj
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </button>
+
+      <button class="module reveal" data-route="islam" style="--d:120ms">
+        <span class="module-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 15a8 8 0 1 1-6-12 6 6 0 0 0 6 12z"/></svg>
+        </span>
+        <h3>Islam</h3>
+        <p>El Corán (114 suras), los Hadices, la Sunna, el Tafsir y la Sharia.</p>
+        <span class="arrow">Ver el Corán
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </button>
+
+      <button class="module reveal" data-route="otras" style="--d:160ms">
+        <span class="module-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3v18"/></svg>
+        </span>
+        <h3>Otras religiones</h3>
+        <p>Hinduismo, budismo, sijismo, taoísmo, confucianismo, zoroastrismo, fe bahá'í y más.</p>
+        <span class="arrow">Explorar tradiciones
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </button>
+
+      <button class="module reveal" data-route="sectas" style="--d:200ms">
+        <span class="module-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/><circle cx="12" cy="12" r="3"/></svg>
+        </span>
+        <h3>Sectas</h3>
+        <p>Qué es una secta, características comunes y casos históricos notorios.</p>
+        <span class="arrow">Conocer el fenómeno
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </button>
+
+      <button class="module reveal" data-route="glosario" style="--d:240ms">
+        <span class="module-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>
+        </span>
+        <h3>Glosario</h3>
+        <p>Más de cuarenta términos clave con buscador y filtros por tradición religiosa.</p>
+        <span class="arrow">Abrir glosario
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </button>
+    </div>
+
+    <div class="note reveal">
+      <strong>Los libros sagrados no son lo mismo que las religiones:</strong> una religión es una
+      tradición viva de comunidades, ritos y éticas; un libro sagrado es uno de sus textos
+      fundamentales. La relación entre ambos varía en cada tradición.
+    </div>
+  </section>
+
+  <!-- ================= LÍNEA DEL TIEMPO ================= -->
+  <section class="view" data-view="timeline">
+    <div class="sec-head section">
+      <h2>Línea del tiempo de los libros sagrados</h2>
+      <p>Los principales hitos de la historia de los textos sagrados, desde la composición de los Vedas hasta los movimientos religiosos del siglo XIX y XX.</p>
+    </div>
+
+    <div class="diagram-wrap reveal" style="margin-bottom:26px">
+      <h4 style="font-size:1.02rem;margin-bottom:8px;font-weight:600">Panorama general</h4>
+      <p style="font-size:.88rem;color:var(--muted);margin-bottom:14px">Cada tradición tiene su propio ritmo de formación textual. Los Vedas son los más antiguos; los textos bahá'ís y mormones, los más recientes.</p>
+      <svg id="timelineSvg" viewBox="0 0 560 260" aria-label="Línea del tiempo general"></svg>
+    </div>
+
+    <h3 style="font-size:1.15rem;font-weight:600;margin:28px 0 14px">Hitos cronológicos</h3>
+    <div class="vt" id="generalTimeline"></div>
+
+    <div class="note reveal">
+      <strong>Fechar textos antiguos es difícil:</strong> muchas obras se transmitieron oralmente
+      durante siglos antes de ser escritas. Las fechas que damos son aproximadas y objeto
+      de debate académico.
+    </div>
+  </section>
+
+  <!-- ================= CRISTIANISMO ================= -->
+  <section class="view" data-view="cristianismo">
+    <div class="sec-head section">
+      <h2>Cristianismo</h2>
+      <p>El libro sagrado del cristianismo es la Biblia: una colección de textos escritos en hebreo, arameo y griego a lo largo de más de mil años. Su estructura varía según la confesión cristiana.</p>
+    </div>
+
+    <div class="grid" style="margin-bottom:24px">
+      <div class="card reveal">
+        <span class="kicker">Qué es</span>
+        <h3>66 o 73 libros</h3>
+        <p>Las Biblias protestantes tienen 66 libros. Las católicas incluyen 7 libros deuterocanónicos adicionales (Tobías, Judit, Sabiduría, Eclesiástico, Baruc, 1-2 Macabeos).</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Cómo se agrupa</span>
+        <h3>Dos testamentos</h3>
+        <p>Antiguo Testamento (39 libros) y Nuevo Testamento (27 libros). El AT se escribe antes de Cristo; el NT, en el siglo I.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Qué contiene</span>
+        <h3>Historia, poesía, profecía</h3>
+        <p>Relatos históricos, poesía, leyes, profecías, evangelios, cartas y un apocalipsis. Es una pequeña biblioteca, no un libro único.</p>
+      </div>
+    </div>
+
+    <div class="diagram-wrap reveal" style="margin-bottom:24px">
+      <h4 style="font-size:1.02rem;margin-bottom:8px;font-weight:600">Estructura de la Biblia cristiana</h4>
+      <p style="font-size:.88rem;color:var(--muted);margin-bottom:14px">Los 66 libros en sus grandes bloques. Toca cada bloque para ver la lista.</p>
+      <svg id="bibliaChartSvg" viewBox="0 0 500 260" aria-label="Estructura de la Biblia"></svg>
+      <div class="info-panel" id="bibliaInfo">
+        <div class="ip-hint">Toca un bloque del diagrama para ver los libros que contiene.</div>
+      </div>
+    </div>
+
+    <h3 style="font-size:1.15rem;font-weight:600;margin:28px 0 14px">Los grandes bloques</h3>
+    <div class="grid" id="bibliaBlocks"></div>
+
+    <h3 style="font-size:1.15rem;font-weight:600;margin:28px 0 14px">Versiones históricas de la Biblia</h3>
+    <div class="vt" id="bibliaVersions"></div>
+
+    <h3 style="font-size:1.15rem;font-weight:600;margin:28px 0 14px">Libros deuterocanónicos (solo en Biblias católicas y ortodoxas)</h3>
+    <div class="grid" id="deuterocanon"></div>
+
+    <div class="note reveal">
+      <strong>Un mismo texto, distintas Biblias:</strong> católicos, protestantes y ortodoxos
+      no tienen exactamente el mismo canon. La diferencia está en los libros deuterocanónicos
+      (llamados "apócrifos" por los protestantes), que se escribieron entre el 300 a.C. y el 100 d.C.
+    </div>
+  </section>
+
+  <!-- ================= JUDAÍSMO ================= -->
+  <section class="view" data-view="judaismo">
+    <div class="sec-head section">
+      <h2>Judaísmo</h2>
+      <p>El libro sagrado del judaísmo es el Tanaj, la Biblia hebrea, compuesta por 24 libros. A su alrededor se desarrolla una rica tradición de comentarios: el Talmud, el Midrash y la Cábala.</p>
+    </div>
+
+    <div class="grid" style="margin-bottom:24px">
+      <div class="card reveal">
+        <span class="kicker">Qué es</span>
+        <h3>Tanaj (TNK)</h3>
+        <p>Acróstico de Torá (Ley), Neviim (Profetas) y Ketuvim (Escritos). 24 libros que corresponden a los 39 del AT protestante (algunos están agrupados).</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Cómo se agrupa</span>
+        <h3>Torá, Neviim, Ketuvim</h3>
+        <p>Torá: los 5 libros de Moisés. Neviim: 8 libros de profetas. Ketuvim: 11 libros de escritos (poesía, historia, sabiduría).</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Tradición oral</span>
+        <h3>Mishná, Talmud, Midrash</h3>
+        <p>La ley oral se compila en la Mishná (~200 d.C.), se comenta en la Guemará y forma el Talmud. El Midrash interpreta y amplía el texto bíblico.</p>
+      </div>
+    </div>
+
+    <div class="diagram-wrap reveal" style="margin-bottom:24px">
+      <h4 style="font-size:1.02rem;margin-bottom:8px;font-weight:600">Estructura del Tanaj</h4>
+      <p style="font-size:.88rem;color:var(--muted);margin-bottom:14px">Los 24 libros de la Biblia hebrea. Toca cada bloque para ver los libros que lo componen.</p>
+      <svg id="tanajChartSvg" viewBox="0 0 500 260" aria-label="Estructura del Tanaj"></svg>
+      <div class="info-panel" id="tanajInfo">
+        <div class="ip-hint">Toca un bloque del diagrama para ver los libros que contiene.</div>
+      </div>
+    </div>
+
+    <h3 style="font-size:1.15rem;font-weight:600;margin:28px 0 14px">Los tres grandes bloques del Tanaj</h3>
+    <div class="grid" id="tanajBlocks"></div>
+
+    <h3 style="font-size:1.15rem;font-weight:600;margin:28px 0 14px">Los otros libros sagrados del judaísmo</h3>
+    <div class="grid" id="jewishBooks"></div>
+
+    <div class="verse reveal">
+      "Escucha, Israel: el Señor nuestro Dios, el Señor uno es. Y amarás al Señor tu Dios con todo tu corazón, con toda tu alma y con todas tus fuerzas."
+      <span class="verse-ref">— Deuteronomio 6:4-5 · El Shemá, oración central del judaísmo</span>
+    </div>
+
+    <div class="note reveal">
+      <strong>La Torá no se lee sola:</strong> el judaísmo tradicional entiende que el texto escrito
+      y la tradición oral (Mishná, Talmud) se interpretan mutuamente. Un versículo nunca está
+      completo sin el comentario de los sabios.
+    </div>
+  </section>
+
+  <!-- ================= ISLAM ================= -->
+  <section class="view" data-view="islam">
+    <div class="sec-head section">
+      <h2>Islam</h2>
+      <p>El libro sagrado del islam es el Corán, que los musulmanes consideran la revelación literal de Dios (Alá) al profeta Mahoma. Lo complementan los hadices y la Sunna del Profeta.</p>
+    </div>
+
+    <div class="grid" style="margin-bottom:24px">
+      <div class="card reveal">
+        <span class="kicker">Qué es</span>
+        <h3>El Corán</h3>
+        <p>114 suras (capítulos) y 6.236 aleyas (versículos), en árabe clásico. Para el islam es la palabra increada de Dios, revelada a Mahoma entre el 610 y el 632 d.C.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Cómo se agrupa</span>
+        <h3>Suras de Meca y Medina</h3>
+        <p>86 suras reveladas en Meca (más cortas, poéticas, sobre la unicidad de Dios) y 28 en Medina (más largas, legislativas, sobre la comunidad).</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Tradición</span>
+        <h3>Hadiz y Sunna</h3>
+        <p>Los hadices son los dichos y hechos del Profeta. La Sunna es su ejemplo normativo. Los más prestigiosos son los Sahih de al-Bujari y Muslim.</p>
+      </div>
+    </div>
+
+    <div class="diagram-wrap reveal" style="margin-bottom:24px">
+      <h4 style="font-size:1.02rem;margin-bottom:8px;font-weight:600">El Corán y sus ciencias</h4>
+      <p style="font-size:.88rem;color:var(--muted);margin-bottom:14px">El Corán se interpreta mediante el Tafsir, se complementa con los hadices y rige la vida mediante la Sharia.</p>
+      <svg id="coranChartSvg" viewBox="0 0 500 280" aria-label="Estructura del Corán y sus ciencias"></svg>
+      <div class="info-panel" id="coranInfo">
+        <div class="ip-hint">Toca cualquier círculo para ver su información.</div>
+      </div>
+    </div>
+
+    <h3 style="font-size:1.15rem;font-weight:600;margin:28px 0 14px">El Corán en cifras</h3>
+    <div class="grid-3" id="coranNumbers"></div>
+
+    <h3 style="font-size:1.15rem;font-weight:600;margin:28px 0 14px">Los libros sagrados del islam</h3>
+    <div class="grid" id="islamBooks"></div>
+
+    <div class="verse reveal">
+      "En el nombre de Alá, el Compasivo, el Misericordioso. Alabado sea Alá, Señor del universo, el Compasivo, el Misericordioso, Soberano del día del Juicio."
+      <span class="verse-ref">— Corán 1:1-4 · La Fatiha, la sura inicial</span>
+    </div>
+
+    <div class="note reveal">
+      <strong>El Corán se memoriza:</strong> la tradición islámica da una importancia enorme a la
+      memorización. Quien lo aprende completo recibe el título de háfiz. Hay millones de háfices
+      en todo el mundo, lo que ha garantizado la transmisión del texto.
+    </div>
+  </section>
+
+  <!-- ================= OTRAS RELIGIONES ================= -->
+  <section class="view" data-view="otras">
+    <div class="sec-head section">
+      <h2>Otras religiones y sus libros sagrados</h2>
+      <p>Más allá de las tres tradiciones abrahámicas, existe una enorme diversidad de textos sagrados: los Vedas hindúes, el Canon Pali budista, el Guru Granth Sahib sij, el Tao Te Ching chino y muchos más.</p>
+    </div>
+
+    <div class="grid-2" style="margin-bottom:24px">
+      <div class="diagram-wrap reveal">
+        <h4 style="font-size:1.02rem;margin-bottom:8px;font-weight:600">Los cuatro Vedas</h4>
+        <p style="font-size:.88rem;color:var(--muted);margin-bottom:14px">Los textos más antiguos del hinduismo, compuestos entre el 1500 y el 500 a.C. Toca cada uno para ver su función.</p>
+        <svg id="vedasSvg" viewBox="0 0 400 280" aria-label="Los cuatro Vedas"></svg>
+        <div class="info-panel" id="vedasInfo">
+          <div class="ip-hint">Toca un Veda para ver su información.</div>
+        </div>
+      </div>
+      <div class="diagram-wrap reveal">
+        <h4 style="font-size:1.02rem;margin-bottom:8px;font-weight:600">El Canon Pali budista</h4>
+        <p style="font-size:.88rem;color:var(--muted);margin-bottom:14px">El Tripitaka o "tres cestos" es la colección de textos del budismo theravada. Toca cada cesto para ver su contenido.</p>
+        <svg id="tripitakaSvg" viewBox="0 0 400 280" aria-label="El Tripitaka budista"></svg>
+        <div class="info-panel" id="tripitakaInfo">
+          <div class="ip-hint">Toca un cesto para ver su información.</div>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="font-size:1.15rem;font-weight:600;margin:28px 0 14px">Las tradiciones y sus libros</h3>
+    <div class="grid" id="otherReligions"></div>
+
+    <h3 style="font-size:1.15rem;font-weight:600;margin:28px 0 14px">Otros textos antiguos influyentes</h3>
+    <div class="grid" id="ancientTexts"></div>
+
+    <div class="note reveal">
+      <strong>"Hinduismo" es un término paraguas:</strong> bajo ese nombre conviven tradiciones
+      muy distintas (vaishnavismo, shivaísmo, shaktismo), con textos, dioses y prácticas
+      diferentes. No hay un único "libro sagrado" hindú, sino una biblioteca entera.
+    </div>
+  </section>
+
+  <!-- ================= SECTAS ================= -->
+  <section class="view" data-view="sectas">
+    <div class="sec-head section">
+      <h2>Sectas y nuevos movimientos religiosos</h2>
+      <p>El término "secta" es escurridizo: para algunos designa un grupo religioso minoritario; para otros, un movimiento con control abusivo. Aquí lo abordamos desde la sociología de la religión, con respeto y espíritu crítico.</p>
+    </div>
+
+    <div class="note warn reveal" style="margin-top:0;margin-bottom:24px">
+      <strong>Aclaración importante:</strong> no toda religión minoritaria es una secta. La diferencia
+      no está en el tamaño ni en la doctrina, sino en el <em>control</em> sobre sus miembros.
+      Muchas denominaciones cristianas, comunidades judías o grupos islámicos pequeños son
+      perfectamente respetuosos con la libertad de sus fieles.
+    </div>
+
+    <h3 style="font-size:1.15rem;font-weight:600;margin:28px 0 14px">Características comunes de una secta coercitiva</h3>
+    <div class="grid" id="sectTraits"></div>
+
+    <h3 style="font-size:1.15rem;font-weight:600;margin:28px 0 14px">Casos históricos notorios</h3>
+    <div class="grid" id="sectCases"></div>
+
+    <h3 style="font-size:1.15rem;font-weight:600;margin:28px 0 14px">Movimientos religiosos a veces clasificados como sectas</h3>
+    <p style="font-size:.9rem;color:var(--muted);margin-bottom:14px">La clasificación de estos grupos varía según el autor y la perspectiva. Se incluyen aquí porque son objeto de debate público, no porque este material los considere sectas.</p>
+    <div class="grid" id="controversialGroups"></div>
+
+    <h3 style="font-size:1.15rem;font-weight:600;margin:28px 0 14px">Cómo reconocer un grupo de alto control</h3>
+    <div class="grid" id="warningSigns"></div>
+
+    <div class="note warn reveal">
+      <strong>La libertad religiosa es un derecho:</strong> toda persona tiene derecho a cambiar
+      de religión, a no tener ninguna, y a no ser manipulada ni coaccionada. Las sectas
+      coercitivas violan ese derecho, aunque se presenten como "religión".
+    </div>
+  </section>
+
+  <!-- ================= GLOSARIO ================= -->
+  <section class="view" data-view="glosario">
+    <div class="sec-head section">
+      <h2>Glosario de libros sagrados</h2>
+      <p>Términos clave para entender los libros sagrados de las grandes tradiciones. Usa el buscador o filtra por tradición.</p>
+    </div>
+
+    <input type="search" class="search-box" id="glossarySearch" placeholder="Buscar un término (ej. Tanaj, Tafsir, Vedas)…" aria-label="Buscar término">
+    <div class="chips" id="glossaryChips" style="margin-bottom:18px"></div>
+    <div class="grid" id="glossaryGrid"></div>
+
+    <div class="note reveal">
+      <strong>Comparar no es igualar:</strong> poner los textos sagrados uno al lado del otro ayuda
+      a comprender sus diferencias y sus puntos de contacto, pero cada tradición tiene su propia
+      lógica interna. Respetar esa lógica es la base de un estudio honesto.
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <p><strong>Libros Sagrados</strong> — Material educativo abierto sobre los textos fundamentales del cristianismo, judaísmo, islam y otras tradiciones religiosas.</p>
+</footer>
+
+<script>
+const $  = (sel, root = document) => root.querySelector(sel);
+const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+const SVGNS = 'http://www.w3.org/2000/svg';
+const el = (tag, attrs = {}, parent) => {
+  const e = document.createElementNS(SVGNS, tag);
+  for (const k in attrs) e.setAttribute(k, attrs[k]);
+  if (parent) parent.appendChild(e);
+  return e;
+};
+const theme = name => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+const accent  = () => theme('--accent')   || '#e11d48';
+const accent2 = () => theme('--accent-2') || '#7c3aed';
+const accent3 = () => theme('--accent-3') || '#0891b2';
+const muted   = () => theme('--muted')    || '#6f6252';
+const textCol = () => theme('--text')     || '#1a1410';
+const good    = () => theme('--good')     || '#059669';
+
+/* ============================================================
+   TEMA
+   ============================================================ */
+const htmlEl = document.documentElement;
+function setTheme(t){
+  htmlEl.setAttribute('data-theme', t);
+  try { localStorage.setItem('libros-theme', t); } catch(e){}
+}
+(function initTheme(){
+  let saved = null;
+  try { saved = localStorage.getItem('libros-theme'); } catch(e){}
+  setTheme(saved || 'light');
+})();
+$('#themeToggle').addEventListener('click', () => {
+  setTheme(htmlEl.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+  if (currentRoute === 'timeline') renderTimeline();
+  if (currentRoute === 'cristianismo') renderBibliaChart();
+  if (currentRoute === 'judaismo') renderTanajChart();
+  if (currentRoute === 'islam') renderCoranChart();
+  if (currentRoute === 'otras'){ renderVedas(); renderTripitaka(); }
+});
+
+/* ============================================================
+   ROUTER
+   ============================================================ */
+const ROUTES = ['inicio','timeline','cristianismo','judaismo','islam','otras','sectas','glosario'];
+let currentRoute = 'inicio';
+function go(route, push = true){
+  if (!ROUTES.includes(route)) route = 'inicio';
+  currentRoute = route;
+  $$('.view').forEach(v => v.classList.toggle('active', v.dataset.view === route));
+  $$('.nav-link').forEach(b => b.classList.toggle('active', b.dataset.route === route));
+  if (push && location.hash.slice(1) !== route) history.pushState(null, '', '#' + route);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  requestAnimationFrame(() => {
+    $$('.view.active .reveal').forEach(el => el.classList.remove('in'));
+    checkReveal();
+    if (route === 'inicio') animateCounters();
+    if (route === 'timeline'){ renderTimeline(); renderGeneralTimeline(); }
+    if (route === 'cristianismo'){ renderBibliaChart(); renderBibliaBlocks(); renderBibliaVersions(); renderDeuterocanon(); }
+    if (route === 'judaismo'){ renderTanajChart(); renderTanajBlocks(); renderJewishBooks(); }
+    if (route === 'islam'){ renderCoranChart(); renderCoranNumbers(); renderIslamBooks(); }
+    if (route === 'otras'){ renderVedas(); renderTripitaka(); renderOtherReligions(); renderAncientTexts(); }
+    if (route === 'sectas'){ renderSectTraits(); renderSectCases(); renderControversial(); renderWarningSigns(); }
+    if (route === 'glosario') renderGlossary();
+  });
+}
+document.addEventListener('click', e => {
+  const trigger = e.target.closest('[data-route]');
+  if (trigger) { e.preventDefault(); go(trigger.dataset.route); }
+});
+window.addEventListener('popstate', () => go(location.hash.slice(1) || 'inicio', false));
+
+/* ============================================================
+   REVEAL + CONTADORES
+   ============================================================ */
+const revealObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('in');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+function checkReveal(){ $$('.view.active .reveal:not(.in)').forEach(el => revealObserver.observe(el)); }
+function animateCounters(){
+  $$('.num[data-count]').forEach(el => {
+    if (el.dataset.done === '1') return;
+    el.dataset.done = '1';
+    const target = parseFloat(el.dataset.count);
+    const suffix = el.dataset.suffix || '';
+    const dur = 1500;
+    const start = performance.now();
+    function tick(now){
+      const p = Math.min((now - start) / dur, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      const val = Math.round(target * eased);
+      el.textContent = val.toLocaleString('es-ES') + suffix;
+      if (p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  });
+}
+
+/* ============================================================
+   LÍNEA DEL TIEMPO
+   ============================================================ */
+function renderTimeline(){
+  const svg = $('#timelineSvg');
+  if (!svg) return;
+  svg.innerHTML = '';
+  const W = 560, H = 260;
+  const lineY = 130;
+
+  // Línea base
+  el('line', { x1:40, y1:lineY, x2:W-40, y2:lineY, stroke:accent(), 'stroke-width':2, opacity:0.4 }, svg);
+
+  const milestones = [
+    { x:70, label:'~1500 a.C.', sub:'Vedas', color:'#f59e0b', above:true },
+    { x:150, label:'~1000 a.C.', sub:'Biblia hebrea', color:'#7c3aed', above:false },
+    { x:230, label:'~250 a.C.', sub:'Septuaginta', color:'#0891b2', above:true },
+    { x:310, label:'~100 d.C.', sub:'Canon NT', color:'#e11d48', above:false },
+    { x:380, label:'~200 d.C.', sub:'Mishná', color:'#ec4899', above:true },
+    { x:440, label:'610–632', sub:'Corán', color:'#10b981', above:false },
+    { x:500, label:'~1450', sub:'Guru Granth', color:'#a16207', above:true }
+  ];
+
+  milestones.forEach(e => {
+    el('circle', { cx:e.x, cy:lineY, r:8, fill:e.color, stroke:'#fff', 'stroke-width':2.5 }, svg);
+    const ty = e.above ? lineY - 22 : lineY + 30;
+    const ty2 = e.above ? lineY - 38 : lineY + 46;
+    el('text', { x:e.x, y:ty, 'text-anchor':'middle', 'font-family':'Inter,sans-serif', 'font-size':11, 'font-weight':700, fill:e.color }, svg).textContent = e.label;
+    el('text', { x:e.x, y:ty2, 'text-anchor':'middle', 'font-family':'Inter,sans-serif', 'font-size':10, 'font-weight':600, fill:textCol() }, svg).textContent = e.sub;
+  });
+}
+
+const GENERAL_EVENTS = [
+  { y:'~1500–1200 a.C.', era:'India', n:'Composición del Rigveda', d:'El texto más antiguo del hinduismo. Se transmite oralmente durante siglos antes de ser escrito.', x:'El Rigveda contiene 1.028 himnos dedicados a diversas deidades. Es uno de los textos religiosos más antiguos que se conservan y se recita aún hoy en rituales.' },
+  { y:'~1000–600 a.C.', era:'Israel', n:'Formación de la Biblia hebrea', d:'Los textos del Tanaj se componen y compilan durante varios siglos, desde la época de los reyes hasta el período persa.', x:'La Torá, los Neviim y los Ketuvim se van formando progresivamente. La tradición judía atribuye la Torá a Moisés, pero la crítica histórica describe un proceso de siglos.' },
+  { y:'~700 a.C.', era:'Persia', n:'Avesta zoroástrico', d:'Los textos sagrados del zoroastrismo, atribuidos a Zoroastro. Solo se conserva una parte de los originales.', x:'Los Gathas (himnos) son la parte más antigua del Avesta y los únicos textos atribuidos directamente a Zoroastro. Gran parte del Avesta original se perdió.' },
+  { y:'~600–500 a.C.', era:'India', n:'Upanishads', d:'Los textos filosóficos que cierran los Vedas. Desarrollan los conceptos de Brahman y Atman.', x:'Son 108 Upanishads principales. Forman la base del Vedanta, una de las escuelas filosóficas más influyentes del hinduismo.' },
+  { y:'~563–483 a.C.', era:'India', n:'Buda y el origen del canon budista', d:'Siddhartha Gautama enseña el Dharma. Sus discursos se transmiten oralmente durante siglos antes de escribirse.', x:'El Canon Pali se escribe por primera vez en Sri Lanka en el siglo I a.C. El Tripitaka tiene unos 40 volúmenes.' },
+  { y:'~551–479 a.C.', era:'China', n:'Confucio y las Analectas', d:'Recopilación de las enseñanzas de Confucio realizada por sus discípulos. Base del confucianismo.', x:'Las Analectas (Lunyu) son 20 libros de aforismos y diálogos. Su influencia en la ética y la educación china ha durado más de dos mil años.' },
+  { y:'~400 a.C.', era:'China', n:'Tao Te Ching', d:'El texto fundamental del taoísmo, atribuido a Lao-Tsé. 81 capítulos breves y poéticos.', x:'"El Tao que puede nombrarse no es el Tao eterno" es su primera línea. Es el segundo libro más traducido del mundo después de la Biblia.' },
+  { y:'~250 a.C.', era:'Egipto helenístico', n:'Septuaginta (LXX)', d:'Traducción del Antiguo Testamento al griego realizada en Alejandría. Es la Biblia que usarán los apóstoles.', x:'La Septuaginta incluye libros que no están en el canon hebreo (los deuterocanónicos). Su nombre viene de los setenta (o setenta y dos) sabios que la tradujeron.' },
+  { y:'~200 a.C.', era:'India', n:'Bhagavad Gita', d:'Parte del Mahabharata. Un diálogo entre Krishna y Arjuna sobre el deber, la devoción y la liberación.', x:'Es uno de los textos más leídos del hinduismo. En 18 capítulos, Krishna enseña a Arjuna el camino del karma yoga, bhakti yoga y jnana yoga.' },
+  { y:'~100 d.C.', era:'Cristianismo', n:'Cierre del canon del Nuevo Testamento', d:'Los 27 libros del NT se escriben entre los años 50 y 100 d.C. El canon se reconoce en los siglos siguientes.', x:'Los concilios de Hipona (393) y Cartago (397) confirman el canon que se usa hasta hoy. Los criterios fueron: apostolicidad, ortodoxia y uso litúrgico.' },
+  { y:'~200 d.C.', era:'Judaísmo', n:'Compilación de la Mishná', d:'Rabí Yehudá Hanasí compila la ley oral judía en 63 tratados. Es la base del Talmud.', x:'La Mishná se divide en seis órdenes: Zeraim (semillas), Moed (fiestas), Nashim (mujeres), Nezikín (daños), Kodashim (cosas sagradas) y Tohorot (purezas).' },
+  { y:'~400–500 d.C.', era:'Judaísmo', n:'Talmud de Jerusalén y de Babilonia', d:'Se completa la Guemará, el comentario a la Mishná. Nace el Talmud, la obra central del judaísmo rabínico.', x:'El Talmud babilónico es el más extenso y autorizado. Ocupa unas 2.711 páginas en la edición estándar de Vilna. Se estudia en parejas (javruta).' },
+  { y:'610–632 d.C.', era:'Islam', n:'Revelación del Corán', d:'Mahoma recibe las revelaciones en La Meca y Medina. Sus compañeros las memorizan y escriben.', x:'El califa Uthmán (644–656) estandariza el texto. El Corán se ha transmitido sin cambios desde entonces, tanto por escrito como por memorización.' },
+  { y:'~850 d.C.', era:'Islam', n:'Sahih al-Bujari', d:'Al-Bujari compila los hadices auténticos del Profeta. Es la colección más prestigiosa del islam suní.', x:'Al-Bujari revisó más de 600.000 hadices y solo aceptó 7.275 como auténticos. Los musulmanes lo consideran el libro más auténtico después del Corán.' },
+  { y:'~1280 d.C.', era:'Judaísmo', n:'Zohar (Cábala)', d:'Se publica el Zohar, texto central de la mística judía, atribuido a Shimon bar Yojai.', x:'El Zohar es un comentario místico a la Torá. Su influencia en la Cábala y en el judaísmo jasídico posterior es enorme.' },
+  { y:'~1469–1539', era:'Sijismo', n:'Guru Nanak y el sijismo', d:'Guru Nanak funda el sijismo en el Punjab. Sus enseñanzas se recogerán en el Guru Granth Sahib.', x:'El sijismo nace en un contexto de convivencia entre hindúes y musulmanes. Guru Nanak proclama la unidad de Dios y la igualdad de todos los seres humanos.' },
+  { y:'1604 d.C.', era:'Sijismo', n:'Compilación del Guru Granth Sahib', d:'Guru Arjan compila el libro sagrado sij. El último guru, Gobind Singh, lo declara su sucesor.', x:'El Guru Granth Sahib tiene 1.430 páginas y contiene himnos de los gurús sijes, pero también de santos hindúes y musulmanes (Kabir, Namdev, Baba Farid).' },
+  { y:'1830 d.C.', era:'Nuevos movimientos', n:'Publicación del Libro de Mormón', d:'Joseph Smith publica el Libro de Mormón. Nace el movimiento de los Santos de los Últimos Días.', x:'El Libro de Mormón se presenta como una historia de antiguos pueblos de América. Es aceptado como escritura por la Iglesia de Jesucristo de los Santos de los Últimos Días, pero no por el cristianismo tradicional.' },
+  { y:'1875–1879', era:'Nuevos movimientos', n:'Ciencia Cristiana y Testigos de Jehová', d:'Mary Baker Eddy funda la Ciencia Cristiana. Charles Taze Russell funda la Watch Tower.', x:'Ambos movimientos nacen en Estados Unidos, en un clima de efervescencia religiosa y expectativa apocalíptica. Ambos se presentan como restauración del cristianismo original.' },
+  { y:'1954 d.C.', era:'Nuevos movimientos', n:'Cienciología', d:'L. Ron Hubbard funda la Iglesia de la Cienciología. Se basa en sus libros y en la "dianética".', x:'La cienciología se describe a sí misma como religión aplicada. Suscita un intenso debate público por sus prácticas y por su estatus legal en distintos países.' }
+];
+
+function renderGeneralTimeline(){
+  const vt = $('#generalTimeline');
+  if (!vt) return;
+  vt.innerHTML = GENERAL_EVENTS.map((p, i) => {
+    const c = ['#f59e0b','#7c3aed','#0891b2','#e11d48','#10b981','#ec4899','#a16207','#0ea5e9','#dc2626','#22c55e'][i % 10];
+    return `
+      <div class="vt-item" style="--c:${c};--d:${i*30}ms">
+        <span class="vt-dot"></span>
+        <div class="vt-card">
+          <div class="vt-top">
+            <span class="vt-year">${p.y}</span>
+            <span class="vt-era">${p.era}</span>
+          </div>
+          <h4>${p.n}</h4>
+          <p>${p.d}</p>
+          <button class="vt-more" type="button">
+            <span>Más detalle</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="vt-extra"><div><p>${p.x}</p></div></div>
+        </div>
+      </div>`;
+  }).join('');
+  vt.onclick = e => {
+    const btn = e.target.closest('.vt-more');
+    if (!btn) return;
+    const item = btn.closest('.vt-item');
+    const open = item.classList.toggle('open');
+    btn.querySelector('span').textContent = open ? 'Ocultar detalle' : 'Más detalle';
+  };
+}
+
+/* ============================================================
+   CRISTIANISMO
+   ============================================================ */
+const BIBLIA_BLOCKS = [
+  { n:'Pentateuco', count:5, color:'#e11d48', books:['Génesis','Éxodo','Levítico','Números','Deuteronomio'], desc:'Los cinco libros de la Ley. Narran la Creación, los patriarcas, el éxodo y la entrega de la Ley en el Sinaí.' },
+  { n:'Históricos (AT)', count:12, color:'#f59e0b', books:['Josué','Jueces','Rut','1 Samuel','2 Samuel','1 Reyes','2 Reyes','1 Crónicas','2 Crónicas','Esdras','Nehemías','Ester'], desc:'Desde la conquista de Canaán hasta el retorno del exilio. Cuentan la historia del pueblo de Israel.' },
+  { n:'Poéticos', count:5, color:'#7c3aed', books:['Job','Salmos','Proverbios','Eclesiastés','Cantares'], desc:'La poesía y la sabiduría de Israel: oración, sufrimiento, alabanza y reflexión sobre el sentido de la vida.' },
+  { n:'Proféticos', count:17, color:'#0891b2', books:['Isaías','Jeremías','Lamentaciones','Ezequiel','Daniel','Oseas','Joel','Amós','Abdías','Jonás','Miqueas','Nahúm','Habacuc','Sofonías','Hageo','Zacarías','Malaquías'], desc:'Los mensajes de los profetas: llamadas al arrepentimiento, denuncias de la injusticia y anuncios del Mesías.' },
+  { n:'Evangelios', count:4, color:'#10b981', books:['Mateo','Marcos','Lucas','Juan'], desc:'Cuatro retratos de la vida, muerte y resurrección de Jesús. Cada uno con su propio énfasis y destinatario.' },
+  { n:'Hechos', count:1, color:'#ec4899', books:['Hechos de los Apóstoles'], desc:'La continuación del evangelio de Lucas. Narra el nacimiento y la expansión de la Iglesia primitiva.' },
+  { n:'Cartas de Pablo', count:13, color:'#a16207', books:['Romanos','1 Corintios','2 Corintios','Gálatas','Efesios','Filipenses','Colosenses','1 Tesalonicenses','2 Tesalonicenses','1 Timoteo','2 Timoteo','Tito','Filemón'], desc:'Las cartas del apóstol Pablo a iglesias y colaboradores. Explican la fe cristiana con profundidad teológica.' },
+  { n:'Cartas generales', count:8, color:'#0ea5e9', books:['Hebreos','Santiago','1 Pedro','2 Pedro','1 Juan','2 Juan','3 Juan','Judas'], desc:'Cartas escritas por otros apóstoles y líderes: Santiago, Pedro, Juan y Judas. Enfoque práctico y pastoral.' },
+  { n:'Apocalipsis', count:1, color:'#dc2626', books:['Apocalipsis'], desc:'La revelación final. Un libro profético y simbólico sobre el fin de la historia y la victoria definitiva del Cordero.' }
+];
+
+function renderBibliaChart(){
+  const svg = $('#bibliaChartSvg');
+  if (!svg) return;
+  svg.innerHTML = '';
+  const cx = 160, cy = 130, r = 110, rIn = 55;
+  const total = 66;
+  let angle = -Math.PI/2;
+
+  BIBLIA_BLOCKS.forEach(b => {
+    const slice = (b.count / total) * Math.PI * 2;
+    const a0 = angle, a1 = angle + slice;
+    const x0 = cx + Math.cos(a0)*r, y0 = cy + Math.sin(a0)*r;
+    const x1 = cx + Math.cos(a1)*r, y1 = cy + Math.sin(a1)*r;
+    const xi0 = cx + Math.cos(a0)*rIn, yi0 = cy + Math.sin(a0)*rIn;
+    const xi1 = cx + Math.cos(a1)*rIn, yi1 = cy + Math.sin(a1)*rIn;
+    const large = slice > Math.PI ? 1 : 0;
+    const d = `M ${x0} ${y0} A ${r} ${r} 0 ${large} 1 ${x1} ${y1} L ${xi1} ${yi1} A ${rIn} ${rIn} 0 ${large} 0 ${xi0} ${yi0} Z`;
+    const g = el('g', { class:'hit', 'data-block':b.n, style:'cursor:pointer' }, svg);
+    el('path', { d, fill:b.color, 'fill-opacity':0.85, stroke:'#fff', 'stroke-width':2, 'data-name':b.n }, g);
+    const mid = (a0 + a1) / 2;
+    const lx = cx + Math.cos(mid)*(r+22), ly = cy + Math.sin(mid)*(r+22);
+    el('text', { x:lx, y:ly+4, 'text-anchor':'middle', 'font-family':'Inter,sans-serif', 'font-size':9, 'font-weight':600, fill:textCol() }, svg).textContent = b.n;
+    el('text', { x:lx, y:ly+17, 'text-anchor':'middle', 'font-family':'Inter,sans-serif', 'font-size':8, fill:muted() }, svg).textContent = b.count;
+    angle = a1;
+  });
+
+  el('circle', { cx, cy, r:rIn-2, fill: theme('--surface-solid') || '#fff', stroke: theme('--border') || '#eee', 'stroke-width':1 }, svg);
+  el('text', { x:cx, y:cy-4, 'text-anchor':'middle', 'font-family':'Space Grotesk,sans-serif', 'font-size':18, 'font-weight':700, fill:textCol() }, svg).textContent = '66';
+  el('text', { x:cx, y:cy+14, 'text-anchor':'middle', 'font-family':'Inter,sans-serif', 'font-size':10, 'font-weight':600, fill:muted() }, svg).textContent = 'libros';
+
+  svg.onclick = e => {
+    const g = e.target.closest('.hit');
+    if (!g) return;
+    const b = BIBLIA_BLOCKS.find(x => x.n === g.dataset.block);
+    if (!b) return;
+    $$('#bibliaChartSvg .hit path').forEach(p => p.setAttribute('stroke-width', 2));
+    g.querySelector('path').setAttribute('stroke-width', 4);
+    const panel = $('#bibliaInfo');
+    panel.classList.add('active');
+    panel.innerHTML = `
+      <div class="ip-name">${b.n} · ${b.count} ${b.count===1?'libro':'libros'}</div>
+      <div class="ip-func">${b.desc}</div>
+      <div class="ip-desc"><strong style="color:var(--text)">Libros:</strong> ${b.books.join(', ')}.</div>
+    `;
+  };
+}
+
+function renderBibliaBlocks(){
+  const grid = $('#bibliaBlocks');
+  if (!grid) return;
+  const groups = [
+    { n:'Antiguo Testamento', count:39, color:'#7c3aed', desc:'Escrito antes de Cristo, en hebreo y arameo. Narra la historia de Israel y la promesa del Mesías.', books:['Pentateuco (5)','Históricos (12)','Poéticos (5)','Proféticos (17)'] },
+    { n:'Nuevo Testamento', count:27, color:'#e11d48', desc:'Escrito en el siglo I, en griego koiné. Narra la vida de Jesús, el nacimiento de la Iglesia y la fe cristiana.', books:['Evangelios (4)','Hechos (1)','Cartas de Pablo (13)','Cartas generales (8)','Apocalipsis (1)'] }
+  ];
+  grid.innerHTML = groups.map(g => `
+    <article class="card reveal">
+      <span class="kicker" style="color:${g.color}">${g.n}</span>
+      <h3>${g.count} libros</h3>
+      <p style="margin-bottom:10px">${g.desc}</p>
+      <div class="book-grid">
+        ${g.books.map(x => `<span class="book-item">${x}</span>`).join('')}
+      </div>
+    </article>`).join('');
+  grid.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+}
+
+const BIBLIA_VERSIONS = [
+  { y:'~250 a.C.', era:'Septuaginta', n:'Septuaginta (LXX)', d:'Primera traducción del Antiguo Testamento al griego, realizada en Alejandría. La usaban los apóstoles.', x:'Setenta (o setenta y dos) sabios judíos la tradujeron. Es la base de muchas traducciones posteriores. Incluye libros deuterocanónicos que no están en el canon hebreo.' },
+  { y:'~90 d.C.', era:'Canon', n:'Cierre del canon del AT', d:'El judaísmo rabínico fija el canon de la Biblia hebrea en el Concilio de Yamnia.', x:'Se descartan los libros deuterocanónicos. El canon hebreo tiene 24 libros, que corresponden a los 39 del AT protestante (algunos están agrupados).' },
+  { y:'~100 d.C.', era:'Canon', n:'Cierre del canon del NT', d:'Los 27 libros del NT se reconocen en las iglesias. Se confirman en los concilios de Hipona (393) y Cartago (397).', x:'Criterios: origen apostólico, ortodoxia doctrinal, uso litúrgico y aceptación general. Los evangelios apócrifos quedan fuera.' },
+  { y:'382–405 d.C.', era:'Vulgata', n:'Vulgata latina', d:'Jerónimo traduce toda la Biblia al latín por encargo del papa Dámaso I. Será la Biblia oficial de Occidente durante más de mil años.', x:'La Vulgata (de "vulgata", "común" o "popular") unificó las traducciones latinas anteriores. El Concilio de Trento (1546) la declaró oficial.' },
+  { y:'~1455', era:'Imprenta', n:'Biblia de Gutenberg', d:'Primer libro impreso con tipos móviles en Europa. Revoluciona la difusión de la Biblia.', x:'Gutenberg imprime unas 180 copias de la Vulgata en Maguncia. La imprenta abarata la producción y prepara la Reforma protestante.' },
+  { y:'1516', era:'Humanismo', n:'Nuevo Testamento griego de Erasmo', d:'Erasmo de Róterdam publica la primera edición impresa del Nuevo Testamento en griego.', x:'Esta edición (Novum Instrumentum) es la base del Textus Receptus, que servirá para la traducción de la King James y de la Reina-Valera.' },
+  { y:'1569 / 1602', era:'Reina-Valera', n:'Biblia del Oso y Reina-Valera', d:'Casiodoro de Reina traduce la Biblia al español (1569). Cipriano de Valera la revisa en 1602.', x:'La Biblia del Oso es la primera Biblia completa impresa en español. La revisión de 1602 se convirtió en la versión protestante de referencia en español.' },
+  { y:'1611', era:'King James', n:'King James Version', d:'La versión inglesa autorizada por el rey Jacobo I. Es la Biblia clásica del mundo angloparlante.', x:'Cuarenta y siete eruditos trabajaron durante siete años. Su lenguaje ha influido profundamente en la literatura inglesa.' },
+  { y:'1947–1956', era:'Descubrimientos', n:'Rollos del Mar Muerto', d:'Se descubren en Qumrán manuscritos del Antiguo Testamento de más de 2.000 años de antigüedad.', x:'Los rollos confirman la fidelidad de la transmisión del texto hebreo. El rollo de Isaías (1QIsaᵃ) tiene 7 metros de largo.' },
+  { y:'1973–1999', era:'Contemporánea', n:'Nueva Versión Internacional', d:'Traducción al español con lenguaje contemporáneo, basada en los manuscritos más antiguos.', x:'La NVI sigue el principio de "equivalencia dinámica": traducir el sentido, no la literalidad. Se ha vuelto muy difundida en América Latina.' }
+];
+
+function renderBibliaVersions(){
+  const vt = $('#bibliaVersions');
+  if (!vt) return;
+  vt.innerHTML = BIBLIA_VERSIONS.map((p, i) => {
+    const c = ['#f59e0b','#e11d48','#7c3aed','#0891b2','#ec4899','#10b981','#a16207','#0ea5e9','#dc2626','#22c55e'][i % 10];
+    return `
+      <div class="vt-item" style="--c:${c};--d:${i*40}ms">
+        <span class="vt-dot"></span>
+        <div class="vt-card">
+          <div class="vt-top">
+            <span class="vt-year">${p.y}</span>
+            <span class="vt-era">${p.era}</span>
+          </div>
+          <h4>${p.n}</h4>
+          <p>${p.d}</p>
+          <button class="vt-more" type="button">
+            <span>Más detalle</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="vt-extra"><div><p>${p.x}</p></div></div>
+        </div>
+      </div>`;
+  }).join('');
+  vt.onclick = e => {
+    const btn = e.target.closest('.vt-more');
+    if (!btn) return;
+    const item = btn.closest('.vt-item');
+    const open = item.classList.toggle('open');
+    btn.querySelector('span').textContent = open ? 'Ocultar detalle' : 'Más detalle';
+  };
+}
+
+const DEUTERO = [
+  { n:'Tobías', d:'Novela didáctica sobre la fidelidad de Dios y la providencia. Narra la historia de Tobit y su hijo Tobías, guiados por el arcángel Rafael.' },
+  { n:'Judit', d:'Relato heroico: la viuda Judit salva a su pueblo decapitando al general Holofernes.' },
+  { n:'Sabiduría', d:'Libro sapiencial atribuido a Salomón. Desarrolla la inmortalidad del alma y la Sabiduría divina.' },
+  { n:'Eclesiástico (Sirácida)', d:'Colección de máximas de Ben Sirá. Es el libro más extenso de la literatura sapiencial bíblica.' },
+  { n:'Baruc', d:'Atribuido al secretario de Jeremías. Incluye una oración de penitencia y un poema sobre la Sabiduría.' },
+  { n:'1 Macabeos', d:'Relato histórico de la revuelta macabea contra los seléucidas (167–134 a.C.).' },
+  { n:'2 Macabeos', d:'Versión paralela, más teológica que histórica, de la revuelta macabea. Incluye doctrinas sobre la resurrección.' }
+];
+
+function renderDeuterocanon(){
+  const grid = $('#deuterocanon');
+  if (!grid) return;
+  grid.innerHTML = DEUTERO.map(d => `
+    <article class="card reveal">
+      <span class="kicker">Deuterocanónico</span>
+      <h3>${d.n}</h3>
+      <p>${d.d}</p>
+    </article>`).join('');
+  grid.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+}
+
+/* ============================================================
+   JUDAÍSMO
+   ============================================================ */
+const TANAJ_BLOCKS = [
+  { n:'Torá', count:5, color:'#e11d48', books:['Génesis (Bereshit)','Éxodo (Shemot)','Levítico (Vayikrá)','Números (Bamidbar)','Deuteronomio (Devarim)'], desc:'La Ley. Los cinco libros de Moisés. Es el corazón del Tanaj y se lee completa cada año en la sinagoga.' },
+  { n:'Neviim', count:8, color:'#7c3aed', books:['Josué','Jueces','Samuel','Reyes','Isaías','Jeremías','Ezequiel','Los Doce (profetas menores)'], desc:'Los Profetas. Ocho libros que narran la historia de Israel desde la conquista hasta el exilio y contienen los mensajes proféticos.' },
+  { n:'Ketuvim', count:11, color:'#0891b2', books:['Salmos','Proverbios','Job','Cantares','Rut','Lamentaciones','Eclesiastés','Ester','Daniel','Esdras-Nehemías','Crónicas'], desc:'Los Escritos. Poesía, sabiduría, historia y apocalíptica. Incluye los cinco Meguilot (rollos) que se leen en las fiestas.' }
+];
+
+function renderTanajChart(){
+  const svg = $('#tanajChartSvg');
+  if (!svg) return;
+  svg.innerHTML = '';
+  const cx = 160, cy = 130, r = 110, rIn = 55;
+  const total = 24;
+  let angle = -Math.PI/2;
+
+  TANAJ_BLOCKS.forEach(b => {
+    const slice = (b.count / total) * Math.PI * 2;
+    const a0 = angle, a1 = angle + slice;
+    const x0 = cx + Math.cos(a0)*r, y0 = cy + Math.sin(a0)*r;
+    const x1 = cx + Math.cos(a1)*r, y1 = cy + Math.sin(a1)*r;
+    const xi0 = cx + Math.cos(a0)*rIn, yi0 = cy + Math.sin(a0)*rIn;
+    const xi1 = cx + Math.cos(a1)*rIn, yi1 = cy + Math.sin(a1)*rIn;
+    const large = slice > Math.PI ? 1 : 0;
+    const d = `M ${x0} ${y0} A ${r} ${r} 0 ${large} 1 ${x1} ${y1} L ${xi1} ${yi1} A ${rIn} ${rIn} 0 ${large} 0 ${xi0} ${yi0} Z`;
+    const g = el('g', { class:'hit', 'data-block':b.n, style:'cursor:pointer' }, svg);
+    el('path', { d, fill:b.color, 'fill-opacity':0.85, stroke:'#fff', 'stroke-width':2, 'data-name':b.n }, g);
+    const mid = (a0 + a1) / 2;
+    const lx = cx + Math.cos(mid)*(r+22), ly = cy + Math.sin(mid)*(r+22);
+    el('text', { x:lx, y:ly+4, 'text-anchor':'middle', 'font-family':'Inter,sans-serif', 'font-size':10, 'font-weight':600, fill:textCol() }, svg).textContent = b.n;
+    el('text', { x:lx, y:ly+17, 'text-anchor':'middle', 'font-family':'Inter,sans-serif', 'font-size':8, fill:muted() }, svg).textContent = b.count;
+    angle = a1;
+  });
+
+  el('circle', { cx, cy, r:rIn-2, fill: theme('--surface-solid') || '#fff', stroke: theme('--border') || '#eee', 'stroke-width':1 }, svg);
+  el('text', { x:cx, y:cy-4, 'text-anchor':'middle', 'font-family':'Space Grotesk,sans-serif', 'font-size':18, 'font-weight':700, fill:textCol() }, svg).textContent = '24';
+  el('text', { x:cx, y:cy+14, 'text-anchor':'middle', 'font-family':'Inter,sans-serif', 'font-size':10, 'font-weight':600, fill:muted() }, svg).textContent = 'libros';
+
+  svg.onclick = e => {
+    const g = e.target.closest('.hit');
+    if (!g) return;
+    const b = TANAJ_BLOCKS.find(x => x.n === g.dataset.block);
+    if (!b) return;
+    $$('#tanajChartSvg .hit path').forEach(p => p.setAttribute('stroke-width', 2));
+    g.querySelector('path').setAttribute('stroke-width', 4);
+    const panel = $('#tanajInfo');
+    panel.classList.add('active');
+    panel.innerHTML = `
+      <div class="ip-name">${b.n} · ${b.count} ${b.count===1?'libro':'libros'}</div>
+      <div class="ip-func">${b.desc}</div>
+      <div class="ip-desc"><strong style="color:var(--text)">Libros:</strong> ${b.books.join(', ')}.</div>
+    `;
+  };
+}
+
+function renderTanajBlocks(){
+  const grid = $('#tanajBlocks');
+  if (!grid) return;
+  grid.innerHTML = TANAJ_BLOCKS.map(b => `
+    <article class="card reveal">
+      <span class="kicker" style="color:${b.color}">${b.n}</span>
+      <h3>${b.count} libros</h3>
+      <p style="margin-bottom:10px">${b.desc}</p>
+      <div class="book-grid">
+        ${b.books.map(x => `<span class="book-item">${x}</span>`).join('')}
+      </div>
+    </article>`).join('');
+  grid.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+}
+
+const JEWISH_BOOKS = [
+  { n:'Mishná', tag:'Ley oral', d:'Compilada por Rabí Yehudá Hanasí (~200 d.C.). 63 tratados que recogen la ley oral judía. Es la base del Talmud.' },
+  { n:'Talmud', tag:'Comentario', d:'Mishná + Guemará. Existen dos versiones: el de Jerusalén (~400 d.C.) y el de Babilonia (~500 d.C.), el más autorizado. Ocupa miles de páginas.' },
+  { n:'Midrash', tag:'Interpretación', d:'Comentarios interpretativos que amplían y actualizan el texto bíblico. Hay midrashim halájicos (legales) y agádicos (narrativos).' },
+  { n:'Zohar', tag:'Mística', d:'"El libro del esplendor". Texto central de la Cábala, atribuido a Shimon bar Yojai pero publicado en el siglo XIII por Moisés de León.' },
+  { n:'Sidur', tag:'Liturgia', d:'Libro de oraciones diarias. Contiene las bendiciones, el Shemá, la Amidá y los salmos del servicio sinagogal.' },
+  { n:'Pirkei Avot', tag:'Ética', d:'"Los dichos de los padres". Tratado de máximas éticas de los sabios judíos. Se lee entre Pascua y Pentecostés.' },
+  { n:'Hagadá', tag:'Liturgia', d:'Texto que se lee durante el Séder de Pascua. Narra la salida de Egipto y estructura la cena pascual.' },
+  { n:'Tosefta', tag:'Ley oral', d:'Colección de tradiciones paralelas a la Mishná que no fueron incluidas en ella. Sirve de complemento en el estudio talmúdico.' }
+];
+
+function renderJewishBooks(){
+  const grid = $('#jewishBooks');
+  if (!grid) return;
+  grid.innerHTML = JEWISH_BOOKS.map(b => `
+    <article class="card reveal">
+      <span class="tag">${b.tag}</span>
+      <h3 style="margin-top:8px">${b.n}</h3>
+      <p>${b.d}</p>
+    </article>`).join('');
+  grid.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+}
+
+/* ============================================================
+   ISLAM
+   ============================================================ */
+function renderCoranChart(){
+  const svg = $('#coranChartSvg');
+  if (!svg) return;
+  svg.innerHTML = '';
+  const W = 500, H = 280;
+  const cx = 250, cy = 140;
+
+  // Nodo central
+  el('circle', { cx, cy, r:52, fill:accent2(), opacity:0.15, stroke:accent2(), 'stroke-width':2 }, svg);
+  el('text', { x:cx, y:cy-4, 'text-anchor':'middle', 'font-family':'Space Grotesk,sans-serif', 'font-size':15, 'font-weight':700, fill:textCol() }, svg).textContent = 'Corán';
+  el('text', { x:cx, y:cy+14, 'text-anchor':'middle', 'font-family':'Inter,sans-serif', 'font-size':10, 'font-weight':600, fill:muted() }, svg).textContent = '114 suras';
+
+  const nodes = [
+    { n:'Suras de Meca', sub:'86 suras', color:'#f59e0b', angle:-Math.PI/2 - 0.4, info:'Reveladas antes de la Hégira (610–622). Más cortas, poéticas, centradas en la unicidad de Dios, el juicio final y la misión profética.' },
+    { n:'Suras de Medina', sub:'28 suras', color:'#e11d48', angle:-Math.PI/2 + 0.4, info:'Reveladas después de la Hégira (622–632). Más largas, legislativas, tratan de la comunidad, el derecho, la guerra y las relaciones con otras religiones.' },
+    { n:'Tafsir', sub:'Exégesis', color:'#7c3aed', angle:Math.PI/2 - 0.4, info:'Ciencia de la interpretación coránica. Los grandes tafsires son los de al-Tabari, al-Razi e Ibn Kathir. Explican el contexto, el lenguaje y la doctrina.' },
+    { n:'Hadiz', sub:'Dichos del Profeta', color:'#0891b2', angle:Math.PI/2 + 0.4, info:'Relatos de los dichos y hechos de Mahoma, transmitidos por una cadena de narradores (isnad). Los Sahih de al-Bujari y Muslim son los más prestigiosos.' },
+    { n:'Sharia', sub:'Ley islámica', color:'#10b981', angle:Math.PI, info:'El conjunto de normas que rigen la vida del musulmán. Se deriva del Corán, la Sunna, el consenso (ijmá) y la analogía (qiyás).' },
+    { n:'Fiqh', sub:'Jurisprudencia', color:'#ec4899', angle:0, info:'La ciencia del derecho islámico. Cuatro escuelas suníes principales: hanafí, malikí, shafií y hanbalí.' }
+  ];
+
+  const radius = 100;
+  nodes.forEach(node => {
+    const x = cx + Math.cos(node.angle) * radius;
+    const y = cy + Math.sin(node.angle) * radius;
+    el('line', { x1:cx + Math.cos(node.angle)*52, y1:cy + Math.sin(node.angle)*52, x2:x - Math.cos(node.angle)*26, y2:y - Math.sin(node.angle)*26, stroke:node.color, 'stroke-width':1.5, opacity:0.4 }, svg);
+    const g = el('g', { class:'hit', 'data-node':node.n, style:'cursor:pointer' }, svg);
+    el('circle', { cx:x, cy:y, r:26, fill:node.color, opacity:0.85, stroke:'#fff', 'stroke-width':2 }, g);
+    el('text', { x, y:y-3, 'text-anchor':'middle', 'font-family':'Inter,sans-serif', 'font-size':9, 'font-weight':700, fill:'#fff' }, svg).textContent = node.n.length > 12 ? node.n.slice(0,10)+'…' : node.n;
+    el('text', { x, y:y+10, 'text-anchor':'middle', 'font-family':'Inter,sans-serif', 'font-size':7, 'font-weight':600, fill:'#fff' }, svg).textContent = node.sub;
+  });
+
+  svg.onclick = e => {
+    const g = e.target.closest('.hit');
+    if (!g) return;
+    const node = nodes.find(n => n.n === g.dataset.node);
+    if (!node) return;
+    const panel = $('#coranInfo');
+    panel.classList.add('active');
+    panel.innerHTML = `
+      <div class="ip-name">${node.n} · ${node.sub}</div>
+      <div class="ip-desc">${node.info}</div>
+    `;
+  };
+}
+
+const CORAN_NUMBERS = [
+  { n:'114', lbl:'Suras (capítulos)' },
+  { n:'6.236', lbl:'Aleyas (versículos)' },
+  { n:'86', lbl:'Suras de Meca' },
+  { n:'28', lbl:'Suras de Medina' },
+  { n:'30', lbl:'Yuz (divisiones para recitar)' },
+  { n:'28', lbl:'Letras del alfabeto árabe' }
+];
+
+function renderCoranNumbers(){
+  const grid = $('#coranNumbers');
+  if (!grid) return;
+  grid.innerHTML = CORAN_NUMBERS.map(x => `
+    <div class="stat reveal">
+      <div class="num" style="font-size:1.5rem">${x.n}</div>
+      <div class="lbl">${x.lbl}</div>
+    </div>`).join('');
+  grid.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+}
+
+const ISLAM_BOOKS = [
+  { n:'Corán', tag:'Revelación', d:'114 suras, 6.236 aleyas. Para los musulmanes es la palabra literal de Dios, revelada a Mahoma entre 610 y 632. Nunca ha sido modificado.' },
+  { n:'Sahih al-Bujari', tag:'Hadiz', d:'La colección más prestigiosa de hadices. Al-Bujari revisó más de 600.000 relatos y aceptó 7.275. Es el libro más auténtico después del Corán.' },
+  { n:'Sahih Muslim', tag:'Hadiz', d:'La segunda colección de hadices más importante del islam suní. Recopilada por Muslim ibn al-Hayyach (†875).' },
+  { n:'Sunan de Abu Dawud', tag:'Hadiz', d:'Una de las cuatro Sunan que completan los seis libros canónicos del hadiz. Se centra en cuestiones legales.' },
+  { n:'Tafsir al-Tabari', tag:'Exégesis', d:'El comentario coránico más extenso y antiguo que se conserva completo. Una obra monumental del siglo X.' },
+  { n:'Sira de Ibn Hisham', tag:'Biografía', d:'La biografía más antigua y completa de Mahoma. Basada en la Sira de Ibn Ishaq (siglo VIII).' },
+  { n:'Kitab al-Kafi', tag:'Chií', d:'Una de las cuatro colecciones de hadices más importantes del islam chií. Recoge tradiciones de los imanes.' },
+  { n:'Nahj al-Balagha', tag:'Chií', d:'"La cumbre de la elocuencia". Colección de sermones, cartas y dichos de Ali ibn Abi Tálib, primo y yerno de Mahoma.' }
+];
+
+function renderIslamBooks(){
+  const grid = $('#islamBooks');
+  if (!grid) return;
+  grid.innerHTML = ISLAM_BOOKS.map(b => `
+    <article class="card reveal">
+      <span class="tag">${b.tag}</span>
+      <h3 style="margin-top:8px">${b.n}</h3>
+      <p>${b.d}</p>
+    </article>`).join('');
+  grid.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+}
+
+/* ============================================================
+   OTRAS RELIGIONES
+   ============================================================ */
+function renderVedas(){
+  const svg = $('#vedasSvg');
+  if (!svg) return;
+  svg.innerHTML = '';
+  const cx = 200, cy = 140, r = 110;
+  const vedas = [
+    { n:'Rigveda', color:'#e11d48', angle:-Math.PI/2, info:'El Veda más antiguo. 1.028 himnos dedicados a los dioses védicos (Agni, Indra, Varuna, etc.). Es la base de toda la tradición védica.' },
+    { n:'Samaveda', color:'#f59e0b', angle:0, info:'El Veda de las melodías. Contiene los himnos que se cantan durante los rituales del soma. Es la base de la música clásica india.' },
+    { n:'Yajurveda', color:'#7c3aed', angle:Math.PI/2, info:'El Veda de los rituales. Contiene las fórmulas que pronuncia el sacerdote durante los sacrificios. Existen dos versiones: blanca y negra.' },
+    { n:'Atharvaveda', color:'#0891b2', angle:Math.PI, info:'El Veda de los conjuros y las fórmulas mágicas. Se usa para la vida cotidiana: salud, amor, protección. Fue aceptado en el canon más tarde.' }
+  ];
+  vedas.forEach(v => {
+    const x = cx + Math.cos(v.angle) * r;
+    const y = cy + Math.sin(v.angle) * r;
+    el('line', { x1:cx, y1:cy, x2:x, y2:y, stroke:v.color, 'stroke-width':1.5, opacity:0.4 }, svg);
+    const g = el('g', { class:'hit', 'data-node':v.n, style:'cursor:pointer' }, svg);
+    el('circle', { cx:x, cy:y, r:32, fill:v.color, opacity:0.85, stroke:'#fff', 'stroke-width':2 }, g);
+    el('text', { x, y:y+4, 'text-anchor':'middle', 'font-family':'Inter,sans-serif', 'font-size':11, 'font-weight':700, fill:'#fff' }, svg).textContent = v.n;
+  });
+  el('circle', { cx, cy, r:34, fill:accent2(), opacity:0.15, stroke:accent2(), 'stroke-width':2 }, svg);
+  el('text', { x:cx, y:cy-2, 'text-anchor':'middle', 'font-family':'Space Grotesk,sans-serif', 'font-size':11, 'font-weight':700, fill:textCol() }, svg).textContent = 'Vedas';
+  el('text', { x:cx, y:cy+14, 'text-anchor':'middle', 'font-family':'Inter,sans-serif', 'font-size':9, 'font-weight':600, fill:muted() }, svg).textContent = '4 textos';
+
+  svg.onclick = e => {
+    const g = e.target.closest('.hit');
+    if (!g) return;
+    const v = vedas.find(x => x.n === g.dataset.node);
+    if (!v) return;
+    const panel = $('#vedasInfo');
+    panel.classList.add('active');
+    panel.innerHTML = `
+      <div class="ip-name">${v.n}</div>
+      <div class="ip-desc">${v.info}</div>
+    `;
+  };
+}
+
+function renderTripitaka(){
+  const svg = $('#tripitakaSvg');
+  if (!svg) return;
+  svg.innerHTML = '';
+  const boxes = [
+    { n:'Vinaya Pitaka', color:'#e11d48', info:'"Cesto de la disciplina". Contiene las reglas monásticas para monjes y monjas. Regula la vida comunitaria, la ética y los procedimientos de confesión.' },
+    { n:'Sutta Pitaka', color:'#7c3aed', info:'"Cesto de los discursos". Contiene los sermones del Buda. Es la parte más leída y estudiada, con textos como el Dhammapada y el Sutra del Loto (en otras tradiciones).' },
+    { n:'Abhidhamma Pitaka', color:'#0891b2', info:'"Cesto de la doctrina superior". Análisis filosófico y sistemático de la doctrina budista. Es la parte más técnica y escolástica del canon.' }
+  ];
+  boxes.forEach((b, i) => {
+    const y = 60 + i * 70;
+    const g = el('g', { class:'hit', 'data-node':b.n, style:'cursor:pointer' }, svg);
+    el('rect', { x:40, y:y, width:320, height:50, rx:12, fill:b.color, opacity:0.85, stroke:'#fff', 'stroke-width':2 }, g);
+    el('text', { x:200, y:y+25, 'text-anchor':'middle', 'font-family':'Inter,sans-serif', 'font-size':12, 'font-weight':700, fill:'#fff' }, svg).textContent = b.n;
+    el('text', { x:200, y:y+40, 'text-anchor':'middle', 'font-family':'Inter,sans-serif', 'font-size':9, 'font-weight':500, fill:'#fff', opacity:0.9 }, svg).textContent = 'Cesto ' + (i+1);
+  });
+  el('text', { x:200, y:30, 'text-anchor':'middle', 'font-family':'Space Grotesk,sans-serif', 'font-size':13, 'font-weight':700, fill:textCol() }, svg).textContent = 'Tripitaka ("tres cestos")';
+
+  svg.onclick = e => {
+    const g = e.target.closest('.hit');
+    if (!g) return;
+    const b = boxes.find(x => x.n === g.dataset.node);
+    if (!b) return;
+    const panel = $('#tripitakaInfo');
+    panel.classList.add('active');
+    panel.innerHTML = `
+      <div class="ip-name">${b.n}</div>
+      <div class="ip-desc">${b.info}</div>
+    `;
+  };
+}
+
+const OTHER_RELIGIONS = [
+  { n:'Hinduismo', tag:'India', color:'#f59e0b', d:'Vedas (Rig, Sama, Yajur, Atharva), Upanishads (108), Bhagavad Gita, Mahabharata, Ramayana, Puranas. No tiene un único libro sagrado sino una biblioteca entera.' },
+  { n:'Budismo', tag:'Asia', color:'#e11d48', d:'Canon Pali (Tripitaka) en theravada. Sutras Mahayana (Loto, Corazón, Diamante). Tantras en vajrayana. El Dhammapada es el texto más popular.' },
+  { n:'Sijismo', tag:'Punjab', color:'#7c3aed', d:'Guru Granth Sahib, el libro sagrado que los sijes consideran su guru vivo. 1.430 páginas con himnos de los gurús y de santos hindúes y musulmanes.' },
+  { n:'Taoísmo', tag:'China', color:'#0891b2', d:'Tao Te Ching (Lao-Tsé, 81 capítulos) y Zhuangzi. Textos breves, poéticos, sobre el Tao, el wu-wei y la armonía con la naturaleza.' },
+  { n:'Confucianismo', tag:'China', color:'#10b981', d:'Analectas (Lunyu), I Ching (Libro de los Cambios), los Cinco Clásicos. Enfoque ético y político más que teológico.' },
+  { n:'Zoroastrismo', tag:'Persia', color:'#ec4899', d:'Avesta, atribuido a Zoroastro. Los Gathas son los himnos más antiguos. Influyó en el judaísmo, el cristianismo y el islam.' },
+  { n:'Fe bahá\'í', tag:'Persia', color:'#a16207', d:'Kitáb-i-Aqdas (Libro de las Leyes) y Kitáb-i-Íqán (Libro de la Certeza), de Bahá\'u\'lláh. Enseña la unidad de las religiones.' },
+  { n:'Jainismo', tag:'India', color:'#0ea5e9', d:'Agamas, los textos sagrados del jainismo. Enseñan la no-violencia (ahimsa) y el ascetismo como camino de liberación.' }
+];
+
+function renderOtherReligions(){
+  const grid = $('#otherReligions');
+  if (!grid) return;
+  grid.innerHTML = OTHER_RELIGIONS.map(r => `
+    <article class="card reveal">
+      <span class="tag">${r.tag}</span>
+      <h3 style="margin-top:8px">${r.n}</h3>
+      <p>${r.d}</p>
+    </article>`).join('');
+  grid.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+}
+
+const ANCIENT_TEXTS = [
+  { n:'Enuma Elish', tag:'Mesopotamia', d:'Poema babilónico de la Creación (~1200 a.C.). Narra el origen del mundo a partir del combate entre Marduk y Tiamat. Tiene paralelos con Génesis 1.' },
+  { n:'Código de Hammurabi', tag:'Babilonia', d:'Conjunto de leyes (~1750 a.C.), uno de los más antiguos que se conservan. Su principio es la ley del talión: "ojo por ojo".' },
+  { n:'Libro de los Muertos', tag:'Egipto', d:'Colección de textos funerarios del antiguo Egipto. Guiaba al difunto en su viaje al más allá. Su capítulo más famoso es la "pesada del corazón".' },
+  { n:'Popol Vuh', tag:'Maya', d:'Texto sagrado del pueblo maya quiché de Guatemala. Narra la creación del mundo, la historia de los gemelos Hunahpú e Ixbalamqué y la genealogía de los reyes.' },
+  { n:'Avesta', tag:'Persia', d:'Textos sagrados del zoroastrismo. Los Gathas, atribuidos a Zoroastro, son la parte más antigua. Gran parte del Avesta original se perdió.' },
+  { n:'I Ching', tag:'China', d:'"Libro de los Cambios". Texto adivinatorio y filosófico basado en 64 hexagramas. Influyó en el confucianismo y el taoísmo.' }
+];
+
+function renderAncientTexts(){
+  const grid = $('#ancientTexts');
+  if (!grid) return;
+  grid.innerHTML = ANCIENT_TEXTS.map(r => `
+    <article class="card reveal">
+      <span class="tag">${r.tag}</span>
+      <h3 style="margin-top:8px">${r.n}</h3>
+      <p>${r.d}</p>
+    </article>`).join('');
+  grid.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+}
+
+/* ============================================================
+   SECTAS
+   ============================================================ */
+const SECT_TRAITS = [
+  { n:'Liderazgo carismático', d:'Un líder fuerte, a menudo con pretensiones de revelación exclusiva o de ser la única autoridad. Su palabra es incuestionable.' },
+  { n:'Revelación nueva y exclusiva', d:'El grupo afirma tener una verdad que nadie más posee. Las demás religiones se presentan como incompletas o falsas.' },
+  { n:'Aislamiento', d:'Los miembros se alejan de familiares y amigos no pertenecientes al grupo. El contacto con el exterior se restringe.' },
+  { n:'Control de la información', d:'Solo el líder y sus delegados deciden qué se puede leer o ver. Se vigila la correspondencia y las redes sociales.' },
+  { n:'Exigencias económicas', d:'Diezmos altos, donaciones obligatorias, venta de bienes. Se pide "sacrificio económico" como prueba de fe.' },
+  { n:'Castigo por disidencia', d:'La crítica se castiga con humillación pública, aislamiento o expulsión. Los disidentes son demonizados.' },
+  { n:'Apocalipticismo', d:'Se anuncia un fin del mundo inminente. La salvación está condicionada a la permanencia en el grupo. Las fechas suelen fallar y se reinterpretan.' },
+  { n:'Mentalidad de asedio', d:'El mundo exterior se presenta como hostil. Solo el grupo es refugio. Esto refuerza la cohesión y la dependencia.' }
+];
+
+const SECT_CASES = [
+  { n:'Templo del Pueblo (Jonestown)', tag:'1978', d:'En Guyana, 918 personas murieron en un suicidio colectivo inducido por Jim Jones. El grupo era una escisión del movimiento cristiano de los discípulos de Cristo.', danger:true },
+  { n:'Davidianos (Waco)', tag:'1993', d:'En Texas, 76 personas murieron durante un asedio del FBI al rancho de los Davidianos. Su líder, David Koresh, se presentaba como un profeta apocalíptico.', danger:true },
+  { n:'Orden del Templo Solar', tag:'1994–1997', d:'En Suiza, Francia y Canadá, más de 70 miembros murieron en suicidios y asesinatos rituales. El grupo mezclaba esoterismo y apocalipticismo.', danger:true },
+  { n:'Heaven\'s Gate', tag:'1997', d:'En California, 39 miembros se suicidaron para "subir a una nave espacial" que, según su líder Marshall Applewhite, venía con el cometa Hale-Bopp.', danger:true },
+  { n:'Aum Shinrikyo', tag:'1995', d:'En Japón, el grupo de Shoko Asahara perpetró un ataque con gas sarín en el metro de Tokio (12 muertos, miles de heridos). Combinaba budismo, hinduismo y apocalipticismo.', danger:true },
+  { n:'Niños de Dios (La Familia Internacional)', tag:'1968–', d:'Fundado por David Berg en California. Polémico por sus prácticas sexuales y su trato a los niños. Sigue activo con otro nombre.', danger:false }
+];
+
+const CONTROVERSIAL_GROUPS = [
+  { n:'Testigos de Jehová', tag:'1879', d:'Fundados por Charles Taze Russell en Estados Unidos. Tienen doctrinas propias (negación de la Trinidad, de la inmortalidad del alma, de un infierno eterno). Son objeto de debate por su control interno y su política de expulsión.', danger:false },
+  { n:'Iglesia de Jesucristo de los Santos de los Últimos Días', tag:'1830', d:'Fundada por Joseph Smith. Acepta el Libro de Mormón como escritura, además de la Biblia. Tiene doctrinas propias (matrimonio eterno, bautismo por los muertos).', danger:false },
+  { n:'Ciencia Cristiana', tag:'1879', d:'Fundada por Mary Baker Eddy. Enseña que la enfermedad y el pecado son ilusiones mentales y se corrigen con la oración. Es una denominación cristiana con doctrinas particulares.', danger:false },
+  { n:'Iglesia de la Unificación', tag:'1954', d:'Fundada por Sun Myung Moon en Corea del Sur. Conocida como "secta Moon". Su doctrina gira en torno al matrimonio y la restauración de la humanidad.', danger:false },
+  { n:'Cienciología', tag:'1954', d:'Fundada por L. Ron Hubbard. Se describe como "religión aplicada". Es objeto de intenso debate por sus prácticas, sus costos y su estatus legal en distintos países.', danger:false },
+  { n:'Adventistas del Séptimo Día', tag:'1863', d:'Denominación cristiana protestante que observa el sábado como día de reposo. Aunque a veces ha sido clasificada como secta, hoy se la considera una denominación cristiana establecida.', danger:false }
+];
+
+const WARNING_SIGNS = [
+  { n:'Te piden que rompas lazos', d:'"Tu familia no te entiende, solo nosotros te comprendemos". El aislamiento de la familia es una señal de alarma muy clara.' },
+  { n:'No puedes cuestionar', d:'Hacer preguntas se castiga. Se te acusa de falta de fe, de rebeldía o de estar influenciado por "el enemigo".' },
+  { n:'Todo se explica por el grupo', d:'Cualquier problema tiene una única explicación: la falta de fe, la influencia externa o el castigo divino.' },
+  { n:'Te apuran a decidir', d:'"Es ahora o nunca". La presión para tomar decisiones rápidas (bautizarte, donar, mudarte) impide pensar con calma.' },
+  { n:'El líder no se equivoca', d:'Sus errores se justifican o se ocultan. Nadie puede contradecirlo sin consecuencias.' },
+  { n:'Te controlan el dinero', d:'Se te pide que entregues tus ahorros o que firmes compromisos económicos importantes para el grupo.' },
+  { n:'Te dicen que el fin es inminente', d:'La urgencia apocalíptica se usa para presionar decisiones. Cuando la fecha falla, se reinterpreta o se culpa a los miembros.' },
+  { n:'Te prometen salvación exclusiva', d:'"Solo aquí te salvarás". La salvación se presenta como monopolio del grupo, y fuera de él no hay esperanza.' }
+];
+
+function renderSectTraits(){
+  const grid = $('#sectTraits');
+  if (!grid) return;
+  grid.innerHTML = SECT_TRAITS.map(t => `
+    <article class="card reveal">
+      <span class="tag danger">Característica</span>
+      <h3 style="margin-top:8px">${t.n}</h3>
+      <p>${t.d}</p>
+    </article>`).join('');
+  grid.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+}
+
+function renderSectCases(){
+  const grid = $('#sectCases');
+  if (!grid) return;
+  grid.innerHTML = SECT_CASES.map(c => `
+    <article class="card reveal">
+      <span class="tag ${c.danger ? 'danger' : ''}">${c.tag}</span>
+      <h3 style="margin-top:8px">${c.n}</h3>
+      <p>${c.d}</p>
+    </article>`).join('');
+  grid.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+}
+
+function renderControversial(){
+  const grid = $('#controversialGroups');
+  if (!grid) return;
+  grid.innerHTML = CONTROVERSIAL_GROUPS.map(c => `
+    <article class="card reveal">
+      <span class="tag">${c.tag}</span>
+      <h3 style="margin-top:8px">${c.n}</h3>
+      <p>${c.d}</p>
+    </article>`).join('');
+  grid.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+}
+
+function renderWarningSigns(){
+  const grid = $('#warningSigns');
+  if (!grid) return;
+  grid.innerHTML = WARNING_SIGNS.map(w => `
+    <article class="card reveal">
+      <span class="tag danger">Alerta</span>
+      <h3 style="margin-top:8px">${w.n}</h3>
+      <p>${w.d}</p>
+    </article>`).join('');
+  grid.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+}
+
+/* ============================================================
+   GLOSARIO
+   ============================================================ */
+const GLOSSARY = [
+  { n:'Aleya', cat:'Islam', d:'Versículo del Corán. El Corán tiene 6.236 aleyas repartidas en 114 suras.' },
+  { n:'Apócrifo', cat:'Cristianismo', d:'"Oculto". Libros que no fueron incluidos en el canon bíblico. En el AT son los deuterocanónicos para los católicos; en el NT son evangelios y cartas no canónicos.' },
+  { n:'Avesta', cat:'Otras religiones', d:'Colección de textos sagrados del zoroastrismo. Los Gathas son la parte más antigua, atribuida a Zoroastro.' },
+  { n:'Bhagavad Gita', cat:'Otras religiones', d:'"El canto del Señor". Diálogo entre Krishna y Arjuna incluido en el Mahabharata. Uno de los textos más leídos del hinduismo.' },
+  { n:'Cábala', cat:'Judaísmo', d:'Tradición mística del judaísmo. Su texto central es el Zohar. Interpreta la Torá como un código simbólico de lo divino.' },
+  { n:'Canon', cat:'Concepto', d:'Lista oficial de libros considerados sagrados y normativos por una tradición religiosa. El canon bíblico varía entre católicos, protestantes y ortodoxos.' },
+  { n:'Corán', cat:'Islam', d:'"Recitación". Libro sagrado del islam. 114 suras reveladas a Mahoma entre el 610 y el 632. Los musulmanes lo consideran la palabra increada de Dios.' },
+  { n:'Deuterocanónico', cat:'Cristianismo', d:'Libros del AT aceptados por la Iglesia católica y ortodoxa, pero no por los protestantes (que los llaman "apócrifos").' },
+  { n:'Dharma', cat:'Otras religiones', d:'"Ley" o "enseñanza". En el hinduismo, el deber de cada persona según su casta y etapa de la vida. En el budismo, la enseñanza del Buda.' },
+  { n:'Exégesis', cat:'Concepto', d:'Interpretación crítica y contextual de un texto sagrado. Busca el sentido original del autor, su contexto histórico y su género literario.' },
+  { n:'Fiqh', cat:'Islam', d:'Jurisprudencia islámica. Ciencia que deriva normas prácticas del Corán y la Sunna. Tiene cuatro escuelas principales en el sunismo.' },
+  { n:'Guemará', cat:'Judaísmo', d:'Comentario a la Mishná. Junto con ella forma el Talmud. Se compone de discusiones de los sabios de Palestina y Babilonia.' },
+  { n:'Hadiz', cat:'Islam', d:'Relato de los dichos y hechos del profeta Mahoma. Los más prestigiosos son los Sahih de al-Bujari y Muslim.' },
+  { n:'Háfiz', cat:'Islam', d:'Musulmán que ha memorizado el Corán completo. Es un título de gran prestigio en el mundo islámico.' },
+  { n:'Hermenéutica', cat:'Concepto', d:'Teoría de la interpretación. Aplica a cualquier texto, pero es fundamental en la lectura de los textos sagrados.' },
+  { n:'Imán', cat:'Islam', d:'1) En el sunismo, quien dirige la oración. 2) En el chiismo, líder espiritual descendiente de Ali, considerado infalible.' },
+  { n:'Inspiración', cat:'Concepto', d:'Doctrina según la cual los textos sagrados fueron escritos bajo la guía del Espíritu Santo o de Dios. Su formulación varía en cada tradición.' },
+  { n:'Ketuvim', cat:'Judaísmo', d:'"Escritos". La tercera parte del Tanaj: Salmos, Proverbios, Job, los cinco Meguilot y otros libros históricos.' },
+  { n:'Mahabharata', cat:'Otras religiones', d:'Una de las dos grandes epopeyas de la India. Contiene la Bhagavad Gita. Es el poema épico más largo del mundo (unos 200.000 versos).' },
+  { n:'Mesías', cat:'Cristianismo', d:'"Ungido" en hebreo. El rey salvador prometido por los profetas. Los cristianos lo identifican con Jesús; los judíos esperan su venida.' },
+  { n:'Midrash', cat:'Judaísmo', d:'Comentario interpretativo del texto bíblico. Busca actualizar el sentido de la Escritura para cada generación.' },
+  { n:'Mishná', cat:'Judaísmo', d:'"Repetición". Compilación de la ley oral judía, realizada por Rabí Yehudá Hanasí (~200 d.C.). 63 tratados, base del Talmud.' },
+  { n:'Neviim', cat:'Judaísmo', d:'"Profetas". Segunda parte del Tanaj. Ocho libros que van de Josué a los Doce profetas menores.' },
+  { n:'Nirvana', cat:'Otras religiones', d:'En el budismo, el estado de liberación del sufrimiento y del ciclo de las reencarnaciones. Es el objetivo último de la práctica budista.' },
+  { n:'Puranas', cat:'Otras religiones', d:'Textos hindúes que narran mitos, genealogías y cosmología. Hay 18 Puranas principales, dedicados a Vishnú, Shiva o Devi.' },
+  { n:'Revelación', cat:'Concepto', d:'Acción por la cual Dios se da a conocer a la humanidad. Puede ser general (a través de la naturaleza) o especial (a través de los textos sagrados).' },
+  { n:'Rigveda', cat:'Otras religiones', d:'El más antiguo de los cuatro Vedas. Contiene 1.028 himnos dedicados a los dioses védicos. Es la base de toda la tradición védica.' },
+  { n:'Sharia', cat:'Islam', d:'Ley islámica. Conjunto de normas que rigen la vida del musulmán, derivadas del Corán, la Sunna, el consenso y la analogía.' },
+  { n:'Secta', cat:'Concepto', d:'1) En sociología, grupo religioso minoritario que se separa de una tradición principal. 2) En sentido peyorativo, grupo con control abusivo sobre sus miembros.' },
+  { n:'Sura', cat:'Islam', d:'Capítulo del Corán. Hay 114 suras, ordenadas aproximadamente de la más larga a la más corta (no por orden cronológico).' },
+  { n:'Sutra', cat:'Otras religiones', d:'"Hilo". En el budismo, discurso del Buda. En el hinduismo, aforismo breve. Hay sutras célebres como el Sutra del Corazón o el Sutra del Loto.' },
+  { n:'Tafsir', cat:'Islam', d:'Exégesis coránica. Ciencia de la interpretación del Corán. Los grandes tafsires son los de al-Tabari, al-Razi e Ibn Kathir.' },
+  { n:'Talmud', cat:'Judaísmo', d:'Obra central del judaísmo rabínico. Compuesto por la Mishná y la Guemará. Hay dos versiones: el de Jerusalén (~400 d.C.) y el de Babilonia (~500 d.C.).' },
+  { n:'Tanaj', cat:'Judaísmo', d:'Acróstico de Torá, Neviim y Ketuvim. La Biblia hebrea, compuesta por 24 libros. Corresponde al Antiguo Testamento cristiano.' },
+  { n:'Tao Te Ching', cat:'Otras religiones', d:'Texto fundamental del taoísmo, atribuido a Lao-Tsé. 81 capítulos breves y poéticos sobre el Tao y el wu-wei.' },
+  { n:'Templo', cat:'Concepto', d:'Edificio sagrado de Jerusalén. El primero lo construyó Salomón (960 a.C.); el segundo, Zorobabel (516 a.C.); Herodes lo amplió (20 a.C.). Fue destruido por Roma en el 70 d.C.' },
+  { n:'Torá', cat:'Judaísmo', d:'"Instrucción" o "Ley". Los cinco libros de Moisés. Es la parte más sagrada del Tanaj.' },
+  { n:'Tripitaka', cat:'Otras religiones', d:'"Tres cestos". Canon pali del budismo theravada. Se compone de Vinaya, Sutta y Abhidhamma Pitaka.' },
+  { n:'Upanishads', cat:'Otras religiones', d:'Textos filosóficos que cierran los Vedas. Desarrollan los conceptos de Brahman y Atman. Hay 108 principales.' },
+  { n:'Vedas', cat:'Otras religiones', d:'Los cuatro textos más antiguos del hinduismo: Rigveda, Samaveda, Yajurveda y Atharvaveda. Compuestos entre el 1500 y el 500 a.C.' },
+  { n:'Vulgata', cat:'Cristianismo', d:'Traducción latina de la Biblia realizada por Jerónimo (382–405 d.C.). Fue la versión oficial de la Iglesia católica durante más de mil años.' },
+  { n:'Zohar', cat:'Judaísmo', d:'"Libro del esplendor". Texto central de la Cábala, publicado en el siglo XIII por Moisés de León. Comentario místico a la Torá.' }
+];
+
+let glossaryFilter = 'Todas';
+
+function renderGlossary(){
+  const chipsEl = $('#glossaryChips');
+  const grid = $('#glossaryGrid');
+  const searchEl = $('#glossarySearch');
+  if (!chipsEl || !grid) return;
+
+  const cats = ['Todas', 'Cristianismo', 'Judaísmo', 'Islam', 'Otras religiones', 'Concepto'];
+  chipsEl.innerHTML = cats.map(c => `<button class="chip${c === glossaryFilter ? ' active' : ''}" data-cat="${c}">${c}</button>`).join('');
+
+  function paint(){
+    const q = (searchEl.value || '').trim().toLowerCase();
+    const filtered = GLOSSARY.filter(g => {
+      const matchCat = glossaryFilter === 'Todas' || g.cat === glossaryFilter;
+      const matchQ = !q || g.n.toLowerCase().includes(q) || g.d.toLowerCase().includes(q);
+      return matchCat && matchQ;
+    });
+    if (filtered.length === 0){
+      grid.innerHTML = `<div class="note" style="grid-column:1/-1;margin:0"><strong>Sin resultados:</strong> prueba con otro término o cambia de categoría.</div>`;
+      return;
+    }
+    grid.innerHTML = filtered.map(g => `
+      <article class="card reveal">
+        <span class="kicker">${g.cat}</span>
+        <h3>${g.n}</h3>
+        <p>${g.d}</p>
+      </article>`).join('');
+    grid.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+  }
+
+  chipsEl.onclick = e => {
+    const c = e.target.closest('.chip');
+    if (!c) return;
+    glossaryFilter = c.dataset.cat;
+    chipsEl.querySelectorAll('.chip').forEach(x => x.classList.toggle('active', x === c));
+    paint();
+  };
+
+  searchEl.oninput = paint;
+  paint();
+}
+
+/* ============================================================
+   EFECTOS Y ARRANQUE
+   ============================================================ */
+$$('.module').forEach(m => {
+  m.addEventListener('mousemove', e => {
+    const r = m.getBoundingClientRect();
+    m.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
+    m.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
+  });
+});
+
+document.addEventListener('visibilitychange', () => {
+  document.querySelectorAll('.orb').forEach(o => {
+    o.style.animationPlayState = document.hidden ? 'paused' : 'running';
+  });
+});
+
+(function boot(){
+  const initial = (location.hash.slice(1) || 'inicio');
+  go(ROUTES.includes(initial) ? initial : 'inicio', false);
+  checkReveal();
+  setTimeout(() => {
+    if (currentRoute === 'inicio') animateCounters();
+  }, 300);
+})();
+</script>
+</body>
+</html>

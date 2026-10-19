@@ -1,0 +1,1814 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>El Reloj en la Historia explicado</title>
+<meta name="description" content="Recorre la historia del reloj: del reloj de sol al reloj atómico. Línea del tiempo, funcionamiento del reloj mecánico, modelo casero de reloj solar, reloj atómico, reloj digital y glosario, con diagramas interactivos.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --font-display:'Space Grotesk','Segoe UI',system-ui,sans-serif;
+  --font-body:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --radius:20px;
+  --radius-sm:12px;
+  --maxw:1180px;
+  --ease:cubic-bezier(.22,.75,.25,1);
+}
+html[data-theme="light"]{
+  --bg:#fbf9f5;
+  --bg-soft:#f4f0e8;
+  --surface:rgba(255,255,255,.86);
+  --surface-solid:#ffffff;
+  --surface-2:rgba(60,40,20,.045);
+  --surface-3:rgba(60,40,20,.08);
+  --border:rgba(60,40,20,.12);
+  --border-strong:rgba(60,40,20,.24);
+  --text:#1a1410;
+  --muted:#6f6252;
+  --accent:#e11d48;
+  --accent-2:#7c3aed;
+  --accent-3:#0891b2;
+  --good:#059669;
+  --bad:#e11d48;
+  --shadow:0 22px 55px -28px rgba(60,30,10,.22);
+  --orb-op:.16;
+  --dot-color:rgba(60,40,20,.055);
+}
+html[data-theme="dark"]{
+  --bg:#0a0806;
+  --bg-soft:#12100c;
+  --surface:rgba(30,25,20,.66);
+  --surface-solid:#1b1712;
+  --surface-2:rgba(255,255,255,.045);
+  --surface-3:rgba(255,255,255,.08);
+  --border:rgba(255,255,255,.10);
+  --border-strong:rgba(255,255,255,.20);
+  --text:#f5ede2;
+  --muted:#a89a86;
+  --accent:#fb7185;
+  --accent-2:#a78bfa;
+  --accent-3:#22d3ee;
+  --good:#34d399;
+  --bad:#fb7185;
+  --shadow:0 24px 60px -24px rgba(0,0,0,.9);
+  --orb-op:.30;
+  --dot-color:rgba(255,255,255,.03);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;font-family:var(--font-body);background:var(--bg);color:var(--text);
+  min-height:100vh;line-height:1.65;-webkit-font-smoothing:antialiased;
+  transition:background .45s var(--ease),color .45s var(--ease);
+  overflow-x:hidden;
+}
+h1,h2,h3,h4,h5{font-family:var(--font-display);line-height:1.15;letter-spacing:-.02em;margin:0}
+p{margin:0}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+a{color:inherit;text-decoration:none}
+ul{margin:0}
+::selection{background:var(--accent);color:#fff}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
+
+.bg-dots{position:fixed;inset:0;z-index:-3;pointer-events:none;background-image:radial-gradient(var(--dot-color) 1px,transparent 1px);background-size:26px 26px}
+.orbs{position:fixed;inset:0;z-index:-2;overflow:hidden;pointer-events:none}
+.orb{position:absolute;border-radius:50%;filter:blur(100px);opacity:var(--orb-op);animation:float 28s ease-in-out infinite alternate}
+.orb.o1{width:52vw;height:52vw;background:var(--accent);top:-16vw;left:-12vw}
+.orb.o2{width:42vw;height:42vw;background:var(--accent-2);bottom:-18vw;right:-10vw;animation-delay:-10s}
+.orb.o3{width:34vw;height:34vw;background:var(--accent-3);top:44%;left:58%;animation-delay:-17s}
+@keyframes float{0%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(4vw,-3vw,0) scale(1.1)}100%{transform:translate3d(-3vw,4vw,0) scale(.95)}}
+
+.site-header{
+  position:sticky;top:0;z-index:50;
+  backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);
+  background:color-mix(in srgb,var(--bg) 78%, transparent);
+  border-bottom:1px solid var(--border);
+}
+.header-inner{max-width:var(--maxw);margin:0 auto;padding:13px 22px;display:flex;align-items:center;gap:20px}
+.brand{display:flex;align-items:center;gap:11px;font-family:var(--font-display);font-weight:700;font-size:1rem;letter-spacing:-.02em;white-space:nowrap}
+.brand-mark{
+  width:38px;height:38px;border-radius:12px;flex:none;
+  background:linear-gradient(140deg,var(--accent),var(--accent-2) 55%,var(--accent-3));
+  display:grid;place-items:center;color:#fff;
+  box-shadow:0 8px 22px -8px var(--accent);
+  transition:transform .5s var(--ease);
+}
+.brand:hover .brand-mark{transform:rotate(-10deg) scale(1.06)}
+.brand-mark svg{width:22px;height:22px}
+
+.nav{display:flex;gap:2px;margin-left:auto;overflow-x:auto;scrollbar-width:none}
+.nav::-webkit-scrollbar{display:none}
+.nav-link{position:relative;padding:9px 11px;border-radius:11px;font-size:.8rem;font-weight:500;color:var(--muted);white-space:nowrap;transition:color .3s var(--ease),background .3s var(--ease)}
+.nav-link:hover{color:var(--text);background:var(--surface-2)}
+.nav-link.active{color:var(--text);background:var(--surface-2)}
+.nav-link.active::after{content:'';position:absolute;left:11px;right:11px;bottom:4px;height:2px;border-radius:2px;background:linear-gradient(90deg,var(--accent),var(--accent-2));animation:navIn .4s var(--ease) both}
+@keyframes navIn{from{transform:scaleX(0);opacity:0}to{transform:scaleX(1);opacity:1}}
+
+.theme-toggle{width:40px;height:40px;border-radius:12px;flex:none;border:1px solid var(--border);background:var(--surface-2);display:grid;place-items:center;transition:transform .35s var(--ease),border-color .3s,background .3s}
+.theme-toggle:hover{transform:translateY(-2px) rotate(8deg);border-color:var(--border-strong)}
+.theme-toggle svg{width:19px;height:19px}
+html[data-theme="dark"] .icon-sun{display:block}
+html[data-theme="dark"] .icon-moon{display:none}
+html[data-theme="light"] .icon-sun{display:none}
+html[data-theme="light"] .icon-moon{display:block}
+
+main{max-width:var(--maxw);margin:0 auto;padding:0 22px 90px}
+.view{display:none}
+.view.active{display:block;animation:viewIn .55s var(--ease) both}
+@keyframes viewIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+
+.hero{padding:72px 0 42px;max-width:920px}
+.pill{display:inline-flex;align-items:center;gap:8px;padding:7px 15px;border-radius:999px;font-size:.78rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;border:1px solid var(--border);background:var(--surface);color:var(--muted);margin-bottom:26px}
+.pill .dot{width:7px;height:7px;border-radius:50%;background:var(--good);animation:pulse 2.4s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--good) 60%,transparent)}70%{box-shadow:0 0 0 9px transparent}100%{box-shadow:0 0 0 0 transparent}}
+h1.hero-title{font-size:clamp(2.1rem,5.2vw,3.9rem);font-weight:700;letter-spacing:-.035em;margin-bottom:22px}
+.grad{background:linear-gradient(100deg,var(--accent),var(--accent-2) 48%,var(--accent-3));-webkit-background-clip:text;background-clip:text;color:transparent;background-size:220% auto;animation:shimmer 8s linear infinite}
+@keyframes shimmer{to{background-position:220% center}}
+.lead{font-size:clamp(1rem,1.6vw,1.15rem);color:var(--muted);max-width:700px;margin-bottom:34px}
+.hero-actions{display:flex;flex-wrap:wrap;gap:13px}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:13px 25px;border-radius:13px;font-size:.93rem;font-weight:600;border:1px solid transparent;transition:transform .28s var(--ease),box-shadow .3s var(--ease),background .3s,border-color .3s,color .3s;will-change:transform}
+.btn:active{transform:scale(.97)}
+.btn svg{width:17px;height:17px}
+.btn-primary{background:linear-gradient(120deg,var(--accent),var(--accent-2));color:#fff;box-shadow:0 14px 34px -14px var(--accent);position:relative;overflow:hidden}
+.btn-primary::after{content:'';position:absolute;inset:0;background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,.45),transparent 70%);transform:translateX(-130%);transition:transform .7s var(--ease)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 20px 42px -14px var(--accent)}
+.btn-primary:hover::after{transform:translateX(130%)}
+.btn-ghost{border-color:var(--border);background:var(--surface);color:var(--text)}
+.btn-ghost:hover{transform:translateY(-2px);border-color:var(--border-strong);background:var(--surface-2)}
+.btn.small{padding:8px 16px;font-size:.85rem}
+
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin:12px 0 58px}
+.stat{padding:22px 20px;border-radius:var(--radius);background:var(--surface);border:1px solid var(--border);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);transition:transform .35s var(--ease),border-color .3s,box-shadow .35s}
+.stat:hover{transform:translateY(-5px);border-color:var(--border-strong);box-shadow:var(--shadow)}
+.stat .num{font-family:var(--font-display);font-size:1.8rem;font-weight:700;letter-spacing:-.03em;background:linear-gradient(120deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.stat .lbl{font-size:.82rem;color:var(--muted);font-weight:500;margin-top:2px}
+
+.sec-head{margin:0 0 28px}
+.sec-head h2{font-size:clamp(1.55rem,3vw,2.05rem);font-weight:700;margin-bottom:8px}
+.sec-head p{color:var(--muted);max-width:720px;font-size:.95rem}
+.section{padding-top:52px}
+
+.module-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(258px,1fr));gap:18px}
+.module{position:relative;overflow:hidden;text-align:left;padding:28px 24px;border-radius:var(--radius);background:var(--surface);border:1px solid var(--border);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);transition:transform .4s var(--ease),border-color .35s,box-shadow .4s}
+.module::before{content:'';position:absolute;inset:0;opacity:0;background:radial-gradient(420px circle at var(--mx,50%) var(--my,0%),color-mix(in srgb,var(--accent) 22%,transparent),transparent 65%);transition:opacity .45s var(--ease)}
+.module:hover{transform:translateY(-6px);border-color:var(--border-strong);box-shadow:var(--shadow)}
+.module:hover::before{opacity:1}
+.module-ico{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;margin-bottom:18px;background:linear-gradient(140deg,color-mix(in srgb,var(--accent) 22%,transparent),color-mix(in srgb,var(--accent-2) 18%,transparent));border:1px solid var(--border);color:var(--accent);transition:transform .4s var(--ease)}
+.module:hover .module-ico{transform:scale(1.08) rotate(-6deg)}
+.module-ico svg{width:22px;height:22px}
+.module h3{font-size:1.04rem;margin-bottom:8px;font-weight:600}
+.module p{font-size:.89rem;color:var(--muted);line-height:1.6}
+.module .arrow{display:inline-flex;align-items:center;gap:6px;margin-top:16px;font-size:.84rem;font-weight:600;color:var(--accent)}
+.module .arrow svg{width:14px;height:14px;transition:transform .35s var(--ease)}
+.module:hover .arrow svg{transform:translateX(5px)}
+
+.card{padding:24px 26px;border-radius:var(--radius);background:var(--surface);border:1px solid var(--border);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);transition:transform .35s var(--ease),border-color .3s,box-shadow .35s}
+.card:hover{transform:translateY(-4px);border-color:var(--border-strong);box-shadow:var(--shadow)}
+.card h3{font-size:1.02rem;margin-bottom:10px;font-weight:600}
+.card p{font-size:.9rem;color:var(--muted);line-height:1.68}
+.card .kicker{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;display:block}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(258px,1fr))}
+.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{padding:8px 15px;border-radius:999px;font-size:.81rem;font-weight:600;border:1px solid var(--border);background:var(--surface);color:var(--muted);transition:all .3s var(--ease)}
+.chip:hover{color:var(--text);border-color:var(--border-strong);transform:translateY(-1px)}
+.chip.active{background:linear-gradient(120deg,var(--accent),var(--accent-2));color:#fff;border-color:transparent;box-shadow:0 10px 26px -12px var(--accent)}
+
+.vt{position:relative;margin-top:26px}
+.vt::before{content:'';position:absolute;left:13px;top:10px;bottom:10px;width:2px;border-radius:2px;background:linear-gradient(180deg,var(--accent),var(--accent-2) 55%,var(--accent-3));opacity:.55}
+.vt-item{position:relative;padding-left:46px;margin-bottom:18px;animation:termIn .5s var(--ease) both;animation-delay:var(--d,0ms)}
+.vt-item.hidden{display:none}
+@keyframes termIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.vt-dot{position:absolute;left:7px;top:24px;width:14px;height:14px;border-radius:50%;background:var(--c);border:3px solid var(--bg);box-shadow:0 0 0 3px color-mix(in srgb,var(--c) 30%,transparent);transition:transform .3s var(--ease)}
+.vt-item:hover .vt-dot{transform:scale(1.3)}
+.vt-card{padding:20px 22px;border-radius:var(--radius-sm);background:var(--surface);border:1px solid var(--border);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);transition:border-color .3s,transform .3s var(--ease),box-shadow .3s}
+.vt-item:hover .vt-card{border-color:var(--border-strong);transform:translateX(3px);box-shadow:var(--shadow)}
+.vt-top{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:8px}
+.vt-year{font-family:var(--font-display);font-size:.86rem;font-weight:700;color:var(--accent);padding:3px 10px;border-radius:7px;background:color-mix(in srgb,var(--accent) 13%,transparent);border:1px solid color-mix(in srgb,var(--accent) 26%,transparent);white-space:nowrap}
+.vt-era{font-size:.68rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.vt-card h4{font-size:1rem;font-weight:600;margin-bottom:7px;line-height:1.3}
+.vt-card > p{font-size:.88rem;color:var(--muted);line-height:1.66}
+.vt-more{display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:.79rem;font-weight:600;color:var(--accent);padding:4px 0;transition:gap .3s var(--ease)}
+.vt-more:hover{gap:9px}
+.vt-more svg{width:12px;height:12px;transition:transform .4s var(--ease)}
+.vt-item.open .vt-more svg{transform:rotate(180deg)}
+.vt-extra{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s var(--ease)}
+.vt-item.open .vt-extra{grid-template-rows:1fr}
+.vt-extra > div{overflow:hidden}
+.vt-extra p{font-size:.85rem;color:var(--muted);line-height:1.7;border-top:1px solid var(--border);margin-top:12px;padding-top:12px}
+
+.diagram-wrap{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px 16px;box-shadow:var(--shadow)}
+.diagram-wrap svg{display:block;width:100%;height:auto;max-width:520px;margin:0 auto}
+
+[data-part]{cursor:pointer;transition:filter .2s var(--ease)}
+[data-part]:hover{filter:brightness(1.15)}
+[data-part].sel{filter:drop-shadow(0 0 8px var(--accent))}
+
+.info-panel{margin-top:16px;padding:16px 18px;border-radius:var(--radius-sm);background:var(--surface-2);border:1px solid var(--border);min-height:110px;transition:border-color .3s,background .3s}
+.info-panel.active{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 7%,var(--surface-2))}
+.info-panel .ip-name{font-family:var(--font-display);font-weight:700;font-size:1.02rem;color:var(--accent);margin-bottom:6px}
+.info-panel .ip-func{font-size:.9rem;color:var(--text);margin-bottom:6px;line-height:1.6}
+.info-panel .ip-desc{font-size:.85rem;color:var(--muted);line-height:1.6}
+.info-panel .ip-hint{color:var(--muted);font-size:.86rem;font-style:italic}
+
+.tbl{width:100%;border-collapse:collapse;font-size:.86rem;border-radius:12px;overflow:hidden;border:1px solid var(--border)}
+.tbl th, .tbl td{padding:11px 14px;text-align:left;border-bottom:1px solid var(--border)}
+.tbl th{background:var(--surface-2);font-weight:600;font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.tbl tr:last-child td{border-bottom:none}
+.tbl tr:hover td{background:var(--surface-2)}
+.tbl td{color:var(--text)}
+
+.note{margin-top:26px;padding:16px 20px;border-radius:14px;font-size:.85rem;color:var(--muted);border:1px solid var(--border);background:var(--surface-2);border-left:3px solid var(--accent);line-height:1.65}
+.note strong{color:var(--text);font-weight:600}
+.note.warn{border-left-color:var(--bad);background:color-mix(in srgb,var(--bad) 6%,var(--surface-2))}
+
+.verse{
+  padding:18px 20px 16px 22px;
+  border-radius:14px;
+  background:var(--surface-2);
+  border-left:3px solid var(--accent);
+  font-style:italic;
+  color:var(--text);
+  font-size:.9rem;
+  line-height:1.7;
+  margin:16px 0 0;
+  position:relative;
+}
+.verse::before{
+  content:'"';
+  position:absolute;
+  top:-6px;
+  right:16px;
+  font-family:var(--font-display);
+  font-size:3.2rem;
+  line-height:1;
+  color:color-mix(in srgb,var(--accent) 28%,transparent);
+  font-style:normal;
+  font-weight:700;
+}
+.verse-ref{
+  display:block;
+  margin-top:8px;
+  font-size:.78rem;
+  font-weight:600;
+  color:var(--accent);
+  font-style:normal;
+  letter-spacing:.03em;
+}
+
+.search-box{
+  width:100%;
+  padding:14px 18px;
+  border-radius:13px;
+  border:1px solid var(--border);
+  background:var(--surface);
+  color:var(--text);
+  font-family:inherit;
+  font-size:.93rem;
+  margin-bottom:18px;
+  transition:border-color .3s, background .3s, box-shadow .3s;
+}
+.search-box:focus{
+  outline:none;
+  border-color:var(--accent);
+  background:var(--surface-solid);
+  box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 15%,transparent);
+}
+.search-box::placeholder{color:var(--muted)}
+
+.tag{
+  display:inline-block;
+  padding:3px 9px;
+  border-radius:6px;
+  font-size:.7rem;
+  font-weight:700;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+  background:color-mix(in srgb,var(--accent-3) 16%,transparent);
+  color:var(--accent-3);
+  border:1px solid color-mix(in srgb,var(--accent-3) 30%,transparent);
+  margin-right:6px;
+  margin-bottom:6px;
+}
+.tag.warn{background:color-mix(in srgb,var(--bad) 16%,transparent);color:var(--bad);border-color:color-mix(in srgb,var(--bad) 30%,transparent)}
+.tag.good{background:color-mix(in srgb,var(--good) 16%,transparent);color:var(--good);border-color:color-mix(in srgb,var(--good) 30%,transparent)}
+
+/* Pasos DIY */
+.steps{display:grid;gap:14px;margin:20px 0}
+.step{
+  display:flex;gap:16px;align-items:flex-start;
+  padding:18px 20px;border-radius:14px;
+  background:var(--surface);border:1px solid var(--border);
+  transition:all .3s var(--ease);
+}
+.step:hover{border-color:var(--border-strong);transform:translateY(-2px);box-shadow:var(--shadow)}
+.step-num{
+  width:36px;height:36px;flex:none;border-radius:50%;
+  background:linear-gradient(140deg,var(--accent),var(--accent-2));
+  color:#fff;display:grid;place-items:center;
+  font-family:var(--font-display);font-weight:700;font-size:1rem;
+  box-shadow:0 6px 16px -6px var(--accent);
+}
+.step-content h4{font-size:.98rem;margin-bottom:6px;font-weight:600}
+.step-content p{font-size:.88rem;color:var(--muted);line-height:1.65}
+
+/* Calculadora latitud */
+.calc-box{
+  padding:22px;border-radius:16px;
+  background:var(--surface);border:1px solid var(--border);
+  margin:20px 0;
+}
+.calc-box label{display:block;font-size:.88rem;font-weight:600;color:var(--text);margin-bottom:8px}
+.calc-input{
+  width:100%;padding:12px 16px;border-radius:11px;
+  border:1px solid var(--border);background:var(--surface-2);
+  color:var(--text);font-family:inherit;font-size:.95rem;
+  transition:border-color .3s, background .3s;
+}
+.calc-input:focus{outline:none;border-color:var(--accent);background:var(--surface-solid)}
+.calc-result{
+  margin-top:16px;padding:14px 18px;border-radius:12px;
+  background:color-mix(in srgb,var(--accent) 8%,var(--surface-2));
+  border:1px solid color-mix(in srgb,var(--accent) 30%,transparent);
+  font-size:.92rem;color:var(--text);
+}
+.calc-result strong{color:var(--accent);font-size:1.15rem;font-family:var(--font-display)}
+
+/* Reloj vivo */
+.live-clock{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:28px 20px;border-radius:var(--radius);
+  background:linear-gradient(135deg,color-mix(in srgb,var(--accent-2) 12%,var(--surface)),color-mix(in srgb,var(--accent-3) 10%,var(--surface)));
+  border:1px solid var(--border);
+  margin:20px 0;
+}
+.live-clock .time{
+  font-family:var(--font-display);
+  font-size:clamp(2.6rem,8vw,4.4rem);
+  font-weight:700;
+  letter-spacing:-.03em;
+  background:linear-gradient(120deg,var(--accent),var(--accent-2) 55%,var(--accent-3));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  font-variant-numeric:tabular-nums;
+  line-height:1;
+  margin-bottom:8px;
+}
+.live-clock .date{
+  font-family:var(--font-display);
+  font-size:.95rem;
+  color:var(--muted);
+  font-weight:500;
+  letter-spacing:.02em;
+  text-transform:capitalize;
+}
+.live-clock .label{
+  font-size:.72rem;font-weight:700;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--muted);
+  margin-bottom:14px;
+}
+
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s var(--ease),transform .7s var(--ease);transition-delay:var(--d,0ms)}
+.reveal.in{opacity:1;transform:none}
+
+.site-footer{border-top:1px solid var(--border);padding:34px 22px;text-align:center;font-size:.85rem;color:var(--muted)}
+.site-footer strong{color:var(--text);font-weight:600}
+
+@media (max-width:1040px){.nav-link{padding:9px 9px;font-size:.76rem}}
+@media (max-width:900px){
+  .header-inner{padding:12px 16px;gap:14px;flex-wrap:wrap}
+  .nav{order:3;width:100%;margin-left:0;padding-bottom:2px}
+  .theme-toggle{margin-left:auto}
+  main{padding:0 16px 70px}
+  .hero{padding:44px 0 32px}
+  .stats{grid-template-columns:repeat(2,1fr);gap:11px}
+  .stat{padding:17px 15px}
+  .stat .num{font-size:1.45rem}
+  .vt-item{padding-left:38px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<div class="bg-dots" aria-hidden="true"></div>
+<div class="orbs" aria-hidden="true">
+  <div class="orb o1"></div>
+  <div class="orb o2"></div>
+  <div class="orb o3"></div>
+</div>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="#inicio" data-route="inicio">
+      <span class="brand-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="9"/>
+          <path d="M12 7v5l3 2"/>
+        </svg>
+      </span>
+      <span>El Reloj</span>
+    </a>
+
+    <nav class="nav" aria-label="Navegación principal">
+      <button class="nav-link active" data-route="inicio">Inicio</button>
+      <button class="nav-link" data-route="timeline">Línea del tiempo</button>
+      <button class="nav-link" data-route="solar">Reloj de Sol</button>
+      <button class="nav-link" data-route="casero">Modelo casero</button>
+      <button class="nav-link" data-route="actual">Reloj actual</button>
+      <button class="nav-link" data-route="atomico">Atómico</button>
+      <button class="nav-link" data-route="digital">Digital</button>
+      <button class="nav-link" data-route="glosario">Glosario</button>
+    </nav>
+
+    <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema">
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round">
+        <circle cx="12" cy="12" r="4"/>
+        <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>
+      </svg>
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<main>
+
+  <!-- ================= INICIO ================= -->
+  <section class="view active" data-view="inicio">
+    <div class="hero">
+      <span class="pill"><span class="dot"></span>De la sombra al átomo</span>
+      <h1 class="hero-title">El Reloj <span class="grad">en la historia</span></h1>
+      <p class="lead">
+        Cómo la humanidad aprendió a medir el tiempo: del primer reloj de sol al reloj atómico
+        que se desvía menos de un segundo en millones de años. La historia, el funcionamiento,
+        un modelo casero de reloj solar y un glosario completo.
+      </p>
+      <div class="hero-actions">
+        <button class="btn btn-primary" data-route="timeline">
+          Ver la línea del tiempo
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+        <button class="btn btn-ghost" data-route="casero">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+          Construir un reloj solar
+        </button>
+      </div>
+    </div>
+
+    <div class="stats reveal">
+      <div class="stat"><div class="num" data-count="3500" data-suffix=" a.C.">0</div><div class="lbl">Primeros relojes de sol</div></div>
+      <div class="stat"><div class="num" data-count="1283" data-suffix="">0</div><div class="lbl">Primer reloj mecánico</div></div>
+      <div class="stat"><div class="num" data-count="1927" data-suffix="">0</div><div class="lbl">Primer reloj de cuarzo</div></div>
+      <div class="stat"><div class="num" data-count="30" data-suffix=" millones">0</div><div class="lbl">Años de error de 1 seg (atómico)</div></div>
+    </div>
+
+    <div class="sec-head reveal">
+      <h2>Cómo está organizada</h2>
+      <p>Siete secciones que recorren la historia del reloj, sus mecanismos y cómo construir uno en casa.</p>
+    </div>
+
+    <div class="module-grid">
+      <button class="module reveal" data-route="timeline" style="--d:0ms">
+        <span class="module-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+        </span>
+        <h3>Línea del tiempo</h3>
+        <p>Del obelisco egipcio al reloj óptico: 5.500 años de historia en una sola línea.</p>
+        <span class="arrow">Recorrer la historia
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </button>
+
+      <button class="module reveal" data-route="solar" style="--d:40ms">
+        <span class="module-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1l2.1-2.1M17 7l2.1-2.1"/></svg>
+        </span>
+        <h3>Reloj de Sol</h3>
+        <p>Cómo funciona el gnomon, los tipos de cuadrante y por qué el mediodía no siempre es a las 12.</p>
+        <span class="arrow">Ver el reloj de sol
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </button>
+
+      <button class="module reveal" data-route="casero" style="--d:80ms">
+        <span class="module-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3l7 7-3 3-7-7z"/><path d="M11 6L4 13c-2 2-2 5 0 7s5 2 7 0l7-7"/></svg>
+        </span>
+        <h3>Modelo casero</h3>
+        <p>Paso a paso, con materiales sencillos: construye tu propio reloj solar horizontal.</p>
+        <span class="arrow">Construir el mío
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </button>
+
+      <button class="module reveal" data-route="actual" style="--d:120ms">
+        <span class="module-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+        </span>
+        <h3>Reloj actual</h3>
+        <p>Las partes del reloj mecánico: cuerda, engranajes, escape y volante, con diagrama interactivo.</p>
+        <span class="arrow">Ver el mecanismo
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </button>
+
+      <button class="module reveal" data-route="atomico" style="--d:160ms">
+        <span class="module-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><ellipse cx="12" cy="12" rx="10" ry="4"/><ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(120 12 12)"/></svg>
+        </span>
+        <h3>Reloj atómico</h3>
+        <p>El patrón actual del segundo: la vibración del átomo de cesio-133. Cómo funciona y para qué se usa.</p>
+        <span class="arrow">Ver el átomo
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </button>
+
+      <button class="module reveal" data-route="digital" style="--d:200ms">
+        <span class="module-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 10v4M17 10v4M11 12h2"/></svg>
+        </span>
+        <h3>Reloj digital</h3>
+        <p>El cuarzo, el oscilador y el contador que convierte 32.768 vibraciones por segundo en horas.</p>
+        <span class="arrow">Ver el reloj digital
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </button>
+
+      <button class="module reveal" data-route="glosario" style="--d:240ms">
+        <span class="module-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>
+        </span>
+        <h3>Glosario</h3>
+        <p>Más de cuarenta términos: gnomon, escape, cuarzo, cesio, TAI, UTC y muchos más.</p>
+        <span class="arrow">Abrir glosario
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </button>
+    </div>
+
+    <div class="note reveal">
+      <strong>Medir el tiempo siempre fue medir algo que se repite:</strong> el sol que vuelve
+      cada día, el agua que gotea, el péndulo que oscila, el cuarzo que vibra, el átomo que
+      cambia de estado. Cuanto más estable la repetición, más preciso el reloj.
+    </div>
+  </section>
+
+  <!-- ================= LÍNEA DEL TIEMPO ================= -->
+  <section class="view" data-view="timeline">
+    <div class="sec-head section">
+      <h2>Línea del tiempo</h2>
+      <p>Los hitos que transformaron la medición del tiempo: desde los obeliscos egipcios hasta los relojes ópticos actuales.</p>
+    </div>
+
+    <div class="diagram-wrap reveal" style="margin-bottom:26px">
+      <h4 style="font-size:1.02rem;margin-bottom:8px;font-weight:600">Panorama general</h4>
+      <p style="font-size:.88rem;color:var(--muted);margin-bottom:14px">Ocho hitos clave de la historia del reloj. Cada uno marca un salto en precisión y portabilidad.</p>
+      <svg id="timelineSvg" viewBox="0 0 560 260" aria-label="Línea del tiempo general"></svg>
+    </div>
+
+    <h3 style="font-size:1.15rem;font-weight:600;margin:28px 0 14px">Hitos cronológicos</h3>
+    <div class="vt" id="generalTimeline"></div>
+
+    <div class="note reveal">
+      <strong>De la hora al nanosegundo:</strong> los primeros relojes distinguían la mañana de la
+      tarde. Los mecánicos medievales marcaban las horas. Los de cuarzo, los segundos. Los atómicos
+      miden nanosegundos. Cada mejora en precisión cambió la sociedad que la usaba.
+    </div>
+  </section>
+
+  <!-- ================= RELOJ DE SOL ================= -->
+  <section class="view" data-view="solar">
+    <div class="sec-head section">
+      <h2>Reloj de Sol</h2>
+      <p>El reloj de sol es el instrumento más antiguo para medir el tiempo. Aprovecha el movimiento aparente del Sol para proyectar una sombra sobre un cuadrante. Toca las horas del diagrama para ver cómo funciona.</p>
+    </div>
+
+    <div class="grid" style="margin-bottom:24px">
+      <div class="card reveal">
+        <span class="kicker">Qué es</span>
+        <h3>Una sombra que da la hora</h3>
+        <p>Una varilla vertical (el gnomon) proyecta una sombra sobre una superficie graduada (el cuadrante). Según la posición del Sol, la sombra cae en una marca distinta.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Por qué funciona</span>
+        <h3>La Tierra gira</h3>
+        <p>El Sol parece moverse de este a oeste porque la Tierra gira sobre su eje. Cada 15° de rotación equivalen a una hora de tiempo solar.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Precisión</span>
+        <h3>Buena, con matices</h3>
+        <p>Un reloj de sol bien calibrado da la hora solar con pocos minutos de error. Para pasar a la hora oficial hay que corregir la ecuación del tiempo y el huso horario.</p>
+      </div>
+    </div>
+
+    <div class="diagram-wrap reveal" style="margin-bottom:20px">
+      <h4 style="font-size:1.02rem;margin-bottom:8px;font-weight:600">Diagrama interactivo</h4>
+      <p style="font-size:.88rem;color:var(--muted);margin-bottom:14px">Un reloj de sol horizontal con su gnomon triangular. Toca las horas para ver la sombra y su significado.</p>
+      <svg id="sundialSvg" viewBox="0 0 400 400" aria-label="Reloj de sol horizontal interactivo">
+        <!-- Cielo -->
+        <rect x="0" y="0" width="400" height="180" fill="var(--accent-3)" opacity="0.08"/>
+        <!-- Sol -->
+        <g id="sunMarker">
+          <circle cx="330" cy="70" r="26" fill="#fbbf24" opacity="0.9"/>
+          <circle cx="330" cy="70" r="34" fill="#fbbf24" opacity="0.25"/>
+        </g>
+        <!-- Cuadrante (elipse) -->
+        <ellipse cx="200" cy="280" rx="160" ry="90" fill="var(--surface-2)" stroke="var(--accent)" stroke-width="2"/>
+        <!-- Círculos concéntricos -->
+        <ellipse cx="200" cy="280" rx="120" ry="67" fill="none" stroke="var(--accent)" stroke-width="1" opacity="0.3"/>
+        <ellipse cx="200" cy="280" rx="80" ry="45" fill="none" stroke="var(--accent)" stroke-width="1" opacity="0.3"/>
+        <!-- Gnomon triangular -->
+        <g data-part="gnomon">
+          <path d="M 195 280 L 205 280 L 200 200 Z" fill="var(--accent-2)" opacity="0.85" stroke="var(--accent-2)" stroke-width="1.5"/>
+        </g>
+        <!-- Horas: 6, 9, 12, 15, 18 -->
+        <g data-part="hour6">
+          <line x1="200" y1="280" x2="40" y2="280" stroke="var(--accent)" stroke-width="1.5" opacity="0.7"/>
+          <circle cx="55" cy="280" r="12" fill="var(--surface-solid)" stroke="var(--accent)" stroke-width="2"/>
+          <text x="55" y="285" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="11" font-weight="700" fill="var(--text)">6</text>
+        </g>
+        <g data-part="hour9">
+          <line x1="200" y1="280" x2="95" y2="200" stroke="var(--accent)" stroke-width="1.5" opacity="0.7"/>
+          <circle cx="105" cy="207" r="12" fill="var(--surface-solid)" stroke="var(--accent)" stroke-width="2"/>
+          <text x="105" y="212" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="11" font-weight="700" fill="var(--text)">9</text>
+        </g>
+        <g data-part="hour12">
+          <line x1="200" y1="280" x2="200" y2="190" stroke="var(--accent)" stroke-width="1.5" opacity="0.7"/>
+          <circle cx="200" cy="205" r="14" fill="var(--accent)" stroke="var(--surface-solid)" stroke-width="2"/>
+          <text x="200" y="210" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="11" font-weight="700" fill="#fff">12</text>
+        </g>
+        <g data-part="hour15">
+          <line x1="200" y1="280" x2="305" y2="200" stroke="var(--accent)" stroke-width="1.5" opacity="0.7"/>
+          <circle cx="295" cy="207" r="12" fill="var(--surface-solid)" stroke="var(--accent)" stroke-width="2"/>
+          <text x="295" y="212" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="11" font-weight="700" fill="var(--text)">15</text>
+        </g>
+        <g data-part="hour18">
+          <line x1="200" y1="280" x2="360" y2="280" stroke="var(--accent)" stroke-width="1.5" opacity="0.7"/>
+          <circle cx="345" cy="280" r="12" fill="var(--surface-solid)" stroke="var(--accent)" stroke-width="2"/>
+          <text x="345" y="285" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="11" font-weight="700" fill="var(--text)">18</text>
+        </g>
+        <!-- Sombra del gnomon: se mueve según la hora elegida -->
+        <path id="shadowPath" d="M 200 280 L 200 200 L 290 280 Z" fill="var(--text)" opacity="0.25"/>
+        <!-- Etiquetas -->
+        <text x="200" y="385" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" fill="var(--muted)" font-weight="600">Cuadrante horizontal</text>
+        <text x="200" y="60" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="var(--muted)" font-weight="500">La sombra del gnomon señala la hora</text>
+      </svg>
+      <p style="font-size:.82rem;color:var(--muted);text-align:center;margin-top:10px">
+        Toca: 6 · 9 · 12 · 15 · 18 · Gnomon
+      </p>
+      <div class="info-panel" id="sundialInfo">
+        <div class="ip-hint">Toca una hora del reloj de sol para ver dónde cae la sombra y qué significa.</div>
+      </div>
+    </div>
+
+    <h3 style="font-size:1.15rem;font-weight:600;margin:28px 0 14px">Cómo funciona</h3>
+    <div class="steps" id="sundialHow"></div>
+
+    <h3 style="font-size:1.15rem;font-weight:600;margin:28px 0 14px">Tipos de reloj de sol</h3>
+    <div class="grid" id="sundialTypes"></div>
+
+    <div class="note reveal">
+      <strong>El mediodía solar no es a las 12:00:</strong> depende de la longitud del lugar y de
+      la ecuación del tiempo. En España, el mediodía solar puede caer entre las 13:00 y las 14:30
+      según la estación y el huso horario. Los relojes de sol bien hechos incluyen tablas de corrección.
+    </div>
+  </section>
+
+  <!-- ================= MODELO CASERO ================= -->
+  <section class="view" data-view="casero">
+    <div class="sec-head section">
+      <h2>Modelo casero de reloj solar</h2>
+      <p>Un reloj de sol horizontal es un proyecto perfecto para hacer en casa o en el aula. Necesitas pocos materiales y unas dos horas de trabajo. Al final del proceso tendrás un reloj que funciona de verdad.</p>
+    </div>
+
+    <div class="grid" style="margin-bottom:24px">
+      <div class="card reveal">
+        <span class="kicker">Materiales</span>
+        <h3>Lo que vas a necesitar</h3>
+        <p>Cartón o madera, transportador, regla, lápiz, compás, cúter, pegamento y una varilla (palo o alambre rígido) para el gnomon.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Tiempo</span>
+        <h3>2 horas aprox.</h3>
+        <p>Una hora para el trazado y otra para el montaje. Si usas madera en lugar de cartón, suma el tiempo de lijado y barnizado.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Dificultad</span>
+        <h3>Fácil</h3>
+        <p>No necesitas herramientas especiales. Solo un poco de paciencia y ganas de medir con precisión.</p>
+      </div>
+    </div>
+
+    <h3 style="font-size:1.15rem;font-weight:600;margin:28px 0 14px">Paso a paso</h3>
+    <div class="steps" id="diySteps"></div>
+
+    <div class="calc-box reveal">
+      <h4 style="font-size:1rem;margin-bottom:8px;font-weight:600">Calcula el ángulo de tu gnomon</h4>
+      <p style="font-size:.88rem;color:var(--muted);margin-bottom:14px">La inclinación del gnomon respecto a la horizontal debe ser igual a la latitud de tu ciudad. Introduce tu latitud (entre -90 y 90) para saber el ángulo exacto.</p>
+      <label for="latInput">Latitud (grados)</label>
+      <input type="number" class="calc-input" id="latInput" placeholder="Ej: 40.4 (Madrid), -34.6 (Buenos Aires), 19.4 (CDMX)" step="0.1" min="-90" max="90">
+      <div class="calc-result" id="calcResult">
+        Introduce tu latitud para ver el ángulo del gnomon.
+      </div>
+    </div>
+
+    <h3 style="font-size:1.15rem;font-weight:600;margin:28px 0 14px">Cómo calibrar tu reloj</h3>
+    <div class="grid" id="diyCalibration"></div>
+
+    <div class="note reveal">
+      <strong>Consejo práctico:</strong> el reloj de sol dará la hora solar. Para convertirlo
+      en hora oficial, suma una hora en verano (horario de verano) y corrige con la ecuación
+      del tiempo. Los relojes de sol profesionales incluyen una tabla de corrección.
+    </div>
+  </section>
+
+  <!-- ================= RELOJ ACTUAL (MECÁNICO) ================= -->
+  <section class="view" data-view="actual">
+    <div class="sec-head section">
+      <h2>Funcionamiento del reloj actual</h2>
+      <p>El reloj mecánico, popularizado a partir del siglo XIV, sigue siendo la base de los relojes de pulsera y de pared. Toca cada parte del diagrama para ver cómo contribuye a dar la hora.</p>
+    </div>
+
+    <div class="diagram-wrap reveal" style="margin-bottom:20px">
+      <h4 style="font-size:1.02rem;margin-bottom:8px;font-weight:600">Diagrama interactivo</h4>
+      <p style="font-size:.88rem;color:var(--muted);margin-bottom:14px">Las cuatro grandes partes de un reloj mecánico: energía, transmisión, regulación y escape.</p>
+      <svg id="mechSvg" viewBox="0 0 500 500" aria-label="Partes de un reloj mecánico">
+        <!-- Esfera -->
+        <circle cx="250" cy="250" r="220" fill="var(--surface-2)" stroke="var(--border-strong)" stroke-width="2"/>
+        <!-- Marcas de las horas -->
+        <g id="mechMarks"></g>
+        <!-- Agujas -->
+        <line x1="250" y1="250" x2="250" y2="90" stroke="var(--text)" stroke-width="4" stroke-linecap="round"/>
+        <line x1="250" y1="250" x2="370" y2="250" stroke="var(--text)" stroke-width="3" stroke-linecap="round"/>
+        <circle cx="250" cy="250" r="8" fill="var(--accent)"/>
+
+        <!-- Cuerda / barrilete (arriba derecha) -->
+        <g data-part="cuerda">
+          <rect x="345" y="60" width="60" height="60" rx="10" fill="var(--accent)" opacity="0.2" stroke="var(--accent)" stroke-width="2.5"/>
+          <path d="M 355 90 Q 355 72 375 72 Q 395 72 395 90 Q 395 108 375 108 Q 355 108 355 90" fill="none" stroke="var(--accent)" stroke-width="2"/>
+          <text x="375" y="135" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" font-weight="700" fill="var(--accent)">CUERDA</text>
+        </g>
+
+        <!-- Tren de engranajes (derecha medio) -->
+        <g data-part="engranajes">
+          <circle cx="385" cy="200" r="28" fill="var(--accent-2)" opacity="0.2" stroke="var(--accent-2)" stroke-width="2"/>
+          <circle cx="385" cy="200" r="18" fill="var(--surface-solid)" stroke="var(--accent-2)" stroke-width="1.5"/>
+          <circle cx="385" cy="200" r="6" fill="var(--accent-2)"/>
+          <g stroke="var(--accent-2)" stroke-width="2.5">
+            <line x1="385" y1="168" x2="385" y2="174"/>
+            <line x1="385" y1="226" x2="385" y2="232"/>
+            <line x1="353" y1="200" x2="359" y2="200"/>
+            <line x1="411" y1="200" x2="417" y2="200"/>
+            <line x1="362" y1="177" x2="366" y2="181"/>
+            <line x1="404" y1="219" x2="408" y2="223"/>
+            <line x1="362" y1="223" x2="366" y2="219"/>
+            <line x1="404" y1="181" x2="408" y2="177"/>
+          </g>
+          <text x="385" y="262" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" font-weight="700" fill="var(--accent-2)">ENGRANAJES</text>
+        </g>
+
+        <!-- Escape (abajo derecha) -->
+        <g data-part="escape">
+          <path d="M 330 380 L 350 340 L 370 380 Z" fill="var(--good)" opacity="0.3" stroke="var(--good)" stroke-width="2"/>
+          <circle cx="350" cy="355" r="5" fill="var(--good)"/>
+          <line x1="330" y1="380" x2="310" y2="395" stroke="var(--good)" stroke-width="2"/>
+          <line x1="370" y1="380" x2="390" y2="395" stroke="var(--good)" stroke-width="2"/>
+          <text x="350" y="418" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" font-weight="700" fill="var(--good)">ESCAPE</text>
+        </g>
+
+        <!-- Volante / péndulo (abajo centro-izquierda) -->
+        <g data-part="volante">
+          <circle cx="150" cy="380" r="35" fill="var(--accent-3)" opacity="0.2" stroke="var(--accent-3)" stroke-width="2"/>
+          <circle cx="150" cy="380" r="22" fill="none" stroke="var(--accent-3)" stroke-width="1.5"/>
+          <circle cx="150" cy="380" r="5" fill="var(--accent-3)"/>
+          <line x1="150" y1="345" x2="150" y2="415" stroke="var(--accent-3)" stroke-width="1.5" opacity="0.6"/>
+          <line x1="115" y1="380" x2="185" y2="380" stroke="var(--accent-3)" stroke-width="1.5" opacity="0.6"/>
+          <text x="150" y="440" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" font-weight="700" fill="var(--accent-3)">VOLANTE / PÉNDULO</text>
+        </g>
+
+        <!-- Anotaciones -->
+        <text x="250" y="475" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="var(--muted)">Toca cualquier parte para conocer su función</text>
+      </svg>
+      <div class="info-panel" id="mechInfo">
+        <div class="ip-hint">Toca cualquier parte del reloj para ver su información.</div>
+      </div>
+    </div>
+
+    <h3 style="font-size:1.15rem;font-weight:600;margin:28px 0 14px">Las cuatro funciones de un reloj mecánico</h3>
+    <div class="grid" id="mechFunctions"></div>
+
+    <h3 style="font-size:1.15rem;font-weight:600;margin:28px 0 14px">De la cuerda al escape: el ciclo completo</h3>
+    <table class="tbl reveal">
+      <thead>
+        <tr><th>Etapa</th><th>Qué ocurre</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1. Energía</td><td>La cuerda (o el peso) almacena energía potencial que se libera lentamente.</td></tr>
+        <tr><td>2. Transmisión</td><td>El tren de engranajes multiplica la velocidad y reparte el movimiento.</td></tr>
+        <tr><td>3. Regulación</td><td>El volante (o el péndulo) oscila con un período constante: es el "corazón" del reloj.</td></tr>
+        <tr><td>4. Escape</td><td>El áncora libera un diente de la rueda de escape en cada oscilación, acompasando el movimiento.</td></tr>
+        <tr><td>5. Indicación</td><td>Las agujas, movidas por el tren, señalan la hora en la esfera.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="note reveal">
+      <strong>La precisión del mecánico es limitada:</strong> los mejores relojes de pulsera
+      certificados como cronómetros se desvían como mucho unos pocos segundos al día. Un
+      reloj de cuarzo lo hace en un mes; uno atómico, en millones de años.
+    </div>
+  </section>
+
+  <!-- ================= RELOJ ATÓMICO ================= -->
+  <section class="view" data-view="atomico">
+    <div class="sec-head section">
+      <h2>Reloj atómico</h2>
+      <p>El reloj atómico no usa engranajes ni cuarzo: usa la vibración de los átomos. Es el patrón actual del segundo y la base del tiempo civil mundial.</p>
+    </div>
+
+    <div class="grid" style="margin-bottom:24px">
+      <div class="card reveal">
+        <span class="kicker">Qué es</span>
+        <h3>Un reloj que mide átomos</h3>
+        <p>Usa la frecuencia de transición entre dos estados de energía de un átomo (habitualmente cesio-133) como referencia de tiempo.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Por qué es tan preciso</span>
+        <h3>La naturaleza no cambia</h3>
+        <p>Todos los átomos de cesio-133 del universo vibran igual. Esa frecuencia es una constante física, no depende de la temperatura, la presión ni el desgaste.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Definición</span>
+        <h3>El segundo oficial</h3>
+        <p>Desde 1967, un segundo es exactamente 9.192.631.770 oscilaciones de la transición del cesio-133.</p>
+      </div>
+    </div>
+
+    <div class="diagram-wrap reveal" style="margin-bottom:20px">
+      <h4 style="font-size:1.02rem;margin-bottom:8px;font-weight:600">Cómo funciona un reloj atómico de cesio</h4>
+      <p style="font-size:.88rem;color:var(--muted);margin-bottom:14px">El ciclo básico: se preparan los átomos, se les hace pasar por una cavidad de microondas, se detecta su estado y se ajusta la frecuencia.</p>
+      <svg id="atomicSvg" viewBox="0 0 560 320" aria-label="Funcionamiento de un reloj atómico de cesio">
+        <!-- Horno -->
+        <g data-part="horno">
+          <rect x="40" y="130" width="80" height="60" rx="8" fill="var(--accent)" opacity="0.8"/>
+          <text x="80" y="165" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="10" font-weight="700" fill="#fff">HORNO</text>
+          <text x="80" y="210" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="var(--muted)">Cesio-133</text>
+        </g>
+        <!-- Haz de átomos -->
+        <g data-part="haz">
+          <line x1="120" y1="160" x2="250" y2="160" stroke="var(--accent-2)" stroke-width="2" stroke-dasharray="4 3"/>
+          <circle cx="140" cy="160" r="3" fill="var(--accent-2)"/>
+          <circle cx="165" cy="160" r="3" fill="var(--accent-2)"/>
+          <circle cx="190" cy="160" r="3" fill="var(--accent-2)"/>
+          <circle cx="215" cy="160" r="3" fill="var(--accent-2)"/>
+          <circle cx="240" cy="160" r="3" fill="var(--accent-2)"/>
+        </g>
+        <!-- Cavidad de microondas -->
+        <g data-part="cavidad">
+          <rect x="250" y="110" width="120" height="100" rx="10" fill="var(--accent-2)" opacity="0.2" stroke="var(--accent-2)" stroke-width="2.5"/>
+          <path d="M 260 130 Q 270 120 280 130 Q 290 140 300 130 Q 310 120 320 130 Q 330 140 340 130 Q 350 120 360 130" fill="none" stroke="var(--accent-2)" stroke-width="2"/>
+          <path d="M 260 190 Q 270 180 280 190 Q 290 200 300 190 Q 310 180 320 190 Q 330 200 340 190 Q 350 180 360 190" fill="none" stroke="var(--accent-2)" stroke-width="2"/>
+          <text x="310" y="155" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="9" font-weight="700" fill="var(--accent-2)">MICROONDAS</text>
+          <text x="310" y="170" text-anchor="middle" font-family="Inter,sans-serif" font-size="8" fill="var(--muted)">9.192.631.770 Hz</text>
+        </g>
+        <!-- Haz de salida -->
+        <g data-part="hazSalida">
+          <line x1="370" y1="160" x2="450" y2="160" stroke="var(--accent-2)" stroke-width="2" stroke-dasharray="4 3"/>
+        </g>
+        <!-- Detector -->
+        <g data-part="detector">
+          <rect x="450" y="130" width="70" height="60" rx="8" fill="var(--good)" opacity="0.8"/>
+          <text x="485" y="165" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="9" font-weight="700" fill="#fff">DETECTOR</text>
+        </g>
+        <!-- Realimentación -->
+        <g data-part="feedback">
+          <path d="M 485 190 Q 485 260 310 260 Q 160 260 160 220 Q 160 200 170 190" fill="none" stroke="var(--accent-3)" stroke-width="2" stroke-dasharray="5 4"/>
+          <polygon points="170,190 162,196 176,198" fill="var(--accent-3)"/>
+          <text x="310" y="285" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" font-weight="700" fill="var(--accent-3)">AJUSTE DE FRECUENCIA</text>
+        </g>
+        <!-- Etiqueta -->
+        <text x="280" y="40" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="13" font-weight="700" fill="var(--text)">Reloj atómico de cesio</text>
+      </svg>
+      <p style="font-size:.82rem;color:var(--muted);text-align:center;margin-top:10px">
+        Toca: Horno · Haz de átomos · Microondas · Detector · Realimentación
+      </p>
+      <div class="info-panel" id="atomicInfo">
+        <div class="ip-hint">Toca cada parte del esquema para ver su función en el reloj atómico.</div>
+      </div>
+    </div>
+
+    <h3 style="font-size:1.15rem;font-weight:600;margin:28px 0 14px">Tipos de reloj atómico</h3>
+    <div class="grid" id="atomicTypes"></div>
+
+    <h3 style="font-size:1.15rem;font-weight:600;margin:28px 0 14px">¿Para qué se usan?</h3>
+    <div class="grid" id="atomicUses"></div>
+
+    <div class="note reveal">
+      <strong>El tiempo es infraestructura:</strong> los relojes atómicos no son solo un juguete
+      de laboratorio. Sincronizan los GPS, las redes de telefonía, las transacciones bancarias,
+      los mercados financieros y los experimentos científicos de todo el mundo.
+    </div>
+  </section>
+
+  <!-- ================= RELOJ DIGITAL ================= -->
+  <section class="view" data-view="digital">
+    <div class="sec-head section">
+      <h2>Reloj digital</h2>
+      <p>El reloj digital reemplazó el mecanismo por electrones y pantallas. Un cristal de cuarzo vibra a una frecuencia fija y un contador traduce esas vibraciones en horas, minutos y segundos.</p>
+    </div>
+
+    <div class="live-clock reveal">
+      <span class="label">Hora actual del sistema</span>
+      <div class="time" id="liveTime">--:--:--</div>
+      <div class="date" id="liveDate">—</div>
+    </div>
+
+    <div class="grid" style="margin-bottom:24px">
+      <div class="card reveal">
+        <span class="kicker">Corazón</span>
+        <h3>El cristal de cuarzo</h3>
+        <p>Un pequeño cristal de cuarzo vibra a 32.768 Hz cuando se le aplica un voltaje. Ese número es 2¹⁵, lo que permite dividirlo hasta 1 Hz (un pulso por segundo) con circuitos digitales simples.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Por qué cuarzo</span>
+        <h3>Piezoelectricidad</h3>
+        <p>El cuarzo genera una pequeña carga eléctrica al deformarse y se deforma al recibir electricidad. Esa propiedad lo hace un oscilador natural: vibra siempre a la misma frecuencia.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Precisión</span>
+        <h3>±15 segundos al mes</h3>
+        <p>Un reloj de cuarzo típico se desvía entre 15 y 30 segundos al mes. Es mucho más preciso que cualquier mecánico y mucho menos que un atómico.</p>
+      </div>
+    </div>
+
+    <div class="diagram-wrap reveal" style="margin-bottom:20px">
+      <h4 style="font-size:1.02rem;margin-bottom:8px;font-weight:600">Cadena del reloj digital</h4>
+      <p style="font-size:.88rem;color:var(--muted);margin-bottom:14px">El pulso del cuarzo se divide, se cuenta y se muestra. Toca cada bloque del esquema.</p>
+      <svg id="digitalSvg" viewBox="0 0 560 300" aria-label="Cadena del reloj digital">
+        <!-- Cuarzo -->
+        <g data-part="cuarzo">
+          <rect x="30" y="110" width="100" height="80" rx="10" fill="var(--accent)" opacity="0.85"/>
+          <text x="80" y="145" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="12" font-weight="700" fill="#fff">CUARZO</text>
+          <text x="80" y="162" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" font-weight="600" fill="#fff">32.768 Hz</text>
+          <text x="80" y="176" text-anchor="middle" font-family="Inter,sans-serif" font-size="8" fill="#fff" opacity="0.9">vibra</text>
+        </g>
+        <!-- Flecha -->
+        <line x1="130" y1="150" x2="165" y2="150" stroke="var(--muted)" stroke-width="2"/>
+        <polygon points="165,150 158,145 158,155" fill="var(--muted)"/>
+        <!-- Divisor -->
+        <g data-part="divisor">
+          <rect x="165" y="110" width="100" height="80" rx="10" fill="var(--accent-2)" opacity="0.85"/>
+          <text x="215" y="145" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="11" font-weight="700" fill="#fff">DIVISOR</text>
+          <text x="215" y="162" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" font-weight="600" fill="#fff">÷ 32.768</text>
+          <text x="215" y="176" text-anchor="middle" font-family="Inter,sans-serif" font-size="8" fill="#fff" opacity="0.9">2¹⁵</text>
+        </g>
+        <!-- Flecha -->
+        <line x1="265" y1="150" x2="300" y2="150" stroke="var(--muted)" stroke-width="2"/>
+        <polygon points="300,150 293,145 293,155" fill="var(--muted)"/>
+        <!-- Contador -->
+        <g data-part="contador">
+          <rect x="300" y="110" width="100" height="80" rx="10" fill="var(--accent-3)" opacity="0.85"/>
+          <text x="350" y="145" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="11" font-weight="700" fill="#fff">CONTADOR</text>
+          <text x="350" y="162" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" font-weight="600" fill="#fff">1 Hz</text>
+          <text x="350" y="176" text-anchor="middle" font-family="Inter,sans-serif" font-size="8" fill="#fff" opacity="0.9">segundos</text>
+        </g>
+        <!-- Flecha -->
+        <line x1="400" y1="150" x2="435" y2="150" stroke="var(--muted)" stroke-width="2"/>
+        <polygon points="435,150 428,145 428,155" fill="var(--muted)"/>
+        <!-- Pantalla -->
+        <g data-part="pantalla">
+          <rect x="435" y="100" width="100" height="100" rx="10" fill="var(--good)" opacity="0.85"/>
+          <text x="485" y="135" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="20" font-weight="700" fill="#fff">12:34</text>
+          <text x="485" y="160" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="14" font-weight="700" fill="#fff" opacity="0.85">:56</text>
+          <text x="485" y="185" text-anchor="middle" font-family="Inter,sans-serif" font-size="8" font-weight="600" fill="#fff">PANTALLA</text>
+        </g>
+        <text x="280" y="40" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="13" font-weight="700" fill="var(--text)">Cómo el cuarzo se convierte en horas</text>
+        <text x="280" y="250" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="var(--muted)">Toca: Cuarzo · Divisor · Contador · Pantalla</text>
+      </svg>
+      <div class="info-panel" id="digitalInfo">
+        <div class="ip-hint">Toca cualquier bloque de la cadena para ver su función.</div>
+      </div>
+    </div>
+
+    <h3 style="font-size:1.15rem;font-weight:600;margin:28px 0 14px">Tipos de pantalla digital</h3>
+    <div class="grid" id="displayTypes"></div>
+
+    <h3 style="font-size:1.15rem;font-weight:600;margin:28px 0 14px">Ventajas del reloj digital</h3>
+    <div class="grid" id="digitalPros"></div>
+
+    <div class="note reveal">
+      <strong>El cuarzo democratizó la hora:</strong> antes de los años 70, un reloj de pulsera
+      era un objeto caro que se heredaba. La revolución del cuarzo (los "quartz crisis")
+      hizo que cualquier persona pudiera tener un reloj preciso por muy poco dinero.
+    </div>
+  </section>
+
+  <!-- ================= GLOSARIO ================= -->
+  <section class="view" data-view="glosario">
+    <div class="sec-head section">
+      <h2>Glosario del reloj</h2>
+      <p>Términos clave para entender la historia y el funcionamiento de los relojes. Usa el buscador o filtra por categoría.</p>
+    </div>
+
+    <input type="search" class="search-box" id="glossarySearch" placeholder="Buscar un término (ej. gnomon, escape, cesio)…" aria-label="Buscar término">
+    <div class="chips" id="glossaryChips" style="margin-bottom:18px"></div>
+    <div class="grid" id="glossaryGrid"></div>
+
+    <div class="note reveal">
+      <strong>El tiempo es una construcción humana:</strong> los relojes miden algo que llamamos
+      "tiempo", pero la forma de dividirlo (segundos, horas, husos horarios) es una convención.
+      Los relojes atómicos miden la duración con enorme precisión; las unidades que usamos
+      para nombrarla son decisiones culturales.
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <p><strong>El Reloj</strong> — Material educativo abierto sobre la historia del reloj, los relojes de sol, el mecanismo de los relojes mecánicos, atómicos y digitales.</p>
+</footer>
+
+<script>
+const $  = (sel, root = document) => root.querySelector(sel);
+const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+const SVGNS = 'http://www.w3.org/2000/svg';
+const el = (tag, attrs = {}, parent) => {
+  const e = document.createElementNS(SVGNS, tag);
+  for (const k in attrs) e.setAttribute(k, attrs[k]);
+  if (parent) parent.appendChild(e);
+  return e;
+};
+const theme = name => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+const accent  = () => theme('--accent')   || '#e11d48';
+const accent2 = () => theme('--accent-2') || '#7c3aed';
+const accent3 = () => theme('--accent-3') || '#0891b2';
+const muted   = () => theme('--muted')    || '#6f6252';
+const textCol = () => theme('--text')     || '#1a1410';
+const good    = () => theme('--good')     || '#059669';
+
+/* ============================================================
+   TEMA
+   ============================================================ */
+const htmlEl = document.documentElement;
+function setTheme(t){
+  htmlEl.setAttribute('data-theme', t);
+  try { localStorage.setItem('reloj-theme', t); } catch(e){}
+}
+(function initTheme(){
+  let saved = null;
+  try { saved = localStorage.getItem('reloj-theme'); } catch(e){}
+  setTheme(saved || 'light');
+})();
+$('#themeToggle').addEventListener('click', () => {
+  setTheme(htmlEl.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+  if (currentRoute === 'timeline') renderTimelineSVG();
+  if (currentRoute === 'actual') renderMechMarks();
+});
+
+/* ============================================================
+   ROUTER
+   ============================================================ */
+const ROUTES = ['inicio','timeline','solar','casero','actual','atomico','digital','glosario'];
+let currentRoute = 'inicio';
+function go(route, push = true){
+  if (!ROUTES.includes(route)) route = 'inicio';
+  currentRoute = route;
+  $$('.view').forEach(v => v.classList.toggle('active', v.dataset.view === route));
+  $$('.nav-link').forEach(b => b.classList.toggle('active', b.dataset.route === route));
+  if (push && location.hash.slice(1) !== route) history.pushState(null, '', '#' + route);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  requestAnimationFrame(() => {
+    $$('.view.active .reveal').forEach(el => el.classList.remove('in'));
+    checkReveal();
+    if (route === 'inicio') animateCounters();
+    if (route === 'timeline'){ renderTimelineSVG(); renderGeneralTimeline(); }
+    if (route === 'solar'){ setupSundial(); renderSundialHow(); renderSundialTypes(); }
+    if (route === 'casero'){ renderDiySteps(); setupLatitudeCalc(); renderDiyCalibration(); }
+    if (route === 'actual'){ renderMechMarks(); setupMechParts(); renderMechFunctions(); }
+    if (route === 'atomico'){ setupAtomicParts(); renderAtomicTypes(); renderAtomicUses(); }
+    if (route === 'digital'){ setupDigitalParts(); renderDisplayTypes(); renderDigitalPros(); startLiveClock(); }
+    if (route === 'glosario') renderGlossary();
+  });
+}
+document.addEventListener('click', e => {
+  const trigger = e.target.closest('[data-route]');
+  if (trigger) { e.preventDefault(); go(trigger.dataset.route); }
+});
+window.addEventListener('popstate', () => go(location.hash.slice(1) || 'inicio', false));
+
+/* ============================================================
+   REVEAL + CONTADORES
+   ============================================================ */
+const revealObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('in');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+function checkReveal(){ $$('.view.active .reveal:not(.in)').forEach(el => revealObserver.observe(el)); }
+function animateCounters(){
+  $$('.num[data-count]').forEach(el => {
+    if (el.dataset.done === '1') return;
+    el.dataset.done = '1';
+    const target = parseFloat(el.dataset.count);
+    const suffix = el.dataset.suffix || '';
+    const dur = 1500;
+    const start = performance.now();
+    function tick(now){
+      const p = Math.min((now - start) / dur, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      const val = Math.round(target * eased);
+      el.textContent = val.toLocaleString('es-ES') + suffix;
+      if (p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  });
+}
+
+/* ============================================================
+   LÍNEA DEL TIEMPO
+   ============================================================ */
+function renderTimelineSVG(){
+  const svg = $('#timelineSvg');
+  if (!svg) return;
+  svg.innerHTML = '';
+  const W = 560, H = 260;
+  const lineY = 130;
+
+  el('line', { x1:40, y1:lineY, x2:W-40, y2:lineY, stroke:accent(), 'stroke-width':2, opacity:0.4 }, svg);
+
+  const milestones = [
+    { x:60, label:'~3500 a.C.', sub:'Reloj de sol', color:'#e11d48', above:true },
+    { x:130, label:'~1400 a.C.', sub:'Clepsidra', color:'#f59e0b', above:false },
+    { x:200, label:'~1090', sub:'Astronómico', color:'#7c3aed', above:true },
+    { x:270, label:'1283', sub:'Mecánico', color:'#0891b2', above:false },
+    { x:330, label:'1656', sub:'Péndulo', color:'#10b981', above:true },
+    { x:390, label:'1927', sub:'Cuarzo', color:'#ec4899', above:false },
+    { x:450, label:'1955', sub:'Atómico', color:'#a16207', above:true },
+    { x:510, label:'2011', sub:'Óptico', color:'#0ea5e9', above:false }
+  ];
+
+  milestones.forEach(e => {
+    el('circle', { cx:e.x, cy:lineY, r:8, fill:e.color, stroke:'#fff', 'stroke-width':2.5 }, svg);
+    const ty = e.above ? lineY - 22 : lineY + 30;
+    const ty2 = e.above ? lineY - 38 : lineY + 46;
+    el('text', { x:e.x, y:ty, 'text-anchor':'middle', 'font-family':'Inter,sans-serif', 'font-size':11, 'font-weight':700, fill:e.color }, svg).textContent = e.label;
+    el('text', { x:e.x, y:ty2, 'text-anchor':'middle', 'font-family':'Inter,sans-serif', 'font-size':10, 'font-weight':600, fill:textCol() }, svg).textContent = e.sub;
+  });
+}
+
+const GENERAL_EVENTS = [
+  { y:'~3500 a.C.', era:'Egipto', n:'Primeros obeliscos y relojes de sol', d:'Los egipcios usan obeliscos y cuadrantes solares para dividir el día en partes. Es el inicio de la medición del tiempo.', x:'Los obeliscos eran los "gnomons" monumentales de la Antigüedad. Su sombra permitía saber aproximadamente la hora y la estación del año.' },
+  { y:'~1500 a.C.', era:'Egipto', n:'Cuadrante solar portátil', d:'Aparecen los primeros relojes de sol portátiles, en forma de escuadra con marcas horarias.', x:'Se encontraron ejemplos en tumbas egipcias. Eran pequeños y se podían transportar, aunque seguían dependiendo del Sol.' },
+  { y:'~1400 a.C.', era:'Egipto / Babilonia', n:'Clepsidra (reloj de agua)', d:'Los relojes de agua permiten medir el tiempo también de noche y sin Sol. Fueron el primer instrumento no solar.', x:'La clepsidra más antigua conocida es egipcia, del reinado de Amenhotep III. Funcionaba por el flujo constante de agua entre dos recipientes.' },
+  { y:'~325 a.C.', era:'Grecia', n:'Relojes de agua griegos', d:'Los griegos perfeccionan la clepsidra y la usan en tribunales y competiciones. Añaden mecanismos para marcar horas.', x:'En los tribunales atenienses, la clepsidra limitaba el tiempo de intervención de cada orador. Un reloj de agua, en el fondo, era un cronómetro.' },
+  { y:'~1000 d.C.', era:'Europa / China', n:'Relojes de velas', d:'Las velas con marcas o los relojes de aceite sirven para medir el tiempo en interiores, aunque con poca precisión.', x:'Algunos relojes de velas tenían pesos o marcas para indicar el paso de las horas. Se usaban en monasterios para programar los rezos nocturnos.' },
+  { y:'~1090', era:'China', n:'Reloj astronómico de Su Song', d:'El ingeniero chino Su Song construye una torre de reloj astronómico con escape hidráulico y esfera estelar.', x:'Su torre tenía más de 10 metros y combinaba observación astronómica y medición del tiempo. Fue uno de los logros técnicos más avanzados de su época.' },
+  { y:'1283', era:'Inglaterra', n:'Primer reloj mecánico de Europa', d:'Se instala un reloj mecánico en el priorato de Dunstable (Inglaterra). Es el primero documentado con escape.', x:'Los primeros relojes mecánicos europeos no tenían minutero: solo marcaban las horas. Eran grandes y estaban en torres de iglesias y monasterios.' },
+  { y:'1364', era:'Italia', n:'Reloj de la torre de Padua', d:'Giovanni Dondi construye un reloj astronómico en Padua que marca horas, días, meses y planetas.', x:'El reloj de Dondi fue una maravilla de su época. Mostraba la posición de los planetas y se anticipó a los relojes astronómicos de las catedrales.' },
+  { y:'1504', era:'Alemania', n:'Reloj de bolsillo de Peter Henlein', d:'Henlein construye uno de los primeros relojes portátiles accionados por cuerda. Nacen los relojes de bolsillo.', x:'Eran pequeños y pesados, y solo marcaban las horas. Sin embargo, por primera vez la hora podía llevarse encima, no había que ir a buscarla a la torre.' },
+  { y:'1656', era:'Países Bajos', n:'Reloj de péndulo de Huygens', d:'Christiaan Huygens aplica el péndulo a los relojes y multiplica por 100 la precisión. Se pasa de minutos a segundos de error.', x:'El péndulo de Huygens tenía un período constante, lo que reducía la desviación a menos de 10 segundos por día. Fue la base de la relojería científica.' },
+  { y:'1675', era:'Países Bajos', n:'Espiral de volante', d:'Huygens y Hooke inventan independientemente el espiral de volante, que permite fabricar relojes de bolsillo precisos.', x:'El espiral de volante reemplazó al péndulo en relojes portátiles. Es el mismo principio que hoy late dentro de cualquier reloj mecánico de pulsera.' },
+  { y:'1761', era:'Inglaterra', n:'Cronómetro marino de Harrison', d:'John Harrison termina el H4, un cronómetro que permite medir la longitud en el mar con enorme precisión.', x:'La longitud (posición este-oeste) solo podía calcularse conociendo la hora con exactitud. El H4 perdió solo 5 segundos en 81 días de travesía.' },
+  { y:'1840', era:'Reino Unido', n:'Reloj eléctrico', d:'Alexander Bain patenta el primer reloj eléctrico. Ya no hace falta darle cuerda manualmente.', x:'Los relojes eléctricos usaron la corriente para accionar el péndulo o el mecanismo. Fueron el puente hacia el cuarzo y la electrónica.' },
+  { y:'1884', era:'Internacional', n:'Husos horarios', d:'La Conferencia de Washington establece los 24 husos horarios con el meridiano de Greenwich como referencia.', x:'Antes, cada ciudad tenía su hora solar. El ferrocarril primero y luego la telegrafía obligaron a unificar. Por eso hoy todos los relojes del mundo hablan en "UTC ± X".' },
+  { y:'1927', era:'EE. UU.', n:'Primer reloj de cuarzo', d:'Warren Marrison construye el primer reloj de cuarzo. Es 100 veces más preciso que los mecánicos de la época.', x:'Marrison usó un cristal de cuarzo para oscilar a una frecuencia alta y estable. El invento se popularizó en la década de 1970 con los relojes de pulsera.' },
+  { y:'1949', era:'EE. UU.', n:'Primer reloj atómico', d:'El NIST construye el primer reloj atómico, basado en la molécula de amoníaco.', x:'El reloj de amoníaco era enorme y solo servía en laboratorio. Demostró que los átomos podían ser un patrón de tiempo mucho mejor que cualquier mecanismo.' },
+  { y:'1955', era:'Reino Unido', n:'Reloj atómico de cesio', d:'Louis Essen y Jack Parry construyen el primer reloj atómico de cesio en el NPL. Es el antecedente directo de los relojes actuales.', x:'Este reloj fue el primero lo bastante preciso para definir el segundo. En 1967, el segundo se redefinió a partir del cesio-133.' },
+  { y:'1969', era:'Japón', n:'Primer reloj digital de pulsera', d:'Seiko lanza el Astron, el primer reloj de pulsera de cuarzo con pantalla digital, con LED rojo.', x:'Costaba como un automóvil pequeño, pero marcó el inicio de la era digital en la relojería. En pocos años los relojes digitales se volvieron populares.' },
+  { y:'1970s', era:'Internacional', n:'Revolución del cuarzo', d:'Los relojes de cuarzo se abaratan y se masifican. La relojería mecánica suiza casi colapsa frente a la japonesa y los nuevos fabricantes.', x:'La "crisis del cuarzo" reconfiguró la industria relojera mundial. Suiza perdió miles de empleos, pero se reinventó con marcas de lujo.' },
+  { y:'2011', era:'EE. UU.', n:'Reloj óptico de estroncio', d:'El NIST presenta un reloj óptico de estroncio con una precisión equivalente a un segundo en 10.000 millones de años.', x:'Los relojes ópticos usan frecuencias de luz (cientos de terahertz) en lugar de microondas. Son la nueva frontera de la metrología del tiempo.' },
+  { y:'2020s', era:'Internacional', n:'Relojes ópticos de nueva generación', d:'Diversos laboratorios construyen relojes ópticos que podrían redefinir el segundo en los próximos años.', x:'El segundo actual (cesio) podría ser reemplazado por una nueva definición basada en relojes ópticos, que son 100 veces más precisos.' }
+];
+
+function renderGeneralTimeline(){
+  const vt = $('#generalTimeline');
+  if (!vt) return;
+  vt.innerHTML = GENERAL_EVENTS.map((p, i) => {
+    const c = ['#f59e0b','#7c3aed','#0891b2','#e11d48','#10b981','#ec4899','#a16207','#0ea5e9','#dc2626','#22c55e'][i % 10];
+    return `
+      <div class="vt-item" style="--c:${c};--d:${Math.min(i*25,600)}ms">
+        <span class="vt-dot"></span>
+        <div class="vt-card">
+          <div class="vt-top">
+            <span class="vt-year">${p.y}</span>
+            <span class="vt-era">${p.era}</span>
+          </div>
+          <h4>${p.n}</h4>
+          <p>${p.d}</p>
+          <button class="vt-more" type="button">
+            <span>Más detalle</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="vt-extra"><div><p>${p.x}</p></div></div>
+        </div>
+      </div>`;
+  }).join('');
+  vt.onclick = e => {
+    const btn = e.target.closest('.vt-more');
+    if (!btn) return;
+    const item = btn.closest('.vt-item');
+    const open = item.classList.toggle('open');
+    btn.querySelector('span').textContent = open ? 'Ocultar detalle' : 'Más detalle';
+  };
+}
+
+/* ============================================================
+   RELOJ DE SOL
+   ============================================================ */
+const SUN_DIAL_INFO = {
+  hour6: {
+    name: '6:00 (amanecer)',
+    desc: 'El Sol está en el horizonte este. La sombra del gnomon se proyecta hacia el oeste y es muy larga. En el equinoccio, el Sol sale exactamente a las 6:00 hora solar.'
+  },
+  hour9: {
+    name: '9:00 (media mañana)',
+    desc: 'El Sol ha subido unos 45°. La sombra cae hacia el noroeste (en el hemisferio norte) y se acorta. Marca la mitad de la mañana.'
+  },
+  hour12: {
+    name: '12:00 (mediodía solar)',
+    desc: 'El Sol está en su punto más alto. La sombra del gnomon es la más corta del día y apunta hacia el norte verdadero (en el hemisferio norte). Es el mediodía solar, no necesariamente las 12:00 del reloj oficial.'
+  },
+  hour15: {
+    name: '15:00 (media tarde)',
+    desc: 'El Sol ha pasado el mediodía y desciende. La sombra cae hacia el noreste y se alarga de nuevo. Marca la mitad de la tarde.'
+  },
+  hour18: {
+    name: '18:00 (atardecer)',
+    desc: 'El Sol está en el horizonte oeste. La sombra se proyecta hacia el este y es muy larga. En el equinoccio, el Sol se pone exactamente a las 18:00 hora solar.'
+  },
+  gnomon: {
+    name: 'Gnomon',
+    desc: 'La varilla o pieza triangular que proyecta la sombra. En un reloj de sol horizontal, su ángulo respecto a la horizontal debe ser igual a la latitud del lugar. Es la parte esencial del reloj.'
+  }
+};
+
+function setupSundial(){
+  const svg = $('#sundialSvg');
+  const panel = $('#sundialInfo');
+  const shadow = $('#shadowPath');
+  if (!svg || !panel || !shadow) return;
+
+  const shadowPaths = {
+    hour6: 'M 200 280 L 200 200 L 40 280 Z',
+    hour9: 'M 200 280 L 200 200 L 95 200 Z',
+    hour12: 'M 200 280 L 200 200 L 200 190 Z',
+    hour15: 'M 200 280 L 200 200 L 305 200 Z',
+    hour18: 'M 200 280 L 200 200 L 360 280 Z'
+  };
+
+  svg.querySelectorAll('[data-part]').forEach(g => {
+    if (g.dataset.bound) return;
+    g.dataset.bound = '1';
+    g.addEventListener('click', () => {
+      const part = g.dataset.part;
+      const info = SUN_DIAL_INFO[part];
+      if (!info) return;
+      svg.querySelectorAll('[data-part]').forEach(x => x.classList.remove('sel'));
+      g.classList.add('sel');
+      if (shadowPaths[part]) shadow.setAttribute('d', shadowPaths[part]);
+      panel.classList.add('active');
+      panel.innerHTML = `
+        <div class="ip-name">${info.name}</div>
+        <div class="ip-desc">${info.desc}</div>
+      `;
+    });
+  });
+}
+
+const SUNDIAL_HOW = [
+  { n:'1. El Sol se mueve', d:'A lo largo del día, el Sol describe un arco en el cielo de este a oeste. En realidad es la Tierra la que gira, pero desde nuestra perspectiva el Sol parece moverse.' },
+  { n:'2. El gnomon proyecta una sombra', d:'El gnomon es una varilla vertical o inclinada que se clava en el centro del cuadrante. Su sombra se alarga y se mueve según la posición del Sol.' },
+  { n:'3. La sombra marca la hora', d:'El cuadrante tiene líneas horarias grabadas. La sombra del gnomon cae sobre una de ellas y esa marca indica la hora solar.' },
+  { n:'4. La corrección', d:'Para obtener la hora oficial hay que sumar la ecuación del tiempo y ajustar al huso horario. Por eso un reloj de sol puede ir "atrasado" o "adelantado" respecto a tu reloj de pulsera.' }
+];
+
+function renderSundialHow(){
+  const grid = $('#sundialHow');
+  if (!grid) return;
+  grid.innerHTML = SUNDIAL_HOW.map(s => `
+    <div class="step">
+      <span class="step-num">${s.n.split('.')[0]}</span>
+      <div class="step-content">
+        <h4>${s.n.split('. ')[1]}</h4>
+        <p>${s.d}</p>
+      </div>
+    </div>`).join('');
+}
+
+const SUNDIAL_TYPES = [
+  { n:'Horizontal', d:'El cuadrante está en un plano horizontal (una mesa, el suelo). Es el más común y el más fácil de construir. El gnomon se inclina según la latitud.' },
+  { n:'Vertical', d:'El cuadrante está en una pared vertical, generalmente orientada al sur. Lo usaban las iglesias y los edificios antiguos.' },
+  { n:'Ecuatorial', d:'El cuadrante está en un plano paralelo al ecuador terrestre. La sombra se mueve a velocidad constante y las horas están igualmente espaciadas.' },
+  { n:'Analemático', d:'El gnomon es vertical pero el observador se coloca en una posición marcada según la fecha. Combina reloj y calendario.' },
+  { n:'Portátil', d:'Diseñado para llevarse encima. Los había de bolsillo, con brújula incorporada para orientarlo.' },
+  { n:'De reflexión', d:'Usa un espejo para proyectar la luz del Sol sobre un techo o pared. Se usa en lugares sin luz solar directa.' }
+];
+
+function renderSundialTypes(){
+  const grid = $('#sundialTypes');
+  if (!grid) return;
+  grid.innerHTML = SUNDIAL_TYPES.map(t => `
+    <article class="card reveal">
+      <h3>${t.n}</h3>
+      <p>${t.d}</p>
+    </article>`).join('');
+  grid.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+}
+
+/* ============================================================
+   MODELO CASERO
+   ============================================================ */
+const DIY_STEPS = [
+  { n:'1', title:'Prepara la base', d:'Corta un cuadrado de cartón o madera de unos 30×30 cm. Si usas madera, lija los bordes para que queden suaves.' },
+  { n:'2', title:'Dibuja el círculo del cuadrante', d:'Con el compás, traza un círculo de 12 cm de radio en el centro de la base. Marca el centro con un punto.' },
+  { n:'3', title:'Traza las líneas horarias', d:'Divide el círculo en 24 partes iguales con el transportador. Cada 15° corresponde a una hora. Marca solo las horas de luz: de 6 a 18.' },
+  { n:'4', title:'Numera las horas', d:'Escribe los números en las marcas, empezando por 6 en el extremo izquierdo (este) y terminando por 18 en el derecho (oeste).' },
+  { n:'5', title:'Calcula el ángulo del gnomon', d:'El gnomon debe inclinarse un ángulo igual a la latitud de tu ciudad. Por ejemplo, en Madrid (40,4° N) el gnomon forma 40,4° con la horizontal.' },
+  { n:'6', title:'Recorta el gnomon', d:'Recorta un triángulo rectángulo en cartón o madera. El ángulo agudo debe ser tu latitud. La altura del triángulo debe ser de unos 12 cm.' },
+  { n:'7', title:'Pega el gnomon en el centro', d:'Coloca el gnomon en el centro del círculo, con el ángulo recto en la base y el ángulo agudo apuntando hacia el norte. Pégalo con cola o cinta fuerte.' },
+  { n:'8', title:'Orienta el reloj', d:'Coloca el reloj en el suelo o en una mesa plana, orientando el gnomon hacia el norte verdadero (no el magnético). Usa una brújula o la estrella Polar.' },
+  { n:'9', title:'Comprueba la hora', d:'Al mediodía solar, la sombra del gnomon debe caer exactamente sobre la línea de las 12. Si no cae, gira ligeramente la base hasta que coincida.' },
+  { n:'10', title:'Personaliza y decora', d:'Puedes pintar el cuadrante, añadir la ecuación del tiempo o grabar tu ciudad y latitud. Un reloj de sol bien hecho es una obra de arte funcional.' }
+];
+
+function renderDiySteps(){
+  const grid = $('#diySteps');
+  if (!grid) return;
+  grid.innerHTML = DIY_STEPS.map(s => `
+    <div class="step reveal">
+      <span class="step-num">${s.n}</span>
+      <div class="step-content">
+        <h4>${s.title}</h4>
+        <p>${s.d}</p>
+      </div>
+    </div>`).join('');
+  grid.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+}
+
+function setupLatitudeCalc(){
+  const input = $('#latInput');
+  const result = $('#calcResult');
+  if (!input || !result) return;
+  input.addEventListener('input', () => {
+    const v = parseFloat(input.value);
+    if (isNaN(v) || v < -90 || v > 90){
+      result.innerHTML = 'Introduce una latitud válida entre -90 y 90.';
+      result.style.color = 'var(--muted)';
+      return;
+    }
+    const abs = Math.abs(v);
+    let emisferio = v >= 0 ? 'norte' : 'sur';
+    let orient;
+    if (v >= 0){
+      orient = 'El gnomon debe apuntar hacia el <strong>norte verdadero</strong>. La sombra caerá hacia el sur al mediodía.';
+    } else {
+      orient = 'El gnomon debe apuntar hacia el <strong>sur verdadero</strong>. La sombra caerá hacia el norte al mediodía.';
+    }
+    result.innerHTML = `
+      Latitud <strong>${v.toFixed(1)}°</strong> (${emisferio}).<br>
+      El gnomon debe formar un ángulo de <strong>${abs.toFixed(1)}°</strong> con la horizontal.<br>
+      ${orient}
+    `;
+    result.style.color = 'var(--text)';
+  });
+}
+
+const DIY_CALIBRATION = [
+  { n:'Orientación', d:'El gnomon debe apuntar al norte verdadero (o al sur, en el hemisferio sur). Usa una brújula, pero recuerda que la brújula apunta al norte magnético, no al geográfico.' },
+  { n:'Ecuación del tiempo', d:'La diferencia entre el mediodía solar y el mediodía del reloj varía a lo largo del año entre -14 y +16 minutos. Se corrige con una tabla o con la ecuación del tiempo.' },
+  { n:'Huso horario', d:'Si tu ciudad está al oeste del meridiano central de tu huso, el mediodía solar llega más tarde. Por eso el reloj de sol puede ir "atrasado" respecto a tu reloj de pulsera.' },
+  { n:'Horario de verano', d:'En verano, si se aplica horario de verano, hay que sumar una hora a la hora solar para obtener la hora oficial.' },
+  { n:'Altitud y clima', d:'La altitud no afecta a la hora, pero el clima sí: en días nublados el reloj de sol no funciona. En zonas de montaña, el horizonte puede retrasar la salida o la puesta del Sol.' },
+  { n:'Ajuste fino', d:'Al mediodía solar (cuando el Sol está en su punto más alto), la sombra del gnomon debe coincidir con la línea de las 12. Si no coincide, gira ligeramente el reloj hasta que coincida.' }
+];
+
+function renderDiyCalibration(){
+  const grid = $('#diyCalibration');
+  if (!grid) return;
+  grid.innerHTML = DIY_CALIBRATION.map(c => `
+    <article class="card reveal">
+      <h3>${c.n}</h3>
+      <p>${c.d}</p>
+    </article>`).join('');
+  grid.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+}
+
+/* ============================================================
+   RELOJ MECÁNICO
+   ============================================================ */
+function renderMechMarks(){
+  const g = $('#mechMarks');
+  if (!g) return;
+  g.innerHTML = '';
+  const cx = 250, cy = 250, r = 200;
+  for (let i = 0; i < 12; i++){
+    const angle = (i * 30 - 90) * Math.PI / 180;
+    const x1 = cx + Math.cos(angle) * (r - 20);
+    const y1 = cy + Math.sin(angle) * (r - 20);
+    const x2 = cx + Math.cos(angle) * (r - 5);
+    const y2 = cy + Math.sin(angle) * (r - 5);
+    const line = document.createElementNS(SVGNS, 'line');
+    line.setAttribute('x1', x1);
+    line.setAttribute('y1', y1);
+    line.setAttribute('x2', x2);
+    line.setAttribute('y2', y2);
+    line.setAttribute('stroke', 'var(--text)');
+    line.setAttribute('stroke-width', '4');
+    line.setAttribute('stroke-linecap', 'round');
+    g.appendChild(line);
+    const tx = cx + Math.cos(angle) * (r - 42);
+    const ty = cy + Math.sin(angle) * (r - 42);
+    const text = document.createElementNS(SVGNS, 'text');
+    text.setAttribute('x', tx);
+    text.setAttribute('y', ty + 6);
+    text.setAttribute('text-anchor', 'middle');
+    text.setAttribute('font-family', 'Space Grotesk,sans-serif');
+    text.setAttribute('font-size', '18');
+    text.setAttribute('font-weight', '700');
+    text.setAttribute('fill', 'var(--text)');
+    text.textContent = i === 0 ? '12' : i;
+    g.appendChild(text);
+  }
+}
+
+const MECH_PARTS = {
+  cuerda: {
+    name: 'Cuerda / Barrilete',
+    desc: 'Es el depósito de energía. Al girar la corona, se enrolla un muelle dentro del barrilete. Ese muelle se va desenrollando lentamente y libera la energía que mueve todo el reloj.',
+    tip: 'Cuanto más largo y elástico el muelle, más tiempo funciona el reloj sin darle cuerda.'
+  },
+  engranajes: {
+    name: 'Tren de engranajes',
+    desc: 'Conjunto de ruedas dentadas que transmiten el movimiento del barrilete a las agujas. Multiplican o reducen la velocidad: la rueda de los segundos da una vuelta por minuto, la de los minutos por hora, la de las horas por 12 horas.',
+    tip: 'El tren de engranajes tiene una relación de transmisión distinta para cada aguja.'
+  },
+  escape: {
+    name: 'Escape',
+    desc: 'Es el mecanismo que libera la energía de forma controlada. El áncora (una pieza en forma de ancla) se engancha y desengancha de los dientes de la rueda de escape, dejándola avanzar un diente por cada oscilación del volante. Es lo que produce el tic-tac.',
+    tip: 'Sin escape, el muelle se desenrollaría de golpe y el reloj no funcionaría.'
+  },
+  volante: {
+    name: 'Volante (o péndulo)',
+    desc: 'Es el regulador del reloj. En relojes de pared, un péndulo oscila con un período constante. En relojes de pulsera, el volante oscila entre 5 y 10 veces por segundo. Cada oscilación deja escapar un diente del escape.',
+    tip: 'La precisión del reloj depende directamente de la regularidad del volante o del péndulo.'
+  }
+};
+
+function setupMechParts(){
+  const svg = $('#mechSvg');
+  const panel = $('#mechInfo');
+  if (!svg || !panel) return;
+  svg.querySelectorAll('[data-part]').forEach(g => {
+    if (g.dataset.bound) return;
+    g.dataset.bound = '1';
+    g.addEventListener('click', () => {
+      const info = MECH_PARTS[g.dataset.part];
+      if (!info) return;
+      svg.querySelectorAll('[data-part]').forEach(x => x.classList.remove('sel'));
+      g.classList.add('sel');
+      panel.classList.add('active');
+      panel.innerHTML = `
+        <div class="ip-name">${info.name}</div>
+        <div class="ip-desc">${info.desc}</div>
+        <div class="ip-func" style="margin-top:10px"><strong>Detalle:</strong> ${info.tip}</div>
+      `;
+    });
+  });
+}
+
+const MECH_FUNCTIONS = [
+  { n:'Energía', d:'La cuerda o el peso acumulan energía. Un reloj de cuerda funciona entre 30 horas y 8 días sin recargar. Un reloj de pesas necesita un peso que cuelgue de una polea.' },
+  { n:'Transmisión', d:'El tren de engranajes reparte la energía del barrilete al escape y a las agujas. La relación entre ruedas determina la velocidad de cada aguja.' },
+  { n:'Regulación', d:'El volante (o el péndulo) oscila con un período constante. Es el "corazón" del reloj: marca el ritmo de todo el mecanismo.' },
+  { n:'Escape', d:'El áncora libera la energía en dosis regulares. Cada oscilación deja pasar un diente de la rueda de escape. El "tic" es la caída del áncora y el "tac" es su enganche.' }
+];
+
+function renderMechFunctions(){
+  const grid = $('#mechFunctions');
+  if (!grid) return;
+  grid.innerHTML = MECH_FUNCTIONS.map(f => `
+    <article class="card reveal">
+      <span class="kicker">${f.n}</span>
+      <h3>Función</h3>
+      <p>${f.d}</p>
+    </article>`).join('');
+  grid.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+}
+
+/* ============================================================
+   RELOJ ATÓMICO
+   ============================================================ */
+const ATOMIC_PARTS = {
+  horno: {
+    name: 'Horno de cesio',
+    desc: 'Calienta cesio-133 hasta que se evapora. Un haz de átomos sale disparado a gran velocidad hacia la cavidad.'
+  },
+  haz: {
+    name: 'Haz de átomos',
+    desc: 'Los átomos de cesio salen del horno en línea recta. Antes de entrar en la cavidad, se preparan en un estado de energía concreto.'
+  },
+  cavidad: {
+    name: 'Cavidad de microondas',
+    desc: 'Una cámara resonante donde los átomos interactúan con una onda de microondas. Si la frecuencia coincide con la de transición del cesio (9.192.631.770 Hz), los átomos cambian de estado.'
+  },
+  detector: {
+    name: 'Detector',
+    desc: 'Mide cuántos átomos han cambiado de estado. Cuando la cifra es máxima, la frecuencia de microondas es exactamente la correcta.'
+  },
+  feedback: {
+    name: 'Realimentación',
+    desc: 'Un circuito ajusta continuamente la frecuencia de microondas para mantener el máximo de átomos excitados. La frecuencia ajustada es la que cuenta los segundos.'
+  }
+};
+
+function setupAtomicParts(){
+  const svg = $('#atomicSvg');
+  const panel = $('#atomicInfo');
+  if (!svg || !panel) return;
+  svg.querySelectorAll('[data-part]').forEach(g => {
+    if (g.dataset.bound) return;
+    g.dataset.bound = '1';
+    g.addEventListener('click', () => {
+      const info = ATOMIC_PARTS[g.dataset.part];
+      if (!info) return;
+      svg.querySelectorAll('[data-part]').forEach(x => x.classList.remove('sel'));
+      g.classList.add('sel');
+      panel.classList.add('active');
+      panel.innerHTML = `
+        <div class="ip-name">${info.name}</div>
+        <div class="ip-desc">${info.desc}</div>
+      `;
+    });
+  });
+}
+
+const ATOMIC_TYPES = [
+  { n:'Cesio', d:'El más preciso y el que define el segundo oficial. Se desvía menos de un segundo en 30 millones de años. Es grande y caro: solo se usa en laboratorios y satélites.' },
+  { n:'Rubidio', d:'Menos preciso que el cesio (un segundo en 300.000 años) pero mucho más pequeño y económico. Es el que llevan los satélites GPS y muchas estaciones base.' },
+  { n:'Máser de hidrógeno', d:'Alta estabilidad a corto plazo. Se usa en radioastronomía y en el Very Long Baseline Array. Su señal es muy limpia.' },
+  { n:'Óptico', d:'Usa frecuencias de luz visible (cientos de terahertz). Es 100 veces más preciso que el de cesio. Podría redefinir el segundo en los próximos años.' },
+  { n:'Chip-scale', d:'Relojes atómicos del tamaño de un chip. Usan vapor de rubidio y caben en un teléfono. Su precisión es menor, pero son portátiles.' }
+];
+
+function renderAtomicTypes(){
+  const grid = $('#atomicTypes');
+  if (!grid) return;
+  grid.innerHTML = ATOMIC_TYPES.map(t => `
+    <article class="card reveal">
+      <h3>${t.n}</h3>
+      <p>${t.d}</p>
+    </article>`).join('');
+  grid.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+}
+
+const ATOMIC_USES = [
+  { n:'GPS', d:'Cada satélite GPS lleva relojes atómicos. Los receptores calculan la posición midiendo el tiempo que tardan las señales en llegar. Sin relojes atómicos, el GPS no funcionaría.' },
+  { n:'Internet', d:'Los servidores se sincronizan con relojes atómicos mediante el protocolo NTP. Esto permite que las redes funcionen, que los correos lleguen a tiempo y que los sistemas se coordinen.' },
+  { n:'Banca', d:'Las transacciones financieras se ordenan por tiempo con precisión de microsegundos. Los mercados necesitan un tiempo común y confiable para evitar fraudes.' },
+  { n:'Ciencia', d:'La física de partículas, la astronomía y la geodesia necesitan medir intervalos de tiempo extremadamente pequeños. Los relojes atómicos también verifican teorías como la relatividad.' },
+  { n:'Telefonía', d:'Las redes móviles coordinan las antenas con precisión de microsegundos para no interferirse. El 5G requiere aún más precisión.' },
+  { n:'Navegación', d:'Barcos, aviones y drones usan señales de tiempo de relojes atómicos para posicionarse cuando el GPS no está disponible.' }
+];
+
+function renderAtomicUses(){
+  const grid = $('#atomicUses');
+  if (!grid) return;
+  grid.innerHTML = ATOMIC_USES.map(u => `
+    <article class="card reveal">
+      <h3>${u.n}</h3>
+      <p>${u.d}</p>
+    </article>`).join('');
+  grid.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+}
+
+/* ============================================================
+   RELOJ DIGITAL
+   ============================================================ */
+const DIGITAL_PARTS = {
+  cuarzo: {
+    name: 'Cristal de cuarzo',
+    desc: 'Un pequeño cristal de cuarzo vibra a 32.768 Hz cuando se le aplica un voltaje. Esa frecuencia es 2¹⁵, lo que permite dividirla fácilmente con circuitos digitales.'
+  },
+  divisor: {
+    name: 'Divisor de frecuencia',
+    desc: 'Un circuito digital divide la frecuencia del cuarzo por 32.768. El resultado es 1 Hz: un pulso por segundo. Es la base del conteo de tiempo.'
+  },
+  contador: {
+    name: 'Contador',
+    desc: 'Cuenta los pulsos de 1 Hz. Cada 60 pulsos suma un minuto, cada 60 minutos suma una hora, cada 24 horas suma un día. Con eso obtiene la hora, el día y la fecha.'
+  },
+  pantalla: {
+    name: 'Pantalla',
+    desc: 'Muestra los números del contador. Puede ser LCD (bajo consumo, luz tenue), LED (brillante, mayor consumo) u OLED (colores vivos, muy eficiente).'
+  }
+};
+
+function setupDigitalParts(){
+  const svg = $('#digitalSvg');
+  const panel = $('#digitalInfo');
+  if (!svg || !panel) return;
+  svg.querySelectorAll('[data-part]').forEach(g => {
+    if (g.dataset.bound) return;
+    g.dataset.bound = '1';
+    g.addEventListener('click', () => {
+      const info = DIGITAL_PARTS[g.dataset.part];
+      if (!info) return;
+      svg.querySelectorAll('[data-part]').forEach(x => x.classList.remove('sel'));
+      g.classList.add('sel');
+      panel.classList.add('active');
+      panel.innerHTML = `
+        <div class="ip-name">${info.name}</div>
+        <div class="ip-desc">${info.desc}</div>
+      `;
+    });
+  });
+}
+
+const DISPLAY_TYPES = [
+  { n:'LCD', d:'Liquid Crystal Display. Cristal líquido entre dos capas polarizadoras. Consume muy poco, pero necesita luz externa o retroiluminación. Es la pantalla clásica de los relojes digitales.' },
+  { n:'LED', d:'Light Emitting Diode. Diodos que emiten luz propia. Son brillantes y se ven de noche, pero consumen más. El primer reloj digital de pulsera, el Seiko Astron, usaba LED rojo.' },
+  { n:'OLED', d:'Organic LED. Píxeles que emiten su propia luz. Colores vivos, negros profundos y muy eficientes. Es la pantalla de los smartwatches modernos.' },
+  { n:'E-ink / tinta electrónica', d:'Reflectante, sin retroiluminación. Se ve como papel y solo consume al cambiar de imagen. Ideal para relojes de bajo consumo o para smartwatches con semanas de batería.' }
+];
+
+function renderDisplayTypes(){
+  const grid = $('#displayTypes');
+  if (!grid) return;
+  grid.innerHTML = DISPLAY_TYPES.map(t => `
+    <article class="card reveal">
+      <h3>${t.n}</h3>
+      <p>${t.d}</p>
+    </article>`).join('');
+  grid.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+}
+
+const DIGITAL_PROS = [
+  { n:'Precisión', d:'Un reloj de cuarzo típico se desvía ±15 segundos al mes. Un mecánico, ±30 segundos al día.' },
+  { n:'Mantenimiento', d:'No hay que darle cuerda: solo cambiar la pila (cada 1 o 2 años) o cargar la batería en los recargables.' },
+  { n:'Funciones extra', d:'Alarma, cronómetro, calendario, zona horaria, luz nocturna, cuenta atrás. Muchas funciones en un solo dispositivo.' },
+  { n:'Robustez', d:'Al no tener partes móviles en el mecanismo, un reloj digital resiste mejor los golpes y las vibraciones.' },
+  { n:'Precio', d:'La producción masiva de chips y cuarzos ha hecho que un reloj digital preciso cueste una fracción de un reloj mecánico.' },
+  { n:'Lectura directa', d:'La hora se lee en dígitos, sin necesidad de interpretar las agujas. Útil para personas con dificultades visuales o en condiciones de poca luz.' }
+];
+
+function renderDigitalPros(){
+  const grid = $('#digitalPros');
+  if (!grid) return;
+  grid.innerHTML = DIGITAL_PROS.map(p => `
+    <article class="card reveal">
+      <h3>${p.n}</h3>
+      <p>${p.d}</p>
+    </article>`).join('');
+  grid.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+}
+
+let liveClockInterval = null;
+function startLiveClock(){
+  if (liveClockInterval) return;
+  const timeEl = $('#liveTime');
+  const dateEl = $('#liveDate');
+  if (!timeEl || !dateEl) return;
+  const dias = ['domingo','lunes','martes','miércoles','jueves','viernes','sábado'];
+  const meses = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+  function update(){
+    const now = new Date();
+    const h = String(now.getHours()).padStart(2,'0');
+    const m = String(now.getMinutes()).padStart(2,'0');
+    const s = String(now.getSeconds()).padStart(2,'0');
+    timeEl.textContent = `${h}:${m}:${s}`;
+    dateEl.textContent = `${dias[now.getDay()]}, ${now.getDate()} de ${meses[now.getMonth()]} de ${now.getFullYear()}`;
+  }
+  update();
+  liveClockInterval = setInterval(update, 1000);
+}
+
+/* ============================================================
+   GLOSARIO
+   ============================================================ */
+const GLOSSARY = [
+  { n:'Áncora', cat:'Mecánica', d:'Pieza en forma de ancla que forma parte del escape de un reloj mecánico. Se engancha y desengancha de la rueda de escape para dejar pasar un diente por cada oscilación.' },
+  { n:'Barrilete', cat:'Mecánica', d:'Tambor cilíndrico que contiene el muelle real en un reloj mecánico. Es el depósito de energía del reloj.' },
+  { n:'Calendario gregoriano', cat:'Tiempo', d:'Sistema de calendario vigente en la mayor parte del mundo. Fue introducido por el papa Gregorio XIII en 1582 para corregir el desfase del calendario juliano.' },
+  { n:'Cesio-133', cat:'Ciencia', d:'Isótopo del cesio que se usa en relojes atómicos. Su transición entre dos estados de energía vibra a 9.192.631.770 Hz, la frecuencia que define el segundo oficial.' },
+  { n:'Clepsidra', cat:'Historia', d:'Reloj de agua de la Antigüedad. Medía el tiempo por el flujo constante de agua entre dos recipientes. Fue el primer reloj que funcionaba también de noche.' },
+  { n:'Contador', cat:'Digital', d:'Circuito digital que cuenta pulsos. En un reloj de cuarzo cuenta los pulsos de 1 Hz para obtener segundos, minutos y horas.' },
+  { n:'Cronómetro', cat:'Mecánica', d:'Reloj de alta precisión que ha superado pruebas oficiales. En sentido amplio, cualquier reloj que mide intervalos de tiempo con precisión, como un cronómetro deportivo.' },
+  { n:'Cuadrante', cat:'Solar', d:'Superficie graduada de un reloj de sol sobre la que se proyecta la sombra del gnomon. Puede ser horizontal, vertical, ecuatorial o analemático.' },
+  { n:'Cuarzo', cat:'Ciencia', d:'Mineral de dióxido de silicio que tiene propiedades piezoeléctricas. En los relojes, un cristal de cuarzo vibra a 32.768 Hz cuando se le aplica un voltaje.' },
+  { n:'Cuerda', cat:'Mecánica', d:'Energía almacenada en el muelle real de un reloj mecánico al girar la corona. Puede durar desde 30 horas hasta varios días.' },
+  { n:'Ecuación del tiempo', cat:'Solar', d:'Diferencia entre el mediodía solar verdadero y el mediodía solar medio. Varía a lo largo del año entre -14 y +16 minutos por la órbita elíptica de la Tierra y la inclinación de su eje.' },
+  { n:'Escape', cat:'Mecánica', d:'Mecanismo que libera la energía del muelle de forma controlada. Produce el "tic-tac" característico de los relojes mecánicos.' },
+  { n:'Espiral de volante', cat:'Mecánica', d:'Muelle en espiral que hace oscilar el volante de un reloj mecánico con un período constante. Fue inventado en el siglo XVII y sigue siendo la base de los relojes mecánicos.' },
+  { n:'Gnomon', cat:'Solar', d:'La varilla o pieza que proyecta la sombra en un reloj de sol. Su inclinación respecto a la horizontal debe ser igual a la latitud del lugar.' },
+  { n:'Huso horario', cat:'Tiempo', d:'Cada una de las 24 franjas en que se divide la Tierra, cada una con una hora distinta. Se establecieron en la Conferencia de Washington (1884) con Greenwich como referencia.' },
+  { n:'Latitud', cat:'Solar', d:'Distancia angular entre un punto de la Tierra y el ecuador. Determina el ángulo del gnomon en un reloj de sol horizontal.' },
+  { n:'LCD', cat:'Digital', d:'Liquid Crystal Display. Pantalla de cristal líquido usada en relojes digitales. Consume muy poco y se ve bien con luz externa.' },
+  { n:'LED', cat:'Digital', d:'Light Emitting Diode. Diodo que emite luz. Se usa en pantallas de relojes digitales brillantes, como el Seiko Astron de 1969.' },
+  { n:'Longitud', cat:'Tiempo', d:'Distancia angular entre un punto de la Tierra y el meridiano de Greenwich. Se mide en grados este u oeste. Históricamente, determinar la longitud en el mar requería conocer la hora con precisión.' },
+  { n:'Mediodía solar', cat:'Solar', d:'Momento en que el Sol alcanza su punto más alto en el cielo. No coincide necesariamente con las 12:00 del reloj oficial.' },
+  { n:'Meridiano', cat:'Tiempo', d:'Línea imaginaria que une los polos. El meridiano de Greenwich es la referencia para los husos horarios y para la longitud.' },
+  { n:'Microondas', cat:'Ciencia', d:'Ondas electromagnéticas de alta frecuencia. En un reloj atómico de cesio, la cavidad de microondas hace vibrar los átomos a la frecuencia exacta de transición.' },
+  { n:'Muelle real', cat:'Mecánica', d:'Muelle que almacena la energía en un reloj mecánico. Se enrolla al dar cuerda y se desenrolla lentamente para mover el mecanismo.' },
+  { n:'NTP', cat:'Tiempo', d:'Network Time Protocol. Protocolo que sincroniza los relojes de los ordenadores con servidores de tiempo. Es la base de la hora en internet.' },
+  { n:'OLED', cat:'Digital', d:'Organic LED. Pantalla de diodos orgánicos que emiten luz propia. Colores vivos y negros profundos. Es la pantalla de los smartwatches modernos.' },
+  { n:'Oscilador', cat:'Ciencia', d:'Circuito electrónico que genera una señal periódica. En un reloj de cuarzo, el oscilador está formado por el cristal de cuarzo y un circuito amplificador.' },
+  { n:'Péndulo', cat:'Mecánica', d:'Masa suspendida de un punto fijo que oscila con un período constante. Fue la base de los relojes precisos desde 1656 hasta la invención del cuarzo.' },
+  { n:'Piezoeléctrico', cat:'Ciencia', d:'Propiedad de algunos cristales (como el cuarzo) de generar una carga eléctrica al deformarse y de deformarse al recibir electricidad. Es la base de los osciladores de cuarzo.' },
+  { n:'Pila', cat:'Digital', d:'Fuente de energía química que alimenta un reloj electrónico. Las pilas de óxido de plata son las más usadas en relojes de pulsera.' },
+  { n:'Reloj atómico', cat:'Ciencia', d:'Reloj que usa la frecuencia de transición entre dos estados de energía de un átomo como referencia de tiempo. Es el reloj más preciso que existe.' },
+  { n:'Reloj de sol', cat:'Solar', d:'Instrumento que mide el tiempo mediante la sombra que proyecta un gnomon sobre un cuadrante. Es el reloj más antiguo que se conoce.' },
+  { n:'Reloj mecánico', cat:'Mecánica', d:'Reloj que usa un mecanismo de engranajes, escape y regulador (volante o péndulo) para medir el tiempo. Se popularizó en Europa a partir del siglo XIV.' },
+  { n:'Reloj óptico', cat:'Ciencia', d:'Reloj atómico que usa frecuencias de luz visible (cientos de terahertz) en lugar de microondas. Es 100 veces más preciso que el de cesio.' },
+  { n:'Segundo', cat:'Tiempo', d:'Unidad básica de tiempo en el Sistema Internacional. Desde 1967 se define como 9.192.631.770 oscilaciones de la transición del cesio-133.' },
+  { n:'Servidor de tiempo', cat:'Tiempo', d:'Ordenador que distribuye la hora exacta a otros dispositivos mediante protocolos como NTP. Suele sincronizarse con relojes atómicos.' },
+  { n:'Solenoide', cat:'Mecánica', d:'Bobina que genera un campo magnético al pasar corriente. Se usa en algunos relojes eléctricos y de cuarzo para mover las agujas.' },
+  { n:'TAI', cat:'Tiempo', d:'Temps Atomique International. Escala de tiempo atómico internacional, calculada a partir de más de 400 relojes atómicos de todo el mundo. Es la referencia del tiempo civil.' },
+  { n:'Tic-tac', cat:'Mecánica', d:'Sonido producido por el escape de un reloj mecánico al liberar un diente de la rueda de escape en cada oscilación. Es la firma sonora del reloj mecánico.' },
+  { n:'Tren de engranajes', cat:'Mecánica', d:'Conjunto de ruedas dentadas que transmite el movimiento del barrilete a las agujas. Cada rueda tiene una relación de transmisión distinta.' },
+  { n:'UTC', cat:'Tiempo', d:'Tiempo Universal Coordinado. Es el tiempo civil de referencia en el mundo. Se calcula a partir del TAI y se ajusta con segundos intercalares para mantenerlo sincronizado con la rotación de la Tierra.' },
+  { n:'Volante', cat:'Mecánica', d:'Rueda que oscila en un reloj mecánico de pulsera. Su período constante regula la marcha del reloj. Sustituye al péndulo en los relojes portátiles.' }
+];
+
+let glossaryFilter = 'Todas';
+
+function renderGlossary(){
+  const chipsEl = $('#glossaryChips');
+  const grid = $('#glossaryGrid');
+  const searchEl = $('#glossarySearch');
+  if (!chipsEl || !grid) return;
+
+  const cats = ['Todas', 'Solar', 'Mecánica', 'Ciencia', 'Digital', 'Tiempo', 'Historia'];
+  chipsEl.innerHTML = cats.map(c => `<button class="chip${c === glossaryFilter ? ' active' : ''}" data-cat="${c}">${c}</button>`).join('');
+
+  function paint(){
+    const q = (searchEl.value || '').trim().toLowerCase();
+    const filtered = GLOSSARY.filter(g => {
+      const matchCat = glossaryFilter === 'Todas' || g.cat === glossaryFilter;
+      const matchQ = !q || g.n.toLowerCase().includes(q) || g.d.toLowerCase().includes(q);
+      return matchCat && matchQ;
+    });
+    if (filtered.length === 0){
+      grid.innerHTML = `<div class="note" style="grid-column:1/-1;margin:0"><strong>Sin resultados:</strong> prueba con otro término o cambia de categoría.</div>`;
+      return;
+    }
+    grid.innerHTML = filtered.map(g => `
+      <article class="card reveal">
+        <span class="kicker">${g.cat}</span>
+        <h3>${g.n}</h3>
+        <p>${g.d}</p>
+      </article>`).join('');
+    grid.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+  }
+
+  chipsEl.onclick = e => {
+    const c = e.target.closest('.chip');
+    if (!c) return;
+    glossaryFilter = c.dataset.cat;
+    chipsEl.querySelectorAll('.chip').forEach(x => x.classList.toggle('active', x === c));
+    paint();
+  };
+
+  searchEl.oninput = paint;
+  paint();
+}
+
+/* ============================================================
+   EFECTOS Y ARRANQUE
+   ============================================================ */
+$$('.module').forEach(m => {
+  m.addEventListener('mousemove', e => {
+    const r = m.getBoundingClientRect();
+    m.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
+    m.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
+  });
+});
+
+document.addEventListener('visibilitychange', () => {
+  document.querySelectorAll('.orb').forEach(o => {
+    o.style.animationPlayState = document.hidden ? 'paused' : 'running';
+  });
+});
+
+(function boot(){
+  const initial = (location.hash.slice(1) || 'inicio');
+  go(ROUTES.includes(initial) ? initial : 'inicio', false);
+  checkReveal();
+  setTimeout(() => {
+    if (currentRoute === 'inicio') animateCounters();
+  }, 300);
+})();
+</script>
+</body>
+</html>

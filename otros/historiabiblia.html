@@ -1,0 +1,1743 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>La Historia Bíblica explicada paso a paso</title>
+<meta name="description" content="Recorre la historia bíblica: Antiguo y Nuevo Testamento, período intertestamentario, Iglesia primitiva, Jesucristo en la historia, principios bíblicos, versiones de la Biblia y glosario, con líneas del tiempo y diagramas interactivos.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --font-display:'Space Grotesk','Segoe UI',system-ui,sans-serif;
+  --font-body:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --radius:20px;
+  --radius-sm:12px;
+  --maxw:1180px;
+  --ease:cubic-bezier(.22,.75,.25,1);
+}
+html[data-theme="light"]{
+  --bg:#fbf9f5;
+  --bg-soft:#f4f0e8;
+  --surface:rgba(255,255,255,.86);
+  --surface-solid:#ffffff;
+  --surface-2:rgba(60,40,20,.045);
+  --surface-3:rgba(60,40,20,.08);
+  --border:rgba(60,40,20,.12);
+  --border-strong:rgba(60,40,20,.24);
+  --text:#1a1410;
+  --muted:#6f6252;
+  --accent:#e11d48;
+  --accent-2:#7c3aed;
+  --accent-3:#0891b2;
+  --good:#059669;
+  --bad:#e11d48;
+  --shadow:0 22px 55px -28px rgba(60,30,10,.22);
+  --orb-op:.16;
+  --dot-color:rgba(60,40,20,.055);
+  --grid:rgba(60,40,20,.10);
+}
+html[data-theme="dark"]{
+  --bg:#0a0806;
+  --bg-soft:#12100c;
+  --surface:rgba(30,25,20,.66);
+  --surface-solid:#1b1712;
+  --surface-2:rgba(255,255,255,.045);
+  --surface-3:rgba(255,255,255,.08);
+  --border:rgba(255,255,255,.10);
+  --border-strong:rgba(255,255,255,.20);
+  --text:#f5ede2;
+  --muted:#a89a86;
+  --accent:#fb7185;
+  --accent-2:#a78bfa;
+  --accent-3:#22d3ee;
+  --good:#34d399;
+  --bad:#fb7185;
+  --shadow:0 24px 60px -24px rgba(0,0,0,.9);
+  --orb-op:.30;
+  --dot-color:rgba(255,255,255,.03);
+  --grid:rgba(255,255,255,.10);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;font-family:var(--font-body);background:var(--bg);color:var(--text);
+  min-height:100vh;line-height:1.65;-webkit-font-smoothing:antialiased;
+  transition:background .45s var(--ease),color .45s var(--ease);
+  overflow-x:hidden;
+}
+h1,h2,h3,h4,h5{font-family:var(--font-display);line-height:1.15;letter-spacing:-.02em;margin:0}
+p{margin:0}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+a{color:inherit;text-decoration:none}
+ul{margin:0}
+::selection{background:var(--accent);color:#fff}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
+
+.bg-dots{position:fixed;inset:0;z-index:-3;pointer-events:none;background-image:radial-gradient(var(--dot-color) 1px,transparent 1px);background-size:26px 26px}
+.orbs{position:fixed;inset:0;z-index:-2;overflow:hidden;pointer-events:none}
+.orb{position:absolute;border-radius:50%;filter:blur(100px);opacity:var(--orb-op);animation:float 28s ease-in-out infinite alternate}
+.orb.o1{width:52vw;height:52vw;background:var(--accent);top:-16vw;left:-12vw}
+.orb.o2{width:42vw;height:42vw;background:var(--accent-2);bottom:-18vw;right:-10vw;animation-delay:-10s}
+.orb.o3{width:34vw;height:34vw;background:var(--accent-3);top:44%;left:58%;animation-delay:-17s}
+@keyframes float{0%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(4vw,-3vw,0) scale(1.1)}100%{transform:translate3d(-3vw,4vw,0) scale(.95)}}
+
+.site-header{
+  position:sticky;top:0;z-index:50;
+  backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);
+  background:color-mix(in srgb,var(--bg) 78%, transparent);
+  border-bottom:1px solid var(--border);
+}
+.header-inner{max-width:var(--maxw);margin:0 auto;padding:13px 22px;display:flex;align-items:center;gap:20px}
+.brand{display:flex;align-items:center;gap:11px;font-family:var(--font-display);font-weight:700;font-size:1rem;letter-spacing:-.02em;white-space:nowrap}
+.brand-mark{
+  width:38px;height:38px;border-radius:12px;flex:none;
+  background:linear-gradient(140deg,var(--accent),var(--accent-2) 55%,var(--accent-3));
+  display:grid;place-items:center;color:#fff;
+  box-shadow:0 8px 22px -8px var(--accent);
+  transition:transform .5s var(--ease);
+}
+.brand:hover .brand-mark{transform:rotate(-10deg) scale(1.06)}
+.brand-mark svg{width:22px;height:22px}
+
+.nav{display:flex;gap:2px;margin-left:auto;overflow-x:auto;scrollbar-width:none}
+.nav::-webkit-scrollbar{display:none}
+.nav-link{position:relative;padding:9px 11px;border-radius:11px;font-size:.8rem;font-weight:500;color:var(--muted);white-space:nowrap;transition:color .3s var(--ease),background .3s var(--ease)}
+.nav-link:hover{color:var(--text);background:var(--surface-2)}
+.nav-link.active{color:var(--text);background:var(--surface-2)}
+.nav-link.active::after{content:'';position:absolute;left:11px;right:11px;bottom:4px;height:2px;border-radius:2px;background:linear-gradient(90deg,var(--accent),var(--accent-2));animation:navIn .4s var(--ease) both}
+@keyframes navIn{from{transform:scaleX(0);opacity:0}to{transform:scaleX(1);opacity:1}}
+
+.theme-toggle{width:40px;height:40px;border-radius:12px;flex:none;border:1px solid var(--border);background:var(--surface-2);display:grid;place-items:center;transition:transform .35s var(--ease),border-color .3s,background .3s}
+.theme-toggle:hover{transform:translateY(-2px) rotate(8deg);border-color:var(--border-strong)}
+.theme-toggle svg{width:19px;height:19px}
+html[data-theme="dark"] .icon-sun{display:block}
+html[data-theme="dark"] .icon-moon{display:none}
+html[data-theme="light"] .icon-sun{display:none}
+html[data-theme="light"] .icon-moon{display:block}
+
+main{max-width:var(--maxw);margin:0 auto;padding:0 22px 90px}
+.view{display:none}
+.view.active{display:block;animation:viewIn .55s var(--ease) both}
+@keyframes viewIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+
+.hero{padding:72px 0 42px;max-width:920px}
+.pill{display:inline-flex;align-items:center;gap:8px;padding:7px 15px;border-radius:999px;font-size:.78rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;border:1px solid var(--border);background:var(--surface);color:var(--muted);margin-bottom:26px}
+.pill .dot{width:7px;height:7px;border-radius:50%;background:var(--good);animation:pulse 2.4s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--good) 60%,transparent)}70%{box-shadow:0 0 0 9px transparent}100%{box-shadow:0 0 0 0 transparent}}
+h1.hero-title{font-size:clamp(2.1rem,5.2vw,3.9rem);font-weight:700;letter-spacing:-.035em;margin-bottom:22px}
+.grad{background:linear-gradient(100deg,var(--accent),var(--accent-2) 48%,var(--accent-3));-webkit-background-clip:text;background-clip:text;color:transparent;background-size:220% auto;animation:shimmer 8s linear infinite}
+@keyframes shimmer{to{background-position:220% center}}
+.lead{font-size:clamp(1rem,1.6vw,1.15rem);color:var(--muted);max-width:700px;margin-bottom:34px}
+.hero-actions{display:flex;flex-wrap:wrap;gap:13px}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:13px 25px;border-radius:13px;font-size:.93rem;font-weight:600;border:1px solid transparent;transition:transform .28s var(--ease),box-shadow .3s var(--ease),background .3s,border-color .3s,color .3s;will-change:transform}
+.btn:active{transform:scale(.97)}
+.btn svg{width:17px;height:17px}
+.btn-primary{background:linear-gradient(120deg,var(--accent),var(--accent-2));color:#fff;box-shadow:0 14px 34px -14px var(--accent);position:relative;overflow:hidden}
+.btn-primary::after{content:'';position:absolute;inset:0;background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,.45),transparent 70%);transform:translateX(-130%);transition:transform .7s var(--ease)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 20px 42px -14px var(--accent)}
+.btn-primary:hover::after{transform:translateX(130%)}
+.btn-ghost{border-color:var(--border);background:var(--surface);color:var(--text)}
+.btn-ghost:hover{transform:translateY(-2px);border-color:var(--border-strong);background:var(--surface-2)}
+.btn.small{padding:8px 16px;font-size:.85rem}
+
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin:12px 0 58px}
+.stat{padding:22px 20px;border-radius:var(--radius);background:var(--surface);border:1px solid var(--border);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);transition:transform .35s var(--ease),border-color .3s,box-shadow .35s}
+.stat:hover{transform:translateY(-5px);border-color:var(--border-strong);box-shadow:var(--shadow)}
+.stat .num{font-family:var(--font-display);font-size:1.8rem;font-weight:700;letter-spacing:-.03em;background:linear-gradient(120deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.stat .lbl{font-size:.82rem;color:var(--muted);font-weight:500;margin-top:2px}
+
+.sec-head{margin:0 0 28px}
+.sec-head h2{font-size:clamp(1.55rem,3vw,2.05rem);font-weight:700;margin-bottom:8px}
+.sec-head p{color:var(--muted);max-width:720px;font-size:.95rem}
+.section{padding-top:52px}
+
+.module-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(258px,1fr));gap:18px}
+.module{position:relative;overflow:hidden;text-align:left;padding:28px 24px;border-radius:var(--radius);background:var(--surface);border:1px solid var(--border);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);transition:transform .4s var(--ease),border-color .35s,box-shadow .4s}
+.module::before{content:'';position:absolute;inset:0;opacity:0;background:radial-gradient(420px circle at var(--mx,50%) var(--my,0%),color-mix(in srgb,var(--accent) 22%,transparent),transparent 65%);transition:opacity .45s var(--ease)}
+.module:hover{transform:translateY(-6px);border-color:var(--border-strong);box-shadow:var(--shadow)}
+.module:hover::before{opacity:1}
+.module-ico{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;margin-bottom:18px;background:linear-gradient(140deg,color-mix(in srgb,var(--accent) 22%,transparent),color-mix(in srgb,var(--accent-2) 18%,transparent));border:1px solid var(--border);color:var(--accent);transition:transform .4s var(--ease)}
+.module:hover .module-ico{transform:scale(1.08) rotate(-6deg)}
+.module-ico svg{width:22px;height:22px}
+.module h3{font-size:1.04rem;margin-bottom:8px;font-weight:600}
+.module p{font-size:.89rem;color:var(--muted);line-height:1.6}
+.module .arrow{display:inline-flex;align-items:center;gap:6px;margin-top:16px;font-size:.84rem;font-weight:600;color:var(--accent)}
+.module .arrow svg{width:14px;height:14px;transition:transform .35s var(--ease)}
+.module:hover .arrow svg{transform:translateX(5px)}
+
+.card{padding:24px 26px;border-radius:var(--radius);background:var(--surface);border:1px solid var(--border);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);transition:transform .35s var(--ease),border-color .3s,box-shadow .35s}
+.card:hover{transform:translateY(-4px);border-color:var(--border-strong);box-shadow:var(--shadow)}
+.card h3{font-size:1.02rem;margin-bottom:10px;font-weight:600}
+.card p{font-size:.9rem;color:var(--muted);line-height:1.68}
+.card .kicker{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;display:block}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(258px,1fr))}
+.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{padding:8px 15px;border-radius:999px;font-size:.81rem;font-weight:600;border:1px solid var(--border);background:var(--surface);color:var(--muted);transition:all .3s var(--ease)}
+.chip:hover{color:var(--text);border-color:var(--border-strong);transform:translateY(-1px)}
+.chip.active{background:linear-gradient(120deg,var(--accent),var(--accent-2));color:#fff;border-color:transparent;box-shadow:0 10px 26px -12px var(--accent)}
+
+.vt{position:relative;margin-top:26px}
+.vt::before{content:'';position:absolute;left:13px;top:10px;bottom:10px;width:2px;border-radius:2px;background:linear-gradient(180deg,var(--accent),var(--accent-2) 55%,var(--accent-3));opacity:.55}
+.vt-item{position:relative;padding-left:46px;margin-bottom:18px;animation:termIn .5s var(--ease) both;animation-delay:var(--d,0ms)}
+.vt-item.hidden{display:none}
+@keyframes termIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.vt-dot{position:absolute;left:7px;top:24px;width:14px;height:14px;border-radius:50%;background:var(--c);border:3px solid var(--bg);box-shadow:0 0 0 3px color-mix(in srgb,var(--c) 30%,transparent);transition:transform .3s var(--ease)}
+.vt-item:hover .vt-dot{transform:scale(1.3)}
+.vt-card{padding:20px 22px;border-radius:var(--radius-sm);background:var(--surface);border:1px solid var(--border);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);transition:border-color .3s,transform .3s var(--ease),box-shadow .3s}
+.vt-item:hover .vt-card{border-color:var(--border-strong);transform:translateX(3px);box-shadow:var(--shadow)}
+.vt-top{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:8px}
+.vt-year{font-family:var(--font-display);font-size:.86rem;font-weight:700;color:var(--accent);padding:3px 10px;border-radius:7px;background:color-mix(in srgb,var(--accent) 13%,transparent);border:1px solid color-mix(in srgb,var(--accent) 26%,transparent);white-space:nowrap}
+.vt-era{font-size:.68rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.vt-card h4{font-size:1rem;font-weight:600;margin-bottom:7px;line-height:1.3}
+.vt-card > p{font-size:.88rem;color:var(--muted);line-height:1.66}
+.vt-more{display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:.79rem;font-weight:600;color:var(--accent);padding:4px 0;transition:gap .3s var(--ease)}
+.vt-more:hover{gap:9px}
+.vt-more svg{width:12px;height:12px;transition:transform .4s var(--ease)}
+.vt-item.open .vt-more svg{transform:rotate(180deg)}
+.vt-extra{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s var(--ease)}
+.vt-item.open .vt-extra{grid-template-rows:1fr}
+.vt-extra > div{overflow:hidden}
+.vt-extra p{font-size:.85rem;color:var(--muted);line-height:1.7;border-top:1px solid var(--border);margin-top:12px;padding-top:12px}
+
+.diagram-wrap{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px 16px;box-shadow:var(--shadow)}
+.diagram-wrap svg{display:block;width:100%;height:auto;max-width:520px;margin:0 auto}
+
+.tbl{width:100%;border-collapse:collapse;font-size:.86rem;border-radius:12px;overflow:hidden;border:1px solid var(--border)}
+.tbl th, .tbl td{padding:11px 14px;text-align:left;border-bottom:1px solid var(--border)}
+.tbl th{background:var(--surface-2);font-weight:600;font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.tbl tr:last-child td{border-bottom:none}
+.tbl tr:hover td{background:var(--surface-2)}
+.tbl td{color:var(--text)}
+
+.note{margin-top:26px;padding:16px 20px;border-radius:14px;font-size:.85rem;color:var(--muted);border:1px solid var(--border);background:var(--surface-2);border-left:3px solid var(--accent);line-height:1.65}
+.note strong{color:var(--text);font-weight:600}
+
+/* Versículos */
+.verse{
+  padding:18px 20px 16px 22px;
+  border-radius:14px;
+  background:var(--surface-2);
+  border-left:3px solid var(--accent);
+  font-style:italic;
+  color:var(--text);
+  font-size:.9rem;
+  line-height:1.7;
+  margin:16px 0 0;
+  position:relative;
+}
+.verse::before{
+  content:'"';
+  position:absolute;
+  top:-6px;
+  right:16px;
+  font-family:var(--font-display);
+  font-size:3.2rem;
+  line-height:1;
+  color:color-mix(in srgb,var(--accent) 28%,transparent);
+  font-style:normal;
+  font-weight:700;
+}
+.verse-ref{
+  display:block;
+  margin-top:8px;
+  font-size:.78rem;
+  font-weight:600;
+  color:var(--accent);
+  font-style:normal;
+  letter-spacing:.03em;
+}
+
+/* Búsqueda y glosario */
+.search-box{
+  width:100%;
+  padding:14px 18px;
+  border-radius:13px;
+  border:1px solid var(--border);
+  background:var(--surface);
+  color:var(--text);
+  font-family:inherit;
+  font-size:.93rem;
+  margin-bottom:18px;
+  transition:border-color .3s, background .3s, box-shadow .3s;
+}
+.search-box:focus{
+  outline:none;
+  border-color:var(--accent);
+  background:var(--surface-solid);
+  box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 15%,transparent);
+}
+.search-box::placeholder{color:var(--muted)}
+
+.glossary-item{
+  padding:16px 18px;
+  border-radius:12px;
+  background:var(--surface);
+  border:1px solid var(--border);
+  transition:all .3s var(--ease);
+}
+.glossary-item:hover{border-color:var(--border-strong);transform:translateY(-2px);box-shadow:var(--shadow)}
+.glossary-item h4{font-size:.98rem;margin-bottom:6px;color:var(--text);font-weight:600}
+.glossary-item .cat{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--accent);margin-bottom:6px;display:block}
+.glossary-item p{font-size:.84rem;color:var(--muted);line-height:1.6}
+.glossary-item.hidden{display:none}
+
+/* Libros */
+.book-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(150px,1fr));
+  gap:8px;
+  margin-top:10px;
+}
+.book-item{
+  padding:10px 12px;
+  border-radius:10px;
+  background:var(--surface-2);
+  border:1px solid var(--border);
+  font-size:.82rem;
+  font-weight:500;
+  transition:all .25s var(--ease);
+  text-align:center;
+  color:var(--text);
+}
+.book-item:hover{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 8%,transparent);transform:translateY(-1px)}
+.book-item small{display:block;font-size:.68rem;font-weight:600;color:var(--muted);margin-top:2px;letter-spacing:.02em;text-transform:uppercase}
+
+/* Grupos judíos / sources */
+.tag{
+  display:inline-block;
+  padding:3px 9px;
+  border-radius:6px;
+  font-size:.7rem;
+  font-weight:700;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+  background:color-mix(in srgb,var(--accent-3) 16%,transparent);
+  color:var(--accent-3);
+  border:1px solid color-mix(in srgb,var(--accent-3) 30%,transparent);
+  margin-right:6px;
+  margin-bottom:6px;
+}
+
+/* Confesión visual */
+.creed{
+  font-family:var(--font-display);
+  font-size:1.05rem;
+  font-weight:500;
+  color:var(--text);
+  line-height:1.6;
+  text-align:center;
+  padding:22px;
+  letter-spacing:-.01em;
+}
+
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s var(--ease),transform .7s var(--ease);transition-delay:var(--d,0ms)}
+.reveal.in{opacity:1;transform:none}
+
+.site-footer{border-top:1px solid var(--border);padding:34px 22px;text-align:center;font-size:.85rem;color:var(--muted)}
+.site-footer strong{color:var(--text);font-weight:600}
+
+@media (max-width:1040px){.nav-link{padding:9px 9px;font-size:.76rem}}
+@media (max-width:900px){
+  .header-inner{padding:12px 16px;gap:14px;flex-wrap:wrap}
+  .nav{order:3;width:100%;margin-left:0;padding-bottom:2px}
+  .theme-toggle{margin-left:auto}
+  main{padding:0 16px 70px}
+  .hero{padding:44px 0 32px}
+  .stats{grid-template-columns:repeat(2,1fr);gap:11px}
+  .stat{padding:17px 15px}
+  .stat .num{font-size:1.45rem}
+  .vt-item{padding-left:38px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<div class="bg-dots" aria-hidden="true"></div>
+<div class="orbs" aria-hidden="true">
+  <div class="orb o1"></div>
+  <div class="orb o2"></div>
+  <div class="orb o3"></div>
+</div>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="#inicio" data-route="inicio">
+      <span class="brand-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 3v18M6 9h12"/>
+          <path d="M7 3h10a2 2 0 0 1 2 2v3H5V5a2 2 0 0 1 2-2z" fill="currentColor" opacity=".15"/>
+        </svg>
+      </span>
+      <span>Historia Bíblica</span>
+    </a>
+
+    <nav class="nav" aria-label="Navegación principal">
+      <button class="nav-link active" data-route="inicio">Inicio</button>
+      <button class="nav-link" data-route="antiguo">Antiguo Testamento</button>
+      <button class="nav-link" data-route="nuevo">Nuevo Testamento</button>
+      <button class="nav-link" data-route="intertestamentario">Intertestamentario</button>
+      <button class="nav-link" data-route="iglesia">Iglesia Primitiva</button>
+      <button class="nav-link" data-route="jesucristo">Jesucristo</button>
+      <button class="nav-link" data-route="principios">Principios</button>
+      <button class="nav-link" data-route="versiones">Versiones</button>
+      <button class="nav-link" data-route="glosario">Glosario</button>
+    </nav>
+
+    <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema">
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round">
+        <circle cx="12" cy="12" r="4"/>
+        <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>
+      </svg>
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<main>
+
+  <!-- ================= INICIO ================= -->
+  <section class="view active" data-view="inicio">
+    <div class="hero">
+      <span class="pill"><span class="dot"></span>De la Creación al Apocalipsis</span>
+      <h1 class="hero-title">La Historia Bíblica <span class="grad">explicada paso a paso</span></h1>
+      <p class="lead">
+        Un recorrido por el Antiguo y el Nuevo Testamento, el silencio de los 400 años,
+        el nacimiento de la Iglesia, las evidencias históricas de Jesús, los principios
+        del cristiano, las versiones de la Biblia y un glosario de términos clave.
+      </p>
+      <div class="hero-actions">
+        <button class="btn btn-primary" data-route="antiguo">
+          Empezar el recorrido
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+        <button class="btn btn-ghost" data-route="jesucristo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M6 9h12"/></svg>
+          Jesucristo en la historia
+        </button>
+      </div>
+    </div>
+
+    <div class="stats reveal">
+      <div class="stat"><div class="num" data-count="66" data-suffix="">0</div><div class="lbl">Libros en la Biblia</div></div>
+      <div class="stat"><div class="num" data-count="40" data-suffix="+">0</div><div class="lbl">Autores aprox.</div></div>
+      <div class="stat"><div class="num" data-count="1500" data-suffix="+">0</div><div class="lbl">Años de redacción</div></div>
+      <div class="stat"><div class="num" data-count="400" data-suffix="">0</div><div class="lbl">Años intertestamentarios</div></div>
+    </div>
+
+    <div class="sec-head reveal">
+      <h2>Cómo está organizada</h2>
+      <p>Nueve secciones que recorren la historia bíblica desde la Creación hasta la consolidación de la Iglesia primitiva, con líneas del tiempo y diagramas interactivos.</p>
+    </div>
+
+    <div class="module-grid">
+      <button class="module reveal" data-route="antiguo" style="--d:0ms">
+        <span class="module-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v14"/><path d="M8 4v16M4 20h16"/></svg>
+        </span>
+        <h3>Antiguo Testamento</h3>
+        <p>De la Creación a Malaquías: patriarcas, éxodo, reyes, profetas, exilio y retorno.</p>
+        <span class="arrow">Recorrer la historia
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </button>
+
+      <button class="module reveal" data-route="nuevo" style="--d:40ms">
+        <span class="module-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M6 9h12"/></svg>
+        </span>
+        <h3>Nuevo Testamento</h3>
+        <p>Jesús, los evangelios, Hechos, las cartas de Pablo y el Apocalipsis.</p>
+        <span class="arrow">Ver el Nuevo Testamento
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </button>
+
+      <button class="module reveal" data-route="intertestamentario" style="--d:80ms">
+        <span class="module-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+        </span>
+        <h3>Historia intertestamentaria</h3>
+        <p>Los 400 años de silencio profético: persas, griegos, macabeos y Roma.</p>
+        <span class="arrow">Conocer el período
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </button>
+
+      <button class="module reveal" data-route="iglesia" style="--d:120ms">
+        <span class="module-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V10l7-5 7 5v11"/><path d="M10 21v-6h4v6"/></svg>
+        </span>
+        <h3>Iglesia primitiva</h3>
+        <p>De Pentecostés a los concilios: mártires, apóstoles, padres de la Iglesia.</p>
+        <span class="arrow">Ver la Iglesia primitiva
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </button>
+
+      <button class="module reveal" data-route="jesucristo" style="--d:160ms">
+        <span class="module-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>
+        </span>
+        <h3>Jesucristo en la historia</h3>
+        <p>Fuentes históricas no cristianas que confirman la figura de Jesús de Nazaret.</p>
+        <span class="arrow">Ver evidencias
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </button>
+
+      <button class="module reveal" data-route="principios" style="--d:200ms">
+        <span class="module-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.5-7 10-7 10z"/></svg>
+        </span>
+        <h3>Principios bíblicos</h3>
+        <p>Doce principios esenciales para la vida cristiana, cada uno con su cita bíblica.</p>
+        <span class="arrow">Conocer los principios
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </button>
+
+      <button class="module reveal" data-route="versiones" style="--d:240ms">
+        <span class="module-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5V5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v14.5"/><path d="M4 19.5A2 2 0 0 1 6 17.5h14"/><path d="M8 7h8M8 11h6"/></svg>
+        </span>
+        <h3>Versiones de la Biblia</h3>
+        <p>De la Septuaginta a las traducciones modernas: cómo llegó la Biblia hasta hoy.</p>
+        <span class="arrow">Ver versiones
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </button>
+
+      <button class="module reveal" data-route="glosario" style="--d:280ms">
+        <span class="module-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>
+        </span>
+        <h3>Glosario bíblico</h3>
+        <p>Términos clave de la Biblia con búsqueda y filtros por categoría.</p>
+        <span class="arrow">Abrir glosario
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </button>
+    </div>
+
+    <div class="note reveal">
+      <strong>La Biblia no es un solo libro:</strong> es una biblioteca de 66 libros escrita
+      por decenas de autores a lo largo de más de mil años, en tres idiomas (hebreo, arameo
+      y griego), con géneros que van de la poesía a la profecía y de la historia a la carta.
+    </div>
+  </section>
+
+  <!-- ================= ANTIGUO TESTAMENTO ================= -->
+  <section class="view" data-view="antiguo">
+    <div class="sec-head section">
+      <h2>Antiguo Testamento</h2>
+      <p>El Antiguo Testamento narra la historia del pueblo de Israel, desde la Creación hasta unos 400 años antes de Cristo. Se divide en cuatro grandes grupos de libros y recorre siete períodos históricos.</p>
+    </div>
+
+    <div class="grid" style="margin-bottom:24px">
+      <div class="card reveal">
+        <span class="kicker">Qué es</span>
+        <h3>39 libros, 3 idiomas</h3>
+        <p>Casi todo está escrito en hebreo, con algunas secciones en arameo (Esdras, Daniel, Jeremías). Es la Biblia que leía Jesús.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Cómo se agrupa</span>
+        <h3>Cuatro grupos</h3>
+        <p>Pentateuco (5), Históricos (12), Poéticos (5) y Proféticos (17: 5 mayores + 12 menores).</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Qué contiene</span>
+        <h3>Historia y promesa</h3>
+        <p>La historia de Israel y la promesa de un Mesías que vendrá. Es la primera parte de un mismo relato que continúa en el Nuevo Testamento.</p>
+      </div>
+    </div>
+
+    <div class="diagram-wrap reveal" style="margin-bottom:24px">
+      <h4 style="font-size:1.02rem;margin-bottom:8px;font-weight:600">Estructura del Antiguo Testamento</h4>
+      <p style="font-size:.88rem;color:var(--muted);margin-bottom:14px">Los 39 libros en sus cuatro grandes bloques. Toca cada bloque para ver la lista completa.</p>
+      <svg id="otChartSvg" viewBox="0 0 500 260" aria-label="Estructura del Antiguo Testamento"></svg>
+      <div class="info-panel" id="otInfo">
+        <div class="ip-hint">Toca un bloque del diagrama para ver los libros que contiene.</div>
+      </div>
+    </div>
+
+    <h3 style="font-size:1.15rem;font-weight:600;margin:28px 0 14px">Línea del tiempo: los siete períodos</h3>
+    <div class="vt" id="otTimeline"></div>
+
+    <h3 style="font-size:1.15rem;font-weight:600;margin:28px 0 14px">Libros del Antiguo Testamento</h3>
+    <div class="grid" id="otBooksGrid"></div>
+
+    <div class="verse reveal">
+      "Y sabemos que a los que aman a Dios, todas las cosas les ayudan a bien, esto es, a los que conforme a su propósito son llamados."
+      <span class="verse-ref">— Romanos 8:28 · Síntesis del plan del Antiguo Testamento</span>
+    </div>
+
+    <div class="note reveal">
+      <strong>Un mismo plan:</strong> los profetas del Antiguo Testamento anuncian un Mesías,
+      un nuevo pacto y un Espíritu que vendrá sobre todo el pueblo. Los evangelios
+      presentan a Jesús como el cumplimiento de esas promesas.
+    </div>
+  </section>
+
+  <!-- ================= NUEVO TESTAMENTO ================= -->
+  <section class="view" data-view="nuevo">
+    <div class="sec-head section">
+      <h2>Nuevo Testamento</h2>
+      <p>27 libros escritos en el siglo I que narran la vida de Jesús, el nacimiento de la Iglesia y la consolidación de la fe cristiana en el mundo grecorromano.</p>
+    </div>
+
+    <div class="grid" style="margin-bottom:24px">
+      <div class="card reveal">
+        <span class="kicker">Qué es</span>
+        <h3>27 libros en griego común</h3>
+        <p>Escrito en griego koiné, el idioma internacional del Imperio Romano en el siglo I. Se completa entre los años 50 y 100 d.C. aproximadamente.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Cómo se agrupa</span>
+        <h3>Cinco bloques</h3>
+        <p>Evangelios (4), Hechos (1), Cartas de Pablo (13), Cartas generales (8) y Apocalipsis (1).</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Qué contiene</span>
+        <h3>Cumplimiento y expansión</h3>
+        <p>La vida, muerte y resurrección de Jesús, el nacimiento de la Iglesia en Pentecostés y la misión a los gentiles.</p>
+      </div>
+    </div>
+
+    <div class="diagram-wrap reveal" style="margin-bottom:24px">
+      <h4 style="font-size:1.02rem;margin-bottom:8px;font-weight:600">Estructura del Nuevo Testamento</h4>
+      <p style="font-size:.88rem;color:var(--muted);margin-bottom:14px">Los 27 libros en sus cinco grandes bloques. Toca cada bloque para ver la lista.</p>
+      <svg id="ntChartSvg" viewBox="0 0 500 260" aria-label="Estructura del Nuevo Testamento"></svg>
+      <div class="info-panel" id="ntInfo">
+        <div class="ip-hint">Toca un bloque del diagrama para ver los libros que contiene.</div>
+      </div>
+    </div>
+
+    <h3 style="font-size:1.15rem;font-weight:600;margin:28px 0 14px">Línea del tiempo: los eventos clave</h3>
+    <div class="vt" id="ntTimeline"></div>
+
+    <h3 style="font-size:1.15rem;font-weight:600;margin:28px 0 14px">Libros del Nuevo Testamento</h3>
+    <div class="grid" id="ntBooksGrid"></div>
+
+    <div class="verse reveal">
+      "Porque de tal manera amó Dios al mundo, que ha dado a su Hijo unigénito, para que todo aquel que en él cree, no se pierda, mas tenga vida eterna."
+      <span class="verse-ref">— Juan 3:16 · El versículo más citado del Nuevo Testamento</span>
+    </div>
+
+    <div class="note reveal">
+      <strong>Cuatro miradas, un mismo Jesús:</strong> Mateo lo presenta como Rey, Marcos como Siervo,
+      Lucas como Hombre perfecto y Juan como Dios encarnado. Son cuatro retratos complementarios,
+      no cuatro biografías contradictorias.
+    </div>
+  </section>
+
+  <!-- ================= INTERTESTAMENTARIO ================= -->
+  <section class="view" data-view="intertestamentario">
+    <div class="sec-head section">
+      <h2>Historia intertestamentaria</h2>
+      <p>Entre el último profeta del Antiguo Testamento (Malaquías, ~430 a.C.) y el nacimiento de Jesús (~5 a.C.) transcurren unos 400 años sin profetas reconocidos. Pero no fueron años vacíos: en ellos se formó el mundo que encontraría el cristianismo.</p>
+    </div>
+
+    <div class="grid" style="margin-bottom:24px">
+      <div class="card reveal">
+        <span class="kicker">Por qué importa</span>
+        <h3>El mundo de Jesús</h3>
+        <p>En estos siglos surgen las sinagogas, la Septuaginta griega, los grupos religiosos judíos y la dominación romana de Palestina.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Qué pasa</span>
+        <h3>Cuatro imperios</h3>
+        <p>Persas, griegos (Alejandro Magno), seléucidas y romanos se suceden como potencias dominantes de la región.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Resultado</span>
+        <h3>Expectativa mesiánica</h3>
+        <p>La opresión extranjera, la revuelta macabea y el celo por la Ley alimentan la espera de un libertador: el Mesías.</p>
+      </div>
+    </div>
+
+    <h3 style="font-size:1.15rem;font-weight:600;margin:28px 0 14px">Línea del tiempo de los 400 años</h3>
+    <div class="vt" id="interTimeline"></div>
+
+    <h3 style="font-size:1.15rem;font-weight:600;margin:28px 0 14px">Grupos religiosos del judaísmo del siglo I</h3>
+    <div class="grid" id="jewishGroups"></div>
+
+    <div class="diagram-wrap reveal" style="margin-top:26px">
+      <h4 style="font-size:1.02rem;margin-bottom:8px;font-weight:600">La revuelta macabea (167–142 a.C.)</h4>
+      <p style="font-size:.88rem;color:var(--muted);margin-bottom:14px">Antíoco IV Epífanes profana el Templo de Jerusalén. Judas Macabeo lidera la resistencia y logra la independencia de Judea durante casi un siglo.</p>
+      <svg id="maccabeanSvg" viewBox="0 0 520 200" aria-label="Línea de la revuelta macabea"></svg>
+    </div>
+
+    <div class="note reveal">
+      <strong>El silencio no fue ausencia:</strong> aunque no hubo profetas, Dios siguió actuando
+      en la historia. La Septuaginta, la sinagoga y la diáspora judía prepararon el terreno
+      para la rápida expansión del evangelio por el Imperio Romano.
+    </div>
+  </section>
+
+  <!-- ================= IGLESIA PRIMITIVA ================= -->
+  <section class="view" data-view="iglesia">
+    <div class="sec-head section">
+      <h2>Historia de la Iglesia primitiva</h2>
+      <p>Desde Pentecostés (~30 d.C.) hasta los grandes concilios del siglo V, la Iglesia pasó de ser un pequeño grupo de discípulos en Jerusalén a la religión dominante del Imperio Romano.</p>
+    </div>
+
+    <div class="grid" style="margin-bottom:24px">
+      <div class="card reveal">
+        <span class="kicker">Comienzo</span>
+        <h3>Pentecostés</h3>
+        <p>El Espíritu Santo desciende sobre los apóstoles en Jerusalén. Pedro predica y se bautizan unas 3.000 personas en un solo día (Hechos 2).</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Expansión</span>
+        <h3>De Jerusalén a Roma</h3>
+        <p>Persecución en Jerusalén, misión de Pablo por Asia Menor y Grecia, y finalmente la comunidad cristiana en Roma.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Consolidación</span>
+        <h3>De religión perseguida a oficial</h3>
+        <p>Después de tres siglos de persecuciones intermitentes, el emperador Constantino legaliza el cristianismo en el 313 d.C. (Edicto de Milán).</p>
+      </div>
+    </div>
+
+    <h3 style="font-size:1.15rem;font-weight:600;margin:28px 0 14px">Línea del tiempo: los primeros siglos</h3>
+    <div class="vt" id="churchTimeline"></div>
+
+    <h3 style="font-size:1.15rem;font-weight:600;margin:28px 0 14px">Padres y figuras de la Iglesia primitiva</h3>
+    <div class="grid" id="churchFathers"></div>
+
+    <div class="grid-2" style="margin-top:26px">
+      <div class="diagram-wrap reveal">
+        <h4 style="font-size:1.02rem;margin-bottom:8px;font-weight:600">Los cuatro concilios ecuménicos</h4>
+        <p style="font-size:.88rem;color:var(--muted);margin-bottom:14px">Los primeros concilios definieron las verdades centrales de la fe cristiana frente a las herejías.</p>
+        <svg id="councilsSvg" viewBox="0 0 500 240" aria-label="Concilios ecuménicos"></svg>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Persecuciones</span>
+        <h3>Los mártires</h3>
+        <p>Nerón (64 d.C.), Domiciano (81–96), Trajano (98–117), Marco Aurelio (161–180) y Diocleciano (303–311) protagonizaron las persecuciones más duras.</p>
+        <p style="margin-top:8px">Muchos cristianos murieron en el Coliseo y en las arenas del Imperio. Su testimonio fue uno de los factores que más contribuyó a la expansión del cristianismo.</p>
+      </div>
+    </div>
+
+    <div class="verse reveal">
+      "Y perseveraban en la doctrina de los apóstoles, en la comunión unos con otros, en el partimiento del pan y en las oraciones."
+      <span class="verse-ref">— Hechos 2:42 · El retrato de la primera comunidad cristiana</span>
+    </div>
+
+    <div class="note reveal">
+      <strong>La Iglesia creció perseguida:</strong> el Imperio Romano no logró detener el
+      cristianismo con violencia. Al contrario: los historiadores coinciden en que las
+      persecuciones y el testimonio de los mártires fortalecieron la fe de las comunidades.
+    </div>
+  </section>
+
+  <!-- ================= JESUCRISTO ================= -->
+  <section class="view" data-view="jesucristo">
+    <div class="sec-head section">
+      <h2>Jesucristo en la historia</h2>
+      <p>La figura de Jesús de Nazaret no solo está documentada en la Biblia. Historiadores romanos, judíos y griegos del siglo I y II mencionan su existencia, su crucifixión bajo Poncio Pilato y el movimiento que surgió a su alrededor.</p>
+    </div>
+
+    <h3 style="font-size:1.15rem;font-weight:600;margin:28px 0 14px">Fuentes históricas no cristianas</h3>
+    <div class="grid" id="histSources"></div>
+
+    <div class="diagram-wrap reveal" style="margin-top:26px">
+      <h4 style="font-size:1.02rem;margin-bottom:8px;font-weight:600">La vida de Jesús: cronología aproximada</h4>
+      <p style="font-size:.88rem;color:var(--muted);margin-bottom:14px">Los historiadores sitúan el nacimiento entre el 6 y el 4 a.C. y la crucifixión entre el 30 y el 33 d.C.</p>
+      <svg id="jesusLifeSvg" viewBox="0 0 560 240" aria-label="Cronología de la vida de Jesús"></svg>
+    </div>
+
+    <h3 style="font-size:1.15rem;font-weight:600;margin:28px 0 14px">Los hitos de su ministerio</h3>
+    <div class="vt" id="jesusTimeline"></div>
+
+    <div class="card reveal" style="margin-top:26px">
+      <span class="kicker">Dato histórico</span>
+      <h3>El año "cero" no existe</h3>
+      <p>El monje Dionisio el Exiguo (s. VI) fijó el nacimiento de Cristo como punto de partida del calendario, pero se equivocó en unos años: Herodes el Grande murió en el 4 a.C., y Jesús nació antes de esa fecha. Por eso los historiadores hablan de "a.C." y "d.C." con esta corrección.</p>
+    </div>
+
+    <div class="verse reveal">
+      "Porque no os hemos dado a conocer el poder y la venida de nuestro Señor Jesucristo siguiendo fábulas artificiosas, sino como habiendo visto con nuestros propios ojos su majestad."
+      <span class="verse-ref">— 2 Pedro 1:16 · El testimonio apostólico</span>
+    </div>
+
+    <div class="note reveal">
+      <strong>El consenso histórico es amplio:</strong> incluso historiadores no cristianos
+      (como Bart Ehrman o Geza Vermes) coinciden en que Jesús existió, fue bautizado por Juan,
+      predicó en Galilea y Judea, reunió discípulos, fue crucificado bajo Pilato y que sus
+      seguidores afirmaron que había resucitado.
+    </div>
+  </section>
+
+  <!-- ================= PRINCIPIOS ================= -->
+  <section class="view" data-view="principios">
+    <div class="sec-head section">
+      <h2>Principios bíblicos para el cristiano</h2>
+      <p>Doce principios esenciales que la Biblia presenta como fundamento de la vida cristiana. Cada uno va acompañado de una cita clave y una breve explicación.</p>
+    </div>
+
+    <div class="grid" id="principlesGrid"></div>
+
+    <div class="diagram-wrap reveal" style="margin-top:28px">
+      <h4 style="font-size:1.02rem;margin-bottom:8px;font-weight:600">El fruto del Espíritu (Gálatas 5:22–23)</h4>
+      <p style="font-size:.88rem;color:var(--muted);margin-bottom:14px">Nueve virtudes que la Biblia presenta como resultado natural de una vida guiada por el Espíritu Santo.</p>
+      <svg id="fruitSvg" viewBox="0 0 500 280" aria-label="El fruto del Espíritu"></svg>
+    </div>
+
+    <div class="verse reveal">
+      "El amor es sufrido, es benigno; el amor no tiene envidia, el amor no es jactancioso, no se envanece; no hace nada indebido, no busca lo suyo, no se irrita, no guarda rencor."
+      <span class="verse-ref">— 1 Corintios 13:4-5 · El capítulo del amor</span>
+    </div>
+
+    <div class="note reveal">
+      <strong>Principios, no reglas:</strong> la Biblia presenta estos valores como fruto de una
+      relación viva con Dios, no como una lista de normas para ganar méritos. El acento está
+      en el corazón transformado, no solo en la conducta externa.
+    </div>
+  </section>
+
+  <!-- ================= VERSIONES ================= -->
+  <section class="view" data-view="versiones">
+    <div class="sec-head section">
+      <h2>Versiones de la Biblia en la historia</h2>
+      <p>La Biblia no siempre se llamó así ni estuvo disponible en un solo volumen. Estas son las traducciones y ediciones que marcaron su historia, desde el siglo III a.C. hasta hoy.</p>
+    </div>
+
+    <div class="grid" style="margin-bottom:24px">
+      <div class="card reveal">
+        <span class="kicker">Origen</span>
+        <h3>Tres idiomas originales</h3>
+        <p>Hebreo (mayoría del AT), arameo (partes de Daniel, Esdras y Jeremías) y griego koiné (todo el NT).</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Manuscritos</span>
+        <h3>Los rollos del Mar Muerto</h3>
+        <p>Descubiertos en Qumrán desde 1947, contienen copias de libros del AT de más de 2.000 años de antigüedad. Confirman la fidelidad de la transmisión del texto.</p>
+      </div>
+      <div class="card reveal">
+        <span class="kicker">Hoy</span>
+        <h3>Más de 3.500 lenguas</h3>
+        <p>La Biblia es el libro más traducido de la historia: se ha traducido, completo o en parte, a más de 3.500 lenguas y dialectos.</p>
+      </div>
+    </div>
+
+    <h3 style="font-size:1.15rem;font-weight:600;margin:28px 0 14px">Línea del tiempo de las versiones</h3>
+    <div class="vt" id="versionsTimeline"></div>
+
+    <h3 style="font-size:1.15rem;font-weight:600;margin:28px 0 14px">Comparativa rápida</h3>
+    <table class="tbl reveal">
+      <thead>
+        <tr><th>Versión</th><th>Año</th><th>Idioma</th><th>Importancia</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Septuaginta (LXX)</td><td>~250 a.C.</td><td>Griego</td><td>Primera traducción del AT; la usaban los apóstoles.</td></tr>
+        <tr><td>Vulgata</td><td>382–405 d.C.</td><td>Latín</td><td>Traducción de Jerónimo; oficial en Occidente durante mil años.</td></tr>
+        <tr><td>Biblia de Gutenberg</td><td>~1455</td><td>Latín</td><td>Primer libro impreso con tipos móviles en Europa.</td></tr>
+        <tr><td>Reina-Valera</td><td>1569 / 1602</td><td>Español</td><td>La traducción al español más difundida de la historia.</td></tr>
+        <tr><td>King James Version</td><td>1611</td><td>Inglés</td><td>Versión clásica del mundo angloparlante.</td></tr>
+        <tr><td>Biblia de Jerusalén</td><td>1956</td><td>Francés / Español</td><td>Traducción católica con notas exegéticas.</td></tr>
+        <tr><td>Nueva Versión Internacional</td><td>1973–1999</td><td>Español</td><td>Lenguaje contemporáneo, muy difundida en América Latina.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="note reveal">
+      <strong>Traducir es interpretar:</strong> ninguna traducción es neutra. Cada versión
+      toma decisiones sobre palabras, giros y matices. Por eso conviene consultar varias
+      versiones al estudiar un pasaje difícil.
+    </div>
+  </section>
+
+  <!-- ================= GLOSARIO ================= -->
+  <section class="view" data-view="glosario">
+    <div class="sec-head section">
+      <h2>Glosario bíblico</h2>
+      <p>Términos clave para entender la Biblia: personajes, libros, conceptos, lugares y grupos. Usa el buscador o filtra por categoría.</p>
+    </div>
+
+    <input type="search" class="search-box" id="glossarySearch" placeholder="Buscar un término (ej. Mesías, Vulgata, Torá)…" aria-label="Buscar término">
+    <div class="chips" id="glossaryChips" style="margin-bottom:18px"></div>
+    <div class="grid" id="glossaryGrid"></div>
+
+    <div class="note reveal">
+      <strong>Contexto, contexto, contexto:</strong> ninguna palabra bíblica se entiende
+      aislada. Siempre conviene leer el versículo, luego el capítulo, luego el libro y,
+      si es posible, toda la Biblia. El significado surge del conjunto.
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <p><strong>Historia Bíblica</strong> — Material educativo abierto sobre el Antiguo y el Nuevo Testamento, la historia intertestamentaria, la Iglesia primitiva y las versiones de la Biblia.</p>
+</footer>
+
+<script>
+const $  = (sel, root = document) => root.querySelector(sel);
+const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+const SVGNS = 'http://www.w3.org/2000/svg';
+const el = (tag, attrs = {}, parent) => {
+  const e = document.createElementNS(SVGNS, tag);
+  for (const k in attrs) e.setAttribute(k, attrs[k]);
+  if (parent) parent.appendChild(e);
+  return e;
+};
+const theme = name => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+const accent  = () => theme('--accent')   || '#e11d48';
+const accent2 = () => theme('--accent-2') || '#7c3aed';
+const accent3 = () => theme('--accent-3') || '#0891b2';
+const muted   = () => theme('--muted')    || '#6f6252';
+const textCol = () => theme('--text')     || '#1a1410';
+const good    = () => theme('--good')     || '#059669';
+
+/* ============================================================
+   TEMA
+   ============================================================ */
+const htmlEl = document.documentElement;
+function setTheme(t){
+  htmlEl.setAttribute('data-theme', t);
+  try { localStorage.setItem('biblia-theme', t); } catch(e){}
+}
+(function initTheme(){
+  let saved = null;
+  try { saved = localStorage.getItem('biblia-theme'); } catch(e){}
+  setTheme(saved || 'light');
+})();
+$('#themeToggle').addEventListener('click', () => {
+  setTheme(htmlEl.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+  if (currentRoute === 'antiguo') renderOTChart();
+  if (currentRoute === 'nuevo') renderNTChart();
+  if (currentRoute === 'intertestamentario') renderMaccabean();
+  if (currentRoute === 'iglesia') renderCouncils();
+  if (currentRoute === 'jesucristo') renderJesusLife();
+  if (currentRoute === 'principios') renderFruit();
+});
+
+/* ============================================================
+   ROUTER
+   ============================================================ */
+const ROUTES = ['inicio','antiguo','nuevo','intertestamentario','iglesia','jesucristo','principios','versiones','glosario'];
+let currentRoute = 'inicio';
+function go(route, push = true){
+  if (!ROUTES.includes(route)) route = 'inicio';
+  currentRoute = route;
+  $$('.view').forEach(v => v.classList.toggle('active', v.dataset.view === route));
+  $$('.nav-link').forEach(b => b.classList.toggle('active', b.dataset.route === route));
+  if (push && location.hash.slice(1) !== route) history.pushState(null, '', '#' + route);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  requestAnimationFrame(() => {
+    $$('.view.active .reveal').forEach(el => el.classList.remove('in'));
+    checkReveal();
+    if (route === 'inicio') animateCounters();
+    if (route === 'antiguo'){ renderOTChart(); renderOTTimeline(); renderOTBooks(); }
+    if (route === 'nuevo'){ renderNTChart(); renderNTTimeline(); renderNTBooks(); }
+    if (route === 'intertestamentario'){ renderInterTimeline(); renderJewishGroups(); renderMaccabean(); }
+    if (route === 'iglesia'){ renderChurchTimeline(); renderChurchFathers(); renderCouncils(); }
+    if (route === 'jesucristo'){ renderHistSources(); renderJesusLife(); renderJesusTimeline(); }
+    if (route === 'principios'){ renderPrinciples(); renderFruit(); }
+    if (route === 'versiones') renderVersionsTimeline();
+    if (route === 'glosario') renderGlossary();
+  });
+}
+document.addEventListener('click', e => {
+  const trigger = e.target.closest('[data-route]');
+  if (trigger) { e.preventDefault(); go(trigger.dataset.route); }
+});
+window.addEventListener('popstate', () => go(location.hash.slice(1) || 'inicio', false));
+
+/* ============================================================
+   REVEAL + CONTADORES
+   ============================================================ */
+const revealObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('in');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+function checkReveal(){ $$('.view.active .reveal:not(.in)').forEach(el => revealObserver.observe(el)); }
+function animateCounters(){
+  $$('.num[data-count]').forEach(el => {
+    if (el.dataset.done === '1') return;
+    el.dataset.done = '1';
+    const target = parseFloat(el.dataset.count);
+    const suffix = el.dataset.suffix || '';
+    const dur = 1500;
+    const start = performance.now();
+    function tick(now){
+      const p = Math.min((now - start) / dur, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      const val = Math.round(target * eased);
+      el.textContent = val.toLocaleString('es-ES') + suffix;
+      if (p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  });
+}
+
+/* ============================================================
+   ANTIGUO TESTAMENTO
+   ============================================================ */
+const OT_BLOCKS = [
+  { n:'Pentateuco', count:5, color:'#e11d48', books:['Génesis','Éxodo','Levítico','Números','Deuteronomio'], desc:'Los cinco libros de la Ley, atribuidos a Moisés. Narran la Creación, los patriarcas, el éxodo y la entrega de la Ley.' },
+  { n:'Históricos', count:12, color:'#f59e0b', books:['Josué','Jueces','Rut','1 Samuel','2 Samuel','1 Reyes','2 Reyes','1 Crónicas','2 Crónicas','Esdras','Nehemías','Ester'], desc:'Desde la conquista de Canaán hasta el retorno del exilio. Cuentan la historia del pueblo de Israel.' },
+  { n:'Poéticos', count:5, color:'#7c3aed', books:['Job','Salmos','Proverbios','Eclesiastés','Cantares'], desc:'La poesía y la sabiduría de Israel: oración, sufrimiento, alabanza y reflexión sobre el sentido de la vida.' },
+  { n:'Proféticos', count:17, color:'#0891b2', books:['Isaías','Jeremías','Lamentaciones','Ezequiel','Daniel','Oseas','Joel','Amós','Abdías','Jonás','Miqueas','Nahúm','Habacuc','Sofonías','Hageo','Zacarías','Malaquías'], desc:'Los mensajes de los profetas: llamadas al arrepentimiento, denuncias de la injusticia y anuncios del Mesías.' }
+];
+
+const OT_PERIODS = [
+  { y:'~? a.C.', era:'Orígenes', n:'Creación y patriarcas', d:'De Adán a José. Dios llama a Abraham y le promete una descendencia y una tierra.', x:'Génesis 1–50. Los patriarcas (Abraham, Isaac, Jacob y José) sientan las bases del pueblo de Israel. La promesa a Abraham (Génesis 12) es el hilo conductor de toda la Biblia.' },
+  { y:'~1446 a.C.', era:'Éxodo', n:'Moisés y la salida de Egipto', d:'Dios libera a Israel de la esclavitud en Egipto mediante las diez plagas y el paso del Mar Rojo.', x:'Éxodo 1–40. En el Sinaí, Dios entrega los Diez Mandamientos y establece un pacto con Israel. Es el evento fundacional de la identidad judía, celebrado cada año en la Pascua.' },
+  { y:'~1400–1050 a.C.', era:'Conquista y jueces', n:'Josué y los jueces', d:'Israel entra en Canaán, se establece en la tierra y vive un ciclo de infidelidad, opresión y liberación.', x:'Josué, Jueces, Rut. Dios levanta jueces como Débora, Gedeón y Sansón para liberar al pueblo. "Cada uno hacía lo que bien le parecía" (Jueces 21:25) describe bien la época.' },
+  { y:'~1050–930 a.C.', era:'Monarquía unida', n:'Saúl, David y Salomón', d:'Los tres reyes que unifican a Israel. David recibe la promesa de un trono eterno; Salomón construye el Templo.', x:'1–2 Samuel, 1 Reyes 1–11. David es el rey modelo del Antiguo Testamento. Su dinastía durará cuatro siglos y de ella se espera el Mesías.' },
+  { y:'~930–586 a.C.', era:'Monarquía dividida', n:'Dos reinos: Israel y Judá', d:'Tras Salomón, el reino se parte en dos. Los profetas denuncian la idolatría y la injusticia.', x:'1–2 Reyes, 1–2 Crónicas. El reino del norte (Israel) cae ante Asiria en el 722 a.C. El reino del sur (Judá) resiste hasta el 586 a.C.' },
+  { y:'586–538 a.C.', era:'Exilio', n:'Cautiverio en Babilonia', d:'Nabucodonosor destruye Jerusalén y el Templo. El pueblo es deportado a Babilonia durante 70 años.', x:'2 Reyes 25, Daniel, Ezequiel, Lamentaciones. En el exilio nace la sinagoga y se consolida la esperanza mesiánica: Dios no ha abandonado a su pueblo.' },
+  { y:'538–400 a.C.', era:'Retorno y reconstrucción', n:'Esdras, Nehemías y los últimos profetas', d:'Ciro el Grande permite el retorno. Se reconstruyen el Templo y las murallas de Jerusalén.', x:'Esdras, Nehemías, Hageo, Zacarías, Malaquías. Con Malaquías se cierra la era profética del Antiguo Testamento. Comienzan los 400 años de silencio.' }
+];
+
+function renderOTChart(){
+  const svg = $('#otChartSvg');
+  if (!svg) return;
+  svg.innerHTML = '';
+  const cx = 160, cy = 130, r = 110, rIn = 55;
+  const total = 39;
+  let angle = -Math.PI/2;
+
+  OT_BLOCKS.forEach((b, i) => {
+    const slice = (b.count / total) * Math.PI * 2;
+    const a0 = angle, a1 = angle + slice;
+    const x0 = cx + Math.cos(a0)*r, y0 = cy + Math.sin(a0)*r;
+    const x1 = cx + Math.cos(a1)*r, y1 = cy + Math.sin(a1)*r;
+    const xi0 = cx + Math.cos(a0)*rIn, yi0 = cy + Math.sin(a0)*rIn;
+    const xi1 = cx + Math.cos(a1)*rIn, yi1 = cy + Math.sin(a1)*rIn;
+    const large = slice > Math.PI ? 1 : 0;
+    const d = `M ${x0} ${y0} A ${r} ${r} 0 ${large} 1 ${x1} ${y1} L ${xi1} ${yi1} A ${rIn} ${rIn} 0 ${large} 0 ${xi0} ${yi0} Z`;
+    const g = el('g', { class:'hit', 'data-block':b.n, style:'cursor:pointer' }, svg);
+    el('path', { d, fill:b.color, 'fill-opacity':0.85, stroke:'#fff', 'stroke-width':2, 'data-name':b.n }, g);
+    // Etiqueta
+    const mid = (a0 + a1) / 2;
+    const lx = cx + Math.cos(mid)*(r+20), ly = cy + Math.sin(mid)*(r+20);
+    el('text', { x:lx, y:ly+4, 'text-anchor':'middle', 'font-family':'Inter,sans-serif', 'font-size':10, 'font-weight':600, fill:textCol() }, svg).textContent = b.n;
+    el('text', { x:lx, y:ly+18, 'text-anchor':'middle', 'font-family':'Inter,sans-serif', 'font-size':9, fill:muted() }, svg).textContent = b.count + ' libros';
+    angle = a1;
+  });
+
+  el('circle', { cx, cy, r:rIn-2, fill: theme('--surface-solid') || '#fff', stroke: theme('--border') || '#eee', 'stroke-width':1 }, svg);
+  el('text', { x:cx, y:cy-4, 'text-anchor':'middle', 'font-family':'Space Grotesk,sans-serif', 'font-size':18, 'font-weight':700, fill:textCol() }, svg).textContent = '39';
+  el('text', { x:cx, y:cy+14, 'text-anchor':'middle', 'font-family':'Inter,sans-serif', 'font-size':10, 'font-weight':600, fill:muted() }, svg).textContent = 'libros';
+
+  svg.onclick = e => {
+    const g = e.target.closest('.hit');
+    if (!g) return;
+    const b = OT_BLOCKS.find(x => x.n === g.dataset.block);
+    if (!b) return;
+    $$('#otChartSvg .hit path').forEach(p => p.setAttribute('stroke-width', 2));
+    g.querySelector('path').setAttribute('stroke-width', 4);
+    const panel = $('#otInfo');
+    panel.classList.add('active');
+    panel.innerHTML = `
+      <div class="ip-name">${b.n} · ${b.count} libros</div>
+      <div class="ip-func">${b.desc}</div>
+      <div class="ip-desc"><strong style="color:var(--text)">Libros:</strong> ${b.books.join(', ')}.</div>
+    `;
+  };
+}
+
+function renderOTTimeline(){
+  const vt = $('#otTimeline');
+  if (!vt) return;
+  vt.innerHTML = OT_PERIODS.map((p, i) => {
+    const c = ['#e11d48','#f59e0b','#7c3aed','#0891b2','#ec4899','#10b981','#a16207'][i % 7];
+    return `
+      <div class="vt-item" style="--c:${c};--d:${i*40}ms">
+        <span class="vt-dot"></span>
+        <div class="vt-card">
+          <div class="vt-top">
+            <span class="vt-year">${p.y}</span>
+            <span class="vt-era">${p.era}</span>
+          </div>
+          <h4>${p.n}</h4>
+          <p>${p.d}</p>
+          <button class="vt-more" type="button">
+            <span>Más detalle</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="vt-extra"><div><p>${p.x}</p></div></div>
+        </div>
+      </div>`;
+  }).join('');
+  vt.onclick = e => {
+    const btn = e.target.closest('.vt-more');
+    if (!btn) return;
+    const item = btn.closest('.vt-item');
+    const open = item.classList.toggle('open');
+    btn.querySelector('span').textContent = open ? 'Ocultar detalle' : 'Más detalle';
+  };
+}
+
+function renderOTBooks(){
+  const grid = $('#otBooksGrid');
+  if (!grid) return;
+  grid.innerHTML = OT_BLOCKS.map(b => `
+    <article class="card reveal">
+      <span class="kicker" style="color:${b.color}">${b.n}</span>
+      <h3>${b.count} libros</h3>
+      <p style="margin-bottom:10px">${b.desc}</p>
+      <div class="book-grid">
+        ${b.books.map(x => `<span class="book-item">${x}</span>`).join('')}
+      </div>
+    </article>`).join('');
+  grid.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+}
+
+/* ============================================================
+   NUEVO TESTAMENTO
+   ============================================================ */
+const NT_BLOCKS = [
+  { n:'Evangelios', count:4, color:'#e11d48', books:['Mateo','Marcos','Lucas','Juan'], desc:'Cuatro retratos de la vida, muerte y resurrección de Jesús. Cada uno con su propio énfasis y destinatario.' },
+  { n:'Hechos', count:1, color:'#f59e0b', books:['Hechos de los Apóstoles'], desc:'La continuación del evangelio de Lucas. Narra el nacimiento y la expansión de la Iglesia primitiva.' },
+  { n:'Cartas de Pablo', count:13, color:'#7c3aed', books:['Romanos','1 Corintios','2 Corintios','Gálatas','Efesios','Filipenses','Colosenses','1 Tesalonicenses','2 Tesalonicenses','1 Timoteo','2 Timoteo','Tito','Filemón'], desc:'Las cartas del apóstol Pablo a iglesias y a colaboradores. Explican la fe cristiana con profundidad teológica.' },
+  { n:'Cartas generales', count:8, color:'#0891b2', books:['Hebreos','Santiago','1 Pedro','2 Pedro','1 Juan','2 Juan','3 Juan','Judas'], desc:'Cartas escritas por otros apóstoles y líderes: Santiago, Pedro, Juan y Judas. Enfoque práctico y pastoral.' },
+  { n:'Apocalipsis', count:1, color:'#10b981', books:['Apocalipsis'], desc:'La revelación final. Un libro profético y simbólico sobre el fin de la historia y la victoria definitiva del Cordero.' }
+];
+
+const NT_EVENTS = [
+  { y:'~5 a.C.', era:'Nacimiento', n:'Nacimiento de Jesús en Belén', d:'Jesús nace en Belén, en tiempos de Herodes el Grande. Los evangelios lo presentan como el Mesías prometido.', x:'Mateo 1–2, Lucas 1–2. La fecha exacta se desconoce: los historiadores la sitúan entre el 6 y el 4 a.C., antes de la muerte de Herodes.' },
+  { y:'~27 d.C.', era:'Ministerio', n:'Bautismo y comienzo del ministerio', d:'Jesús es bautizado por Juan el Bautista en el Jordán. Comienza a predicar el Reino de Dios por Galilea y Judea.', x:'Mateo 3, Marcos 1, Lucas 3, Juan 1. Aproximadamente a los 30 años. Reúne a sus doce discípulos y realiza numerosos milagros y enseñanzas.' },
+  { y:'~30 d.C.', era:'Pasión', n:'Crucifixión en Jerusalén', d:'Jesús es condenado por el Sanedrín, entregado a Poncio Pilato y crucificado en el Gólgota durante la Pascua.', x:'Mateo 26–27, Marcos 14–15, Lucas 22–23, Juan 18–19. Los historiadores romanos Tácito y Josefo también mencionan la crucifixión bajo Pilato.' },
+  { y:'~30 d.C.', era:'Resurrección', n:'Resurrección y apariciones', d:'Al tercer día, sus seguidores encuentran el sepulcro vacío. Jesús se aparece a los discípulos durante cuarenta días.', x:'Mateo 28, Marcos 16, Lucas 24, Juan 20–21, 1 Corintios 15. La resurrección es el eje central de la fe cristiana.' },
+  { y:'~30 d.C.', era:'Pentecostés', n:'Nacimiento de la Iglesia', d:'El Espíritu Santo desciende sobre los apóstoles. Pedro predica y se bautizan unas 3.000 personas en un solo día.', x:'Hechos 2. La Iglesia pasa de un grupo pequeño de discípulos a una comunidad en expansión.' },
+  { y:'~35–60 d.C.', era:'Misión', n:'Conversión de Pablo y expansión', d:'Saulo de Tarso se convierte en el apóstol Pablo. Viaja por Asia Menor, Grecia y finalmente Roma.', x:'Hechos 9, 13–28. Pablo funda iglesias, escribe cartas y es detenido finalmente en Roma, donde escribe algunas de sus cartas más famosas.' },
+  { y:'~50–95 d.C.', era:'Redacción', n:'Se escriben los libros del NT', d:'Las cartas de Pablo son los textos más antiguos. Los evangelios se escriben entre el 60 y el 90 d.C.; el Apocalipsis, hacia el 95.', x:'1 Tesalonicenses (50–51) es el libro más antiguo del NT. El Apocalipsis (95 d.C.) es el más reciente. El canon se cierra a finales del siglo I.' },
+  { y:'70 d.C.', era:'Contexto', n:'Destrucción del Templo de Jerusalén', d:'Las legiones romanas de Tito destruyen el Templo. El judaísmo y el cristianismo se separan definitivamente.', x:'Lucas 21, Mateo 24. Jesús había anunciado la destrucción del Templo. Este evento cambia el centro de gravedad del cristianismo: la Iglesia se expande por el Imperio.' }
+];
+
+function renderNTChart(){
+  const svg = $('#ntChartSvg');
+  if (!svg) return;
+  svg.innerHTML = '';
+  const cx = 160, cy = 130, r = 110, rIn = 55;
+  const total = 27;
+  let angle = -Math.PI/2;
+
+  NT_BLOCKS.forEach((b) => {
+    const slice = (b.count / total) * Math.PI * 2;
+    const a0 = angle, a1 = angle + slice;
+    const x0 = cx + Math.cos(a0)*r, y0 = cy + Math.sin(a0)*r;
+    const x1 = cx + Math.cos(a1)*r, y1 = cy + Math.sin(a1)*r;
+    const xi0 = cx + Math.cos(a0)*rIn, yi0 = cy + Math.sin(a0)*rIn;
+    const xi1 = cx + Math.cos(a1)*rIn, yi1 = cy + Math.sin(a1)*rIn;
+    const large = slice > Math.PI ? 1 : 0;
+    const d = `M ${x0} ${y0} A ${r} ${r} 0 ${large} 1 ${x1} ${y1} L ${xi1} ${yi1} A ${rIn} ${rIn} 0 ${large} 0 ${xi0} ${yi0} Z`;
+    const g = el('g', { class:'hit', 'data-block':b.n, style:'cursor:pointer' }, svg);
+    el('path', { d, fill:b.color, 'fill-opacity':0.85, stroke:'#fff', 'stroke-width':2, 'data-name':b.n }, g);
+    const mid = (a0 + a1) / 2;
+    const lx = cx + Math.cos(mid)*(r+20), ly = cy + Math.sin(mid)*(r+20);
+    el('text', { x:lx, y:ly+4, 'text-anchor':'middle', 'font-family':'Inter,sans-serif', 'font-size':10, 'font-weight':600, fill:textCol() }, svg).textContent = b.n;
+    el('text', { x:lx, y:ly+18, 'text-anchor':'middle', 'font-family':'Inter,sans-serif', 'font-size':9, fill:muted() }, svg).textContent = b.count + ' libros';
+    angle = a1;
+  });
+
+  el('circle', { cx, cy, r:rIn-2, fill: theme('--surface-solid') || '#fff', stroke: theme('--border') || '#eee', 'stroke-width':1 }, svg);
+  el('text', { x:cx, y:cy-4, 'text-anchor':'middle', 'font-family':'Space Grotesk,sans-serif', 'font-size':18, 'font-weight':700, fill:textCol() }, svg).textContent = '27';
+  el('text', { x:cx, y:cy+14, 'text-anchor':'middle', 'font-family':'Inter,sans-serif', 'font-size':10, 'font-weight':600, fill:muted() }, svg).textContent = 'libros';
+
+  svg.onclick = e => {
+    const g = e.target.closest('.hit');
+    if (!g) return;
+    const b = NT_BLOCKS.find(x => x.n === g.dataset.block);
+    if (!b) return;
+    $$('#ntChartSvg .hit path').forEach(p => p.setAttribute('stroke-width', 2));
+    g.querySelector('path').setAttribute('stroke-width', 4);
+    const panel = $('#ntInfo');
+    panel.classList.add('active');
+    panel.innerHTML = `
+      <div class="ip-name">${b.n} · ${b.count} libros</div>
+      <div class="ip-func">${b.desc}</div>
+      <div class="ip-desc"><strong style="color:var(--text)">Libros:</strong> ${b.books.join(', ')}.</div>
+    `;
+  };
+}
+
+function renderNTTimeline(){
+  const vt = $('#ntTimeline');
+  if (!vt) return;
+  vt.innerHTML = NT_EVENTS.map((p, i) => {
+    const c = ['#e11d48','#f59e0b','#7c3aed','#0891b2','#10b981','#ec4899','#a16207','#0ea5e9'][i % 8];
+    return `
+      <div class="vt-item" style="--c:${c};--d:${i*40}ms">
+        <span class="vt-dot"></span>
+        <div class="vt-card">
+          <div class="vt-top">
+            <span class="vt-year">${p.y}</span>
+            <span class="vt-era">${p.era}</span>
+          </div>
+          <h4>${p.n}</h4>
+          <p>${p.d}</p>
+          <button class="vt-more" type="button">
+            <span>Más detalle</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="vt-extra"><div><p>${p.x}</p></div></div>
+        </div>
+      </div>`;
+  }).join('');
+  vt.onclick = e => {
+    const btn = e.target.closest('.vt-more');
+    if (!btn) return;
+    const item = btn.closest('.vt-item');
+    const open = item.classList.toggle('open');
+    btn.querySelector('span').textContent = open ? 'Ocultar detalle' : 'Más detalle';
+  };
+}
+
+function renderNTBooks(){
+  const grid = $('#ntBooksGrid');
+  if (!grid) return;
+  grid.innerHTML = NT_BLOCKS.map(b => `
+    <article class="card reveal">
+      <span class="kicker" style="color:${b.color}">${b.n}</span>
+      <h3>${b.count} ${b.count === 1 ? 'libro' : 'libros'}</h3>
+      <p style="margin-bottom:10px">${b.desc}</p>
+      <div class="book-grid">
+        ${b.books.map(x => `<span class="book-item">${x}</span>`).join('')}
+      </div>
+    </article>`).join('');
+  grid.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+}
+
+/* ============================================================
+   INTERTESTAMENTARIO
+   ============================================================ */
+const INTER_EVENTS = [
+  { y:'539 a.C.', era:'Persa', n:'Ciro el Grande toma Babilonia', d:'Ciro decreta el retorno de los judíos a Jerusalén. Comienza la dominación persa de Judea.', x:'Esdras 1. Los judíos vuelven a su tierra, reconstruyen el Templo (516 a.C.) y las murallas (445 a.C. con Nehemías).' },
+  { y:'~430 a.C.', era:'Persa', n:'Malaquías, último profeta', d:'Con Malaquías se cierra el Antiguo Testamento. Comienzan 400 años sin profetas reconocidos.', x:'Malaquías 4. Los judíos quedan bajo dominio persa durante casi 200 años más, hasta la llegada de Alejandro Magno.' },
+  { y:'332 a.C.', era:'Griega', n:'Alejandro Magno conquista Judea', d:'Alejandro derrota a los persas y extiende la cultura griega (helenización) por todo el Oriente Medio.', x:'Tras la muerte de Alejandro (323 a.C.), sus generales se reparten el imperio. Judea cae primero bajo los ptolomeos de Egipto y luego bajo los seléucidas de Siria.' },
+  { y:'~250 a.C.', era:'Griega', n:'Traducción de la Septuaginta', d:'Setenta sabios judíos traducen el Antiguo Testamento al griego en Alejandría. Es la Biblia que usarán los apóstoles.', x:'La Septuaginta (LXX) se convierte en la traducción más influyente de la historia. El Nuevo Testamento cita mayoritariamente esta versión.' },
+  { y:'167 a.C.', era:'Seléucida', n:'Profanación del Templo', d:'Antíoco IV Epífanes saquea Jerusalén e instala un altar a Zeus en el Templo. Prohíbe la circuncisión y el sábado.', x:'1 Macabeos 1. Este evento provoca la revuelta macabea, uno de los episodios más heroicos del judaísmo antiguo.' },
+  { y:'167–142 a.C.', era:'Macabea', n:'Revuelta de los Macabeos', d:'Judas Macabeo lidera la resistencia. Tras años de guerrilla, logra la independencia de Judea.', x:'1 y 2 Macabeos. La fiesta de Hanukkah conmemora la rededicación del Templo (164 a.C.) y la victoria sobre los seléucidas.' },
+  { y:'63 a.C.', era:'Romana', n:'Pompeyo toma Jerusalén', d:'El general romano Pompeyo conquista Jerusalén. Judea queda bajo dominio romano.', x:'Roma gobierna Judea mediante reyes vasallos y procuradores. La expectativa mesiánica se intensifica: el pueblo espera un libertador.' },
+  { y:'37–4 a.C.', era:'Romana', n:'Reinado de Herodes el Grande', d:'Roma nombra a Herodes rey de Judea. Reconstruye el Templo y funda Cesarea, pero gobierna con crueldad.', x:'Mateo 2. Herodes manda matar a los niños de Belén. Su muerte (4 a.C.) es el punto de referencia para fechar el nacimiento de Jesús.' }
+];
+
+const JEWISH_GROUPS = [
+  { n:'Fariseos', tag:'Grupo religioso', d:'El grupo más influyente del judaísmo del siglo I. Cuidaban minuciosamente la Ley y la tradición oral. Creían en la resurrección y en los ángeles.' },
+  { n:'Saduceos', tag:'Grupo religioso', d:'Aristocracia sacerdotal vinculada al Templo. Solo aceptaban la Torá escrita. Negaban la resurrección y la vida después de la muerte.' },
+  { n:'Esenios', tag:'Grupo religioso', d:'Comunidad monástica apartada en el desierto, cerca del Mar Muerto. Se les atribuye la autoría de los rollos de Qumrán.' },
+  { n:'Zelotes', tag:'Grupo político', d:'Movimiento nacionalista radical que buscaba expulsar a Roma por la fuerza. Uno de los discípulos de Jesús fue "Simón el Zelote".' },
+  { n:'Samaritanos', tag:'Grupo religioso', d:'Habitantes de Samaria. Adoraban a Dios en el monte Gerizim, no en Jerusalén. Su relación con los judíos era muy tensa.' },
+  { n:'Prosélitos', tag:'Grupo social', d:'Gentiles convertidos al judaísmo mediante la circuncisión y el cumplimiento de la Ley. A ellos se dirige buena parte de la misión de Pablo.' },
+  { n:'Temerosos de Dios', tag:'Grupo social', d:'Gentiles que simpatizaban con el judaísmo sin circuncidarse. El centurión Cornelio (Hechos 10) es un ejemplo.' },
+  { n:'Sanedrín', tag:'Institución', d:'El tribunal supremo del judaísmo, con 71 miembros. Presidido por el sumo sacerdote. Condenó a Jesús.' }
+];
+
+function renderInterTimeline(){
+  const vt = $('#interTimeline');
+  if (!vt) return;
+  vt.innerHTML = INTER_EVENTS.map((p, i) => {
+    const c = ['#f59e0b','#e11d48','#7c3aed','#0891b2','#ec4899','#10b981','#a16207','#0ea5e9'][i % 8];
+    return `
+      <div class="vt-item" style="--c:${c};--d:${i*40}ms">
+        <span class="vt-dot"></span>
+        <div class="vt-card">
+          <div class="vt-top">
+            <span class="vt-year">${p.y}</span>
+            <span class="vt-era">${p.era}</span>
+          </div>
+          <h4>${p.n}</h4>
+          <p>${p.d}</p>
+          <button class="vt-more" type="button">
+            <span>Más detalle</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="vt-extra"><div><p>${p.x}</p></div></div>
+        </div>
+      </div>`;
+  }).join('');
+  vt.onclick = e => {
+    const btn = e.target.closest('.vt-more');
+    if (!btn) return;
+    const item = btn.closest('.vt-item');
+    const open = item.classList.toggle('open');
+    btn.querySelector('span').textContent = open ? 'Ocultar detalle' : 'Más detalle';
+  };
+}
+
+function renderJewishGroups(){
+  const grid = $('#jewishGroups');
+  if (!grid) return;
+  grid.innerHTML = JEWISH_GROUPS.map(g => `
+    <article class="card reveal">
+      <span class="tag">${g.tag}</span>
+      <h3 style="margin-top:8px">${g.n}</h3>
+      <p>${g.d}</p>
+    </article>`).join('');
+  grid.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+}
+
+function renderMaccabean(){
+  const svg = $('#maccabeanSvg');
+  if (!svg) return;
+  svg.innerHTML = '';
+  const W = 520, H = 200, lineY = 100;
+  const c = accent(), c2 = accent2(), c3 = accent3();
+
+  // Línea base
+  el('line', { x1:40, y1:lineY, x2:W-40, y2:lineY, stroke:c, 'stroke-width':2, 'stroke-dasharray':'6 4', opacity:0.7 }, svg);
+
+  const points = [
+    { x:60, y:lineY, label:'167 a.C.', sub:'Profanación', color:c },
+    { x:180, y:lineY, label:'164 a.C.', sub:'Rededicación', color:c2 },
+    { x:300, y:lineY, label:'142 a.C.', sub:'Independencia', color:c3 },
+    { x:440, y:lineY, label:'63 a.C.', sub:'Roma', color:'#10b981' }
+  ];
+
+  points.forEach((p, i) => {
+    el('circle', { cx:p.x, cy:p.y, r:8, fill:p.color, stroke:'#fff', 'stroke-width':2 }, svg);
+    el('text', { x:p.x, y:p.y-20, 'text-anchor':'middle', 'font-family':'Inter,sans-serif', 'font-size':11, 'font-weight':700, fill:textCol() }, svg).textContent = p.label;
+    el('text', { x:p.x, y:p.y+28, 'text-anchor':'middle', 'font-family':'Inter,sans-serif', 'font-size':10, 'font-weight':600, fill:muted() }, svg).textContent = p.sub;
+    if (i < points.length - 1) {
+      // arco
+      const x1 = p.x + 10, x2 = points[i+1].x - 10;
+      el('path', { d:`M ${x1} ${lineY} Q ${(x1+x2)/2} ${lineY-30} ${x2} ${lineY}`, fill:'none', stroke:p.color, 'stroke-width':2, opacity:0.5 }, svg);
+    }
+  });
+}
+
+/* ============================================================
+   IGLESIA PRIMITIVA
+   ============================================================ */
+const CHURCH_EVENTS = [
+  { y:'~30 d.C.', era:'Origen', n:'Pentecostés en Jerusalén', d:'El Espíritu Santo desciende sobre los apóstoles. Pedro predica y se bautizan 3.000 personas.', x:'Hechos 2. La comunidad de Jerusalén crece rápidamente. Los apóstoles realizan milagros y la Iglesia se organiza en torno a la enseñanza, la comunión y la oración.' },
+  { y:'~34 d.C.', era:'Persecución', n:'Martirio de Esteban', d:'Esteban, primer mártir cristiano, es apedreado en Jerusalén. Saulo de Tarso presencia su muerte.', x:'Hechos 7. La persecución dispersa a los creyentes, que llevan el evangelio a Samaria, Antioquía y otras regiones.' },
+  { y:'~35 d.C.', era:'Conversión', n:'Saulo se convierte en Pablo', d:'Camino a Damasco, Saulo tiene un encuentro con Cristo resucitado y se convierte en el apóstol de los gentiles.', x:'Hechos 9. Pablo fundará iglesias en Asia Menor, Grecia y Roma, y escribirá 13 cartas que forman parte del Nuevo Testamento.' },
+  { y:'~49 d.C.', era:'Consolidación', n:'Concilio de Jerusalén', d:'Los apóstoles se reúnen para decidir si los gentiles deben circuncidarse para ser cristianos. Deciden que no.', x:'Hechos 15. Este concilio marca la apertura definitiva del cristianismo a los no judíos. La Iglesia deja de ser una secta judía para volverse universal.' },
+  { y:'64 d.C.', era:'Persecución', n:'Persecución de Nerón', d:'Tras el incendio de Roma, Nerón culpa a los cristianos y desata la primera gran persecución imperial.', x:'Tácito (Anales XV.44) describe cómo los cristianos fueron crucificados, quemados y arrojados a las fieras. Pedro y Pablo mueren en Roma en esta época.' },
+  { y:'70 d.C.', era:'Contexto', n:'Destrucción de Jerusalén', d:'Tito destruye el Templo. El cristianismo se separa definitivamente del judaísmo y se expande por el Imperio.', x:'Lucas 21, Mateo 24. La caída de Jerusalén obliga a la Iglesia a reorganizarse. El centro de gravedad se traslada a Roma, Antioquía, Alejandría y Éfeso.' },
+  { y:'~95 d.C.', era:'Persecución', n:'Persecución de Domiciano', d:'Domiciano exige ser adorado como "señor y dios". Los cristianos que se niegan son perseguidos.', x:'Apocalipsis 1. Se cree que Juan escribe el Apocalipsis durante esta persecución, desde la isla de Patmos.' },
+  { y:'313 d.C.', era:'Legalización', n:'Edicto de Milán', d:'Constantino y Licinio legalizan el cristianismo en el Imperio Romano. Terminan las persecuciones.', x:'El cristianismo pasa de ser una religión perseguida a una religión permitida. En el 380 d.C., Teodosio la declarará religión oficial del Imperio.' },
+  { y:'325 d.C.', era:'Concilios', n:'Concilio de Nicea', d:'Se define la doctrina de la Trinidad y se condena el arrianismo. Se redacta el Credo niceno.', x:'Nicea es el primer concilio ecuménico. Reúne a más de 300 obispos. Afirma que el Hijo es "de la misma sustancia que el Padre".' },
+  { y:'451 d.C.', era:'Concilios', n:'Concilio de Calcedonia', d:'Se define que Cristo tiene dos naturalezas, divina y humana, en una sola persona.', x:'Calcedonia es el cuarto concilio ecuménico. Su definición es aceptada por católicos, ortodoxos y la mayoría de los protestantes.' }
+];
+
+const CHURCH_FATHERS = [
+  { n:'Clemente de Roma', tag:'Padre apostólico', d:'Discípulo de los apóstoles. Su carta a los corintios (95 d.C.) es uno de los documentos cristianos más antiguos fuera del NT.' },
+  { n:'Ignacio de Antioquía', tag:'Padre apostólico', d:'Obispo mártir (†107 d.C.). Sus siete cartas, escritas camino al martirio en Roma, defienden la unidad de la Iglesia y la autoridad del obispo.' },
+  { n:'Policarpo de Esmirna', tag:'Padre apostólico', d:'Discípulo de Juan. Martirizado en el 155 d.C. Su testimonio es uno de los relatos de martirio más antiguos que se conservan.' },
+  { n:'Justino Mártir', tag:'Apologista', d:'Filósofo griego convertido (†165 d.C.). Escribió defensas del cristianismo dirigidas al emperador y a los intelectuales paganos.' },
+  { n:'Ireneo de Lyon', tag:'Padre de la Iglesia', d:'Obispo (†202 d.C.). Combatió el gnosticismo. Su obra "Contra las herejías" es clave para entender la doctrina cristiana del siglo II.' },
+  { n:'Tertuliano', tag:'Apologista', d:'Jurista romano convertido (†220 d.C.). Acuñó el término "Trinidad" y escribió en latín las primeras obras teológicas sistemáticas.' },
+  { n:'Orígenes', tag:'Padre de la Iglesia', d:'Uno de los teólogos más influyentes de la Antigüedad (†253 d.C.). Escribió la Hexapla, una edición crítica del AT en seis columnas.' },
+  { n:'Atanasio de Alejandría', tag:'Padre de la Iglesia', d:'Defensor de la fe de Nicea frente al arrianismo (†373 d.C.). Pasó cinco veces al exilio por sus convicciones.' },
+  { n:'Jerónimo', tag:'Padre de la Iglesia', d:'Traductor de la Vulgata latina (†420 d.C.). Su obra fue la Biblia oficial de Occidente durante más de mil años.' },
+  { n:'Agustín de Hipona', tag:'Padre de la Iglesia', d:'Obispo y teólogo (†430 d.C.). Sus "Confesiones" y "La ciudad de Dios" marcaron todo el pensamiento cristiano posterior.' }
+];
+
+function renderChurchTimeline(){
+  const vt = $('#churchTimeline');
+  if (!vt) return;
+  vt.innerHTML = CHURCH_EVENTS.map((p, i) => {
+    const c = ['#e11d48','#f59e0b','#7c3aed','#0891b2','#ec4899','#10b981','#a16207','#0ea5e9','#dc2626','#7c3aed'][i % 10];
+    return `
+      <div class="vt-item" style="--c:${c};--d:${i*40}ms">
+        <span class="vt-dot"></span>
+        <div class="vt-card">
+          <div class="vt-top">
+            <span class="vt-year">${p.y}</span>
+            <span class="vt-era">${p.era}</span>
+          </div>
+          <h4>${p.n}</h4>
+          <p>${p.d}</p>
+          <button class="vt-more" type="button">
+            <span>Más detalle</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="vt-extra"><div><p>${p.x}</p></div></div>
+        </div>
+      </div>`;
+  }).join('');
+  vt.onclick = e => {
+    const btn = e.target.closest('.vt-more');
+    if (!btn) return;
+    const item = btn.closest('.vt-item');
+    const open = item.classList.toggle('open');
+    btn.querySelector('span').textContent = open ? 'Ocultar detalle' : 'Más detalle';
+  };
+}
+
+function renderChurchFathers(){
+  const grid = $('#churchFathers');
+  if (!grid) return;
+  grid.innerHTML = CHURCH_FATHERS.map(f => `
+    <article class="card reveal">
+      <span class="tag">${f.tag}</span>
+      <h3 style="margin-top:8px">${f.n}</h3>
+      <p>${f.d}</p>
+    </article>`).join('');
+  grid.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+}
+
+function renderCouncils(){
+  const svg = $('#councilsSvg');
+  if (!svg) return;
+  svg.innerHTML = '';
+  const W = 500, H = 240;
+  const councils = [
+    { year:'325', name:'Nicea', color:'#e11d48' },
+    { year:'381', name:'Constantinopla', color:'#f59e0b' },
+    { year:'431', name:'Éfeso', color:'#7c3aed' },
+    { year:'451', name:'Calcedonia', color:'#0891b2' }
+  ];
+  const padding = 50;
+  const stepX = (W - 2*padding) / (councils.length - 1);
+  const lineY = 140;
+
+  el('line', { x1:padding, y1:lineY, x2:W-padding, y2:lineY, stroke:accent(), 'stroke-width':2, 'stroke-dasharray':'6 4', opacity:0.6 }, svg);
+
+  councils.forEach((c, i) => {
+    const x = padding + stepX * i;
+    const yOff = i % 2 === 0 ? -30 : 30;
+    el('circle', { cx:x, cy:lineY, r:10, fill:c.color, stroke:'#fff', 'stroke-width':2.5 }, svg);
+    el('text', { x, y:lineY + yOff - 10, 'text-anchor':'middle', 'font-family':'Space Grotesk,sans-serif', 'font-size':13, 'font-weight':700, fill:c.color }, svg).textContent = c.year;
+    el('text', { x, y:lineY + yOff + 4, 'text-anchor':'middle', 'font-family':'Inter,sans-serif', 'font-size':10, 'font-weight':600, fill:textCol() }, svg).textContent = c.name;
+    el('line', { x1:x, y1:lineY, x2:x, y2:lineY + yOff - 20, stroke:c.color, 'stroke-width':1.5, opacity:0.5 }, svg);
+  });
+
+  el('text', { x:W/2, y:H - 14, 'text-anchor':'middle', 'font-family':'Inter,sans-serif', 'font-size':10, fill:muted(), 'font-weight':500 }, svg).textContent = 'Los cuatro primeros concilios ecuménicos definieron la fe cristiana';
+}
+
+/* ============================================================
+   JESUCRISTO EN LA HISTORIA
+   ============================================================ */
+const HIST_SOURCES = [
+  { n:'Tácito', tag:'Historiador romano', d:'En sus "Anales" (c. 116 d.C.) menciona que Cristo fue ejecutado por Poncio Pilato durante el reinado de Tiberio, y que sus seguidores persistieron a pesar de la persecución de Nerón.' },
+  { n:'Flavio Josefo', tag:'Historiador judío', d:'En "Antigüedades judías" (c. 93 d.C.) menciona a Jesús como un hombre sabio, maestro, crucificado por Pilato, y a su hermano Santiago como líder de la comunidad cristiana.' },
+  { n:'Plinio el Joven', tag:'Gobernador romano', d:'En una carta al emperador Trajano (c. 112 d.C.) describe a los cristianos como personas que se reunían antes del amanecer para cantar a "Cristo como a un dios".' },
+  { n:'Suetonio', tag:'Historiador romano', d:'En "Vidas de los césares" (c. 121 d.C.) menciona que Claudio expulsó de Roma a los judíos por los disturbios provocados por "Cresto" (Cristo).' },
+  { n:'Mara bar Serapión', tag:'Filósofo sirio', d:'Una carta del siglo I o II compara a Jesús con Sócrates y Pitágoras, y menciona que los judíos lo ejecutaron.' },
+  { n:'El Talmud', tag:'Tradición judía', d:'Textos rabínicos del siglo II mencionan a "Yeshu" y su ejecución en la víspera de Pascua, aunque con una valoración negativa.' }
+];
+
+const JESUS_TIMELINE = [
+  { y:'~5–4 a.C.', era:'Nacimiento', n:'Nacimiento en Belén', d:'Nace en Belén, en Judea, durante el reinado de Herodes el Grande.', x:'Mateo 1–2, Lucas 2. Los historiadores no conocen el día exacto. La fecha del 25 de diciembre se fijó siglos después, probablemente para reemplazar una fiesta pagana.' },
+  { y:'~27 d.C.', era:'Bautismo', n:'Bautismo en el Jordán', d:'Juan el Bautista lo bautiza en el río Jordán. Comienza su ministerio público.', x:'Mateo 3:13-17. Los evangelios describen el descenso del Espíritu Santo en forma de paloma y una voz del cielo: "Este es mi Hijo amado".' },
+  { y:'~27–30 d.C.', era:'Ministerio', n:'Predicación del Reino', d:'Recorre Galilea y Judea predicando el Reino de Dios, sanando enfermos y enseñando en parábolas.', x:'Mateo 4–25, Marcos 1–13, Lucas 4–21, Juan 2–17. El Sermón del Monte (Mateo 5–7) es su enseñanza más conocida.' },
+  { y:'~30 d.C.', era:'Pasión', n:'Entrada en Jerusalén', d:'Entra en Jerusalén montado en un asno, aclamado por la multitud. Es la "entrada triunfal" que se celebra el Domingo de Ramos.', x:'Mateo 21, Marcos 11, Lucas 19, Juan 12. Días después celebra la Última Cena con sus discípulos, donde instituye la eucaristía.' },
+  { y:'~30 d.C.', era:'Crucifixión', n:'Juicio y crucifixión', d:'Es condenado por el Sanedrín, entregado a Poncio Pilato y crucificado en el Gólgota.', x:'Mateo 27, Marcos 15, Lucas 23, Juan 19. Tácito y Josefo confirman la crucifixión bajo Pilato. Fue un método romano de ejecución reservado a sediciosos y esclavos.' },
+  { y:'~30 d.C.', era:'Resurrección', n:'Resurrección y apariciones', d:'Al tercer día, sus seguidores encuentran el sepulcro vacío. Se aparece durante cuarenta días.', x:'Mateo 28, Marcos 16, Lucas 24, Juan 20–21, 1 Corintios 15:3-8. Es el eje central de la predicación apostólica y de la fe cristiana.' },
+  { y:'~30 d.C.', era:'Ascensión', n:'Ascensión y Pentecostés', d:'Asciende al cielo ante sus discípulos. Diez días después, en Pentecostés, desciende el Espíritu Santo.', x:'Hechos 1–2. Desde ese momento, los discípulos pasan de ser un grupo temeroso a predicadores valientes del evangelio.' }
+];
+
+function renderHistSources(){
+  const grid = $('#histSources');
+  if (!grid) return;
+  grid.innerHTML = HIST_SOURCES.map(s => `
+    <article class="card reveal">
+      <span class="tag">${s.tag}</span>
+      <h3 style="margin-top:8px">${s.n}</h3>
+      <p>${s.d}</p>
+    </article>`).join('');
+  grid.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+}
+
+function renderJesusLife(){
+  const svg = $('#jesusLifeSvg');
+  if (!svg) return;
+  svg.innerHTML = '';
+  const W = 560, H = 240;
+  const lineY = 120;
+  const c1 = accent(), c2 = accent2(), c3 = accent3();
+
+  el('line', { x1:40, y1:lineY, x2:W-40, y2:lineY, stroke:accent(), 'stroke-width':2, opacity:0.4 }, svg);
+
+  const events = [
+    { x:70, label:'~5 a.C.', sub:'Nacimiento', color:c1, above:true },
+    { x:170, label:'~27 d.C.', sub:'Bautismo', color:c2, above:false },
+    { x:290, label:'~30 d.C.', sub:'Ministerio', color:c3, above:true },
+    { x:400, label:'~30 d.C.', sub:'Crucifixión', color:'#dc2626', above:false },
+    { x:500, label:'~30 d.C.', sub:'Resurrección', color:good(), above:true }
+  ];
+
+  events.forEach(e => {
+    el('circle', { cx:e.x, cy:lineY, r:9, fill:e.color, stroke:'#fff', 'stroke-width':2.5 }, svg);
+    const ty = e.above ? lineY - 22 : lineY + 30;
+    el('text', { x:e.x, y:ty, 'text-anchor':'middle', 'font-family':'Inter,sans-serif', 'font-size':11, 'font-weight':700, fill:e.color }, svg).textContent = e.label;
+    const ty2 = e.above ? lineY - 38 : lineY + 46;
+    el('text', { x:e.x, y:ty2, 'text-anchor':'middle', 'font-family':'Inter,sans-serif', 'font-size':10, 'font-weight':600, fill:textCol() }, svg).textContent = e.sub;
+  });
+
+  // Curva de vida
+  el('path', { d:`M 70 ${lineY-12} Q 170 ${lineY-60} 290 ${lineY-12} Q 400 ${lineY+40} 500 ${lineY-12}`, fill:'none', stroke:accent2(), 'stroke-width':1.5, 'stroke-dasharray':'3 3', opacity:0.4 }, svg);
+}
+
+function renderJesusTimeline(){
+  const vt = $('#jesusTimeline');
+  if (!vt) return;
+  vt.innerHTML = JESUS_TIMELINE.map((p, i) => {
+    const c = ['#e11d48','#f59e0b','#7c3aed','#0891b2','#dc2626','#10b981','#a16207'][i % 7];
+    return `
+      <div class="vt-item" style="--c:${c};--d:${i*40}ms">
+        <span class="vt-dot"></span>
+        <div class="vt-card">
+          <div class="vt-top">
+            <span class="vt-year">${p.y}</span>
+            <span class="vt-era">${p.era}</span>
+          </div>
+          <h4>${p.n}</h4>
+          <p>${p.d}</p>
+          <button class="vt-more" type="button">
+            <span>Más detalle</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="vt-extra"><div><p>${p.x}</p></div></div>
+        </div>
+      </div>`;
+  }).join('');
+  vt.onclick = e => {
+    const btn = e.target.closest('.vt-more');
+    if (!btn) return;
+    const item = btn.closest('.vt-item');
+    const open = item.classList.toggle('open');
+    btn.querySelector('span').textContent = open ? 'Ocultar detalle' : 'Más detalle';
+  };
+}
+
+/* ============================================================
+   PRINCIPIOS BÍBLICOS
+   ============================================================ */
+const PRINCIPLES = [
+  { n:'Amor a Dios y al prójimo', v:'Mateo 22:37-39', d:'El mandamiento más grande: amar a Dios con todo el corazón y al prójimo como a uno mismo. Es el resumen de toda la Ley y los profetas.' },
+  { n:'Fe', v:'Hebreos 11:1', d:'"La fe es la certeza de lo que se espera, la convicción de lo que no se ve." No es credulidad: es confianza activa en las promesas de Dios.' },
+  { n:'Oración', v:'1 Tesalonicenses 5:17', d:'"Orad sin cesar." La oración es la respiración del alma cristiana: una relación constante, no un acto puntual.' },
+  { n:'Perdón', v:'Mateo 18:22', d:'Jesús enseña a perdonar "setenta veces siete", es decir, sin límite. El perdón libera al que perdona más que al perdonado.' },
+  { n:'Humildad', v:'Santiago 4:6', d:'"Dios resiste a los soberbios, y da gracia a los humildes." La humildad no es auto-desprecio: es reconocer la propia dependencia de Dios.' },
+  { n:'Obediencia', v:'1 Samuel 15:22', d:'"El obedecer es mejor que los sacrificios." La obediencia bíblica no es legalismo: es respuesta amorosa a Dios, no miedo a un castigo.' },
+  { n:'Santidad', v:'1 Pedro 1:16', d:'"Sed santos, porque yo soy santo." La santidad es la vocación de todo cristiano: reflejar el carácter de Dios en la vida diaria.' },
+  { n:'Generosidad', v:'Hechos 20:35', d:'"Más bienaventurado es dar que recibir." La generosidad cristiana se mide no solo por lo que se da, sino por la disposición del corazón.' },
+  { n:'Justicia', v:'Miqueas 6:8', d:'"Hacer justicia, amar misericordia y humillarte ante tu Dios." La fe bíblica incluye el compromiso con la justicia social y el cuidado del vulnerable.' },
+  { n:'Esperanza', v:'Romanos 15:13', d:'"Y el Dios de esperanza os llene de todo gozo y paz en el creer." La esperanza cristiana no depende de las circunstancias, sino de la promesa de Dios.' },
+  { n:'Gratitud', v:'1 Tesalonicenses 5:18', d:'"Dad gracias en todo, porque esta es la voluntad de Dios para con vosotros en Cristo Jesús." La gratitud transforma la mirada sobre la vida.' },
+  { n:'Servicio', v:'Marcos 10:45', d:'"El Hijo del Hombre no vino para ser servido, sino para servir." El liderazgo cristiano es servicio, no dominio.' }
+];
+
+function renderPrinciples(){
+  const grid = $('#principlesGrid');
+  if (!grid) return;
+  grid.innerHTML = PRINCIPLES.map((p, i) => `
+    <article class="card reveal" style="--d:${i*25}ms">
+      <span class="kicker">${p.n}</span>
+      <div class="verse" style="margin-top:0;margin-bottom:12px;font-size:.85rem">
+        ${p.d}
+        <span class="verse-ref">— ${p.v}</span>
+      </div>
+    </article>`).join('');
+  grid.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+}
+
+function renderFruit(){
+  const svg = $('#fruitSvg');
+  if (!svg) return;
+  svg.innerHTML = '';
+  const W = 500, H = 280;
+  const cx = 250, cy = 150;
+  const fruits = ['Amor','Gozo','Paz','Paciencia','Benignidad','Bondad','Fe','Mansedumbre','Templanza'];
+  const colors = ['#e11d48','#f59e0b','#7c3aed','#0891b2','#ec4899','#10b981','#a16207','#0ea5e9','#dc2626'];
+
+  // Círculo central
+  el('circle', { cx, cy, r:48, fill:accent2(), opacity:0.15, stroke:accent2(), 'stroke-width':2 }, svg);
+  el('text', { x:cx, y:cy-2, 'text-anchor':'middle', 'font-family':'Space Grotesk,sans-serif', 'font-size':12, 'font-weight':700, fill:textCol() }, svg).textContent = 'Fruto del';
+  el('text', { x:cx, y:cy+16, 'text-anchor':'middle', 'font-family':'Space Grotesk,sans-serif', 'font-size':12, 'font-weight':700, fill:textCol() }, svg).textContent = 'Espíritu';
+
+  const radius = 105;
+  fruits.forEach((f, i) => {
+    const angle = -Math.PI/2 + (i / fruits.length) * Math.PI * 2;
+    const x = cx + Math.cos(angle) * radius;
+    const y = cy + Math.sin(angle) * radius;
+    const color = colors[i % colors.length];
+    el('circle', { cx:x, cy:y, r:22, fill:color, opacity:0.85, stroke:'#fff', 'stroke-width':2 }, svg);
+    el('text', { x, y:y+4, 'text-anchor':'middle', 'font-family':'Inter,sans-serif', 'font-size':9, 'font-weight':700, fill:'#fff' }, svg).textContent = f;
+    el('line', { x1:cx + Math.cos(angle)*48, y1:cy + Math.sin(angle)*48, x2:x - Math.cos(angle)*22, y2:y - Math.sin(angle)*22, stroke:color, 'stroke-width':1.5, opacity:0.4 }, svg);
+  });
+}
+
+/* ============================================================
+   VERSIONES DE LA BIBLIA
+   ============================================================ */
+const VERSIONS = [
+  { y:'~250 a.C.', era:'Septuaginta', n:'Septuaginta (LXX)', d:'Primera traducción del Antiguo Testamento al griego, realizada en Alejandría. La usaban los apóstoles.', x:'Setenta (o setenta y dos) sabios judíos la tradujeron en la isla de Faros. El Nuevo Testamento cita mayoritariamente esta versión griega. Es la base de muchas traducciones posteriores.' },
+  { y:'382–405 d.C.', era:'Vulgata', n:'Vulgata latina', d:'Jerónimo traduce toda la Biblia al latín por encargo del papa Dámaso I. Será la Biblia oficial de Occidente durante más de mil años.', x:'La Vulgata (de "vulgata", "común" o "popular") unificó las traducciones latinas anteriores. El Concilio de Trento (1546) la declaró oficial de la Iglesia católica.' },
+  { y:'~1455', era:'Imprenta', n:'Biblia de Gutenberg', d:'Primer libro impreso con tipos móviles en Europa. Supone una revolución en la difusión de la Biblia.', x:'Gutenberg imprime unas 180 copias de la Vulgata en Maguncia. La imprenta abarata la producción de libros y prepara la Reforma protestante.' },
+  { y:'1516', era:'Humanismo', n:'Nuevo Testamento griego de Erasmo', d:'Erasmo de Róterdam publica la primera edición impresa del Nuevo Testamento en griego.', x:'Esta edición (Novum Instrumentum) es la base del Textus Receptus, que a su vez servirá para la traducción de la King James y de la Reina-Valera.' },
+  { y:'1569 / 1602', era:'Reina-Valera', n:'Biblia del Oso (1569) y Reina-Valera (1602)', d:'Casiodoro de Reina traduce la Biblia al español (1569). Cipriano de Valera la revisa en 1602.', x:'La Biblia del Oso es la primera Biblia completa impresa en español. La revisión de 1602 se convirtió en la versión protestante de referencia en español durante cuatro siglos.' },
+  { y:'1611', era:'King James', n:'King James Version', d:'La versión inglesa autorizada por el rey Jacobo I. Es la Biblia clásica del mundo angloparlante.', x:'Cuarenta y siete eruditos trabajaron durante siete años. Su lenguaje ha influido profundamente en la literatura inglesa (Shakespeare, Milton, Melville).' },
+  { y:'1885', era:'Inglés moderno', n:'Revised Version / Revised Standard Version', d:'Revisiones de la King James que actualizan el lenguaje y utilizan manuscritos más antiguos.', x:'El descubrimiento de manuscritos como el Códice Sinaítico (1844) y el Códice Vaticano permitió corregir lecturas que se habían transmitido con errores durante siglos.' },
+  { y:'1947–1956', era:'Descubrimientos', n:'Rollos del Mar Muerto', d:'Se descubren en Qumrán manuscritos del Antiguo Testamento de más de 2.000 años de antigüedad.', x:'Los rollos confirman la fidelidad de la transmisión del texto hebreo. El rollo de Isaías (1QIsaᵃ) tiene 7 metros de largo y es casi idéntico al texto que conocemos mil años después.' },
+  { y:'1956', era:'Católica', n:'Biblia de Jerusalén', d:'Traducción católica francesa, con introducciones y notas exegéticas. Adaptada al español en 1967.', x:'La Escuela Bíblica de Jerusalén la preparó con rigor histórico-crítico. Es una de las Biblias de estudio más usadas en el ámbito católico.' },
+  { y:'1973–1999', era:'Contemporánea', n:'Nueva Versión Internacional (NVI)', d:'Traducción al español con lenguaje contemporáneo, basada en los manuscritos más antiguos.', x:'La NVI se convirtió rápidamente en una de las versiones más difundidas en América Latina. Sigue el principio de "equivalencia dinámica": traducir el sentido, no la literalidad.' }
+];
+
+function renderVersionsTimeline(){
+  const vt = $('#versionsTimeline');
+  if (!vt) return;
+  vt.innerHTML = VERSIONS.map((p, i) => {
+    const c = ['#f59e0b','#e11d48','#7c3aed','#0891b2','#ec4899','#10b981','#a16207','#0ea5e9','#dc2626','#7c3aed'][i % 10];
+    return `
+      <div class="vt-item" style="--c:${c};--d:${i*40}ms">
+        <span class="vt-dot"></span>
+        <div class="vt-card">
+          <div class="vt-top">
+            <span class="vt-year">${p.y}</span>
+            <span class="vt-era">${p.era}</span>
+          </div>
+          <h4>${p.n}</h4>
+          <p>${p.d}</p>
+          <button class="vt-more" type="button">
+            <span>Más detalle</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="vt-extra"><div><p>${p.x}</p></div></div>
+        </div>
+      </div>`;
+  }).join('');
+  vt.onclick = e => {
+    const btn = e.target.closest('.vt-more');
+    if (!btn) return;
+    const item = btn.closest('.vt-item');
+    const open = item.classList.toggle('open');
+    btn.querySelector('span').textContent = open ? 'Ocultar detalle' : 'Más detalle';
+  };
+}
+
+/* ============================================================
+   GLOSARIO
+   ============================================================ */
+const GLOSSARY = [
+  { n:'Amén', cat:'Concepto', d:'Palabra hebrea que significa "así sea" o "verdaderamente". Se usa para confirmar una oración o una declaración.' },
+  { n:'Apocalipsis', cat:'Libro', d:'Último libro del NT. "Revelación" en griego. Contiene visiones simbólicas sobre el fin de la historia y la victoria de Cristo.' },
+  { n:'Apóstol', cat:'Personaje', d:'"Enviado". Los doce discípulos elegidos por Jesús, más Pablo, enviados a predicar el evangelio y fundar iglesias.' },
+  { n:'Arca', cat:'Lugar', d:'1) El arca de Noé (Génesis 6–9). 2) El arca de la alianza, cofre sagrado que contenía las tablas de la Ley (Éxodo 25).' },
+  { n:'Arrepentimiento', cat:'Concepto', d:'Cambio de mente y de dirección. En la Biblia implica reconocer el pecado, abandonarlo y volverse a Dios.' },
+  { n:'Bautismo', cat:'Concepto', d:'Rito de iniciación cristiana por inmersión o aspersión en agua. Simboliza la muerte al pecado y la resurrección con Cristo.' },
+  { n:'Biblia', cat:'Concepto', d:'"Los libros" en griego. Colección de 66 libros (39 AT + 27 NT) reconocidos como Palabra de Dios por los cristianos.' },
+  { n:'Canon', cat:'Concepto', d:'Lista oficial de libros considerados inspirados y normativos. El canon del NT se cerró a finales del siglo I.' },
+  { n:'Cristo', cat:'Personaje', d:'"Ungido" en griego; equivale al hebreo "Mesías". Título de Jesús como el Salvador prometido.' },
+  { n:'Diez Mandamientos', cat:'Concepto', d:'Las diez leyes que Dios entregó a Moisés en el Sinaí (Éxodo 20, Deuteronomio 5). Resumen de la ley moral del AT.' },
+  { n:'Discípulo', cat:'Personaje', d:'"Alumno" o "aprendiz". Los seguidores de Jesús durante su ministerio. Los doce apóstoles fueron el núcleo.' },
+  { n:'Epístola', cat:'Libro', d:'Carta. Las 21 cartas del NT (13 de Pablo + 8 generales) están dirigidas a iglesias o a personas concretas.' },
+  { n:'Evangelio', cat:'Libro', d:'"Buena noticia". Los cuatro relatos de la vida, muerte y resurrección de Jesús: Mateo, Marcos, Lucas y Juan.' },
+  { n:'Éxodo', cat:'Lugar', d:'"Salida". El libro que narra la liberación de Israel de Egipto bajo Moisés. Es el evento fundacional del pueblo judío.' },
+  { n:'Fariseo', cat:'Grupo', d:'Grupo religioso judío del siglo I. Cuidaban minuciosamente la Ley y la tradición oral. Creían en la resurrección.' },
+  { n:'Génesis', cat:'Libro', d:'Primer libro de la Biblia. Narra la Creación, el diluvio, la torre de Babel y la historia de los patriarcas.' },
+  { n:'Gracia', cat:'Concepto', d:'Favor inmerecido de Dios. El don de la salvación no se gana por obras, sino que se recibe por fe (Efesios 2:8-9).' },
+  { n:'Hermenéutica', cat:'Concepto', d:'Arte y ciencia de interpretar textos, especialmente los textos bíblicos. Incluye principios para entender el sentido original.' },
+  { n:'Jesucristo', cat:'Personaje', d:'El Hijo de Dios encarnado. Nació en Belén, murió crucificado bajo Pilato y resucitó al tercer día. Centro de la fe cristiana.' },
+  { n:'Judío', cat:'Personaje', d:'Natural de Judea. Tras el exilio, el término designa a todo el pueblo de Israel, tanto por etnia como por religión.' },
+  { n:'Ley (Torá)', cat:'Concepto', d:'"Instrucción" en hebreo. Los cinco primeros libros de la Biblia (Pentateuco). También puede referirse a toda la voluntad de Dios revelada.' },
+  { n:'Mesías', cat:'Personaje', d:'"Ungido" en hebreo. El rey salvador prometido por los profetas. Los cristianos identifican a Jesús como el Mesías.' },
+  { n:'Moisés', cat:'Personaje', d:'Libertador de Israel, legislador y profeta. Recibió los Diez Mandamientos en el Sinaí. Autor tradicional del Pentateuco.' },
+  { n:'Monoteísmo', cat:'Concepto', d:'Creencia en un solo Dios. Es la base de la fe judía y cristiana: "Escucha, Israel: Jehová nuestro Dios, Jehová uno es" (Deut. 6:4).' },
+  { n:'Pacto', cat:'Concepto', d:'"Alianza" o "testamento". Acuerdo entre Dios y su pueblo. Los principales son: con Noé, con Abraham, con Moisés y el nuevo pacto en Cristo.' },
+  { n:'Parábola', cat:'Concepto', d:'Relato breve y sencillo que enseña una verdad espiritual. Jesús usó más de 40 parábolas (el hijo pródigo, el sembrador, el buen samaritano).' },
+  { n:'Pascua', cat:'Concepto', d:'Fiesta judía que conmemora la liberación de Egipto. Jesús la celebra en la Última Cena, donde instituye la eucaristía.' },
+  { n:'Pentateuco', cat:'Libro', d:'Los cinco primeros libros de la Biblia: Génesis, Éxodo, Levítico, Números y Deuteronomio. En hebreo se llama Torá.' },
+  { n:'Pentecostés', cat:'Concepto', d:'Fiesta judía de las semanas. En Hechos 2, el Espíritu Santo desciende sobre los apóstoles y nace la Iglesia cristiana.' },
+  { n:'Profeta', cat:'Personaje', d:'Portavoz de Dios. Anuncia la voluntad divina, denuncia el pecado y anuncia el futuro. Los 17 libros proféticos del AT lo atestiguan.' },
+  { n:'Redención', cat:'Concepto', d:'"Rescate" o "liberación" mediante el pago de un precio. En el NT, la muerte de Cristo es el precio de la liberación del pecado.' },
+  { n:'Resurrección', cat:'Concepto', d:'Vuelta a la vida después de la muerte. La resurrección de Jesús al tercer día es el fundamento de la fe cristiana (1 Corintios 15).' },
+  { n:'Saduceo', cat:'Grupo', d:'Aristocracia sacerdotal judía. Solo aceptaban la Torá escrita y negaban la resurrección. Controlaban el Templo de Jerusalén.' },
+  { n:'Sanedrín', cat:'Institución', d:'Tribunal supremo del judaísmo, con 71 miembros. Presidido por el sumo sacerdote. Condenó a Jesús.' },
+  { n:'Septuaginta', cat:'Libro', d:'Traducción griega del AT realizada en Alejandría (~250 a.C.). Es la Biblia que usaban los apóstoles y los primeros cristianos.' },
+  { n:'Sinagoga', cat:'Lugar', d:'Lugar de reunión y oración judía. Surgió durante el exilio babilónico. En ellas predicó Pablo en sus viajes misioneros.' },
+  { n:'Tabernáculo', cat:'Lugar', d:'Tienda sagrada portátil que acompañó a Israel en el desierto. Era el lugar de la presencia de Dios antes del Templo.' },
+  { n:'Talmud', cat:'Libro', d:'Compilación de la ley oral judía y de los comentarios rabínicos. Se compone de la Mishná y la Guemará.' },
+  { n:'Templo', cat:'Lugar', d:'Edificio sagrado de Jerusalén. El primero lo construyó Salomón (960 a.C.), el segundo Zorobabel (516 a.C.) y Herodes lo amplió (20 a.C.). Fue destruido por Roma en el 70 d.C.' },
+  { n:'Torá', cat:'Libro', d:'"Instrucción" en hebreo. Los cinco libros de Moisés. Es la base de la fe y la ética judías.' },
+  { n:'Trinidad', cat:'Concepto', d:'Doctrina cristiana según la cual Dios es uno en esencia y tres en personas: Padre, Hijo y Espíritu Santo. Definida en Nicea (325) y Constantinopla (381).' },
+  { n:'Vulgata', cat:'Libro', d:'Traducción latina de la Biblia realizada por Jerónimo (382–405 d.C.). Fue la versión oficial de la Iglesia católica durante más de mil años.' },
+  { n:'Yahvé', cat:'Personaje', d:'Nombre propio de Dios en el AT. Se revela a Moisés en la zarza ardiente (Éxodo 3:14). Los judíos lo leen como "Adonai" (Señor).' },
+  { n:'Zelote', cat:'Grupo', d:'Movimiento nacionalista judío que buscaba expulsar a Roma por la fuerza. Simón el Zelote fue uno de los doce discípulos.' }
+];
+
+let glossaryFilter = 'Todos';
+
+function renderGlossary(){
+  const chipsEl = $('#glossaryChips');
+  const grid = $('#glossaryGrid');
+  const searchEl = $('#glossarySearch');
+  if (!chipsEl || !grid) return;
+
+  const cats = ['Todos', 'Personaje', 'Libro', 'Concepto', 'Lugar', 'Grupo', 'Institución'];
+  chipsEl.innerHTML = cats.map(c => `<button class="chip${c === glossaryFilter ? ' active' : ''}" data-cat="${c}">${c}</button>`).join('');
+
+  function paint(){
+    const q = (searchEl.value || '').trim().toLowerCase();
+    const filtered = GLOSSARY.filter(g => {
+      const matchCat = glossaryFilter === 'Todos' || g.cat === glossaryFilter;
+      const matchQ = !q || g.n.toLowerCase().includes(q) || g.d.toLowerCase().includes(q);
+      return matchCat && matchQ;
+    });
+    if (filtered.length === 0){
+      grid.innerHTML = `<div class="note" style="grid-column:1/-1;margin:0"><strong>Sin resultados:</strong> prueba con otro término o cambia de categoría.</div>`;
+      return;
+    }
+    grid.innerHTML = filtered.map(g => `
+      <article class="card reveal">
+        <span class="kicker">${g.cat}</span>
+        <h3>${g.n}</h3>
+        <p>${g.d}</p>
+      </article>`).join('');
+    grid.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+  }
+
+  chipsEl.onclick = e => {
+    const c = e.target.closest('.chip');
+    if (!c) return;
+    glossaryFilter = c.dataset.cat;
+    chipsEl.querySelectorAll('.chip').forEach(x => x.classList.toggle('active', x === c));
+    paint();
+  };
+
+  searchEl.oninput = paint;
+  paint();
+}
+
+/* ============================================================
+   EFECTOS Y ARRANQUE
+   ============================================================ */
+$$('.module').forEach(m => {
+  m.addEventListener('mousemove', e => {
+    const r = m.getBoundingClientRect();
+    m.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
+    m.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
+  });
+});
+
+document.addEventListener('visibilitychange', () => {
+  document.querySelectorAll('.orb').forEach(o => {
+    o.style.animationPlayState = document.hidden ? 'paused' : 'running';
+  });
+});
+
+(function boot(){
+  const initial = (location.hash.slice(1) || 'inicio');
+  go(ROUTES.includes(initial) ? initial : 'inicio', false);
+  checkReveal();
+  setTimeout(() => {
+    if (currentRoute === 'inicio') animateCounters();
+  }, 300);
+})();
+</script>
+</body>
+</html>
