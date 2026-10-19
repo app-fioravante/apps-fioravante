@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enciclopedia Visual · Fioravante</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <script>
+    // Aplicar tema antes del render para evitar flash
+    (function () {
+      try {
+        const stored = localStorage.getItem('enc-theme');
+        if (stored === 'light' || stored === 'dark') {
+          document.documentElement.setAttribute('data-theme', stored);
+        } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+          document.documentElement.setAttribute('data-theme', 'light');
+        }
+      } catch (e) {}
+    })();
+  </script>
+  <style>
+    /* ─── RESET & BASE ─── */
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg-deep: #070b14;
+      --surface: rgba(22, 32, 50, 0.65);
+      --surface-hover: rgba(30, 44, 68, 0.8);
+      --border: rgba(255, 255, 255, 0.07);
+      --border-strong: rgba(255, 255, 255, 0.15);
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --text-dim: #64748b;
+      --accent-cyan: #22d3ee;
+      --accent-violet: #a78bfa;
+      --accent-amber: #fbbf24;
+      --accent-emerald: #34d399;
+      --accent-rose: #fb7185;
+      --input-focus-bg: rgba(22, 32, 50, 0.85);
+      --chip-hover-bg: rgba(255, 255, 255, 0.04);
+      --arrow-bg: rgba(255, 255, 255, 0.05);
+      --noise-opacity: 0.03;
+      --radius-lg: 24px;
+      --radius-md: 16px;
+      --radius-sm: 12px;
+      --shadow-card: 0 4px 24px -8px rgba(0, 0, 0, 0.6);
+      --shadow-hover: 0 24px 48px -16px rgba(0, 0, 0, 0.7);
+      --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* ─── TEMA CLARO SUAVE ─── */
+    [data-theme="light"] {
+      --bg-deep: #f4f6fa;
+      --surface: rgba(255, 255, 255, 0.72);
+      --surface-hover: rgba(255, 255, 255, 0.92);
+      --border: rgba(15, 23, 42, 0.08);
+      --border-strong: rgba(15, 23, 42, 0.16);
+      --text-primary: #1e293b;
+      --text-secondary: #475569;
+      --text-dim: #94a3b8;
+      --accent-cyan: #0891b2;
+      --accent-violet: #7c3aed;
+      --accent-amber: #d97706;
+      --accent-emerald: #059669;
+      --accent-rose: #e11d48;
+      --input-focus-bg: rgba(255, 255, 255, 0.95);
+      --chip-hover-bg: rgba(15, 23, 42, 0.04);
+      --arrow-bg: rgba(15, 23, 42, 0.04);
+      --noise-opacity: 0.015;
+      --shadow-card: 0 4px 24px -8px rgba(15, 23, 42, 0.08);
+      --shadow-hover: 0 24px 48px -16px rgba(15, 23, 42, 0.16);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background-color: var(--bg-deep);
+      color: var(--text-primary);
+      min-height: 100vh;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+      transition: background-color 0.5s ease, color 0.5s ease;
+    }
+
+    /* Fondo con gradientes radiales animados (Glassmorphism 2.0) */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      background:
+        radial-gradient(ellipse 80% 60% at 10% 0%, rgba(34, 211, 238, 0.12), transparent 60%),
+        radial-gradient(ellipse 70% 50% at 90% 10%, rgba(167, 139, 250, 0.1), transparent 55%),
+        radial-gradient(ellipse 60% 50% at 50% 100%, rgba(52, 211, 153, 0.06), transparent 60%);
+      animation: bgShift 20s ease-in-out infinite alternate;
+      transition: opacity 0.5s ease;
+    }
+
+    [data-theme="light"] body::before {
+      background:
+        radial-gradient(ellipse 80% 60% at 10% 0%, rgba(6, 182, 212, 0.14), transparent 60%),
+        radial-gradient(ellipse 70% 50% at 90% 10%, rgba(139, 92, 246, 0.11), transparent 55%),
+        radial-gradient(ellipse 60% 50% at 50% 100%, rgba(16, 185, 129, 0.09), transparent 60%);
+    }
+
+    @keyframes bgShift {
+      0% { opacity: 0.7; transform: scale(1); }
+      100% { opacity: 1; transform: scale(1.08); }
+    }
+
+    /* Textura de grano sutil para dar profundidad */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      opacity: var(--noise-opacity);
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      pointer-events: none;
+      transition: opacity 0.5s ease;
+    }
+
+    /* ─── LAYOUT ─── */
+    .app {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+    }
+
+    /* ─── THEME TOGGLE ─── */
+    .theme-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 100;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      color: var(--text-primary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow-card);
+      transition: transform 0.35s var(--ease-out-expo),
+                  border-color 0.3s,
+                  box-shadow 0.35s var(--ease-out-expo),
+                  background-color 0.4s ease,
+                  color 0.4s ease;
+    }
+
+    .theme-toggle:hover {
+      transform: scale(1.1) rotate(10deg);
+      border-color: var(--border-strong);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .theme-toggle:active {
+      transform: scale(0.96);
+    }
+
+    .theme-toggle svg {
+      width: 20px;
+      height: 20px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .theme-toggle .icon-sun { display: block; }
+    .theme-toggle .icon-moon { display: none; }
+    [data-theme="light"] .theme-toggle .icon-sun { display: none; }
+    [data-theme="light"] .theme-toggle .icon-moon { display: block; }
+
+    /* ─── HEADER ─── */
+    .header {
+      padding: 56px 0 32px;
+      text-align: center;
+      position: relative;
+    }
+
+    .header-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      border-radius: 999px;
+      background: rgba(34, 211, 238, 0.08);
+      border: 1px solid rgba(34, 211, 238, 0.2);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent-cyan);
+      margin-bottom: 20px;
+      animation: fadeDown 0.8s var(--ease-out-expo) both;
+      transition: background-color 0.4s ease, border-color 0.4s ease, color 0.4s ease;
+    }
+
+    [data-theme="light"] .header-badge {
+      background: rgba(8, 145, 178, 0.08);
+      border-color: rgba(8, 145, 178, 0.22);
+    }
+
+    .header-badge::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent-cyan);
+      box-shadow: 0 0 12px var(--accent-cyan);
+      animation: pulse 2s ease-in-out infinite;
+      transition: background-color 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+
+    .header h1 {
+      font-size: clamp(2.4rem, 6vw, 4.2rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      margin-bottom: 16px;
+      animation: fadeDown 0.9s 0.1s var(--ease-out-expo) both;
+    }
+
+    .header h1 .gradient-text {
+      background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-violet) 50%, var(--accent-rose) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-size: 200% 200%;
+      animation: gradientMove 6s ease-in-out infinite;
+    }
+
+    @keyframes gradientMove {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .header-subtitle {
+      font-size: clamp(0.95rem, 2vw, 1.15rem);
+      color: var(--text-secondary);
+      font-weight: 400;
+      max-width: 600px;
+      margin: 0 auto;
+      animation: fadeDown 1s 0.2s var(--ease-out-expo) both;
+      transition: color 0.4s ease;
+    }
+
+    /* ─── CONTROLES ─── */
+    .controls {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      margin-bottom: 40px;
+      animation: fadeUp 0.8s 0.3s var(--ease-out-expo) both;
+    }
+
+    .search-row {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .search-wrapper {
+      flex: 1 1 280px;
+      position: relative;
+    }
+
+    .search-wrapper svg {
+      position: absolute;
+      left: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 20px;
+      height: 20px;
+      stroke: var(--text-dim);
+      pointer-events: none;
+      transition: stroke 0.2s;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 16px 20px 16px 52px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      background: var(--surface);
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      color: var(--text-primary);
+      font-family: inherit;
+      font-size: 1rem;
+      outline: none;
+      transition: border-color 0.3s, box-shadow 0.3s, background-color 0.4s ease, color 0.4s ease;
+    }
+
+    .search-input::placeholder {
+      color: var(--text-dim);
+    }
+
+    .search-input:focus {
+      border-color: var(--accent-cyan);
+      box-shadow: 0 0 0 4px rgba(34, 211, 238, 0.12);
+      background: var(--input-focus-bg);
+    }
+
+    .search-wrapper:focus-within svg {
+      stroke: var(--accent-cyan);
+    }
+
+    .view-toggle {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px;
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      flex-shrink: 0;
+      transition: background-color 0.4s ease, border-color 0.4s ease;
+    }
+
+    .view-btn {
+      padding: 10px 20px;
+      border-radius: var(--radius-sm);
+      border: none;
+      background: transparent;
+      color: var(--text-secondary);
+      font-family: inherit;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s var(--ease-out-expo);
+      white-space: nowrap;
+    }
+
+    .view-btn.active {
+      background: rgba(34, 211, 238, 0.15);
+      color: var(--accent-cyan);
+      box-shadow: 0 0 20px -4px rgba(34, 211, 238, 0.2);
+    }
+
+    [data-theme="light"] .view-btn.active {
+      background: rgba(8, 145, 178, 0.12);
+      box-shadow: 0 0 20px -6px rgba(8, 145, 178, 0.25);
+    }
+
+    .view-btn:hover:not(.active) {
+      color: var(--text-primary);
+    }
+
+    /* Chips de categoría */
+    .chips-scroll {
+      overflow-x: auto;
+      padding-bottom: 4px;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(127, 127, 127, 0.2) transparent;
+    }
+
+    .chips-scroll::-webkit-scrollbar {
+      height: 4px;
+    }
+
+    .chips-scroll::-webkit-scrollbar-thumb {
+      background: rgba(127, 127, 127, 0.2);
+      border-radius: 999px;
+    }
+
+    .chips {
+      display: flex;
+      gap: 8px;
+      flex-wrap: nowrap;
+      min-width: max-content;
+    }
+
+    .chip {
+      padding: 9px 18px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text-secondary);
+      font-family: inherit;
+      font-size: 0.82rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.25s var(--ease-out-expo);
+      white-space: nowrap;
+    }
+
+    .chip:hover {
+      border-color: var(--border-strong);
+      color: var(--text-primary);
+      background: var(--chip-hover-bg);
+    }
+
+    .chip.active {
+      background: var(--accent-cyan);
+      border-color: var(--accent-cyan);
+      color: var(--bg-deep);
+      font-weight: 700;
+      box-shadow: 0 0 24px -6px rgba(34, 211, 238, 0.4);
+    }
+
+    [data-theme="light"] .chip.active {
+      color: #ffffff;
+      box-shadow: 0 0 24px -8px rgba(8, 145, 178, 0.5);
+    }
+
+    /* ─── CONTADOR ─── */
+    .results-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      animation: fadeUp 0.8s 0.4s var(--ease-out-expo) both;
+      transition: color 0.4s ease;
+    }
+
+    .results-count strong {
+      color: var(--accent-cyan);
+      font-weight: 700;
+      transition: color 0.4s ease;
+    }
+
+    /* ─── GRID ─── */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 20px;
+    }
+
+    /* ─── TARJETAS ─── */
+    .card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      padding: 28px 24px 24px;
+      border-radius: var(--radius-lg);
+      background: var(--surface);
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-card);
+      text-decoration: none;
+      color: inherit;
+      overflow: hidden;
+      transition: transform 0.4s var(--ease-out-expo),
+                  border-color 0.3s,
+                  box-shadow 0.4s var(--ease-out-expo),
+                  background-color 0.4s ease,
+                  color 0.4s ease;
+      animation: cardReveal 0.7s var(--ease-out-expo) both;
+    }
+
+    @keyframes cardReveal {
+      from {
+        opacity: 0;
+        transform: translateY(24px) scale(0.97);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .card:hover {
+      transform: translateY(-8px) scale(1.015);
+      border-color: var(--border-strong);
+      box-shadow: var(--shadow-hover);
+      background: var(--surface-hover);
+    }
+
+    /* Brillo que sigue al cursor */
+    .card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 0%), rgba(34, 211, 238, 0.08), transparent 40%);
+      opacity: 0;
+      transition: opacity 0.5s;
+      pointer-events: none;
+    }
+
+    [data-theme="light"] .card::before {
+      background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 0%), rgba(8, 145, 178, 0.09), transparent 40%);
+    }
+
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    .card-avatar {
+      width: 56px;
+      height: 56px;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 18px;
+      letter-spacing: -0.02em;
+      transition: transform 0.4s var(--ease-out-expo), filter 0.4s ease;
+      box-shadow: 0 8px 20px -8px rgba(0,0,0,0.35);
+      position: relative;
+      z-index: 1;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.12);
+    }
+
+    [data-theme="light"] .card-avatar {
+      filter: brightness(0.92) saturate(1.05);
+      text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+      box-shadow: 0 8px 20px -10px rgba(15, 23, 42, 0.25);
+    }
+
+    .card:hover .card-avatar {
+      transform: scale(1.08) rotate(-3deg);
+    }
+
+    .card-category {
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 8px;
+      opacity: 0.9;
+      position: relative;
+      z-index: 1;
+      transition: filter 0.4s ease;
+    }
+
+    [data-theme="light"] .card-category {
+      filter: brightness(0.7) saturate(1.1);
+      opacity: 1;
+    }
+
+    .card-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+      line-height: 1.25;
+      position: relative;
+      z-index: 1;
+      transition: color 0.4s ease;
+    }
+
+    .card-description {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      line-height: 1.55;
+      flex: 1;
+      position: relative;
+      z-index: 1;
+      transition: color 0.4s ease;
+    }
+
+    .card-arrow {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--arrow-bg);
+      border: 1px solid var(--border);
+      margin-top: 18px;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      align-self: flex-end;
+      transition: all 0.3s var(--ease-out-expo);
+      position: relative;
+      z-index: 1;
+    }
+
+    .card:hover .card-arrow {
+      background: var(--accent-cyan);
+      border-color: var(--accent-cyan);
+      color: var(--bg-deep);
+      transform: translateX(4px);
+    }
+
+    [data-theme="light"] .card:hover .card-arrow {
+      color: #ffffff;
+    }
+
+    /* ─── ENCABEZADOS DE CATEGORÍA (vista por materia) ─── */
+    .category-heading {
+      grid-column: 1 / -1;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 32px 0 8px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 8px;
+      animation: fadeUp 0.6s var(--ease-out-expo) both;
+      transition: color 0.4s ease, border-color 0.4s ease;
+    }
+
+    .category-heading:first-of-type {
+      padding-top: 0;
+    }
+
+    /* ─── ESTADO VACÍO ─── */
+    .empty-state {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 80px 20px;
+      color: var(--text-dim);
+      transition: color 0.4s ease;
+    }
+
+    .empty-state svg {
+      width: 48px;
+      height: 48px;
+      stroke: var(--text-dim);
+      margin-bottom: 16px;
+      opacity: 0.5;
+    }
+
+    .empty-state p {
+      font-size: 1rem;
+    }
+
+    /* ─── FOOTER ─── */
+    .footer {
+      text-align: center;
+      padding: 64px 0 0;
+      color: var(--text-dim);
+      font-size: 0.8rem;
+      border-top: 1px solid var(--border);
+      margin-top: 64px;
+      transition: color 0.4s ease, border-color 0.4s ease;
+    }
+
+    .footer a {
+      color: var(--accent-cyan);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.4s ease;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* ─── ANIMACIONES GLOBALES ─── */
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 640px) {
+      .app { padding: 0 16px 48px; }
+      .header { padding: 40px 0 24px; }
+      .search-row { flex-direction: column; align-items: stretch; }
+      .view-toggle { justify-content: center; }
+      .grid { grid-template-columns: 1fr; gap: 16px; }
+      .card { padding: 24px 20px 20px; }
+      .theme-toggle { top: 14px; right: 14px; width: 42px; height: 42px; }
+    }
+
+    /* ─── ACCESIBILIDAD: REDUCED MOTION ─── */
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Botón de tema -->
+  <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema" title="Cambiar tema">
+    <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true">
+      <circle cx="12" cy="12" r="4"/>
+      <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
+    </svg>
+    <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+  </button>
+
+  <div class="app">
+    <!-- Header -->
+    <header class="header">
+      <div class="header-badge">Enciclopedia visual digital</div>
+      <h1>
+        Explora el <span class="gradient-text">conocimiento</span><br>
+        de forma visual
+      </h1>
+      <p class="header-subtitle">
+        29 temas organizados por orden alfabético y por materia. Cada tarjeta abre una experiencia interactiva completa.
+      </p>
+    </header>
+
+    <!-- Controles -->
+    <div class="controls">
+      <div class="search-row">
+        <div class="search-wrapper">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="m21 21-4.3-4.3"></path>
+          </svg>
+          <input
+            type="text"
+            class="search-input"
+            id="searchInput"
+            placeholder="Buscar por tema, descripción o categoría…"
+            autocomplete="off"
+            aria-label="Buscar en la enciclopedia"
+          >
+        </div>
+        <div class="view-toggle" role="group" aria-label="Modo de visualización">
+          <button class="view-btn active" data-view="alphabetical" id="btnAlphabetical">A – Z</button>
+          <button class="view-btn" data-view="byCategory" id="btnByCategory">Por materia</button>
+        </div>
+      </div>
+
+      <div class="chips-scroll">
+        <div class="chips" id="chipsContainer" role="group" aria-label="Filtrar por categoría"></div>
+      </div>
+    </div>
+
+    <!-- Meta resultados -->
+    <div class="results-meta">
+      <span class="results-count" id="resultsCount"></span>
+    </div>
+
+    <!-- Grid -->
+    <main class="grid" id="grid" aria-live="polite"></main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>
+        Enciclopedia Visual · Contenido original de
+        <a href="https://app-fioravante.github.io/apps-fioravante/" target="_blank" rel="noopener noreferrer">Fioravante</a>.
+        Cada tema se abre en una nueva pestaña.
+      </p>
+    </footer>
+  </div>
+
+  <script>
+    // ─── TEMA ───
+    const rootEl = document.documentElement;
+    const themeToggle = document.getElementById('themeToggle');
+
+    function updateToggleLabel() {
+      const isLight = rootEl.getAttribute('data-theme') === 'light';
+      themeToggle.setAttribute('aria-label', isLight ? 'Cambiar a modo oscuro' : 'Cambiar a modo claro');
+      themeToggle.setAttribute('title', isLight ? 'Cambiar a modo oscuro' : 'Cambiar a modo claro');
+    }
+
+    themeToggle.addEventListener('click', () => {
+      const isLight = rootEl.getAttribute('data-theme') === 'light';
+      const next = isLight ? 'dark' : 'light';
+      rootEl.setAttribute('data-theme', next);
+      try { localStorage.setItem('enc-theme', next); } catch (e) {}
+      updateToggleLabel();
+    });
+
+    updateToggleLabel();
+
+    // ─── DATOS ───
+    const BASE_URL_OTROS = 'https://app-fioravante.github.io/apps-fioravante/otros/';
+    const BASE_URL_ROOT = 'https://app-fioravante.github.io/apps-fioravante/';
+
+    const entries = [
+      // ── Temas originales (dentro de /otros/) ──
+      { title: 'Apocalipsis',  url: BASE_URL_OTROS + 'apocalipsis',  category: 'Misterios y Escatología',  description: 'El fin de los tiempos según las profecías bíblicas y las principales interpretaciones escatológicas.', color: '#fbbf24' },
+      { title: 'Arte',         url: BASE_URL_OTROS + 'arte',          category: 'Arte y Cultura',            description: 'Elementos, principios del diseño y los artistas que transformaron la historia de la mirada.', color: '#fb7185' },
+      { title: 'Atmósfera',    url: BASE_URL_OTROS + 'atmosfera',     category: 'Ciencia y Tecnología',      description: 'Capas, fenómenos y dinámica del aire que hace posible la vida en el planeta.', color: '#22d3ee' },
+      { title: 'Cohetes',      url: BASE_URL_OTROS + 'cohetes',       category: 'Ciencia y Tecnología',      description: 'Principios de propulsión, historia y futuro de la exploración espacial.', color: '#22d3ee' },
+      { title: 'Cuerpo Humano',url: BASE_URL_OTROS + 'cuerpohumano',  category: 'Cuerpo y Mente',            description: 'Anatomía, sistemas y funciones vitales explicados de forma visual e interactiva.', color: '#34d399' },
+      { title: 'Egipto',       url: BASE_URL_OTROS + 'egipto',        category: 'Historia y Civilizaciones', description: 'Faraones, pirámides, jeroglíficos y la civilización que floreció a orillas del Nilo.', color: '#a78bfa' },
+      { title: 'Escritura',    url: BASE_URL_OTROS + 'escritura',     category: 'Arte y Cultura',            description: 'De los primeros pictogramas a los alfabetos modernos: la tecnología que cambió la memoria.', color: '#fb7185' },
+      { title: 'Fenómeno',     url: BASE_URL_OTROS + 'fenomeno',      category: 'Geografía y Naturaleza',    description: 'Misterios, anomalías y eventos naturales que desafían la explicación cotidiana.', color: '#2dd4bf' },
+      { title: 'Geografía',    url: BASE_URL_OTROS + 'geografia',     category: 'Geografía y Naturaleza',    description: 'Relieves, climas, regiones y la compleja relación entre el ser humano y su entorno.', color: '#2dd4bf' },
+      { title: 'Grecia',       url: BASE_URL_OTROS + 'grecia',        category: 'Historia y Civilizaciones', description: 'Filosofía, política, mitología y el legado perdurable de la Antigua Grecia.', color: '#a78bfa' },
+      { title: 'Historia',     url: BASE_URL_OTROS + 'historia',      category: 'Historia y Civilizaciones', description: 'Grandes procesos, revoluciones y eventos que han configurado el mundo contemporáneo.', color: '#a78bfa' },
+      { title: 'Idiomas',      url: BASE_URL_OTROS + 'idiomas',       category: 'Arte y Cultura',            description: 'Familias lingüísticas, evolución de las lenguas y los mecanismos de la comunicación humana.', color: '#fb7185' },
+      { title: 'Matemática',   url: BASE_URL_OTROS + 'matematica',    category: 'Ciencia y Tecnología',      description: 'Números, formas, patrones y la lógica abstracta que sostiene el universo.', color: '#22d3ee' },
+      { title: 'Música',       url: BASE_URL_OTROS + 'musica',        category: 'Arte y Cultura',            description: 'Ritmo, armonía, instrumentos e historia de los sonidos que emocionan.', color: '#fb7185' },
+      { title: 'OVNI',         url: BASE_URL_OTROS + 'ovni',          category: 'Misterios y Escatología',   description: 'Avistamientos, evidencia documental y el debate científico sobre los objetos no identificados.', color: '#fbbf24' },
+      { title: 'Prehistoria',  url: BASE_URL_OTROS + 'prehistoria',   category: 'Historia y Civilizaciones', description: 'Orígenes de la humanidad, evolución de las especies y las primeras sociedades complejas.', color: '#a78bfa' },
+      { title: 'Radio',        url: BASE_URL_OTROS + 'radio',         category: 'Ciencia y Tecnología',      description: 'Ondas electromagnéticas, broadcasting y la tecnología que conectó al mundo en tiempo real.', color: '#22d3ee' },
+      { title: 'Roma',         url: BASE_URL_OTROS + 'roma',          category: 'Historia y Civilizaciones', description: 'República, imperio, ingeniería y el legado jurídico y cultural de la Ciudad Eterna.', color: '#a78bfa' },
+      { title: 'Supervivencia',url: BASE_URL_OTROS + 'supervivencia', category: 'Supervivencia',             description: 'Técnicas, habilidades y mentalidad para afrontar situaciones extremas con recursos limitados.', color: '#f87171' },
+      { title: 'TV',           url: BASE_URL_OTROS + 'tv',            category: 'Ciencia y Tecnología',      description: 'Historia, evolución tecnológica y el impacto cultural de la televisión.', color: '#22d3ee' },
+
+      // ── Nuevos temas (en la raíz de /apps-fioravante/) ──
+      { title: 'Albañilería',  url: BASE_URL_ROOT + 'albañileria',    category: 'Oficios y Hogar',           description: 'Aprendé el orden correcto de cada trabajo, los materiales y los errores que más cuestan en una obra doméstica.', color: '#f59e0b' },
+      { title: 'Comida',       url: BASE_URL_ROOT + 'comida',         category: 'Cocina y Nutrición',        description: 'Armá un plato equilibrado, entendé tu IMC, conocé las dietas más comunes y cociná recetas fáciles.', color: '#34d399' },
+      { title: 'Electricidad', url: BASE_URL_ROOT + 'electricidad',   category: 'Oficios y Hogar',           description: 'Cuidá tu instalación eléctrica, evitá accidentes y gastá menos energía en el hogar.', color: '#f59e0b' },
+      { title: 'Finanzas',     url: BASE_URL_ROOT + 'finanzas',       category: 'Finanzas y Dinero',         description: 'Armá tu balance de gastos, entendé el ahorro, usá mejor el banco y conocé los riesgos de las criptomonedas.', color: '#10b981' },
+      { title: 'Malvinas',     url: BASE_URL_ROOT + 'malvinas',       category: 'Historia y Civilizaciones', description: 'Una guerra de 74 días y dos formas de contarla. Elegí una perspectiva y observá cómo cambian los nombres y las causas.', color: '#a78bfa' },
+      { title: 'Plomería',     url: BASE_URL_ROOT + 'plomeria',       category: 'Oficios y Hogar',           description: 'Entendé cómo funcionan tus tuberías, evitá fugas costosas y actuá con calma cuando surja una emergencia.', color: '#f59e0b' },
+      { title: 'Redes',        url: BASE_URL_ROOT + 'redes',          category: 'Tecnología y Computación',  description: 'Descubrí cómo se conectan tus dispositivos, qué hace un servidor y por qué tus mensajes llegan en segundos.', color: '#22d3ee' },
+      { title: 'Religiones',   url: BASE_URL_ROOT + 'religiones',     category: 'Religión y Filosofía',      description: 'Una guía introductoria para conocer qué enseña y practica cada gran tradición religiosa.', color: '#c084fc' },
+      { title: 'Telescopio',   url: BASE_URL_ROOT + 'telescopio',     category: 'Astronomía y Espacio',      description: 'Todo lo necesario para elegir un telescopio, calcular aumentos, saber qué mirar y observar con paciencia.', color: '#818cf8' }
+    ];
+
+    // ─── ESTADO ───
+    let currentCategory = 'all';
+    let searchQuery = '';
+    let viewMode = 'alphabetical';
+
+    // ─── REFERENCIAS DOM ───
+    const grid = document.getElementById('grid');
+    const chipsContainer = document.getElementById('chipsContainer');
+    const searchInput = document.getElementById('searchInput');
+    const resultsCount = document.getElementById('resultsCount');
+    const btnAlphabetical = document.getElementById('btnAlphabetical');
+    const btnByCategory = document.getElementById('btnByCategory');
+
+    // ─── UTILIDAD: oscurecer un color hex ───
+    function darken(hex, percent) {
+      const num = parseInt(hex.replace('#', ''), 16);
+      const r = Math.max(0, Math.min(255, (num >> 16) - Math.round(255 * percent / 100)));
+      const g = Math.max(0, Math.min(255, ((num >> 8) & 0xFF) - Math.round(255 * percent / 100)));
+      const b = Math.max(0, Math.min(255, (num & 0xFF) - Math.round(255 * percent / 100)));
+      return `#${((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1)}`;
+    }
+
+    // ─── CATEGORÍAS ÚNICAS ───
+    const allCategories = ['all', ...new Set(entries.map(e => e.category))];
+
+    // ─── RENDERIZADO DE CHIPS ───
+    function renderChips() {
+      chipsContainer.innerHTML = '';
+      allCategories.forEach(cat => {
+        const btn = document.createElement('button');
+        btn.className = 'chip' + (currentCategory === cat ? ' active' : '');
+        btn.textContent = cat === 'all' ? 'Todas' : cat;
+        btn.setAttribute('aria-pressed', currentCategory === cat);
+        btn.addEventListener('click', () => {
+          currentCategory = cat;
+          renderChips();
+          render();
+        });
+        chipsContainer.appendChild(btn);
+      });
+    }
+
+    // ─── FILTRADO ───
+    function getFilteredEntries() {
+      let filtered = [...entries];
+      if (currentCategory !== 'all') {
+        filtered = filtered.filter(e => e.category === currentCategory);
+      }
+      if (searchQuery.trim() !== '') {
+        const q = searchQuery.toLowerCase().trim();
+        filtered = filtered.filter(e =>
+          e.title.toLowerCase().includes(q) ||
+          e.description.toLowerCase().includes(q) ||
+          e.category.toLowerCase().includes(q)
+        );
+      }
+      return filtered;
+    }
+
+    // ─── CREACIÓN DE TARJETA ───
+    function createCard(entry, index) {
+      const a = document.createElement('a');
+      a.href = entry.url;
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+      a.className = 'card';
+      a.style.animationDelay = `${Math.min(index * 0.04, 0.5)}s`;
+      a.setAttribute('aria-label', `Abrir ${entry.title} — ${entry.category}`);
+
+      // Gradiente sólido sin transparencia para mejor contraste
+      const gradient = `linear-gradient(135deg, ${entry.color}, ${darken(entry.color, 18)})`;
+
+      a.innerHTML = `
+        <div class="card-avatar" style="background: ${gradient};">
+          ${entry.title.charAt(0)}
+        </div>
+        <span class="card-category" style="color: ${entry.color};">${entry.category}</span>
+        <h3 class="card-title">${entry.title}</h3>
+        <p class="card-description">${entry.description}</p>
+        <span class="card-arrow" aria-hidden="true">↗</span>
+      `;
+
+      // Efecto de brillo que sigue al cursor
+      a.addEventListener('mousemove', (e) => {
+        const rect = a.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width) * 100;
+        const y = ((e.clientY - rect.top) / rect.height) * 100;
+        a.style.setProperty('--mouse-x', `${x}%`);
+        a.style.setProperty('--mouse-y', `${y}%`);
+      });
+
+      return a;
+    }
+
+    // ─── RENDERIZADO PRINCIPAL ───
+    function render() {
+      const filtered = getFilteredEntries();
+      grid.innerHTML = '';
+
+      resultsCount.innerHTML = `Mostrando <strong>${filtered.length}</strong> de ${entries.length} temas`;
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `
+          <div class="empty-state">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <path d="m21 21-4.3-4.3"></path>
+              <path d="M8 11h6"></path>
+            </svg>
+            <p>No se encontraron temas con esos criterios.<br>Prueba con otra búsqueda o categoría.</p>
+          </div>
+        `;
+        return;
+      }
+
+      if (viewMode === 'alphabetical') {
+        filtered.sort((a, b) => a.title.localeCompare(b.title, 'es'));
+        filtered.forEach((entry, i) => {
+          grid.appendChild(createCard(entry, i));
+        });
+      } else {
+        const groups = {};
+        filtered.forEach(entry => {
+          if (!groups[entry.category]) groups[entry.category] = [];
+          groups[entry.category].push(entry);
+        });
+
+        const sortedCategories = Object.keys(groups).sort((a, b) => a.localeCompare(b, 'es'));
+
+        sortedCategories.forEach(cat => {
+          const heading = document.createElement('h2');
+          heading.className = 'category-heading';
+          heading.textContent = cat;
+          grid.appendChild(heading);
+
+          groups[cat].sort((a, b) => a.title.localeCompare(b.title, 'es'));
+          groups[cat].forEach((entry, i) => {
+            grid.appendChild(createCard(entry, i));
+          });
+        });
+      }
+    }
+
+    // ─── EVENTOS ───
+    searchInput.addEventListener('input', (e) => {
+      searchQuery = e.target.value;
+      render();
+    });
+
+    btnAlphabetical.addEventListener('click', () => {
+      viewMode = 'alphabetical';
+      btnAlphabetical.classList.add('active');
+      btnByCategory.classList.remove('active');
+      render();
+    });
+
+    btnByCategory.addEventListener('click', () => {
+      viewMode = 'byCategory';
+      btnByCategory.classList.add('active');
+      btnAlphabetical.classList.remove('active');
+      render();
+    });
+
+    // ─── INICIALIZACIÓN ───
+    renderChips();
+    render();
+
+    // ─── ATAJO: ENFOCAR BÚSQUEDA CON "/" ───
+    document.addEventListener('keydown', (e) => {
+      if (e.key === '/' && document.activeElement !== searchInput) {
+        e.preventDefault();
+        searchInput.focus();
+      }
+    });
+  </script>
+
+</body>
+</html>
