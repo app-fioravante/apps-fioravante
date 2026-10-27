@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Historia de Misiones</title>
+<meta name="description" content="Historia de la provincia de Misiones: línea del tiempo, Territorio Nacional, gobernadores, inmigrantes, ciudades, comidas típicas, clima y proyectos futuros.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;700&family=Fraunces:opsz,wght@9..144,600..800&display=swap" rel="stylesheet">
+<style>
+:root{--fd:'Fraunces',Georgia,serif;--fb:'Figtree','Segoe UI',system-ui,sans-serif;--bg:#f6f1ec;--sf:#fff;--s2:#eadfd5;--bd:#d6c5b5;--tx:#2a1a14;--mu:#665248;--ac:#a8432a;--on:#fff;--c1:#a8432a;--c2:#2b7a58;--c3:#1d6fb4;--c4:#9a6700;--c5:#6a4fa0;box-sizing:border-box;padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1a120e;--sf:#261a14;--s2:#35261d;--bd:#4d3829;--tx:#f6ece4;--mu:#c7b3a4;--ac:#f0987f;--on:#1a120e;--c1:#f0987f;--c2:#6fd1a4;--c3:#7cc2f4;--c4:#f6b93b;--c5:#b9a6f0}}
+:root[data-theme="dark"]{--bg:#1a120e;--sf:#261a14;--s2:#35261d;--bd:#4d3829;--tx:#f6ece4;--mu:#c7b3a4;--ac:#f0987f;--on:#1a120e;--c1:#f0987f;--c2:#6fd1a4;--c3:#7cc2f4;--c4:#f6b93b;--c5:#b9a6f0}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px);-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--tx);font:400 1rem/1.65 var(--fb);overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--bg)}
+h1,h2,h3,h4{font-family:var(--fd);margin:0;line-height:1.12}p{margin:0}a{color:inherit;text-decoration:none}button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--ac);outline-offset:2px;border-radius:6px}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:var(--bg);border-bottom:1px solid var(--bd)}
+.hi{max-width:1100px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:12px}
+.brand{font:700 1.15rem var(--fd);white-space:nowrap}
+.nav{display:flex;gap:2px;margin-left:auto;overflow-x:auto;scrollbar-width:none;min-width:0}.nav::-webkit-scrollbar{display:none}
+.nl{padding:8px 12px;border-radius:10px;font-size:.85rem;color:var(--mu);white-space:nowrap}.nl.on{background:var(--ac);color:var(--on);font-weight:700}
+.tt{width:38px;height:38px;flex:none;border:1px solid var(--bd);border-radius:10px;background:var(--s2)}
+main{max-width:1100px;margin:0 auto;padding:0 16px 70px}
+.view{display:none}.view.on{display:block}
+.flag{height:16px;border-radius:99px;background:linear-gradient(90deg,#b5472f 0 33.3%,#2f7d4f 33.3% 66.6%,#3b8fd0 66.6%)}
+.hero{margin-top:18px}.hero h1{font-size:clamp(3rem,13vw,6.5rem);font-weight:800;letter-spacing:-.02em;margin:22px 0 10px}
+.lead{color:var(--mu);font-size:1.08rem;max-width:62ch}
+.stn{display:flex;gap:10px;overflow-x:auto;padding:6px 0 12px;margin-top:22px;scroll-snap-type:x proximity}
+.st{flex:0 0 152px;padding:12px 14px;border-radius:12px;background:var(--sf);border:1px solid var(--bd);scroll-snap-align:start}
+.st b{display:block;font:700 1.3rem var(--fd);color:var(--ac)}.st span{display:block;font-size:.85rem;line-height:1.3;color:var(--mu)}
+.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr))}
+.card{padding:18px;border-radius:12px;background:var(--sf);border:1px solid var(--bd)}a.card:hover{border-color:var(--ac)}
+.card h3{font-size:1.15rem;margin-bottom:6px}.card p{font-size:.92rem;color:var(--mu)}.card small{display:block;color:var(--mu);margin-bottom:6px}
+.home{margin-top:20px}.note{margin-top:22px;padding:14px 18px;border-radius:12px;border:1px dashed var(--bd);color:var(--mu);font-size:.9rem}
+.sec{padding:34px 0 4px}.sec h2{font-size:clamp(1.9rem,6vw,3rem);margin-bottom:8px}.sec>.lead{margin-bottom:22px}
+.tabs{display:flex;gap:8px;margin-bottom:12px;overflow-x:auto;padding-bottom:4px;scrollbar-width:thin}
+.tab{flex:none;padding:10px 15px;border-radius:10px;border:1px solid var(--bd);background:var(--sf);font-weight:700;font-size:.9rem}.tab[aria-selected=true]{background:var(--c);color:var(--on);border-color:transparent}
+@media(min-width:700px){.tabs{flex-wrap:wrap;overflow:visible}}
+.panel{padding:20px;border-radius:12px;background:var(--sf);border:1px solid var(--bd);border-left:6px solid var(--c)}
+.panel h3{font-size:1.45rem;margin-bottom:10px}.pt{color:var(--mu);max-width:76ch}.pt p+p,.pt ul{margin-top:.7em}.pt b{color:var(--tx)}.pt ul{padding-left:1.2em}
+.two{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));margin-bottom:10px}.two>div{padding:12px 14px;border-radius:10px;background:var(--s2)}
+.tl{position:relative;padding-top:4px}.tl::before{content:"";position:absolute;left:7px;top:10px;bottom:10px;width:2px;background:var(--bd)}
+.ev{position:relative;padding:0 0 18px 34px}.ev::before{content:"";position:absolute;left:0;top:5px;width:16px;height:16px;border-radius:50%;background:var(--sf);border:4px solid var(--c)}
+.ev b{display:block;font:700 1.1rem var(--fd);color:var(--c)}.ev h4{font-size:1.05rem;color:var(--tx)}.ev p{max-width:62ch}
+.ctl{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}.chip{padding:7px 14px;border-radius:99px;border:1px solid var(--bd);background:var(--sf);font-size:.88rem}.chip[aria-pressed=true]{background:var(--ac);color:var(--on);border-color:transparent;font-weight:700}
+.search{width:100%;max-width:420px;padding:12px 16px;border-radius:12px;border:1px solid var(--bd);background:var(--sf);color:var(--tx);font:inherit;margin-bottom:8px}
+.m{color:var(--mu);font-size:.88rem;margin-bottom:12px}.tag{display:inline-block;padding:2px 10px;border-radius:99px;background:var(--s2);color:var(--ac);font-size:.78rem;font-weight:700;margin-bottom:8px}
+.tw{overflow-x:auto}.gt{border-collapse:collapse;width:100%;min-width:540px;font-size:.88rem}.gt th,.gt td{padding:7px 10px;border-bottom:1px solid var(--bd);text-align:left;vertical-align:top}.gt th{color:var(--tx);white-space:nowrap}.gt td{color:var(--mu)}.gt td:first-child{color:var(--tx);font-weight:700}.pt:has(.tw){max-width:none}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style></head>
+<body>
+<header class="top"><div class="hi"><a class="brand" href="#inicio">Historia de Misiones</a><nav class="nav" id="nav" aria-label="Secciones"></nav><button class="tt" id="tt" aria-label="Cambiar entre tema claro y oscuro">◐</button></div></header>
+<main>
+<section class="view" id="inicio"><div class="hero"><div class="flag" role="img" aria-label="Tierra colorada, selva y río"></div><h1>Misiones</h1>
+<p class="lead">Selva, ríos, tierra colorada y gente de muchos orígenes: la historia de la provincia, desde los guaraníes y los jesuitas hasta hoy.</p>
+<div class="stn" id="stn"></div></div>
+<div class="grid home" id="home"></div>
+<p class="note">Resumen educativo: no reemplaza a los textos oficiales ni a los libros de historia. Los temas en debate muestran la posición de cada parte, y los datos recientes pueden cambiar.</p></section>
+</main>
+<script>
+const $=(s,e=document)=>e.querySelector(s),$$=(s,e=document)=>[...e.querySelectorAll(s)];
+const V=[['linea','Línea del tiempo','De los guaraníes y jesuitas a la actualidad.','Historia'],['territorio','Territorio Nacional','De 1881 a 1953: cómo se organizó y se provincializó.','Territorio'],['gobernadores','Gobernadores','Del Territorio Nacional a la democracia.','Gobernadores'],['inmigrantes','Inmigrantes','Colonización y colectividades.','Inmigrantes'],['ciudades','Ciudades principales','Posadas, Oberá, Eldorado y más.','Ciudades'],['comidas','Comidas típicas','Sabores guaraníes y de inmigrantes.','Comidas'],['clima','Clima y selva','Subtropical húmedo y tierra colorada.','Clima'],['futuro','Futuros proyectos','Rutas, energía, frontera y turismo.','Futuro']];
+$('main').insertAdjacentHTML('beforeend',V.map(v=>`<section class="view" id="${v[0]}"><div class="sec"><h2>${v[1]}</h2><p class="lead">${v[2]}</p><div id="b-${v[0]}"></div></div></section>`).join(''));
+$('#nav').innerHTML=V.map(v=>`<a class="nl" href="#${v[0]}" data-v="${v[0]}">${v[3]}</a>`).join('');
+$('#home').innerHTML=V.map(v=>`<a class="card" href="#${v[0]}"><h3>${v[1]}</h3><p>${v[2]}</p></a>`).join('');
+$('#stn').innerHTML=[['1541','Cabeza de Vaca llega a las Cataratas','linea'],['1610','Primeras reducciones guaraníes','linea'],['1881','Se federaliza Misiones','territorio'],['1897','Primeros inmigrantes','inmigrantes'],['1919','Eldorado y Puerto Rico','inmigrantes'],['1928','Se funda Oberá','inmigrantes'],['1953','Misiones es provincia','territorio'],['1983','Vuelve la democracia','gobernadores'],['2023','Gobierno actual','gobernadores']].map(s=>`<a class="st" href="#${s[2]}"><b>${s[0]}</b><span>${s[1]}</span></a>`).join('');
+function go(h){const id=V.some(v=>v[0]===h)?h:'inicio';$$('.view').forEach(e=>e.classList.toggle('on',e.id===id));$$('.nl').forEach(e=>e.classList.toggle('on',e.dataset.v===id));scrollTo(0,0);const a=$('.nl.on');a&&a.scrollIntoView({inline:'center',block:'nearest'})}
+addEventListener('hashchange',()=>go(location.hash.slice(1)));
+$('#tt').onclick=()=>{const r=document.documentElement,d=r.dataset.theme==='dark'||(!r.dataset.theme&&matchMedia('(prefers-color-scheme:dark)').matches);r.dataset.theme=d?'light':'dark';try{localStorage.setItem('hm-theme',r.dataset.theme)}catch(e){}};
+try{const t=localStorage.getItem('hm-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}
+const P=t=>`<p>${t}</p>`,tl=a=>`<div class="tl">${a.map(x=>`<div class="ev"><b>${x[0]}</b><h4>${x[1]}</h4><p>${x[2]}</p></div>`).join('')}</div>`,two=(a,x,b,y)=>`<div class="two"><div><b>${a}</b>${P(x)}</div><div><b>${b}</b>${P(y)}</div></div>`,ul=a=>`<ul>${a.map(x=>`<li>${x}</li>`).join('')}</ul>`;
+function tabs(id,D){const e=$('#b-'+id);e.innerHTML=`<div class="tabs" role="tablist">${D.map((d,i)=>`<button class="tab" role="tab" style="--c:var(--c${i%5+1})" data-i="${i}">${d[0]}</button>`).join('')}</div><div class="panel" role="tabpanel"></div>`;const p=$('.panel',e),sel=i=>{$$('.tab',e).forEach((t,j)=>t.setAttribute('aria-selected',i===j));p.style.setProperty('--c',`var(--c${i%5+1})`);p.innerHTML=`<h3>${D[i][1]}</h3><div class="pt">${D[i][2]}</div>`};e.onclick=ev=>{const t=ev.target.closest('.tab');t&&sel(+t.dataset.i)};sel(0)}
+const cards=a=>`<div class="grid">${a.map(c=>`<div class="card"><span class="tag">${c[1]}</span><h3>${c[0]}</h3><p>${c[2]}</p></div>`).join('')}</div>`;
+tabs('linea',[
+['Guaraníes y jesuitas','Pueblos guaraníes y reducciones (hasta 1810)',tl([['Antes de 1500','Pueblos guaraníes','El territorio estaba habitado por pueblos guaraníes, cuyos descendientes mbyá y avá guaraní viven hoy en comunidades misioneras.'],['1541','Cabeza de Vaca y las Cataratas','Álvar Núñez Cabeza de Vaca llega a los saltos del Iguazú en su viaje hacia Asunción.'],['1609–1610','Primeras reducciones','Los jesuitas fundan pueblos guaraníes (reducciones) en la región.'],['1696','San Ignacio Miní','La reducción se instala en su sitio actual. Hoy es Patrimonio de la Humanidad.'],['1750–1756','Tratado de Madrid','España y Portugal redefinen límites y los guaraníes resisten el traslado de sus pueblos (Guerra Guaranítica).'],['1767','Expulsión de los jesuitas','Carlos III los expulsa; los pueblos decaen y sus habitantes se dispersan.']])],
+['Siglo XIX','Del abandono a la federalización (1810–1881)',tl([['1810–1860','Territorio disputado','Tras la independencia, la región es poco poblada y la disputan Corrientes, Paraguay y Brasil.'],['1863','Trincheras de San José','Se funda el puesto que luego será Posadas.'],['1865–1870','Guerra de la Triple Alianza','La guerra con Paraguay afecta a esta zona de frontera.'],['1879','Nace Posadas','La localidad recibe el nombre de Gervasio Antonio de Posadas.'],['1881','Federalización','El Congreso federaliza el territorio, que pasa a depender de la Nación.']])],
+['Colonización','Colonización y Territorio (1881–1953)',tl([['1897','Primeras colonias','Llegan familias ucranianas y polacas; empieza la colonización agrícola.'],['1919–1928','Eldorado, Montecarlo y Oberá','Compañías colonizadoras fundan colonias de europeos y sus descendientes.'],['1934','Parque Nacional Iguazú','Se crea para proteger las Cataratas y la selva.'],['1953','Provincialización','Misiones se convierte en provincia y se crea su Cámara de Representantes.']])],
+['Provincia','Provincia de Misiones (desde 1953)',tl([['1973','Universidad Nacional de Misiones','Nace la UNaM, con sede en Posadas.'],['1983–1984','Patrimonio de la Humanidad','La UNESCO declara a las misiones jesuíticas y a las Cataratas del Iguazú.'],['1990','Obras de integración','Se inauguran la represa Urugua-í y el puente Posadas–Encarnación.'],['2011','Maravilla natural','Las Cataratas del Iguazú son elegidas una de las siete maravillas naturales del mundo.']])]]);
+
+tabs('territorio',[
+['Creación','Un territorio federal (1881–1953)',P('En 1881 el Congreso federalizó Misiones, que pasó a ser Territorio Nacional con capital en Posadas. La Ley 1532 (1884) organizó los territorios: los gobernaba un gobernador designado por el presidente y sus habitantes no elegían gobernador ni tenían representantes en el Congreso.')],
+['Gobierno','Cómo se gobernaba',P('El gobernador, nombrado por el Poder Ejecutivo nacional, conducía el territorio. La ley preveía una legislatura al llegar a 30.000 habitantes y el pase a provincia con 60.000. El primer gobernador fue Rudecindo Roca.')],
+['Producción','Tierra, yerba y madera',P('El Estado vendió tierras fiscales a empresas colonizadoras y colonos. Crecieron la yerba mate, el té y la explotación forestal. El río Paraná fue la salida de la producción y hacia 1912 llegó el ferrocarril a Posadas.')],
+['Provincia','Ley 14.294 (1953)',P('En 1953, durante el gobierno de Perón, la Ley 14.294 convirtió a Misiones en provincia. Desde entonces elige gobernador, legisladores provinciales y representantes en el Congreso Nacional.')]]);
+
+const R=t=>t.trim().split('\n').map(l=>l.split('|')),gt=(h,r)=>`<div class="tw"><table class="gt"><thead><tr>${h.map(x=>`<th>${x}</th>`).join('')}</tr></thead><tbody>${R(r).map(x=>`<tr>${x.map(c=>`<td>${c}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
+tabs('gobernadores',[
+['Territorio','Gobernadores del Territorio Nacional (1882–1955)',P('Los designaba el Poder Ejecutivo Nacional, por lo que no había partidos gobernantes provinciales. Se listan también los interinos.')+gt(['Gobernador','Desde','Hasta','Carácter'],`Rudecindo Roca|01/01/1882|13/04/1891|Coronel; primero del Territorio
+Benjamín Moritán|11/06/1891|10/07/1893|Coronel
+Francisco Delgado|10/07/1893|28/10/1893|Interino
+Juan Balestra|28/10/1893|09/11/1896|
+Juan José Lanusse|09/11/1896|01/07/1905|
+Manuel Bermúdez|24/07/1905|18/07/1908|
+José Manuel López|18/07/1908|12/09/1908|Interino
+Justino Solari|12/09/1908|31/05/1911|
+Marco Acosta|31/05/1911|08/07/1911|Interino
+Diógenes Lotero|08/07/1911|14/07/1911|Interino
+Gregorio López|14/07/1911|30/11/1916|Coronel
+Soriano Romero|01/12/1916|23/05/1917|Interino
+Héctor Barreyro|23/05/1917|27/04/1920|Primer período
+Guillermo Doll|27/04/1920|30/09/1922|Interino
+Diógenes Lotero|30/09/1922|16/10/1922|Interino
+Héctor Barreyro|16/10/1922|01/01/1930|Segundo período
+José Manuel López|01/01/1930|27/09/1930|Interino
+Enrique Pilotto|27/09/1930|19/12/1930|
+Carlos Acuña|19/12/1930|25/06/1935|
+Julio Amarante|25/06/1935|12/09/1935|Interino
+Julio Agustín Vanasco|12/09/1935|16/08/1938|
+Ángel Ruiz|16/08/1938|29/11/1938|Interino
+Luis Cirilo Romaña|29/11/1938|06/11/1941|
+Julio Sánchez|06/11/1941|22/11/1941|
+Esteban Servando Semilla|22/11/1941|11/06/1943|
+Gastón Fermepín|11/06/1943|08/07/1943|
+Eduardo Otaño|14/06/1943|19/07/1946|
+Manuel Ribero y Hornos|19/07/1946|20/01/1947|Interino
+Aparicio Pereyra Almeida|20/01/1947|30/09/1949|
+Alberto D’Uva|01/10/1949|23/11/1949|Interino (secretario)
+Eduardo Ramón Reguero|21/12/1949|31/12/1952|
+Claudio Arrechea|31/12/1952|01/02/1955|Comisionado desde 1954
+Marcos B. Reyes|03/02/1955|24/02/1955|Ministro a cargo
+Juan Carlos Lorenzo|24/05/1955|04/06/1955|Comisionado; último del Territorio`)],
+['1955–1983','Provincia con intervenciones y golpes (1955–1983)',P('Desde la provincialización hubo gobernadores electos, interventores federales y gobiernos de facto. Solo seis gobiernos fueron elegidos por el voto popular y ninguno completó su período.')+gt(['Gobernante','Desde','Hasta','Cargo','Partido o régimen'],`Claudio Arrechea|04/06/1955|20/09/1955|Gobernador electo|Partido Peronista
+Juan Carlos Rocca|20/09/1955|11/10/1955|Gobierno militar|Revolución Libertadora
+Adolfo J. Pomar|11/10/1955|30/04/1958|Interventor federal|Revolución Libertadora
+Pedro Domingo Rebollo|01/05/1958|29/05/1958|Interventor federal|—
+Julio Brouwer de Koning|29/05/1958|15/03/1959|Interventor federal|—
+César Napoleón Ayrault|16/03/1959|21/01/1960|Interventor federal|—
+Francisco Luis Martos|22/01/1960|01/05/1960|Interventor federal|—
+César Napoleón Ayrault|01/05/1960|24/04/1962|Gobernador electo|UCRI
+Wilde Santa Cruz|24/04/1962|25/06/1962|Interventor federal|—
+Emilio Gueret|25/06/1962|24/10/1962|Interventor federal|—
+Pablo Luzuriaga|24/10/1962|12/10/1963|Interventor federal|—
+Mario Losada|12/10/1963|28/06/1966|Gobernador electo|UCRP
+Manuel Alfonso Galeano|28/06/1966|27/07/1966|Interventor|Revolución Argentina
+Hugo Jorge Montiel|27/07/1966|18/11/1969|Interventor|Revolución Argentina
+Ángel Vicente Rossi|18/11/1969|24/05/1973|Interventor|Revolución Argentina
+Juan Manuel Irrazábal|25/05/1973|30/11/1973|Gobernador electo|PJ (FREJULI)
+Luis Ángel Ripoll|01/12/1973|21/01/1975|Gobernador interino|PJ
+Juan Carlos Taparelli|21/01/1975|25/05/1975|Interventor federal|—
+Miguel Ángel Alterach|25/05/1975|24/03/1976|Gobernador|PJ
+Juan Antonio Beltrametti|24/03/1976|23/04/1976|Interventor militar|Proceso
+René Gabriel Buteler|24/04/1976|17/03/1977|Interventor militar|Proceso
+Rodolfo R. Poletti|17/03/1977|01/11/1978|Interventor militar|Proceso
+Fernando Di Fonzo|01/11/1978|06/12/1978|Interventor militar|Proceso
+Rubén Norberto Paccagnini|07/12/1978|31/03/1981|Interventor militar|Proceso
+Juan Manuel Bayón|31/03/1981|11/12/1983|Interventor militar|Proceso`)],
+['Democracia','Gobernadores desde 1983',gt(['Gobernador','Desde','Hasta','Partido','Vicegobernador'],`Ricardo Barrios Arrechea|11/12/1983|17/09/1987|UCR|Luis María Cassoni
+Luis María Cassoni|17/09/1987|11/12/1987|UCR|Vacante
+Julio César Humada|11/12/1987|11/12/1991|PJ|Julio Piró
+Federico Ramón Puerta|11/12/1991|11/12/1999|PJ|Miguel Ángel Alterach (1991–95); Julio Alberto Ifrán (1995–99)
+Carlos Eduardo Rovira|11/12/1999|10/12/2007|PJ (1999); Frente Renovador de la Concordia (2003)|Mercedes Margarita Oviedo; Pablo Tschirsch
+Maurice Fabián Closs|10/12/2007|10/12/2015|Frente Renovador de la Concordia|Sandra Giménez; Hugo Passalacqua
+Hugo Mario Passalacqua|10/12/2015|10/12/2019|Frente Renovador de la Concordia|Oscar Herrera Ahuad
+Oscar Alberto Herrera Ahuad|10/12/2019|10/12/2023|Frente Renovador de la Concordia|Carlos Omar Arce
+Hugo Mario Passalacqua|10/12/2023|10/12/2027|Frente Renovador de la Concordia|Lucas Romero Spinelli`)+P('Barrios Arrechea renunció en septiembre de 1987 y completó el período su vicegobernador. Puerta y Rovira tuvieron dos mandatos, y Passalacqua tiene dos en períodos separados.')],
+['Partidos','Partidos y regímenes que gobernaron',gt(['Período','Partido o régimen','Gobernantes'],`1882–1955|Sin partido provincial: gobernadores designados por el Presidente de la Nación|Ver pestaña Territorio
+1955|Partido Peronista|Claudio Arrechea
+1955–1958|Revolución Libertadora (de facto)|Rocca, Pomar
+1958–1960|Intervenciones federales|Rebollo, Brouwer de Koning, Ayrault, Martos
+1960–1962|Unión Cívica Radical Intransigente (UCRI)|César Napoleón Ayrault
+1962–1963|Intervenciones federales|Santa Cruz, Gueret, Luzuriaga
+1963–1966|Unión Cívica Radical del Pueblo (UCRP)|Mario Losada
+1966–1973|Revolución Argentina (de facto)|Galeano, Montiel, Rossi
+1973–1976|Partido Justicialista (FREJULI)|Irrazábal, Ripoll, Alterach
+1975|Intervención federal|Taparelli
+1976–1983|Proceso de Reorganización Nacional (de facto)|Beltrametti, Buteler, Poletti, Di Fonzo, Paccagnini, Bayón
+1983–1987|Unión Cívica Radical (UCR)|Barrios Arrechea, Cassoni
+1987–2003|Partido Justicialista (PJ)|Humada, Puerta, Rovira (primer mandato)
+2003–hoy|Frente Renovador de la Concordia (Partido de la Concordia Social)|Rovira (segundo mandato), Closs, Passalacqua, Herrera Ahuad, Passalacqua`)],
+['Fuentes','Sobre los datos y las fuentes',P('Las listas se armaron cruzando el listado de gobernadores de Wikipedia, el archivo de la provincia de Misiones (publicado por El Territorio en 2008) y el repositorio histórico de Eldorado.')+ul(['Las fuentes difieren en algunas fechas por días o semanas. En esos casos se usó la del archivo provincial para 1954–2008 y la de Wikipedia para el resto.','Las fechas de Eduardo Otaño y Gastón Fermepín (junio y julio de 1943) se superponen en las fuentes.','Entre Juan José Lanusse y Manuel Bermúdez (julio de 1905) hubo un breve interinato cuyo nombre no figura en las fuentes consultadas.','Claudio Arrechea figura en distintas fuentes con fechas algo diferentes entre 1952 y 1955.','Los partidos de los gobernadores del Territorio no se indican: no los elegía el voto popular.'])]]);
+
+tabs('inmigrantes',[
+['Cómo llegaron','La colonización europea',tl([['1897','Primeros colonos','Llegan familias ucranianas y polacas y se forman las primeras colonias, como Apóstoles.'],['1919–1920','Colonias privadas','Empresas colonizadoras fundan Eldorado, Puerto Rico y Montecarlo con alemanes, suizos y descendientes de europeos venidos de Brasil.'],['1920–1940','Más colectividades','Se suman italianos, españoles, escandinavos, rusos, checos y otros. Oberá nace en 1928.'],['Siempre','Vecinos de frontera','Paraguayos y brasileños llegaron y llegan por la frontera; su cultura es parte de la identidad misionera.']])],
+['Colectividades','Quiénes son',ul(['<b>Ucranianos y polacos:</b> entre los primeros colonos agrícolas.','<b>Alemanes y suizos:</b> Eldorado, Montecarlo, Puerto Rico y Oberá; yerba, madera y comercio.','<b>Paraguayos y brasileños:</b> influyen en el idioma, la comida y la música.','<b>Italianos y españoles:</b> comercio, construcción y agricultura.','<b>Escandinavos, checos, rusos y otros:</b> presentes en Oberá.'])],
+['Fiesta','Fiesta Nacional del Inmigrante',P('Se celebra en Oberá, en septiembre, desde 1980. Las colectividades muestran comidas, danzas y trajes en el Parque de las Naciones.')]]);
+
+$('#b-ciudades').innerHTML=cards([['Posadas','Capital','Puerto sobre el Paraná frente a Encarnación (Paraguay), unida por el puente de 1990. Nació como Trincheras de San José (1863).'],['Oberá','Capital Nacional del Inmigrante','Fundada en 1928 en el centro de la provincia; sede de la Fiesta Nacional del Inmigrante.'],['Eldorado','Polo productivo','Fundada en 1919 sobre el Paraná; centro de madera y yerba mate.'],['Puerto Iguazú','Turismo','Puerta de las Cataratas del Iguazú y de la Triple Frontera con Brasil y Paraguay.'],['Apóstoles','Capital Nacional de la Yerba Mate','Colonia fundada en 1897 con inmigrantes ucranianos y polacos.'],['San Ignacio','Misión jesuítica','Ruinas de San Ignacio Miní y casa del escritor Horacio Quiroga.'],['El Soberbio','Saltos del Moconá','Acceso a los Saltos del Moconá, sobre el río Uruguay.']]);
+
+$('#b-comidas').innerHTML=cards([['Chipá','Tradicional','Pan de almidón de mandioca, queso y huevo, de origen guaraní.'],['Mbejú','Tradicional','Torta fina de almidón de mandioca y queso, cocida en plancha.'],['Sopa paraguaya','Tradicional','Pastel salado de maíz, queso y cebolla; a pesar del nombre, no es sopa.'],['Chipá guazú','Tradicional','Torta de choclo, queso y leche.'],['Reviro','Tradicional','Masa de harina frita, típica del desayuno y la merienda.'],['Pacú y surubí','Pescados','Peces del Paraná, a la parrilla o en milanesa.'],['Mandioca','Acompañante','Hervida o frita, acompaña asados y pescados.'],['Yerba mate y tereré','Bebidas','El mate y el tereré (mate frío) son la bebida diaria; Misiones es la principal provincia yerbatera.'],['De los inmigrantes','Colectividades','Varéniki y pierogi ucranianos y polacos, strudel y kuchen alemanes.']]);
+
+tabs('clima',[
+['Clima','Subtropical sin estación seca',P('Misiones tiene clima subtropical húmedo. Llueve todo el año, entre 1.600 y 2.000 mm anuales en promedio, y la temperatura media anual ronda los 21 °C. El verano es caluroso y húmedo, con máximas que superan los 35 °C; el invierno es suave, con heladas ocasionales.')],
+['Suelo y selva','Tierra colorada y Selva Paranaense',P('El suelo rojo, rico en óxidos de hierro, sostiene la yerba mate, el té y los pinos. La Selva Paranaense, parte de la Mata Atlántica, es de las zonas de mayor biodiversidad del país y alberga al yaguareté y al tucán.')],
+['Ríos y saltos','Paraná, Uruguay e Iguazú',P('Los ríos Paraná, Uruguay e Iguazú marcan los límites con Paraguay y Brasil: casi el 90 % de las fronteras de la provincia son internacionales. Allí están las Cataratas del Iguazú y los Saltos del Moconá.')]]);
+
+$('#b-futuro').innerHTML=cards([['Autovía de la Ruta 105','En presupuesto nacional','Une el by-pass de la Ruta 12 en Posadas con el empalme de la Ruta 14 en San José.'],['Ruta 12','En debate','Se pide completar la autovía entre San Ignacio y Puerto Iguazú; la ruta pasaría a un nuevo esquema de concesión.'],['Centro de Frontera Posadas–Encarnación','En obra','Obra nacional en curso para ordenar el paso fronterizo.'],['Gasoducto a Misiones','Pendiente','Es la única provincia sin gas por red; el presupuesto nacional 2026 no contemplaba iniciar la obra.'],['Línea eléctrica de 132 kV','En gestión','La provincia busca financiamiento (CAF) para la línea San Isidro–Alem–Oberá.'],['Programa 100 Puentes','Provincial','Vialidad construyó 139 puentes entre 2020 y 2025 y el plan sigue en 2026.'],['Saltos del Moconá','Con fondos del BID','Obras de puentes para mejorar el acceso a los saltos.']])+`<p class="note">Estado a octubre de 2026 según información periodística. Las obras dependen de fondos y pueden cambiar: consultá fuentes oficiales.</p>`;
+go(location.hash.slice(1));
+</script>
+</body></html>

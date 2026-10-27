@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>La Tierra</title>
+<meta name="description" content="La Tierra: continentes, océanos, ríos y mares, estructura interna, la Luna, grandes ciudades, densidad de población, civilización humana, distancias a otros planetas, ubicación astronómica y glosario.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;700&family=Fraunces:opsz,wght@9..144,600..800&display=swap" rel="stylesheet">
+<style>
+:root{--fd:'Fraunces',Georgia,serif;--fb:'Figtree','Segoe UI',system-ui,sans-serif;--bg:#eef4f2;--sf:#fff;--s2:#dce9e6;--bd:#bfd3ce;--tx:#10262b;--mu:#4a636a;--ac:#17658f;--on:#fff;box-sizing:border-box;padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0d1a1f;--sf:#14262d;--s2:#1d3640;--bd:#2f4c57;--tx:#e8f3f2;--mu:#9fbcc2;--ac:#6cc3ea;--on:#0d1a1f}}
+:root[data-theme="dark"]{--bg:#0d1a1f;--sf:#14262d;--s2:#1d3640;--bd:#2f4c57;--tx:#e8f3f2;--mu:#9fbcc2;--ac:#6cc3ea;--on:#0d1a1f}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px);-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--tx);font:400 1rem/1.65 var(--fb);overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--bg)}
+h1,h2,h3,h4{font-family:var(--fd);margin:0;line-height:1.12}p{margin:0}a{color:inherit;text-decoration:none}button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--ac);outline-offset:2px;border-radius:6px}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:var(--bg);border-bottom:1px solid var(--bd)}
+.hi{max-width:1100px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:12px}
+.brand{font:700 1.15rem var(--fd);white-space:nowrap}
+.nav{display:flex;gap:2px;margin-left:auto;overflow-x:auto;scrollbar-width:none;min-width:0}.nav::-webkit-scrollbar{display:none}
+.nl{padding:8px 12px;border-radius:10px;font-size:.85rem;color:var(--mu);white-space:nowrap}.nl.on{background:var(--ac);color:var(--on);font-weight:700}
+.tt{width:38px;height:38px;flex:none;border:1px solid var(--bd);border-radius:10px;background:var(--s2)}
+main{max-width:1100px;margin:0 auto;padding:0 16px 70px}
+.view{display:none}.view.on{display:block}
+.flag{height:16px;border-radius:99px;background:linear-gradient(90deg,#2a7fc0 0 71%,#2f8a5b 71%)}
+.hero{margin-top:18px}.hero h1{font-size:clamp(3rem,13vw,6.5rem);font-weight:800;letter-spacing:-.02em;margin:22px 0 10px}
+.lead{color:var(--mu);font-size:1.08rem;max-width:62ch}
+.stn{display:flex;gap:10px;overflow-x:auto;padding:6px 0 12px;margin-top:22px}
+.st{flex:0 0 152px;padding:12px 14px;border-radius:12px;background:var(--sf);border:1px solid var(--bd)}
+.st b{display:block;font:700 1.3rem var(--fd);color:var(--ac)}.st span{display:block;font-size:.85rem;line-height:1.3;color:var(--mu)}
+.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr))}
+.card{padding:18px;border-radius:12px;background:var(--sf);border:1px solid var(--bd)}a.card:hover{border-color:var(--ac)}
+.card h3{font-size:1.15rem;margin-bottom:6px}.card p{font-size:.92rem;color:var(--mu)}
+.home{margin-top:20px}.note{margin-top:22px;padding:14px 18px;border-radius:12px;border:1px dashed var(--bd);color:var(--mu);font-size:.9rem}
+.sec{padding:34px 0 4px}.sec h2{font-size:clamp(1.9rem,6vw,3rem);margin-bottom:8px}.sec>.lead{margin-bottom:22px}
+.tabs{display:flex;gap:8px;margin-bottom:12px;overflow-x:auto;padding-bottom:4px}
+.tab{flex:none;padding:10px 15px;border-radius:10px;border:1px solid var(--bd);background:var(--sf);font-weight:700;font-size:.9rem}.tab[aria-selected=true]{background:var(--ac);color:var(--on);border-color:transparent}
+.panel{padding:20px;border-radius:12px;background:var(--sf);border:1px solid var(--bd);border-left:6px solid var(--ac)}
+.pt{color:var(--mu)}.pt p,.pt ul{max-width:74ch}.pt p+*,.pt ul+*{margin-top:.8em}.pt b{color:var(--tx)}.pt ul{padding-left:1.2em}
+.tl{position:relative;padding-top:4px}.tl::before{content:"";position:absolute;left:7px;top:10px;bottom:10px;width:2px;background:var(--bd)}
+.ev{position:relative;padding:0 0 18px 34px}.ev::before{content:"";position:absolute;left:0;top:5px;width:16px;height:16px;border-radius:50%;background:var(--sf);border:4px solid var(--ac)}
+.ev b{display:block;font:700 1.1rem var(--fd);color:var(--ac)}.ev h4{font-size:1.05rem}.ev p{max-width:62ch;color:var(--mu)}
+.search{width:100%;max-width:420px;padding:12px 16px;border-radius:12px;border:1px solid var(--bd);background:var(--sf);color:var(--tx);font:inherit;margin-bottom:14px}
+.tw{overflow-x:auto}.gt{border-collapse:collapse;width:100%;min-width:540px;font-size:.88rem}.gt th,.gt td{padding:7px 10px;border-bottom:1px solid var(--bd);text-align:left;vertical-align:top}.gt th{color:var(--tx);white-space:nowrap}.gt td{color:var(--mu)}.gt td:first-child{color:var(--tx);font-weight:700}
+.earth{width:min(240px,70vw);aspect-ratio:1;border-radius:50%;margin:0 auto 6px;background:radial-gradient(circle,#f7d154 0 19%,#e8833a 19% 54.6%,#b04a2c 54.6% 97%,#2f8a5b 97% 98.6%,#2a7fc0 98.6%)}
+.cap{text-align:center;font-size:.82rem;color:var(--mu);margin-bottom:16px}
+.bar{display:grid;grid-template-columns:6.5rem 1fr 4rem;gap:10px;align-items:center;margin:9px 0;font-size:.9rem}.bar i{display:block;height:14px;border-radius:99px;background:var(--ac)}.bar b{text-align:right;color:var(--tx)}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style></head>
+<body>
+<header class="top"><div class="hi"><a class="brand" href="#inicio">La Tierra</a><nav class="nav" id="nav" aria-label="Secciones"></nav><button class="tt" id="tt" aria-label="Cambiar entre tema claro y oscuro">◐</button></div></header>
+<main>
+<section class="view" id="inicio"><div class="hero"><div class="flag" role="img" aria-label="71 % océanos y 29 % tierras emergidas"></div><h1>La Tierra</h1>
+<p class="lead">Nuestro planeta: sus continentes y océanos, su interior, su Luna, quienes la habitamos y el lugar que ocupa en el universo.</p>
+<div class="stn" id="stn"></div></div>
+<div class="grid home" id="home"></div>
+<p class="note">Resumen educativo. Las cifras son aproximadas, varían según la fuente y los datos recientes pueden cambiar.</p></section>
+</main>
+<script>
+const $=(s,e=document)=>e.querySelector(s),$$=(s,e=document)=>[...e.querySelectorAll(s)];
+const V=[['continentes','Continentes','Siete grandes masas de tierra.','Continentes'],['oceanos','Océanos','Cinco océanos y un solo mar mundial.','Océanos'],['rios','Ríos y mares','Los ríos, mares y lagos principales.','Ríos y mares'],['interior','Estructura interna','Corteza, manto y núcleo.','Interior'],['luna','La Luna','Nuestro satélite natural.','Luna'],['ciudades','Grandes ciudades','Las mayores áreas urbanas actuales.','Ciudades'],['densidad','Densidad poblacional','Cuántas personas viven por km².','Densidad'],['humanos','Civilización y planeta','Cómo la humanidad cambió la Tierra.','Humanidad'],['planetas','Distancia a otros planetas','Cuán lejos están los vecinos del Sol.','Distancias'],['ubicacion','Ubicación astronómica','La dirección de la Tierra en el cosmos.','Ubicación'],['glosario','Glosario','Palabras clave explicadas.','Glosario']];
+$('main').insertAdjacentHTML('beforeend',V.map(v=>`<section class="view" id="${v[0]}"><div class="sec"><h2>${v[1]}</h2><p class="lead">${v[2]}</p><div id="b-${v[0]}"></div></div></section>`).join(''));
+$('#nav').innerHTML=V.map(v=>`<a class="nl" href="#${v[0]}" data-v="${v[0]}">${v[3]}</a>`).join('');
+$('#home').innerHTML=V.map(v=>`<a class="card" href="#${v[0]}"><h3>${v[1]}</h3><p>${v[2]}</p></a>`).join('');
+$('#stn').innerHTML=[['4.540 M años','Edad de la Tierra'],['510 M km²','Superficie total'],['71 %','Cubierto por agua'],['12.742 km','Diámetro medio'],['1','Satélite natural: la Luna'],['≈8.300 M','Habitantes en 2026']].map(s=>`<div class="st"><b>${s[0]}</b><span>${s[1]}</span></div>`).join('');
+const P=t=>`<p>${t}</p>`,ul=a=>`<ul>${a.map(x=>`<li>${x}</li>`).join('')}</ul>`;
+const gt=(h,r)=>`<div class="tw"><table class="gt"><tr>${h.map(x=>`<th>${x}</th>`).join('')}</tr>${r.split('\n').map(l=>`<tr>${l.split('|').map(c=>`<td>${c}</td>`).join('')}</tr>`).join('')}</table></div>`;
+const pn=h=>`<div class="panel"><div class="pt">${h}</div></div>`;
+const ev=a=>`<div class="tl">${a.map(x=>`<div class="ev"><b>${x[0]}</b><h4>${x[1]}</h4><p>${x[2]}</p></div>`).join('')}</div>`;
+const tabs=(id,a)=>{const b=$('#b-'+id);b.innerHTML=`<div class="tabs" role="tablist">${a.map((x,i)=>`<button class="tab" role="tab" data-i="${i}">${x[0]}</button>`).join('')}</div><div class="panel"><div class="pt"></div></div>`;const s=i=>{$$('.tab',b).forEach((t,j)=>t.setAttribute('aria-selected',i==j));$('.pt',b).innerHTML=a[i][1]};b.onclick=e=>{const t=e.target.closest('.tab');t&&s(+t.dataset.i)};s(0)};
+const B=(id,h)=>$('#b-'+id).innerHTML=h;
+
+B('continentes',pn(P('La Tierra tiene unos 510 millones de km², y las tierras emergidas ocupan unos 149 millones (29 %). Se cuentan siete continentes, aunque en algunos países se enseñan seis (con América unida) o cinco.')+gt(['Continente','Superficie (M km²)','Población aprox.','Punto más alto'],`Asia|44,6|4.800 M|Everest, 8.849 m
+África|30,4|1.540 M|Kilimanjaro, 5.895 m
+Norteamérica*|24,7|600 M|Denali, 6.190 m
+Sudamérica|17,8|440 M|Aconcagua, 6.961 m
+Antártida|14,2|Sin población permanente|Macizo Vinson, 4.892 m
+Europa|10,2|745 M|Elbrús, 5.642 m
+Oceanía|8,5|46 M|Puncak Jaya, 4.884 m`)+P('*Incluye América Central y el Caribe. El Aconcagua es la cima más alta fuera de Asia.')));
+
+B('oceanos',pn(P('Los océanos cubren el 71 % de la superficie, guardan el 97 % del agua del planeta y tienen una profundidad media de unos 3.700 m. En realidad forman un único océano mundial que se divide por convención.')+gt(['Océano','Superficie (M km²)','Mayor profundidad','Dato'],`Pacífico|165,2|Fosa de las Marianas, ≈10.935 m|Ocupa casi un tercio del planeta
+Atlántico|106,5|Fosa de Puerto Rico, ≈8.400 m|Se ensancha unos 2,5 cm al año
+Índico|70,6|Fosa de Java, ≈7.290 m|Es el más cálido
+Antártico|21,9|Fosa de las Sandwich del Sur, ≈7.430 m|Rodea la Antártida
+Ártico|15,6|Cuenca Molloy, ≈5.550 m|Es el más pequeño y menos profundo`)));
+
+tabs('rios',[['Ríos',P('El orden entre el Nilo y el Amazonas depende de dónde se mida el nacimiento. El Amazonas tiene, con diferencia, el mayor caudal.')+gt(['Río','Longitud (km)','Desemboca en','Dato'],`Nilo|≈6.650|Mar Mediterráneo|Su cuenca abarca 11 países
+Amazonas|≈6.400|Océano Atlántico|Caudal ≈209.000 m³/s
+Yangtsé|≈6.300|Mar de China Oriental|El más largo de Asia
+Misisipi–Misuri|≈6.275|Golfo de México|Principal río de Estados Unidos
+Yeniséi–Angará|≈5.540|Mar de Kara|Atraviesa Siberia
+Río Amarillo|≈5.460|Mar de Bohai|Cuna de la civilización china
+Paraná|≈4.880|Río de la Plata|Se une al Uruguay en el Río de la Plata
+Congo|≈4.700|Océano Atlántico|Es el río más profundo`)],['Mares',gt(['Mar','Superficie (M km²)','Ubicación'],`Mar de Filipinas|5,7|Pacífico occidental
+Mar Arábigo|3,9|Océano Índico
+Mar de China Meridional|3,5|Pacífico occidental
+Mar Caribe|2,75|Entre América Central y las Antillas
+Mar Mediterráneo|2,5|Entre Europa, África y Asia
+Mar de Bering|2,3|Pacífico norte`)+P('También destacan el Mar Negro, el Mar Rojo, el Mar del Norte y el Báltico.')],['Lagos',gt(['Lago','Superficie (km²)','Dato'],`Mar Caspio|371.000|Es el lago más grande; su agua es salada
+Superior|82.100|El mayor lago de agua dulce por superficie
+Victoria|68.800|El mayor de África
+Baikal|31.700|El más profundo (1.642 m) y antiguo`)]]);
+
+B('interior',pn(`<div class="earth" role="img" aria-label="Capas de la Tierra: núcleo interno, núcleo externo, manto y corteza"></div><p class="cap">Corte de la Tierra. La corteza está ampliada para que se vea.</p>`+gt(['Capa','Profundidad','Estado','Composición'],`Corteza|0–35 km (5–10 km bajo los océanos)|Sólida|Silicatos como basalto y granito
+Manto|35–2.890 km|Roca sólida que fluye muy lento|Silicatos de hierro y magnesio; ≈84 % del volumen
+Núcleo externo|2.890–5.150 km|Líquido|Hierro y níquel; genera el campo magnético
+Núcleo interno|5.150–6.371 km|Sólido|Hierro y níquel; ≈5.400 °C`)+ul(['<b>Forma:</b> es algo achatada: radio ecuatorial 6.378 km y polar 6.357 km. Su masa es de 5,97 × 10²⁴ kg.','<b>Densidad:</b> 5,51 g/cm³, la mayor de todos los planetas.','<b>Placas tectónicas:</b> la litosfera (corteza y parte superior del manto) se divide en siete placas grandes que se mueven entre 2 y 10 cm al año. Sus choques causan terremotos, volcanes y cordilleras.','<b>Campo magnético:</b> lo crea el movimiento del hierro líquido del núcleo y nos protege del viento solar.'])));
+
+B('luna',pn(gt(['Dato','Valor'],`Distancia media|384.400 km
+Diámetro|3.474 km (poco más de ¼ del terrestre)
+Masa|1/81 de la masa de la Tierra
+Gravedad|1/6 de la terrestre
+Órbita|27,3 días; el ciclo de fases dura 29,5 días
+Temperatura|De −170 °C a +120 °C
+Alejamiento|≈3,8 cm por año`)+ul(['<b>Origen:</b> se formó hace unos 4.500 millones de años, probablemente por el choque de un cuerpo del tamaño de Marte con la joven Tierra.','<b>Cara oculta:</b> rota en el mismo tiempo que orbita, por eso siempre vemos la misma cara.','<b>Efectos:</b> causa las mareas, produce los eclipses y estabiliza la inclinación del eje terrestre (23,4°).','<b>Exploración:</b> Luna 2 la alcanzó en 1959; Apolo 11 llevó al primer ser humano en 1969 y doce personas caminaron sobre ella hasta 1972. El programa Artemis, de la NASA, prepara el regreso.'])));
+
+B('ciudades',pn(P('Ranking de aglomeraciones urbanas según la ONU (2025). Cambia según cómo se defina el límite de una ciudad: con otros criterios, Tokio encabeza la lista.')+gt(['Ciudad','País','Población aprox.'],`Yakarta|Indonesia|42 M
+Daca|Bangladés|37 M
+Tokio|Japón|33 M
+Nueva Delhi|India|30 M
+Shanghái|China|30 M
+Guangzhou|China|28 M
+El Cairo|Egipto|26 M
+Manila|Filipinas|25 M
+Calcuta|India|23 M
+Seúl|Corea del Sur|22 M`)+P('Fuera de esa lista destacan São Paulo, Ciudad de México, Lagos, Nueva York, Estambul y Buenos Aires. Más de la mitad de la humanidad vive hoy en áreas urbanas.')));
+
+(()=>{const d=[['Asia',108],['Europa',73],['África',51],['Sudamérica',25],['Norteamérica',24],['Oceanía',5]];
+B('densidad',pn(P('Con unos 8.300 millones de personas y 149 millones de km² de tierra firme, la densidad media mundial es de unos <b>56 hab/km²</b>. La población está muy desigualmente repartida: India y China juntas suman cerca del 35 % de la humanidad.')+d.map(x=>`<div class="bar"><span>${x[0]}</span><i style="width:${x[1]/108*100}%"></i><b>${x[1]}</b></div>`).join('')+P('Habitantes por km², aproximado. La Antártida tiene menos de 0,01.')+gt(['Más densos','hab/km²','Menos densos','hab/km²'],`Mónaco|≈19.000|Groenlandia|≈0,03
+Singapur|≈8.000|Mongolia|≈2
+Hong Kong|≈7.000|Namibia|≈3
+Bangladés|≈1.200|Australia|≈3`)))})();
+
+tabs('humanos',[['Historia',ev([['≈300.000 años','Aparece el Homo sapiens','Surge en África y luego se extiende por todos los continentes.'],['≈10.000 a. C.','Agricultura','Nacen los cultivos, la ganadería y las aldeas estables.'],['≈3500 a. C.','Ciudades y escritura','Mesopotamia y Egipto, y más tarde el Indo, China, Mesoamérica y los Andes.'],['1760–1840','Revolución industrial','El carbón y las máquinas aceleran la producción; en 1804 somos 1.000 millones.'],['Desde 1950','Gran Aceleración','Se disparan la población, la energía, los fertilizantes y los plásticos. En 2022 llegamos a 8.000 millones.']])],['Efectos',ul(['<b>Clima:</b> el CO₂ pasó de ≈280 ppm antes de 1750 a más de 420 ppm. La Tierra se calentó ≈1,3 °C y 2024 fue el año más cálido registrado.','<b>Océanos:</b> el agua es ≈30 % más ácida y el nivel del mar subió unos 20 cm desde 1900.','<b>Suelo y bosques:</b> casi la mitad de la tierra habitable se usa para agricultura y se talan unos 10 millones de hectáreas de bosque por año.','<b>Biodiversidad:</b> cerca de 1 millón de especies están amenazadas de extinción (IPBES, 2019).','<b>Residuos:</b> se producen más de 400 millones de toneladas de plástico por año.'])+P('Muchos científicos llaman «Antropoceno» a esta etapa, pero no es una época geológica oficial.')],['Respuestas',ul(['<b>Protocolo de Montreal (1987):</b> eliminó casi todas las sustancias que dañaban la capa de ozono, que se está recuperando.','<b>Acuerdo de París (2015):</b> busca limitar el calentamiento muy por debajo de 2 °C, e idealmente a 1,5 °C.','<b>Energías renovables:</b> la solar y la eólica crecen cada año.','<b>Áreas protegidas:</b> cubren cerca del 17 % de la tierra y el 8 % de los océanos.'])]]);
+
+B('planetas',pn(P('Las distancias a la Tierra cambian porque todos los planetas orbitan. La columna central muestra el acercamiento mínimo.')+gt(['Planeta','Distancia media al Sol','Mínima a la Tierra','La luz del Sol tarda'],`Mercurio|57,9 M km (0,39 UA)|77 M km|3 min 13 s
+Venus|108,2 M km (0,72 UA)|38 M km|6 min
+Tierra|149,6 M km (1 UA)|—|8 min 20 s
+Marte|227,9 M km (1,52 UA)|54,6 M km|12 min 40 s
+Júpiter|778,5 M km (5,2 UA)|588 M km|43 min
+Saturno|1.434 M km (9,6 UA)|1.200 M km|1 h 20 min
+Urano|2.871 M km (19,2 UA)|2.580 M km|2 h 40 min
+Neptuno|4.495 M km (30,1 UA)|4.300 M km|4 h 10 min`)+ul(['<b>Luna:</b> 384.400 km; su luz tarda 1,3 s.','<b>Próxima Centauri:</b> la estrella más cercana está a 4,24 años luz, unos 40 billones de km.','<b>Voyager 1:</b> lanzada en 1977, está a ≈170 UA y es el objeto humano más lejano.'])));
+
+B('ubicacion',pn(ev([['Planeta','Tierra, tercer planeta del Sol','A 1 UA, en la zona habitable. Su eje está inclinado 23,4°, rota en ≈24 h y orbita en 365,25 días a ≈30 km/s.'],['Sistema Solar','Una estrella y ocho planetas','El Sol, una enana amarilla de 4.600 millones de años, reúne el 99,86 % de la masa. Su influencia llega hasta la nube de Oort, a ≈100.000 UA.'],['Brazo de Orión','Un brazo menor de la galaxia','Está a ≈26.000 años luz del centro galáctico. El Sol da una vuelta a la galaxia cada ≈230 millones de años.'],['Vía Láctea','Galaxia espiral barrada','Mide ≈100.000 años luz de diámetro y tiene entre 100.000 y 400.000 millones de estrellas.'],['Grupo Local','≈80 galaxias','La mayor vecina es Andrómeda, a 2,5 millones de años luz.'],['Laniakea','Supercúmulo de ≈100.000 galaxias','Mide ≈500 millones de años luz de lado a lado.'],['Universo observable','≈93.000 millones de años luz de diámetro','Tiene 13.800 millones de años de edad.']])));
+
+(()=>{const G=[['Afelio','Punto de la órbita más lejano del Sol (≈152,1 M km, en julio).'],['Albedo','Fracción de luz que refleja una superficie. El hielo refleja mucho; el océano, poco.'],['Año luz','Distancia que recorre la luz en un año: ≈9,46 billones de km.'],['Antropoceno','Etapa en que la actividad humana es una fuerza que cambia el planeta.'],['Astenosfera','Capa blanda del manto superior sobre la que se mueven las placas.'],['Atmósfera','Capa de gases que rodea la Tierra: ≈78 % nitrógeno y ≈21 % oxígeno.'],['Biosfera','Conjunto de todos los seres vivos y los lugares donde viven.'],['Corteza','Capa sólida externa de la Tierra.'],['Cuenca hidrográfica','Territorio cuyas aguas desembocan en un mismo río, lago o mar.'],['Ecuador','Línea imaginaria a 0° de latitud que divide la Tierra en dos hemisferios.'],['Eclipse','Ocultamiento de un astro por otro: de Sol, si la Luna se interpone; de Luna, si la sombra de la Tierra la cubre.'],['Efecto invernadero','Retención de calor por gases como el CO₂. Es natural, pero se intensifica con las emisiones humanas.'],['Equinoccio','Momento en que el día y la noche duran casi lo mismo (marzo y septiembre).'],['Fosa oceánica','Zona muy profunda del fondo marino, donde una placa se hunde bajo otra.'],['Hidrosfera','Toda el agua de la Tierra: océanos, ríos, lagos, hielo y aguas subterráneas.'],['Latitud y longitud','Coordenadas que ubican un punto: distancia al ecuador (latitud) y al meridiano de Greenwich (longitud).'],['Litosfera','Corteza y parte superior del manto, rígidas, divididas en placas.'],['Magnetosfera','Región protegida por el campo magnético terrestre que desvía el viento solar.'],['Manto','Capa intermedia, entre la corteza y el núcleo.'],['Mareas','Subida y bajada del mar causadas sobre todo por la atracción de la Luna.'],['Perihelio','Punto de la órbita más cercano al Sol (≈147,1 M km, en enero).'],['Placa tectónica','Gran fragmento de litosfera que se mueve lentamente.'],['Rotación y traslación','Giro de la Tierra sobre su eje (un día) y vuelta alrededor del Sol (un año).'],['Solsticio','Momento de mayor o menor duración del día (diciembre y junio).'],['Unidad astronómica (UA)','Distancia media entre la Tierra y el Sol: 149,6 millones de km.'],['Zona habitable','Región alrededor de una estrella donde el agua líquida puede existir en la superficie de un planeta.']];
+B('glosario','<input class="search" id="q" type="search" placeholder="Buscar un término" aria-label="Buscar en el glosario"><div class="grid" id="gl"></div>');
+const r=f=>{$('#gl').innerHTML=G.filter(g=>(g[0]+g[1]).toLowerCase().includes(f)).map(g=>`<div class="card"><h3>${g[0]}</h3><p>${g[1]}</p></div>`).join('')||'<p class="note">No hay términos con esa búsqueda.</p>'};
+$('#q').oninput=e=>r(e.target.value.toLowerCase().trim());r('')})();
+
+const go=h=>{h=V.some(v=>v[0]==h)?h:'inicio';$$('.view').forEach(e=>e.classList.toggle('on',e.id==h));$$('.nl').forEach(a=>a.classList.toggle('on',a.dataset.v==h));scrollTo(0,0)};
+addEventListener('hashchange',()=>go(location.hash.slice(1)));
+$('#tt').onclick=()=>{const d=document.documentElement,k=d.dataset.theme?d.dataset.theme=='dark':matchMedia('(prefers-color-scheme:dark)').matches;d.dataset.theme=k?'light':'dark'};
+go(location.hash.slice(1));
+</script>
+</body></html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>El Microscopio</title>
+<meta name="description" content="El microscopio: cómo funciona, partes y uso, tipos ópticos y electrónicos, escalas, historia, preparación de muestras, aplicaciones y glosario.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;700&family=Fraunces:opsz,wght@9..144,600..800&display=swap" rel="stylesheet">
+<style>
+:root{--fd:'Fraunces',Georgia,serif;--fb:'Figtree','Segoe UI',system-ui,sans-serif;--bg:#f5f1f8;--sf:#fff;--s2:#e8e0f0;--bd:#d3c7e0;--tx:#21172b;--mu:#5d5069;--ac:#6a3fa0;--on:#fff;box-sizing:border-box;padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#150f1d;--sf:#201730;--s2:#2d2142;--bd:#43335c;--tx:#f1eaf8;--mu:#b9aacb;--ac:#c4a8f2;--on:#150f1d}}
+:root[data-theme="dark"]{--bg:#150f1d;--sf:#201730;--s2:#2d2142;--bd:#43335c;--tx:#f1eaf8;--mu:#b9aacb;--ac:#c4a8f2;--on:#150f1d}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px);-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--tx);font:400 1rem/1.65 var(--fb);overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--bg)}
+h1,h2,h3,h4{font-family:var(--fd);margin:0;line-height:1.12}p{margin:0}a{color:inherit;text-decoration:none}button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--ac);outline-offset:2px;border-radius:6px}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:var(--bg);border-bottom:1px solid var(--bd)}
+.hi{max-width:1100px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:12px}
+.brand{font:700 1.15rem var(--fd);white-space:nowrap}
+.nav{display:flex;gap:2px;margin-left:auto;overflow-x:auto;scrollbar-width:none;min-width:0}.nav::-webkit-scrollbar{display:none}
+.nl{padding:8px 12px;border-radius:10px;font-size:.85rem;color:var(--mu);white-space:nowrap}.nl.on{background:var(--ac);color:var(--on);font-weight:700}
+.tt{width:38px;height:38px;flex:none;border:1px solid var(--bd);border-radius:10px;background:var(--s2)}
+main{max-width:1100px;margin:0 auto;padding:0 16px 70px}
+.view{display:none}.view.on{display:block}
+.hero{margin-top:22px;display:flex;flex-wrap:wrap;gap:24px;align-items:center}.hero>div{flex:1 1 320px}.hero h1{font-size:clamp(3rem,12vw,6rem);font-weight:800;letter-spacing:-.02em;margin:0 0 10px}
+.fov{flex:0 0 auto;width:min(220px,60vw);aspect-ratio:1;border-radius:50%;border:10px solid #1f1a26;background:radial-gradient(circle at 30% 35%,#d98fb8 0 11%,#8d5ab8 11% 13%,transparent 13.5%),radial-gradient(circle at 64% 27%,#b79be0 0 7%,transparent 7.5%),radial-gradient(circle at 56% 66%,#d98fb8 0 13%,#8d5ab8 13% 15%,transparent 15.5%),radial-gradient(circle at 24% 72%,#b79be0 0 6%,transparent 6.5%),radial-gradient(circle at 78% 58%,#d98fb8 0 5%,transparent 5.5%),#f6eefb}
+.lead{color:var(--mu);font-size:1.08rem;max-width:62ch}
+.stn{display:flex;gap:10px;overflow-x:auto;padding:6px 0 12px;margin-top:18px}
+.st{flex:0 0 152px;padding:12px 14px;border-radius:12px;background:var(--sf);border:1px solid var(--bd)}
+.st b{display:block;font:700 1.3rem var(--fd);color:var(--ac)}.st span{display:block;font-size:.85rem;line-height:1.3;color:var(--mu)}
+.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr))}
+.card{padding:18px;border-radius:12px;background:var(--sf);border:1px solid var(--bd)}a.card:hover{border-color:var(--ac)}
+.card h3{font-size:1.15rem;margin-bottom:6px}.card p{font-size:.92rem;color:var(--mu)}
+.home{margin-top:20px}.note{margin-top:22px;padding:14px 18px;border-radius:12px;border:1px dashed var(--bd);color:var(--mu);font-size:.9rem}
+.sec{padding:34px 0 4px}.sec h2{font-size:clamp(1.9rem,6vw,3rem);margin-bottom:8px}.sec>.lead{margin-bottom:22px}
+.tabs{display:flex;gap:8px;margin-bottom:12px;overflow-x:auto;padding-bottom:4px}
+.tab{flex:none;padding:10px 15px;border-radius:10px;border:1px solid var(--bd);background:var(--sf);font-weight:700;font-size:.9rem}.tab[aria-selected=true]{background:var(--ac);color:var(--on);border-color:transparent}
+.panel{padding:20px;border-radius:12px;background:var(--sf);border:1px solid var(--bd);border-left:6px solid var(--ac)}
+.pt{color:var(--mu)}.pt p,.pt ul,.pt ol{max-width:74ch}.pt p+*,.pt ul+*,.pt ol+*{margin-top:.8em}.pt b{color:var(--tx)}.pt ul,.pt ol{padding-left:1.3em}
+.tl{position:relative;padding-top:4px}.tl::before{content:"";position:absolute;left:7px;top:10px;bottom:10px;width:2px;background:var(--bd)}
+.ev{position:relative;padding:0 0 18px 34px}.ev::before{content:"";position:absolute;left:0;top:5px;width:16px;height:16px;border-radius:50%;background:var(--sf);border:4px solid var(--ac)}
+.ev b{display:block;font:700 1.1rem var(--fd);color:var(--ac)}.ev h4{font-size:1.05rem}.ev p{max-width:62ch;color:var(--mu)}
+.search,.sel{padding:12px 16px;border-radius:12px;border:1px solid var(--bd);background:var(--sf);color:var(--tx);font:inherit}.search{width:100%;max-width:420px;margin-bottom:14px}.sel{padding:9px 12px;border-radius:10px}
+.lb{display:flex;flex-direction:column;gap:4px;font-size:.85rem;color:var(--mu)}.ctl{display:flex;flex-wrap:wrap;gap:14px;margin:14px 0 4px}
+.tw{overflow-x:auto}.gt{border-collapse:collapse;width:100%;min-width:540px;font-size:.88rem}.gt th,.gt td{padding:7px 10px;border-bottom:1px solid var(--bd);text-align:left;vertical-align:top}.gt th{color:var(--tx);white-space:nowrap}.gt td{color:var(--mu)}.gt td:first-child{color:var(--tx);font-weight:700}
+.bar{display:grid;grid-template-columns:7.5rem 1fr 4.5rem;gap:10px;align-items:center;margin:9px 0;font-size:.9rem}.bar i{display:block;height:14px;border-radius:99px;background:var(--ac)}.bar b{text-align:right;color:var(--tx)}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style></head>
+<body>
+<header class="top"><div class="hi"><a class="brand" href="#inicio">El Microscopio</a><nav class="nav" id="nav" aria-label="Secciones"></nav><button class="tt" id="tt" aria-label="Cambiar entre tema claro y oscuro">◐</button></div></header>
+<main>
+<section class="view" id="inicio"><div class="hero"><div><h1>El Microscopio</h1>
+<p class="lead">El instrumento que nos permitió ver células, bacterias, virus y hasta átomos: cómo funciona, de qué tipos hay y para qué se usa.</p></div><div class="fov" role="img" aria-label="Campo de visión de un microscopio con células teñidas"></div></div>
+<div class="stn" id="stn"></div>
+<div class="grid home" id="home"></div>
+<p class="note">Resumen educativo. Las cifras son aproximadas y varían según el equipo y la fuente.</p></section>
+</main>
+<script>
+const $=(s,e=document)=>e.querySelector(s),$$=(s,e=document)=>[...e.querySelectorAll(s)];
+const V=[['funciona','Cómo funciona','Aumento, resolución y camino de la luz.','Cómo funciona'],['partes','Partes y uso','Cada pieza, cómo se usa y cómo se cuida.','Partes y uso'],['tipos','Tipos de microscopio','Ópticos, electrónicos y de sonda.','Tipos'],['escalas','Escalas','Del cabello humano al átomo.','Escalas'],['historia','Historia','De las primeras lentes a la superresolución.','Historia'],['muestras','Preparación de muestras','Cortes, colorantes y montaje.','Muestras'],['usos','Aplicaciones','Dónde se usa el microscopio.','Aplicaciones'],['glosario','Glosario','Palabras clave explicadas.','Glosario']];
+$('main').insertAdjacentHTML('beforeend',V.map(v=>`<section class="view" id="${v[0]}"><div class="sec"><h2>${v[1]}</h2><p class="lead">${v[2]}</p><div id="b-${v[0]}"></div></div></section>`).join(''));
+$('#nav').innerHTML=V.map(v=>`<a class="nl" href="#${v[0]}" data-v="${v[0]}">${v[3]}</a>`).join('');
+$('#home').innerHTML=V.map(v=>`<a class="card" href="#${v[0]}"><h3>${v[1]}</h3><p>${v[2]}</p></a>`).join('');
+$('#stn').innerHTML=[['≈1590','Primeros microscopios compuestos'],['0,2 µm','Límite de la luz visible'],['<0,1 nm','Resolución del microscopio electrónico'],['1.000.000×','Aumento del SEM'],['1931','Primer microscopio electrónico']].map(s=>`<div class="st"><b>${s[0]}</b><span>${s[1]}</span></div>`).join('');
+const P=t=>`<p>${t}</p>`,ul=a=>`<ul>${a.map(x=>`<li>${x}</li>`).join('')}</ul>`,ol=a=>`<ol>${a.map(x=>`<li>${x}</li>`).join('')}</ol>`;
+const gt=(h,r)=>`<div class="tw"><table class="gt"><tr>${h.map(x=>`<th>${x}</th>`).join('')}</tr>${r.split('\n').map(l=>`<tr>${l.split('|').map(c=>`<td>${c}</td>`).join('')}</tr>`).join('')}</table></div>`;
+const pn=h=>`<div class="panel"><div class="pt">${h}</div></div>`;
+const ev=a=>`<div class="tl">${a.map(x=>`<div class="ev"><b>${x[0]}</b><h4>${x[1]}</h4><p>${x[2]}</p></div>`).join('')}</div>`;
+const tabs=(id,a)=>{const b=$('#b-'+id);b.innerHTML=`<div class="tabs" role="tablist">${a.map((x,i)=>`<button class="tab" role="tab" data-i="${i}">${x[0]}</button>`).join('')}</div><div class="panel"><div class="pt"></div></div>`;const s=i=>{$$('.tab',b).forEach((t,j)=>t.setAttribute('aria-selected',i==j));$('.pt',b).innerHTML=a[i][1]};b.onclick=e=>{const t=e.target.closest('.tab');t&&s(+t.dataset.i)};s(0)};
+const B=(id,h)=>$('#b-'+id).innerHTML=h;
+const f=(n,d=2)=>n.toFixed(d).replace('.',',');
+
+B('funciona',pn(ul(['<b>Aumento total:</b> es el aumento del ocular multiplicado por el del objetivo.','<b>Resolución:</b> es la capacidad de distinguir dos puntos muy cercanos. Depende de la longitud de onda de la luz (λ) y de la apertura numérica (AN) del objetivo: d ≈ 0,61 × λ / AN.','<b>Límite de Abbe:</b> con luz visible, el detalle más pequeño que se puede separar es de unos 0,2 µm. Más aumento no da más detalle: se llama «aumento vacío».','<b>Camino de la luz:</b> la fuente ilumina, el condensador concentra la luz, esta atraviesa la muestra, el objetivo forma una imagen ampliada y el ocular la amplía otra vez para el ojo. La imagen se ve invertida.','<b>Con electrones:</b> a 100 kV su longitud de onda es de ≈0,004 nm, miles de veces menor que la de la luz, por eso ven mucho más pequeño.'])+`<div class="ctl"><label class="lb">Ocular<select class="sel" id="oc"><option>5</option><option selected>10</option><option>15</option></select></label><label class="lb">Objetivo<select class="sel" id="ob"><option value="4|0.10">4× (seco)</option><option value="10|0.25">10× (seco)</option><option value="40|0.65" selected>40× (seco)</option><option value="100|1.25">100× (inmersión en aceite)</option></select></label></div><div class="stn" id="calc"></div>`+P('La calculadora usa luz verde (550 nm) y valores de AN típicos de un microscopio escolar.')));
+const cc=()=>{const o=+$('#oc').value,[m,na]=$('#ob').value.split('|').map(Number),t=o*m,u=t<=1000*na;$('#calc').innerHTML=[[t+'×','Aumento total'],[f(na),'Apertura numérica'],['≈'+f(.61*.55/na)+' µm','Detalle mínimo visible'],[u?'Útil':'Vacío',u?'Aumento aprovechable':'Más aumento que detalle']].map(s=>`<div class="st"><b>${s[0]}</b><span>${s[1]}</span></div>`).join('')};
+$('#oc').onchange=$('#ob').onchange=cc;cc();
+
+tabs('partes',[['Partes',gt(['Parte','Función'],`Ocular|Lente cercana al ojo; amplía la imagen (5×, 10×, 15×)
+Tubo o cabezal|Une el ocular con los objetivos
+Revólver|Pieza giratoria que sostiene los objetivos
+Objetivos|Lentes cercanas a la muestra (4×, 10×, 40×, 100×)
+Platina|Superficie donde se apoya el preparado; las pinzas lo sujetan
+Condensador y diafragma|Concentran la luz y regulan su cantidad
+Fuente de luz|Lámpara LED o halógena en la base
+Tornillo macrométrico|Enfoque rápido, para el primer ajuste
+Tornillo micrométrico|Enfoque fino
+Brazo y base|Sostienen el conjunto y dan estabilidad`)],['Cómo se usa',ol(['Lleva el microscopio con dos manos: una en el brazo y otra bajo la base. Enciende la luz.','Gira el revólver hasta el objetivo de menor aumento (4×).','Coloca el preparado en la platina, con la muestra sobre el orificio, y sujétalo con las pinzas.','Mirando de costado, acerca la platina al objetivo. Luego mira por el ocular y enfoca alejándola con el macrométrico.','Afina con el micrométrico y regula la luz con el diafragma.','Para aumentar, pasa al objetivo siguiente y enfoca solo con el micrométrico.','Con el objetivo de 100× pon una gota de aceite de inmersión sobre el preparado.','Al terminar, baja la platina, vuelve al objetivo de 4×, limpia, apaga y cubre el equipo.'])],['Cuidados',ul(['Limpia las lentes solo con papel para óptica, nunca con los dedos ni con pañuelos.','No uses nunca el macrométrico con objetivos de 40× o 100×: puedes romper el preparado y rayar la lente.','Limpia el aceite de inmersión después de usarlo, con papel para óptica.','Guárdalo cubierto y en un lugar seco, para evitar hongos en las lentes.'])]]);
+
+tabs('tipos',[['Ópticos',gt(['Tipo','Cómo trabaja','Sirve para'],`Compuesto de campo claro|La luz atraviesa la muestra; objetivo y ocular|Células y tejidos teñidos
+Estereoscópico (lupa binocular)|Dos trayectorias dan imagen 3D; 10–40×|Disección, insectos, minerales, circuitos
+Campo oscuro|Solo entra la luz que la muestra dispersa|Células vivas sin teñir, bacterias finas
+Contraste de fase|Convierte diferencias de fase de la luz en brillo|Células vivas y transparentes
+Fluorescencia|Colorantes que brillan al ser excitados con luz|Marcar proteínas y estructuras
+Confocal|Un láser y un orificio eliminan la luz desenfocada|Cortes ópticos y reconstrucción 3D
+Invertido|Los objetivos están debajo de la muestra|Cultivos celulares en placas
+De polarización|Usa luz polarizada|Minerales y cristales`)],['Electrónicos',gt(['Tipo','Cómo trabaja','Sirve para'],`TEM (de transmisión)|Un haz de electrones atraviesa cortes de 50–100 nm|Interior de células y virus; resolución atómica
+SEM (de barrido)|Un haz recorre la superficie y se detectan los electrones que salen|Relieve en 3D de superficies; ≈1 nm
+Crío-EM|Muestras congeladas de golpe, sin teñir|Estructura de proteínas y virus (Nobel 2017)`)+P('Trabajan al vacío y con muestras especiales, por lo que no se pueden observar seres vivos. Dan imágenes en blanco y negro; los colores se agregan después por computadora.')],['De sonda y superresolución',gt(['Tipo','Cómo trabaja','Sirve para'],`STM|Una punta atómica mide una corriente que pasa por efecto túnel|Átomos en superficies conductoras
+AFM (fuerza atómica)|Una punta en una palanca «palpa» la superficie|Superficies y moléculas, incluso en líquido
+STED, PALM y STORM|Superan el límite de difracción de la luz con fluorescencia|Detalles de ≈20–50 nm en células (Nobel 2014)`)]]);
+
+(()=>{const d=[['Cabello humano','80 µm',8e4],['Célula animal','20 µm',2e4],['Glóbulo rojo','7,5 µm',7500],['Bacteria (E. coli)','2 µm',2e3],['Virus (SARS-CoV-2)','100 nm',100],['Ribosoma','25 nm',25],['ADN (ancho)','2 nm',2],['Átomo','0,2 nm',.2]];
+B('escalas',pn(P('Tamaño de cada objeto en escala logarítmica: cada paso hacia la izquierda es mucho más pequeño.')+d.map(x=>`<div class="bar"><span>${x[0]}</span><i style="width:${(Math.log10(x[2])+1)/6*100}%"></i><b>${x[1]}</b></div>`).join('')+gt(['Instrumento','Detalle mínimo','Qué permite ver'],`Ojo humano|≈0,1 mm|Cabellos y granos de arena
+Microscopio óptico|≈0,2 µm|Células, núcleos y bacterias
+Superresolución|≈20–50 nm|Estructuras finas dentro de la célula
+SEM|≈1 nm|Superficies en relieve y virus grandes
+TEM|<0,1 nm|Interior de células, virus y proteínas
+STM y AFM|Atómica|Átomos y moléculas`)))})();
+
+B('historia',pn(ev([['≈1590','Primeros microscopios compuestos','Se atribuyen a los holandeses Hans y Zacharias Janssen, aunque el origen es discutido.'],['1609–1610','Galileo','Adapta su telescopio para observar objetos pequeños, como insectos.'],['1665','Robert Hooke','Publica Micrographia y llama «células» a las cavidades del corcho.'],['1674–1676','Antonie van Leeuwenhoek','Con lentes simples de hasta ≈270×, describe bacterias y protozoos que llama «animálculos».'],['1830','Joseph Jackson Lister','Reduce las aberraciones de las lentes y hace posible el microscopio óptico moderno.'],['1873','Ernst Abbe','Formula la teoría de la resolución; con Zeiss y Schott mejora la fabricación de lentes.'],['1931','Ernst Ruska y Max Knoll','Construyen el primer microscopio electrónico (Ruska recibió el Nobel en 1986).'],['1953','Frits Zernike','Recibe el Nobel por el contraste de fase, que permite ver células vivas sin teñir.'],['1981–1986','Binnig y Rohrer','Inventan el microscopio de efecto túnel (STM); poco después se crea el AFM.'],['2014','Betzig, Hell y Moerner','Nobel de Química por la microscopía de fluorescencia de superresolución.'],['2017','Dubochet, Frank y Henderson','Nobel de Química por la crío-microscopía electrónica.']])));
+
+tabs('muestras',[['Microscopio óptico',ol(['<b>Fijar:</b> con formol u otro fijador, para conservar la estructura.','<b>Cortar:</b> con un micrótomo, en láminas de 5–10 µm de espesor.','<b>Teñir:</b> con colorantes, para dar contraste a las estructuras.','<b>Montar:</b> sobre un portaobjetos, con un cubreobjetos puesto en ángulo para evitar burbujas.'])+P('En un montaje húmedo se observa una gota de agua con la muestra viva, por ejemplo agua de charco.')],['Colorantes',gt(['Técnica','Qué muestra'],`Azul de metileno|Núcleos celulares y bacterias, en azul
+Lugol (yodo)|Almidón, que se tiñe de azul oscuro
+Tinción de Gram|Bacterias Gram positivas (violeta) y Gram negativas (rosa)
+Hematoxilina-eosina|Núcleos violeta y citoplasma rosa; es la técnica básica en biopsias
+Giemsa|Parásitos de la sangre, como el de la malaria`)],['Microscopio electrónico',ul(['<b>SEM:</b> la muestra se deshidrata y se cubre con una capa finísima de oro o platino para que conduzca electrones.','<b>TEM:</b> se hacen cortes ultrafinos de 50–100 nm con un ultramicrótomo y se les añaden metales pesados, como el acetato de uranilo, para dar contraste.','<b>Crío-EM:</b> la muestra se congela tan rápido que el agua no forma cristales.'])]]);
+
+B('usos',`<div class="grid">${[['Medicina','Análisis de sangre, biopsias para detectar cáncer y diagnóstico de bacterias y parásitos.'],['Biología','Estudio de células, tejidos y microorganismos, de la división celular a los procesos del desarrollo.'],['Materiales','Análisis de metales, plásticos y cerámicas: granos, grietas y fallas.'],['Electrónica','Fabricación y control de chips con detalles de pocos nanómetros.'],['Ciencia forense','Comparación de fibras, pelos, pólvora, balas y pintura.'],['Geología','Láminas delgadas de rocas con luz polarizada para identificar minerales.'],['Alimentos y agua','Control de bacterias, levaduras y partículas en alimentos y agua potable.'],['Arte y patrimonio','Análisis de pigmentos, fibras y daños en pinturas y objetos históricos.']].map(x=>`<div class="card"><h3>${x[0]}</h3><p>${x[1]}</p></div>`).join('')}</div>`);
+
+(()=>{const G=[['Ångström','Unidad de longitud: 0,1 nm. Un átomo mide unos pocos Å.'],['Aberración','Defecto de una lente que deforma la imagen o produce halos de color.'],['Apertura numérica (AN)','Medida de cuánta luz capta un objetivo; mayor AN, mayor resolución.'],['Aumento','Cuántas veces se ve más grande una imagen que el objeto.'],['Campo visual','Parte de la muestra que se ve a la vez; disminuye al aumentar el aumento.'],['Condensador','Lente bajo la platina que concentra la luz sobre la muestra.'],['Cubreobjetos','Lámina de vidrio muy fina que cubre la muestra.'],['Diafragma','Pieza que regula la cantidad de luz que llega a la muestra.'],['Distancia de trabajo','Espacio entre el objetivo y la muestra; es muy pequeño a 100×.'],['Fijación','Tratamiento que conserva la estructura de una muestra biológica.'],['Fluorescencia','Emisión de luz de un colorante tras ser excitado con luz de otro color.'],['Inmersión','Uso de una gota de aceite entre el preparado y el objetivo de 100× para ganar resolución.'],['Micrómetro (µm)','Una millonésima de metro. Una célula mide decenas de µm.'],['Micrótomo','Máquina que corta láminas finísimas de una muestra.'],['Nanómetro (nm)','Una milmillonésima de metro. Un virus mide unos 100 nm.'],['Parfocal','Objetivos que mantienen el enfoque al girar el revólver.'],['Platina','Superficie donde se apoya el preparado.'],['Portaobjetos','Lámina de vidrio donde se coloca la muestra.'],['Preparado','Muestra lista para observar: fijada, teñida y montada.'],['Resolución','Capacidad de ver separados dos puntos muy próximos.'],['Tinción','Uso de colorantes para dar contraste a las estructuras.']];
+B('glosario','<input class="search" id="q" type="search" placeholder="Buscar un término" aria-label="Buscar en el glosario"><div class="grid" id="gl"></div>');
+const r=t=>{$('#gl').innerHTML=G.filter(g=>(g[0]+g[1]).toLowerCase().includes(t)).map(g=>`<div class="card"><h3>${g[0]}</h3><p>${g[1]}</p></div>`).join('')||'<p class="note">No hay términos con esa búsqueda.</p>'};
+$('#q').oninput=e=>r(e.target.value.toLowerCase().trim());r('')})();
+
+const go=h=>{h=V.some(v=>v[0]==h)?h:'inicio';$$('.view').forEach(e=>e.classList.toggle('on',e.id==h));$$('.nl').forEach(a=>a.classList.toggle('on',a.dataset.v==h));scrollTo(0,0)};
+addEventListener('hashchange',()=>go(location.hash.slice(1)));
+$('#tt').onclick=()=>{const d=document.documentElement,k=d.dataset.theme?d.dataset.theme=='dark':matchMedia('(prefers-color-scheme:dark)').matches;d.dataset.theme=k?'light':'dark'};
+go(location.hash.slice(1));
+</script>
+</body></html>
