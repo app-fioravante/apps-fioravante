@@ -1,0 +1,1309 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistema Educativo · Enciclopedia Visual Fioravante</title>
+  <meta name="description" content="Exploración interactiva del sistema educativo: historia, estructura, sistemas comparados, desafíos actuales y proyectos futuros.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <script>
+    (function () {
+      try {
+        const stored = localStorage.getItem('enc-theme');
+        if (stored === 'light' || stored === 'dark') {
+          document.documentElement.setAttribute('data-theme', stored);
+        } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+          document.documentElement.setAttribute('data-theme', 'light');
+        }
+      } catch (e) {}
+    })();
+  </script>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg-deep: #070b14;
+      --surface: rgba(22, 32, 50, 0.65);
+      --surface-hover: rgba(30, 44, 68, 0.8);
+      --border: rgba(255, 255, 255, 0.07);
+      --border-strong: rgba(255, 255, 255, 0.15);
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --text-dim: #64748b;
+      --accent-cyan: #22d3ee;
+      --accent-violet: #a78bfa;
+      --accent-amber: #fbbf24;
+      --accent-rose: #fb7185;
+      --accent-emerald: #34d399;
+      --chip-hover-bg: rgba(255, 255, 255, 0.04);
+      --radius-lg: 24px;
+      --radius-md: 16px;
+      --radius-sm: 12px;
+      --shadow-card: 0 4px 24px -8px rgba(0, 0, 0, 0.6);
+      --shadow-hover: 0 24px 48px -16px rgba(0, 0, 0, 0.7);
+      --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+      --noise-opacity: 0.03;
+    }
+
+    [data-theme="light"] {
+      --bg-deep: #f4f6fa;
+      --surface: rgba(255, 255, 255, 0.72);
+      --surface-hover: rgba(255, 255, 255, 0.92);
+      --border: rgba(15, 23, 42, 0.08);
+      --border-strong: rgba(15, 23, 42, 0.16);
+      --text-primary: #1e293b;
+      --text-secondary: #475569;
+      --text-dim: #94a3b8;
+      --accent-cyan: #0891b2;
+      --accent-violet: #7c3aed;
+      --accent-amber: #d97706;
+      --accent-rose: #e11d48;
+      --accent-emerald: #059669;
+      --chip-hover-bg: rgba(15, 23, 42, 0.04);
+      --shadow-card: 0 4px 24px -8px rgba(15, 23, 42, 0.08);
+      --shadow-hover: 0 24px 48px -16px rgba(15, 23, 42, 0.16);
+      --noise-opacity: 0.015;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background-color: var(--bg-deep);
+      color: var(--text-primary);
+      min-height: 100vh;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+      transition: background-color 0.5s ease, color 0.5s ease;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      background:
+        radial-gradient(ellipse 80% 60% at 10% 0%, rgba(52, 211, 153, 0.14), transparent 60%),
+        radial-gradient(ellipse 70% 50% at 90% 10%, rgba(167, 139, 250, 0.1), transparent 55%),
+        radial-gradient(ellipse 60% 50% at 50% 100%, rgba(251, 191, 36, 0.06), transparent 60%);
+      animation: bgShift 20s ease-in-out infinite alternate;
+      transition: opacity 0.5s ease;
+    }
+
+    [data-theme="light"] body::before {
+      background:
+        radial-gradient(ellipse 80% 60% at 10% 0%, rgba(5, 150, 105, 0.13), transparent 60%),
+        radial-gradient(ellipse 70% 50% at 90% 10%, rgba(124, 58, 237, 0.1), transparent 55%),
+        radial-gradient(ellipse 60% 50% at 50% 100%, rgba(217, 119, 6, 0.08), transparent 60%);
+    }
+
+    @keyframes bgShift {
+      0% { opacity: 0.7; transform: scale(1); }
+      100% { opacity: 1; transform: scale(1.08); }
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      opacity: var(--noise-opacity);
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      pointer-events: none;
+      transition: opacity 0.5s ease;
+    }
+
+    .app { max-width: 1200px; margin: 0 auto; padding: 0 24px 80px; }
+
+    /* ─── THEME TOGGLE ─── */
+    .theme-toggle {
+      position: fixed; top: 20px; right: 20px; z-index: 100;
+      width: 46px; height: 46px; border-radius: 50%;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      color: var(--text-primary); cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: var(--shadow-card);
+      transition: transform 0.35s var(--ease-out-expo), border-color 0.3s, box-shadow 0.35s var(--ease-out-expo), background-color 0.4s ease, color 0.4s ease;
+    }
+    .theme-toggle:hover { transform: scale(1.1) rotate(10deg); border-color: var(--border-strong); box-shadow: var(--shadow-hover); }
+    .theme-toggle svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .theme-toggle .icon-sun { display: block; }
+    .theme-toggle .icon-moon { display: none; }
+    [data-theme="light"] .theme-toggle .icon-sun { display: none; }
+    [data-theme="light"] .theme-toggle .icon-moon { display: block; }
+
+    /* ─── HEADER ─── */
+    .header { padding: 56px 0 24px; text-align: center; }
+    .header-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 16px; border-radius: 999px;
+      background: rgba(52, 211, 153, 0.1);
+      border: 1px solid rgba(52, 211, 153, 0.25);
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--accent-emerald);
+      margin-bottom: 20px;
+      animation: fadeDown 0.8s var(--ease-out-expo) both;
+    }
+    .header-badge::before {
+      content: ''; width: 6px; height: 6px; border-radius: 50%;
+      background: var(--accent-emerald); box-shadow: 0 0 12px var(--accent-emerald);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.8); } }
+
+    .header h1 {
+      font-size: clamp(2.2rem, 5.5vw, 3.8rem);
+      font-weight: 800; letter-spacing: -0.03em; line-height: 1.1;
+      margin-bottom: 16px;
+      animation: fadeDown 0.9s 0.1s var(--ease-out-expo) both;
+    }
+    .header h1 .gradient-text {
+      background: linear-gradient(135deg, var(--accent-emerald) 0%, var(--accent-cyan) 50%, var(--accent-violet) 100%);
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-size: 200% 200%;
+      animation: gradientMove 6s ease-in-out infinite;
+    }
+    @keyframes gradientMove { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+
+    .header-subtitle {
+      font-size: clamp(0.95rem, 2vw, 1.1rem);
+      color: var(--text-secondary); font-weight: 400;
+      max-width: 720px; margin: 0 auto;
+      animation: fadeDown 1s 0.2s var(--ease-out-expo) both;
+    }
+
+    /* ─── NAVEGACIÓN POR PESTAÑAS ─── */
+    .tabs-nav {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      margin: 32px 0 28px;
+      padding: 8px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      animation: fadeUp 0.8s 0.3s var(--ease-out-expo) both;
+    }
+    .tab-btn {
+      flex: 1 1 auto;
+      padding: 12px 18px;
+      border-radius: var(--radius-sm);
+      border: none; background: transparent;
+      color: var(--text-secondary);
+      font-family: inherit; font-size: 0.88rem; font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s var(--ease-out-expo);
+      white-space: nowrap;
+    }
+    .tab-btn:hover { color: var(--text-primary); background: var(--chip-hover-bg); }
+    .tab-btn.active {
+      background: rgba(52, 211, 153, 0.15);
+      color: var(--accent-emerald);
+      box-shadow: 0 0 20px -4px rgba(52, 211, 153, 0.2);
+    }
+    [data-theme="light"] .tab-btn.active { background: rgba(5, 150, 105, 0.12); color: var(--accent-emerald); }
+
+    /* ─── PANELES ─── */
+    .panel { display: none; animation: fadeUp 0.5s var(--ease-out-expo) both; }
+    .panel.active { display: block; }
+
+    .content-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      box-shadow: var(--shadow-card);
+      margin-bottom: 24px;
+      transition: background-color 0.4s ease, border-color 0.4s ease;
+    }
+
+    .content-card h2 {
+      font-size: 1.5rem; font-weight: 700; letter-spacing: -0.02em;
+      margin-bottom: 16px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .content-card h2 .icon-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--accent-emerald);
+      box-shadow: 0 0 12px var(--accent-emerald);
+      flex-shrink: 0;
+    }
+    .content-card h3 {
+      font-size: 1.1rem; font-weight: 700;
+      margin: 24px 0 10px;
+      color: var(--accent-emerald);
+    }
+    .content-card p {
+      color: var(--text-secondary);
+      margin-bottom: 14px;
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+    .content-card p strong { color: var(--text-primary); }
+    .content-card ul, .content-card ol {
+      margin: 12px 0 18px 20px;
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+    .content-card li { margin-bottom: 8px; }
+    .content-card blockquote {
+      border-left: 3px solid var(--accent-emerald);
+      padding: 12px 20px;
+      margin: 20px 0;
+      background: rgba(52, 211, 153, 0.05);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      font-style: italic;
+      color: var(--text-secondary);
+      font-size: 0.92rem;
+    }
+    [data-theme="light"] .content-card blockquote { background: rgba(5, 150, 105, 0.05); }
+    .content-card blockquote cite {
+      display: block; margin-top: 8px;
+      font-style: normal; font-size: 0.82rem; color: var(--text-dim);
+    }
+
+    /* ─── TARJETAS DE CONCEPTO ─── */
+    .concept-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+      margin: 20px 0;
+    }
+    .concept-card {
+      padding: 22px;
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      transition: transform 0.3s var(--ease-out-expo), border-color 0.3s, box-shadow 0.3s;
+    }
+    .concept-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--border-strong);
+      box-shadow: var(--shadow-hover);
+    }
+    .concept-card .concept-icon {
+      width: 44px; height: 44px; border-radius: var(--radius-sm);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem; margin-bottom: 14px;
+      background: rgba(52, 211, 153, 0.12);
+      color: var(--accent-emerald);
+    }
+    .concept-card h4 {
+      font-size: 1rem; font-weight: 700; margin-bottom: 8px;
+    }
+    .concept-card p {
+      font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; margin: 0;
+    }
+
+    /* ─── COMPARADOR ─── */
+    .compare-controls {
+      display: flex; gap: 8px; margin: 20px 0 24px; flex-wrap: wrap;
+    }
+    .compare-btn {
+      padding: 10px 20px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text-secondary);
+      font-family: inherit; font-size: 0.85rem; font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s var(--ease-out-expo);
+    }
+    .compare-btn:hover { border-color: var(--border-strong); color: var(--text-primary); }
+    .compare-btn.active {
+      background: var(--accent-emerald);
+      border-color: var(--accent-emerald);
+      color: var(--bg-deep);
+      font-weight: 700;
+    }
+    [data-theme="light"] .compare-btn.active { color: #fff; }
+
+    .compare-panels {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    @media (max-width: 640px) { .compare-panels { grid-template-columns: 1fr; } }
+
+    .compare-panel {
+      padding: 24px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      background: var(--surface);
+      transition: opacity 0.3s ease;
+    }
+    .compare-panel.dimmed { opacity: 0.35; pointer-events: none; }
+    .compare-panel h4 {
+      font-size: 0.95rem; font-weight: 700; margin-bottom: 12px;
+      text-transform: uppercase; letter-spacing: 0.06em;
+    }
+    .compare-panel.left h4 { color: var(--accent-amber); }
+    .compare-panel.right h4 { color: var(--accent-cyan); }
+    .compare-panel p { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.7; }
+
+    /* ─── LÍNEA DE TIEMPO ─── */
+    .timeline { position: relative; padding: 20px 0 20px 32px; }
+    .timeline::before {
+      content: ''; position: absolute; left: 11px; top: 0; bottom: 0;
+      width: 2px; background: linear-gradient(to bottom, var(--accent-emerald), var(--accent-violet));
+      border-radius: 2px;
+    }
+    .timeline-item {
+      position: relative; margin-bottom: 28px; padding-left: 8px;
+    }
+    .timeline-item::before {
+      content: ''; position: absolute; left: -27px; top: 6px;
+      width: 12px; height: 12px; border-radius: 50%;
+      background: var(--bg-deep); border: 2px solid var(--accent-emerald);
+      box-shadow: 0 0 10px rgba(52, 211, 153, 0.3);
+    }
+    .timeline-item .timeline-era {
+      font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.08em; color: var(--accent-emerald); margin-bottom: 4px;
+    }
+    .timeline-item h4 { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+    .timeline-item p { font-size: 0.88rem; color: var(--text-secondary); margin: 0; line-height: 1.6; }
+
+    /* ─── TABLA ─── */
+    .table-wrap {
+      overflow-x: auto;
+      margin: 20px 0;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+    th, td {
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-secondary);
+    }
+    th {
+      background: var(--chip-hover-bg);
+      color: var(--text-primary);
+      font-weight: 700;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: var(--chip-hover-bg); }
+    td strong { color: var(--text-primary); }
+
+    /* ─── GLOSARIO ─── */
+    .accordion-item {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      margin-bottom: 10px;
+      overflow: hidden;
+      transition: border-color 0.3s;
+    }
+    .accordion-item:hover { border-color: var(--border-strong); }
+    .accordion-trigger {
+      width: 100%;
+      padding: 16px 20px;
+      background: transparent;
+      border: none;
+      color: var(--text-primary);
+      font-family: inherit; font-size: 0.95rem; font-weight: 600;
+      text-align: left; cursor: pointer;
+      display: flex; justify-content: space-between; align-items: center;
+      transition: background-color 0.2s;
+    }
+    .accordion-trigger:hover { background: var(--chip-hover-bg); }
+    .accordion-trigger .chevron {
+      transition: transform 0.3s var(--ease-out-expo);
+      font-size: 0.8rem; color: var(--text-dim);
+    }
+    .accordion-item.open .accordion-trigger .chevron { transform: rotate(180deg); }
+    .accordion-content {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.4s var(--ease-out-expo), padding 0.4s var(--ease-out-expo);
+      padding: 0 20px;
+    }
+    .accordion-item.open .accordion-content {
+      max-height: 500px; padding: 0 20px 18px;
+    }
+    .accordion-content p {
+      font-size: 0.9rem; color: var(--text-secondary); line-height: 1.7; margin: 0;
+    }
+
+    /* ─── FOOTER ─── */
+    .footer {
+      text-align: center; padding: 48px 0 0;
+      color: var(--text-dim); font-size: 0.8rem;
+      border-top: 1px solid var(--border); margin-top: 48px;
+    }
+    .footer a { color: var(--accent-emerald); text-decoration: none; font-weight: 500; }
+    .footer a:hover { text-decoration: underline; }
+
+    @keyframes fadeDown { from { opacity: 0; transform: translateY(-16px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+
+    @media (max-width: 640px) {
+      .app { padding: 0 16px 48px; }
+      .content-card { padding: 24px 20px; }
+      .tabs-nav { gap: 4px; padding: 6px; }
+      .tab-btn { padding: 10px 12px; font-size: 0.8rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema" title="Cambiar tema">
+    <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+    <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  </button>
+
+  <div class="app">
+    <!-- Header -->
+    <header class="header">
+      <div class="header-badge">Educación · Sociedad · Futuro</div>
+      <h1>El <span class="gradient-text">Sistema Educativo</span></h1>
+      <p class="header-subtitle">
+        Un recorrido visual e interactivo por la institución que forma a las sociedades: su historia, su estructura, los sistemas más destacados del mundo, los desafíos actuales y los proyectos que están redefiniendo el aprendizaje.
+      </p>
+    </header>
+
+    <!-- Navegación por pestañas -->
+    <nav class="tabs-nav" role="tablist" aria-label="Secciones del tema">
+      <button class="tab-btn active" data-panel="panel-intro" role="tab" aria-selected="true">¿Qué es?</button>
+      <button class="tab-btn" data-panel="panel-historia" role="tab" aria-selected="false">Historia</button>
+      <button class="tab-btn" data-panel="panel-estructura" role="tab" aria-selected="false">Estructura</button>
+      <button class="tab-btn" data-panel="panel-modelos" role="tab" aria-selected="false">Modelos Comparados</button>
+      <button class="tab-btn" data-panel="panel-desafios" role="tab" aria-selected="false">Desafíos Actuales</button>
+      <button class="tab-btn" data-panel="panel-proyectos" role="tab" aria-selected="false">Proyectos Futuros</button>
+      <button class="tab-btn" data-panel="panel-glosario" role="tab" aria-selected="false">Glosario</button>
+    </nav>
+
+    <!-- ─── PANEL: ¿QUÉ ES? ─── -->
+    <section id="panel-intro" class="panel active" role="tabpanel">
+      <div class="content-card">
+        <h2><span class="icon-dot"></span>¿Qué es el sistema educativo?</h2>
+        <p>
+          El <strong>sistema educativo</strong> es el conjunto organizado de instituciones, políticas, planes de estudio, niveles, actores y prácticas mediante los cuales una sociedad transmite, produce y acredita conocimiento. No es solo la escuela: incluye también la educación inicial, la formación docente, la educación técnica, la universidad, la educación no formal y el aprendizaje a lo largo de la vida.
+        </p>
+        <p>
+          Su existencia responde a una necesidad histórica: ninguna sociedad puede reproducirse sin <strong>transmitir su cultura, sus valores, sus técnicas y su memoria</strong> a las nuevas generaciones. La escuela, como institución moderna, se consolida en el siglo XIX junto con los Estados nacionales, la industrialización y la alfabetización masiva.
+        </p>
+
+        <h3>Las cuatro funciones esenciales</h3>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">📚</div>
+            <h4>Transmisión cultural</h4>
+            <p>Conservar y transmitir el conocimiento acumulado, la lengua, la historia, las tradiciones y los valores de una comunidad.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🧑‍🎓</div>
+            <h4>Formación ciudadana</h4>
+            <p>Formar personas capaces de ejercer derechos y deberes, participar en la vida pública y convivir en democracia.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">💼</div>
+            <h4>Preparación laboral</h4>
+            <p>Desarrollar competencias y habilidades para el trabajo, la producción y la innovación económica.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🌱</div>
+            <h4>Desarrollo personal</h4>
+            <p>Favorecer el crecimiento integral de cada persona: cognitivo, emocional, social, físico y ético.</p>
+          </div>
+        </div>
+
+        <h3>Derecho humano y bien público</h3>
+        <p>
+          La educación es reconocida como <strong>derecho humano fundamental</strong> por la Declaración Universal de Derechos Humanos (1948) y por la UNESCO. El Objetivo de Desarrollo Sostenible 4 (ODS 4) de la ONU busca garantizar una educación inclusiva, equitativa y de calidad para todos antes de 2030.
+        </p>
+        <p>
+          Aunque existe consenso sobre su importancia, no hay acuerdo universal sobre <strong>quién debe financiarla, cómo debe organizarse, qué debe enseñarse y para qué</strong>. Cada país, cada cultura y cada modelo ideológico ha dado respuestas distintas a estas preguntas.
+        </p>
+
+        <blockquote>
+          "La educación es el arma más poderosa que puedes usar para cambiar el mundo." — Nelson Mandela
+          <cite>Una frase que resume la centralidad de la educación en cualquier proyecto de transformación social.</cite>
+        </blockquote>
+
+        <h3>¿Educación o escolarización?</h3>
+        <p>
+          Es importante distinguir entre <strong>educación</strong> (proceso amplio de aprendizaje que ocurre en toda la vida y en todos los contextos) y <strong>escolarización</strong> (institucionalización formal de la enseñanza). Los sistemas educativos modernos han privilegiado la segunda, pero cada vez más voces reclaman reconocer y articular los aprendizajes que ocurren fuera de la escuela: en la familia, la comunidad, el trabajo, los medios y los entornos digitales.
+        </p>
+      </div>
+    </section>
+
+    <!-- ─── PANEL: HISTORIA ─── -->
+    <section id="panel-historia" class="panel" role="tabpanel">
+      <div class="content-card">
+        <h2><span class="icon-dot"></span>Historia de la educación</h2>
+        <p>
+          La historia de la educación es tan antigua como la humanidad: toda cultura ha transmitido a las nuevas generaciones sus técnicas, mitos, normas y saberes. Pero la <strong>escuela como institución</strong> —con currículos, maestros, aulas, evaluaciones y certificaciones— es una invención relativamente reciente.
+        </p>
+
+        <h3>Línea de tiempo</h3>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-era">c. 3000 a.C.</div>
+            <h4>Primeras escuelas en Mesopotamia y Egipto</h4>
+            <p>Escuelas de escribas donde se enseñaba a leer, escribir y calcular para servir al templo, al palacio y al comercio.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">c. 400 a.C.</div>
+            <h4>Atenas y la paideia</h4>
+            <p>Modelo educativo griego basado en la formación integral: gimnasia, música, filosofía y retórica. Sócrates, Platón y Aristóteles fundan las bases de la pedagogía occidental.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">Edad Media (s. V–XV)</div>
+            <h4>Escuelas monásticas y universidades</h4>
+            <p>La Iglesia controla la enseñanza. Nacen las primeras universidades (Bolonia, París, Oxford, Salamanca), centradas en teología, derecho y medicina.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">s. XVII–XVIII</div>
+            <h4>Ilustración y pedagogía moderna</h4>
+            <p>Comenio propone enseñar "todo a todos". Rousseau, Pestalozzi y Fröbel sientan las bases de una educación centrada en el niño.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">s. XIX</div>
+            <h4>Nacimiento de los sistemas nacionales</h4>
+            <p>Los Estados modernos asumen la educación como responsabilidad pública. Se establece la escuela primaria obligatoria y gratuita en Europa y América.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">s. XX (primera mitad)</div>
+            <h4>Escuela Nueva y pedagogías activas</h4>
+            <p>Montessori, Dewey, Decroly y Freinet proponen aprender haciendo, respetar los ritmos del niño y vincular la escuela con la vida.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">1948</div>
+            <h4>Derecho a la educación</h4>
+            <p>La Declaración Universal de Derechos Humanos reconoce la educación como derecho fundamental para todas las personas.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">1990</div>
+            <h4>Cumbre de Jomtien y Educación para Todos</h4>
+            <p>La UNESCO y organismos internacionales impulsan la universalización de la educación básica y la reducción del analfabetismo.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">2000–2015</div>
+            <h4>Objetivos de Desarrollo del Milenio</h4>
+            <p>Se fija la meta de la educación primaria universal. Se logran avances históricos, aunque persisten brechas de calidad y equidad.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">2015–2030</div>
+            <h4>ODS 4: Educación de calidad</h4>
+            <p>La Agenda 2030 propone una educación inclusiva, equitativa, de calidad y a lo largo de toda la vida.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">2020–2022</div>
+            <h4>Pandemia y educación remota</h4>
+            <p>La COVID-19 cierra las escuelas en todo el mundo y acelera la digitalización forzosa. Se agravan las brechas educativas.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">2023–presente</div>
+            <h4>Era de la IA educativa</h4>
+            <p>La inteligencia artificial generativa irrumpe en las aulas. Se debate su potencial para personalizar el aprendizaje y sus riesgos.</p>
+          </div>
+        </div>
+
+        <h3>Grandes pedagogos y sus aportes</h3>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">🏛️</div>
+            <h4>Comenio (1592–1670)</h4>
+            <p>Padre de la didáctica moderna. Propuso enseñar gradualmente, con imágenes y en la lengua materna, "todo a todos".</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🌱</div>
+            <h4>Rousseau (1712–1778)</h4>
+            <p>En <em>Emilio</em> propone una educación natural, que respete el desarrollo del niño y no lo fuerce con contenidos ajenos.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🧩</div>
+            <h4>Pestalozzi (1746–1827)</h4>
+            <p>Defendió una educación integral (cabeza, corazón y manos), intuitiva y afectiva, especialmente para los más pobres.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🌼</div>
+            <h4>Fröbel (1782–1852)</h4>
+            <p>Creador del jardín de infantes. Concibió el juego como la actividad central del aprendizaje en la primera infancia.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🖐️</div>
+            <h4>Montessori (1870–1952)</h4>
+            <p>Desarrolló materiales y ambientes que favorecen la autonomía, el orden y la concentración del niño.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🔬</div>
+            <h4>Dewey (1859–1952)</h4>
+            <p>Padre del "aprender haciendo". Vinculó la escuela con la vida democrática y la experiencia concreta.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">📖</div>
+            <h4>Freire (1921–1997)</h4>
+            <p>Propuso una pedagogía crítica y liberadora. Combatió la "educación bancaria" y defendió el diálogo como método.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🎨</div>
+            <h4>Freinet (1896–1966)</h4>
+            <p>Impulsó técnicas activas como la imprenta escolar, el texto libre y la correspondencia entre escuelas.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── PANEL: ESTRUCTURA ─── -->
+    <section id="panel-estructura" class="panel" role="tabpanel">
+      <div class="content-card">
+        <h2><span class="icon-dot"></span>Estructura del sistema educativo</h2>
+        <p>
+          Aunque cada país organiza su sistema con particularidades, la mayoría comparte una <strong>estructura común por niveles</strong>. Los sistemas educativos modernos suelen articularse en etapas que responden al desarrollo evolutivo de las personas y a las demandas sociales.
+        </p>
+
+        <h3>Niveles educativos</h3>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">🍼</div>
+            <h4>Educación inicial</h4>
+            <p>0 a 5 años. Estimulación temprana, socialización y desarrollo cognitivo, motor y afectivo. Puede ser formal (jardín) o no formal.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">✏️</div>
+            <h4>Educación primaria</h4>
+            <p>6 a 11/12 años. Alfabetización, cálculo básico, conocimiento del mundo, formación ciudadana. Generalmente obligatoria y gratuita.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">📐</div>
+            <h4>Educación secundaria</h4>
+            <p>12 a 17/18 años. Dos ciclos: básico (común) y orientado (humanístico, técnico, artístico). Prepara para estudios superiores o trabajo.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🎓</div>
+            <h4>Educación superior</h4>
+            <p>Universitaria y no universitaria (terciaria). Grados, tecnicaturas, posgrados. Formación profesional, científica y de especialización.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🔁</div>
+            <h4>Educación permanente</h4>
+            <p>Formación a lo largo de toda la vida: capacitación laboral, cursos, talleres, aprendizaje autodidacta, educación de adultos.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">♿</div>
+            <h4>Educación especial</h4>
+            <p>Modalidad transversal que atiende a personas con discapacidad, en escuelas especiales o con apoyos en escuelas comunes.</p>
+          </div>
+        </div>
+
+        <h3>Componentes del sistema</h3>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">🏫</div>
+            <h4>Instituciones</h4>
+            <p>Escuelas, institutos y universidades. Pueden ser de gestión estatal, privada, cooperativa o comunitaria.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">📋</div>
+            <h4>Currículo</h4>
+            <p>Definición de qué se enseña, cómo y para qué. Incluye contenidos, objetivos, metodologías y criterios de evaluación.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🧑‍🏫</div>
+            <h4>Docentes</h4>
+            <p>Actores centrales. Su formación, condiciones laborales y desarrollo profesional determinan en gran medida la calidad educativa.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">👨‍👩‍👧</div>
+            <h4>Familias y comunidad</h4>
+            <p>Actores corresponsables. Su participación en la escuela impacta en la trayectoria y el bienestar de los estudiantes.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">📊</div>
+            <h4>Evaluación</h4>
+            <p>Instrumentos para valorar aprendizajes: pruebas estandarizadas, evaluaciones formativas, portafolios, observaciones.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🏛️</div>
+            <h4>Política educativa</h4>
+            <p>Marco legal, financiamiento, planificación y regulación. Define las prioridades y los recursos del sistema.</p>
+          </div>
+        </div>
+
+        <h3>Organización de los sistemas</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Modelo</th>
+                <th>Característica</th>
+                <th>Ejemplos</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Centralizado</strong></td>
+                <td>El Estado nacional define currículos, financiamiento y evaluación</td>
+                <td>Francia, Japón, Corea del Sur</td>
+              </tr>
+              <tr>
+                <td><strong>Federalizado</strong></td>
+                <td>Las provincias o estados tienen autonomía significativa</td>
+                <td>Argentina, Estados Unidos, Alemania</td>
+              </tr>
+              <tr>
+                <td><strong>Mixto</strong></td>
+                <td>Un marco nacional con adaptaciones regionales</td>
+                <td>España, México, Brasil</td>
+              </tr>
+              <tr>
+                <td><strong>Descentralizado</strong></td>
+                <td>Amplia autonomía de escuelas y municipios</td>
+                <td>Finlandia, Países Bajos</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <blockquote>
+          "El currículo no es neutral: siempre refleja una selección de qué se considera importante, quién lo decide y a qué intereses sirve." — Michael Apple
+          <cite>La pregunta por el conocimiento legítimo es también una pregunta política.</cite>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- ─── PANEL: MODELOS COMPARADOS ─── -->
+    <section id="panel-modelos" class="panel" role="tabpanel">
+      <div class="content-card">
+        <h2><span class="icon-dot"></span>Modelos educativos comparados</h2>
+        <p>
+          Los sistemas educativos más destacados del mundo no siguen un único modelo, pero comparten algunos rasgos: <strong>alta valoración social del docente, inversión sostenida, equidad, autonomía pedagógica y articulación con la comunidad</strong>. Veamos algunos casos emblemáticos.
+        </p>
+
+        <h3>Casos destacados</h3>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">🇫🇮</div>
+            <h4>Finlandia</h4>
+            <p>Docentes con formación de posgrado, escasa estandarización, mucho juego en la infancia, escuelas autónomas, equidad entre instituciones. Uno de los sistemas más admirados del mundo.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🇸🇬</div>
+            <h4>Singapur</h4>
+            <p>Alto rendimiento en pruebas internacionales. Currículo exigente, formación docente rigurosa, uso intensivo de tecnología y método "CPA" (concreto-pictórico-abstracto) en matemática.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🇰🇷</div>
+            <h4>Corea del Sur</h4>
+            <p>Altísima exigencia académica y presión social por el éxito. Fuerte inversión privada en clases particulares. Debate sobre el bienestar estudiantil.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🇯🇵</div>
+            <h4>Japón</h4>
+            <p>Disciplina, trabajo colectivo y formación moral. Currículo centralizado y alta valoración del esfuerzo. Ronin (año de estudio tras no ingresar a la universidad) es parte del sistema.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🇨🇦</div>
+            <h4>Canadá</h4>
+            <p>Sistema federal con fuerte equidad y buenos resultados. Alta inversión por alumno e integración de inmigrantes. Ontario y Quebec son referentes.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🇺🇾</div>
+            <h4>Uruguay</h4>
+            <p>Referente histórico en América Latina: Plan Ceibal (una laptop por niño), Universidad de la República gratuita y cogobernada.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🇦🇷</div>
+            <h4>Argentina</h4>
+            <p>Ley de Educación Nacional (2006), obligatoriedad del nivel secundario, universidades públicas gratuitas. Brechas entre jurisdicciones y desafíos de calidad.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🇪🇪</div>
+            <h4>Estonia</h4>
+            <p>Pionera en digitalización educativa. Programación desde primer grado, plataformas propias (eKool), alta conectividad y formación docente continua.</p>
+          </div>
+        </div>
+
+        <h3>Indicadores de comparación (PISA)</h3>
+        <p>
+          El <strong>Programa para la Evaluación Internacional de Estudiantes (PISA)</strong> de la OCDE evalúa cada tres años a estudiantes de 15 años en lectura, matemática y ciencias. Es el principal instrumento de comparación internacional, aunque también recibe críticas por su enfoque estandarizado.
+        </p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Dimensión</th>
+                <th>Qué evalúa</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Rendimiento</strong></td>
+                <td>Resultados en pruebas de lectura, matemática y ciencias.</td>
+              </tr>
+              <tr>
+                <td><strong>Equidad</strong></td>
+                <td>Impacto del origen socioeconómico en el rendimiento.</td>
+              </tr>
+              <tr>
+                <td><strong>Bienestar</strong></td>
+                <td>Satisfacción con la vida, sentido de pertenencia, ansiedad escolar.</td>
+              </tr>
+              <tr>
+                <td><strong>Innovación</strong></td>
+                <td>Uso pedagógico de la tecnología, prácticas docentes, autonomía escolar.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Comparador: modelo tradicional vs. modelo activo</h3>
+        <p style="margin-bottom: 12px;">Selecciona una columna para enfocarte en ella.</p>
+        <div class="compare-controls">
+          <button class="compare-btn active" data-compare="both">Ambas</button>
+          <button class="compare-btn" data-compare="left">Solo tradicional</button>
+          <button class="compare-btn" data-compare="right">Solo activo</button>
+        </div>
+        <div class="compare-panels">
+          <div class="compare-panel left" id="compare-left-modelos">
+            <h4>🏛️ Modelo tradicional</h4>
+            <p><strong>Rol del docente:</strong> autoridad que transmite el saber.</p>
+            <p><strong>Rol del estudiante:</strong> receptor que escucha, memoriza y repite.</p>
+            <p><strong>Contenido:</strong> currículo fijo y centralizado.</p>
+            <p><strong>Evaluación:</strong> exámenes estandarizados, notas numéricas.</p>
+            <p><strong>Organización:</strong> aulas frontales, tiempos rígidos, materias separadas.</p>
+          </div>
+          <div class="compare-panel right" id="compare-right-modelos">
+            <h4>🌱 Modelo activo</h4>
+            <p><strong>Rol del docente:</strong> guía y facilitador del aprendizaje.</p>
+            <p><strong>Rol del estudiante:</strong> protagonista, investigador, constructor de conocimiento.</p>
+            <p><strong>Contenido:</strong> flexible, interdisciplinario, contextualizado.</p>
+            <p><strong>Evaluación:</strong> formativa, por competencias, portafolios, autoevaluación.</p>
+            <p><strong>Organización:</strong> aulas flexibles, proyectos, agrupamientos heterogéneos.</p>
+          </div>
+        </div>
+
+        <blockquote>
+          "Los mejores sistemas educativos no son los que enseñan más rápido, sino los que logran que todos aprendan y nadie quede atrás." — Principio de equidad educativa
+          <cite>La calidad sin equidad no es calidad.</cite>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- ─── PANEL: DESAFÍOS ACTUALES ─── -->
+    <section id="panel-desafios" class="panel" role="tabpanel">
+      <div class="content-card">
+        <h2><span class="icon-dot"></span>Desafíos actuales de la educación</h2>
+        <p>
+          A pesar de los avances de las últimas décadas, los sistemas educativos enfrentan desafíos estructurales que la pandemia agravó y que la revolución tecnológica vuelve más urgentes. La pregunta ya no es si hay que transformar la educación, sino <strong>cómo hacerlo sin profundizar las desigualdades</strong>.
+        </p>
+
+        <h3>Los grandes desafíos</h3>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">⚖️</div>
+            <h4>Equidad</h4>
+            <p>El origen socioeconómico sigue prediciendo el rendimiento y la trayectoria educativa. La escuela no siempre logra compensar las desigualdades de origen.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🚪</div>
+            <h4>Deserción escolar</h4>
+            <p>Millones de niños y adolescentes abandonan la escuela cada año, especialmente en secundaria. Las causas combinan pobreza, trabajo infantil, desmotivación y falta de pertinencia.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">📉</div>
+            <h4>Calidad y aprendizajes</h4>
+            <p>Aún con más años de escolaridad, los aprendizajes fundamentales no están garantizados. La crisis de comprensión lectora y matemática es global.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">👩‍🏫</div>
+            <h4>Formación y condiciones docentes</h4>
+            <p>Falta de formación continua, bajos salarios, sobrecarga administrativa y escaso reconocimiento social afectan la calidad y la permanencia docente.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🌐</div>
+            <h4>Brecha digital</h4>
+            <p>El acceso desigual a dispositivos, conectividad y habilidades digitales profundiza las diferencias. La tecnología puede ampliar o reducir brechas.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🧠</div>
+            <h4>Salud mental</h4>
+            <p>Ansiedad, depresión, bullying y problemas de conducta afectan cada vez más a los estudiantes. La escuela necesita responder integralmente.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🔄</div>
+            <h4>Pertinencia del currículo</h4>
+            <p>Muchos contenidos siguen desconectados de la vida real, del trabajo y de los desafíos del siglo XXI. La motivación estudiantil depende de esa conexión.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🎯</div>
+            <h4>Evaluación</h4>
+            <p>Los sistemas de evaluación siguen centrados en pruebas estandarizadas, que miden una parte limitada del aprendizaje y generan presión y estrés.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🤖</div>
+            <h4>Inteligencia artificial</h4>
+            <p>La irrupción de herramientas de IA generativa abre oportunidades inmensas y riesgos graves: dependencia, plagio, pérdida de pensamiento crítico, desinformación.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">💰</div>
+            <h4>Financiamiento</h4>
+            <p>La inversión educativa sigue siendo insuficiente en muchos países. Sin recursos sostenidos, las reformas no pueden implementarse.</p>
+          </div>
+        </div>
+
+        <h3>Impacto de la pandemia (2020–2022)</h3>
+        <p>
+          La COVID-19 cerró las escuelas en todo el mundo y transformó radicalmente la experiencia educativa. La UNESCO estimó que más de <strong>1.600 millones de estudiantes</strong> se vieron afectados. Las consecuencias fueron heterogéneas: algunos sistemas se adaptaron rápido, otros no; muchas familias no tenían conectividad ni dispositivos; los aprendizajes retrocedieron en todo el mundo.
+        </p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Área</th>
+                <th>Impacto observado</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Aprendizajes</strong></td>
+                <td>Pérdida significativa en lectura, matemática y ciencias, especialmente en sectores vulnerables.</td>
+              </tr>
+              <tr>
+                <td><strong>Brechas</strong></td>
+                <td>Ampliación de la desigualdad entre estudiantes con y sin recursos, conectividad y apoyo familiar.</td>
+              </tr>
+              <tr>
+                <td><strong>Salud mental</strong></td>
+                <td>Aumento de ansiedad, depresión, aislamiento y problemas de conducta.</td>
+              </tr>
+              <tr>
+                <td><strong>Docentes</strong></td>
+                <td>Sobrecarga, necesidad de formación digital acelerada, agotamiento profesional.</td>
+              </tr>
+              <tr>
+                <td><strong>Innovación</strong></td>
+                <td>Adopción acelerada de plataformas, recursos digitales y nuevas modalidades.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <blockquote>
+          "La pandemia no inventó las brechas educativas: las hizo visibles y las profundizó." — Reflexión pospandemia
+          <cite>La crisis dejó al descubierto lo que ya sabíamos pero no queríamos mirar.</cite>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- ─── PANEL: PROYECTOS FUTUROS ─── -->
+    <section id="panel-proyectos" class="panel" role="tabpanel">
+      <div class="content-card">
+        <h2><span class="icon-dot"></span>Proyectos futuros y tendencias</h2>
+        <p>
+          La educación del futuro no será una versión "mejorada" del sistema actual: será una <strong>reorganización profunda de tiempos, espacios, roles y contenidos</strong>. La tecnología es una parte de la transformación, pero no la única: tan importantes son las reformas pedagógicas, la formación docente y las políticas de equidad.
+        </p>
+
+        <h3>Tendencias emergentes</h3>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">🤖</div>
+            <h4>IA educativa</h4>
+            <p>Tutores inteligentes, corrección automática, personalización del aprendizaje, generación de materiales. Requiere regulación, formación docente y criterios éticos.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🎯</div>
+            <h4>Aprendizaje personalizado</h4>
+            <p>Adaptar ritmos, contenidos y metodologías a cada estudiante. Los sistemas adaptativos y la IA lo hacen posible a escala.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🏆</div>
+            <h4>Microcredenciales</h4>
+            <p>Certificaciones cortas y modulares que acreditan habilidades específicas. Responden a la necesidad de formación continua y reconversión laboral.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🌍</div>
+            <h4>Aprendizaje global</h4>
+            <p>Aulas conectadas, intercambios virtuales, proyectos colaborativos internacionales. La escuela se abre al mundo.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🥽</div>
+            <h4>Realidad extendida</h4>
+            <p>Realidad virtual y aumentada en el aula: laboratorios inmersivos, visitas virtuales, simulaciones interactivas.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🧩</div>
+            <h4>Aprendizaje basado en proyectos</h4>
+            <p>Los estudiantes aprenden investigando, creando y resolviendo problemas reales. El conocimiento se vuelve significativo.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">💻</div>
+            <h4>Pensamiento computacional</h4>
+            <p>Programación, lógica algorítmica y resolución de problemas desde edades tempranas. Habilidad básica del siglo XXI.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🧠</div>
+            <h4>Educación socioemocional</h4>
+            <p>Integración explícita de habilidades como empatía, regulación emocional, colaboración y resiliencia en el currículo.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">📱</div>
+            <h4>M-learning</h4>
+            <p>Aprendizaje móvil: contenidos accesibles desde cualquier dispositivo y en cualquier lugar. Flexibiliza tiempos y espacios.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🔗</div>
+            <h4>Blockchain académico</h4>
+            <p>Certificaciones y títulos verificables e inmutables. Facilita la portabilidad de credenciales entre instituciones y países.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🌱</div>
+            <h4>Educación para el desarrollo sostenible</h4>
+            <p>Incorporar la crisis climática, la ciudadanía global y la justicia social como ejes transversales del currículo.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🏫</div>
+            <h4>Escuelas abiertas</h4>
+            <p>Espacios educativos integrados a la comunidad: bibliotecas, centros culturales, clubes, espacios públicos educativos.</p>
+          </div>
+        </div>
+
+        <h3>Proyectos concretos en marcha</h3>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-era">Global</div>
+            <h4>ODS 4 · Educación 2030</h4>
+            <p>Agenda internacional para garantizar educación inclusiva, equitativa y de calidad. Metas medibles en acceso, aprendizaje, equidad y formación docente.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">América Latina</div>
+            <h4>Plan Ceibal y Ceibal en casa</h4>
+            <p>Uruguay fue pionero en entregar dispositivos a todos los estudiantes. Hoy evoluciona a un ecosistema de plataformas, contenidos y formación docente.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">Argentina</div>
+            <h4>Conectar Igualdad</h4>
+            <p>Programa de distribución de netbooks y conectividad en escuelas secundarias. Busca reducir la brecha digital y mejorar la enseñanza.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">Unión Europea</div>
+            <h4>Plan de Acción de Educación Digital (2021–2027)</h4>
+            <p>Impulsa competencias digitales, infraestructura, formación docente y uso ético de la IA en educación.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">UNESCO</div>
+            <h4>Guía para la IA generativa en educación</h4>
+            <p>Recomendaciones sobre uso responsable de IA en las aulas: edad mínima, transparencia, protección de datos, formación crítica.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">Estonia</div>
+            <h4>Programación desde primer grado</h4>
+            <p>Proyecto ProgeTiiger: todos los estudiantes aprenden a programar, en el marco de una estrategia nacional de alfabetización digital.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">India</div>
+            <h4>DIKSHA y NEP 2020</h4>
+            <p>Plataforma nacional de contenidos educativos y nueva política educativa que busca transformar la enseñanza, la evaluación y la formación docente.</p>
+          </div>
+        </div>
+
+        <h3>¿Qué escuela para el futuro?</h3>
+        <p>
+          No hay una única respuesta, pero hay consensos crecientes. La escuela del futuro debería:
+        </p>
+        <ul>
+          <li><strong>Poner al estudiante en el centro</strong>: reconocer sus intereses, ritmos y contextos.</li>
+          <li><strong>Formar para la incertidumbre</strong>: no solo transmitir contenidos, sino enseñar a aprender, a desaprender y a convivir con el cambio.</li>
+          <li><strong>Integrar la tecnología con criterio pedagógico</strong>: no como fin, sino como medio.</li>
+          <li><strong>Desarrollar habilidades socioemocionales</strong>: empatía, colaboración, autorregulación, resiliencia.</li>
+          <li><strong>Vincularse con la comunidad</strong>: abrir sus puertas y aprender del territorio.</li>
+          <li><strong>Garantizar equidad</strong>: compensar desigualdades, no reproducirlas.</li>
+          <li><strong>Revalorizar a los docentes</strong>: formación, salarios y reconocimiento social.</li>
+          <li><strong>Educar para la ciudadanía global y la sostenibilidad</strong>: formar personas capaces de habitar un mundo complejo e interconectado.</li>
+        </ul>
+
+        <blockquote>
+          "La educación no cambia el mundo: cambia a las personas que van a cambiar el mundo." — Paulo Freire
+          <cite>Una frase que recuerda que toda transformación social comienza en el aula.</cite>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- ─── PANEL: GLOSARIO ─── -->
+    <section id="panel-glosario" class="panel" role="tabpanel">
+      <div class="content-card">
+        <h2><span class="icon-dot"></span>Glosario educativo</h2>
+        <p>Términos clave para comprender el tema. Haz clic en cada uno para expandir su definición.</p>
+
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Sistema educativo <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Conjunto organizado de instituciones, políticas, planes de estudio, niveles, actores y prácticas mediante los cuales una sociedad transmite, produce y acredita conocimiento. Incluye todos los niveles, desde la educación inicial hasta la superior y la permanente.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Currículo <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Definición de qué se enseña, cómo, cuándo y para qué. Incluye contenidos, objetivos, metodologías, criterios de evaluación y orientaciones didácticas. No es neutral: refleja una selección de saberes considerados legítimos.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Pedagogía <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Disciplina que estudia los procesos de enseñanza y aprendizaje. Reflexiona sobre cómo se enseña, cómo se aprende, qué se enseña y para qué, integrando dimensiones teóricas, éticas y políticas.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Didáctica <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Rama de la pedagogía que estudia las metodologías y estrategias de enseñanza. Se pregunta cómo organizar los contenidos, cómo secuenciarlos y cómo evaluarlos para favorecer el aprendizaje.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Educación obligatoria <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Nivel o niveles educativos que el Estado exige y garantiza para toda la población. Suele abarcar la primaria y la secundaria. Implica gratuidad, accesibilidad y obligación legal para las familias.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Escuela inclusiva <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Modelo educativo que reconoce y valora la diversidad, y garantiza el aprendizaje y la participación de todos los estudiantes, independientemente de sus condiciones personales, sociales o culturales. Se contrapone a la escuela segregadora.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Brecha educativa <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Desigualdad en el acceso, la permanencia, los aprendizajes y los resultados educativos entre distintos grupos sociales. Puede deberse a factores socioeconómicos, territoriales, de género, de discapacidad o de origen migratorio.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Deserción escolar <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Abandono de los estudios antes de completar el nivel. Puede ser temporal o definitiva. Combina causas económicas, familiares, pedagógicas, emocionales y culturales.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Evaluación formativa <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Tipo de evaluación centrada en el proceso de aprendizaje, no solo en el resultado. Su propósito es orientar y mejorar, brindando retroalimentación continua a estudiantes y docentes. Se opone a la evaluación meramente sumativa.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Competencias <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Conjunto integrado de conocimientos, habilidades, actitudes y valores que permiten actuar de manera eficaz en situaciones concretas. La educación por competencias busca formar para la vida y el trabajo, no solo para el examen.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">PISA <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Programa para la Evaluación Internacional de Estudiantes, de la OCDE. Evalúa cada tres años a estudiantes de 15 años en lectura, matemática y ciencias. Es el principal instrumento de comparación internacional, aunque también recibe críticas.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Microcredenciales <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Certificaciones cortas y modulares que acreditan habilidades específicas. Se diferencian de los títulos tradicionales por su duración, flexibilidad y foco en competencias concretas. Responden a la necesidad de formación continua y reconversión laboral.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Aprendizaje a lo largo de la vida <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Principio según el cual el aprendizaje no se limita a la edad escolar, sino que se extiende a toda la vida: formación profesional, capacitación laboral, aprendizaje autodidacta, educación de adultos, cursos y talleres.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Educación socioemocional <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Enfoque pedagógico que desarrolla habilidades como la empatía, la regulación emocional, la comunicación, la colaboración, la resiliencia y la toma de decisiones responsables. Se integra en el currículo y la vida escolar.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Pensamiento computacional <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Conjunto de habilidades cognitivas que permiten resolver problemas de forma algorítmica: descomponer, abstraer, reconocer patrones, diseñar secuencias. Se desarrolla mediante programación y otras actividades, no requiere necesariamente una computadora.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">ODS 4 <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Cuarto Objetivo de Desarrollo Sostenible de la Agenda 2030 de la ONU: "Garantizar una educación inclusiva, equitativa y de calidad y promover oportunidades de aprendizaje durante toda la vida para todos".</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Escuela Nueva <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Movimiento pedagógico surgido a fines del siglo XIX que propuso una educación centrada en el niño, activa, basada en la experiencia y en la vida real. Sus referentes incluyen a Montessori, Dewey, Decroly y Freinet.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>
+        Enciclopedia Visual · Contenido original de
+        <a href="https://app-fioravante.github.io/apps-fioravante/" target="_blank" rel="noopener noreferrer">Fioravante</a>.
+        Este recurso es de carácter educativo y exploratorio.
+      </p>
+    </footer>
+  </div>
+
+  <script>
+    // ─── TEMA ───
+    const rootEl = document.documentElement;
+    const themeToggle = document.getElementById('themeToggle');
+    function updateToggleLabel() {
+      const isLight = rootEl.getAttribute('data-theme') === 'light';
+      themeToggle.setAttribute('aria-label', isLight ? 'Cambiar a modo oscuro' : 'Cambiar a modo claro');
+      themeToggle.setAttribute('title', isLight ? 'Cambiar a modo oscuro' : 'Cambiar a modo claro');
+    }
+    themeToggle.addEventListener('click', () => {
+      const isLight = rootEl.getAttribute('data-theme') === 'light';
+      const next = isLight ? 'dark' : 'light';
+      rootEl.setAttribute('data-theme', next);
+      try { localStorage.setItem('enc-theme', next); } catch (e) {}
+      updateToggleLabel();
+    });
+    updateToggleLabel();
+
+    // ─── PESTAÑAS ───
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const panels = document.querySelectorAll('.panel');
+
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const targetId = btn.dataset.panel;
+        tabBtns.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });
+        btn.classList.add('active');
+        btn.setAttribute('aria-selected', 'true');
+        panels.forEach(p => p.classList.remove('active'));
+        document.getElementById(targetId).classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    });
+
+    // ─── COMPARADOR ───
+    document.querySelectorAll('.compare-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const group = btn.closest('.content-card');
+        group.querySelectorAll('.compare-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const mode = btn.dataset.compare;
+
+        const left = document.getElementById('compare-left-modelos');
+        const right = document.getElementById('compare-right-modelos');
+
+        if (left && right) {
+          left.classList.remove('dimmed');
+          right.classList.remove('dimmed');
+          if (mode === 'left') right.classList.add('dimmed');
+          if (mode === 'right') left.classList.add('dimmed');
+        }
+      });
+    });
+
+    // ─── ACORDEÓN ───
+    document.querySelectorAll('.accordion-trigger').forEach(trigger => {
+      trigger.addEventListener('click', () => {
+        const item = trigger.parentElement;
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.accordion-item').forEach(i => {
+          i.classList.remove('open');
+          i.querySelector('.accordion-trigger').setAttribute('aria-expanded', 'false');
+        });
+        if (!isOpen) {
+          item.classList.add('open');
+          trigger.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,1358 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Juguetes · Enciclopedia Visual Fioravante</title>
+  <meta name="description" content="Exploración interactiva del universo de los juguetes: historia, tipos, juguetes icónicos, industria, cultura, cómo elegir y glosario.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <script>
+    (function () {
+      try {
+        const stored = localStorage.getItem('enc-theme');
+        if (stored === 'light' || stored === 'dark') {
+          document.documentElement.setAttribute('data-theme', stored);
+        } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+          document.documentElement.setAttribute('data-theme', 'light');
+        }
+      } catch (e) {}
+    })();
+  </script>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg-deep: #070b14;
+      --surface: rgba(22, 32, 50, 0.65);
+      --surface-hover: rgba(30, 44, 68, 0.8);
+      --border: rgba(255, 255, 255, 0.07);
+      --border-strong: rgba(255, 255, 255, 0.15);
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --text-dim: #64748b;
+      --accent-cyan: #22d3ee;
+      --accent-violet: #a78bfa;
+      --accent-amber: #fbbf24;
+      --accent-rose: #fb7185;
+      --accent-emerald: #34d399;
+      --chip-hover-bg: rgba(255, 255, 255, 0.04);
+      --radius-lg: 24px;
+      --radius-md: 16px;
+      --radius-sm: 12px;
+      --shadow-card: 0 4px 24px -8px rgba(0, 0, 0, 0.6);
+      --shadow-hover: 0 24px 48px -16px rgba(0, 0, 0, 0.7);
+      --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+      --noise-opacity: 0.03;
+    }
+
+    [data-theme="light"] {
+      --bg-deep: #f4f6fa;
+      --surface: rgba(255, 255, 255, 0.72);
+      --surface-hover: rgba(255, 255, 255, 0.92);
+      --border: rgba(15, 23, 42, 0.08);
+      --border-strong: rgba(15, 23, 42, 0.16);
+      --text-primary: #1e293b;
+      --text-secondary: #475569;
+      --text-dim: #94a3b8;
+      --accent-cyan: #0891b2;
+      --accent-violet: #7c3aed;
+      --accent-amber: #b45309;
+      --accent-rose: #e11d48;
+      --accent-emerald: #059669;
+      --chip-hover-bg: rgba(15, 23, 42, 0.04);
+      --shadow-card: 0 4px 24px -8px rgba(15, 23, 42, 0.08);
+      --shadow-hover: 0 24px 48px -16px rgba(15, 23, 42, 0.16);
+      --noise-opacity: 0.015;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background-color: var(--bg-deep);
+      color: var(--text-primary);
+      min-height: 100vh;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+      transition: background-color 0.5s ease, color 0.5s ease;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      background:
+        radial-gradient(ellipse 80% 60% at 10% 0%, rgba(167, 139, 250, 0.14), transparent 60%),
+        radial-gradient(ellipse 70% 50% at 90% 10%, rgba(251, 113, 133, 0.1), transparent 55%),
+        radial-gradient(ellipse 60% 50% at 50% 100%, rgba(251, 191, 36, 0.06), transparent 60%);
+      animation: bgShift 20s ease-in-out infinite alternate;
+      transition: opacity 0.5s ease;
+    }
+
+    [data-theme="light"] body::before {
+      background:
+        radial-gradient(ellipse 80% 60% at 10% 0%, rgba(124, 58, 237, 0.12), transparent 60%),
+        radial-gradient(ellipse 70% 50% at 90% 10%, rgba(225, 29, 72, 0.09), transparent 55%),
+        radial-gradient(ellipse 60% 50% at 50% 100%, rgba(180, 83, 9, 0.07), transparent 60%);
+    }
+
+    @keyframes bgShift {
+      0% { opacity: 0.7; transform: scale(1); }
+      100% { opacity: 1; transform: scale(1.08); }
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      opacity: var(--noise-opacity);
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      pointer-events: none;
+      transition: opacity 0.5s ease;
+    }
+
+    .app { max-width: 1200px; margin: 0 auto; padding: 0 24px 80px; }
+
+    /* ─── THEME TOGGLE ─── */
+    .theme-toggle {
+      position: fixed; top: 20px; right: 20px; z-index: 100;
+      width: 46px; height: 46px; border-radius: 50%;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      color: var(--text-primary); cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: var(--shadow-card);
+      transition: transform 0.35s var(--ease-out-expo), border-color 0.3s, box-shadow 0.35s var(--ease-out-expo), background-color 0.4s ease, color 0.4s ease;
+    }
+    .theme-toggle:hover { transform: scale(1.1) rotate(10deg); border-color: var(--border-strong); box-shadow: var(--shadow-hover); }
+    .theme-toggle svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .theme-toggle .icon-sun { display: block; }
+    .theme-toggle .icon-moon { display: none; }
+    [data-theme="light"] .theme-toggle .icon-sun { display: none; }
+    [data-theme="light"] .theme-toggle .icon-moon { display: block; }
+
+    /* ─── HEADER ─── */
+    .header { padding: 56px 0 24px; text-align: center; }
+    .header-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 16px; border-radius: 999px;
+      background: rgba(167, 139, 250, 0.1);
+      border: 1px solid rgba(167, 139, 250, 0.25);
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--accent-violet);
+      margin-bottom: 20px;
+      animation: fadeDown 0.8s var(--ease-out-expo) both;
+    }
+    .header-badge::before {
+      content: ''; width: 6px; height: 6px; border-radius: 50%;
+      background: var(--accent-violet); box-shadow: 0 0 12px var(--accent-violet);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.8); } }
+
+    .header h1 {
+      font-size: clamp(2.2rem, 5.5vw, 3.8rem);
+      font-weight: 800; letter-spacing: -0.03em; line-height: 1.1;
+      margin-bottom: 16px;
+      animation: fadeDown 0.9s 0.1s var(--ease-out-expo) both;
+    }
+    .header h1 .gradient-text {
+      background: linear-gradient(135deg, var(--accent-violet) 0%, var(--accent-rose) 50%, var(--accent-amber) 100%);
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-size: 200% 200%;
+      animation: gradientMove 6s ease-in-out infinite;
+    }
+    @keyframes gradientMove { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+
+    .header-subtitle {
+      font-size: clamp(0.95rem, 2vw, 1.1rem);
+      color: var(--text-secondary); font-weight: 400;
+      max-width: 720px; margin: 0 auto;
+      animation: fadeDown 1s 0.2s var(--ease-out-expo) both;
+    }
+
+    /* ─── NAVEGACIÓN POR PESTAÑAS ─── */
+    .tabs-nav {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      margin: 32px 0 28px;
+      padding: 8px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      animation: fadeUp 0.8s 0.3s var(--ease-out-expo) both;
+    }
+    .tab-btn {
+      flex: 1 1 auto;
+      padding: 12px 18px;
+      border-radius: var(--radius-sm);
+      border: none; background: transparent;
+      color: var(--text-secondary);
+      font-family: inherit; font-size: 0.88rem; font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s var(--ease-out-expo);
+      white-space: nowrap;
+    }
+    .tab-btn:hover { color: var(--text-primary); background: var(--chip-hover-bg); }
+    .tab-btn.active {
+      background: rgba(167, 139, 250, 0.15);
+      color: var(--accent-violet);
+      box-shadow: 0 0 20px -4px rgba(167, 139, 250, 0.2);
+    }
+    [data-theme="light"] .tab-btn.active { background: rgba(124, 58, 237, 0.12); color: var(--accent-violet); }
+
+    /* ─── PANELES ─── */
+    .panel { display: none; animation: fadeUp 0.5s var(--ease-out-expo) both; }
+    .panel.active { display: block; }
+
+    .content-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      box-shadow: var(--shadow-card);
+      margin-bottom: 24px;
+      transition: background-color 0.4s ease, border-color 0.4s ease;
+    }
+
+    .content-card h2 {
+      font-size: 1.5rem; font-weight: 700; letter-spacing: -0.02em;
+      margin-bottom: 16px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .content-card h2 .icon-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--accent-violet);
+      box-shadow: 0 0 12px var(--accent-violet);
+      flex-shrink: 0;
+    }
+    .content-card h3 {
+      font-size: 1.1rem; font-weight: 700;
+      margin: 24px 0 10px;
+      color: var(--accent-violet);
+    }
+    .content-card p {
+      color: var(--text-secondary);
+      margin-bottom: 14px;
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+    .content-card p strong { color: var(--text-primary); }
+    .content-card ul, .content-card ol {
+      margin: 12px 0 18px 20px;
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+    .content-card li { margin-bottom: 8px; }
+    .content-card blockquote {
+      border-left: 3px solid var(--accent-violet);
+      padding: 12px 20px;
+      margin: 20px 0;
+      background: rgba(167, 139, 250, 0.05);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      font-style: italic;
+      color: var(--text-secondary);
+      font-size: 0.92rem;
+    }
+    [data-theme="light"] .content-card blockquote { background: rgba(124, 58, 237, 0.05); }
+    .content-card blockquote cite {
+      display: block; margin-top: 8px;
+      font-style: normal; font-size: 0.82rem; color: var(--text-dim);
+    }
+
+    /* ─── TARJETAS DE CONCEPTO ─── */
+    .concept-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+      margin: 20px 0;
+    }
+    .concept-card {
+      padding: 22px;
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      transition: transform 0.3s var(--ease-out-expo), border-color 0.3s, box-shadow 0.3s;
+    }
+    .concept-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--border-strong);
+      box-shadow: var(--shadow-hover);
+    }
+    .concept-card .concept-icon {
+      width: 44px; height: 44px; border-radius: var(--radius-sm);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem; margin-bottom: 14px;
+      background: rgba(167, 139, 250, 0.12);
+      color: var(--accent-violet);
+    }
+    .concept-card h4 {
+      font-size: 1rem; font-weight: 700; margin-bottom: 8px;
+    }
+    .concept-card p {
+      font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; margin: 0;
+    }
+    .concept-card .author {
+      display: block;
+      margin-top: 10px;
+      font-size: 0.78rem;
+      color: var(--text-dim);
+      font-style: italic;
+    }
+
+    /* ─── COMPARADOR ─── */
+    .compare-controls {
+      display: flex; gap: 8px; margin: 20px 0 24px; flex-wrap: wrap;
+    }
+    .compare-btn {
+      padding: 10px 20px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text-secondary);
+      font-family: inherit; font-size: 0.85rem; font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s var(--ease-out-expo);
+    }
+    .compare-btn:hover { border-color: var(--border-strong); color: var(--text-primary); }
+    .compare-btn.active {
+      background: var(--accent-violet);
+      border-color: var(--accent-violet);
+      color: var(--bg-deep);
+      font-weight: 700;
+    }
+    [data-theme="light"] .compare-btn.active { color: #fff; }
+
+    .compare-panels {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    @media (max-width: 640px) { .compare-panels { grid-template-columns: 1fr; } }
+
+    .compare-panel {
+      padding: 24px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      background: var(--surface);
+      transition: opacity 0.3s ease;
+    }
+    .compare-panel.dimmed { opacity: 0.35; pointer-events: none; }
+    .compare-panel h4 {
+      font-size: 0.95rem; font-weight: 700; margin-bottom: 12px;
+      text-transform: uppercase; letter-spacing: 0.06em;
+    }
+    .compare-panel.left h4 { color: var(--accent-amber); }
+    .compare-panel.right h4 { color: var(--accent-cyan); }
+    .compare-panel p { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.7; }
+
+    /* ─── LÍNEA DE TIEMPO ─── */
+    .timeline { position: relative; padding: 20px 0 20px 32px; }
+    .timeline::before {
+      content: ''; position: absolute; left: 11px; top: 0; bottom: 0;
+      width: 2px; background: linear-gradient(to bottom, var(--accent-violet), var(--accent-rose));
+      border-radius: 2px;
+    }
+    .timeline-item {
+      position: relative; margin-bottom: 28px; padding-left: 8px;
+    }
+    .timeline-item::before {
+      content: ''; position: absolute; left: -27px; top: 6px;
+      width: 12px; height: 12px; border-radius: 50%;
+      background: var(--bg-deep); border: 2px solid var(--accent-violet);
+      box-shadow: 0 0 10px rgba(167, 139, 250, 0.3);
+    }
+    .timeline-item .timeline-era {
+      font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.08em; color: var(--accent-violet); margin-bottom: 4px;
+    }
+    .timeline-item h4 { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+    .timeline-item p { font-size: 0.88rem; color: var(--text-secondary); margin: 0; line-height: 1.6; }
+
+    /* ─── TABLA ─── */
+    .table-wrap {
+      overflow-x: auto;
+      margin: 20px 0;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+    th, td {
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-secondary);
+    }
+    th {
+      background: var(--chip-hover-bg);
+      color: var(--text-primary);
+      font-weight: 700;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: var(--chip-hover-bg); }
+    td strong { color: var(--text-primary); }
+
+    /* ─── GLOSARIO ─── */
+    .accordion-item {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      margin-bottom: 10px;
+      overflow: hidden;
+      transition: border-color 0.3s;
+    }
+    .accordion-item:hover { border-color: var(--border-strong); }
+    .accordion-trigger {
+      width: 100%;
+      padding: 16px 20px;
+      background: transparent;
+      border: none;
+      color: var(--text-primary);
+      font-family: inherit; font-size: 0.95rem; font-weight: 600;
+      text-align: left; cursor: pointer;
+      display: flex; justify-content: space-between; align-items: center;
+      transition: background-color 0.2s;
+    }
+    .accordion-trigger:hover { background: var(--chip-hover-bg); }
+    .accordion-trigger .chevron {
+      transition: transform 0.3s var(--ease-out-expo);
+      font-size: 0.8rem; color: var(--text-dim);
+    }
+    .accordion-item.open .accordion-trigger .chevron { transform: rotate(180deg); }
+    .accordion-content {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.4s var(--ease-out-expo), padding 0.4s var(--ease-out-expo);
+      padding: 0 20px;
+    }
+    .accordion-item.open .accordion-content {
+      max-height: 500px; padding: 0 20px 18px;
+    }
+    .accordion-content p {
+      font-size: 0.9rem; color: var(--text-secondary); line-height: 1.7; margin: 0;
+    }
+
+    /* ─── FOOTER ─── */
+    .footer {
+      text-align: center; padding: 48px 0 0;
+      color: var(--text-dim); font-size: 0.8rem;
+      border-top: 1px solid var(--border); margin-top: 48px;
+    }
+    .footer a { color: var(--accent-violet); text-decoration: none; font-weight: 500; }
+    .footer a:hover { text-decoration: underline; }
+
+    @keyframes fadeDown { from { opacity: 0; transform: translateY(-16px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+
+    @media (max-width: 640px) {
+      .app { padding: 0 16px 48px; }
+      .content-card { padding: 24px 20px; }
+      .tabs-nav { gap: 4px; padding: 6px; }
+      .tab-btn { padding: 10px 12px; font-size: 0.8rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema" title="Cambiar tema">
+    <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+    <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  </button>
+
+  <div class="app">
+    <!-- Header -->
+    <header class="header">
+      <div class="header-badge">Juego · Imaginación · Infancia</div>
+      <h1>Los <span class="gradient-text">Juguetes</span></h1>
+      <p class="header-subtitle">
+        Un recorrido visual e interactivo por el universo de los juguetes: su historia, sus tipos, los juguetes icónicos, la industria, su presencia en la cultura y las claves para elegir y jugar.
+      </p>
+    </header>
+
+    <!-- Navegación por pestañas -->
+    <nav class="tabs-nav" role="tablist" aria-label="Secciones del tema">
+      <button class="tab-btn active" data-panel="panel-intro" role="tab" aria-selected="true">¿Qué son?</button>
+      <button class="tab-btn" data-panel="panel-historia" role="tab" aria-selected="false">Historia</button>
+      <button class="tab-btn" data-panel="panel-tipos" role="tab" aria-selected="false">Tipos</button>
+      <button class="tab-btn" data-panel="panel-iconicos" role="tab" aria-selected="false">Juguetes Icónicos</button>
+      <button class="tab-btn" data-panel="panel-industria" role="tab" aria-selected="false">Industria</button>
+      <button class="tab-btn" data-panel="panel-cultura" role="tab" aria-selected="false">Cultura</button>
+      <button class="tab-btn" data-panel="panel-elegir" role="tab" aria-selected="false">Cómo elegir</button>
+      <button class="tab-btn" data-panel="panel-glosario" role="tab" aria-selected="false">Glosario</button>
+    </nav>
+
+    <!-- ─── PANEL: ¿QUÉ SON? ─── -->
+    <section id="panel-intro" class="panel active" role="tabpanel">
+      <div class="content-card">
+        <h2><span class="icon-dot"></span>¿Qué son los juguetes?</h2>
+        <p>
+          Un <strong>juguete</strong> es un objeto diseñado para jugar. Puede ser una réplica de algo real, una creación abstracta, un personaje, una herramienta o incluso un objeto cotidiano transformado por la imaginación. Lo que define al juguete no es su material ni su forma, sino su <strong>función lúdica</strong>: invita a la acción, a la fantasía, a la experimentación y al disfrute.
+        </p>
+        <p>
+          Los juguetes son tan antiguos como la humanidad. Se han encontrado muñecas, sonajeros y pelotas en yacimientos prehistóricos. Han acompañado a los niños y niñas de todas las épocas y culturas, y también a los adultos: coleccionistas, aficionados y creadores que siguen jugando toda la vida.
+        </p>
+
+        <h3>Las cuatro funciones del juguete</h3>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">🧠</div>
+            <h4>Cognitiva</h4>
+            <p>Estimula la imaginación, la resolución de problemas, la memoria, la atención y el pensamiento simbólico. Jugar es una de las formas más eficaces de aprender.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🤝</div>
+            <h4>Social</h4>
+            <p>Enseña a compartir, a negociar, a respetar turnos y a cooperar. Los juegos grupales son un laboratorio de habilidades sociales.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">❤️</div>
+            <h4>Emocional</h4>
+            <p>Permite expresar miedos, deseos y conflictos en un espacio seguro. El juego simbólico ayuda a comprender el mundo y a regular las emociones.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🤸</div>
+            <h4>Física</h4>
+            <p>Desarrolla la motricidad gruesa y fina, la coordinación y la percepción del cuerpo en el espacio. Correr, saltar, ensartar, construir.</p>
+          </div>
+        </div>
+
+        <h3>¿Qué distingue a un juguete de otros objetos?</h3>
+        <ul>
+          <li><strong>Intención lúdica:</strong> está pensado para el juego, no para la utilidad práctica inmediata.</li>
+          <li><strong>Libertad de uso:</strong> admite múltiples formas de jugar; cuanto más abierto, más rico su potencial.</li>
+          <li><strong>Valor simbólico:</strong> puede representar algo (un animal, un coche, una casa) o ser pura forma para la imaginación.</li>
+          <li><strong>Placer:</strong> su finalidad principal es el disfrute, no el rendimiento ni el resultado.</li>
+          <li><strong>Seguridad:</strong> los juguetes infantiles están sujetos a normativas estrictas para evitar riesgos.</li>
+        </ul>
+
+        <blockquote>
+          "El juego es el trabajo del niño." — Maria Montessori
+          <cite>Jugar no es una pérdida de tiempo: es la forma natural de aprender y crecer.</cite>
+        </blockquote>
+
+        <h3>Juguete, juego y desarrollo</h3>
+        <p>
+          Los juguetes no existen en el vacío: forman parte de una cultura lúdica más amplia que incluye los juegos tradicionales, las canciones, los rituales y las relaciones entre quienes juegan. Un mismo juguete puede tener significados muy distintos según la edad, el contexto y la imaginación de quien lo usa. Por eso, más importante que el objeto en sí es <strong>lo que se hace con él</strong>.
+        </p>
+        <p>
+          En la infancia, el juego con juguetes cumple un papel central en el desarrollo cognitivo, afectivo y social. En la adultez, el juguete puede convertirse en objeto de colección, en herramienta creativa, en símbolo de nostalgia o en forma de relax. En todas las etapas, jugar sigue siendo una de las actividades más humanas que existen.
+        </p>
+      </div>
+    </section>
+
+    <!-- ─── PANEL: HISTORIA ─── -->
+    <section id="panel-historia" class="panel" role="tabpanel">
+      <div class="content-card">
+        <h2><span class="icon-dot"></span>Historia de los juguetes</h2>
+        <p>
+          La historia de los juguetes es tan larga como la de la humanidad. Desde las primeras muñecas de hueso o arcilla hasta los juguetes electrónicos y digitales, cada época ha creado objetos para jugar que reflejan su tecnología, sus creencias y su manera de entender la infancia.
+        </p>
+
+        <h3>Línea de tiempo</h3>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-era">Prehistoria</div>
+            <h4>Los primeros juguetes</h4>
+            <p>Se han encontrado muñecas de marfil, piedra y arcilla, sonajeros y pelotas en yacimientos de la Edad de Piedra. Muchos pudieron tener también un uso ritual o simbólico.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">Antigüedad</div>
+            <h4>Egipto, Grecia y Roma</h4>
+            <p>Muñecas articuladas, carritos, pelotas, tabas y juegos de mesa como el senet egipcio. En Grecia y Roma, los niños tenían sonajeros, aros y caballitos de madera.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">Edad Media</div>
+            <h4>Juguetes artesanales</h4>
+            <p>Predominan los juguetes de madera, tela y metal hechos a mano: caballitos de madera, muñecas de trapo, peonzas, cometas. También se popularizan los juegos de bolas y los naipes.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">Siglo XVIII</div>
+            <h4>La infancia como etapa</h4>
+            <p>Se empieza a valorar la infancia como una etapa diferenciada. Aparecen juguetes educativos, rompecabezas y libros para niños. La muñeca de porcelana se vuelve un objeto de lujo.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">Siglo XIX</div>
+            <h4>Industrialización</h4>
+            <p>La producción en serie abarata los juguetes y los hace accesibles a más familias. Surgen empresas como Steiff (osos de peluche) y Märklin (trenes de juguete).</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">Principios del siglo XX</div>
+            <h4>Juguetes mecánicos y de hojalata</h4>
+            <p>Los juguetes de cuerda y los autómatas de hojalata conquistan el mercado. Aparecen los primeros juegos de construcción y los juguetes educativos inspirados en la pedagogía moderna.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">Años 30–50</div>
+            <h4>La era del plástico y los iconos</h4>
+            <p>El plástico transforma la industria. Nacen el Monopoly (1935), el cubo de Rubik (1974) y, sobre todo, el Lego (1949) y la Barbie (1959). El osito de peluche se consolida como símbolo.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">Años 60–80</div>
+            <h4>Juguetes de acción y electrónicos</h4>
+            <p>G.I. Joe, Action Man, Playmobil. Llegan los primeros juguetes con pilas: robots, coches teledirigidos, consolas primitivas. El videojuego empieza a competir con el juguete tradicional.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">Años 90</div>
+            <h4>La fiebre de las mascotas digitales</h4>
+            <p>Tamagotchi (1996), Furby (1998), Pokémon. Los juguetes se conectan con franquicias transmedia: series, películas, videojuegos y coleccionables.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">Años 2000</div>
+            <h4>Juguetes conectados y pantallas</h4>
+            <p>Tablets para niños, juguetes con realidad aumentada, robots educativos. La frontera entre juguete físico y digital se vuelve porosa.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">Años 2010</div>
+            <h4>Sostenibilidad y diversidad</h4>
+            <p>Crece la preocupación por los materiales sostenibles, la representación y la inclusividad. Los juguetes sin género y los de madera recobran protagonismo.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">Años 2020</div>
+            <h4>Nuevos horizontes</h4>
+            <p>Juguetes STEM, realidad virtual, coleccionismo adulto, fabricación digital (impresión 3D) y una revalorización del juego libre y al aire libre.</p>
+          </div>
+        </div>
+
+        <h3>Grandes hitos por época</h3>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">🏺</div>
+            <h4>Antigüedad</h4>
+            <p>Muñecas articuladas · Senet · Tabas · Aros · Caballitos de madera</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🪵</div>
+            <h4>Edad Media y Renacimiento</h4>
+            <p>Peonzas · Cometas · Muñecas de trapo · Naipes · Juegos de bolas</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">⚙️</div>
+            <h4>Revolución Industrial</h4>
+            <p>Oso de peluche (Steiff, 1902) · Trenes de hojalata · Rompecabezas · Muñecas de porcelana</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🧱</div>
+            <h4>Siglo XX</h4>
+            <p>Lego (1949) · Barbie (1959) · Monopoly (1935) · G.I. Joe (1964) · Rubik (1974)</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">📱</div>
+            <h4>Siglo XXI</h4>
+            <p>Tamagotchi (1996) · Furby (1998) · Robots educativos · Juguetes conectados · Coleccionismo retro</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── PANEL: TIPOS ─── -->
+    <section id="panel-tipos" class="panel" role="tabpanel">
+      <div class="content-card">
+        <h2><span class="icon-dot"></span>Tipos de juguetes</h2>
+        <p>
+          Los juguetes se pueden clasificar de muchas maneras: por la edad a la que van dirigidos, por el material del que están hechos, por la habilidad que desarrollan o por el tipo de juego que proponen. Estas categorías no son excluyentes: un mismo juguete puede pertenecer a varias.
+        </p>
+
+        <h3>Clasificación por función</h3>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">🧸</div>
+            <h4>Muñecos y peluches</h4>
+            <p>Representan seres humanos, animales o personajes fantásticos. Fomentan el juego simbólico, el afecto y la narración de historias. Ejemplos: muñecas, osos de peluche, figuras de acción.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🧱</div>
+            <h4>Construcción</h4>
+            <p>Piezas que se combinan para crear estructuras. Desarrollan la motricidad fina, la lógica espacial y la creatividad. Ejemplos: Lego, bloques de madera, mecanos.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🚗</div>
+            <h4>Vehículos y transporte</h4>
+            <p>Coches, trenes, aviones, barcos. Pueden ser de empuje, de cuerda, teledirigidos o de colección. Estimulan el juego de movimiento y la imaginación.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🧩</div>
+            <h4>Rompecabezas y puzles</h4>
+            <p>Ejercitan la percepción visual, la paciencia y la resolución de problemas. Van desde pocas piezas para los más pequeños hasta desafíos de miles de piezas.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🎲</div>
+            <h4>Juegos de mesa</h4>
+            <p>Combinan reglas, estrategia y socialización. Pueden ser de tablero, de cartas, de dados o de rol. Ejemplos: Monopoly, ajedrez, Catan, Dixit.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🤖</div>
+            <h4>Juguetes electrónicos</h4>
+            <p>Incluyen pilas, circuitos, sonido o movimiento. Desde robots y coches teledirigidos hasta mascotas virtuales y tablets infantiles.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">⚽</div>
+            <h4>Juguetes de exterior</h4>
+            <p>Pelotas, bicicletas, cometas, aros, cuerdas. Favorecen la actividad física, la coordinación y el juego al aire libre.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🎨</div>
+            <h4>Juguetes creativos</h4>
+            <p>Materiales para dibujar, pintar, modelar, coser o construir. Estimulan la expresión artística y la experimentación sensorial.</p>
+          </div>
+        </div>
+
+        <h3>Clasificación por material</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Material</th>
+                <th>Características</th>
+                <th>Ejemplos</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Madera</strong></td>
+                <td>Duradero, cálido, natural. Muy valorado en juguetes educativos y de construcción.</td>
+                <td>Bloques, trenes, rompecabezas, juguetes Montessori</td>
+              </tr>
+              <tr>
+                <td><strong>Plástico</strong></td>
+                <td>Versátil, económico, fácil de moldear y limpiar. El material dominante desde mediados del siglo XX.</td>
+                <td>Muñecas, figuras de acción, vehículos, piezas de construcción</td>
+              </tr>
+              <tr>
+                <td><strong>Tela y peluche</strong></td>
+                <td>Suaves, afectivos, seguros para bebés. Ideales para el apego y el juego simbólico.</td>
+                <td>Osos de peluche, muñecas de trapo, mantas de apego</td>
+              </tr>
+              <tr>
+                <td><strong>Metal</strong></td>
+                <td>Resistente y con acabados brillantes. Frecuente en juguetes de colección y miniaturas.</td>
+                <td>Coches de hojalata, trenes, soldaditos, peonzas</td>
+              </tr>
+              <tr>
+                <td><strong>Cartón y papel</strong></td>
+                <td>Ligero, reciclable y económico. Muy usado en juegos de mesa, puzles y manualidades.</td>
+                <td>Rompecabezas, naipes, juegos de mesa, disfraces</td>
+              </tr>
+              <tr>
+                <td><strong>Electrónica</strong></td>
+                <td>Integra circuitos, sensores y pantallas. Permite interactividad y conexión digital.</td>
+                <td>Robots, consolas, mascotas virtuales, drones</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Juguetes según la etapa evolutiva</h3>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-era">0–2 años</div>
+            <h4>Exploración sensorial</h4>
+            <p>Sonajeros, mordedores, pelotas de tela, libros de baño, muñecos de apego. Importan la textura, el color, el sonido y la seguridad.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">3–5 años</div>
+            <h4>Juego simbólico</h4>
+            <p>Muñecas, cocinitas, disfraces, bloques grandes, plastilina, cuentos. El niño representa roles y situaciones del mundo adulto.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">6–8 años</div>
+            <h4>Reglas y construcción</h4>
+            <p>Lego, juegos de mesa sencillos, rompecabezas, bicicletas, juegos de cartas. Se desarrolla la lógica, la cooperación y la motricidad fina.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">9–12 años</div>
+            <h4>Estrategia y aficiones</h4>
+            <p>Juegos de mesa complejos, maquetas, experimentos científicos, videojuegos, coleccionables. Aparecen los intereses personales y el juego en grupo.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">Adolescencia y adultez</div>
+            <h4>Coleccionismo y juego social</h4>
+            <p>Juegos de rol, cartas coleccionables, videojuegos, puzzles grandes, modelismo. El juguete se vuelve también objeto cultural y de nostalgia.</p>
+          </div>
+        </div>
+
+        <blockquote>
+          "Un juguete bueno es el que se adapta a quien juega, no al revés." — Reflexión
+          <cite>La edad recomendada es orientativa: lo importante es la seguridad y el interés del niño.</cite>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- ─── PANEL: JUGUETES ICÓNICOS ─── -->
+    <section id="panel-iconicos" class="panel" role="tabpanel">
+      <div class="content-card">
+        <h2><span class="icon-dot"></span>Juguetes icónicos</h2>
+        <p>
+          Algunos juguetes trascienden generaciones y se convierten en iconos culturales. Estos son algunos de los más influyentes, aquellos que marcaron la infancia de millones de personas y transformaron la industria del juguete.
+        </p>
+
+        <h3>Los grandes clásicos</h3>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">🧱</div>
+            <h4>Lego</h4>
+            <p>Creado en Dinamarca en 1949, el ladrillo de plástico encajable se convirtió en el sistema de construcción más versátil del mundo. Hoy es también una potente marca transmedia.</p>
+            <span class="author">Dinamarca, 1949 – actualidad</span>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">👗</div>
+            <h4>Barbie</h4>
+            <p>Lanzada por Mattel en 1959, fue la primera muñeca pensada como adolescente con vida propia. Ha generado debates sobre estereotipos y también una enorme cultura de colección.</p>
+            <span class="author">EE.UU., 1959 – actualidad</span>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🧸</div>
+            <h4>Oso de peluche</h4>
+            <p>Popularizado a principios del siglo XX (Steiff, 1902), se convirtió en el juguete de apego por excelencia. Su nombre vendría del presidente Theodore Roosevelt.</p>
+            <span class="author">Alemania / EE.UU., 1902 – actualidad</span>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🎲</div>
+            <h4>Monopoly</h4>
+            <p>Creado en 1935, es el juego de mesa comercial más vendido de la historia. Un clásico de la especulación inmobiliaria que ha generado cientos de ediciones.</p>
+            <span class="author">EE.UU., 1935 – actualidad</span>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🟥</div>
+            <h4>Cubo de Rubik</h4>
+            <p>Inventado por Ernő Rubik en 1974, se convirtió en el puzzle más famoso del mundo. Ha inspirado competiciones de velocidad y una comunidad global de aficionados.</p>
+            <span class="author">Hungría, 1974 – actualidad</span>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🤖</div>
+            <h4>G.I. Joe / Action Man</h4>
+            <p>El primer muñeco de acción para niños (1964) introdujo el concepto de figura articulada con accesorios. Fue un éxito enorme y abrió el camino a las franquicias de acción.</p>
+            <span class="author">EE.UU. / Reino Unido, 1964 – actualidad</span>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🧩</div>
+            <h4>Playmobil</h4>
+            <p>Desde 1974, sus figuras de 7,5 cm y sus mundos temáticos han fomentado el juego simbólico durante generaciones. Su diseño sencillo y robusto es su seña de identidad.</p>
+            <span class="author">Alemania, 1974 – actualidad</span>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🥚</div>
+            <h4>Tamagotchi</h4>
+            <p>La mascota virtual de Bandai (1996) enseñó a toda una generación a cuidar de un ser digital. Fue un fenómeno global y el precursor de los juguetes conectados.</p>
+            <span class="author">Japón, 1996 – actualidad</span>
+          </div>
+        </div>
+
+        <h3>Cronología de lanzamientos icónicos</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Año</th>
+                <th>Juguete</th>
+                <th>Creador / Marca</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>1902</strong></td><td>Oso de peluche</td><td>Steiff / Morris Michtom</td></tr>
+              <tr><td><strong>1935</strong></td><td>Monopoly</td><td>Charles Darrow / Parker Brothers</td></tr>
+              <tr><td><strong>1949</strong></td><td>Lego</td><td>Ole Kirk Christiansen</td></tr>
+              <tr><td><strong>1959</strong></td><td>Barbie</td><td>Ruth Handler / Mattel</td></tr>
+              <tr><td><strong>1964</strong></td><td>G.I. Joe</td><td>Hasbro</td></tr>
+              <tr><td><strong>1974</strong></td><td>Cubo de Rubik / Playmobil</td><td>Ernő Rubik / Brandstätter</td></tr>
+              <tr><td><strong>1979</strong></td><td>Lego Minifigures</td><td>Lego</td></tr>
+              <tr><td><strong>1983</strong></td><td>My Little Pony</td><td>Hasbro</td></tr>
+              <tr><td><strong>1996</strong></td><td>Tamagotchi</td><td>Bandai</td></tr>
+              <tr><td><strong>1998</strong></td><td>Furby</td><td>Tiger Electronics</td></tr>
+              <tr><td><strong>1999</strong></td><td>Beyblade</td><td>Takara</td></tr>
+              <tr><td><strong>2005</strong></td><td>Lego Star Wars</td><td>Lego / Lucasfilm</td></tr>
+              <tr><td><strong>2010</strong></td><td>Fidget Spinner</td><td>Catherine Hettinger</td></tr>
+              <tr><td><strong>2016</strong></td><td>Fidget Cube / Hatchimals</td><td>Antsy Labs / Spin Master</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Juguetes que marcaron época</h3>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">🪀</div>
+            <h4>Yo-yo</h4>
+            <p>Milenario y universal. Popularizado en el siglo XX, ha tenido múltiples resurgimientos y campeonatos mundiales.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🪁</div>
+            <h4>Cometa</h4>
+            <p>Uno de los juguetes más antiguos. Su vuelo depende del viento y de la habilidad, y ha inspirado festivales en todo el mundo.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🚂</div>
+            <h4>Tren eléctrico</h4>
+            <p>Märklin (1891) creó el primer tren de juguete eléctrico. Se convirtió en un clásico del modelismo ferroviario.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🐻</div>
+            <h4>Teddy Bear</h4>
+            <p>El osito de peluche es el juguete de apego por antonomasia. Ha sido objeto de colección, terapia y cultura pop.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🃏</div>
+            <h4>Naipes</h4>
+            <p>Baratos, portátiles y con infinidad de juegos. Han acompañado a la humanidad durante siglos y siguen siendo un éxito.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🧸</div>
+            <h4>Muñeca de trapo</h4>
+            <p>Un clásico humilde y querido. Hecha en casa o en talleres, ha sido durante siglos el juguete más común entre las niñas.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── PANEL: INDUSTRIA ─── -->
+    <section id="panel-industria" class="panel" role="tabpanel">
+      <div class="content-card">
+        <h2><span class="icon-dot"></span>La industria del juguete</h2>
+        <p>
+          La industria del juguete mueve miles de millones de dólares al año y está dominada por grandes multinacionales, aunque también hay un importante ecosistema de pequeños fabricantes y artesanos. Es una industria muy estacional (la mayor parte de las ventas se concentra en Navidad y Reyes) y muy ligada a las franquicias del entretenimiento.
+        </p>
+
+        <h3>Principales empresas</h3>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">🧱</div>
+            <h4>Lego Group</h4>
+            <p>Fundada en 1932 en Dinamarca. Es la mayor empresa de juguetes del mundo por ingresos. Su sistema de ladrillos encajables es un estándar global.</p>
+            <span class="author">Dinamarca, 1932</span>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🎎</div>
+            <h4>Mattel</h4>
+            <p>Creadora de Barbie, Hot Wheels, Fisher-Price y American Girl. Una de las mayores compañías del sector, con fuerte presencia en cine y televisión.</p>
+            <span class="author">EE.UU., 1945</span>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🎲</div>
+            <h4>Hasbro</h4>
+            <p>Dueña de Monopoly, Play-Doh, Nerf, Transformers y My Little Pony, entre muchas otras. También es un gigante del entretenimiento.</p>
+            <span class="author">EE.UU., 1923</span>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🐉</div>
+            <h4>Bandai Namco</h4>
+            <p>Compañía japonesa conocida por Tamagotchi, Gundam, Power Rangers y una enorme cantidad de figuras coleccionables.</p>
+            <span class="author">Japón, 1950</span>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🚗</div>
+            <h4>Spin Master</h4>
+            <p>Canadiense, creadora de Hatchimals, Bakugan y Paw Patrol. Ha crecido rápidamente en las últimas décadas.</p>
+            <span class="author">Canadá, 1994</span>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🧸</div>
+            <h4>Steiff</h4>
+            <p>La histórica empresa alemana inventora del oso de peluche con el botón en la oreja. Sigue fabricando peluches de alta calidad y colección.</p>
+            <span class="author">Alemania, 1880</span>
+          </div>
+        </div>
+
+        <h3>El negocio del juguete en cifras</h3>
+        <ul>
+          <li><strong>Mercado global:</strong> supera los 100.000 millones de dólares anuales (incluyendo videojuegos y juguetes electrónicos).</li>
+          <li><strong>Estacionalidad:</strong> entre el 50% y el 70% de las ventas anuales se concentran en el último trimestre del año.</li>
+          <li><strong>Franquicias:</strong> una gran parte de los juguetes más vendidos están vinculados a películas, series o videojuegos.</li>
+          <li><strong>China:</strong> es el principal país productor de juguetes del mundo.</li>
+          <li><strong>Coleccionismo:</strong> el mercado de juguetes de colección (retro, ediciones limitadas) ha crecido enormemente entre adultos.</li>
+        </ul>
+
+        <h3>Seguridad y normativas</h3>
+        <p>
+          Los juguetes infantiles están sujetos a estrictas regulaciones para garantizar su seguridad. Las normas más influyentes son la europea <strong>EN 71</strong> y la estadounidense <strong>ASTM F963</strong>. Regulan aspectos como:
+        </p>
+        <ul>
+          <li>Materiales no tóxicos y libres de sustancias peligrosas (plomo, ftalatos, etc.).</li>
+          <li>Partes pequeñas que puedan suponer riesgo de asfixia en menores de 3 años.</li>
+          <li>Bordes afilados, puntas, cuerdas y elementos que puedan atrapar.</li>
+          <li>Etiquetado claro con la edad recomendada y advertencias.</li>
+          <li>Resistencia y durabilidad del juguete.</li>
+        </ul>
+
+        <h3>Comparador: juguete tradicional vs. juguete digital</h3>
+        <p style="margin-bottom: 12px;">Selecciona una columna para enfocarte en ella.</p>
+        <div class="compare-controls">
+          <button class="compare-btn active" data-compare="both">Ambos</button>
+          <button class="compare-btn" data-compare="left">Solo tradicional</button>
+          <button class="compare-btn" data-compare="right">Solo digital</button>
+        </div>
+        <div class="compare-panels">
+          <div class="compare-panel left">
+            <h4>🪵 Juguete tradicional</h4>
+            <p><strong>Material:</strong> madera, tela, plástico, metal.</p>
+            <p><strong>Interacción:</strong> física, manual, simbólica.</p>
+            <p><strong>Ventajas:</strong> fomenta la imaginación, el movimiento y la socialización cara a cara.</p>
+            <p><strong>Limitaciones:</strong> requiere más esfuerzo de construcción narrativa por parte del niño.</p>
+            <p><strong>Durabilidad:</strong> alta, a menudo se hereda.</p>
+          </div>
+          <div class="compare-panel right">
+            <h4>📱 Juguete digital</h4>
+            <p><strong>Material:</strong> pantallas, circuitos, sensores.</p>
+            <p><strong>Interacción:</strong> táctil, por voz, mediante apps.</p>
+            <p><strong>Ventajas:</strong> estímulos inmediatos, feedback, conexión con contenidos transmedia.</p>
+            <p><strong>Limitaciones:</strong> menor juego físico, riesgo de sobreexposición a pantallas.</p>
+            <p><strong>Durabilidad:</strong> menor; obsolescencia tecnológica rápida.</p>
+          </div>
+        </div>
+
+        <blockquote>
+          "El mejor juguete es el que deja espacio para que el niño lo complete con su imaginación." — Reflexión
+          <cite>La tecnología puede ser un complemento, pero el juego libre sigue siendo insustituible.</cite>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- ─── PANEL: CULTURA ─── -->
+    <section id="panel-cultura" class="panel" role="tabpanel">
+      <div class="content-card">
+        <h2><span class="icon-dot"></span>Juguetes y cultura</h2>
+        <p>
+          Los juguetes no solo entretienen: son objetos culturales que expresan valores, miedos y aspiraciones de una sociedad. A través de ellos se transmiten roles de género, ideales de belleza, nociones de progreso y modelos de comportamiento. También son fuente de nostalgia, objeto de colección y protagonistas de películas, libros y obras de arte.
+        </p>
+
+        <h3>Los juguetes como espejo social</h3>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">👗</div>
+            <h4>Roles de género</h4>
+            <p>Durante décadas, los juguetes estuvieron fuertemente estereotipados: muñecas para niñas, coches y soldados para niños. Hoy la industria avanza hacia juguetes más inclusivos y neutros.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">💪</div>
+            <h4>Modelos de heroicidad</h4>
+            <p>Los superhéroes y figuras de acción transmiten ideales de valentía, fuerza y justicia. Su evolución refleja los cambios en lo que una sociedad considera heroico.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🌍</div>
+            <h4>Sostenibilidad</h4>
+            <p>La creciente preocupación por el medio ambiente ha impulsado juguetes de materiales reciclados, madera certificada y embalajes ecológicos.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">📺</div>
+            <h4>Transmedia</h4>
+            <p>Muchos juguetes nacen de películas, series o videojuegos, y a su vez generan nuevas ficciones. El juguete es un nodo en una red de contenido.</p>
+          </div>
+        </div>
+
+        <h3>Juguetes en el cine y la literatura</h3>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">🎬</div>
+            <h4>Toy Story</h4>
+            <p>La saga de Pixar (1995–) dio vida a los juguetes y exploró temas como la amistad, la obsolescencia y el miedo a ser reemplazado.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🧱</div>
+            <h4>The Lego Movie</h4>
+            <p>Una celebración de la creatividad y una crítica a la rigidez de las instrucciones. Convirtió el juguete en metáfora del juego libre.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🎎</div>
+            <h4>Barbie</h4>
+            <p>La película de 2023 llevó al cine un debate cultural sobre la muñeca, el feminismo y la identidad, con enorme éxito global.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">📖</div>
+            <h4>El soldadito de plomo</h4>
+            <p>El cuento de Andersen (1838) es una de las primeras obras literarias que otorga alma y destino trágico a un juguete.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🖼️</div>
+            <h4>Arte y juguetes</h4>
+            <p>Artistas como Alexander Calder o Jeff Koons han incorporado juguetes y formas lúdicas a sus obras. El juguete también es objeto de museo.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🎮</div>
+            <h4>Videojuegos</h4>
+            <p>Los videojuegos son la evolución digital del juguete. Comparten con él la interacción, la fantasía y el placer lúdico.</p>
+          </div>
+        </div>
+
+        <h3>Coleccionismo</h3>
+        <p>
+          El coleccionismo de juguetes es una práctica muy extendida entre adultos. Figuras de acción, muñecas vintage, coches en miniatura, Lego, consolas antiguas… Los objetos de la infancia adquieren un valor simbólico y económico. Ferias, subastas y comunidades online mantienen vivo este mercado, que mezcla nostalgia, inversión y pasión.
+        </p>
+        <ul>
+          <li><strong>Juguetes vintage:</strong> piezas antiguas, muchas veces en su caja original, alcanzan precios muy altos.</li>
+          <li><strong>Ediciones limitadas:</strong> lanzamientos exclusivos para coleccionistas.</li>
+          <li><strong>Customización:</strong> artistas y aficionados modifican figuras para crear piezas únicas.</li>
+          <li><strong>Museos del juguete:</strong> existen en muchas ciudades del mundo y conservan la historia lúdica de la humanidad.</li>
+        </ul>
+
+        <blockquote>
+          "Los juguetes son las herramientas con las que los niños aprenden a ser adultos, y los adultos aprenden a recordar." — Reflexión
+          <cite>En cada juguete hay una historia cultural que merece ser contada.</cite>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- ─── PANEL: CÓMO ELEGIR ─── -->
+    <section id="panel-elegir" class="panel" role="tabpanel">
+      <div class="content-card">
+        <h2><span class="icon-dot"></span>Cómo elegir un juguete</h2>
+        <p>
+          Elegir un juguete no es solo cuestión de gustos o de modas. Hay que tener en cuenta la edad, la seguridad, el interés del niño o niña, el tipo de juego que propone y los valores que transmite. Un buen juguete es el que se adapta a quien juega y le permite desplegar su imaginación.
+        </p>
+
+        <h3>Criterios fundamentales</h3>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">👶</div>
+            <h4>Edad y seguridad</h4>
+            <p>Respetar la edad recomendada (especialmente en menores de 3 años por riesgo de asfixia). Verificar materiales no tóxicos y ausencia de bordes afilados.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🧠</div>
+            <h4>Valor educativo</h4>
+            <p>Priorizar juguetes que estimulen la creatividad, el pensamiento lógico, la motricidad o la socialización, sin caer en el didactismo forzado.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">❤️</div>
+            <h4>Interés personal</h4>
+            <p>Observar qué le gusta al niño: construye, dibuja, corre, inventa historias. El mejor juguete es el que conecta con sus intereses reales.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🔓</div>
+            <h4>Juego abierto</h4>
+            <p>Los juguetes con múltiples usos (bloques, muñecos, telas) permiten jugar de formas distintas y acompañan mejor el crecimiento.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">💪</div>
+            <h4>Durabilidad</h4>
+            <p>Un juguete robusto dura más, se hereda y genera menos residuos. A veces lo barato sale caro.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🌱</div>
+            <h4>Sostenibilidad</h4>
+            <p>Materiales reciclados, madera certificada, embalajes mínimos. La elección de juguetes también es una elección ambiental.</p>
+          </div>
+        </div>
+
+        <h3>Qué evitar</h3>
+        <ul>
+          <li><strong>Juguetes bélicos que glorifican la violencia</strong> sin contexto ni juego simbólico.</li>
+          <li><strong>Estereotipos de género rígidos:</strong> no limitar las opciones por ser niño o niña.</li>
+          <li><strong>Sobrecarga de estímulos:</strong> juguetes que lo hacen todo por el niño y dejan poco espacio a la imaginación.</li>
+          <li><strong>Materiales frágiles o tóxicos:</strong> verificar siempre las certificaciones de seguridad.</li>
+          <li><strong>Pantallas excesivas:</strong> en edades tempranas, el juego físico y simbólico debería ser prioritario.</li>
+        </ul>
+
+        <h3>Comparador: juego libre vs. juego dirigido</h3>
+        <p style="margin-bottom: 12px;">Selecciona una columna para enfocarte en ella.</p>
+        <div class="compare-controls">
+          <button class="compare-btn active" data-compare="both">Ambos</button>
+          <button class="compare-btn" data-compare="left">Solo juego libre</button>
+          <button class="compare-btn" data-compare="right">Solo juego dirigido</button>
+        </div>
+        <div class="compare-panels">
+          <div class="compare-panel left">
+            <h4>🌳 Juego libre</h4>
+            <p><strong>Definición:</strong> el niño decide qué, cómo y con qué jugar.</p>
+            <p><strong>Rol del adulto:</strong> observa y acompaña, sin dirigir.</p>
+            <p><strong>Ventajas:</strong> fomenta la creatividad, la autonomía y la resolución de conflictos.</p>
+            <p><strong>Juguetes típicos:</strong> bloques, telas, muñecos, materiales no estructurados.</p>
+            <p><strong>Riesgo:</strong> puede derivar en dispersión si no hay espacio ni materiales adecuados.</p>
+          </div>
+          <div class="compare-panel right">
+            <h4>🎯 Juego dirigido</h4>
+            <p><strong>Definición:</strong> el adulto propone una actividad o un objetivo.</p>
+            <p><strong>Rol del adulto:</strong> guía, explica reglas, marca pautas.</p>
+            <p><strong>Ventajas:</strong> enseña habilidades específicas, asegura aprendizajes concretos.</p>
+            <p><strong>Juguetes típicos:</strong> juegos de mesa, kits de ciencia, manualidades guiadas.</p>
+            <p><strong>Riesgo:</strong> puede sofocar la iniciativa si es excesivamente directivo.</p>
+          </div>
+        </div>
+
+        <blockquote>
+          "El juguete perfecto no existe; existe el juguete adecuado para cada momento, cada niño y cada forma de jugar." — Reflexión
+          <cite>La mejor guía es la observación atenta y el diálogo con quien juega.</cite>
+        </blockquote>
+
+        <h3>Consejos prácticos</h3>
+        <ul>
+          <li><strong>Menos es más:</strong> demasiados juguetes dispersan la atención. Rotar y guardar algunos ayuda a valorarlos.</li>
+          <li><strong>Jugar juntos:</strong> el mejor juguete es el tiempo compartido. El adulto también puede jugar y disfrutar.</li>
+          <li><strong>Escuchar:</strong> preguntar al niño qué le gustaría, qué le aburre, qué le emociona.</li>
+          <li><strong>Reparar y reciclar:</strong> enseñar a cuidar los juguetes y a darles una segunda vida.</li>
+          <li><strong>Fomentar el juego al aire libre:</strong> el mejor juguete a veces es una pelota, una cuerda o un palo.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ─── PANEL: GLOSARIO ─── -->
+    <section id="panel-glosario" class="panel" role="tabpanel">
+      <div class="content-card">
+        <h2><span class="icon-dot"></span>Glosario de juguetes</h2>
+        <p>Términos clave para comprender el tema. Haz clic en cada uno para expandir su definición.</p>
+
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Juguete <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Objeto diseñado para jugar. Su función principal es lúdica: invita a la acción, la fantasía y el disfrute. No se define por su material ni su forma, sino por el uso que se le da.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Juego simbólico <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>También llamado juego de ficción o de roles. El niño representa situaciones, personajes y acciones del mundo real o imaginario. Es fundamental para el desarrollo del lenguaje, la empatía y la creatividad.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Juguete de construcción <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Piezas que se combinan para crear estructuras. Desarrollan la motricidad fina, la lógica espacial y la paciencia. Ejemplos: Lego, bloques de madera, mecanos.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Muñeco de acción <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Figura articulada que representa a un personaje (héroe, soldado, aventurero). A diferencia de la muñeca tradicional, está pensada para el juego de acción y la recreación de escenas.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Peluche <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Juguete de tela relleno, generalmente con forma de animal. Suele tener una función de apego y consuelo, y es muy común en la primera infancia.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Rompecabezas <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Juguete que consiste en recomponer una imagen o una forma a partir de piezas. Ejercita la percepción visual, la paciencia y la resolución de problemas.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Juego de mesa <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Juego que se desarrolla sobre una superficie con reglas y componentes (tablero, cartas, dados, fichas). Favorece la socialización, la estrategia y el respeto de turnos.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Juguete electrónico <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Juguete que incorpora circuitos, pilas, sensores o pantallas. Puede tener movimiento, sonido o interactividad. Su popularidad ha crecido con la digitalización.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Ludoteca <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Espacio o servicio dedicado al préstamo y uso de juguetes y juegos. Puede ser municipal, escolar o privado, y a menudo organiza actividades lúdicas y formativas.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Juguete educativo <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Juguete diseñado con una intención pedagógica explícita: enseñar matemáticas, letras, ciencias o habilidades sociales. No debe confundirse con el juego libre, que también educa.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Coleccionismo <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Práctica de reunir y conservar juguetes por su valor histórico, estético o afectivo. Los coleccionistas suelen buscar piezas vintage, ediciones limitadas o figuras descatalogadas.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Transmedia <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Estrategia de narración que expande una historia a través de múltiples plataformas (cine, televisión, videojuegos, juguetes). Muchos juguetes actuales forman parte de universos transmedia.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Juego abierto <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Tipo de juego que no tiene un objetivo único ni una forma correcta de jugar. Los juguetes abiertos (bloques, telas, muñecos) permiten múltiples usos y estimulan más la imaginación.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Seguridad del juguete <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Conjunto de normas y controles que garantizan que un juguete no suponga riesgos para la salud. Incluye materiales no tóxicos, ausencia de piezas pequeñas peligrosas, bordes seguros y etiquetado adecuado.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Juguete sostenible <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Juguete fabricado con materiales reciclados, biodegradables o de origen certificado, y con procesos de producción que minimizan el impacto ambiental. También incluye embalajes reducidos y durabilidad.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>
+        Enciclopedia Visual · Contenido original de
+        <a href="https://app-fioravante.github.io/apps-fioravante/" target="_blank" rel="noopener noreferrer">Fioravante</a>.
+        Este recurso es de carácter educativo y exploratorio.
+      </p>
+    </footer>
+  </div>
+
+  <script>
+    // ─── TEMA ───
+    const rootEl = document.documentElement;
+    const themeToggle = document.getElementById('themeToggle');
+    function updateToggleLabel() {
+      const isLight = rootEl.getAttribute('data-theme') === 'light';
+      themeToggle.setAttribute('aria-label', isLight ? 'Cambiar a modo oscuro' : 'Cambiar a modo claro');
+      themeToggle.setAttribute('title', isLight ? 'Cambiar a modo oscuro' : 'Cambiar a modo claro');
+    }
+    themeToggle.addEventListener('click', () => {
+      const isLight = rootEl.getAttribute('data-theme') === 'light';
+      const next = isLight ? 'dark' : 'light';
+      rootEl.setAttribute('data-theme', next);
+      try { localStorage.setItem('enc-theme', next); } catch (e) {}
+      updateToggleLabel();
+    });
+    updateToggleLabel();
+
+    // ─── PESTAÑAS ───
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const panels = document.querySelectorAll('.panel');
+
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const targetId = btn.dataset.panel;
+        tabBtns.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });
+        btn.classList.add('active');
+        btn.setAttribute('aria-selected', 'true');
+        panels.forEach(p => p.classList.remove('active'));
+        document.getElementById(targetId).classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    });
+
+    // ─── COMPARADORES (genérico) ───
+    document.querySelectorAll('.compare-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const card = btn.closest('.content-card');
+        card.querySelectorAll('.compare-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const mode = btn.dataset.compare;
+
+        card.querySelectorAll('.compare-panel').forEach(p => p.classList.remove('dimmed'));
+        if (mode === 'left') {
+          card.querySelectorAll('.compare-panel.right').forEach(p => p.classList.add('dimmed'));
+        }
+        if (mode === 'right') {
+          card.querySelectorAll('.compare-panel.left').forEach(p => p.classList.add('dimmed'));
+        }
+      });
+    });
+
+    // ─── ACORDEÓN ───
+    document.querySelectorAll('.accordion-trigger').forEach(trigger => {
+      trigger.addEventListener('click', () => {
+        const item = trigger.parentElement;
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.accordion-item').forEach(i => {
+          i.classList.remove('open');
+          i.querySelector('.accordion-trigger').setAttribute('aria-expanded', 'false');
+        });
+        if (!isOpen) {
+          item.classList.add('open');
+          trigger.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

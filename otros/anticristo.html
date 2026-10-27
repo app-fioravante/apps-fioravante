@@ -1,0 +1,1238 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anticristo, 666 e IA · Enciclopedia Visual Fioravante</title>
+  <meta name="description" content="Exploración interactiva de la figura del Anticristo, la marca 666, la inteligencia artificial, el Tercer Templo, el rapto, la gran tribulación y el milenio dentro de la escatología bíblica.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <script>
+    (function () {
+      try {
+        const stored = localStorage.getItem('enc-theme');
+        if (stored === 'light' || stored === 'dark') {
+          document.documentElement.setAttribute('data-theme', stored);
+        } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+          document.documentElement.setAttribute('data-theme', 'light');
+        }
+      } catch (e) {}
+    })();
+  </script>
+  <style>
+    /* ─── RESET & BASE (mismo sistema de diseño) ─── */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg-deep: #070b14;
+      --surface: rgba(22, 32, 50, 0.65);
+      --surface-hover: rgba(30, 44, 68, 0.8);
+      --border: rgba(255, 255, 255, 0.07);
+      --border-strong: rgba(255, 255, 255, 0.15);
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --text-dim: #64748b;
+      --accent-cyan: #22d3ee;
+      --accent-violet: #a78bfa;
+      --accent-amber: #fbbf24;
+      --accent-rose: #fb7185;
+      --accent-emerald: #34d399;
+      --input-focus-bg: rgba(22, 32, 50, 0.85);
+      --chip-hover-bg: rgba(255, 255, 255, 0.04);
+      --radius-lg: 24px;
+      --radius-md: 16px;
+      --radius-sm: 12px;
+      --shadow-card: 0 4px 24px -8px rgba(0, 0, 0, 0.6);
+      --shadow-hover: 0 24px 48px -16px rgba(0, 0, 0, 0.7);
+      --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+      --noise-opacity: 0.03;
+    }
+
+    [data-theme="light"] {
+      --bg-deep: #f4f6fa;
+      --surface: rgba(255, 255, 255, 0.72);
+      --surface-hover: rgba(255, 255, 255, 0.92);
+      --border: rgba(15, 23, 42, 0.08);
+      --border-strong: rgba(15, 23, 42, 0.16);
+      --text-primary: #1e293b;
+      --text-secondary: #475569;
+      --text-dim: #94a3b8;
+      --accent-cyan: #0891b2;
+      --accent-violet: #7c3aed;
+      --accent-amber: #d97706;
+      --accent-rose: #e11d48;
+      --accent-emerald: #059669;
+      --input-focus-bg: rgba(255, 255, 255, 0.95);
+      --chip-hover-bg: rgba(15, 23, 42, 0.04);
+      --radius-lg: 24px;
+      --radius-md: 16px;
+      --radius-sm: 12px;
+      --shadow-card: 0 4px 24px -8px rgba(15, 23, 42, 0.08);
+      --shadow-hover: 0 24px 48px -16px rgba(15, 23, 42, 0.16);
+      --noise-opacity: 0.015;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background-color: var(--bg-deep);
+      color: var(--text-primary);
+      min-height: 100vh;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+      transition: background-color 0.5s ease, color 0.5s ease;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      background:
+        radial-gradient(ellipse 80% 60% at 10% 0%, rgba(251, 191, 36, 0.12), transparent 60%),
+        radial-gradient(ellipse 70% 50% at 90% 10%, rgba(167, 139, 250, 0.1), transparent 55%),
+        radial-gradient(ellipse 60% 50% at 50% 100%, rgba(251, 113, 133, 0.06), transparent 60%);
+      animation: bgShift 20s ease-in-out infinite alternate;
+      transition: opacity 0.5s ease;
+    }
+
+    [data-theme="light"] body::before {
+      background:
+        radial-gradient(ellipse 80% 60% at 10% 0%, rgba(217, 119, 6, 0.12), transparent 60%),
+        radial-gradient(ellipse 70% 50% at 90% 10%, rgba(124, 58, 237, 0.1), transparent 55%),
+        radial-gradient(ellipse 60% 50% at 50% 100%, rgba(225, 29, 72, 0.07), transparent 60%);
+    }
+
+    @keyframes bgShift {
+      0% { opacity: 0.7; transform: scale(1); }
+      100% { opacity: 1; transform: scale(1.08); }
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      opacity: var(--noise-opacity);
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      pointer-events: none;
+      transition: opacity 0.5s ease;
+    }
+
+    .app { max-width: 1200px; margin: 0 auto; padding: 0 24px 80px; }
+
+    /* ─── THEME TOGGLE ─── */
+    .theme-toggle {
+      position: fixed; top: 20px; right: 20px; z-index: 100;
+      width: 46px; height: 46px; border-radius: 50%;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      color: var(--text-primary); cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: var(--shadow-card);
+      transition: transform 0.35s var(--ease-out-expo), border-color 0.3s, box-shadow 0.35s var(--ease-out-expo), background-color 0.4s ease, color 0.4s ease;
+    }
+    .theme-toggle:hover { transform: scale(1.1) rotate(10deg); border-color: var(--border-strong); box-shadow: var(--shadow-hover); }
+    .theme-toggle svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .theme-toggle .icon-sun { display: block; }
+    .theme-toggle .icon-moon { display: none; }
+    [data-theme="light"] .theme-toggle .icon-sun { display: none; }
+    [data-theme="light"] .theme-toggle .icon-moon { display: block; }
+
+    /* ─── HEADER ─── */
+    .header { padding: 56px 0 24px; text-align: center; }
+    .header-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 16px; border-radius: 999px;
+      background: rgba(251, 191, 36, 0.1);
+      border: 1px solid rgba(251, 191, 36, 0.25);
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--accent-amber);
+      margin-bottom: 20px;
+      animation: fadeDown 0.8s var(--ease-out-expo) both;
+    }
+    .header-badge::before {
+      content: ''; width: 6px; height: 6px; border-radius: 50%;
+      background: var(--accent-amber); box-shadow: 0 0 12px var(--accent-amber);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.8); } }
+
+    .header h1 {
+      font-size: clamp(2.2rem, 5.5vw, 3.8rem);
+      font-weight: 800; letter-spacing: -0.03em; line-height: 1.1;
+      margin-bottom: 16px;
+      animation: fadeDown 0.9s 0.1s var(--ease-out-expo) both;
+    }
+    .header h1 .gradient-text {
+      background: linear-gradient(135deg, var(--accent-amber) 0%, var(--accent-violet) 50%, var(--accent-rose) 100%);
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-size: 200% 200%;
+      animation: gradientMove 6s ease-in-out infinite;
+    }
+    @keyframes gradientMove { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+
+    .header-subtitle {
+      font-size: clamp(0.95rem, 2vw, 1.1rem);
+      color: var(--text-secondary); font-weight: 400;
+      max-width: 700px; margin: 0 auto;
+      animation: fadeDown 1s 0.2s var(--ease-out-expo) both;
+    }
+
+    /* ─── NAVEGACIÓN POR PESTAÑAS ─── */
+    .tabs-nav {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      margin: 32px 0 28px;
+      padding: 8px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      animation: fadeUp 0.8s 0.3s var(--ease-out-expo) both;
+    }
+    .tab-btn {
+      flex: 1 1 auto;
+      padding: 12px 20px;
+      border-radius: var(--radius-sm);
+      border: none; background: transparent;
+      color: var(--text-secondary);
+      font-family: inherit; font-size: 0.9rem; font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s var(--ease-out-expo);
+      white-space: nowrap;
+    }
+    .tab-btn:hover { color: var(--text-primary); background: var(--chip-hover-bg); }
+    .tab-btn.active {
+      background: rgba(251, 191, 36, 0.15);
+      color: var(--accent-amber);
+      box-shadow: 0 0 20px -4px rgba(251, 191, 36, 0.2);
+    }
+    [data-theme="light"] .tab-btn.active { background: rgba(217, 119, 6, 0.12); color: var(--accent-amber); }
+
+    /* ─── PANELES DE CONTENIDO ─── */
+    .panel { display: none; animation: fadeUp 0.5s var(--ease-out-expo) both; }
+    .panel.active { display: block; }
+
+    .content-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      box-shadow: var(--shadow-card);
+      margin-bottom: 24px;
+      transition: background-color 0.4s ease, border-color 0.4s ease;
+    }
+
+    .content-card h2 {
+      font-size: 1.5rem; font-weight: 700; letter-spacing: -0.02em;
+      margin-bottom: 16px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .content-card h2 .icon-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--accent-amber);
+      box-shadow: 0 0 12px var(--accent-amber);
+      flex-shrink: 0;
+    }
+    .content-card h3 {
+      font-size: 1.1rem; font-weight: 700;
+      margin: 24px 0 10px;
+      color: var(--accent-amber);
+    }
+    .content-card p {
+      color: var(--text-secondary);
+      margin-bottom: 14px;
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+    .content-card p strong { color: var(--text-primary); }
+    .content-card ul {
+      margin: 12px 0 18px 20px;
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+    .content-card li { margin-bottom: 8px; }
+    .content-card blockquote {
+      border-left: 3px solid var(--accent-amber);
+      padding: 12px 20px;
+      margin: 20px 0;
+      background: rgba(251, 191, 36, 0.05);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      font-style: italic;
+      color: var(--text-secondary);
+      font-size: 0.92rem;
+    }
+    [data-theme="light"] .content-card blockquote { background: rgba(217, 119, 6, 0.05); }
+    .content-card blockquote cite {
+      display: block; margin-top: 8px;
+      font-style: normal; font-size: 0.82rem; color: var(--text-dim);
+    }
+
+    /* ─── TARJETAS DE CONCEPTO ─── */
+    .concept-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+      margin: 20px 0;
+    }
+    .concept-card {
+      padding: 22px;
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      transition: transform 0.3s var(--ease-out-expo), border-color 0.3s, box-shadow 0.3s;
+    }
+    .concept-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--border-strong);
+      box-shadow: var(--shadow-hover);
+    }
+    .concept-card .concept-icon {
+      width: 44px; height: 44px; border-radius: var(--radius-sm);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem; margin-bottom: 14px;
+      background: rgba(251, 191, 36, 0.12);
+      color: var(--accent-amber);
+    }
+    .concept-card h4 {
+      font-size: 1rem; font-weight: 700; margin-bottom: 8px;
+    }
+    .concept-card p {
+      font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; margin: 0;
+    }
+
+    /* ─── COMPARADOR INTERACTIVO ─── */
+    .compare-controls {
+      display: flex; gap: 8px; margin: 20px 0 24px; flex-wrap: wrap;
+    }
+    .compare-btn {
+      padding: 10px 20px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text-secondary);
+      font-family: inherit; font-size: 0.85rem; font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s var(--ease-out-expo);
+    }
+    .compare-btn:hover { border-color: var(--border-strong); color: var(--text-primary); }
+    .compare-btn.active {
+      background: var(--accent-amber);
+      border-color: var(--accent-amber);
+      color: var(--bg-deep);
+      font-weight: 700;
+    }
+    [data-theme="light"] .compare-btn.active { color: #fff; }
+
+    .compare-panels {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    @media (max-width: 640px) { .compare-panels { grid-template-columns: 1fr; } }
+
+    .compare-panel {
+      padding: 24px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      background: var(--surface);
+      transition: opacity 0.3s ease;
+    }
+    .compare-panel.dimmed { opacity: 0.35; pointer-events: none; }
+    .compare-panel h4 {
+      font-size: 0.95rem; font-weight: 700; margin-bottom: 12px;
+      text-transform: uppercase; letter-spacing: 0.06em;
+    }
+    .compare-panel.traditional h4 { color: var(--accent-rose); }
+    .compare-panel.tech h4 { color: var(--accent-cyan); }
+    .compare-panel p { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.7; }
+
+    /* ─── LÍNEA DE TIEMPO ─── */
+    .timeline { position: relative; padding: 20px 0 20px 32px; }
+    .timeline::before {
+      content: ''; position: absolute; left: 11px; top: 0; bottom: 0;
+      width: 2px; background: linear-gradient(to bottom, var(--accent-amber), var(--accent-violet));
+      border-radius: 2px;
+    }
+    .timeline-item {
+      position: relative; margin-bottom: 28px; padding-left: 8px;
+    }
+    .timeline-item::before {
+      content: ''; position: absolute; left: -27px; top: 6px;
+      width: 12px; height: 12px; border-radius: 50%;
+      background: var(--bg-deep); border: 2px solid var(--accent-amber);
+      box-shadow: 0 0 10px rgba(251, 191, 36, 0.3);
+    }
+    .timeline-item .timeline-era {
+      font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.08em; color: var(--accent-amber); margin-bottom: 4px;
+    }
+    .timeline-item h4 { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+    .timeline-item p { font-size: 0.88rem; color: var(--text-secondary); margin: 0; line-height: 1.6; }
+
+    /* ─── GLOSARIO ACORDEÓN ─── */
+    .accordion-item {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      margin-bottom: 10px;
+      overflow: hidden;
+      transition: border-color 0.3s;
+    }
+    .accordion-item:hover { border-color: var(--border-strong); }
+    .accordion-trigger {
+      width: 100%;
+      padding: 16px 20px;
+      background: transparent;
+      border: none;
+      color: var(--text-primary);
+      font-family: inherit; font-size: 0.95rem; font-weight: 600;
+      text-align: left; cursor: pointer;
+      display: flex; justify-content: space-between; align-items: center;
+      transition: background-color 0.2s;
+    }
+    .accordion-trigger:hover { background: var(--chip-hover-bg); }
+    .accordion-trigger .chevron {
+      transition: transform 0.3s var(--ease-out-expo);
+      font-size: 0.8rem; color: var(--text-dim);
+    }
+    .accordion-item.open .accordion-trigger .chevron { transform: rotate(180deg); }
+    .accordion-content {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.4s var(--ease-out-expo), padding 0.4s var(--ease-out-expo);
+      padding: 0 20px;
+    }
+    .accordion-item.open .accordion-content {
+      max-height: 500px; padding: 0 20px 18px;
+    }
+    .accordion-content p {
+      font-size: 0.9rem; color: var(--text-secondary); line-height: 1.7; margin: 0;
+    }
+
+    /* ─── FOOTER ─── */
+    .footer {
+      text-align: center; padding: 48px 0 0;
+      color: var(--text-dim); font-size: 0.8rem;
+      border-top: 1px solid var(--border); margin-top: 48px;
+    }
+    .footer a { color: var(--accent-amber); text-decoration: none; font-weight: 500; }
+    .footer a:hover { text-decoration: underline; }
+
+    @keyframes fadeDown { from { opacity: 0; transform: translateY(-16px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+
+    @media (max-width: 640px) {
+      .app { padding: 0 16px 48px; }
+      .content-card { padding: 24px 20px; }
+      .tabs-nav { gap: 4px; padding: 6px; }
+      .tab-btn { padding: 10px 12px; font-size: 0.8rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema" title="Cambiar tema">
+    <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+    <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  </button>
+
+  <div class="app">
+    <!-- Header -->
+    <header class="header">
+      <div class="header-badge">Escatología · Tecnología · Profecía</div>
+      <h1>Anticristo, <span class="gradient-text">666</span> e IA</h1>
+      <p class="header-subtitle">
+        Un recorrido visual e interactivo por el Anticristo, la marca de la bestia, la inteligencia artificial, el Tercer Templo, el rapto de la Iglesia, la Gran Tribulación y el Milenio en el futuro escatológico bíblico.
+      </p>
+    </header>
+
+    <!-- Navegación por pestañas -->
+    <nav class="tabs-nav" role="tablist" aria-label="Secciones del tema">
+      <button class="tab-btn active" data-panel="panel-anticristo" role="tab" aria-selected="true">El Anticristo</button>
+      <button class="tab-btn" data-panel="panel-666" role="tab" aria-selected="false">La Marca 666</button>
+      <button class="tab-btn" data-panel="panel-ia" role="tab" aria-selected="false">IA y la Bestia</button>
+      <button class="tab-btn" data-panel="panel-templo" role="tab" aria-selected="false">Tercer Templo</button>
+      <button class="tab-btn" data-panel="panel-rapto" role="tab" aria-selected="false">Rapto de la Iglesia</button>
+      <button class="tab-btn" data-panel="panel-tribulacion" role="tab" aria-selected="false">Gran Tribulación</button>
+      <button class="tab-btn" data-panel="panel-milenio" role="tab" aria-selected="false">Milenio</button>
+      <button class="tab-btn" data-panel="panel-futuro" role="tab" aria-selected="false">Futuro Escatológico</button>
+      <button class="tab-btn" data-panel="panel-glosario" role="tab" aria-selected="false">Glosario</button>
+    </nav>
+
+    <!-- ─── PANEL: EL ANTICRISTO ─── -->
+    <section id="panel-anticristo" class="panel active" role="tabpanel">
+      <div class="content-card">
+        <h2><span class="icon-dot"></span>¿Quién es el Anticristo?</h2>
+        <p>
+          En la escatología cristiana, el <strong>Anticristo</strong> es una figura central de los últimos tiempos: un líder mundial que se opone a Cristo, engaña a las naciones y exige una lealtad absoluta que desplaza la adoración debida a Dios. El término proviene del griego <em>antíchristos</em> (ἀντίχριστος), que significa tanto "contra Cristo" como "en lugar de Cristo".
+        </p>
+        <p>
+          A lo largo de la historia, su identidad ha sido objeto de intensa especulación. Desde emperadores romanos y papas hasta líderes políticos modernos, cada generación ha proyectado la figura del Anticristo sobre sus propios temores. Hoy, en la era digital, esa proyección apunta con creciente fuerza hacia la <strong>inteligencia artificial</strong> y los sistemas tecnológicos de control global.
+        </p>
+
+        <h3>Características bíblicas principales</h3>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">👑</div>
+            <h4>Poder global</h4>
+            <p>Surge como un líder con autoridad sobre "toda tribu, lengua y nación" (Apocalipsis 13:7). No es un tirano local, sino una figura de alcance planetario.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🎭</div>
+            <h4>Engaño y falsos prodigios</h4>
+            <p>Realiza "grandes señales y prodigios" para seducir a las masas (Mateo 24:24; 2 Tesalonicenses 2:9). Su poder persuasivo es casi irresistible.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🛐</div>
+            <h4>Exigencia de adoración</h4>
+            <p>No solo busca obediencia política o económica: demanda culto. Se hace pasar por Dios o por una deidad digna de veneración (2 Tesalonicenses 2:4).</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">⏳</div>
+            <h4>Gobierno de 7 años</h4>
+            <p>Según la interpretación dispensacionalista, firma un pacto de siete años con Israel y lo rompe a la mitad, desencadenando la Gran Tribulación (Daniel 9:27).</p>
+          </div>
+        </div>
+
+        <blockquote>
+          "Y vi subir del mar una bestia que tenía siete cabezas y diez cuernos... y el dragón le dio su poder y su trono y grande autoridad." — Apocalipsis 13:1-2
+          <cite>La bestia del mar es la figura que la tradición identifica con el Anticristo.</cite>
+        </blockquote>
+
+        <p>
+          La <strong>Segunda Carta a los Tesalonicenses</strong> añade un matiz crucial: el Anticristo se opone y se levanta "contra todo lo que se llama Dios o es objeto de culto; tanto que se sienta en el templo de Dios como Dios, haciéndose pasar por Dios" (2 Tesalonicenses 2:4). Esta auto-deificación es el núcleo de su rebelión espiritual.
+        </p>
+      </div>
+    </section>
+
+    <!-- ─── PANEL: LA MARCA 666 ─── -->
+    <section id="panel-666" class="panel" role="tabpanel">
+      <div class="content-card">
+        <h2><span class="icon-dot"></span>La marca de la bestia: 666</h2>
+        <p>
+          El número <strong>666</strong> aparece en Apocalipsis 13:18 como "el número de la bestia" y "número de hombre". La marca asociada —recibida en la mano derecha o en la frente— es el sello de lealtad que permite comprar y vender dentro del sistema económico del Anticristo.
+        </p>
+        <p>
+          A lo largo de los siglos, la interpretación del 666 ha oscilado entre claves <strong>históricas</strong> (Nerón César, el papado, imperios), <strong>simbólicas</strong> (la imperfección llevada al extremo, la trinidad de la rebelión) y <strong>futuristas</strong> (un líder o sistema específico del fin de los tiempos).
+        </p>
+
+        <h3>Interpretaciones clave del 666</h3>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">🏛️</div>
+            <h4>Nerón César</h4>
+            <p>La gematría hebrea de "Nerón César" (<em>Neron Qesar</em>) suma 666. Fue la interpretación más temprana, ligada a la persecución romana.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">⛪</div>
+            <h4>El papado</h4>
+            <p>Interpretación protestante clásica: el título latino <em>Vicarius Filii Dei</em> ("Vicario del Hijo de Dios") se asociaba con el 666.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🌐</div>
+            <h4>Sistema global</h4>
+            <p>Hoy se lee como el sello de un sistema económico, político y tecnológico que exige lealtad total para participar en la vida social.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🔢</div>
+            <h4>Simbología numérica</h4>
+            <p>El 6 es el número del hombre (creado el sexto día); repetido tres veces, simboliza la plenitud de la rebelión humana contra Dios.</p>
+          </div>
+        </div>
+
+        <h3>La marca: ¿símbolo o tecnología?</h3>
+        <p>
+          Apocalipsis 13:16-17 describe la marca como algo que se recibe "en la mano derecha o en la frente" y sin la cual "nadie puede comprar ni vender". Esto ha llevado a especulaciones que van desde tatuajes y microchips hasta <strong>identificaciones biométricas</strong>, <strong>billeteras digitales</strong> y <strong>sistemas de crédito social</strong>.
+        </p>
+        <p>
+          En la interpretación tecnológica contemporánea, la marca no sería un objeto físico, sino la <strong>integración total</strong> de la identidad de una persona en un sistema digital controlado por una autoridad central. La "frente" representaría la lealtad mental (lo que piensas y crees), y la "mano" la acción económica (lo que haces y compras).
+        </p>
+
+        <blockquote>
+          "Y que ninguno pudiese comprar ni vender, sino el que tuviese la marca o el nombre de la bestia, o el número de su nombre." — Apocalipsis 13:17
+          <cite>El control económico es el mecanismo de coerción del sistema de la bestia.</cite>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- ─── PANEL: IA Y LA BESTIA ─── -->
+    <section id="panel-ia" class="panel" role="tabpanel">
+      <div class="content-card">
+        <h2><span class="icon-dot"></span>Inteligencia artificial: ¿la infraestructura del fin?</h2>
+        <p>
+          La pregunta ya no es si la IA puede "ser" el Anticristo, sino si puede convertirse en la <strong>infraestructura técnica</strong> que haga posible el sistema global de control descrito en Apocalipsis. Teólogos y pensadores como Peter Thiel han planteado que el Anticristo podría usar la IA para ofrecer seguridad a cambio de devoción, conduciendo a un gobierno mundial totalitario.
+        </p>
+
+        <h3>Roles posibles de la IA en el sistema de la bestia</h3>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">👁️</div>
+            <h4>Vigilancia total</h4>
+            <p>Reconocimiento facial, análisis de datos masivos y algoritmos de monitoreo pueden rastrear cada movimiento, compra y comunicación de una persona en tiempo real.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">💳</div>
+            <h4>Control económico</h4>
+            <p>Monedas digitales de banco central (CBDC) combinadas con IA podrían bloquear o conceder acceso a bienes y servicios según la "lealtad" del individuo.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🎭</div>
+            <h4>Engaño profético</h4>
+            <p>Deepfakes, avatares hiperrealistas y realidades virtuales pueden simular milagros, resurrecciones o apariciones, seduciendo a las masas.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🗿</div>
+            <h4>La imagen que habla</h4>
+            <p>Apocalipsis 13:15 describe una imagen que "recibe aliento" y habla. Un avatar de IA omnipresente en pantallas y dispositivos podría encarnar esta profecía.</p>
+          </div>
+        </div>
+
+        <h3>El debate teológico</h3>
+        <p>
+          No todos los teólogos ven la IA como una amenaza apocalíptica directa. Algunos advierten contra el <strong>sensacionalismo</strong> y señalan que la IA, como toda tecnología, es una herramienta que puede usarse para el bien o para el mal. La clave, argumentan, no está en la tecnología en sí, sino en el corazón humano y en la disposición a rendirle lealtad suprema.
+        </p>
+        <p>
+          Sin embargo, la convergencia de capacidades —vigilancia masiva, control financiero algorítmico, generación de realidades sintéticas y persuasión personalizada— crea un <strong>conjunto de herramientas</strong> sin precedentes en la historia. La pregunta escatológica es si ese conjunto será utilizado por un líder global para exigir la lealtad que solo Dios merece.
+        </p>
+
+        <blockquote>
+          "Con la inteligencia artificial, estamos invocando al demonio." — Elon Musk, MIT, 2014
+          <cite>Una frase que se ha convertido en emblema del debate sobre los riesgos existenciales de la IA.</cite>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- ─── PANEL: TERCER TEMPLO ─── -->
+    <section id="panel-templo" class="panel" role="tabpanel">
+      <div class="content-card">
+        <h2><span class="icon-dot"></span>El Proyecto del Tercer Templo de Jerusalén</h2>
+        <p>
+          El <strong>Tercer Templo</strong> es la reconstrucción esperada del Templo de Jerusalén, destruido por los romanos en el año 70 d.C. Para muchos judíos ortodoxos y cristianos dispensacionalistas, su edificación es un requisito profético indispensable para la llegada del Mesías y el cumplimiento de los eventos del fin de los tiempos.
+        </p>
+        <p>
+          En las últimas décadas, el proyecto ha dejado de ser una utopía religiosa para convertirse en una <strong>empresa con preparativos concretos</strong>, infraestructura ritual y respaldo político creciente, aunque sin una construcción oficial en curso.
+        </p>
+
+        <h3>Estado actual y preparativos</h3>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">🏛️</div>
+            <h4>El Instituto del Templo</h4>
+            <p>Fundado en 1987 por el rabino Yisrael Ariel, es la organización central del proyecto. Ha recreado más de 90 utensilios rituales, vestimentas sacerdotales y planos arquitectónicos del Templo.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🐄</div>
+            <h4>La novilla roja</h4>
+            <p>Según Números 19, las cenizas de una novilla roja sin defecto son necesarias para la purificación ritual. Se han importado novillas de Estados Unidos y se realizaron rituales de quema en Samaria en 2025.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🎼</div>
+            <h4>Sacerdotes y levitas</h4>
+            <p>El Instituto entrena coros levíticos y prepara sacerdotes (kohanim) para el servicio del Templo. Se reporta la cría de un sacerdote ritualmente puro desde su nacimiento.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🏗️</div>
+            <h4>Terreno y altar</h4>
+            <p>La organización <em>Boneh Israel</em> adquirió tierras en el Monte de los Olivos para la quema de la novilla. Ya existen planos y un altar listo para ser usado, aunque la construcción del Templo en el Monte del Templo no ha comenzado oficialmente.</p>
+          </div>
+        </div>
+
+        <h3>El conflicto en el Monte del Templo</h3>
+        <p>
+          El Monte del Templo es el lugar más sagrado del judaísmo, pero también alberga la <strong>Mezquita de Al-Aqsa</strong> y el <strong>Domo de la Roca</strong>, el tercer sitio más sagrado del islam. Cualquier movimiento hacia la construcción del Tercer Templo en ese lugar desataría una crisis regional de proporciones incalculables.
+        </p>
+        <p>
+          En los últimos años, el <em>statu quo</em> que impedía la oración judía en el recinto se ha ido erosionando. Ministros israelíes de extrema derecha han visitado el Monte y han declarado su intención de permitir la oración judía e incluso construir una sinagoga, lo que ha generado tensiones internacionales. En 2025, el Instituto del Templo declaró públicamente que era "tiempo de construir".
+        </p>
+
+        <blockquote>
+          "Cuando el templo sea construido, pediremos a los levitas que vengan a cantar, y no sabrán. Tienen que aprender." — Menahem Rozenthal, director del coro del Instituto del Templo
+          <cite>La preparación ritual avanza con la convicción de que la reconstrucción es inminente.</cite>
+        </blockquote>
+
+        <h3>Conexión escatológica: el Templo y el Anticristo</h3>
+        <p>
+          En la profecía bíblica, el Tercer Templo no es un fin en sí mismo, sino el <strong>escenario</strong> de los eventos finales. Daniel 9:27 habla de un "pacto" de siete años que un líder romperá a la mitad, y 2 Tesalonicenses 2:4 describe al "hombre de pecado" sentándose en el templo de Dios para proclamarse Dios.
+        </p>
+        <p>
+          Para la interpretación dispensacionalista, el Anticristo firmará un pacto con Israel que permitirá la reconstrucción del Templo. A mitad de ese período, romperá el pacto, profanará el Templo con la "abominación desoladora" y exigirá adoración global, desencadenando la Gran Tribulación.
+        </p>
+
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">📜</div>
+            <h4>El pacto de 7 años</h4>
+            <p>Daniel 9:27 describe un pacto que el líder final confirma con "muchos" por una semana (siete años). La tradición lo interpreta como un acuerdo político-religioso que permite la reconstrucción del Templo.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">⛪</div>
+            <h4>La abominación desoladora</h4>
+            <p>Mateo 24:15 y Daniel 11:31 describen la profanación del Templo. El Anticristo se sentará en el lugar santísimo, exigiendo la adoración que solo Dios merece.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🤖</div>
+            <h4>Tecnología e IA</h4>
+            <p>Algunos grupos han difundido videos generados con IA que simulan la destrucción de la Mezquita de Al-Aqsa y la construcción del Tercer Templo, avivando tanto la expectativa profética como la tensión geopolítica.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🕊️</div>
+            <h4>Debate teológico</h4>
+            <p>No todos los cristianos sostienen que el Tercer Templo sea necesario. Algunos ven a Cristo como el verdadero Templo (Juan 2:19-21) y leen estas profecías de forma simbólica o ya cumplida.</p>
+          </div>
+        </div>
+
+        <h3>Línea de tiempo de los preparativos</h3>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-era">1987</div>
+            <h4>Fundación del Instituto del Templo</h4>
+            <p>El rabino Yisrael Ariel funda la organización dedicada a la reconstrucción del Templo y a la restauración de los rituales sacerdotales.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">Décadas de 2000-2020</div>
+            <h4>Recreación de utensilios y vestimentas</h4>
+            <p>Se fabrican más de 90 objetos rituales, vestiduras sacerdotales y se elaboran planos arquitectónicos del complejo del Templo.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">2024-2025</div>
+            <h4>Importación de novillas rojas</h4>
+            <p>La organización <em>Boneh Israel</em> importa cinco novillas rojas de Estados Unidos. En julio de 2025 se realiza una ceremonia de quema en Samaria para obtener cenizas de purificación.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">Agosto de 2025</div>
+            <h4>Declaración: "Es tiempo de construir"</h4>
+            <p>El Instituto del Templo declara públicamente en Tisha B'Av que es el momento de construir el Tercer Templo, acelerando la expectativa escatológica.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">2026</div>
+            <h4>Preparativos avanzados y tensión política</h4>
+            <p>Se reportan nuevos candidatos de novilla roja, entrenamiento de sacerdotes y coros levíticos. El debate sobre la soberanía israelí en el Monte del Templo se intensifica.</p>
+          </div>
+        </div>
+
+        <h3>¿Un detonante profético?</h3>
+        <p>
+          Para millones de creyentes, los preparativos del Tercer Templo son una <strong>señal de los tiempos</strong>. Para los críticos, son una empresa política y religiosa que podría desestabilizar Medio Oriente. En cualquier caso, el proyecto ha dejado de ser un tema marginal: sus ecos resuenan en parlamentos, podcasts proféticos, redes sociales y, cada vez más, en los debates sobre el futuro de la inteligencia artificial y el control global.
+        </p>
+        <p>
+          La pregunta escatológica sigue abierta: ¿será el Tercer Templo el escenario donde se manifieste el Anticristo, o simplemente un símbolo de la esperanza mesiánica judía? Lo que es indiscutible es que los <strong>eventos actuales</strong> han convertido esta antigua profecía en un tema de candente actualidad.
+        </p>
+      </div>
+    </section>
+
+    <!-- ─── PANEL: RAPTO DE LA IGLESIA (NUEVO) ─── -->
+    <section id="panel-rapto" class="panel" role="tabpanel">
+      <div class="content-card">
+        <h2><span class="icon-dot"></span>El Rapto de la Iglesia</h2>
+        <p>
+          El <strong>rapto</strong> (del latín <em>raptare</em>, "arrebatar") es la creencia de que Cristo vendrá a llevarse a su Iglesia —los creyentes vivos y resucitados— para estar con Él antes de los juicios finales. A diferencia de la Segunda Venida, en la que Cristo regresa visiblemente a la tierra para reinar, el rapto describe un encuentro en el aire, instantáneo y transformador.
+        </p>
+        <p>
+          Su base bíblica principal se encuentra en <strong>1 Tesalonicenses 4:16-17</strong>: "El Señor mismo con voz de mando, con voz de arcángel, y con trompeta de Dios, descenderá del cielo; y los muertos en Cristo resucitarán primero. Luego nosotros los que vivimos, los que hayamos quedado, seremos arrebatados juntamente con ellos en las nubes para recibir al Señor en el aire."
+        </p>
+
+        <blockquote>
+          "He aquí, os digo un misterio: No todos dormiremos; pero todos seremos transformados, en un momento, en un abrir y cerrar de ojos, a la final trompeta." — 1 Corintios 15:51-52
+          <cite>La transformación instantánea de los creyentes es una promesa central del rapto.</cite>
+        </blockquote>
+
+        <h3>Las tres posiciones principales</h3>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">⏫</div>
+            <h4>Pre-tribulacionista</h4>
+            <p>El rapto ocurre <strong>antes</strong> de los siete años de la Gran Tribulación. La Iglesia es llevada al cielo mientras el Anticristo se manifiesta en la tierra. Es la posición más difundida en el dispensacionalismo moderno.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">⏸️</div>
+            <h4>Mid-tribulacionista</h4>
+            <p>El rapto ocurre a la <strong>mitad</strong> de la Tribulación, coincidiendo con la ruptura del pacto de siete años. La Iglesia pasa por la primera mitad, pero es librada de la "gran" tribulación final.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">⏬</div>
+            <h4>Post-tribulacionista</h4>
+            <p>El rapto ocurre <strong>después</strong> de la Gran Tribulación, prácticamente unido a la Segunda Venida. La Iglesia atraviesa todo el período de persecución y es arrebatada al final para encontrarse con Cristo.</p>
+          </div>
+        </div>
+
+        <h3>Rapto vs. Segunda Venida</h3>
+        <div class="compare-panels">
+          <div class="compare-panel traditional">
+            <h4>⏫ El Rapto</h4>
+            <p><strong>Destino:</strong> Los creyentes van al cielo a estar con Cristo.</p>
+            <p><strong>Visibilidad:</strong> Ocurre "en un abrir y cerrar de ojos"; es súbito e invisible para el mundo.</p>
+            <p><strong>Propósito:</strong> Librar a la Iglesia de la ira venidera (1 Tesalonicenses 5:9).</p>
+            <p><strong>Destinatarios:</strong> Solo la Iglesia (creyentes en Cristo).</p>
+            <p><strong>Naturaleza:</strong> Encuentro en el aire; Cristo no toca la tierra.</p>
+          </div>
+          <div class="compare-panel tech">
+            <h4>⏬ La Segunda Venida</h4>
+            <p><strong>Destino:</strong> Cristo viene a la tierra con sus santos para reinar.</p>
+            <p><strong>Visibilidad:</strong> "Todo ojo le verá" (Apocalipsis 1:7); es un evento público y glorioso.</p>
+            <p><strong>Propósito:</strong> Juzgar al mundo, derrotar al Anticristo e instaurar el Reino.</p>
+            <p><strong>Destinatarios:</strong> Todo el mundo; Israel y las naciones son juzgadas.</p>
+            <p><strong>Naturaleza:</strong> Cristo toca la tierra en el Monte de los Olivos (Zacarías 14:4).</p>
+          </div>
+        </div>
+
+        <h3>El debate teológico</h3>
+        <p>
+          No todos los cristianos aceptan el rapto como un evento separado de la Segunda Venida. Las tradiciones <strong>amilenialistas</strong> y <strong>postmilenialistas</strong> entienden que el rapto y la Segunda Venida son un solo evento al final de la historia. Los <strong>premilenialistas históricos</strong> suelen ubicar el rapto en la Segunda Venida, después de la Tribulación.
+        </p>
+        <p>
+          La posición <strong>pre-tribulacionista</strong>, aunque es la más popular en amplios sectores evangélicos y en la cultura popular (como la saga <em>Left Behind</em>), es también la más debatida académicamente. Los críticos señalan que la palabra "rapto" no aparece en la Biblia y que la distinción entre rapto y Segunda Venida se desarrolló tardíamente en la historia de la interpretación.
+        </p>
+
+        <blockquote>
+          "Porque no nos ha puesto Dios para ira, sino para alcanzar salvación por medio de nuestro Señor Jesucristo." — 1 Tesalonicenses 5:9
+          <cite>Texto clave para la interpretación pre-tribulacionista del rapto.</cite>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- ─── PANEL: GRAN TRIBULACIÓN (NUEVO) ─── -->
+    <section id="panel-tribulacion" class="panel" role="tabpanel">
+      <div class="content-card">
+        <h2><span class="icon-dot"></span>La Gran Tribulación</h2>
+        <p>
+          La <strong>Gran Tribulación</strong> es el período de siete años de sufrimiento, juicio y persecución que, según la interpretación dispensacionalista, precede a la Segunda Venida de Cristo. Es el contexto en el que se manifiesta el Anticristo, se implanta la marca de la bestia y se derraman los juicios de Dios sobre la tierra.
+        </p>
+        <p>
+          Su fundamento profético está en <strong>Daniel 9:24-27</strong>, la profecía de las "setenta semanas". Las primeras 69 semanas (483 años) se cumplieron hasta la venida del Mesías; la semana final (7 años) queda por cumplirse en los últimos tiempos. A mitad de esa semana, el líder final rompe el pacto y establece la "abominación desoladora".
+        </p>
+
+        <blockquote>
+          "Y por otra semana confirmará el pacto con muchos; a la mitad de la semana hará cesar el sacrificio y la ofrenda. Después con la muchedumbre de las abominaciones vendrá el desolador." — Daniel 9:27
+          <cite>El versículo clave que estructura toda la interpretación dispensacionalista de la Tribulación.</cite>
+        </blockquote>
+
+        <h3>El período de siete años</h3>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">📜</div>
+            <h4>Primera mitad (3,5 años)</h4>
+            <p>El Anticristo firma un pacto con Israel que permite la reconstrucción del Templo y el restablecimiento del culto. Es un período de relativa paz y falsa seguridad.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">💔</div>
+            <h4>Ruptura del pacto</h4>
+            <p>A la mitad de la semana, el Anticristo rompe el pacto, cesa el sacrificio, se sienta en el Templo y se proclama Dios (2 Tesalonicenses 2:4). Es la "abominación desoladora".</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🔥</div>
+            <h4>Segunda mitad (3,5 años)</h4>
+            <p>Es la "gran tribulación" propiamente dicha: persecución intensa contra los que rechazan la marca, derramamiento de los juicios de Dios y caos global.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">⚖️</div>
+            <h4>Propósitos divinos</h4>
+            <p>Purificar a Israel (Zacarías 13:8-9), juzgar a las naciones impenitentes y demostrar la soberanía de Dios sobre la historia.</p>
+          </div>
+        </div>
+
+        <h3>Los juicios del Apocalipsis</h3>
+        <p>
+          Apocalipsis describe tres series de juicios que se derraman durante la Tribulación: los <strong>sellos</strong> (6:1-17), las <strong>trompetas</strong> (8:1-9:21) y las <strong>copas</strong> (16:1-21). Cada serie intensifica el juicio divino sobre un mundo que se ha rendido al Anticristo.
+        </p>
+        <ul>
+          <li><strong>Sellos:</strong> Guerras, hambrunas, pestes, martirio de los santos y señales cósmicas.</li>
+          <li><strong>Trompetas:</strong> Granizo y fuego, contaminación del mar y las aguas, oscurecimiento del sol, langostas demoníacas y ejércitos de juicio.</li>
+          <li><strong>Copas:</strong> Úlceras, muerte de los mares, sangre en los ríos, calor abrasador, oscuridad, sequedad del Éufrates y gran terremoto final.</li>
+        </ul>
+
+        <h3>La marca de la bestia en la Tribulación</h3>
+        <p>
+          El mecanismo central de coerción durante la Tribulación es la <strong>marca de la bestia</strong> (Apocalipsis 13:16-17). Sin ella, nadie puede comprar ni vender. Quienes se niegan son perseguidos y muchos son martirizados. La IA, la biometría y las monedas digitales ofrecen un paralelo tecnológico inquietante con este sistema de control total.
+        </p>
+
+        <blockquote>
+          "Y vi las almas de los decapitados por causa del testimonio de Jesús y por la palabra de Dios, los que no habían adorado a la bestia ni a su imagen, y que no recibieron su marca en sus frentes ni en sus manos." — Apocalipsis 20:4
+          <cite>Los mártires de la Tribulación reinarán con Cristo en el Milenio.</cite>
+        </blockquote>
+
+        <h3>Línea de tiempo de los siete años</h3>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-era">Inicio</div>
+            <h4>El pacto con Israel</h4>
+            <p>El Anticristo confirma un pacto de siete años. Comienza un período de falsa paz y se permite la reconstrucción del Tercer Templo.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">Primeros 3,5 años</div>
+            <h4>Falsa seguridad y preparación</h4>
+            <p>El sistema global se consolida. Se implanta gradualmente el control económico y la adoración al líder mundial.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">Mitad (3,5 años)</div>
+            <h4>La abominación desoladora</h4>
+            <p>El Anticristo rompe el pacto, profana el Templo y exige adoración global. Comienza la "gran tribulación" propiamente dicha.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">Segunda mitad</div>
+            <h4>Persecución y juicios</h4>
+            <p>Se implanta la marca de la bestia. Los que la rechazan son perseguidos. Se derraman los sellos, trompetas y copas de la ira de Dios.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">Final</div>
+            <h4>La Segunda Venida</h4>
+            <p>Cristo regresa con poder y gloria, derrota al Anticristo y al falso profeta, y establece su Reino milenial (Apocalipsis 19:11-21).</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── PANEL: MILENIO (NUEVO) ─── -->
+    <section id="panel-milenio" class="panel" role="tabpanel">
+      <div class="content-card">
+        <h2><span class="icon-dot"></span>El Milenio</h2>
+        <p>
+          El <strong>Milenio</strong> es el período de mil años de reinado de Cristo sobre la tierra, descrito en Apocalipsis 20:1-6. Durante este tiempo, Satanás es atado, los mártires de la Tribulación resucitan y reinan con Cristo, y la tierra experimenta una paz y justicia sin precedentes.
+        </p>
+        <p>
+          El término proviene del latín <em>millennium</em> ("mil años"). La interpretación del Milenio ha dividido a los teólogos cristianos durante siglos, dando origen a tres grandes escuelas escatológicas: el <strong>premilenialismo</strong>, el <strong>postmilenialismo</strong> y el <strong>amilenialismo</strong>.
+        </p>
+
+        <blockquote>
+          "Y vi tronos, y se sentaron sobre ellos los que recibieron facultad de juzgar; y vi las almas de los decapitados por causa del testimonio de Jesús... y vivieron y reinaron con Cristo mil años." — Apocalipsis 20:4
+          <cite>El texto fundamental para toda doctrina del Milenio.</cite>
+        </blockquote>
+
+        <h3>Las tres interpretaciones principales</h3>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">👑</div>
+            <h4>Premilenialismo</h4>
+            <p>Cristo regresa <strong>antes</strong> del Milenio para reinar literalmente mil años en la tierra. Es la posición dispensacionalista clásica. El Milenio es un período literal de paz y justicia bajo el gobierno visible de Cristo.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🌍</div>
+            <h4>Postmilenialismo</h4>
+            <p>El Milenio es un período de triunfo del evangelio antes del regreso de Cristo. La Iglesia, mediante la predicación y la influencia cultural, extiende el Reino de Dios hasta que el mundo sea transformado. Cristo regresa <strong>después</strong> del Milenio.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🕊️</div>
+            <h4>Amilenialismo</h4>
+            <p>El Milenio no es un período literal, sino simbólico: el reinado actual de Cristo en el cielo y en los corazones de los creyentes, entre su primera y segunda venida. El número "mil" representa la plenitud del tiempo.</p>
+          </div>
+        </div>
+
+        <h3>Eventos del Milenio (según el premilenialismo)</h3>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-era">Inicio</div>
+            <h4>Satanás es atado</h4>
+            <p>Un ángel desciende con la llave del abismo y una gran cadena, y ata a Satanás por mil años (Apocalipsis 20:1-3). El mal es neutralizado.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">Resurrección</div>
+            <h4>La primera resurrección</h4>
+            <p>Los mártires de la Tribulación y los santos resucitan y reinan con Cristo. Los impíos no resucitan hasta el final del Milenio (Apocalipsis 20:5-6).</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">Los mil años</div>
+            <h4>Reinado de Cristo</h4>
+            <p>La tierra experimenta paz, justicia y prosperidad bajo el gobierno de Cristo. Las naciones son gobernadas con vara de hierro. La creación es restaurada parcialmente.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">Final del Milenio</div>
+            <h4>La rebelión final</h4>
+            <p>Satanás es liberado por un breve tiempo y engaña a las naciones para una rebelión final. Es derrotado definitivamente y lanzado al lago de fuego (Apocalipsis 20:7-10).</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">Juicio final</div>
+            <h4>El Gran Trono Blanco</h4>
+            <p>Los muertos impíos resucitan y son juzgados según sus obras. La muerte y el Hades son lanzados al lago de fuego (Apocalipsis 20:11-15).</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">Eternidad</div>
+            <h4>Nuevos cielos y nueva tierra</h4>
+            <p>Dios habita con su pueblo para siempre. No hay más muerte, llanto ni dolor (Apocalipsis 21-22).</p>
+          </div>
+        </div>
+
+        <h3>Debate teológico</h3>
+        <p>
+          La interpretación del Milenio no es un tema cerrado. Los <strong>premilenialistas dispensacionalistas</strong> esperan un reino literal y terrenal; los <strong>premilenialistas históricos</strong> lo entienden como un período de paz tras la Tribulación, pero sin las distinciones entre Israel y la Iglesia; los <strong>postmilenialistas</strong> confían en el avance del evangelio antes del regreso de Cristo; y los <strong>amilenialistas</strong> lo leen como el reinado espiritual actual de Cristo.
+        </p>
+        <p>
+          Lo que todas las posiciones comparten es la convicción de que <strong>Cristo reina</strong> y que la historia culminará en el juicio final y la renovación de todas las cosas. La diferencia está en el <em>cómo</em> y el <em>cuándo</em>.
+        </p>
+
+        <blockquote>
+          "Y el diablo que los engañaba fue lanzado en el lago de fuego y azufre... y serán atormentados día y noche por los siglos de los siglos." — Apocalipsis 20:10
+          <cite>La derrota definitiva de Satanás al final del Milenio.</cite>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- ─── PANEL: FUTURO ESCATOLÓGICO ─── -->
+    <section id="panel-futuro" class="panel" role="tabpanel">
+      <div class="content-card">
+        <h2><span class="icon-dot"></span>El futuro escatológico bíblico</h2>
+        <p>
+          La escatología bíblica describe una secuencia de eventos que culminan en el regreso de Cristo y el juicio final. Independientemente de la interpretación que se adopte, hay <strong>señales</strong> que Jesús mismo anticipó y que la tradición ha sistematizado.
+        </p>
+
+        <h3>Señales previas al fin (Mateo 24)</h3>
+        <ul>
+          <li><strong>Falsos profetas y falsos cristos:</strong> "Muchos vendrán en mi nombre, diciendo: Yo soy el Cristo, y engañarán a muchos" (Mateo 24:5).</li>
+          <li><strong>Guerras y rumores de guerras:</strong> Conflictos globales que no deben confundirse con el fin, pero que jalonan el camino.</li>
+          <li><strong>Hambrunas y terremotos:</strong> "Todo esto será principio de dolores" (Mateo 24:8).</li>
+          <li><strong>Persecución y apostasía:</strong> "Seréis aborrecidos por todas las naciones por causa de mi nombre" (Mateo 24:9).</li>
+          <li><strong>Predicación global del evangelio:</strong> "Y será predicado este evangelio del reino en todo el mundo... y entonces vendrá el fin" (Mateo 24:14).</li>
+        </ul>
+
+        <h3>Línea de tiempo escatológica completa</h3>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-era">Antes del fin</div>
+            <h4>Preludios y señales</h4>
+            <p>Guerras, rumores, hambrunas, terremotos, persecuciones y apostasía. La IA acelera la capacidad de engaño y control, pero el fin aún no ha llegado.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">El rapto (según interpretación dispensacionalista)</div>
+            <h4>La Iglesia es llevada</h4>
+            <p>Cristo viene por su Iglesia antes de la Gran Tribulación (1 Tesalonicenses 4:16-17). No todos los sistemas teológicos coinciden en este punto.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">Los 7 años de tribulación</div>
+            <h4>El pacto y su ruptura</h4>
+            <p>El Anticristo firma un pacto con Israel, lo rompe a la mitad y establece la "abominación desoladora". Se implanta la marca de la bestia. El Tercer Templo es el escenario central de estos eventos.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">La Gran Tribulación</div>
+            <h4>Persecución y juicios</h4>
+            <p>Los que rechazan la marca son perseguidos. Se derraman las copas de la ira de Dios. La IA podría ser el instrumento de control y martirio.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">La segunda venida</div>
+            <h4>Cristo regresa</h4>
+            <p>Jesús viene con poder y gloria, derrota al Anticristo y establece su Reino milenial (Apocalipsis 19:11-21).</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">El Milenio</div>
+            <h4>Reinado de mil años</h4>
+            <p>Cristo reina sobre la tierra con justicia y paz. Satanás está atado. Los mártires resucitan y reinan con Él (Apocalipsis 20:1-6).</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">Juicio final y eternidad</div>
+            <h4>Nuevos cielos y nueva tierra</h4>
+            <p>El mal es erradicado definitivamente. Los redimidos habitan con Dios para siempre (Apocalipsis 21-22).</p>
+          </div>
+        </div>
+
+        <h3>Comparador: visión tradicional vs. visión tecnológica</h3>
+        <p style="margin-bottom: 12px;">Selecciona una columna para enfocarte en ella.</p>
+        <div class="compare-controls">
+          <button class="compare-btn active" data-compare="ambas">Ambas</button>
+          <button class="compare-btn" data-compare="traditional">Solo tradicional</button>
+          <button class="compare-btn" data-compare="tech">Solo tecnológica</button>
+        </div>
+        <div class="compare-panels">
+          <div class="compare-panel traditional" id="compare-traditional">
+            <h4>🔴 Visión tradicional</h4>
+            <p><strong>El Anticristo:</strong> Un individuo histórico, un líder político-religioso que se auto-deifica.</p>
+            <p><strong>La marca 666:</strong> Un sello visible (tatuaje, microchip, moneda) impuesto por decreto.</p>
+            <p><strong>El Tercer Templo:</strong> Un edificio físico reconstruido en el Monte del Templo, escenario literal de la profanación.</p>
+            <p><strong>El rapto:</strong> Un evento súbito e invisible en el que la Iglesia es llevada al cielo.</p>
+            <p><strong>La Gran Tribulación:</strong> Siete años literales de juicio y persecución global.</p>
+            <p><strong>El Milenio:</strong> Un reinado literal de Cristo de mil años en la tierra.</p>
+            <p><strong>El control:</strong> Ejercido mediante coerción política, militar y religiosa directa.</p>
+            <p><strong>El engaño:</strong> Falsos milagros y prodigios sobrenaturales realizados por el falso profeta.</p>
+          </div>
+          <div class="compare-panel tech" id="compare-tech">
+            <h4>🔵 Visión tecnológica</h4>
+            <p><strong>El Anticristo:</strong> Un sistema o figura que utiliza la IA como infraestructura de poder global.</p>
+            <p><strong>La marca 666:</strong> Una identidad digital integrada (biometría + CBDC + crédito social) sin la cual no se participa en la economía.</p>
+            <p><strong>El Tercer Templo:</strong> Un símbolo o escenario geopolítico que, combinado con IA, amplifica el engaño y la coerción a escala global.</p>
+            <p><strong>El rapto:</strong> Un evento que, si ocurriera, sería negado o reinterpretado por los sistemas de información globales.</p>
+            <p><strong>La Gran Tribulación:</strong> Un período de control algorítmico total, persecución digital y exclusión financiera automatizada.</p>
+            <p><strong>El Milenio:</strong> Un período de gobierno global tecnocrático que algunos identificarían con el Reino, pero que carece de la presencia física de Cristo.</p>
+            <p><strong>El control:</strong> Ejercido mediante algoritmos, vigilancia masiva y exclusión financiera automatizada.</p>
+            <p><strong>El engaño:</strong> Deepfakes, avatares hiperrealistas y realidades virtuales que simulan lo sobrenatural.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── PANEL: GLOSARIO ─── -->
+    <section id="panel-glosario" class="panel" role="tabpanel">
+      <div class="content-card">
+        <h2><span class="icon-dot"></span>Glosario escatológico</h2>
+        <p>Términos clave para comprender el tema. Haz clic en cada uno para expandir su definición.</p>
+
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Escatología <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Rama de la teología que estudia los eventos finales de la historia: la muerte, el juicio, el fin del mundo y el destino final de la humanidad. Proviene del griego <em>éschatos</em> ("último") y <em>logos</em> ("estudio").</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Anticristo <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Figura apocalíptica que se opone a Cristo y busca suplantarlo. En 1 Juan 2:18 se menciona que "ya han surgido muchos anticristos", lo que sugiere tanto una dimensión individual como un espíritu colectivo de oposición a Cristo.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Marca de la bestia <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Sello o señal descrita en Apocalipsis 13:16-17 que se recibe en la mano derecha o la frente. Sin ella, nadie puede comprar ni vender. Representa la lealtad absoluta al sistema del Anticristo.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">666 <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Número de la bestia en Apocalipsis 13:18. Se describe como "número de hombre". Las interpretaciones incluyen la gematría de Nerón César, el papado, o un símbolo de la imperfección humana triplicada.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Tercer Templo <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Reconstrucción esperada del Templo de Jerusalén, destruido en el año 70 d.C. Para el dispensacionalismo, es un requisito profético para el fin de los tiempos. El Instituto del Templo (1987) ha recreado utensilios rituales y prepara sacerdotes y novillas rojas para su construcción.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Novilla roja <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Según Números 19, una novilla roja sin defecto es necesaria para producir las cenizas de purificación ritual. Su obtención es un paso crucial en los preparativos del Tercer Templo. Se han importado novillas y realizado rituales de quema en Samaria (2025).</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Rapto de la Iglesia <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Creencia de que Cristo vendrá a llevarse a su Iglesia —los creyentes vivos y resucitados— para estar con Él antes de los juicios finales. Se basa en 1 Tesalonicenses 4:16-17 y 1 Corintios 15:51-52. Las posiciones principales son pre-tribulacionista, mid-tribulacionista y post-tribulacionista.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Gran Tribulación <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Período de siete años de intensa persecución y juicio divino que, según la interpretación dispensacionalista, precede a la segunda venida de Cristo. Se divide en dos mitades por la "abominación desoladora" (Daniel 9:27). Es el contexto en el que se implanta la marca de la bestia y se derraman los juicios del Apocalipsis.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Milenio <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Período de mil años de reinado de Cristo sobre la tierra, descrito en Apocalipsis 20:1-6. Las tres interpretaciones principales son el premilenialismo (Cristo reina literalmente antes del fin), el postmilenialismo (el evangelio triunfa antes del regreso de Cristo) y el amilenialismo (el Milenio es simbólico y representa el reinado actual de Cristo).</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Premilenialismo <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Interpretación según la cual Cristo regresa <strong>antes</strong> del Milenio para reinar literalmente mil años en la tierra. Es la posición dispensacionalista clásica. Distingue entre el rapto de la Iglesia y la Segunda Venida, y espera un reino terrenal de paz y justicia.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Amilenialismo <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Interpretación según la cual el Milenio no es un período literal, sino simbólico: el reinado actual de Cristo en el cielo y en los corazones de los creyentes, entre su primera y segunda venida. El número "mil" representa la plenitud del tiempo.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Postmilenialismo <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Interpretación según la cual el Milenio es un período de triunfo del evangelio antes del regreso de Cristo. La Iglesia, mediante la predicación y la influencia cultural, extiende el Reino de Dios hasta que el mundo sea transformado. Cristo regresa <strong>después</strong> del Milenio.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Deepfake <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Técnica de inteligencia artificial que permite crear videos, imágenes o audios falsos pero hiperrealistas. En el contexto escatológico, podría usarse para simular milagros o apariciones, contribuyendo al engaño profetizado.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">CBDC (Moneda Digital de Banco Central) <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Versión digital de la moneda fiduciaria emitida por un banco central. Combinada con IA, podría permitir un control granular sobre quién puede comprar, vender o acceder a servicios, dependiendo de su "lealtad" al sistema.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Imagen de la bestia <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>En Apocalipsis 13:15, se describe una imagen de la bestia que "recibe aliento" y habla, y que causa la muerte de quienes se niegan a adorarla. La tecnología de avatares de IA y entidades robóticas ofrece un paralelo inquietante.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Dispensacionalismo <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Sistema teológico que interpreta la historia bíblica en "dispensaciones" o períodos distintos. Sostiene un futuro literal para Israel, un arrebatamiento previo a la Gran Tribulación y un Reino milenial terrenal. Es la escuela que más énfasis pone en la necesidad del Tercer Templo.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Segunda Venida <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>El regreso glorioso de Jesucristo al final de los tiempos para juzgar al mundo, derrotar al Anticristo y establecer su Reino. Es la esperanza central de la fe cristiana y el punto culminante de la escatología bíblica.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>
+        Enciclopedia Visual · Contenido original de
+        <a href="https://app-fioravante.github.io/apps-fioravante/" target="_blank" rel="noopener noreferrer">Fioravante</a>.
+        Este recurso es de carácter educativo y exploratorio.
+      </p>
+    </footer>
+  </div>
+
+  <script>
+    // ─── TEMA ───
+    const rootEl = document.documentElement;
+    const themeToggle = document.getElementById('themeToggle');
+    function updateToggleLabel() {
+      const isLight = rootEl.getAttribute('data-theme') === 'light';
+      themeToggle.setAttribute('aria-label', isLight ? 'Cambiar a modo oscuro' : 'Cambiar a modo claro');
+      themeToggle.setAttribute('title', isLight ? 'Cambiar a modo oscuro' : 'Cambiar a modo claro');
+    }
+    themeToggle.addEventListener('click', () => {
+      const isLight = rootEl.getAttribute('data-theme') === 'light';
+      const next = isLight ? 'dark' : 'light';
+      rootEl.setAttribute('data-theme', next);
+      try { localStorage.setItem('enc-theme', next); } catch (e) {}
+      updateToggleLabel();
+    });
+    updateToggleLabel();
+
+    // ─── PESTAÑAS ───
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const panels = document.querySelectorAll('.panel');
+
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const targetId = btn.dataset.panel;
+        tabBtns.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });
+        btn.classList.add('active');
+        btn.setAttribute('aria-selected', 'true');
+        panels.forEach(p => p.classList.remove('active'));
+        document.getElementById(targetId).classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    });
+
+    // ─── COMPARADOR ───
+    const compareBtns = document.querySelectorAll('.compare-btn');
+    const compareTraditional = document.getElementById('compare-traditional');
+    const compareTech = document.getElementById('compare-tech');
+
+    compareBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        compareBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const mode = btn.dataset.compare;
+
+        compareTraditional.classList.remove('dimmed');
+        compareTech.classList.remove('dimmed');
+
+        if (mode === 'traditional') {
+          compareTech.classList.add('dimmed');
+        } else if (mode === 'tech') {
+          compareTraditional.classList.add('dimmed');
+        }
+      });
+    });
+
+    // ─── ACORDEÓN ───
+    document.querySelectorAll('.accordion-trigger').forEach(trigger => {
+      trigger.addEventListener('click', () => {
+        const item = trigger.parentElement;
+        const isOpen = item.classList.contains('open');
+        // Cerrar todos los demás
+        document.querySelectorAll('.accordion-item').forEach(i => {
+          i.classList.remove('open');
+          i.querySelector('.accordion-trigger').setAttribute('aria-expanded', 'false');
+        });
+        if (!isOpen) {
+          item.classList.add('open');
+          trigger.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

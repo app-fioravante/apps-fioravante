@@ -1,0 +1,1714 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Literatura · Enciclopedia Visual Fioravante</title>
+  <meta name="description" content="Exploración interactiva de la literatura: historia, géneros, autores, obras maestras, movimientos literarios, literatura latinoamericana y claves para leer.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <script>
+    (function () {
+      try {
+        const stored = localStorage.getItem('enc-theme');
+        if (stored === 'light' || stored === 'dark') {
+          document.documentElement.setAttribute('data-theme', stored);
+        } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+          document.documentElement.setAttribute('data-theme', 'light');
+        }
+      } catch (e) {}
+    })();
+  </script>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg-deep: #070b14;
+      --surface: rgba(22, 32, 50, 0.65);
+      --surface-hover: rgba(30, 44, 68, 0.8);
+      --border: rgba(255, 255, 255, 0.07);
+      --border-strong: rgba(255, 255, 255, 0.15);
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --text-dim: #64748b;
+      --accent-cyan: #22d3ee;
+      --accent-violet: #a78bfa;
+      --accent-amber: #fbbf24;
+      --accent-rose: #fb7185;
+      --accent-emerald: #34d399;
+      --chip-hover-bg: rgba(255, 255, 255, 0.04);
+      --radius-lg: 24px;
+      --radius-md: 16px;
+      --radius-sm: 12px;
+      --shadow-card: 0 4px 24px -8px rgba(0, 0, 0, 0.6);
+      --shadow-hover: 0 24px 48px -16px rgba(0, 0, 0, 0.7);
+      --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+      --noise-opacity: 0.03;
+    }
+
+    [data-theme="light"] {
+      --bg-deep: #f4f6fa;
+      --surface: rgba(255, 255, 255, 0.72);
+      --surface-hover: rgba(255, 255, 255, 0.92);
+      --border: rgba(15, 23, 42, 0.08);
+      --border-strong: rgba(15, 23, 42, 0.16);
+      --text-primary: #1e293b;
+      --text-secondary: #475569;
+      --text-dim: #94a3b8;
+      --accent-cyan: #0891b2;
+      --accent-violet: #7c3aed;
+      --accent-amber: #b45309;
+      --accent-rose: #e11d48;
+      --accent-emerald: #059669;
+      --chip-hover-bg: rgba(15, 23, 42, 0.04);
+      --shadow-card: 0 4px 24px -8px rgba(15, 23, 42, 0.08);
+      --shadow-hover: 0 24px 48px -16px rgba(15, 23, 42, 0.16);
+      --noise-opacity: 0.015;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background-color: var(--bg-deep);
+      color: var(--text-primary);
+      min-height: 100vh;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+      transition: background-color 0.5s ease, color 0.5s ease;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      background:
+        radial-gradient(ellipse 80% 60% at 10% 0%, rgba(167, 139, 250, 0.14), transparent 60%),
+        radial-gradient(ellipse 70% 50% at 90% 10%, rgba(251, 113, 133, 0.1), transparent 55%),
+        radial-gradient(ellipse 60% 50% at 50% 100%, rgba(251, 191, 36, 0.06), transparent 60%);
+      animation: bgShift 20s ease-in-out infinite alternate;
+      transition: opacity 0.5s ease;
+    }
+
+    [data-theme="light"] body::before {
+      background:
+        radial-gradient(ellipse 80% 60% at 10% 0%, rgba(124, 58, 237, 0.12), transparent 60%),
+        radial-gradient(ellipse 70% 50% at 90% 10%, rgba(225, 29, 72, 0.09), transparent 55%),
+        radial-gradient(ellipse 60% 50% at 50% 100%, rgba(180, 83, 9, 0.07), transparent 60%);
+    }
+
+    @keyframes bgShift {
+      0% { opacity: 0.7; transform: scale(1); }
+      100% { opacity: 1; transform: scale(1.08); }
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      opacity: var(--noise-opacity);
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      pointer-events: none;
+      transition: opacity 0.5s ease;
+    }
+
+    .app { max-width: 1200px; margin: 0 auto; padding: 0 24px 80px; }
+
+    /* ─── THEME TOGGLE ─── */
+    .theme-toggle {
+      position: fixed; top: 20px; right: 20px; z-index: 100;
+      width: 46px; height: 46px; border-radius: 50%;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      color: var(--text-primary); cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: var(--shadow-card);
+      transition: transform 0.35s var(--ease-out-expo), border-color 0.3s, box-shadow 0.35s var(--ease-out-expo), background-color 0.4s ease, color 0.4s ease;
+    }
+    .theme-toggle:hover { transform: scale(1.1) rotate(10deg); border-color: var(--border-strong); box-shadow: var(--shadow-hover); }
+    .theme-toggle svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .theme-toggle .icon-sun { display: block; }
+    .theme-toggle .icon-moon { display: none; }
+    [data-theme="light"] .theme-toggle .icon-sun { display: none; }
+    [data-theme="light"] .theme-toggle .icon-moon { display: block; }
+
+    /* ─── HEADER ─── */
+    .header { padding: 56px 0 24px; text-align: center; }
+    .header-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 16px; border-radius: 999px;
+      background: rgba(167, 139, 250, 0.1);
+      border: 1px solid rgba(167, 139, 250, 0.25);
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--accent-violet);
+      margin-bottom: 20px;
+      animation: fadeDown 0.8s var(--ease-out-expo) both;
+    }
+    .header-badge::before {
+      content: ''; width: 6px; height: 6px; border-radius: 50%;
+      background: var(--accent-violet); box-shadow: 0 0 12px var(--accent-violet);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.8); } }
+
+    .header h1 {
+      font-size: clamp(2.2rem, 5.5vw, 3.8rem);
+      font-weight: 800; letter-spacing: -0.03em; line-height: 1.1;
+      margin-bottom: 16px;
+      animation: fadeDown 0.9s 0.1s var(--ease-out-expo) both;
+    }
+    .header h1 .gradient-text {
+      background: linear-gradient(135deg, var(--accent-violet) 0%, var(--accent-rose) 50%, var(--accent-amber) 100%);
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-size: 200% 200%;
+      animation: gradientMove 6s ease-in-out infinite;
+    }
+    @keyframes gradientMove { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+
+    .header-subtitle {
+      font-size: clamp(0.95rem, 2vw, 1.1rem);
+      color: var(--text-secondary); font-weight: 400;
+      max-width: 720px; margin: 0 auto;
+      animation: fadeDown 1s 0.2s var(--ease-out-expo) both;
+    }
+
+    /* ─── NAVEGACIÓN POR PESTAÑAS ─── */
+    .tabs-nav {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      margin: 32px 0 28px;
+      padding: 8px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      animation: fadeUp 0.8s 0.3s var(--ease-out-expo) both;
+    }
+    .tab-btn {
+      flex: 1 1 auto;
+      padding: 12px 18px;
+      border-radius: var(--radius-sm);
+      border: none; background: transparent;
+      color: var(--text-secondary);
+      font-family: inherit; font-size: 0.88rem; font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s var(--ease-out-expo);
+      white-space: nowrap;
+    }
+    .tab-btn:hover { color: var(--text-primary); background: var(--chip-hover-bg); }
+    .tab-btn.active {
+      background: rgba(167, 139, 250, 0.15);
+      color: var(--accent-violet);
+      box-shadow: 0 0 20px -4px rgba(167, 139, 250, 0.2);
+    }
+    [data-theme="light"] .tab-btn.active { background: rgba(124, 58, 237, 0.12); color: var(--accent-violet); }
+
+    /* ─── PANELES ─── */
+    .panel { display: none; animation: fadeUp 0.5s var(--ease-out-expo) both; }
+    .panel.active { display: block; }
+
+    .content-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      box-shadow: var(--shadow-card);
+      margin-bottom: 24px;
+      transition: background-color 0.4s ease, border-color 0.4s ease;
+    }
+
+    .content-card h2 {
+      font-size: 1.5rem; font-weight: 700; letter-spacing: -0.02em;
+      margin-bottom: 16px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .content-card h2 .icon-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--accent-violet);
+      box-shadow: 0 0 12px var(--accent-violet);
+      flex-shrink: 0;
+    }
+    .content-card h3 {
+      font-size: 1.1rem; font-weight: 700;
+      margin: 24px 0 10px;
+      color: var(--accent-violet);
+    }
+    .content-card p {
+      color: var(--text-secondary);
+      margin-bottom: 14px;
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+    .content-card p strong { color: var(--text-primary); }
+    .content-card ul, .content-card ol {
+      margin: 12px 0 18px 20px;
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+    .content-card li { margin-bottom: 8px; }
+    .content-card blockquote {
+      border-left: 3px solid var(--accent-violet);
+      padding: 12px 20px;
+      margin: 20px 0;
+      background: rgba(167, 139, 250, 0.05);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      font-style: italic;
+      color: var(--text-secondary);
+      font-size: 0.92rem;
+    }
+    [data-theme="light"] .content-card blockquote { background: rgba(124, 58, 237, 0.05); }
+    .content-card blockquote cite {
+      display: block; margin-top: 8px;
+      font-style: normal; font-size: 0.82rem; color: var(--text-dim);
+    }
+
+    /* ─── TARJETAS DE CONCEPTO ─── */
+    .concept-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+      margin: 20px 0;
+    }
+    .concept-card {
+      padding: 22px;
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      transition: transform 0.3s var(--ease-out-expo), border-color 0.3s, box-shadow 0.3s;
+    }
+    .concept-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--border-strong);
+      box-shadow: var(--shadow-hover);
+    }
+    .concept-card .concept-icon {
+      width: 44px; height: 44px; border-radius: var(--radius-sm);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem; margin-bottom: 14px;
+      background: rgba(167, 139, 250, 0.12);
+      color: var(--accent-violet);
+    }
+    .concept-card h4 {
+      font-size: 1rem; font-weight: 700; margin-bottom: 8px;
+    }
+    .concept-card p {
+      font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; margin: 0;
+    }
+    .concept-card .author {
+      display: block;
+      margin-top: 10px;
+      font-size: 0.78rem;
+      color: var(--text-dim);
+      font-style: italic;
+    }
+
+    /* ─── COMPARADOR ─── */
+    .compare-controls {
+      display: flex; gap: 8px; margin: 20px 0 24px; flex-wrap: wrap;
+    }
+    .compare-btn {
+      padding: 10px 20px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text-secondary);
+      font-family: inherit; font-size: 0.85rem; font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s var(--ease-out-expo);
+    }
+    .compare-btn:hover { border-color: var(--border-strong); color: var(--text-primary); }
+    .compare-btn.active {
+      background: var(--accent-violet);
+      border-color: var(--accent-violet);
+      color: var(--bg-deep);
+      font-weight: 700;
+    }
+    [data-theme="light"] .compare-btn.active { color: #fff; }
+
+    .compare-panels {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    @media (max-width: 640px) { .compare-panels { grid-template-columns: 1fr; } }
+
+    .compare-panel {
+      padding: 24px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      background: var(--surface);
+      transition: opacity 0.3s ease;
+    }
+    .compare-panel.dimmed { opacity: 0.35; pointer-events: none; }
+    .compare-panel h4 {
+      font-size: 0.95rem; font-weight: 700; margin-bottom: 12px;
+      text-transform: uppercase; letter-spacing: 0.06em;
+    }
+    .compare-panel.left h4 { color: var(--accent-amber); }
+    .compare-panel.right h4 { color: var(--accent-cyan); }
+    .compare-panel p { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.7; }
+
+    /* ─── LÍNEA DE TIEMPO ─── */
+    .timeline { position: relative; padding: 20px 0 20px 32px; }
+    .timeline::before {
+      content: ''; position: absolute; left: 11px; top: 0; bottom: 0;
+      width: 2px; background: linear-gradient(to bottom, var(--accent-violet), var(--accent-rose));
+      border-radius: 2px;
+    }
+    .timeline-item {
+      position: relative; margin-bottom: 28px; padding-left: 8px;
+    }
+    .timeline-item::before {
+      content: ''; position: absolute; left: -27px; top: 6px;
+      width: 12px; height: 12px; border-radius: 50%;
+      background: var(--bg-deep); border: 2px solid var(--accent-violet);
+      box-shadow: 0 0 10px rgba(167, 139, 250, 0.3);
+    }
+    .timeline-item .timeline-era {
+      font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.08em; color: var(--accent-violet); margin-bottom: 4px;
+    }
+    .timeline-item h4 { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+    .timeline-item p { font-size: 0.88rem; color: var(--text-secondary); margin: 0; line-height: 1.6; }
+
+    /* ─── TABLA ─── */
+    .table-wrap {
+      overflow-x: auto;
+      margin: 20px 0;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+    th, td {
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-secondary);
+    }
+    th {
+      background: var(--chip-hover-bg);
+      color: var(--text-primary);
+      font-weight: 700;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: var(--chip-hover-bg); }
+    td strong { color: var(--text-primary); }
+
+    /* ─── GLOSARIO ─── */
+    .accordion-item {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      margin-bottom: 10px;
+      overflow: hidden;
+      transition: border-color 0.3s;
+    }
+    .accordion-item:hover { border-color: var(--border-strong); }
+    .accordion-trigger {
+      width: 100%;
+      padding: 16px 20px;
+      background: transparent;
+      border: none;
+      color: var(--text-primary);
+      font-family: inherit; font-size: 0.95rem; font-weight: 600;
+      text-align: left; cursor: pointer;
+      display: flex; justify-content: space-between; align-items: center;
+      transition: background-color 0.2s;
+    }
+    .accordion-trigger:hover { background: var(--chip-hover-bg); }
+    .accordion-trigger .chevron {
+      transition: transform 0.3s var(--ease-out-expo);
+      font-size: 0.8rem; color: var(--text-dim);
+    }
+    .accordion-item.open .accordion-trigger .chevron { transform: rotate(180deg); }
+    .accordion-content {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.4s var(--ease-out-expo), padding 0.4s var(--ease-out-expo);
+      padding: 0 20px;
+    }
+    .accordion-item.open .accordion-content {
+      max-height: 500px; padding: 0 20px 18px;
+    }
+    .accordion-content p {
+      font-size: 0.9rem; color: var(--text-secondary); line-height: 1.7; margin: 0;
+    }
+
+    /* ─── FOOTER ─── */
+    .footer {
+      text-align: center; padding: 48px 0 0;
+      color: var(--text-dim); font-size: 0.8rem;
+      border-top: 1px solid var(--border); margin-top: 48px;
+    }
+    .footer a { color: var(--accent-violet); text-decoration: none; font-weight: 500; }
+    .footer a:hover { text-decoration: underline; }
+
+    @keyframes fadeDown { from { opacity: 0; transform: translateY(-16px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+
+    @media (max-width: 640px) {
+      .app { padding: 0 16px 48px; }
+      .content-card { padding: 24px 20px; }
+      .tabs-nav { gap: 4px; padding: 6px; }
+      .tab-btn { padding: 10px 12px; font-size: 0.8rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema" title="Cambiar tema">
+    <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+    <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  </button>
+
+  <div class="app">
+    <!-- Header -->
+    <header class="header">
+      <div class="header-badge">Palabras · Imaginación · Mundo</div>
+      <h1>La <span class="gradient-text">Literatura</span></h1>
+      <p class="header-subtitle">
+        Un recorrido visual e interactivo por el arte de la palabra: su historia, sus géneros, sus grandes autores, sus obras maestras, sus movimientos y las claves para leer con más profundidad.
+      </p>
+    </header>
+
+    <!-- Navegación por pestañas -->
+    <nav class="tabs-nav" role="tablist" aria-label="Secciones del tema">
+      <button class="tab-btn active" data-panel="panel-intro" role="tab" aria-selected="true">¿Qué es?</button>
+      <button class="tab-btn" data-panel="panel-historia" role="tab" aria-selected="false">Historia</button>
+      <button class="tab-btn" data-panel="panel-generos" role="tab" aria-selected="false">Géneros</button>
+      <button class="tab-btn" data-panel="panel-obras" role="tab" aria-selected="false">Obras y Autores</button>
+      <button class="tab-btn" data-panel="panel-latinoamerica" role="tab" aria-selected="false">Latinoamérica</button>
+      <button class="tab-btn" data-panel="panel-movimientos" role="tab" aria-selected="false">Movimientos</button>
+      <button class="tab-btn" data-panel="panel-leer" role="tab" aria-selected="false">Cómo leer</button>
+      <button class="tab-btn" data-panel="panel-glosario" role="tab" aria-selected="false">Glosario</button>
+    </nav>
+
+    <!-- ─── PANEL: ¿QUÉ ES? ─── -->
+    <section id="panel-intro" class="panel active" role="tabpanel">
+      <div class="content-card">
+        <h2><span class="icon-dot"></span>¿Qué es la literatura?</h2>
+        <p>
+          La <strong>literatura</strong> es el arte que usa la palabra —escrita u oral— como materia prima para crear obras que transmiten emociones, ideas, historias y visiones del mundo. No toda escritura es literatura: un manual, una ley o una receta no lo son. Lo que distingue a la literatura es su <strong>voluntad estética</strong>, su capacidad de ir más allá de la información y su vocación de perdurar.
+        </p>
+        <p>
+          Etimológicamente, la palabra proviene del latín <em>litteratura</em> ("instrucción, saber de letras"). Pero su sentido moderno —como arte verbal— se consolidó entre los siglos XVIII y XIX, cuando la novela, la poesía y el teatro se autonomizaron como formas artísticas.
+        </p>
+
+        <h3>Las cuatro funciones de la literatura</h3>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">💭</div>
+            <h4>Expresiva</h4>
+            <p>Permite al autor expresar su mundo interior, sus emociones, sus obsesiones y su visión personal de la realidad.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🪞</div>
+            <h4>Mimética</h4>
+            <p>Representa, interpreta o transforma la realidad. Es un espejo que puede deformar, amplificar o iluminar el mundo.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">💬</div>
+            <h4>Comunicativa</h4>
+            <p>Permite transmitir ideas, valores y visiones del mundo entre culturas, generaciones y épocas distintas.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">✨</div>
+            <h4>Estética</h4>
+            <p>Produce placer, emoción, asombro. Trabaja con el lenguaje de un modo que trasciende la mera utilidad práctica.</p>
+          </div>
+        </div>
+
+        <h3>¿Qué la distingue de otros discursos?</h3>
+        <ul>
+          <li><strong>Ficción:</strong> no necesita ser verdadera para decir verdad. La ficción es un modo de conocimiento, no una mentira.</li>
+          <li><strong>Lenguaje figurado:</strong> usa metáforas, imágenes, ritmo, sonoridad. El <em>cómo</em> importa tanto como el <em>qué</em>.</li>
+          <li><strong>Polisemia:</strong> una obra literaria admite múltiples lecturas y ningún cierre definitivo.</li>
+          <li><strong>Duración:</strong> aspira a perdurar. A diferencia de la noticia o el mensaje publicitario, la literatura busca permanecer.</li>
+          <li><strong>Autonomía:</strong> crea su propio mundo, sus propias reglas, su propia lógica interna.</li>
+        </ul>
+
+        <blockquote>
+          "La literatura es el modo más agradable de ignorar la vida." — Fernando Pessoa
+          <cite>Una definición irónica que revela, en realidad, hasta qué punto la literatura también la ilumina.</cite>
+        </blockquote>
+
+        <h3>Literatura y sociedad</h3>
+        <p>
+          La literatura no existe en el vacío: refleja, critica y transforma las sociedades que la producen. Ha sido herramienta de denuncia, de resistencia política, de construcción de identidades nacionales, de invención de lenguas y de preservación de la memoria colectiva. Cada obra literaria es también un documento histórico, aunque no lo pretenda.
+        </p>
+        <p>
+          Leer literatura es, en definitiva, <strong>ampliar la propia experiencia del mundo</strong>. Nos permite habitar otras vidas, otras épocas, otras culturas y otras formas de pensar sin necesidad de vivirlas en carne propia. En ese sentido, es una de las formas más poderosas de empatía y conocimiento que ha inventado la humanidad.
+        </p>
+      </div>
+    </section>
+
+    <!-- ─── PANEL: HISTORIA ─── -->
+    <section id="panel-historia" class="panel" role="tabpanel">
+      <div class="content-card">
+        <h2><span class="icon-dot"></span>Historia de la literatura</h2>
+        <p>
+          La historia de la literatura es tan antigua como la palabra misma. Antes de la escritura, los relatos se transmitían oralmente, y muchas de esas tradiciones siguen vivas en las culturas contemporáneas. La escritura permitió conservar y transmitir obras a través de milenios.
+        </p>
+
+        <h3>Línea de tiempo</h3>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-era">c. 2000 a.C.</div>
+            <h4>Primeras obras escritas</h4>
+            <p>La <em>Epopeya de Gilgamesh</em> (Mesopotamia) es el texto literario más antiguo conservado: un relato sobre la amistad, la mortalidad y la búsqueda de la inmortalidad.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">s. VIII a.C.</div>
+            <h4>Homero y la épica griega</h4>
+            <p>La <em>Ilíada</em> y la <em>Odisea</em> fijan los modelos de la épica occidental. Se transmiten primero oralmente y luego se escriben.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">s. V a.C.</div>
+            <h4>El teatro griego</h4>
+            <p>Esquilo, Sófocles y Eurípides crean la tragedia; Aristófanes, la comedia. El teatro se vuelve un rito colectivo y político en Atenas.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">s. I a.C. – s. I d.C.</div>
+            <h4>Literatura latina</h4>
+            <p>Virgilio (<em>Eneida</em>), Ovidio (<em>Metamorfosis</em>), Horacio y Cicerón: la literatura romana hereda y transforma el legado griego.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">Edad Media (s. V–XV)</div>
+            <h4>Épica y lírica medieval</h4>
+            <p>El <em>Cantar de Mio Cid</em>, el <em>Cantar de Rolando</em>, el <em>Cantar de los Nibelungos</em>, y la lírica trovadoresca. La literatura está marcada por la religión y la oralidad.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">s. XIV</div>
+            <h4>Dante y la modernidad</h4>
+            <p>La <em>Divina Comedia</em> de Dante Alighieri sintetiza la cultura medieval y anuncia el Renacimiento. Es considerada una de las obras cumbres de la literatura universal.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">s. XVI–XVII</div>
+            <h4>Renacimiento y Barroco</h4>
+            <p>El <em>Quijote</em> (1605) de Cervantes funda la novela moderna. Shakespeare transforma el teatro. Góngora y Quevedo representan el Barroco español.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">s. XVIII</div>
+            <h4>Ilustración y Neoclasicismo</h4>
+            <p>La razón y la crítica dominan la literatura. Surge la novela moderna (Defoe, Swift, Voltaire) y el ensayo ilustrado.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">s. XIX</div>
+            <h4>Romanticismo, Realismo y Naturalismo</h4>
+            <p>El Romanticismo exalta la emoción, la libertad y la naturaleza. Luego el Realismo (Balzac, Dickens, Tolstói) y el Naturalismo (Zola) retratan la sociedad con precisión casi científica.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">s. XX</div>
+            <h4>Vanguardias y modernidad</h4>
+            <p>Las vanguardias (surrealismo, futurismo, dadaísmo) rompen con la tradición. Proust, Joyce, Kafka, Woolf transforman la novela. El boom latinoamericano proyecta la literatura del continente al mundo.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">Posguerra y posmodernidad</div>
+            <h4>Nuevos territorios</h4>
+            <p>Borges, Cortázar, García Márquez, Bolaño, y autores de todo el mundo amplían los límites de la ficción. La literatura dialoga con el cine, la ciencia y los medios.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">Siglo XXI</div>
+            <h4>Literatura contemporánea</h4>
+            <p>Nuevas voces, nuevos formatos (digital, audiolibros, narrativa transmedia), nuevas temáticas (identidad, migración, crisis climática, inteligencia artificial).</p>
+          </div>
+        </div>
+
+        <h3>Grandes obras por época</h3>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">🏺</div>
+            <h4>Antigüedad</h4>
+            <p><em>Epopeya de Gilgamesh</em> · <em>Ilíada</em> · <em>Odisea</em> · <em>Edipo Rey</em> · <em>Eneida</em></p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">⛪</div>
+            <h4>Edad Media</h4>
+            <p><em>Cantar de Mio Cid</em> · <em>Divina Comedia</em> · <em>El libro de buen amor</em> · <em>Los cuentos de Canterbury</em></p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🎭</div>
+            <h4>Renacimiento</h4>
+            <p><em>El Quijote</em> · <em>Hamlet</em> · <em>La Celestina</em> · <em>Orlando furioso</em></p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🌹</div>
+            <h4>Siglo XIX</h4>
+            <p><em>Rojo y negro</em> · <em>Los miserables</em> · <em>Guerra y paz</em> · <em>Crimen y castigo</em> · <em>Madame Bovary</em></p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🕰️</div>
+            <h4>Siglo XX</h4>
+            <p><em>En busca del tiempo perdido</em> · <em>Ulises</em> · <em>La metamorfosis</em> · <em>Cien años de soledad</em> · <em>Rayuela</em></p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🌐</div>
+            <h4>Siglo XXI</h4>
+            <p><em>2666</em> · <em>La carretera</em> · <em>El cuento de la criada</em> · <em>Nunca me abandones</em></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── PANEL: GÉNEROS ─── -->
+    <section id="panel-generos" class="panel" role="tabpanel">
+      <div class="content-card">
+        <h2><span class="icon-dot"></span>Los géneros literarios</h2>
+        <p>
+          Los <strong>géneros literarios</strong> son categorías que agrupan obras según sus características comunes: estructura, tema, tono, finalidad y modo de representación. Desde Aristóteles hasta hoy, la clasificación de los géneros ha cambiado, pero algunos grandes tipos se mantienen estables.
+        </p>
+
+        <h3>Los tres géneros clásicos</h3>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">📖</div>
+            <h4>Épica / Narrativa</h4>
+            <p>Cuenta una historia a través de un narrador. Incluye la epopeya, el cuento, la novela, la fábula, la leyenda y el mito. Predomina la acción y los personajes.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🎭</div>
+            <h4>Dramática / Teatro</h4>
+            <p>Representa una acción mediante el diálogo de los personajes, sin narrador. Incluye la tragedia, la comedia, el drama y el sainete. Está escrita para ser representada.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🎵</div>
+            <h4>Lírica / Poesía</h4>
+            <p>Expresa emociones, sensaciones e ideas a través del ritmo, la sonoridad y las imágenes. Predomina la voz del yo poético. Incluye la oda, la elegía, el soneto, la canción.</p>
+          </div>
+        </div>
+
+        <h3>Subgéneros narrativos</h3>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">📚</div>
+            <h4>Novela</h4>
+            <p>Narración extensa, con múltiples personajes, tramas y espacios. Puede ser realista, histórica, policial, ciencia ficción, fantástica, romántica, etc.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">📝</div>
+            <h4>Cuento</h4>
+            <p>Narración breve, con una sola acción central y un final sorpresivo o significativo. Maestros: Poe, Chéjov, Borges, Cortázar.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🐺</div>
+            <h4>Fábula</h4>
+            <p>Relato breve con animales o cosas personificadas que deja una enseñanza o moraleja. Tradición: Esopo, La Fontaine.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🗺️</div>
+            <h4>Mito y leyenda</h4>
+            <p>Relatos fundacionales de una cultura. Explican el origen del mundo, de los dioses, de los pueblos o de fenómenos naturales.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🕵️</div>
+            <h4>Novela policial</h4>
+            <p>Se centra en un enigma criminal y su resolución. Maestros: Poe, Conan Doyle, Agatha Christie, Chandler.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🚀</div>
+            <h4>Ciencia ficción</h4>
+            <p>Explora futuros posibles, tecnologías imaginarias y sus consecuencias sociales. Autores: Asimov, Bradbury, Le Guin, Dick.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🐉</div>
+            <h4>Fantasía</h4>
+            <p>Crea mundos con leyes propias, magia y criaturas extraordinarias. De Tolkien a Le Guin, de Rowling a Sanderson.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">📓</div>
+            <h4>Ensayo</h4>
+            <p>Texto breve en prosa que reflexiona, argumenta o interpreta un tema. Es literatura de ideas: Montaigne, Orwell, Sontag.</p>
+          </div>
+        </div>
+
+        <h3>Subgéneros líricos</h3>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">🎶</div>
+            <h4>Oda</h4>
+            <p>Composición que celebra o exalta algo: una persona, un objeto, un acontecimiento. Tradición clásica: Píndaro, Horacio; moderna: Neruda.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🕯️</div>
+            <h4>Elegía</h4>
+            <p>Poema de lamento por la muerte de alguien o por una pérdida. Tono melancólico y reflexivo.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">📜</div>
+            <h4>Soneto</h4>
+            <p>Composición de 14 versos endecasílabos, organizada en dos cuartetos y dos tercetos. Forma clásica de la poesía occidental: Petrarca, Garcilaso, Quevedo, Borges.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🎼</div>
+            <h4>Égloga y romance</h4>
+            <p>La égloga presenta diálogos pastoriles; el romance es una forma popular española de versos octosílabos con rima asonante.</p>
+          </div>
+        </div>
+
+        <h3>Subgéneros dramáticos</h3>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">💀</div>
+            <h4>Tragedia</h4>
+            <p>Los personajes enfrentan un destino inevitable que los conduce a la catástrofe. Provoca compasión y temor. Sófocles, Shakespeare, Racine.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">😂</div>
+            <h4>Comedia</h4>
+            <p>Representa situaciones divertidas, equívocos y conflictos que se resuelven de forma positiva. Aristófanes, Molière, Wilde.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🎭</div>
+            <h4>Drama</h4>
+            <p>Mezcla elementos trágicos y cómicos. Se centra en conflictos humanos realistas. Ibsen, Chéjov, Lorca.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🎪</div>
+            <h4>Sainete y entremés</h4>
+            <p>Piezas breves, costumbristas y cómicas, de origen popular. El entremés se representaba entre los actos de una obra mayor.</p>
+          </div>
+        </div>
+
+        <h3>Géneros contemporáneos y mixtos</h3>
+        <ul>
+          <li><strong>Autoficción:</strong> mezcla autobiografía y ficción, donde el autor se inventa a sí mismo.</li>
+          <li><strong>Crónica:</strong> relato periodístico con recursos literarios. Grandes cultores: Caparrós, Guerriero, Villoro.</li>
+          <li><strong>Microrrelato:</strong> narración ultrabreve, a veces de una sola línea. Maestros: Monterroso, Shua, Cortázar.</li>
+          <li><strong>Novela gráfica y cómic:</strong> narrativa visual con creciente reconocimiento literario.</li>
+          <li><strong>Literatura digital:</strong> obras creadas para soportes electrónicos, con hipertexto, interactividad o formatos no lineales.</li>
+        </ul>
+
+        <blockquote>
+          "Los géneros son como las casas: uno puede habitarlas, pero también salir de ellas." — Reflexión sobre la hibridez contemporánea
+          <cite>Las fronteras entre géneros son cada vez más porosas.</cite>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- ─── PANEL: OBRAS Y AUTORES ─── -->
+    <section id="panel-obras" class="panel" role="tabpanel">
+      <div class="content-card">
+        <h2><span class="icon-dot"></span>Obras maestras y grandes autores</h2>
+        <p>
+          Elegir las grandes obras de la literatura universal es siempre arbitrario: toda lista deja afuera obras fundamentales. Esta selección propone un recorrido amplio, diverso y personal por algunos de los textos que transformaron la manera de contar y de leer el mundo.
+        </p>
+
+        <h3>Grandes autores universales</h3>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">🏛️</div>
+            <h4>Homero</h4>
+            <p>Padre de la épica occidental. <em>Ilíada</em> y <em>Odisea</em> son las obras fundacionales de la literatura europea.</p>
+            <span class="author">Grecia, s. VIII a.C.</span>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🎭</div>
+            <h4>Shakespeare</h4>
+            <p>El dramaturgo más influyente de la historia. <em>Hamlet</em>, <em>Macbeth</em>, <em>El rey Lear</em>, <em>Romeo y Julieta</em>.</p>
+            <span class="author">Inglaterra, 1564–1616</span>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">📖</div>
+            <h4>Cervantes</h4>
+            <p>Con el <em>Quijote</em>, funda la novela moderna: humor, metaliteratura, personajes complejos y una reflexión sobre la ficción misma.</p>
+            <span class="author">España, 1547–1616</span>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🌹</div>
+            <h4>Dostoievski</h4>
+            <p>Explorador de la psicología humana y del alma rusa. <em>Crimen y castigo</em>, <em>Los hermanos Karamázov</em>.</p>
+            <span class="author">Rusia, 1821–1881</span>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🐋</div>
+            <h4>Herman Melville</h4>
+            <p><em>Moby-Dick</em> es mucho más que una novela de ballenas: es una meditación sobre la obsesión, el mal y el sentido de la existencia.</p>
+            <span class="author">EE.UU., 1819–1891</span>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">💭</div>
+            <h4>Franz Kafka</h4>
+            <p>Maestro de lo absurdo y de la burocracia como pesadilla. <em>La metamorfosis</em>, <em>El proceso</em>, <em>El castillo</em>.</p>
+            <span class="author">Praga, 1883–1924</span>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🌊</div>
+            <h4>Virginia Woolf</h4>
+            <p>Renovó la novela con el monólogo interior y la exploración de la subjetividad femenina. <em>La señora Dalloway</em>, <em>Al faro</em>.</p>
+            <span class="author">Inglaterra, 1882–1941</span>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🔍</div>
+            <h4>James Joyce</h4>
+            <p><em>Ulises</em> es una de las obras más ambiciosas del siglo XX: un día en la vida de Dublín convertido en mito moderno.</p>
+            <span class="author">Irlanda, 1882–1941</span>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🌌</div>
+            <h4>Jorge Luis Borges</h4>
+            <p>Maestro del cuento fantástico y de la reflexión metafísica. <em>Ficciones</em>, <em>El Aleph</em>. Influyó en todo el pensamiento contemporáneo.</p>
+            <span class="author">Argentina, 1899–1986</span>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🌳</div>
+            <h4>Gabriel García Márquez</h4>
+            <p>El realismo mágico alcanza con él su máxima expresión. <em>Cien años de soledad</em> es una de las novelas más leídas en español.</p>
+            <span class="author">Colombia, 1927–2014</span>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🎲</div>
+            <h4>Julio Cortázar</h4>
+            <p>Renovó la narrativa con <em>Rayuela</em> y sus cuentos. Maestro del juego, el humor y lo fantástico cotidiano.</p>
+            <span class="author">Argentina, 1914–1984</span>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">📚</div>
+            <h4>Italo Calvino</h4>
+            <p>Fabulador, ensayista y experimentador. <em>Las ciudades invisibles</em>, <em>Si una noche de invierno un viajero</em>.</p>
+            <span class="author">Italia, 1923–1985</span>
+          </div>
+        </div>
+
+        <h3>Obras imprescindibles por región</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Región</th>
+                <th>Obra destacada</th>
+                <th>Autor</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Grecia antigua</strong></td>
+                <td><em>Odisea</em></td>
+                <td>Homero</td>
+              </tr>
+              <tr>
+                <td><strong>Roma antigua</strong></td>
+                <td><em>Eneida</em></td>
+                <td>Virgilio</td>
+              </tr>
+              <tr>
+                <td><strong>España</strong></td>
+                <td><em>El Quijote</em></td>
+                <td>Miguel de Cervantes</td>
+              </tr>
+              <tr>
+                <td><strong>Inglaterra</strong></td>
+                <td><em>Hamlet</em></td>
+                <td>William Shakespeare</td>
+              </tr>
+              <tr>
+                <td><strong>Francia</strong></td>
+                <td><em>En busca del tiempo perdido</em></td>
+                <td>Marcel Proust</td>
+              </tr>
+              <tr>
+                <td><strong>Rusia</strong></td>
+                <td><em>Los hermanos Karamázov</em></td>
+                <td>Fiodor Dostoievski</td>
+              </tr>
+              <tr>
+                <td><strong>Alemania</strong></td>
+                <td><em>Fausto</em></td>
+                <td>Johann Wolfgang von Goethe</td>
+              </tr>
+              <tr>
+                <td><strong>EE.UU.</strong></td>
+                <td><em>Moby-Dick</em></td>
+                <td>Herman Melville</td>
+              </tr>
+              <tr>
+                <td><strong>Irlanda</strong></td>
+                <td><em>Ulises</em></td>
+                <td>James Joyce</td>
+              </tr>
+              <tr>
+                <td><strong>Argentina</strong></td>
+                <td><em>Rayuela</em></td>
+                <td>Julio Cortázar</td>
+              </tr>
+              <tr>
+                <td><strong>Colombia</strong></td>
+                <td><em>Cien años de soledad</em></td>
+                <td>Gabriel García Márquez</td>
+              </tr>
+              <tr>
+                <td><strong>México</strong></td>
+                <td><em>Pedro Páramo</em></td>
+                <td>Juan Rulfo</td>
+              </tr>
+              <tr>
+                <td><strong>Chile</strong></td>
+                <td><em>Canto general</em></td>
+                <td>Pablo Neruda</td>
+              </tr>
+              <tr>
+                <td><strong>Perú</strong></td>
+                <td><em>La ciudad y los perros</em></td>
+                <td>Mario Vargas Llosa</td>
+              </tr>
+              <tr>
+                <td><strong>Japón</strong></td>
+                <td><em>La historia de Genji</em></td>
+                <td>Murasaki Shikibu</td>
+              </tr>
+              <tr>
+                <td><strong>China</strong></td>
+                <td><em>Sueño en el pabellón rojo</em></td>
+                <td>Cao Xueqin</td>
+              </tr>
+              <tr>
+                <td><strong>India</strong></td>
+                <td><em>Mahabharata</em></td>
+                <td>Anónimo (tradición oral)</td>
+              </tr>
+              <tr>
+                <td><strong>África</strong></td>
+                <td><em>Todo se desmorona</em></td>
+                <td>Chinua Achebe</td>
+              </tr>
+              <tr>
+                <td><strong>Medio Oriente</strong></td>
+                <td><em>Las mil y una noches</em></td>
+                <td>Anónimo</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <blockquote>
+          "Un clásico es un libro que nunca termina de decir lo que tiene que decir." — Italo Calvino
+          <cite>La literatura clásica no se agota: se reescribe en cada lectura.</cite>
+        </blockquote>
+
+        <h3>Premios Nobel de Literatura destacados</h3>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">🏅</div>
+            <h4>Gabriela Mistral</h4>
+            <p>Primera latinoamericana en recibir el Nobel (1945). Poeta chilena de profunda voz maternal y telúrica.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🏅</div>
+            <h4>Pablo Neruda</h4>
+            <p>Premio Nobel 1971. Una de las voces poéticas más importantes del siglo XX. <em>Veinte poemas de amor</em>, <em>Canto general</em>.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🏅</div>
+            <h4>Miguel Ángel Asturias</h4>
+            <p>Nobel 1967. Guatelmateco, autor de <em>El señor Presidente</em> y <em>Hombres de maíz</em>.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🏅</div>
+            <h4>Octavio Paz</h4>
+            <p>Nobel 1990. Poeta y ensayista mexicano. <em>El laberinto de la soledad</em>, <em>Piedra de sol</em>.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🏅</div>
+            <h4>Gabriel García Márquez</h4>
+            <p>Nobel 1982. El escritor colombiano que llevó el realismo mágico al mundo entero.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🏅</div>
+            <h4>Mario Vargas Llosa</h4>
+            <p>Nobel 2010. Autor peruano de <em>La ciudad y los perros</em>, <em>Conversación en La Catedral</em>, <em>La fiesta del chivo</em>.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── PANEL: LATINOAMÉRICA ─── -->
+    <section id="panel-latinoamerica" class="panel" role="tabpanel">
+      <div class="content-card">
+        <h2><span class="icon-dot"></span>Literatura latinoamericana</h2>
+        <p>
+          La literatura latinoamericana es una de las más vitales y reconocidas del mundo. Su historia combina tradiciones indígenas, herencia colonial europea, influencias africanas y una búsqueda constante de identidad propia. En el siglo XX alcanzó proyección universal con el llamado <strong>boom latinoamericano</strong>.
+        </p>
+
+        <h3>Etapas de la literatura latinoamericana</h3>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-era">Época prehispánica</div>
+            <h4>Tradiciones orales y códices</h4>
+            <p><em>Popol Vuh</em> (mayas), <em>Chilam Balam</em>, poesía náhuatl, quechua y guaraní. Una rica tradición oral y simbólica que muchas veces fue silenciada por la conquista.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">Colonia (s. XVI–XVIII)</div>
+            <h4>Crónicas y barroco americano</h4>
+            <p>Crónicas de Indias (Colón, Cortés, Bernal Díaz), poesía épica (<em>La Araucana</em> de Ercilla) y el barroco de Sor Juana Inés de la Cruz.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">s. XIX</div>
+            <h4>Independencia y romanticismo</h4>
+            <p>Literatura de construcción nacional. <em>Facundo</em> de Sarmiento, <em>Martín Fierro</em> de Hernández, <em>Amalia</em> de Mármol. El romanticismo social y político.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">1880–1910</div>
+            <h4>Modernismo</h4>
+            <p>Rubén Darío renueva la poesía en lengua española. El modernismo hispanoamericano es la primera corriente literaria del continente con proyección mundial.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">1920–1950</div>
+            <h4>Vanguardias y narrativa regionalista</h4>
+            <p>Borges, Huidobro, Vallejo, Neruda. La novela de la tierra: <em>Doña Bárbara</em>, <em>La vorágine</em>, <em>Don Segundo Sombra</em>.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">1950–1970</div>
+            <h4>El boom latinoamericano</h4>
+            <p>García Márquez, Cortázar, Vargas Llosa, Fuentes, Donoso. La narrativa latinoamericana conquista lectores en todo el mundo. El realismo mágico se vuelve su marca distintiva.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">1970–1990</div>
+            <h4>Posboom y dictaduras</h4>
+            <p>Voces femeninas (Allende, Poniatowska), literatura del exilio, testimonio, novela histórica. La sombra de las dictaduras atraviesa la producción literaria.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">1990–presente</div>
+            <h4>Nuevas voces</h4>
+            <p>Bolaño, Schweblin, Enrigue, Neuman, Melchor, Luiselli, Ojeda, Almada. Una literatura diversa, urbana, experimental, atenta al presente.</p>
+          </div>
+        </div>
+
+        <h3>El boom latinoamericano</h3>
+        <p>
+          Se conoce como <strong>boom</strong> al fenómeno editorial y literario de los años 60 y 70 que proyectó internacionalmente a un grupo de novelistas latinoamericanos. Sus obras combinaban experimentación formal, compromiso político y una mirada original sobre la historia y la identidad del continente.
+        </p>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">🌳</div>
+            <h4>Gabriel García Márquez</h4>
+            <p><em>Cien años de soledad</em> (1967) es la obra emblemática del boom. El realismo mágico alcanzó con él su máxima expresión.</p>
+            <span class="author">Colombia</span>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🎲</div>
+            <h4>Julio Cortázar</h4>
+            <p><em>Rayuela</em> (1963) propone una novela abierta, con múltiples órdenes de lectura. Renovó la forma narrativa.</p>
+            <span class="author">Argentina</span>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🎭</div>
+            <h4>Mario Vargas Llosa</h4>
+            <p>Combinó experimentación técnica con crítica política. <em>La ciudad y los perros</em>, <em>Conversación en La Catedral</em>.</p>
+            <span class="author">Perú</span>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🏛️</div>
+            <h4>Carlos Fuentes</h4>
+            <p><em>La muerte de Artemio Cruz</em>, <em>Terra Nostra</em>. Exploró la identidad mexicana y la historia del continente.</p>
+            <span class="author">México</span>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🗺️</div>
+            <h4>José Donoso</h4>
+            <p><em>El obsceno pájaro de la noche</em>. Representó la complejidad psicológica y social de Chile.</p>
+            <span class="author">Chile</span>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">📖</div>
+            <h4>Juan Rulfo</h4>
+            <p><em>Pedro Páramo</em> (1955) precede al boom pero lo anticipa: una obra maestra breve y deslumbrante sobre la muerte y el México rural.</p>
+            <span class="author">México</span>
+          </div>
+        </div>
+
+        <h3>Voces femeninas fundamentales</h3>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">🌺</div>
+            <h4>Sor Juana Inés de la Cruz</h4>
+            <p>La "Décima Musa" mexicana. Poeta, dramaturga y pensadora del siglo XVII. Defendió el derecho de las mujeres al conocimiento.</p>
+            <span class="author">México, 1648–1695</span>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🏅</div>
+            <h4>Gabriela Mistral</h4>
+            <p>Primera latinoamericana en ganar el Nobel. Su poesía combina lo maternal, lo telúrico y lo social.</p>
+            <span class="author">Chile, 1889–1957</span>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🕯️</div>
+            <h4>Alejandra Pizarnik</h4>
+            <p>Poeta argentina de obra breve e intensa. Exploró la locura, la infancia, la muerte y el lenguaje poético.</p>
+            <span class="author">Argentina, 1936–1972</span>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">👁️</div>
+            <h4>Clarice Lispector</h4>
+            <p>Una de las escritoras más originales del siglo XX. Renovó la prosa en lengua portuguesa con su estilo introspectivo y visionario.</p>
+            <span class="author">Brasil, 1920–1977</span>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">📚</div>
+            <h4>Isabel Allende</h4>
+            <p><em>La casa de los espíritus</em>. Renovó el realismo mágico con una mirada femenina y familiar.</p>
+            <span class="author">Chile, 1942–</span>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🌾</div>
+            <h4>Samanta Schweblin</h4>
+            <p>Una de las voces más potentes de la narrativa argentina contemporánea. <em>Distancia de rescate</em>, <em>Kentukis</em>.</p>
+            <span class="author">Argentina, 1978–</span>
+          </div>
+        </div>
+
+        <h3>Comparador: realismo mágico vs. literatura fantástica</h3>
+        <p style="margin-bottom: 12px;">Selecciona una columna para enfocarte en ella.</p>
+        <div class="compare-controls">
+          <button class="compare-btn active" data-compare="both">Ambas</button>
+          <button class="compare-btn" data-compare="left">Solo realismo mágico</button>
+          <button class="compare-btn" data-compare="right">Solo fantástico</button>
+        </div>
+        <div class="compare-panels">
+          <div class="compare-panel left" id="compare-left-latam">
+            <h4>🌳 Realismo mágico</h4>
+            <p><strong>Definición:</strong> lo extraordinario aparece como natural dentro de un contexto realista.</p>
+            <p><strong>Ejemplo:</strong> los personajes no se sorprenden por los hechos mágicos.</p>
+            <p><strong>Autores:</strong> García Márquez, Asturias, Allende, Rulfo.</p>
+            <p><strong>Origen:</strong> América Latina, siglo XX.</p>
+            <p><strong>Función:</strong> reflejar la historia y la identidad del continente.</p>
+          </div>
+          <div class="compare-panel right" id="compare-right-latam">
+            <h4>🌌 Literatura fantástica</h4>
+            <p><strong>Definición:</strong> lo sobrenatural irrumpe y provoca desconcierto o vacilación.</p>
+            <p><strong>Ejemplo:</strong> el personaje se enfrenta a lo imposible y lo cuestiona.</p>
+            <p><strong>Autores:</strong> Borges, Cortázar, Kafka, Bioy Casares.</p>
+            <p><strong>Origen:</strong> Europa y Río de la Plata, siglos XIX–XX.</p>
+            <p><strong>Función:</strong> problematizar la realidad y los límites de la razón.</p>
+          </div>
+        </div>
+
+        <blockquote>
+          "La literatura latinoamericana es la más joven de las literaturas del mundo y, sin embargo, ha dado algunas de las obras más importantes del siglo XX." — Reflexión crítica
+          <cite>La juventud no es una limitación: es una potencia.</cite>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- ─── PANEL: MOVIMIENTOS ─── -->
+    <section id="panel-movimientos" class="panel" role="tabpanel">
+      <div class="content-card">
+        <h2><span class="icon-dot"></span>Movimientos literarios</h2>
+        <p>
+          Los <strong>movimientos literarios</strong> son corrientes que agrupan a autores de una misma época con ideas, estéticas y búsquedas comunes. No son bloques cerrados: se solapan, se contradicen y se transforman mutuamente. Pero conocerlos ayuda a situar cada obra en su contexto y a comprender sus innovaciones.
+        </p>
+
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">🌿</div>
+            <h4>Clasicismo</h4>
+            <p>Grecia y Roma antiguas. Equilibrio, claridad, imitación de los modelos clásicos. Normas y proporción como ideales estéticos.</p>
+            <span class="author">s. V a.C. – s. V d.C.</span>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🏰</div>
+            <h4>Medieval</h4>
+            <p>Predominio de la religión. Literatura didáctica y simbólica. Épica, lírica trovadoresca, alegoría.</p>
+            <span class="author">s. V – XV</span>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🎨</div>
+            <h4>Renacimiento</h4>
+            <p>Recuperación de los clásicos, humanismo, antropocentrismo. Nuevas formas: soneto, novela moderna, ensayo.</p>
+            <span class="author">s. XV – XVI</span>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">💫</div>
+            <h4>Barroco</h4>
+            <p>Complejidad, contrastes, pesimismo. Uso intensivo de la metáfora y la hipérbole. Góngora, Quevedo, Sor Juana.</p>
+            <span class="author">s. XVII</span>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🧠</div>
+            <h4>Neoclasicismo</h4>
+            <p>Razón, orden, normas clásicas. Ilustración, didactismo. Teatro y ensayo moral.</p>
+            <span class="author">s. XVIII</span>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🌹</div>
+            <h4>Romanticismo</h4>
+            <p>Emoción, libertad, subjetividad, exaltación de la naturaleza y del yo. Héroe rebelde, amor trágico, nacionalismo.</p>
+            <span class="author">s. XIX (fines del XVIII en Europa)</span>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🏙️</div>
+            <h4>Realismo</h4>
+            <p>Retrato objetivo de la sociedad. Novela como documento de su época. Balzac, Dickens, Tolstói, Galdós.</p>
+            <span class="author">s. XIX (segunda mitad)</span>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🔬</div>
+            <h4>Naturalismo</h4>
+            <p>Extensión científica del realismo: determinismo biológico y social. Zola, Clarín, Gorki.</p>
+            <span class="author">Fines del s. XIX</span>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">💎</div>
+            <h4>Modernismo</h4>
+            <p>Rubén Darío. Renovación de la poesía en español: musicalidad, color, exotismo. Primera corriente latinoamericana con proyección mundial.</p>
+            <span class="author">1880 – 1910</span>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">⚡</div>
+            <h4>Vanguardias</h4>
+            <p>Futurismo, dadaísmo, surrealismo, ultraísmo, creacionismo. Ruptura con la tradición, experimentación, manifiestos.</p>
+            <span class="author">1910 – 1930</span>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🌳</div>
+            <h4>Realismo mágico</h4>
+            <p>Lo maravilloso integrado a lo cotidiano. García Márquez, Asturias, Rulfo, Allende.</p>
+            <span class="author">1950 – 1970 (auge)</span>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🎭</div>
+            <h4>Posmodernidad</h4>
+            <p>Fragmentación, ironía, intertextualidad, mezcla de géneros y registros. Borges, Calvino, Bolaño.</p>
+            <span class="author">1970 – presente</span>
+          </div>
+        </div>
+
+        <h3>Movimientos clave en detalle</h3>
+
+        <h3 style="color: var(--accent-rose);">Romanticismo</h3>
+        <p>
+          Surgió a fines del siglo XVIII como reacción al racionalismo ilustrado. Exaltó la emoción, la imaginación, la libertad individual y la naturaleza. El poeta se concibió como un visionario, un ser excepcional en conflicto con el mundo. Sus temas: el amor trágico, la muerte, la noche, el paisaje, lo sublime y lo popular.
+        </p>
+        <ul>
+          <li><strong>Alemania:</strong> Goethe (<em>Werther</em>), Novalis, Hölderlin.</li>
+          <li><strong>Inglaterra:</strong> Wordsworth, Coleridge, Byron, Shelley, Keats.</li>
+          <li><strong>Francia:</strong> Chateaubriand, Lamartine, Hugo (<em>Los miserables</em>).</li>
+          <li><strong>España:</strong> Bécquer, Espronceda, Larra.</li>
+          <li><strong>América Latina:</strong> Esteban Echeverría, José Mármol, Jorge Isaacs.</li>
+        </ul>
+
+        <h3 style="color: var(--accent-rose);">Realismo</h3>
+        <p>
+          A mediados del siglo XIX, la novela realista se propuso retratar la vida tal como era, sin idealizaciones. Los novelistas se convirtieron en cronistas de su época: describían con precisión ambientes, costumbres y conflictos sociales. La novela se volvió un instrumento de conocimiento y crítica.
+        </p>
+        <ul>
+          <li><strong>Francia:</strong> Balzac, Stendhal, Flaubert.</li>
+          <li><strong>Inglaterra:</strong> Dickens, Thackeray, George Eliot.</li>
+          <li><strong>Rusia:</strong> Tolstói, Dostoievski, Turguénev.</li>
+          <li><strong>España:</strong> Galdós, Clarín.</li>
+          <li><strong>América Latina:</strong> Blest Gana, Machado de Assis.</li>
+        </ul>
+
+        <h3 style="color: var(--accent-rose);">Vanguardias</h3>
+        <p>
+          Las vanguardias históricas (1909–1939) fueron un conjunto de movimientos que buscaron romper radicalmente con el arte del pasado. Se organizaron en manifiestos y se definieron por la provocación, la experimentación y la fusión de disciplinas.
+        </p>
+        <ul>
+          <li><strong>Futurismo</strong> (Marinetti, Italia): exaltación de la máquina, la velocidad, la guerra.</li>
+          <li><strong>Dadaísmo</strong> (Tzara, Suiza): negación del arte establecido, humor, azar, collage.</li>
+          <li><strong>Surrealismo</strong> (Breton, Francia): exploración del inconsciente, escritura automática, sueño e imagen visionaria.</li>
+          <li><strong>Ultraísmo y creacionismo</strong> (España y América Latina): síntesis, imagen, eliminación de la anécdota.</li>
+          <li><strong>Expresionismo</strong> (Alemania): deformación de la realidad para expresar el mundo interior.</li>
+        </ul>
+
+        <h3 style="color: var(--accent-rose);">Posmodernidad</h3>
+        <p>
+          Desde los años 70, la literatura posmoderna abandonó la pretensión de totalidad y de verdad única. Sus características: la mezcla de géneros y discursos, la intertextualidad, la ironía, el pastiche, la fragmentación, la autorreferencia, la ruptura de las fronteras entre alta cultura y cultura popular.
+        </p>
+        <ul>
+          <li><strong>Borges</strong>: prefigura muchos de sus recursos.</li>
+          <li><strong>Italo Calvino</strong>: <em>Si una noche de invierno un viajero</em>.</li>
+          <li><strong>Umberto Eco</strong>: <em>El nombre de la rosa</em>.</li>
+          <li><strong>Roberto Bolaño</strong>: <em>2666</em>, <em>Los detectives salvajes</em>.</li>
+          <li><strong>David Foster Wallace</strong>: <em>La broma infinita</em>.</li>
+        </ul>
+
+        <blockquote>
+          "Cada época tiene los monstruos que se merece, y la literatura se encarga de nombrarlos." — Reflexión sobre el vínculo entre literatura e historia
+          <cite>Los movimientos literarios son también movimientos de la sensibilidad.</cite>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- ─── PANEL: CÓMO LEER ─── -->
+    <section id="panel-leer" class="panel" role="tabpanel">
+      <div class="content-card">
+        <h2><span class="icon-dot"></span>Cómo leer literatura</h2>
+        <p>
+          Leer literatura no es solo "entender lo que pasa". Es una práctica que se aprende y se profundiza. Los grandes lectores no nacen: se forman. Esta sección propone algunas claves para leer con más atención, más placer y más provecho.
+        </p>
+
+        <h3>Herramientas del análisis literario</h3>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">🧭</div>
+            <h4>Narrador</h4>
+            <p>Quién cuenta la historia. Puede ser interno (protagonista, testigo) o externo (omnisciente, objetivo). Su perspectiva transforma todo.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">👥</div>
+            <h4>Personajes</h4>
+            <p>Seres construidos con palabras. Pueden ser redondos (complejos, cambiantes) o planos (simples, fijos). Su conflicto motoriza la obra.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🕰️</div>
+            <h4>Tiempo</h4>
+            <p>Puede ser lineal, fragmentado, circular, subjetivo. Las rupturas temporales son un recurso clave de la narrativa moderna.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🗺️</div>
+            <h4>Espacio</h4>
+            <p>El lugar donde ocurre la acción. Puede ser realista o simbólico, cerrado o abierto, urbano o rural. Configura la atmósfera.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">📐</div>
+            <h4>Estructura</h4>
+            <p>Organización de la obra: capítulos, partes, escenas, estrofas. Su forma también comunica un sentido.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🎨</div>
+            <h4>Estilo</h4>
+            <p>La voz del autor: sintaxis, vocabulario, imágenes, ritmo. Es lo que hace que reconozcamos a un escritor entre miles.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">💬</div>
+            <h4>Intertextualidad</h4>
+            <p>Diálogo entre obras. Citas, alusiones, parodias, reescrituras. Toda literatura es un palimpsesto.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🎯</div>
+            <h4>Tema y símbolo</h4>
+            <p>El tema es de qué trata la obra; el símbolo, los objetos o imágenes que cargan sentidos profundos (la ballena blanca, el laberinto).</p>
+          </div>
+        </div>
+
+        <h3>Figuras literarias fundamentales</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Figura</th>
+                <th>Definición</th>
+                <th>Ejemplo</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Metáfora</strong></td>
+                <td>Identificación de dos términos por semejanza</td>
+                <td>"Tus ojos son dos luceros"</td>
+              </tr>
+              <tr>
+                <td><strong>Símil</strong></td>
+                <td>Comparación explícita entre dos términos</td>
+                <td>"Fuerte como un roble"</td>
+              </tr>
+              <tr>
+                <td><strong>Hipérbole</strong></td>
+                <td>Exageración expresiva</td>
+                <td>"Te lo dije un millón de veces"</td>
+              </tr>
+              <tr>
+                <td><strong>Personificación</strong></td>
+                <td>Atribuir cualidades humanas a lo no humano</td>
+                <td>"El viento susurraba secretos"</td>
+              </tr>
+              <tr>
+                <td><strong>Anáfora</strong></td>
+                <td>Repetición de palabras al inicio de versos o frases</td>
+                <td>"Verde que te quiero verde..."</td>
+              </tr>
+              <tr>
+                <td><strong>Aliteración</strong></td>
+                <td>Repetición de sonidos semejantes</td>
+                <td>"El ruido con que rueda la ronca tempestad"</td>
+              </tr>
+              <tr>
+                <td><strong>Ironía</strong></td>
+                <td>Decir lo contrario de lo que se quiere significar</td>
+                <td>"¡Qué puntualidad la tuya!" (llegando tarde)</td>
+              </tr>
+              <tr>
+                <td><strong>Sinestesia</strong></td>
+                <td>Mezclar sensaciones de distintos sentidos</td>
+                <td>"Un color chillón", "un silencio verde"</td>
+              </tr>
+              <tr>
+                <td><strong>Oxímoron</strong></td>
+                <td>Unión de términos contradictorios</td>
+                <td>"Silencio atronador", "soledad acompañada"</td>
+              </tr>
+              <tr>
+                <td><strong>Hipérbaton</strong></td>
+                <td>Alteración del orden habitual de las palabras</td>
+                <td>"Del monte en la ladera, por mi mano plantado, tengo un huerto"</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Cómo leer una obra literaria</h3>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-era">Antes</div>
+            <h4>Contextualizar</h4>
+            <p>Informarse sobre el autor, la época, la corriente literaria y las circunstancias de la obra ayuda a comprenderla mejor. Pero no es obligatorio: también se puede leer a ciegas.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">Durante</div>
+            <h4>Leer sin apuro</h4>
+            <p>Subrayar, anotar, volver atrás. Prestar atención al estilo, a las imágenes, a las repeticiones. Dejar que el texto resuene.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">Durante</div>
+            <h4>Hacerse preguntas</h4>
+            <p>¿Quién narra? ¿Qué quiere? ¿Qué no dice? ¿Qué símbolos aparecen? ¿Qué me produce? Las preguntas abren el texto.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">Después</div>
+            <h4>Releer</h4>
+            <p>La relectura es una de las experiencias más ricas de la literatura. Un texto cambia cuando volvemos a él: nosotros también cambiamos.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">Después</div>
+            <h4>Escribir y conversar</h4>
+            <p>Anotar impresiones, discutir con otros lectores, escribir reseñas. La literatura se vuelve más rica cuando se comparte.</p>
+          </div>
+        </div>
+
+        <h3>Comparador: lectura ingenua vs. lectura crítica</h3>
+        <p style="margin-bottom: 12px;">Selecciona una columna para enfocarte en ella.</p>
+        <div class="compare-controls">
+          <button class="compare-btn active" data-compare="both">Ambas</button>
+          <button class="compare-btn" data-compare="left">Solo ingenua</button>
+          <button class="compare-btn" data-compare="right">Solo crítica</button>
+        </div>
+        <div class="compare-panels">
+          <div class="compare-panel left" id="compare-left-leer">
+            <h4>🌱 Lectura ingenua</h4>
+            <p><strong>Foco:</strong> la historia, los personajes, el suspenso.</p>
+            <p><strong>Pregunta:</strong> ¿qué pasa?</p>
+            <p><strong>Ritmo:</strong> rápido, sin detenerse.</p>
+            <p><strong>Ventaja:</strong> placer inmediato, inmersión.</p>
+            <p><strong>Riesgo:</strong> perder la riqueza del texto.</p>
+          </div>
+          <div class="compare-panel right" id="compare-right-leer">
+            <h4>🔍 Lectura crítica</h4>
+            <p><strong>Foco:</strong> el lenguaje, la estructura, los símbolos, el contexto.</p>
+            <p><strong>Pregunta:</strong> ¿cómo se construye lo que se cuenta y por qué?</p>
+            <p><strong>Ritmo:</strong> pausado, atento, con relecturas.</p>
+            <p><strong>Ventaja:</strong> mayor comprensión y disfrute.</p>
+            <p><strong>Riesgo:</strong> perder el placer de la historia.</p>
+          </div>
+        </div>
+
+        <blockquote>
+          "Uno no lee para saber que lee; uno lee para saber que vive." — Fragmento atribuido a distintos autores
+          <cite>La literatura no es solo un objeto de estudio: es una forma de estar en el mundo.</cite>
+        </blockquote>
+
+        <h3>Consejos para formar el hábito lector</h3>
+        <ul>
+          <li><strong>Empezar por lo que disfrutas:</strong> la lectura no tiene por qué ser una obligación. Novelas, cuentos, poesía, ensayos: hay un formato para cada lector.</li>
+          <li><strong>Leer todos los días, aunque sea poco:</strong> diez minutos diarios son más que ninguna lectura.</li>
+          <li><strong>No temer abandonar un libro:</strong> si no te atrapa, no es tu momento. Volverás a él o no: ambas cosas están bien.</li>
+          <li><strong>Llevar un registro:</strong> anotar qué leíste, qué te gustó, qué frases te marcaron. Ayuda a recordar y a profundizar.</li>
+          <li><strong>Compartir:</strong> hablar con otros sobre lo leído multiplica el placer.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ─── PANEL: GLOSARIO ─── -->
+    <section id="panel-glosario" class="panel" role="tabpanel">
+      <div class="content-card">
+        <h2><span class="icon-dot"></span>Glosario literario</h2>
+        <p>Términos clave para comprender el tema. Haz clic en cada uno para expandir su definición.</p>
+
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Literatura <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Arte que usa la palabra —escrita u oral— como materia prima para crear obras que transmiten emociones, ideas e historias. Lo que la distingue de otros discursos es su voluntad estética y su vocación de perdurar.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Narrador <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Voz que cuenta la historia. Puede ser interno (protagonista o testigo) o externo (omnisciente, objetivo, parcial). No debe confundirse con el autor: el narrador es una construcción del texto.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Género literario <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Categoría que agrupa obras según sus características comunes: estructura, tono, finalidad. Los grandes géneros clásicos son épica, lírica y dramática, aunque hoy existen muchas subdivisiones y formas híbridas.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Metáfora <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Figura que identifica dos términos por su semejanza, sin usar "como" ni "parece". Ejemplo: "Tus ojos son dos luceros". Es una de las figuras centrales del lenguaje literario.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Ficción <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Construcción imaginaria que no pretende ser verdadera en sentido literal, pero que puede decir verdades profundas sobre la experiencia humana. La ficción no es una mentira: es otro modo de conocimiento.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Realismo mágico <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Corriente narrativa latinoamericana en la que lo extraordinario se integra a lo cotidiano sin que los personajes se sorprendan. Su obra emblemática es <em>Cien años de soledad</em>, de Gabriel García Márquez.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Boom latinoamericano <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Fenómeno editorial y literario de los años 60 y 70 que proyectó internacionalmente a un grupo de novelistas latinoamericanos: García Márquez, Cortázar, Vargas Llosa, Fuentes, Donoso, entre otros.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Intertextualidad <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Relación que una obra mantiene con otras obras anteriores: citas, alusiones, parodias, reescrituras. Toda literatura dialoga con la tradición que la precede.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Palimpsesto <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Metáfora que describe la literatura como una escritura sobre otra: cada obra se escribe sobre las ruinas de las anteriores, dejando ver sus huellas.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Vanguardia <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Conjunto de movimientos artísticos y literarios de principios del siglo XX que buscaron romper radicalmente con la tradición: futurismo, dadaísmo, surrealismo, ultraísmo, creacionismo, expresionismo.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Posmodernidad <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Corriente cultural y literaria de las últimas décadas que se caracteriza por la fragmentación, la ironía, la intertextualidad, la mezcla de géneros y la desconfianza hacia los grandes relatos.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Canon literario <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Conjunto de obras consideradas "clásicas" o fundamentales en una cultura. El canon es siempre discutible: refleja relaciones de poder, tradiciones y elecciones históricas que pueden revisarse.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Monólogo interior <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Técnica narrativa que reproduce el flujo de pensamientos de un personaje sin intervención del narrador. Fue clave en la renovación de la novela del siglo XX (Joyce, Woolf, Faulkner).</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Cuento <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Narración breve, con una sola acción central y un final significativo. Según Julio Cortázar, el cuento gana por knockout, mientras que la novela gana por puntos.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Hipérbaton <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Figura que altera el orden habitual de las palabras en la oración. Fue muy usada en la poesía barroca y clásica: "Del monte en la ladera, por mi mano plantado, tengo un huerto".</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Polisemia <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Capacidad de un texto literario de admitir múltiples interpretaciones. A diferencia de un texto informativo, la obra literaria no tiene una única lectura correcta ni un sentido definitivo.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Autoficción <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Género contemporáneo que mezcla autobiografía y ficción: el autor se pone en escena como personaje, pero se inventa. Difumina los límites entre lo vivido y lo imaginado.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Microrrelato <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Narración ultrabreve, a veces de una sola línea, que condensa un relato completo. Su brevedad extrema exige una enorme precisión. Maestro del género: Augusto Monterroso, con "Cuando despertó, el dinosaurio todavía estaba allí".</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>
+        Enciclopedia Visual · Contenido original de
+        <a href="https://app-fioravante.github.io/apps-fioravante/" target="_blank" rel="noopener noreferrer">Fioravante</a>.
+        Este recurso es de carácter educativo y exploratorio.
+      </p>
+    </footer>
+  </div>
+
+  <script>
+    // ─── TEMA ───
+    const rootEl = document.documentElement;
+    const themeToggle = document.getElementById('themeToggle');
+    function updateToggleLabel() {
+      const isLight = rootEl.getAttribute('data-theme') === 'light';
+      themeToggle.setAttribute('aria-label', isLight ? 'Cambiar a modo oscuro' : 'Cambiar a modo claro');
+      themeToggle.setAttribute('title', isLight ? 'Cambiar a modo oscuro' : 'Cambiar a modo claro');
+    }
+    themeToggle.addEventListener('click', () => {
+      const isLight = rootEl.getAttribute('data-theme') === 'light';
+      const next = isLight ? 'dark' : 'light';
+      rootEl.setAttribute('data-theme', next);
+      try { localStorage.setItem('enc-theme', next); } catch (e) {}
+      updateToggleLabel();
+    });
+    updateToggleLabel();
+
+    // ─── PESTAÑAS ───
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const panels = document.querySelectorAll('.panel');
+
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const targetId = btn.dataset.panel;
+        tabBtns.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });
+        btn.classList.add('active');
+        btn.setAttribute('aria-selected', 'true');
+        panels.forEach(p => p.classList.remove('active'));
+        document.getElementById(targetId).classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    });
+
+    // ─── COMPARADORES ───
+    document.querySelectorAll('.compare-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const group = btn.closest('.content-card');
+        group.querySelectorAll('.compare-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const mode = btn.dataset.compare;
+
+        const latamLeft = document.getElementById('compare-left-latam');
+        const latamRight = document.getElementById('compare-right-latam');
+        const leerLeft = document.getElementById('compare-left-leer');
+        const leerRight = document.getElementById('compare-right-leer');
+
+        if (latamLeft && latamRight) {
+          latamLeft.classList.remove('dimmed');
+          latamRight.classList.remove('dimmed');
+          if (mode === 'left') latamRight.classList.add('dimmed');
+          if (mode === 'right') latamLeft.classList.add('dimmed');
+        }
+        if (leerLeft && leerRight) {
+          leerLeft.classList.remove('dimmed');
+          leerRight.classList.remove('dimmed');
+          if (mode === 'left') leerRight.classList.add('dimmed');
+          if (mode === 'right') leerLeft.classList.add('dimmed');
+        }
+      });
+    });
+
+    // ─── ACORDEÓN ───
+    document.querySelectorAll('.accordion-trigger').forEach(trigger => {
+      trigger.addEventListener('click', () => {
+        const item = trigger.parentElement;
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.accordion-item').forEach(i => {
+          i.classList.remove('open');
+          i.querySelector('.accordion-trigger').setAttribute('aria-expanded', 'false');
+        });
+        if (!isOpen) {
+          item.classList.add('open');
+          trigger.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

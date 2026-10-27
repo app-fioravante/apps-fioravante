@@ -1,0 +1,1712 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cine · Enciclopedia Visual Fioravante</title>
+  <meta name="description" content="Exploración interactiva del cine: historia, géneros, directores, películas esenciales, movimientos cinematográficos, cine latinoamericano y claves para mirar una película.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <script>
+    (function () {
+      try {
+        const stored = localStorage.getItem('enc-theme');
+        if (stored === 'light' || stored === 'dark') {
+          document.documentElement.setAttribute('data-theme', stored);
+        } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+          document.documentElement.setAttribute('data-theme', 'light');
+        }
+      } catch (e) {}
+    })();
+  </script>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg-deep: #070b14;
+      --surface: rgba(22, 32, 50, 0.65);
+      --surface-hover: rgba(30, 44, 68, 0.8);
+      --border: rgba(255, 255, 255, 0.07);
+      --border-strong: rgba(255, 255, 255, 0.15);
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --text-dim: #64748b;
+      --accent-cyan: #22d3ee;
+      --accent-violet: #a78bfa;
+      --accent-amber: #fbbf24;
+      --accent-rose: #fb7185;
+      --accent-emerald: #34d399;
+      --chip-hover-bg: rgba(255, 255, 255, 0.04);
+      --radius-lg: 24px;
+      --radius-md: 16px;
+      --radius-sm: 12px;
+      --shadow-card: 0 4px 24px -8px rgba(0, 0, 0, 0.6);
+      --shadow-hover: 0 24px 48px -16px rgba(0, 0, 0, 0.7);
+      --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+      --noise-opacity: 0.03;
+    }
+
+    [data-theme="light"] {
+      --bg-deep: #f4f6fa;
+      --surface: rgba(255, 255, 255, 0.72);
+      --surface-hover: rgba(255, 255, 255, 0.92);
+      --border: rgba(15, 23, 42, 0.08);
+      --border-strong: rgba(15, 23, 42, 0.16);
+      --text-primary: #1e293b;
+      --text-secondary: #475569;
+      --text-dim: #94a3b8;
+      --accent-cyan: #0891b2;
+      --accent-violet: #7c3aed;
+      --accent-amber: #b45309;
+      --accent-rose: #e11d48;
+      --accent-emerald: #059669;
+      --chip-hover-bg: rgba(15, 23, 42, 0.04);
+      --shadow-card: 0 4px 24px -8px rgba(15, 23, 42, 0.08);
+      --shadow-hover: 0 24px 48px -16px rgba(15, 23, 42, 0.16);
+      --noise-opacity: 0.015;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background-color: var(--bg-deep);
+      color: var(--text-primary);
+      min-height: 100vh;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+      transition: background-color 0.5s ease, color 0.5s ease;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      background:
+        radial-gradient(ellipse 80% 60% at 10% 0%, rgba(167, 139, 250, 0.14), transparent 60%),
+        radial-gradient(ellipse 70% 50% at 90% 10%, rgba(251, 113, 133, 0.1), transparent 55%),
+        radial-gradient(ellipse 60% 50% at 50% 100%, rgba(251, 191, 36, 0.06), transparent 60%);
+      animation: bgShift 20s ease-in-out infinite alternate;
+      transition: opacity 0.5s ease;
+    }
+
+    [data-theme="light"] body::before {
+      background:
+        radial-gradient(ellipse 80% 60% at 10% 0%, rgba(124, 58, 237, 0.12), transparent 60%),
+        radial-gradient(ellipse 70% 50% at 90% 10%, rgba(225, 29, 72, 0.09), transparent 55%),
+        radial-gradient(ellipse 60% 50% at 50% 100%, rgba(180, 83, 9, 0.07), transparent 60%);
+    }
+
+    @keyframes bgShift {
+      0% { opacity: 0.7; transform: scale(1); }
+      100% { opacity: 1; transform: scale(1.08); }
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      opacity: var(--noise-opacity);
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      pointer-events: none;
+      transition: opacity 0.5s ease;
+    }
+
+    .app { max-width: 1200px; margin: 0 auto; padding: 0 24px 80px; }
+
+    /* ─── THEME TOGGLE ─── */
+    .theme-toggle {
+      position: fixed; top: 20px; right: 20px; z-index: 100;
+      width: 46px; height: 46px; border-radius: 50%;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      color: var(--text-primary); cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: var(--shadow-card);
+      transition: transform 0.35s var(--ease-out-expo), border-color 0.3s, box-shadow 0.35s var(--ease-out-expo), background-color 0.4s ease, color 0.4s ease;
+    }
+    .theme-toggle:hover { transform: scale(1.1) rotate(10deg); border-color: var(--border-strong); box-shadow: var(--shadow-hover); }
+    .theme-toggle svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .theme-toggle .icon-sun { display: block; }
+    .theme-toggle .icon-moon { display: none; }
+    [data-theme="light"] .theme-toggle .icon-sun { display: none; }
+    [data-theme="light"] .theme-toggle .icon-moon { display: block; }
+
+    /* ─── HEADER ─── */
+    .header { padding: 56px 0 24px; text-align: center; }
+    .header-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 16px; border-radius: 999px;
+      background: rgba(167, 139, 250, 0.1);
+      border: 1px solid rgba(167, 139, 250, 0.25);
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--accent-violet);
+      margin-bottom: 20px;
+      animation: fadeDown 0.8s var(--ease-out-expo) both;
+    }
+    .header-badge::before {
+      content: ''; width: 6px; height: 6px; border-radius: 50%;
+      background: var(--accent-violet); box-shadow: 0 0 12px var(--accent-violet);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.8); } }
+
+    .header h1 {
+      font-size: clamp(2.2rem, 5.5vw, 3.8rem);
+      font-weight: 800; letter-spacing: -0.03em; line-height: 1.1;
+      margin-bottom: 16px;
+      animation: fadeDown 0.9s 0.1s var(--ease-out-expo) both;
+    }
+    .header h1 .gradient-text {
+      background: linear-gradient(135deg, var(--accent-violet) 0%, var(--accent-rose) 50%, var(--accent-amber) 100%);
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-size: 200% 200%;
+      animation: gradientMove 6s ease-in-out infinite;
+    }
+    @keyframes gradientMove { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+
+    .header-subtitle {
+      font-size: clamp(0.95rem, 2vw, 1.1rem);
+      color: var(--text-secondary); font-weight: 400;
+      max-width: 720px; margin: 0 auto;
+      animation: fadeDown 1s 0.2s var(--ease-out-expo) both;
+    }
+
+    /* ─── NAVEGACIÓN POR PESTAÑAS ─── */
+    .tabs-nav {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      margin: 32px 0 28px;
+      padding: 8px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      animation: fadeUp 0.8s 0.3s var(--ease-out-expo) both;
+    }
+    .tab-btn {
+      flex: 1 1 auto;
+      padding: 12px 18px;
+      border-radius: var(--radius-sm);
+      border: none; background: transparent;
+      color: var(--text-secondary);
+      font-family: inherit; font-size: 0.88rem; font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s var(--ease-out-expo);
+      white-space: nowrap;
+    }
+    .tab-btn:hover { color: var(--text-primary); background: var(--chip-hover-bg); }
+    .tab-btn.active {
+      background: rgba(167, 139, 250, 0.15);
+      color: var(--accent-violet);
+      box-shadow: 0 0 20px -4px rgba(167, 139, 250, 0.2);
+    }
+    [data-theme="light"] .tab-btn.active { background: rgba(124, 58, 237, 0.12); color: var(--accent-violet); }
+
+    /* ─── PANELES ─── */
+    .panel { display: none; animation: fadeUp 0.5s var(--ease-out-expo) both; }
+    .panel.active { display: block; }
+
+    .content-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      box-shadow: var(--shadow-card);
+      margin-bottom: 24px;
+      transition: background-color 0.4s ease, border-color 0.4s ease;
+    }
+
+    .content-card h2 {
+      font-size: 1.5rem; font-weight: 700; letter-spacing: -0.02em;
+      margin-bottom: 16px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .content-card h2 .icon-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--accent-violet);
+      box-shadow: 0 0 12px var(--accent-violet);
+      flex-shrink: 0;
+    }
+    .content-card h3 {
+      font-size: 1.1rem; font-weight: 700;
+      margin: 24px 0 10px;
+      color: var(--accent-violet);
+    }
+    .content-card p {
+      color: var(--text-secondary);
+      margin-bottom: 14px;
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+    .content-card p strong { color: var(--text-primary); }
+    .content-card ul, .content-card ol {
+      margin: 12px 0 18px 20px;
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+    .content-card li { margin-bottom: 8px; }
+    .content-card blockquote {
+      border-left: 3px solid var(--accent-violet);
+      padding: 12px 20px;
+      margin: 20px 0;
+      background: rgba(167, 139, 250, 0.05);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      font-style: italic;
+      color: var(--text-secondary);
+      font-size: 0.92rem;
+    }
+    [data-theme="light"] .content-card blockquote { background: rgba(124, 58, 237, 0.05); }
+    .content-card blockquote cite {
+      display: block; margin-top: 8px;
+      font-style: normal; font-size: 0.82rem; color: var(--text-dim);
+    }
+
+    /* ─── TARJETAS DE CONCEPTO ─── */
+    .concept-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+      margin: 20px 0;
+    }
+    .concept-card {
+      padding: 22px;
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      transition: transform 0.3s var(--ease-out-expo), border-color 0.3s, box-shadow 0.3s;
+    }
+    .concept-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--border-strong);
+      box-shadow: var(--shadow-hover);
+    }
+    .concept-card .concept-icon {
+      width: 44px; height: 44px; border-radius: var(--radius-sm);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem; margin-bottom: 14px;
+      background: rgba(167, 139, 250, 0.12);
+      color: var(--accent-violet);
+    }
+    .concept-card h4 {
+      font-size: 1rem; font-weight: 700; margin-bottom: 8px;
+    }
+    .concept-card p {
+      font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; margin: 0;
+    }
+    .concept-card .author {
+      display: block;
+      margin-top: 10px;
+      font-size: 0.78rem;
+      color: var(--text-dim);
+      font-style: italic;
+    }
+
+    /* ─── COMPARADOR ─── */
+    .compare-controls {
+      display: flex; gap: 8px; margin: 20px 0 24px; flex-wrap: wrap;
+    }
+    .compare-btn {
+      padding: 10px 20px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text-secondary);
+      font-family: inherit; font-size: 0.85rem; font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s var(--ease-out-expo);
+    }
+    .compare-btn:hover { border-color: var(--border-strong); color: var(--text-primary); }
+    .compare-btn.active {
+      background: var(--accent-violet);
+      border-color: var(--accent-violet);
+      color: var(--bg-deep);
+      font-weight: 700;
+    }
+    [data-theme="light"] .compare-btn.active { color: #fff; }
+
+    .compare-panels {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    @media (max-width: 640px) { .compare-panels { grid-template-columns: 1fr; } }
+
+    .compare-panel {
+      padding: 24px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      background: var(--surface);
+      transition: opacity 0.3s ease;
+    }
+    .compare-panel.dimmed { opacity: 0.35; pointer-events: none; }
+    .compare-panel h4 {
+      font-size: 0.95rem; font-weight: 700; margin-bottom: 12px;
+      text-transform: uppercase; letter-spacing: 0.06em;
+    }
+    .compare-panel.left h4 { color: var(--accent-amber); }
+    .compare-panel.right h4 { color: var(--accent-cyan); }
+    .compare-panel p { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.7; }
+
+    /* ─── LÍNEA DE TIEMPO ─── */
+    .timeline { position: relative; padding: 20px 0 20px 32px; }
+    .timeline::before {
+      content: ''; position: absolute; left: 11px; top: 0; bottom: 0;
+      width: 2px; background: linear-gradient(to bottom, var(--accent-violet), var(--accent-rose));
+      border-radius: 2px;
+    }
+    .timeline-item {
+      position: relative; margin-bottom: 28px; padding-left: 8px;
+    }
+    .timeline-item::before {
+      content: ''; position: absolute; left: -27px; top: 6px;
+      width: 12px; height: 12px; border-radius: 50%;
+      background: var(--bg-deep); border: 2px solid var(--accent-violet);
+      box-shadow: 0 0 10px rgba(167, 139, 250, 0.3);
+    }
+    .timeline-item .timeline-era {
+      font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.08em; color: var(--accent-violet); margin-bottom: 4px;
+    }
+    .timeline-item h4 { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+    .timeline-item p { font-size: 0.88rem; color: var(--text-secondary); margin: 0; line-height: 1.6; }
+
+    /* ─── TABLA ─── */
+    .table-wrap {
+      overflow-x: auto;
+      margin: 20px 0;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+    th, td {
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-secondary);
+    }
+    th {
+      background: var(--chip-hover-bg);
+      color: var(--text-primary);
+      font-weight: 700;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: var(--chip-hover-bg); }
+    td strong { color: var(--text-primary); }
+
+    /* ─── GLOSARIO ─── */
+    .accordion-item {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      margin-bottom: 10px;
+      overflow: hidden;
+      transition: border-color 0.3s;
+    }
+    .accordion-item:hover { border-color: var(--border-strong); }
+    .accordion-trigger {
+      width: 100%;
+      padding: 16px 20px;
+      background: transparent;
+      border: none;
+      color: var(--text-primary);
+      font-family: inherit; font-size: 0.95rem; font-weight: 600;
+      text-align: left; cursor: pointer;
+      display: flex; justify-content: space-between; align-items: center;
+      transition: background-color 0.2s;
+    }
+    .accordion-trigger:hover { background: var(--chip-hover-bg); }
+    .accordion-trigger .chevron {
+      transition: transform 0.3s var(--ease-out-expo);
+      font-size: 0.8rem; color: var(--text-dim);
+    }
+    .accordion-item.open .accordion-trigger .chevron { transform: rotate(180deg); }
+    .accordion-content {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.4s var(--ease-out-expo), padding 0.4s var(--ease-out-expo);
+      padding: 0 20px;
+    }
+    .accordion-item.open .accordion-content {
+      max-height: 500px; padding: 0 20px 18px;
+    }
+    .accordion-content p {
+      font-size: 0.9rem; color: var(--text-secondary); line-height: 1.7; margin: 0;
+    }
+
+    /* ─── FOOTER ─── */
+    .footer {
+      text-align: center; padding: 48px 0 0;
+      color: var(--text-dim); font-size: 0.8rem;
+      border-top: 1px solid var(--border); margin-top: 48px;
+    }
+    .footer a { color: var(--accent-violet); text-decoration: none; font-weight: 500; }
+    .footer a:hover { text-decoration: underline; }
+
+    @keyframes fadeDown { from { opacity: 0; transform: translateY(-16px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+
+    @media (max-width: 640px) {
+      .app { padding: 0 16px 48px; }
+      .content-card { padding: 24px 20px; }
+      .tabs-nav { gap: 4px; padding: 6px; }
+      .tab-btn { padding: 10px 12px; font-size: 0.8rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema" title="Cambiar tema">
+    <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+    <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  </button>
+
+  <div class="app">
+    <!-- Header -->
+    <header class="header">
+      <div class="header-badge">Imagen · Movimiento · Mirada</div>
+      <h1>El <span class="gradient-text">Cine</span></h1>
+      <p class="header-subtitle">
+        Un recorrido visual e interactivo por el séptimo arte: su historia, sus géneros, sus grandes directores, sus películas esenciales, sus movimientos y las claves para mirar una película con otros ojos.
+      </p>
+    </header>
+
+    <!-- Navegación por pestañas -->
+    <nav class="tabs-nav" role="tablist" aria-label="Secciones del tema">
+      <button class="tab-btn active" data-panel="panel-intro" role="tab" aria-selected="true">¿Qué es?</button>
+      <button class="tab-btn" data-panel="panel-historia" role="tab" aria-selected="false">Historia</button>
+      <button class="tab-btn" data-panel="panel-generos" role="tab" aria-selected="false">Géneros</button>
+      <button class="tab-btn" data-panel="panel-obras" role="tab" aria-selected="false">Películas y Directores</button>
+      <button class="tab-btn" data-panel="panel-latinoamerica" role="tab" aria-selected="false">Latinoamérica</button>
+      <button class="tab-btn" data-panel="panel-movimientos" role="tab" aria-selected="false">Movimientos</button>
+      <button class="tab-btn" data-panel="panel-ver" role="tab" aria-selected="false">Cómo ver</button>
+      <button class="tab-btn" data-panel="panel-glosario" role="tab" aria-selected="false">Glosario</button>
+    </nav>
+
+    <!-- ─── PANEL: ¿QUÉ ES? ─── -->
+    <section id="panel-intro" class="panel active" role="tabpanel">
+      <div class="content-card">
+        <h2><span class="icon-dot"></span>¿Qué es el cine?</h2>
+        <p>
+          El <strong>cine</strong> es el arte de contar historias —y de crear experiencias sensoriales— mediante imágenes en movimiento y sonido. Combina fotografía, actuación, música, diseño, escritura y montaje en una obra colectiva que se proyecta sobre una pantalla. Es, al mismo tiempo, un <strong>arte</strong>, una <strong>industria</strong>, una <strong>tecnología</strong> y un <strong>lenguaje</strong>.
+        </p>
+        <p>
+          Etimológicamente, la palabra proviene del griego <em>kinema</em> ("movimiento"). En 1911 el crítico italiano Ricciotto Canudo lo llamó <strong>"séptimo arte"</strong>, sumándolo a las seis artes tradicionales. Pero el cine es también el primero que nació con la técnica: sin la fotografía, el proyector y luego el sonido, simplemente no existiría.
+        </p>
+
+        <h3>Las cuatro funciones del cine</h3>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">💭</div>
+            <h4>Expresiva</h4>
+            <p>Permite al director expresar una visión personal del mundo a través de la puesta en escena, el encuadre y el ritmo.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🪞</div>
+            <h4>Mimética</h4>
+            <p>Representa, documenta o transforma la realidad. Puede ser un espejo fiel, un espejo deformado o un espejo roto.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">💬</div>
+            <h4>Comunicativa</h4>
+            <p>Transmite ideas, emociones y valores a públicos enormes, a menudo atravesando culturas y generaciones.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">✨</div>
+            <h4>Estética</h4>
+            <p>Produce placer visual y sonoro, asombro, emoción. Trabaja con la luz, el color, el tiempo y el espacio como materia artística.</p>
+          </div>
+        </div>
+
+        <h3>¿Qué lo distingue de otras artes?</h3>
+        <ul>
+          <li><strong>Imagen en movimiento:</strong> el cine piensa con el tiempo. Un plano dura, y esa duración también significa.</li>
+          <li><strong>Montaje:</strong> la unión de dos planos crea un tercer sentido que ninguno de los dos tenía por separado.</li>
+          <li><strong>Obra colectiva:</strong> a diferencia de la novela o la pintura, una película es el resultado de cientos de oficios coordinados.</li>
+          <li><strong>Tecnología e industria:</strong> cada avance técnico (sonido, color, digital, streaming) transforma también su estética.</li>
+          <li><strong>Recepción colectiva:</strong> nació como experiencia de sala, compartida y pública. Hoy convive con la pantalla individual.</li>
+        </ul>
+
+        <blockquote>
+          "Una película es una cinta de sueños." — Orson Welles
+          <cite>El cine proyecta sueños sobre una pared, pero esos sueños están hechos de decisiones concretas: luz, lente, corte, sonido.</cite>
+        </blockquote>
+
+        <h3>Cine y sociedad</h3>
+        <p>
+          El cine no existe en el vacío: refleja, critica y transforma las sociedades que lo producen. Ha sido herramienta de propaganda, de denuncia, de resistencia política, de construcción de identidades nacionales y de preservación de la memoria colectiva. Cada película es también un documento de su época, aunque no lo pretenda: sus ropas, sus voces, sus silencios y sus obsesiones hablan del mundo que la hizo posible.
+        </p>
+        <p>
+          Ver cine es, en definitiva, <strong>ampliar la propia experiencia del mundo</strong>. Nos permite habitar otras vidas, otras épocas, otras culturas y otras formas de mirar sin necesidad de vivirlas en carne propia. En ese sentido, es una de las formas más poderosas de empatía y conocimiento que ha inventado la humanidad.
+        </p>
+      </div>
+    </section>
+
+    <!-- ─── PANEL: HISTORIA ─── -->
+    <section id="panel-historia" class="panel" role="tabpanel">
+      <div class="content-card">
+        <h2><span class="icon-dot"></span>Historia del cine</h2>
+        <p>
+          La historia del cine es brevísima comparada con la de la literatura o la pintura: poco más de 125 años. Pero en ese tiempo pasó de ser una curiosidad de feria a convertirse en el arte popular más influyente del planeta. Esta línea de tiempo recorre sus grandes momentos.
+        </p>
+
+        <h3>Línea de tiempo</h3>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-era">1878–1894</div>
+            <h4>La obsesión por el movimiento</h4>
+            <p>Eadweard Muybridge y Étienne-Jules Marey descomponen el movimiento en fotografías sucesivas. El cine nace como investigación científica antes que como arte.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">1895</div>
+            <h4>Los hermanos Lumière</h4>
+            <p>El 28 de diciembre, en el Salón Indien del Grand Café de París, se realiza la primera proyección pública y paga. <em>Salida de la fábrica Lumière</em>, <em>La llegada del tren a la estación de La Ciotat</em>.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">1896–1915</div>
+            <h4>La invención del lenguaje</h4>
+            <p>Méliès descubre los trucajes (<em>Viaje a la luna</em>, 1902). Porter ensaya el montaje narrativo. Griffith sistematiza el lenguaje clásico en <em>El nacimiento de una nación</em> (1915), obra fundacional del relato cinematográfico y, a la vez, abiertamente racista: reivindica el Ku Klux Klan. Conviene verla con sentido crítico.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">Años 20</div>
+            <h4>Vanguardias y cine mudo</h4>
+            <p>Expresionismo alemán (<em>El gabinete del doctor Caligari</em>, 1920; <em>Nosferatu</em>, 1922), montaje soviético (Eisenstein, <em>El acorazado Potemkin</em>, 1925), y el cine cómico de Chaplin y Keaton.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">1927</div>
+            <h4>Llega el sonido</h4>
+            <p><em>El cantor de jazz</em> (Alan Crosland) populariza el cine sonoro. Cambian la industria, la actuación, la música y la escritura de guiones. Muchas carreras del cine mudo no sobreviven.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">1930–1945</div>
+            <h4>El cine clásico de Hollywood</h4>
+            <p>Sistema de estudios, star system y géneros bien aceitados: western, comedia screwball, cine negro, musical, melodrama. <em>Lo que el viento se llevó</em> (1939), <em>Casablanca</em> (1942).</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">1945–1955</div>
+            <h4>Neorrealismo italiano</h4>
+            <p><em>Roma, ciudad abierta</em> (Rossellini), <em>Ladrón de bicicletas</em> (De Sica). Cine en la calle, actores no profesionales, pobreza de posguerra y una nueva idea de verdad.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">1959–1965</div>
+            <h4>Nouvelle vague y nuevas olas</h4>
+            <p><em>Los 400 golpes</em> (Truffaut), <em>Sin aliento</em> (Godard), <em>Hiroshima mon amour</em> (Resnais). Cámara en mano, jump cut y la teoría del <em>cine de autor</em>. En paralelo: nueva ola japonesa, free cinema británico y cinema novo brasileño.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">Años 70</div>
+            <h4>Nuevo Hollywood</h4>
+            <p><em>El padrino</em> (Coppola), <em>Taxi Driver</em> (Scorsese), <em>El cazador</em> (Cimino). <em>La guerra de las galaxias</em> (1977) inaugura el blockbuster moderno y su modelo de franquicias.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">Años 80–90</div>
+            <h4>Efectos digitales y cine independiente</h4>
+            <p>La era del videoclub, los festivales y el cine indie. Tarantino y <em>Pulp Fiction</em> (1994). El cine de autor se globaliza; el cine asiático y el latinoamericano conquistan premios internacionales.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">Años 2000</div>
+            <h4>Digitalización</h4>
+            <p>Cámaras digitales, CGI, 3D. <em>Avatar</em> (2009) lleva la técnica al extremo. Documental y animación amplían sus públicos. Rodar se vuelve mucho más barato.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">Años 2010</div>
+            <h4>Streaming y globalización</h4>
+            <p>Las plataformas transforman producción, distribución y exhibición. El cine coreano, iraní, latinoamericano y africano encuentran audiencias mundiales. <em>Parásitos</em> (2019) gana el Óscar a mejor película.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">Años 2020</div>
+            <h4>Después de la pandemia</h4>
+            <p>Salas en crisis, hibridación de formatos, inteligencia artificial en la producción, cine vertical y nuevas narrativas transmedia. El cine se reinventa otra vez, como en 1927.</p>
+          </div>
+        </div>
+
+        <h3>Grandes obras por época</h3>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">🎞️</div>
+            <h4>Orígenes</h4>
+            <p><em>Viaje a la luna</em> · <em>Asalto y robo de un tren</em> · <em>El gabinete del doctor Caligari</em> · <em>El acorazado Potemkin</em></p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🏛️</div>
+            <h4>Cine clásico</h4>
+            <p><em>Luces de la ciudad</em> · <em>Ciudadano Kane</em> · <em>Casablanca</em> · <em>Ladrón de bicicletas</em> · <em>Los siete samuráis</em></p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🎭</div>
+            <h4>Modernidad</h4>
+            <p><em>Los 400 golpes</em> · <em>Sin aliento</em> · <em>El séptimo sello</em> · <em>8½</em> · <em>2001: Una odisea del espacio</em></p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🌃</div>
+            <h4>Nuevo Hollywood</h4>
+            <p><em>El padrino</em> · <em>Taxi Driver</em> · <em>Apocalypse Now</em> · <em>Annie Hall</em> · <em>Toro salvaje</em></p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🌐</div>
+            <h4>Globalización</h4>
+            <p><em>Pulp Fiction</em> · <em>Deseando amar</em> · <em>Ciudad de Dios</em> · <em>El viaje de Chihiro</em> · <em>Amores perros</em></p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">📱</div>
+            <h4>Siglo XXI</h4>
+            <p><em>Roma</em> · <em>Parásitos</em> · <em>El secreto de sus ojos</em> · <em>Mad Max: Furia en la carretera</em> · <em>Zama</em></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── PANEL: GÉNEROS ─── -->
+    <section id="panel-generos" class="panel" role="tabpanel">
+      <div class="content-card">
+        <h2><span class="icon-dot"></span>Los géneros cinematográficos</h2>
+        <p>
+          Los <strong>géneros</strong> son categorías que agrupan películas según su tono, sus temas, sus convenciones y el contrato que proponen al público. No son cajas rígidas: funcionan más bien como expectativas compartidas que cada película puede cumplir, torcer o traicionar. Y en el cine tienen una función industrial muy concreta: ayudan a vender entradas.
+        </p>
+
+        <h3>Los tres grandes modos</h3>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">🎬</div>
+            <h4>Ficción / Narrativo</h4>
+            <p>Cuenta una historia con personajes y conflicto, aunque esté inspirada en hechos reales. Es el modo dominante del cine industrial. Incluye casi todos los géneros que veremos abajo.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">📷</div>
+            <h4>Documental</h4>
+            <p>Parte de lo real para construir un discurso sobre el mundo. No es "la verdad objetiva": también tiene punto de vista, montaje y forma. Autores: Flaherty, Vertov, Wiseman, Guzmán.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🌀</div>
+            <h4>Experimental / Vanguardista</h4>
+            <p>Explora las posibilidades del medio sin someterse al relato clásico. Abstracción, ritmo visual, cine expanded, videoarte. Tradición: Richter, Deren, Brakhage, Snow.</p>
+          </div>
+        </div>
+
+        <h3>Grandes géneros de ficción</h3>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">🎭</div>
+            <h4>Drama</h4>
+            <p>El género más amplio: conflictos humanos, emociones intensas, personajes complejos. Puede ser familiar, social, histórico, judicial, romántico.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">😂</div>
+            <h4>Comedia</h4>
+            <p>Busca provocar risa mediante el equívoco, el gag, la ironía o el absurdo. Subgéneros: screwball, comedia romántica, comedia negra, parodia.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">👻</div>
+            <h4>Terror</h4>
+            <p>Provoca miedo mediante lo sobrenatural, lo psicológico o lo corporal. De <em>Nosferatu</em> a <em>El resplandor</em>, del slasher al terror de autor contemporáneo.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🚀</div>
+            <h4>Ciencia ficción</h4>
+            <p>Imagina futuros, tecnologías y sociedades posibles. No es solo un género de naves: es una forma de pensar el presente. <em>Metrópolis</em>, <em>Blade Runner</em>, <em>Arrival</em>.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🕵️</div>
+            <h4>Cine negro</h4>
+            <p>Nacido del policial y la novela negra. Sombras, cinismo, femme fatale, ciudad corrupta. Clásicos: <em>El halcón maltés</em>, <em>Perdición</em>, <em>Sunset Boulevard</em>.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🤠</div>
+            <h4>Western</h4>
+            <p>El género fundacional del cine estadounidense: frontera, ley, violencia, paisaje. De Ford a Leone, y su reescritura en el wéstern crepuscular.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🎵</div>
+            <h4>Musical</h4>
+            <p>La narración se interrumpe para cantar y bailar. Cuerpo, coreografía y cámara como lenguaje. <em>Cantando bajo la lluvia</em>, <em>West Side Story</em>, <em>La La Land</em>.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">⚔️</div>
+            <h4>Bélico y épico</h4>
+            <p>Guerra, historia y gran espectáculo. Puede glorificar o denunciar. <em>Sin novedad en el frente</em>, <em>Apocalypse Now</em>, <em>Salvar al soldado Ryan</em>.</p>
+          </div>
+        </div>
+
+        <h3>Otros géneros y formatos</h3>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">🎨</div>
+            <h4>Animación</h4>
+            <p>No es un género sino una técnica con géneros propios. Disney, Pixar, Ghibli, el stop-motion de Aardman y la animación adulta contemporánea.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">😰</div>
+            <h4>Thriller / Suspense</h4>
+            <p>Juega con la tensión y la expectativa. Hitchcock es su arquitecto mayor: sabía que el espectador sufre más cuando sabe más que el personaje.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">💘</div>
+            <h4>Romance</h4>
+            <p>El amor como motor del relato, con sus obstáculos, malentendidos y desenlaces. Del melodrama clásico a la comedia romántica moderna.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🦸</div>
+            <h4>Superhéroes</h4>
+            <p>El gran género del siglo XXI. Mitología contemporánea, franquicias interconectadas y un debate abierto sobre su lugar en la cultura.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🏛️</div>
+            <h4>Histórico y biopic</h4>
+            <p>Reconstrucción de épocas y vidas reales. Siempre es una interpretación: el cine histórico dice tanto del pasado como del presente que lo filma.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🌪️</div>
+            <h4>Catástrofe y aventura</h4>
+            <p>Grandes escenarios, peligro inminente, supervivencia. El espectáculo como experiencia física en la sala.</p>
+          </div>
+        </div>
+
+        <h3>Géneros híbridos y contemporáneos</h3>
+        <ul>
+          <li><strong>Falso documental (mockumentary):</strong> usa las formas del documental para ficcionar. <em>This Is Spinal Tap</em>, <em>Zelig</em>.</li>
+          <li><strong>Found footage:</strong> relato construido con material "encontrado". <em>El proyecto de la bruja de Blair</em>, <em>REC</em>.</li>
+          <li><strong>Post-horror:</strong> terror lento, atmosférico y de autor. <em>Hereditary</em>, <em>El faro</em>, <em>Midsommar</em>.</li>
+          <li><strong>Cine de autor:</strong> más que un género, una categoría que prioriza la voz del director por encima del formato industrial.</li>
+          <li><strong>Cine de culto:</strong> películas que fracasan en su estreno y luego construyen comunidades devotas alrededor.</li>
+        </ul>
+
+        <blockquote>
+          "Los géneros son el contrato que el cine firma con su público, y también el lugar donde lo rompe." — Reflexión sobre las convenciones
+          <cite>Un buen género se reconoce; una gran película lo traiciona con elegancia.</cite>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- ─── PANEL: PELÍCULAS Y DIRECTORES ─── -->
+    <section id="panel-obras" class="panel" role="tabpanel">
+      <div class="content-card">
+        <h2><span class="icon-dot"></span>Películas esenciales y grandes directores</h2>
+        <p>
+          Toda lista de "mejores películas" es arbitraria: deja afuera obras fundamentales y privilegia ciertos cánones. Esta selección propone un recorrido amplio, diverso y personal por algunos de los films que transformaron la manera de contar y de mirar.
+        </p>
+
+        <h3>Grandes directores universales</h3>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">🎩</div>
+            <h4>Charles Chaplin</h4>
+            <p>El rostro del cine mudo. Charlot es un personaje universal: cómico, tierno, crítico. <em>Luces de la ciudad</em>, <em>Tiempos modernos</em>, <em>El gran dictador</em>.</p>
+            <span class="author">Reino Unido / EE.UU., 1889–1977</span>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🔍</div>
+            <h4>Orson Welles</h4>
+            <p><em>Ciudadano Kane</em> (1941) renovó el lenguaje con profundidad de campo, narración fragmentada y una libertad formal inédita.</p>
+            <span class="author">EE.UU., 1915–1985</span>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">😱</div>
+            <h4>Alfred Hitchcock</h4>
+            <p>El maestro del suspense. Convirtió el miedo en forma pura: <em>Vértigo</em>, <em>Psicosis</em>, <em>La ventana indiscreta</em>, <em>Con la muerte en los talones</em>.</p>
+            <span class="author">Reino Unido / EE.UU., 1899–1980</span>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🧠</div>
+            <h4>Stanley Kubrick</h4>
+            <p>Perfeccionista obsesivo. Recorrió todos los géneros con frialdad analítica: <em>2001</em>, <em>La naranja mecánica</em>, <em>El resplandor</em>, <em>Barry Lyndon</em>.</p>
+            <span class="author">EE.UU. / Reino Unido, 1928–1999</span>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🗡️</div>
+            <h4>Akira Kurosawa</h4>
+            <p>El gran narrador del cine japonés. <em>Los siete samuráis</em>, <em>Rashomon</em>, <em>Ran</em>. Su influencia atraviesa el cine mundial, de Leone a Lucas.</p>
+            <span class="author">Japón, 1910–1998</span>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🎪</div>
+            <h4>Federico Fellini</h4>
+            <p>Del neorrealismo al sueño barroco. <em>La dolce vita</em>, <em>8½</em>, <em>Amarcord</em>. El cine como autobiografía imaginaria.</p>
+            <span class="author">Italia, 1920–1993</span>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🕯️</div>
+            <h4>Ingmar Bergman</h4>
+            <p>Cine de cámara, silencios, primeros planos y preguntas últimas: Dios, la muerte, el amor. <em>El séptimo sello</em>, <em>Persona</em>, <em>Fanny y Alexander</em>.</p>
+            <span class="author">Suecia, 1918–2007</span>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">⚡</div>
+            <h4>Jean-Luc Godard</h4>
+            <p>El enfant terrible de la nouvelle vague. <em>Sin aliento</em>, <em>Pierrot el loco</em>. Rompió las reglas del montaje y del relato.</p>
+            <span class="author">Francia / Suiza, 1930–2022</span>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🌟</div>
+            <h4>Steven Spielberg</h4>
+            <p>El gran narrador popular del cine moderno. <em>Tiburón</em>, <em>E.T.</em>, <em>La lista de Schindler</em>, <em>Salvar al soldado Ryan</em>.</p>
+            <span class="author">EE.UU., 1946–</span>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🎸</div>
+            <h4>Martin Scorsese</h4>
+            <p>La ciudad, la violencia y la culpa. <em>Taxi Driver</em>, <em>Toro salvaje</em>, <em>Buenos muchachos</em>, <em>El irlandés</em>.</p>
+            <span class="author">EE.UU., 1942–</span>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🌲</div>
+            <h4>David Lynch</h4>
+            <p>El surrealismo en el corazón del sueño americano. <em>Terciopelo azul</em>, <em>Mulholland Drive</em>, <em>Twin Peaks</em>.</p>
+            <span class="author">EE.UU., 1946–2025</span>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🎏</div>
+            <h4>Hayao Miyazaki</h4>
+            <p>El maestro de la animación. Imaginación, naturaleza, infancia y una mirada humanista. <em>Mi vecino Totoro</em>, <em>El viaje de Chihiro</em>.</p>
+            <span class="author">Japón, 1941–</span>
+          </div>
+        </div>
+
+        <h3>Películas imprescindibles por región</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Región</th>
+                <th>Película destacada</th>
+                <th>Director</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Francia</strong></td>
+                <td><em>Viaje a la luna</em> (1902)</td>
+                <td>Georges Méliès</td>
+              </tr>
+              <tr>
+                <td><strong>URSS</strong></td>
+                <td><em>El acorazado Potemkin</em> (1925)</td>
+                <td>Serguéi Eisenstein</td>
+              </tr>
+              <tr>
+                <td><strong>Alemania</strong></td>
+                <td><em>El gabinete del doctor Caligari</em> (1920)</td>
+                <td>Robert Wiene</td>
+              </tr>
+              <tr>
+                <td><strong>EE.UU. clásico</strong></td>
+                <td><em>Ciudadano Kane</em> (1941)</td>
+                <td>Orson Welles</td>
+              </tr>
+              <tr>
+                <td><strong>Italia</strong></td>
+                <td><em>Ladrón de bicicletas</em> (1948)</td>
+                <td>Vittorio De Sica</td>
+              </tr>
+              <tr>
+                <td><strong>Japón</strong></td>
+                <td><em>Los siete samuráis</em> (1954)</td>
+                <td>Akira Kurosawa</td>
+              </tr>
+              <tr>
+                <td><strong>Suecia</strong></td>
+                <td><em>El séptimo sello</em> (1957)</td>
+                <td>Ingmar Bergman</td>
+              </tr>
+              <tr>
+                <td><strong>India</strong></td>
+                <td><em>El mundo de Apu</em> (1955)</td>
+                <td>Satyajit Ray</td>
+              </tr>
+              <tr>
+                <td><strong>Francia (nouvelle vague)</strong></td>
+                <td><em>Sin aliento</em> (1960)</td>
+                <td>Jean-Luc Godard</td>
+              </tr>
+              <tr>
+                <td><strong>Reino Unido</strong></td>
+                <td><em>2001: Una odisea del espacio</em> (1968)</td>
+                <td>Stanley Kubrick</td>
+              </tr>
+              <tr>
+                <td><strong>Irán</strong></td>
+                <td><em>Close-Up</em> (1990)</td>
+                <td>Abbas Kiarostami</td>
+              </tr>
+              <tr>
+                <td><strong>Hong Kong</strong></td>
+                <td><em>Deseando amar</em> (2000)</td>
+                <td>Wong Kar-wai</td>
+              </tr>
+              <tr>
+                <td><strong>Corea del Sur</strong></td>
+                <td><em>Parásitos</em> (2019)</td>
+                <td>Bong Joon-ho</td>
+              </tr>
+              <tr>
+                <td><strong>España</strong></td>
+                <td><em>Todo sobre mi madre</em> (1999)</td>
+                <td>Pedro Almodóvar</td>
+              </tr>
+              <tr>
+                <td><strong>México</strong></td>
+                <td><em>Los olvidados</em> (1950)</td>
+                <td>Luis Buñuel</td>
+              </tr>
+              <tr>
+                <td><strong>Argentina</strong></td>
+                <td><em>El secreto de sus ojos</em> (2009)</td>
+                <td>Juan José Campanella</td>
+              </tr>
+              <tr>
+                <td><strong>Brasil</strong></td>
+                <td><em>Ciudad de Dios</em> (2002)</td>
+                <td>Fernando Meirelles</td>
+              </tr>
+              <tr>
+                <td><strong>Chile</strong></td>
+                <td><em>Una mujer fantástica</em> (2017)</td>
+                <td>Sebastián Lelio</td>
+              </tr>
+              <tr>
+                <td><strong>Colombia</strong></td>
+                <td><em>El abrazo de la serpiente</em> (2015)</td>
+                <td>Ciro Guerra</td>
+              </tr>
+              <tr>
+                <td><strong>Senegal</strong></td>
+                <td><em>Touki Bouki</em> (1973)</td>
+                <td>Djibril Diop Mambéty</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <blockquote>
+          "El cine es una máquina para generar empatía." — Roger Ebert
+          <cite>Nos hace ver el mundo desde ojos que no son los nuestros durante dos horas.</cite>
+        </blockquote>
+
+        <h3>Festivales y premios fundamentales</h3>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">🌴</div>
+            <h4>Festival de Cannes</h4>
+            <p>El más prestigioso del mundo. Su máximo galardón es la <strong>Palma de Oro</strong>. Se celebra cada mayo en la Costa Azul.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🦁</div>
+            <h4>Mostra de Venecia</h4>
+            <p>El festival más antiguo (1932). Otorga el <strong>León de Oro</strong> y suele ser plataforma de estrenos de prestigio hacia los Óscar.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🐻</div>
+            <h4>Berlinale</h4>
+            <p>El gran festival alemán, en febrero. Entrega el <strong>Oso de Oro</strong> y tiene una fuerte vocación política y de cine de autor.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🏆</div>
+            <h4>Premios Óscar</h4>
+            <p>Los premios de la Academia de Hollywood. El mayor escaparate mediático del cine mundial, también el más discutido.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🏔️</div>
+            <h4>Sundance</h4>
+            <p>El festival de referencia del cine independiente estadounidense. Fundado por Robert Redford en Utah.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🐚</div>
+            <h4>San Sebastián</h4>
+            <p>El gran festival del cine en lengua española. Otorga la <strong>Concha de Oro</strong> y es puente entre Europa y América Latina.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── PANEL: LATINOAMÉRICA ─── -->
+    <section id="panel-latinoamerica" class="panel" role="tabpanel">
+      <div class="content-card">
+        <h2><span class="icon-dot"></span>Cine latinoamericano</h2>
+        <p>
+          El cine latinoamericano es uno de los más vitales y reconocidos del mundo. Su historia combina tradiciones populares, herencia colonial, influencias europeas y estadounidenses, y una búsqueda constante de identidad propia. En los años 60 alcanzó proyección universal con el <strong>nuevo cine latinoamericano</strong>, y desde los 2000 vive un nuevo auge internacional.
+        </p>
+
+        <h3>Etapas del cine latinoamericano</h3>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-era">1896–1920</div>
+            <h4>Los pioneros</h4>
+            <p>Los primeros camarógrafos recorren el continente filmando noticias, paisajes y ceremonias. Se documentan revoluciones, fiestas y ciudades. El cine llega casi al mismo tiempo que a Europa.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">1930–1950</div>
+            <h4>La época de oro del cine mexicano</h4>
+            <p>México se convierte en la gran potencia cinematográfica de habla hispana. Emilio "el Indio" Fernández, fotografía de Gabriel Figueroa, Cantinflas, Jorge Negrete, Dolores del Río. También destaca el cine argentino clásico.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">1950–1960</div>
+            <h4>Buñuel en México y la modernidad</h4>
+            <p>Luis Buñuel filma en México obras como <em>Los olvidados</em> (1950). Surgen las primeras escuelas de cine y una nueva generación de críticos y realizadores.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">1960–1975</div>
+            <h4>El nuevo cine latinoamericano</h4>
+            <p>Cinema Novo brasileño (Glauber Rocha, <em>Dios y el diablo en la tierra del sol</em>), nuevo cine cubano (<em>Memorias del subdesarrollo</em>, Gutiérrez Alea), el "Tercer Cine" de Solanas y Getino en Argentina. Cine militante, político y experimental.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">1975–1990</div>
+            <h4>Dictaduras y exilio</h4>
+            <p>Las dictaduras del Cono Sur silencian y exilian a muchos cineastas. Aparece el cine del exilio, el testimonio y la denuncia. En paralelo, se consolida un cine de autor con mirada femenina: María Luisa Bemberg.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">1990–2000</div>
+            <h4>Transición y reconocimiento internacional</h4>
+            <p><em>Como agua para chocolate</em> (1992), <em>Central do Brasil</em> (1998), <em>Amores perros</em> (2000). Se recuperan las industrias nacionales y los festivales empiezan a mirar con atención al continente.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">2000–2015</div>
+            <h4>La nueva generación</h4>
+            <p>Cuarón, Iñárritu y Del Toro conquistan Hollywood sin perder su sello. Lucrecia Martel renueva el cine de autor. <em>El secreto de sus ojos</em> (2009) gana el Óscar a mejor película extranjera.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">2015–presente</div>
+            <h4>Consagración global</h4>
+            <p><em>Roma</em> (2018) gana el León de Oro y el Óscar; <em>Una mujer fantástica</em> (2017) y <em>El abrazo de la serpiente</em> (2015) se consagran. El cine de género, el documental y las nuevas voces femeninas amplían el mapa.</p>
+          </div>
+        </div>
+
+        <h3>Realizadores clave</h3>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">🏛️</div>
+            <h4>Luis Buñuel</h4>
+            <p>Surrealista aragonés exiliado en México. <em>Los olvidados</em>, <em>El ángel exterminador</em>, <em>Viridiana</em>. Su mirada crítica marcó el cine del continente.</p>
+            <span class="author">España / México</span>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🌵</div>
+            <h4>Emilio Fernández</h4>
+            <p>El "Indio" Fernández construyó la imagen mítica del México rural: <em>María Candelaria</em>, <em>Río Escondido</em>, con la fotografía de Gabriel Figueroa.</p>
+            <span class="author">México</span>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🔥</div>
+            <h4>Glauber Rocha</h4>
+            <p>Ideólogo del Cinema Novo y de la "estética del hambre". <em>Dios y el diablo en la tierra del sol</em>, <em>Tierra en trance</em>.</p>
+            <span class="author">Brasil</span>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🇨🇺</div>
+            <h4>Tomás Gutiérrez Alea</h4>
+            <p>El gran cineasta cubano. <em>Memorias del subdesarrollo</em>, <em>Fresa y chocolate</em>. Ironía, política y retrato de la intimidad.</p>
+            <span class="author">Cuba</span>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🎬</div>
+            <h4>Fernando Solanas</h4>
+            <p>Autor de <em>La hora de los hornos</em> y teórico del Tercer Cine junto a Octavio Getino. Cine como herramienta de liberación.</p>
+            <span class="author">Argentina</span>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🌌</div>
+            <h4>Alejandro Jodorowsky</h4>
+            <p>Cine visionario, esotérico y provocador. <em>El topo</em>, <em>La montaña sagrada</em>. Una influencia de culto en todo el mundo.</p>
+            <span class="author">Chile / México</span>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🛸</div>
+            <h4>Alfonso Cuarón</h4>
+            <p>Del road movie a la ciencia ficción y al drama personal. <em>Y tu mamá también</em>, <em>Hijos de los hombres</em>, <em>Gravedad</em>, <em>Roma</em>.</p>
+            <span class="author">México</span>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">👹</div>
+            <h4>Guillermo del Toro</h4>
+            <p>El fantástico como lenguaje político y afectivo. <em>El laberinto del fauno</em>, <em>La forma del agua</em>, <em>Nightmare Alley</em>.</p>
+            <span class="author">México</span>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🎭</div>
+            <h4>Alejandro González Iñárritu</h4>
+            <p>Narrativas fragmentadas y experiencias inmersivas. <em>Amores perros</em>, <em>Babel</em>, <em>Birdman</em>, <em>El renacido</em>.</p>
+            <span class="author">México</span>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🌾</div>
+            <h4>Lucrecia Martel</h4>
+            <p>Una de las voces más singulares del cine contemporáneo. <em>La ciénaga</em>, <em>La niña santa</em>, <em>Zama</em>. Sonido, atmósfera y crítica social.</p>
+            <span class="author">Argentina</span>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🏙️</div>
+            <h4>Pablo Larraín</h4>
+            <p>Cine político y retratos femeninos. <em>Tony Manero</em>, <em>No</em>, <em>Jackie</em>, <em>Spencer</em>.</p>
+            <span class="author">Chile</span>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🌿</div>
+            <h4>Ciro Guerra</h4>
+            <p>El cine colombiano contemporáneo se proyecta al mundo con <em>El abrazo de la serpiente</em> y <em>Los viajes del viento</em>.</p>
+            <span class="author">Colombia</span>
+          </div>
+        </div>
+
+        <h3>Voces femeninas fundamentales</h3>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">🌺</div>
+            <h4>María Luisa Bemberg</h4>
+            <p>Pionera del cine feminista argentino. <em>Camila</em>, <em>Yo, la peor de todas</em>, <em>De eso no se habla</em>.</p>
+            <span class="author">Argentina, 1922–1995</span>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">💧</div>
+            <h4>Lucrecia Martel</h4>
+            <p>Su cine incomoda y deslumbra: el malestar de clase en el norte argentino, el sonido como protagonista.</p>
+            <span class="author">Argentina, 1966–</span>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🕯️</div>
+            <h4>Tatiana Huezo</h4>
+            <p>Documental y ficción sobre la violencia y la memoria. <em>El lugar más pequeño</em>, <em>Tempestad</em>, <em>Noche de fuego</em>.</p>
+            <span class="author">El Salvador / México, 1972–</span>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🏔️</div>
+            <h4>Claudia Llosa</h4>
+            <p><em>La teta asustada</em> (2009) ganó el Oso de Oro en Berlín: una mirada poética sobre el trauma y la memoria peruana.</p>
+            <span class="author">Perú, 1976–</span>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🌊</div>
+            <h4>Lucía Puenzo</h4>
+            <p><em>XXY</em>, <em>El niño pez</em>, <em>Wakolda</em>. Aborda la identidad, el cuerpo y los bordes del género.</p>
+            <span class="author">Argentina, 1976–</span>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">📚</div>
+            <h4>Maite Alberdi</h4>
+            <p>Documentalista chilena de enorme sensibilidad. <em>La once</em>, <em>El agente topo</em>, <em>La memoria infinita</em>.</p>
+            <span class="author">Chile, 1983–</span>
+          </div>
+        </div>
+
+        <h3>Comparador: cine de autor vs. cine comercial</h3>
+        <p style="margin-bottom: 12px;">Selecciona una columna para enfocarte en ella.</p>
+        <div class="compare-controls">
+          <button class="compare-btn active" data-compare="both">Ambos</button>
+          <button class="compare-btn" data-compare="left">Solo cine de autor</button>
+          <button class="compare-btn" data-compare="right">Solo cine comercial</button>
+        </div>
+        <div class="compare-panels">
+          <div class="compare-panel left">
+            <h4>🎨 Cine de autor</h4>
+            <p><strong>Prioridad:</strong> la visión personal del director.</p>
+            <p><strong>Forma:</strong> experimentación, ritmo propio, ambigüedad.</p>
+            <p><strong>Financiación:</strong> fondos públicos, festivales, coproducciones.</p>
+            <p><strong>Público:</strong> nicho, cinéfilos, circuito de festivales.</p>
+            <p><strong>Riesgo:</strong> hermetismo, dificultad de distribución.</p>
+          </div>
+          <div class="compare-panel right">
+            <h4>🍿 Cine comercial</h4>
+            <p><strong>Prioridad:</strong> conectar con el mayor público posible.</p>
+            <p><strong>Forma:</strong> relato clásico, continuidad invisible, géneros probados.</p>
+            <p><strong>Financiación:</strong> grandes estudios, franquicias, marketing global.</p>
+            <p><strong>Público:</strong> masivo, salas multiplex, plataformas.</p>
+            <p><strong>Riesgo:</strong> fórmula, previsibilidad, saturación.</p>
+          </div>
+        </div>
+
+        <blockquote>
+          "Una cámara en la mano y una idea en la cabeza." — Glauber Rocha
+          <cite>La consigna del Cinema Novo sigue definiendo buena parte del mejor cine latinoamericano.</cite>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- ─── PANEL: MOVIMIENTOS ─── -->
+    <section id="panel-movimientos" class="panel" role="tabpanel">
+      <div class="content-card">
+        <h2><span class="icon-dot"></span>Movimientos cinematográficos</h2>
+        <p>
+          Los <strong>movimientos cinematográficos</strong> son corrientes que agrupan a cineastas de una misma época con ideas estéticas, políticas y formales comunes. A diferencia de los movimientos literarios, casi siempre nacen con un <strong>manifiesto</strong>, una revista, una escuela o una coyuntura histórica compartida. No son bloques cerrados: se solapan y se influyen mutuamente.
+        </p>
+
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">🎨</div>
+            <h4>Impresionismo francés</h4>
+            <p>Exploración de la subjetividad, el ritmo visual y la fotografía como emoción. Delluc, Gance, L'Herbier.</p>
+            <span class="author">Años 20</span>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🌀</div>
+            <h4>Expresionismo alemán</h4>
+            <p>Decorados deformados, sombras pintadas, angustia. El mundo interior se vuelve paisaje. <em>Caligari</em>, <em>Nosferatu</em>, <em>Metrópolis</em>.</p>
+            <span class="author">1919–1933</span>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">✂️</div>
+            <h4>Montaje soviético</h4>
+            <p>El montaje como herramienta de pensamiento y de propaganda. Eisenstein, Pudovkin, Vertov.</p>
+            <span class="author">Años 20</span>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🚲</div>
+            <h4>Neorrealismo italiano</h4>
+            <p>Calle, pobreza, actores no profesionales, luz natural. Rossellini, De Sica, Visconti.</p>
+            <span class="author">1945–1955</span>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">⚡</div>
+            <h4>Nouvelle vague</h4>
+            <p>Cámara en mano, jump cut, cine de autor. Truffaut, Godard, Chabrol, Rohmer, Varda.</p>
+            <span class="author">1959–1965</span>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🏭</div>
+            <h4>Free cinema</h4>
+            <p>Retrato de la clase trabajadora británica con humor y ternura. Richardson, Reisz, Anderson.</p>
+            <span class="author">Fines de los 50</span>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🔥</div>
+            <h4>Cinema Novo</h4>
+            <p>Cine brasileño político y de bajo presupuesto. "Estética del hambre". Glauber Rocha, Ruy Guerra.</p>
+            <span class="author">1960–1970</span>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🌊</div>
+            <h4>Nueva ola japonesa</h4>
+            <p>Ozu, Mizoguchi, Kurosawa y luego Oshima. Un cine que piensa la familia, la guerra y la modernización.</p>
+            <span class="author">Años 50–60</span>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🌃</div>
+            <h4>Nuevo Hollywood</h4>
+            <p>Autores jóvenes toman el poder de los estudios. Ambigüedad moral, violencia, política. Coppola, Scorsese, Altman.</p>
+            <span class="author">1967–1980</span>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">📜</div>
+            <h4>Dogma 95</h4>
+            <p>Voto de castidad cinematográfica: luz natural, cámara en mano, sin música añadida. Lars von Trier, Thomas Vinterberg.</p>
+            <span class="author">1995–2005</span>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🎭</div>
+            <h4>Posmodernidad</h4>
+            <p>Pastiche, ironía, citas, mezcla de géneros y de alta y baja cultura. Tarantino, Lynch, Almodóvar, los Coen.</p>
+            <span class="author">1980–presente</span>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">📱</div>
+            <h4>Cine digital</h4>
+            <p>Nuevos soportes, nuevas estéticas, nuevas ventanas de exhibición. Del Dogma al streaming y al cine vertical.</p>
+            <span class="author">2000–presente</span>
+          </div>
+        </div>
+
+        <h3>Movimientos clave en detalle</h3>
+
+        <h3 style="color: var(--accent-rose);">Expresionismo alemán</h3>
+        <p>
+          Surgido en la Alemania de entreguerras, el expresionismo llevó al cine la estética deformada que ya dominaba la pintura y el teatro. Decorados pintados, perspectivas imposibles, sombras dibujadas en el suelo y una iluminación de fuertes contrastes. Sus temas: la locura, el doble, la tiranía, el destino. El movimiento se truncó con la llegada del nazismo y la emigración de muchos de sus autores a Hollywood, donde su influencia se volvió permanente (cine negro, terror, ciencia ficción).
+        </p>
+        <ul>
+          <li><strong>Obras:</strong> <em>El gabinete del doctor Caligari</em> (Wiene, 1920), <em>Nosferatu</em> (Murnau, 1922), <em>Metrópolis</em> (Lang, 1927), <em>M, el vampiro de Düsseldorf</em> (Lang, 1931).</li>
+          <li><strong>Legado:</strong> el cine negro, Tim Burton, Guillermo del Toro, buena parte del terror contemporáneo.</li>
+        </ul>
+
+        <h3 style="color: var(--accent-rose);">Neorrealismo italiano</h3>
+        <p>
+          Nació en la Italia recién salida de la Segunda Guerra Mundial, con las ciudades en ruinas y una enorme necesidad de verdad. Rodaba en la calle, con luz natural, actores no profesionales y una cámara que seguía a la gente común. Sus historias eran las del desempleo, la miseria, la resistencia y la infancia abandonada. Fue un cine moral antes que estético.
+        </p>
+        <ul>
+          <li><strong>Obras:</strong> <em>Roma, ciudad abierta</em> (Rossellini, 1945), <em>Ladrón de bicicletas</em> (De Sica, 1948), <em>La terra trema</em> (Visconti, 1948), <em>Umberto D.</em> (De Sica, 1952).</li>
+          <li><strong>Legado:</strong> la nueva ola francesa, el cine social latinoamericano, el documental contemporáneo.</li>
+        </ul>
+
+        <h3 style="color: var(--accent-rose);">Nouvelle vague</h3>
+        <p>
+          Un grupo de críticos de la revista <em>Cahiers du cinéma</em> —Truffaut, Godard, Chabrol, Rohmer, Rivette— pasó de escribir a dirigir, y en pocos años cambió el cine para siempre. Reivindicaron a los grandes artesanos de Hollywood (Hitchcock, Hawks, Ford) como autores y llevaron a la práctica la <strong>política de autor</strong>: el director es el verdadero autor de una película. Rodaban rápido, barato y en la calle, con cámara en mano, jump cuts, miradas a cámara y finales abiertos.
+        </p>
+        <ul>
+          <li><strong>Obras:</strong> <em>Los 400 golpes</em> (Truffaut, 1959), <em>Sin aliento</em> (Godard, 1960), <em>Hiroshima mon amour</em> (Resnais, 1959), <em>Cleo de 5 a 7</em> (Varda, 1962).</li>
+          <li><strong>Legado:</strong> el cine independiente mundial, la teoría del cine de autor, la libertad formal moderna.</li>
+        </ul>
+
+        <h3 style="color: var(--accent-rose);">Dogma 95</h3>
+        <p>
+          En 1995, Lars von Trier y Thomas Vinterberg lanzaron un manifiesto con un "voto de castidad" para el cine: rodar en exteriores, con luz natural, cámara en mano, sonido directo, sin música añadida, sin géneros de acción, sin trucos. Buscaban devolverle al cine una desnudez y una verdad que consideraban perdidas en la producción industrial.
+        </p>
+        <ul>
+          <li><strong>Obras:</strong> <em>Festen</em> (Vinterberg, 1998), <em>Los idiotas</em> (von Trier, 1998), <em>Italiano para principiantes</em> (Lone Scherfig, 2000).</li>
+          <li><strong>Legado:</strong> el cine digital de bajo presupuesto, el found footage, buena parte del cine independiente del siglo XXI.</li>
+        </ul>
+
+        <blockquote>
+          "El cine es la verdad 24 veces por segundo." — Jean-Luc Godard (frase atribuida, popularizada a partir de <em>El soldadito</em>)
+          <cite>Una de las definiciones más citadas —y más discutidas— del cine moderno.</cite>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- ─── PANEL: CÓMO VER ─── -->
+    <section id="panel-ver" class="panel" role="tabpanel">
+      <div class="content-card">
+        <h2><span class="icon-dot"></span>Cómo ver cine</h2>
+        <p>
+          Ver cine no es solo "enterarse de qué pasa". Es una práctica que se aprende y se profundiza. Los grandes espectadores no nacen: se forman. Esta sección propone algunas claves para mirar una película con más atención, más placer y más provecho.
+        </p>
+
+        <h3>Herramientas para leer una película</h3>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">🖼️</div>
+            <h4>Plano y encuadre</h4>
+            <p>Qué se ve y qué queda fuera. La distancia de la cámara, el tamaño del plano y lo que decide no mostrarse también cuentan la historia.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">📐</div>
+            <h4>Angulación</h4>
+            <p>Picado, contrapicado, plano cenital, ángulo holandés. La posición de la cámara frente a lo filmado expresa poder, vulnerabilidad o extrañeza.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">💡</div>
+            <h4>Iluminación</h4>
+            <p>Dura o suave, cálida o fría, natural o artificial. La luz crea atmósfera, jerarquiza y, a veces, es el tema mismo de la película.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">✂️</div>
+            <h4>Montaje</h4>
+            <p>El orden y el ritmo de los planos. Un corte puede crear suspenso, elipsis, asociación de ideas o ruptura. Aquí nace el lenguaje del cine.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🔊</div>
+            <h4>Sonido</h4>
+            <p>Diálogos, ambiente, música, silencio. El sonido construye espacio y emoción: muchas veces oímos lo que no vemos.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🎨</div>
+            <h4>Color y textura</h4>
+            <p>Paletas, contrastes, saturación, grano. El color puede narrar (el rojo de <em>Roma</em>, los amarillos de <em>Matrix</em>) o simplemente ambientar.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🎭</div>
+            <h4>Puesta en escena</h4>
+            <p>Todo lo que aparece frente a la cámara: decorados, vestuario, movimiento de actores, objetos. El mundo construido de la película.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🌫️</div>
+            <h4>Fuera de campo</h4>
+            <p>Lo que existe aunque no se vea: un ruido, una mirada hacia afuera, un personaje que nunca aparece. El cine sugiere tanto como muestra.</p>
+          </div>
+        </div>
+
+        <h3>La escala de planos</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Plano</th>
+                <th>Qué muestra</th>
+                <th>Uso habitual</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Gran plano general</strong></td>
+                <td>Un paisaje o una multitud; el personaje es mínimo</td>
+                <td>Situar la acción, mostrar magnitud, desamparo</td>
+              </tr>
+              <tr>
+                <td><strong>Plano general</strong></td>
+                <td>El espacio completo donde ocurre la escena</td>
+                <td>Contextualizar, coreografiar la acción</td>
+              </tr>
+              <tr>
+                <td><strong>Plano entero</strong></td>
+                <td>El cuerpo completo del personaje</td>
+                <td>Mostrar el cuerpo en relación con el entorno</td>
+              </tr>
+              <tr>
+                <td><strong>Plano americano</strong></td>
+                <td>De la cabeza a las rodillas</td>
+                <td>Acción y diálogo (herencia del wéstern)</td>
+              </tr>
+              <tr>
+                <td><strong>Plano medio</strong></td>
+                <td>De la cintura hacia arriba</td>
+                <td>Conversación, gestualidad, relación entre personajes</td>
+              </tr>
+              <tr>
+                <td><strong>Primer plano</strong></td>
+                <td>El rostro del personaje</td>
+                <td>Emoción, pensamiento, intimidad</td>
+              </tr>
+              <tr>
+                <td><strong>Primerísimo primer plano</strong></td>
+                <td>Un detalle del rostro (ojos, boca)</td>
+                <td>Tensión, obsesión, clímax emocional</td>
+              </tr>
+              <tr>
+                <td><strong>Plano detalle</strong></td>
+                <td>Un objeto o una parte mínima del cuerpo</td>
+                <td>Subrayar un elemento clave, crear significado</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Cómo analizar una película</h3>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-era">Antes</div>
+            <h4>Contextualizar</h4>
+            <p>Informarse sobre el director, la época, el movimiento y las condiciones de producción ayuda a comprenderla mejor. Pero no es obligatorio: también se puede entrar a ciegas.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">Durante</div>
+            <h4>Ver sin apuro</h4>
+            <p>No hay que analizarlo todo en la primera visión. Dejarse llevar, sentir, aburrirse si hace falta. La primera vez es para la experiencia.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">Durante</div>
+            <h4>Hacerse preguntas</h4>
+            <p>¿Quién mira? ¿Desde dónde? ¿Qué se me está mostrando y qué se me oculta? ¿Qué me hace sentir esta escena y por qué?</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">Después</div>
+            <h4>Revisar escenas</h4>
+            <p>Volver a ver fragmentos clave: el inicio, un plano que quedó dando vueltas, el final. La relectura cambia la película.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">Después</div>
+            <h4>Escribir y conversar</h4>
+            <p>Anotar impresiones, leer críticas, discutir con otros. El cine se vuelve más rico cuando se comparte.</p>
+          </div>
+        </div>
+
+        <h3>Comparador: mirada del espectador vs. mirada del analista</h3>
+        <p style="margin-bottom: 12px;">Selecciona una columna para enfocarte en ella.</p>
+        <div class="compare-controls">
+          <button class="compare-btn active" data-compare="both">Ambas</button>
+          <button class="compare-btn" data-compare="left">Solo espectador</button>
+          <button class="compare-btn" data-compare="right">Solo analista</button>
+        </div>
+        <div class="compare-panels">
+          <div class="compare-panel left">
+            <h4>🍿 Mirada del espectador</h4>
+            <p><strong>Foco:</strong> la historia, los personajes, la emoción.</p>
+            <p><strong>Pregunta:</strong> ¿qué pasa y qué siento?</p>
+            <p><strong>Actitud:</strong> entrega, inmersión, suspensión de la incredulidad.</p>
+            <p><strong>Ventaja:</strong> placer inmediato, experiencia compartida.</p>
+            <p><strong>Riesgo:</strong> quedarse solo con la anécdota.</p>
+          </div>
+          <div class="compare-panel right">
+            <h4>🔍 Mirada del analista</h4>
+            <p><strong>Foco:</strong> la forma, el montaje, la luz, el sonido, el contexto.</p>
+            <p><strong>Pregunta:</strong> ¿cómo se construye lo que siento y por qué?</p>
+            <p><strong>Actitud:</strong> distancia, atención a los detalles, relectura.</p>
+            <p><strong>Ventaja:</strong> comprensión más profunda y duradera.</p>
+            <p><strong>Riesgo:</strong> perder el placer de la entrega.</p>
+          </div>
+        </div>
+
+        <blockquote>
+          "Aprender a ver cine es aprender a mirar de otra manera: no solo lo que la película cuenta, sino cómo lo cuenta." — Reflexión
+          <cite>La forma también es contenido: no hay separación entre lo que se dice y cómo se dice.</cite>
+        </blockquote>
+
+        <h3>Consejos para formar el hábito cinéfilo</h3>
+        <ul>
+          <li><strong>Empezar por lo que disfrutas:</strong> no todo tiene que ser "cine difícil". Hay un género, una época y un director para cada persona.</li>
+          <li><strong>Ver con subtítulos:</strong> ayuda a escuchar mejor el sonido, la voz y el silencio, y a respetar la versión original.</li>
+          <li><strong>Alternar:</strong> una película comercial, una de autor, un documental, un clásico. La variedad forma la mirada.</li>
+          <li><strong>No temer abandonar una película:</strong> si no te atrapa, no es tu momento. Volverás a ella o no: ambas cosas están bien.</li>
+          <li><strong>Llevar un registro:</strong> anotar qué viste, qué te gustó, qué escenas te marcaron. Ayuda a recordar y a profundizar.</li>
+          <li><strong>Compartir:</strong> ver cine con otros y conversar después multiplica el placer.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ─── PANEL: GLOSARIO ─── -->
+    <section id="panel-glosario" class="panel" role="tabpanel">
+      <div class="content-card">
+        <h2><span class="icon-dot"></span>Glosario cinematográfico</h2>
+        <p>Términos clave para comprender el tema. Haz clic en cada uno para expandir su definición.</p>
+
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Cine <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Arte de crear obras mediante imágenes en movimiento y sonido. Es a la vez un lenguaje, una industria, una tecnología y una forma de espectáculo colectivo. Fue llamado "séptimo arte" por Ricciotto Canudo en 1911.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Plano <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Unidad mínima del lenguaje cinematográfico: un fragmento de película rodado de forma continua, sin cortes. Su tamaño (general, medio, primer plano) y su duración construyen el sentido de la escena.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Escena y secuencia <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>La <strong>escena</strong> es una unidad de acción que transcurre en un mismo tiempo y lugar. La <strong>secuencia</strong> es un conjunto de escenas que forman una unidad narrativa mayor, aunque cambien los lugares o los tiempos.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Montaje <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Operación de seleccionar y unir planos. Es el corazón del lenguaje cinematográfico: la unión de dos imágenes produce un sentido nuevo que ninguna de ellas tenía por separado. Puede ser narrativo, rítmico, ideológico o asociativo.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Raccord <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Continuidad lógica y visual entre planos: la ropa, la posición, la luz, los objetos y los movimientos deben coincidir para que el espectador no perciba el corte. Un fallo de raccord es un "error de continuidad".</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Fuera de campo <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Todo lo que existe en el mundo de la película pero no aparece en el encuadre: sonidos, personajes, objetos o espacios que se sugieren. El cine construye sentido tanto con lo que muestra como con lo que oculta.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Diégesis <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>El universo narrativo de la película: todo lo que pertenece al mundo de la historia (personajes, lugares, acciones, sonidos). Un sonido "diegético" es el que los personajes también escuchan; una música "extradiegética" solo la escucha el espectador.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">MacGuffin <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Objeto, secreto o meta que moviliza a los personajes pero cuya naturaleza concreta es irrelevante para el espectador. El término lo popularizó Hitchcock: lo importante es que todos lo persigan, no qué es.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Plano secuencia <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Un plano de larga duración que recorre un espacio y una acción sin cortes. Exige una coreografía compleja de cámara, actores y decorado. Ejemplos célebres: la fiesta inicial de <em>La ronde</em>, la playa de <em>El año pasado en Marienbad</em>, la entrada de <em>El arca rusa</em>.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Travelling <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Movimiento de cámara que se desplaza físicamente en el espacio (sobre raíles, grúa o estabilizador). A diferencia del zoom, transforma la relación del espectador con la escena y produce profundidad.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Profundidad de campo <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Distancia entre el punto más cercano y el más lejano que aparecen nítidos en un plano. Una gran profundidad de campo permite componer con varios planos de acción simultáneos, como hizo Welles en <em>Ciudadano Kane</em>.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Voz en off <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Voz que se escucha sin que su emisor aparezca en la imagen. Puede ser un narrador, un pensamiento del personaje o una voz documental. Crea una relación particular entre lo que vemos y lo que oímos.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Flashback <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Retroceso narrativo que muestra hechos anteriores al presente de la historia. Puede ser objetivo (lo que ocurrió) o subjetivo (lo que un personaje recuerda o imagina), y a menudo la diferencia es deliberadamente ambigua.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Leitmotiv <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Tema musical asociado a un personaje, un lugar o una idea, que se repite y varía a lo largo de la película. Técnica heredada de la ópera wagneriana y utilizada por compositores como John Williams o Ennio Morricone.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Cine de autor <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Cine en el que la visión personal del director es el criterio central de la obra. Concepto desarrollado por los críticos de <em>Cahiers du cinéma</em> en los años 50: el director es el verdadero autor de la película, por encima del guionista o del estudio.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Blockbuster <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Película de gran presupuesto, fuerte campaña de marketing y vocación masiva. El término se consolidó con <em>Tiburón</em> (1975) y <em>La guerra de las galaxias</em> (1977), que instauraron el modelo de estreno masivo y franquicia.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Cine de culto <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Película que, más allá de su éxito comercial, genera una comunidad de seguidores devotos que la revisitan, la citan y la resignifican. Muchas veces nace del fracaso en su estreno: <em>El gran Lebowski</em>, <em>Donnie Darko</em>, <em>Fight Club</em>.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Cinefilia <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Amor por el cine entendido como práctica cultural: ver, coleccionar, discutir, programar, escribir. La cinefilia nació con las cinematecas y las revistas de crítica en los años 50 y sigue reinventándose en la era del streaming.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>
+        Enciclopedia Visual · Contenido original de
+        <a href="https://app-fioravante.github.io/apps-fioravante/" target="_blank" rel="noopener noreferrer">Fioravante</a>.
+        Este recurso es de carácter educativo y exploratorio.
+      </p>
+    </footer>
+  </div>
+
+  <script>
+    // ─── TEMA ───
+    const rootEl = document.documentElement;
+    const themeToggle = document.getElementById('themeToggle');
+    function updateToggleLabel() {
+      const isLight = rootEl.getAttribute('data-theme') === 'light';
+      themeToggle.setAttribute('aria-label', isLight ? 'Cambiar a modo oscuro' : 'Cambiar a modo claro');
+      themeToggle.setAttribute('title', isLight ? 'Cambiar a modo oscuro' : 'Cambiar a modo claro');
+    }
+    themeToggle.addEventListener('click', () => {
+      const isLight = rootEl.getAttribute('data-theme') === 'light';
+      const next = isLight ? 'dark' : 'light';
+      rootEl.setAttribute('data-theme', next);
+      try { localStorage.setItem('enc-theme', next); } catch (e) {}
+      updateToggleLabel();
+    });
+    updateToggleLabel();
+
+    // ─── PESTAÑAS ───
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const panels = document.querySelectorAll('.panel');
+
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const targetId = btn.dataset.panel;
+        tabBtns.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });
+        btn.classList.add('active');
+        btn.setAttribute('aria-selected', 'true');
+        panels.forEach(p => p.classList.remove('active'));
+        document.getElementById(targetId).classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    });
+
+    // ─── COMPARADORES (genérico) ───
+    document.querySelectorAll('.compare-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const card = btn.closest('.content-card');
+        card.querySelectorAll('.compare-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const mode = btn.dataset.compare;
+
+        card.querySelectorAll('.compare-panel').forEach(p => p.classList.remove('dimmed'));
+        if (mode === 'left') {
+          card.querySelectorAll('.compare-panel.right').forEach(p => p.classList.add('dimmed'));
+        }
+        if (mode === 'right') {
+          card.querySelectorAll('.compare-panel.left').forEach(p => p.classList.add('dimmed'));
+        }
+      });
+    });
+
+    // ─── ACORDEÓN ───
+    document.querySelectorAll('.accordion-trigger').forEach(trigger => {
+      trigger.addEventListener('click', () => {
+        const item = trigger.parentElement;
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.accordion-item').forEach(i => {
+          i.classList.remove('open');
+          i.querySelector('.accordion-trigger').setAttribute('aria-expanded', 'false');
+        });
+        if (!isOpen) {
+          item.classList.add('open');
+          trigger.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

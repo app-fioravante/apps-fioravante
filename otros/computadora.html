@@ -1,0 +1,1336 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Computadora · Enciclopedia Visual Fioravante</title>
+  <meta name="description" content="Exploración interactiva de la computadora: historia, hardware, software, funcionamiento, tipos y su impacto en el mundo moderno.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <script>
+    (function () {
+      try {
+        const stored = localStorage.getItem('enc-theme');
+        if (stored === 'light' || stored === 'dark') {
+          document.documentElement.setAttribute('data-theme', stored);
+        } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+          document.documentElement.setAttribute('data-theme', 'light');
+        }
+      } catch (e) {}
+    })();
+  </script>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg-deep: #070b14;
+      --surface: rgba(22, 32, 50, 0.65);
+      --surface-hover: rgba(30, 44, 68, 0.8);
+      --border: rgba(255, 255, 255, 0.07);
+      --border-strong: rgba(255, 255, 255, 0.15);
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --text-dim: #64748b;
+      --accent-cyan: #22d3ee;
+      --accent-violet: #a78bfa;
+      --accent-amber: #fbbf24;
+      --accent-rose: #fb7185;
+      --accent-emerald: #34d399;
+      --chip-hover-bg: rgba(255, 255, 255, 0.04);
+      --radius-lg: 24px;
+      --radius-md: 16px;
+      --radius-sm: 12px;
+      --shadow-card: 0 4px 24px -8px rgba(0, 0, 0, 0.6);
+      --shadow-hover: 0 24px 48px -16px rgba(0, 0, 0, 0.7);
+      --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+      --noise-opacity: 0.03;
+    }
+
+    [data-theme="light"] {
+      --bg-deep: #f4f6fa;
+      --surface: rgba(255, 255, 255, 0.72);
+      --surface-hover: rgba(255, 255, 255, 0.92);
+      --border: rgba(15, 23, 42, 0.08);
+      --border-strong: rgba(15, 23, 42, 0.16);
+      --text-primary: #1e293b;
+      --text-secondary: #475569;
+      --text-dim: #94a3b8;
+      --accent-cyan: #0891b2;
+      --accent-violet: #7c3aed;
+      --accent-amber: #d97706;
+      --accent-rose: #e11d48;
+      --accent-emerald: #059669;
+      --chip-hover-bg: rgba(15, 23, 42, 0.04);
+      --shadow-card: 0 4px 24px -8px rgba(15, 23, 42, 0.08);
+      --shadow-hover: 0 24px 48px -16px rgba(15, 23, 42, 0.16);
+      --noise-opacity: 0.015;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background-color: var(--bg-deep);
+      color: var(--text-primary);
+      min-height: 100vh;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+      transition: background-color 0.5s ease, color 0.5s ease;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      background:
+        radial-gradient(ellipse 80% 60% at 10% 0%, rgba(34, 211, 238, 0.14), transparent 60%),
+        radial-gradient(ellipse 70% 50% at 90% 10%, rgba(167, 139, 250, 0.12), transparent 55%),
+        radial-gradient(ellipse 60% 50% at 50% 100%, rgba(52, 211, 153, 0.06), transparent 60%);
+      animation: bgShift 20s ease-in-out infinite alternate;
+      transition: opacity 0.5s ease;
+    }
+
+    [data-theme="light"] body::before {
+      background:
+        radial-gradient(ellipse 80% 60% at 10% 0%, rgba(8, 145, 178, 0.12), transparent 60%),
+        radial-gradient(ellipse 70% 50% at 90% 10%, rgba(124, 58, 237, 0.1), transparent 55%),
+        radial-gradient(ellipse 60% 50% at 50% 100%, rgba(5, 150, 105, 0.07), transparent 60%);
+    }
+
+    @keyframes bgShift {
+      0% { opacity: 0.7; transform: scale(1); }
+      100% { opacity: 1; transform: scale(1.08); }
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      opacity: var(--noise-opacity);
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      pointer-events: none;
+      transition: opacity 0.5s ease;
+    }
+
+    .app { max-width: 1200px; margin: 0 auto; padding: 0 24px 80px; }
+
+    /* ─── THEME TOGGLE ─── */
+    .theme-toggle {
+      position: fixed; top: 20px; right: 20px; z-index: 100;
+      width: 46px; height: 46px; border-radius: 50%;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      color: var(--text-primary); cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: var(--shadow-card);
+      transition: transform 0.35s var(--ease-out-expo), border-color 0.3s, box-shadow 0.35s var(--ease-out-expo), background-color 0.4s ease, color 0.4s ease;
+    }
+    .theme-toggle:hover { transform: scale(1.1) rotate(10deg); border-color: var(--border-strong); box-shadow: var(--shadow-hover); }
+    .theme-toggle svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .theme-toggle .icon-sun { display: block; }
+    .theme-toggle .icon-moon { display: none; }
+    [data-theme="light"] .theme-toggle .icon-sun { display: none; }
+    [data-theme="light"] .theme-toggle .icon-moon { display: block; }
+
+    /* ─── HEADER ─── */
+    .header { padding: 56px 0 24px; text-align: center; }
+    .header-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 16px; border-radius: 999px;
+      background: rgba(34, 211, 238, 0.1);
+      border: 1px solid rgba(34, 211, 238, 0.25);
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--accent-cyan);
+      margin-bottom: 20px;
+      animation: fadeDown 0.8s var(--ease-out-expo) both;
+    }
+    .header-badge::before {
+      content: ''; width: 6px; height: 6px; border-radius: 50%;
+      background: var(--accent-cyan); box-shadow: 0 0 12px var(--accent-cyan);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.8); } }
+
+    .header h1 {
+      font-size: clamp(2.2rem, 5.5vw, 3.8rem);
+      font-weight: 800; letter-spacing: -0.03em; line-height: 1.1;
+      margin-bottom: 16px;
+      animation: fadeDown 0.9s 0.1s var(--ease-out-expo) both;
+    }
+    .header h1 .gradient-text {
+      background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-violet) 50%, var(--accent-emerald) 100%);
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-size: 200% 200%;
+      animation: gradientMove 6s ease-in-out infinite;
+    }
+    @keyframes gradientMove { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+
+    .header-subtitle {
+      font-size: clamp(0.95rem, 2vw, 1.1rem);
+      color: var(--text-secondary); font-weight: 400;
+      max-width: 720px; margin: 0 auto;
+      animation: fadeDown 1s 0.2s var(--ease-out-expo) both;
+    }
+
+    /* ─── NAVEGACIÓN POR PESTAÑAS ─── */
+    .tabs-nav {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      margin: 32px 0 28px;
+      padding: 8px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      animation: fadeUp 0.8s 0.3s var(--ease-out-expo) both;
+    }
+    .tab-btn {
+      flex: 1 1 auto;
+      padding: 12px 18px;
+      border-radius: var(--radius-sm);
+      border: none; background: transparent;
+      color: var(--text-secondary);
+      font-family: inherit; font-size: 0.88rem; font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s var(--ease-out-expo);
+      white-space: nowrap;
+    }
+    .tab-btn:hover { color: var(--text-primary); background: var(--chip-hover-bg); }
+    .tab-btn.active {
+      background: rgba(34, 211, 238, 0.15);
+      color: var(--accent-cyan);
+      box-shadow: 0 0 20px -4px rgba(34, 211, 238, 0.2);
+    }
+    [data-theme="light"] .tab-btn.active { background: rgba(8, 145, 178, 0.12); color: var(--accent-cyan); }
+
+    /* ─── PANELES ─── */
+    .panel { display: none; animation: fadeUp 0.5s var(--ease-out-expo) both; }
+    .panel.active { display: block; }
+
+    .content-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      box-shadow: var(--shadow-card);
+      margin-bottom: 24px;
+      transition: background-color 0.4s ease, border-color 0.4s ease;
+    }
+
+    .content-card h2 {
+      font-size: 1.5rem; font-weight: 700; letter-spacing: -0.02em;
+      margin-bottom: 16px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .content-card h2 .icon-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--accent-cyan);
+      box-shadow: 0 0 12px var(--accent-cyan);
+      flex-shrink: 0;
+    }
+    .content-card h3 {
+      font-size: 1.1rem; font-weight: 700;
+      margin: 24px 0 10px;
+      color: var(--accent-cyan);
+    }
+    .content-card p {
+      color: var(--text-secondary);
+      margin-bottom: 14px;
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+    .content-card p strong { color: var(--text-primary); }
+    .content-card ul, .content-card ol {
+      margin: 12px 0 18px 20px;
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+    .content-card li { margin-bottom: 8px; }
+    .content-card blockquote {
+      border-left: 3px solid var(--accent-cyan);
+      padding: 12px 20px;
+      margin: 20px 0;
+      background: rgba(34, 211, 238, 0.05);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      font-style: italic;
+      color: var(--text-secondary);
+      font-size: 0.92rem;
+    }
+    [data-theme="light"] .content-card blockquote { background: rgba(8, 145, 178, 0.05); }
+    .content-card blockquote cite {
+      display: block; margin-top: 8px;
+      font-style: normal; font-size: 0.82rem; color: var(--text-dim);
+    }
+
+    /* ─── TARJETAS DE CONCEPTO ─── */
+    .concept-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+      margin: 20px 0;
+    }
+    .concept-card {
+      padding: 22px;
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      transition: transform 0.3s var(--ease-out-expo), border-color 0.3s, box-shadow 0.3s;
+    }
+    .concept-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--border-strong);
+      box-shadow: var(--shadow-hover);
+    }
+    .concept-card .concept-icon {
+      width: 44px; height: 44px; border-radius: var(--radius-sm);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem; margin-bottom: 14px;
+      background: rgba(34, 211, 238, 0.12);
+      color: var(--accent-cyan);
+    }
+    .concept-card h4 {
+      font-size: 1rem; font-weight: 700; margin-bottom: 8px;
+    }
+    .concept-card p {
+      font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; margin: 0;
+    }
+
+    /* ─── COMPARADOR ─── */
+    .compare-controls {
+      display: flex; gap: 8px; margin: 20px 0 24px; flex-wrap: wrap;
+    }
+    .compare-btn {
+      padding: 10px 20px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text-secondary);
+      font-family: inherit; font-size: 0.85rem; font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s var(--ease-out-expo);
+    }
+    .compare-btn:hover { border-color: var(--border-strong); color: var(--text-primary); }
+    .compare-btn.active {
+      background: var(--accent-cyan);
+      border-color: var(--accent-cyan);
+      color: var(--bg-deep);
+      font-weight: 700;
+    }
+    [data-theme="light"] .compare-btn.active { color: #fff; }
+
+    .compare-panels {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    @media (max-width: 640px) { .compare-panels { grid-template-columns: 1fr; } }
+
+    .compare-panel {
+      padding: 24px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      background: var(--surface);
+      transition: opacity 0.3s ease;
+    }
+    .compare-panel.dimmed { opacity: 0.35; pointer-events: none; }
+    .compare-panel h4 {
+      font-size: 0.95rem; font-weight: 700; margin-bottom: 12px;
+      text-transform: uppercase; letter-spacing: 0.06em;
+    }
+    .compare-panel.hardware h4 { color: var(--accent-amber); }
+    .compare-panel.software h4 { color: var(--accent-violet); }
+    .compare-panel p { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.7; }
+
+    /* ─── LÍNEA DE TIEMPO ─── */
+    .timeline { position: relative; padding: 20px 0 20px 32px; }
+    .timeline::before {
+      content: ''; position: absolute; left: 11px; top: 0; bottom: 0;
+      width: 2px; background: linear-gradient(to bottom, var(--accent-cyan), var(--accent-violet));
+      border-radius: 2px;
+    }
+    .timeline-item {
+      position: relative; margin-bottom: 28px; padding-left: 8px;
+    }
+    .timeline-item::before {
+      content: ''; position: absolute; left: -27px; top: 6px;
+      width: 12px; height: 12px; border-radius: 50%;
+      background: var(--bg-deep); border: 2px solid var(--accent-cyan);
+      box-shadow: 0 0 10px rgba(34, 211, 238, 0.3);
+    }
+    .timeline-item .timeline-era {
+      font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.08em; color: var(--accent-cyan); margin-bottom: 4px;
+    }
+    .timeline-item h4 { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+    .timeline-item p { font-size: 0.88rem; color: var(--text-secondary); margin: 0; line-height: 1.6; }
+
+    /* ─── TABLA COMPARATIVA ─── */
+    .table-wrap {
+      overflow-x: auto;
+      margin: 20px 0;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+    th, td {
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-secondary);
+    }
+    th {
+      background: var(--chip-hover-bg);
+      color: var(--text-primary);
+      font-weight: 700;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: var(--chip-hover-bg); }
+    td strong { color: var(--text-primary); }
+
+    /* ─── GLOSARIO ─── */
+    .accordion-item {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      margin-bottom: 10px;
+      overflow: hidden;
+      transition: border-color 0.3s;
+    }
+    .accordion-item:hover { border-color: var(--border-strong); }
+    .accordion-trigger {
+      width: 100%;
+      padding: 16px 20px;
+      background: transparent;
+      border: none;
+      color: var(--text-primary);
+      font-family: inherit; font-size: 0.95rem; font-weight: 600;
+      text-align: left; cursor: pointer;
+      display: flex; justify-content: space-between; align-items: center;
+      transition: background-color 0.2s;
+    }
+    .accordion-trigger:hover { background: var(--chip-hover-bg); }
+    .accordion-trigger .chevron {
+      transition: transform 0.3s var(--ease-out-expo);
+      font-size: 0.8rem; color: var(--text-dim);
+    }
+    .accordion-item.open .accordion-trigger .chevron { transform: rotate(180deg); }
+    .accordion-content {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.4s var(--ease-out-expo), padding 0.4s var(--ease-out-expo);
+      padding: 0 20px;
+    }
+    .accordion-item.open .accordion-content {
+      max-height: 500px; padding: 0 20px 18px;
+    }
+    .accordion-content p {
+      font-size: 0.9rem; color: var(--text-secondary); line-height: 1.7; margin: 0;
+    }
+
+    /* ─── FOOTER ─── */
+    .footer {
+      text-align: center; padding: 48px 0 0;
+      color: var(--text-dim); font-size: 0.8rem;
+      border-top: 1px solid var(--border); margin-top: 48px;
+    }
+    .footer a { color: var(--accent-cyan); text-decoration: none; font-weight: 500; }
+    .footer a:hover { text-decoration: underline; }
+
+    @keyframes fadeDown { from { opacity: 0; transform: translateY(-16px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+
+    @media (max-width: 640px) {
+      .app { padding: 0 16px 48px; }
+      .content-card { padding: 24px 20px; }
+      .tabs-nav { gap: 4px; padding: 6px; }
+      .tab-btn { padding: 10px 12px; font-size: 0.8rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema" title="Cambiar tema">
+    <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+    <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  </button>
+
+  <div class="app">
+    <!-- Header -->
+    <header class="header">
+      <div class="header-badge">Tecnología · Historia · Máquinas</div>
+      <h1>La <span class="gradient-text">Computadora</span></h1>
+      <p class="header-subtitle">
+        Un recorrido visual e interactivo por la máquina que transformó la civilización: su historia, su arquitectura, su software, su funcionamiento interno y su impacto en el mundo moderno.
+      </p>
+    </header>
+
+    <!-- Navegación por pestañas -->
+    <nav class="tabs-nav" role="tablist" aria-label="Secciones del tema">
+      <button class="tab-btn active" data-panel="panel-intro" role="tab" aria-selected="true">¿Qué es?</button>
+      <button class="tab-btn" data-panel="panel-historia" role="tab" aria-selected="false">Historia</button>
+      <button class="tab-btn" data-panel="panel-hardware" role="tab" aria-selected="false">Hardware</button>
+      <button class="tab-btn" data-panel="panel-software" role="tab" aria-selected="false">Software</button>
+      <button class="tab-btn" data-panel="panel-funciona" role="tab" aria-selected="false">¿Cómo funciona?</button>
+      <button class="tab-btn" data-panel="panel-tipos" role="tab" aria-selected="false">Tipos</button>
+      <button class="tab-btn" data-panel="panel-impacto" role="tab" aria-selected="false">Impacto y futuro</button>
+      <button class="tab-btn" data-panel="panel-glosario" role="tab" aria-selected="false">Glosario</button>
+    </nav>
+
+    <!-- ─── PANEL: ¿QUÉ ES? ─── -->
+    <section id="panel-intro" class="panel active" role="tabpanel">
+      <div class="content-card">
+        <h2><span class="icon-dot"></span>¿Qué es una computadora?</h2>
+        <p>
+          Una <strong>computadora</strong> (u <em>ordenador</em>) es una máquina electrónica programable capaz de recibir datos, procesarlos mediante instrucciones, almacenar resultados y comunicarlos. Su poder no reside en una capacidad única, sino en la <strong>combinación de velocidad, precisión y repetibilidad</strong>: puede ejecutar millones de operaciones por segundo sin fatigarse ni equivocarse.
+        </p>
+        <p>
+          Etimológicamente, la palabra viene del latín <em>computare</em> ("calcular", "contar"). Durante siglos, "computadora" designaba a la <strong>persona</strong> que hacía cálculos —a menudo mujeres en equipos científicos—. Solo a mediados del siglo XX el término se trasladó a las máquinas.
+        </p>
+
+        <h3>Las cuatro funciones esenciales</h3>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">📥</div>
+            <h4>Entrada</h4>
+            <p>Recibir datos e instrucciones del exterior: teclado, mouse, sensores, cámaras, redes, micrófonos.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">⚙️</div>
+            <h4>Procesamiento</h4>
+            <p>Transformar los datos mediante operaciones lógicas y aritméticas ejecutadas por la CPU.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🗄️</div>
+            <h4>Almacenamiento</h4>
+            <p>Guardar datos y resultados de forma temporal (RAM) o permanente (disco, SSD, nube).</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">📤</div>
+            <h4>Salida</h4>
+            <p>Comunicar los resultados al usuario o a otros sistemas: pantalla, altavoces, impresora, red.</p>
+          </div>
+        </div>
+
+        <h3>La arquitectura de von Neumann</h3>
+        <p>
+          En 1945, el matemático <strong>John von Neumann</strong> describió la arquitectura que aún domina casi todas las computadoras actuales: un diseño en el que los <strong>programas se almacenan en la misma memoria que los datos</strong>. Esto significa que una computadora puede modificar su propio funcionamiento sin cambiar su hardware: solo cargando otro programa.
+        </p>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">🧠</div>
+            <h4>Unidad de control</h4>
+            <p>Interpreta las instrucciones del programa y coordina los demás componentes.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">➗</div>
+            <h4>Unidad aritmético-lógica (ALU)</h4>
+            <p>Ejecuta operaciones matemáticas y comparaciones lógicas.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">💾</div>
+            <h4>Memoria</h4>
+            <p>Almacena tanto los datos como las instrucciones del programa en ejecución.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🔁</div>
+            <h4>Ciclo de instrucción</h4>
+            <p>Buscar, decodificar, ejecutar y almacenar. Se repite miles de millones de veces por segundo.</p>
+          </div>
+        </div>
+
+        <blockquote>
+          "Una computadora es una máquina tonta que hace cosas inteligentes a una velocidad asombrosa." — Atribuida a diversos autores de la informática
+          <cite>La potencia nace de la velocidad, no de la comprensión.</cite>
+        </blockquote>
+
+        <h3>¿Qué distingue a una computadora de una calculadora?</h3>
+        <p>
+          Una calculadora ejecuta operaciones fijas grabadas en su circuitería. Una computadora, en cambio, es <strong>programable</strong>: puede ejecutar cualquier secuencia de instrucciones que se le cargue, siempre que sea expresable en su lenguaje de máquina. Esa generalidad es lo que la convierte en una herramienta universal.
+        </p>
+      </div>
+    </section>
+
+    <!-- ─── PANEL: HISTORIA ─── -->
+    <section id="panel-historia" class="panel" role="tabpanel">
+      <div class="content-card">
+        <h2><span class="icon-dot"></span>Historia de la computación</h2>
+        <p>
+          La historia de la computadora no comienza con la electrónica, sino con la necesidad humana de <strong>automatizar el cálculo</strong>. Desde el ábaco hasta los procesadores cuánticos, cada generación de máquinas respondió a un problema concreto de su época.
+        </p>
+
+        <h3>Línea de tiempo</h3>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-era">c. 2700–2300 a.C.</div>
+            <h4>El ábaco</h4>
+            <p>Primer instrumento de cálculo conocido, usado en Mesopotamia, China y Egipto. Permite sumar, restar y multiplicar de forma mecánica.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">1642</div>
+            <h4>Pascalina</h4>
+            <p>Blaise Pascal construye la primera calculadora mecánica práctica, capaz de sumar y restar, para ayudar a su padre en tareas fiscales.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">1837</div>
+            <h4>Máquina analítica de Babbage</h4>
+            <p>Charles Babbage diseña —aunque no construye— la primera computadora mecánica programable. Ada Lovelace escribe para ella el primer algoritmo publicado de la historia.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">1936</div>
+            <h4>Máquina de Turing</h4>
+            <p>Alan Turing formaliza el concepto de "computación" con su máquina teórica. Es el fundamento matemático de toda la informática moderna.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">1945</div>
+            <h4>ENIAC y arquitectura de von Neumann</h4>
+            <p>Se termina el ENIAC, uno de los primeros computadores electrónicos de propósito general. Von Neumann describe la arquitectura que dominará las siguientes décadas.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">1947</div>
+            <h4>El transistor</h4>
+            <p>Bardeen, Brattain y Shockley inventan el transistor en Bell Labs. Reemplaza a las válvulas, reduce el tamaño y multiplica la fiabilidad.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">1958</div>
+            <h4>Circuito integrado</h4>
+            <p>Jack Kilby y Robert Noyce desarrollan el chip: múltiples transistores en un solo sustrato. Nace la electrónica moderna.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">1971</div>
+            <h4>Intel 4004</h4>
+            <p>Primer microprocesador comercial. Integra la CPU completa en un solo chip y abre la era de la computadora personal.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">1977–1984</div>
+            <h4>Apple II, IBM PC y Macintosh</h4>
+            <p>La computadora entra en los hogares. La interfaz gráfica de Macintosh (1984) populariza el uso del mouse y las ventanas.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">1991</div>
+            <h4>World Wide Web</h4>
+            <p>Tim Berners-Lee pone a disposición del público la Web. La computadora deja de ser una herramienta aislada y se vuelve global.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">2007</div>
+            <h4>El smartphone</h4>
+            <p>El iPhone y los teléfonos inteligentes llevan una computadora completa al bolsillo de miles de millones de personas.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">2010s–presente</div>
+            <h4>Nube, IA y computación cuántica</h4>
+            <p>El cómputo se descentraliza en la nube. Los aceleradores de IA y los primeros procesadores cuánticos redefinen lo que significa "computar".</p>
+          </div>
+        </div>
+
+        <h3>Las cinco generaciones</h3>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">🔌</div>
+            <h4>1ª (1940–1956)</h4>
+            <p>Válvulas de vacío. Grandes, costosas, consumidoras de energía. Ejemplo: ENIAC, UNIVAC.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🔋</div>
+            <h4>2ª (1956–1963)</h4>
+            <p>Transistores. Menores, más rápidas y fiables. Aparecen los primeros lenguajes de alto nivel (COBOL, FORTRAN).</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">💠</div>
+            <h4>3ª (1964–1971)</h4>
+            <p>Circuitos integrados. Nace la idea de familia de computadoras compatibles (IBM System/360).</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🧩</div>
+            <h4>4ª (1971–presente)</h4>
+            <p>Microprocesadores. La computadora personal, las redes y luego Internet redefinen la vida cotidiana.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">⚛️</div>
+            <h4>5ª (en curso)</h4>
+            <p>Inteligencia artificial y computación cuántica. La frontera entre hardware y cognición se difumina.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── PANEL: HARDWARE ─── -->
+    <section id="panel-hardware" class="panel" role="tabpanel">
+      <div class="content-card">
+        <h2><span class="icon-dot"></span>Hardware: las piezas físicas</h2>
+        <p>
+          El <strong>hardware</strong> es todo lo tangible de una computadora: circuitos, chips, discos, cables, periféricos. Su diseño está organizado en componentes que cumplen funciones específicas y se comunican mediante buses (canales de datos).
+        </p>
+
+        <h3>Componentes principales</h3>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">🧠</div>
+            <h4>CPU (procesador)</h4>
+            <p>El "cerebro". Ejecuta instrucciones, realiza cálculos y coordina el resto. Su velocidad se mide en GHz; su rendimiento depende de núcleos, caché y arquitectura.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">⚡</div>
+            <h4>Memoria RAM</h4>
+            <p>Memoria de trabajo, volátil y muy rápida. Guarda los datos y programas en uso. Más RAM permite tener más aplicaciones abiertas sin ralentizar.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">💽</div>
+            <h4>Almacenamiento</h4>
+            <p>Disco duro (HDD) o unidad de estado sólido (SSD). Persistente y de mayor capacidad que la RAM, pero más lento. Los SSD son decenas de veces más rápidos que los HDD.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🔲</div>
+            <h4>Placa madre</h4>
+            <p>Circuito principal que conecta todos los componentes. Aloja la CPU, la RAM, los puertos y los buses de comunicación.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🎮</div>
+            <h4>GPU (tarjeta gráfica)</h4>
+            <p>Procesador especializado en operaciones paralelas: gráficos, video, simulaciones e inteligencia artificial.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🔌</div>
+            <h4>Fuente de alimentación</h4>
+            <p>Convierte la corriente alterna en continua y distribuye energía a todos los componentes.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🌬️</div>
+            <h4>Refrigeración</h4>
+            <p>Disipadores, ventiladores y refrigeración líquida evitan que los componentes se sobrecalienten y pierdan rendimiento.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🖥️</div>
+            <h4>Periféricos</h4>
+            <p>Entrada (teclado, mouse, cámara), salida (pantalla, altavoces) y mixtos (impresora, pantalla táctil).</p>
+          </div>
+        </div>
+
+        <h3>La Ley de Moore</h3>
+        <p>
+          En 1965, Gordon Moore observó que la cantidad de transistores en un chip se duplicaba aproximadamente cada dos años. Esa tendencia —conocida como <strong>Ley de Moore</strong>— impulsó medio siglo de crecimiento exponencial en potencia de cómputo. En la última década, sin embargo, el ritmo se ha ralentizado por límites físicos: los transistores ya son de pocos nanómetros y se acercan a escalas atómicas.
+        </p>
+
+        <blockquote>
+          "La cantidad de transistores en un circuito integrado se duplica aproximadamente cada dos años." — Gordon Moore, 1965
+          <cite>Una observación que se convirtió en la hoja de ruta de toda la industria.</cite>
+        </blockquote>
+
+        <h3>Hardware vs. software</h3>
+        <p style="margin-bottom: 12px;">Selecciona una columna para enfocarte en ella.</p>
+        <div class="compare-controls">
+          <button class="compare-btn active" data-compare="both">Ambas</button>
+          <button class="compare-btn" data-compare="hardware">Solo hardware</button>
+          <button class="compare-btn" data-compare="software">Solo software</button>
+        </div>
+        <div class="compare-panels">
+          <div class="compare-panel hardware" id="compare-hardware">
+            <h4>🔧 Hardware</h4>
+            <p><strong>Naturaleza:</strong> física, tangible. Circuitos, chips, cables.</p>
+            <p><strong>Ejemplos:</strong> CPU, RAM, disco, teclado, monitor.</p>
+            <p><strong>Modificación:</strong> requiere reemplazar piezas o comprar un dispositivo nuevo.</p>
+            <p><strong>Duración:</strong> envejece con el uso y la obsolescencia tecnológica.</p>
+            <p><strong>Analógicamente:</strong> el cuerpo de la computadora.</p>
+          </div>
+          <div class="compare-panel software" id="compare-software">
+            <h4>💻 Software</h4>
+            <p><strong>Naturaleza:</strong> lógica, intangible. Instrucciones y datos.</p>
+            <p><strong>Ejemplos:</strong> sistema operativo, navegador, juegos, aplicaciones.</p>
+            <p><strong>Modificación:</strong> se instala, actualiza o desinstala en segundos.</p>
+            <p><strong>Duración:</strong> puede sobrevivir a varias generaciones de hardware.</p>
+            <p><strong>Analógicamente:</strong> la mente de la computadora.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── PANEL: SOFTWARE ─── -->
+    <section id="panel-software" class="panel" role="tabpanel">
+      <div class="content-card">
+        <h2><span class="icon-dot"></span>Software: las instrucciones invisibles</h2>
+        <p>
+          El <strong>software</strong> es el conjunto de programas, datos e instrucciones que le dicen al hardware qué hacer. Sin software, una computadora es una caja de silicio inerte. El software se organiza en capas: desde el firmware que arranca la máquina hasta las aplicaciones que el usuario utiliza a diario.
+        </p>
+
+        <h3>Las capas del software</h3>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">⚡</div>
+            <h4>Firmware y BIOS/UEFI</h4>
+            <p>El nivel más básico. Inicia el hardware al encender la computadora y permite que el sistema operativo tome el control.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🖥️</div>
+            <h4>Sistema operativo</h4>
+            <p>Gestiona recursos (CPU, memoria, discos), administra archivos y ofrece una interfaz al usuario. Ejemplos: Windows, macOS, Linux, Android, iOS.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🧰</div>
+            <h4>Controladores (drivers)</h4>
+            <p>Traducen las órdenes del sistema operativo a instrucciones que el hardware específico entiende.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">📚</div>
+            <h4>Bibliotecas y runtimes</h4>
+            <p>Código reutilizable que otras aplicaciones aprovechan: gráficos, redes, cifrado, bases de datos.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">📱</div>
+            <h4>Aplicaciones</h4>
+            <p>Programas que el usuario ejecuta para una tarea concreta: navegador, procesador de texto, juego, editor de video.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">☁️</div>
+            <h4>Servicios en la nube</h4>
+            <p>Software que corre en servidores remotos y se accede por Internet: correo, almacenamiento, streaming, IA.</p>
+          </div>
+        </div>
+
+        <h3>Lenguajes de programación</h3>
+        <p>
+          Los lenguajes permiten a los humanos escribir instrucciones comprensibles que luego son traducidas al lenguaje de máquina (binario). Se clasifican por su nivel de abstracción:
+        </p>
+        <ul>
+          <li><strong>Lenguaje de máquina:</strong> ceros y unos. Es lo único que la CPU ejecuta directamente.</li>
+          <li><strong>Ensamblador:</strong> mnemónicos cercanos al hardware (<em>MOV</em>, <em>ADD</em>, <em>JMP</em>).</li>
+          <li><strong>Lenguajes de alto nivel:</strong> Python, JavaScript, Java, C#, C++, Ruby, Go, Rust. Legibles y portables entre sistemas.</li>
+          <li><strong>Lenguajes especializados:</strong> SQL para bases de datos, R para estadística, HTML/CSS para la web.</li>
+        </ul>
+
+        <h3>Software libre vs. propietario</h3>
+        <div class="compare-panels">
+          <div class="compare-panel hardware">
+            <h4>🔓 Software libre</h4>
+            <p><strong>Libertades:</strong> usar, estudiar, modificar y distribuir el código.</p>
+            <p><strong>Ejemplos:</strong> Linux, Firefox, Blender, LibreOffice, Python.</p>
+            <p><strong>Ventajas:</strong> transparencia, comunidad, independencia del proveedor.</p>
+            <p><strong>Desafíos:</strong> soporte variable, curva de aprendizaje, fragmentación.</p>
+          </div>
+          <div class="compare-panel software">
+            <h4>🔒 Software propietario</h4>
+            <p><strong>Restricciones:</strong> el código es cerrado; su uso está limitado por licencia.</p>
+            <p><strong>Ejemplos:</strong> Windows, macOS, Adobe Photoshop, Microsoft Office.</p>
+            <p><strong>Ventajas:</strong> soporte profesional, integración, experiencia pulida.</p>
+            <p><strong>Desafíos:</strong> dependencia del proveedor, costos, opacidad.</p>
+          </div>
+        </div>
+
+        <blockquote>
+          "El software es una idea, no un objeto. Su costo está en el diseño, no en la reproducción." — Observación clásica de la economía del software
+          <cite>Explica por qué el software puede copiarse a costo casi nulo.</cite>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- ─── PANEL: ¿CÓMO FUNCIONA? ─── -->
+    <section id="panel-funciona" class="panel" role="tabpanel">
+      <div class="content-card">
+        <h2><span class="icon-dot"></span>¿Cómo funciona por dentro?</h2>
+        <p>
+          En el nivel más profundo, toda computadora opera con dos estados: <strong>0 y 1</strong>. Esa simplicidad binaria es la clave de su potencia: los transistores solo necesitan distinguir entre dos niveles de voltaje, lo que permite fabricarlos en cantidades enormes y a escalas minúsculas.
+        </p>
+
+        <h3>El sistema binario</h3>
+        <p>
+          La computadora representa toda la información —números, letras, imágenes, sonidos— como secuencias de bits (dígitos binarios). Un bit es 0 o 1; ocho bits forman un byte, que puede representar 256 valores distintos (2⁸).
+        </p>
+        <ul>
+          <li><strong>Bit:</strong> unidad mínima de información (0 o 1).</li>
+          <li><strong>Byte:</strong> 8 bits. Representa un carácter o un valor de 0 a 255.</li>
+          <li><strong>Kilobyte:</strong> 1.024 bytes.</li>
+          <li><strong>Megabyte:</strong> 1.024 KB.</li>
+          <li><strong>Gigabyte:</strong> 1.024 MB.</li>
+          <li><strong>Terabyte:</strong> 1.024 GB.</li>
+        </ul>
+
+        <h3>Compuertas lógicas</h3>
+        <p>
+          Los transistores se combinan para formar <strong>compuertas lógicas</strong>: circuitos que implementan operaciones booleanas. Todo procesador moderno está construido con miles de millones de estas compuertas.
+        </p>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">➕</div>
+            <h4>AND</h4>
+            <p>Devuelve 1 solo si ambas entradas son 1. Se usa para enmascarar bits.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🔀</div>
+            <h4>OR</h4>
+            <p>Devuelve 1 si al menos una entrada es 1. Combina condiciones.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🔄</div>
+            <h4>NOT</h4>
+            <p>Invierte el valor: 0 se convierte en 1 y viceversa. Base de la negación lógica.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">↔️</div>
+            <h4>XOR</h4>
+            <p>Devuelve 1 si las entradas son distintas. Fundamental en cifrado y aritmética binaria.</p>
+          </div>
+        </div>
+
+        <h3>El ciclo de instrucción de la CPU</h3>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-era">Paso 1</div>
+            <h4>Fetch (búsqueda)</h4>
+            <p>La CPU toma la siguiente instrucción desde la memoria RAM, apuntada por el registro contador de programa (PC).</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">Paso 2</div>
+            <h4>Decode (decodificación)</h4>
+            <p>La unidad de control interpreta la instrucción: qué operación es, sobre qué datos y dónde guardar el resultado.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">Paso 3</div>
+            <h4>Execute (ejecución)</h4>
+            <p>La ALU realiza la operación matemática o lógica. Puede implicar acceder a memoria o a registros.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">Paso 4</div>
+            <h4>Writeback (almacenamiento)</h4>
+            <p>El resultado se escribe en un registro o en memoria. El PC avanza a la siguiente instrucción y el ciclo se repite.</p>
+          </div>
+        </div>
+        <p>
+          Este ciclo se ejecuta miles de millones de veces por segundo. Una CPU moderna a 3 GHz completa 3.000 millones de ciclos en un segundo, aunque cada instrucción puede tardar varios ciclos en completarse.
+        </p>
+
+        <h3>Jerarquía de memoria</h3>
+        <p>
+          La memoria de una computadora no es un bloque único: es una <strong>pirámide</strong> donde velocidad y capacidad están en tensión. Cuanto más rápida, más pequeña y más cara.
+        </p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Nivel</th>
+                <th>Velocidad</th>
+                <th>Capacidad típica</th>
+                <th>Función</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Registros</strong></td>
+                <td>Más rápida</td>
+                <td>Bytes</td>
+                <td>Datos en uso inmediato por la CPU</td>
+              </tr>
+              <tr>
+                <td><strong>Caché L1/L2/L3</strong></td>
+                <td>Muy rápida</td>
+                <td>KB–MB</td>
+                <td>Copias de datos frecuentes</td>
+              </tr>
+              <tr>
+                <td><strong>RAM</strong></td>
+                <td>Rápida</td>
+                <td>GB</td>
+                <td>Programas y datos en ejecución</td>
+              </tr>
+              <tr>
+                <td><strong>SSD</strong></td>
+                <td>Media</td>
+                <td>GB–TB</td>
+                <td>Almacenamiento persistente veloz</td>
+              </tr>
+              <tr>
+                <td><strong>HDD</strong></td>
+                <td>Lenta</td>
+                <td>TB</td>
+                <td>Almacenamiento masivo económico</td>
+              </tr>
+              <tr>
+                <td><strong>Nube / red</strong></td>
+                <td>Más lenta</td>
+                <td>Ilimitada</td>
+                <td>Datos remotos y respaldos</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <blockquote>
+          "Hablar de la velocidad de una computadora es hablar de la velocidad con la que puede mover datos entre estos niveles." — Principio clásico de arquitectura de computadoras
+          <cite>El cuello de botella suele estar en la memoria, no en la CPU.</cite>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- ─── PANEL: TIPOS ─── -->
+    <section id="panel-tipos" class="panel" role="tabpanel">
+      <div class="content-card">
+        <h2><span class="icon-dot"></span>Tipos de computadoras</h2>
+        <p>
+          No existe una sola clase de computadora. La diversidad va desde los diminutos microcontroladores embebidos en un electrodoméstico hasta los supercomputadores que simulan el clima global. Lo que cambia es la <strong>escala, el propósito y la arquitectura</strong>.
+        </p>
+
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">🖥️</div>
+            <h4>Computadora personal</h4>
+            <p>De escritorio o todo-en-uno. Diseñada para un usuario, con teclado, mouse y monitor. Equilibrio entre potencia y precio.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">💻</div>
+            <h4>Portátil</h4>
+            <p>Integra pantalla, teclado, batería y componentes en un solo cuerpo. Prioriza portabilidad, eficiencia energética y conectividad inalámbrica.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">📱</div>
+            <h4>Smartphone y tablet</h4>
+            <p>Computadoras de bolsillo con pantalla táctil, sensores y conectividad permanente. Suelen usar arquitecturas ARM de bajo consumo.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🗄️</div>
+            <h4>Servidor</h4>
+            <p>Máquina diseñada para ofrecer servicios a otros equipos: web, bases de datos, correo, almacenamiento. Prioriza fiabilidad y disponibilidad 24/7.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">⚡</div>
+            <h4>Supercomputadora</h4>
+            <p>Miles de procesadores trabajando en paralelo para resolver cálculos masivos: clima, genómica, física de partículas, IA.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🔌</div>
+            <h4>Sistema embebido</h4>
+            <p>Computadora dedicada dentro de otro dispositivo: lavarropas, auto, marcapasos, router, semáforo. Suele no tener pantalla ni teclado.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">☁️</div>
+            <h4>Computación en la nube</h4>
+            <p>No es un dispositivo físico, sino un modelo: recursos de cómputo alquilados en centros de datos remotos y accedidos por Internet.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">⚛️</div>
+            <h4>Computadora cuántica</h4>
+            <p>Usa qubits, que pueden estar en superposición de 0 y 1. Potencialmente resuelve en segundos problemas que a una computadora clásica le llevarían milenios.</p>
+          </div>
+        </div>
+
+        <h3>Comparación de escala</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Tipo</th>
+                <th>Uso típico</th>
+                <th>Potencia relativa</th>
+                <th>Consumo</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Embebido</strong></td>
+                <td>Control de dispositivos</td>
+                <td>Muy baja</td>
+                <td>Watts o menos</td>
+              </tr>
+              <tr>
+                <td><strong>Smartphone</strong></td>
+                <td>Comunicación, apps, cámara</td>
+                <td>Media</td>
+                <td>2–10 W</td>
+              </tr>
+              <tr>
+                <td><strong>Portátil</strong></td>
+                <td>Trabajo, estudio, ocio</td>
+                <td>Media-alta</td>
+                <td>15–100 W</td>
+              </tr>
+              <tr>
+                <td><strong>PC de escritorio</strong></td>
+                <td>Productividad, gaming, edición</td>
+                <td>Alta</td>
+                <td>100–800 W</td>
+              </tr>
+              <tr>
+                <td><strong>Servidor</strong></td>
+                <td>Servicios en red</td>
+                <td>Muy alta</td>
+                <td>300–2.000 W</td>
+              </tr>
+              <tr>
+                <td><strong>Supercomputadora</strong></td>
+                <td>Simulación e investigación</td>
+                <td>Extrema</td>
+                <td>Megawatts</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <blockquote>
+          "La computadora más poderosa del mundo es la que ya tienes en el bolsillo, comparada con la que llevó al hombre a la Luna." 
+          <cite>Un recordatorio de la velocidad del progreso tecnológico.</cite>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- ─── PANEL: IMPACTO Y FUTURO ─── -->
+    <section id="panel-impacto" class="panel" role="tabpanel">
+      <div class="content-card">
+        <h2><span class="icon-dot"></span>Impacto y futuro</h2>
+        <p>
+          La computadora es, quizás, la herramienta más transformadora de la historia humana reciente. En menos de un siglo pasó de ser un dispositivo experimental a mediar casi todas las actividades humanas: comunicación, trabajo, comercio, ciencia, arte, educación, salud, entretenimiento y política.
+        </p>
+
+        <h3>Transformaciones clave</h3>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">🌐</div>
+            <h4>Internet</h4>
+            <p>La computadora dejó de ser una isla y se volvió parte de una red global. Todo conocimiento digitalizado es accesible en segundos.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🏭</div>
+            <h4>Automatización</h4>
+            <p>Procesos industriales, administrativos y logísticos son ejecutados por computadoras con una precisión y velocidad imposibles para el trabajo humano.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🧬</div>
+            <h4>Ciencia</h4>
+            <p>Genómica, simulaciones climáticas, física de partículas, astronomía: ninguna ciencia moderna sería posible sin cómputo masivo.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🎨</div>
+            <h4>Cultura</h4>
+            <p>Música, cine, literatura, diseño, videojuegos: la computadora transformó la producción y la distribución del arte.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">💼</div>
+            <h4>Trabajo</h4>
+            <p>Nuevas profesiones surgieron; otras se transformaron o desaparecieron. El teletrabajo redefinió la relación entre espacio y empleo.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">⚖️</div>
+            <h4>Sociedad</h4>
+            <p>Redes sociales, gobiernos digitales, banca electrónica y comercio en línea reconfiguraron la vida cívica y económica.</p>
+          </div>
+        </div>
+
+        <h3>Fronteras actuales</h3>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">🤖</div>
+            <h4>Inteligencia artificial</h4>
+            <p>Las computadoras ya no solo ejecutan reglas: aprenden de datos. Modelos de lenguaje, visión y generación transforman industrias enteras.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">⚛️</div>
+            <h4>Computación cuántica</h4>
+            <p>Aún en etapas tempranas, pero con potencial para romper la criptografía actual y simular sistemas físicos imposibles para computadoras clásicas.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🧠</div>
+            <h4>Neuromórfica</h4>
+            <p>Chips que imitan la estructura del cerebro humano para procesar información con mucha menor energía.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">📡</div>
+            <h4>Computación ubicua</h4>
+            <p>La computadora se disuelve en el entorno: sensores, objetos conectados, ropa, autos, ciudades. Ya no se "usa": se habita.</p>
+          </div>
+        </div>
+
+        <h3>Desafíos</h3>
+        <ul>
+          <li><strong>Brecha digital:</strong> el acceso desigual a dispositivos, conectividad y alfabetización digital profundiza desigualdades existentes.</li>
+          <li><strong>Privacidad:</strong> la computadora es también un sensor que registra cada acción. La protección de datos se vuelve crucial.</li>
+          <li><strong>Consumo energético:</strong> los centros de datos y la IA consumen cantidades crecientes de electricidad y agua.</li>
+          <li><strong>Obsolescencia:</strong> el ritmo de renovación tecnológica genera enormes volúmenes de residuos electrónicos.</li>
+          <li><strong>Dependencia:</strong> la sociedad se ha vuelto vulnerable a fallas, ataques y apagones informáticos.</li>
+        </ul>
+
+        <blockquote>
+          "La computadora es el equivalente moderno del fuego: transforma todo lo que toca, para bien y para mal." — Reflexión contemporánea
+          <cite>Su poder exige una responsabilidad proporcional.</cite>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- ─── PANEL: GLOSARIO ─── -->
+    <section id="panel-glosario" class="panel" role="tabpanel">
+      <div class="content-card">
+        <h2><span class="icon-dot"></span>Glosario informático</h2>
+        <p>Términos clave para comprender el tema. Haz clic en cada uno para expandir su definición.</p>
+
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Bit y byte <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Un bit es la unidad mínima de información (0 o 1). Un byte agrupa 8 bits y puede representar 256 valores distintos. A partir de ahí: kilobyte (1.024 bytes), megabyte (1.024 KB), gigabyte (1.024 MB), terabyte (1.024 GB).</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">CPU <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Unidad Central de Procesamiento. Es el componente que ejecuta las instrucciones de los programas: busca, decodifica, ejecuta y almacena resultados en un ciclo continuo. Su rendimiento depende de la frecuencia (GHz), la cantidad de núcleos, la caché y la arquitectura.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">RAM <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Memoria de acceso aleatorio. Es volátil (se borra al apagar la máquina) y muy rápida. Guarda los datos y programas en ejecución. Más RAM permite mantener más aplicaciones abiertas sin recurrir al disco.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Arquitectura de von Neumann <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Modelo de computadora en el que los programas y los datos se almacenan en la misma memoria. Fue descrito por John von Neumann en 1945 y sigue siendo la base de casi todas las computadoras actuales.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Sistema operativo <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Software que gestiona el hardware y proporciona servicios a las aplicaciones: administra memoria, procesador, archivos, dispositivos y usuarios. Ejemplos: Windows, macOS, Linux, Android, iOS.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Firmware <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Software grabado en la memoria permanente del hardware que controla su funcionamiento más básico. En las computadoras, el BIOS o UEFI es el firmware que inicia el arranque del sistema operativo.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">GPU <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Unidad de Procesamiento Gráfico. Procesador especializado en operaciones paralelas sobre muchos datos a la vez. Es indispensable para gráficos 3D, video e inteligencia artificial.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Transistor <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Dispositivo semiconductor que actúa como interruptor o amplificador de señales. Es la unidad básica de toda la electrónica digital: un procesador moderno contiene miles de millones.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Ley de Moore <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Observación formulada por Gordon Moore en 1965: la cantidad de transistores en un chip se duplica aproximadamente cada dos años. Impulsó medio siglo de crecimiento exponencial y hoy se enfrenta a límites físicos.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Compuerta lógica <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Circuito que implementa una operación booleana básica: AND, OR, NOT, XOR. Combinadas en millones, forman los procesadores que ejecutan todas las operaciones de una computadora.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Algoritmo <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Secuencia finita y ordenada de pasos que resuelve un problema o realiza una tarea. Un programa es un algoritmo expresado en un lenguaje que la máquina puede ejecutar.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Lenguaje de programación <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Notación formal que permite escribir instrucciones para una computadora. Va desde el lenguaje de máquina (binario) hasta lenguajes de alto nivel como Python, JavaScript, Java, C++ o Rust.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Software libre <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Software cuyo código fuente puede ser usado, estudiado, modificado y redistribuido libremente. Ejemplos: Linux, Firefox, Blender, Python. Se distingue del software propietario, cuyo código es cerrado.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Sistema embebido <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Computadora dedicada a una función específica dentro de un dispositivo mayor: un lavarropas, un auto, un marcapasos o un router. Suele tener recursos limitados y no una interfaz de usuario tradicional.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Computación cuántica <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Modelo de cómputo que usa qubits, capaces de estar en superposición de 0 y 1 y de entrelazarse. Promete resolver ciertos problemas (factorización, simulación molecular, optimización) mucho más rápido que las computadoras clásicas, aunque aún está en etapas tempranas.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Brecha digital <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Desigualdad en el acceso, uso y aprovechamiento de las tecnologías digitales. Se manifiesta entre países, regiones, generaciones y niveles socioeconómicos, y profundiza otras desigualdades existentes.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>
+        Enciclopedia Visual · Contenido original de
+        <a href="https://app-fioravante.github.io/apps-fioravante/" target="_blank" rel="noopener noreferrer">Fioravante</a>.
+        Este recurso es de carácter educativo y exploratorio.
+      </p>
+    </footer>
+  </div>
+
+  <script>
+    // ─── TEMA ───
+    const rootEl = document.documentElement;
+    const themeToggle = document.getElementById('themeToggle');
+    function updateToggleLabel() {
+      const isLight = rootEl.getAttribute('data-theme') === 'light';
+      themeToggle.setAttribute('aria-label', isLight ? 'Cambiar a modo oscuro' : 'Cambiar a modo claro');
+      themeToggle.setAttribute('title', isLight ? 'Cambiar a modo oscuro' : 'Cambiar a modo claro');
+    }
+    themeToggle.addEventListener('click', () => {
+      const isLight = rootEl.getAttribute('data-theme') === 'light';
+      const next = isLight ? 'dark' : 'light';
+      rootEl.setAttribute('data-theme', next);
+      try { localStorage.setItem('enc-theme', next); } catch (e) {}
+      updateToggleLabel();
+    });
+    updateToggleLabel();
+
+    // ─── PESTAÑAS ───
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const panels = document.querySelectorAll('.panel');
+
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const targetId = btn.dataset.panel;
+        tabBtns.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });
+        btn.classList.add('active');
+        btn.setAttribute('aria-selected', 'true');
+        panels.forEach(p => p.classList.remove('active'));
+        document.getElementById(targetId).classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    });
+
+    // ─── COMPARADOR ───
+    const compareBtns = document.querySelectorAll('.compare-btn');
+    const compareHardware = document.getElementById('compare-hardware');
+    const compareSoftware = document.getElementById('compare-software');
+
+    if (compareBtns.length > 0 && compareHardware && compareSoftware) {
+      compareBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          compareBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          const mode = btn.dataset.compare;
+
+          compareHardware.classList.remove('dimmed');
+          compareSoftware.classList.remove('dimmed');
+
+          if (mode === 'hardware') {
+            compareSoftware.classList.add('dimmed');
+          } else if (mode === 'software') {
+            compareHardware.classList.add('dimmed');
+          }
+        });
+      });
+    }
+
+    // ─── ACORDEÓN ───
+    document.querySelectorAll('.accordion-trigger').forEach(trigger => {
+      trigger.addEventListener('click', () => {
+        const item = trigger.parentElement;
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.accordion-item').forEach(i => {
+          i.classList.remove('open');
+          i.querySelector('.accordion-trigger').setAttribute('aria-expanded', 'false');
+        });
+        if (!isOpen) {
+          item.classList.add('open');
+          trigger.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

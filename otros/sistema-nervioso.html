@@ -1,0 +1,1395 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistema Nervioso Humano · Enciclopedia Visual Fioravante</title>
+  <meta name="description" content="Exploración interactiva del sistema nervioso humano: anatomía, neuronas, sinapsis, sistema central y periférico, funciones, enfermedades y curiosidades.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <script>
+    (function () {
+      try {
+        const stored = localStorage.getItem('enc-theme');
+        if (stored === 'light' || stored === 'dark') {
+          document.documentElement.setAttribute('data-theme', stored);
+        } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+          document.documentElement.setAttribute('data-theme', 'light');
+        }
+      } catch (e) {}
+    })();
+  </script>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg-deep: #070b14;
+      --surface: rgba(22, 32, 50, 0.65);
+      --surface-hover: rgba(30, 44, 68, 0.8);
+      --border: rgba(255, 255, 255, 0.07);
+      --border-strong: rgba(255, 255, 255, 0.15);
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --text-dim: #64748b;
+      --accent-cyan: #22d3ee;
+      --accent-violet: #a78bfa;
+      --accent-amber: #fbbf24;
+      --accent-rose: #fb7185;
+      --accent-emerald: #34d399;
+      --chip-hover-bg: rgba(255, 255, 255, 0.04);
+      --radius-lg: 24px;
+      --radius-md: 16px;
+      --radius-sm: 12px;
+      --shadow-card: 0 4px 24px -8px rgba(0, 0, 0, 0.6);
+      --shadow-hover: 0 24px 48px -16px rgba(0, 0, 0, 0.7);
+      --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+      --noise-opacity: 0.03;
+    }
+
+    [data-theme="light"] {
+      --bg-deep: #f4f6fa;
+      --surface: rgba(255, 255, 255, 0.72);
+      --surface-hover: rgba(255, 255, 255, 0.92);
+      --border: rgba(15, 23, 42, 0.08);
+      --border-strong: rgba(15, 23, 42, 0.16);
+      --text-primary: #1e293b;
+      --text-secondary: #475569;
+      --text-dim: #94a3b8;
+      --accent-cyan: #0891b2;
+      --accent-violet: #7c3aed;
+      --accent-amber: #d97706;
+      --accent-rose: #e11d48;
+      --accent-emerald: #059669;
+      --chip-hover-bg: rgba(15, 23, 42, 0.04);
+      --shadow-card: 0 4px 24px -8px rgba(15, 23, 42, 0.08);
+      --shadow-hover: 0 24px 48px -16px rgba(15, 23, 42, 0.16);
+      --noise-opacity: 0.015;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background-color: var(--bg-deep);
+      color: var(--text-primary);
+      min-height: 100vh;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+      transition: background-color 0.5s ease, color 0.5s ease;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      background:
+        radial-gradient(ellipse 80% 60% at 10% 0%, rgba(251, 113, 133, 0.13), transparent 60%),
+        radial-gradient(ellipse 70% 50% at 90% 10%, rgba(167, 139, 250, 0.12), transparent 55%),
+        radial-gradient(ellipse 60% 50% at 50% 100%, rgba(34, 211, 238, 0.06), transparent 60%);
+      animation: bgShift 20s ease-in-out infinite alternate;
+      transition: opacity 0.5s ease;
+    }
+
+    [data-theme="light"] body::before {
+      background:
+        radial-gradient(ellipse 80% 60% at 10% 0%, rgba(225, 29, 72, 0.11), transparent 60%),
+        radial-gradient(ellipse 70% 50% at 90% 10%, rgba(124, 58, 237, 0.1), transparent 55%),
+        radial-gradient(ellipse 60% 50% at 50% 100%, rgba(8, 145, 178, 0.07), transparent 60%);
+    }
+
+    @keyframes bgShift {
+      0% { opacity: 0.7; transform: scale(1); }
+      100% { opacity: 1; transform: scale(1.08); }
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      opacity: var(--noise-opacity);
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      pointer-events: none;
+      transition: opacity 0.5s ease;
+    }
+
+    .app { max-width: 1200px; margin: 0 auto; padding: 0 24px 80px; }
+
+    /* ─── THEME TOGGLE ─── */
+    .theme-toggle {
+      position: fixed; top: 20px; right: 20px; z-index: 100;
+      width: 46px; height: 46px; border-radius: 50%;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      color: var(--text-primary); cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: var(--shadow-card);
+      transition: transform 0.35s var(--ease-out-expo), border-color 0.3s, box-shadow 0.35s var(--ease-out-expo), background-color 0.4s ease, color 0.4s ease;
+    }
+    .theme-toggle:hover { transform: scale(1.1) rotate(10deg); border-color: var(--border-strong); box-shadow: var(--shadow-hover); }
+    .theme-toggle svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .theme-toggle .icon-sun { display: block; }
+    .theme-toggle .icon-moon { display: none; }
+    [data-theme="light"] .theme-toggle .icon-sun { display: none; }
+    [data-theme="light"] .theme-toggle .icon-moon { display: block; }
+
+    /* ─── HEADER ─── */
+    .header { padding: 56px 0 24px; text-align: center; }
+    .header-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 16px; border-radius: 999px;
+      background: rgba(251, 113, 133, 0.1);
+      border: 1px solid rgba(251, 113, 133, 0.25);
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--accent-rose);
+      margin-bottom: 20px;
+      animation: fadeDown 0.8s var(--ease-out-expo) both;
+    }
+    .header-badge::before {
+      content: ''; width: 6px; height: 6px; border-radius: 50%;
+      background: var(--accent-rose); box-shadow: 0 0 12px var(--accent-rose);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.8); } }
+
+    .header h1 {
+      font-size: clamp(2.2rem, 5.5vw, 3.8rem);
+      font-weight: 800; letter-spacing: -0.03em; line-height: 1.1;
+      margin-bottom: 16px;
+      animation: fadeDown 0.9s 0.1s var(--ease-out-expo) both;
+    }
+    .header h1 .gradient-text {
+      background: linear-gradient(135deg, var(--accent-rose) 0%, var(--accent-violet) 50%, var(--accent-cyan) 100%);
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-size: 200% 200%;
+      animation: gradientMove 6s ease-in-out infinite;
+    }
+    @keyframes gradientMove { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+
+    .header-subtitle {
+      font-size: clamp(0.95rem, 2vw, 1.1rem);
+      color: var(--text-secondary); font-weight: 400;
+      max-width: 720px; margin: 0 auto;
+      animation: fadeDown 1s 0.2s var(--ease-out-expo) both;
+    }
+
+    /* ─── NAVEGACIÓN POR PESTAÑAS ─── */
+    .tabs-nav {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      margin: 32px 0 28px;
+      padding: 8px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      animation: fadeUp 0.8s 0.3s var(--ease-out-expo) both;
+    }
+    .tab-btn {
+      flex: 1 1 auto;
+      padding: 12px 18px;
+      border-radius: var(--radius-sm);
+      border: none; background: transparent;
+      color: var(--text-secondary);
+      font-family: inherit; font-size: 0.88rem; font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s var(--ease-out-expo);
+      white-space: nowrap;
+    }
+    .tab-btn:hover { color: var(--text-primary); background: var(--chip-hover-bg); }
+    .tab-btn.active {
+      background: rgba(251, 113, 133, 0.15);
+      color: var(--accent-rose);
+      box-shadow: 0 0 20px -4px rgba(251, 113, 133, 0.2);
+    }
+    [data-theme="light"] .tab-btn.active { background: rgba(225, 29, 72, 0.12); color: var(--accent-rose); }
+
+    /* ─── PANELES ─── */
+    .panel { display: none; animation: fadeUp 0.5s var(--ease-out-expo) both; }
+    .panel.active { display: block; }
+
+    .content-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      box-shadow: var(--shadow-card);
+      margin-bottom: 24px;
+      transition: background-color 0.4s ease, border-color 0.4s ease;
+    }
+
+    .content-card h2 {
+      font-size: 1.5rem; font-weight: 700; letter-spacing: -0.02em;
+      margin-bottom: 16px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .content-card h2 .icon-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--accent-rose);
+      box-shadow: 0 0 12px var(--accent-rose);
+      flex-shrink: 0;
+    }
+    .content-card h3 {
+      font-size: 1.1rem; font-weight: 700;
+      margin: 24px 0 10px;
+      color: var(--accent-rose);
+    }
+    .content-card p {
+      color: var(--text-secondary);
+      margin-bottom: 14px;
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+    .content-card p strong { color: var(--text-primary); }
+    .content-card ul, .content-card ol {
+      margin: 12px 0 18px 20px;
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+    .content-card li { margin-bottom: 8px; }
+    .content-card blockquote {
+      border-left: 3px solid var(--accent-rose);
+      padding: 12px 20px;
+      margin: 20px 0;
+      background: rgba(251, 113, 133, 0.05);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      font-style: italic;
+      color: var(--text-secondary);
+      font-size: 0.92rem;
+    }
+    [data-theme="light"] .content-card blockquote { background: rgba(225, 29, 72, 0.05); }
+    .content-card blockquote cite {
+      display: block; margin-top: 8px;
+      font-style: normal; font-size: 0.82rem; color: var(--text-dim);
+    }
+
+    /* ─── TARJETAS DE CONCEPTO ─── */
+    .concept-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+      margin: 20px 0;
+    }
+    .concept-card {
+      padding: 22px;
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      transition: transform 0.3s var(--ease-out-expo), border-color 0.3s, box-shadow 0.3s;
+    }
+    .concept-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--border-strong);
+      box-shadow: var(--shadow-hover);
+    }
+    .concept-card .concept-icon {
+      width: 44px; height: 44px; border-radius: var(--radius-sm);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem; margin-bottom: 14px;
+      background: rgba(251, 113, 133, 0.12);
+      color: var(--accent-rose);
+    }
+    .concept-card h4 {
+      font-size: 1rem; font-weight: 700; margin-bottom: 8px;
+    }
+    .concept-card p {
+      font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; margin: 0;
+    }
+
+    /* ─── COMPARADOR ─── */
+    .compare-controls {
+      display: flex; gap: 8px; margin: 20px 0 24px; flex-wrap: wrap;
+    }
+    .compare-btn {
+      padding: 10px 20px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text-secondary);
+      font-family: inherit; font-size: 0.85rem; font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s var(--ease-out-expo);
+    }
+    .compare-btn:hover { border-color: var(--border-strong); color: var(--text-primary); }
+    .compare-btn.active {
+      background: var(--accent-rose);
+      border-color: var(--accent-rose);
+      color: var(--bg-deep);
+      font-weight: 700;
+    }
+    [data-theme="light"] .compare-btn.active { color: #fff; }
+
+    .compare-panels {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    @media (max-width: 640px) { .compare-panels { grid-template-columns: 1fr; } }
+
+    .compare-panel {
+      padding: 24px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      background: var(--surface);
+      transition: opacity 0.3s ease;
+    }
+    .compare-panel.dimmed { opacity: 0.35; pointer-events: none; }
+    .compare-panel h4 {
+      font-size: 0.95rem; font-weight: 700; margin-bottom: 12px;
+      text-transform: uppercase; letter-spacing: 0.06em;
+    }
+    .compare-panel.left h4 { color: var(--accent-amber); }
+    .compare-panel.right h4 { color: var(--accent-cyan); }
+    .compare-panel p { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.7; }
+
+    /* ─── LÍNEA DE TIEMPO ─── */
+    .timeline { position: relative; padding: 20px 0 20px 32px; }
+    .timeline::before {
+      content: ''; position: absolute; left: 11px; top: 0; bottom: 0;
+      width: 2px; background: linear-gradient(to bottom, var(--accent-rose), var(--accent-violet));
+      border-radius: 2px;
+    }
+    .timeline-item {
+      position: relative; margin-bottom: 28px; padding-left: 8px;
+    }
+    .timeline-item::before {
+      content: ''; position: absolute; left: -27px; top: 6px;
+      width: 12px; height: 12px; border-radius: 50%;
+      background: var(--bg-deep); border: 2px solid var(--accent-rose);
+      box-shadow: 0 0 10px rgba(251, 113, 133, 0.3);
+    }
+    .timeline-item .timeline-era {
+      font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.08em; color: var(--accent-rose); margin-bottom: 4px;
+    }
+    .timeline-item h4 { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+    .timeline-item p { font-size: 0.88rem; color: var(--text-secondary); margin: 0; line-height: 1.6; }
+
+    /* ─── TABLA ─── */
+    .table-wrap {
+      overflow-x: auto;
+      margin: 20px 0;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+    th, td {
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-secondary);
+    }
+    th {
+      background: var(--chip-hover-bg);
+      color: var(--text-primary);
+      font-weight: 700;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: var(--chip-hover-bg); }
+    td strong { color: var(--text-primary); }
+
+    /* ─── GLOSARIO ─── */
+    .accordion-item {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      margin-bottom: 10px;
+      overflow: hidden;
+      transition: border-color 0.3s;
+    }
+    .accordion-item:hover { border-color: var(--border-strong); }
+    .accordion-trigger {
+      width: 100%;
+      padding: 16px 20px;
+      background: transparent;
+      border: none;
+      color: var(--text-primary);
+      font-family: inherit; font-size: 0.95rem; font-weight: 600;
+      text-align: left; cursor: pointer;
+      display: flex; justify-content: space-between; align-items: center;
+      transition: background-color 0.2s;
+    }
+    .accordion-trigger:hover { background: var(--chip-hover-bg); }
+    .accordion-trigger .chevron {
+      transition: transform 0.3s var(--ease-out-expo);
+      font-size: 0.8rem; color: var(--text-dim);
+    }
+    .accordion-item.open .accordion-trigger .chevron { transform: rotate(180deg); }
+    .accordion-content {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.4s var(--ease-out-expo), padding 0.4s var(--ease-out-expo);
+      padding: 0 20px;
+    }
+    .accordion-item.open .accordion-content {
+      max-height: 500px; padding: 0 20px 18px;
+    }
+    .accordion-content p {
+      font-size: 0.9rem; color: var(--text-secondary); line-height: 1.7; margin: 0;
+    }
+
+    /* ─── FOOTER ─── */
+    .footer {
+      text-align: center; padding: 48px 0 0;
+      color: var(--text-dim); font-size: 0.8rem;
+      border-top: 1px solid var(--border); margin-top: 48px;
+    }
+    .footer a { color: var(--accent-rose); text-decoration: none; font-weight: 500; }
+    .footer a:hover { text-decoration: underline; }
+
+    @keyframes fadeDown { from { opacity: 0; transform: translateY(-16px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+
+    @media (max-width: 640px) {
+      .app { padding: 0 16px 48px; }
+      .content-card { padding: 24px 20px; }
+      .tabs-nav { gap: 4px; padding: 6px; }
+      .tab-btn { padding: 10px 12px; font-size: 0.8rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema" title="Cambiar tema">
+    <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+    <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  </button>
+
+  <div class="app">
+    <!-- Header -->
+    <header class="header">
+      <div class="header-badge">Biología · Anatomía · Neurociencia</div>
+      <h1>Sistema <span class="gradient-text">Nervioso</span> Humano</h1>
+      <p class="header-subtitle">
+        Un recorrido visual e interactivo por la red que coordina cada pensamiento, movimiento y emoción: su anatomía, sus neuronas, sus divisiones, sus funciones y sus principales patologías.
+      </p>
+    </header>
+
+    <!-- Navegación por pestañas -->
+    <nav class="tabs-nav" role="tablist" aria-label="Secciones del tema">
+      <button class="tab-btn active" data-panel="panel-intro" role="tab" aria-selected="true">¿Qué es?</button>
+      <button class="tab-btn" data-panel="panel-neuronas" role="tab" aria-selected="false">Neuronas y Sinapsis</button>
+      <button class="tab-btn" data-panel="panel-central" role="tab" aria-selected="false">Sistema Central</button>
+      <button class="tab-btn" data-panel="panel-periferico" role="tab" aria-selected="false">Sistema Periférico</button>
+      <button class="tab-btn" data-panel="panel-funciones" role="tab" aria-selected="false">Funciones</button>
+      <button class="tab-btn" data-panel="panel-enfermedades" role="tab" aria-selected="false">Enfermedades</button>
+      <button class="tab-btn" data-panel="panel-curiosidades" role="tab" aria-selected="false">Curiosidades</button>
+      <button class="tab-btn" data-panel="panel-glosario" role="tab" aria-selected="false">Glosario</button>
+    </nav>
+
+    <!-- ─── PANEL: ¿QUÉ ES? ─── -->
+    <section id="panel-intro" class="panel active" role="tabpanel">
+      <div class="content-card">
+        <h2><span class="icon-dot"></span>¿Qué es el sistema nervioso?</h2>
+        <p>
+          El <strong>sistema nervioso</strong> es la red de células, tejidos y órganos que coordina, integra y controla todas las funciones del cuerpo humano. Recibe información del entorno y del interior del organismo, la procesa, genera respuestas y permite funciones superiores como el pensamiento, la memoria, el lenguaje y las emociones.
+        </p>
+        <p>
+          Es el sistema más complejo del cuerpo: contiene aproximadamente <strong>86.000 millones de neuronas</strong> y un número aún mayor de células gliales que las sostienen, nutren y protegen. Cada neurona puede conectarse con miles de otras, formando una red de billones de conexiones.
+        </p>
+
+        <h3>Las tres funciones esenciales</h3>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">📡</div>
+            <h4>Sensorial</h4>
+            <p>Detectar estímulos del exterior (luz, sonido, tacto, temperatura) y del interior (dolor, presión, composición química) mediante receptores especializados.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🧠</div>
+            <h4>Integradora</h4>
+            <p>Procesar la información recibida, compararla con experiencias previas, interpretarla y decidir una respuesta adecuada.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🦵</div>
+            <h4>Motora</h4>
+            <p>Ordenar y coordinar respuestas: contracción muscular, secreción glandular, movimiento voluntario o reflejo.</p>
+          </div>
+        </div>
+
+        <h3>Las dos grandes divisiones</h3>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">🧠</div>
+            <h4>Sistema nervioso central (SNC)</h4>
+            <p>Encéfalo y médula espinal. Es el centro de integración y control: procesa la información y genera las respuestas.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🕸️</div>
+            <h4>Sistema nervioso periférico (SNP)</h4>
+            <p>Nervios y ganglios que conectan el SNC con el resto del cuerpo. Transporta información sensitiva y motora.</p>
+          </div>
+        </div>
+
+        <blockquote>
+          "El cerebro es un órgano hecho de miles de millones de células, cada una conectada con miles de otras. Todo lo que somos —pensamientos, recuerdos, emociones— emerge de esa red." — Reflexión neurocientífica
+          <cite>La mente es lo que hace el cerebro.</cite>
+        </blockquote>
+
+        <h3>¿Por qué es tan importante?</h3>
+        <ul>
+          <li>Controla la respiración, el ritmo cardíaco, la digestión y otras funciones vitales involuntarias.</li>
+          <li>Coordina el movimiento, el equilibrio, la postura y las habilidades motoras finas.</li>
+          <li>Permite percibir el mundo mediante los cinco sentidos (y muchos más: propiocepción, interocepción, equilibrio).</li>
+          <li>Hace posible el aprendizaje, la memoria, el lenguaje, la planificación y la creatividad.</li>
+          <li>Regula las emociones, el estrés y la conducta social.</li>
+          <li>Integra toda la información en una experiencia unificada de "yo".</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ─── PANEL: NEURONAS Y SINAPSIS ─── -->
+    <section id="panel-neuronas" class="panel" role="tabpanel">
+      <div class="content-card">
+        <h2><span class="icon-dot"></span>Neuronas y sinapsis</h2>
+        <p>
+          La <strong>neurona</strong> es la unidad funcional del sistema nervioso. Es una célula altamente especializada en recibir, procesar y transmitir información mediante señales eléctricas y químicas. Se estima que el cerebro humano contiene unos <strong>86.000 millones de neuronas</strong>.
+        </p>
+
+        <h3>Partes de una neurona</h3>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">🌳</div>
+            <h4>Dendritas</h4>
+            <p>Ramificaciones que reciben las señales de otras neuronas y las conducen hacia el cuerpo celular.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">⚪</div>
+            <h4>Soma (cuerpo celular)</h4>
+            <p>Contiene el núcleo y los orgánulos. Integra las señales recibidas y decide si se generará un impulso nervioso.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🛤️</div>
+            <h4>Axón</h4>
+            <p>Prolongación larga que conduce el impulso eléctrico desde el soma hacia otras células. Puede medir desde micrómetros hasta más de un metro.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🧴</div>
+            <h4>Vaina de mielina</h4>
+            <p>Capa aislante que envuelve el axón y acelera la conducción del impulso. Su ausencia o daño causa enfermedades como la esclerosis múltiple.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🔗</div>
+            <h4>Terminales axónicos</h4>
+            <p>Extremos del axón donde se liberan los neurotransmisores que transmiten la señal a la siguiente neurona o célula.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🛡️</div>
+            <h4>Células gliales</h4>
+            <p>Células de soporte: astrocitos, oligodendrocitos, microglía y células de Schwann. Nutren, protegen y modulan a las neuronas.</p>
+          </div>
+        </div>
+
+        <h3>Tipos de neuronas</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Tipo</th>
+                <th>Función</th>
+                <th>Dirección del impulso</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Sensitivas (aferentes)</strong></td>
+                <td>Llevan información de los receptores al SNC</td>
+                <td>Periferia → Centro</td>
+              </tr>
+              <tr>
+                <td><strong>Motoras (eferentes)</strong></td>
+                <td>Llevan órdenes del SNC a músculos y glándulas</td>
+                <td>Centro → Periferia</td>
+              </tr>
+              <tr>
+                <td><strong>Interneuronas</strong></td>
+                <td>Conectan neuronas entre sí; procesan información</td>
+                <td>Dentro del SNC</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>El potencial de acción</h3>
+        <p>
+          La neurona transmite información mediante un <strong>impulso eléctrico</strong> llamado potencial de acción. Este se genera cuando la membrana celular se despolariza más allá de un umbral, invirtiendo brevemente su carga interna (de negativa a positiva) y propagándose a lo largo del axón.
+        </p>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-era">Reposo</div>
+            <h4>Potencial de membrana en reposo</h4>
+            <p>El interior de la neurona es negativo (-70 mV) respecto al exterior, debido a la distribución desigual de iones (Na⁺, K⁺, Cl⁻).</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">Estímulo</div>
+            <h4>Despolarización</h4>
+            <p>Un estímulo abre canales de sodio: entra Na⁺ y la carga interna se vuelve positiva. Si alcanza el umbral, se dispara el potencial de acción.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">Pico</div>
+            <h4>Espiga</h4>
+            <p>La inversión de carga alcanza su máximo (+30 mV) y el impulso se propaga por el axón de forma "todo o nada": no hay intensidades intermedias.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">Recuperación</div>
+            <h4>Repolarización</h4>
+            <p>Los canales de potasio se abren, sale K⁺ y la neurona recupera su carga negativa. Se produce un breve período refractario.</p>
+          </div>
+        </div>
+
+        <h3>La sinapsis</h3>
+        <p>
+          La <strong>sinapsis</strong> es el punto de contacto funcional entre dos neuronas (o entre una neurona y otra célula). Es donde se transmite la información. Existen dos tipos principales:
+        </p>
+        <div class="compare-panels">
+          <div class="compare-panel left">
+            <h4>⚡ Sinapsis eléctrica</h4>
+            <p><strong>Mecanismo:</strong> paso directo de corriente a través de uniones gap.</p>
+            <p><strong>Velocidad:</strong> muy rápida (casi instantánea).</p>
+            <p><strong>Ubicación:</strong> menos frecuente en mamíferos, común en reflejos rápidos y en el corazón.</p>
+            <p><strong>Ventaja:</strong> sincronización precisa.</p>
+          </div>
+          <div class="compare-panel right">
+            <h4>🧪 Sinapsis química</h4>
+            <p><strong>Mecanismo:</strong> liberación de neurotransmisores en la hendidura sináptica.</p>
+            <p><strong>Velocidad:</strong> más lenta, pero modulable.</p>
+            <p><strong>Ubicación:</strong> la gran mayoría de las sinapsis del sistema nervioso.</p>
+            <p><strong>Ventaja:</strong> permite amplificación, inhibición y plasticidad.</p>
+          </div>
+        </div>
+
+        <h3>Neurotransmisores principales</h3>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">🚀</div>
+            <h4>Dopamina</h4>
+            <p>Motivación, recompensa, placer, movimiento. Su déficit se relaciona con el Parkinson; su exceso, con la esquizofrenia.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">😊</div>
+            <h4>Serotonina</h4>
+            <p>Estado de ánimo, sueño, apetito, regulación emocional. Su desequilibrio se asocia con la depresión.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">⚡</div>
+            <h4>Glutamato</h4>
+            <p>Principal neurotransmisor excitatorio del cerebro. Fundamental en el aprendizaje y la memoria.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🛑</div>
+            <h4>GABA</h4>
+            <p>Principal neurotransmisor inhibidor. Regula la excitabilidad y previene la sobreactivación neuronal.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">💓</div>
+            <h4>Noradrenalina</h4>
+            <p>Alerta, atención, respuesta al estrés. También llamada norepinefrina.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">💪</div>
+            <h4>Acetilcolina</h4>
+            <p>Contracción muscular, memoria, sistema nervioso autónomo. Su déficit está asociado al Alzheimer.</p>
+          </div>
+        </div>
+
+        <blockquote>
+          "Las neuronas que se activan juntas, se conectan juntas." — Donald Hebb
+          <cite>Principio fundamental de la plasticidad sináptica y del aprendizaje.</cite>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- ─── PANEL: SISTEMA CENTRAL ─── -->
+    <section id="panel-central" class="panel" role="tabpanel">
+      <div class="content-card">
+        <h2><span class="icon-dot"></span>Sistema nervioso central (SNC)</h2>
+        <p>
+          El <strong>sistema nervioso central</strong> está formado por el <strong>encéfalo</strong> y la <strong>médula espinal</strong>. Es el centro de integración y control: recibe, procesa y genera respuestas. Está protegido por estructuras óseas (cráneo y columna vertebral) y por tres membranas llamadas meninges, además del líquido cefalorraquídeo.
+        </p>
+
+        <h3>El encéfalo</h3>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">🧠</div>
+            <h4>Cerebro</h4>
+            <p>La parte más grande. Dividido en dos hemisferios (izquierdo y derecho) unidos por el cuerpo calloso. Alberga funciones superiores: pensamiento, memoria, lenguaje, emoción, movimiento voluntario.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🌾</div>
+            <h4>Cerebelo</h4>
+            <p>Situado detrás del cerebro. Coordina el movimiento, el equilibrio, la postura y participa en el aprendizaje motor.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🌉</div>
+            <h4>Tronco encefálico</h4>
+            <p>Conecta el cerebro con la médula espinal. Controla funciones vitales: respiración, ritmo cardíaco, presión arterial, reflejos.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🦋</div>
+            <h4>Diencéfalo</h4>
+            <p>Incluye el tálamo (relevo sensorial) y el hipotálamo (regulación de hambre, sed, temperatura, hormonas).</p>
+          </div>
+        </div>
+
+        <h3>Lóbulos cerebrales</h3>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">👁️</div>
+            <h4>Frontal</h4>
+            <p>Funciones ejecutivas: planificación, toma de decisiones, control de impulsos, movimiento voluntario, lenguaje expresivo (área de Broca).</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">👂</div>
+            <h4>Temporal</h4>
+            <p>Audición, memoria (hipocampo), comprensión del lenguaje (área de Wernicke), reconocimiento de objetos y caras.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">✋</div>
+            <h4>Parietal</h4>
+            <p>Sensación táctil, propiocepción, orientación espacial, integración multisensorial.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">👀</div>
+            <h4>Occipital</h4>
+            <p>Procesamiento visual: forma, color, movimiento. Es la "sede" de la visión consciente.</p>
+          </div>
+        </div>
+
+        <h3>Estructuras subcorticales</h3>
+        <ul>
+          <li><strong>Tálamo:</strong> estación de relevo de casi todas las señales sensoriales hacia la corteza.</li>
+          <li><strong>Hipotálamo:</strong> regula hambre, sed, temperatura, sueño y conexión con el sistema endocrino.</li>
+          <li><strong>Hipocampo:</strong> esencial para la formación de nuevas memorias y la navegación espacial.</li>
+          <li><strong>Amígdala:</strong> procesa emociones, especialmente el miedo y la agresión.</li>
+          <li><strong>Ganglios basales:</strong> coordinan el movimiento, los hábitos y la recompensa.</li>
+        </ul>
+
+        <h3>La médula espinal</h3>
+        <p>
+          La <strong>médula espinal</strong> es un cordón nervioso que desciende desde el tronco encefálico por el canal vertebral. Cumple dos funciones esenciales:
+        </p>
+        <ul>
+          <li><strong>Vía de conducción:</strong> transporta información sensitiva hacia el encéfalo y órdenes motoras hacia los músculos.</li>
+          <li><strong>Centro de reflejos:</strong> genera respuestas automáticas e inmediatas (reflejo rotuliano, retirada de la mano ante el dolor) sin necesidad de que la información llegue al cerebro.</li>
+        </ul>
+
+        <blockquote>
+          "El sistema nervioso central es el lugar donde la información se convierte en experiencia y la experiencia en acción." — Reflexión neurocientífica
+          <cite>Percibir, decidir y actuar son las tres operaciones fundamentales del SNC.</cite>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- ─── PANEL: SISTEMA PERIFÉRICO ─── -->
+    <section id="panel-periferico" class="panel" role="tabpanel">
+      <div class="content-card">
+        <h2><span class="icon-dot"></span>Sistema nervioso periférico (SNP)</h2>
+        <p>
+          El <strong>sistema nervioso periférico</strong> está formado por todos los nervios y ganglios que conectan el sistema nervioso central con el resto del cuerpo. Es la "red de cables" que transporta información desde los receptores sensoriales hacia el SNC y desde el SNC hacia los músculos y glándulas.
+        </p>
+
+        <h3>División funcional</h3>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">📥</div>
+            <h4>Sensitivo (aferente)</h4>
+            <p>Lleva información desde la piel, los músculos, las articulaciones y los órganos internos hacia el SNC.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">📤</div>
+            <h4>Motor (eferente)</h4>
+            <p>Lleva órdenes desde el SNC hacia los músculos y glándulas. Se divide en somático y autónomo.</p>
+          </div>
+        </div>
+
+        <h3>Sistema nervioso somático</h3>
+        <p>
+          Controla los movimientos <strong>voluntarios</strong> y la información sensitiva consciente. Inerva los músculos esqueléticos y transmite información de tacto, dolor, temperatura y propiocepción.
+        </p>
+
+        <h3>Sistema nervioso autónomo (SNA)</h3>
+        <p>
+          Regula las funciones <strong>involuntarias</strong> del organismo: ritmo cardíaco, digestión, respiración, sudoración, diámetro pupilar, presión arterial. Se subdivide en dos ramas complementarias:
+        </p>
+        <div class="compare-panels">
+          <div class="compare-panel left">
+            <h4>⚡ Simpático</h4>
+            <p><strong>Función:</strong> "lucha o huida". Prepara al cuerpo para la acción.</p>
+            <p><strong>Efectos:</strong> acelera el corazón, dilata las pupilas y los bronquios, desvía la sangre a los músculos, inhibe la digestión.</p>
+            <p><strong>Activación:</strong> estrés, peligro, esfuerzo físico intenso.</p>
+            <p><strong>Neurotransmisor:</strong> noradrenalina.</p>
+          </div>
+          <div class="compare-panel right">
+            <h4>🌿 Parasimpático</h4>
+            <p><strong>Función:</strong> "descanso y digestión". Promueve la recuperación y el ahorro de energía.</p>
+            <p><strong>Efectos:</strong> enlentece el corazón, contrae las pupilas, estimula la digestión, favorece la micción.</p>
+            <p><strong>Activación:</strong> reposo, después de comer, durante el sueño.</p>
+            <p><strong>Neurotransmisor:</strong> acetilcolina.</p>
+          </div>
+        </div>
+
+        <h3>Estructuras del SNP</h3>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">🕸️</div>
+            <h4>Nervios craneales</h4>
+            <p>12 pares que emergen del encéfalo. Inervan la cabeza, el cuello y algunos órganos internos. Ejemplo: nervio óptico, vago, trigémino.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🦴</div>
+            <h4>Nervios espinales</h4>
+            <p>31 pares que emergen de la médula espinal. Recorren todo el cuerpo y se ramifican en nervios periféricos.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🔵</div>
+            <h4>Ganglios</h4>
+            <p>Agrupaciones de somas neuronales fuera del SNC. Actúan como estaciones de relevo y procesamiento local.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🫀</div>
+            <h4>Sistema entérico</h4>
+            <p>Red nerviosa del tubo digestivo. A veces llamado "segundo cerebro", contiene cientos de millones de neuronas y regula la digestión de forma relativamente autónoma.</p>
+          </div>
+        </div>
+
+        <blockquote>
+          "El sistema nervioso periférico es la interfaz entre el mundo interior y el mundo exterior. Sin él, el cerebro estaría aislado en su caja de hueso." — Reflexión anatómica
+          <cite>El SNC piensa y decide; el SNP conecta y ejecuta.</cite>
+        </blockquote>
+
+        <h3>Comparador: central vs. periférico</h3>
+        <p style="margin-bottom: 12px;">Selecciona una columna para enfocarte en ella.</p>
+        <div class="compare-controls">
+          <button class="compare-btn active" data-compare="both">Ambas</button>
+          <button class="compare-btn" data-compare="left">Solo central</button>
+          <button class="compare-btn" data-compare="right">Solo periférico</button>
+        </div>
+        <div class="compare-panels">
+          <div class="compare-panel left" id="compare-left-snp">
+            <h4>🧠 Sistema central</h4>
+            <p><strong>Componentes:</strong> encéfalo y médula espinal.</p>
+            <p><strong>Función:</strong> integración, procesamiento y control.</p>
+            <p><strong>Protección:</strong> cráneo, columna, meninges, líquido cefalorraquídeo.</p>
+            <p><strong>Capacidad:</strong> regeneración muy limitada.</p>
+            <p><strong>Analogía:</strong> el centro de datos y el procesador.</p>
+          </div>
+          <div class="compare-panel right" id="compare-right-snp">
+            <h4>🕸️ Sistema periférico</h4>
+            <p><strong>Componentes:</strong> nervios y ganglios.</p>
+            <p><strong>Función:</strong> transporte de información sensitiva y motora.</p>
+            <p><strong>Protección:</strong> vainas de mielina, tejido conectivo, trayectos anatómicos.</p>
+            <p><strong>Capacidad:</strong> regeneración parcial en algunos nervios.</p>
+            <p><strong>Analogía:</strong> los cables que conectan el centro con los dispositivos.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── PANEL: FUNCIONES ─── -->
+    <section id="panel-funciones" class="panel" role="tabpanel">
+      <div class="content-card">
+        <h2><span class="icon-dot"></span>Funciones del sistema nervioso</h2>
+        <p>
+          El sistema nervioso no se ocupa de una sola tarea: coordina prácticamente todo lo que el cuerpo hace. Sus funciones abarcan desde reflejos instantáneos hasta procesos cognitivos que tardan años en desarrollarse.
+        </p>
+
+        <h3>Funciones principales</h3>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">👁️</div>
+            <h4>Sensación y percepción</h4>
+            <p>Recibe e interpreta estímulos visuales, auditivos, táctiles, olfativos, gustativos, propioceptivos y viscerales.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🦵</div>
+            <h4>Movimiento</h4>
+            <p>Controla la contracción muscular voluntaria e involuntaria, la postura, el equilibrio y la coordinación motora.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🫀</div>
+            <h4>Regulación interna</h4>
+            <p>Mantiene la homeostasis: temperatura, presión arterial, glucemia, pH, hidratación, ritmo cardíaco y respiración.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">📚</div>
+            <h4>Aprendizaje y memoria</h4>
+            <p>Almacena experiencias, forma hábitos, consolida recuerdos y permite adaptarse al entorno.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">💬</div>
+            <h4>Lenguaje y comunicación</h4>
+            <p>Permite producir y comprender el lenguaje hablado y escrito, así como la comunicación no verbal.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">❤️</div>
+            <h4>Emociones</h4>
+            <p>Procesa el miedo, la alegría, la tristeza, la ira, el amor. Vincula la experiencia con respuestas fisiológicas.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🧩</div>
+            <h4>Cognición superior</h4>
+            <p>Razonamiento, planificación, resolución de problemas, creatividad, juicio moral, conciencia de sí mismo.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">⏰</div>
+            <h4>Ritmos biológicos</h4>
+            <p>Regula el ciclo sueño-vigilia, la liberación hormonal y los ritmos circadianos a través del hipotálamo y la glándula pineal.</p>
+          </div>
+        </div>
+
+        <h3>El arco reflejo</h3>
+        <p>
+          El <strong>arco reflejo</strong> es la vía nerviosa más simple: una respuesta automática e inmediata a un estímulo, que no requiere la intervención consciente del cerebro. Es esencial para la supervivencia y la protección.
+        </p>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-era">Paso 1</div>
+            <h4>Estímulo</h4>
+            <p>Un receptor detecta un estímulo nocivo (por ejemplo, tocar algo caliente).</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">Paso 2</div>
+            <h4>Vía aferente</h4>
+            <p>Una neurona sensitiva lleva el impulso hacia la médula espinal.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">Paso 3</div>
+            <h4>Centro integrador</h4>
+            <p>En la médula espinal, una interneurona conecta la señal sensitiva con la motora.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">Paso 4</div>
+            <h4>Vía eferente</h4>
+            <p>Una neurona motora lleva la orden al músculo correspondiente.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">Paso 5</div>
+            <h4>Respuesta</h4>
+            <p>El músculo se contrae y la mano se retira antes de que el cerebro registre el dolor consciente.</p>
+          </div>
+        </div>
+
+        <h3>Plasticidad neuronal</h3>
+        <p>
+          El sistema nervioso no es estático: es <strong>plástico</strong>. Puede reorganizarse, formar nuevas conexiones y modificar las existentes a lo largo de toda la vida. La plasticidad es la base del aprendizaje, la memoria, la rehabilitación tras una lesión y la adaptación al entorno.
+        </p>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">🌱</div>
+            <h4>Plasticidad del desarrollo</h4>
+            <p>En la infancia, el cerebro forma conexiones a gran velocidad. Los períodos críticos permiten adquirir lenguaje, visión y habilidades sociales.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🔄</div>
+            <h4>Plasticidad adulta</h4>
+            <p>El cerebro adulto sigue cambiando: aprender un idioma, un instrumento o una profesión modifica sus circuitos.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🩹</div>
+            <h4>Plasticidad reparadora</h4>
+            <p>Tras una lesión, otras áreas pueden asumir funciones perdidas. Es la base de la rehabilitación neurológica.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🧠</div>
+            <h4>Neurogénesis</h4>
+            <p>Se ha demostrado que en algunas regiones del cerebro adulto —como el hipocampo— nacen nuevas neuronas a lo largo de la vida.</p>
+          </div>
+        </div>
+
+        <blockquote>
+          "El cerebro no es un órgano fijo, sino un órgano que se esculpe con la experiencia." — Principio de la neuroplasticidad
+          <cite>Lo que hacemos, pensamos y sentimos moldea nuestra propia red neuronal.</cite>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- ─── PANEL: ENFERMEDADES ─── -->
+    <section id="panel-enfermedades" class="panel" role="tabpanel">
+      <div class="content-card">
+        <h2><span class="icon-dot"></span>Enfermedades del sistema nervioso</h2>
+        <p>
+          Las enfermedades neurológicas afectan a millones de personas en todo el mundo. Pueden originarse en las neuronas, en la mielina, en los vasos sanguíneos, en las meninges o en los músculos que el sistema nervioso controla. Su impacto es enorme, tanto por el sufrimiento individual como por su costo social y económico.
+        </p>
+
+        <h3>Principales trastornos</h3>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">🧩</div>
+            <h4>Alzheimer</h4>
+            <p>Enfermedad neurodegenerativa progresiva. Se caracteriza por la pérdida de memoria, el deterioro cognitivo y cambios de conducta. Está asociada a placas de beta-amiloide y ovillos de tau.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🦋</div>
+            <h4>Parkinson</h4>
+            <p>Trastorno del movimiento por degeneración de neuronas dopaminérgicas en la sustancia negra. Provoca temblor, rigidez, lentitud y alteraciones posturales.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">⚡</div>
+            <h4>Epilepsia</h4>
+            <p>Descargas eléctricas anormales y excesivas en el cerebro que generan crisis. Puede ser genética, estructural o adquirida.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🩸</div>
+            <h4>ACV (ictus)</h4>
+            <p>Interrupción del flujo sanguíneo a una parte del cerebro (isquémico) o hemorragia (hemorrágico). Es una emergencia médica: cada minuto cuenta.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🛡️</div>
+            <h4>Esclerosis múltiple</h4>
+            <p>Enfermedad autoinmune que daña la mielina del SNC. Provoca síntomas variables: fatiga, problemas motores, sensitivos, visuales y cognitivos.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">😔</div>
+            <h4>Depresión</h4>
+            <p>Trastorno del estado de ánimo con base neurobiológica. Involucra desequilibrios en serotonina, dopamina y noradrenalina, y alteraciones en la plasticidad neuronal.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🌀</div>
+            <h4>Migraña</h4>
+            <p>Cefalea recurrente e intensa, a menudo con náuseas, fotofobia y aura. Su mecanismo involucra vasos sanguíneos y neurotransmisores.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🧠</div>
+            <h4>ELA</h4>
+            <p>Esclerosis lateral amiotrófica: degeneración progresiva de las neuronas motoras. Afecta el movimiento, pero no la cognición ni la sensibilidad.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">👶</div>
+            <h4>Parálisis cerebral</h4>
+            <p>Trastorno del movimiento y la postura por una lesión cerebral ocurrida antes, durante o poco después del nacimiento.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">😰</div>
+            <h4>Ansiedad</h4>
+            <p>Trastorno que involucra hiperactivación de la amígdala y del sistema simpático. Puede ser generalizada, social, por pánico o fóbica.</p>
+          </div>
+        </div>
+
+        <h3>Factores de riesgo y prevención</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Factor</th>
+                <th>Riesgo</th>
+                <th>Recomendación</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Hipertensión</strong></td>
+                <td>ACV, demencia vascular</td>
+                <td>Controlar presión arterial</td>
+              </tr>
+              <tr>
+                <td><strong>Sedentarismo</strong></td>
+                <td>Deterioro cognitivo, depresión</td>
+                <td>Actividad física regular</td>
+              </tr>
+              <tr>
+                <td><strong>Sueño deficiente</strong></td>
+                <td>Fatiga, deterioro cognitivo</td>
+                <td>Higiene del sueño</td>
+              </tr>
+              <tr>
+                <td><strong>Estrés crónico</strong></td>
+                <td>Ansiedad, depresión, ACV</td>
+                <td>Técnicas de manejo del estrés</td>
+              </tr>
+              <tr>
+                <td><strong>Alcohol y tabaco</strong></td>
+                <td>Neurotoxicidad, ACV, adicción</td>
+                <td>Evitar o reducir su consumo</td>
+              </tr>
+              <tr>
+                <td><strong>Aislamiento social</strong></td>
+                <td>Deterioro cognitivo</td>
+                <td>Mantener vínculos significativos</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>La salud del cerebro</h3>
+        <p>
+          El cerebro se cuida como cualquier otro órgano: con <strong>alimentación equilibrada, ejercicio, sueño reparador, vida social activa y estimulación cognitiva</strong>. También es crucial consultar tempranamente ante síntomas neurológicos, porque muchas enfermedades son más tratables en sus etapas iniciales.
+        </p>
+
+        <blockquote>
+          "El cerebro es el único órgano que se estudia a sí mismo. Conocerlo es conocer al que conoce." — Reflexión neurocientífica
+          <cite>La neurociencia es, en cierto sentido, el cerebro explorándose.</cite>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- ─── PANEL: CURIOSIDADES ─── -->
+    <section id="panel-curiosidades" class="panel" role="tabpanel">
+      <div class="content-card">
+        <h2><span class="icon-dot"></span>Curiosidades del sistema nervioso</h2>
+        <p>
+          El sistema nervioso es uno de los objetos más fascinantes de estudio. Aunque la ciencia ha avanzado enormemente, sigue siendo en gran parte un misterio. Estas son algunas de las curiosidades más sorprendentes.
+        </p>
+
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">⚡</div>
+            <h4>Velocidad del impulso</h4>
+            <p>Las señales nerviosas pueden viajar a velocidades de hasta <strong>120 m/s</strong> (432 km/h) en los axones mielinizados. Sin embargo, el dolor tarda en percibirse una fracción de segundo.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🔋</div>
+            <h4>Potencia energética</h4>
+            <p>El cerebro representa alrededor del <strong>2% del peso corporal</strong>, pero consume cerca del <strong>20% de la energía total</strong> del cuerpo.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🧬</div>
+            <h4>Número de neuronas</h4>
+            <p>Se estima que el cerebro contiene unos <strong>86.000 millones de neuronas</strong>, conectadas por billones de sinapsis.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🌊</div>
+            <h4>Contenido de agua</h4>
+            <p>El cerebro es aproximadamente <strong>75% agua</strong>. Una deshidratación leve ya afecta la concentración y el estado de ánimo.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">💡</div>
+            <h4>Chispas biológicas</h4>
+            <p>El cerebro genera suficiente electricidad para encender una pequeña lámpara LED: las neuronas producen corrientes de pocos milivoltios.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🩸</div>
+            <h4>Sin dolor propio</h4>
+            <p>El cerebro no tiene receptores de dolor propios. Las cefaleas provienen de vasos, meninges y músculos que lo rodean.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🌙</div>
+            <h4>Sueño y memoria</h4>
+            <p>Mientras dormimos, el cerebro consolida la memoria, elimina desechos y reorganiza conexiones. Dormir es una actividad neurológica intensa.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🫄</div>
+            <h4>Desarrollo temprano</h4>
+            <p>Durante el embarazo, el cerebro fetal produce <strong>miles de neuronas por segundo</strong>. En la infancia, forma millones de conexiones por minuto.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🎨</div>
+            <h4>Ilusiones ópticas</h4>
+            <p>El cerebro interpreta activamente lo que ve, no registra pasivamente. Las ilusiones revelan sus reglas de funcionamiento y sus límites.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🤝</div>
+            <h4>Neuronas espejo</h4>
+            <p>Se activan al observar a otra persona realizar una acción. Se relacionan con la empatía, el aprendizaje imitativo y la comprensión social.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🎵</div>
+            <h4>Emoción musical</h4>
+            <p>Escuchar música que nos gusta activa el circuito de recompensa (dopamina) y zonas motoras, como si "bailara" internamente.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🕰️</div>
+            <h4>Percepción del tiempo</h4>
+            <p>El cerebro no tiene un "reloj" único: percibe el paso del tiempo a través de la actividad de varias regiones, y lo distorsiona según la emoción y la atención.</p>
+          </div>
+        </div>
+
+        <h3>El "segundo cerebro"</h3>
+        <p>
+          El sistema nervioso entérico, que recubre el aparato digestivo, contiene alrededor de <strong>500 millones de neuronas</strong> —aproximadamente la cantidad que tiene el cerebro de un gato—. Aunque no piensa, regula la digestión, se comunica con el cerebro mediante el nervio vago y produce el 90% de la serotonina del organismo.
+        </p>
+
+        <h3>El cerebro del futuro</h3>
+        <p>
+          Las interfaces cerebro-computadora (BCI) están comenzando a permitir que personas con parálisis controlen prótesis o escriban con el pensamiento. Combinadas con la inteligencia artificial, podrían transformar radicalmente lo que significa ser humano en el siglo XXI.
+        </p>
+
+        <blockquote>
+          "El cerebro es la última frontera. Lo que somos, sentimos y pensamos está inscrito en sus conexiones. Conocerlo es conocernos." — Reflexión contemporánea
+          <cite>La neurociencia es el espejo más profundo de nuestra propia identidad.</cite>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- ─── PANEL: GLOSARIO ─── -->
+    <section id="panel-glosario" class="panel" role="tabpanel">
+      <div class="content-card">
+        <h2><span class="icon-dot"></span>Glosario del sistema nervioso</h2>
+        <p>Términos clave para comprender el tema. Haz clic en cada uno para expandir su definición.</p>
+
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Neurona <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Célula especializada del sistema nervioso que recibe, procesa y transmite información mediante señales eléctricas y químicas. Está formada por soma, dendritas, axón y terminales sinápticos.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Sinapsis <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Punto de contacto funcional entre dos neuronas o entre una neurona y otra célula. Puede ser eléctrica (paso directo de corriente) o química (liberación de neurotransmisores en la hendidura sináptica).</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Neurotransmisor <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Sustancia química liberada por las neuronas en la sinapsis para transmitir señales a otras células. Ejemplos: dopamina, serotonina, glutamato, GABA, acetilcolina, noradrenalina.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Mielina <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Capa lipídica que envuelve los axones y acelera la conducción del impulso nervioso. En el SNC la produce los oligodendrocitos; en el SNP, las células de Schwann. Su pérdida causa enfermedades como la esclerosis múltiple.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Potencial de acción <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Impulso eléctrico que se propaga a lo largo del axón cuando la despolarización de la membrana supera un umbral. Es un fenómeno "todo o nada": no existen intensidades intermedias.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Sistema nervioso central (SNC) <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>División del sistema nervioso formada por el encéfalo y la médula espinal. Es el centro de integración, procesamiento y control.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Sistema nervioso periférico (SNP) <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>División formada por los nervios y ganglios que conectan el SNC con el resto del cuerpo. Transporta información sensitiva y motora.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Sistema nervioso autónomo <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Parte del SNP que regula las funciones involuntarias: ritmo cardíaco, digestión, respiración, sudoración. Se divide en simpático (lucha o huida) y parasimpático (descanso y digestión).</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Neurona espejo <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Neurona que se activa tanto cuando realizamos una acción como cuando observamos a otra persona realizarla. Se relacionan con la empatía, el aprendizaje imitativo y la cognición social.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Neuroplasticidad <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Capacidad del sistema nervioso para reorganizarse, formar nuevas conexiones y modificar las existentes a lo largo de la vida. Es la base del aprendizaje, la memoria, la rehabilitación y la adaptación.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Hipocampo <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Estructura del lóbulo temporal esencial para la formación de nuevas memorias y la navegación espacial. Su daño bilateral produce amnesia anterógrada grave.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Amígdala <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Estructura subcortical que procesa emociones, especialmente el miedo y la agresión. Coordina respuestas fisiológicas y conductuales ante amenazas.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Corteza cerebral <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Capa externa del cerebro, con pliegues y surcos que aumentan su superficie. Alberga funciones superiores: percepción, movimiento voluntario, lenguaje, razonamiento, emoción.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Arco reflejo <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Vía nerviosa más simple que produce una respuesta automática e inmediata a un estímulo. Intervienen un receptor, una neurona sensitiva, una o más interneuronas, una neurona motora y un efector.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Homeostasis <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Capacidad del organismo de mantener un equilibrio interno estable (temperatura, pH, glucemia, presión). El sistema nervioso y el endocrino son sus principales reguladores.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Célula glial <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Célula de soporte del sistema nervioso. Incluye astrocitos (nutrición y soporte), oligodendrocitos (mielina en el SNC), células de Schwann (mielina en el SNP) y microglía (defensa inmunitaria).</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Neurogénesis <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Formación de nuevas neuronas. Aunque durante décadas se creyó que no ocurría en el cerebro adulto, hoy se sabe que existe en regiones como el hipocampo y el bulbo olfatorio.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>
+        Enciclopedia Visual · Contenido original de
+        <a href="https://app-fioravante.github.io/apps-fioravante/" target="_blank" rel="noopener noreferrer">Fioravante</a>.
+        Este recurso es de carácter educativo y exploratorio.
+      </p>
+    </footer>
+  </div>
+
+  <script>
+    // ─── TEMA ───
+    const rootEl = document.documentElement;
+    const themeToggle = document.getElementById('themeToggle');
+    function updateToggleLabel() {
+      const isLight = rootEl.getAttribute('data-theme') === 'light';
+      themeToggle.setAttribute('aria-label', isLight ? 'Cambiar a modo oscuro' : 'Cambiar a modo claro');
+      themeToggle.setAttribute('title', isLight ? 'Cambiar a modo oscuro' : 'Cambiar a modo claro');
+    }
+    themeToggle.addEventListener('click', () => {
+      const isLight = rootEl.getAttribute('data-theme') === 'light';
+      const next = isLight ? 'dark' : 'light';
+      rootEl.setAttribute('data-theme', next);
+      try { localStorage.setItem('enc-theme', next); } catch (e) {}
+      updateToggleLabel();
+    });
+    updateToggleLabel();
+
+    // ─── PESTAÑAS ───
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const panels = document.querySelectorAll('.panel');
+
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const targetId = btn.dataset.panel;
+        tabBtns.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });
+        btn.classList.add('active');
+        btn.setAttribute('aria-selected', 'true');
+        panels.forEach(p => p.classList.remove('active'));
+        document.getElementById(targetId).classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    });
+
+    // ─── COMPARADOR SNC vs SNP ───
+    document.querySelectorAll('.compare-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const group = btn.closest('.content-card');
+        group.querySelectorAll('.compare-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const mode = btn.dataset.compare;
+
+        const left = document.getElementById('compare-left-snp');
+        const right = document.getElementById('compare-right-snp');
+
+        if (left && right) {
+          left.classList.remove('dimmed');
+          right.classList.remove('dimmed');
+          if (mode === 'left') right.classList.add('dimmed');
+          if (mode === 'right') left.classList.add('dimmed');
+        }
+      });
+    });
+
+    // ─── ACORDEÓN ───
+    document.querySelectorAll('.accordion-trigger').forEach(trigger => {
+      trigger.addEventListener('click', () => {
+        const item = trigger.parentElement;
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.accordion-item').forEach(i => {
+          i.classList.remove('open');
+          i.querySelector('.accordion-trigger').setAttribute('aria-expanded', 'false');
+        });
+        if (!isOpen) {
+          item.classList.add('open');
+          trigger.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

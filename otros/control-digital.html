@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Control Digital de la Sociedad · Enciclopedia Visual Fioravante</title>
+  <meta name="description" content="Exploración interactiva del control digital de la sociedad: vigilancia masiva, crédito social, identidad digital, CBDCs, gobernanza algorítmica y resistencia.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <script>
+    (function () {
+      try {
+        const stored = localStorage.getItem('enc-theme');
+        if (stored === 'light' || stored === 'dark') {
+          document.documentElement.setAttribute('data-theme', stored);
+        } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+          document.documentElement.setAttribute('data-theme', 'light');
+        }
+      } catch (e) {}
+    })();
+  </script>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg-deep: #070b14;
+      --surface: rgba(22, 32, 50, 0.65);
+      --surface-hover: rgba(30, 44, 68, 0.8);
+      --border: rgba(255, 255, 255, 0.07);
+      --border-strong: rgba(255, 255, 255, 0.15);
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --text-dim: #64748b;
+      --accent-cyan: #22d3ee;
+      --accent-violet: #a78bfa;
+      --accent-amber: #fbbf24;
+      --accent-rose: #fb7185;
+      --accent-emerald: #34d399;
+      --chip-hover-bg: rgba(255, 255, 255, 0.04);
+      --radius-lg: 24px;
+      --radius-md: 16px;
+      --radius-sm: 12px;
+      --shadow-card: 0 4px 24px -8px rgba(0, 0, 0, 0.6);
+      --shadow-hover: 0 24px 48px -16px rgba(0, 0, 0, 0.7);
+      --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+      --noise-opacity: 0.03;
+    }
+
+    [data-theme="light"] {
+      --bg-deep: #f4f6fa;
+      --surface: rgba(255, 255, 255, 0.72);
+      --surface-hover: rgba(255, 255, 255, 0.92);
+      --border: rgba(15, 23, 42, 0.08);
+      --border-strong: rgba(15, 23, 42, 0.16);
+      --text-primary: #1e293b;
+      --text-secondary: #475569;
+      --text-dim: #94a3b8;
+      --accent-cyan: #0891b2;
+      --accent-violet: #7c3aed;
+      --accent-amber: #d97706;
+      --accent-rose: #e11d48;
+      --accent-emerald: #059669;
+      --chip-hover-bg: rgba(15, 23, 42, 0.04);
+      --shadow-card: 0 4px 24px -8px rgba(15, 23, 42, 0.08);
+      --shadow-hover: 0 24px 48px -16px rgba(15, 23, 42, 0.16);
+      --noise-opacity: 0.015;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background-color: var(--bg-deep);
+      color: var(--text-primary);
+      min-height: 100vh;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+      transition: background-color 0.5s ease, color 0.5s ease;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      background:
+        radial-gradient(ellipse 80% 60% at 10% 0%, rgba(34, 211, 238, 0.14), transparent 60%),
+        radial-gradient(ellipse 70% 50% at 90% 10%, rgba(167, 139, 250, 0.12), transparent 55%),
+        radial-gradient(ellipse 60% 50% at 50% 100%, rgba(52, 211, 153, 0.06), transparent 60%);
+      animation: bgShift 20s ease-in-out infinite alternate;
+      transition: opacity 0.5s ease;
+    }
+
+    [data-theme="light"] body::before {
+      background:
+        radial-gradient(ellipse 80% 60% at 10% 0%, rgba(8, 145, 178, 0.12), transparent 60%),
+        radial-gradient(ellipse 70% 50% at 90% 10%, rgba(124, 58, 237, 0.1), transparent 55%),
+        radial-gradient(ellipse 60% 50% at 50% 100%, rgba(5, 150, 105, 0.07), transparent 60%);
+    }
+
+    @keyframes bgShift {
+      0% { opacity: 0.7; transform: scale(1); }
+      100% { opacity: 1; transform: scale(1.08); }
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      opacity: var(--noise-opacity);
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      pointer-events: none;
+      transition: opacity 0.5s ease;
+    }
+
+    .app { max-width: 1200px; margin: 0 auto; padding: 0 24px 80px; }
+
+    /* ─── THEME TOGGLE ─── */
+    .theme-toggle {
+      position: fixed; top: 20px; right: 20px; z-index: 100;
+      width: 46px; height: 46px; border-radius: 50%;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      color: var(--text-primary); cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: var(--shadow-card);
+      transition: transform 0.35s var(--ease-out-expo), border-color 0.3s, box-shadow 0.35s var(--ease-out-expo), background-color 0.4s ease, color 0.4s ease;
+    }
+    .theme-toggle:hover { transform: scale(1.1) rotate(10deg); border-color: var(--border-strong); box-shadow: var(--shadow-hover); }
+    .theme-toggle svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .theme-toggle .icon-sun { display: block; }
+    .theme-toggle .icon-moon { display: none; }
+    [data-theme="light"] .theme-toggle .icon-sun { display: none; }
+    [data-theme="light"] .theme-toggle .icon-moon { display: block; }
+
+    /* ─── HEADER ─── */
+    .header { padding: 56px 0 24px; text-align: center; }
+    .header-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 16px; border-radius: 999px;
+      background: rgba(34, 211, 238, 0.1);
+      border: 1px solid rgba(34, 211, 238, 0.25);
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--accent-cyan);
+      margin-bottom: 20px;
+      animation: fadeDown 0.8s var(--ease-out-expo) both;
+    }
+    .header-badge::before {
+      content: ''; width: 6px; height: 6px; border-radius: 50%;
+      background: var(--accent-cyan); box-shadow: 0 0 12px var(--accent-cyan);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.8); } }
+
+    .header h1 {
+      font-size: clamp(2.2rem, 5.5vw, 3.8rem);
+      font-weight: 800; letter-spacing: -0.03em; line-height: 1.1;
+      margin-bottom: 16px;
+      animation: fadeDown 0.9s 0.1s var(--ease-out-expo) both;
+    }
+    .header h1 .gradient-text {
+      background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-violet) 50%, var(--accent-emerald) 100%);
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-size: 200% 200%;
+      animation: gradientMove 6s ease-in-out infinite;
+    }
+    @keyframes gradientMove { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+
+    .header-subtitle {
+      font-size: clamp(0.95rem, 2vw, 1.1rem);
+      color: var(--text-secondary); font-weight: 400;
+      max-width: 720px; margin: 0 auto;
+      animation: fadeDown 1s 0.2s var(--ease-out-expo) both;
+    }
+
+    /* ─── NAVEGACIÓN POR PESTAÑAS ─── */
+    .tabs-nav {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      margin: 32px 0 28px;
+      padding: 8px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      animation: fadeUp 0.8s 0.3s var(--ease-out-expo) both;
+    }
+    .tab-btn {
+      flex: 1 1 auto;
+      padding: 12px 18px;
+      border-radius: var(--radius-sm);
+      border: none; background: transparent;
+      color: var(--text-secondary);
+      font-family: inherit; font-size: 0.88rem; font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s var(--ease-out-expo);
+      white-space: nowrap;
+    }
+    .tab-btn:hover { color: var(--text-primary); background: var(--chip-hover-bg); }
+    .tab-btn.active {
+      background: rgba(34, 211, 238, 0.15);
+      color: var(--accent-cyan);
+      box-shadow: 0 0 20px -4px rgba(34, 211, 238, 0.2);
+    }
+    [data-theme="light"] .tab-btn.active { background: rgba(8, 145, 178, 0.12); color: var(--accent-cyan); }
+
+    /* ─── PANELES ─── */
+    .panel { display: none; animation: fadeUp 0.5s var(--ease-out-expo) both; }
+    .panel.active { display: block; }
+
+    .content-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      box-shadow: var(--shadow-card);
+      margin-bottom: 24px;
+      transition: background-color 0.4s ease, border-color 0.4s ease;
+    }
+
+    .content-card h2 {
+      font-size: 1.5rem; font-weight: 700; letter-spacing: -0.02em;
+      margin-bottom: 16px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .content-card h2 .icon-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--accent-cyan);
+      box-shadow: 0 0 12px var(--accent-cyan);
+      flex-shrink: 0;
+    }
+    .content-card h3 {
+      font-size: 1.1rem; font-weight: 700;
+      margin: 24px 0 10px;
+      color: var(--accent-cyan);
+    }
+    .content-card p {
+      color: var(--text-secondary);
+      margin-bottom: 14px;
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+    .content-card p strong { color: var(--text-primary); }
+    .content-card ul {
+      margin: 12px 0 18px 20px;
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+    .content-card li { margin-bottom: 8px; }
+    .content-card blockquote {
+      border-left: 3px solid var(--accent-cyan);
+      padding: 12px 20px;
+      margin: 20px 0;
+      background: rgba(34, 211, 238, 0.05);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      font-style: italic;
+      color: var(--text-secondary);
+      font-size: 0.92rem;
+    }
+    [data-theme="light"] .content-card blockquote { background: rgba(8, 145, 178, 0.05); }
+    .content-card blockquote cite {
+      display: block; margin-top: 8px;
+      font-style: normal; font-size: 0.82rem; color: var(--text-dim);
+    }
+
+    /* ─── TARJETAS DE CONCEPTO ─── */
+    .concept-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+      margin: 20px 0;
+    }
+    .concept-card {
+      padding: 22px;
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      transition: transform 0.3s var(--ease-out-expo), border-color 0.3s, box-shadow 0.3s;
+    }
+    .concept-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--border-strong);
+      box-shadow: var(--shadow-hover);
+    }
+    .concept-card .concept-icon {
+      width: 44px; height: 44px; border-radius: var(--radius-sm);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem; margin-bottom: 14px;
+      background: rgba(34, 211, 238, 0.12);
+      color: var(--accent-cyan);
+    }
+    .concept-card h4 {
+      font-size: 1rem; font-weight: 700; margin-bottom: 8px;
+    }
+    .concept-card p {
+      font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; margin: 0;
+    }
+
+    /* ─── COMPARADOR ─── */
+    .compare-controls {
+      display: flex; gap: 8px; margin: 20px 0 24px; flex-wrap: wrap;
+    }
+    .compare-btn {
+      padding: 10px 20px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text-secondary);
+      font-family: inherit; font-size: 0.85rem; font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s var(--ease-out-expo);
+    }
+    .compare-btn:hover { border-color: var(--border-strong); color: var(--text-primary); }
+    .compare-btn.active {
+      background: var(--accent-cyan);
+      border-color: var(--accent-cyan);
+      color: var(--bg-deep);
+      font-weight: 700;
+    }
+    [data-theme="light"] .compare-btn.active { color: #fff; }
+
+    .compare-panels {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    @media (max-width: 640px) { .compare-panels { grid-template-columns: 1fr; } }
+
+    .compare-panel {
+      padding: 24px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      background: var(--surface);
+      transition: opacity 0.3s ease;
+    }
+    .compare-panel.dimmed { opacity: 0.35; pointer-events: none; }
+    .compare-panel h4 {
+      font-size: 0.95rem; font-weight: 700; margin-bottom: 12px;
+      text-transform: uppercase; letter-spacing: 0.06em;
+    }
+    .compare-panel.risks h4 { color: var(--accent-rose); }
+    .compare-panel.benefits h4 { color: var(--accent-emerald); }
+    .compare-panel p { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.7; }
+
+    /* ─── LÍNEA DE TIEMPO ─── */
+    .timeline { position: relative; padding: 20px 0 20px 32px; }
+    .timeline::before {
+      content: ''; position: absolute; left: 11px; top: 0; bottom: 0;
+      width: 2px; background: linear-gradient(to bottom, var(--accent-cyan), var(--accent-violet));
+      border-radius: 2px;
+    }
+    .timeline-item {
+      position: relative; margin-bottom: 28px; padding-left: 8px;
+    }
+    .timeline-item::before {
+      content: ''; position: absolute; left: -27px; top: 6px;
+      width: 12px; height: 12px; border-radius: 50%;
+      background: var(--bg-deep); border: 2px solid var(--accent-cyan);
+      box-shadow: 0 0 10px rgba(34, 211, 238, 0.3);
+    }
+    .timeline-item .timeline-era {
+      font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.08em; color: var(--accent-cyan); margin-bottom: 4px;
+    }
+    .timeline-item h4 { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+    .timeline-item p { font-size: 0.88rem; color: var(--text-secondary); margin: 0; line-height: 1.6; }
+
+    /* ─── GLOSARIO ─── */
+    .accordion-item {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      margin-bottom: 10px;
+      overflow: hidden;
+      transition: border-color 0.3s;
+    }
+    .accordion-item:hover { border-color: var(--border-strong); }
+    .accordion-trigger {
+      width: 100%;
+      padding: 16px 20px;
+      background: transparent;
+      border: none;
+      color: var(--text-primary);
+      font-family: inherit; font-size: 0.95rem; font-weight: 600;
+      text-align: left; cursor: pointer;
+      display: flex; justify-content: space-between; align-items: center;
+      transition: background-color 0.2s;
+    }
+    .accordion-trigger:hover { background: var(--chip-hover-bg); }
+    .accordion-trigger .chevron {
+      transition: transform 0.3s var(--ease-out-expo);
+      font-size: 0.8rem; color: var(--text-dim);
+    }
+    .accordion-item.open .accordion-trigger .chevron { transform: rotate(180deg); }
+    .accordion-content {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.4s var(--ease-out-expo), padding 0.4s var(--ease-out-expo);
+      padding: 0 20px;
+    }
+    .accordion-item.open .accordion-content {
+      max-height: 500px; padding: 0 20px 18px;
+    }
+    .accordion-content p {
+      font-size: 0.9rem; color: var(--text-secondary); line-height: 1.7; margin: 0;
+    }
+
+    /* ─── FOOTER ─── */
+    .footer {
+      text-align: center; padding: 48px 0 0;
+      color: var(--text-dim); font-size: 0.8rem;
+      border-top: 1px solid var(--border); margin-top: 48px;
+    }
+    .footer a { color: var(--accent-cyan); text-decoration: none; font-weight: 500; }
+    .footer a:hover { text-decoration: underline; }
+
+    @keyframes fadeDown { from { opacity: 0; transform: translateY(-16px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+
+    @media (max-width: 640px) {
+      .app { padding: 0 16px 48px; }
+      .content-card { padding: 24px 20px; }
+      .tabs-nav { gap: 4px; padding: 6px; }
+      .tab-btn { padding: 10px 12px; font-size: 0.8rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema" title="Cambiar tema">
+    <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+    <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  </button>
+
+  <div class="app">
+    <!-- Header -->
+    <header class="header">
+      <div class="header-badge">Tecnología · Sociedad · Poder</div>
+      <h1>Control <span class="gradient-text">Digital</span> de la Sociedad</h1>
+      <p class="header-subtitle">
+        Un recorrido visual e interactivo por los mecanismos, tecnologías y debates del control digital: vigilancia masiva, crédito social, identidad digital, gobernanza algorítmica y resistencia.
+      </p>
+    </header>
+
+    <!-- Navegación por pestañas -->
+    <nav class="tabs-nav" role="tablist" aria-label="Secciones del tema">
+      <button class="tab-btn active" data-panel="panel-intro" role="tab" aria-selected="true">¿Qué es?</button>
+      <button class="tab-btn" data-panel="panel-vigilancia" role="tab" aria-selected="false">Vigilancia Masiva</button>
+      <button class="tab-btn" data-panel="panel-credito" role="tab" aria-selected="false">Crédito Social</button>
+      <button class="tab-btn" data-panel="panel-identidad" role="tab" aria-selected="false">Identidad Digital</button>
+      <button class="tab-btn" data-panel="panel-algoritmo" role="tab" aria-selected="false">Gobernanza Algorítmica</button>
+      <button class="tab-btn" data-panel="panel-resistencia" role="tab" aria-selected="false">Resistencia</button>
+      <button class="tab-btn" data-panel="panel-glosario" role="tab" aria-selected="false">Glosario</button>
+    </nav>
+
+    <!-- ─── PANEL: ¿QUÉ ES? ─── -->
+    <section id="panel-intro" class="panel active" role="tabpanel">
+      <div class="content-card">
+        <h2><span class="icon-dot"></span>¿Qué es el control digital de la sociedad?</h2>
+        <p>
+          El <strong>control digital de la sociedad</strong> es el conjunto de mecanismos, tecnologías y políticas mediante los cuales Estados, corporaciones y otros actores monitorean, clasifican, predicen y condicionan la conducta de las personas a través de sistemas digitales. No es un fenómeno único ni monolítico: se manifiesta en capas que van desde la recolección masiva de datos hasta la exclusión económica automatizada.
+        </p>
+        <p>
+          Lo que distingue al control digital contemporáneo de formas anteriores de vigilancia es su <strong>escala, velocidad y granularidad</strong>. Nunca antes fue tan barato recolectar, almacenar y procesar información sobre millones de personas en tiempo real, ni tan fácil convertir esos datos en decisiones que afectan su acceso a bienes, servicios, empleo, crédito y libertad de movimiento.
+        </p>
+
+        <h3>Las cinco capas del control digital</h3>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">📡</div>
+            <h4>1. Captura</h4>
+            <p>Sensores, cámaras, dispositivos móviles, plataformas digitales y registros administrativos que recolectan datos de forma continua y ubicua.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🗄️</div>
+            <h4>2. Almacenamiento</h4>
+            <p>Infraestructura en la nube, bases de datos estatales y corporativas que acumulan historiales de comportamiento sin límites claros.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🧠</div>
+            <h4>3. Análisis</h4>
+            <p>Algoritmos de aprendizaje automático que perfilan, clasifican y predicen conductas, afinidades y riesgos de cada individuo.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">⚙️</div>
+            <h4>4. Decisión</h4>
+            <p>Sistemas automatizados que conceden o deniegan acceso a crédito, empleo, beneficios, movilidad o servicios según los perfiles generados.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🔒</div>
+            <h4>5. Coerción</h4>
+            <p>Incentivos, sanciones, exclusión financiera, bloqueos y condicionamientos que moldean el comportamiento sin necesidad de fuerza física directa.</p>
+          </div>
+        </div>
+
+        <h3>¿Quiénes participan?</h3>
+        <ul>
+          <li><strong>Estados:</strong> mediante programas de vigilancia, identificación obligatoria, registros biométricos y sistemas de puntuación.</li>
+          <li><strong>Corporaciones:</strong> plataformas digitales, bancos, aseguradoras y empresas de datos que monetizan la información personal.</li>
+          <li><strong>Actores intermedios:</strong> proveedores de infraestructura, algoritmos y servicios en la nube que operan entre ambos.</li>
+          <li><strong>Ciudadanía:</strong> a menudo sin conocimiento pleno de cómo se usan sus datos ni posibilidad real de negarse.</li>
+        </ul>
+
+        <blockquote>
+          "La vigilancia no es solo mirar. Es clasificar, predecir y actuar sobre la vida de las personas antes de que puedan siquiera saber que están siendo evaluadas." — Shoshana Zuboff
+          <cite>La lógica del capitalismo de vigilancia aplicada al control social.</cite>
+        </blockquote>
+
+        <h3>El debate central</h3>
+        <p>
+          El control digital no es intrínsecamente bueno ni malo: es una <strong>capacidad</strong>. Puede usarse para prevenir fraudes, mejorar servicios públicos o responder a emergencias. Pero también puede derivar en vigilancia masiva, discriminación algorítmica, manipulación política y erosión de libertades fundamentales. La diferencia no está en la tecnología, sino en quién la controla, con qué límites y con qué rendición de cuentas.
+        </p>
+      </div>
+    </section>
+
+    <!-- ─── PANEL: VIGILANCIA MASIVA ─── -->
+    <section id="panel-vigilancia" class="panel" role="tabpanel">
+      <div class="content-card">
+        <h2><span class="icon-dot"></span>Vigilancia masiva</h2>
+        <p>
+          La <strong>vigilancia masiva</strong> es la recolección indiscriminada de información sobre poblaciones enteras, sin sospecha individual ni orden judicial específica. Su lógica se aparta del modelo tradicional de vigilancia dirigida: en lugar de investigar a un sospechoso, se recopilan datos de todos para detectar patrones.
+        </p>
+
+        <h3>Dimensiones de la vigilancia contemporánea</h3>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">👁️</div>
+            <h4>Visual</h4>
+            <p>Cámaras de circuito cerrado, reconocimiento facial, lectores de patentes, drones y satélites que monitorean espacios públicos y privados.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">📶</div>
+            <h4>Digital</h4>
+            <p>Metadatos telefónicos, tráfico web, correos, mensajería cifrada (cuando se rompe o se ordena su entrega), ubicación GPS y redes sociales.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🧬</div>
+            <h4>Biométrica</h4>
+            <p>Huellas dactilares, iris, reconocimiento facial, voz y patrones de marcha almacenados en bases de datos estatales y corporativas.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">💰</div>
+            <h4>Financiera</h4>
+            <p>Historiales de transacciones, puntajes crediticios, patrones de consumo y flujos de dinero monitoreados por bancos y fintechs.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🏙️</div>
+            <h4>Urbana</h4>
+            <p>Ciudades inteligentes: sensores de tráfico, wifi público, iluminación conectada y reconocimiento en transporte masivo.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🛰️</div>
+            <h4>Satelital</h4>
+            <p>Imágenes de alta resolución, geolocalización constante y monitoreo de desplazamientos a gran escala.</p>
+          </div>
+        </div>
+
+        <h3>El caso Snowden (2013)</h3>
+        <p>
+          En junio de 2013, Edward Snowden reveló la existencia de programas de vigilancia masiva de la Agencia de Seguridad Nacional (NSA) de Estados Unidos, como <strong>PRISM</strong> y la recolección de metadatos telefónicos. Las filtraciones demostraron que gobiernos aliados cooperaban en la recolección de datos a escala global y que empresas tecnológicas facilitaban el acceso.
+        </p>
+        <p>
+          Las revelaciones transformaron el debate público: se aprobaron reformas en algunos países, se fortaleció el cifrado de extremo a extremo y surgieron movimientos por los derechos digitales. Pero también normalizaron la idea de que la vigilancia masiva es una práctica permanente, no una excepción.
+        </p>
+
+        <blockquote>
+          "No me importa si tienes algo que ocultar. Me importa que no tengas nada que temer si no tienes nada que ocultar. Pero si te vigilan, cambias tu comportamiento." — Glenn Greenwald
+          <cite>El argumento del "efecto enfriamiento" (chilling effect) de la vigilancia.</cite>
+        </blockquote>
+
+        <h3>El panóptico digital</h3>
+        <p>
+          El filósofo Jeremy Bentham diseñó en el siglo XVIII el <strong>panóptico</strong>: una prisión donde los guardias pueden ver a todos los reclusos sin que estos sepan si están siendo observados. Michel Foucault lo usó como metáfora del poder disciplinario moderno. La vigilancia digital masiva actualiza esa lógica: no necesitas saber si te miran, solo saber que <em>podrían</em> mirarte.
+        </p>
+        <p>
+          La diferencia clave es que el panóptico digital no está centralizado en una torre: está distribuido en cámaras, teléfonos, plataformas y sensores. Cada persona lleva consigo un dispositivo de vigilancia voluntaria: su propio smartphone.
+        </p>
+
+        <h3>Efectos sociales</h3>
+        <ul>
+          <li><strong>Autocensura:</strong> las personas modifican su comportamiento al sentirse observadas.</li>
+          <li><strong>Normalización:</strong> la vigilancia se acepta como precio de la seguridad o la comodidad.</li>
+          <li><strong>Asimetría de poder:</strong> quien vigila acumula información; quien es vigilado pierde control sobre su propia narrativa.</li>
+          <li><strong>Discriminación:</strong> los sistemas de reconocimiento facial fallan más en personas racializadas, mujeres y menores.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ─── PANEL: CRÉDITO SOCIAL ─── -->
+    <section id="panel-credito" class="panel" role="tabpanel">
+      <div class="content-card">
+        <h2><span class="icon-dot"></span>Sistemas de crédito social</h2>
+        <p>
+          El <strong>crédito social</strong> es un sistema de puntuación que asigna a cada persona o entidad un valor numérico según su comportamiento, evaluado por algoritmos y bases de datos estatales o corporativas. Ese puntaje condiciona el acceso a servicios, beneficios, crédito, viajes y oportunidades.
+        </p>
+        <p>
+          Aunque suele asociarse con China, lógicas de puntuación social existen en todo el mundo: desde los <em>credit scores</em> bancarios hasta los sistemas de <em>know your customer</em> (KYC), los programas de recompensas por buena conducta y las evaluaciones de "confiabilidad" en plataformas digitales.
+        </p>
+
+        <h3>El sistema chino de crédito social</h3>
+        <p>
+          China implementó desde 2014 un sistema nacional de crédito social (<em>shehui xinyong</em>) que combina múltiples bases de datos: financieras, judiciales, administrativas y de comportamiento. No es un puntaje único nacional, sino un conjunto de sistemas locales y sectoriales que comparten información.
+        </p>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">✅</div>
+            <h4>Conductas premiadas</h4>
+            <p>Pagar impuestos, cumplir contratos, donar sangre, cuidar a ancianos, participar en actividades comunitarias, no cometer infracciones.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">❌</div>
+            <h4>Conductas sancionadas</h4>
+            <p>Impagos, infracciones de tráfico, difusión de "noticias falsas", desorden público, incumplimiento de obligaciones familiares.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🎁</div>
+            <h4>Beneficios</h4>
+            <p>Acceso prioritario a crédito, descuentos en transporte, facilidades para viajar, mejores condiciones en trámites administrativos.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🚫</div>
+            <h4>Sanciones</h4>
+            <p>Restricción de vuelos, trenes de alta velocidad, hoteles, escuelas privadas, crédito y ciertos empleos.</p>
+          </div>
+        </div>
+
+        <h3>Crédito social más allá de China</h3>
+        <p>
+          En Occidente no existe un sistema estatal unificado de crédito social, pero hay <strong>equivalentes funcionales</strong>:
+        </p>
+        <ul>
+          <li><strong>Credit scores:</strong> puntajes que determinan acceso a vivienda, empleo y crédito.</li>
+          <li><strong>Scoring alternativo:</strong> algoritmos que usan datos de redes sociales, ubicación y hábitos para evaluar riesgo.</li>
+          <li><strong>Sistemas de reputación:</strong> Uber, Airbnb, Mercado Libre y otras plataformas que rankean a usuarios.</li>
+          <li><strong>KYC/AML:</strong> controles de identidad y lavado de dinero que excluyen financieramente a millones.</li>
+          <li><strong>Seguros de comportamiento:</strong> pólizas que ajustan primas según datos de conducción, salud o actividad física.</li>
+          <li><strong>Sanciones administrativas:</strong> registro de deudores alimentarios, morosos e infractores que restringen trámites y servicios.</li>
+        </ul>
+
+        <h3>Riesgos y críticas</h3>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">⚖️</div>
+            <h4>Opacidad</h4>
+            <p>Los algoritmos no son transparentes; las personas no saben qué datos se usan ni cómo se calcula su puntaje.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🔁</div>
+            <h4>Bucle de exclusión</h4>
+            <p>Un puntaje bajo reduce oportunidades, lo que a su vez empeora el puntaje. La exclusión se autoalimenta.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🎯</div>
+            <h4>Discriminación</h4>
+            <p>Los sistemas reproducen sesgos históricos y castigan a los grupos ya vulnerables.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🗣️</div>
+            <h4>Control de la expresión</h4>
+            <p>Cuando el comportamiento en redes o la opinión influyen en el puntaje, se inhibe la libertad de expresión.</p>
+          </div>
+        </div>
+
+        <blockquote>
+          "Un sistema de crédito social no necesita castigar a todos. Le basta con que todos sepan que pueden ser castigados." 
+          <cite>La lógica del panóptico aplicada a la puntuación social.</cite>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- ─── PANEL: IDENTIDAD DIGITAL ─── -->
+    <section id="panel-identidad" class="panel" role="tabpanel">
+      <div class="content-card">
+        <h2><span class="icon-dot"></span>Identidad digital y dinero programable</h2>
+        <p>
+          La <strong>identidad digital</strong> es el conjunto de datos, credenciales y atributos que representan a una persona en el entorno digital. Cuando esa identidad se vincula a un documento único, biométrico y verificable, se convierte en la llave de acceso a servicios, derechos y participación social.
+        </p>
+        <p>
+          El problema no es la identificación en sí —es necesaria para ejercer derechos y acceder a servicios—, sino la <strong>centralización, obligatoriedad y falta de control</strong> sobre esa identidad. Si un solo sistema puede confirmar quién eres, también puede decidir qué puedes hacer.
+        </p>
+
+        <h3>Componentes de la identidad digital</h3>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">🆔</div>
+            <h4>Identificador único</h4>
+            <p>Un número o código que vincula todos los registros de una persona: salud, impuestos, educación, empleo, bancos.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🧬</div>
+            <h4>Datos biométricos</h4>
+            <p>Huella digital, rostro, iris o voz que verifican la identidad de forma "infalsificable" pero irrevocable.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">📱</div>
+            <h4>Autenticación</h4>
+            <p>Aplicaciones móviles, tokens, contraseñas y factores que permiten demostrar que eres quien dices ser.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🔗</div>
+            <h4>Credenciales verificables</h4>
+            <p>Certificados digitales de identidad, títulos, licencias y atributos que pueden presentarse sin revelar más de lo necesario.</p>
+          </div>
+        </div>
+
+        <h3>CBDC: dinero programable</h3>
+        <p>
+          Las <strong>Monedas Digitales de Banco Central (CBDC)</strong> son versiones digitales del dinero fiduciario emitidas por los bancos centrales. A diferencia del efectivo, son rastreables y programables: pueden llevar condiciones de uso, fechas de vencimiento o restricciones de destino.
+        </p>
+        <p>
+          Combinadas con identidad digital, las CBDC permiten un nivel de control sobre el gasto sin precedentes. Un gobierno o banco central podría bloquear transacciones, limitar compras en ciertos rubros o condicionar el acceso al dinero según criterios administrativos.
+        </p>
+
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">💸</div>
+            <h4>Programabilidad</h4>
+            <p>El dinero puede llevar reglas: "solo para alimentos", "vence en 30 días", "no para ciertos comercios".</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">📍</div>
+            <h4>Trazabilidad</h4>
+            <p>Cada transacción queda registrada y puede vincularse a una identidad digital, eliminando el anonimato del efectivo.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🚫</div>
+            <h4>Exclusión financiera</h4>
+            <p>Quien no tenga identidad digital o esté sancionado puede quedar fuera del sistema de pagos.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">❄️</div>
+            <h4>Congelamiento</h4>
+            <p>Los fondos pueden bloquearse automáticamente por algoritmos o decisiones administrativas, sin orden judicial.</p>
+          </div>
+        </div>
+
+        <h3>El experimento indio: Aadhaar</h3>
+        <p>
+          India implementó desde 2009 el sistema <strong>Aadhaar</strong>, la mayor base de datos biométrica del mundo, con más de 1.300 millones de personas registradas. Aunque no es obligatorio por ley, se volvió de facto necesario para acceder a servicios bancarios, subsidios, teléfono y trámites.
+        </p>
+        <p>
+          El sistema ha facilitado la inclusión financiera de millones, pero también ha generado <strong>exclusiones masivas</strong>: personas que no pudieron autenticarse por fallas biométricas, errores de datos o falta de conectividad perdieron acceso a alimentos y pensiones. El caso muestra que la identidad digital no es neutral: <strong>incluye y excluye al mismo tiempo</strong>.
+        </p>
+
+        <blockquote>
+          "La identidad digital no es un derecho. Es una infraestructura de poder. Quien la controla, controla el acceso." 
+          <cite>Reflexión crítica sobre la centralización de la identidad.</cite>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- ─── PANEL: GOBERNANZA ALGORÍTMICA ─── -->
+    <section id="panel-algoritmo" class="panel" role="tabpanel">
+      <div class="content-card">
+        <h2><span class="icon-dot"></span>Gobernanza algorítmica e IA</h2>
+        <p>
+          La <strong>gobernanza algorítmica</strong> es el uso de algoritmos y sistemas de inteligencia artificial para tomar decisiones sobre personas, asignar recursos y regular comportamientos. Ocurre en el Estado (policía predictiva, justicia, beneficios sociales), en el mercado (crédito, seguros, empleo) y en la vida cotidiana (recomendaciones, moderación de contenidos, precios dinámicos).
+        </p>
+
+        <h3>Ámbitos de aplicación</h3>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">🚔</div>
+            <h4>Policía predictiva</h4>
+            <p>Algoritmos que identifican zonas, personas o grupos con mayor "riesgo" de delito, orientando el despliegue policial y las investigaciones.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">⚖️</div>
+            <h4>Justicia algorítmica</h4>
+            <p>Sistemas que evalúan riesgo de reincidencia, sugieren penas o asisten a jueces en decisiones de libertad condicional.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🏛️</div>
+            <h4>Administración pública</h4>
+            <p>Algoritmos que determinan elegibilidad para subsidios, priorizan inspecciones o detectan "fraudes" en beneficios sociales.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">💼</div>
+            <h4>Selección laboral</h4>
+            <p>Sistemas que filtran currículums, evalúan entrevistas por video y predicen el "ajuste cultural" de candidatos.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">📰</div>
+            <h4>Moderación de contenidos</h4>
+            <p>Algoritmos que deciden qué se publica, qué se elimina y qué se amplifica en redes sociales y plataformas.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">💰</div>
+            <h4>Precios dinámicos</h4>
+            <p>Algoritmos que ajustan precios según el perfil del consumidor, su ubicación, su historial o su urgencia percibida.</p>
+          </div>
+        </div>
+
+        <h3>Los problemas de la caja negra</h3>
+        <p>
+          La mayoría de los sistemas algorítmicos son <strong>opacos</strong>: ni las personas afectadas ni los reguladores pueden comprender cómo se llegó a una decisión. Esta opacidad genera problemas estructurales:
+        </p>
+        <ul>
+          <li><strong>Sesgos:</strong> los algoritmos aprenden de datos históricos que contienen discriminaciones previas y las reproducen o amplifican.</li>
+          <li><strong>Falta de debido proceso:</strong> no hay forma de apelar una decisión automatizada ni de saber qué datos la motivaron.</li>
+          <li><strong>Responsabilidad difusa:</strong> cuando un sistema automatizado causa daño, no está claro quién responde: el programador, la empresa, el Estado o el algoritmo.</li>
+          <li><strong>Bucles de retroalimentación:</strong> las predicciones moldean la realidad que intentan medir (p. ej., más policía en una zona genera más detenciones, lo que "confirma" el riesgo).</li>
+        </ul>
+
+        <h3>El caso COMPAS</h3>
+        <p>
+          El sistema <strong>COMPAS</strong>, usado en Estados Unidos para evaluar el riesgo de reincidencia de imputados, se volvió emblemático del debate sobre sesgo algorítmico. Una investigación de ProPublica (2016) mostró que el sistema sobreestimaba el riesgo de reincidencia de personas negras y lo subestimaba en personas blancas.
+        </p>
+        <p>
+          La empresa propietaria defendió la precisión global del sistema, pero el caso expuso una tensión central: un algoritmo puede ser "preciso" en promedio y, al mismo tiempo, <strong>profundamente injusto</strong> para grupos específicos. La gobernanza algorítmica no es solo un problema técnico: es un problema político y ético.
+        </p>
+
+        <blockquote>
+          "Los algoritmos no son neutrales. Son opiniones codificadas en matemáticas." — Cathy O'Neil
+          <cite>Autora de <em>Weapons of Math Destruction</em>, sobre el impacto social de los algoritmos opacos.</cite>
+        </blockquote>
+
+        <h3>Hacia una gobernanza responsable</h3>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">🔍</div>
+            <h4>Transparencia</h4>
+            <p>Auditorías algorítmicas, documentación de sistemas y acceso público a las lógicas de decisión que afectan derechos.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">👥</div>
+            <h4>Supervisión humana</h4>
+            <p>Mantener la posibilidad de revisión humana en decisiones críticas: salud, justicia, beneficios sociales, empleo.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">📋</div>
+            <h4>Rendición de cuentas</h4>
+            <p>Responsabilidad clara sobre los efectos de los sistemas y mecanismos de reparación para quienes son afectados.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">⚖️</div>
+            <h4>Marcos regulatorios</h4>
+            <p>Leyes que limiten usos de alto riesgo, como la identificación biométrica masiva o la puntuación social.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── PANEL: RESISTENCIA ─── -->
+    <section id="panel-resistencia" class="panel" role="tabpanel">
+      <div class="content-card">
+        <h2><span class="icon-dot"></span>Resistencia y derechos digitales</h2>
+        <p>
+          Frente al avance del control digital, existe un ecosistema de <strong>resistencia</strong> que combina tecnología, derecho, activismo y educación. No se trata de rechazar toda tecnología, sino de exigir que su desarrollo y uso respeten derechos fundamentales, límites democráticos y dignidad humana.
+        </p>
+
+        <h3>Estrategias de resistencia</h3>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">🔐</div>
+            <h4>Cifrado</h4>
+            <p>Herramientas de cifrado de extremo a extremo (mensajería, correo, almacenamiento) que protegen la privacidad frente a terceros.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🕵️</div>
+            <h4>Anonimato</h4>
+            <p>Redes Tor, VPNs, navegadores enfocados en privacidad y prácticas de minimización de datos personales.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">📢</div>
+            <h4>Transparencia</h4>
+            <p>Periodismo de investigación, filtraciones, auditorías independientes y demandas de acceso a la información pública.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">⚖️</div>
+            <h4>Litigio estratégico</h4>
+            <p>Acciones legales contra programas de vigilancia, discriminación algorítmica y violaciones de privacidad.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">📚</div>
+            <h4>Educación digital</h4>
+            <p>Alfabetización sobre datos, privacidad y derechos digitales para que las personas tomen decisiones informadas.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🏛️</div>
+            <h4>Regulación</h4>
+            <p>Leyes de protección de datos (GDPR, LGPD, leyes nacionales), moratorias a la vigilancia biométrica y límites a la IA de alto riesgo.</p>
+          </div>
+        </div>
+
+        <h3>Marcos legales de referencia</h3>
+        <ul>
+          <li><strong>GDPR (Unión Europea, 2018):</strong> establece derechos de acceso, rectificación, supresión y portabilidad de datos, y obliga a las organizaciones a justificar su tratamiento.</li>
+          <li><strong>Convenio 108+ (Consejo de Europa):</strong> tratado internacional sobre protección de datos personales.</li>
+          <li><strong>Leyes nacionales de protección de datos:</strong> Brasil (LGPD), Argentina (Ley 25.326), México (LFPDPPP) y más de 130 países.</li>
+          <li><strong>Regulación de IA:</strong> la Ley de IA de la Unión Europea clasifica sistemas según su riesgo y prohíbe usos como la puntuación social generalizada.</li>
+        </ul>
+
+        <h3>El debate sobre la identificación biométrica</h3>
+        <p>
+          Ciudades como San Francisco, Boston y Portland prohibieron el uso de reconocimiento facial por parte de autoridades locales. La Unión Europea debate moratorias y límites estrictos. Sin embargo, la tendencia global sigue siendo la expansión: aeropuertos, estadios, transporte público y fronteras adoptan sistemas biométricos a gran escala.
+        </p>
+        <p>
+          La pregunta central es si la comodidad y la seguridad justifican la renuncia al anonimato en espacios públicos. Los defensores de los derechos digitales argumentan que <strong>el anonimato es una condición de la libertad</strong>: sin él, la disidencia, la protesta y la intimidad se vuelven imposibles.
+        </p>
+
+        <blockquote>
+          "La privacidad no es para quienes tienen algo que ocultar. Es para todos los que quieren decidir qué mostrar y qué no." 
+          <cite>Principio fundamental de los derechos digitales.</cite>
+        </blockquote>
+
+        <h3>El futuro de la resistencia</h3>
+        <p>
+          La resistencia al control digital no es un movimiento único ni coordinado. Es una red de actores —investigadores, activistas, abogados, periodistas, desarrolladores, ciudadanos— que operan en múltiples frentes. Su éxito depende de tres condiciones:
+        </p>
+        <ul>
+          <li><strong>Visibilidad:</strong> hacer tangible lo que suele ser invisible (algoritmos, flujos de datos, decisiones automatizadas).</li>
+          <li><strong>Alternativas:</strong> construir tecnologías y prácticas que demuestren que otro modelo es posible.</li>
+          <li><strong>Poder colectivo:</strong> articular demandas ciudadanas que obliguen a los Estados y corporaciones a rendir cuentas.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ─── PANEL: GLOSARIO ─── -->
+    <section id="panel-glosario" class="panel" role="tabpanel">
+      <div class="content-card">
+        <h2><span class="icon-dot"></span>Glosario del control digital</h2>
+        <p>Términos clave para comprender el tema. Haz clic en cada uno para expandir su definición.</p>
+
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Vigilancia masiva <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Recolección indiscriminada de información sobre poblaciones enteras, sin sospecha individual ni orden judicial específica. Se basa en la lógica de recopilar datos de todos para detectar patrones.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Capitalismo de vigilancia <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Modelo económico en el que las empresas extraen datos personales, los procesan para predecir comportamientos y los venden a anunciantes u otros actores. Concepto desarrollado por Shoshana Zuboff.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Crédito social <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Sistema de puntuación que asigna a personas o entidades un valor numérico según su comportamiento evaluado por algoritmos. Ese puntaje condiciona el acceso a servicios, beneficios y oportunidades.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">CBDC <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Moneda Digital de Banco Central. Versión digital del dinero fiduciario emitida por un banco central. A diferencia del efectivo, es rastreable y programable: puede llevar condiciones de uso, fechas de vencimiento o restricciones de destino.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Identidad digital <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Conjunto de datos, credenciales y atributos que representan a una persona en el entorno digital. Cuando se centraliza y se vincula a datos biométricos, se convierte en la llave de acceso a servicios y derechos.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Biometría <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Uso de características físicas o conductuales (huella digital, rostro, iris, voz, patrones de marcha) para identificar o verificar la identidad de una persona. A diferencia de una contraseña, no se puede cambiar si se compromete.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Gobernanza algorítmica <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Uso de algoritmos y sistemas de inteligencia artificial para tomar decisiones sobre personas, asignar recursos y regular comportamientos. Ocurre en el Estado, el mercado y la vida cotidiana.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Caja negra <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Metáfora que describe sistemas algorítmicos cuya lógica interna es opaca para las personas afectadas e incluso para sus operadores. La opacidad impide comprender cómo se llegó a una decisión y dificulta impugnarla.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Sesgo algorítmico <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Reproducción o amplificación de discriminaciones históricas por parte de sistemas automatizados que aprenden de datos sesgados. Puede afectar a grupos racializados, mujeres, personas pobres o con discapacidad.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Panóptico digital <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Actualización del concepto de Bentham y Foucault: un sistema de vigilancia distribuido en cámaras, teléfonos, plataformas y sensores, donde las personas saben que podrían ser observadas en cualquier momento, aunque no sepan si lo están siendo.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Efecto enfriamiento <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Fenómeno por el cual las personas modifican su comportamiento, se autocensuran o evitan ciertas actividades al sentirse observadas o saber que pueden ser vigiladas.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Policía predictiva <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Uso de algoritmos para identificar zonas, personas o grupos con mayor "riesgo" de delito, orientando el despliegue policial y las investigaciones. Suele basarse en datos históricos que contienen sesgos.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Cifrado de extremo a extremo <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Método de comunicación en el que solo emisor y receptor pueden leer los mensajes. Ni la plataforma ni terceros pueden acceder al contenido. Es una de las principales herramientas de resistencia a la vigilancia.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">KYC (Know Your Customer) <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Conjunto de controles que obligan a bancos y entidades financieras a verificar la identidad de sus clientes para prevenir lavado de dinero y financiamiento del terrorismo. Puede excluir a personas sin documentación adecuada.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">GDPR <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Reglamento General de Protección de Datos de la Unión Europea (2018). Establece derechos de acceso, rectificación, supresión y portabilidad de datos, y obliga a las organizaciones a justificar su tratamiento. Es el marco de referencia global en la materia.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>
+        Enciclopedia Visual · Contenido original de
+        <a href="https://app-fioravante.github.io/apps-fioravante/" target="_blank" rel="noopener noreferrer">Fioravante</a>.
+        Este recurso es de carácter educativo y exploratorio.
+      </p>
+    </footer>
+  </div>
+
+  <script>
+    // ─── TEMA ───
+    const rootEl = document.documentElement;
+    const themeToggle = document.getElementById('themeToggle');
+    function updateToggleLabel() {
+      const isLight = rootEl.getAttribute('data-theme') === 'light';
+      themeToggle.setAttribute('aria-label', isLight ? 'Cambiar a modo oscuro' : 'Cambiar a modo claro');
+      themeToggle.setAttribute('title', isLight ? 'Cambiar a modo oscuro' : 'Cambiar a modo claro');
+    }
+    themeToggle.addEventListener('click', () => {
+      const isLight = rootEl.getAttribute('data-theme') === 'light';
+      const next = isLight ? 'dark' : 'light';
+      rootEl.setAttribute('data-theme', next);
+      try { localStorage.setItem('enc-theme', next); } catch (e) {}
+      updateToggleLabel();
+    });
+    updateToggleLabel();
+
+    // ─── PESTAÑAS ───
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const panels = document.querySelectorAll('.panel');
+
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const targetId = btn.dataset.panel;
+        tabBtns.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });
+        btn.classList.add('active');
+        btn.setAttribute('aria-selected', 'true');
+        panels.forEach(p => p.classList.remove('active'));
+        document.getElementById(targetId).classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    });
+
+    // ─── COMPARADOR ───
+    const compareBtns = document.querySelectorAll('.compare-btn');
+    const compareRisks = document.getElementById('compare-risks');
+    const compareBenefits = document.getElementById('compare-benefits');
+
+    if (compareBtns.length > 0) {
+      compareBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          compareBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          const mode = btn.dataset.compare;
+
+          compareRisks.classList.remove('dimmed');
+          compareBenefits.classList.remove('dimmed');
+
+          if (mode === 'risks') {
+            compareBenefits.classList.add('dimmed');
+          } else if (mode === 'benefits') {
+            compareRisks.classList.add('dimmed');
+          }
+        });
+      });
+    }
+
+    // ─── ACORDEÓN ───
+    document.querySelectorAll('.accordion-trigger').forEach(trigger => {
+      trigger.addEventListener('click', () => {
+        const item = trigger.parentElement;
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.accordion-item').forEach(i => {
+          i.classList.remove('open');
+          i.querySelector('.accordion-trigger').setAttribute('aria-expanded', 'false');
+        });
+        if (!isOpen) {
+          item.classList.add('open');
+          trigger.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

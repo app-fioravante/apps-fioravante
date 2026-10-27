@@ -1,0 +1,1719 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Banca, Bolsa y Economía Mundial · Enciclopedia Visual Fioravante</title>
+  <meta name="description" content="Exploración interactiva de la banca, la bolsa y la economía mundial: historia, funcionamiento, instituciones, crisis, ciclos y futuro financiero.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <script>
+    (function () {
+      try {
+        const stored = localStorage.getItem('enc-theme');
+        if (stored === 'light' || stored === 'dark') {
+          document.documentElement.setAttribute('data-theme', stored);
+        } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+          document.documentElement.setAttribute('data-theme', 'light');
+        }
+      } catch (e) {}
+    })();
+  </script>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg-deep: #070b14;
+      --surface: rgba(22, 32, 50, 0.65);
+      --surface-hover: rgba(30, 44, 68, 0.8);
+      --border: rgba(255, 255, 255, 0.07);
+      --border-strong: rgba(255, 255, 255, 0.15);
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --text-dim: #64748b;
+      --accent-cyan: #22d3ee;
+      --accent-violet: #a78bfa;
+      --accent-amber: #fbbf24;
+      --accent-rose: #fb7185;
+      --accent-emerald: #34d399;
+      --chip-hover-bg: rgba(255, 255, 255, 0.04);
+      --radius-lg: 24px;
+      --radius-md: 16px;
+      --radius-sm: 12px;
+      --shadow-card: 0 4px 24px -8px rgba(0, 0, 0, 0.6);
+      --shadow-hover: 0 24px 48px -16px rgba(0, 0, 0, 0.7);
+      --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+      --noise-opacity: 0.03;
+    }
+
+    [data-theme="light"] {
+      --bg-deep: #f4f6fa;
+      --surface: rgba(255, 255, 255, 0.72);
+      --surface-hover: rgba(255, 255, 255, 0.92);
+      --border: rgba(15, 23, 42, 0.08);
+      --border-strong: rgba(15, 23, 42, 0.16);
+      --text-primary: #1e293b;
+      --text-secondary: #475569;
+      --text-dim: #94a3b8;
+      --accent-cyan: #0891b2;
+      --accent-violet: #7c3aed;
+      --accent-amber: #b45309;
+      --accent-rose: #e11d48;
+      --accent-emerald: #059669;
+      --chip-hover-bg: rgba(15, 23, 42, 0.04);
+      --shadow-card: 0 4px 24px -8px rgba(15, 23, 42, 0.08);
+      --shadow-hover: 0 24px 48px -16px rgba(15, 23, 42, 0.16);
+      --noise-opacity: 0.015;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background-color: var(--bg-deep);
+      color: var(--text-primary);
+      min-height: 100vh;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+      transition: background-color 0.5s ease, color 0.5s ease;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      background:
+        radial-gradient(ellipse 80% 60% at 10% 0%, rgba(251, 191, 36, 0.14), transparent 60%),
+        radial-gradient(ellipse 70% 50% at 90% 10%, rgba(34, 211, 238, 0.1), transparent 55%),
+        radial-gradient(ellipse 60% 50% at 50% 100%, rgba(52, 211, 153, 0.07), transparent 60%);
+      animation: bgShift 20s ease-in-out infinite alternate;
+      transition: opacity 0.5s ease;
+    }
+
+    [data-theme="light"] body::before {
+      background:
+        radial-gradient(ellipse 80% 60% at 10% 0%, rgba(180, 83, 9, 0.12), transparent 60%),
+        radial-gradient(ellipse 70% 50% at 90% 10%, rgba(8, 145, 178, 0.1), transparent 55%),
+        radial-gradient(ellipse 60% 50% at 50% 100%, rgba(5, 150, 105, 0.08), transparent 60%);
+    }
+
+    @keyframes bgShift {
+      0% { opacity: 0.7; transform: scale(1); }
+      100% { opacity: 1; transform: scale(1.08); }
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      opacity: var(--noise-opacity);
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      pointer-events: none;
+      transition: opacity 0.5s ease;
+    }
+
+    .app { max-width: 1200px; margin: 0 auto; padding: 0 24px 80px; }
+
+    /* ─── THEME TOGGLE ─── */
+    .theme-toggle {
+      position: fixed; top: 20px; right: 20px; z-index: 100;
+      width: 46px; height: 46px; border-radius: 50%;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      color: var(--text-primary); cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: var(--shadow-card);
+      transition: transform 0.35s var(--ease-out-expo), border-color 0.3s, box-shadow 0.35s var(--ease-out-expo), background-color 0.4s ease, color 0.4s ease;
+    }
+    .theme-toggle:hover { transform: scale(1.1) rotate(10deg); border-color: var(--border-strong); box-shadow: var(--shadow-hover); }
+    .theme-toggle svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .theme-toggle .icon-sun { display: block; }
+    .theme-toggle .icon-moon { display: none; }
+    [data-theme="light"] .theme-toggle .icon-sun { display: none; }
+    [data-theme="light"] .theme-toggle .icon-moon { display: block; }
+
+    /* ─── HEADER ─── */
+    .header { padding: 56px 0 24px; text-align: center; }
+    .header-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 16px; border-radius: 999px;
+      background: rgba(251, 191, 36, 0.1);
+      border: 1px solid rgba(251, 191, 36, 0.25);
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--accent-amber);
+      margin-bottom: 20px;
+      animation: fadeDown 0.8s var(--ease-out-expo) both;
+    }
+    .header-badge::before {
+      content: ''; width: 6px; height: 6px; border-radius: 50%;
+      background: var(--accent-amber); box-shadow: 0 0 12px var(--accent-amber);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.8); } }
+
+    .header h1 {
+      font-size: clamp(2.2rem, 5.5vw, 3.8rem);
+      font-weight: 800; letter-spacing: -0.03em; line-height: 1.1;
+      margin-bottom: 16px;
+      animation: fadeDown 0.9s 0.1s var(--ease-out-expo) both;
+    }
+    .header h1 .gradient-text {
+      background: linear-gradient(135deg, var(--accent-amber) 0%, var(--accent-cyan) 50%, var(--accent-emerald) 100%);
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-size: 200% 200%;
+      animation: gradientMove 6s ease-in-out infinite;
+    }
+    @keyframes gradientMove { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+
+    .header-subtitle {
+      font-size: clamp(0.95rem, 2vw, 1.1rem);
+      color: var(--text-secondary); font-weight: 400;
+      max-width: 720px; margin: 0 auto;
+      animation: fadeDown 1s 0.2s var(--ease-out-expo) both;
+    }
+
+    /* ─── NAVEGACIÓN POR PESTAÑAS ─── */
+    .tabs-nav {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      margin: 32px 0 28px;
+      padding: 8px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      animation: fadeUp 0.8s 0.3s var(--ease-out-expo) both;
+    }
+    .tab-btn {
+      flex: 1 1 auto;
+      padding: 12px 18px;
+      border-radius: var(--radius-sm);
+      border: none; background: transparent;
+      color: var(--text-secondary);
+      font-family: inherit; font-size: 0.88rem; font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s var(--ease-out-expo);
+      white-space: nowrap;
+    }
+    .tab-btn:hover { color: var(--text-primary); background: var(--chip-hover-bg); }
+    .tab-btn.active {
+      background: rgba(251, 191, 36, 0.15);
+      color: var(--accent-amber);
+      box-shadow: 0 0 20px -4px rgba(251, 191, 36, 0.2);
+    }
+    [data-theme="light"] .tab-btn.active { background: rgba(180, 83, 9, 0.12); color: var(--accent-amber); }
+
+    /* ─── PANELES ─── */
+    .panel { display: none; animation: fadeUp 0.5s var(--ease-out-expo) both; }
+    .panel.active { display: block; }
+
+    .content-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      box-shadow: var(--shadow-card);
+      margin-bottom: 24px;
+      transition: background-color 0.4s ease, border-color 0.4s ease;
+    }
+
+    .content-card h2 {
+      font-size: 1.5rem; font-weight: 700; letter-spacing: -0.02em;
+      margin-bottom: 16px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .content-card h2 .icon-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--accent-amber);
+      box-shadow: 0 0 12px var(--accent-amber);
+      flex-shrink: 0;
+    }
+    .content-card h3 {
+      font-size: 1.1rem; font-weight: 700;
+      margin: 24px 0 10px;
+      color: var(--accent-amber);
+    }
+    .content-card p {
+      color: var(--text-secondary);
+      margin-bottom: 14px;
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+    .content-card p strong { color: var(--text-primary); }
+    .content-card ul, .content-card ol {
+      margin: 12px 0 18px 20px;
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+    .content-card li { margin-bottom: 8px; }
+    .content-card blockquote {
+      border-left: 3px solid var(--accent-amber);
+      padding: 12px 20px;
+      margin: 20px 0;
+      background: rgba(251, 191, 36, 0.05);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      font-style: italic;
+      color: var(--text-secondary);
+      font-size: 0.92rem;
+    }
+    [data-theme="light"] .content-card blockquote { background: rgba(180, 83, 9, 0.05); }
+    .content-card blockquote cite {
+      display: block; margin-top: 8px;
+      font-style: normal; font-size: 0.82rem; color: var(--text-dim);
+    }
+
+    /* ─── TARJETAS DE CONCEPTO ─── */
+    .concept-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+      margin: 20px 0;
+    }
+    .concept-card {
+      padding: 22px;
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      transition: transform 0.3s var(--ease-out-expo), border-color 0.3s, box-shadow 0.3s;
+    }
+    .concept-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--border-strong);
+      box-shadow: var(--shadow-hover);
+    }
+    .concept-card .concept-icon {
+      width: 44px; height: 44px; border-radius: var(--radius-sm);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem; margin-bottom: 14px;
+      background: rgba(251, 191, 36, 0.12);
+      color: var(--accent-amber);
+    }
+    .concept-card h4 {
+      font-size: 1rem; font-weight: 700; margin-bottom: 8px;
+    }
+    .concept-card p {
+      font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; margin: 0;
+    }
+
+    /* ─── COMPARADOR ─── */
+    .compare-controls {
+      display: flex; gap: 8px; margin: 20px 0 24px; flex-wrap: wrap;
+    }
+    .compare-btn {
+      padding: 10px 20px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text-secondary);
+      font-family: inherit; font-size: 0.85rem; font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s var(--ease-out-expo);
+    }
+    .compare-btn:hover { border-color: var(--border-strong); color: var(--text-primary); }
+    .compare-btn.active {
+      background: var(--accent-amber);
+      border-color: var(--accent-amber);
+      color: var(--bg-deep);
+      font-weight: 700;
+    }
+    [data-theme="light"] .compare-btn.active { color: #fff; }
+
+    .compare-panels {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    @media (max-width: 640px) { .compare-panels { grid-template-columns: 1fr; } }
+
+    .compare-panel {
+      padding: 24px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      background: var(--surface);
+      transition: opacity 0.3s ease;
+    }
+    .compare-panel.dimmed { opacity: 0.35; pointer-events: none; }
+    .compare-panel h4 {
+      font-size: 0.95rem; font-weight: 700; margin-bottom: 12px;
+      text-transform: uppercase; letter-spacing: 0.06em;
+    }
+    .compare-panel.left h4 { color: var(--accent-amber); }
+    .compare-panel.right h4 { color: var(--accent-cyan); }
+    .compare-panel p { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.7; }
+
+    /* ─── LÍNEA DE TIEMPO ─── */
+    .timeline { position: relative; padding: 20px 0 20px 32px; }
+    .timeline::before {
+      content: ''; position: absolute; left: 11px; top: 0; bottom: 0;
+      width: 2px; background: linear-gradient(to bottom, var(--accent-amber), var(--accent-cyan));
+      border-radius: 2px;
+    }
+    .timeline-item {
+      position: relative; margin-bottom: 28px; padding-left: 8px;
+    }
+    .timeline-item::before {
+      content: ''; position: absolute; left: -27px; top: 6px;
+      width: 12px; height: 12px; border-radius: 50%;
+      background: var(--bg-deep); border: 2px solid var(--accent-amber);
+      box-shadow: 0 0 10px rgba(251, 191, 36, 0.3);
+    }
+    .timeline-item .timeline-era {
+      font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.08em; color: var(--accent-amber); margin-bottom: 4px;
+    }
+    .timeline-item h4 { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+    .timeline-item p { font-size: 0.88rem; color: var(--text-secondary); margin: 0; line-height: 1.6; }
+
+    /* ─── TABLA ─── */
+    .table-wrap {
+      overflow-x: auto;
+      margin: 20px 0;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+    th, td {
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-secondary);
+    }
+    th {
+      background: var(--chip-hover-bg);
+      color: var(--text-primary);
+      font-weight: 700;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: var(--chip-hover-bg); }
+    td strong { color: var(--text-primary); }
+
+    /* ─── GLOSARIO ─── */
+    .accordion-item {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      margin-bottom: 10px;
+      overflow: hidden;
+      transition: border-color 0.3s;
+    }
+    .accordion-item:hover { border-color: var(--border-strong); }
+    .accordion-trigger {
+      width: 100%;
+      padding: 16px 20px;
+      background: transparent;
+      border: none;
+      color: var(--text-primary);
+      font-family: inherit; font-size: 0.95rem; font-weight: 600;
+      text-align: left; cursor: pointer;
+      display: flex; justify-content: space-between; align-items: center;
+      transition: background-color 0.2s;
+    }
+    .accordion-trigger:hover { background: var(--chip-hover-bg); }
+    .accordion-trigger .chevron {
+      transition: transform 0.3s var(--ease-out-expo);
+      font-size: 0.8rem; color: var(--text-dim);
+    }
+    .accordion-item.open .accordion-trigger .chevron { transform: rotate(180deg); }
+    .accordion-content {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.4s var(--ease-out-expo), padding 0.4s var(--ease-out-expo);
+      padding: 0 20px;
+    }
+    .accordion-item.open .accordion-content {
+      max-height: 500px; padding: 0 20px 18px;
+    }
+    .accordion-content p {
+      font-size: 0.9rem; color: var(--text-secondary); line-height: 1.7; margin: 0;
+    }
+
+    /* ─── FOOTER ─── */
+    .footer {
+      text-align: center; padding: 48px 0 0;
+      color: var(--text-dim); font-size: 0.8rem;
+      border-top: 1px solid var(--border); margin-top: 48px;
+    }
+    .footer a { color: var(--accent-amber); text-decoration: none; font-weight: 500; }
+    .footer a:hover { text-decoration: underline; }
+
+    @keyframes fadeDown { from { opacity: 0; transform: translateY(-16px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+
+    @media (max-width: 640px) {
+      .app { padding: 0 16px 48px; }
+      .content-card { padding: 24px 20px; }
+      .tabs-nav { gap: 4px; padding: 6px; }
+      .tab-btn { padding: 10px 12px; font-size: 0.8rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema" title="Cambiar tema">
+    <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+    <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  </button>
+
+  <div class="app">
+    <!-- Header -->
+    <header class="header">
+      <div class="header-badge">Finanzas · Mercados · Economía</div>
+      <h1>Banca, Bolsa y <span class="gradient-text">Economía Mundial</span></h1>
+      <p class="header-subtitle">
+        Un recorrido visual e interactivo por los tres pilares del sistema financiero global: las instituciones que crean y prestan dinero, los mercados donde se negocian activos y la economía que conecta a todas las naciones.
+      </p>
+    </header>
+
+    <!-- Navegación por pestañas -->
+    <nav class="tabs-nav" role="tablist" aria-label="Secciones del tema">
+      <button class="tab-btn active" data-panel="panel-intro" role="tab" aria-selected="true">Panorama</button>
+      <button class="tab-btn" data-panel="panel-historia" role="tab" aria-selected="false">Historia</button>
+      <button class="tab-btn" data-panel="panel-banca" role="tab" aria-selected="false">Banca</button>
+      <button class="tab-btn" data-panel="panel-bolsa" role="tab" aria-selected="false">Bolsa</button>
+      <button class="tab-btn" data-panel="panel-mundial" role="tab" aria-selected="false">Economía Mundial</button>
+      <button class="tab-btn" data-panel="panel-crisis" role="tab" aria-selected="false">Crisis y Ciclos</button>
+      <button class="tab-btn" data-panel="panel-futuro" role="tab" aria-selected="false">Futuro</button>
+      <button class="tab-btn" data-panel="panel-glosario" role="tab" aria-selected="false">Glosario</button>
+    </nav>
+
+    <!-- ─── PANEL: PANORAMA ─── -->
+    <section id="panel-intro" class="panel active" role="tabpanel">
+      <div class="content-card">
+        <h2><span class="icon-dot"></span>Los tres pilares del sistema financiero</h2>
+        <p>
+          La <strong>banca</strong>, la <strong>bolsa</strong> y la <strong>economía mundial</strong> son tres dimensiones interconectadas de un mismo sistema: el que determina cómo se crea, circula, invierte y distribuye el dinero en el planeta. Entenderlos por separado ayuda a comprenderlos; entenderlos juntos permite entender el mundo.
+        </p>
+
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">🏦</div>
+            <h4>Banca</h4>
+            <p>Instituciones que captan depósitos, otorgan créditos y crean dinero. Son el corazón del sistema de pagos y financiamiento de la economía real: familias, empresas y Estados.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">📈</div>
+            <h4>Bolsa</h4>
+            <p>Mercado donde se compran y venden acciones, bonos y otros instrumentos financieros. Canaliza el ahorro hacia la inversión y determina el valor de las empresas.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🌍</div>
+            <h4>Economía mundial</h4>
+            <p>Sistema global de producción, comercio, finanzas y trabajo. Involucra países, empresas, organismos internacionales, divisas, flujos de capital y políticas macroeconómicas.</p>
+          </div>
+        </div>
+
+        <h3>¿Cómo se conectan?</h3>
+        <p>
+          Los <strong>bancos centrales</strong> fijan las tasas de interés que influyen en lo que los bancos comerciales cobran y pagan. Los <strong>bancos comerciales</strong> financian a las empresas, algunas de las cuales cotizan en la <strong>bolsa</strong>. Los <strong>inversores</strong> compran acciones y bonos según las expectativas sobre la economía. Las <strong>empresas y los Estados</strong> emiten deuda que se negocia en los mercados. Los <strong>flujos internacionales</strong> de capital conectan a todas las economías y transmiten crisis de un país al resto del mundo.
+        </p>
+
+        <h3>Los ciclos y las crisis</h3>
+        <p>
+          El sistema no crece de forma lineal: lo hace en <strong>ciclos</strong> (expansión, pico, recesión, recuperación) que incluyen crisis periódicas. Algunas son locales; otras se contagian globalmente con una velocidad que no tiene precedentes históricos. Comprender esos ciclos es fundamental para gobiernos, inversores y ciudadanos.
+        </p>
+
+        <blockquote>
+          "Cuando el dinero fluye, todo parece crecer. Cuando se detiene, todos descubren quién nadaba desnudo." — Warren Buffett
+          <cite>La famosa frase sobre las crisis financieras y la importancia de la gestión del riesgo.</cite>
+        </blockquote>
+
+        <h3>Un sistema de confianza</h3>
+        <p>
+          Nada de esto funcionaría sin <strong>confianza</strong>. Los depositantes confían en que podrán retirar su dinero; los inversores confían en que los mercados son razonablemente justos; los países confían en que sus socios comerciales cumplirán los acuerdos. Cuando la confianza se rompe, el sistema entero tiembla. Por eso la regulación, la transparencia y las instituciones son tan importantes.
+        </p>
+      </div>
+    </section>
+
+    <!-- ─── PANEL: HISTORIA ─── -->
+    <section id="panel-historia" class="panel" role="tabpanel">
+      <div class="content-card">
+        <h2><span class="icon-dot"></span>Historia del sistema financiero</h2>
+        <p>
+          La historia de las finanzas es tan antigua como el comercio. Cada innovación —la moneda, el crédito, la bolsa, el banco central, el dinero digital— respondió a una necesidad concreta de su época, y a la vez transformó profundamente las sociedades.
+        </p>
+
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-era">c. 3000 a.C.</div>
+            <h4>Primeras formas de crédito y moneda</h4>
+            <p>En Mesopotamia y Egipto se registran préstamos, contratos y unidades de cuenta (cebada, plata). El Código de Hammurabi (c. 1750 a.C.) ya regula deudas y tasas de interés.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">s. VII a.C.</div>
+            <h4>Acuñación de monedas</h4>
+            <p>En Lidia (actual Turquía) aparecen las primeras monedas acuñadas con valor garantizado por la autoridad. Facilitan el comercio y el pago de impuestos.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">s. XII–XV</div>
+            <h4>Banca italiana</h4>
+            <p>Las ciudades-estado italianas (Venecia, Génova, Florencia) desarrollan la banca moderna. Los Médici consolidan la letra de cambio, el crédito internacional y las sucursales bancarias.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">1602</div>
+            <h4>La Bolsa de Ámsterdam</h4>
+            <p>Se funda la primera bolsa moderna del mundo con la Compañía Neerlandesa de las Indias Orientales (VOC). Se negocian acciones y se desarrollan instrumentos como las opciones.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">1694</div>
+            <h4>Banco de Inglaterra</h4>
+            <p>Nace el primer banco central moderno. Su función: financiar al Estado y estabilizar el sistema monetario. Se convierte en modelo para el resto del mundo.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">1792</div>
+            <h4>Bolsa de Nueva York (NYSE)</h4>
+            <p>El Acuerdo de Buttonwood (Buttonwood Agreement) da origen a Wall Street. Se convierte con el tiempo en el mayor mercado de valores del mundo.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">1929</div>
+            <h4>El crash y la Gran Depresión</h4>
+            <p>La caída de Wall Street desencadena la peor crisis económica del siglo XX. Nace la necesidad de regulación financiera y de redes de seguridad social.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">1944</div>
+            <h4>Bretton Woods</h4>
+            <p>Se crean el FMI y el Banco Mundial. Se fija el dólar como moneda de reserva mundial, convertible en oro. Nace el orden económico de la posguerra.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">1971</div>
+            <h4>Fin del patrón oro</h4>
+            <p>Nixon cierra la ventana del oro. Las monedas pasan a flotar libremente. Comienza una era de tipos de cambio volátiles y de mercados financieros globalizados.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">1987</div>
+            <h4>Lunes Negro</h4>
+            <p>El Dow Jones cae un 22,6% en un solo día. Se generalizan los "circuit breakers" y se moderniza la infraestructura de los mercados.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">1997–1998</div>
+            <h4>Crisis asiática y default ruso</h4>
+            <p>Demuestran la rapidez del contagio financiero global. El FMI interviene en varios países y se reformula el debate sobre los controles de capital.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">2008</div>
+            <h4>Crisis subprime</h4>
+            <p>La caída de Lehman Brothers desencadena la peor crisis desde 1929. Se rescatan bancos con dinero público y se reforma la regulación (Basilea III, Dodd-Frank).</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">2009</div>
+            <h4>Bitcoin y la era cripto</h4>
+            <p>Aparece la primera criptomoneda descentralizada. Abre un debate sobre la naturaleza del dinero y el rol de los intermediarios.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">2020</div>
+            <h4>Pandemia y estímulos masivos</h4>
+            <p>Los bancos centrales inyectan liquidez sin precedentes. Las tasas caen a mínimos históricos. Se acelera la digitalización financiera.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">2022–2023</div>
+            <h4>Inflación, subas de tasas y crisis bancaria</h4>
+            <p>La inflación global obliga a subir tasas abruptamente. Quiebran bancos regionales en EE.UU. (SVB, Signature) y se rescata Credit Suisse. Nuevos desafíos para la estabilidad.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">Presente</div>
+            <h4>Fintech, CBDC e IA</h4>
+            <p>Los neobancos, las monedas digitales de banco central y la inteligencia artificial redefinen la banca, la bolsa y la economía mundial.</p>
+          </div>
+        </div>
+
+        <h3>Grandes transformaciones</h3>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">🪙</div>
+            <h4>Del trueque a la moneda</h4>
+            <p>La moneda resuelve el problema del trueque: separa la compra de la venta y permite acumular valor en el tiempo.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">📜</div>
+            <h4>Del oro al papel</h4>
+            <p>El dinero fiduciario (papel moneda respaldado por el Estado) reemplaza al oro. La confianza sustituye a la materia física.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">💳</div>
+            <h4>Del efectivo al bit</h4>
+            <p>Tarjetas, transferencias electrónicas, billeteras digitales y criptomonedas redefinen qué significa "tener dinero".</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🌐</div>
+            <h4>De lo nacional a lo global</h4>
+            <p>Los mercados financieros se globalizan: el capital cruza fronteras en milisegundos y las crisis se contagian al instante.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── PANEL: BANCA ─── -->
+    <section id="panel-banca" class="panel" role="tabpanel">
+      <div class="content-card">
+        <h2><span class="icon-dot"></span>La banca</h2>
+        <p>
+          Los <strong>bancos</strong> son instituciones financieras que captan dinero del público (depósitos), otorgan préstamos, facilitan pagos y ofrecen otros servicios financieros. Son el corazón del sistema monetario: la mayor parte del dinero que circula en la economía moderna no es efectivo impreso, sino <strong>dinero bancario</strong> creado por los propios bancos al otorgar créditos.
+        </p>
+
+        <h3>Tipos de bancos</h3>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">🏦</div>
+            <h4>Bancos comerciales</h4>
+            <p>Reciben depósitos del público y otorgan créditos a familias y empresas. Son los que usamos cotidianamente.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">💼</div>
+            <h4>Bancos de inversión</h4>
+            <p>Asisten a empresas y gobiernos en la emisión de acciones y bonos, fusiones, adquisiciones y financiamiento de proyectos. No captan depósitos minoristas.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🏛️</div>
+            <h4>Bancos centrales</h4>
+            <p>Autoridad monetaria de un país o región: emite moneda, fija tasas de interés, regula a los bancos y actúa como prestamista de última instancia.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🤝</div>
+            <h4>Bancos cooperativos</h4>
+            <p>Propiedad de sus socios (cooperativas de crédito, cajas de ahorro). Priorizan el servicio a la comunidad sobre el lucro.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">📱</div>
+            <h4>Bancos digitales y neobancos</h4>
+            <p>Operan principalmente por apps, sin sucursales físicas. Suelen tener costos más bajos y experiencias más ágiles.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🌍</div>
+            <h4>Bancos de desarrollo</h4>
+            <p>Financian proyectos de infraestructura y desarrollo. Ejemplos: Banco Mundial, BID, CAF, Banco Asiático de Desarrollo.</p>
+          </div>
+        </div>
+
+        <h3>Funciones de un banco comercial</h3>
+        <ul>
+          <li><strong>Captar depósitos:</strong> recibir dinero de los clientes y pagar intereses por él.</li>
+          <li><strong>Otorgar créditos:</strong> prestar dinero a familias y empresas, cobrando intereses.</li>
+          <li><strong>Facilitar pagos:</strong> gestionar transferencias, tarjetas, cheques y cobros.</li>
+          <li><strong>Crear dinero:</strong> al prestar, el banco genera nuevos depósitos que se suman al dinero circulante.</li>
+          <li><strong>Custodiar valores:</strong> guardar activos, administrar inversiones y ofrecer cajas de seguridad.</li>
+          <li><strong>Gestionar riesgos:</strong> evaluar la capacidad de pago de los clientes y diversificar sus propias carteras.</li>
+        </ul>
+
+        <h3>La creación de dinero bancario</h3>
+        <p>
+          El dinero no lo crea solo el banco central: la mayor parte lo crean los <strong>bancos comerciales</strong> al otorgar préstamos. Cuando un banco concede un crédito, acredita el dinero en la cuenta del cliente. Ese dinero no existía antes: ha sido creado por el acto de prestar.
+        </p>
+        <p>
+          El proceso se conoce como <strong>multiplicador bancario</strong>: con cada préstamo y depósito sucesivo, una fracción del dinero se multiplica. Los bancos centrales regulan este proceso mediante el <strong>encaje</strong> (porcentaje de depósitos que deben mantener como reserva) y las tasas de interés.
+        </p>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Concepto</th>
+                <th>Descripción</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Depósito</strong></td>
+                <td>Dinero que un cliente deja en el banco, con derecho a retirarlo.</td>
+              </tr>
+              <tr>
+                <td><strong>Encaje / reserva</strong></td>
+                <td>Porcentaje mínimo de los depósitos que el banco debe mantener disponible.</td>
+              </tr>
+              <tr>
+                <td><strong>Crédito</strong></td>
+                <td>Dinero prestado por el banco, que el cliente debe devolver con intereses.</td>
+              </tr>
+              <tr>
+                <td><strong>Tasa activa</strong></td>
+                <td>Interés que cobra el banco por los préstamos que otorga.</td>
+              </tr>
+              <tr>
+                <td><strong>Tasa pasiva</strong></td>
+                <td>Interés que paga el banco por los depósitos que recibe.</td>
+              </tr>
+              <tr>
+                <td><strong>Spread</strong></td>
+                <td>Diferencia entre la tasa activa y la pasiva: el margen del banco.</td>
+              </tr>
+              <tr>
+                <td><strong>Liquidez</strong></td>
+                <td>Capacidad de un banco de responder a retiros y obligaciones a corto plazo.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Los bancos centrales</h3>
+        <p>
+          El <strong>banco central</strong> es la institución que controla la política monetaria de un país o región. Sus decisiones sobre las tasas de interés afectan el crédito, la inversión, el consumo, el empleo y la inflación. Ejemplos: la Reserva Federal (Fed) de EE.UU., el Banco Central Europeo (BCE), el Banco Central de la República Argentina (BCRA), el Banco de Japón (BoJ).
+        </p>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">💰</div>
+            <h4>Emisión de moneda</h4>
+            <p>Único organismo autorizado para emitir billetes y monedas de curso legal.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">📊</div>
+            <h4>Política monetaria</h4>
+            <p>Fija las tasas de interés y controla la cantidad de dinero para influir en la inflación y el empleo.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🛡️</div>
+            <h4>Prestamista de última instancia</h4>
+            <p>Presta a los bancos en dificultades para evitar pánicos y quiebras sistémicas.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">👁️</div>
+            <h4>Supervisión bancaria</h4>
+            <p>Regula y supervisa a las entidades financieras para asegurar su solvencia y el cumplimiento de normas.</p>
+          </div>
+        </div>
+
+        <h3>Riesgos bancarios</h3>
+        <p>
+          Los bancos enfrentan varios tipos de riesgo. Los principales son:
+        </p>
+        <ul>
+          <li><strong>Riesgo de crédito:</strong> que los prestatarios no devuelvan el dinero.</li>
+          <li><strong>Riesgo de liquidez:</strong> que muchos depositantes retiren fondos al mismo tiempo (pánico bancario).</li>
+          <li><strong>Riesgo de mercado:</strong> pérdidas por fluctuaciones de tasas, divisas o precios de activos.</li>
+          <li><strong>Riesgo operativo:</strong> fallas internas, fraudes, errores humanos o ciberataques.</li>
+          <li><strong>Riesgo sistémico:</strong> el contagio a todo el sistema financiero si un banco grande quiebra.</li>
+        </ul>
+
+        <blockquote>
+          "Un banco es un lugar donde te prestan un paraguas cuando hace sol y te lo piden de vuelta cuando empieza a llover." — Mark Twain (atribuido)
+          <cite>La clásica crítica a la lógica pro-cíclica de la banca comercial.</cite>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- ─── PANEL: BOLSA ─── -->
+    <section id="panel-bolsa" class="panel" role="tabpanel">
+      <div class="content-card">
+        <h2><span class="icon-dot"></span>La bolsa</h2>
+        <p>
+          La <strong>bolsa de valores</strong> es un mercado organizado donde se compran y venden instrumentos financieros: principalmente <strong>acciones</strong> (participaciones en empresas) y <strong>bonos</strong> (deuda emitida por empresas o Estados). Su función central es canalizar el ahorro hacia la inversión productiva.
+        </p>
+
+        <h3>¿Qué se negocia en la bolsa?</h3>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">📊</div>
+            <h4>Acciones</h4>
+            <p>Fracciones de propiedad de una empresa. Su valor sube o baja según las expectativas sobre los beneficios futuros y el contexto del mercado.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">📜</div>
+            <h4>Bonos</h4>
+            <p>Títulos de deuda: quien los compra presta dinero a cambio de un interés. Los emiten Estados (bonos soberanos) y empresas (bonos corporativos).</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">📦</div>
+            <h4>ETF</h4>
+            <p>Fondos cotizados que replican un índice o una cesta de activos. Permiten diversificar con una sola compra.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">⚖️</div>
+            <h4>Derivados</h4>
+            <p>Contratos cuyo valor depende de otro activo: futuros, opciones, swaps. Se usan para cubrir riesgos o especular.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">💵</div>
+            <h4>Divisas</h4>
+            <p>En el mercado forex se negocian monedas. Es el mayor mercado financiero del mundo por volumen operado diario.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🏭</div>
+            <h4>Materias primas</h4>
+            <p>Petróleo, oro, trigo, cobre. Se negocian en mercados específicos y afectan los precios de toda la economía.</p>
+          </div>
+        </div>
+
+        <h3>Mercado primario y secundario</h3>
+        <div class="compare-panels">
+          <div class="compare-panel left">
+            <h4>🆕 Mercado primario</h4>
+            <p><strong>Qué ocurre:</strong> la empresa o el Estado emite nuevos títulos y los vende por primera vez.</p>
+            <p><strong>Quién recibe el dinero:</strong> el emisor (empresa o gobierno).</p>
+            <p><strong>Ejemplo:</strong> una IPO (salida a bolsa) o la emisión de un bono soberano.</p>
+            <p><strong>Función:</strong> financiar la inversión y el gasto.</p>
+          </div>
+          <div class="compare-panel right">
+            <h4>🔄 Mercado secundario</h4>
+            <p><strong>Qué ocurre:</strong> los inversores compran y venden entre sí títulos ya emitidos.</p>
+            <p><strong>Quién recibe el dinero:</strong> el vendedor del título, no el emisor.</p>
+            <p><strong>Ejemplo:</strong> comprar acciones de Apple en el Nasdaq.</p>
+            <p><strong>Función:</strong> dar liquidez y determinar precios de mercado.</p>
+          </div>
+        </div>
+
+        <h3>¿Cómo se forma el precio?</h3>
+        <p>
+          El precio de una acción se forma por la interacción entre <strong>oferta y demanda</strong>. Si hay más compradores que vendedores, el precio sube; si ocurre lo contrario, baja. Esa dinámica refleja las expectativas de los inversores sobre:
+        </p>
+        <ul>
+          <li>Los beneficios futuros de la empresa.</li>
+          <li>El contexto macroeconómico (tasas, inflación, crecimiento).</li>
+          <li>Las decisiones políticas y regulatorias.</li>
+          <li>Los acontecimientos globales (guerras, pandemias, crisis).</li>
+          <li>El sentimiento del mercado: optimismo, miedo o euforia.</li>
+        </ul>
+
+        <h3>Principales índices bursátiles</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Índice</th>
+                <th>País / Región</th>
+                <th>Qué mide</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>S&amp;P 500</strong></td>
+                <td>EE.UU.</td>
+                <td>Las 500 empresas más grandes del mercado estadounidense.</td>
+              </tr>
+              <tr>
+                <td><strong>Dow Jones</strong></td>
+                <td>EE.UU.</td>
+                <td>30 empresas industriales líderes.</td>
+              </tr>
+              <tr>
+                <td><strong>Nasdaq Composite</strong></td>
+                <td>EE.UU.</td>
+                <td>Más de 3.000 empresas, con fuerte peso tecnológico.</td>
+              </tr>
+              <tr>
+                <td><strong>FTSE 100</strong></td>
+                <td>Reino Unido</td>
+                <td>100 empresas más grandes de la Bolsa de Londres.</td>
+              </tr>
+              <tr>
+                <td><strong>DAX</strong></td>
+                <td>Alemania</td>
+                <td>40 empresas principales de la Bolsa de Frankfurt.</td>
+              </tr>
+              <tr>
+                <td><strong>Nikkei 225</strong></td>
+                <td>Japón</td>
+                <td>225 empresas representativas de la Bolsa de Tokio.</td>
+              </tr>
+              <tr>
+                <td><strong>Hang Seng</strong></td>
+                <td>Hong Kong</td>
+                <td>Empresas de la Bolsa de Hong Kong, con fuerte vínculo con China.</td>
+              </tr>
+              <tr>
+                <td><strong>Merval</strong></td>
+                <td>Argentina</td>
+                <td>Panel líder de la Bolsa de Comercio de Buenos Aires.</td>
+              </tr>
+              <tr>
+                <td><strong>Ibovespa</strong></td>
+                <td>Brasil</td>
+                <td>Principal índice de la Bolsa de San Pablo.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Participantes del mercado</h3>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">👤</div>
+            <h4>Inversores individuales</h4>
+            <p>Personas que compran acciones u otros activos, generalmente mediante brokers o apps de inversión.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🏛️</div>
+            <h4>Inversores institucionales</h4>
+            <p>Fondos de pensión, aseguradoras, fondos mutuos, hedge funds. Concentran gran parte del volumen operado.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🤝</div>
+            <h4>Brokers y agentes</h4>
+            <p>Intermediarios que ejecutan órdenes de compra y venta por cuenta de sus clientes.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🏦</div>
+            <h4>Market makers</h4>
+            <p>Proveen liquidez cotizando precios de compra y venta de forma continua.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">⚖️</div>
+            <h4>Reguladores</h4>
+            <p>Supervisan el mercado: SEC (EE.UU.), CNV (Argentina), FCA (Reino Unido), ESMA (UE).</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🤖</div>
+            <h4>Algoritmos</h4>
+            <p>Sistemas automatizados que ejecutan operaciones en milisegundos. Dominan el volumen en los mercados modernos.</p>
+          </div>
+        </div>
+
+        <h3>Burbujas y crashes</h3>
+        <p>
+          Los mercados alternan entre euforia y pánico. Una <strong>burbuja</strong> ocurre cuando los precios de un activo se alejan mucho de su valor fundamental por expectativas exageradas. Cuando esas expectativas se rompen, se produce un <strong>crash</strong>: una caída abrupta y generalizada.
+        </p>
+        <ul>
+          <li><strong>Tulipanes (1637):</strong> la primera burbuja documentada. Los bulbos de tulipán alcanzaron precios absurdos antes de desplomarse.</li>
+          <li><strong>Compañía de los Mares del Sur (1720):</strong> una de las primeras burbujas accionarias, con epicentro en Londres.</li>
+          <li><strong>Crash del 29:</strong> la caída de Wall Street que anticipó la Gran Depresión.</li>
+          <li><strong>Burbuja puntocom (2000):</strong> el estallido de las valoraciones de las empresas de internet.</li>
+          <li><strong>Subprime (2008):</strong> la explosión de las hipotecas basura en EE.UU. que desencadenó una crisis global.</li>
+          <li><strong>Cripto (2022):</strong> la caída del mercado de criptomonedas tras un ciclo de euforia y escándalos de fraude.</li>
+        </ul>
+
+        <blockquote>
+          "El mercado puede permanecer irracional más tiempo del que tú puedes permanecer solvente." — John Maynard Keynes
+          <cite>Una advertencia clásica sobre la dificultad de anticipar burbujas.</cite>
+        </blockquote>
+
+        <h3>Comparador: invertir a largo plazo vs. especular</h3>
+        <p style="margin-bottom: 12px;">Selecciona una columna para enfocarte en ella.</p>
+        <div class="compare-controls">
+          <button class="compare-btn active" data-compare="both">Ambas</button>
+          <button class="compare-btn" data-compare="left">Solo largo plazo</button>
+          <button class="compare-btn" data-compare="right">Solo especular</button>
+        </div>
+        <div class="compare-panels">
+          <div class="compare-panel left" id="compare-left-bolsa">
+            <h4>🌱 Largo plazo</h4>
+            <p><strong>Horizonte:</strong> años o décadas.</p>
+            <p><strong>Objetivo:</strong> acompañar el crecimiento de las empresas y la economía.</p>
+            <p><strong>Estrategia:</strong> diversificación, análisis fundamental, paciencia.</p>
+            <p><strong>Riesgo:</strong> moderado, amortiguado por el tiempo.</p>
+            <p><strong>Perfil:</strong> ahorristas, jubilados, fondos de pensión.</p>
+          </div>
+          <div class="compare-panel right" id="compare-right-bolsa">
+            <h4>⚡ Especulación</h4>
+            <p><strong>Horizonte:</strong> días, horas o minutos.</p>
+            <p><strong>Objetivo:</strong> obtener ganancias por fluctuaciones de precio.</p>
+            <p><strong>Estrategia:</strong> análisis técnico, apalancamiento, timing.</p>
+            <p><strong>Riesgo:</strong> alto, con posibilidad de pérdidas rápidas y totales.</p>
+            <p><strong>Perfil:</strong> traders profesionales, hedge funds, algoritmos.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── PANEL: ECONOMÍA MUNDIAL ─── -->
+    <section id="panel-mundial" class="panel" role="tabpanel">
+      <div class="content-card">
+        <h2><span class="icon-dot"></span>La economía mundial</h2>
+        <p>
+          La <strong>economía mundial</strong> es el sistema global de producción, distribución, comercio, finanzas y trabajo que conecta a todos los países. En las últimas décadas, la globalización ha profundizado esos vínculos hasta un punto histórico: ninguna economía es autosuficiente.
+        </p>
+
+        <h3>Indicadores fundamentales</h3>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">📈</div>
+            <h4>PIB</h4>
+            <p>Producto Interno Bruto: valor total de bienes y servicios finales producidos por un país en un período. Es el principal indicador del tamaño de una economía.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">👥</div>
+            <h4>PIB per cápita</h4>
+            <p>PIB dividido por la población. Es un indicador aproximado del nivel de vida, aunque no mide la distribución del ingreso.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">💹</div>
+            <h4>Inflación</h4>
+            <p>Aumento sostenido del nivel general de precios. Reduce el poder adquisitivo del dinero y distorsiona las decisiones económicas.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🧑‍💼</div>
+            <h4>Desempleo</h4>
+            <p>Porcentaje de la población activa que busca trabajo y no lo encuentra. Varía según los ciclos económicos.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">💱</div>
+            <h4>Tipo de cambio</h4>
+            <p>Precio de una moneda en términos de otra. Afecta exportaciones, importaciones, turismo y deuda externa.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🏦</div>
+            <h4>Reservas internacionales</h4>
+            <p>Activos en divisas y oro que un banco central conserva para respaldar su moneda y hacer frente a obligaciones externas.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">📊</div>
+            <h4>Balanza comercial</h4>
+            <p>Diferencia entre exportaciones e importaciones de un país. Superávit si exporta más; déficit si importa más.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">💰</div>
+            <h4>Deuda pública</h4>
+            <p>Total de obligaciones que un Estado tiene con acreedores. Su sostenibilidad depende del crecimiento y de las tasas de interés.</p>
+          </div>
+        </div>
+
+        <h3>Comercio internacional</h3>
+        <p>
+          El comercio internacional permite que cada país se especialice en lo que produce mejor y compre lo que le resulta más eficiente importar. Este principio, formulado por David Ricardo en el siglo XIX como <strong>ventaja comparativa</strong>, sigue siendo la base teórica de la globalización.
+        </p>
+        <p>
+          Sin embargo, el comercio global también genera tensiones: competencia desleal, pérdida de empleos en sectores no competitivos, dependencias estratégicas, guerras comerciales y disputas por aranceles.
+        </p>
+
+        <h3>Divisas y monedas de reserva</h3>
+        <p>
+          El <strong>mercado de divisas (forex)</strong> es el mayor del mundo: mueve billones de dólares por día. Algunas monedas cumplen un rol especial como <strong>reservas internacionales</strong>: el dólar estadounidense, el euro, el yen japonés, la libra esterlina y el yuan chino.
+        </p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Moneda</th>
+                <th>Símbolo</th>
+                <th>Banco central emisor</th>
+                <th>Rol internacional</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Dólar estadounidense</strong></td>
+                <td>USD</td>
+                <td>Reserva Federal (Fed)</td>
+                <td>Principal moneda de reserva y de comercio mundial</td>
+              </tr>
+              <tr>
+                <td><strong>Euro</strong></td>
+                <td>EUR</td>
+                <td>Banco Central Europeo (BCE)</td>
+                <td>Segunda moneda de reserva global</td>
+              </tr>
+              <tr>
+                <td><strong>Yen japonés</strong></td>
+                <td>JPY</td>
+                <td>Banco de Japón (BoJ)</td>
+                <td>Moneda refugio en momentos de crisis</td>
+              </tr>
+              <tr>
+                <td><strong>Libra esterlina</strong></td>
+                <td>GBP</td>
+                <td>Banco de Inglaterra</td>
+                <td>Histórica moneda de reserva</td>
+              </tr>
+              <tr>
+                <td><strong>Yuan chino</strong></td>
+                <td>CNY</td>
+                <td>Banco Popular de China (PBoC)</td>
+                <td>Creciente peso en comercio internacional</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Instituciones internacionales</h3>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">🌐</div>
+            <h4>FMI</h4>
+            <p>Fondo Monetario Internacional. Brinda asistencia financiera a países con problemas de balanza de pagos y promueve la estabilidad macroeconómica global.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🏗️</div>
+            <h4>Banco Mundial</h4>
+            <p>Financia proyectos de desarrollo, infraestructura y reducción de la pobreza en países en desarrollo.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">⚖️</div>
+            <h4>OMC</h4>
+            <p>Organización Mundial del Comercio. Regula el comercio internacional, resuelve disputas y negocia acuerdos entre países.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🏦</div>
+            <h4>BIS</h4>
+            <p>Banco de Pagos Internacionales. Coordina a los bancos centrales y establece estándares globales de regulación (Basilea).</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🛢️</div>
+            <h4>OPEP</h4>
+            <p>Organización de Países Exportadores de Petróleo. Coordina políticas de producción y precios del crudo.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">💼</div>
+            <h4>OCDE</h4>
+            <p>Organización para la Cooperación y el Desarrollo Económicos. Foro de políticas públicas para países desarrollados.</p>
+          </div>
+        </div>
+
+        <h3>Bloques económicos regionales</h3>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">🇪🇺</div>
+            <h4>Unión Europea</h4>
+            <p>Mercado único, moneda común (euro) y libre circulación de personas, bienes y capitales. 27 países miembros.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🌎</div>
+            <h4>Mercosur</h4>
+            <p>Mercado común del sur: Argentina, Brasil, Paraguay, Uruguay, con Bolivia en proceso de adhesión.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🇺🇸</div>
+            <h4>T-MEC (ex TLCAN)</h4>
+            <p>Tratado comercial entre Estados Unidos, México y Canadá, renegociado en 2020.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🌏</div>
+            <h4>CPTPP</h4>
+            <p>Acuerdo Transpacífico de Cooperación Económica: 11 países de Asia y América del Pacífico.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🪙</div>
+            <h4>BRICS</h4>
+            <p>Brasil, Rusia, India, China, Sudáfrica y nuevos miembros. Bloque de economías emergentes que busca mayor peso global.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🌍</div>
+            <h4>Unión Africana</h4>
+            <p>Integración económica y política de 55 países africanos. Iniciativas como el Área de Libre Comercio Continental.</p>
+          </div>
+        </div>
+
+        <blockquote>
+          "La economía global no es una competencia entre países, sino una red de interdependencias. Lo que afecta a uno, afecta a todos." — Reflexión contemporánea
+          <cite>La globalización ha hecho que las crisis sean siempre potencialmente globales.</cite>
+        </blockquote>
+
+        <h3>Desafíos de la economía mundial</h3>
+        <ul>
+          <li><strong>Desigualdad:</strong> la brecha entre países y dentro de cada país sigue siendo enorme.</li>
+          <li><strong>Cambio climático:</strong> la transición energética es un desafío económico de primera magnitud.</li>
+          <li><strong>Envejecimiento poblacional:</strong> afecta los sistemas de pensiones y el crecimiento potencial.</li>
+          <li><strong>Concentración de poder corporativo:</strong> las grandes tecnológicas concentran mercado, datos y capital.</li>
+          <li><strong>Deuda global:</strong> los niveles de deuda pública y privada son históricamente altos.</li>
+          <li><strong>Tensiones geopolíticas:</strong> guerras comerciales, sanciones y bloques rivales fragmentan el sistema.</li>
+          <li><strong>Automatización e IA:</strong> transforman el trabajo y pueden agravar el desempleo y la desigualdad.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ─── PANEL: CRISIS Y CICLOS ─── -->
+    <section id="panel-crisis" class="panel" role="tabpanel">
+      <div class="content-card">
+        <h2><span class="icon-dot"></span>Crisis y ciclos económicos</h2>
+        <p>
+          La economía no crece de manera lineal: lo hace a través de <strong>ciclos</strong> que alternan expansión y contracción. Comprenderlos es fundamental para anticipar riesgos, diseñar políticas y entender por qué ocurren las crisis.
+        </p>
+
+        <h3>Las fases del ciclo económico</h3>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">📈</div>
+            <h4>Expansión</h4>
+            <p>Crecimiento del PIB, empleo, inversión y consumo. Los precios tienden a subir, el crédito se expande y el optimismo se generaliza.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🔝</div>
+            <h4>Pico</h4>
+            <p>Punto máximo del ciclo. La economía está sobrecalentada, la inflación aumenta y el crédito se vuelve riesgoso.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">📉</div>
+            <h4>Recesión</h4>
+            <p>Caída del PIB, aumento del desempleo, retracción del consumo y del crédito. Dos trimestres consecutivos de caída del PIB suelen definir una recesión técnica.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🔻</div>
+            <h4>Valle o depresión</h4>
+            <p>Punto mínimo del ciclo. Si la caída es severa y prolongada, se habla de depresión. Luego comienza la recuperación.</p>
+          </div>
+        </div>
+
+        <h3>Crisis históricas</h3>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-era">1929</div>
+            <h4>La Gran Depresión</h4>
+            <p>El crash de Wall Street y la caída de la demanda global desencadenan la peor crisis del capitalismo. El desempleo supera el 25% en EE.UU. Nace la teoría keynesiana y el Estado de bienestar.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">1973</div>
+            <h4>Crisis del petróleo</h4>
+            <p>La OPEP eleva los precios del crudo abruptamente. Se produce <em>estanflación</em>: inflación alta con estancamiento. Se quiebra el régimen de Bretton Woods.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">1982</div>
+            <h4>Crisis de la deuda latinoamericana</h4>
+            <p>México declara la moratoria de su deuda externa. Argentina, Brasil y otros países siguen. Nace el concepto de "década perdida" para América Latina.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">1987</div>
+            <h4>Lunes Negro</h4>
+            <p>El Dow Jones cae un 22,6% en un día. La caída es global, pero la economía real resiste mejor que en 1929 gracias a la intervención de los bancos centrales.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">1994–1995</div>
+            <h4>Efecto Tequila</h4>
+            <p>La devaluación del peso mexicano contagia a otros mercados emergentes. El FMI y EE.UU. intervienen con rescates financieros.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">1997–1998</div>
+            <h4>Crisis asiática</h4>
+            <p>La devaluación del baht tailandés desencadena un contagio regional. Quiebran bancos y empresas, se desploman las monedas y el FMI interviene en varios países.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">2001</div>
+            <h4>Burbuja puntocom y default argentino</h4>
+            <p>El estallido de las valoraciones de las empresas de internet coincide con la peor crisis económica de la historia argentina: default, corralito y fin de la convertibilidad.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">2008</div>
+            <h4>Crisis subprime</h4>
+            <p>La explosión de las hipotecas basura en EE.UU. provoca la caída de Lehman Brothers y desata una crisis financiera global. Los Estados rescatan bancos y aplican políticas monetarias no convencionales.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">2010–2012</div>
+            <h4>Crisis de la deuda europea</h4>
+            <p>Grecia, Portugal, Irlanda, España e Italia enfrentan problemas de financiamiento. La Unión Europea y el BCE implementan rescates y reformas estructurales.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">2020</div>
+            <h4>Crisis por la COVID-19</h4>
+            <p>La pandemia provoca una recesión global abrupta y sincronizada. Los Estados y bancos centrales responden con estímulos de magnitud histórica.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">2022–2023</div>
+            <h4>Inflación y crisis bancaria</h4>
+            <p>La inflación pospandemia obliga a subir tasas abruptamente. Quiebran bancos regionales en EE.UU. y se rescata Credit Suisse. Se renueva el debate sobre la estabilidad financiera.</p>
+          </div>
+        </div>
+
+        <h3>Tipos de crisis</h3>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">🏦</div>
+            <h4>Bancaria</h4>
+            <p>Quiebras o pánicos bancarios que interrumpen el crédito. Ejemplo: crisis de 2008, crisis de 1930.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">💱</div>
+            <h4>Cambiaria</h4>
+            <p>Colapso del tipo de cambio, fuga de capitales y pérdida de reservas. Ejemplo: Argentina 2001, crisis asiática 1997.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">📜</div>
+            <h4>De deuda</h4>
+            <p>Un país o región no puede pagar sus obligaciones. Ejemplo: crisis de la deuda latinoamericana, Grecia 2010.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">📉</div>
+            <h4>De mercado</h4>
+            <p>Caídas abruptas de precios de activos (acciones, bonos, inmuebles) que afectan la confianza y la economía real.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🛢️</div>
+            <h4>De oferta</h4>
+            <p>Shock de precios de materias primas o energía que encarece la producción y genera inflación. Ejemplo: crisis del petróleo 1973.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🦠</div>
+            <h4>Sanitaria o climática</h4>
+            <p>Eventos que interrumpen la producción y el consumo global. Ejemplo: COVID-19, desastres naturales extremos.</p>
+          </div>
+        </div>
+
+        <h3>Contagio y efecto dominó</h3>
+        <p>
+          En la economía globalizada, las crisis rara vez quedan contenidas. Un default en un país puede afectar a los bancos que le prestaron; una caída bursátil en un mercado puede arrastrar a otros; una crisis bancaria puede convertirse en recesión global. La velocidad del contagio es una característica distintiva del capitalismo financiero contemporáneo.
+        </p>
+
+        <h3>Cómo se enfrentan las crisis</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Herramienta</th>
+                <th>Qué hace</th>
+                <th>Quién la aplica</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Baja de tasas</strong></td>
+                <td>Abarta el crédito, estimula la inversión y el consumo</td>
+                <td>Banco central</td>
+              </tr>
+              <tr>
+                <td><strong>Estímulo fiscal</strong></td>
+                <td>Aumenta el gasto público y/o reduce impuestos</td>
+                <td>Gobierno</td>
+              </tr>
+              <tr>
+                <td><strong>Rescates bancarios</strong></td>
+                <td>Inyecta capital a entidades en dificultades</td>
+                <td>Estado / banco central</td>
+              </tr>
+              <tr>
+                <td><strong>Flexibilización cuantitativa (QE)</strong></td>
+                <td>Compra masiva de activos para inyectar liquidez</td>
+                <td>Banco central</td>
+              </tr>
+              <tr>
+                <td><strong>Regulación macroprudencial</strong></td>
+                <td>Exige más capital y reservas a los bancos</td>
+                <td>Reguladores</td>
+              </tr>
+              <tr>
+                <td><strong>Reestructuración de deuda</strong></td>
+                <td>Negocia plazos y condiciones con acreedores</td>
+                <td>Estado / FMI</td>
+              </tr>
+              <tr>
+                <td><strong>Controles de capital</strong></td>
+                <td>Limita la entrada y salida de divisas</td>
+                <td>Gobierno / banco central</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <blockquote>
+          "Las crisis son el mecanismo por el cual el sistema se renueva. El problema es que, mientras se renueva, millones de personas pierden empleos, ahorros y oportunidades." — Reflexión crítica
+          <cite>La destrucción creativa tiene costos humanos concretos.</cite>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- ─── PANEL: FUTURO ─── -->
+    <section id="panel-futuro" class="panel" role="tabpanel">
+      <div class="content-card">
+        <h2><span class="icon-dot"></span>El futuro de las finanzas</h2>
+        <p>
+          La tecnología está transformando la banca, la bolsa y la economía mundial con una velocidad sin precedentes. Los intermediarios tradicionales son desafiados por nuevos actores, los mercados se automatizan y la naturaleza misma del dinero está siendo redefinida.
+        </p>
+
+        <h3>Tendencias emergentes</h3>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">📱</div>
+            <h4>Fintech y neobancos</h4>
+            <p>Empresas digitales que ofrecen servicios financieros sin sucursales físicas: transferencias, tarjetas, préstamos, inversiones. Ejemplos: Revolut, Nubank, Ualá, Mercado Pago.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🏛️</div>
+            <h4>CBDC</h4>
+            <p>Monedas digitales de banco central. Versiones digitales del dinero fiduciario emitidas por autoridades monetarias. China, la UE y otros países avanzan en proyectos piloto.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">₿</div>
+            <h4>Criptomonedas</h4>
+            <p>Activos digitales descentralizados que funcionan sobre blockchain. Bitcoin es el más conocido, pero existen miles de proyectos con distintos usos y niveles de riesgo.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">💵</div>
+            <h4>Stablecoins</h4>
+            <p>Criptomonedas ancladas al valor de una moneda fiduciaria o una materia prima. Buscan combinar la eficiencia cripto con la estabilidad del dinero tradicional.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🔗</div>
+            <h4>DeFi</h4>
+            <p>Finanzas descentralizadas: protocolos sobre blockchain que ofrecen préstamos, intercambios y rendimientos sin intermediarios tradicionales.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🤖</div>
+            <h4>IA en finanzas</h4>
+            <p>Modelos que detectan fraudes, evalúan crédito, hacen trading algorítmico, gestionan carteras y atienden clientes. Cada vez más presentes en todos los niveles.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🔍</div>
+            <h4>Open banking</h4>
+            <p>Compartición de datos financieros entre instituciones con el consentimiento del usuario. Fomenta la competencia y nuevos servicios.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">⚡</div>
+            <h4>Trading de alta frecuencia</h4>
+            <p>Algoritmos que ejecutan millones de operaciones por segundo. Aumentan la liquidez pero también la volatilidad y el riesgo sistémico.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🌱</div>
+            <h4>Finanzas sostenibles</h4>
+            <p>Inversiones con criterios ambientales, sociales y de gobernanza (ASG). Los bonos verdes y los fondos sostenibles crecen a ritmo acelerado.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🪙</div>
+            <h4>Tokenización</h4>
+            <p>Representación digital de activos reales (inmuebles, obras de arte, acciones) sobre blockchain. Facilita la división y el intercambio de propiedad.</p>
+          </div>
+        </div>
+
+        <h3>Comparador: banca tradicional vs. fintech</h3>
+        <p style="margin-bottom: 12px;">Selecciona una columna para enfocarte en ella.</p>
+        <div class="compare-controls">
+          <button class="compare-btn active" data-compare="both">Ambas</button>
+          <button class="compare-btn" data-compare="left">Solo tradicional</button>
+          <button class="compare-btn" data-compare="right">Solo fintech</button>
+        </div>
+        <div class="compare-panels">
+          <div class="compare-panel left" id="compare-left-futuro">
+            <h4>🏦 Banca tradicional</h4>
+            <p><strong>Estructura:</strong> sucursales físicas, procesos lentos, alta regulación.</p>
+            <p><strong>Fortalezas:</strong> respaldo, confianza, acceso a crédito grande, asesoramiento personalizado.</p>
+            <p><strong>Debilidades:</strong> costos altos, burocracia, menor agilidad digital.</p>
+            <p><strong>Regulación:</strong> muy estricta, supervisada por bancos centrales.</p>
+            <p><strong>Clientes:</strong> todos los segmentos, con fuerte presencia en mayores de 40 años.</p>
+          </div>
+          <div class="compare-panel right" id="compare-right-futuro">
+            <h4>📱 Fintech / neobanco</h4>
+            <p><strong>Estructura:</strong> 100% digital, apps, procesos automatizados.</p>
+            <p><strong>Fortalezas:</strong> agilidad, costos bajos, experiencia de usuario, innovación.</p>
+            <p><strong>Debilidades:</strong> menor respaldo, atención menos personalizada, dependencia tecnológica.</p>
+            <p><strong>Regulación:</strong> variable, en proceso de armonización global.</p>
+            <p><strong>Clientes:</strong> jóvenes, nómadas digitales, pequeños emprendedores.</p>
+          </div>
+        </div>
+
+        <h3>Los grandes debates del futuro</h3>
+        <ul>
+          <li><strong>¿El efectivo desaparecerá?</strong> Cada vez más países avanzan hacia la digitalización total de los pagos. El efectivo resiste en sectores vulnerables.</li>
+          <li><strong>¿Quién controla los datos financieros?</strong> El open banking y la IA redefinen quién accede a la información y en qué condiciones.</li>
+          <li><strong>¿Las criptomonedas reemplazarán al dinero tradicional?</strong> Su volatilidad, regulación y riesgos de fraude limitan su adopción masiva como medio de pago.</li>
+          <li><strong>¿Los bancos centrales emitirán dinero programable?</strong> Las CBDC abren la puerta a un dinero con reglas de uso, lo que genera oportunidades y riesgos.</li>
+          <li><strong>¿La IA reemplazará a los analistas financieros?</strong> Automatiza muchas tareas, pero el juicio humano sigue siendo clave en contextos inciertos.</li>
+          <li><strong>¿Cómo regular la innovación sin frenarla?</strong> El equilibrio entre proteger a los usuarios y fomentar la innovación es el gran desafío regulatorio del siglo.</li>
+        </ul>
+
+        <h3>Riesgos emergentes</h3>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">🔓</div>
+            <h4>Ciberseguridad</h4>
+            <p>El dinero digital es vulnerable a robos, hackeos y fraudes. Los ataques a plataformas financieras afectan a millones.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🎯</div>
+            <h4>Exclusión digital</h4>
+            <p>La digitalización total puede dejar afuera a quienes no tienen acceso, habilidades o confianza en la tecnología.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🧠</div>
+            <h4>Sesgo algorítmico</h4>
+            <p>Los modelos de IA que evalúan crédito pueden discriminar a grupos históricamente postergados.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🕵️</div>
+            <h4>Privacidad</h4>
+            <p>La trazabilidad de las transacciones digitales plantea desafíos a la intimidad y al anonimato financiero.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">📉</div>
+            <h4>Volatilidad cripto</h4>
+            <p>Las criptomonedas pueden desplomarse abruptamente, generando pérdidas masivas a inversores minoristas.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🌐</div>
+            <h4>Fragmentación global</h4>
+            <p>Las tensiones geopolíticas pueden dividir el sistema financiero en bloques rivales.</p>
+          </div>
+        </div>
+
+        <blockquote>
+          "La pregunta no es si la tecnología va a transformar las finanzas, sino quién se beneficiará de esa transformación." — Reflexión contemporánea
+          <cite>La innovación financiera es también una cuestión de poder.</cite>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- ─── PANEL: GLOSARIO ─── -->
+    <section id="panel-glosario" class="panel" role="tabpanel">
+      <div class="content-card">
+        <h2><span class="icon-dot"></span>Glosario financiero</h2>
+        <p>Términos clave para comprender el tema. Haz clic en cada uno para expandir su definición.</p>
+
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">PIB (Producto Interno Bruto) <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Valor total de mercado de todos los bienes y servicios finales producidos por un país en un período determinado (generalmente un año). Es el principal indicador del tamaño y la evolución de una economía.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Inflación <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Aumento generalizado y sostenido del nivel de precios de bienes y servicios. Reduce el poder adquisitivo del dinero. Los bancos centrales suelen tener como objetivo mantenerla en niveles bajos y estables (por ejemplo, 2% anual en la eurozona).</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Tasa de interés <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Porcentaje que se paga o se cobra por el uso del dinero en el tiempo. Las tasas activas son las que cobran los bancos por prestar; las pasivas, las que pagan por depositar. El banco central fija la tasa de referencia, que influye en todas las demás.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Banco central <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Institución que controla la política monetaria de un país o región. Emite moneda, fija tasas de interés, regula a los bancos comerciales y actúa como prestamista de última instancia. Ejemplos: Fed (EE.UU.), BCE (eurozona), BCRA (Argentina), BoJ (Japón).</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Reserva fraccionaria <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Sistema según el cual los bancos mantienen como reserva solo una fracción de los depósitos que reciben, y prestan el resto. Permite la creación de dinero bancario, pero también genera riesgos de liquidez y pánicos bancarios.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Acción <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Valor que representa una fracción de la propiedad de una empresa. Otorga derechos económicos (dividendos) y políticos (voto en la junta de accionistas). Las acciones se compran y venden en la bolsa.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Bono <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Título de deuda emitido por un Estado, una empresa u otra entidad. Quien lo compra presta dinero a cambio de un interés periódico (cupón) y la devolución del capital al vencimiento. Los bonos soberanos son los emitidos por los gobiernos.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Índice bursátil <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Indicador que mide la evolución de un conjunto de acciones representativas de un mercado. Ejemplos: S&amp;P 500, Dow Jones, Nasdaq, Merval. Sirve como referencia del comportamiento del mercado.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Burbuja financiera <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Situación en la que el precio de un activo se aleja significativamente de su valor fundamental, impulsado por expectativas exageradas y comportamiento gregario. Cuando la burbuja estalla, el precio cae abruptamente y genera pérdidas.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Recesión <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Fase del ciclo económico caracterizada por la caída de la actividad productiva, el aumento del desempleo y la reducción del consumo y la inversión. En términos técnicos, suele definirse como dos trimestres consecutivos de caída del PIB.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Tipo de cambio <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Precio de una moneda expresado en otra. Puede ser fijo (fijado por el banco central) o flotante (determinado por el mercado). Afecta el comercio exterior, el turismo, la deuda externa y la inflación.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Balanza comercial <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Diferencia entre las exportaciones e importaciones de bienes de un país. Si las exportaciones superan a las importaciones, hay superávit; si ocurre lo contrario, hay déficit.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">FMI <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Fondo Monetario Internacional. Organismo internacional que brinda asistencia financiera a países con problemas de balanza de pagos, promueve la estabilidad macroeconómica y la cooperación monetaria global.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">CBDC <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Central Bank Digital Currency: moneda digital emitida por un banco central. Es la versión digital del dinero fiduciario, con estatus de curso legal. A diferencia de las criptomonedas, es centralizada y respaldada por el Estado.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Fintech <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Contracción de "financial technology". Empresas que usan tecnología para ofrecer servicios financieros de forma más ágil y económica que los bancos tradicionales. Incluyen neobancos, billeteras digitales, plataformas de préstamos e inversión.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Blockchain <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Registro distribuido e inmutable de transacciones, organizado en bloques enlazados criptográficamente. Es la tecnología subyacente a las criptomonedas y a muchas aplicaciones financieras descentralizadas.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Liquidez <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Facilidad con la que un activo puede convertirse en dinero sin perder valor. El efectivo es el activo más líquido. La falta de liquidez en un banco o mercado puede desencadenar crisis.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Riesgo sistémico <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Riesgo de que el fracaso de una institución o mercado se propague a todo el sistema financiero y afecte a la economía real. Es una de las principales preocupaciones de los reguladores.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>
+        Enciclopedia Visual · Contenido original de
+        <a href="https://app-fioravante.github.io/apps-fioravante/" target="_blank" rel="noopener noreferrer">Fioravante</a>.
+        Este recurso es de carácter educativo y exploratorio. No constituye asesoramiento financiero.
+      </p>
+    </footer>
+  </div>
+
+  <script>
+    // ─── TEMA ───
+    const rootEl = document.documentElement;
+    const themeToggle = document.getElementById('themeToggle');
+    function updateToggleLabel() {
+      const isLight = rootEl.getAttribute('data-theme') === 'light';
+      themeToggle.setAttribute('aria-label', isLight ? 'Cambiar a modo oscuro' : 'Cambiar a modo claro');
+      themeToggle.setAttribute('title', isLight ? 'Cambiar a modo oscuro' : 'Cambiar a modo claro');
+    }
+    themeToggle.addEventListener('click', () => {
+      const isLight = rootEl.getAttribute('data-theme') === 'light';
+      const next = isLight ? 'dark' : 'light';
+      rootEl.setAttribute('data-theme', next);
+      try { localStorage.setItem('enc-theme', next); } catch (e) {}
+      updateToggleLabel();
+    });
+    updateToggleLabel();
+
+    // ─── PESTAÑAS ───
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const panels = document.querySelectorAll('.panel');
+
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const targetId = btn.dataset.panel;
+        tabBtns.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });
+        btn.classList.add('active');
+        btn.setAttribute('aria-selected', 'true');
+        panels.forEach(p => p.classList.remove('active'));
+        document.getElementById(targetId).classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    });
+
+    // ─── COMPARADORES ───
+    document.querySelectorAll('.compare-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const group = btn.closest('.content-card');
+        group.querySelectorAll('.compare-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const mode = btn.dataset.compare;
+
+        const bolsaLeft = document.getElementById('compare-left-bolsa');
+        const bolsaRight = document.getElementById('compare-right-bolsa');
+        const futuroLeft = document.getElementById('compare-left-futuro');
+        const futuroRight = document.getElementById('compare-right-futuro');
+
+        if (bolsaLeft && bolsaRight) {
+          bolsaLeft.classList.remove('dimmed');
+          bolsaRight.classList.remove('dimmed');
+          if (mode === 'left') bolsaRight.classList.add('dimmed');
+          if (mode === 'right') bolsaLeft.classList.add('dimmed');
+        }
+        if (futuroLeft && futuroRight) {
+          futuroLeft.classList.remove('dimmed');
+          futuroRight.classList.remove('dimmed');
+          if (mode === 'left') futuroRight.classList.add('dimmed');
+          if (mode === 'right') futuroLeft.classList.add('dimmed');
+        }
+      });
+    });
+
+    // ─── ACORDEÓN ───
+    document.querySelectorAll('.accordion-trigger').forEach(trigger => {
+      trigger.addEventListener('click', () => {
+        const item = trigger.parentElement;
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.accordion-item').forEach(i => {
+          i.classList.remove('open');
+          i.querySelector('.accordion-trigger').setAttribute('aria-expanded', 'false');
+        });
+        if (!isOpen) {
+          item.classList.add('open');
+          trigger.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

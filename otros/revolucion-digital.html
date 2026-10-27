@@ -1,0 +1,1326 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Revolución Tecnodigital · Enciclopedia Visual Fioravante</title>
+  <meta name="description" content="Exploración interactiva de la Revolución Tecnodigital: historia, tecnologías clave, economía digital, sociedad, trabajo, educación, riesgos y desafíos.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <script>
+    (function () {
+      try {
+        const stored = localStorage.getItem('enc-theme');
+        if (stored === 'light' || stored === 'dark') {
+          document.documentElement.setAttribute('data-theme', stored);
+        } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+          document.documentElement.setAttribute('data-theme', 'light');
+        }
+      } catch (e) {}
+    })();
+  </script>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg-deep: #070b14;
+      --surface: rgba(22, 32, 50, 0.65);
+      --surface-hover: rgba(30, 44, 68, 0.8);
+      --border: rgba(255, 255, 255, 0.07);
+      --border-strong: rgba(255, 255, 255, 0.15);
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --text-dim: #64748b;
+      --accent-cyan: #22d3ee;
+      --accent-violet: #a78bfa;
+      --accent-amber: #fbbf24;
+      --accent-rose: #fb7185;
+      --accent-emerald: #34d399;
+      --chip-hover-bg: rgba(255, 255, 255, 0.04);
+      --radius-lg: 24px;
+      --radius-md: 16px;
+      --radius-sm: 12px;
+      --shadow-card: 0 4px 24px -8px rgba(0, 0, 0, 0.6);
+      --shadow-hover: 0 24px 48px -16px rgba(0, 0, 0, 0.7);
+      --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+      --noise-opacity: 0.03;
+    }
+
+    [data-theme="light"] {
+      --bg-deep: #f4f6fa;
+      --surface: rgba(255, 255, 255, 0.72);
+      --surface-hover: rgba(255, 255, 255, 0.92);
+      --border: rgba(15, 23, 42, 0.08);
+      --border-strong: rgba(15, 23, 42, 0.16);
+      --text-primary: #1e293b;
+      --text-secondary: #475569;
+      --text-dim: #94a3b8;
+      --accent-cyan: #0891b2;
+      --accent-violet: #7c3aed;
+      --accent-amber: #d97706;
+      --accent-rose: #e11d48;
+      --accent-emerald: #059669;
+      --chip-hover-bg: rgba(15, 23, 42, 0.04);
+      --shadow-card: 0 4px 24px -8px rgba(15, 23, 42, 0.08);
+      --shadow-hover: 0 24px 48px -16px rgba(15, 23, 42, 0.16);
+      --noise-opacity: 0.015;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background-color: var(--bg-deep);
+      color: var(--text-primary);
+      min-height: 100vh;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+      transition: background-color 0.5s ease, color 0.5s ease;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      background:
+        radial-gradient(ellipse 80% 60% at 10% 0%, rgba(34, 211, 238, 0.14), transparent 60%),
+        radial-gradient(ellipse 70% 50% at 90% 10%, rgba(167, 139, 250, 0.12), transparent 55%),
+        radial-gradient(ellipse 60% 50% at 50% 100%, rgba(52, 211, 153, 0.06), transparent 60%);
+      animation: bgShift 20s ease-in-out infinite alternate;
+      transition: opacity 0.5s ease;
+    }
+
+    [data-theme="light"] body::before {
+      background:
+        radial-gradient(ellipse 80% 60% at 10% 0%, rgba(8, 145, 178, 0.12), transparent 60%),
+        radial-gradient(ellipse 70% 50% at 90% 10%, rgba(124, 58, 237, 0.1), transparent 55%),
+        radial-gradient(ellipse 60% 50% at 50% 100%, rgba(5, 150, 105, 0.07), transparent 60%);
+    }
+
+    @keyframes bgShift {
+      0% { opacity: 0.7; transform: scale(1); }
+      100% { opacity: 1; transform: scale(1.08); }
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      opacity: var(--noise-opacity);
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      pointer-events: none;
+      transition: opacity 0.5s ease;
+    }
+
+    .app { max-width: 1200px; margin: 0 auto; padding: 0 24px 80px; }
+
+    /* ─── THEME TOGGLE ─── */
+    .theme-toggle {
+      position: fixed; top: 20px; right: 20px; z-index: 100;
+      width: 46px; height: 46px; border-radius: 50%;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      color: var(--text-primary); cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: var(--shadow-card);
+      transition: transform 0.35s var(--ease-out-expo), border-color 0.3s, box-shadow 0.35s var(--ease-out-expo), background-color 0.4s ease, color 0.4s ease;
+    }
+    .theme-toggle:hover { transform: scale(1.1) rotate(10deg); border-color: var(--border-strong); box-shadow: var(--shadow-hover); }
+    .theme-toggle svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .theme-toggle .icon-sun { display: block; }
+    .theme-toggle .icon-moon { display: none; }
+    [data-theme="light"] .theme-toggle .icon-sun { display: none; }
+    [data-theme="light"] .theme-toggle .icon-moon { display: block; }
+
+    /* ─── HEADER ─── */
+    .header { padding: 56px 0 24px; text-align: center; }
+    .header-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 16px; border-radius: 999px;
+      background: rgba(167, 139, 250, 0.1);
+      border: 1px solid rgba(167, 139, 250, 0.25);
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--accent-violet);
+      margin-bottom: 20px;
+      animation: fadeDown 0.8s var(--ease-out-expo) both;
+    }
+    .header-badge::before {
+      content: ''; width: 6px; height: 6px; border-radius: 50%;
+      background: var(--accent-violet); box-shadow: 0 0 12px var(--accent-violet);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.8); } }
+
+    .header h1 {
+      font-size: clamp(2.2rem, 5.5vw, 3.8rem);
+      font-weight: 800; letter-spacing: -0.03em; line-height: 1.1;
+      margin-bottom: 16px;
+      animation: fadeDown 0.9s 0.1s var(--ease-out-expo) both;
+    }
+    .header h1 .gradient-text {
+      background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-violet) 50%, var(--accent-rose) 100%);
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-size: 200% 200%;
+      animation: gradientMove 6s ease-in-out infinite;
+    }
+    @keyframes gradientMove { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+
+    .header-subtitle {
+      font-size: clamp(0.95rem, 2vw, 1.1rem);
+      color: var(--text-secondary); font-weight: 400;
+      max-width: 720px; margin: 0 auto;
+      animation: fadeDown 1s 0.2s var(--ease-out-expo) both;
+    }
+
+    /* ─── NAVEGACIÓN POR PESTAÑAS ─── */
+    .tabs-nav {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      margin: 32px 0 28px;
+      padding: 8px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      animation: fadeUp 0.8s 0.3s var(--ease-out-expo) both;
+    }
+    .tab-btn {
+      flex: 1 1 auto;
+      padding: 12px 18px;
+      border-radius: var(--radius-sm);
+      border: none; background: transparent;
+      color: var(--text-secondary);
+      font-family: inherit; font-size: 0.88rem; font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s var(--ease-out-expo);
+      white-space: nowrap;
+    }
+    .tab-btn:hover { color: var(--text-primary); background: var(--chip-hover-bg); }
+    .tab-btn.active {
+      background: rgba(167, 139, 250, 0.15);
+      color: var(--accent-violet);
+      box-shadow: 0 0 20px -4px rgba(167, 139, 250, 0.2);
+    }
+    [data-theme="light"] .tab-btn.active { background: rgba(124, 58, 237, 0.12); color: var(--accent-violet); }
+
+    /* ─── PANELES ─── */
+    .panel { display: none; animation: fadeUp 0.5s var(--ease-out-expo) both; }
+    .panel.active { display: block; }
+
+    .content-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      box-shadow: var(--shadow-card);
+      margin-bottom: 24px;
+      transition: background-color 0.4s ease, border-color 0.4s ease;
+    }
+
+    .content-card h2 {
+      font-size: 1.5rem; font-weight: 700; letter-spacing: -0.02em;
+      margin-bottom: 16px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .content-card h2 .icon-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--accent-violet);
+      box-shadow: 0 0 12px var(--accent-violet);
+      flex-shrink: 0;
+    }
+    .content-card h3 {
+      font-size: 1.1rem; font-weight: 700;
+      margin: 24px 0 10px;
+      color: var(--accent-violet);
+    }
+    .content-card p {
+      color: var(--text-secondary);
+      margin-bottom: 14px;
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+    .content-card p strong { color: var(--text-primary); }
+    .content-card ul, .content-card ol {
+      margin: 12px 0 18px 20px;
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+    .content-card li { margin-bottom: 8px; }
+    .content-card blockquote {
+      border-left: 3px solid var(--accent-violet);
+      padding: 12px 20px;
+      margin: 20px 0;
+      background: rgba(167, 139, 250, 0.05);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      font-style: italic;
+      color: var(--text-secondary);
+      font-size: 0.92rem;
+    }
+    [data-theme="light"] .content-card blockquote { background: rgba(124, 58, 237, 0.05); }
+    .content-card blockquote cite {
+      display: block; margin-top: 8px;
+      font-style: normal; font-size: 0.82rem; color: var(--text-dim);
+    }
+
+    /* ─── TARJETAS DE CONCEPTO ─── */
+    .concept-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+      margin: 20px 0;
+    }
+    .concept-card {
+      padding: 22px;
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      transition: transform 0.3s var(--ease-out-expo), border-color 0.3s, box-shadow 0.3s;
+    }
+    .concept-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--border-strong);
+      box-shadow: var(--shadow-hover);
+    }
+    .concept-card .concept-icon {
+      width: 44px; height: 44px; border-radius: var(--radius-sm);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem; margin-bottom: 14px;
+      background: rgba(167, 139, 250, 0.12);
+      color: var(--accent-violet);
+    }
+    .concept-card h4 {
+      font-size: 1rem; font-weight: 700; margin-bottom: 8px;
+    }
+    .concept-card p {
+      font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; margin: 0;
+    }
+
+    /* ─── COMPARADOR ─── */
+    .compare-controls {
+      display: flex; gap: 8px; margin: 20px 0 24px; flex-wrap: wrap;
+    }
+    .compare-btn {
+      padding: 10px 20px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text-secondary);
+      font-family: inherit; font-size: 0.85rem; font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s var(--ease-out-expo);
+    }
+    .compare-btn:hover { border-color: var(--border-strong); color: var(--text-primary); }
+    .compare-btn.active {
+      background: var(--accent-violet);
+      border-color: var(--accent-violet);
+      color: var(--bg-deep);
+      font-weight: 700;
+    }
+    [data-theme="light"] .compare-btn.active { color: #fff; }
+
+    .compare-panels {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    @media (max-width: 640px) { .compare-panels { grid-template-columns: 1fr; } }
+
+    .compare-panel {
+      padding: 24px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      background: var(--surface);
+      transition: opacity 0.3s ease;
+    }
+    .compare-panel.dimmed { opacity: 0.35; pointer-events: none; }
+    .compare-panel h4 {
+      font-size: 0.95rem; font-weight: 700; margin-bottom: 12px;
+      text-transform: uppercase; letter-spacing: 0.06em;
+    }
+    .compare-panel.left h4 { color: var(--accent-amber); }
+    .compare-panel.right h4 { color: var(--accent-cyan); }
+    .compare-panel p { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.7; }
+
+    /* ─── LÍNEA DE TIEMPO ─── */
+    .timeline { position: relative; padding: 20px 0 20px 32px; }
+    .timeline::before {
+      content: ''; position: absolute; left: 11px; top: 0; bottom: 0;
+      width: 2px; background: linear-gradient(to bottom, var(--accent-cyan), var(--accent-violet));
+      border-radius: 2px;
+    }
+    .timeline-item {
+      position: relative; margin-bottom: 28px; padding-left: 8px;
+    }
+    .timeline-item::before {
+      content: ''; position: absolute; left: -27px; top: 6px;
+      width: 12px; height: 12px; border-radius: 50%;
+      background: var(--bg-deep); border: 2px solid var(--accent-violet);
+      box-shadow: 0 0 10px rgba(167, 139, 250, 0.3);
+    }
+    .timeline-item .timeline-era {
+      font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.08em; color: var(--accent-violet); margin-bottom: 4px;
+    }
+    .timeline-item h4 { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+    .timeline-item p { font-size: 0.88rem; color: var(--text-secondary); margin: 0; line-height: 1.6; }
+
+    /* ─── TABLA ─── */
+    .table-wrap {
+      overflow-x: auto;
+      margin: 20px 0;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+    th, td {
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-secondary);
+    }
+    th {
+      background: var(--chip-hover-bg);
+      color: var(--text-primary);
+      font-weight: 700;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: var(--chip-hover-bg); }
+    td strong { color: var(--text-primary); }
+
+    /* ─── GLOSARIO ─── */
+    .accordion-item {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      margin-bottom: 10px;
+      overflow: hidden;
+      transition: border-color 0.3s;
+    }
+    .accordion-item:hover { border-color: var(--border-strong); }
+    .accordion-trigger {
+      width: 100%;
+      padding: 16px 20px;
+      background: transparent;
+      border: none;
+      color: var(--text-primary);
+      font-family: inherit; font-size: 0.95rem; font-weight: 600;
+      text-align: left; cursor: pointer;
+      display: flex; justify-content: space-between; align-items: center;
+      transition: background-color 0.2s;
+    }
+    .accordion-trigger:hover { background: var(--chip-hover-bg); }
+    .accordion-trigger .chevron {
+      transition: transform 0.3s var(--ease-out-expo);
+      font-size: 0.8rem; color: var(--text-dim);
+    }
+    .accordion-item.open .accordion-trigger .chevron { transform: rotate(180deg); }
+    .accordion-content {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.4s var(--ease-out-expo), padding 0.4s var(--ease-out-expo);
+      padding: 0 20px;
+    }
+    .accordion-item.open .accordion-content {
+      max-height: 500px; padding: 0 20px 18px;
+    }
+    .accordion-content p {
+      font-size: 0.9rem; color: var(--text-secondary); line-height: 1.7; margin: 0;
+    }
+
+    /* ─── FOOTER ─── */
+    .footer {
+      text-align: center; padding: 48px 0 0;
+      color: var(--text-dim); font-size: 0.8rem;
+      border-top: 1px solid var(--border); margin-top: 48px;
+    }
+    .footer a { color: var(--accent-violet); text-decoration: none; font-weight: 500; }
+    .footer a:hover { text-decoration: underline; }
+
+    @keyframes fadeDown { from { opacity: 0; transform: translateY(-16px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+
+    @media (max-width: 640px) {
+      .app { padding: 0 16px 48px; }
+      .content-card { padding: 24px 20px; }
+      .tabs-nav { gap: 4px; padding: 6px; }
+      .tab-btn { padding: 10px 12px; font-size: 0.8rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema" title="Cambiar tema">
+    <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+    <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  </button>
+
+  <div class="app">
+    <!-- Header -->
+    <header class="header">
+      <div class="header-badge">Sociedad · Tecnología · Futuro</div>
+      <h1>Revolución <span class="gradient-text">Tecnodigital</span></h1>
+      <p class="header-subtitle">
+        Un recorrido visual e interactivo por la transformación más profunda de nuestro tiempo: las tecnologías que la impulsan, la economía que la sostiene, la sociedad que la habita y los desafíos que plantea.
+      </p>
+    </header>
+
+    <!-- Navegación por pestañas -->
+    <nav class="tabs-nav" role="tablist" aria-label="Secciones del tema">
+      <button class="tab-btn active" data-panel="panel-intro" role="tab" aria-selected="true">¿Qué es?</button>
+      <button class="tab-btn" data-panel="panel-historia" role="tab" aria-selected="false">Historia</button>
+      <button class="tab-btn" data-panel="panel-tecnologias" role="tab" aria-selected="false">Tecnologías</button>
+      <button class="tab-btn" data-panel="panel-economia" role="tab" aria-selected="false">Economía Digital</button>
+      <button class="tab-btn" data-panel="panel-sociedad" role="tab" aria-selected="false">Sociedad y Cultura</button>
+      <button class="tab-btn" data-panel="panel-trabajo" role="tab" aria-selected="false">Trabajo y Educación</button>
+      <button class="tab-btn" data-panel="panel-riesgos" role="tab" aria-selected="false">Riesgos y Desafíos</button>
+      <button class="tab-btn" data-panel="panel-glosario" role="tab" aria-selected="false">Glosario</button>
+    </nav>
+
+    <!-- ─── PANEL: ¿QUÉ ES? ─── -->
+    <section id="panel-intro" class="panel active" role="tabpanel">
+      <div class="content-card">
+        <h2><span class="icon-dot"></span>¿Qué es la Revolución Tecnodigital?</h2>
+        <p>
+          La <strong>Revolución Tecnodigital</strong> es el proceso de transformación profunda de la economía, la sociedad y la cultura impulsado por la convergencia de tecnologías digitales: computación ubicua, internet, inteligencia artificial, sensores, redes de alta velocidad y plataformas. No es solo un cambio técnico: es una <strong>reorganización del poder, del trabajo, del conocimiento y de la vida cotidiana</strong>.
+        </p>
+        <p>
+          A diferencia de la Revolución Industrial —que sustituyó la fuerza muscular por máquinas—, la Revolución Tecnodigital sustituye y amplifica capacidades <strong>cognitivas</strong>: memoria, cálculo, comunicación, predicción, creatividad, coordinación. Su materia prima no es el carbón ni el acero: son los <strong>datos</strong>.
+        </p>
+
+        <h3>Las cuatro revoluciones industriales</h3>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">💨</div>
+            <h4>1ª (1760–1840)</h4>
+            <p>Máquina de vapor, mecanización textil, ferrocarril. La energía del carbón reemplaza la fuerza humana y animal.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">⚡</div>
+            <h4>2ª (1870–1914)</h4>
+            <p>Electricidad, línea de montaje, petróleo, telecomunicaciones. Producción masiva y nacimiento de la sociedad de consumo.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">💻</div>
+            <h4>3ª (1960–2000)</h4>
+            <p>Computadora, transistor, internet. Automatización, información digital y globalización.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🧠</div>
+            <h4>4ª (2010–presente)</h4>
+            <p>Inteligencia artificial, IoT, big data, nube, robótica, biotecnología. La fusión entre lo físico, lo digital y lo biológico.</p>
+          </div>
+        </div>
+
+        <h3>Rasgos distintivos</h3>
+        <ul>
+          <li><strong>Velocidad exponencial:</strong> las capacidades tecnológicas se duplican en ciclos cada vez más cortos.</li>
+          <li><strong>Convergencia:</strong> las tecnologías se combinan y potencian mutuamente (IA + IoT + 5G + nube).</li>
+          <li><strong>Desmaterialización:</strong> bienes y servicios se vuelven intangibles: software, streaming, plataformas, datos.</li>
+          <li><strong>Ubicuidad:</strong> la computación se disuelve en el entorno: sensores, objetos, cuerpos, ciudades.</li>
+          <li><strong>Centralidad de los datos:</strong> los datos se convierten en el recurso estratégico del siglo XXI.</li>
+          <li><strong>Globalización instantánea:</strong> lo que ocurre en un lugar puede afectar al mundo entero en segundos.</li>
+        </ul>
+
+        <blockquote>
+          "La Revolución Tecnodigital no es una revolución de máquinas: es una revolución de la información, del poder y de la experiencia humana." — Reflexión contemporánea
+          <cite>Lo digital deja de ser una herramienta para convertirse en un entorno.</cite>
+        </blockquote>
+
+        <h3>¿Revolución o evolución?</h3>
+        <p>
+          Hay debate sobre si lo que vivimos es una verdadera revolución o una aceleración de procesos previos. Algunos autores hablan de <strong>"cuarta revolución industrial"</strong> (Klaus Schwab), otros de <strong>"sociedad de la información"</strong> (Manuel Castells), otros de <strong>"capitalismo de plataformas"</strong> (Nick Srnicek) o <strong>"capitalismo de vigilancia"</strong> (Shoshana Zuboff). Lo que todos comparten es la convicción de que <strong>algo estructural ha cambiado</strong>.
+        </p>
+      </div>
+    </section>
+
+    <!-- ─── PANEL: HISTORIA ─── -->
+    <section id="panel-historia" class="panel" role="tabpanel">
+      <div class="content-card">
+        <h2><span class="icon-dot"></span>Historia de la Revolución Tecnodigital</h2>
+        <p>
+          La revolución tecnodigital no ocurrió de un día para otro. Es el resultado de décadas de innovaciones encadenadas que, hacia los años 2000, se combinaron para transformar radicalmente la sociedad.
+        </p>
+
+        <h3>Línea de tiempo</h3>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-era">1947</div>
+            <h4>El transistor</h4>
+            <p>Invención que reemplaza a las válvulas y da inicio a la electrónica moderna. Es la base física de toda la revolución digital.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">1969</div>
+            <h4>ARPANET</h4>
+            <p>Primera red de computadoras. Precedente directo de Internet, desarrollada por el Departamento de Defensa de EE.UU.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">1971</div>
+            <h4>Intel 4004</h4>
+            <p>Primer microprocesador comercial. Abre la era de la computadora personal y de la miniaturización.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">1983</div>
+            <h4>TCP/IP</h4>
+            <p>Se adopta el protocolo que unifica las redes dispersas en una sola Internet. Nace la red global.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">1989–1991</div>
+            <h4>World Wide Web</h4>
+            <p>Tim Berners-Lee inventa la Web: páginas enlazadas, navegadores, acceso universal a la información. La revolución se vuelve masiva.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">1995–2000</div>
+            <h4>Burbuja de las puntocom</h4>
+            <p>Explosión de empresas digitales, auge del e-commerce y de las primeras plataformas. La economía comienza a digitalizarse.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">2004–2007</div>
+            <h4>Web 2.0 y redes sociales</h4>
+            <p>Facebook, YouTube, Twitter y luego el iPhone. Los usuarios dejan de ser solo consumidores: se vuelven productores de contenido.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">2008–2012</div>
+            <h4>Nube y smartphones</h4>
+            <p>Amazon, Google y Microsoft ofrecen infraestructura bajo demanda. La computación se vuelve un servicio. Android e iOS dominan los bolsillos.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">2012–2017</div>
+            <h4>Big data e IA moderna</h4>
+            <p>Auge del aprendizaje profundo, los asistentes de voz y los algoritmos de recomendación. Los datos se consolidan como recurso estratégico.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">2020–2022</div>
+            <h4>Pandemia y aceleración digital</h4>
+            <p>Teletrabajo, telemedicina, educación remota y comercio electrónico se masifican. La transformación digital se vuelve necesidad.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">2022–presente</div>
+            <h4>IA generativa</h4>
+            <p>Modelos capaces de producir texto, imágenes, audio y video. La inteligencia artificial deja de ser una promesa y se vuelve herramienta cotidiana.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">Futuro</div>
+            <h4>Computación cuántica y biométrica</h4>
+            <p>Las próximas fronteras: computación cuántica, interfaces cerebro-computadora, realidad aumentada omnipresente, robótica autónoma.</p>
+          </div>
+        </div>
+
+        <h3>Tres etapas clave</h3>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">🖥️</div>
+            <h4>Digitalización (1980–2000)</h4>
+            <p>Convertir lo analógico en digital: documentos, imágenes, sonidos, procesos. La computadora reemplaza herramientas físicas.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🌐</div>
+            <h4>Conectividad (2000–2015)</h4>
+            <p>Todo se conecta: personas, dispositivos, sistemas. Nacen las plataformas, el e-commerce, las redes sociales y la nube.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🧠</div>
+            <h4>Inteligencia (2015–presente)</h4>
+            <p>Los sistemas aprenden de los datos. La IA se integra a la vida cotidiana: recomendaciones, asistentes, automatización, generación.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── PANEL: TECNOLOGÍAS ─── -->
+    <section id="panel-tecnologias" class="panel" role="tabpanel">
+      <div class="content-card">
+        <h2><span class="icon-dot"></span>Tecnologías clave</h2>
+        <p>
+          La Revolución Tecnodigital no se apoya en una sola tecnología, sino en una <strong>constelación de tecnologías convergentes</strong> que se refuerzan mutuamente. Cada una amplifica el poder de las demás.
+        </p>
+
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">🤖</div>
+            <h4>Inteligencia artificial</h4>
+            <p>Sistemas capaces de aprender, predecir, clasificar y generar. Desde asistentes de voz hasta IA generativa de texto, imagen y video.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">☁️</div>
+            <h4>Computación en la nube</h4>
+            <p>Infraestructura, plataformas y software bajo demanda. Las empresas alquilan potencia de cómputo y almacenamiento en lugar de poseerlos.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">📊</div>
+            <h4>Big data</h4>
+            <p>Volúmenes masivos de datos que se analizan para detectar patrones, predecir conductas y optimizar decisiones.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">📡</div>
+            <h4>Internet de las cosas (IoT)</h4>
+            <p>Objetos cotidianos conectados a la red: sensores, electrodomésticos, autos, ciudades. Todo genera y comparte datos.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">📶</div>
+            <h4>5G y conectividad</h4>
+            <p>Redes móviles de alta velocidad y baja latencia que permiten aplicaciones imposibles con generaciones previas.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🔗</div>
+            <h4>Blockchain</h4>
+            <p>Registro distribuido e inmutable de transacciones. Base de criptomonedas, contratos inteligentes y nuevas formas de confianza digital.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🦾</div>
+            <h4>Robótica</h4>
+            <p>Máquinas físicas autónomas o teleoperadas. Automatizan manufactura, logística, cirugía, agricultura y exploración.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🥽</div>
+            <h4>Realidad extendida</h4>
+            <p>Realidad virtual, aumentada y mixta. Fusionan lo digital y lo físico en experiencias inmersivas.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🧬</div>
+            <h4>Biotecnología digital</h4>
+            <p>Secuenciación genómica, edición genética e interfaces biológicas-digitales. La vida también se digitaliza.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">⚛️</div>
+            <h4>Computación cuántica</h4>
+            <p>Promesa de resolver en segundos problemas hoy imposibles. Aún incipiente, pero con potencial transformador.</p>
+          </div>
+        </div>
+
+        <h3>La convergencia tecnológica</h3>
+        <p>
+          La potencia de la Revolución Tecnodigital no proviene de cada tecnología por separado, sino de su <strong>combinación</strong>. Un auto autónomo es IA + sensores + 5G + nube + GPS + visión computacional. Una ciudad inteligente es IoT + big data + IA + redes + energía. Un asistente personal es IA + voz + nube + datos + interfaces.
+        </p>
+
+        <blockquote>
+          "Las tecnologías no actúan solas. Se combinan, se potencian y crean capacidades que ninguna tendría por separado." — Principio de convergencia tecnológica
+          <cite>El todo es más que la suma de las partes.</cite>
+        </blockquote>
+
+        <h3>Comparador: tecnología aislada vs. tecnología convergente</h3>
+        <p style="margin-bottom: 12px;">Selecciona una columna para enfocarte en ella.</p>
+        <div class="compare-controls">
+          <button class="compare-btn active" data-compare="both">Ambas</button>
+          <button class="compare-btn" data-compare="left">Aislada</button>
+          <button class="compare-btn" data-compare="right">Convergente</button>
+        </div>
+        <div class="compare-panels">
+          <div class="compare-panel left" id="compare-left">
+            <h4>🔧 Tecnología aislada</h4>
+            <p><strong>Foco:</strong> una sola capacidad (por ejemplo, una cámara).</p>
+            <p><strong>Impacto:</strong> limitado a su función específica.</p>
+            <p><strong>Ejemplo:</strong> una cámara de fotos analógica.</p>
+            <p><strong>Escala:</strong> local, puntual, predecible.</p>
+          </div>
+          <div class="compare-panel right" id="compare-right">
+            <h4>🌐 Tecnología convergente</h4>
+            <p><strong>Foco:</strong> combinación de capacidades (cámara + IA + 5G + nube).</p>
+            <p><strong>Impacto:</strong> transformador, transversal, exponencial.</p>
+            <p><strong>Ejemplo:</strong> reconocimiento facial en tiempo real en una ciudad entera.</p>
+            <p><strong>Escala:</strong> global, sistémica, impredecible.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── PANEL: ECONOMÍA DIGITAL ─── -->
+    <section id="panel-economia" class="panel" role="tabpanel">
+      <div class="content-card">
+        <h2><span class="icon-dot"></span>La economía digital</h2>
+        <p>
+          La Revolución Tecnodigital transformó la economía en su núcleo: la forma de producir, distribuir, consumir y trabajar. El valor ya no reside solo en los bienes físicos, sino en el <strong>conocimiento, los datos, las redes y las plataformas</strong>.
+        </p>
+
+        <h3>Características de la economía digital</h3>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">🏪</div>
+            <h4>Plataformas</h4>
+            <p>Intermediarios digitales que conectan oferta y demanda: Amazon, Mercado Libre, Uber, Airbnb, YouTube. Su valor crece con la red de usuarios.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🆓</div>
+            <h4>Coste marginal cero</h4>
+            <p>Producir una copia adicional de software, un ebook o un video cuesta casi nada. La economía de la abundancia digital rompe la lógica industrial.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">📈</div>
+            <h4>Efectos de red</h4>
+            <p>Cuanto más usuarios tiene una plataforma, más valiosa se vuelve. Esto genera monopolios naturales y concentración de poder.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🧾</div>
+            <h4>Datos como capital</h4>
+            <p>Los datos personales y de comportamiento son el insumo central de la economía digital. Se extraen, procesan y monetizan.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🛒</div>
+            <h4>Comercio electrónico</h4>
+            <p>Compras y ventas por Internet. Transformó el retail, la logística y los hábitos de consumo a escala global.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">💳</div>
+            <h4>Fintech</h4>
+            <p>Banca digital, billeteras virtuales, préstamos P2P, criptomonedas. La infraestructura financiera se descentraliza y se digitaliza.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🏭</div>
+            <h4>Industria 4.0</h4>
+            <p>Fábricas inteligentes, sensores, robots colaborativos, mantenimiento predictivo. La manufactura se integra con la informática.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🌍</div>
+            <h4>Globalización digital</h4>
+            <p>Servicios que se prestan a distancia, equipos distribuidos, competencia global. La geografía se vuelve menos determinante.</p>
+          </div>
+        </div>
+
+        <h3>Gig economy y trabajo por plataformas</h3>
+        <p>
+          La <strong>gig economy</strong> ("economía de los encargos") es un modelo laboral basado en trabajos temporales, independientes y mediados por plataformas digitales. Conductores, repartidores, freelancers, creadores de contenido y trabajadores domésticos digitales forman parte de esta economía.
+        </p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Aspecto</th>
+                <th>Empleo tradicional</th>
+                <th>Gig economy</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Contrato</strong></td>
+                <td>Indefinido, con derechos</td>
+                <td>Por tarea, sin estabilidad</td>
+              </tr>
+              <tr>
+                <td><strong>Horario</strong></td>
+                <td>Fijo, regulado</td>
+                <td>Flexible, autogestionado</td>
+              </tr>
+              <tr>
+                <td><strong>Ingresos</strong></td>
+                <td>Salario predecible</td>
+                <td>Variable, dependiente de algoritmos</td>
+              </tr>
+              <tr>
+                <td><strong>Protección social</strong></td>
+                <td>Obra social, jubilación, vacaciones</td>
+                <td>Generalmente a cargo del trabajador</td>
+              </tr>
+              <tr>
+                <td><strong>Control</strong></td>
+                <td>Jerárquico, presencial</td>
+                <td>Algorítmico, distribuido</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Concentración de poder</h3>
+        <p>
+          Una de las paradojas de la economía digital es que, aunque se presenta como descentralizada y abierta, ha producido una concentración de poder sin precedentes. Un puñado de empresas —las llamadas <strong>Big Tech</strong>— controla infraestructura crítica: sistemas operativos, nubes, motores de búsqueda, redes sociales, publicidad digital y ahora también modelos de IA.
+        </p>
+
+        <blockquote>
+          "Las plataformas no son solo empresas: son infraestructuras. Y quien controla la infraestructura, controla las reglas." — Reflexión sobre el poder de plataformas
+          <cite>La neutralidad de la red y la regulación de plataformas se vuelven debates centrales.</cite>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- ─── PANEL: SOCIEDAD Y CULTURA ─── -->
+    <section id="panel-sociedad" class="panel" role="tabpanel">
+      <div class="content-card">
+        <h2><span class="icon-dot"></span>Sociedad y cultura digital</h2>
+        <p>
+          La Revolución Tecnodigital no solo cambió cómo producimos: cambió <strong>cómo nos comunicamos, cómo nos informamos, cómo nos relacionamos y cómo construimos identidad</strong>. La vida social se ha trasladado, en gran medida, a entornos digitales.
+        </p>
+
+        <h3>Transformaciones sociales</h3>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">📱</div>
+            <h4>Redes sociales</h4>
+            <p>Espacios donde se construyen vínculos, se difunde información y se forma opinión. Transformaron la sociabilidad y la política.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🎭</div>
+            <h4>Identidad digital</h4>
+            <p>La identidad se construye y se exhibe en perfiles, publicaciones y métricas. Lo público y lo privado se redefinen.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">📰</div>
+            <h4>Información instantánea</h4>
+            <p>Noticias en tiempo real, acceso universal al conocimiento. Pero también sobreabundancia, desinformación y polarización.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🎬</div>
+            <h4>Cultura del streaming</h4>
+            <p>Música, cine y series bajo demanda. El consumo cultural se personaliza y se desliga de horarios y soportes.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🎮</div>
+            <h4>Videojuegos</h4>
+            <p>De nicho a industria principal. Espacios de socialización, competición, creatividad y economía propia.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">✊</div>
+            <h4>Activismo digital</h4>
+            <p>Movimientos sociales que se organizan y difunden en red. Nuevas formas de participación y también de vigilancia.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🧑‍🏫</div>
+            <h4>Educación abierta</h4>
+            <p>Cursos masivos, tutoriales, bibliotecas digitales. El acceso al conocimiento se democratiza… para quienes tienen conexión.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">💬</div>
+            <h4>Nuevos lenguajes</h4>
+            <p>Memes, emojis, videos cortos, hilos. La comunicación se transforma en formato, ritmo y estética.</p>
+          </div>
+        </div>
+
+        <h3>La sociedad de la información</h3>
+        <p>
+          El sociólogo <strong>Manuel Castells</strong> describió la emergencia de la "sociedad red": una organización social en la que el poder, la producción y la experiencia se estructuran en torno a flujos de información más que a territorios físicos. Las redes digitales se convierten en la infraestructura básica de la vida social.
+        </p>
+        <p>
+          Pero el acceso a esas redes no es igual para todos. La <strong>brecha digital</strong> —en conectividad, dispositivos, habilidades y calidad de uso— se convierte en una nueva forma de desigualdad, que se superpone a las anteriores.
+        </p>
+
+        <h3>Brecha digital: tres dimensiones</h3>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">📡</div>
+            <h4>Acceso</h4>
+            <p>Disponibilidad de infraestructura, dispositivos y conexión. Todavía hay millones de personas sin internet confiable.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🧠</div>
+            <h4>Habilidades</h4>
+            <p>Capacidad de usar las tecnologías de forma significativa: buscar, evaluar, crear, protegerse.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🎯</div>
+            <h4>Aprovechamiento</h4>
+            <p>Posibilidad de traducir el acceso en beneficios reales: educación, empleo, salud, participación.</p>
+          </div>
+        </div>
+
+        <blockquote>
+          "El acceso a internet no garantiza la inclusión digital. La verdadera brecha está en quién puede convertir la conexión en oportunidad." — Reflexión contemporánea
+          <cite>La brecha digital es también una brecha de poder.</cite>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- ─── PANEL: TRABAJO Y EDUCACIÓN ─── -->
+    <section id="panel-trabajo" class="panel" role="tabpanel">
+      <div class="content-card">
+        <h2><span class="icon-dot"></span>Trabajo y educación en la era digital</h2>
+        <p>
+          La automatización y la inteligencia artificial están transformando radicalmente el trabajo: qué tareas se hacen, quién las hace y cómo se valoran. Simultáneamente, el aprendizaje se digitaliza y se vuelve permanente.
+        </p>
+
+        <h3>El impacto de la automatización</h3>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">⚙️</div>
+            <h4>Tareas rutinarias</h4>
+            <p>Las tareas repetitivas, manuales o cognitivas predecibles son las más vulnerables a la automatización.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🎨</div>
+            <h4>Tareas creativas</h4>
+            <p>La creatividad, el juicio ético, la empatía y la resolución de problemas complejos son más difíciles de automatizar.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🤝</div>
+            <h4>Complementariedad</h4>
+            <p>El escenario más probable no es la sustitución total, sino la colaboración entre personas y sistemas inteligentes.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🔄</div>
+            <h4>Reconversión</h4>
+            <p>La clave es la capacidad de aprender nuevas habilidades a lo largo de toda la vida laboral.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">📉</div>
+            <h4>Desigualdad</h4>
+            <p>La automatización puede aumentar la brecha entre quienes tienen habilidades digitales avanzadas y quienes no.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🏠</div>
+            <h4>Teletrabajo</h4>
+            <p>La pandemia masificó el trabajo remoto. Reorganizó la vida cotidiana, la ciudad y la relación con el empleo.</p>
+          </div>
+        </div>
+
+        <h3>Habilidades para el siglo XXI</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Categoría</th>
+                <th>Habilidades clave</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Digitales técnicas</strong></td>
+                <td>Programación, análisis de datos, IA, ciberseguridad, manejo de herramientas digitales.</td>
+              </tr>
+              <tr>
+                <td><strong>Cognitivas</strong></td>
+                <td>Pensamiento crítico, resolución de problemas, creatividad, aprendizaje continuo.</td>
+              </tr>
+              <tr>
+                <td><strong>Socioemocionales</strong></td>
+                <td>Empatía, comunicación, trabajo en equipo, liderazgo, adaptabilidad.</td>
+              </tr>
+              <tr>
+                <td><strong>Éticas y cívicas</strong></td>
+                <td>Responsabilidad digital, privacidad, uso crítico de la información, ciudadanía digital.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>La educación digital</h3>
+        <p>
+          La educación también se ha transformado: plataformas de aprendizaje en línea, cursos masivos abiertos (MOOC), tutoriales, simuladores, inteligencia artificial educativa y entornos virtuales. El aprendizaje deja de estar confinado al aula y se vuelve <strong>continuo, personalizado y accesible</strong>… para quienes tienen las condiciones para aprovecharlo.
+        </p>
+
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">📚</div>
+            <h4>MOOC</h4>
+            <p>Cursos masivos, abiertos y en línea. Democratizan el acceso a contenidos de universidades prestigiosas.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🧑‍💻</div>
+            <h4>Aprendizaje autodidacta</h4>
+            <p>YouTube, documentación, foros y comunidades permiten aprender casi cualquier cosa sin instituciones formales.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🤖</div>
+            <h4>IA educativa</h4>
+            <p>Tutores inteligentes, corrección automática, personalización del ritmo de aprendizaje. Nuevas oportunidades y nuevos riesgos.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🌐</div>
+            <h4>Aulas híbridas</h4>
+            <p>La combinación de presencialidad y virtualidad redefine el espacio escolar, universitario y laboral.</p>
+          </div>
+        </div>
+
+        <blockquote>
+          "En la era digital, la pregunta ya no es qué sabes, sino qué puedes aprender, desaprender y reaprender a lo largo de la vida." — Reflexión educativa contemporánea
+          <cite>El aprendizaje permanente se vuelve la habilidad central.</cite>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- ─── PANEL: RIESGOS Y DESAFÍOS ─── -->
+    <section id="panel-riesgos" class="panel" role="tabpanel">
+      <div class="content-card">
+        <h2><span class="icon-dot"></span>Riesgos y desafíos</h2>
+        <p>
+          La Revolución Tecnodigital no es un proceso neutro. Junto a sus beneficios —acceso, eficiencia, conectividad— trae <strong>riesgos estructurales</strong> que afectan derechos, democracia, salud mental y equilibrio ecológico.
+        </p>
+
+        <h3>Los grandes desafíos</h3>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon">🕵️</div>
+            <h4>Privacidad</h4>
+            <p>Nunca antes se recolectó tanta información personal. La vigilancia masiva, el rastreo y la monetización de datos erosionan la intimidad.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">📰</div>
+            <h4>Desinformación</h4>
+            <p>Noticias falsas, deepfakes y manipulación informativa circulan más rápido que las correcciones. El debate público se degrada.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🧠</div>
+            <h4>Salud mental</h4>
+            <p>Uso compulsivo de pantallas, ansiedad, soledad, comparación social constante. Los efectos son especialmente intensos en adolescentes.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">⚖️</div>
+            <h4>Concentración de poder</h4>
+            <p>Un puñado de empresas controla infraestructura crítica. La asimetría frente a Estados y ciudadanos crece.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🔓</div>
+            <h4>Ciberseguridad</h4>
+            <p>Ataques, fraudes, filtraciones y ransomware. La dependencia digital hace que cada vulnerabilidad tenga efectos sistémicos.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🤖</div>
+            <h4>Sesgo algorítmico</h4>
+            <p>Sistemas automatizados que reproducen discriminaciones y deciden sobre empleo, crédito, justicia y visibilidad.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🌍</div>
+            <h4>Impacto ambiental</h4>
+            <p>Los centros de datos y la IA consumen cantidades crecientes de energía y agua. La basura electrónica es un problema global.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🧑‍🏭</div>
+            <h4>Desempleo tecnológico</h4>
+            <p>La automatización puede destruir empleos más rápido de lo que crea otros. La reconversión no siempre llega a tiempo.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon">🌐</div>
+            <h4>Brecha digital</h4>
+            <p>Millones de personas quedan al margen del acceso, las habilidades y las oportunidades de la economía digital.</p>
+          </div>
+        </div>
+
+        <h3>El debate sobre la IA</h3>
+        <p>
+          La irrupción de la <strong>inteligencia artificial generativa</strong> agregó una capa adicional de incertidumbre. Sus defensores destacan la productividad, la creatividad asistida y el acceso a herramientas antes reservadas a expertos. Sus críticos señalan los riesgos de desinformación, desplazamiento laboral, concentración de poder, dependencia cognitiva y pérdida de control humano sobre decisiones críticas.
+        </p>
+
+        <h3>Comparador: oportunidades vs. riesgos</h3>
+        <p style="margin-bottom: 12px;">Selecciona una columna para enfocarte en ella.</p>
+        <div class="compare-controls">
+          <button class="compare-btn active" data-compare="both2">Ambas</button>
+          <button class="compare-btn" data-compare="left2">Oportunidades</button>
+          <button class="compare-btn" data-compare="right2">Riesgos</button>
+        </div>
+        <div class="compare-panels">
+          <div class="compare-panel left" id="compare-left2">
+            <h4>🌱 Oportunidades</h4>
+            <p><strong>Acceso:</strong> conocimiento, salud y servicios a distancia.</p>
+            <p><strong>Productividad:</strong> automatización de tareas repetitivas.</p>
+            <p><strong>Creatividad:</strong> nuevas herramientas para crear, aprender y colaborar.</p>
+            <p><strong>Inclusión:</strong> tecnologías de asistencia, traducción, accesibilidad.</p>
+            <p><strong>Ciencia:</strong> simulación, genómica, descubrimiento de fármacos.</p>
+          </div>
+          <div class="compare-panel right" id="compare-right2">
+            <h4>⚠️ Riesgos</h4>
+            <p><strong>Vigilancia:</strong> erosión de la privacidad y del anonimato.</p>
+            <p><strong>Desigualdad:</strong> concentración de poder y riqueza.</p>
+            <p><strong>Manipulación:</strong> desinformación y control de la atención.</p>
+            <p><strong>Exclusión:</strong> brecha digital y desempleo tecnológico.</p>
+            <p><strong>Dependencia:</strong> pérdida de autonomía frente a sistemas opacos.</p>
+          </div>
+        </div>
+
+        <blockquote>
+          "La tecnología no es buena ni mala. Lo que importa es quién la controla, para qué y con qué límites." — Principio clásico del debate tecnológico
+          <cite>La pregunta no es qué puede hacer la tecnología, sino qué debería hacer.</cite>
+        </blockquote>
+
+        <h3>Hacia una revolución digital con derechos</h3>
+        <p>
+          Frente a estos desafíos, surgen marcos regulatorios y movimientos sociales que buscan orientar la transformación digital hacia el bien común: leyes de protección de datos, regulación de plataformas, auditorías algorítmicas, educación digital, transparencia, soberanía tecnológica y derechos digitales.
+        </p>
+        <ul>
+          <li><strong>Regulación:</strong> GDPR en Europa, leyes de IA, normativas de plataformas.</li>
+          <li><strong>Transparencia:</strong> auditorías de algoritmos y acceso público a información sobre sistemas que afectan derechos.</li>
+          <li><strong>Educación:</strong> alfabetización digital crítica desde la infancia.</li>
+          <li><strong>Participación:</strong> involucrar a la ciudadanía en las decisiones sobre tecnología.</li>
+          <li><strong>Alternativas:</strong> software libre, infraestructura pública digital, modelos cooperativos.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ─── PANEL: GLOSARIO ─── -->
+    <section id="panel-glosario" class="panel" role="tabpanel">
+      <div class="content-card">
+        <h2><span class="icon-dot"></span>Glosario tecnodigital</h2>
+        <p>Términos clave para comprender el tema. Haz clic en cada uno para expandir su definición.</p>
+
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Revolución Tecnodigital <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Proceso de transformación profunda de la economía, la sociedad y la cultura impulsado por la convergencia de tecnologías digitales: computación, internet, inteligencia artificial, sensores, redes y plataformas. Su materia prima central son los datos.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Cuarta Revolución Industrial <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Término popularizado por Klaus Schwab para describir la fusión de tecnologías físicas, digitales y biológicas: IA, IoT, robótica, biotecnología, computación cuántica. Es la fase actual de la Revolución Tecnodigital.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Sociedad de la información <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Concepto que describe una sociedad en la que la creación, distribución y manipulación de información son actividades económicas y culturales centrales. La información reemplaza a los bienes materiales como fuente principal de valor.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Sociedad red <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Concepto de Manuel Castells: una organización social en la que el poder, la producción y la experiencia se estructuran en torno a flujos de información más que a territorios físicos. Las redes digitales son su infraestructura básica.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Capitalismo de plataformas <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Modelo económico en el que grandes plataformas digitales (Amazon, Google, Meta, Uber, etc.) actúan como intermediarios que conectan oferta y demanda, extraen datos y controlan la infraestructura de la vida digital.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Capitalismo de vigilancia <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Concepto de Shoshana Zuboff: modelo económico en el que las empresas extraen datos personales como materia prima, los procesan para predecir comportamientos y los venden a anunciantes u otros actores. La experiencia humana se convierte en materia prima.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Gig economy <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>"Economía de los encargos": modelo laboral basado en trabajos temporales, independientes y mediados por plataformas digitales. Incluye conductores, repartidores, freelancers y creadores de contenido. Ofrece flexibilidad pero reduce estabilidad y protección social.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Efectos de red <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Fenómeno por el cual el valor de un producto o servicio aumenta a medida que más personas lo usan. Ejemplo: una red social es más útil cuantos más usuarios tiene. Genera monopolios naturales y concentración de poder.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Big data <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Conjunto de datos tan grandes, veloces y variados que requieren tecnologías específicas para su análisis. Permite detectar patrones, predecir comportamientos y personalizar servicios a gran escala.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Inteligencia artificial <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Conjunto de técnicas que permiten a las máquinas realizar tareas asociadas a la inteligencia humana: aprender, razonar, percibir, comprender lenguaje, generar contenido. Incluye aprendizaje automático, redes neuronales y modelos generativos.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Internet de las cosas (IoT) <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Red de objetos cotidianos conectados a internet que recopilan y comparten datos: sensores, electrodomésticos, autos, ciudades. Genera enormes volúmenes de información y nuevas capacidades de automatización.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Blockchain <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Registro distribuido e inmutable de transacciones, organizado en bloques enlazados criptográficamente. Base de criptomonedas, contratos inteligentes y nuevas formas de confianza digital sin intermediarios centrales.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Brecha digital <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Desigualdad en el acceso, uso y aprovechamiento de las tecnologías digitales. Se manifiesta en tres dimensiones: acceso (infraestructura y dispositivos), habilidades (capacidad de uso significativo) y aprovechamiento (traducción en beneficios reales).</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Alfabetización digital <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Conjunto de habilidades para buscar, evaluar, crear y comunicar información usando tecnologías digitales de forma crítica, ética y segura. Es una condición para la participación plena en la sociedad digital.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Convergencia tecnológica <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Fenómeno por el cual distintas tecnologías se combinan y potencian mutuamente, creando capacidades que ninguna tendría por separado. Ejemplo: IA + IoT + 5G + nube = ciudades inteligentes.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Derechos digitales <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Conjunto de derechos humanos adaptados al entorno digital: privacidad, protección de datos, libertad de expresión, acceso a internet, no discriminación algorítmica, olvido digital. Su reconocimiento es uno de los grandes debates actuales.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Soberanía tecnológica <span class="chevron">▼</span></button>
+          <div class="accordion-content"><p>Capacidad de un país o comunidad para desarrollar, controlar y decidir sobre su propia infraestructura tecnológica, sin depender de actores externos. Incluye hardware, software, datos e inteligencia artificial.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>
+        Enciclopedia Visual · Contenido original de
+        <a href="https://app-fioravante.github.io/apps-fioravante/" target="_blank" rel="noopener noreferrer">Fioravante</a>.
+        Este recurso es de carácter educativo y exploratorio.
+      </p>
+    </footer>
+  </div>
+
+  <script>
+    // ─── TEMA ───
+    const rootEl = document.documentElement;
+    const themeToggle = document.getElementById('themeToggle');
+    function updateToggleLabel() {
+      const isLight = rootEl.getAttribute('data-theme') === 'light';
+      themeToggle.setAttribute('aria-label', isLight ? 'Cambiar a modo oscuro' : 'Cambiar a modo claro');
+      themeToggle.setAttribute('title', isLight ? 'Cambiar a modo oscuro' : 'Cambiar a modo claro');
+    }
+    themeToggle.addEventListener('click', () => {
+      const isLight = rootEl.getAttribute('data-theme') === 'light';
+      const next = isLight ? 'dark' : 'light';
+      rootEl.setAttribute('data-theme', next);
+      try { localStorage.setItem('enc-theme', next); } catch (e) {}
+      updateToggleLabel();
+    });
+    updateToggleLabel();
+
+    // ─── PESTAÑAS ───
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const panels = document.querySelectorAll('.panel');
+
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const targetId = btn.dataset.panel;
+        tabBtns.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });
+        btn.classList.add('active');
+        btn.setAttribute('aria-selected', 'true');
+        panels.forEach(p => p.classList.remove('active'));
+        document.getElementById(targetId).classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    });
+
+    // ─── COMPARADORES ───
+    document.querySelectorAll('.compare-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const group = btn.closest('.content-card');
+        group.querySelectorAll('.compare-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const mode = btn.dataset.compare;
+
+        const left1 = document.getElementById('compare-left');
+        const right1 = document.getElementById('compare-right');
+        const left2 = document.getElementById('compare-left2');
+        const right2 = document.getElementById('compare-right2');
+
+        // Comparador de tecnologías
+        if (left1 && right1) {
+          left1.classList.remove('dimmed');
+          right1.classList.remove('dimmed');
+          if (mode === 'left') right1.classList.add('dimmed');
+          if (mode === 'right') left1.classList.add('dimmed');
+        }
+        // Comparador de oportunidades/riesgos
+        if (left2 && right2) {
+          left2.classList.remove('dimmed');
+          right2.classList.remove('dimmed');
+          if (mode === 'left2') right2.classList.add('dimmed');
+          if (mode === 'right2') left2.classList.add('dimmed');
+        }
+      });
+    });
+
+    // ─── ACORDEÓN ───
+    document.querySelectorAll('.accordion-trigger').forEach(trigger => {
+      trigger.addEventListener('click', () => {
+        const item = trigger.parentElement;
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.accordion-item').forEach(i => {
+          i.classList.remove('open');
+          i.querySelector('.accordion-trigger').setAttribute('aria-expanded', 'false');
+        });
+        if (!isOpen) {
+          item.classList.add('open');
+          trigger.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
