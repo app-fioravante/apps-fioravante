@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#f3f1ec" />
+<meta name="description" content="Guía sobre la historia del fascismo y el nazismo: orígenes, ideología, ascenso al poder, totalitarismo, Segunda Guerra Mundial, Holocausto, comparación y legado." />
+<title>Nazismo y Fascismo — Historia, ideología y totalitarismo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f3f1ec;
+  --panel:#ffffff;
+  --panel2:#e9e5db;
+  --line:rgba(30,26,20,.13);
+  --text:#16130e;
+  --muted:#6a6154;
+  --iron:#3a4250;
+  --rust:#a04a1f;
+  --steel:#2a5d7c;
+  --gold:#8f6a00;
+  --crimson:#a8293a;
+  --lime:#4a7a2c;
+  --radius:22px;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{margin:0;background:radial-gradient(ellipse at 80% -10%,#e6ddd0 0,transparent 36%),var(--bg);color:var(--text);font-family:Manrope,system-ui,sans-serif;line-height:1.6;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.5;z-index:-1;background-image:linear-gradient(rgba(30,26,20,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(30,26,20,.035) 1px,transparent 1px);background-size:48px 48px;mask-image:linear-gradient(to bottom,black,transparent 80%)}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer}
+a:focus-visible,button:focus-visible{outline:2px solid var(--rust);outline-offset:3px}
+.mono{font-family:"DM Mono",monospace;text-transform:uppercase;letter-spacing:.12em;font-size:.72rem}
+.muted{color:var(--muted)}
+.wrap{width:min(1160px,calc(100% - 40px));margin:auto}
+
+nav{position:sticky;top:0;z-index:20;backdrop-filter:blur(18px);background:rgba(243,241,236,.88);border-bottom:1px solid var(--line)}
+.navin{min-height:68px;height:auto;display:flex;align-items:center;justify-content:space-between;gap:14px;padding-top:8px;padding-bottom:8px}
+.brand{display:flex;align-items:center;gap:11px;font-weight:800;letter-spacing:-.04em;font-size:clamp(.68rem,.98vw,.86rem);white-space:nowrap}
+.brandmark{width:34px;height:34px;border-radius:11px;background:linear-gradient(135deg,var(--iron),var(--rust));display:grid;place-items:center;color:#fff;font-weight:900;box-shadow:0 6px 18px #3a425033}
+.navlinks{display:flex;align-items:center;gap:clamp(8px,1.4vw,18px);color:var(--muted);font-size:clamp(.68rem,.88vw,.82rem);white-space:nowrap}
+.navlinks a:hover{color:var(--rust)}
+.navcta{white-space:nowrap;padding:9px 12px;font-size:.74rem}
+.navcta,.btn{border:1px solid var(--line);background:rgba(30,26,20,.04);color:var(--text);padding:11px 16px;border-radius:999px;font-weight:700;font-size:.85rem;transition:.25s}
+.navcta:hover,.btn:hover{border-color:var(--rust);transform:translateY(-2px)}
+.btn.primary{background:var(--rust);color:#fff;border-color:var(--rust)}
+.btn.primary:hover{box-shadow:0 10px 28px #a04a1f38}
+.btn:disabled{opacity:.45;cursor:not-allowed;transform:none}
+
+.hero{padding:92px 0 72px;position:relative}
+.hero-grid{display:grid;grid-template-columns:1.02fr .98fr;align-items:center;gap:45px}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;color:var(--rust);margin-bottom:20px}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--rust);box-shadow:0 0 14px #a04a1f66}
+h1{font-size:clamp(2.5rem,5.4vw,4.8rem);line-height:1;letter-spacing:-.07em;margin:0 0 24px;font-weight:800}
+h1 .gradient{background:linear-gradient(100deg,var(--iron),#7a4a20 48%,var(--rust));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{font-size:1.08rem;color:var(--muted);max-width:560px;margin:0 0 30px}
+.actions{display:flex;gap:12px;flex-wrap:wrap}
+.hero-note{display:flex;align-items:center;gap:15px;margin-top:38px;color:var(--muted);font-size:.8rem}
+.avatars{display:flex}
+.avatars span{width:29px;height:29px;border:2px solid var(--bg);margin-left:-7px;border-radius:50%;display:grid;place-items:center;background:#dfd6c8;color:#3f3628;font-size:.68rem}
+.avatars span:first-child{margin-left:0}
+
+/* --- Gráfico principal responsivo --- */
+.visual{position:relative;display:grid;place-items:center;width:100%}
+.chart-card{width:100%;max-width:600px;background:#fff;border:1px solid var(--line);border-radius:24px;padding:16px 16px 12px;box-shadow:0 24px 60px rgba(30,26,20,.10)}
+.chart-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:4px;color:var(--muted)}
+.chart{width:100%;height:auto;display:block;overflow:visible}
+.chart-legend{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:8px;color:var(--muted);font-size:.7rem}
+.chart-legend span{display:inline-flex;align-items:center;gap:6px}
+.chart-legend i{width:10px;height:10px;border-radius:3px;display:inline-block}
+.chart-foot{display:flex;justify-content:space-between;gap:10px;margin-top:6px;color:var(--muted);font-size:.68rem;flex-wrap:wrap}
+
+.stats{border-block:1px solid var(--line);padding:23px 0}
+.stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.stat{padding-left:22px;border-left:1px solid var(--line)}
+.stat:first-child{border:0;padding-left:0}
+.stat strong{display:block;font-size:1.25rem;letter-spacing:-.05em}
+.stat span{font-size:.78rem;color:var(--muted)}
+
+section{padding:94px 0}
+.section-head{display:flex;align-items:end;justify-content:space-between;gap:25px;margin-bottom:35px}
+.kicker{color:var(--rust);margin-bottom:12px}
+.section-head h2,.split-copy h2{font-size:clamp(2rem,3.8vw,3.3rem);line-height:1.05;letter-spacing:-.065em;margin:0}
+.section-head p{max-width:460px;color:var(--muted);margin:0}
+.topic-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.topic{border:1px solid var(--line);border-radius:var(--radius);background:linear-gradient(145deg,#ffffff,#f2eee5);padding:28px;position:relative;overflow:hidden;transition:transform .3s,border-color .3s,box-shadow .3s;box-shadow:0 10px 30px rgba(30,26,20,.05)}
+.topic:hover{transform:translateY(-6px);border-color:#a04a1f55;box-shadow:0 18px 45px rgba(30,26,20,.10)}
+.topic:after{content:"";position:absolute;width:220px;height:220px;border-radius:50%;filter:blur(70px);opacity:.15;right:-100px;top:-110px;background:var(--glow,var(--rust));pointer-events:none}
+.topic-top{display:flex;align-items:center;justify-content:space-between}
+.topic-icon{width:48px;height:48px;border-radius:15px;background:#a04a1f12;border:1px solid #a04a1f33;display:grid;place-items:center;color:var(--rust);font-size:1.15rem}
+.topic-num{color:#9d9184}
+.topic h3{font-size:1.35rem;margin:25px 0 9px;letter-spacing:-.04em}
+.topic p{color:var(--muted);margin:0 0 23px}
+.tag-row{display:flex;flex-wrap:wrap;gap:8px}
+.tag{font-size:.72rem;padding:6px 10px;border:1px solid var(--line);border-radius:999px;color:#43392b;background:rgba(30,26,20,.035)}
+
+.lab{background:linear-gradient(180deg,transparent,#e8e2d5 28%,#e8e2d5 75%,transparent)}
+.lab-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:42px;align-items:center}
+.split-copy p{color:var(--muted);max-width:450px}
+.checklist{list-style:none;padding:0;margin:26px 0;display:grid;gap:13px}
+.checklist li{display:flex;gap:11px;align-items:start;color:#2e2618;font-size:.9rem}
+.check{color:var(--rust);font-weight:900}
+.demo{background:#ffffff;border:1px solid var(--line);border-radius:24px;overflow:hidden;box-shadow:0 20px 60px rgba(30,26,20,.10)}
+.demo-head{padding:17px 20px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:12px;background:#fdfbf7;flex-wrap:wrap}
+.window-dots{display:flex;gap:5px}
+.window-dots i{width:7px;height:7px;border-radius:50%;background:#d4ccbc}
+.live{color:var(--lime);font-size:.7rem}
+.demo-body{padding:24px}
+.phase-title{font-size:1.3rem;font-weight:800;letter-spacing:-.03em;margin:0 0 4px;color:var(--rust)}
+.sensor-panel{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
+.sensor{padding:17px;border:1px solid var(--line);border-radius:16px;background:rgba(30,26,20,.025)}
+.sensor label{color:var(--muted);font-size:.76rem}
+.sensor .value{font-size:1.2rem;font-weight:800;letter-spacing:-.05em;margin:8px 0}
+.sensor .value small{font-size:.75rem;color:var(--muted);font-weight:500}
+.meter{height:5px;background:#e6dfd1;border-radius:9px;overflow:hidden}
+.meter span{display:block;height:100%;width:var(--w);background:linear-gradient(90deg,var(--gold),var(--rust));border-radius:9px;transition:width .5s}
+.demo-foot{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:18px;color:var(--muted);font-size:.78rem;flex-wrap:wrap}
+.toggle{border:1px solid #a04a1f50;background:#a04a1f10;color:var(--rust);padding:9px 13px;border-radius:10px;font-weight:700;font-size:.78rem}
+.toggle:hover{background:#a04a1f20}
+
+.nanowide{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.nano-art{min-height:400px;border-radius:24px;border:1px solid var(--line);background:radial-gradient(circle at 50% 30%,#f0e4d4,transparent 65%),#efe8db;position:relative;overflow:hidden;display:grid;place-items:center}
+.nano-art svg{width:90%;max-width:460px;overflow:visible}
+.atom{animation:float 6s ease-in-out infinite;transform-origin:center}
+.atom:nth-child(2){animation-delay:-2s}
+.atom:nth-child(3){animation-delay:-4s}
+.nano-caption{position:absolute;bottom:18px;left:20px;right:20px;display:flex;justify-content:space-between;color:var(--muted);font-size:.72rem;gap:10px}
+.nano-copy h2{font-size:clamp(2.1rem,3.8vw,3.2rem);line-height:1.05;letter-spacing:-.065em;margin:0 0 20px}
+.nano-copy p{color:var(--muted)}
+.nano-points{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:25px}
+.nano-point{padding:15px;border:1px solid var(--line);border-radius:14px;background:rgba(30,26,20,.025)}
+.nano-point b{display:block;font-size:.86rem}
+.nano-point span{font-size:.76rem;color:var(--muted)}
+
+.path-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.path-card{padding:23px;border:1px solid var(--line);border-radius:18px;background:#ffffff;box-shadow:0 10px 26px rgba(30,26,20,.05);transition:transform .3s,border-color .3s,box-shadow .3s}
+.path-card:hover{transform:translateY(-4px);border-color:#a04a1f55;box-shadow:0 16px 40px rgba(30,26,20,.09)}
+.path-card .num{font-family:"DM Mono",monospace;color:var(--gold);font-size:.78rem;letter-spacing:.08em}
+.path-card h3{margin:14px 0 7px;font-size:1.05rem;letter-spacing:-.02em}
+.path-card p{font-size:.85rem;color:var(--muted);margin:0}
+
+.note{display:flex;gap:12px;align-items:start;padding:16px 18px;border:1px dashed #8f6a0055;background:#8f6a000d;border-radius:14px;color:#5b460f;font-size:.85rem;margin-top:24px}
+.note b{color:#855f00}
+
+.quiz{padding:30px;border:1px solid #a04a1f3d;border-radius:24px;background:radial-gradient(ellipse at 90% 0%,#f3ded2,transparent 55%),#ffffff;box-shadow:0 16px 45px rgba(30,26,20,.08)}
+.quiz-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:35px}
+.quiz h2{font-size:1.9rem;line-height:1.1;letter-spacing:-.06em;margin:0 0 12px}
+.quiz p{color:var(--muted)}
+.question{font-size:1.1rem;font-weight:700;margin-bottom:17px;letter-spacing:-.02em}
+.answers{display:grid;gap:10px}
+.answer{padding:13px 15px;border:1px solid var(--line);border-radius:12px;background:#faf7f2;color:var(--text);text-align:left;transition:.2s}
+.answer:hover:not(:disabled){border-color:var(--rust);background:#a04a1f0c}
+.answer:disabled{cursor:default}
+.answer.correct{border-color:var(--lime);background:#4a7a2c12}
+.answer.wrong{border-color:var(--crimson);background:#a8293a12}
+.feedback{min-height:26px;font-size:.85rem;margin-top:12px;color:var(--muted)}
+.quiz-bottom{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:18px;flex-wrap:wrap}
+.quiz-bottom .btn{font-size:.8rem}
+
+footer{padding:30px 0;border-top:1px solid var(--line);color:var(--muted);font-size:.78rem}
+.footerin{display:flex;justify-content:space-between;align-items:center;gap:20px}
+.footerin strong{color:var(--text)}
+
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}.reveal{opacity:1;transform:none}}
+
+@media(max-width:920px){.navlinks{display:none}.navin{min-height:66px}}
+@media(max-width:850px){
+  .hero-grid,.lab-grid,.nanowide,.quiz-grid{grid-template-columns:1fr}
+  .hero{padding-top:60px}
+  .visual{order:-1}
+  .hero-grid{gap:18px}
+  .hero-copy{text-align:center}
+  .hero-copy p{margin-inline:auto}
+  .actions,.hero-note{justify-content:center}
+  .section-head{display:block}
+  .section-head p{margin-top:15px}
+  .lab-grid{gap:28px}
+  .nanowide{gap:25px}
+  .nano-art{min-height:310px}
+  .quiz-grid{gap:12px}
+  .stat-grid{grid-template-columns:repeat(2,1fr);row-gap:22px}
+  .stat:nth-child(3){padding-left:0;border:0}
+  .path-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:560px){
+  .wrap{width:min(100% - 28px,1160px)}
+  .navin{height:66px}
+  .navcta{padding:9px 12px;font-size:.72rem}
+  .hero{padding:43px 0 45px}
+  h1{font-size:2.4rem}
+  .chart-card{padding:12px 10px 8px;border-radius:18px}
+  .chart-legend{font-size:.64rem;gap:4px 10px}
+  .stats{padding:18px 0}
+  section{padding:66px 0}
+  .topic-grid{grid-template-columns:1fr}
+  .topic{padding:23px}
+  .sensor-panel{grid-template-columns:1fr 1fr}
+  .sensor{padding:12px}
+  .sensor .value{font-size:1rem}
+  .demo-body{padding:15px}
+  .path-grid{grid-template-columns:1fr}
+  .nano-points{grid-template-columns:1fr 1fr}
+  .quiz{padding:22px}
+  .footerin{align-items:flex-start;flex-direction:column;gap:8px}
+}
+</style>
+</head>
+<body>
+<nav>
+  <div class="wrap navin">
+    <a class="brand" href="#inicio"><span class="brandmark">N</span> NAZISMO Y FASCISMO <span style="color:var(--rust)">· TOTALITARISMOS</span></a>
+    <div class="navlinks">
+      <a href="#panorama">Panorama</a>
+      <a href="#fascismo">Fascismo</a>
+      <a href="#nazismo">Nazismo</a>
+      <a href="#comparacion">Comparación</a>
+      <a href="#holocausto">Holocausto</a>
+      <a href="#historia">Línea del tiempo</a>
+      <a href="#legado">Legado</a>
+    </div>
+    <a class="navcta" href="#panorama">Ver contenidos ↗</a>
+  </div>
+</nav>
+
+<main>
+<header class="hero" id="inicio">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <div class="eyebrow mono"><span class="dot"></span> Historia · Política · Memoria</div>
+      <h1>Nazismo<br><span class="gradient">y fascismo</span></h1>
+      <p>Dos regímenes totalitarios que marcaron el siglo XX. El fascismo italiano de Mussolini y el nacionalsocialismo alemán de Hitler compartieron el culto al líder, el partido único y la violencia política, pero también tuvieron diferencias profundas. Esta guía recorre sus orígenes, su ideología, su ascenso al poder y su legado trágico.</p>
+      <div class="actions">
+        <a class="btn primary" href="#panorama">Explorar el panorama <span>↗</span></a>
+        <a class="btn" href="#historia">Ver línea del tiempo</a>
+      </div>
+      <div class="hero-note">
+        <div class="avatars"><span>⚔</span><span>✠</span><span>⚖</span></div>
+        <span>Contenido educativo: historia, análisis y memoria.</span>
+      </div>
+    </div>
+
+    <!-- GRÁFICO PRINCIPAL RESPONSIVO -->
+    <div class="visual">
+      <figure class="chart-card" style="margin:0">
+        <div class="chart-head">
+          <span class="mono">Cronología comparada · 1919–1945</span>
+          <span class="mono" style="color:var(--rust)">Fases del régimen</span>
+        </div>
+
+        <svg class="chart" viewBox="0 0 560 320" role="img" aria-labelledby="chartTitle chartDesc">
+          <title id="chartTitle">Cronología comparada del fascismo italiano y el nazismo alemán</title>
+          <desc id="chartDesc">Gráfico de barras horizontales que muestra las fases de ascenso, consolidación, apogeo y caída del fascismo italiano (1919-1945) y del nazismo alemán (1919-1945).</desc>
+
+          <defs>
+            <linearGradient id="itaGrad" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0" stop-color="#2a5d7c" stop-opacity=".85"/>
+              <stop offset="1" stop-color="#2a5d7c" stop-opacity=".35"/>
+            </linearGradient>
+            <linearGradient id="nazGrad" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0" stop-color="#a04a1f" stop-opacity=".85"/>
+              <stop offset="1" stop-color="#a04a1f" stop-opacity=".35"/>
+            </linearGradient>
+          </defs>
+
+          <!-- Eje temporal -->
+          <g stroke="#16130e" stroke-opacity=".10" stroke-width="1">
+            <line x1="50" y1="270" x2="540" y2="270"/>
+            <line x1="50" y1="207.5" x2="540" y2="207.5"/>
+            <line x1="50" y1="145" x2="540" y2="145"/>
+            <line x1="50" y1="82.5" x2="540" y2="82.5"/>
+            <line x1="50" y1="20" x2="540" y2="20"/>
+          </g>
+
+          <!-- Etiquetas de años -->
+          <g fill="#6a6154" font-family="DM Mono, monospace" font-size="12">
+            <text x="50" y="292" text-anchor="middle">1919</text>
+            <text x="173" y="292" text-anchor="middle">1929</text>
+            <text x="296" y="292" text-anchor="middle">1939</text>
+            <text x="419" y="292" text-anchor="middle">1945</text>
+          </g>
+          <text x="295" y="313" text-anchor="middle" fill="#6a6154" font-family="DM Mono, monospace" font-size="10.5" letter-spacing="1.6">AÑOS</text>
+
+          <!-- Fascismo italiano -->
+          <text x="50" y="60" fill="#2a5d7c" font-family="DM Mono, monospace" font-size="11.5" letter-spacing="1.4">FASCISMO ITALIANO</text>
+          <!-- Ascenso -->
+          <rect x="50" y="68" width="82" height="16" rx="4" fill="url(#itaGrad)"/>
+          <text x="55" y="80" fill="#fff" font-family="DM Mono, monospace" font-size="8.5">ASCENSO</text>
+          <!-- Régimen -->
+          <rect x="132" y="68" width="174" height="16" rx="4" fill="url(#itaGrad)"/>
+          <text x="180" y="80" fill="#fff" font-family="DM Mono, monospace" font-size="8.5">RÉGIMEN FASCISTA</text>
+          <!-- Caída -->
+          <rect x="306" y="68" width="234" height="16" rx="4" fill="#2a5d7c" opacity=".25"/>
+          <text x="370" y="80" fill="#2a5d7c" font-family="DM Mono, monospace" font-size="8.5">GUERRA Y CAÍDA</text>
+
+          <!-- Nazismo alemán -->
+          <text x="50" y="120" fill="#a04a1f" font-family="DM Mono, monospace" font-size="11.5" letter-spacing="1.4">NAZISMO ALEMÁN</text>
+          <!-- Ascenso -->
+          <rect x="50" y="128" width="82" height="16" rx="4" fill="url(#nazGrad)"/>
+          <text x="55" y="140" fill="#fff" font-family="DM Mono, monospace" font-size="8.5">ASCENSO</text>
+          <!-- Régimen -->
+          <rect x="132" y="128" width="174" height="16" rx="4" fill="url(#nazGrad)"/>
+          <text x="180" y="140" fill="#fff" font-family="DM Mono, monospace" font-size="8.5">TERCER REICH</text>
+          <!-- Caída -->
+          <rect x="306" y="128" width="234" height="16" rx="4" fill="#a04a1f" opacity=".25"/>
+          <text x="370" y="140" fill="#a04a1f" font-family="DM Mono, monospace" font-size="8.5">GUERRA Y DERROTA</text>
+
+          <!-- Hitos clave -->
+          <g font-family="DM Mono, monospace" font-size="9.5" fill="#6a6154">
+            <!-- 1922 Marcha sobre Roma -->
+            <line x1="95" y1="52" x2="95" y2="68" stroke="#2a5d7c" stroke-width="1.2" stroke-dasharray="3 2"/>
+            <text x="95" y="48" text-anchor="middle" fill="#2a5d7c">1922</text>
+
+            <!-- 1933 Hitler canciller -->
+            <line x1="170" y1="112" x2="170" y2="128" stroke="#a04a1f" stroke-width="1.2" stroke-dasharray="3 2"/>
+            <text x="170" y="108" text-anchor="middle" fill="#a04a1f">1933</text>
+
+            <!-- 1939 Pacto de Acero -->
+            <line x1="296" y1="52" x2="296" y2="68" stroke="#2a5d7c" stroke-width="1.2" stroke-dasharray="3 2"/>
+            <text x="296" y="48" text-anchor="middle" fill="#2a5d7c">1939</text>
+
+            <!-- 1945 Fin -->
+            <line x1="480" y1="112" x2="480" y2="128" stroke="#a04a1f" stroke-width="1.2" stroke-dasharray="3 2"/>
+            <text x="480" y="108" text-anchor="middle" fill="#a04a1f">1945</text>
+          </g>
+        </svg>
+
+        <figcaption class="chart-legend">
+          <span><i style="background:var(--steel)"></i>Fascismo italiano</span>
+          <span><i style="background:var(--rust)"></i>Nazismo alemán</span>
+          <span><i style="background:var(--gold)"></i>Hitos clave</span>
+        </figcaption>
+        <div class="chart-foot">
+          <span>Esquema comparativo · fases principales</span>
+          <span>1919 — 1945</span>
+        </div>
+      </figure>
+    </div>
+  </div>
+</header>
+
+<div class="stats">
+  <div class="wrap stat-grid">
+    <div class="stat"><strong>1919 <span style="color:var(--steel)">·</span></strong><span>Fundación de los Fasci italiani</span></div>
+    <div class="stat"><strong>1922 <span style="color:var(--steel)">·</span></strong><span>Marcha sobre Roma</span></div>
+    <div class="stat"><strong>1933 <span style="color:var(--rust)">·</span></strong><span>Hitler canciller de Alemania</span></div>
+    <div class="stat"><strong>6 <span style="color:var(--crimson)">millones</span></strong><span>Judíos asesinados en el Holocausto</span></div>
+  </div>
+</div>
+
+<section id="panorama">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <div class="kicker mono">01 — Panorama</div>
+        <h2>Dos totalitarismos,<br>un mismo siglo.</h2>
+      </div>
+      <p>El fascismo y el nazismo surgieron en la Europa de entreguerras, marcada por la crisis económica, el miedo al comunismo, la humillación de la Primera Guerra Mundial y la fragilidad de las democracias liberales. Ambos prometieron orden, grandeza nacional y un líder fuerte.</p>
+    </div>
+
+    <div class="topic-grid">
+      <article class="topic reveal" style="--glow:var(--steel)">
+        <div class="topic-top">
+          <div class="topic-icon" style="color:var(--steel);background:#2a5d7c12;border-color:#2a5d7c33">◈</div>
+          <span class="topic-num mono">01 / ITALIA</span>
+        </div>
+        <h3>El fascismo de Mussolini</h3>
+        <p>Nació en 1919 como un movimiento nacionalista y anticomunista. En 1922, la Marcha sobre Roma llevó a Mussolini al poder. Se convirtió en el primer régimen totalitario de Europa occidental.</p>
+        <div class="tag-row">
+          <span class="tag">Mussolini</span><span class="tag">Marcha sobre Roma</span><span class="tag">Partido único</span>
+        </div>
+      </article>
+
+      <article class="topic reveal" style="--glow:var(--rust)">
+        <div class="topic-top">
+          <div class="topic-icon">✠</div>
+          <span class="topic-num mono">02 / ALEMANIA</span>
+        </div>
+        <h3>El nazismo de Hitler</h3>
+        <p>El Partido Nazi combinó un nacionalismo extremo con un racismo biológico y un antisemitismo radical. Llegó al poder en 1933 y construyó el Tercer Reich, un régimen totalitario que desató la Segunda Guerra Mundial y el Holocausto.</p>
+        <div class="tag-row">
+          <span class="tag">Hitler</span><span class="tag">Tercer Reich</span><span class="tag">Antisemitismo</span>
+        </div>
+      </article>
+    </div>
+
+    <div class="note reveal">
+      <span style="font-size:1.1rem">⚖</span>
+      <span><b>Advertencia.</b> El fascismo y el nazismo no fueron "accidentes" de la historia. Fueron el resultado de decisiones políticas, condiciones económicas y procesos sociales concretos. Estudiarlos es una herramienta para reconocer los signos de peligro en el presente.</span>
+    </div>
+  </div>
+</section>
+
+<section class="lab" id="fascismo">
+  <div class="wrap lab-grid">
+    <div class="split-copy reveal">
+      <div class="kicker mono">02 — Fascismo italiano</div>
+      <h2>El primer<br>régimen totalitario.</h2>
+      <p>Benito Mussolini fundó los <em>Fasci di Combattimento</em> en marzo de 1919. En noviembre de 1921 se transformaron en el Partido Nacional Fascista (PNF). En octubre de 1922, la Marcha sobre Roma forzó su nombramiento como primer ministro.</p>
+      <ul class="checklist">
+        <li><span class="check">✓</span><span><b>Culto al líder:</b> Mussolini, el <em>Duce</em>, encarnaba la voluntad nacional.</span></li>
+        <li><span class="check">✓</span><span><b>Partido único:</b> se prohibieron los demás partidos y se suprimió la libertad de prensa.</span></li>
+        <li><span class="check">✓</span><span><b>Violencia política:</b> las escuadras fascistas atacaron a socialistas, comunistas y sindicatos.</span></li>
+      </ul>
+      <a class="btn" href="#nazismo">Ver nazismo ↗</a>
+    </div>
+
+    <div class="demo reveal">
+      <div class="demo-head">
+        <div style="display:flex;align-items:center;gap:11px">
+          <div class="window-dots"><i></i><i></i><i></i></div>
+          <span class="mono">ANÁLISIS COMPARADO / 010</span>
+        </div>
+        <span class="live mono">● RASGOS DEL RÉGIMEN</span>
+      </div>
+      <div class="demo-body">
+        <p class="phase-title" id="phaseName">Fascismo italiano</p>
+        <span class="muted" style="font-size:.8rem" id="phaseDesc">1922–1943 · culto al Duce y partido único</span>
+        <div class="sensor-panel">
+          <div class="sensor">
+            <label>Culto al líder</label>
+            <div class="value" id="culto">90 <small>%</small></div>
+            <div class="meter"><span id="cultoBar" style="--w:90%"></span></div>
+          </div>
+          <div class="sensor">
+            <label>Racismo biológico</label>
+            <div class="value" id="raza">40 <small>%</small></div>
+            <div class="meter"><span id="razaBar" style="--w:40%;background:linear-gradient(90deg,var(--gold),var(--crimson))"></span></div>
+          </div>
+          <div class="sensor">
+            <label>Antisemitismo</label>
+            <div class="value" id="anti">35 <small>%</small></div>
+            <div class="meter"><span id="antiBar" style="--w:35%;background:linear-gradient(90deg,var(--crimson),var(--iron))"></span></div>
+          </div>
+          <div class="sensor">
+            <label>Control estatal</label>
+            <div class="value" id="control">75 <small>%</small></div>
+            <div class="meter"><span id="controlBar" style="--w:75%;background:linear-gradient(90deg,var(--steel),var(--iron))"></span></div>
+          </div>
+        </div>
+        <div class="demo-foot">
+          <span id="demoStatus">El fascismo italiano no fue inicialmente antisemita · giro racial en 1938</span>
+          <button class="toggle" id="simulate">Ver nazismo →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="nano">
+  <div class="wrap nanowide">
+    <div class="nano-art reveal">
+      <svg viewBox="0 0 460 340" fill="none" aria-label="Esquema ilustrativo de la propaganda y el culto al líder">
+        <defs>
+          <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#e8ddd0"/>
+            <stop offset="1" stop-color="#efe8db"/>
+          </linearGradient>
+          <linearGradient id="stage" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#c9b79a"/>
+            <stop offset="1" stop-color="#94805f"/>
+          </linearGradient>
+        </defs>
+        <rect x="0" y="0" width="460" height="340" fill="url(#sky)" rx="18"/>
+        <!-- Escenario -->
+        <rect x="80" y="200" width="300" height="80" fill="url(#stage)"/>
+        <rect x="80" y="200" width="300" height="8" fill="#6f5c3e"/>
+        <!-- Líder -->
+        <g class="atom">
+          <circle cx="230" cy="150" r="24" fill="#3a4250"/>
+          <path d="M210 170 L250 170 L260 220 L200 220 Z" fill="#3a4250"/>
+          <rect x="222" y="140" width="16" height="16" fill="#a04a1f"/>
+        </g>
+        <!-- Multitud -->
+        <g class="atom">
+          <circle cx="140" cy="235" r="8" fill="#6b5f4d" opacity=".6"/>
+          <circle cx="170" cy="240" r="8" fill="#6b5f4d" opacity=".6"/>
+          <circle cx="200" cy="238" r="8" fill="#6b5f4d" opacity=".6"/>
+          <circle cx="260" cy="238" r="8" fill="#6b5f4d" opacity=".6"/>
+          <circle cx="290" cy="240" r="8" fill="#6b5f4d" opacity=".6"/>
+          <circle cx="320" cy="235" r="8" fill="#6b5f4d" opacity=".6"/>
+        </g>
+        <!-- Banderas -->
+        <g class="atom">
+          <rect x="110" y="130" width="30" height="50" fill="#a04a1f" opacity=".5"/>
+          <rect x="320" y="130" width="30" height="50" fill="#2a5d7c" opacity=".5"/>
+        </g>
+        <g fill="#2b1a0c" opacity=".55" font-family="DM Mono, monospace" font-size="10" letter-spacing="1.2">
+          <text x="20" y="316">PROPAGANDA</text>
+          <text x="340" y="316">CULTO AL LÍDER</text>
+        </g>
+      </svg>
+      <div class="nano-caption">
+        <span class="mono">Esquema conceptual</span>
+        <span>Masas · símbolo · líder</span>
+      </div>
+    </div>
+
+    <div class="nano-copy reveal">
+      <div class="kicker mono">03 — La maquinaria del poder</div>
+      <h2>Propaganda,<br>violencia y control.</h2>
+      <p>Tanto el fascismo como el nazismo construyeron un aparato de propaganda masivo para moldear la opinión pública, glorificar al líder y crear un enemigo interno. La violencia no fue un exceso: fue un instrumento central del régimen.</p>
+      <p>Las milicias paramilitares (escuadras fascistas, SA y SS) actuaron impunemente contra opositores, sindicalistas, minorías y disidentes. El miedo y la intimidación sostuvieron el poder.</p>
+      <div class="nano-points">
+        <div class="nano-point"><b style="color:var(--steel)">Propaganda</b><span>Control de medios</span></div>
+        <div class="nano-point"><b style="color:var(--rust)">Milicias</b><span>Violencia organizada</span></div>
+        <div class="nano-point"><b style="color:var(--gold)">Culto</b><span>Líder infalible</span></div>
+        <div class="nano-point"><b style="color:var(--crimson)">Enemigo</b><span>Chivo expiatorio</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="nazismo">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <div class="kicker mono">04 — Nazismo alemán</div>
+        <h2>Raza,<br>espacio y destrucción.</h2>
+      </div>
+      <p>El nacionalsocialismo llevó el totalitarismo a un extremo genocida. Su ideología combinaba el racismo biológico, el antisemitismo radical, el darwinismo social y la búsqueda de un "espacio vital" (<em>Lebensraum</em>) en el Este.</p>
+    </div>
+
+    <div class="topic-grid">
+      <article class="topic reveal"><div class="topic-top"><div class="topic-icon">✠</div><span class="topic-num mono">IDEOLOGÍA</span></div><h3>Racismo y antisemitismo</h3><p>Los nazis consideraban que los alemanes pertenecían a una "raza aria" superior. Culpaban a los judíos de todos los males de Alemania y los señalaban como el enemigo biológico a eliminar.</p><div class="tag-row"><span class="tag">Raza aria</span><span class="tag">Antisemitismo</span><span class="tag">Darwinismo social</span></div></article>
+      <article class="topic reveal"><div class="topic-top"><div class="topic-icon">⌘</div><span class="topic-num mono">EXPANSIÓN</span></div><h3>Lebensraum</h3><p>La doctrina del "espacio vital" sostenía que Alemania necesitaba conquistar territorio en Europa del Este para su crecimiento. Fue la justificación ideológica de la invasión de Polonia y la URSS.</p><div class="tag-row"><span class="tag">Espacio vital</span><span class="tag">Expansión</span><span class="tag">Europa del Este</span></div></article>
+      <article class="topic reveal"><div class="topic-top"><div class="topic-icon">◈</div><span class="topic-num mono">ESTADO</span></div><h3>El Führerprinzip</h3><p>El "principio del líder" organizaba todo el Estado y el partido en torno a la voluntad infalible de Hitler. No había separación de poderes ni límites legales a su autoridad.</p><div class="tag-row"><span class="tag">Führer</span><span class="tag">Obediencia absoluta</span><span class="tag">Culto</span></div></article>
+      <article class="topic reveal"><div class="topic-top"><div class="topic-icon">⚔</div><span class="topic-num mono">REPRESIÓN</span></div><h3>SS, Gestapo y campos</h3><p>Las SS y la Gestapo tejieron una red de vigilancia y terror. Los campos de concentración, inicialmente para opositores políticos, se multiplicaron y se convirtieron en instrumentos de exterminio.</p><div class="tag-row"><span class="tag">SS</span><span class="tag">Gestapo</span><span class="tag">Campos</span></div></article>
+      <article class="topic reveal"><div class="topic-top"><div class="topic-icon">✦</div><span class="topic-num mono">CONSOLIDACIÓN</span></div><h3>Incendio del Reichstag y Ley Habilitante</h3><p>Tras el incendio del Reichstag (febrero de 1933), los nazis suspendieron derechos fundamentales. La Ley Habilitante (marzo de 1933) permitió a Hitler legislar sin el parlamento.</p><div class="tag-row"><span class="tag">1933</span><span class="tag">Ley Habilitante</span><span class="tag">Dictadura legal</span></div></article>
+      <article class="topic reveal"><div class="topic-top"><div class="topic-icon">☠</div><span class="topic-num mono">HOLOCAUSTO</span></div><h3>La Solución Final</h3><p>La conferencia de Wannsee (enero de 1942) coordinó el asesinato sistemático de los judíos europeos. Seis millones de personas fueron asesinadas en guetos, fusilamientos masivos y campos de exterminio.</p><div class="tag-row"><span class="tag">Wannsee</span><span class="tag">Genocidio</span><span class="tag">Auschwitz</span></div></article>
+    </div>
+
+    <div class="note reveal">
+      <span style="font-size:1.1rem">⚑</span>
+      <span><b>Dato clave.</b> El nazismo no fue solo un régimen autoritario: fue un régimen genocida. El Holocausto, el asesinato de seis millones de judíos, es un hecho central para comprender su naturaleza y su legado.</span>
+    </div>
+  </div>
+</section>
+
+<section class="lab" id="comparacion">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <div class="kicker mono">05 — Comparación</div>
+        <h2>Similitudes<br>y diferencias.</h2>
+      </div>
+      <p>El nazismo se inspiró en el fascismo italiano, pero lo radicalizó. Ambos compartieron el rechazo a la democracia liberal, el culto al líder y la violencia política. Se diferenciaron en el papel de la raza y en la intensidad del exterminio.</p>
+    </div>
+
+    <div class="path-grid">
+      <article class="path-card reveal"><span class="num">SIMILITUD 01</span><h3>Totalitarismo</h3><p>Ambos regímenes buscaron controlar todos los aspectos de la vida pública y privada: partido único, censura, propaganda, policía política y eliminación de la oposición.</p></article>
+      <article class="path-card reveal"><span class="num">SIMILITUD 02</span><h3>Culto al líder</h3><p>Mussolini como <em>Duce</em> y Hitler como <em>Führer</em> encarnaban la nación. Su palabra era ley y su imagen se reproducía en todos los espacios públicos.</p></article>
+      <article class="path-card reveal"><span class="num">SIMILITUD 03</span><h3>Violencia y milicias</h3><p>Las escuadras fascistas y las SA/SS compartieron el uso sistemático de la violencia contra opositores y minorías. La calle fue un espacio de combate político.</p></article>
+      <article class="path-card reveal"><span class="num">DIFERENCIA 01</span><h3>El racismo biológico</h3><p>El nazismo hizo de la "raza" el eje central de su ideología. El fascismo italiano fue inicialmente más cultural y político; su giro racial llegó en 1938, influido por Hitler.</p></article>
+      <article class="path-card reveal"><span class="num">DIFERENCIA 02</span><h3>El Holocausto</h3><p>El régimen nazi llevó a cabo un genocidio planificado y sistemático. El fascismo italiano participó en persecuciones y deportaciones, pero no construyó un sistema de exterminio equivalente.</p></article>
+      <article class="path-card reveal"><span class="num">DIFERENCIA 03</span><h3>Grado de totalitarismo</h3><p>El Estado nazi fue más radical y coherente en su control total. El fascismo italiano conservó la monarquía y algunos espacios de autonomía, aunque sin tolerar disidencia.</p></article>
+    </div>
+
+    <div class="note reveal">
+      <span style="font-size:1.1rem">ⓘ</span>
+      <span><b>Matiz.</b> La frontera entre ambos regímenes no es absoluta. El fascismo italiano adoptó medidas antisemitas y racistas, y el nazismo tomó del fascismo elementos organizativos y simbólicos. La comparación ayuda a comprender sus lógicas, no a igualarlos.</span>
+    </div>
+  </div>
+</section>
+
+<section id="holocausto">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <div class="kicker mono">06 — Holocausto</div>
+        <h2>El exterminio<br>planificado.</h2>
+      </div>
+      <p>El Holocausto fue el asesinato sistemático de seis millones de judíos europeos por el régimen nazi y sus colaboradores. También fueron perseguidos y asesinados gitanos, personas con discapacidad, homosexuales, opositores políticos y otros grupos.</p>
+    </div>
+
+    <div class="path-grid">
+      <article class="path-card reveal"><span class="num">ETAPA 01</span><h3>Persecución (1933–1939)</h3><p>Boicot a negocios judíos, Leyes de Nuremberg (1935), exclusión de la vida pública, <em>Kristallnacht</em> (1938). La violencia se institucionaliza.</p></article>
+      <article class="path-card reveal"><span class="num">ETAPA 02</span><h3>Guetos y fusilamientos (1939–1941)</h3><p>Tras la invasión de Polonia y la URSS, se crean guetos y los <em>Einsatzgruppen</em> fusilan a judíos en masa en territorio soviético.</p></article>
+      <article class="path-card reveal"><span class="num">ETAPA 03</span><h3>La Solución Final (1942–1945)</h3><p>La conferencia de Wannsee coordina la deportación a campos de exterminio (Auschwitz, Treblinka, Sobibor, Belzec, Chelmno). El asesinato se industrializa.</p></article>
+    </div>
+
+    <div class="note reveal">
+      <span style="font-size:1.1rem">⚑</span>
+      <span><b>Memoria.</b> El Holocausto no fue un "exceso" ni un "accidente". Fue el resultado de una ideología racista llevada al poder y aplicada con medios estatales. Recordarlo es una responsabilidad histórica y ética.</span>
+    </div>
+  </div>
+</section>
+
+<section id="historia">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <div class="kicker mono">07 — Línea del tiempo</div>
+        <h2>De la posguerra<br>a la catástrofe.</h2>
+      </div>
+      <p>Hitos clave en la historia del fascismo y el nazismo, desde su nacimiento hasta su derrota.</p>
+    </div>
+
+    <div class="path-grid">
+      <article class="path-card reveal"><span class="num">1919</span><h3>Fundación del fascismo</h3><p>Mussolini crea los <em>Fasci di Combattimento</em> en Milán. En Alemania, Hitler se une al pequeño Partido Obrero Alemán, que luego se convertirá en el NSDAP.</p></article>
+      <article class="path-card reveal"><span class="num">1922</span><h3>Marcha sobre Roma</h3><p>Los fascistas marchan sobre Roma. El rey Víctor Manuel III nombra a Mussolini primer ministro. Comienza la construcción del régimen fascista.</p></article>
+      <article class="path-card reveal"><span class="num">1923</span><h3>Putsch de Múnich</h3><p>Hitler intenta tomar el poder por la fuerza en Baviera. Fracasa y es encarcelado. En prisión escribe <em>Mein Kampf</em>, donde expone su ideología racista y expansionista.</p></article>
+      <article class="path-card reveal"><span class="num">1929</span><h3>Crisis de la Gran Depresión</h3><p>El crack de la bolsa de Nueva York desestabiliza la economía mundial. En Alemania, el desempleo masivo y la crisis política fortalecen al Partido Nazi.</p></article>
+      <article class="path-card reveal"><span class="num">1933</span><h3>Hitler canciller</h3><p>El 30 de enero, el presidente Hindenburg nombra canciller a Hitler. Tras el incendio del Reichstag, la Ley Habilitante le concede poderes dictatoriales.</p></article>
+      <article class="path-card reveal"><span class="num">1935</span><h3>Leyes de Nuremberg</h3><p>Se institucionaliza la discriminación racial contra los judíos alemanes. Se les retira la ciudadanía y se prohíben los matrimonios mixtos.</p></article>
+      <article class="path-card reveal"><span class="num">1938</span><h3>Kristallnacht y Anschluss</h3><p>Alemania anexa Austria. En noviembre, un pogromo nacional contra los judíos destruye sinagogas y comercios. La persecución se intensifica.</p></article>
+      <article class="path-card reveal"><span class="num">1939</span><h3>Pacto de Acero e invasión de Polonia</h3><p>Alemania e Italia formalizan su alianza militar. El 1 de septiembre, Alemania invade Polonia y comienza la Segunda Guerra Mundial.</p></article>
+      <article class="path-card reveal"><span class="num">1942</span><h3>Conferencia de Wannsee</h3><p>Se coordina la "Solución Final": el asesinato sistemático de los judíos europeos. Los campos de exterminio comienzan a operar a pleno rendimiento.</p></article>
+      <article class="path-card reveal"><span class="num">1945</span><h3>Derrota y liberación</h3><p>Alemania se rinde incondicionalmente. Los Aliados liberan los campos de concentración. Se revela al mundo la magnitud del Holocausto.</p></article>
+    </div>
+  </div>
+</section>
+
+<section id="legado">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <div class="kicker mono">08 — Legado y memoria</div>
+        <h2>Lo que<br>no debemos olvidar.</h2>
+      </div>
+      <p>El fascismo y el nazismo dejaron una huella de destrucción y sufrimiento. Su estudio es fundamental para comprender los peligros del autoritarismo, la propaganda y el odio ideológico.</p>
+    </div>
+
+    <div class="path-grid">
+      <article class="path-card reveal"><span class="num">LEGADO 01</span><h3>Memoria del Holocausto</h3><p>Museos, memoriales y programas educativos mantienen viva la memoria de las víctimas. El Día Internacional en Memoria del Holocausto se conmemora cada 27 de enero.</p></article>
+      <article class="path-card reveal"><span class="num">LEGADO 02</span><h3>Derechos humanos</h3><p>La Declaración Universal de Derechos Humanos (1948) fue una respuesta directa a los horrores de la Segunda Guerra Mundial y el Holocausto.</p></article>
+      <article class="path-card reveal"><span class="num">LEGADO 03</span><h3>Justicia internacional</h3><p>Los Juicios de Nuremberg establecieron precedentes para el derecho penal internacional y la Corte Penal Internacional.</p></article>
+      <article class="path-card reveal"><span class="num">LEGADO 04</span><h3>Alerta contra el autoritarismo</h3><p>El estudio de estos regímenes ayuda a identificar los signos de peligro: culto al líder, deshumanización del otro, censura, violencia política y desprecio por las instituciones.</p></article>
+      <article class="path-card reveal"><span class="num">LEGADO 05</span><h3>Debates historiográficos</h3><p>Los historiadores discuten las causas, la complicidad de las sociedades, el papel de las élites y las continuidades entre ambos regímenes.</p></article>
+      <article class="path-card reveal"><span class="num">LEGADO 06</span><h3>Educación y prevención</h3><p>La educación sobre el fascismo y el nazismo es una herramienta para prevenir la repetición de estos crímenes contra la humanidad.</p></article>
+    </div>
+
+    <div class="note reveal">
+      <span style="font-size:1.1rem">⚑</span>
+      <span><b>Reflexión final.</b> La historia del nazismo y el fascismo no es solo la historia de dos dictadores. Es la historia de sociedades que permitieron, toleraron o apoyaron el ascenso de regímenes destructivos. Comprender cómo ocurrió es la mejor defensa contra su repetición.</span>
+    </div>
+  </div>
+</section>
+
+<section id="desafio">
+  <div class="wrap">
+    <div class="quiz reveal">
+      <div class="quiz-grid">
+        <div>
+          <div class="kicker mono">09 — Comprueba lo aprendido</div>
+          <h2>Evalúa tus conocimientos</h2>
+          <p>Responde tres preguntas sobre la historia del nazismo y el fascismo.</p>
+          <div class="mono muted">PREGUNTA <span id="qnum">01</span> / 03</div>
+        </div>
+        <div>
+          <div class="question" id="question">¿Quién fue el líder del fascismo italiano?</div>
+          <div class="answers" id="answers">
+            <button class="answer">Adolf Hitler</button>
+            <button class="answer">Benito Mussolini</button>
+            <button class="answer">Francisco Franco</button>
+          </div>
+          <div class="feedback" id="feedback" aria-live="polite">Selecciona una respuesta para continuar.</div>
+          <div class="quiz-bottom">
+            <span class="muted" id="score">Puntuación: 0</span>
+            <button class="btn" id="next" disabled>Siguiente →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap footerin">
+    <div><strong>NAZISMO Y FASCISMO <span style="color:var(--rust)">· TOTALITARISMOS</span></strong> <span>· Aprende explorando.</span></div>
+    <span>Guía educativa · Historia, política y memoria</span>
+    <a href="#inicio">Volver arriba ↑</a>
+  </div>
+</footer>
+
+<script>
+/* Reveal */
+const observer = new IntersectionObserver(entries => entries.forEach(e => {
+  if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+}), { threshold: .12 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+/* Comparador de regímenes */
+const regimes = [
+  { name:'Fascismo italiano', desc:'1922–1943 · culto al Duce y partido único',
+    culto:90, raza:40, anti:35, control:75,
+    status:'El fascismo italiano no fue inicialmente antisemita · giro racial en 1938' },
+  { name:'Nazismo alemán', desc:'1933–1945 · racismo biológico y antisemitismo radical',
+    culto:95, raza:98, anti:100, control:95,
+    status:'El nazismo hizo de la raza y el antisemitismo el eje de su ideología' }
+];
+let ri = 0;
+const simulate = document.getElementById('simulate');
+function renderRegime() {
+  const r = regimes[ri];
+  document.getElementById('phaseName').textContent = r.name;
+  document.getElementById('phaseDesc').textContent = r.desc;
+  document.getElementById('demoStatus').textContent = r.status;
+  document.getElementById('culto').innerHTML = r.culto + ' <small>%</small>';
+  document.getElementById('raza').innerHTML = r.raza + ' <small>%</small>';
+  document.getElementById('anti').innerHTML = r.anti + ' <small>%</small>';
+  document.getElementById('control').innerHTML = r.control + ' <small>%</small>';
+  document.getElementById('cultoBar').style.setProperty('--w', r.culto + '%');
+  document.getElementById('razaBar').style.setProperty('--w', r.raza + '%');
+  document.getElementById('antiBar').style.setProperty('--w', r.anti + '%');
+  document.getElementById('controlBar').style.setProperty('--w', r.control + '%');
+  simulate.textContent = ri === regimes.length - 1 ? 'Ver fascismo ←' : 'Ver nazismo →';
+}
+simulate.addEventListener('click', () => { ri = (ri + 1) % regimes.length; renderRegime(); });
+renderRegime();
+
+/* Quiz */
+const questions = [
+  { q:'¿Quién fue el líder del fascismo italiano?',
+    a:['Adolf Hitler','Benito Mussolini','Francisco Franco'],
+    correct:1,
+    why:'Benito Mussolini fundó el fascismo italiano en 1919 y gobernó Italia como dictador desde 1922 hasta 1943.' },
+  { q:'¿Qué conferencia coordinó la "Solución Final" nazi?',
+    a:['Conferencia de Yalta','Conferencia de Wannsee','Conferencia de Potsdam'],
+    correct:1,
+    why:'La Conferencia de Wannsee, celebrada el 20 de enero de 1942, coordinó la logística del asesinato sistemático de los judíos europeos.' },
+  { q:'¿Qué diferencia clave existía entre el fascismo italiano y el nazismo alemán?',
+    a:['El fascismo era más racista que el nazismo','El nazismo hizo del racismo biológico y el antisemitismo el eje de su ideología','El fascismo no utilizó propaganda'],
+    correct:1,
+    why:'Aunque el fascismo italiano adoptó medidas racistas en 1938, el nazismo se construyó desde el inicio sobre una ideología de racismo biológico y antisemitismo radical, que culminó en el Holocausto.' }
+];
+let qi = 0, score = 0, answered = false;
+const qEl = document.getElementById('question');
+const aEl = document.getElementById('answers');
+const fEl = document.getElementById('feedback');
+const nEl = document.getElementById('qnum');
+const sEl = document.getElementById('score');
+const next = document.getElementById('next');
+
+function renderQ() {
+  const q = questions[qi];
+  answered = false;
+  nEl.textContent = String(qi + 1).padStart(2, '0');
+  qEl.textContent = q.q;
+  aEl.innerHTML = '';
+  q.a.forEach((a, i) => {
+    const b = document.createElement('button');
+    b.className = 'answer';
+    b.textContent = a;
+    b.addEventListener('click', () => choose(i, b));
+    aEl.appendChild(b);
+  });
+  fEl.textContent = 'Selecciona una respuesta para continuar.';
+  next.disabled = true;
+  next.textContent = qi === questions.length - 1 ? 'Reiniciar ↻' : 'Siguiente →';
+}
+
+function choose(i, b) {
+  if (answered) return;
+  answered = true;
+  const q = questions[qi];
+  [...aEl.children].forEach((el, j) => {
+    el.disabled = true;
+    if (j === q.correct) el.classList.add('correct');
+  });
+  if (i === q.correct) { score++; fEl.textContent = '¡Correcto! ' + q.why; }
+  else { b.classList.add('wrong'); fEl.textContent = 'Casi. ' + q.why; }
+  sEl.textContent = 'Puntuación: ' + score;
+  next.disabled = false;
+}
+
+next.addEventListener('click', () => {
+  if (!answered) return;
+  if (qi < questions.length - 1) { qi++; renderQ(); }
+  else {
+    qi = 0; score = 0;
+    sEl.textContent = 'Puntuación: 0';
+    renderQ();
+    fEl.textContent = '¡Vamos otra vez!';
+  }
+});
+
+renderQ();
+</script>
+</body>
+</html>

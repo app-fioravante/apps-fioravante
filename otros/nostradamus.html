@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#f4f1e9" />
+<meta name="description" content="Guía sobre Nostradamus y el fin del mundo: las Centurias, interpretaciones apocalípticas, el Papa Negro, el efecto Forer, predicciones fallidas y la perspectiva histórica y escéptica." />
+<title>Nostradamus y el Fin del Mundo — Profecías, interpretaciones y crítica</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f4f1e9;
+  --panel:#ffffff;
+  --panel2:#ebe6da;
+  --line:rgba(28,22,14,.13);
+  --text:#171209;
+  --muted:#6b5f4d;
+  --indigo:#3a2e5c;
+  --violet:#7b4a8c;
+  --gold:#9a6f00;
+  --teal:#1f6b6b;
+  --crimson:#9a2538;
+  --lime:#4f7c2a;
+  --radius:22px;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{margin:0;background:radial-gradient(ellipse at 80% -10%,#e8e0d0 0,transparent 36%),var(--bg);color:var(--text);font-family:Manrope,system-ui,sans-serif;line-height:1.6;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.5;z-index:-1;background-image:linear-gradient(rgba(28,22,14,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(28,22,14,.035) 1px,transparent 1px);background-size:48px 48px;mask-image:linear-gradient(to bottom,black,transparent 80%)}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer}
+a:focus-visible,button:focus-visible{outline:2px solid var(--indigo);outline-offset:3px}
+.mono{font-family:"DM Mono",monospace;text-transform:uppercase;letter-spacing:.12em;font-size:.72rem}
+.muted{color:var(--muted)}
+.wrap{width:min(1160px,calc(100% - 40px));margin:auto}
+
+nav{position:sticky;top:0;z-index:20;backdrop-filter:blur(18px);background:rgba(244,241,233,.88);border-bottom:1px solid var(--line)}
+.navin{min-height:68px;height:auto;display:flex;align-items:center;justify-content:space-between;gap:14px;padding-top:8px;padding-bottom:8px}
+.brand{display:flex;align-items:center;gap:11px;font-weight:800;letter-spacing:-.04em;font-size:clamp(.66rem,.96vw,.84rem);white-space:nowrap}
+.brandmark{width:34px;height:34px;border-radius:11px;background:linear-gradient(135deg,var(--indigo),var(--violet));display:grid;place-items:center;color:#fff;font-weight:900;box-shadow:0 6px 18px #3a2e5c33}
+.navlinks{display:flex;align-items:center;gap:clamp(8px,1.3vw,16px);color:var(--muted);font-size:clamp(.66rem,.86vw,.8rem);white-space:nowrap}
+.navlinks a:hover{color:var(--violet)}
+.navcta{white-space:nowrap;padding:9px 12px;font-size:.74rem}
+.navcta,.btn{border:1px solid var(--line);background:rgba(28,22,14,.04);color:var(--text);padding:11px 16px;border-radius:999px;font-weight:700;font-size:.85rem;transition:.25s}
+.navcta:hover,.btn:hover{border-color:var(--violet);transform:translateY(-2px)}
+.btn.primary{background:var(--indigo);color:#fff;border-color:var(--indigo)}
+.btn.primary:hover{box-shadow:0 10px 28px #3a2e5c38}
+.btn:disabled{opacity:.45;cursor:not-allowed;transform:none}
+
+.hero{padding:92px 0 72px;position:relative}
+.hero-grid{display:grid;grid-template-columns:1.02fr .98fr;align-items:center;gap:45px}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;color:var(--violet);margin-bottom:20px}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--violet);box-shadow:0 0 14px #7b4a8c66}
+h1{font-size:clamp(2.5rem,5.4vw,4.8rem);line-height:1;letter-spacing:-.07em;margin:0 0 24px;font-weight:800}
+h1 .gradient{background:linear-gradient(100deg,var(--indigo),#8a5a9e 48%,var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{font-size:1.08rem;color:var(--muted);max-width:560px;margin:0 0 30px}
+.actions{display:flex;gap:12px;flex-wrap:wrap}
+.hero-note{display:flex;align-items:center;gap:15px;margin-top:38px;color:var(--muted);font-size:.8rem}
+.avatars{display:flex}
+.avatars span{width:29px;height:29px;border:2px solid var(--bg);margin-left:-7px;border-radius:50%;display:grid;place-items:center;background:#e0d8c8;color:#3f3220;font-size:.68rem}
+.avatars span:first-child{margin-left:0}
+
+/* --- Gráfico principal responsivo --- */
+.visual{position:relative;display:grid;place-items:center;width:100%}
+.chart-card{width:100%;max-width:600px;background:#fff;border:1px solid var(--line);border-radius:24px;padding:16px 16px 12px;box-shadow:0 24px 60px rgba(28,22,14,.10)}
+.chart-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:4px;color:var(--muted)}
+.chart{width:100%;height:auto;display:block;overflow:visible}
+.chart-legend{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:8px;color:var(--muted);font-size:.7rem}
+.chart-legend span{display:inline-flex;align-items:center;gap:6px}
+.chart-legend i{width:10px;height:10px;border-radius:3px;display:inline-block}
+.chart-foot{display:flex;justify-content:space-between;gap:10px;margin-top:6px;color:var(--muted);font-size:.68rem;flex-wrap:wrap}
+
+.stats{border-block:1px solid var(--line);padding:23px 0}
+.stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.stat{padding-left:22px;border-left:1px solid var(--line)}
+.stat:first-child{border:0;padding-left:0}
+.stat strong{display:block;font-size:1.25rem;letter-spacing:-.05em}
+.stat span{font-size:.78rem;color:var(--muted)}
+
+section{padding:94px 0}
+.section-head{display:flex;align-items:end;justify-content:space-between;gap:25px;margin-bottom:35px}
+.kicker{color:var(--violet);margin-bottom:12px}
+.section-head h2,.split-copy h2{font-size:clamp(2rem,3.8vw,3.3rem);line-height:1.05;letter-spacing:-.065em;margin:0}
+.section-head p{max-width:460px;color:var(--muted);margin:0}
+.topic-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.topic{border:1px solid var(--line);border-radius:var(--radius);background:linear-gradient(145deg,#ffffff,#f4efe4);padding:28px;position:relative;overflow:hidden;transition:transform .3s,border-color .3s,box-shadow .3s;box-shadow:0 10px 30px rgba(28,22,14,.05)}
+.topic:hover{transform:translateY(-6px);border-color:#7b4a8c55;box-shadow:0 18px 45px rgba(28,22,14,.10)}
+.topic:after{content:"";position:absolute;width:220px;height:220px;border-radius:50%;filter:blur(70px);opacity:.15;right:-100px;top:-110px;background:var(--glow,var(--violet));pointer-events:none}
+.topic-top{display:flex;align-items:center;justify-content:space-between}
+.topic-icon{width:48px;height:48px;border-radius:15px;background:#7b4a8c12;border:1px solid #7b4a8c33;display:grid;place-items:center;color:var(--violet);font-size:1.15rem}
+.topic-num{color:#9d9280}
+.topic h3{font-size:1.4rem;margin:25px 0 9px;letter-spacing:-.04em}
+.topic p{color:var(--muted);margin:0 0 23px}
+.tag-row{display:flex;flex-wrap:wrap;gap:8px}
+.tag{font-size:.72rem;padding:6px 10px;border:1px solid var(--line);border-radius:999px;color:#463a22;background:rgba(28,22,14,.035)}
+
+.lab{background:linear-gradient(180deg,transparent,#e9e2d4 28%,#e9e2d4 75%,transparent)}
+.lab-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:42px;align-items:center}
+.split-copy p{color:var(--muted);max-width:450px}
+.checklist{list-style:none;padding:0;margin:26px 0;display:grid;gap:13px}
+.checklist li{display:flex;gap:11px;align-items:start;color:#2e2415;font-size:.9rem}
+.check{color:var(--violet);font-weight:900}
+.demo{background:#ffffff;border:1px solid var(--line);border-radius:24px;overflow:hidden;box-shadow:0 20px 60px rgba(28,22,14,.10)}
+.demo-head{padding:17px 20px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:12px;background:#fdfbf7;flex-wrap:wrap}
+.window-dots{display:flex;gap:5px}
+.window-dots i{width:7px;height:7px;border-radius:50%;background:#d4c9b6}
+.live{color:var(--lime);font-size:.7rem}
+.demo-body{padding:24px}
+.phase-title{font-size:1.3rem;font-weight:800;letter-spacing:-.03em;margin:0 0 4px;color:var(--violet)}
+.sensor-panel{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
+.sensor{padding:17px;border:1px solid var(--line);border-radius:16px;background:rgba(28,22,14,.025)}
+.sensor label{color:var(--muted);font-size:.76rem}
+.sensor .value{font-size:1.2rem;font-weight:800;letter-spacing:-.05em;margin:8px 0}
+.sensor .value small{font-size:.75rem;color:var(--muted);font-weight:500}
+.meter{height:5px;background:#e7dfcf;border-radius:9px;overflow:hidden}
+.meter span{display:block;height:100%;width:var(--w);background:linear-gradient(90deg,var(--gold),var(--violet));border-radius:9px;transition:width .5s}
+.demo-foot{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:18px;color:var(--muted);font-size:.78rem;flex-wrap:wrap}
+.toggle{border:1px solid #7b4a8c50;background:#7b4a8c10;color:var(--violet);padding:9px 13px;border-radius:10px;font-weight:700;font-size:.78rem}
+.toggle:hover{background:#7b4a8c20}
+
+.nanowide{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.nano-art{min-height:400px;border-radius:24px;border:1px solid var(--line);background:radial-gradient(circle at 50% 30%,#e8e0f0,transparent 65%),#efe9de;position:relative;overflow:hidden;display:grid;place-items:center}
+.nano-art svg{width:90%;max-width:460px;overflow:visible}
+.atom{animation:float 6s ease-in-out infinite;transform-origin:center}
+.atom:nth-child(2){animation-delay:-2s}
+.atom:nth-child(3){animation-delay:-4s}
+.nano-caption{position:absolute;bottom:18px;left:20px;right:20px;display:flex;justify-content:space-between;color:var(--muted);font-size:.72rem;gap:10px}
+.nano-copy h2{font-size:clamp(2.1rem,3.8vw,3.2rem);line-height:1.05;letter-spacing:-.065em;margin:0 0 20px}
+.nano-copy p{color:var(--muted)}
+.nano-points{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:25px}
+.nano-point{padding:15px;border:1px solid var(--line);border-radius:14px;background:rgba(28,22,14,.025)}
+.nano-point b{display:block;font-size:.86rem}
+.nano-point span{font-size:.76rem;color:var(--muted)}
+
+.path-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.path-card{padding:23px;border:1px solid var(--line);border-radius:18px;background:#ffffff;box-shadow:0 10px 26px rgba(28,22,14,.05);transition:transform .3s,border-color .3s,box-shadow .3s}
+.path-card:hover{transform:translateY(-4px);border-color:#7b4a8c55;box-shadow:0 16px 40px rgba(28,22,14,.09)}
+.path-card .num{font-family:"DM Mono",monospace;color:var(--gold);font-size:.78rem;letter-spacing:.08em}
+.path-card h3{margin:14px 0 7px;font-size:1.05rem;letter-spacing:-.02em}
+.path-card p{font-size:.85rem;color:var(--muted);margin:0}
+
+.note{display:flex;gap:12px;align-items:start;padding:16px 18px;border:1px dashed #9a6f0055;background:#9a6f000d;border-radius:14px;color:#5c4712;font-size:.85rem;margin-top:24px}
+.note b{color:#7a5600}
+
+.quiz{padding:30px;border:1px solid #7b4a8c3d;border-radius:24px;background:radial-gradient(ellipse at 90% 0%,#e8dff2,transparent 55%),#ffffff;box-shadow:0 16px 45px rgba(28,22,14,.08)}
+.quiz-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:35px}
+.quiz h2{font-size:1.9rem;line-height:1.1;letter-spacing:-.06em;margin:0 0 12px}
+.quiz p{color:var(--muted)}
+.question{font-size:1.1rem;font-weight:700;margin-bottom:17px;letter-spacing:-.02em}
+.answers{display:grid;gap:10px}
+.answer{padding:13px 15px;border:1px solid var(--line);border-radius:12px;background:#faf7f2;color:var(--text);text-align:left;transition:.2s}
+.answer:hover:not(:disabled){border-color:var(--violet);background:#7b4a8c0c}
+.answer:disabled{cursor:default}
+.answer.correct{border-color:var(--lime);background:#4f7c2a12}
+.answer.wrong{border-color:var(--crimson);background:#9a253812}
+.feedback{min-height:26px;font-size:.85rem;margin-top:12px;color:var(--muted)}
+.quiz-bottom{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:18px;flex-wrap:wrap}
+.quiz-bottom .btn{font-size:.8rem}
+
+footer{padding:30px 0;border-top:1px solid var(--line);color:var(--muted);font-size:.78rem}
+.footerin{display:flex;justify-content:space-between;align-items:center;gap:20px}
+.footerin strong{color:var(--text)}
+
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}.reveal{opacity:1;transform:none}}
+
+@media(max-width:920px){.navlinks{display:none}.navin{min-height:66px}}
+@media(max-width:850px){
+  .hero-grid,.lab-grid,.nanowide,.quiz-grid{grid-template-columns:1fr}
+  .hero{padding-top:60px}
+  .visual{order:-1}
+  .hero-grid{gap:18px}
+  .hero-copy{text-align:center}
+  .hero-copy p{margin-inline:auto}
+  .actions,.hero-note{justify-content:center}
+  .section-head{display:block}
+  .section-head p{margin-top:15px}
+  .lab-grid{gap:28px}
+  .nanowide{gap:25px}
+  .nano-art{min-height:310px}
+  .quiz-grid{gap:12px}
+  .stat-grid{grid-template-columns:repeat(2,1fr);row-gap:22px}
+  .stat:nth-child(3){padding-left:0;border:0}
+  .path-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:560px){
+  .wrap{width:min(100% - 28px,1160px)}
+  .navin{height:66px}
+  .navcta{padding:9px 12px;font-size:.72rem}
+  .hero{padding:43px 0 45px}
+  h1{font-size:2.4rem}
+  .chart-card{padding:12px 10px 8px;border-radius:18px}
+  .chart-legend{font-size:.64rem;gap:4px 10px}
+  .stats{padding:18px 0}
+  section{padding:66px 0}
+  .topic-grid{grid-template-columns:1fr}
+  .topic{padding:23px}
+  .sensor-panel{grid-template-columns:1fr 1fr}
+  .sensor{padding:12px}
+  .sensor .value{font-size:.95rem}
+  .demo-body{padding:15px}
+  .path-grid{grid-template-columns:1fr}
+  .nano-points{grid-template-columns:1fr 1fr}
+  .quiz{padding:22px}
+  .footerin{align-items:flex-start;flex-direction:column;gap:8px}
+}
+</style>
+</head>
+<body>
+<nav>
+  <div class="wrap navin">
+    <a class="brand" href="#inicio"><span class="brandmark">N</span> NOSTRADAMUS <span style="color:var(--violet)">· FIN DEL MUNDO</span></a>
+    <div class="navlinks">
+      <a href="#panorama">Panorama</a>
+      <a href="#centurias">Centurias</a>
+      <a href="#apocalipsis">Apocalipsis</a>
+      <a href="#critica">Crítica</a>
+      <a href="#historia">Línea del tiempo</a>
+      <a href="#legado">Legado</a>
+    </div>
+    <a class="navcta" href="#panorama">Ver contenidos ↗</a>
+  </div>
+</nav>
+
+<main>
+<header class="hero" id="inicio">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <div class="eyebrow mono"><span class="dot"></span> Historia · Profecía · Escepticismo</div>
+      <h1>Nostradamus<br><span class="gradient">y el fin del mundo</span></h1>
+      <p>Médico, astrólogo y escritor del Renacimiento, Michel de Nostredame dejó 942 cuartetas crípticas que, durante casi cinco siglos, han sido leídas como anuncios de catástrofes, guerras y el fin de los tiempos. ¿Qué dijo realmente? ¿Por qué sus versos parecen cumplirse siempre?</p>
+      <div class="actions">
+        <a class="btn primary" href="#panorama">Explorar el panorama <span>↗</span></a>
+        <a class="btn" href="#historia">Ver línea del tiempo</a>
+      </div>
+      <div class="hero-note">
+        <div class="avatars"><span>☾</span><span>✶</span><span>⚖</span></div>
+        <span>Contenido educativo: distingue historia, interpretación y crítica.</span>
+      </div>
+    </div>
+
+    <!-- GRÁFICO PRINCIPAL RESPONSIVO -->
+    <div class="visual">
+      <figure class="chart-card" style="margin:0">
+        <div class="chart-head">
+          <span class="mono">Atención apocalíptica atribuida · 1555–2025</span>
+          <span class="mono" style="color:var(--violet)">Índice relativo</span>
+        </div>
+
+        <svg class="chart" viewBox="0 0 560 320" role="img" aria-labelledby="chartTitle chartDesc">
+          <title id="chartTitle">Picos de atención apocalíptica atribuidos a Nostradamus entre 1555 y 2025</title>
+          <desc id="chartDesc">Gráfico de una línea que muestra picos de interés en las profecías del fin del mundo de Nostradamus: la publicación en 1555, el Gran Incendio de Londres en 1666, la Segunda Guerra Mundial, el año 1999, el 2012 y la pandemia de 2020.</desc>
+
+          <defs>
+            <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#3a2e5c" stop-opacity=".24"/>
+              <stop offset="1" stop-color="#3a2e5c" stop-opacity=".02"/>
+            </linearGradient>
+          </defs>
+
+          <!-- Retícula -->
+          <g stroke="#171209" stroke-opacity=".10" stroke-width="1">
+            <line x1="50" y1="270" x2="540" y2="270"/>
+            <line x1="50" y1="207.5" x2="540" y2="207.5"/>
+            <line x1="50" y1="145" x2="540" y2="145"/>
+            <line x1="50" y1="82.5" x2="540" y2="82.5"/>
+            <line x1="50" y1="20" x2="540" y2="20"/>
+          </g>
+
+          <!-- Eje Y -->
+          <g fill="#6b5f4d" font-family="DM Mono, monospace" font-size="13" text-anchor="end">
+            <text x="42" y="274">0</text>
+            <text x="42" y="212">25</text>
+            <text x="42" y="149">50</text>
+            <text x="42" y="87">75</text>
+            <text x="42" y="24">100</text>
+          </g>
+
+          <!-- Área -->
+          <path d="M50,210
+                   C80,200 110,190 140,185
+                   C170,180 185,170 200,165
+                   C220,158 235,155 250,160
+                   C270,168 285,175 300,170
+                   C320,162 340,150 360,140
+                   C380,130 395,120 410,110
+                   C430,98 445,90 460,85
+                   C475,80 490,82 505,78
+                   C520,75 530,72 540,70
+                   L540,270 L50,270 Z"
+                fill="url(#areaGrad)"/>
+
+          <!-- Curva -->
+          <path d="M50,210
+                   C80,200 110,190 140,185
+                   C170,180 185,170 200,165
+                   C220,158 235,155 250,160
+                   C270,168 285,175 300,170
+                   C320,162 340,150 360,140
+                   C380,130 395,120 410,110
+                   C430,98 445,90 460,85
+                   C475,80 490,82 505,78
+                   C520,75 530,72 540,70"
+                fill="none" stroke="#3a2e5c" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round"/>
+
+          <!-- Hitos -->
+          <g>
+            <!-- 1555 -->
+            <circle cx="82" cy="202" r="4.5" fill="#fff" stroke="#3a2e5c" stroke-width="2.4"/>
+            <text x="82" y="188" text-anchor="middle" fill="#3a2e5c" font-family="DM Mono, monospace" font-size="10.5">1555</text>
+            <text x="82" y="176" text-anchor="middle" fill="#6b5f4d" font-family="DM Mono, monospace" font-size="9.5">CENTURIAS</text>
+
+            <!-- 1666 -->
+            <circle cx="200" cy="165" r="4.5" fill="#fff" stroke="#9a6f00" stroke-width="2.4"/>
+            <text x="200" y="151" text-anchor="middle" fill="#9a6f00" font-family="DM Mono, monospace" font-size="10.5">1666</text>
+            <text x="200" y="139" text-anchor="middle" fill="#6b5f4d" font-family="DM Mono, monospace" font-size="9.5">LONDRES</text>
+
+            <!-- 1939 -->
+            <circle cx="400" cy="118" r="4.5" fill="#fff" stroke="#9a2538" stroke-width="2.4"/>
+            <text x="400" y="104" text-anchor="middle" fill="#9a2538" font-family="DM Mono, monospace" font-size="10.5">1939</text>
+            <text x="400" y="92" text-anchor="middle" fill="#6b5f4d" font-family="DM Mono, monospace" font-size="9.5">GUERRA</text>
+
+            <!-- 1999 -->
+            <circle cx="460" cy="85" r="4.5" fill="#fff" stroke="#7b4a8c" stroke-width="2.4"/>
+            <text x="460" y="71" text-anchor="middle" fill="#7b4a8c" font-family="DM Mono, monospace" font-size="10.5">1999</text>
+            <text x="460" y="59" text-anchor="middle" fill="#6b5f4d" font-family="DM Mono, monospace" font-size="9.5">REY DEL TERROR</text>
+
+            <!-- 2012 -->
+            <circle cx="505" cy="78" r="4.5" fill="#fff" stroke="#1f6b6b" stroke-width="2.4"/>
+            <text x="505" y="64" text-anchor="middle" fill="#1f6b6b" font-family="DM Mono, monospace" font-size="10.5">2012</text>
+            <text x="505" y="52" text-anchor="middle" fill="#6b5f4d" font-family="DM Mono, monospace" font-size="9.5">MAYAS</text>
+          </g>
+
+          <!-- Etiqueta 2020 -->
+          <text x="540" y="56" text-anchor="end" fill="#6b5f4d" font-family="DM Mono, monospace" font-size="9.5">2020</text>
+
+          <!-- Eje X -->
+          <g fill="#6b5f4d" font-family="DM Mono, monospace" font-size="12">
+            <text x="50" y="292" text-anchor="middle">1550</text>
+            <text x="200" y="292" text-anchor="middle">1666</text>
+            <text x="350" y="292" text-anchor="middle">1850</text>
+            <text x="460" y="292" text-anchor="middle">1999</text>
+            <text x="540" y="292" text-anchor="end">2025</text>
+          </g>
+          <text x="295" y="313" text-anchor="middle" fill="#6b5f4d" font-family="DM Mono, monospace" font-size="10.5" letter-spacing="1.6">AÑOS</text>
+        </svg>
+
+        <figcaption class="chart-legend">
+          <span><i style="background:var(--indigo)"></i>Atención apocalíptica</span>
+          <span><i style="background:var(--gold)"></i>Hitos interpretados</span>
+        </figcaption>
+        <div class="chart-foot">
+          <span>Índice ilustrativo · no mide cumplimiento de profecías</span>
+          <span>1555 — 2025</span>
+        </div>
+      </figure>
+    </div>
+  </div>
+</header>
+
+<div class="stats">
+  <div class="wrap stat-grid">
+    <div class="stat"><strong>1503 <span style="color:var(--violet)">·</span></strong><span>Nacimiento en Saint-Rémy</span></div>
+    <div class="stat"><strong>942 <span style="color:var(--gold)">cuartetas</span></strong><span>En diez centurias</span></div>
+    <div class="stat"><strong>1999 <span style="color:var(--crimson)">·</span></strong><span>El "rey del terror" que no llegó</span></div>
+    <div class="stat"><strong>3797 <span style="color:var(--teal)">·</span></strong><span>Fecha lejana citada por intérpretes</span></div>
+  </div>
+</div>
+
+<section id="panorama">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <div class="kicker mono">01 — Panorama</div>
+        <h2>¿Quién fue<br>Nostradamus?</h2>
+      </div>
+      <p>Michel de Nostredame (1503–1566) fue un médico y astrólogo francés del Renacimiento. Su fama no proviene de curaciones ni de tratados médicos, sino de un libro de versos oscuros que publicó en 1555: las <em>Centurias</em>.</p>
+    </div>
+
+    <div class="topic-grid">
+      <article class="topic reveal" style="--glow:var(--indigo)">
+        <div class="topic-top">
+          <div class="topic-icon">✶</div>
+          <span class="topic-num mono">01 / BIOGRAFÍA</span>
+        </div>
+        <h3>Médico y humanista</h3>
+        <p>Nació en Saint-Rémy-de-Provence, estudió medicina en Montpellier y ejerció como médico. También fue boticario y astrólogo, actividades que en el siglo XVI no estaban separadas como hoy.</p>
+        <div class="tag-row">
+          <span class="tag">Médico</span><span class="tag">Astrólogo</span><span class="tag">Renacimiento</span>
+        </div>
+      </article>
+
+      <article class="topic reveal" style="--glow:var(--gold)">
+        <div class="topic-top">
+          <div class="topic-icon" style="color:var(--gold);background:#9a6f0012;border-color:#9a6f0033">☾</div>
+          <span class="topic-num mono">02 / CONTEXTO</span>
+        </div>
+        <h3>Un mundo en crisis</h3>
+        <p>Vivió guerras de religión, pestes y conflictos políticos. Sus versos nacieron en un clima de ansiedad apocalíptica, no en el de un profeta aislado del mundo.</p>
+        <div class="tag-row">
+          <span class="tag">Guerras de religión</span><span class="tag">Peste</span><span class="tag">Apocalipsis</span>
+        </div>
+      </article>
+    </div>
+
+    <div class="note reveal">
+      <span style="font-size:1.1rem">⚖</span>
+      <span><b>Precisión histórica.</b> Nostradamus no fue un "vidente" en el sentido moderno, sino un intelectual renacentista que combinó astrología, medicina, misticismo y una profunda inquietud religiosa. Sus textos deben leerse en su contexto, no como titulares de periódico.</span>
+    </div>
+  </div>
+</section>
+
+<section class="lab" id="centurias">
+  <div class="wrap lab-grid">
+    <div class="split-copy reveal">
+      <div class="kicker mono">02 — Las Centurias</div>
+      <h2>942 versos<br>que lo dicen todo y nada.</h2>
+      <p>Las <em>Prophéties</em> de Nostradamus se organizan en diez "centurias" de cien cuartetas cada una (aunque la última está incompleta). En total, 942 estrofas de cuatro versos escritas en una mezcla de francés antiguo, latín, griego e italiano.</p>
+      <ul class="checklist">
+        <li><span class="check">✓</span><span><b>Lenguaje críptico:</b> anagramas, metáforas, referencias mitológicas y sintaxis ambigua.</span></li>
+        <li><span class="check">✓</span><span><b>Sin orden cronológico:</b> las cuartetas no siguen una secuencia temporal clara.</span></li>
+        <li><span class="check">✓</span><span><b>Sin fechas explícitas:</b> solo unas pocas contienen años concretos, y casi todas ellas han fallado.</span></li>
+      </ul>
+      <a class="btn" href="#apocalipsis">Ver interpretaciones apocalípticas ↗</a>
+    </div>
+
+    <div class="demo reveal">
+      <div class="demo-head">
+        <div style="display:flex;align-items:center;gap:11px">
+          <div class="window-dots"><i></i><i></i><i></i></div>
+          <span class="mono">ANÁLISIS DIDÁCTICO / 008</span>
+        </div>
+        <span class="live mono">● AMBIGÜEDAD</span>
+      </div>
+      <div class="demo-body">
+        <p class="phase-title" id="phaseName">Claridad del texto</p>
+        <span class="muted" style="font-size:.8rem" id="phaseDesc">Las cuartetas evitan nombres, fechas y contextos precisos</span>
+        <div class="sensor-panel">
+          <div class="sensor">
+            <label>Ambigüedad</label>
+            <div class="value" id="amb">95 <small>%</small></div>
+            <div class="meter"><span id="ambBar" style="--w:95%"></span></div>
+          </div>
+          <div class="sensor">
+            <label>Referencias veladas</label>
+            <div class="value" id="ref">88 <small>%</small></div>
+            <div class="meter"><span id="refBar" style="--w:88%"></span></div>
+          </div>
+          <div class="sensor">
+            <label>Fechas explícitas</label>
+            <div class="value" id="fec">5 <small>%</small></div>
+            <div class="meter"><span id="fecBar" style="--w:5%;background:linear-gradient(90deg,var(--gold),var(--crimson))"></span></div>
+          </div>
+          <div class="sensor">
+            <label>Precisión verificable</label>
+            <div class="value" id="pre">3 <small>%</small></div>
+            <div class="meter"><span id="preBar" style="--w:3%;background:linear-gradient(90deg,var(--teal),var(--indigo))"></span></div>
+          </div>
+        </div>
+        <div class="demo-foot">
+          <span id="demoStatus">Texto abierto a múltiples lecturas · dificultad de traducción</span>
+          <button class="toggle" id="simulate">Ver otra dimensión</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="nano">
+  <div class="wrap nanowide">
+    <div class="nano-art reveal">
+      <svg viewBox="0 0 460 340" fill="none" aria-label="Esquema ilustrativo de un libro abierto con símbolos astrológicos">
+        <defs>
+          <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#e8dff0"/>
+            <stop offset="1" stop-color="#efe9de"/>
+          </linearGradient>
+          <linearGradient id="page" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#fdfaf3"/>
+            <stop offset="1" stop-color="#e8ddc8"/>
+          </linearGradient>
+        </defs>
+        <rect x="0" y="0" width="460" height="340" fill="url(#sky)" rx="18"/>
+        <g class="atom">
+          <path d="M70 120 L230 100 L230 260 L70 240 Z" fill="url(#page)" stroke="#c2b59a" stroke-width="1.5"/>
+          <path d="M390 120 L230 100 L230 260 L390 240 Z" fill="url(#page)" stroke="#c2b59a" stroke-width="1.5"/>
+          <line x1="230" y1="100" x2="230" y2="260" stroke="#c2b59a" stroke-width="2"/>
+          <!-- Símbolos -->
+          <circle cx="130" cy="160" r="12" stroke="#3a2e5c" stroke-width="2" fill="none"/>
+          <circle cx="130" cy="160" r="4" fill="#3a2e5c"/>
+          <path d="M160 190 L175 210 L145 210 Z" stroke="#7b4a8c" stroke-width="2" fill="none"/>
+          <circle cx="330" cy="160" r="14" stroke="#9a6f00" stroke-width="2" fill="none"/>
+          <path d="M320 160 H340 M330 150 V170" stroke="#9a6f00" stroke-width="2"/>
+          <rect x="310" y="200" width="30" height="30" stroke="#1f6b6b" stroke-width="2" fill="none" transform="rotate(15 325 215)"/>
+        </g>
+        <g class="atom">
+          <circle cx="100" cy="70" r="16" stroke="#3a2e5c" stroke-width="1.6" fill="none" opacity=".5"/>
+          <circle cx="360" cy="80" r="10" fill="#7b4a8c" opacity=".4"/>
+          <circle cx="390" cy="110" r="6" fill="#9a6f00" opacity=".5"/>
+        </g>
+        <g fill="#2b1a0c" opacity=".55" font-family="DM Mono, monospace" font-size="10" letter-spacing="1.2">
+          <text x="60" y="316">CUARTETAS</text>
+          <text x="330" y="316">ASTROLOGÍA</text>
+        </g>
+      </svg>
+      <div class="nano-caption">
+        <span class="mono">Esquema conceptual</span>
+        <span>Texto · símbolo · interpretación</span>
+      </div>
+    </div>
+
+    <div class="nano-copy reveal">
+      <div class="kicker mono">03 — El estilo profético</div>
+      <h2>Por qué todo<br>parece encajar.</h2>
+      <p>Las cuartetas de Nostradamus no describen hechos con nombres y fechas. Usan imágenes oscuras: "el gran shameless", "el rey del terror", "la ciudad de las siete colinas". Esa vaguedad es precisamente lo que permite que cada generación las adapte a sus propios miedos.</p>
+      <p>Además, las traducciones varían enormemente. Muchas "predicciones" que circulan hoy son reinterpretaciones modernas, no lecturas literales del texto original.</p>
+      <div class="nano-points">
+        <div class="nano-point"><b style="color:var(--indigo)">Vaguedad</b><span>Sin nombres ni fechas</span></div>
+        <div class="nano-point"><b style="color:var(--violet)">Metáfora</b><span>Imágenes abiertas</span></div>
+        <div class="nano-point"><b style="color:var(--gold)">Traducción</b><span>Versiones divergentes</span></div>
+        <div class="nano-point"><b style="color:var(--teal)">Retrospectiva</b><span>Claridad solo después</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="apocalipsis">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <div class="kicker mono">04 — El fin del mundo</div>
+        <h2>Las catástrofes<br>que se le atribuyen.</h2>
+      </div>
+      <p>A lo largo de los siglos, lectores y medios han visto en Nostradamus anuncios de guerras, incendios, asesinatos y apocalipsis. Estas son algunas de las interpretaciones más difundidas.</p>
+    </div>
+
+    <div class="topic-grid">
+      <article class="topic reveal"><div class="topic-top"><div class="topic-icon">☄</div><span class="topic-num mono">COSMOS</span></div><h3>La "bola de fuego"</h3><p>Una cuarteta menciona una "bola de fuego del cielo". Se ha interpretado como un impacto de asteroide o un evento cósmico. El texto no da fecha ni lugar, y la imagen es frecuente en la literatura apocalíptica de la época.</p><div class="tag-row"><span class="tag">Asteroide</span><span class="tag">Fuego</span><span class="tag">Cosmos</span></div></article>
+      <article class="topic reveal"><div class="topic-top"><div class="topic-icon">✠</div><span class="topic-num mono">IGLESIA</span></div><h3>El "Papa Negro"</h3><p>Circula la idea de que Nostradamus predijo la llegada de un "Papa Negro" que desataría el apocalipsis. La expresión no aparece textualmente en las <em>Centurias</em>; es una interpretación moderna de versos sobre papas y Roma.</p><div class="tag-row"><span class="tag">Papado</span><span class="tag">Roma</span><span class="tag">Interpretación</span></div></article>
+      <article class="topic reveal"><div class="topic-top"><div class="topic-icon">⚔</div><span class="topic-num mono">GUERRA</span></div><h3>La "gran guerra final"</h3><p>Varias cuartetas hablan de conflictos, ejércitos y destrucción. Se han aplicado a las guerras mundiales, a conflictos nucleares y a escenarios de Tercera Guerra Mundial.</p><div class="tag-row"><span class="tag">Guerra</span><span class="tag">Ejércitos</span><span class="tag">Destrucción</span></div></article>
+      <article class="topic reveal"><div class="topic-top"><div class="topic-icon">◐</div><span class="topic-num mono">FECHA</span></div><h3>1999: el "rey del terror"</h3><p>Una de las pocas cuartetas con año explícito: "En el año 1999, séptimo mes, del cielo vendrá un gran rey del terror". El año pasó sin que ocurriera ninguna catástrofe anunciada.</p><div class="tag-row"><span class="tag">1999</span><span class="tag">Rey del terror</span><span class="tag">Fracaso</span></div></article>
+      <article class="topic reveal"><div class="topic-top"><div class="topic-icon">⌛</div><span class="topic-num mono">LEJOS</span></div><h3>El año 3797</h3><p>Algunos intérpretes sostienen que las profecías se extienden hasta el año 3797. Es una fecha tan remota que no puede verificarse, lo que la vuelve inmune a la refutación.</p><div class="tag-row"><span class="tag">3797</span><span class="tag">Futuro lejano</span><span class="tag">Inverificable</span></div></article>
+      <article class="topic reveal"><div class="topic-top"><div class="topic-icon">✦</div><span class="topic-num mono">CATÁSTROFE</span></div><h3>Diluvios y plagas</h3><p>El propio Nostradamus escribió sobre "diluvios" e inundaciones antes de la conflagración final. Son imágenes bíblicas y apocalípticas comunes en su época, no necesariamente predicciones literales.</p><div class="tag-row"><span class="tag">Diluvio</span><span class="tag">Peste</span><span class="tag">Biblia</span></div></article>
+    </div>
+
+    <div class="note reveal">
+      <span style="font-size:1.1rem">⚑</span>
+      <span><b>Patrón recurrente.</b> Cada generación encuentra en Nostradamus la catástrofe que teme: la peste en el siglo XVI, la guerra en el XX, el terrorismo en el XXI. El texto permanece, cambia la interpretación.</span>
+    </div>
+  </div>
+</section>
+
+<section class="lab" id="critica">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <div class="kicker mono">05 — La perspectiva crítica</div>
+        <h2>Por qué parece<br>que acierta.</h2>
+      </div>
+      <p>La psicología y la historiografía explican por qué las profecías de Nostradamus se perciben como exactas. No es magia: son mecanismos cognitivos y textuales bien conocidos.</p>
+    </div>
+
+    <div class="path-grid">
+      <article class="path-card reveal"><span class="num">MECANISMO 01</span><h3>Efecto Forer</h3><p>También llamado efecto Barnum. Las descripciones vagas y generales se perciben como precisas y personalizadas. Las cuartetas funcionan igual: parecen hablar de un evento concreto porque son lo bastante ambiguas.</p></article>
+      <article class="path-card reveal"><span class="num">MECANISMO 02</span><h3>Sesgo de confirmación</h3><p>Recordamos los "aciertos" e ignoramos los fallos. Las predicciones que no se cumplen simplemente no se comentan, mientras que cualquier coincidencia fortuita se celebra como prueba.</p></article>
+      <article class="path-card reveal"><span class="num">MECANISMO 03</span><h3>Claridad retrospectiva</h3><p>Después de un evento, el texto parece claro. Antes, es opaco. Como escribió Robert Carroll: "Son confusos y oscuros antes del evento, pero se vuelven cristalinos después de que ha ocurrido".</p></article>
+      <article class="path-card reveal"><span class="num">MECANISMO 04</span><h3>Traducciones interesadas</h3><p>Muchas "profecías" actuales provienen de traducciones deliberadamente reinterpretadas. El francés antiguo de Nostradamus es difícil, y las versiones varían según el intérprete.</p></article>
+      <article class="path-card reveal"><span class="num">MECANISMO 05</span><h3>Predicciones fallidas</h3><p>James Randi señaló que cada vez que Nostradamus mencionó una fecha, la predicción falló. El año 1999 es el caso más famoso: el "rey del terror" no llegó.</p></article>
+      <article class="path-card reveal"><span class="num">MECANISMO 06</span><h3>Profecía autocumplida</h3><p>Si suficientes personas creen que una fecha es apocalíptica, pueden tomar decisiones que generen consecuencias reales. El mito del fin del mundo puede influir en el mundo, aunque el fin no llegue.</p></article>
+    </div>
+
+    <div class="note reveal">
+      <span style="font-size:1.1rem">ⓘ</span>
+      <span><b>Consenso académico.</b> La mayoría de las fuentes académicas serias coinciden en que las asociaciones entre las cuartetas y eventos mundiales son el resultado de malas traducciones, interpretaciones deliberadas o conexiones tan tenues que no tienen valor probatorio.</span>
+    </div>
+  </div>
+</section>
+
+<section id="historia">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <div class="kicker mono">06 — Línea del tiempo</div>
+        <h2>De las Centurias<br>al mito moderno.</h2>
+      </div>
+      <p>Hitos en la vida de Nostradamus y en la historia de las interpretaciones apocalípticas de su obra.</p>
+    </div>
+
+    <div class="path-grid">
+      <article class="path-card reveal"><span class="num">1503</span><h3>Nacimiento</h3><p>Michel de Nostredame nace en Saint-Rémy-de-Provence, en el sur de Francia.</p></article>
+      <article class="path-card reveal"><span class="num">1555</span><h3>Primera edición de las Centurias</h3><p>Publica en Lyon 353 cuartetas. La obra se amplía en ediciones posteriores hasta reunir 942 versos en diez centurias.</p></article>
+      <article class="path-card reveal"><span class="num">1566</span><h3>Muerte</h3><p>Muere en Salon-de-Provence. Su fama como profeta ya estaba extendida por Europa.</p></article>
+      <article class="path-card reveal"><span class="num">1666</span><h3>El Gran Incendio de Londres</h3><p>Muchos vieron en una cuarteta una predicción del incendio. El texto, sin embargo, no menciona Londres de forma explícita.</p></article>
+      <article class="path-card reveal"><span class="num">1791</span><h3>Revolución Francesa</h3><p>Se atribuyen a Nostradamus "predicciones" sobre la huida de Luis XVI y los disturbios revolucionarios.</p></article>
+      <article class="path-card reveal"><span class="num">1939–1945</span><h3>Segunda Guerra Mundial</h3><p>Durante la guerra, las profecías se convierten en un fenómeno global. Se usan para anunciar la derrota del adversario.</p></article>
+      <article class="path-card reveal"><span class="num">1999</span><h3>El "rey del terror"</h3><p>La cuarteta con año explícito se difunde masivamente. El año pasa sin la catástrofe anunciada.</p></article>
+      <article class="path-card reveal"><span class="num">2012</span><h3>El fin del mundo maya</h3><p>Aunque no es Nostradamus, el episodio muestra el mismo patrón: una fecha, un mito y un fracaso anunciado.</p></article>
+      <article class="path-card reveal"><span class="num">2020–HOY</span><h3>Pandemias y "Papa Negro"</h3><p>Cada crisis global reactiva las interpretaciones. Las redes sociales amplifican lecturas que los historiadores consideran infundadas.</p></article>
+    </div>
+  </div>
+</section>
+
+<section id="legado">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <div class="kicker mono">07 — Legado y debates</div>
+        <h2>Un espejo<br>de nuestros miedos.</h2>
+      </div>
+      <p>Nostradamus no dejó un mapa del futuro. Dejó un texto que funciona como espejo: cada época proyecta en él sus ansiedades. Su verdadero legado es cultural, no profético.</p>
+    </div>
+
+    <div class="path-grid">
+      <article class="path-card reveal"><span class="num">LEGADO 01</span><h3>El profeta como personaje</h3><p>Nostradamus se convirtió en arquetipo del vidente misterioso: barba, astrolabio, versos oscuros. La cultura popular lo adoptó como figura.</p></article>
+      <article class="path-card reveal"><span class="num">LEGADO 02</span><h3>La industria del apocalipsis</h3><p>Libros, documentales, películas y medios viven de anunciar el fin. Nostradamus es una marca recurrente en ese mercado.</p></article>
+      <article class="path-card reveal"><span class="num">LEGADO 03</span><h3>Educación mediática</h3><p>Sus cuartetas son un caso práctico para enseñar efecto Forer, sesgo de confirmación y pensamiento crítico.</p></article>
+      <article class="path-card reveal"><span class="num">LEGADO 04</span><h3>Historia del miedo</h3><p>Estudiar sus interpretaciones permite comprender cómo las sociedades procesan crisis, guerras y pandemias.</p></article>
+      <article class="path-card reveal"><span class="num">LEGADO 05</span><h3>Debate sobre la profecía</h3><p>¿Puede un texto predecir el futuro? La evidencia histórica y estadística dice que no. El debate sigue vivo en la cultura popular.</p></article>
+      <article class="path-card reveal"><span class="num">LEGADO 06</span><h3>El fin del mundo como mito</h3><p>Más allá de Nostradamus, el apocalipsis es un tema recurrente en religiones y culturas. Su estudio es el estudio de la esperanza y del miedo humanos.</p></article>
+    </div>
+
+    <div class="note reveal">
+      <span style="font-size:1.1rem">⚑</span>
+      <span><b>Nota final.</b> Leer a Nostradamus como historia, literatura y fenómeno cultural es valioso. Leerlo como un oráculo literal conduce, invariablemente, a decepciones y a manipulaciones. La fecha 3797 no es una promesa: es un síntoma de un texto que se resiste a ser verificado.</span>
+    </div>
+  </div>
+</section>
+
+<section id="desafio">
+  <div class="wrap">
+    <div class="quiz reveal">
+      <div class="quiz-grid">
+        <div>
+          <div class="kicker mono">08 — Comprueba lo aprendido</div>
+          <h2>Evalúa tus conocimientos</h2>
+          <p>Responde tres preguntas sobre Nostradamus y el fin del mundo.</p>
+          <div class="mono muted">PREGUNTA <span id="qnum">01</span> / 03</div>
+        </div>
+        <div>
+          <div class="question" id="question">¿Qué son las "Centurias" de Nostradamus?</div>
+          <div class="answers" id="answers">
+            <button class="answer">Un tratado de medicina renacentista</button>
+            <button class="answer">Una colección de 942 cuartetas proféticas</button>
+            <button class="answer">Un calendario maya</button>
+          </div>
+          <div class="feedback" id="feedback" aria-live="polite">Selecciona una respuesta para continuar.</div>
+          <div class="quiz-bottom">
+            <span class="muted" id="score">Puntuación: 0</span>
+            <button class="btn" id="next" disabled>Siguiente →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap footerin">
+    <div><strong>NOSTRADAMUS <span style="color:var(--violet)">· FIN DEL MUNDO</span></strong> <span>· Aprende explorando.</span></div>
+    <span>Guía educativa · Historia, profecía y pensamiento crítico</span>
+    <a href="#inicio">Volver arriba ↑</a>
+  </div>
+</footer>
+
+<script>
+/* Reveal */
+const observer = new IntersectionObserver(entries => entries.forEach(e => {
+  if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+}), { threshold: .12 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+/* Comparador de dimensiones del texto */
+const dimensions = [
+  { name:'Ambigüedad', desc:'Las cuartetas evitan nombres, fechas y contextos precisos',
+    amb:95, ref:88, fec:5, pre:3,
+    status:'Texto abierto a múltiples lecturas · dificultad de traducción' },
+  { name:'Interpretación moderna', desc:'Cada época proyecta sus propios miedos en los versos',
+    amb:85, ref:90, fec:8, pre:5,
+    status:'Las lecturas cambian con el contexto · no hay una versión única' },
+  { name:'Verificación histórica', desc:'Las fechas explícitas han fallado sistemáticamente',
+    amb:70, ref:75, fec:15, pre:2,
+    status:'1999 pasó sin el "rey del terror" · sin evidencia predictiva' }
+];
+let di = 0;
+const simulate = document.getElementById('simulate');
+function renderDimension() {
+  const d = dimensions[di];
+  document.getElementById('phaseName').textContent = d.name;
+  document.getElementById('phaseDesc').textContent = d.desc;
+  document.getElementById('demoStatus').textContent = d.status;
+  document.getElementById('amb').innerHTML = d.amb + ' <small>%</small>';
+  document.getElementById('ref').innerHTML = d.ref + ' <small>%</small>';
+  document.getElementById('fec').innerHTML = d.fec + ' <small>%</small>';
+  document.getElementById('pre').innerHTML = d.pre + ' <small>%</small>';
+  document.getElementById('ambBar').style.setProperty('--w', d.amb + '%');
+  document.getElementById('refBar').style.setProperty('--w', d.ref + '%');
+  document.getElementById('fecBar').style.setProperty('--w', d.fec + '%');
+  document.getElementById('preBar').style.setProperty('--w', d.pre + '%');
+  simulate.textContent = di === dimensions.length - 1 ? 'Volver al inicio' : 'Ver otra dimensión';
+}
+simulate.addEventListener('click', () => { di = (di + 1) % dimensions.length; renderDimension(); });
+renderDimension();
+
+/* Quiz */
+const questions = [
+  { q:'¿Qué son las "Centurias" de Nostradamus?',
+    a:['Un tratado de medicina renacentista','Una colección de 942 cuartetas proféticas','Un calendario maya'],
+    correct:1,
+    why:'Las Centurias son la obra principal de Nostradamus: 942 cuartetas (estrofas de cuatro versos) agrupadas en diez centurias, publicadas a partir de 1555.' },
+  { q:'¿Qué mecanismo psicológico explica que las profecías parezcan cumplirse?',
+    a:['El efecto Forer o Barnum','La ley de la gravedad','El teorema de Pitágoras'],
+    correct:0,
+    why:'El efecto Forer describe la tendencia a aceptar descripciones vagas y generales como si fueran precisas y personalizadas. Es clave para entender la aparente exactitud de las profecías.' },
+  { q:'¿Qué ocurrió con la predicción del "rey del terror" para 1999?',
+    a:['Se cumplió exactamente','El año pasó sin la catástrofe anunciada','Fue retirada por la Iglesia'],
+    correct:1,
+    why:'La cuarteta que menciona 1999 es una de las pocas con fecha explícita. El año pasó sin que ocurriera la catástrofe anunciada, lo que los escépticos citan como evidencia de su falta de valor predictivo.' }
+];
+let qi = 0, score = 0, answered = false;
+const qEl = document.getElementById('question');
+const aEl = document.getElementById('answers');
+const fEl = document.getElementById('feedback');
+const nEl = document.getElementById('qnum');
+const sEl = document.getElementById('score');
+const next = document.getElementById('next');
+
+function renderQ() {
+  const q = questions[qi];
+  answered = false;
+  nEl.textContent = String(qi + 1).padStart(2, '0');
+  qEl.textContent = q.q;
+  aEl.innerHTML = '';
+  q.a.forEach((a, i) => {
+    const b = document.createElement('button');
+    b.className = 'answer';
+    b.textContent = a;
+    b.addEventListener('click', () => choose(i, b));
+    aEl.appendChild(b);
+  });
+  fEl.textContent = 'Selecciona una respuesta para continuar.';
+  next.disabled = true;
+  next.textContent = qi === questions.length - 1 ? 'Reiniciar ↻' : 'Siguiente →';
+}
+
+function choose(i, b) {
+  if (answered) return;
+  answered = true;
+  const q = questions[qi];
+  [...aEl.children].forEach((el, j) => {
+    el.disabled = true;
+    if (j === q.correct) el.classList.add('correct');
+  });
+  if (i === q.correct) { score++; fEl.textContent = '¡Correcto! ' + q.why; }
+  else { b.classList.add('wrong'); fEl.textContent = 'Casi. ' + q.why; }
+  sEl.textContent = 'Puntuación: ' + score;
+  next.disabled = false;
+}
+
+next.addEventListener('click', () => {
+  if (!answered) return;
+  if (qi < questions.length - 1) { qi++; renderQ(); }
+  else {
+    qi = 0; score = 0;
+    sEl.textContent = 'Puntuación: 0';
+    renderQ();
+    fEl.textContent = '¡Vamos otra vez!';
+  }
+});
+
+renderQ();
+</script>
+</body>
+</html>

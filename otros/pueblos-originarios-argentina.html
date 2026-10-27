@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#f6f3ee" />
+<meta name="description" content="Guía sobre los pueblos originarios de Argentina: diversidad, lenguas, cosmovisión, historia, situación actual y derechos territoriales." />
+<title>Pueblos Originarios de Argentina — Diversidad, lenguas y territorios</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f6f3ee;
+  --panel:#ffffff;
+  --panel2:#efe9df;
+  --line:rgba(40,28,16,.13);
+  --text:#1d1610;
+  --muted:#6d5e4d;
+  --teal:#0b7a78;
+  --terra:#b3502a;
+  --gold:#9a7200;
+  --violet:#6a55d8;
+  --pink:#b83d76;
+  --lime:#397a2b;
+  --radius:22px;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{margin:0;background:radial-gradient(ellipse at 80% -10%,#f4e4d2 0,transparent 36%),var(--bg);color:var(--text);font-family:Manrope,system-ui,sans-serif;line-height:1.6;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.5;z-index:-1;background-image:linear-gradient(rgba(40,28,16,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(40,28,16,.035) 1px,transparent 1px);background-size:48px 48px;mask-image:linear-gradient(to bottom,black,transparent 80%)}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer}
+a:focus-visible,button:focus-visible{outline:2px solid var(--terra);outline-offset:3px}
+.mono{font-family:"DM Mono",monospace;text-transform:uppercase;letter-spacing:.12em;font-size:.72rem}
+.muted{color:var(--muted)}
+.wrap{width:min(1160px,calc(100% - 40px));margin:auto}
+
+nav{position:sticky;top:0;z-index:20;backdrop-filter:blur(18px);background:rgba(246,243,238,.86);border-bottom:1px solid var(--line)}
+.navin{min-height:68px;height:auto;display:flex;align-items:center;justify-content:space-between;gap:14px;padding-top:8px;padding-bottom:8px}
+.brand{display:flex;align-items:center;gap:11px;font-weight:800;letter-spacing:-.04em;font-size:clamp(.7rem,1vw,.88rem);white-space:nowrap}
+.brandmark{width:34px;height:34px;border-radius:11px;background:linear-gradient(135deg,var(--terra),var(--gold));display:grid;place-items:center;color:#fff;font-weight:900;box-shadow:0 6px 18px #b3502a33}
+.navlinks{display:flex;align-items:center;gap:clamp(8px,1.4vw,18px);color:var(--muted);font-size:clamp(.68rem,.88vw,.82rem);white-space:nowrap}
+.navlinks a:hover{color:var(--terra)}
+.navcta{white-space:nowrap;padding:9px 12px;font-size:.74rem}
+.navcta,.btn{border:1px solid var(--line);background:rgba(40,28,16,.04);color:var(--text);padding:11px 16px;border-radius:999px;font-weight:700;font-size:.85rem;transition:.25s}
+.navcta:hover,.btn:hover{border-color:var(--terra);transform:translateY(-2px)}
+.btn.primary{background:var(--terra);color:#fff;border-color:var(--terra)}
+.btn.primary:hover{box-shadow:0 10px 28px #b3502a38}
+.btn:disabled{opacity:.45;cursor:not-allowed;transform:none}
+
+.hero{padding:92px 0 72px;position:relative}
+.hero-grid{display:grid;grid-template-columns:1.02fr .98fr;align-items:center;gap:45px}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;color:var(--terra);margin-bottom:20px}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--terra);box-shadow:0 0 14px #b3502a66}
+h1{font-size:clamp(2.6rem,5.6vw,5rem);line-height:1;letter-spacing:-.07em;margin:0 0 24px;font-weight:800}
+h1 .gradient{background:linear-gradient(100deg,var(--terra),#d08a2b 48%,var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{font-size:1.08rem;color:var(--muted);max-width:560px;margin:0 0 30px}
+.actions{display:flex;gap:12px;flex-wrap:wrap}
+.hero-note{display:flex;align-items:center;gap:15px;margin-top:38px;color:var(--muted);font-size:.8rem}
+.avatars{display:flex}
+.avatars span{width:29px;height:29px;border:2px solid var(--bg);margin-left:-7px;border-radius:50%;display:grid;place-items:center;background:#e7ddcf;color:#4a3826;font-size:.68rem}
+.avatars span:first-child{margin-left:0}
+
+.visual{min-height:470px;position:relative;display:grid;place-items:center}
+.orbital{position:absolute;width:min(440px,90%);aspect-ratio:1;border:1px solid #b3502a30;border-radius:50%;animation:spin 34s linear infinite}
+.orbital:before,.orbital:after{content:"";position:absolute;border:1px solid #9a720030;border-radius:50%;inset:11%}
+.orbital:after{inset:24%;border-color:#6a55d840}
+.orbit-dot{position:absolute;top:15%;right:12%;width:12px;height:12px;background:var(--gold);border-radius:50%;box-shadow:0 0 22px #9a720088}
+.core{width:220px;aspect-ratio:1;border-radius:46% 54% 58% 42% / 50% 46% 54% 50%;background:radial-gradient(circle at 32% 28%,#fff6e6 0,#f0cf8a 20%,#d9963f 50%,#b3502a 80%,#873b1e 100%);box-shadow:inset -14px -18px 40px #7a341333,0 24px 70px #b3502a33;display:grid;place-items:center;animation:morph 9s ease-in-out infinite;position:relative}
+.core svg{width:118px;filter:drop-shadow(0 5px 12px rgba(60,25,8,.35))}
+.float-card{position:absolute;background:#ffffffee;border:1px solid var(--line);backdrop-filter:blur(14px);padding:13px 15px;border-radius:15px;box-shadow:0 18px 40px rgba(40,28,16,.12);animation:float 5s ease-in-out infinite}
+.float-card b{display:block;font-size:.85rem}
+.float-card small{color:var(--muted)}
+.fc1{top:13%;left:0}
+.fc2{right:-1%;bottom:18%;animation-delay:-2s}
+.fc3{left:8%;bottom:6%;animation-delay:-3s}
+.mini-bars{display:flex;align-items:end;gap:4px;height:24px;margin-top:6px}
+.mini-bars i{display:block;width:5px;border-radius:3px;background:var(--terra);height:35%}
+.mini-bars i:nth-child(2){height:65%}
+.mini-bars i:nth-child(3){height:48%}
+.mini-bars i:nth-child(4){height:90%}
+.mini-bars i:nth-child(5){height:70%}
+
+.stats{border-block:1px solid var(--line);padding:23px 0}
+.stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.stat{padding-left:22px;border-left:1px solid var(--line)}
+.stat:first-child{border:0;padding-left:0}
+.stat strong{display:block;font-size:1.3rem;letter-spacing:-.05em}
+.stat span{font-size:.78rem;color:var(--muted)}
+
+section{padding:94px 0}
+.section-head{display:flex;align-items:end;justify-content:space-between;gap:25px;margin-bottom:35px}
+.kicker{color:var(--terra);margin-bottom:12px}
+.section-head h2,.split-copy h2{font-size:clamp(2.1rem,4vw,3.5rem);line-height:1.05;letter-spacing:-.065em;margin:0}
+.section-head p{max-width:440px;color:var(--muted);margin:0}
+.topic-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.topic{border:1px solid var(--line);border-radius:var(--radius);background:linear-gradient(145deg,#ffffff,#f5f0e8);padding:28px;position:relative;overflow:hidden;transition:transform .3s,border-color .3s,box-shadow .3s;box-shadow:0 10px 30px rgba(40,28,16,.05)}
+.topic:hover{transform:translateY(-6px);border-color:#b3502a55;box-shadow:0 18px 45px rgba(40,28,16,.10)}
+.topic:after{content:"";position:absolute;width:220px;height:220px;border-radius:50%;filter:blur(70px);opacity:.15;right:-100px;top:-110px;background:var(--glow,var(--terra));pointer-events:none}
+.topic-top{display:flex;align-items:center;justify-content:space-between}
+.topic-icon{width:48px;height:48px;border-radius:15px;background:#b3502a12;border:1px solid #b3502a33;display:grid;place-items:center;color:var(--terra);font-size:1.15rem}
+.topic-num{color:#a3947f}
+.topic h3{font-size:1.4rem;margin:25px 0 9px;letter-spacing:-.04em}
+.topic p{color:var(--muted);margin:0 0 23px}
+.tag-row{display:flex;flex-wrap:wrap;gap:8px}
+.tag{font-size:.72rem;padding:6px 10px;border:1px solid var(--line);border-radius:999px;color:#4a3826;background:rgba(40,28,16,.035)}
+
+.lab{background:linear-gradient(180deg,transparent,#ece4d7 28%,#ece4d7 75%,transparent)}
+.lab-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:42px;align-items:center}
+.split-copy p{color:var(--muted);max-width:450px}
+.checklist{list-style:none;padding:0;margin:26px 0;display:grid;gap:13px}
+.checklist li{display:flex;gap:11px;align-items:start;color:#33261a;font-size:.9rem}
+.check{color:var(--terra);font-weight:900}
+.demo{background:#ffffff;border:1px solid var(--line);border-radius:24px;overflow:hidden;box-shadow:0 20px 60px rgba(40,28,16,.10)}
+.demo-head{padding:17px 20px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:12px;background:#fdfbf7;flex-wrap:wrap}
+.window-dots{display:flex;gap:5px}
+.window-dots i{width:7px;height:7px;border-radius:50%;background:#d6cab8}
+.live{color:var(--lime);font-size:.7rem}
+.demo-body{padding:24px}
+.phase-title{font-size:1.25rem;font-weight:800;letter-spacing:-.03em;margin:0 0 4px;color:var(--terra)}
+.sensor-panel{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
+.sensor{padding:17px;border:1px solid var(--line);border-radius:16px;background:rgba(40,28,16,.025)}
+.sensor label{color:var(--muted);font-size:.76rem}
+.sensor .value{font-size:1.2rem;font-weight:800;letter-spacing:-.05em;margin:8px 0}
+.sensor .value small{font-size:.75rem;color:var(--muted);font-weight:500}
+.meter{height:5px;background:#e8e0d3;border-radius:9px;overflow:hidden}
+.meter span{display:block;height:100%;width:var(--w);background:linear-gradient(90deg,var(--gold),var(--terra));border-radius:9px;transition:width .5s}
+.demo-foot{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:18px;color:var(--muted);font-size:.78rem;flex-wrap:wrap}
+.toggle{border:1px solid #b3502a50;background:#b3502a10;color:var(--terra);padding:9px 13px;border-radius:10px;font-weight:700;font-size:.78rem}
+.toggle:hover{background:#b3502a20}
+
+.nanowide{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.nano-art{min-height:390px;border-radius:24px;border:1px solid var(--line);background:radial-gradient(circle at 50% 30%,#f6e5cd,transparent 65%),#f0e9dd;position:relative;overflow:hidden;display:grid;place-items:center}
+.nano-art svg{width:90%;max-width:460px;overflow:visible}
+.atom{animation:float 6s ease-in-out infinite;transform-origin:center}
+.atom:nth-child(2){animation-delay:-2s}
+.atom:nth-child(3){animation-delay:-4s}
+.nano-caption{position:absolute;bottom:18px;left:20px;right:20px;display:flex;justify-content:space-between;color:var(--muted);font-size:.72rem;gap:10px}
+.nano-copy h2{font-size:clamp(2.2rem,4vw,3.3rem);line-height:1.05;letter-spacing:-.065em;margin:0 0 20px}
+.nano-copy p{color:var(--muted)}
+.nano-points{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:25px}
+.nano-point{padding:15px;border:1px solid var(--line);border-radius:14px;background:rgba(40,28,16,.025)}
+.nano-point b{display:block;font-size:.86rem}
+.nano-point span{font-size:.76rem;color:var(--muted)}
+
+.path-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.path-card{padding:23px;border:1px solid var(--line);border-radius:18px;background:#ffffff;box-shadow:0 10px 26px rgba(40,28,16,.05);transition:transform .3s,border-color .3s,box-shadow .3s}
+.path-card:hover{transform:translateY(-4px);border-color:#b3502a55;box-shadow:0 16px 40px rgba(40,28,16,.09)}
+.path-card .num{font-family:"DM Mono",monospace;color:var(--gold);font-size:.78rem;letter-spacing:.08em}
+.path-card h3{margin:14px 0 7px;font-size:1.06rem;letter-spacing:-.02em}
+.path-card p{font-size:.85rem;color:var(--muted);margin:0}
+
+.note{display:flex;gap:12px;align-items:start;padding:16px 18px;border:1px dashed #9a720055;background:#9a72000d;border-radius:14px;color:#5c4610;font-size:.85rem;margin-top:24px}
+.note b{color:#8a6200}
+
+.quiz{padding:30px;border:1px solid #b3502a3d;border-radius:24px;background:radial-gradient(ellipse at 90% 0%,#f7e2d0,transparent 55%),#ffffff;box-shadow:0 16px 45px rgba(40,28,16,.08)}
+.quiz-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:35px}
+.quiz h2{font-size:2rem;line-height:1.1;letter-spacing:-.06em;margin:0 0 12px}
+.quiz p{color:var(--muted)}
+.question{font-size:1.1rem;font-weight:700;margin-bottom:17px;letter-spacing:-.02em}
+.answers{display:grid;gap:10px}
+.answer{padding:13px 15px;border:1px solid var(--line);border-radius:12px;background:#faf7f2;color:var(--text);text-align:left;transition:.2s}
+.answer:hover:not(:disabled){border-color:var(--terra);background:#b3502a0c}
+.answer:disabled{cursor:default}
+.answer.correct{border-color:var(--lime);background:#397a2b12}
+.answer.wrong{border-color:var(--pink);background:#b83d7612}
+.feedback{min-height:26px;font-size:.85rem;margin-top:12px;color:var(--muted)}
+.quiz-bottom{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:18px;flex-wrap:wrap}
+.quiz-bottom .btn{font-size:.8rem}
+
+footer{padding:30px 0;border-top:1px solid var(--line);color:var(--muted);font-size:.78rem}
+.footerin{display:flex;justify-content:space-between;align-items:center;gap:20px}
+.footerin strong{color:var(--text)}
+
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes morph{0%,100%{border-radius:46% 54% 58% 42% / 50% 46% 54% 50%;transform:rotate(-4deg)}50%{border-radius:56% 44% 42% 58% / 48% 56% 44% 52%;transform:rotate(4deg)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}.reveal{opacity:1;transform:none}}
+
+@media(max-width:920px){.navlinks{display:none}.navin{min-height:66px}}
+@media(max-width:850px){
+  .hero-grid,.lab-grid,.nanowide,.quiz-grid{grid-template-columns:1fr}
+  .hero{padding-top:60px}
+  .visual{min-height:420px;order:-1}
+  .hero-grid{gap:8px}
+  .hero-copy{text-align:center}
+  .hero-copy p{margin-inline:auto}
+  .actions,.hero-note{justify-content:center}
+  .section-head{display:block}
+  .section-head p{margin-top:15px}
+  .lab-grid{gap:28px}
+  .nanowide{gap:25px}
+  .nano-art{min-height:310px}
+  .quiz-grid{gap:12px}
+  .stat-grid{grid-template-columns:repeat(2,1fr);row-gap:22px}
+  .stat:nth-child(3){padding-left:0;border:0}
+  .path-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:560px){
+  .wrap{width:min(100% - 28px,1160px)}
+  .navin{height:66px}
+  .navcta{padding:9px 12px;font-size:.72rem}
+  .hero{padding:43px 0 45px}
+  h1{font-size:2.5rem}
+  .visual{min-height:335px}
+  .core{width:165px}
+  .core svg{width:88px}
+  .orbital{width:300px}
+  .fc1{top:6%;left:-2%}
+  .fc2{right:-2%;bottom:15%}
+  .fc3{left:0;bottom:3%}
+  .float-card{padding:10px 12px}
+  .float-card b{font-size:.75rem}
+  .float-card small{font-size:.67rem}
+  .stats{padding:18px 0}
+  section{padding:66px 0}
+  .topic-grid{grid-template-columns:1fr}
+  .topic{padding:23px}
+  .sensor-panel{grid-template-columns:1fr 1fr}
+  .sensor{padding:12px}
+  .sensor .value{font-size:1rem}
+  .demo-body{padding:15px}
+  .path-grid{grid-template-columns:1fr}
+  .nano-points{grid-template-columns:1fr 1fr}
+  .quiz{padding:22px}
+  .footerin{align-items:flex-start;flex-direction:column;gap:8px}
+}
+</style>
+</head>
+<body>
+<nav>
+  <div class="wrap navin">
+    <a class="brand" href="#inicio"><span class="brandmark">P</span> PUEBLOS ORIGINARIOS <span style="color:var(--terra)">DE ARGENTINA</span></a>
+    <div class="navlinks">
+      <a href="#panorama">Panorama</a>
+      <a href="#regiones">Regiones</a>
+      <a href="#historia">Historia</a>
+      <a href="#pueblos">Pueblos</a>
+      <a href="#lenguas">Lenguas</a>
+      <a href="#actualidad">Actualidad</a>
+    </div>
+    <a class="navcta" href="#panorama">Ver contenidos ↗</a>
+  </div>
+</nav>
+
+<main>
+<header class="hero" id="inicio">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <div class="eyebrow mono"><span class="dot"></span> Diversidad · Memoria · Territorio</div>
+      <h1>Pueblos originarios<br><span class="gradient">de Argentina</span></h1>
+      <p>Argentina es un país plurinacional. Más de 48 pueblos indígenas habitan su territorio, con lenguas, cosmovisiones y formas de vida propias. Esta guía recorre su diversidad, su historia, sus luchas presentes y su patrimonio cultural.</p>
+      <div class="actions">
+        <a class="btn primary" href="#regiones">Recorrer regiones <span>↗</span></a>
+        <a class="btn" href="#historia">Ver línea del tiempo</a>
+      </div>
+      <div class="hero-note">
+        <div class="avatars"><span>𖣂</span><span>◈</span><span>✳</span></div>
+        <span>Contenido educativo basado en fuentes oficiales y académicas.</span>
+      </div>
+    </div>
+
+    <div class="visual" aria-label="Ilustración abstracta de diversidad y territorio">
+      <div class="orbital"><span class="orbit-dot"></span></div>
+      <div class="core">
+        <svg viewBox="0 0 140 140" fill="none" aria-hidden="true">
+          <circle cx="70" cy="70" r="30" stroke="#3a1c0c" stroke-width="2.5" opacity=".7"/>
+          <circle cx="70" cy="70" r="18" fill="#3a1c0c" opacity=".85"/>
+          <g stroke="#3a1c0c" stroke-width="3" stroke-linecap="round" opacity=".8">
+            <path d="M70 26v12M70 102v12M26 70h12M102 70h12"/>
+            <path d="M41 41l8 8M91 91l8 8M99 41l-8 8M49 91l-8 8"/>
+          </g>
+          <circle cx="70" cy="70" r="48" stroke="#3a1c0c" stroke-width="1.5" opacity=".35"/>
+        </svg>
+      </div>
+      <div class="float-card fc1"><span class="mono" style="color:var(--terra)">01 / DIVERSIDAD</span><b>Más de 48 pueblos</b><small>Uno solo país</small></div>
+      <div class="float-card fc2"><span class="mono" style="color:var(--gold)">02 / LENGUAS</span><b>40 idiomas</b><div class="mini-bars"><i></i><i></i><i></i><i></i><i></i></div></div>
+      <div class="float-card fc3"><b>Territorio y memoria</b><small>Preexistencia y derechos</small></div>
+    </div>
+  </div>
+</header>
+
+<div class="stats">
+  <div class="wrap stat-grid">
+    <div class="stat"><strong>+48 <span style="color:var(--terra)">pueblos</span></strong><span>Reconocidos en el territorio</span></div>
+    <div class="stat"><strong>1.306.730 <span style="color:var(--gold)">·</span></strong><span>Personas indígenas censadas (2022)</span></div>
+    <div class="stat"><strong>29,3 <span style="color:var(--pink)">%</span></strong><span>Habla o entiende una lengua indígena</span></div>
+    <div class="stat"><strong>13 <span style="color:var(--lime)">lenguas</span></strong><span>Con hablantes activos</span></div>
+  </div>
+</div>
+
+<section id="panorama">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <div class="kicker mono">01 — Panorama</div>
+        <h2>Un país<br>plurinacional.</h2>
+      </div>
+      <p>La presencia indígena en el actual territorio argentino es anterior a la formación del Estado. Hoy los pueblos originarios viven tanto en comunidades rurales como en grandes ciudades, y reclaman reconocimiento, territorio y derechos.</p>
+    </div>
+
+    <div class="topic-grid">
+      <article class="topic reveal" style="--glow:var(--terra)">
+        <div class="topic-top">
+          <div class="topic-icon">⌘</div>
+          <span class="topic-num mono">01 / TERRITORIO</span>
+        </div>
+        <h3>Preexistencia</h3>
+        <p>Los pueblos indígenas habitaban estas tierras antes de la creación del Estado argentino. Ese principio de preexistencia es la base jurídica de sus derechos territoriales y culturales.</p>
+        <div class="tag-row">
+          <span class="tag">Preexistencia</span><span class="tag">Derechos</span><span class="tag">Territorio</span>
+        </div>
+      </article>
+
+      <article class="topic reveal" style="--glow:var(--gold)">
+        <div class="topic-top">
+          <div class="topic-icon" style="color:var(--gold);background:#9a720012;border-color:#9a720033">◈</div>
+          <span class="topic-num mono">02 / CULTURA</span>
+        </div>
+        <h3>Diversidad cultural</h3>
+        <p>No existe "una" cultura originaria. Hay pueblos agricultores, cazadores-recolectores, pescadores y pastores, con lenguas de distintas familias y cosmovisiones muy diversas.</p>
+        <div class="tag-row">
+          <span class="tag">Lenguas</span><span class="tag">Cosmovisión</span><span class="tag">Organización</span>
+        </div>
+      </article>
+    </div>
+
+    <div class="note reveal">
+      <span style="font-size:1.1rem">⚖</span>
+      <span><b>Sobre los datos.</b> El Censo 2022 registró 1.306.730 personas que se reconocen indígenas o descendientes de pueblos originarios. De ellas, el 29,3% habla o entiende una lengua indígena. Las cifras son parciales: muchas personas no se autorreconocen por discriminación o falta de información.</span>
+    </div>
+  </div>
+</section>
+
+<section class="lab" id="regiones">
+  <div class="wrap lab-grid">
+    <div class="split-copy reveal">
+      <div class="kicker mono">02 — Recorrido regional</div>
+      <h2>Seis regiones,<br>muchos mundos.</h2>
+      <p>Cada región desarrolló modos de vida adaptados a su ambiente: agricultura de altura en el Noroeste, caza y recolección en el Chaco, pesca y agricultura en el Litoral, movilidad ecuestre en la Pampa, caza marina y terrestre en la Patagonia, y agricultura de oasis en Cuyo.</p>
+      <ul class="checklist">
+        <li><span class="check">✓</span><span><b>Noroeste:</b> diaguitas, omaguacas, atacamas, comechingones.</span></li>
+        <li><span class="check">✓</span><span><b>Chaco:</b> qom, wichí, moqoit, pilagá, nivaclé.</span></li>
+        <li><span class="check">✓</span><span><b>Patagonia:</b> mapuche, tehuelche, selk'nam, yámana.</span></li>
+      </ul>
+      <a class="btn" href="#pueblos">Ver pueblos destacados ↗</a>
+    </div>
+
+    <div class="demo reveal">
+      <div class="demo-head">
+        <div style="display:flex;align-items:center;gap:11px">
+          <div class="window-dots"><i></i><i></i><i></i></div>
+          <span class="mono">RECORRIDO DIDÁCTICO / 004</span>
+        </div>
+        <span class="live mono">● REGIONES</span>
+      </div>
+      <div class="demo-body">
+        <p class="phase-title" id="phaseName">Noroeste (NOA)</p>
+        <span class="muted" style="font-size:.8rem" id="phaseDesc">Valles y quebradas · agricultura de riego y andenes</span>
+        <div class="sensor-panel">
+          <div class="sensor">
+            <label>Pueblos principales</label>
+            <div class="value" id="pueblosRegion" style="font-size:.95rem">Diaguitas, omaguacas</div>
+            <div class="meter"><span id="pueblosBar" style="--w:85%"></span></div>
+          </div>
+          <div class="sensor">
+            <label>Modo de vida</label>
+            <div class="value" id="modo" style="font-size:.95rem">Agricultura sedentaria</div>
+            <div class="meter"><span id="modoBar" style="--w:80%;background:linear-gradient(90deg,var(--gold),var(--lime))"></span></div>
+          </div>
+          <div class="sensor">
+            <label>Lengua / familia</label>
+            <div class="value" id="lenguaRegion" style="font-size:.95rem">Cacán / quechua</div>
+            <div class="meter"><span id="lenguaBar" style="--w:60%;background:linear-gradient(90deg,var(--violet),var(--pink))"></span></div>
+          </div>
+          <div class="sensor">
+            <label>Patrimonio clave</label>
+            <div class="value" id="patrimonio" style="font-size:.95rem">Andenes y cerámica</div>
+            <div class="meter"><span id="patrimonioBar" style="--w:75%;background:linear-gradient(90deg,var(--terra),var(--gold))"></span></div>
+          </div>
+        </div>
+        <div class="demo-foot">
+          <span id="demoStatus">Recorre las regiones para comparar</span>
+          <button class="toggle" id="simulate">Siguiente región →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="nano">
+  <div class="wrap nanowide">
+    <div class="nano-art reveal">
+      <svg viewBox="0 0 460 340" fill="none" aria-label="Esquema ilustrativo de diversidad territorial">
+        <defs>
+          <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#f7d9b0"/>
+            <stop offset="1" stop-color="#f0e9dd"/>
+          </linearGradient>
+          <linearGradient id="land" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#c98a4c"/>
+            <stop offset="1" stop-color="#8f5a2c"/>
+          </linearGradient>
+          <linearGradient id="green" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#6ba648"/>
+            <stop offset="1" stop-color="#397a2b"/>
+          </linearGradient>
+        </defs>
+        <rect x="0" y="0" width="460" height="340" fill="url(#sky)" rx="18"/>
+        <circle cx="370" cy="70" r="30" fill="#e2992f" opacity=".8"/>
+        <path d="M0 260 L80 150 L150 230 L230 120 L330 250 L460 180 V340 H0 Z" fill="url(#land)" opacity=".55"/>
+        <g class="atom">
+          <rect x="0" y="255" width="460" height="85" fill="url(#land)" opacity=".9"/>
+          <rect x="0" y="258" width="460" height="8" fill="url(#green)" opacity=".8"/>
+          <rect x="0" y="285" width="460" height="6" fill="url(#green)" opacity=".65"/>
+          <rect x="0" y="308" width="460" height="6" fill="url(#green)" opacity=".55"/>
+        </g>
+        <g fill="#2b1a0c" opacity=".6" font-family="DM Mono, monospace" font-size="10" letter-spacing="1.2">
+          <text x="22" y="250">TERRITORIO</text>
+          <text x="300" y="200">DIVERSIDAD</text>
+          <text x="22" y="335">REGIONES</text>
+        </g>
+      </svg>
+      <div class="nano-caption">
+        <span class="mono">Esquema conceptual</span>
+        <span>Ambiente · cultura · territorio</span>
+      </div>
+    </div>
+
+    <div class="nano-copy reveal">
+      <div class="kicker mono">03 — Ambiente y cultura</div>
+      <h2>La vida<br>no es una sola.</h2>
+      <p>Los pueblos originarios de Argentina no comparten una única forma de vida. Desarrollaron estrategias diversas según el ambiente: riego y andenes en los valles áridos del Noroeste, movilidad estacional en el Chaco, navegación y pesca en el Litoral, caza de guanacos y ñandúes en la Patagonia.</p>
+      <p>Esa diversidad también se expresa en la organización social, las creencias, las técnicas y las lenguas. Reconocerla es el primer paso para superar los estereotipos.</p>
+      <div class="nano-points">
+        <div class="nano-point"><b style="color:var(--terra)">Noroeste</b><span>Agricultura de altura</span></div>
+        <div class="nano-point"><b style="color:var(--gold)">Chaco</b><span>Caza y recolección</span></div>
+        <div class="nano-point"><b style="color:var(--teal)">Litoral</b><span>Pesca y agricultura</span></div>
+        <div class="nano-point"><b style="color:var(--lime)">Patagonia</b><span>Caza y movilidad</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="historia">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <div class="kicker mono">04 — Línea del tiempo</div>
+        <h2>De la preexistencia<br>a la reemergencia.</h2>
+      </div>
+      <p>Hitos orientativos. La historia indígena no termina con la conquista: continúa con resistencias, adaptaciones y luchas por derechos.</p>
+    </div>
+
+    <div class="path-grid">
+      <article class="path-card reveal"><span class="num">+12.000 AÑOS</span><h3>Poblamiento temprano</h3><p>Diversos grupos humanos habitan el actual territorio argentino. La arqueología documenta ocupaciones muy antiguas en Patagonia, Pampa, Noroeste y Litoral.</p></article>
+      <article class="path-card reveal"><span class="num">SIGLO XV–XVI</span><h3>Imperio Inca y conquista</h3><p>El Tawantinsuyu expande su dominio sobre el Noroeste. Luego llegan los europeos, imponen el sistema colonial y desestructuran las sociedades originarias.</p></article>
+      <article class="path-card reveal"><span class="num">SIGLOS XVII–XVIII</span><h3>Misiones y resistencias</h3><p>Las misiones jesuitas y franciscanas reorganizan la vida de muchos pueblos. En el Chaco y la Patagonia se mantienen fuertes resistencias.</p></article>
+      <article class="path-card reveal"><span class="num">1878–1885</span><h3>Campañas militares</h3><p>Las campañas conocidas como "Conquista del Desierto" y "Conquista del Chaco" avanzan sobre territorios indígenas, con violencia, despojo y desplazamiento.</p></article>
+      <article class="path-card reveal"><span class="num">SIGLO XX</span><h3>Invisibilización y migración</h3><p>Muchas comunidades migran a las ciudades. El Estado promueve políticas asimilacionistas y la narrativa de una Argentina "blanca y europea".</p></article>
+      <article class="path-card reveal"><span class="num">1985–2000</span><h3>Reconocimiento jurídico</h3><p>Se sancionan leyes de protección indígena y la reforma constitucional de 1994 reconoce la preexistencia étnica y cultural de los pueblos originarios.</p></article>
+      <article class="path-card reveal"><span class="num">2001–2020</span><h3>Reemergencia y organización</h3><p>Se multiplican las organizaciones indígenas, los reclamos territoriales y los procesos de revitalización lingüística y cultural.</p></article>
+      <article class="path-card reveal"><span class="num">2022–HOY</span><h3>Censo y derechos en tensión</h3><p>El Censo 2022 visibiliza a más de 1,3 millones de personas indígenas. Al mismo tiempo, se profundizan conflictos por la tierra y retrocesos en políticas de protección.</p></article>
+      <article class="path-card reveal"><span class="num">FUTURO</span><h3>Plurinacionalidad</h3><p>El debate actual gira en torno al reconocimiento efectivo de derechos, la restitución territorial, la interculturalidad y la revitalización de las lenguas.</p></article>
+    </div>
+  </div>
+</section>
+
+<section id="pueblos">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <div class="kicker mono">05 — Pueblos destacados</div>
+        <h2>Nombres,<br>territorios y culturas.</h2>
+      </div>
+      <p>Una selección de pueblos entre los más de 48 reconocidos. No es una lista exhaustiva: cada pueblo tiene su propia historia y situación contemporánea.</p>
+    </div>
+
+    <div class="topic-grid">
+      <article class="topic reveal"><div class="topic-top"><div class="topic-icon">◈</div><span class="topic-num mono">CHACO</span></div><h3>Qom (toba)</h3><p>Pueblo chaqueño de tradición cazadora-recolectora. Hoy vive en Chaco, Formosa, Santa Fe y en grandes ciudades como Rosario y Buenos Aires. Su lengua es el qom.</p><div class="tag-row"><span class="tag">Qom</span><span class="tag">Chaco</span><span class="tag">Caza-recolección</span></div></article>
+      <article class="topic reveal"><div class="topic-top"><div class="topic-icon">⌬</div><span class="topic-num mono">CHACO</span></div><h3>Wichí</h3><p>Uno de los pueblos más numerosos del país. Habita Chaco, Salta y Formosa. Su nombre significa "persona" o "gente". Su lengua pertenece a la familia mataguaya.</p><div class="tag-row"><span class="tag">Wichí</span><span class="tag">Mataguaya</span><span class="tag">Chaco salteño</span></div></article>
+      <article class="topic reveal"><div class="topic-top"><div class="topic-icon">⚭</div><span class="topic-num mono">PATAGONIA</span></div><h3>Mapuche</h3><p>Pueblo originario de la Araucanía que se expandió hacia la Patagonia argentina. Vive principalmente en Neuquén, Río Negro y Chubut. Su lengua es el mapuzungun.</p><div class="tag-row"><span class="tag">Mapuzungun</span><span class="tag">Neuquén</span><span class="tag">Patagonia</span></div></article>
+      <article class="topic reveal"><div class="topic-top"><div class="topic-icon">✦</div><span class="topic-num mono">LITORAL</span></div><h3>Mbyá guaraní</h3><p>Pueblo guaraní de Misiones, con una fuerte tradición religiosa y una relación estrecha con la selva. Su lengua es el mbyá. También hay comunidades ava guaraní en Salta.</p><div class="tag-row"><span class="tag">Mbyá</span><span class="tag">Misiones</span><span class="tag">Selva</span></div></article>
+      <article class="topic reveal"><div class="topic-top"><div class="topic-icon">⛰</div><span class="topic-num mono">NOA</span></div><h3>Diaguitas</h3><p>Pueblo agricultor de los valles y quebradas del Noroeste. Construyeron canales de riego y andenes. Su cultura estuvo influida por el mundo andino.</p><div class="tag-row"><span class="tag">Andenes</span><span class="tag">Riego</span><span class="tag">Noroeste</span></div></article>
+      <article class="topic reveal"><div class="topic-top"><div class="topic-icon">◐</div><span class="topic-num mono">PATAGONIA SUR</span></div><h3>Selk'nam</h3><p>Pueblo cazador de Tierra del Fuego. Su ceremonia del Hain y sus máscaras son parte de un patrimonio cultural profundo. Fue víctima de un genocidio y hoy vive un proceso de reemergencia.</p><div class="tag-row"><span class="tag">Hain</span><span class="tag">Tierra del Fuego</span><span class="tag">Reemergencia</span></div></article>
+      <article class="topic reveal"><div class="topic-top"><div class="topic-icon">⛰</div><span class="topic-num mono">PATAGONIA</span></div><h3>Tehuelche (aonikenk)</h3><p>Pueblo cazador de la Patagonia, famoso por su estatura y su movilidad ecuestre. Usaban boleadoras y arcos. Su lengua es el aonek'o 'a'jen.</p><div class="tag-row"><span class="tag">Aonikenk</span><span class="tag">Boleadoras</span><span class="tag">Patagonia</span></div></article>
+      <article class="topic reveal"><div class="topic-top"><div class="topic-icon">⌂</div><span class="topic-num mono">SIERRAS</span></div><h3>Comechingones</h3><p>Pueblo de las sierras de Córdoba y San Luis. Agricultores y artesanos textiles. Su nombre actual es una denominación colonial; muchos se reconocen como camiare.</p><div class="tag-row"><span class="tag">Camiare</span><span class="tag">Córdoba</span><span class="tag">Textilería</span></div></article>
+      <article class="topic reveal"><div class="topic-top"><div class="topic-icon">◈</div><span class="topic-num mono">CUYO</span></div><h3>Huarpes</h3><p>Pueblo de Cuyo, con grupos laguneros y agricultores. Fue considerado "extinto" durante décadas, pero hoy vive un proceso de reemergencia identitaria.</p><div class="tag-row"><span class="tag">Cuyo</span><span class="tag">Reemergencia</span><span class="tag">Oasis</span></div></article>
+    </div>
+  </div>
+</section>
+
+<section class="lab" id="lenguas">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <div class="kicker mono">06 — Lenguas indígenas</div>
+        <h2>Palabras<br>que resisten.</h2>
+      </div>
+      <p>En Argentina se hablan alrededor de 40 lenguas indígenas, aunque solo 13 tienen hablantes activos. Muchas se encuentran en proceso de revitalización o en riesgo de desaparición.</p>
+    </div>
+
+    <div class="path-grid">
+      <article class="path-card reveal"><span class="num">FAMILIA GUAYCURÚ</span><h3>Qom, moqoit, pilagá</h3><p>Lenguas del Chaco con distintos grados de vitalidad. El qom y el pilagá tienen un número importante de hablantes.</p></article>
+      <article class="path-card reveal"><span class="num">FAMILIA MATAGUAYA</span><h3>Wichí, nivaclé, chorote</h3><p>El wichí es una de las lenguas con mayor vitalidad relativa; el chorote y el nivaclé también registran hablantes.</p></article>
+      <article class="path-card reveal"><span class="num">FAMILIA TUPÍ-GUARANÍ</span><h3>Mbyá, ava guaraní, tapiete</h3><p>Lenguas guaraníes habladas en Misiones y Salta. El mbyá y el ava guaraní mantienen transmisión intergeneracional.</p></article>
+      <article class="path-card reveal"><span class="num">MAPUZUNGUN</span><h3>Mapuche</h3><p>Lengua del pueblo mapuche, hablada en la Patagonia argentina y en Chile. Tiene hablantes activos y procesos de revitalización.</p></article>
+      <article class="path-card reveal"><span class="num">QUECHUA</span><h3>Quichua santiagueño</h3><p>Variedad de quechua hablada en Santiago del Estero, con una larga historia de contacto y vitalidad.</p></article>
+      <article class="path-card reveal"><span class="num">FAMILIA CHON</span><h3>Tehuelche, selk'nam, haush</h3><p>Lenguas de la Patagonia austral. Varias se encuentran sin hablantes nativos, pero hay esfuerzos de recuperación y documentación.</p></article>
+    </div>
+
+    <div class="note reveal">
+      <span style="font-size:1.1rem">ⓘ</span>
+      <span><b>Revitalización.</b> Hablar una lengua no es solo comunicarse: es transmitir una cosmovisión. Los proyectos de educación intercultural bilingüe y los medios indígenas son clave para su continuidad.</span>
+    </div>
+  </div>
+</section>
+
+<section id="cosmovision">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <div class="kicker mono">07 — Cosmovisión y patrimonio</div>
+        <h2>Relaciones<br>con el mundo.</h2>
+      </div>
+      <p>La cosmovisión de los pueblos originarios no es folclore: es una forma de entender la vida, el territorio y las relaciones entre humanos, animales, plantas y fuerzas espirituales.</p>
+    </div>
+
+    <div class="topic-grid">
+      <article class="topic reveal"><div class="topic-top"><div class="topic-icon">⛰</div><span class="topic-num mono">ANDES</span></div><h3>Pachamama</h3><p>La Madre Tierra, presente en el Noroeste y en gran parte del mundo andino. Se le ofrenda y se la celebra el 1 de agosto. Su culto se sincretiza con tradiciones católicas.</p><div class="tag-row"><span class="tag">Madre Tierra</span><span class="tag">Ofrendas</span><span class="tag">Agosto</span></div></article>
+      <article class="topic reveal"><div class="topic-top"><div class="topic-icon">✦</div><span class="topic-num mono">FUEGO</span></div><h3>Hain selk'nam</h3><p>Ceremonia de iniciación de los jóvenes selk'nam. Las máscaras y pinturas corporales representaban espíritus. Fue prohibida y perseguida, pero hoy se recupera su memoria.</p><div class="tag-row"><span class="tag">Iniciación</span><span class="tag">Máscaras</span><span class="tag">Memoria</span></div></article>
+      <article class="topic reveal"><div class="topic-top"><div class="topic-icon">⌘</div><span class="topic-num mono">CHACO</span></div><h3>Los dueños del monte</h3><p>Para muchos pueblos chaqueños, animales y plantas tienen dueños espirituales. La caza y la recolección implican respeto y reciprocidad con esas fuerzas.</p><div class="tag-row"><span class="tag">Espíritus</span><span class="tag">Monte</span><span class="tag">Reciprocidad</span></div></article>
+      <article class="topic reveal"><div class="topic-top"><div class="topic-icon">✎</div><span class="topic-num mono">PATRIMONIO</span></div><h3>Textiles y arte</h3><p>Los tejidos andinos y chaqueños combinan técnica, símbolos y memoria. El arte indígena contemporáneo también es una forma de resistencia y afirmación identitaria.</p><div class="tag-row"><span class="tag">Textiles</span><span class="tag">Símbolos</span><span class="tag">Arte actual</span></div></article>
+    </div>
+  </div>
+</section>
+
+<section id="actualidad">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <div class="kicker mono">08 — Situación actual</div>
+        <h2>Derechos<br>en tensión.</h2>
+      </div>
+      <p>Argentina reconoce constitucionalmente la preexistencia indígena, pero la implementación de derechos territoriales, culturales y lingüísticos sigue siendo desigual y conflictiva.</p>
+    </div>
+
+    <div class="path-grid">
+      <article class="path-card reveal"><span class="num">TENSIÓN 01</span><h3>Territorio</h3><p>Muchas comunidades enfrentan desalojos, presiones inmobiliarias, mineras y agropecuarias. La derogación de leyes de protección territorial agravó la situación en los últimos años.</p></article>
+      <article class="path-card reveal"><span class="num">TENSIÓN 02</span><h3>Consulta y participación</h3><p>El derecho a la consulta previa, libre e informada no siempre se cumple. Los pueblos reclaman participación real en las decisiones sobre sus territorios.</p></article>
+      <article class="path-card reveal"><span class="num">TENSIÓN 03</span><h3>Educación intercultural</h3><p>La educación intercultural bilingüe avanza de forma desigual. La falta de docentes formados y de materiales en lenguas originarias limita su implementación.</p></article>
+      <article class="path-card reveal"><span class="num">TENSIÓN 04</span><h3>Discriminación y racismo</h3><p>Persisten estereotipos y prácticas discriminatorias. El autorreconocimiento indígena creció también porque muchas personas dejaron de ocultar su identidad.</p></article>
+      <article class="path-card reveal"><span class="num">TENSIÓN 05</span><h3>Salud y ambiente</h3><p>Comunidades expuestas a contaminación, deforestación y falta de acceso a servicios de salud adecuados denuncian impactos sobre su vida y su cultura.</p></article>
+      <article class="path-card reveal"><span class="num">TENSIÓN 06</span><h3>Reemergencia</h3><p>Pueblos considerados "extintos" —como los huarpes o los selk'nam— viven procesos de reorganización y visibilización. La identidad no desaparece: se transforma.</p></article>
+    </div>
+
+    <div class="note reveal">
+      <span style="font-size:1.1rem">⚑</span>
+      <span><b>Marco legal.</b> La Constitución Nacional (art. 75 inc. 17) reconoce la preexistencia étnica y cultural, la personería jurídica de las comunidades, la posesión y propiedad comunitaria de las tierras y la educación intercultural bilingüe. El desafío es su cumplimiento efectivo.</span>
+    </div>
+  </div>
+</section>
+
+<section id="desafio">
+  <div class="wrap">
+    <div class="quiz reveal">
+      <div class="quiz-grid">
+        <div>
+          <div class="kicker mono">09 — Comprueba lo aprendido</div>
+          <h2>Evalúa tus conocimientos</h2>
+          <p>Responde tres preguntas sobre los pueblos originarios de Argentina.</p>
+          <div class="mono muted">PREGUNTA <span id="qnum">01</span> / 03</div>
+        </div>
+        <div>
+          <div class="question" id="question">¿Qué significa que los pueblos indígenas son "preexistentes"?</div>
+          <div class="answers" id="answers">
+            <button class="answer">Que llegaron antes que los europeos</button>
+            <button class="answer">Que habitaban el territorio antes de la creación del Estado argentino</button>
+            <button class="answer">Que ya no existen</button>
+          </div>
+          <div class="feedback" id="feedback" aria-live="polite">Selecciona una respuesta para continuar.</div>
+          <div class="quiz-bottom">
+            <span class="muted" id="score">Puntuación: 0</span>
+            <button class="btn" id="next" disabled>Siguiente →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap footerin">
+    <div><strong>PUEBLOS ORIGINARIOS <span style="color:var(--terra)">DE ARGENTINA</span></strong> <span>· Aprende explorando.</span></div>
+    <span>Guía educativa · Diversidad, lenguas y derechos</span>
+    <a href="#inicio">Volver arriba ↑</a>
+  </div>
+</footer>
+
+<script>
+/* Reveal */
+const observer = new IntersectionObserver(entries => entries.forEach(e => {
+  if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+}), { threshold: .12 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+/* Recorrido por regiones */
+const regions = [
+  { name:'Noroeste (NOA)', desc:'Valles y quebradas · agricultura de riego y andenes',
+    pueblos:'Diaguitas, omaguacas', pueblosW:85,
+    modo:'Agricultura sedentaria', modoW:80,
+    lengua:'Cacán / quechua', lenguaW:60,
+    patrimonio:'Andenes y cerámica', patrimonioW:75,
+    status:'Región andina · fuerte influencia incaica' },
+  { name:'Chaco', desc:'Llanura boscosa · caza, pesca y recolección',
+    pueblos:'Qom, wichí, moqoit', pueblosW:95,
+    modo:'Caza-recolección', modoW:88,
+    lengua:'Guaycurú / mataguaya', lenguaW:82,
+    patrimonio:'Cestería y oralidad', patrimonioW:80,
+    status:'Gran diversidad lingüística · resistencias históricas' },
+  { name:'Litoral', desc:'Ríos y selvas · pesca y agricultura incipiente',
+    pueblos:'Mbyá, ava guaraní, chaná', pueblosW:70,
+    modo:'Pesca y agricultura', modoW:65,
+    lengua:'Tupí-guaraní', lenguaW:78,
+    patrimonio:'Selva y espiritualidad', patrimonioW:72,
+    status:'Pueblos guaraníes · relación estrecha con la selva' },
+  { name:'Pampa', desc:'Llanura · movilidad ecuestre y caza',
+    pueblos:'Ranqueles, querandíes', pueblosW:55,
+    modo:'Caza y movilidad', modoW:70,
+    lengua:'Günün a yajüch / mapudungun', lenguaW:40,
+    patrimonio:'Tolderías y boleadoras', patrimonioW:50,
+    status:'Transformaciones por la colonización y el caballo' },
+  { name:'Patagonia', desc:'Estepa y bosque · caza y movilidad',
+    pueblos:'Mapuche, tehuelche, selk’nam', pueblosW:90,
+    modo:'Caza y recolección', modoW:85,
+    lengua:'Mapuzungun / chon', lenguaW:55,
+    patrimonio:'Arte rupestre y textilería', patrimonioW:78,
+    status:'Pueblos cazadores · genocidio y reemergencia' },
+  { name:'Cuyo', desc:'Oasis y precordillera · agricultura de riego',
+    pueblos:'Huarpes, pehuenches', pueblosW:60,
+    modo:'Agricultura de oasis', modoW:68,
+    lengua:'Huarpe / mapudungun', lenguaW:35,
+    patrimonio:'Canales y cerámica', patrimonioW:58,
+    status:'Reemergencia identitaria · disputas por el agua' }
+];
+let ri = 0;
+const simulate = document.getElementById('simulate');
+function renderRegion() {
+  const r = regions[ri];
+  document.getElementById('phaseName').textContent = r.name;
+  document.getElementById('phaseDesc').textContent = r.desc;
+  document.getElementById('demoStatus').textContent = r.status;
+  document.getElementById('pueblosRegion').textContent = r.pueblos;
+  document.getElementById('modo').textContent = r.modo;
+  document.getElementById('lenguaRegion').textContent = r.lengua;
+  document.getElementById('patrimonio').textContent = r.patrimonio;
+  document.getElementById('pueblosBar').style.setProperty('--w', r.pueblosW + '%');
+  document.getElementById('modoBar').style.setProperty('--w', r.modoW + '%');
+  document.getElementById('lenguaBar').style.setProperty('--w', r.lenguaW + '%');
+  document.getElementById('patrimonioBar').style.setProperty('--w', r.patrimonioW + '%');
+  simulate.textContent = ri === regions.length - 1 ? 'Volver al Noroeste' : 'Siguiente región →';
+}
+simulate.addEventListener('click', () => { ri = (ri + 1) % regions.length; renderRegion(); });
+renderRegion();
+
+/* Quiz */
+const questions = [
+  { q:'¿Qué significa que los pueblos indígenas son "preexistentes"?',
+    a:['Que llegaron antes que los europeos','Que habitaban el territorio antes de la creación del Estado argentino','Que ya no existen'],
+    correct:1,
+    why:'La preexistencia es un principio jurídico: los pueblos indígenas ya habitaban estas tierras antes de que se formara el Estado nacional, y ese hecho fundamenta sus derechos.' },
+  { q:'¿Cuál es uno de los pueblos chaqueños más numerosos de Argentina?',
+    a:['Mapuche','Wichí','Selk’nam'],
+    correct:1,
+    why:'El pueblo wichí habita Chaco, Salta y Formosa y es uno de los más numerosos del país. Su lengua pertenece a la familia mataguaya.' },
+  { q:'¿Qué reconoce el artículo 75 inciso 17 de la Constitución Nacional?',
+    a:['La preexistencia étnica y cultural de los pueblos indígenas','La desaparición de los pueblos originarios','La prohibición de hablar lenguas indígenas'],
+    correct:0,
+    why:'La reforma constitucional de 1994 reconoce la preexistencia étnica y cultural, la personería jurídica de las comunidades, la propiedad comunitaria de las tierras y la educación intercultural bilingüe.' }
+];
+let qi = 0, score = 0, answered = false;
+const qEl = document.getElementById('question');
+const aEl = document.getElementById('answers');
+const fEl = document.getElementById('feedback');
+const nEl = document.getElementById('qnum');
+const sEl = document.getElementById('score');
+const next = document.getElementById('next');
+
+function renderQ() {
+  const q = questions[qi];
+  answered = false;
+  nEl.textContent = String(qi + 1).padStart(2, '0');
+  qEl.textContent = q.q;
+  aEl.innerHTML = '';
+  q.a.forEach((a, i) => {
+    const b = document.createElement('button');
+    b.className = 'answer';
+    b.textContent = a;
+    b.addEventListener('click', () => choose(i, b));
+    aEl.appendChild(b);
+  });
+  fEl.textContent = 'Selecciona una respuesta para continuar.';
+  next.disabled = true;
+  next.textContent = qi === questions.length - 1 ? 'Reiniciar ↻' : 'Siguiente →';
+}
+
+function choose(i, b) {
+  if (answered) return;
+  answered = true;
+  const q = questions[qi];
+  [...aEl.children].forEach((el, j) => {
+    el.disabled = true;
+    if (j === q.correct) el.classList.add('correct');
+  });
+  if (i === q.correct) { score++; fEl.textContent = '¡Correcto! ' + q.why; }
+  else { b.classList.add('wrong'); fEl.textContent = 'Casi. ' + q.why; }
+  sEl.textContent = 'Puntuación: ' + score;
+  next.disabled = false;
+}
+
+next.addEventListener('click', () => {
+  if (!answered) return;
+  if (qi < questions.length - 1) { qi++; renderQ(); }
+  else {
+    qi = 0; score = 0;
+    sEl.textContent = 'Puntuación: 0';
+    renderQ();
+    fEl.textContent = '¡Vamos otra vez!';
+  }
+});
+
+renderQ();
+</script>
+</body>
+</html>

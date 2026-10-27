@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#f7f2e8" />
+<meta name="description" content="Guía sobre el Renacimiento: contexto histórico, humanismo, arte, ciencia, mecenazgo, difusión europea, línea del tiempo, legado y debates." />
+<title>Renacimiento — Humanismo, arte y ciencia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f7f2e8;
+  --panel:#ffffff;
+  --panel2:#efe7d7;
+  --line:rgba(30,24,14,.13);
+  --text:#181309;
+  --muted:#6b5c46;
+  --medici:#8a2538;
+  --terracotta:#b85a2c;
+  --gold:#9a7711;
+  --teal:#156b6e;
+  --royal:#2d3a76;
+  --lime:#4d7c2a;
+  --radius:22px;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{margin:0;background:radial-gradient(ellipse at 80% -10%,#f0e2c8 0,transparent 36%),var(--bg);color:var(--text);font-family:Manrope,system-ui,sans-serif;line-height:1.6;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.5;z-index:-1;background-image:linear-gradient(rgba(30,24,14,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(30,24,14,.035) 1px,transparent 1px);background-size:48px 48px;mask-image:linear-gradient(to bottom,black,transparent 80%)}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer}
+a:focus-visible,button:focus-visible{outline:2px solid var(--medici);outline-offset:3px}
+.mono{font-family:"DM Mono",monospace;text-transform:uppercase;letter-spacing:.12em;font-size:.72rem}
+.muted{color:var(--muted)}
+.wrap{width:min(1160px,calc(100% - 40px));margin:auto}
+
+nav{position:sticky;top:0;z-index:20;backdrop-filter:blur(18px);background:rgba(247,242,232,.88);border-bottom:1px solid var(--line)}
+.navin{min-height:68px;height:auto;display:flex;align-items:center;justify-content:space-between;gap:14px;padding-top:8px;padding-bottom:8px}
+.brand{display:flex;align-items:center;gap:11px;font-weight:800;letter-spacing:-.04em;font-size:clamp(.68rem,.98vw,.86rem);white-space:nowrap}
+.brandmark{width:34px;height:34px;border-radius:11px;background:linear-gradient(135deg,var(--medici),var(--gold));display:grid;place-items:center;color:#fff;font-weight:900;box-shadow:0 6px 18px #8a253833}
+.navlinks{display:flex;align-items:center;gap:clamp(8px,1.4vw,18px);color:var(--muted);font-size:clamp(.68rem,.88vw,.82rem);white-space:nowrap}
+.navlinks a:hover{color:var(--medici)}
+.navcta{white-space:nowrap;padding:9px 12px;font-size:.74rem}
+.navcta,.btn{border:1px solid var(--line);background:rgba(30,24,14,.04);color:var(--text);padding:11px 16px;border-radius:999px;font-weight:700;font-size:.85rem;transition:.25s}
+.navcta:hover,.btn:hover{border-color:var(--medici);transform:translateY(-2px)}
+.btn.primary{background:var(--medici);color:#fff;border-color:var(--medici)}
+.btn.primary:hover{box-shadow:0 10px 28px #8a253838}
+.btn:disabled{opacity:.45;cursor:not-allowed;transform:none}
+
+.hero{padding:92px 0 72px;position:relative}
+.hero-grid{display:grid;grid-template-columns:1.02fr .98fr;align-items:center;gap:45px}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;color:var(--medici);margin-bottom:20px}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--medici);box-shadow:0 0 14px #8a253866}
+h1{font-size:clamp(2.7rem,5.8vw,5.2rem);line-height:1;letter-spacing:-.07em;margin:0 0 24px;font-weight:800}
+h1 .gradient{background:linear-gradient(100deg,var(--medici),#b8691f 48%,var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{font-size:1.08rem;color:var(--muted);max-width:560px;margin:0 0 30px}
+.actions{display:flex;gap:12px;flex-wrap:wrap}
+.hero-note{display:flex;align-items:center;gap:15px;margin-top:38px;color:var(--muted);font-size:.8rem}
+.avatars{display:flex}
+.avatars span{width:29px;height:29px;border:2px solid var(--bg);margin-left:-7px;border-radius:50%;display:grid;place-items:center;background:#e5dbc7;color:#3f3020;font-size:.68rem}
+.avatars span:first-child{margin-left:0}
+
+/* --- Gráfico principal responsivo --- */
+.visual{position:relative;display:grid;place-items:center;width:100%}
+.chart-card{width:100%;max-width:600px;background:#fff;border:1px solid var(--line);border-radius:24px;padding:16px 16px 12px;box-shadow:0 24px 60px rgba(30,24,14,.10)}
+.chart-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:4px;color:var(--muted)}
+.chart{width:100%;height:auto;display:block;overflow:visible}
+.chart-legend{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:8px;color:var(--muted);font-size:.7rem}
+.chart-legend span{display:inline-flex;align-items:center;gap:6px}
+.chart-legend i{width:10px;height:10px;border-radius:3px;display:inline-block}
+.chart-foot{display:flex;justify-content:space-between;gap:10px;margin-top:6px;color:var(--muted);font-size:.68rem;flex-wrap:wrap}
+
+.stats{border-block:1px solid var(--line);padding:23px 0}
+.stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.stat{padding-left:22px;border-left:1px solid var(--line)}
+.stat:first-child{border:0;padding-left:0}
+.stat strong{display:block;font-size:1.3rem;letter-spacing:-.05em}
+.stat span{font-size:.78rem;color:var(--muted)}
+
+section{padding:94px 0}
+.section-head{display:flex;align-items:end;justify-content:space-between;gap:25px;margin-bottom:35px}
+.kicker{color:var(--medici);margin-bottom:12px}
+.section-head h2,.split-copy h2{font-size:clamp(2.1rem,4vw,3.5rem);line-height:1.05;letter-spacing:-.065em;margin:0}
+.section-head p{max-width:440px;color:var(--muted);margin:0}
+.topic-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.topic{border:1px solid var(--line);border-radius:var(--radius);background:linear-gradient(145deg,#ffffff,#f5efe1);padding:28px;position:relative;overflow:hidden;transition:transform .3s,border-color .3s,box-shadow .3s;box-shadow:0 10px 30px rgba(30,24,14,.05)}
+.topic:hover{transform:translateY(-6px);border-color:#8a253855;box-shadow:0 18px 45px rgba(30,24,14,.10)}
+.topic:after{content:"";position:absolute;width:220px;height:220px;border-radius:50%;filter:blur(70px);opacity:.15;right:-100px;top:-110px;background:var(--glow,var(--medici));pointer-events:none}
+.topic-top{display:flex;align-items:center;justify-content:space-between}
+.topic-icon{width:48px;height:48px;border-radius:15px;background:#8a253812;border:1px solid #8a253833;display:grid;place-items:center;color:var(--medici);font-size:1.15rem}
+.topic-num{color:#a1957d}
+.topic h3{font-size:1.4rem;margin:25px 0 9px;letter-spacing:-.04em}
+.topic p{color:var(--muted);margin:0 0 23px}
+.tag-row{display:flex;flex-wrap:wrap;gap:8px}
+.tag{font-size:.72rem;padding:6px 10px;border:1px solid var(--line);border-radius:999px;color:#463a22;background:rgba(30,24,14,.035)}
+
+.lab{background:linear-gradient(180deg,transparent,#ece2cf 28%,#ece2cf 75%,transparent)}
+.lab-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:42px;align-items:center}
+.split-copy p{color:var(--muted);max-width:450px}
+.checklist{list-style:none;padding:0;margin:26px 0;display:grid;gap:13px}
+.checklist li{display:flex;gap:11px;align-items:start;color:#2e2415;font-size:.9rem}
+.check{color:var(--medici);font-weight:900}
+.demo{background:#ffffff;border:1px solid var(--line);border-radius:24px;overflow:hidden;box-shadow:0 20px 60px rgba(30,24,14,.10)}
+.demo-head{padding:17px 20px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:12px;background:#fdfbf7;flex-wrap:wrap}
+.window-dots{display:flex;gap:5px}
+.window-dots i{width:7px;height:7px;border-radius:50%;background:#d6c9b1}
+.live{color:var(--lime);font-size:.7rem}
+.demo-body{padding:24px}
+.phase-title{font-size:1.35rem;font-weight:800;letter-spacing:-.03em;margin:0 0 4px;color:var(--medici)}
+.sensor-panel{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
+.sensor{padding:17px;border:1px solid var(--line);border-radius:16px;background:rgba(30,24,14,.025)}
+.sensor label{color:var(--muted);font-size:.76rem}
+.sensor .value{font-size:1.25rem;font-weight:800;letter-spacing:-.05em;margin:8px 0}
+.sensor .value small{font-size:.75rem;color:var(--muted);font-weight:500}
+.meter{height:5px;background:#e8dfcd;border-radius:9px;overflow:hidden}
+.meter span{display:block;height:100%;width:var(--w);background:linear-gradient(90deg,var(--gold),var(--medici));border-radius:9px;transition:width .5s}
+.demo-foot{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:18px;color:var(--muted);font-size:.78rem;flex-wrap:wrap}
+.toggle{border:1px solid #8a253850;background:#8a253810;color:var(--medici);padding:9px 13px;border-radius:10px;font-weight:700;font-size:.78rem}
+.toggle:hover{background:#8a253820}
+
+.nanowide{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.nano-art{min-height:400px;border-radius:24px;border:1px solid var(--line);background:radial-gradient(circle at 50% 30%,#f2e2c6,transparent 65%),#efe8d9;position:relative;overflow:hidden;display:grid;place-items:center}
+.nano-art svg{width:90%;max-width:460px;overflow:visible}
+.atom{animation:float 6s ease-in-out infinite;transform-origin:center}
+.atom:nth-child(2){animation-delay:-2s}
+.atom:nth-child(3){animation-delay:-4s}
+.nano-caption{position:absolute;bottom:18px;left:20px;right:20px;display:flex;justify-content:space-between;color:var(--muted);font-size:.72rem;gap:10px}
+.nano-copy h2{font-size:clamp(2.2rem,4vw,3.3rem);line-height:1.05;letter-spacing:-.065em;margin:0 0 20px}
+.nano-copy p{color:var(--muted)}
+.nano-points{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:25px}
+.nano-point{padding:15px;border:1px solid var(--line);border-radius:14px;background:rgba(30,24,14,.025)}
+.nano-point b{display:block;font-size:.86rem}
+.nano-point span{font-size:.76rem;color:var(--muted)}
+
+.path-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.path-card{padding:23px;border:1px solid var(--line);border-radius:18px;background:#ffffff;box-shadow:0 10px 26px rgba(30,24,14,.05);transition:transform .3s,border-color .3s,box-shadow .3s}
+.path-card:hover{transform:translateY(-4px);border-color:#8a253855;box-shadow:0 16px 40px rgba(30,24,14,.09)}
+.path-card .num{font-family:"DM Mono",monospace;color:var(--gold);font-size:.78rem;letter-spacing:.08em}
+.path-card h3{margin:14px 0 7px;font-size:1.06rem;letter-spacing:-.02em}
+.path-card p{font-size:.85rem;color:var(--muted);margin:0}
+
+.note{display:flex;gap:12px;align-items:start;padding:16px 18px;border:1px dashed #9a771155;background:#9a77110d;border-radius:14px;color:#5c4712;font-size:.85rem;margin-top:24px}
+.note b{color:#7a5e0a}
+
+.quiz{padding:30px;border:1px solid #8a25383d;border-radius:24px;background:radial-gradient(ellipse at 90% 0%,#f3dcdc,transparent 55%),#ffffff;box-shadow:0 16px 45px rgba(30,24,14,.08)}
+.quiz-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:35px}
+.quiz h2{font-size:2rem;line-height:1.1;letter-spacing:-.06em;margin:0 0 12px}
+.quiz p{color:var(--muted)}
+.question{font-size:1.1rem;font-weight:700;margin-bottom:17px;letter-spacing:-.02em}
+.answers{display:grid;gap:10px}
+.answer{padding:13px 15px;border:1px solid var(--line);border-radius:12px;background:#faf7f2;color:var(--text);text-align:left;transition:.2s}
+.answer:hover:not(:disabled){border-color:var(--medici);background:#8a25380c}
+.answer:disabled{cursor:default}
+.answer.correct{border-color:var(--lime);background:#4d7c2a12}
+.answer.wrong{border-color:var(--terracotta);background:#b85a2c12}
+.feedback{min-height:26px;font-size:.85rem;margin-top:12px;color:var(--muted)}
+.quiz-bottom{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:18px;flex-wrap:wrap}
+.quiz-bottom .btn{font-size:.8rem}
+
+footer{padding:30px 0;border-top:1px solid var(--line);color:var(--muted);font-size:.78rem}
+.footerin{display:flex;justify-content:space-between;align-items:center;gap:20px}
+.footerin strong{color:var(--text)}
+
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}.reveal{opacity:1;transform:none}}
+
+@media(max-width:920px){.navlinks{display:none}.navin{min-height:66px}}
+@media(max-width:850px){
+  .hero-grid,.lab-grid,.nanowide,.quiz-grid{grid-template-columns:1fr}
+  .hero{padding-top:60px}
+  .visual{order:-1}
+  .hero-grid{gap:18px}
+  .hero-copy{text-align:center}
+  .hero-copy p{margin-inline:auto}
+  .actions,.hero-note{justify-content:center}
+  .section-head{display:block}
+  .section-head p{margin-top:15px}
+  .lab-grid{gap:28px}
+  .nanowide{gap:25px}
+  .nano-art{min-height:310px}
+  .quiz-grid{gap:12px}
+  .stat-grid{grid-template-columns:repeat(2,1fr);row-gap:22px}
+  .stat:nth-child(3){padding-left:0;border:0}
+  .path-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:560px){
+  .wrap{width:min(100% - 28px,1160px)}
+  .navin{height:66px}
+  .navcta{padding:9px 12px;font-size:.72rem}
+  .hero{padding:43px 0 45px}
+  h1{font-size:2.5rem}
+  .chart-card{padding:12px 10px 8px;border-radius:18px}
+  .chart-legend{font-size:.64rem;gap:4px 10px}
+  .stats{padding:18px 0}
+  section{padding:66px 0}
+  .topic-grid{grid-template-columns:1fr}
+  .topic{padding:23px}
+  .sensor-panel{grid-template-columns:1fr 1fr}
+  .sensor{padding:12px}
+  .sensor .value{font-size:1rem}
+  .demo-body{padding:15px}
+  .path-grid{grid-template-columns:1fr}
+  .nano-points{grid-template-columns:1fr 1fr}
+  .quiz{padding:22px}
+  .footerin{align-items:flex-start;flex-direction:column;gap:8px}
+}
+</style>
+</head>
+<body>
+<nav>
+  <div class="wrap navin">
+    <a class="brand" href="#inicio"><span class="brandmark">R</span> RENACIMIENTO <span style="color:var(--medici)">· SIGLOS XIV–XVI</span></a>
+    <div class="navlinks">
+      <a href="#panorama">Panorama</a>
+      <a href="#humanismo">Humanismo</a>
+      <a href="#arte">Arte</a>
+      <a href="#ciencia">Ciencia</a>
+      <a href="#difusion">Difusión</a>
+      <a href="#historia">Línea del tiempo</a>
+      <a href="#legado">Legado</a>
+    </div>
+    <a class="navcta" href="#panorama">Ver contenidos ↗</a>
+  </div>
+</nav>
+
+<main>
+<header class="hero" id="inicio">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <div class="eyebrow mono"><span class="dot"></span> Arte · Pensamiento · Ciencia</div>
+      <h1>Renacimiento<br><span class="gradient">volver a mirar</span></h1>
+      <p>Entre los siglos XIV y XVI, Europa occidental vivió una profunda renovación cultural. El ser humano, la naturaleza y la antigüedad clásica volvieron al centro de la mirada. Nacieron la perspectiva, la imprenta, el método experimental y una nueva forma de entender el mundo.</p>
+      <div class="actions">
+        <a class="btn primary" href="#panorama">Explorar el panorama <span>↗</span></a>
+        <a class="btn" href="#historia">Ver línea del tiempo</a>
+      </div>
+      <div class="hero-note">
+        <div class="avatars"><span>◈</span><span>✎</span><span>☼</span></div>
+        <span>Los datos del gráfico son índices ilustrativos de difusión cultural.</span>
+      </div>
+    </div>
+
+    <!-- GRÁFICO PRINCIPAL RESPONSIVO -->
+    <div class="visual">
+      <figure class="chart-card" style="margin:0">
+        <div class="chart-head">
+          <span class="mono">Difusión cultural del Renacimiento · 1400–1600</span>
+          <span class="mono" style="color:var(--medici)">Índice 0–100</span>
+        </div>
+
+        <svg class="chart" viewBox="0 0 560 320" role="img" aria-labelledby="chartTitle chartDesc">
+          <title id="chartTitle">Difusión del Renacimiento en Europa entre 1400 y 1600</title>
+          <desc id="chartDesc">Gráfico de dos líneas: la producción artística y humanista alcanza su punto máximo en Italia hacia 1500 y luego se estabiliza; la difusión europea crece de forma sostenida desde 1450 y supera a Italia hacia 1580.</desc>
+
+          <defs>
+            <linearGradient id="itaGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#8a2538" stop-opacity=".26"/>
+              <stop offset="1" stop-color="#8a2538" stop-opacity=".02"/>
+            </linearGradient>
+            <linearGradient id="eurGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#2d3a76" stop-opacity=".22"/>
+              <stop offset="1" stop-color="#2d3a76" stop-opacity=".02"/>
+            </linearGradient>
+          </defs>
+
+          <!-- Bandas de etapas -->
+          <g>
+            <rect x="50" y="20" width="196" height="250" fill="#8a2538" opacity=".055"/>
+            <rect x="246" y="20" width="122.5" height="250" fill="#9a7711" opacity=".085"/>
+            <rect x="368.5" y="20" width="171.5" height="250" fill="#2d3a76" opacity=".07"/>
+          </g>
+
+          <!-- Retícula -->
+          <g stroke="#181309" stroke-opacity=".10" stroke-width="1">
+            <line x1="50" y1="270" x2="540" y2="270"/>
+            <line x1="50" y1="207.5" x2="540" y2="207.5"/>
+            <line x1="50" y1="145" x2="540" y2="145"/>
+            <line x1="50" y1="82.5" x2="540" y2="82.5"/>
+            <line x1="50" y1="20" x2="540" y2="20"/>
+          </g>
+
+          <!-- Eje Y -->
+          <g fill="#6b5c46" font-family="DM Mono, monospace" font-size="13" text-anchor="end">
+            <text x="42" y="274">0</text>
+            <text x="42" y="212">25</text>
+            <text x="42" y="149">50</text>
+            <text x="42" y="87">75</text>
+            <text x="42" y="24">100</text>
+          </g>
+
+          <!-- Área Europa -->
+          <path d="M50,258
+                   C90,254 130,246 172,240
+                   C200,235 220,225 240,215
+                   C260,204 275,192 295,180
+                   C320,164 345,145 368,127.5
+                   C400,105 440,80 480,62.5
+                   C505,52 525,45 540,40
+                   L540,270 L50,270 Z"
+                fill="url(#eurGrad)"/>
+
+          <!-- Área Italia -->
+          <path d="M50,235
+                   C90,215 130,185 172,155
+                   C200,132 220,110 240,95
+                   C260,82 275,72 295,66.5
+                   C320,60 345,57 368,58
+                   C400,60 440,62 480,64
+                   C505,65 525,66 540,67
+                   L540,270 L50,270 Z"
+                fill="url(#itaGrad)"/>
+
+          <!-- Línea Europa -->
+          <path d="M50,258
+                   C90,254 130,246 172,240
+                   C200,235 220,225 240,215
+                   C260,204 275,192 295,180
+                   C320,164 345,145 368,127.5
+                   C400,105 440,80 480,62.5
+                   C505,52 525,45 540,40"
+                fill="none" stroke="#2d3a76" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+
+          <!-- Línea Italia -->
+          <path d="M50,235
+                   C90,215 130,185 172,155
+                   C200,132 220,110 240,95
+                   C260,82 275,72 295,66.5
+                   C320,60 345,57 368,58
+                   C400,60 440,62 480,64
+                   C505,65 525,66 540,67"
+                fill="none" stroke="#8a2538" stroke-width="3.4" stroke-linejoin="round" stroke-linecap="round"/>
+
+          <!-- Hitos -->
+          <g>
+            <!-- 1450 imprenta -->
+            <circle cx="172" cy="240" r="4.5" fill="#fff" stroke="#2d3a76" stroke-width="2.4"/>
+            <text x="172" y="226" text-anchor="middle" fill="#2d3a76" font-family="DM Mono, monospace" font-size="10.5">1450</text>
+            <text x="172" y="214" text-anchor="middle" fill="#6b5c46" font-family="DM Mono, monospace" font-size="9.5">IMPRENTA</text>
+
+            <!-- 1500 cima -->
+            <circle cx="295" cy="66.5" r="4.5" fill="#fff" stroke="#8a2538" stroke-width="2.4"/>
+            <text x="295" y="52" text-anchor="middle" fill="#8a2538" font-family="DM Mono, monospace" font-size="10.5">1500</text>
+            <text x="295" y="40" text-anchor="middle" fill="#6b5c46" font-family="DM Mono, monospace" font-size="9.5">CIMA ITALIANA</text>
+
+            <!-- 1543 Copérnico -->
+            <circle cx="418" cy="90" r="4.5" fill="#fff" stroke="#9a7711" stroke-width="2.4"/>
+            <text x="418" y="76" text-anchor="middle" fill="#9a7711" font-family="DM Mono, monospace" font-size="10.5">1543</text>
+            <text x="418" y="64" text-anchor="middle" fill="#6b5c46" font-family="DM Mono, monospace" font-size="9.5">COPÉRNICO</text>
+          </g>
+
+          <!-- Etiquetas de etapa -->
+          <g font-family="DM Mono, monospace" font-size="11.5" letter-spacing="1.6" text-anchor="middle">
+            <text x="148" y="34" fill="#8a2538">QUATTROCENTO</text>
+            <text x="307" y="34" fill="#9a7711">CINQUECENTO</text>
+            <text x="454" y="34" fill="#2d3a76">DIFUSIÓN</text>
+          </g>
+
+          <!-- Eje X -->
+          <g fill="#6b5c46" font-family="DM Mono, monospace" font-size="13">
+            <text x="50" y="292" text-anchor="middle">1400</text>
+            <text x="172" y="292" text-anchor="middle">1450</text>
+            <text x="295" y="292" text-anchor="middle">1500</text>
+            <text x="418" y="292" text-anchor="middle">1550</text>
+            <text x="540" y="292" text-anchor="end">1600</text>
+          </g>
+          <text x="295" y="313" text-anchor="middle" fill="#6b5c46" font-family="DM Mono, monospace" font-size="10.5" letter-spacing="1.6">AÑOS</text>
+        </svg>
+
+        <figcaption class="chart-legend">
+          <span><i style="background:var(--medici)"></i>Producción artística y humanista en Italia</span>
+          <span><i style="background:var(--royal)"></i>Difusión europea</span>
+          <span><i style="background:var(--gold)"></i>Etapas</span>
+        </figcaption>
+        <div class="chart-foot">
+          <span>Índices ilustrativos · tendencias historiográficas</span>
+          <span>1400 — 1600</span>
+        </div>
+      </figure>
+    </div>
+  </div>
+</header>
+
+<div class="stats">
+  <div class="wrap stat-grid">
+    <div class="stat"><strong>1450 <span style="color:var(--medici)">·</span></strong><span>Imprenta de Gutenberg</span></div>
+    <div class="stat"><strong>1453 <span style="color:var(--gold)">·</span></strong><span>Caída de Constantinopla</span></div>
+    <div class="stat"><strong>1503 <span style="color:var(--teal)">·</span></strong><span>La Gioconda de Leonardo</span></div>
+    <div class="stat"><strong>1543 <span style="color:var(--royal)">·</span></strong><span>Copérnico y Vesalio</span></div>
+  </div>
+</div>
+
+<section id="panorama">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <div class="kicker mono">01 — Panorama</div>
+        <h2>¿Qué fue<br>el Renacimiento?</h2>
+      </div>
+      <p>Más que un estilo artístico, el Renacimiento fue un movimiento cultural que transformó la forma de pensar, mirar y representar el mundo. Nació en las ciudades del norte de Italia y, desde allí, se difundió por Europa.</p>
+    </div>
+
+    <div class="topic-grid">
+      <article class="topic reveal" style="--glow:var(--medici)">
+        <div class="topic-top">
+          <div class="topic-icon">◈</div>
+          <span class="topic-num mono">01 / CONCEPTO</span>
+        </div>
+        <h3>Un "renacer" clásico</h3>
+        <p>Los humanistas quisieron recuperar la cultura griega y romana y colocarla como modelo. Ese retorno a la Antigüedad dio nombre al movimiento: <em>renasci</em>, volver a nacer.</p>
+        <div class="tag-row">
+          <span class="tag">Antigüedad</span><span class="tag">Clasicismo</span><span class="tag">Humanismo</span>
+        </div>
+      </article>
+
+      <article class="topic reveal" style="--glow:var(--gold)">
+        <div class="topic-top">
+          <div class="topic-icon" style="color:var(--gold);background:#9a771112;border-color:#9a771133">✦</div>
+          <span class="topic-num mono">02 / CONTEXTO</span>
+        </div>
+        <h3>Ciudades y mecenas</h3>
+        <p>Florencia, Venecia, Roma y Milán fueron centros del nuevo movimiento. Familias como los Médici financiaron artistas y pensadores: el mecenazgo fue clave para su desarrollo.</p>
+        <div class="tag-row">
+          <span class="tag">Médici</span><span class="tag">Florencia</span><span class="tag">Mecenazgo</span>
+        </div>
+      </article>
+    </div>
+
+    <div class="note reveal">
+      <span style="font-size:1.1rem">⚖</span>
+      <span><b>Matices.</b> El Renacimiento no fue un corte abrupto con la Edad Media. Muchas continuidades se mantuvieron, y el movimiento convivió con la escolástica, la religiosidad tradicional y la política de poder.</span>
+    </div>
+  </div>
+</section>
+
+<section class="lab" id="humanismo">
+  <div class="wrap lab-grid">
+    <div class="split-copy reveal">
+      <div class="kicker mono">02 — Humanismo</div>
+      <h2>El ser humano<br>en el centro.</h2>
+      <p>Los humanistas estudiaron los textos clásicos con una mirada nueva. Desarrollaron la filología, defendieron la educación como formación integral y revalorizaron la dignidad humana.</p>
+      <ul class="checklist">
+        <li><span class="check">✓</span><span><b>Estudio de las fuentes:</b> leer a los clásicos en su lengua original y contrastar manuscritos.</span></li>
+        <li><span class="check">✓</span><span><b>Educación integral:</b> gramática, retórica, historia, poesía y filosofía moral.</span></li>
+        <li><span class="check">✓</span><span><b>Individualismo:</b> nueva conciencia del yo, del mérito personal y de la fama.</span></li>
+      </ul>
+      <a class="btn" href="#arte">Ver arte ↗</a>
+    </div>
+
+    <div class="demo reveal">
+      <div class="demo-head">
+        <div style="display:flex;align-items:center;gap:11px">
+          <div class="window-dots"><i></i><i></i><i></i></div>
+          <span class="mono">COMPARADOR DIDÁCTICO / 007</span>
+        </div>
+        <span class="live mono">● ÍNDICES RELATIVOS</span>
+      </div>
+      <div class="demo-body">
+        <p class="phase-title" id="phaseName">Quattrocento</p>
+        <span class="muted" style="font-size:.8rem" id="phaseDesc">Siglo XV · Florencia, perspectiva y primeras academias</span>
+        <div class="sensor-panel">
+          <div class="sensor">
+            <label>Arte</label>
+            <div class="value" id="arte">70 <small>%</small></div>
+            <div class="meter"><span id="arteBar" style="--w:70%"></span></div>
+          </div>
+          <div class="sensor">
+            <label>Literatura</label>
+            <div class="value" id="lit">65 <small>%</small></div>
+            <div class="meter"><span id="litBar" style="--w:65%"></span></div>
+          </div>
+          <div class="sensor">
+            <label>Filosofía</label>
+            <div class="value" id="fil">55 <small>%</small></div>
+            <div class="meter"><span id="filBar" style="--w:55%;background:linear-gradient(90deg,var(--gold),var(--medici))"></span></div>
+          </div>
+          <div class="sensor">
+            <label>Ciencia</label>
+            <div class="value" id="cie">40 <small>%</small></div>
+            <div class="meter"><span id="cieBar" style="--w:40%;background:linear-gradient(90deg,var(--royal),var(--teal))"></span></div>
+          </div>
+        </div>
+        <div class="demo-foot">
+          <span id="demoStatus">Foco en Florencia · mecenazgo de los Médici</span>
+          <button class="toggle" id="simulate">Siguiente etapa →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="nano">
+  <div class="wrap nanowide">
+    <div class="nano-art reveal">
+      <svg viewBox="0 0 460 340" fill="none" aria-label="Esquema ilustrativo de una cúpula renacentista y proporciones">
+        <defs>
+          <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#f8e2b8"/>
+            <stop offset="1" stop-color="#efe8d9"/>
+          </linearGradient>
+          <linearGradient id="dome" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#c4543a"/>
+            <stop offset="1" stop-color="#8a2f22"/>
+          </linearGradient>
+          <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#e5d3b3"/>
+            <stop offset="1" stop-color="#c2a980"/>
+          </linearGradient>
+        </defs>
+        <rect x="0" y="0" width="460" height="340" fill="url(#sky)" rx="18"/>
+        <circle cx="374" cy="64" r="26" fill="#d99540" opacity=".7"/>
+        <!-- Edificio -->
+        <g class="atom">
+          <rect x="110" y="180" width="240" height="120" fill="url(#wall)"/>
+          <path d="M110 180 L230 118 L350 180 Z" fill="url(#dome)"/>
+          <rect x="215" y="90" width="30" height="30" fill="#8a2f22"/>
+          <circle cx="230" cy="80" r="10" fill="#c4543a"/>
+          <!-- Columnas -->
+          <rect x="130" y="200" width="18" height="100" fill="#efe5d2"/>
+          <rect x="170" y="200" width="18" height="100" fill="#efe5d2"/>
+          <rect x="210" y="200" width="18" height="100" fill="#efe5d2"/>
+          <rect x="250" y="200" width="18" height="100" fill="#efe5d2"/>
+          <rect x="290" y="200" width="18" height="100" fill="#efe5d2"/>
+          <rect x="330" y="200" width="18" height="100" fill="#efe5d2"/>
+          <!-- Ventanas -->
+          <circle cx="230" cy="205" r="10" fill="#8a2f22" opacity=".6"/>
+          <!-- Línea de simetría -->
+          <line x1="230" y1="70" x2="230" y2="300" stroke="#8a2f22" stroke-width="1.4" stroke-dasharray="4 4" opacity=".55"/>
+        </g>
+        <!-- Proporciones -->
+        <g class="atom" opacity=".7">
+          <circle cx="90" cy="240" r="60" stroke="#8a2f22" stroke-width="1.4" stroke-dasharray="3 3" fill="none"/>
+          <circle cx="370" cy="240" r="60" stroke="#8a2f22" stroke-width="1.4" stroke-dasharray="3 3" fill="none"/>
+        </g>
+        <g class="atom">
+          <path d="M0 300 H460 V340 H0 Z" fill="#a69575" opacity=".85"/>
+          <path d="M0 314 H460" stroke="#6d5f42" stroke-width="2" opacity=".4"/>
+        </g>
+        <g fill="#2b1a0c" opacity=".55" font-family="DM Mono, monospace" font-size="10" letter-spacing="1.2">
+          <text x="20" y="316">PROPORCIÓN</text>
+          <text x="360" y="316">SIMETRÍA</text>
+        </g>
+      </svg>
+      <div class="nano-caption">
+        <span class="mono">Esquema conceptual</span>
+        <span>Cúpula · proporción · simetría</span>
+      </div>
+    </div>
+
+    <div class="nano-copy reveal">
+      <div class="kicker mono">03 — Arte y perspectiva</div>
+      <h2>Mirar el mundo<br>con nuevos ojos.</h2>
+      <p>La pintura renacentista introdujo la perspectiva lineal, el estudio de la anatomía y el uso de la luz para crear volumen. El espacio dejó de ser simbólico y se volvió geométricamente calculable.</p>
+      <p>En arquitectura se recuperaron las proporciones clásicas, la cúpula y el orden. En escultura se buscó el cuerpo humano idealizado y el movimiento contenido. El artista dejó de ser un artesano anónimo y firmó sus obras.</p>
+      <div class="nano-points">
+        <div class="nano-point"><b style="color:var(--medici)">Perspectiva</b><span>Espacio matemático</span></div>
+        <div class="nano-point"><b style="color:var(--gold)">Anatomía</b><span>Estudio del cuerpo</span></div>
+        <div class="nano-point"><b style="color:var(--teal)">Clasicismo</b><span>Modelos antiguos</span></div>
+        <div class="nano-point"><b style="color:var(--lime)">Firma</b><span>El artista autor</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="arte">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <div class="kicker mono">04 — Grandes nombres</div>
+        <h2>Artistas<br>que cambiaron la mirada.</h2>
+      </div>
+      <p>El Renacimiento produjo algunas de las obras más reconocidas del arte occidental. Sus autores combinaron técnica, observación y una nueva idea del artista como creador.</p>
+    </div>
+
+    <div class="topic-grid">
+      <article class="topic reveal"><div class="topic-top"><div class="topic-icon">◈</div><span class="topic-num mono">QUATTROCENTO</span></div><h3>Leonardo da Vinci</h3><p>Pintor, ingeniero, anatomista y botánico. Encarnó el ideal del "hombre universal". Obras como <em>La Gioconda</em> y <em>La última cena</em> son hitos del arte y de la observación científica.</p><div class="tag-row"><span class="tag">Anatomía</span><span class="tag">Perspectiva</span><span class="tag">Ingeniería</span></div></article>
+      <article class="topic reveal"><div class="topic-top"><div class="topic-icon">✦</div><span class="topic-num mono">QUATTROCENTO</span></div><h3>Miguel Ángel</h3><p>Escultor, pintor y arquitecto. El <em>David</em> y la bóveda de la Capilla Sixtina condensan el ideal renacentista del cuerpo humano y la grandiosidad del espacio.</p><div class="tag-row"><span class="tag">Escultura</span><span class="tag">Sixtina</span><span class="tag">Mármol</span></div></article>
+      <article class="topic reveal"><div class="topic-top"><div class="topic-icon">⌘</div><span class="topic-num mono">QUATTROCENTO</span></div><h3>Rafael</h3><p>Pintor y arquitecto. Su obra <em>La escuela de Atenas</em> es una síntesis del ideal clásico: armonía, equilibrio y claridad compositiva.</p><div class="tag-row"><span class="tag">Armonía</span><span class="tag">Clasicismo</span><span class="tag">Retrato</span></div></article>
+      <article class="topic reveal"><div class="topic-top"><div class="topic-icon">✎</div><span class="topic-num mono">NORTE</span></div><h3>Alberto Durero</h3><p>Artista alemán que combinó la tradición nórdica con las novedades italianas. Su obra gráfica y sus tratados sobre proporción fueron muy influyentes.</p><div class="tag-row"><span class="tag">Grabado</span><span class="tag">Proporción</span><span class="tag">Norte de Europa</span></div></article>
+      <article class="topic reveal"><div class="topic-top"><div class="topic-icon">◐</div><span class="topic-num mono">VENECIA</span></div><h3>Tiziano</h3><p>Maestro del color veneciano. Su pintura influyó en toda la tradición posterior y mostró una nueva sensibilidad hacia la luz y el deseo.</p><div class="tag-row"><span class="tag">Color</span><span class="tag">Venecia</span><span class="tag">Retrato</span></div></article>
+      <article class="topic reveal"><div class="topic-top"><div class="topic-icon">⚜</div><span class="topic-num mono">ARQUITECTURA</span></div><h3>Brunelleschi</h3><p>Autor de la cúpula de Santa María del Fiore en Florencia. Combinó técnica de ingeniería y estudio de la Antigüedad, y formuló las bases de la perspectiva.</p><div class="tag-row"><span class="tag">Cúpula</span><span class="tag">Florencia</span><span class="tag">Perspectiva</span></div></article>
+    </div>
+
+    <div class="note reveal">
+      <span style="font-size:1.1rem">⚑</span>
+      <span><b>Contexto.</b> Los artistas no trabajaban solos: talleres, ayudantes, mecenas y comitentes condicionaban las obras. La idea del "genio solitario" es posterior al Renacimiento.</span>
+    </div>
+  </div>
+</section>
+
+<section id="ciencia">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <div class="kicker mono">05 — Ciencia y pensamiento</div>
+        <h2>Observar, medir,<br>dudar.</h2>
+      </div>
+      <p>El Renacimiento no produjo todavía la ciencia moderna, pero preparó el terreno: se recuperaron textos antiguos, se valoró la observación y se empezó a cuestionar la autoridad de Aristóteles y Ptolomeo.</p>
+    </div>
+
+    <div class="path-grid">
+      <article class="path-card reveal"><span class="num">ASTRONOMÍA</span><h3>Copérnico</h3><p>En 1543 publicó <em>De revolutionibus</em>, donde propuso un modelo heliocéntrico. Su obra desplazó a la Tierra del centro del universo.</p></article>
+      <article class="path-card reveal"><span class="num">ANATOMÍA</span><h3>Vesalio</h3><p>Su tratado <em>De humani corporis fabrica</em> (1543) renovó el estudio del cuerpo humano con disecciones y descripciones precisas.</p></article>
+      <article class="path-card reveal"><span class="num">MÉTODO</span><h3>Bacon y Descartes</h3><p>Ya en el siglo XVII, sentaron bases para el método experimental y la duda metódica. El Renacimiento abrió el camino.</p></article>
+      <article class="path-card reveal"><span class="num">MATEMÁTICAS</span><h3>Álgebra y perspectiva</h3><p>Avanzaron el álgebra simbólica, la trigonometría y los estudios de perspectiva aplicada al arte y a la arquitectura.</p></article>
+      <article class="path-card reveal"><span class="num">IMPRENTA</span><h3>Difusión del saber</h3><p>La imprenta de tipos móviles de Gutenberg (h. 1450) multiplicó los libros y aceleró la circulación de ideas, mapas y descubrimientos.</p></article>
+      <article class="path-card reveal"><span class="num">NAVEGACIÓN</span><h3>Nuevos mundos</h3><p>Cartografía, brújula y astronomía aplicada permitieron viajes oceánicos que ampliaron radicalmente el mapa del mundo conocido.</p></article>
+    </div>
+
+    <div class="note reveal">
+      <span style="font-size:1.1rem">ⓘ</span>
+      <span><b>Transición.</b> Muchos pensadores renacentistas combinaron observación empírica con creencias mágicas, astrológicas y herméticas. La "ciencia moderna" surgirá en el siglo XVII con Galileo, Kepler, Bacon y Newton.</span>
+    </div>
+  </div>
+</section>
+
+<section class="lab" id="difusion">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <div class="kicker mono">06 — Difusión europea</div>
+        <h2>De Italia<br>al resto de Europa.</h2>
+      </div>
+      <p>Desde mediados del siglo XV, el Renacimiento italiano se difundió hacia el norte y el oeste de Europa. Cada región lo adaptó a su propia tradición cultural y religiosa.</p>
+    </div>
+
+    <div class="topic-grid">
+      <article class="topic reveal"><div class="topic-top"><div class="topic-icon">◈</div><span class="topic-num mono">NORTE</span></div><h3>Renacimiento nórdico</h3><p>En Flandes y Alemania, el Renacimiento se combinó con la tradición gótica y la Reforma protestante. Durero, Bruegel y Holbein son figuras clave.</p><div class="tag-row"><span class="tag">Flandes</span><span class="tag">Reforma</span><span class="tag">Grabado</span></div></article>
+      <article class="topic reveal"><div class="topic-top"><div class="topic-icon">✦</div><span class="topic-num mono">FRANCIA</span></div><h3>Escuela de Fontainebleau</h3><p>La corte francesa importó artistas italianos y creó un estilo propio, con palacios como Chambord y el Louvre, ejemplo de la nueva arquitectura.</p><div class="tag-row"><span class="tag">Palacios</span><span class="tag">Corte</span><span class="tag">Manierismo</span></div></article>
+      <article class="topic reveal"><div class="topic-top"><div class="topic-icon">⌘</div><span class="topic-num mono">INGLATERRA</span></div><h3>Renacimiento inglés</h3><p>Shakespeare, Marlowe y la corte de Isabel I vivieron una época de esplendor literario y teatral. El humanismo inglés llegó también a la educación.</p><div class="tag-row"><span class="tag">Shakespeare</span><span class="tag">Teatro</span><span class="tag">Isabel I</span></div></article>
+      <article class="topic reveal"><div class="topic-top"><div class="topic-icon">◐</div><span class="topic-num mono">ESPAÑA</span></div><h3>Siglo de Oro temprano</h3><p>El Renacimiento español combinó tradición religiosa y cultura clásica. El Escorial, Cervantes y las universidades renovadas son muestras de su vitalidad.</p><div class="tag-row"><span class="tag">El Escorial</span><span class="tag">Cervantes</span><span class="tag">Universidades</span></div></article>
+    </div>
+
+    <div class="note reveal">
+      <span style="font-size:1.1rem">⚑</span>
+      <span><b>Difusión no uniforme.</b> La recepción del Renacimiento dependió de la política, la religión y la economía de cada región. Hubo resistencias, adaptaciones y reelaboraciones locales.</span>
+    </div>
+  </div>
+</section>
+
+<section id="historia">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <div class="kicker mono">07 — Línea del tiempo</div>
+        <h2>Hitos<br>del Renacimiento.</h2>
+      </div>
+      <p>Selección de fechas clave. Los siglos XV y XVI concentran la mayor parte de la producción artística y del desarrollo cultural del movimiento.</p>
+    </div>
+
+    <div class="path-grid">
+      <article class="path-card reveal"><span class="num">1401</span><h3>Concurso de las puertas del Baptisterio</h3><p>En Florencia, Brunelleschi y Ghiberti compiten por las puertas del Baptisterio. El episodio marca el arranque del Renacimiento florentino.</p></article>
+      <article class="path-card reveal"><span class="num">1420–1436</span><h3>Cúpula de Santa María del Fiore</h3><p>Brunelleschi construye la gran cúpula de Florencia, obra maestra de la ingeniería y símbolo del nuevo ideal renacentista.</p></article>
+      <article class="path-card reveal"><span class="num">1450</span><h3>Imprenta de Gutenberg</h3><p>La imprenta de tipos móviles multiplica la producción y difusión de libros y acelera la circulación de ideas por Europa.</p></article>
+      <article class="path-card reveal"><span class="num">1453</span><h3>Caída de Constantinopla</h3><p>El Imperio Bizantino llega a su fin. Intelectuales griegos llegan a Italia con manuscritos y saberes clásicos.</p></article>
+      <article class="path-card reveal"><span class="num">1492</span><h3>Llegada a América</h3><p>La expansión ultramarina amplía radicalmente la imagen del mundo y transforma la economía y la cultura europeas.</p></article>
+      <article class="path-card reveal"><span class="num">1503–1519</span><h3>Leonardo y los grandes papas</h3><p>Leonardo pinta <em>La Gioconda</em> y trabaja en Roma. Miguel Ángel y Rafael culminan sus grandes obras bajo mecenazgo papal.</p></article>
+      <article class="path-card reveal"><span class="num">1517</span><h3>Reforma protestante</h3><p>Las tesis de Lutero transforman el mapa religioso de Europa y afectan al arte, la educación y la política del continente.</p></article>
+      <article class="path-card reveal"><span class="num">1543</span><h3>Copérnico y Vesalio</h3><p>Se publican <em>De revolutionibus</em> y <em>De humani corporis fabrica</em>. Astronomía y anatomía abren una nueva era del saber.</p></article>
+      <article class="path-card reveal"><span class="num">1564–1616</span><h3>Shakespeare</h3><p>El teatro isabelino alcanza una cima literaria. El Renacimiento se prolonga en el manierismo y el Barroco temprano.</p></article>
+      <article class="path-card reveal"><span class="num">1600</span><h3>Fin de una época</h3><p>La transición al Barroco y a la ciencia moderna cierra el ciclo renacentista, que dejará una huella profunda en la cultura occidental.</p></article>
+    </div>
+  </div>
+</section>
+
+<section id="legado">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <div class="kicker mono">08 — Legado y debates</div>
+        <h2>Lo que<br>dejó al presente.</h2>
+      </div>
+      <p>El Renacimiento modeló la idea moderna de arte, de individuo y de conocimiento. Sus obras siguen presentes en museos, universidades y el imaginario colectivo.</p>
+    </div>
+
+    <div class="path-grid">
+      <article class="path-card reveal"><span class="num">LEGADO 01</span><h3>Arte como disciplina</h3><p>La pintura, la escultura y la arquitectura se consolidaron como artes liberales, con tratados, academias y firmas de autor.</p></article>
+      <article class="path-card reveal"><span class="num">LEGADO 02</span><h3>Humanismo y educación</h3><p>Los <em>studia humanitatis</em> dieron forma a un ideal educativo que llega, transformado, hasta la universidad moderna.</p></article>
+      <article class="path-card reveal"><span class="num">LEGADO 03</span><h3>Ciencia moderna</h3><p>La valoración de la observación, la crítica a la autoridad y la difusión impresa prepararon el camino a Galileo y Newton.</p></article>
+      <article class="path-card reveal"><span class="num">LEGADO 04</span><h3>Patrimonio mundial</h3><p>Florencia, Venecia, Roma y tantas otras ciudades conservan obras que son patrimonio de la humanidad.</p></article>
+      <article class="path-card reveal"><span class="num">LEGADO 05</span><h3>Debates historiográficos</h3><p>Se discute hasta qué punto fue un corte con la Edad Media, cuál fue el papel de las mujeres artistas y qué lugar ocuparon las colonias.</p></article>
+      <article class="path-card reveal"><span class="num">LEGADO 06</span><h3>Eurocentrismo</h3><p>Los historiadores actuales insisten en situar el Renacimiento en un contexto global, con contactos con el mundo islámico, África y América.</p></article>
+    </div>
+
+    <div class="note reveal">
+      <span style="font-size:1.1rem">⚑</span>
+      <span><b>Nota.</b> El Renacimiento convivió con la Inquisición, la censura, las guerras de religión y la esclavitud. Estudiarlo críticamente implica reconocer también sus sombras.</span>
+    </div>
+  </div>
+</section>
+
+<section id="desafio">
+  <div class="wrap">
+    <div class="quiz reveal">
+      <div class="quiz-grid">
+        <div>
+          <div class="kicker mono">09 — Comprueba lo aprendido</div>
+          <h2>Evalúa tus conocimientos</h2>
+          <p>Responde tres preguntas sobre el Renacimiento.</p>
+          <div class="mono muted">PREGUNTA <span id="qnum">01</span> / 03</div>
+        </div>
+        <div>
+          <div class="question" id="question">¿En qué ciudad italiana nació el Renacimiento?</div>
+          <div class="answers" id="answers">
+            <button class="answer">Venecia</button>
+            <button class="answer">Florencia</button>
+            <button class="answer">Roma</button>
+          </div>
+          <div class="feedback" id="feedback" aria-live="polite">Selecciona una respuesta para continuar.</div>
+          <div class="quiz-bottom">
+            <span class="muted" id="score">Puntuación: 0</span>
+            <button class="btn" id="next" disabled>Siguiente →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap footerin">
+    <div><strong>RENACIMIENTO <span style="color:var(--medici)">· SIGLOS XIV–XVI</span></strong> <span>· Aprende explorando.</span></div>
+    <span>Guía educativa · Arte, pensamiento y ciencia</span>
+    <a href="#inicio">Volver arriba ↑</a>
+  </div>
+</footer>
+
+<script>
+/* Reveal */
+const observer = new IntersectionObserver(entries => entries.forEach(e => {
+  if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+}), { threshold: .12 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+/* Comparador de etapas */
+const stages = [
+  { name:'Quattrocento', desc:'Siglo XV · Florencia, perspectiva y primeras academias',
+    arte:70, lit:65, fil:55, cie:40,
+    status:'Foco en Florencia · mecenazgo de los Médici' },
+  { name:'Cinquecento', desc:'Siglo XVI · Roma, Venecia y madurez del clasicismo',
+    arte:95, lit:85, fil:75, cie:70,
+    status:'Miguel Ángel, Rafael y Tiziano · esplendor papal' },
+  { name:'Manierismo y difusión', desc:'Finales del siglo XVI · corte, tensión y expansión europea',
+    arte:80, lit:90, fil:85, cie:88,
+    status:'Difusión por Europa · Reforma y nueva ciencia' }
+];
+let si = 0;
+const simulate = document.getElementById('simulate');
+function renderStage() {
+  const s = stages[si];
+  document.getElementById('phaseName').textContent = s.name;
+  document.getElementById('phaseDesc').textContent = s.desc;
+  document.getElementById('demoStatus').textContent = s.status;
+  document.getElementById('arte').innerHTML = s.arte + ' <small>%</small>';
+  document.getElementById('lit').innerHTML = s.lit + ' <small>%</small>';
+  document.getElementById('fil').innerHTML = s.fil + ' <small>%</small>';
+  document.getElementById('cie').innerHTML = s.cie + ' <small>%</small>';
+  document.getElementById('arteBar').style.setProperty('--w', s.arte + '%');
+  document.getElementById('litBar').style.setProperty('--w', s.lit + '%');
+  document.getElementById('filBar').style.setProperty('--w', s.fil + '%');
+  document.getElementById('cieBar').style.setProperty('--w', s.cie + '%');
+  simulate.textContent = si === stages.length - 1 ? 'Volver al inicio' : 'Siguiente etapa →';
+}
+simulate.addEventListener('click', () => { si = (si + 1) % stages.length; renderStage(); });
+renderStage();
+
+/* Quiz */
+const questions = [
+  { q:'¿En qué ciudad italiana nació el Renacimiento?',
+    a:['Venecia','Florencia','Roma'],
+    correct:1,
+    why:'Florencia, bajo el mecenazgo de familias como los Médici, fue el gran centro inicial del Renacimiento en el siglo XV.' },
+  { q:'¿Qué aportó la imprenta de Gutenberg (h. 1450)?',
+    a:['La difusión masiva de libros e ideas','La invención de la perspectiva','El descubrimiento de América'],
+    correct:0,
+    why:'La imprenta de tipos móviles multiplicó la producción de libros y aceleró la circulación de ideas, mapas y descubrimientos por Europa.' },
+  { q:'¿Qué propuso Copérnico en 1543?',
+    a:['Que el Sol gira alrededor de la Tierra','Un modelo heliocéntrico del universo','La teoría de la evolución'],
+    correct:1,
+    why:'En De revolutionibus, Copérnico propuso que el Sol, y no la Tierra, ocupaba el centro del universo, desplazando la visión tradicional.' }
+];
+let qi = 0, score = 0, answered = false;
+const qEl = document.getElementById('question');
+const aEl = document.getElementById('answers');
+const fEl = document.getElementById('feedback');
+const nEl = document.getElementById('qnum');
+const sEl = document.getElementById('score');
+const next = document.getElementById('next');
+
+function renderQ() {
+  const q = questions[qi];
+  answered = false;
+  nEl.textContent = String(qi + 1).padStart(2, '0');
+  qEl.textContent = q.q;
+  aEl.innerHTML = '';
+  q.a.forEach((a, i) => {
+    const b = document.createElement('button');
+    b.className = 'answer';
+    b.textContent = a;
+    b.addEventListener('click', () => choose(i, b));
+    aEl.appendChild(b);
+  });
+  fEl.textContent = 'Selecciona una respuesta para continuar.';
+  next.disabled = true;
+  next.textContent = qi === questions.length - 1 ? 'Reiniciar ↻' : 'Siguiente →';
+}
+
+function choose(i, b) {
+  if (answered) return;
+  answered = true;
+  const q = questions[qi];
+  [...aEl.children].forEach((el, j) => {
+    el.disabled = true;
+    if (j === q.correct) el.classList.add('correct');
+  });
+  if (i === q.correct) { score++; fEl.textContent = '¡Correcto! ' + q.why; }
+  else { b.classList.add('wrong'); fEl.textContent = 'Casi. ' + q.why; }
+  sEl.textContent = 'Puntuación: ' + score;
+  next.disabled = false;
+}
+
+next.addEventListener('click', () => {
+  if (!answered) return;
+  if (qi < questions.length - 1) { qi++; renderQ(); }
+  else {
+    qi = 0; score = 0;
+    sEl.textContent = 'Puntuación: 0';
+    renderQ();
+    fEl.textContent = '¡Vamos otra vez!';
+  }
+});
+
+renderQ();
+</script>
+</body>
+</html>

@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#f7f4ee" />
+<meta name="description" content="Guía sobre el Imperio Inca o Tawantinsuyu: origen, línea del tiempo, organización política, economía, arquitectura, religión, legado y debates actuales." />
+<title>Imperio Inca — Tawantinsuyu: historia, organización y legado</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f7f4ee;
+  --panel:#ffffff;
+  --panel2:#efe9df;
+  --line:rgba(38,26,16,.13);
+  --text:#1c150e;
+  --muted:#6b5d4c;
+  --teal:#0a7a8f;
+  --terra:#b4542a;
+  --gold:#a67c00;
+  --violet:#6f5ae8;
+  --pink:#c2407f;
+  --lime:#3a7d2c;
+  --radius:22px;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{margin:0;background:radial-gradient(ellipse at 78% -10%,#f6e6d0 0,transparent 36%),var(--bg);color:var(--text);font-family:Manrope,system-ui,sans-serif;line-height:1.6;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.55;z-index:-1;background-image:linear-gradient(rgba(38,26,16,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(38,26,16,.035) 1px,transparent 1px);background-size:48px 48px;mask-image:linear-gradient(to bottom,black,transparent 80%)}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer}
+a:focus-visible,button:focus-visible{outline:2px solid var(--terra);outline-offset:3px}
+.mono{font-family:"DM Mono",monospace;text-transform:uppercase;letter-spacing:.12em;font-size:.72rem}
+.muted{color:var(--muted)}
+.wrap{width:min(1160px,calc(100% - 40px));margin:auto}
+
+nav{position:sticky;top:0;z-index:20;backdrop-filter:blur(18px);background:rgba(247,244,238,.85);border-bottom:1px solid var(--line)}
+.navin{min-height:68px;height:auto;display:flex;align-items:center;justify-content:space-between;gap:14px;padding-top:8px;padding-bottom:8px}
+.brand{display:flex;align-items:center;gap:11px;font-weight:800;letter-spacing:-.04em;font-size:clamp(.72rem,1vw,.9rem);white-space:nowrap}
+.brandmark{width:34px;height:34px;border-radius:11px;background:linear-gradient(135deg,var(--terra),var(--gold));display:grid;place-items:center;color:#fff;font-weight:900;box-shadow:0 6px 18px #b4542a33}
+.navlinks{display:flex;align-items:center;gap:clamp(10px,1.5vw,22px);color:var(--muted);font-size:clamp(.72rem,.9vw,.84rem);white-space:nowrap}
+.navlinks a:hover{color:var(--terra)}
+.navcta{white-space:nowrap;padding:9px 12px;font-size:.76rem}
+.navcta,.btn{border:1px solid var(--line);background:rgba(38,26,16,.04);color:var(--text);padding:11px 16px;border-radius:999px;font-weight:700;font-size:.85rem;transition:.25s}
+.navcta:hover,.btn:hover{border-color:var(--terra);transform:translateY(-2px)}
+.btn.primary{background:var(--terra);color:#fff;border-color:var(--terra)}
+.btn.primary:hover{box-shadow:0 10px 28px #b4542a38}
+.btn:disabled{opacity:.45;cursor:not-allowed;transform:none}
+
+.hero{padding:92px 0 72px;position:relative}
+.hero-grid{display:grid;grid-template-columns:1.02fr .98fr;align-items:center;gap:45px}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;color:var(--terra);margin-bottom:20px}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--terra);box-shadow:0 0 14px #b4542a66}
+h1{font-size:clamp(2.7rem,5.8vw,5.2rem);line-height:1;letter-spacing:-.07em;margin:0 0 24px;font-weight:800}
+h1 .gradient{background:linear-gradient(100deg,var(--terra),#d99a2b 46%,var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{font-size:1.08rem;color:var(--muted);max-width:560px;margin:0 0 30px}
+.actions{display:flex;gap:12px;flex-wrap:wrap}
+.hero-note{display:flex;align-items:center;gap:15px;margin-top:38px;color:var(--muted);font-size:.8rem}
+.avatars{display:flex}
+.avatars span{width:29px;height:29px;border:2px solid var(--bg);margin-left:-7px;border-radius:50%;display:grid;place-items:center;background:#e8dfd1;color:#4a3a28;font-size:.7rem}
+.avatars span:first-child{margin-left:0}
+
+.visual{min-height:470px;position:relative;display:grid;place-items:center}
+.orbital{position:absolute;width:min(440px,90%);aspect-ratio:1;border:1px solid #b4542a30;border-radius:50%;animation:spin 34s linear infinite}
+.orbital:before,.orbital:after{content:"";position:absolute;border:1px solid #a67c0030;border-radius:50%;inset:11%}
+.orbital:after{inset:24%;border-color:#6f5ae840}
+.orbit-dot{position:absolute;top:15%;right:12%;width:12px;height:12px;background:var(--gold);border-radius:50%;box-shadow:0 0 22px #a67c0088}
+.core{width:220px;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 34% 28%,#fff7e4 0,#f6cf74 22%,#e2992f 52%,#b4542a 82%,#8a3a1c 100%);box-shadow:inset -14px -18px 40px #7a341333,0 24px 70px #b4542a33;display:grid;place-items:center;animation:pulse 7s ease-in-out infinite;position:relative}
+.core svg{width:120px;filter:drop-shadow(0 5px 12px rgba(60,25,8,.35))}
+.float-card{position:absolute;background:#ffffffee;border:1px solid var(--line);backdrop-filter:blur(14px);padding:13px 15px;border-radius:15px;box-shadow:0 18px 40px rgba(38,26,16,.12);animation:float 5s ease-in-out infinite}
+.float-card b{display:block;font-size:.85rem}
+.float-card small{color:var(--muted)}
+.fc1{top:13%;left:0}
+.fc2{right:-1%;bottom:18%;animation-delay:-2s}
+.fc3{left:8%;bottom:6%;animation-delay:-3s}
+.mini-bars{display:flex;align-items:end;gap:4px;height:24px;margin-top:6px}
+.mini-bars i{display:block;width:5px;border-radius:3px;background:var(--terra);height:35%}
+.mini-bars i:nth-child(2){height:65%}
+.mini-bars i:nth-child(3){height:48%}
+.mini-bars i:nth-child(4){height:90%}
+.mini-bars i:nth-child(5){height:70%}
+
+.stats{border-block:1px solid var(--line);padding:23px 0}
+.stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.stat{padding-left:22px;border-left:1px solid var(--line)}
+.stat:first-child{border:0;padding-left:0}
+.stat strong{display:block;font-size:1.35rem;letter-spacing:-.05em}
+.stat span{font-size:.78rem;color:var(--muted)}
+
+section{padding:94px 0}
+.section-head{display:flex;align-items:end;justify-content:space-between;gap:25px;margin-bottom:35px}
+.kicker{color:var(--terra);margin-bottom:12px}
+.section-head h2,.split-copy h2{font-size:clamp(2.1rem,4vw,3.5rem);line-height:1.05;letter-spacing:-.065em;margin:0}
+.section-head p{max-width:440px;color:var(--muted);margin:0}
+.topic-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.topic{border:1px solid var(--line);border-radius:var(--radius);background:linear-gradient(145deg,#ffffff,#f5f0e8);padding:28px;position:relative;overflow:hidden;transition:transform .3s,border-color .3s,box-shadow .3s;box-shadow:0 10px 30px rgba(38,26,16,.05)}
+.topic:hover{transform:translateY(-6px);border-color:#b4542a55;box-shadow:0 18px 45px rgba(38,26,16,.10)}
+.topic:after{content:"";position:absolute;width:220px;height:220px;border-radius:50%;filter:blur(70px);opacity:.15;right:-100px;top:-110px;background:var(--glow,var(--terra));pointer-events:none}
+.topic-top{display:flex;align-items:center;justify-content:space-between}
+.topic-icon{width:48px;height:48px;border-radius:15px;background:#b4542a12;border:1px solid #b4542a33;display:grid;place-items:center;color:var(--terra);font-size:1.2rem}
+.topic-num{color:#a3947f}
+.topic h3{font-size:1.45rem;margin:25px 0 9px;letter-spacing:-.04em}
+.topic p{color:var(--muted);margin:0 0 23px}
+.tag-row{display:flex;flex-wrap:wrap;gap:8px}
+.tag{font-size:.72rem;padding:6px 10px;border:1px solid var(--line);border-radius:999px;color:#4a3a28;background:rgba(38,26,16,.035)}
+
+.lab{background:linear-gradient(180deg,transparent,#efe8dc 28%,#efe8dc 75%,transparent)}
+.lab-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:42px;align-items:center}
+.split-copy p{color:var(--muted);max-width:450px}
+.checklist{list-style:none;padding:0;margin:26px 0;display:grid;gap:13px}
+.checklist li{display:flex;gap:11px;align-items:start;color:#33261a;font-size:.9rem}
+.check{color:var(--terra);font-weight:900}
+.demo{background:#ffffff;border:1px solid var(--line);border-radius:24px;overflow:hidden;box-shadow:0 20px 60px rgba(38,26,16,.10)}
+.demo-head{padding:17px 20px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:12px;background:#fdfbf7;flex-wrap:wrap}
+.window-dots{display:flex;gap:5px}
+.window-dots i{width:7px;height:7px;border-radius:50%;background:#d6cab8}
+.live{color:var(--lime);font-size:.7rem}
+.demo-body{padding:24px}
+.phase-title{font-size:1.3rem;font-weight:800;letter-spacing:-.03em;margin:0 0 4px;color:var(--terra)}
+.sensor-panel{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
+.sensor{padding:17px;border:1px solid var(--line);border-radius:16px;background:rgba(38,26,16,.025)}
+.sensor label{color:var(--muted);font-size:.76rem}
+.sensor .value{font-size:1.45rem;font-weight:800;letter-spacing:-.05em;margin:8px 0}
+.sensor .value small{font-size:.75rem;color:var(--muted);font-weight:500}
+.meter{height:5px;background:#e8e0d3;border-radius:9px;overflow:hidden}
+.meter span{display:block;height:100%;width:var(--w);background:linear-gradient(90deg,var(--gold),var(--terra));border-radius:9px;transition:width .5s}
+.demo-foot{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:18px;color:var(--muted);font-size:.78rem;flex-wrap:wrap}
+.toggle{border:1px solid #b4542a50;background:#b4542a10;color:var(--terra);padding:9px 13px;border-radius:10px;font-weight:700;font-size:.78rem}
+.toggle:hover{background:#b4542a20}
+
+.nanowide{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.nano-art{min-height:390px;border-radius:24px;border:1px solid var(--line);background:radial-gradient(circle at 50% 30%,#f8e8d2,transparent 65%),#f1ebdf;position:relative;overflow:hidden;display:grid;place-items:center}
+.nano-art svg{width:90%;max-width:460px;overflow:visible}
+.atom{animation:float 6s ease-in-out infinite;transform-origin:center}
+.atom:nth-child(2){animation-delay:-2s}
+.atom:nth-child(3){animation-delay:-4s}
+.nano-caption{position:absolute;bottom:18px;left:20px;right:20px;display:flex;justify-content:space-between;color:var(--muted);font-size:.72rem;gap:10px}
+.nano-copy h2{font-size:clamp(2.2rem,4vw,3.4rem);line-height:1.05;letter-spacing:-.065em;margin:0 0 20px}
+.nano-copy p{color:var(--muted)}
+.nano-points{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:25px}
+.nano-point{padding:15px;border:1px solid var(--line);border-radius:14px;background:rgba(38,26,16,.025)}
+.nano-point b{display:block;font-size:.86rem}
+.nano-point span{font-size:.76rem;color:var(--muted)}
+
+.path-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.path-card{padding:23px;border:1px solid var(--line);border-radius:18px;background:#ffffff;box-shadow:0 10px 26px rgba(38,26,16,.05);transition:transform .3s,border-color .3s,box-shadow .3s}
+.path-card:hover{transform:translateY(-4px);border-color:#b4542a55;box-shadow:0 16px 40px rgba(38,26,16,.09)}
+.path-card .num{font-family:"DM Mono",monospace;color:var(--gold);font-size:.78rem;letter-spacing:.08em}
+.path-card h3{margin:14px 0 7px;font-size:1.08rem;letter-spacing:-.02em}
+.path-card p{font-size:.85rem;color:var(--muted);margin:0}
+
+.note{display:flex;gap:12px;align-items:start;padding:16px 18px;border:1px dashed #a67c0055;background:#a67c000d;border-radius:14px;color:#5c4610;font-size:.85rem;margin-top:24px}
+.note b{color:#8a6200}
+
+.quiz{padding:30px;border:1px solid #b4542a3d;border-radius:24px;background:radial-gradient(ellipse at 90% 0%,#f7e2d0,transparent 55%),#ffffff;box-shadow:0 16px 45px rgba(38,26,16,.08)}
+.quiz-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:35px}
+.quiz h2{font-size:2rem;line-height:1.1;letter-spacing:-.06em;margin:0 0 12px}
+.quiz p{color:var(--muted)}
+.question{font-size:1.1rem;font-weight:700;margin-bottom:17px;letter-spacing:-.02em}
+.answers{display:grid;gap:10px}
+.answer{padding:13px 15px;border:1px solid var(--line);border-radius:12px;background:#faf7f2;color:var(--text);text-align:left;transition:.2s}
+.answer:hover:not(:disabled){border-color:var(--terra);background:#b4542a0c}
+.answer:disabled{cursor:default}
+.answer.correct{border-color:var(--lime);background:#3a7d2c12}
+.answer.wrong{border-color:var(--pink);background:#c2407f12}
+.feedback{min-height:26px;font-size:.85rem;margin-top:12px;color:var(--muted)}
+.quiz-bottom{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:18px;flex-wrap:wrap}
+.quiz-bottom .btn{font-size:.8rem}
+
+footer{padding:30px 0;border-top:1px solid var(--line);color:var(--muted);font-size:.78rem}
+.footerin{display:flex;justify-content:space-between;align-items:center;gap:20px}
+.footerin strong{color:var(--text)}
+
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes pulse{0%,100%{transform:scale(1);box-shadow:inset -14px -18px 40px #7a341333,0 24px 70px #b4542a33}50%{transform:scale(1.04);box-shadow:inset -14px -18px 40px #7a341333,0 30px 90px #b4542a4d}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}.reveal{opacity:1;transform:none}}
+
+@media(max-width:920px){.navlinks{display:none}.navin{min-height:66px}}
+@media(max-width:850px){
+  .hero-grid,.lab-grid,.nanowide,.quiz-grid{grid-template-columns:1fr}
+  .hero{padding-top:60px}
+  .visual{min-height:420px;order:-1}
+  .hero-grid{gap:8px}
+  .hero-copy{text-align:center}
+  .hero-copy p{margin-inline:auto}
+  .actions,.hero-note{justify-content:center}
+  .section-head{display:block}
+  .section-head p{margin-top:15px}
+  .lab-grid{gap:28px}
+  .nanowide{gap:25px}
+  .nano-art{min-height:310px}
+  .quiz-grid{gap:12px}
+  .stat-grid{grid-template-columns:repeat(2,1fr);row-gap:22px}
+  .stat:nth-child(3){padding-left:0;border:0}
+  .path-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:560px){
+  .wrap{width:min(100% - 28px,1160px)}
+  .navin{height:66px}
+  .navcta{padding:9px 12px;font-size:.75rem}
+  .hero{padding:43px 0 45px}
+  h1{font-size:2.6rem}
+  .visual{min-height:335px}
+  .core{width:165px}
+  .core svg{width:90px}
+  .orbital{width:300px}
+  .fc1{top:6%;left:-2%}
+  .fc2{right:-2%;bottom:15%}
+  .fc3{left:0;bottom:3%}
+  .float-card{padding:10px 12px}
+  .float-card b{font-size:.75rem}
+  .float-card small{font-size:.67rem}
+  .stats{padding:18px 0}
+  section{padding:66px 0}
+  .topic-grid{grid-template-columns:1fr}
+  .topic{padding:23px}
+  .sensor-panel{grid-template-columns:1fr 1fr}
+  .sensor{padding:12px}
+  .sensor .value{font-size:1.15rem}
+  .demo-body{padding:15px}
+  .path-grid{grid-template-columns:1fr}
+  .nano-points{grid-template-columns:1fr 1fr}
+  .quiz{padding:22px}
+  .footerin{align-items:flex-start;flex-direction:column;gap:8px}
+}
+</style>
+</head>
+<body>
+<nav>
+  <div class="wrap navin">
+    <a class="brand" href="#inicio"><span class="brandmark">I</span> IMPERIO INCA <span style="color:var(--terra)">· TAWANTINSUYU</span></a>
+    <div class="navlinks">
+      <a href="#panorama">Panorama</a>
+      <a href="#historia">Historia</a>
+      <a href="#politica">Organización</a>
+      <a href="#economia">Economía</a>
+      <a href="#arquitectura">Arquitectura</a>
+      <a href="#legado">Legado</a>
+    </div>
+    <a class="navcta" href="#panorama">Ver contenidos ↗</a>
+  </div>
+</nav>
+
+<main>
+<header class="hero" id="inicio">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <div class="eyebrow mono"><span class="dot"></span> Historia · Arqueología · Patrimonio</div>
+      <h1>Imperio Inca<br><span class="gradient">Tawantinsuyu</span></h1>
+      <p>El Estado más extenso de la América prehispánica. Una guía para comprender su origen, su organización política y social, su economía de altura, su arquitectura monumental, su cosmovisión y el legado que perdura hasta hoy.</p>
+      <div class="actions">
+        <a class="btn primary" href="#panorama">Explorar el panorama <span>↗</span></a>
+        <a class="btn" href="#historia">Ver línea del tiempo</a>
+      </div>
+      <div class="hero-note">
+        <div class="avatars"><span>☀</span><span>⛰</span><span>𖣂</span></div>
+        <span>Las cifras y cronologías son estimaciones discutidas por investigadores.</span>
+      </div>
+    </div>
+
+    <div class="visual" aria-label="Ilustración abstracta del sol inca o Inti">
+      <div class="orbital"><span class="orbit-dot"></span></div>
+      <div class="core">
+        <svg viewBox="0 0 140 140" fill="none" aria-hidden="true">
+          <circle cx="70" cy="70" r="26" fill="#3a1c0c"/>
+          <circle cx="70" cy="70" r="18" fill="#f7d79a"/>
+          <g stroke="#3a1c0c" stroke-width="4" stroke-linecap="round">
+            <path d="M70 20v14M70 106v14M20 70h14M106 70h14"/>
+            <path d="M35 35l10 10M95 95l10 10M105 35l-10 10M45 95l-10 10"/>
+          </g>
+          <circle cx="70" cy="70" r="44" stroke="#3a1c0c" stroke-width="2" opacity=".5"/>
+        </svg>
+      </div>
+      <div class="float-card fc1"><span class="mono" style="color:var(--terra)">01 / ESTADO</span><b>Cuatro suyus</b><small>Un solo Tawantinsuyu</small></div>
+      <div class="float-card fc2"><span class="mono" style="color:var(--gold)">02 / ALTURA</span><b>Pisos ecológicos</b><div class="mini-bars"><i></i><i></i><i></i><i></i><i></i></div></div>
+      <div class="float-card fc3"><b>Piedra y camino</b><small>Ingeniería sin rueda</small></div>
+    </div>
+  </div>
+</header>
+
+<div class="stats">
+  <div class="wrap stat-grid">
+    <div class="stat"><strong>4 <span style="color:var(--terra)">suyus</span></strong><span>Divisiones del imperio</span></div>
+    <div class="stat"><strong>≈2 <span style="color:var(--gold)">mill. km²</span></strong><span>Extensión máxima estimada</span></div>
+    <div class="stat"><strong>1438–1533 <span style="color:var(--pink)">·</span></strong><span>Expansión y caída</span></div>
+    <div class="stat"><strong>40.000 <span style="color:var(--lime)">km</span></strong><span>Red de caminos o Qhapaq Ñan</span></div>
+  </div>
+</div>
+
+<section id="panorama">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <div class="kicker mono">01 — Panorama general</div>
+        <h2>Un Estado andino<br>de montaña y altura.</h2>
+      </div>
+      <p>El Tawantinsuyu surgió en la región del Cusco hacia el siglo XIII y se expandió rápidamente desde el siglo XV. En menos de un siglo llegó a abarcar territorios de los actuales Perú, Bolivia, Ecuador, Colombia, Chile y Argentina.</p>
+    </div>
+
+    <div class="topic-grid">
+      <article class="topic reveal" style="--glow:var(--terra)">
+        <div class="topic-top">
+          <div class="topic-icon">⌘</div>
+          <span class="topic-num mono">01 / TERRITORIO</span>
+        </div>
+        <h3>Los cuatro suyus</h3>
+        <p>El nombre <em>Tawantinsuyu</em> significa "las cuatro partes juntas". El Cusco era el centro simbólico y político desde el que se organizaba el territorio.</p>
+        <div class="tag-row">
+          <span class="tag">Chinchaysuyu</span><span class="tag">Antisuyu</span><span class="tag">Contisuyu</span><span class="tag">Collasuyu</span>
+        </div>
+      </article>
+
+      <article class="topic reveal" style="--glow:var(--gold)">
+        <div class="topic-top">
+          <div class="topic-icon" style="color:var(--gold);background:#a67c0012;border-color:#a67c0033">⛰</div>
+          <span class="topic-num mono">02 / GEOGRAFÍA</span>
+        </div>
+        <h3>Un territorio vertical</h3>
+        <p>El imperio abarcaba costa desértica, valles interandinos, puna de altura y selva alta. Controlar varios pisos ecológicos permitía acceder a productos muy distintos.</p>
+        <div class="tag-row">
+          <span class="tag">Costa</span><span class="tag">Quechua</span><span class="tag">Puna</span><span class="tag">Yunga</span><span class="tag">Selva alta</span>
+        </div>
+      </article>
+    </div>
+
+    <div class="note reveal">
+      <span style="font-size:1.1rem">⚖</span>
+      <span><b>Sobre las fuentes.</b> Gran parte de lo que sabemos proviene de crónicas coloniales, registros administrativos, arqueología y tradición oral. Muchas cifras —población, extensión, fechas exactas— son estimaciones que los especialistas siguen discutiendo.</span>
+    </div>
+  </div>
+</section>
+
+<section class="lab" id="economia">
+  <div class="wrap lab-grid">
+    <div class="split-copy reveal">
+      <div class="kicker mono">02 — Economía de altura</div>
+      <h2>Producir en<br>varios pisos a la vez.</h2>
+      <p>Los Andes ofrecen franjas de altitud con climas y cultivos muy diferentes en distancias cortas. Los pueblos andinos aprovecharon esa diversidad mediante el llamado "archipiélago vertical": comunidades que controlaban tierras en varios niveles.</p>
+      <ul class="checklist">
+        <li><span class="check">✓</span><span><b>Terrazas o andenes:</b> permitían cultivar en pendientes, reducir la erosión y aprovechar mejor el agua.</span></li>
+        <li><span class="check">✓</span><span><b>Mita:</b> trabajo rotativo por turnos para obras públicas, caminos, minas y tierras del Estado.</span></li>
+        <li><span class="check">✓</span><span><b>Tambos y quipus:</b> almacenes y registros de cuerdas anudadas para administrar bienes y personas.</span></li>
+      </ul>
+      <a class="btn" href="#arquitectura">Ver arquitectura ↗</a>
+    </div>
+
+    <div class="demo reveal">
+      <div class="demo-head">
+        <div style="display:flex;align-items:center;gap:11px">
+          <div class="window-dots"><i></i><i></i><i></i></div>
+          <span class="mono">SIMULACIÓN DIDÁCTICA / 003</span>
+        </div>
+        <span class="live mono">● PISOS ECOLÓGICOS</span>
+      </div>
+      <div class="demo-body">
+        <p class="phase-title" id="phaseName">Quechua</p>
+        <span class="muted" style="font-size:.8rem" id="phaseDesc">2 300 – 3 500 m · el corazón agrícola del imperio</span>
+        <div class="sensor-panel">
+          <div class="sensor">
+            <label>Altitud</label>
+            <div class="value" id="alt">2 900 <small>m</small></div>
+            <div class="meter"><span id="altbar" style="--w:42%"></span></div>
+          </div>
+          <div class="sensor">
+            <label>Temperatura media</label>
+            <div class="value" id="temp">13 <small>°C</small></div>
+            <div class="meter"><span id="tempbar" style="--w:55%"></span></div>
+          </div>
+          <div class="sensor">
+            <label>Cultivo principal</label>
+            <div class="value" id="crop" style="font-size:1.15rem">Maíz</div>
+            <div class="meter"><span id="cropbar" style="--w:70%;background:linear-gradient(90deg,var(--gold),var(--lime))"></span></div>
+          </div>
+          <div class="sensor">
+            <label>Producto clave</label>
+            <div class="value" id="prod" style="font-size:1.15rem">Chicha y grano</div>
+            <div class="meter"><span id="prodbar" style="--w:62%;background:linear-gradient(90deg,var(--terra),var(--gold))"></span></div>
+          </div>
+        </div>
+        <div class="demo-foot">
+          <span id="demoStatus">Valores ilustrativos · franjas aproximadas</span>
+          <button class="toggle" id="simulate">Subir de piso</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="nano">
+  <div class="wrap nanowide">
+    <div class="nano-art reveal">
+      <svg viewBox="0 0 460 340" fill="none" aria-label="Esquema ilustrativo de terrazas agrícolas andinas">
+        <defs>
+          <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#f8d9a8"/>
+            <stop offset="1" stop-color="#f1ebdf"/>
+          </linearGradient>
+          <linearGradient id="hill" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#c98a4c"/>
+            <stop offset="1" stop-color="#8f5a2c"/>
+          </linearGradient>
+          <linearGradient id="crop" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#6ba648"/>
+            <stop offset="1" stop-color="#3a7d2c"/>
+          </linearGradient>
+        </defs>
+        <rect x="0" y="0" width="460" height="340" fill="url(#sky)" rx="18"/>
+        <circle cx="360" cy="78" r="34" fill="#e2992f" opacity=".85"/>
+        <circle cx="360" cy="78" r="48" stroke="#e2992f" stroke-opacity=".35" stroke-width="2"/>
+        <path d="M0 250 L90 130 L170 220 L260 110 L360 240 L460 170 V340 H0 Z" fill="url(#hill)" opacity=".55"/>
+        <g class="atom">
+          <path d="M0 340 V250 H460 V340 Z" fill="url(#hill)" opacity=".9"/>
+          <path d="M0 288 H460" stroke="#6d4420" stroke-width="3" opacity=".55"/>
+          <path d="M0 318 H460" stroke="#6d4420" stroke-width="3" opacity=".55"/>
+          <rect x="0" y="252" width="460" height="10" fill="url(#crop)" opacity=".85"/>
+          <rect x="0" y="292" width="460" height="10" fill="url(#crop)" opacity=".7"/>
+          <rect x="0" y="322" width="460" height="10" fill="url(#crop)" opacity=".6"/>
+        </g>
+        <g fill="#2b1a0c" opacity=".65" font-family="DM Mono, monospace" font-size="11" letter-spacing="1.4">
+          <text x="22" y="246">ANDÉN</text>
+          <text x="330" y="200">CUMBRE</text>
+          <text x="22" y="336">TERRAZAS</text>
+        </g>
+      </svg>
+      <div class="nano-caption">
+        <span class="mono">Esquema conceptual</span>
+        <span>Terrazas · riego · control de pendiente</span>
+      </div>
+    </div>
+
+    <div class="nano-copy reveal">
+      <div class="kicker mono">03 — Ingeniería y territorio</div>
+      <h2>Modelar la montaña<br>sin rueda ni hierro.</h2>
+      <p>Sin vehículos de rueda, sin hierro y sin escritura alfabética, el Tawantinsuyu construyó una red de caminos de decenas de miles de kilómetros, sistemas de andenes, canales, puentes colgantes y depósitos de almacenamiento.</p>
+      <p>La organización del trabajo, el conocimiento del clima y una administración muy centralizada hicieron posible sostener ciudades, ejércitos y poblaciones numerosas en un terreno extremadamente difícil.</p>
+      <div class="nano-points">
+        <div class="nano-point"><b style="color:var(--terra)">Qhapaq Ñan</b><span>Red vial imperial</span></div>
+        <div class="nano-point"><b style="color:var(--gold)">Andenes</b><span>Cultivo en pendiente</span></div>
+        <div class="nano-point"><b style="color:var(--teal)">Puentes</b><span>Estructuras colgantes</span></div>
+        <div class="nano-point"><b style="color:var(--lime)">Qollqa</b><span>Almacenes de alimentos</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="historia">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <div class="kicker mono">04 — Línea del tiempo</div>
+        <h2>Del valle del Cusco<br>al gran imperio.</h2>
+      </div>
+      <p>Cronología orientativa. Las fechas de los primeros gobernantes son tradicionales y difíciles de verificar arqueológicamente.</p>
+    </div>
+
+    <div class="path-grid">
+      <article class="path-card reveal"><span class="num">SIGLO XII–XIII</span><h3>Origen en el Cusco</h3><p>Según la tradición, Manco Cápac funda el señorío del Cusco. Los primeros gobernantes consolidan el control del valle y de los grupos vecinos.</p></article>
+      <article class="path-card reveal"><span class="num">SIGLO XIV</span><h3>Primeras expansiones</h3><p>Los incas amplían su dominio sobre pueblos cercanos. La organización militar y la alianza con otros señoríos fortalecen el poder cusqueño.</p></article>
+      <article class="path-card reveal"><span class="num">1438</span><h3>Pachacútec y el gran salto</h3><p>Tras vencer a los chancas, Pachacútec reorganiza el Estado, inicia una expansión decisiva y ordena grandes obras en el Cusco.</p></article>
+      <article class="path-card reveal"><span class="num">1471–1493</span><h3>Túpac Yupanqui</h3><p>Se consolidan territorios hacia el Chinchaysuyu y el sur. Se perfeccionan la administración, los caminos y los centros provinciales.</p></article>
+      <article class="path-card reveal"><span class="num">1493–1527</span><h3>Huayna Cápac</h3><p>El imperio alcanza su máxima extensión. Se refuerzan fronteras, se construyen nuevos centros y se agudizan tensiones internas.</p></article>
+      <article class="path-card reveal"><span class="num">1527–1532</span><h3>Guerra civil</h3><p>La muerte de Huayna Cápac y la disputa entre Huáscar y Atahualpa desatan un conflicto interno que debilita al Estado.</p></article>
+      <article class="path-card reveal"><span class="num">1532–1533</span><h3>Caída del Tawantinsuyu</h3><p>La llegada de los españoles, las alianzas con pueblos rivales, las epidemias y la captura de Atahualpa culminan en la caída del imperio.</p></article>
+      <article class="path-card reveal"><span class="num">1533–1572</span><h3>Resistencias</h3><p>Se mantienen focos de resistencia, como el Estado neoinca de Vilcabamba, hasta su derrota definitiva en 1572.</p></article>
+      <article class="path-card reveal"><span class="num">HOY</span><h3>Memoria viva</h3><p>El quechua, las prácticas agrícolas, la textilería, la música y la memoria oral mantienen viva la herencia andina.</p></article>
+    </div>
+  </div>
+</section>
+
+<section id="politica">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <div class="kicker mono">05 — Organización política y social</div>
+        <h2>Un Estado<br>profundamente jerárquico.</h2>
+      </div>
+      <p>El poder se concentraba en el Sapa Inca, considerado de origen divino. Una compleja burocracia, parentescos y obligaciones recíprocas sostenían el funcionamiento del imperio.</p>
+    </div>
+
+    <div class="topic-grid">
+      <article class="topic reveal"><div class="topic-top"><div class="topic-icon">☀</div><span class="topic-num mono">CÚSPIDE</span></div><h3>El Sapa Inca</h3><p>Gobernante supremo, jefe militar, religioso y administrativo. Su figura se asociaba al Sol (Inti) y su palabra tenía carácter sagrado.</p><div class="tag-row"><span class="tag">Poder divino</span><span class="tag">Mando militar</span><span class="tag">Autoridad religiosa</span></div></article>
+      <article class="topic reveal"><div class="topic-top"><div class="topic-icon">◈</div><span class="topic-num mono">NOBLEZA</span></div><h3>Nobleza y panacas</h3><p>La élite cusqueña ocupaba los principales cargos. Las <em>panacas</em>, linajes vinculados a cada gobernante, mantenían poder político y ritual.</p><div class="tag-row"><span class="tag">Linajes</span><span class="tag">Cargos</span><span class="tag">Ritual</span></div></article>
+      <article class="topic reveal"><div class="topic-top"><div class="topic-icon">⌂</div><span class="topic-num mono">BASE</span></div><h3>El ayllu</h3><p>Comunidad basada en parentesco, con tierras colectivas y obligaciones mutuas. Era la unidad social fundamental del mundo andino.</p><div class="tag-row"><span class="tag">Parentesco</span><span class="tag">Tierras comunes</span><span class="tag">Reciprocidad</span></div></article>
+      <article class="topic reveal"><div class="topic-top"><div class="topic-icon">⚒</div><span class="topic-num mono">TRABAJO</span></div><h3>Mita y reciprocidad</h3><p>El Estado exigía trabajo por turnos (mita) y ofrecía bienes, alimentos y protección. La reciprocidad regulaba las relaciones entre comunidades y poder central.</p><div class="tag-row"><span class="tag">Turnos</span><span class="tag">Redistribución</span><span class="tag">Obras públicas</span></div></article>
+      <article class="topic reveal"><div class="topic-top"><div class="topic-icon">⚖</div><span class="topic-num mono">ADMINISTRACIÓN</span></div><h3>Funcionarios y control</h3><p>Inspectores, gobernadores regionales y responsables de almacenes supervisaban la producción, la población y el cumplimiento de las obligaciones.</p><div class="tag-row"><span class="tag">Tucuyricuq</span><span class="tag">Censos</span><span class="tag">Almacenes</span></div></article>
+      <article class="topic reveal"><div class="topic-top"><div class="topic-icon">✎</div><span class="topic-num mono">REGISTRO</span></div><h3>Quipus</h3><p>Sistema de cuerdas anudadas usado para registrar cantidades y, probablemente, otro tipo de información. Su interpretación sigue siendo objeto de estudio.</p><div class="tag-row"><span class="tag">Cuerdas</span><span class="tag">Nudos</span><span class="tag">Registros</span></div></article>
+    </div>
+
+    <div class="note reveal">
+      <span style="font-size:1.1rem">⚑</span>
+      <span><b>Matices.</b> El imperio no fue homogéneo: integró pueblos con lenguas, tradiciones y niveles de autonomía muy distintos. La imagen de un control total debe matizarse con evidencia arqueológica y etnohistórica.</span>
+    </div>
+  </div>
+</section>
+
+<section class="lab" id="arquitectura">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <div class="kicker mono">06 — Arquitectura e ingeniería</div>
+        <h2>Piedra encajada<br>con precisión asombrosa.</h2>
+      </div>
+      <p>La arquitectura inca destaca por el uso de bloques de piedra tallados y ensamblados sin mortero, muros ligeramente inclinados y una gran resistencia sísmica.</p>
+    </div>
+
+    <div class="path-grid">
+      <article class="path-card reveal"><span class="num">SITIO 01</span><h3>Machu Picchu</h3><p>Conjunto urbano y agrícola en la ceja de selva, con andenes, templos, canales y sectores residenciales. Es el sitio inca más conocido del mundo.</p></article>
+      <article class="path-card reveal"><span class="num">SITIO 02</span><h3>Sacsayhuamán</h3><p>Complejo ceremonial y defensivo en las afueras del Cusco, con muros ciclópeos y bloques de gran tamaño encajados con enorme precisión.</p></article>
+      <article class="path-card reveal"><span class="num">SITIO 03</span><h3>Qorikancha</h3><p>Templo principal del Sol en el Cusco. Sobre sus muros se construyó después el convento de Santo Domingo, en un ejemplo de superposición colonial.</p></article>
+      <article class="path-card reveal"><span class="num">SITIO 04</span><h3>Ollantaytambo</h3><p>Centro administrativo, militar y agrícola con terrazas monumentales y un sector urbano planificado que aún conserva su trazado.</p></article>
+      <article class="path-card reveal"><span class="num">SITIO 05</span><h3>Qhapaq Ñan</h3><p>Red de caminos que articulaba el imperio, con tambos, puentes, escaleras y tramos empedrados. Fue inscrita como Patrimonio Mundial.</p></article>
+      <article class="path-card reveal"><span class="num">SITIO 06</span><h3>Moray y Tipón</h3><p>Sistemas de andenes circulares y obras hidráulicas que muestran el dominio inca del agua, el suelo y los microclimas.</p></article>
+    </div>
+
+    <div class="note reveal">
+      <span style="font-size:1.1rem">ⓘ</span>
+      <span><b>Precisión y función.</b> La técnica constructiva inca no fue solo estética: la forma, la inclinación y el encaje de los bloques mejoraban la estabilidad frente a terremotos y deslizamientos.</span>
+    </div>
+  </div>
+</section>
+
+<section id="religion">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <div class="kicker mono">07 — Religión y cosmovisión</div>
+        <h2>Un mundo<br>habitado por fuerzas.</h2>
+      </div>
+      <p>La cosmovisión andina combinaba el culto a astros, montañas y fuerzas naturales con un calendario agrícola y ritual muy ligado a los ciclos del Sol.</p>
+    </div>
+
+    <div class="topic-grid">
+      <article class="topic reveal"><div class="topic-top"><div class="topic-icon">☀</div><span class="topic-num mono">ASTRO</span></div><h3>Inti</h3><p>El Sol, fuente de vida y figura central del culto estatal. El Sapa Inca se presentaba como su descendiente y el Inti Raymi celebraba el solsticio.</p><div class="tag-row"><span class="tag">Sol</span><span class="tag">Solsticio</span><span class="tag">Inti Raymi</span></div></article>
+      <article class="topic reveal"><div class="topic-top"><div class="topic-icon">⛰</div><span class="topic-num mono">TIERRA</span></div><h3>Pachamama</h3><p>La Madre Tierra, asociada a la fertilidad agrícola. Se le ofrecían ofrendas y rituales para asegurar buenas cosechas y el bienestar de la comunidad.</p><div class="tag-row"><span class="tag">Fertilidad</span><span class="tag">Ofrendas</span><span class="tag">Cosecha</span></div></article>
+      <article class="topic reveal"><div class="topic-top"><div class="topic-icon">✦</div><span class="topic-num mono">CREADOR</span></div><h3>Viracocha</h3><p>Divinidad creadora y ordenadora del mundo en la tradición andina. Su figura articula relatos de origen y de renovación cósmica.</p><div class="tag-row"><span class="tag">Creación</span><span class="tag">Orden</span><span class="tag">Mito</span></div></article>
+      <article class="topic reveal"><div class="topic-top"><div class="topic-icon">⚭</div><span class="topic-num mono">CICLO</span></div><h3>Calendario ritual</h3><p>Las festividades se vinculaban a la siembra, la cosecha y los solsticios. El tiempo no era solo cronología: organizaba obligaciones, trabajo y celebración.</p><div class="tag-row"><span class="tag">Siembra</span><span class="tag">Cosecha</span><span class="tag">Solsticios</span></div></article>
+    </div>
+  </div>
+</section>
+
+<section id="legado">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <div class="kicker mono">08 — Legado y presente</div>
+        <h2>Una herencia<br>que sigue viva.</h2>
+      </div>
+      <p>El imperio desapareció como Estado, pero sus lenguas, prácticas agrícolas, tecnologías, textiles, música y formas de organización comunitaria perduran.</p>
+    </div>
+
+    <div class="path-grid">
+      <article class="path-card reveal"><span class="num">LEGADO 01</span><h3>El quechua</h3><p>Lengua de millones de personas en Perú, Bolivia, Ecuador, Colombia, Argentina y Chile. Conserva palabras, estructuras y tradiciones orales de origen andino.</p></article>
+      <article class="path-card reveal"><span class="num">LEGADO 02</span><h3>Agricultura andina</h3><p>Papas nativas, quinua, maíz, olluco y otros cultivos domesticados siguen siendo base alimentaria y objeto de investigación agronómica.</p></article>
+      <article class="path-card reveal"><span class="num">LEGADO 03</span><h3>Textilería</h3><p>Los tejidos andinos combinan técnica, símbolos y memoria comunitaria. Muchas comunidades mantienen formas de tejer heredadas de época prehispánica.</p></article>
+      <article class="path-card reveal"><span class="num">LEGADO 04</span><h3>Patrimonio y turismo</h3><p>Machu Picchu y otros sitios atraen millones de visitantes. El desafío es conservar el patrimonio frente a la presión turística y el cambio climático.</p></article>
+      <article class="path-card reveal"><span class="num">LEGADO 05</span><h3>Arqueología en curso</h3><p>Nuevas técnicas —LiDAR, ADN antiguo, datación— permiten revisar hipótesis sobre población, expansión y organización del Tawantinsuyu.</p></article>
+      <article class="path-card reveal"><span class="num">LEGADO 06</span><h3>Debates y memoria</h3><p>Se discute cómo enseñar el imperio, cómo representar a los pueblos originarios y cómo equilibrar orgullo patrimonial con crítica histórica.</p></article>
+    </div>
+
+    <div class="note reveal">
+      <span style="font-size:1.1rem">⚑</span>
+      <span><b>Nota.</b> El estudio del Tawantinsuyu combina historia, arqueología, lingüística y antropología. Las interpretaciones cambian a medida que aparecen nuevas evidencias.</span>
+    </div>
+  </div>
+</section>
+
+<section id="desafio">
+  <div class="wrap">
+    <div class="quiz reveal">
+      <div class="quiz-grid">
+        <div>
+          <div class="kicker mono">09 — Comprueba lo aprendido</div>
+          <h2>Evalúa tus conocimientos</h2>
+          <p>Responde tres preguntas sobre el Imperio Inca.</p>
+          <div class="mono muted">PREGUNTA <span id="qnum">01</span> / 03</div>
+        </div>
+        <div>
+          <div class="question" id="question">¿Qué significa "Tawantinsuyu"?</div>
+          <div class="answers" id="answers">
+            <button class="answer">La ciudad de piedra</button>
+            <button class="answer">Las cuatro partes juntas</button>
+            <button class="answer">El pueblo del Sol</button>
+          </div>
+          <div class="feedback" id="feedback" aria-live="polite">Selecciona una respuesta para continuar.</div>
+          <div class="quiz-bottom">
+            <span class="muted" id="score">Puntuación: 0</span>
+            <button class="btn" id="next" disabled>Siguiente →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap footerin">
+    <div><strong>IMPERIO INCA <span style="color:var(--terra)">· TAWANTINSUYU</span></strong> <span>· Aprende explorando.</span></div>
+    <span>Guía educativa · Historia, arqueología y patrimonio</span>
+    <a href="#inicio">Volver arriba ↑</a>
+  </div>
+</footer>
+
+<script>
+/* Reveal */
+const observer = new IntersectionObserver(entries => entries.forEach(e => {
+  if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+}), { threshold: .12 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+/* Simulador de pisos ecológicos */
+const floors = [
+  { name:'Costa o Chala', desc:'0 – 500 m · desierto y litoral',
+    alt:250, altw:8, temp:20, tempw:88, crop:'Algodón y maíz', cropw:55,
+    prod:'Pescado y mariscos', prodw:70,
+    status:'Recursos marinos · intercambio con valles' },
+  { name:'Yunga', desc:'500 – 2 300 m · valles cálidos',
+    alt:1400, altw:22, temp:18, tempw:78, crop:'Frutales y ají', cropw:60,
+    prod:'Coca y frutas', prodw:58,
+    status:'Zona de transición · frutales y arbustos' },
+  { name:'Quechua', desc:'2 300 – 3 500 m · el corazón agrícola del imperio',
+    alt:2900, altw:42, temp:13, tempw:55, crop:'Maíz', cropw:70,
+    prod:'Chicha y grano', prodw:62,
+    status:'Principal zona agrícola · alta densidad poblacional' },
+  { name:'Suni', desc:'3 500 – 4 000 m · laderas frías',
+    alt:3750, altw:58, temp:9, tempw:38, crop:'Papa y habas', cropw:78,
+    prod:'Chuño y tubérculos', prodw:75,
+    status:'Cultivos resistentes al frío · almacenamiento' },
+  { name:'Puna', desc:'4 000 – 4 800 m · pastizales de altura',
+    alt:4400, altw:74, temp:4, tempw:20, crop:'Papa amarga', cropw:40,
+    prod:'Camélidos y lana', prodw:88,
+    status:'Ganadería de llamas y alpacas · fibra y transporte' },
+  { name:'Janca', desc:'4 800 m en adelante · nieve y roca',
+    alt:5100, altw:92, temp:-2, tempw:6, crop:'Sin cultivo', cropw:12,
+    prod:'Minería y ritual', prodw:35,
+    status:'Zona ritual y de recursos minerales · acceso estacional' }
+];
+let fi = 0;
+const simulate = document.getElementById('simulate');
+function renderFloor() {
+  const f = floors[fi];
+  document.getElementById('phaseName').textContent = f.name;
+  document.getElementById('phaseDesc').textContent = f.desc;
+  document.getElementById('demoStatus').textContent = f.status;
+  document.getElementById('alt').innerHTML = f.alt.toLocaleString('es') + ' <small>m</small>';
+  document.getElementById('temp').innerHTML = f.temp + ' <small>°C</small>';
+  document.getElementById('crop').textContent = f.crop;
+  document.getElementById('prod').textContent = f.prod;
+  document.getElementById('altbar').style.setProperty('--w', f.altw + '%');
+  document.getElementById('tempbar').style.setProperty('--w', f.tempw + '%');
+  document.getElementById('cropbar').style.setProperty('--w', f.cropw + '%');
+  document.getElementById('prodbar').style.setProperty('--w', f.prodw + '%');
+  simulate.textContent = fi === floors.length - 1 ? 'Volver a la costa' : 'Subir de piso';
+}
+simulate.addEventListener('click', () => { fi = (fi + 1) % floors.length; renderFloor(); });
+renderFloor();
+
+/* Quiz */
+const questions = [
+  { q:'¿Qué significa "Tawantinsuyu"?',
+    a:['La ciudad de piedra','Las cuatro partes juntas','El pueblo del Sol'],
+    correct:1,
+    why:'El nombre alude a las cuatro grandes divisiones o suyus que formaban el imperio, unidas bajo el poder del Cusco.' },
+  { q:'¿Qué era la mita en el Imperio Inca?',
+    a:['Un tributo en oro','Un sistema de trabajo por turnos','Una festividad religiosa'],
+    correct:1,
+    why:'La mita era un sistema de trabajo rotativo obligatorio para obras públicas, caminos, minas y tierras del Estado.' },
+  { q:'¿Cuál era la capital y centro simbólico del imperio?',
+    a:['Cusco','Machu Picchu','Ollantaytambo'],
+    correct:0,
+    why:'El Cusco era el centro político y simbólico desde el cual se organizaba el territorio; Machu Picchu y Ollantaytambo eran centros importantes, pero no la capital.' }
+];
+let qi = 0, score = 0, answered = false;
+const qEl = document.getElementById('question');
+const aEl = document.getElementById('answers');
+const fEl = document.getElementById('feedback');
+const nEl = document.getElementById('qnum');
+const sEl = document.getElementById('score');
+const next = document.getElementById('next');
+
+function renderQ() {
+  const q = questions[qi];
+  answered = false;
+  nEl.textContent = String(qi + 1).padStart(2, '0');
+  qEl.textContent = q.q;
+  aEl.innerHTML = '';
+  q.a.forEach((a, i) => {
+    const b = document.createElement('button');
+    b.className = 'answer';
+    b.textContent = a;
+    b.addEventListener('click', () => choose(i, b));
+    aEl.appendChild(b);
+  });
+  fEl.textContent = 'Selecciona una respuesta para continuar.';
+  next.disabled = true;
+  next.textContent = qi === questions.length - 1 ? 'Reiniciar ↻' : 'Siguiente →';
+}
+
+function choose(i, b) {
+  if (answered) return;
+  answered = true;
+  const q = questions[qi];
+  [...aEl.children].forEach((el, j) => {
+    el.disabled = true;
+    if (j === q.correct) el.classList.add('correct');
+  });
+  if (i === q.correct) { score++; fEl.textContent = '¡Correcto! ' + q.why; }
+  else { b.classList.add('wrong'); fEl.textContent = 'Casi. ' + q.why; }
+  sEl.textContent = 'Puntuación: ' + score;
+  next.disabled = false;
+}
+
+next.addEventListener('click', () => {
+  if (!answered) return;
+  if (qi < questions.length - 1) { qi++; renderQ(); }
+  else {
+    qi = 0; score = 0;
+    sEl.textContent = 'Puntuación: 0';
+    renderQ();
+    fEl.textContent = '¡Vamos otra vez!';
+  }
+});
+
+renderQ();
+</script>
+</body>
+</html>
