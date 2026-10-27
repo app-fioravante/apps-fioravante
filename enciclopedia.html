@@ -905,7 +905,14 @@
       { title: 'Parrilla', url: BASE_URL_OTROS + 'parrilla', category: 'Cocina y Nutrición', description: 'Técnicas, cortes y secretos para dominar el arte de la parrilla y preparar carnes y vegetales con el mejor sabor.', color: '#f97316' },
       { title: 'Derecho y Justicia Argentina', url: BASE_URL_OTROS + 'derecho-justicia-argentina', category: 'Sociedad y Política', description: 'Conoce el sistema judicial argentino, tus derechos y los procedimientos legales fundamentales para la vida en sociedad.', color: '#3b82f6' },
       { title: 'Oriente', url: BASE_URL_OTROS + 'oriente', category: 'Historia y Civilizaciones', description: 'Un recorrido por las civilizaciones, culturas y tradiciones de Asia Oriental, desde la antigüedad hasta la actualidad.', color: '#a78bfa' },
-      { title: 'Tecnocracia y Transhumanismo', url: BASE_URL_OTROS + 'tecnocracia-trashumanismo', category: 'Tecnología y Computación', description: 'Analiza el impacto de la tecnología en la sociedad: desde el gobierno de los expertos hasta la mejora humana y sus dilemas éticos.', color: '#d946ef' }
+      { title: 'Tecnocracia y Transhumanismo', url: BASE_URL_OTROS + 'tecnocracia-trashumanismo', category: 'Tecnología y Computación', description: 'Analiza el impacto de la tecnología en la sociedad: desde el gobierno de los expertos hasta la mejora humana y sus dilemas éticos.', color: '#d946ef' },
+
+      // ── Novedades: panadería, óptica, África, Europa y medicina ──
+      { title: 'Panadería, Repostería y Comidas del Mundo', url: BASE_URL_OTROS + 'panaderia-reposteria-comidas', category: 'Cocina y Nutrición', description: 'Harina, agua, sal y levadura: la ciencia del pan. Azúcar, huevos y mantequilla: la repostería. Un viaje por los panes y postres de los cinco continentes.', color: '#f59e0b' },
+      { title: 'Óptica y Visión Humana', url: BASE_URL_OTROS + 'optica-vision', category: 'Salud y Medicina', description: 'El ojo como sistema óptico: anatomía refractiva, defectos visuales y las tecnologías que redefinen la visión.', color: '#38bdf8' },
+      { title: 'África', url: BASE_URL_OTROS + 'africa', category: 'Historia y Civilizaciones', description: 'El continente donde nació nuestra especie: geografía, historia y la diversidad de sus 54 países y más de 2.000 lenguas.', color: '#d97706' },
+      { title: 'Europa', url: BASE_URL_OTROS + 'europa', category: 'Historia y Civilizaciones', description: 'El continente que inventó la filosofía y la Revolución Industrial: geografía, historia y los retos de la Unión Europea.', color: '#3b82f6' },
+      { title: 'Medicina', url: BASE_URL_OTROS + 'medicina', category: 'Salud y Medicina', description: 'Ciencia y arte de prevenir, diagnosticar y tratar la enfermedad: especialidades, historia, avances y retos éticos.', color: '#f43f5e' }
     ];
 
     // ─── PERSISTENCIA (localStorage, tolerante a errores) ───
@@ -936,8 +943,6 @@
     const btnByCategory = document.getElementById('btnByCategory');
 
     // ─── UTILIDAD: oscurecer un color hex (HSL) ───
-    // Reduce la luminosidad de forma relativa: percent = 18 → L × 0.82.
-    // Conserva el tono y nunca llega a negro, incluso con colores ya oscuros.
     function darken(hex, percent) {
       const m = /^#?([0-9a-f]{6})$/i.exec(hex);
       if (!m) return hex;
@@ -946,7 +951,6 @@
       const g = ((n >> 8) & 0xFF) / 255;
       const b = (n & 0xFF) / 255;
 
-      // RGB → HSL
       const max = Math.max(r, g, b);
       const min = Math.min(r, g, b);
       const d = max - min;
@@ -963,7 +967,6 @@
 
       l = Math.max(0, Math.min(1, l * (1 - percent / 100)));
 
-      // HSL → RGB
       const a = s * Math.min(l, 1 - l);
       const f = (k) => {
         const t = (k + h / 30) % 12;
@@ -1044,10 +1047,8 @@
       a.rel = 'noopener noreferrer';
       a.className = 'card';
       a.style.animationDelay = `${Math.min(index * 0.04, 0.5)}s`;
-      // El aria-label reemplaza el contenido del enlace, así que el aviso va aquí
       a.setAttribute('aria-label', `Abrir ${entry.title} — ${entry.category} (se abre en una nueva pestaña)`);
 
-      // Gradiente sólido sin transparencia para mejor contraste
       const gradient = `linear-gradient(135deg, ${entry.color}, ${darken(entry.color, 18)})`;
 
       a.innerHTML = `
@@ -1060,7 +1061,6 @@
         <span class="card-arrow" aria-hidden="true">↗</span>
       `;
 
-      // Efecto de brillo que sigue al cursor
       a.addEventListener('mousemove', (e) => {
         const rect = a.getBoundingClientRect();
         const x = ((e.clientX - rect.left) / rect.width) * 100;
