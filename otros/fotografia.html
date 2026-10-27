@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#253d55">
+<meta name="description" content="Guía educativa e interactiva de fotografía: cámara, luz, exposición, composición, géneros, equipo, edición y glosario.">
+<title>Fotografía — Aprende a mirar</title>
+<style>
+:root{
+ --bg:#f4f5f7;--paper:#fff;--ink:#172536;--muted:#627080;--navy:#253d55;--blue:#3f6f96;
+ --sky:#e1edf7;--sand:#f8eddd;--lav:#eee9ff;--mint:#e2f2e9;--line:#e1e6eb;--shadow:0 18px 48px #17253612;--radius:22px
+}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:88px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+a{color:inherit;text-decoration:none}button,input,select{font:inherit}button,a{-webkit-tap-highlight-color:transparent}
+.wrap{width:min(1160px,calc(100% - 40px));margin:auto}
+header{position:sticky;top:0;z-index:30;background:#f4f5f7e8;backdrop-filter:blur(16px);border-bottom:1px solid #e1e6ebcc}
+.nav{height:74px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:900;letter-spacing:-.6px}
+.brand-mark{display:grid;place-items:center;width:40px;height:40px;border-radius:13px;background:var(--navy);color:white;font-size:22px}
+.navlinks{display:flex;align-items:center;gap:18px}.navlinks a{font-size:13px;color:var(--muted);font-weight:750}.navlinks a:hover{color:var(--blue)}
+.menu-btn{display:none;background:white;border:1px solid var(--line);border-radius:12px;padding:8px 12px;color:var(--ink);cursor:pointer}
+.hero{padding:68px 0 52px;overflow:hidden}.hero-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:42px;align-items:center}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;padding:7px 12px;border-radius:999px;background:var(--sky);color:var(--navy);font-size:12px;font-weight:850;letter-spacing:.08em;text-transform:uppercase}
+h1{font-size:clamp(2.8rem,6.5vw,5.6rem);line-height:.98;letter-spacing:-.07em;margin:22px 0}
+h1 span{color:var(--blue)}.hero p{font-size:18px;color:var(--muted);max-width:610px}
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 18px;border:0;border-radius:14px;font-weight:800;cursor:pointer;transition:transform .18s,filter .18s}
+.btn:hover{transform:translateY(-2px);filter:brightness(.98)}.primary{background:var(--navy);color:white;box-shadow:0 8px 22px #253d5530}.secondary{background:white;border:1px solid var(--line)}
+.hero-art{position:relative;min-height:390px;display:grid;place-items:center}
+.photo-frame{position:relative;width:min(420px,100%);aspect-ratio:1.08;background:#d6e2e8;border:10px solid white;border-radius:28px;box-shadow:0 25px 50px #17253622;overflow:hidden;transform:rotate(3deg)}
+.photo-frame svg{width:100%;height:100%;display:block}
+.camera{position:absolute;left:32%;top:34%;font-size:75px;filter:drop-shadow(0 12px 8px #13283c36);transform:rotate(-9deg)}
+.float{position:absolute;background:white;border:1px solid #fff;border-radius:17px;padding:12px 15px;box-shadow:var(--shadow);font-size:13px;font-weight:800}.float small{display:block;color:var(--muted);font-weight:500}.f1{left:-4px;top:24px}.f2{right:-3px;top:113px}.f3{left:8%;bottom:9px}
+.section{padding:67px 0}.section-head{max-width:760px;margin-bottom:30px}.kicker{font-size:12px;text-transform:uppercase;letter-spacing:.13em;font-weight:900;color:var(--blue)}
+h2{font-size:clamp(2rem,4vw,3.15rem);line-height:1.08;letter-spacing:-.05em;margin:9px 0 13px}.section-head p{color:var(--muted);font-size:16px;margin:0}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:23px;box-shadow:0 5px 22px #17253605;transition:transform .2s,box-shadow .2s}
+.card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}.iconbox{width:48px;height:48px;border-radius:15px;background:var(--sky);display:grid;place-items:center;font-size:24px;margin-bottom:15px}
+.card:nth-child(3n+2) .iconbox{background:var(--mint)}.card:nth-child(3n) .iconbox{background:var(--sand)}
+.card h3{font-size:19px;letter-spacing:-.025em;margin:0 0 7px}.card p{font-size:14px;color:var(--muted);margin:0}
+.tag{display:inline-block;margin-top:14px;background:#edf1f6;color:var(--navy);font-weight:800;font-size:11px;padding:4px 9px;border-radius:8px}
+.band{background:#1e3145;color:white;border-radius:28px;padding:38px;display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:center}
+.band .kicker{color:#b9d7f0}.band p{color:#d0dce6}.band .btn{background:#d9eaf7;color:#20394f}
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.stats-grid div{background:#ffffff10;border:1px solid #ffffff20;border-radius:16px;padding:15px}.stats-grid b{display:block;font-size:24px}.stats-grid span{font-size:12px;color:#d0dce6}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:18px}.panel{background:white;border:1px solid var(--line);border-radius:var(--radius);padding:26px}.panel h3{margin:0 0 10px;font-size:21px}.panel p{color:var(--muted);margin:8px 0}.panel.lav{background:var(--lav);border-color:transparent}.panel.mint{background:var(--mint);border-color:transparent}
+.list{padding-left:21px;color:var(--muted)}.list li{margin:7px 0}
+.simulator{background:white;border:1px solid var(--line);border-radius:24px;padding:25px;display:grid;grid-template-columns:1fr .85fr;gap:25px;align-items:center}
+.controls{display:grid;gap:19px}.control label{display:flex;justify-content:space-between;gap:10px;font-weight:800;font-size:14px}.control output{color:var(--blue);font-variant-numeric:tabular-nums}.control input{width:100%;accent-color:var(--blue);margin-top:12px;cursor:pointer}.hint{font-size:12px;color:var(--muted);margin-top:3px}
+.exposure-result{border-radius:18px;padding:23px;background:var(--sky);min-height:225px}.exposure-result h3{margin:0 0 8px}.exposure-result p{color:#445d70;margin:8px 0}.meter{height:12px;border-radius:999px;background:#cfdeea;overflow:hidden;margin:18px 0 8px}.meter span{display:block;height:100%;width:50%;background:var(--blue);border-radius:999px;transition:width .2s}
+.composition-demo{display:grid;grid-template-columns:1fr 1fr;gap:18px}.composition-visual{background:#dce9e7;border-radius:18px;overflow:hidden;min-height:230px;position:relative}.composition-visual svg{width:100%;height:100%;min-height:230px;display:block}.composition-copy{padding:7px}.composition-copy p{color:var(--muted)}.comp-buttons{display:flex;gap:8px;flex-wrap:wrap;margin-top:17px}.comp-btn{background:white;border:1px solid var(--line);color:var(--muted);padding:8px 11px;border-radius:10px;cursor:pointer;font-size:13px;font-weight:750}.comp-btn.active{background:var(--navy);color:white;border-color:var(--navy)}
+.toolbar{display:flex;gap:12px;flex-wrap:wrap;margin:20px 0 24px}.search{flex:1;min-width:230px;position:relative}.search input{width:100%;border:1px solid var(--line);background:white;border-radius:14px;padding:13px 15px 13px 42px;outline:none}.search:before{content:"⌕";position:absolute;left:15px;top:4px;font-size:25px;color:var(--muted)}
+.filters{display:flex;gap:8px;flex-wrap:wrap}.filter{border:1px solid var(--line);background:white;border-radius:12px;padding:9px 13px;color:var(--muted);cursor:pointer;font-weight:700;font-size:13px}.filter.active{background:var(--navy);color:white;border-color:var(--navy)}
+.glossary{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.term{background:white;border:1px solid var(--line);padding:19px;border-radius:17px}.term h3{margin:0 0 7px;font-size:17px}.term p{margin:0;color:var(--muted);font-size:14px}.empty{display:none;text-align:center;padding:24px;color:var(--muted)}
+.accordion{background:white;border:1px solid var(--line);border-radius:15px;margin:10px 0;overflow:hidden}.accordion button{display:flex;justify-content:space-between;align-items:center;text-align:left;width:100%;background:white;border:0;color:var(--ink);padding:17px 19px;font-weight:800;cursor:pointer}.accordion .answer{display:none;padding:0 19px 18px;color:var(--muted)}.accordion.open .answer{display:block}.plus{font-size:23px;color:var(--blue);transition:transform .2s}.accordion.open .plus{transform:rotate(45deg)}
+.quiz{background:linear-gradient(140deg,#e1edf7,#e8e6fb);border-radius:25px;padding:29px}.quiz h3{margin:0;font-size:22px}.answers{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px}.answers button{padding:14px;border:1px solid #cfdbe8;border-radius:13px;background:#fff;text-align:left;cursor:pointer;font-weight:650}.answers button:hover{border-color:var(--blue)}.feedback{font-weight:800;margin-top:15px;min-height:26px}
+footer{background:#1e3145;color:white;margin-top:60px;padding:42px 0 27px}.footgrid{display:flex;justify-content:space-between;gap:25px;flex-wrap:wrap}.footnote{color:#d0dce6;font-size:13px;max-width:720px}.footlinks{display:flex;gap:15px;flex-wrap:wrap;font-size:13px}.footlinks a{text-decoration:underline;color:#c5dff4}
+.backtop{display:none;position:fixed;right:20px;bottom:20px;width:46px;height:46px;border:0;border-radius:15px;background:var(--navy);color:#fff;font-size:22px;box-shadow:var(--shadow);cursor:pointer;z-index:10}
+@media(max-width:900px){.hero-grid{grid-template-columns:1fr}.hero-art{min-height:340px}.grid,.glossary{grid-template-columns:repeat(2,1fr)}.band{grid-template-columns:1fr}.simulator{grid-template-columns:1fr}.navlinks{display:none;position:absolute;left:20px;right:20px;top:67px;background:white;border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:var(--shadow);flex-direction:column;align-items:flex-start}.navlinks.show{display:flex}.menu-btn{display:block}}
+@media(max-width:580px){.wrap{width:calc(100% - 28px)}.hero{padding:46px 0 34px}.hero-art{min-height:280px}.photo-frame{width:90%}.camera{font-size:58px}.float{font-size:11px;padding:9px 11px}.grid,.glossary,.two-col,.composition-demo{grid-template-columns:1fr}.section{padding:48px 0}.band{padding:24px}.stats-grid{grid-template-columns:1fr 1fr}.answers{grid-template-columns:1fr}.quiz{padding:22px}.nav{height:66px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header><div class="wrap nav">
+ <a class="brand" href="#inicio" aria-label="Fotografía, inicio"><span class="brand-mark">◉</span><span>Fotografía</span></a>
+ <nav class="navlinks" id="navlinks" aria-label="Navegación principal"><a href="#fundamentos">Fundamentos</a><a href="#exposicion">Exposición</a><a href="#composicion">Composición</a><a href="#generos">Géneros</a><a href="#glosario">Glosario</a></nav>
+ <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="navlinks">☰ Menú</button>
+</div></header>
+<main id="inicio">
+<section class="hero"><div class="wrap hero-grid">
+ <div><span class="eyebrow">📷 Guía educativa · Aprende a mirar</span>
+  <h1>Todo empieza<br>con <span>la luz.</span></h1>
+  <p>Descubre cómo funciona una cámara, aprende a controlar la exposición, compone imágenes con intención y explora los distintos estilos fotográficos. De tus primeras fotos a una mirada más creativa.</p>
+  <div class="actions"><a class="btn primary" href="#fundamentos">Comenzar a aprender <span>→</span></a><a class="btn secondary" href="#exposicion">Probar la exposición</a></div>
+ </div>
+ <div class="hero-art" aria-label="Ilustración de paisaje enmarcado como una fotografía">
+  <div class="photo-frame"><svg viewBox="0 0 440 400" role="img" aria-label="Paisaje ilustrado con montañas, sol y agua"><defs><linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#86b5d2"/><stop offset="1" stop-color="#f4d7b5"/></linearGradient><linearGradient id="waterGrad" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#7aafbb"/><stop offset="1" stop-color="#244c65"/></linearGradient></defs><rect width="440" height="400" fill="url(#skyGrad)"/><circle cx="305" cy="105" r="45" fill="#ffe8ab"/><path d="M0 235 L100 104 L185 230 L268 130 L440 260 V400 H0Z" fill="#496e79"/><path d="M0 267 L116 176 L210 272 L315 174 L440 284 V400 H0Z" fill="#2f5863"/><path d="M0 272 Q100 245 220 275 T440 272 V400 H0Z" fill="url(#waterGrad)"/><path d="M70 300 L190 300 M235 323 L355 323 M110 350 L290 350" stroke="#f2d4a7" stroke-width="4" opacity=".65" stroke-linecap="round"/><path d="M0 365 Q130 333 245 374 T440 360 V400 H0Z" fill="#203e4d"/></svg></div>
+  <div class="camera">📷</div><div class="float f1">☀️ Luz<small>La materia prima</small></div><div class="float f2">🎯 Composición<small>Guiar la mirada</small></div><div class="float f3">✨ Creatividad<small>Contar historias</small></div>
+ </div>
+</div></section>
+
+<section class="section" id="fundamentos"><div class="wrap">
+ <div class="section-head"><span class="kicker">01 · Lo esencial</span><h2>¿Qué es la fotografía?</h2><p>Fotografiar es registrar la luz para crear una imagen. La cámara es una herramienta, pero la fotografía también depende de observar, elegir un momento, decidir qué incluir y transmitir una idea o emoción.</p></div>
+ <div class="grid">
+  <article class="card"><div class="iconbox">☀️</div><h3>La luz</h3><p>Su dirección, intensidad, color y dureza transforman el aspecto de un objeto. Aprender a verla es una de las habilidades más importantes.</p></article>
+  <article class="card"><div class="iconbox">👁️</div><h3>La mirada</h3><p>Encuadrar significa decidir qué entra y qué queda fuera. Dos personas pueden fotografiar la misma escena y contar historias distintas.</p></article>
+  <article class="card"><div class="iconbox">🧰</div><h3>La herramienta</h3><p>Una cámara dedicada, un teléfono o una cámara analógica pueden producir grandes imágenes si se usan con intención.</p></article>
+ </div>
+</div></section>
+
+<section class="section" id="exposicion"><div class="wrap">
+ <div class="section-head"><span class="kicker">02 · Control de la luz</span><h2>El triángulo de exposición</h2><p>La exposición es la cantidad de luz registrada. Tres ajustes están relacionados: apertura, velocidad de obturación e ISO. Cambiar uno puede afectar el brillo, el movimiento o el ruido de la imagen.</p></div>
+ <div class="simulator">
+  <div class="controls">
+   <div class="control"><label for="aperture">Apertura <output id="apertureOut">f/4</output></label><input type="range" id="aperture" min="0" max="8" value="4" step="1"><div class="hint">Un número f pequeño deja entrar más luz y suele dar menos profundidad de campo.</div></div>
+   <div class="control"><label for="shutter">Velocidad de obturación <output id="shutterOut">1/125 s</output></label><input type="range" id="shutter" min="0" max="8" value="4" step="1"><div class="hint">Una velocidad rápida congela el movimiento; una lenta puede mostrarlo borroso.</div></div>
+   <div class="control"><label for="iso">ISO <output id="isoOut">400</output></label><input type="range" id="iso" min="0" max="8" value="3" step="1"><div class="hint">Un ISO alto permite trabajar con menos luz, pero puede aumentar el ruido visible.</div></div>
+  </div>
+  <div class="exposure-result"><h3>Tu combinación</h3><p id="exposureText">Exposición simulada equilibrada. Ajusta los controles para ver cómo cambia el resultado.</p><div class="meter"><span id="exposureMeter"></span></div><p id="qualityText">Busca un equilibrio entre brillo, nitidez y el efecto creativo que deseas.</p><span class="tag">Simulación educativa, no medición real</span></div>
+ </div>
+ <p class="muted" style="font-size:13px;margin-top:14px">La simulación simplifica el comportamiento de la cámara: el resultado real depende de la iluminación, el objetivo, el sensor y los pasos de exposición disponibles.</p>
+</div></section>
+
+<section class="section" id="composicion"><div class="wrap">
+ <div class="section-head"><span class="kicker">03 · Organizar la imagen</span><h2>Composición fotográfica</h2><p>La composición es la forma de organizar los elementos de una foto. No son reglas rígidas: son herramientas para dirigir la atención y comunicar con mayor claridad.</p></div>
+ <div class="composition-demo">
+  <div class="composition-visual"><svg id="compositionSvg" viewBox="0 0 500 350" role="img" aria-label="Ejemplo ilustrado de composición fotográfica"><defs><linearGradient id="compSky" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#c5e0ed"/><stop offset="1" stop-color="#f5dfba"/></linearGradient></defs><rect width="500" height="350" fill="url(#compSky)"/><circle cx="360" cy="85" r="34" fill="#f9c873"/><path d="M0 225 L125 112 L232 225 L330 150 L500 245 V350 H0Z" fill="#75918d"/><path d="M0 260 Q100 225 220 260 T500 250 V350 H0Z" fill="#416c69"/><path d="M30 350 L150 265 L260 350" fill="#a0b8ac"/><g id="gridOverlay" stroke="#fff" stroke-width="2" opacity=".8"><path d="M166.7 0V350 M333.3 0V350 M0 116.7H500 M0 233.3H500" stroke-dasharray="7 7"/></g><circle id="focusPoint" cx="333" cy="116" r="12" fill="#fff" stroke="#20394f" stroke-width="4"/></svg></div>
+  <div class="composition-copy"><span class="kicker">Prueba distintas ideas</span><h3 id="compTitle" style="font-size:25px;margin:10px 0 6px">Regla de los tercios</h3><p id="compDesc">Divide mentalmente la imagen en tres franjas horizontales y verticales. Colocar el sujeto cerca de una intersección puede dar equilibrio y dinamismo.</p><div class="comp-buttons"><button class="comp-btn active" data-comp="thirds">Regla de tercios</button><button class="comp-btn" data-comp="center">Centrado</button><button class="comp-btn" data-comp="negative">Espacio negativo</button><button class="comp-btn" data-comp="leading">Líneas guía</button></div></div>
+ </div>
+ <div class="grid" style="margin-top:18px">
+  <article class="card"><div class="iconbox">📐</div><h3>Encuadre</h3><p>Decide los límites de la imagen. Acércate, cambia el ángulo o elimina elementos que distraigan.</p></article>
+  <article class="card"><div class="iconbox">↗️</div><h3>Perspectiva</h3><p>Fotografiar desde arriba, abajo o a la altura del sujeto modifica la relación entre los elementos.</p></article>
+  <article class="card"><div class="iconbox">⚖️</div><h3>Equilibrio visual</h3><p>Distribuye formas, colores y espacios para guiar la atención. La simetría puede dar calma; la asimetría, tensión.</p></article>
+ </div>
+</div></section>
+
+<section class="section"><div class="wrap"><div class="band">
+ <div><span class="kicker">Una idea importante</span><h2>La mejor cámara es la que sabes usar.</h2><p>El equipo puede ampliar tus posibilidades, pero la observación, la práctica y la intención pesan mucho. Antes de comprar más accesorios, aprende a trabajar con la luz y las herramientas que ya tienes.</p><a class="btn" href="#equipo">Conocer el equipo →</a></div>
+ <div class="stats-grid"><div><b>👀</b><span>Observar la luz</span></div><div><b>📏</b><span>Elegir el encuadre</span></div><div><b>⏳</b><span>Esperar el momento</span></div><div><b>🔁</b><span>Practicar y revisar</span></div></div>
+</div></div></section>
+
+<section class="section" id="generos"><div class="wrap">
+ <div class="section-head"><span class="kicker">04 · Diferentes miradas</span><h2>Tipos de fotografía</h2><p>Cada género tiene objetivos, desafíos y formas de trabajar la luz. Muchos se mezclan en la práctica.</p></div>
+ <div class="grid">
+  <article class="card"><div class="iconbox">🧑‍🤝‍🧑</div><h3>Retrato</h3><p>Busca expresar la personalidad, el estado de ánimo o la presencia de una persona mediante la luz, el gesto y el fondo.</p><span class="tag">Personas</span></article>
+  <article class="card"><div class="iconbox">🏞️</div><h3>Paisaje</h3><p>Fotografía entornos naturales o urbanos atendiendo a la luz, profundidad, escala, clima y composición.</p><span class="tag">Entorno</span></article>
+  <article class="card"><div class="iconbox">🏙️</div><h3>Urbana y callejera</h3><p>Observa la vida cotidiana, los gestos, la arquitectura y las coincidencias que suceden en espacios públicos.</p><span class="tag">Vida cotidiana</span></article>
+  <article class="card"><div class="iconbox">🦋</div><h3>Macro y naturaleza</h3><p>Revela detalles pequeños, texturas e insectos o plantas que a menudo pasan desapercibidos.</p><span class="tag">Detalles</span></article>
+  <article class="card"><div class="iconbox">⚽</div><h3>Deportes</h3><p>Exige anticipación, enfoque continuo y velocidades adecuadas para capturar momentos de acción.</p><span class="tag">Movimiento</span></article>
+  <article class="card"><div class="iconbox">🍲</div><h3>Producto y gastronomía</h3><p>Utiliza fondos, iluminación controlada y composición para mostrar objetos, alimentos o productos de forma atractiva.</p><span class="tag">Comercial</span></article>
+  <article class="card"><div class="iconbox">📰</div><h3>Fotoperiodismo</h3><p>Documenta hechos de interés público con contexto, honestidad y cuidado para no manipular lo que la imagen comunica.</p><span class="tag">Documental</span></article>
+  <article class="card"><div class="iconbox">💍</div><h3>Eventos y bodas</h3><p>Combina retratos, escenas espontáneas y detalles, anticipando momentos importantes y condiciones cambiantes.</p><span class="tag">Narrativa</span></article>
+  <article class="card"><div class="iconbox">🌌</div><h3>Astrofotografía</h3><p>Registra el cielo nocturno. Suele requerir estabilidad, enfoque cuidadoso y exposiciones prolongadas.</p><span class="tag">Noche y cielo</span></article>
+ </div>
+</div></section>
+
+<section class="section" id="equipo"><div class="wrap">
+ <div class="section-head"><span class="kicker">05 · Herramientas</span><h2>Equipo fotográfico</h2><p>No hace falta comprarlo todo. Elige según las fotos que te gustaría hacer y aprende para qué sirve cada herramienta.</p></div>
+ <div class="two-col">
+  <div class="panel lav"><h3>📷 Cámara y objetivos</h3><ul class="list"><li><strong>Teléfono:</strong> práctico, siempre a mano y suficiente para aprender muchos fundamentos.</li><li><strong>Cámara compacta:</strong> sencilla y portátil; sus controles dependen del modelo.</li><li><strong>Sin espejo o réflex:</strong> suelen permitir cambiar objetivos y controlar muchos ajustes.</li><li><strong>Gran angular:</strong> abarca más escena; útil en interiores y paisajes.</li><li><strong>Teleobjetivo:</strong> acerca sujetos lejanos y facilita encuadres cerrados.</li><li><strong>Objetivo macro:</strong> facilita fotografiar detalles pequeños a corta distancia.</li></ul></div>
+  <div class="panel mint"><h3>🧰 Accesorios útiles</h3><ul class="list"><li><strong>Trípode:</strong> mantiene estable la cámara en exposiciones largas o escenas estáticas.</li><li><strong>Tarjeta de memoria:</strong> almacena fotos; conviene tener capacidad y velocidad adecuadas.</li><li><strong>Batería extra:</strong> útil para sesiones largas o viajes.</li><li><strong>Reflector:</strong> rebota luz para suavizar sombras en retratos y productos.</li><li><strong>Flash o luz continua:</strong> permite controlar iluminación cuando la luz ambiente no alcanza.</li><li><strong>Paño de limpieza:</strong> ayuda a mantener la óptica sin rayarla.</li></ul></div>
+ </div>
+</div></section>
+
+<section class="section" id="edicion"><div class="wrap">
+ <div class="section-head"><span class="kicker">06 · Del archivo a la foto final</span><h2>Edición y flujo de trabajo</h2><p>Editar puede ayudar a expresar la intención de la foto. Un flujo organizado conserva archivos, facilita encontrar imágenes y evita perder originales.</p></div>
+ <div class="grid">
+  <article class="card"><div class="iconbox">🗂️</div><h3>Importar y organizar</h3><p>Guarda los originales, usa carpetas con nombres claros y realiza copias de seguridad en ubicaciones separadas.</p></article>
+  <article class="card"><div class="iconbox">☀️</div><h3>Ajustar la luz</h3><p>Corrige exposición, contraste, altas luces y sombras para recuperar detalle sin perder el aspecto natural deseado.</p></article>
+  <article class="card"><div class="iconbox">🎨</div><h3>Color y tono</h3><p>Trabaja balance de blancos, saturación y tonos con coherencia. Los colores pueden cambiar mucho según la pantalla.</p></article>
+  <article class="card"><div class="iconbox">✂️</div><h3>Recortar y enderezar</h3><p>Mejora el encuadre, corrige horizontes y elimina distracciones cuando sea apropiado para el propósito.</p></article>
+  <article class="card"><div class="iconbox">🧹</div><h3>Enfoque y ruido</h3><p>Aplica ajustes moderados: demasiado enfoque crea halos y demasiada reducción de ruido puede borrar texturas.</p></article>
+  <article class="card"><div class="iconbox">📤</div><h3>Exportar</h3><p>JPEG suele servir para compartir; RAW conserva más datos para editar. Elige tamaño, calidad y perfil de color según el uso.</p></article>
+ </div>
+</div></section>
+
+<section class="section" id="etica"><div class="wrap">
+ <div class="section-head"><span class="kicker">07 · Responsabilidad</span><h2>Ética, privacidad y derechos</h2><p>Fotografiar no es solo una cuestión técnica. También importa el respeto a las personas, el contexto y el uso que se dará a la imagen.</p></div>
+ <div class="two-col">
+  <div class="panel mint"><h3>🤝 Respeto a las personas</h3><ul class="list"><li>Pide permiso cuando la situación, la privacidad o el contexto lo requieran.</li><li>Evita poner a personas en riesgo por conseguir una foto.</li><li>Ten especial cuidado con menores y situaciones vulnerables.</li><li>Antes de publicar, piensa en cómo la imagen puede afectar a quienes aparecen.</li></ul></div>
+  <div class="panel lav"><h3>🧭 Uso responsable de imágenes</h3><ul class="list"><li>Verifica licencias y permisos antes de usar fotos ajenas.</li><li>No presentes una escena documental editada de forma engañosa.</li><li>Revisa las normas locales sobre privacidad, espacios y publicación.</li><li>Si trabajas profesionalmente, acuerda por escrito el uso, entrega y derechos de las imágenes cuando sea necesario.</li></ul></div>
+ </div>
+</div></section>
+
+<section class="section" id="glosario"><div class="wrap">
+ <div class="section-head"><span class="kicker">08 · Diccionario visual</span><h2>Glosario de fotografía</h2><p>Busca un término o filtra por categoría para encontrar una definición sencilla.</p></div>
+ <div class="toolbar"><label class="search"><input id="searchInput" type="search" placeholder="Buscar: ISO, enfoque, RAW…" aria-label="Buscar términos de fotografía"></label><div class="filters" id="filters"><button class="filter active" data-filter="Todos">Todos</button><button class="filter" data-filter="Cámara">Cámara</button><button class="filter" data-filter="Luz">Luz</button><button class="filter" data-filter="Composición">Composición</button><button class="filter" data-filter="Edición">Edición</button></div></div>
+ <div class="glossary" id="glossaryGrid"></div><p class="empty" id="emptyState">No encontramos términos. Prueba otra búsqueda.</p>
+</div></section>
+
+<section class="section" id="preguntas"><div class="wrap">
+ <div class="section-head"><span class="kicker">09 · Preguntas frecuentes</span><h2>Respuestas rápidas</h2><p>Ideas útiles para dar los primeros pasos y seguir practicando.</p></div>
+ <div class="accordion"><button aria-expanded="false">¿Necesito una cámara cara para empezar? <span class="plus">+</span></button><div class="answer">No. Un teléfono puede servir para aprender composición, luz, perspectiva y narrativa visual. El equipo más avanzado ayuda en situaciones específicas, pero no sustituye la práctica ni la mirada.</div></div>
+ <div class="accordion"><button aria-expanded="false">¿Qué diferencia hay entre RAW y JPEG? <span class="plus">+</span></button><div class="answer">RAW guarda más información del sensor y suele ofrecer mayor margen de edición, pero necesita procesamiento y ocupa más espacio. JPEG ya tiene ajustes aplicados, es más liviano y fácil de compartir.</div></div>
+ <div class="accordion"><button aria-expanded="false">¿Por qué mis fotos salen movidas? <span class="plus">+</span></button><div class="answer">Puede deberse a una velocidad de obturación lenta, movimiento del sujeto, cámara inestable o enfoque incorrecto. Prueba una velocidad más rápida, apoya la cámara o usa una técnica de estabilidad adecuada.</div></div>
+ <div class="accordion"><button aria-expanded="false">¿Qué conviene aprender primero? <span class="plus">+</span></button><div class="answer">Empieza por reconocer la luz, componer, enfocar y entender la exposición. Luego practica un género que te interese y revisa tus fotos para identificar qué quieres mejorar en la siguiente toma.</div></div>
+</div></section>
+
+<section class="section" id="desafio"><div class="wrap">
+ <div class="section-head"><span class="kicker">10 · Comprueba lo aprendido</span><h2>Mini desafío fotográfico</h2><p>Responde y recibe una explicación al instante.</p></div>
+ <div class="quiz"><h3>¿Qué suele ocurrir al usar una velocidad de obturación más rápida?</h3><div class="answers" id="quizAnswers"><button data-answer="wrong">Entra siempre más luz</button><button data-answer="right">Se puede congelar mejor el movimiento, pero entra menos luz si no compensas otros ajustes</button><button data-answer="wrong">Aumenta automáticamente la profundidad de campo</button><button data-answer="wrong">La imagen siempre queda más cálida</button></div><div class="feedback" id="quizFeedback" role="status" aria-live="polite"></div></div>
+</div></section>
+</main>
+<footer><div class="wrap">
+ <div class="footgrid"><div><a class="brand" href="#inicio"><span class="brand-mark">◉</span><span>Fotografía</span></a><p class="footnote">Una guía para aprender técnica, desarrollar creatividad y mirar el mundo con otros ojos.</p></div><div class="footlinks"><a href="#exposicion">Exposición</a><a href="#composicion">Composición</a><a href="#equipo">Equipo</a><a href="#glosario">Glosario</a></div></div>
+ <p class="footnote" style="margin-top:25px">Contenido educativo general. La práctica con equipos, luces o accesorios debe hacerse con cuidado y siguiendo las indicaciones de los fabricantes y las normas del lugar.</p>
+ <p class="footnote">© <span id="year"></span> Fotografía · Aprende a mirar.</p>
+</div></footer>
+<button class="backtop" id="backtop" aria-label="Volver arriba" title="Volver arriba">↑</button>
+<script>
+const terms=[
+["Apertura","Cámara","Tamaño del orificio del objetivo por el que entra luz. Se expresa con números f; un número f pequeño indica una apertura mayor."],
+["Obturación","Cámara","Mecanismo que determina durante cuánto tiempo el sensor recibe luz. La velocidad también influye en cómo aparece el movimiento."],
+["ISO","Cámara","Ajuste de sensibilidad de salida del sistema de imagen. Valores altos facilitan fotografiar con menos luz, pero pueden aumentar el ruido."],
+["Distancia focal","Cámara","Dato del objetivo, expresado normalmente en milímetros, que influye en el ángulo de visión y el tamaño aparente de los elementos."],
+["Profundidad de campo","Cámara","Zona de la imagen que parece suficientemente enfocada por delante y detrás del punto de enfoque."],
+["Enfoque","Cámara","Ajuste que permite que el sujeto o plano elegido aparezca nítido. Puede ser automático o manual."],
+["RAW","Cámara","Formato que conserva gran parte de la información capturada por el sensor para tener más margen de ajuste durante la edición."],
+["JPEG","Cámara","Formato comprimido de imagen ampliamente compatible, práctico para compartir e imprimir; suele aplicar procesamiento dentro de la cámara."],
+["Balance de blancos","Luz","Ajuste que ayuda a que los colores neutros se vean neutros bajo distintas fuentes de luz."],
+["Luz dura","Luz","Luz que produce sombras definidas y bordes marcados, como el sol directo en ciertas condiciones."],
+["Luz suave","Luz","Luz que crea transiciones graduales y sombras menos marcadas, como la luz de una ventana con difusión."],
+["Contraluz","Luz","Situación en la que la luz principal viene desde detrás del sujeto en dirección a la cámara."],
+["Exposición","Luz","Cantidad de luz que queda registrada en la fotografía. Una exposición inadecuada puede perder detalle en sombras o zonas claras."],
+["Histograma","Luz","Gráfico que muestra cómo se distribuyen los tonos oscuros, medios y claros de una imagen."],
+["Regla de tercios","Composición","Guía que divide mentalmente la imagen en nueve partes para ayudar a ubicar sujetos y líneas de interés."],
+["Espacio negativo","Composición","Área relativamente despejada alrededor del sujeto que puede darle protagonismo o transmitir calma."],
+["Líneas guía","Composición","Líneas presentes en la escena que dirigen la mirada hacia el sujeto o a través de la imagen."],
+["Bokeh","Composición","Aspecto visual de las zonas desenfocadas, especialmente los puntos de luz fuera de foco."],
+["Viñeteado","Edición","Oscurecimiento o aclaramiento gradual de las esquinas de una imagen, que puede ser óptico o aplicado durante la edición."],
+["Recorte","Edición","Eliminar parte de los bordes de una fotografía para cambiar el encuadre o mejorar la composición."],
+["Reducción de ruido","Edición","Proceso para disminuir granulado digital visible, que debe aplicarse con cuidado para no borrar detalles."],
+["Rango dinámico","Luz","Capacidad de registrar detalle entre las zonas más oscuras y las más claras de una escena."]
+];
+let activeFilter="Todos";const glossaryGrid=document.getElementById("glossaryGrid");
+function renderGlossary(){const q=document.getElementById("searchInput").value.trim().toLocaleLowerCase("es");const items=terms.filter(t=>(activeFilter==="Todos"||t[1]===activeFilter)&&(t[0]+" "+t[1]+" "+t[2]).toLocaleLowerCase("es").includes(q));glossaryGrid.innerHTML=items.map(t=>`<article class="term"><span class="tag" style="margin:0 0 9px">${t[1]}</span><h3>${t[0]}</h3><p>${t[2]}</p></article>`).join("");document.getElementById("emptyState").style.display=items.length?"none":"block";}
+document.getElementById("searchInput").addEventListener("input",renderGlossary);
+document.getElementById("filters").addEventListener("click",e=>{const b=e.target.closest("button[data-filter]");if(!b)return;activeFilter=b.dataset.filter;document.querySelectorAll(".filter").forEach(x=>x.classList.toggle("active",x===b));renderGlossary();});
+document.querySelectorAll(".accordion button").forEach(b=>b.addEventListener("click",()=>{const item=b.parentElement;const open=item.classList.toggle("open");b.setAttribute("aria-expanded",String(open));}));
+document.getElementById("quizAnswers").addEventListener("click",e=>{const b=e.target.closest("button[data-answer]");if(!b)return;const f=document.getElementById("quizFeedback");if(b.dataset.answer==="right"){f.textContent="¡Correcto! Una obturación más rápida reduce el tiempo durante el que entra luz y ayuda a congelar movimiento; puede ser necesario compensar con apertura o ISO.";f.style.color="#245c45";}else{f.textContent="No exactamente. La velocidad controla el tiempo de exposición y cómo se registra el movimiento. Una velocidad rápida suele dejar entrar menos luz si los otros ajustes no cambian.";f.style.color="#87471e";}});
+const apertureValues=[1.4,2,2.8,4,5.6,8,11,16,22],shutterValues=["1/2000 s","1/1000 s","1/500 s","1/250 s","1/125 s","1/60 s","1/30 s","1/15 s","1/8 s"],isoValues=[50,100,200,400,800,1600,3200,6400,12800];
+function updateExposure(){const a=+document.getElementById("aperture").value,s=+document.getElementById("shutter").value,i=+document.getElementById("iso").value;document.getElementById("apertureOut").textContent="f/"+apertureValues[a];document.getElementById("shutterOut").textContent=shutterValues[s];document.getElementById("isoOut").textContent=isoValues[i];const ev=(2*Math.log2(4/apertureValues[a]))+(4-s)+(Math.log2(isoValues[i]/400));const pct=Math.max(4,Math.min(100,50+ev*11));document.getElementById("exposureMeter").style.width=pct+"%";let main;if(ev>2)main="La combinación simulada tiende a una imagen muy luminosa.";else if(ev< -2)main="La combinación simulada tiende a una imagen oscura.";else main="La combinación simulada está cerca de un brillo equilibrado.";let more=apertureValues[a]<=2.8?"Apertura amplia: suele ayudar a separar al sujeto del fondo. ":apertureValues[a]>=11?"Apertura pequeña: suele aumentar la profundidad de campo, pero reduce la luz. ":"Apertura intermedia: equilibrio entre entrada de luz y profundidad de campo. ";more+=s<=2?"Velocidad rápida: buena para congelar movimiento. ":s>=6?"Velocidad lenta: puede registrar movimiento y requiere estabilidad. ":"Velocidad intermedia: evalúa el movimiento del sujeto. ";more+=isoValues[i]>=1600?"ISO alto: vigila el ruido.":isoValues[i]<=100?"ISO bajo: suele favorecer una imagen limpia con buena luz.":"ISO intermedio: compromiso entre sensibilidad y ruido.";document.getElementById("exposureText").textContent=main;document.getElementById("qualityText").textContent=more;}
+["aperture","shutter","iso"].forEach(id=>document.getElementById(id).addEventListener("input",updateExposure));updateExposure();
+const comps={thirds:{title:"Regla de los tercios",desc:"Divide mentalmente la imagen en tres franjas horizontales y verticales. Colocar el sujeto cerca de una intersección puede dar equilibrio y dinamismo.",point:[333,116],grid:true},center:{title:"Composición centrada",desc:"Colocar el sujeto en el centro puede transmitir simetría, estabilidad o fuerza. Funciona especialmente bien con formas simétricas y retratos directos.",point:[250,175],grid:false},negative:{title:"Espacio negativo",desc:"Dejar una zona amplia y despejada alrededor del sujeto puede hacerlo destacar y comunicar calma, soledad o amplitud.",point:[115,265],grid:false},leading:{title:"Líneas guía",desc:"Caminos, barandas, sombras y otros elementos lineales pueden dirigir la mirada hacia el sujeto o conducirla a través de la imagen.",point:[250,215],grid:false}};
+document.querySelectorAll(".comp-btn").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll(".comp-btn").forEach(x=>x.classList.toggle("active",x===b));const c=comps[b.dataset.comp];document.getElementById("compTitle").textContent=c.title;document.getElementById("compDesc").textContent=c.desc;const p=document.getElementById("focusPoint");p.setAttribute("cx",c.point[0]);p.setAttribute("cy",c.point[1]);document.getElementById("gridOverlay").style.display=c.grid?"":"none";}));
+const menu=document.getElementById("menuBtn"),nav=document.getElementById("navlinks");menu.addEventListener("click",()=>{const show=nav.classList.toggle("show");menu.setAttribute("aria-expanded",String(show));});nav.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>{nav.classList.remove("show");menu.setAttribute("aria-expanded","false");}));
+document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener("click",e=>{const target=document.querySelector(a.getAttribute("href"));if(target){e.preventDefault();target.scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});}}));
+const topBtn=document.getElementById("backtop");window.addEventListener("scroll",()=>{topBtn.style.display=window.scrollY>500?"block":"none";});topBtn.addEventListener("click",()=>window.scrollTo({top:0,behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"}));
+document.getElementById("year").textContent=new Date().getFullYear();renderGlossary();
+</script>
+</body>
+</html>

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#b85420">
+<meta name="description" content="Guía educativa e interactiva sobre básquetbol: reglas, posiciones, tácticas, técnica, entrenamiento y glosario.">
+<title>Básquet — Aprende, juega y comprende</title>
+<style>
+:root{
+ --bg:#faf6f1;--paper:#fff;--ink:#2a211c;--muted:#75675f;--orange:#b85420;--orange2:#dc7335;
+ --cream:#ffead8;--peach:#fff0e5;--sky:#e8f1ff;--mint:#e4f3e8;--line:#eee1d7;
+ --shadow:0 18px 48px #4f2c1910;--radius:22px
+}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:86px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+a{color:inherit;text-decoration:none}button,input{font:inherit}button,a{-webkit-tap-highlight-color:transparent}
+.wrap{width:min(1160px,calc(100% - 40px));margin:auto}
+header{position:sticky;top:0;z-index:30;background:#faf6f1e8;backdrop-filter:blur(16px);border-bottom:1px solid #eee1d7c7}
+.nav{height:74px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:900;letter-spacing:-.6px}
+.brand-mark{display:grid;place-items:center;width:40px;height:40px;border-radius:13px;background:var(--orange);color:#fff;font-size:22px}
+.navlinks{display:flex;align-items:center;gap:18px}.navlinks a{font-size:13px;color:var(--muted);font-weight:750}.navlinks a:hover{color:var(--orange)}
+.menu-btn{display:none;background:white;border:1px solid var(--line);border-radius:12px;padding:8px 12px;color:var(--ink);cursor:pointer}
+.hero{padding:68px 0 52px;overflow:hidden}.hero-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:42px;align-items:center}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;padding:7px 12px;border-radius:999px;background:var(--cream);color:var(--orange);font-size:12px;font-weight:850;letter-spacing:.08em;text-transform:uppercase}
+h1{font-size:clamp(2.8rem,6.5vw,5.6rem);line-height:.98;letter-spacing:-.07em;margin:22px 0}
+h1 span{color:var(--orange)}.hero p{font-size:18px;color:var(--muted);max-width:610px}
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 18px;border:0;border-radius:14px;font-weight:800;cursor:pointer;transition:transform .18s,filter .18s}
+.btn:hover{transform:translateY(-2px);filter:brightness(.98)}.primary{background:var(--orange);color:white;box-shadow:0 8px 22px #b8542030}.secondary{background:white;border:1px solid var(--line)}
+.court-wrap{position:relative;min-height:380px;display:grid;place-items:center}
+.court{position:relative;width:min(440px,100%);aspect-ratio:1.08;border-radius:24px;background:repeating-linear-gradient(90deg,#c77b43 0 24px,#d18b53 24px 48px);border:5px solid #fff;box-shadow:0 25px 50px #4f2c1920;transform:rotate(-3deg);overflow:hidden}
+.court:before{content:"";position:absolute;inset:8%;border:2px solid #fff9}
+.center-circle{position:absolute;left:50%;top:50%;width:30%;aspect-ratio:1;border:2px solid #fff9;border-radius:50%;transform:translate(-50%,-50%)}
+.key-left,.key-right{position:absolute;top:28%;height:44%;width:22%;border:2px solid #fff9}.key-left{left:8%}.key-right{right:8%}
+.arc-left,.arc-right{position:absolute;top:50%;width:38%;aspect-ratio:1;border:2px solid #fff9;border-radius:50%;transform:translateY(-50%)}.arc-left{left:-19%}.arc-right{right:-19%}
+.ball{position:absolute;z-index:2;left:43%;top:35%;font-size:76px;filter:drop-shadow(0 12px 6px #411d1255);transform:rotate(12deg)}
+.stat{position:absolute;background:white;border:1px solid #fff;border-radius:17px;padding:12px 16px;box-shadow:var(--shadow);font-size:13px;font-weight:800}.stat small{display:block;color:var(--muted);font-weight:500}
+.stat1{left:-2px;top:29px}.stat2{right:-4px;top:112px}.stat3{left:7%;bottom:13px}
+.section{padding:67px 0}.section-head{max-width:760px;margin-bottom:30px}.kicker{font-size:12px;text-transform:uppercase;letter-spacing:.13em;font-weight:900;color:var(--orange)}
+h2{font-size:clamp(2rem,4vw,3.15rem);line-height:1.08;letter-spacing:-.05em;margin:9px 0 13px}.section-head p{color:var(--muted);font-size:16px;margin:0}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:23px;box-shadow:0 5px 22px #4f2c1905;transition:transform .2s,box-shadow .2s}
+.card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}.iconbox{width:48px;height:48px;border-radius:15px;background:var(--cream);display:grid;place-items:center;font-size:24px;margin-bottom:15px}
+.card:nth-child(3n+2) .iconbox{background:var(--mint)}.card:nth-child(3n) .iconbox{background:var(--sky)}
+.card h3{font-size:19px;letter-spacing:-.025em;margin:0 0 7px}.card p{font-size:14px;color:var(--muted);margin:0}
+.tag{display:inline-block;margin-top:14px;background:#f8ece4;color:var(--orange);font-weight:800;font-size:11px;padding:4px 9px;border-radius:8px}
+.band{background:#32231b;color:white;border-radius:28px;padding:38px;display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:center}
+.band .kicker{color:#ffd09c}.band p{color:#e6d5c9}.band .btn{background:#ffd09c;color:#492816}
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.stats-grid div{background:#ffffff10;border:1px solid #ffffff20;border-radius:16px;padding:15px}.stats-grid b{display:block;font-size:24px}.stats-grid span{font-size:12px;color:#e6d5c9}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:18px}.panel{background:white;border:1px solid var(--line);border-radius:var(--radius);padding:26px}.panel h3{margin:0 0 10px;font-size:21px}.panel p{color:var(--muted);margin:8px 0}.panel.peach{background:var(--peach);border-color:transparent}.panel.mint{background:var(--mint);border-color:transparent}
+.list{padding-left:21px;color:var(--muted)}.list li{margin:7px 0}
+.toolbar{display:flex;gap:12px;flex-wrap:wrap;margin:20px 0 24px}.search{flex:1;min-width:230px;position:relative}.search input{width:100%;border:1px solid var(--line);background:white;border-radius:14px;padding:13px 15px 13px 42px;outline:none}.search:before{content:"⌕";position:absolute;left:15px;top:4px;font-size:25px;color:var(--muted)}
+.filters{display:flex;gap:8px;flex-wrap:wrap}.filter{border:1px solid var(--line);background:white;border-radius:12px;padding:9px 13px;color:var(--muted);cursor:pointer;font-weight:700;font-size:13px}.filter.active{background:var(--orange);color:white;border-color:var(--orange)}
+.glossary{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.term{background:white;border:1px solid var(--line);padding:19px;border-radius:17px}.term h3{margin:0 0 7px;font-size:17px}.term p{margin:0;color:var(--muted);font-size:14px}.empty{display:none;text-align:center;padding:24px;color:var(--muted)}
+.accordion{background:white;border:1px solid var(--line);border-radius:15px;margin:10px 0;overflow:hidden}.accordion button{display:flex;justify-content:space-between;align-items:center;text-align:left;width:100%;background:white;border:0;color:var(--ink);padding:17px 19px;font-weight:800;cursor:pointer}.accordion .answer{display:none;padding:0 19px 18px;color:var(--muted)}.accordion.open .answer{display:block}.plus{font-size:23px;color:var(--orange);transition:transform .2s}.accordion.open .plus{transform:rotate(45deg)}
+.quiz{background:linear-gradient(140deg,#ffead8,#f7e6d3);border-radius:25px;padding:29px}.quiz h3{margin:0;font-size:22px}.answers{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px}.answers button{padding:14px;border:1px solid #ead1bd;border-radius:13px;background:#fff;text-align:left;cursor:pointer;font-weight:650}.answers button:hover{border-color:var(--orange)}.feedback{font-weight:800;margin-top:15px;min-height:26px}
+footer{background:#32231b;color:white;margin-top:60px;padding:42px 0 27px}.footgrid{display:flex;justify-content:space-between;gap:25px;flex-wrap:wrap}.footnote{color:#e0d1c7;font-size:13px;max-width:720px}.footlinks{display:flex;gap:15px;flex-wrap:wrap;font-size:13px}.footlinks a{text-decoration:underline;color:#ffd09c}
+.backtop{display:none;position:fixed;right:20px;bottom:20px;width:46px;height:46px;border:0;border-radius:15px;background:var(--orange);color:#fff;font-size:22px;box-shadow:var(--shadow);cursor:pointer;z-index:10}
+@media(max-width:900px){.hero-grid{grid-template-columns:1fr}.court-wrap{min-height:340px}.grid,.glossary{grid-template-columns:repeat(2,1fr)}.band{grid-template-columns:1fr}.navlinks{display:none;position:absolute;left:20px;right:20px;top:67px;background:white;border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:var(--shadow);flex-direction:column;align-items:flex-start}.navlinks.show{display:flex}.menu-btn{display:block}}
+@media(max-width:580px){.wrap{width:calc(100% - 28px)}.hero{padding:46px 0 34px}.court-wrap{min-height:280px}.court{width:90%}.ball{font-size:54px}.stat{font-size:11px;padding:9px 11px}.grid,.glossary,.two-col{grid-template-columns:1fr}.section{padding:48px 0}.band{padding:24px}.stats-grid{grid-template-columns:1fr 1fr}.answers{grid-template-columns:1fr}.quiz{padding:22px}.nav{height:66px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header><div class="wrap nav">
+ <a class="brand" href="#inicio" aria-label="Básquet, inicio"><span class="brand-mark">🏀</span><span>Básquet</span></a>
+ <nav class="navlinks" id="navlinks" aria-label="Navegación principal"><a href="#fundamentos">Fundamentos</a><a href="#reglas">Reglas</a><a href="#posiciones">Posiciones</a><a href="#tactica">Táctica</a><a href="#glosario">Glosario</a></nav>
+ <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="navlinks">☰ Menú</button>
+</div></header>
+<main id="inicio">
+<section class="hero"><div class="wrap hero-grid">
+ <div><span class="eyebrow">🏀 Guía educativa · De la cancha al aro</span>
+  <h1>Todo el básquet.<br><span>Bien explicado.</span></h1>
+  <p>Aprende cómo se juega, cuáles son las reglas, qué hace cada posición y cómo funcionan las estrategias. Una guía sencilla para jugadores, estudiantes, entrenadores y aficionados.</p>
+  <div class="actions"><a class="btn primary" href="#fundamentos">Comenzar a aprender <span>→</span></a><a class="btn secondary" href="#glosario">Explorar el glosario</a></div>
+ </div>
+ <div class="court-wrap" aria-label="Ilustración de una cancha de básquet">
+  <div class="court"><div class="center-circle"></div><div class="key-left"></div><div class="key-right"></div><div class="arc-left"></div><div class="arc-right"></div><div class="ball">🏀</div></div>
+  <div class="stat stat1">🎯 Lanzamiento<small>Precisión y decisión</small></div><div class="stat stat2">🧠 Estrategia<small>Espacios y lectura</small></div><div class="stat stat3">🤝 Equipo<small>Pases y cooperación</small></div>
+ </div>
+</div></section>
+
+<section class="section" id="fundamentos"><div class="wrap">
+ <div class="section-head"><span class="kicker">01 · Lo esencial</span><h2>¿Qué es el básquet?</h2><p>El básquetbol es un deporte de equipo en el que dos conjuntos intentan anotar puntos lanzando la pelota dentro del aro rival y evitar que el otro equipo lo consiga. Combina coordinación, velocidad, estrategia y cooperación.</p></div>
+ <div class="grid">
+  <article class="card"><div class="iconbox">🧺</div><h3>El objetivo</h3><p>Conseguir más puntos que el adversario dentro del tiempo de juego, respetando las reglas y el espíritu deportivo.</p></article>
+  <article class="card"><div class="iconbox">🤝</div><h3>Jugar en equipo</h3><p>Los pases, los bloqueos, los cortes y la comunicación ayudan a crear mejores oportunidades de tiro.</p></article>
+  <article class="card"><div class="iconbox">👀</div><h3>Leer la cancha</h3><p>Observar a compañeros y rivales permite decidir cuándo pasar, lanzar, penetrar o reorganizarse.</p></article>
+ </div>
+</div></section>
+
+<section class="section" id="reglas"><div class="wrap">
+ <div class="section-head"><span class="kicker">02 · Cómo se juega</span><h2>Reglas básicas</h2><p>Este resumen utiliza como referencia el formato habitual de cinco contra cinco. La duración, algunas distancias y ciertas interpretaciones pueden variar entre FIBA, NBA, NCAA y otras competiciones.</p></div>
+ <div class="grid">
+  <article class="card"><div class="iconbox">⏱️</div><h3>Tiempo de juego</h3><p>En reglas FIBA, el partido adulto se divide en cuatro cuartos de 10 minutos. Otras ligas, como la NBA, utilizan períodos de duración diferente.</p></article>
+  <article class="card"><div class="iconbox">👥</div><h3>Jugadores</h3><p>Cada equipo tiene cinco jugadores en cancha en el básquet tradicional. Los cambios se realizan según las reglas de sustitución de la competición.</p></article>
+  <article class="card"><div class="iconbox">🏀</div><h3>Valor de los tiros</h3><p>Un tiro libre vale 1 punto; un lanzamiento desde dentro de la línea de tres vale 2; desde fuera de esa línea vale 3, si se cumplen las condiciones de la regla.</p></article>
+  <article class="card"><div class="iconbox">👣</div><h3>Pasos y drible</h3><p>Para avanzar con la pelota, normalmente hay que botarla. Dar pasos ilegales sin driblar puede ser una infracción. No se puede volver a driblar tras terminar el drible, salvo excepciones reglamentarias.</p></article>
+  <article class="card"><div class="iconbox">✋</div><h3>Faltas</h3><p>El contacto ilegal puede ser una falta personal. Las faltas acumuladas pueden dar tiros libres u otras consecuencias según el tipo, el momento y las reglas aplicables.</p></article>
+  <article class="card"><div class="iconbox">⌛</div><h3>Violaciones de tiempo</h3><p>Existen límites para avanzar el balón, permanecer en ciertas zonas o efectuar un lanzamiento. Los tiempos exactos dependen de las reglas de cada liga.</p></article>
+ </div>
+ <p class="muted" style="font-size:13px;margin-top:18px">Para arbitrar o competir oficialmente, consulta el reglamento vigente de la federación o liga correspondiente.</p>
+</div></section>
+
+<section class="section"><div class="wrap"><div class="band">
+ <div><span class="kicker">Una clave del juego</span><h2>Crear una buena oportunidad vale más que apurarse.</h2><p>Un buen ataque combina movimiento sin pelota, pases oportunos, equilibrio y selección de tiro. La defensa, por su parte, busca proteger el aro, disputar espacios y forzar decisiones difíciles.</p><a class="btn" href="#tecnica">Ver fundamentos técnicos →</a></div>
+ <div class="stats-grid"><div><b>👀</b><span>Mirar antes de recibir</span></div><div><b>↔️</b><span>Generar espacio</span></div><div><b>🔁</b><span>Pasar y moverse</span></div><div><b>🛡️</b><span>Defender en conjunto</span></div></div>
+</div></div></section>
+
+<section class="section" id="posiciones"><div class="wrap">
+ <div class="section-head"><span class="kicker">03 · Roles en la cancha</span><h2>Las cinco posiciones tradicionales</h2><p>En el básquet moderno las funciones se mezclan: muchos jugadores pueden crear juego, lanzar desde lejos, defender varias posiciones y participar en el rebote.</p></div>
+ <div class="grid">
+  <article class="card"><div class="iconbox">🧭</div><h3>Base (1)</h3><p>Suele organizar el ataque, subir la pelota, leer la defensa y decidir cuándo pasar o iniciar una jugada.</p><span class="tag">Visión y manejo</span></article>
+  <article class="card"><div class="iconbox">🎯</div><h3>Escolta (2)</h3><p>Combina lanzamiento, penetración y movimiento sin pelota. También puede ayudar a subirla y crear ventajas.</p><span class="tag">Anotación y tiro</span></article>
+  <article class="card"><div class="iconbox">↔️</div><h3>Alero (3)</h3><p>Jugador versátil que puede anotar, defender a rivales distintos, correr la cancha y colaborar en el rebote.</p><span class="tag">Versatilidad</span></article>
+  <article class="card"><div class="iconbox">💪</div><h3>Ala-pívot (4)</h3><p>Puede jugar cerca del aro o abrirse para lanzar. Ayuda en rebotes, bloqueos, defensa interior y circulación.</p><span class="tag">Fuerza y movilidad</span></article>
+  <article class="card"><div class="iconbox">🧱</div><h3>Pívot (5)</h3><p>Tradicionalmente juega cerca del aro, protege la pintura, toma rebotes, pone bloqueos y finaliza cerca de la canasta.</p><span class="tag">Rebote y protección</span></article>
+  <article class="card"><div class="iconbox">🔀</div><h3>Roles híbridos</h3><p>La posición no lo dice todo: hay bases altos, pívots pasadores y aleros que organizan el juego. El sistema determina las funciones.</p><span class="tag">Básquet moderno</span></article>
+ </div>
+</div></section>
+
+<section class="section" id="tactica"><div class="wrap">
+ <div class="section-head"><span class="kicker">04 · La estrategia</span><h2>Conceptos tácticos</h2><p>Las tácticas son formas de colaborar para crear ventajas en ataque o reducir las oportunidades del rival en defensa.</p></div>
+ <div class="two-col">
+  <div class="panel peach"><h3>🏀 En ataque</h3><ul class="list"><li><strong>Bloqueo directo:</strong> un jugador se coloca para dificultar el camino del defensor y liberar al compañero con balón.</li><li><strong>Corte:</strong> movimiento sin pelota hacia un espacio libre, a menudo rumbo al aro.</li><li><strong>Espaciado:</strong> distribuirse para no ocupar todos la misma zona y dar opciones de pase o penetración.</li><li><strong>Contraataque:</strong> avanzar rápidamente antes de que la defensa rival se organice.</li></ul></div>
+  <div class="panel mint"><h3>🛡️ En defensa</h3><ul class="list"><li><strong>Defensa individual:</strong> cada jugador es responsable principalmente de un rival, con ayudas y rotaciones.</li><li><strong>Defensa zonal:</strong> cada jugador protege una zona y se desplaza siguiendo la pelota y los atacantes.</li><li><strong>Ayuda defensiva:</strong> un defensor apoya a un compañero que ha sido superado o enfrenta una ventaja rival.</li><li><strong>Rebote defensivo:</strong> recuperar la pelota tras un lanzamiento fallado y terminar la posesión rival.</li></ul></div>
+ </div>
+</div></section>
+
+<section class="section" id="tecnica"><div class="wrap">
+ <div class="section-head"><span class="kicker">05 · Habilidades</span><h2>Fundamentos técnicos</h2><p>Para progresar, conviene practicar con regularidad, cuidar la técnica y aumentar la dificultad poco a poco.</p></div>
+ <div class="grid">
+  <article class="card"><div class="iconbox">🤲</div><h3>Pase y recepción</h3><p>Pasar al lugar correcto, con la fuerza adecuada y a tiempo. Recibir con manos preparadas y orientarse hacia la siguiente acción.</p></article>
+  <article class="card"><div class="iconbox">🏀</div><h3>Drible o bote</h3><p>Controlar la pelota con una mano sin mirarla todo el tiempo, cambiar de ritmo y protegerla con el cuerpo.</p></article>
+  <article class="card"><div class="iconbox">🎯</div><h3>Lanzamiento</h3><p>Coordinar equilibrio, alineación, extensión y seguimiento de la muñeca. La repetición con buena técnica ayuda a desarrollar consistencia.</p></article>
+  <article class="card"><div class="iconbox">🚀</div><h3>Bandeja</h3><p>Finalización en movimiento cerca del aro, coordinando pasos, despegue y mano de lanzamiento según el lado de entrada.</p></article>
+  <article class="card"><div class="iconbox">🦘</div><h3>Rebote</h3><p>Leer la trayectoria del tiro, ubicarse, bloquear el paso del rival con el cuerpo de manera legal y asegurar la pelota.</p></article>
+  <article class="card"><div class="iconbox">🛡️</div><h3>Desplazamiento defensivo</h3><p>Mantener una postura equilibrada, moverse lateralmente, ver pelota y atacante, y evitar acciones que generen contacto ilegal.</p></article>
+ </div>
+</div></section>
+
+<section class="section" id="entrenamiento"><div class="wrap">
+ <div class="section-head"><span class="kicker">06 · Preparación</span><h2>Entrenamiento y condición física</h2><p>Un plan equilibrado desarrolla técnica, fuerza, resistencia, velocidad, coordinación y recuperación. La carga debe adaptarse a la edad, experiencia y condición de cada persona.</p></div>
+ <div class="two-col">
+  <div class="panel mint"><h3>🏀 Ejemplo de práctica inicial</h3><ol class="list"><li><strong>Entrada en calor:</strong> movilidad dinámica y desplazamientos suaves.</li><li><strong>Manejo:</strong> bote bajo y alto, cambios de mano y protección de pelota.</li><li><strong>Pases y tiros:</strong> practicar la técnica con pausas y objetivos realistas.</li><li><strong>Juego reducido:</strong> probar decisiones en situaciones simples, sin olvidar la cooperación.</li><li><strong>Vuelta a la calma:</strong> bajar la intensidad y revisar cómo te sientes.</li></ol></div>
+  <div class="panel peach"><h3>💪 Qué capacidades desarrollar</h3><ul class="list"><li><strong>Fuerza:</strong> saltar, frenar, estabilizar y disputar posiciones de manera segura.</li><li><strong>Velocidad y agilidad:</strong> reaccionar y cambiar de dirección.</li><li><strong>Resistencia:</strong> repetir esfuerzos a lo largo del partido.</li><li><strong>Coordinación:</strong> sincronizar manos, pies, visión y decisiones.</li><li><strong>Recuperación:</strong> sueño suficiente, hidratación, alimentación y descanso.</li></ul></div>
+ </div>
+ <p class="muted" style="font-size:13px;margin-top:15px">Calienta antes de jugar, aumenta las cargas gradualmente y practica en un espacio seguro. Si aparece dolor o una lesión, detén la actividad y busca orientación sanitaria cuando corresponda.</p>
+</div></section>
+
+<section class="section" id="modalidades"><div class="wrap">
+ <div class="section-head"><span class="kicker">07 · Más formas de jugar</span><h2>Modalidades y competiciones</h2><p>El básquet se practica en distintos formatos, niveles y contextos; cada uno tiene reglas y objetivos específicos.</p></div>
+ <div class="grid">
+  <article class="card"><div class="iconbox">🏆</div><h3>Clubes y ligas</h3><p>Equipos que compiten en torneos locales, nacionales e internacionales, con calendarios y sistemas de clasificación propios.</p></article>
+  <article class="card"><div class="iconbox">🌎</div><h3>Selecciones</h3><p>Representan a sus países en partidos y torneos internacionales, incluidos campeonatos continentales y mundiales.</p></article>
+  <article class="card"><div class="iconbox">⚡</div><h3>Básquet 3x3</h3><p>Formato de media cancha con tres jugadores por equipo en juego. Es más corto y dinámico, y utiliza reglas específicas.</p></article>
+  <article class="card"><div class="iconbox">♿</div><h3>Básquet en silla de ruedas</h3><p>Deporte adaptado con gran exigencia técnica y táctica. Tiene reglamento propio y se juega en distintos niveles competitivos.</p></article>
+  <article class="card"><div class="iconbox">🧒</div><h3>Básquet formativo</h3><p>Se adapta a edades y etapas de desarrollo, priorizando aprendizaje, participación, seguridad y disfrute.</p></article>
+  <article class="card"><div class="iconbox">👩‍🦰</div><h3>Básquet femenino</h3><p>Se practica en todas las edades y niveles, desde iniciación y clubes hasta ligas profesionales y torneos internacionales.</p></article>
+ </div>
+</div></section>
+
+<section class="section" id="glosario"><div class="wrap">
+ <div class="section-head"><span class="kicker">08 · Diccionario de la cancha</span><h2>Glosario de básquet</h2><p>Busca un término o filtra por tema para encontrar una definición sencilla.</p></div>
+ <div class="toolbar"><label class="search"><input id="searchInput" type="search" placeholder="Buscar: doble, rebote, bloqueo…" aria-label="Buscar términos de básquet"></label><div class="filters" id="filters"><button class="filter active" data-filter="Todos">Todos</button><button class="filter" data-filter="Ataque">Ataque</button><button class="filter" data-filter="Defensa">Defensa</button><button class="filter" data-filter="Reglas">Reglas</button><button class="filter" data-filter="Estadísticas">Estadísticas</button></div></div>
+ <div class="glossary" id="glossaryGrid"></div><p class="empty" id="emptyState">No encontramos términos. Prueba otra búsqueda.</p>
+</div></section>
+
+<section class="section" id="preguntas"><div class="wrap">
+ <div class="section-head"><span class="kicker">09 · Preguntas frecuentes</span><h2>Entender mejor el juego</h2><p>Abre las preguntas para conocer las respuestas.</p></div>
+ <div class="accordion"><button aria-expanded="false">¿Qué es un doble-doble? <span class="plus">+</span></button><div class="answer">Es cuando un jugador alcanza cifras de dos dígitos en dos categorías estadísticas diferentes en un mismo partido, por ejemplo puntos y rebotes. Un triple-doble combina dos dígitos en tres categorías.</div></div>
+ <div class="accordion"><button aria-expanded="false">¿Qué es un pick and roll? <span class="plus">+</span></button><div class="answer">Es una jugada en la que un jugador coloca un bloqueo al defensor del compañero que tiene la pelota y luego se mueve hacia el aro o un espacio libre para recibir un pase.</div></div>
+ <div class="accordion"><button aria-expanded="false">¿Más puntos significa que un jugador jugó mejor? <span class="plus">+</span></button><div class="answer">No siempre. También cuentan la defensa, los pases, el rebote, las pérdidas, las decisiones y el efecto en el equipo. Las estadísticas ayudan, pero no explican por sí solas todo el rendimiento.</div></div>
+ <div class="accordion"><button aria-expanded="false">¿FIBA y NBA usan exactamente las mismas reglas? <span class="plus">+</span></button><div class="answer">No. Comparten principios generales, pero hay diferencias en duración, medidas y detalles del reglamento. Conviene identificar qué competición se está mirando antes de comparar reglas o estadísticas.</div></div>
+</div></section>
+
+<section class="section" id="desafio"><div class="wrap">
+ <div class="section-head"><span class="kicker">10 · Comprueba lo aprendido</span><h2>Mini desafío basquetbolero</h2><p>Responde y recibe una explicación al instante.</p></div>
+ <div class="quiz"><h3>¿Cuántos puntos vale un lanzamiento convertido desde fuera de la línea de tres puntos?</h3><div class="answers" id="quizAnswers"><button data-answer="wrong">1 punto</button><button data-answer="wrong">2 puntos</button><button data-answer="right">3 puntos</button><button data-answer="wrong">4 puntos siempre</button></div><div class="feedback" id="quizFeedback" role="status" aria-live="polite"></div></div>
+</div></section>
+</main>
+<footer><div class="wrap">
+ <div class="footgrid"><div><a class="brand" href="#inicio"><span class="brand-mark">🏀</span><span>Básquet</span></a><p class="footnote">Una guía educativa para aprender, entrenar y disfrutar el juego con más conocimiento.</p></div><div class="footlinks"><a href="#reglas">Reglas</a><a href="#tactica">Táctica</a><a href="#entrenamiento">Entrenamiento</a><a href="#glosario">Glosario</a></div></div>
+ <p class="footnote" style="margin-top:25px">Contenido educativo general. Las reglas pueden variar según la competición y actualizarse. Para arbitrar o competir, consulta el reglamento vigente de tu federación o liga.</p>
+ <p class="footnote">© <span id="year"></span> Básquet · Aprende, juega y comprende.</p>
+</div></footer>
+<button class="backtop" id="backtop" aria-label="Volver arriba" title="Volver arriba">↑</button>
+<script>
+const terms=[
+["Asistencia","Ataque","Pase que permite a un compañero anotar, de acuerdo con los criterios estadísticos de la competición."],
+["Bandeja","Ataque","Lanzamiento cerca del aro realizado en movimiento, coordinando los pasos y el salto."],
+["Bloqueo","Ataque","Acción legal de colocarse para frenar o desviar el recorrido de un defensor y liberar a un compañero."],
+["Pick and roll","Ataque","Bloqueo al defensor del jugador con balón, seguido por el movimiento del bloqueador hacia el aro o un espacio libre."],
+["Corte","Ataque","Movimiento rápido sin balón para aparecer en un espacio libre, recibir o atacar el aro."],
+["Contraataque","Ataque","Avance veloz hacia el aro rival antes de que la defensa se organice."],
+["Pérdida","Reglas","Posesión que termina a favor del rival por un error, una intercepción o una infracción."],
+["Drible ilegal","Reglas","Infracción que puede producirse al terminar el bote y volver a botar, o al llevar la pelota de manera no permitida."],
+["Pasos","Reglas","Infracción relacionada con mover los pies de manera ilegal mientras se sostiene la pelota."],
+["Falta personal","Reglas","Contacto ilegal con un adversario. La sanción depende del tipo de acción, la situación y las reglas de la competición."],
+["Tiro libre","Reglas","Lanzamiento sin oposición directa desde la línea correspondiente, concedido tras ciertas faltas."],
+["Violación de tiempo","Reglas","Infracción por no avanzar o lanzar dentro de los límites establecidos por el reglamento aplicable."],
+["Rebote ofensivo","Ataque","Recuperación de la pelota por el equipo atacante después de fallar un lanzamiento."],
+["Rebote defensivo","Defensa","Recuperación del balón por el equipo defensor tras un tiro fallado, que normalmente termina la posesión rival."],
+["Ayuda defensiva","Defensa","Apoyo de un defensor a un compañero para frenar una penetración o proteger una zona vulnerable."],
+["Defensa zonal","Defensa","Sistema en el que los jugadores protegen áreas de la cancha y ajustan su posición según el movimiento del balón."],
+["Tapón","Defensa","Acción legal de desviar o bloquear un lanzamiento rival sin cometer una infracción."],
+["Robo","Defensa","Acción de quitar o interceptar la pelota al rival y obtener la posesión."],
+["Doble-doble","Estadísticas","Lograr cifras de dos dígitos en dos categorías estadísticas distintas en un mismo partido."],
+["Triple-doble","Estadísticas","Lograr cifras de dos dígitos en tres categorías estadísticas distintas en un mismo partido."],
+["Porcentaje de tiro","Estadísticas","Proporción de lanzamientos convertidos respecto de los intentos realizados en una categoría de tiro."],
+["Eficiencia","Estadísticas","Término usado para resumir el rendimiento estadístico mediante fórmulas que pueden variar según la competición."]
+];
+let activeFilter="Todos";
+const glossaryGrid=document.getElementById("glossaryGrid");
+function renderGlossary(){
+ const query=document.getElementById("searchInput").value.trim().toLocaleLowerCase("es");
+ const filtered=terms.filter(t=>(activeFilter==="Todos"||t[1]===activeFilter)&&(t[0]+" "+t[1]+" "+t[2]).toLocaleLowerCase("es").includes(query));
+ glossaryGrid.innerHTML=filtered.map(t=>`<article class="term"><span class="tag" style="margin:0 0 9px">${t[1]}</span><h3>${t[0]}</h3><p>${t[2]}</p></article>`).join("");
+ document.getElementById("emptyState").style.display=filtered.length?"none":"block";
+}
+document.getElementById("searchInput").addEventListener("input",renderGlossary);
+document.getElementById("filters").addEventListener("click",e=>{const b=e.target.closest("button[data-filter]");if(!b)return;activeFilter=b.dataset.filter;document.querySelectorAll(".filter").forEach(x=>x.classList.toggle("active",x===b));renderGlossary();});
+document.querySelectorAll(".accordion button").forEach(b=>b.addEventListener("click",()=>{const item=b.parentElement;const isOpen=item.classList.toggle("open");b.setAttribute("aria-expanded",String(isOpen));}));
+document.getElementById("quizAnswers").addEventListener("click",e=>{const b=e.target.closest("button[data-answer]");if(!b)return;const f=document.getElementById("quizFeedback");if(b.dataset.answer==="right"){f.textContent="¡Correcto! En el básquet tradicional, un lanzamiento convertido desde fuera de la línea de tres vale tres puntos.";f.style.color="#17623e";}else{f.textContent="No exactamente. Un tiro libre vale 1 punto, un lanzamiento de dos vale 2 y uno desde fuera de la línea de tres vale 3, bajo las condiciones reglamentarias.";f.style.color="#995022";}});
+const menu=document.getElementById("menuBtn"),nav=document.getElementById("navlinks");menu.addEventListener("click",()=>{const show=nav.classList.toggle("show");menu.setAttribute("aria-expanded",String(show));});nav.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>{nav.classList.remove("show");menu.setAttribute("aria-expanded","false");}));
+document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener("click",e=>{const target=document.querySelector(a.getAttribute("href"));if(target){e.preventDefault();target.scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});}}));
+const topBtn=document.getElementById("backtop");window.addEventListener("scroll",()=>{topBtn.style.display=window.scrollY>500?"block":"none";});topBtn.addEventListener("click",()=>window.scrollTo({top:0,behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"}));
+document.getElementById("year").textContent=new Date().getFullYear();renderGlossary();
+</script>
+</body>
+</html>

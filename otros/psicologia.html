@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#6558d3">
+<meta name="description" content="Una guía clara, visual e interactiva para aprender psicología en lenguaje sencillo.">
+<title>Psicologia — Psicología en palabras simples</title>
+<style>
+:root{--bg:#f7f7fc;--paper:#fff;--ink:#20213a;--muted:#686b83;--brand:#6558d3;--brand2:#9b8df5;--mint:#dff7ef;--peach:#fff0e4;--blue:#e9efff;--line:#e9e8f3;--shadow:0 16px 45px #29265c12;--radius:22px}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:90px}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}button,input{font:inherit}button,a{-webkit-tap-highlight-color:transparent}a{color:inherit;text-decoration:none}.wrap{width:min(1160px,calc(100% - 40px));margin:auto}
+header{position:sticky;top:0;z-index:20;background:#f7f7fcdf;backdrop-filter:blur(16px);border-bottom:1px solid #e9e8f3cc}.nav{height:76px;display:flex;align-items:center;justify-content:space-between;gap:20px}.logo{display:flex;align-items:center;gap:10px;font-weight:850;letter-spacing:-.5px}.logo-mark{width:39px;height:39px;border-radius:13px;background:var(--brand);color:white;display:grid;place-items:center;font-size:22px}.navlinks{display:flex;gap:20px;align-items:center}.navlinks a{font-size:14px;color:var(--muted);font-weight:650}.navlinks a:hover,.navlinks a.active{color:var(--brand)}.menu-btn{display:none;border:1px solid var(--line);background:white;border-radius:12px;padding:8px 12px}
+.hero{padding:76px 0 56px;overflow:hidden}.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:50px;align-items:center}.eyebrow{display:inline-flex;align-items:center;gap:8px;background:#eeebff;color:#5143b8;border-radius:999px;padding:7px 12px;font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase}.hero h1{font-size:clamp(2.7rem,6vw,5.2rem);line-height:1.02;letter-spacing:-.065em;margin:22px 0}.hero h1 span{color:var(--brand)}.hero p{font-size:18px;max-width:590px;color:var(--muted)}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:14px;padding:13px 19px;font-weight:750;cursor:pointer;transition:.2s}.btn:hover{transform:translateY(-2px)}.primary{background:var(--brand);color:#fff;box-shadow:0 8px 20px #6558d333}.secondary{background:#fff;border:1px solid var(--line);color:var(--ink)}.hero-art{position:relative;min-height:370px;display:grid;place-items:center}.orb{width:min(350px,80vw);aspect-ratio:1;border-radius:48% 52% 60% 40%/45% 42% 58% 55%;background:linear-gradient(145deg,#dcd7ff,#b6f0df);position:relative;display:grid;place-items:center;transform:rotate(-8deg)}.brain{font-size:130px;filter:drop-shadow(0 12px 10px #5a48a422);transform:rotate(8deg)}.float{position:absolute;background:#fff;border:1px solid #fff;border-radius:18px;padding:13px 16px;box-shadow:var(--shadow);font-size:14px;font-weight:750}.float small{display:block;color:var(--muted);font-weight:500}.f1{top:28px;left:0}.f2{right:0;top:105px}.f3{bottom:25px;left:12%}
+.section{padding:70px 0}.section-head{max-width:720px;margin-bottom:30px}.kicker{color:var(--brand);font-weight:850;font-size:12px;text-transform:uppercase;letter-spacing:.12em}.section h2{font-size:clamp(2rem,4vw,3rem);line-height:1.1;letter-spacing:-.045em;margin:10px 0 14px}.section-head p,.muted{color:var(--muted)}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:24px;box-shadow:0 5px 20px #29265c05;transition:transform .2s,box-shadow .2s}.card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}.iconbox{width:48px;height:48px;border-radius:15px;display:grid;place-items:center;font-size:24px;margin-bottom:16px;background:var(--blue)}.card:nth-child(3n+2) .iconbox{background:var(--mint)}.card:nth-child(3n) .iconbox{background:var(--peach)}.card h3{margin:0 0 8px;font-size:19px;letter-spacing:-.02em}.card p{margin:0;color:var(--muted);font-size:15px}.tag{display:inline-block;background:#f0eff9;color:#5c5686;padding:4px 9px;border-radius:8px;font-size:12px;font-weight:750;margin-top:15px}
+.band{background:#24213f;color:#fff;border-radius:30px;padding:40px;display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:center}.band p{color:#d4d1e7}.band .btn{background:#fff;color:#30285f}.band .mini{display:grid;grid-template-columns:1fr 1fr;gap:12px}.mini div{background:#ffffff12;border:1px solid #ffffff20;border-radius:17px;padding:17px}.mini strong{font-size:23px;display:block}.mini span{font-size:13px;color:#d4d1e7}
+.toolbar{display:flex;gap:12px;flex-wrap:wrap;margin:20px 0 25px}.search{flex:1;min-width:220px;position:relative}.search input{width:100%;border:1px solid var(--line);background:#fff;border-radius:14px;padding:13px 15px 13px 42px;outline:none}.search:before{content:"⌕";position:absolute;left:15px;top:5px;font-size:25px;color:var(--muted)}.filter{border:1px solid var(--line);background:#fff;border-radius:13px;padding:10px 14px;color:var(--muted);cursor:pointer}.filter.active{background:var(--brand);color:#fff;border-color:var(--brand)}.concept-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.concept{background:white;border:1px solid var(--line);border-radius:17px;padding:20px}.concept h3{margin:0 0 7px;font-size:17px}.concept p{margin:0;color:var(--muted);font-size:14px}.empty{display:none;padding:25px;text-align:center;color:var(--muted)}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:18px}.panel{border-radius:var(--radius);padding:28px;background:white;border:1px solid var(--line)}.panel.mint{background:var(--mint);border-color:transparent}.panel.peach{background:var(--peach);border-color:transparent}.panel h3{margin-top:0}.simple-list{padding-left:20px;color:var(--muted)}.simple-list li{margin:8px 0}
+.accordion{border:1px solid var(--line);border-radius:16px;background:white;margin:10px 0;overflow:hidden}.accordion button{width:100%;display:flex;justify-content:space-between;align-items:center;text-align:left;padding:18px 20px;background:white;border:0;font-weight:750;cursor:pointer;color:var(--ink)}.accordion .answer{display:none;padding:0 20px 18px;color:var(--muted)}.accordion.open .answer{display:block}.accordion.open .plus{transform:rotate(45deg)}.plus{font-size:23px;color:var(--brand);transition:.2s}
+.quiz{background:linear-gradient(140deg,#eeeaff,#e6f8f2);border-radius:26px;padding:30px}.quiz-options{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px}.quiz-options button{background:white;border:1px solid #ded9f7;border-radius:13px;padding:14px;text-align:left;cursor:pointer}.quiz-options button:hover{border-color:var(--brand)}.feedback{font-weight:750;margin-top:15px;min-height:28px}
+footer{padding:45px 0 30px;background:#23213d;color:white;margin-top:65px}.footgrid{display:flex;justify-content:space-between;gap:25px;flex-wrap:wrap}.footnote{max-width:650px;color:#d0cde1;font-size:13px}footer a{color:#ddd7ff;text-decoration:underline}.backtop{position:fixed;right:20px;bottom:20px;width:46px;height:46px;border:0;border-radius:15px;background:var(--brand);color:white;font-size:22px;box-shadow:var(--shadow);cursor:pointer;display:none;z-index:10}
+@media(max-width:850px){.hero-grid{grid-template-columns:1fr}.hero-art{min-height:300px}.grid,.concept-grid{grid-template-columns:repeat(2,1fr)}.band{grid-template-columns:1fr}.navlinks{display:none;position:absolute;left:20px;right:20px;top:68px;background:white;padding:18px;border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);flex-direction:column;align-items:flex-start}.navlinks.show{display:flex}.menu-btn{display:block}}
+@media(max-width:560px){.wrap{width:min(100% - 28px,1160px)}.hero{padding-top:48px}.hero-art{min-height:270px}.orb{width:240px}.brain{font-size:95px}.float{font-size:12px;padding:10px}.f1{left:-2px}.f2{right:-2px}.grid,.concept-grid,.two-col{grid-template-columns:1fr}.section{padding:48px 0}.band{padding:25px}.mini{grid-template-columns:1fr 1fr}.quiz{padding:22px}.quiz-options{grid-template-columns:1fr}.nav{height:66px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header>
+ <div class="wrap nav">
+  <a class="logo" href="#inicio" aria-label="Psicologia, inicio"><span class="logo-mark">ψ</span><span>Psicologia</span></a>
+  <nav class="navlinks" id="navlinks" aria-label="Navegación principal">
+   <a href="#fundamentos">Fundamentos</a><a href="#ramas">Ramas</a><a href="#conceptos">Conceptos</a><a href="#bienestar">Bienestar</a><a href="#mitos">Mitos</a>
+  </nav>
+  <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="navlinks">☰ Menú</button>
+ </div>
+</header>
+<main id="inicio">
+<section class="hero">
+ <div class="wrap hero-grid">
+  <div>
+   <span class="eyebrow">✦ Una guía para entenderte mejor</span>
+   <h1>La mente humana, <span>en palabras simples.</span></h1>
+   <p>Descubre qué estudia la psicología, cómo funcionan las emociones y qué herramientas pueden ayudarte a comprender tus pensamientos, relaciones y hábitos.</p>
+   <div class="actions"><a class="btn primary" href="#fundamentos">Empezar a explorar <span>→</span></a><a class="btn secondary" href="#conceptos">Buscar conceptos</a></div>
+  </div>
+  <div class="hero-art" aria-label="Ilustración simbólica de la mente y las emociones">
+   <div class="orb"><div class="brain">🧠</div></div>
+   <div class="float f1">💭 Pensamientos<small>Lo que nos decimos</small></div>
+   <div class="float f2">💗 Emociones<small>Lo que sentimos</small></div>
+   <div class="float f3">🌱 Aprendizaje<small>Podemos cambiar</small></div>
+  </div>
+ </div>
+</section>
+<section class="section" id="fundamentos">
+ <div class="wrap">
+  <div class="section-head"><span class="kicker">01 · Lo esencial</span><h2>¿Qué es la psicología?</h2><p>Es la ciencia que estudia cómo pensamos, sentimos y actuamos. Intenta comprender a las personas teniendo en cuenta su cuerpo, su historia, sus relaciones y el entorno en el que viven.</p></div>
+  <div class="grid">
+   <article class="card"><div class="iconbox">🔎</div><h3>Observa y pregunta</h3><p>Busca patrones y explicaciones usando investigación, observación y métodos científicos; no solo intuiciones.</p></article>
+   <article class="card"><div class="iconbox">🧩</div><h3>Considera el contexto</h3><p>Una conducta puede tener muchas causas: experiencias, cultura, sueño, aprendizaje, biología y situación actual.</p></article>
+   <article class="card"><div class="iconbox">🌿</div><h3>Ayuda a comprender</h3><p>Puede contribuir al bienestar, al aprendizaje, a las relaciones y al tratamiento profesional de dificultades psicológicas.</p></article>
+  </div>
+ </div>
+</section>
+<section class="section" id="ramas">
+ <div class="wrap">
+  <div class="section-head"><span class="kicker">02 · Diferentes caminos</span><h2>Ramas de la psicología</h2><p>La psicología es amplia. Estas son algunas de sus áreas más conocidas; pueden complementarse entre sí.</p></div>
+  <div class="grid">
+   <article class="card"><div class="iconbox">🛋️</div><h3>Clínica y de la salud</h3><p>Evalúa y trata dificultades emocionales, conductuales y de salud mental, y promueve el bienestar.</p><span class="tag">Bienestar y tratamiento</span></article>
+   <article class="card"><div class="iconbox">📚</div><h3>Educacional</h3><p>Estudia cómo aprendemos y cómo crear entornos que favorezcan la enseñanza y el desarrollo.</p><span class="tag">Aprendizaje</span></article>
+   <article class="card"><div class="iconbox">👥</div><h3>Social</h3><p>Investiga cómo influyen los grupos, las normas, la cultura y la presencia de otras personas.</p><span class="tag">Grupos y sociedad</span></article>
+   <article class="card"><div class="iconbox">💼</div><h3>Laboral y organizacional</h3><p>Se ocupa de la motivación, el liderazgo, los equipos, la selección y el bienestar en el trabajo.</p><span class="tag">Trabajo</span></article>
+   <article class="card"><div class="iconbox">🧒</div><h3>Del desarrollo</h3><p>Estudia los cambios en pensamiento, emociones y conducta a lo largo de la vida.</p><span class="tag">Ciclo vital</span></article>
+   <article class="card"><div class="iconbox">🧪</div><h3>Cognitiva y experimental</h3><p>Investiga procesos como atención, memoria, lenguaje, decisiones y resolución de problemas.</p><span class="tag">Cómo funciona la mente</span></article>
+  </div>
+ </div>
+</section>
+<section class="section">
+ <div class="wrap">
+  <div class="band">
+   <div><span class="kicker" style="color:#c4bcff">Una idea importante</span><h2>Comprender no es juzgar.</h2><p>Un pensamiento no siempre es un hecho; una emoción no define quién eres; y una conducta no cuenta toda tu historia. La psicología invita a mirar con curiosidad y respeto.</p><a class="btn" href="#bienestar">Explorar herramientas →</a></div>
+   <div class="mini"><div><strong>🧠</strong><span>Pensamientos: interpretaciones</span></div><div><strong>💗</strong><span>Emociones: señales internas</span></div><div><strong>🧍</strong><span>Conductas: lo que hacemos</span></div><div><strong>🌎</strong><span>Contexto: lo que nos rodea</span></div></div>
+  </div>
+ </div>
+</section>
+<section class="section" id="conceptos">
+ <div class="wrap">
+  <div class="section-head"><span class="kicker">03 · Mini diccionario</span><h2>Conceptos psicológicos, sin vueltas</h2><p>Busca una palabra o filtra por tema para encontrar una explicación breve.</p></div>
+  <div class="toolbar"><label class="search"><input id="searchInput" type="search" placeholder="Buscar: ansiedad, memoria, autoestima…" aria-label="Buscar conceptos"></label><div id="filters" style="display:flex;gap:8px;flex-wrap:wrap"><button class="filter active" data-filter="Todos">Todos</button><button class="filter" data-filter="Emociones">Emociones</button><button class="filter" data-filter="Pensamiento">Pensamiento</button><button class="filter" data-filter="Relaciones">Relaciones</button><button class="filter" data-filter="Hábitos">Hábitos</button></div></div>
+  <div class="concept-grid" id="conceptGrid"></div><p class="empty" id="emptyState">No encontramos conceptos con esa búsqueda. Prueba otra palabra.</p>
+ </div>
+</section>
+<section class="section" id="bienestar">
+ <div class="wrap">
+  <div class="section-head"><span class="kicker">04 · En la vida cotidiana</span><h2>Herramientas para el bienestar</h2><p>No son fórmulas mágicas. Son prácticas sencillas que algunas personas encuentran útiles; puedes adaptarlas a tus necesidades.</p></div>
+  <div class="two-col">
+   <div class="panel mint"><h3>🌬️ Pausa consciente</h3><p>Durante un minuto, observa tu respiración sin forzarla. Nota qué sientes en el cuerpo y vuelve al presente cuando te distraigas.</p><ul class="simple-list"><li>Busca una postura cómoda.</li><li>Inhala y exhala a tu ritmo natural.</li><li>Si concentrarte en respirar te incomoda, mira a tu alrededor y nombra cinco cosas que ves.</li></ul></div>
+   <div class="panel peach"><h3>📝 Poner nombre a lo que pasa</h3><p>Escribir puede ayudarte a ordenar ideas y detectar patrones, sin exigirte encontrar una solución inmediata.</p><ul class="simple-list"><li>¿Qué ocurrió?</li><li>¿Qué pensé y qué sentí?</li><li>¿Qué necesito ahora y cuál sería un paso pequeño?</li></ul></div>
+   <div class="panel"><h3>💬 Comunicación clara</h3><p>Prueba describir una situación sin insultos ni acusaciones, explicar cómo te afecta y pedir algo concreto.</p><p><strong>Ejemplo:</strong> “Cuando cambiamos el plan sin avisar, me siento frustrado. ¿Podrías avisarme antes la próxima vez?”</p></div>
+   <div class="panel"><h3>🌱 Hábitos realistas</h3><p>Los cambios pequeños suelen ser más sostenibles que intentar modificar todo de golpe.</p><ul class="simple-list"><li>Elige una acción muy concreta.</li><li>Únela a una rutina que ya tengas.</li><li>Evalúa qué funcionó sin castigarte por los tropiezos.</li></ul></div>
+  </div>
+ </div>
+</section>
+<section class="section" id="mitos">
+ <div class="wrap">
+  <div class="section-head"><span class="kicker">05 · Revisemos ideas</span><h2>Mitos frecuentes</h2><p>Abre cada pregunta para leer una explicación.</p></div>
+  <div class="accordion"><button aria-expanded="false">“La psicología puede leer la mente” <span class="plus">+</span></button><div class="answer">No. Puede estudiar patrones y hacer evaluaciones, pero no leer pensamientos directamente ni saber con certeza lo que otra persona siente sin información.</div></div>
+  <div class="accordion"><button aria-expanded="false">“Si voy a terapia, es porque estoy débil” <span class="plus">+</span></button><div class="answer">Pedir ayuda no es debilidad. La terapia puede servir para atravesar problemas, conocerse mejor, cambiar patrones o recibir tratamiento. Cada persona tiene necesidades distintas.</div></div>
+  <div class="accordion"><button aria-expanded="false">“Todos los problemas se resuelven pensando positivo” <span class="plus">+</span></button><div class="answer">No. El optimismo por sí solo no elimina pérdidas, injusticias, enfermedades o dificultades reales. Puede ayudar más reconocer lo que ocurre, buscar apoyo y decidir qué pasos son posibles.</div></div>
+  <div class="accordion"><button aria-expanded="false">“Una etiqueta explica toda la personalidad” <span class="plus">+</span></button><div class="answer">No. Las etiquetas pueden orientar una conversación clínica, pero una persona es más compleja que un diagnóstico, un test o un rasgo aislado. La evaluación corresponde a profesionales cualificados.</div></div>
+ </div>
+</section>
+<section class="section" id="aprende">
+ <div class="wrap">
+  <div class="section-head"><span class="kicker">06 · Comprueba lo aprendido</span><h2>Mini desafío</h2><p>Una pregunta rápida para distinguir una emoción de una interpretación.</p></div>
+  <div class="quiz"><h3>Si alguien no responde un mensaje y piensas “seguro está enojado conmigo”, ¿qué es “seguro está enojado conmigo”?</h3><div class="quiz-options" id="quizOptions"><button data-answer="wrong">Una emoción</button><button data-answer="right">Una interpretación o pensamiento</button><button data-answer="wrong">Un hecho comprobado</button><button data-answer="wrong">Una conducta</button></div><div class="feedback" id="quizFeedback" role="status" aria-live="polite"></div></div>
+ </div>
+</section>
+</main>
+<footer>
+ <div class="wrap footgrid"><div><a class="logo" href="#inicio"><span class="logo-mark">ψ</span><span>Psicologia</span></a><p class="footnote">Aprender sobre psicología puede abrir preguntas útiles y promover la empatía.</p></div><div class="footnote"><strong>Importante:</strong> este sitio es educativo y no sustituye una evaluación, diagnóstico ni tratamiento profesional. Si el malestar es intenso, persiste o afecta tu vida cotidiana, considera consultar a un profesional de salud mental. Si existe peligro inmediato para ti o para otra persona, busca los servicios de emergencia de tu zona.</div></div>
+ <div class="wrap footnote" style="margin-top:25px">© <span id="year"></span> Psicologia · Hecho para aprender con curiosidad y respeto.</div>
+</footer>
+<button class="backtop" id="backtop" aria-label="Volver arriba" title="Volver arriba">↑</button>
+<script>
+const concepts=[
+["Ansiedad","Emociones","Una respuesta de alerta ante una amenaza real o percibida. Puede ser útil, pero si es intensa o persistente puede interferir con la vida."],
+["Estrés","Emociones","Respuesta física y mental cuando sentimos que las demandas superan los recursos disponibles. Descanso, apoyo y cambios concretos pueden ayudar."],
+["Tristeza","Emociones","Emoción humana que puede aparecer ante una pérdida, frustración o dificultad. No siempre significa que exista un trastorno."],
+["Ira","Emociones","Puede señalar frustración, amenaza o una necesidad no atendida. Sentirla no obliga a actuar de manera agresiva."],
+["Autoestima","Relaciones","La valoración que hacemos de nosotros mismos. Puede cambiar con las experiencias y no depende de ser perfecto."],
+["Empatía","Relaciones","Intentar comprender la perspectiva o los sentimientos de otra persona, sin que eso signifique estar siempre de acuerdo."],
+["Límites personales","Relaciones","Acuerdos sobre lo que aceptas y lo que no, comunicados con claridad y respeto. No controlan al otro: expresan tus necesidades."],
+["Apego","Relaciones","Forma en que aprendemos a buscar cercanía y seguridad en los vínculos. Se desarrolla a través de experiencias y no determina todo el futuro."],
+["Memoria","Pensamiento","Proceso de codificar, guardar y recuperar información. No funciona como una grabación perfecta y puede verse influida por el contexto."],
+["Sesgo cognitivo","Pensamiento","Atajo o tendencia del pensamiento que puede distorsionar cómo interpretamos la información. Todos podemos tenerlos."],
+["Pensamiento automático","Pensamiento","Idea que aparece rápidamente ante una situación. Puede sentirse cierta sin ser necesariamente una descripción completa de los hechos."],
+["Atención","Pensamiento","Capacidad de seleccionar a qué información damos prioridad. Puede variar con el cansancio, el interés, el estrés y el entorno."],
+["Motivación","Hábitos","Factores que nos impulsan a empezar o mantener una acción. No siempre aparece antes de actuar; a veces crece al comenzar."],
+["Hábito","Hábitos","Conducta que se vuelve más automática con la repetición y el contexto. Hacerla pequeña y asociarla a una rutina puede facilitarla."],
+["Resiliencia","Hábitos","Proceso de adaptación ante dificultades. No significa no sufrir, ni tener que poder con todo sin ayuda."],
+["Regulación emocional","Emociones","Habilidades para reconocer y manejar emociones de forma flexible, sin tener que eliminarlas o esconderlas."]
+];
+let activeFilter="Todos";
+const grid=document.getElementById("conceptGrid");
+function renderConcepts(){const q=document.getElementById("searchInput").value.trim().toLocaleLowerCase("es");const list=concepts.filter(c=>(activeFilter==="Todos"||c[1]===activeFilter)&&(c[0]+" "+c[1]+" "+c[2]).toLocaleLowerCase("es").includes(q));grid.innerHTML=list.map(c=>`<article class="concept"><span class="tag" style="margin:0 0 10px">${c[1]}</span><h3>${c[0]}</h3><p>${c[2]}</p></article>`).join("");document.getElementById("emptyState").style.display=list.length?"none":"block";}
+document.getElementById("searchInput").addEventListener("input",renderConcepts);
+document.getElementById("filters").addEventListener("click",e=>{const b=e.target.closest("button[data-filter]");if(!b)return;activeFilter=b.dataset.filter;document.querySelectorAll(".filter").forEach(x=>x.classList.toggle("active",x===b));renderConcepts();});
+document.querySelectorAll(".accordion button").forEach(b=>b.addEventListener("click",()=>{const item=b.parentElement;const open=item.classList.toggle("open");b.setAttribute("aria-expanded",String(open));}));
+document.getElementById("quizOptions").addEventListener("click",e=>{const b=e.target.closest("button[data-answer]");if(!b)return;const f=document.getElementById("quizFeedback");if(b.dataset.answer==="right"){f.textContent="¡Correcto! Es una interpretación, no un hecho confirmado. También podrías sentir ansiedad, pero eso sería la emoción.";f.style.color="#246b52";}else{f.textContent="Casi. La frase expresa una idea sobre lo que podría estar pasando; no sabemos si es cierta hasta tener más información.";f.style.color="#8a4c20";}});
+const menu=document.getElementById("menuBtn"),nav=document.getElementById("navlinks");menu.addEventListener("click",()=>{const show=nav.classList.toggle("show");menu.setAttribute("aria-expanded",String(show));});nav.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>{nav.classList.remove("show");menu.setAttribute("aria-expanded","false");}));
+document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener("click",e=>{const target=document.querySelector(a.getAttribute("href"));if(target){e.preventDefault();target.scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});}}));
+const topBtn=document.getElementById("backtop");window.addEventListener("scroll",()=>{topBtn.style.display=window.scrollY>500?"block":"none";});topBtn.addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"}));document.getElementById("year").textContent=new Date().getFullYear();renderConcepts();
+</script>
+</body>
+</html>

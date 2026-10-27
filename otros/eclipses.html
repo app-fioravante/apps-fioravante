@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#11182e">
+<meta name="description" content="Guía educativa e interactiva sobre eclipses solares y lunares, sus fases, causas, observación segura y astronomía.">
+<title>Eclipses — Una guía para mirar el cielo</title>
+<style>
+:root{
+ --bg:#f5f6fb;--paper:#fff;--ink:#20243a;--muted:#697087;--night:#11182e;--night2:#202b4c;
+ --violet:#7266e8;--violet-light:#eeeaff;--gold:#ffd36b;--blue:#dfeeff;--peach:#fff0e3;--mint:#e2f6ee;
+ --line:#e3e6f0;--shadow:0 18px 48px #121a3414;--radius:22px
+}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:88px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+a{color:inherit;text-decoration:none}button,input,select{font:inherit}button,a{-webkit-tap-highlight-color:transparent}
+.wrap{width:min(1160px,calc(100% - 40px));margin:auto}
+header{position:sticky;top:0;z-index:30;background:#f5f6fbeb;backdrop-filter:blur(16px);border-bottom:1px solid #e3e6f0cc}
+.nav{height:74px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:900;letter-spacing:-.5px}
+.brand-mark{display:grid;place-items:center;width:40px;height:40px;border-radius:13px;background:var(--night);color:var(--gold);font-size:22px}
+.navlinks{display:flex;align-items:center;gap:18px}.navlinks a{font-size:13px;color:var(--muted);font-weight:750}.navlinks a:hover{color:var(--violet)}
+.menu-btn{display:none;background:white;border:1px solid var(--line);border-radius:12px;padding:8px 12px;color:var(--ink);cursor:pointer}
+.hero{padding:68px 0 54px;overflow:hidden;background:radial-gradient(ellipse at 82% 30%,#29275b 0,transparent 40%),linear-gradient(120deg,#11182e,#1b2545 70%,#24214c);color:white}
+.hero-grid{display:grid;grid-template-columns:1.02fr .98fr;gap:42px;align-items:center}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;padding:7px 12px;border-radius:999px;background:#ffffff12;border:1px solid #ffffff24;color:#e4e0ff;font-size:12px;font-weight:850;letter-spacing:.08em;text-transform:uppercase}
+h1{font-size:clamp(2.8rem,6.5vw,5.6rem);line-height:.98;letter-spacing:-.07em;margin:22px 0}
+h1 span{color:var(--gold)}.hero p{font-size:18px;color:#d2d8ee;max-width:610px}
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 18px;border:0;border-radius:14px;font-weight:800;cursor:pointer;transition:transform .18s,filter .18s}
+.btn:hover{transform:translateY(-2px);filter:brightness(.98)}.primary{background:var(--gold);color:#24213f;box-shadow:0 8px 22px #00000020}.secondary{background:#ffffff10;border:1px solid #ffffff36;color:white}
+.space-art{position:relative;min-height:360px;display:grid;place-items:center}
+.orbit{position:absolute;width:330px;height:230px;border:1px solid #ffffff5a;border-radius:50%;transform:rotate(-24deg)}
+.sun{position:absolute;width:120px;height:120px;border-radius:50%;left:8%;top:14%;background:radial-gradient(circle at 35% 32%,#fff7bd,#ffd052 55%,#f39a43);box-shadow:0 0 35px #ffca5c80,0 0 85px #ffbd4540}
+.earth{position:absolute;right:12%;top:39%;width:78px;height:78px;border-radius:50%;background:radial-gradient(circle at 28% 28%,#96e5ed,#4287cb 57%,#233d87);box-shadow:inset -13px -5px 20px #11182e88,0 0 25px #5ea9f54a}
+.moon{position:absolute;left:47%;bottom:10%;width:48px;height:48px;border-radius:50%;background:radial-gradient(circle at 30% 25%,#f8f5e8,#b8bfd3 60%,#686f8c);box-shadow:inset -8px -4px 10px #33395470}
+.star{position:absolute;color:#fff;font-size:19px;opacity:.9}.s1{left:19%;top:10%}.s2{right:9%;top:16%}.s3{left:23%;bottom:14%}.s4{right:25%;bottom:13%}
+.art-label{position:absolute;background:#ffffff10;border:1px solid #ffffff26;color:#e5e8f6;border-radius:12px;padding:8px 11px;font-size:12px;font-weight:750}
+.l1{left:2%;bottom:1%}.l2{right:0;top:14%}
+.section{padding:67px 0}.section-head{max-width:780px;margin-bottom:30px}.kicker{font-size:12px;text-transform:uppercase;letter-spacing:.13em;font-weight:900;color:var(--violet)}
+h2{font-size:clamp(2rem,4vw,3.15rem);line-height:1.08;letter-spacing:-.05em;margin:9px 0 13px}.section-head p{color:var(--muted);font-size:16px;margin:0}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:23px;box-shadow:0 5px 22px #17253605;transition:transform .2s,box-shadow .2s}
+.card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}.iconbox{width:48px;height:48px;border-radius:15px;background:var(--violet-light);display:grid;place-items:center;font-size:24px;margin-bottom:15px}
+.card:nth-child(3n+2) .iconbox{background:var(--blue)}.card:nth-child(3n) .iconbox{background:var(--peach)}
+.card h3{font-size:19px;letter-spacing:-.025em;margin:0 0 7px}.card p{font-size:14px;color:var(--muted);margin:0}
+.tag{display:inline-block;margin-top:14px;background:#f0effb;color:#554ab6;font-weight:800;font-size:11px;padding:4px 9px;border-radius:8px}
+.band{background:var(--night);color:white;border-radius:28px;padding:38px;display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:center}
+.band .kicker{color:var(--gold)}.band p{color:#d2d8ee}.band .btn{background:var(--gold);color:#24213f}
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.stats-grid div{background:#ffffff10;border:1px solid #ffffff20;border-radius:16px;padding:15px}.stats-grid b{display:block;font-size:24px}.stats-grid span{font-size:12px;color:#d2d8ee}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:18px}.panel{background:white;border:1px solid var(--line);border-radius:var(--radius);padding:26px}.panel h3{margin:0 0 10px;font-size:21px}.panel p{color:var(--muted);margin:8px 0}.panel.peach{background:var(--peach);border-color:transparent}.panel.mint{background:var(--mint);border-color:transparent}.panel.blue{background:var(--blue);border-color:transparent}
+.list{padding-left:21px;color:var(--muted)}.list li{margin:7px 0}
+.simulator{background:var(--night);color:white;border-radius:26px;padding:26px;display:grid;grid-template-columns:.8fr 1.2fr;gap:24px;align-items:center}
+.sim-controls{display:grid;gap:17px}.sim-controls p{color:#d2d8ee;margin:0 0 4px}.choice-row{display:flex;gap:8px;flex-wrap:wrap}.choice{background:#ffffff10;border:1px solid #ffffff35;color:white;border-radius:12px;padding:10px 13px;font-weight:800;cursor:pointer}.choice.active{background:var(--gold);border-color:var(--gold);color:#24213f}
+.range-label{display:flex;justify-content:space-between;gap:10px;font-size:14px;font-weight:750}.range-label output{color:var(--gold)}input[type=range]{width:100%;accent-color:var(--gold);margin-top:12px}
+.diagram{min-height:270px;background:radial-gradient(ellipse at center,#242f58,#0d1326);border:1px solid #ffffff1c;border-radius:18px;display:grid;place-items:center;padding:12px;overflow:hidden}.diagram svg{width:100%;max-width:600px;height:auto;display:block}.sim-caption{color:#d2d8ee;text-align:center;font-size:13px;margin:12px 0 0}
+.phase-row{display:grid;grid-template-columns:repeat(4,1fr);gap:13px}.phase{background:white;border:1px solid var(--line);border-radius:17px;padding:18px}.phase .emoji{font-size:28px}.phase h3{margin:7px 0;font-size:16px}.phase p{font-size:13px;color:var(--muted);margin:0}
+.warning{display:flex;gap:16px;align-items:flex-start;background:#fff3df;border:1px solid #f2d3a1;border-radius:20px;padding:22px}.warning-icon{font-size:31px;flex-shrink:0}.warning h3{margin:0 0 6px;color:#7e4218}.warning p,.warning li{color:#714b31}.warning ul{padding-left:19px;margin:9px 0 0}.warning strong{color:#68320e}
+.toolbar{display:flex;gap:12px;flex-wrap:wrap;margin:20px 0 24px}.search{flex:1;min-width:230px;position:relative}.search input{width:100%;border:1px solid var(--line);background:white;border-radius:14px;padding:13px 15px 13px 42px;outline:none}.search:before{content:"⌕";position:absolute;left:15px;top:4px;font-size:25px;color:var(--muted)}
+.filters{display:flex;gap:8px;flex-wrap:wrap}.filter{border:1px solid var(--line);background:white;border-radius:12px;padding:9px 13px;color:var(--muted);cursor:pointer;font-weight:700;font-size:13px}.filter.active{background:var(--night);color:white;border-color:var(--night)}
+.glossary{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.term{background:white;border:1px solid var(--line);padding:19px;border-radius:17px}.term h3{margin:0 0 7px;font-size:17px}.term p{margin:0;color:var(--muted);font-size:14px}.empty{display:none;text-align:center;padding:24px;color:var(--muted)}
+.accordion{background:white;border:1px solid var(--line);border-radius:15px;margin:10px 0;overflow:hidden}.accordion button{display:flex;justify-content:space-between;align-items:center;text-align:left;width:100%;background:white;border:0;color:var(--ink);padding:17px 19px;font-weight:800;cursor:pointer}.accordion .answer{display:none;padding:0 19px 18px;color:var(--muted)}.accordion.open .answer{display:block}.plus{font-size:23px;color:var(--violet);transition:transform .2s}.accordion.open .plus{transform:rotate(45deg)}
+.quiz{background:linear-gradient(140deg,#eeeaff,#dfeeff);border-radius:25px;padding:29px}.quiz h3{margin:0;font-size:22px}.answers{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px}.answers button{padding:14px;border:1px solid #d1d9ec;border-radius:13px;background:#fff;text-align:left;cursor:pointer;font-weight:650}.answers button:hover{border-color:var(--violet)}.feedback{font-weight:800;margin-top:15px;min-height:26px}
+footer{background:var(--night);color:white;margin-top:60px;padding:42px 0 27px}.footgrid{display:flex;justify-content:space-between;gap:25px;flex-wrap:wrap}.footnote{color:#d2d8ee;font-size:13px;max-width:740px}.footlinks{display:flex;gap:15px;flex-wrap:wrap;font-size:13px}.footlinks a{text-decoration:underline;color:var(--gold)}
+.backtop{display:none;position:fixed;right:20px;bottom:20px;width:46px;height:46px;border:0;border-radius:15px;background:var(--violet);color:#fff;font-size:22px;box-shadow:var(--shadow);cursor:pointer;z-index:10}
+@media(max-width:900px){.hero-grid{grid-template-columns:1fr}.space-art{min-height:330px}.grid,.glossary{grid-template-columns:repeat(2,1fr)}.band{grid-template-columns:1fr}.simulator{grid-template-columns:1fr}.phase-row{grid-template-columns:repeat(2,1fr)}.navlinks{display:none;position:absolute;left:20px;right:20px;top:67px;background:white;border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:var(--shadow);flex-direction:column;align-items:flex-start}.navlinks.show{display:flex}.menu-btn{display:block}}
+@media(max-width:580px){.wrap{width:calc(100% - 28px)}.hero{padding:46px 0 34px}.space-art{min-height:260px}.sun{width:90px;height:90px}.earth{width:58px;height:58px}.moon{width:38px;height:38px}.orbit{width:260px;height:180px}.art-label{font-size:10px}.grid,.glossary,.two-col{grid-template-columns:1fr}.section{padding:48px 0}.band{padding:24px}.stats-grid{grid-template-columns:1fr 1fr}.answers{grid-template-columns:1fr}.quiz{padding:22px}.phase-row{grid-template-columns:1fr 1fr}.nav{height:66px}.warning{padding:16px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header><div class="wrap nav">
+ <a class="brand" href="#inicio" aria-label="Eclipses, inicio"><span class="brand-mark">☾</span><span>Eclipses</span></a>
+ <nav class="navlinks" id="navlinks" aria-label="Navegación principal"><a href="#fundamentos">Fundamentos</a><a href="#tipos">Tipos</a><a href="#simulador">Simulador</a><a href="#seguridad">Seguridad</a><a href="#glosario">Glosario</a></nav>
+ <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="navlinks">☰ Menú</button>
+</div></header>
+<main id="inicio">
+<section class="hero"><div class="wrap hero-grid">
+ <div><span class="eyebrow">🌘 Guía educativa · Astronomía para todos</span>
+  <h1>Cuando el cielo<br>se <span>alinea.</span></h1>
+  <p>Descubre cómo se producen los eclipses solares y lunares, por qué no ocurren cada mes, cuáles son sus fases y cómo observarlos de forma segura.</p>
+  <div class="actions"><a class="btn primary" href="#fundamentos">Comenzar a explorar <span>→</span></a><a class="btn secondary" href="#simulador">Ver cómo se alinean</a></div>
+ </div>
+ <div class="space-art" aria-label="Ilustración simbólica del Sol, la Tierra y la Luna">
+  <div class="orbit"></div><div class="sun" title="Sol"></div><div class="earth" title="Tierra"></div><div class="moon" title="Luna"></div>
+  <span class="star s1">✦</span><span class="star s2">✧</span><span class="star s3">✧</span><span class="star s4">✦</span>
+  <div class="art-label l1">☀️ Sol · Tierra · Luna</div><div class="art-label l2">Órbitas y sombras</div>
+ </div>
+</div></section>
+
+<section class="section" id="fundamentos"><div class="wrap">
+ <div class="section-head"><span class="kicker">01 · Lo esencial</span><h2>¿Qué es un eclipse?</h2><p>Un eclipse ocurre cuando un cuerpo celeste queda total o parcialmente oculto, o entra en la sombra de otro, debido a la alineación entre el Sol, la Tierra y la Luna. Hay dos familias principales: eclipses solares y eclipses lunares.</p></div>
+ <div class="grid">
+  <article class="card"><div class="iconbox">☀️</div><h3>El Sol ilumina</h3><p>El Sol es la fuente de luz del sistema. La luz viaja en línea recta y los cuerpos opacos pueden bloquearla, creando sombras.</p></article>
+  <article class="card"><div class="iconbox">🌍</div><h3>La Tierra proyecta sombra</h3><p>Cuando la Tierra se interpone entre el Sol y la Luna, su sombra puede cubrir la Luna: se produce un eclipse lunar.</p></article>
+  <article class="card"><div class="iconbox">🌑</div><h3>La Luna puede cubrir el Sol</h3><p>Cuando la Luna pasa entre el Sol y la Tierra, puede tapar el Sol para observadores en una zona de la Tierra: es un eclipse solar.</p></article>
+ </div>
+</div></section>
+
+<section class="section" id="tipos"><div class="wrap">
+ <div class="section-head"><span class="kicker">02 · Dos grandes familias</span><h2>Eclipses solares y lunares</h2><p>La diferencia principal es qué cuerpo queda en la sombra y desde dónde lo observamos.</p></div>
+ <div class="two-col">
+  <div class="panel blue"><h3>🌞 Eclipse solar</h3><p>La Luna pasa entre el Sol y la Tierra. La sombra lunar toca una franja limitada de la superficie terrestre, por eso solo se ve desde determinadas regiones.</p><ul class="list"><li>Ocurre durante la fase de <strong>Luna nueva</strong>.</li><li>Puede ser total, parcial o anular.</li><li>La fase total, cuando existe, dura poco tiempo en cada lugar.</li></ul></div>
+  <div class="panel peach"><h3>🌕 Eclipse lunar</h3><p>La Tierra se sitúa entre el Sol y la Luna, y la Luna entra en la sombra terrestre. Puede observarse desde gran parte del hemisferio nocturno donde la Luna está sobre el horizonte.</p><ul class="list"><li>Ocurre durante la fase de <strong>Luna llena</strong>.</li><li>Puede ser penumbral, parcial o total.</li><li>La fase puede durar mucho más que la totalidad de un eclipse solar.</li></ul></div>
+ </div>
+</div></section>
+
+<section class="section" id="simulador"><div class="wrap">
+ <div class="section-head"><span class="kicker">03 · Explora la alineación</span><h2>Simulador conceptual de eclipses</h2><p>Elige el tipo de eclipse y mueve el control para acercar o alejar la alineación. El diagrama es esquemático, no está a escala y simplifica la geometría real.</p></div>
+ <div class="simulator">
+  <div class="sim-controls">
+   <div><p><strong>¿Qué quieres explorar?</strong></p><div class="choice-row"><button class="choice active" data-kind="solar">Eclipse solar</button><button class="choice" data-kind="lunar">Eclipse lunar</button></div></div>
+   <div><label class="range-label" for="alignment">Alineación <output id="alignmentOut">Casi alineados</output></label><input id="alignment" type="range" min="-100" max="100" value="0" step="1"><p style="font-size:12px;color:#d2d8ee;margin:4px 0 0">Mueve el control para observar cómo cambia la posición relativa.</p></div>
+   <div><p><strong>Qué debes observar</strong></p><p id="simExplanation" style="font-size:14px">En un eclipse solar, la Luna pasa entre el Sol y la Tierra. Cuando la alineación es precisa, su sombra puede alcanzar una parte de la Tierra.</p></div>
+  </div>
+  <div><div class="diagram"><svg id="eclipseSvg" viewBox="0 0 620 270" role="img" aria-label="Diagrama de alineación de un eclipse solar">
+   <defs><radialGradient id="sunFill"><stop stop-color="#fff5b7"/><stop offset=".7" stop-color="#ffc84d"/><stop offset="1" stop-color="#ee8c35"/></radialGradient><radialGradient id="earthFill"><stop stop-color="#7ac8ec"/><stop offset=".75" stop-color="#3578c2"/><stop offset="1" stop-color="#1b376d"/></radialGradient><radialGradient id="moonFill"><stop stop-color="#efeee7"/><stop offset="1" stop-color="#7b8297"/></radialGradient></defs>
+   <rect x="0" y="0" width="620" height="270" rx="12" fill="#11182e"/>
+   <g fill="#fff" opacity=".8"><circle cx="35" cy="38" r="1.5"/><circle cx="99" cy="218" r="1.3"/><circle cx="180" cy="35" r="1.1"/><circle cx="270" cy="230" r="1.4"/><circle cx="395" cy="45" r="1.5"/><circle cx="485" cy="215" r="1.2"/><circle cx="568" cy="52" r="1.3"/></g>
+   <g id="sunBody"><circle cx="80" cy="135" r="33" fill="url(#sunFill)"/><text x="80" y="190" fill="#e8eaf7" font-size="14" text-anchor="middle">Sol</text></g>
+   <g id="shadowShape" opacity=".65"><path id="shadowCone" d="M115 116 L490 126 L490 144 L115 154Z" fill="#54617e" opacity=".6"/><path id="umbraCone" d="M115 128 L490 132 L490 138 L115 142Z" fill="#090d19"/></g>
+   <g id="moonBody"><circle id="moonCircle" cx="300" cy="135" r="19" fill="url(#moonFill)"/><text id="moonLabel" x="300" y="190" fill="#e8eaf7" font-size="14" text-anchor="middle">Luna</text></g>
+   <g id="earthBody"><circle id="earthCircle" cx="520" cy="135" r="30" fill="url(#earthFill)"/><path id="earthLand" d="M506 116 l15 -5 6 8 -7 5 5 11 -9 8 -8 -9 -8 -4 2 -8Z" fill="#58b78b"/><text x="520" y="190" fill="#e8eaf7" font-size="14" text-anchor="middle">Tierra</text></g>
+   <text id="diagramStatus" x="310" y="250" fill="#ffd36b" font-size="13" text-anchor="middle">Alineación favorable</text>
+  </svg></div><p class="sim-caption">La sombra está exagerada para facilitar la explicación. Las distancias y tamaños reales son muy diferentes.</p></div>
+ </div>
+</div></section>
+
+<section class="section" id="variedades"><div class="wrap">
+ <div class="section-head"><span class="kicker">04 · Variantes</span><h2>Tipos de eclipses</h2><p>La apariencia depende de la alineación, las distancias entre los cuerpos y la posición del observador.</p></div>
+ <div class="grid">
+  <article class="card"><div class="iconbox">🌑</div><h3>Solar total</h3><p>La Luna cubre por completo el disco brillante del Sol para observadores dentro de la estrecha franja de totalidad. Puede verse la corona solar durante esa fase.</p><span class="tag">Sol completamente cubierto</span></article>
+  <article class="card"><div class="iconbox">🌒</div><h3>Solar parcial</h3><p>La Luna cubre solo una parte del disco solar. El Sol conserva una forma de creciente o mordida, según la magnitud del eclipse.</p><span class="tag">Cobertura parcial</span></article>
+  <article class="card"><div class="iconbox">💍</div><h3>Solar anular</h3><p>La Luna se ve algo más pequeña que el Sol en el cielo y no lo cubre por completo; queda un anillo brillante alrededor.</p><span class="tag">Anillo de luz</span></article>
+  <article class="card"><div class="iconbox">🌘</div><h3>Lunar penumbral</h3><p>La Luna pasa por la penumbra terrestre, una sombra más tenue. El oscurecimiento puede ser sutil y difícil de notar a simple vista.</p><span class="tag">Sombra tenue</span></article>
+  <article class="card"><div class="iconbox">🌗</div><h3>Lunar parcial</h3><p>Una parte de la Luna entra en la umbra, la región más oscura de la sombra de la Tierra. Parece como si faltara un sector del disco lunar.</p><span class="tag">Sombra definida</span></article>
+  <article class="card"><div class="iconbox">🌕</div><h3>Lunar total</h3><p>Toda la Luna entra en la umbra terrestre. Puede adquirir tonos rojizos porque la atmósfera terrestre dispersa y refracta parte de la luz solar hacia ella.</p><span class="tag">Luna rojiza</span></article>
+ </div>
+</div></section>
+
+<section class="section" id="fases"><div class="wrap">
+ <div class="section-head"><span class="kicker">05 · Qué ocurre durante el fenómeno</span><h2>Fases y momentos importantes</h2><p>Los nombres y el orden exacto dependen de si el eclipse es solar o lunar y de qué fases son visibles desde tu ubicación.</p></div>
+ <div class="phase-row">
+  <article class="phase"><div class="emoji">🌗</div><h3>Inicio parcial</h3><p>Comienza a notarse que un cuerpo entra en la sombra o que la Luna empieza a cubrir el Sol.</p></article>
+  <article class="phase"><div class="emoji">🌘</div><h3>Acercamiento a la totalidad</h3><p>La cobertura aumenta. En un eclipse solar, la luz ambiental puede cambiar al aproximarse la totalidad.</p></article>
+  <article class="phase"><div class="emoji">🌑</div><h3>Totalidad (si ocurre)</h3><p>En el eclipse solar total, el disco brillante del Sol queda cubierto por la Luna desde la zona de totalidad.</p></article>
+  <article class="phase"><div class="emoji">🌒</div><h3>Salida de la sombra</h3><p>El fenómeno se revierte gradualmente hasta que los cuerpos dejan de superponerse desde el punto de observación.</p></article>
+ </div>
+ <p class="muted" style="font-size:13px;margin-top:15px">Un eclipse lunar sigue fases de entrada y salida de la penumbra y umbra; no tiene exactamente la misma secuencia visual que un eclipse solar.</p>
+</div></section>
+
+<section class="section"><div class="wrap"><div class="band">
+ <div><span class="kicker">Una idea clave</span><h2>La Luna nueva no siempre produce un eclipse solar.</h2><p>La órbita lunar está inclinada unos cinco grados respecto al plano de la órbita terrestre. Por eso, la mayoría de los meses la Luna pasa por encima o por debajo de la alineación necesaria.</p><a class="btn" href="#preguntas">Entender por qué →</a></div>
+ <div class="stats-grid"><div><b>🌑</b><span>Luna nueva: puede haber eclipse solar</span></div><div><b>🌕</b><span>Luna llena: puede haber eclipse lunar</span></div><div><b>↗️</b><span>Órbita lunar inclinada</span></div><div><b>📍</b><span>La ubicación cambia lo que se ve</span></div></div>
+</div></div></section>
+
+<section class="section" id="seguridad"><div class="wrap">
+ <div class="section-head"><span class="kicker">06 · Observación responsable</span><h2>Cómo mirar un eclipse solar de forma segura</h2><p>La luz solar puede dañar la vista. La seguridad depende del tipo de eclipse y del método de observación.</p></div>
+ <div class="warning"><div class="warning-icon">⚠️</div><div><h3>Nunca mires directamente al Sol sin protección solar adecuada.</h3><p>Durante todas las fases parciales y durante un eclipse anular, el Sol sigue siendo peligroso de mirar directamente. Las gafas de sol comunes no son protección suficiente.</p><ul><li>Usa gafas para eclipses conformes con la norma <strong>ISO 12312-2</strong>, en buen estado y siguiendo sus instrucciones.</li><li><strong>No mires al Sol a través de cámaras, binoculares o telescopios</strong> usando solo gafas de eclipse: estos instrumentos requieren filtros solares específicos instalados correctamente delante de la óptica.</li><li>Un método indirecto, como un proyector estenopeico, permite observar la imagen proyectada sin mirar al Sol.</li><li>Solo durante la totalidad de un eclipse solar total, dentro de la franja de totalidad y cuando el disco brillante está completamente cubierto, se puede mirar brevemente sin filtro; vuelve a protegerte antes de que reaparezca el Sol brillante.</li></ul></div></div>
+ <div class="two-col" style="margin-top:18px">
+  <div class="panel mint"><h3>✅ Eclipse lunar</h3><p>Observar un eclipse lunar a simple vista es seguro. No requiere gafas especiales, ya que estás mirando la Luna y no el Sol.</p></div>
+  <div class="panel blue"><h3>🔭 Preparar la observación</h3><p>Consulta el horario y la visibilidad para tu localidad con fuentes astronómicas confiables, prepara el equipo con anticipación y sigue las recomendaciones de seguridad.</p></div>
+ </div>
+ <p style="font-size:13px;color:var(--muted);margin-top:15px">Más información: <a href="https://science.nasa.gov/eclipses/" target="_blank" rel="noopener noreferrer" style="color:var(--violet);text-decoration:underline">NASA — Eclipses</a> · <a href="https://eclipse.aas.org/eye-safety" target="_blank" rel="noopener noreferrer" style="color:var(--violet);text-decoration:underline">American Astronomical Society — Seguridad visual</a>.</p>
+</div></section>
+
+<section class="section" id="glosario"><div class="wrap">
+ <div class="section-head"><span class="kicker">07 · Diccionario astronómico</span><h2>Glosario de eclipses</h2><p>Busca un término o filtra por categoría para encontrar una definición breve.</p></div>
+ <div class="toolbar"><label class="search"><input id="searchInput" type="search" placeholder="Buscar: umbra, totalidad, órbita…" aria-label="Buscar términos astronómicos"></label><div class="filters" id="filters"><button class="filter active" data-filter="Todos">Todos</button><button class="filter" data-filter="Geometría">Geometría</button><button class="filter" data-filter="Eclipses">Eclipses</button><button class="filter" data-filter="Luna">Luna</button><button class="filter" data-filter="Observación">Observación</button></div></div>
+ <div class="glossary" id="glossaryGrid"></div><p class="empty" id="emptyState">No encontramos términos. Prueba otra búsqueda.</p>
+</div></section>
+
+<section class="section" id="preguntas"><div class="wrap">
+ <div class="section-head"><span class="kicker">08 · Preguntas frecuentes</span><h2>El cielo responde</h2><p>Abre cada pregunta para leer su explicación.</p></div>
+ <div class="accordion"><button aria-expanded="false">¿Por qué no hay un eclipse cada mes? <span class="plus">+</span></button><div class="answer">La órbita de la Luna está inclinada con respecto al plano en que la Tierra orbita al Sol. En la mayoría de las lunas nuevas y llenas, los tres cuerpos no quedan suficientemente alineados. Los eclipses suceden cuando la Luna nueva o llena ocurre cerca de los puntos donde su órbita cruza ese plano.</div></div>
+ <div class="accordion"><button aria-expanded="false">¿Por qué la Luna se ve roja durante un eclipse lunar total? <span class="plus">+</span></button><div class="answer">La atmósfera terrestre desvía parte de la luz solar hacia la sombra y dispersa más las longitudes de onda azules. Parte de la luz rojiza alcanza la Luna, aunque el color depende también de las condiciones atmosféricas.</div></div>
+ <div class="accordion"><button aria-expanded="false">¿Un eclipse solar se ve igual desde todos los lugares? <span class="plus">+</span></button><div class="answer">No. La visibilidad depende de la ubicación. En una franja estrecha puede verse un eclipse solar total; fuera de ella, algunas regiones ven uno parcial y otras no ven el eclipse. Un eclipse anular también tiene una franja específica de anularidad.</div></div>
+ <div class="accordion"><button aria-expanded="false">¿Qué es la corona solar? <span class="plus">+</span></button><div class="answer">Es la capa más externa de la atmósfera del Sol. Es muy tenue frente al brillo de la superficie visible y suele observarse desde tierra durante la totalidad de un eclipse solar total, cuando el disco brillante queda completamente cubierto.</div></div>
+ <div class="accordion"><button aria-expanded="false">¿Cómo sé cuándo será el próximo eclipse en mi zona? <span class="plus">+</span></button><div class="answer">Los horarios y el tipo de eclipse visible varían con la ubicación. Consulta los mapas y tablas de fuentes astronómicas confiables, como NASA o servicios especializados, usando tu ciudad o coordenadas. No todos los eclipses son visibles desde todas las regiones.</div></div>
+</div></section>
+
+<section class="section" id="desafio"><div class="wrap">
+ <div class="section-head"><span class="kicker">09 · Comprueba lo aprendido</span><h2>Mini desafío astronómico</h2><p>Responde y recibe una explicación al instante.</p></div>
+ <div class="quiz"><h3>¿Qué debe ocurrir para que se produzca un eclipse lunar?</h3><div class="answers" id="quizAnswers"><button data-answer="wrong">La Luna pasa entre el Sol y la Tierra</button><button data-answer="right">La Tierra se sitúa entre el Sol y la Luna, y la Luna entra en la sombra terrestre</button><button data-answer="wrong">El Sol pasa detrás de la Luna nueva sin alineación</button><button data-answer="wrong">La Luna deja de reflejar luz para siempre</button></div><div class="feedback" id="quizFeedback" role="status" aria-live="polite"></div></div>
+</div></section>
+</main>
+<footer><div class="wrap">
+ <div class="footgrid"><div><a class="brand" href="#inicio"><span class="brand-mark">☾</span><span>Eclipses</span></a><p class="footnote">Una guía para comprender los movimientos celestes y observar el cielo con curiosidad y seguridad.</p></div><div class="footlinks"><a href="#tipos">Tipos</a><a href="#simulador">Simulador</a><a href="#seguridad">Seguridad</a><a href="#glosario">Glosario</a></div></div>
+ <p class="footnote" style="margin-top:25px">Contenido educativo general. El simulador es esquemático y no predice horarios ni visibilidad local. Para planificar una observación, consulta efemérides y mapas astronómicos actualizados.</p>
+ <p class="footnote">© <span id="year"></span> Eclipses · Una guía para mirar el cielo.</p>
+</div></footer>
+<button class="backtop" id="backtop" aria-label="Volver arriba" title="Volver arriba">↑</button>
+<script>
+const glossaryTerms=[
+["Alineación","Geometría","Disposición aproximada del Sol, la Tierra y la Luna en una misma dirección, necesaria para que ocurra un eclipse."],
+["Órbita","Geometría","Trayectoria que sigue un cuerpo celeste alrededor de otro por efecto de la gravedad."],
+["Nodo orbital","Geometría","Punto donde la órbita de la Luna cruza el plano de la órbita terrestre alrededor del Sol."],
+["Umbra","Geometría","Región más oscura de una sombra, donde la fuente de luz queda completamente bloqueada."],
+["Penumbra","Geometría","Región exterior de la sombra en la que la fuente de luz queda bloqueada solo en parte."],
+["Antumbra","Geometría","Región que se extiende más allá de la punta de la umbra; desde ella puede verse un eclipse solar anular."],
+["Eclipse solar","Eclipses","Fenómeno en el que la Luna pasa entre el Sol y la Tierra y oculta total o parcialmente el disco solar desde algunas zonas."],
+["Eclipse lunar","Eclipses","Fenómeno en el que la Luna entra en la sombra de la Tierra."],
+["Totalidad","Eclipses","Fase durante la cual el cuerpo eclipsado queda completamente cubierto o dentro de la sombra central, según el tipo de eclipse."],
+["Eclipse anular","Eclipses","Eclipse solar en el que la Luna no cubre todo el disco del Sol y queda visible un anillo brillante."],
+["Magnitud del eclipse","Eclipses","Medida de la parte del diámetro aparente del cuerpo eclipsado que queda cubierta, según la definición usada para ese tipo de eclipse."],
+["Saros","Eclipses","Ciclo de aproximadamente 18 años y 11 días tras el cual se repiten geometrías de eclipses similares, aunque no idénticas y en distintas regiones."],
+["Luna nueva","Luna","Fase en la que la cara iluminada de la Luna mira principalmente en dirección contraria a la Tierra; puede ocurrir un eclipse solar si hay alineación."],
+["Luna llena","Luna","Fase en la que vemos iluminado casi todo el disco lunar; puede ocurrir un eclipse lunar si hay alineación."],
+["Corona solar","Observación","Atmósfera externa del Sol, muy tenue y normalmente difícil de ver por el brillo del disco solar."],
+["Filtros solares","Observación","Dispositivos especialmente diseñados para reducir de forma segura la luz solar en observación directa o instrumental."],
+["Proyección estenopeica","Observación","Método indirecto que proyecta una imagen del Sol a través de un pequeño orificio sobre una superficie, sin mirar directamente al Sol."],
+["Efemérides","Observación","Tablas o cálculos que indican posiciones y tiempos de objetos astronómicos para fechas y lugares concretos."]
+];
+let activeFilter="Todos";const glossaryGrid=document.getElementById("glossaryGrid");
+function renderGlossary(){const q=document.getElementById("searchInput").value.trim().toLocaleLowerCase("es");const arr=glossaryTerms.filter(t=>(activeFilter==="Todos"||t[1]===activeFilter)&&(t[0]+" "+t[1]+" "+t[2]).toLocaleLowerCase("es").includes(q));glossaryGrid.innerHTML=arr.map(t=>`<article class="term"><span class="tag" style="margin:0 0 9px">${t[1]}</span><h3>${t[0]}</h3><p>${t[2]}</p></article>`).join("");document.getElementById("emptyState").style.display=arr.length?"none":"block";}
+document.getElementById("searchInput").addEventListener("input",renderGlossary);
+document.getElementById("filters").addEventListener("click",e=>{const b=e.target.closest("button[data-filter]");if(!b)return;activeFilter=b.dataset.filter;document.querySelectorAll(".filter").forEach(x=>x.classList.toggle("active",x===b));renderGlossary();});
+document.querySelectorAll(".accordion button").forEach(b=>b.addEventListener("click",()=>{const item=b.parentElement;const open=item.classList.toggle("open");b.setAttribute("aria-expanded",String(open));}));
+document.getElementById("quizAnswers").addEventListener("click",e=>{const b=e.target.closest("button[data-answer]");if(!b)return;const f=document.getElementById("quizFeedback");if(b.dataset.answer==="right"){f.textContent="¡Correcto! La Tierra bloquea la luz solar y su sombra cae sobre la Luna. Esto ocurre cerca de la fase de Luna llena.";f.style.color="#245c45";}else{f.textContent="No exactamente. En un eclipse lunar, la Tierra se sitúa entre el Sol y la Luna, y la Luna entra en la sombra terrestre.";f.style.color="#87471e";}});
+let eclipseKind="solar";
+const svgNS="http://www.w3.org/2000/svg";
+function svgEl(tag,attrs){const el=document.createElementNS(svgNS,tag);Object.entries(attrs).forEach(([k,v])=>el.setAttribute(k,v));return el;}
+function renderEclipse(){const align=Number(document.getElementById("alignment").value);const shift=align*0.52;const moonX=300+shift;const earthX=520;const solar=eclipseKind==="solar";
+document.getElementById("alignmentOut").textContent=Math.abs(align)<18?"Casi alineados":Math.abs(align)<55?"Alineación parcial":"Poco alineados";
+const moon=document.getElementById("moonCircle"),moonLabel=document.getElementById("moonLabel");moon.setAttribute("cx",moonX);moonLabel.setAttribute("x",moonX);
+const shadowCone=document.getElementById("shadowCone"),umbra=document.getElementById("umbraCone");
+if(solar){
+ document.getElementById("sunBody").setAttribute("transform","");
+ document.getElementById("earthBody").setAttribute("transform","");
+ moon.setAttribute("r","19");moon.setAttribute("fill","url(#moonFill)");
+ shadowCone.setAttribute("d",`M${moonX+15} ${135+shift*.12-17} L490 ${135+shift*.12-8} L490 ${135+shift*.12+8} L${moonX+15} ${135+shift*.12+17}Z`);
+ umbra.setAttribute("d",`M${moonX+15} ${135+shift*.12-6} L490 ${135+shift*.12-3} L490 ${135+shift*.12+3} L${moonX+15} ${135+shift*.12+6}Z`);
+ document.getElementById("simExplanation").textContent="La Luna pasa entre el Sol y la Tierra. Cuando su sombra llega a la superficie terrestre, algunas regiones pueden ver un eclipse solar.";
+ document.getElementById("diagramStatus").textContent=Math.abs(align)<18?"Alineación favorable: sombra cerca de la Tierra":Math.abs(align)<55?"La sombra se desplaza respecto de la Tierra":"La alineación es insuficiente";
+ // Shadow shown extending right from the moon; fade when the moon is far from the center line.
+ document.getElementById("shadowShape").setAttribute("opacity",String(Math.max(.12,1-Math.abs(align)/125)));
+ document.getElementById("earthLand").setAttribute("opacity",Math.abs(align)<20?"0.55":"1");
+}else{
+ // For lunar eclipses use Sun at left, Earth centered with shadow extending to the right, Moon entering the shadow.
+ document.getElementById("earthCircle").setAttribute("cx","300");document.getElementById("earthBody").setAttribute("transform","");
+ document.getElementById("earthLand").setAttribute("transform","translate(-220 0)");
+ document.getElementById("earthBody").querySelector("text").setAttribute("x","300");
+ moon.setAttribute("r","19");moon.setAttribute("cx",500+shift);moonLabel.setAttribute("x",500+shift);
+ // Moon should be to the right of Earth for diagram; earth moved to x=300 via transform.
+ shadowCone.setAttribute("d",`M330 115 L${590+shift*.25} 124 L${590+shift*.25} 146 L330 155Z`);
+ umbra.setAttribute("d",`M330 129 L${590+shift*.25} 132 L${590+shift*.25} 138 L330 141Z`);
+ document.getElementById("shadowShape").setAttribute("opacity",String(Math.max(.12,1-Math.abs(align)/125)));
+ document.getElementById("simExplanation").textContent="La Tierra se sitúa entre el Sol y la Luna. La sombra terrestre se extiende detrás de la Tierra y puede oscurecer la Luna cuando la alineación es adecuada.";
+ document.getElementById("diagramStatus").textContent=Math.abs(align)<18?"Alineación favorable: la Luna entra en la sombra":Math.abs(align)<55?"La Luna roza o se acerca a la sombra":"La Luna queda fuera de la sombra";
+}
+}
+document.querySelectorAll(".choice").forEach(b=>b.addEventListener("click",()=>{eclipseKind=b.dataset.kind;document.querySelectorAll(".choice").forEach(x=>x.classList.toggle("active",x===b));const earth=document.getElementById("earthBody");if(eclipseKind==="solar"){earth.setAttribute("transform","");document.getElementById("earthLand").setAttribute("transform","");document.getElementById("earthBody").querySelector("text").setAttribute("x","520");document.getElementById("earthCircle").setAttribute("cx","520");document.getElementById("earthLand").setAttribute("opacity","1");document.getElementById("moonCircle").setAttribute("cx","300");document.getElementById("moonLabel").setAttribute("x","300");}else{document.getElementById("earthCircle").setAttribute("cx","520");document.getElementById("earthLand").setAttribute("transform","");earth.setAttribute("transform","");document.getElementById("earthBody").querySelector("text").setAttribute("x","520");}document.getElementById("alignment").value=0;renderEclipse();}));
+document.getElementById("alignment").addEventListener("input",renderEclipse);
+const menu=document.getElementById("menuBtn"),nav=document.getElementById("navlinks");menu.addEventListener("click",()=>{const show=nav.classList.toggle("show");menu.setAttribute("aria-expanded",String(show));});nav.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>{nav.classList.remove("show");menu.setAttribute("aria-expanded","false");}));
+document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener("click",e=>{const target=document.querySelector(a.getAttribute("href"));if(target){e.preventDefault();target.scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});}}));
+const topBtn=document.getElementById("backtop");window.addEventListener("scroll",()=>{topBtn.style.display=window.scrollY>500?"block":"none";});topBtn.addEventListener("click",()=>window.scrollTo({top:0,behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"}));
+document.getElementById("year").textContent=new Date().getFullYear();renderGlossary();renderEclipse();
+</script>
+</body>
+</html>
