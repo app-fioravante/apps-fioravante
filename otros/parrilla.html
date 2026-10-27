@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Comidas a la parrilla</title>
+<meta name="description" content="Todo sobre la parrilla: historia, técnicas de fuego, parrilladas del mundo, cortes y puntos de cocción, recetas y seguridad.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;700&family=Fraunces:opsz,wght@9..144,600..800&display=swap" rel="stylesheet">
+<style>
+:root{--fd:'Fraunces',Georgia,serif;--fb:'Figtree','Segoe UI',system-ui,sans-serif;--bg:#fdf7f1;--sf:#fff;--s2:#f6e8da;--bd:#e3cdb8;--tx:#2a1a10;--mu:#6b5445;--ac:#b23a1f;--on:#fff;box-sizing:border-box;padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#180f0b;--sf:#211510;--s2:#2f1f16;--bd:#4a3225;--tx:#f7ece2;--mu:#c5b0a0;--ac:#f08a5d;--on:#180f0b}}
+:root[data-theme="dark"]{--bg:#180f0b;--sf:#211510;--s2:#2f1f16;--bd:#4a3225;--tx:#f7ece2;--mu:#c5b0a0;--ac:#f08a5d;--on:#180f0b}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px);-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--tx);font:400 1rem/1.65 var(--fb);overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--bg)}
+h1,h2,h3,h4{font-family:var(--fd);margin:0;line-height:1.12}p{margin:0}a{color:inherit;text-decoration:none}button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--ac);outline-offset:2px;border-radius:6px}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:var(--bg);border-bottom:1px solid var(--bd)}
+.hi{max-width:1100px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:12px}
+.brand{font:700 1.15rem var(--fd);white-space:nowrap}
+.nav{display:flex;gap:2px;margin-left:auto;overflow-x:auto;scrollbar-width:none;min-width:0}.nav::-webkit-scrollbar{display:none}
+.nl{padding:8px 12px;border-radius:10px;font-size:.85rem;color:var(--mu);white-space:nowrap}.nl.on{background:var(--ac);color:var(--on);font-weight:700}
+.tt{width:38px;height:38px;flex:none;border:1px solid var(--bd);border-radius:10px;background:var(--s2)}
+main{max-width:1100px;margin:0 auto;padding:0 16px 70px}
+.view{display:none}.view.on{display:block}
+.hero{margin-top:18px;display:flex;flex-wrap:wrap;align-items:center;gap:8px 28px}.hero h1{font-size:clamp(2.6rem,12vw,6rem);font-weight:800;letter-spacing:-.02em;margin:0 0 10px}.hero svg{flex:none;max-width:42vw;height:auto}
+.lead{color:var(--mu);font-size:1.08rem;max-width:62ch}
+.stn{display:flex;gap:10px;overflow-x:auto;padding:6px 0 12px;margin-top:22px;width:100%}
+.st{flex:0 0 158px;padding:12px 14px;border-radius:12px;background:var(--sf);border:1px solid var(--bd)}
+.st b{display:block;font:700 1.3rem var(--fd);color:var(--ac)}.st span{display:block;font-size:.85rem;line-height:1.3;color:var(--mu)}
+.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));align-items:start}
+.card{padding:18px;border-radius:12px;background:var(--sf);border:1px solid var(--bd)}a.card:hover{border-color:var(--ac)}
+.card h3{font-size:1.15rem;margin-bottom:6px}.card p{font-size:.92rem;color:var(--mu)}
+.home{margin-top:20px}.note{margin-top:22px;padding:14px 18px;border-radius:12px;border:1px dashed var(--bd);color:var(--mu);font-size:.9rem}
+.sec{padding:34px 0 4px}.sec h2{font-size:clamp(1.9rem,6vw,3rem);margin-bottom:8px}.sec>.lead{margin-bottom:22px}
+.tabs{display:flex;gap:8px;margin-bottom:12px;overflow-x:auto;padding-bottom:4px}
+.tab{flex:none;padding:10px 15px;border-radius:10px;border:1px solid var(--bd);background:var(--sf);font-weight:700;font-size:.9rem}.tab[aria-selected=true]{background:var(--ac);color:var(--on);border-color:transparent}
+.panel{padding:20px;border-radius:12px;background:var(--sf);border:1px solid var(--bd);border-left:6px solid var(--ac)}
+.pt{color:var(--mu)}.pt p,.pt ul,.pt ol{max-width:74ch}.pt p+*,.pt ul+*,.pt ol+*{margin-top:.8em}.pt b{color:var(--tx)}.pt ul,.pt ol{padding-left:1.2em}.pt li+li{margin-top:.3em}
+.tl{position:relative;padding-top:4px}.tl::before{content:"";position:absolute;left:7px;top:10px;bottom:10px;width:2px;background:var(--bd)}
+.ev{position:relative;padding:0 0 18px 34px}.ev::before{content:"";position:absolute;left:0;top:5px;width:16px;height:16px;border-radius:50%;background:var(--sf);border:4px solid var(--ac)}
+.ev b{display:block;font:700 1.1rem var(--fd);color:var(--ac)}.ev h4{font-size:1.05rem}.ev p{max-width:62ch;color:var(--mu)}
+.search{width:100%;max-width:420px;padding:12px 16px;border-radius:12px;border:1px solid var(--bd);background:var(--sf);color:var(--tx);font:inherit;margin-bottom:14px}
+.tw{overflow-x:auto}.gt{border-collapse:collapse;width:100%;min-width:540px;font-size:.88rem}.gt th,.gt td{padding:7px 10px;border-bottom:1px solid var(--bd);text-align:left;vertical-align:top}.gt th{color:var(--tx);white-space:nowrap}.gt td{color:var(--mu)}.gt td:first-child{color:var(--tx);font-weight:700}
+.eq{margin:12px 0;padding:14px;border-radius:12px;background:var(--s2);color:var(--tx);font:700 1.15rem var(--fd);text-align:center;overflow-x:auto}
+.defs{display:grid;gap:10px;margin-top:10px}
+.def{padding:12px 14px;border-radius:10px;background:var(--s2)}
+.def b{display:block;font:700 1.05rem var(--fd);color:var(--tx)}
+.def span{display:block;font-size:.9rem;color:var(--mu);margin-top:3px;line-height:1.55}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.chip{padding:8px 14px;border-radius:99px;border:1px solid var(--bd);background:var(--sf);font-weight:700;font-size:.85rem}
+.chip[aria-pressed=true]{background:var(--ac);color:var(--on);border-color:transparent}
+.ph{padding:16px;border-radius:12px;background:var(--sf);border:1px solid var(--bd);border-top:4px solid var(--ac)}
+.ph h3{font-size:1.1rem;margin-bottom:2px}
+.ph .yr{font-size:.8rem;color:var(--ac);font-weight:700}
+.ph p{font-size:.9rem;color:var(--mu);margin-top:6px}
+.ph .q{font-family:var(--fd);font-style:italic;color:var(--tx);border-left:3px solid var(--ac);padding-left:10px;margin-top:10px;font-size:.92rem;line-height:1.4}
+details.card summary{cursor:pointer;list-style:none}details.card summary::-webkit-details-marker{display:none}details.card summary::after{content:" +";color:var(--ac);font-weight:700}details.card[open] summary::after{content:" –"}details.card[open] summary{margin-bottom:10px}
+details.card h3{display:inline}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style></head>
+<body>
+<header class="top"><div class="hi"><a class="brand" href="#inicio">Parrilla</a><nav class="nav" id="nav" aria-label="Secciones"></nav><button class="tt" id="tt" aria-label="Cambiar entre tema claro y oscuro">◐</button></div></header>
+<main>
+<section class="view on" id="inicio"><div class="hero"><div><h1>Parrilla</h1><p class="lead">Fuego, brasas y paciencia: cómo se cocina carne, pescado y vegetales sobre la rejilla. Técnicas de dos zonas y ahumado lento, la historia desde el control del fuego, parrilladas de veinte países, cortes y puntos de cocción, recetas y todo lo que hay que saber para no arruinar el asado.</p></div><div id="hgrill"></div>
+<div class="stn" id="stn"></div></div>
+<div class="grid home" id="home"></div>
+<p class="note">Las temperaturas y los tiempos son orientativos: dependen del grosor de la pieza, del viento, del combustible y del equipo. Cocinar carne picada, pollo y cerdo exige temperaturas internas mínimas de seguridad. El fuego se maneja con un adulto y nunca en espacios cerrados.</p></section>
+</main>
+<script>
+const $=(s,e=document)=>e.querySelector(s),$$=(s,e=document)=>[...e.querySelectorAll(s)];
+const V=[['que-es','¿Qué es la parrilla?','El calor, la rejilla y la reacción que doran la carne.','Qué es'],['historia','Línea de tiempo','Del control del fuego a las parrillas a pellets.','Historia'],['tecnicas','Técnicas y fuego','Dos zonas, ahumado lento, la cruz y los errores típicos.','Técnicas'],['mundo','Parrillas del mundo','Veintisiete formas de hacer fuego, país por país.','Mundo'],['cortes','Cortes y puntos','Qué pieza es cuál y hasta qué temperatura cocinarla.','Cortes'],['recetas','Recetas','Seis preparaciones explicadas paso a paso.','Recetas'],['seguridad','Seguridad y consejos','Higiene, manejo del fuego y trucos de parrillero.','Seguridad'],['glosario','Glosario','Las palabras del oficio, sin vueltas.','Glosario']];
+$('main').insertAdjacentHTML('beforeend',V.map(v=>`<section class="view" id="${v[0]}"><div class="sec"><h2>${v[1]}</h2><p class="lead">${v[2]}</p><div id="b-${v[0]}"></div></div></section>`).join(''));
+$('#nav').innerHTML=V.map(v=>`<a class="nl" href="#${v[0]}" data-v="${v[0]}">${v[3]}</a>`).join('');
+$('#home').innerHTML=V.map(v=>`<a class="card" href="#${v[0]}"><h3>${v[1]}</h3><p>${v[2]}</p></a>`).join('');
+$('#stn').innerHTML=[['≈1 millón','De años cocinando con fuego'],['74 °C','Mínimo seguro para aves y carne picada'],['2 zonas','Fuego directo e indirecto'],['27','Países con tradición parrillera'],['150 °C','Donde arranca la reacción de Maillard'],['5 min','Reposo mínimo antes de cortar']].map(s=>`<div class="st"><b>${s[0]}</b><span>${s[1]}</span></div>`).join('');
+
+const P=t=>`<p>${t}</p>`,ul=a=>`<ul>${a.map(x=>`<li>${x}</li>`).join('')}</ul>`,ol=a=>`<ol>${a.map(x=>`<li>${x}</li>`).join('')}</ol>`;
+const gt=(h,r)=>`<div class="tw"><table class="gt"><tr>${h.map(x=>`<th>${x}</th>`).join('')}</tr>${r.split('\n').map(l=>`<tr>${l.split('|').map(c=>`<td>${c}</td>`).join('')}</tr>`).join('')}</table></div>`;
+const ev=a=>`<div class="tl">${a.map(x=>`<div class="ev"><b>${x[0]}</b><h4>${x[1]}</h4><p>${x[2]}</p></div>`).join('')}</div>`;
+const dfs=a=>`<div class="defs">${a.map(x=>`<div class="def"><b>${x[0]}</b><span>${x[1]}</span></div>`).join('')}</div>`;
+const tabs=(id,a)=>{const b=$('#b-'+id);b.innerHTML=`<div class="tabs" role="tablist">${a.map((x,i)=>`<button class="tab" role="tab" data-i="${i}">${x[0]}</button>`).join('')}</div><div class="panel"><div class="pt"></div></div>`;const s=i=>{$$('.tab',b).forEach((t,j)=>t.setAttribute('aria-selected',i==j));$('.pt',b).innerHTML=a[i][1]};b.onclick=e=>{const t=e.target.closest('.tab');t&&s(+t.dataset.i)};s(0)};
+const B=(id,h)=>$('#b-'+id).innerHTML=h;
+
+$('#hgrill').innerHTML=`<svg viewBox="0 0 200 200" width="210" role="img" aria-label="Parrilla con brasas y llamas"><g fill="none" stroke="var(--ac)" stroke-width="3" stroke-linecap="round"><path d="M36 92 H164"/><path d="M44 92 Q100 170 156 92"/><path d="M62 148 L42 192"/><path d="M138 148 L158 192"/><path d="M30 192 H70"/><path d="M130 192 H170"/><path d="M52 92 v-10"/><path d="M76 92 v-10"/><path d="M100 92 v-10"/><path d="M124 92 v-10"/><path d="M148 92 v-10"/></g><g fill="var(--ac)" opacity=".8"><path d="M72 88 q7 -16 2 -28 q12 8 12 28 z"/><path d="M98 88 q8 -20 3 -32 q13 9 13 32 z"/><path d="M124 88 q7 -16 2 -26 q11 7 11 26 z"/></g><g fill="var(--ac)" opacity=".4"><circle cx="70" cy="50" r="4"/><circle cx="104" cy="40" r="5"/><circle cx="132" cy="52" r="3"/></g></svg>`;
+
+tabs('que-es',[
+['El calor',P('Cocinar a la parrilla es <b>transferir calor</b> a un alimento por tres vías al mismo tiempo: <b>conducción</b> (la rejilla caliente toca la carne), <b>convección</b> (el aire caliente circula) y <b>radiación</b> (las brasas emiten calor directo). Manejar esas tres variables es toda la técnica.')+ul(['<b>Brasa:</b> el carbón o la leña ya encendidos, sin llama. Da calor parejo y humo aromático.','<b>Llama:</b> fuego vivo. Cocina rápido pero se descontrola y ahuma mal.','<b>Rejilla:</b> de hierro o acero. Mientras más gruesa, mejor retiene el calor y marca la carne.','<b>Tapa:</b> convierte la parrilla en un horno: sube la temperatura y ahuma.'])+P('Las brasas ideales están cubiertas de una ceniza blanca fina. Si todavía hay llama amarilla, el fuego es demasiado joven: la carne se va a quemar por fuera y quedará cruda por dentro.')],
+['La reacción de Maillard',P('Cuando la superficie de la carne supera los <b>140-165 °C</b> y se queda sin agua, los aminoácidos y los azúcares reaccionan y producen cientos de compuestos nuevos: el dorado, el aroma tostado y el sabor profundo. Es la <b>reacción de Maillard</b>, y es la razón por la que una carne bien sellada sabe distinto de una hervida.')+ul(['Necesita <b>superficie seca</b>: la carne húmeda se cuece al vapor antes de dorarse.','Necesita <b>calor fuerte</b>: sin temperatura no hay reacción.','Se pasa rápido: en segundos el dorado se convierte en carbón amargo.'])+P('No hay que confundirla con la <b>caramelización</b>, que solo involucra azúcares y ocurre a unos 160 °C, y que es la responsable del brillo de las costillas glaseadas.')],
+['Combustibles',gt(['Combustible','Ventajas','Desventajas','Ideal para'],`Carbón vegetal|Calor intenso, humo limpio, fácil de regular|Se consume rápido, hay que reponer|Carnes rojas y pollo
+Briquetas|Calor estable y duradero, precio parejo|Humo más neutro, tardan en encenderse|Ahumado lento
+Leña dura|Aroma inconfundible, brasa larga|Necesita tiempo y paciencia|Asado a la cruz, cordero
+Gas|Enciende al instante, temperatura exacta|Poco aroma, no ahuma sin accesorios|Uso diario, departamentos
+Pellets|Automáticos, humo constante, muy parejos|Requieren electricidad y limpieza|Low and slow, costillas, brisket`)+P('Maderas aromáticas: <b>manzano y cerezo</b> son suaves y dulces; <b>nogal, hickory y mezquite</b> son intensos; <b>encina</b> es la reina del asado sudamericano. Nunca uses maderas resinosas (pino, eucalipto tratado): dan sabor amargo y humo tóxico.')],
+['Herramientas',dfs([['Pinzas largas','Manos lejos del fuego. Nunca uses un tenedor para dar vuelta la carne: pierde jugos.'],['Termómetro de sonda','La única forma confiable de saber el punto. Uno instantáneo alcanza; los de sonda con cable son ideales para ahumado.'],['Cepillo de alambre o de acero','Limpiar la rejilla caliente antes y después de cada uso evita sabores rancios y bacterias.'],['Tabla y cuchillo de trinchar','Tabla con canaleta para recoger los jugos. Cuchillo largo y afilado para cortar en una sola pasada.'],['Guantes','De algodón debajo y de nitrilo encima: protegen del calor y permiten manipular sin contaminar.'],['Pulverizador con agua','Para apagar llamaradas y controlar puntos calientes. Nunca arrojes agua a un fuego de aceite.'],['Parrilla de dos zonas','La herramienta más importante no es un objeto: es la distribución. Fuego a un lado, zona segura al otro.']])]
+]);
+
+B('historia',P('La parrilla es tan vieja como la especie humana. Cada cultura inventó su manera de cocinar sobre el fuego, y de esas maneras nacieron platos que hoy son identidad nacional.')+ev([
+['≈1.000.000 a.C.','El control del fuego','Los primeros homínidos dominan el fuego. Cocinar ablanda los alimentos, mata parásitos y permite aprovechar más calorías. Hay quien sostiene que ese cambio ayudó al crecimiento del cerebro.'],
+['≈12.000 a.C.','Hornos de pozo','En muchas culturas se cava un hoyo, se calientan piedras y se envuelve la comida en hojas. Es el ancestro de la barbacoa, el curanto, el imu polinesio y el hāngi maorí.'],
+['s. VIII a.C.','Grecia y Roma','El asado acompaña al sacrificio ritual. Los romanos usan el <i>veru</i>, un espetón giratorio, y ya distinguen cortes y puntos de cocción.'],
+['s. XVI','La palabra barbacoa','Los taínos del Caribe llaman <i>barbacoa</i> a la estructura de madera para asar. Los cronistas españoles la registran a comienzos del siglo XVI y el término se globaliza.'],
+['1530–1600','El ganado llega a América','Las vacas introducidas por los colonizadores se reproducen libres en las pampas. Nace una de las mayores culturas de carne vacuna del planeta.'],
+['s. XVIII','Gauchos y asado a la cruz','En el Río de la Plata, los gauchos asan animales enteros o piezas grandes clavadas en una cruz de hierro inclinada junto al fuego. Sal gruesa y nada más.'],
+['s. XIX','La parrilla urbana','Aparecen las parrillas de hierro fundido en casas y restaurantes. En Buenos Aires y Montevideo se consolida la costumbre del asado dominical.'],
+['1919','La parrilla a gas','Se patenta en Estados Unidos un sistema de cocción con gas. Cambia la comodidad, pero no el ritual.'],
+['1952','La cúpula Weber','George Stephen corta un boya de metal por la mitad y crea la parrilla de cúpula: nace el control de aire y la posibilidad de ahumar en el jardín.'],
+['1960–1980','El barbecue competitivo','En Estados Unidos se profesionalizan las escuelas regionales (Texas, Carolina, Kansas City, Memphis) y arrancan los concursos de costillas y brisket.'],
+['1986','Pellets y automatización','Aparecen las parrillas a pellets: alimentación automática de combustible y control digital de temperatura. El ahumado se vuelve doméstico y repetible.'],
+['2000–2015','Low and slow global','Termómetros digitales, sondas wifi y redes sociales difunden el ahumado lento por todo el mundo. El asado argentino y el churrasco brasileño se vuelven tendencia internacional.'],
+['Hoy','Parrilla vegetal y precisa','Auge de la parrilla de vegetales y hongos, cortes alternativos, carne de origen trazable y equipos con control de temperatura por aplicación. La técnica se democratiza.']
+]));
+
+tabs('tecnicas',[
+['Dos zonas',P('La base de todo: <b>no uses toda la parrilla con el mismo fuego</b>. Cargá el carbón en un solo lado y dejá el otro vacío. Así tenés una zona caliente para dorar y una zona tibia para terminar la cocción.')+ul(['<b>Directo:</b> el alimento va sobre las brasas. Sirve para piezas finas: bifes, chori, hamburguesas, brochetas, vegetales.','<b>Indirecto:</b> el alimento va sobre la zona sin brasas y con la tapa puesta. Sirve para piezas gruesas: pollo entero, costillar, bondiola, cordero.'])+gt(['Pieza','Zona','Tapa','Tiempo orientativo'],`Bife de 2 cm|Directa|Sin tapa|3-4 min por lado
+Pollo entero|Indirecta|Con tapa|60-80 min
+Costillar de cerdo|Indirecta|Con tapa|4-6 h a 110 °C
+Chorizo|Directa media|Sin tapa|15-20 min
+Vegetales|Directa|Opcional|8-12 min
+Pescado entero|Indirecta|Con tapa|20-25 min`)+P('Regla práctica: si el tiempo de cocción supera los <b>20 minutos</b>, la tapa y el calor indirecto casi siempre son la mejor opción.')],
+['Ahumado lento',P('El <b>low and slow</b> cocina a <b>100-120 °C</b> durante horas. El colágeno se transforma en gelatina, la carne se vuelve tierna y la superficie absorbe humo. Es la técnica del brisket, las costillas y el pulled pork.')+ul(['<b>Anillo de humo:</b> la franja rosada debajo de la corteza no indica crudo, es una reacción química con los gases de la combustión.','<b>El estancamiento (stall):</b> la temperatura interna se frena alrededor de los 65-75 °C porque la evaporación enfría la pieza. Es normal: hay que esperar o envolver en papel.','<b>Madera:</b> poca cantidad y bien seca. Un trozo del tamaño del puño alcanza para varias horas.','<b>Flujo de aire:</b> el humo debe circular limpio y azulado, nunca blanco y espeso.'])+gt(['Pieza','Temperatura','Tiempo','Interna final'],`Brisket (pecho)|110-120 °C|12-16 h|95-98 °C
+Costillar de cerdo|110 °C|4-6 h|88-92 °C
+Bondiola / paleta|110-120 °C|8-12 h|90-95 °C
+Pollo entero|140 °C|2-3 h|74 °C
+Cordero|120 °C|6-8 h|75-80 °C`)+P('La clave no es el reloj sino la <b>sensación</b>: la pieza está lista cuando la sonda entra como si atravesara manteca.')],
+['A la cruz',P('El <b>asado a la cruz</b> es la técnica rioplatense y patagónica por excelencia: la carne se clava en una cruz o un hierro inclinado frente al fuego, y se cocina por radiación. No hay rejilla ni contacto.')+ul(['La inclinación regula el calor: más vertical, más lejos del fuego.','Se usa sal gruesa o salmuera seca, nunca líquida, para no secar la superficie.','El cordero patagónico al asador tarda entre 3 y 5 horas según el tamaño.','El fuego se mantiene a un costado: se cocina con brasa y llama baja, nunca con el fuego debajo.'])+P('La <b>parrilla a la cruz</b> tiene una versión con rejilla vertical y otra con la pieza abierta (mariposa). Ambas buscan lo mismo: cocción lenta, corteza dorada y centro jugoso.')+P('Otras técnicas parientes: la <b>parrilla de pescado</b> española (rejillas sujetas con pinzas), el <b>tandoor</b> indio (horno de barro vertical) y el <b>imu</b> polinesio (pozo de piedras).')],
+['Salsas y adobos',dfs([['Salmuera seca (rub)','Mezcla de sal, azúcar y especias que se frota sobre la carne horas antes. Sazona en profundidad y ayuda a formar corteza.'],['Salmuera húmeda (brine)','Agua con sal y a veces azúcar donde se sumerge la pieza. Aporta humedad, ideal para pollo y cerdo.'],['Marinada','Líquido ácido (limón, vinagre, yogur, vino) con especias y aceite. Ácida en exceso «cocina» la superficie: no más de 12 horas.'],['Mop sauce','Salsa aguada que se pincela durante el ahumado para mantener la superficie húmeda.'],['Chimichurri','Perejil, ajo, orégano, ají molido, vinagre y aceite. Se sirve con el asado argentino, también como marinada.'],['Salsa barbacoa','Base de tomate, azúcar morena, vinagre y especias. Se pinta al final: el azúcar se quema rápido.'],['Piri-piri','Ají picante, ajo, limón y aceite. Emblema del pollo portugués y africano.'],['Tare','Salsa japonesa de soja, mirin y azúcar para glasear yakitori.'],['Tzatziki','Yogur, pepino, ajo y hierbas. Acompaña el souvlaki griego.']])+P('<b>Regla de oro:</b> las salsas con azúcar se agregan en los últimos minutos. Antes, el azúcar se carboniza y amarga toda la pieza.')],
+['Errores comunes',ul(['<b>Carne fría a la parrilla:</b> sacala 30-40 minutos antes. Una pieza a temperatura ambiente se cocina parejo.','<b>Pinchar o aplastar:</b> cada pinchazo pierde jugo. Las hamburguesas no se aplastan: eso expulsa la grasa y seca la carne.','<b>Fuego demasiado fuerte:</b> se quema por fuera y queda cruda. Si chisporrotea sin parar, el fuego está de más.','<b>No dejar reposar:</b> cortar enseguida derrama todos los jugos en la tabla. Mínimo 5 minutos, 10-15 para piezas grandes.','<b>Cortar a favor de la fibra:</b> hay que cortar en contra. Si no, la carne se siente dura aunque esté tierna.','<b>Tapar todo el tiempo:</b> la tapa es una herramienta de cocción lenta, no un accesorio permanente.','<b>Rejilla sucia:</b> además de pegar la carne, transmite sabores viejos.','<b>Encendedor líquido sobre brasas encendidas:</b> genera sabores químicos y llamaradas peligrosas.'])]
+]);
+
+(()=>{const REG=['todas','América','Europa','Asia','África','Oceanía'];
+const W=[
+['Argentina','América','Asado a la cruz y parrilla','El asado es rito nacional: carne vacuna a las brasas, sal gruesa y sobremesa larga. La cruz inclina la carne para regular el calor.','Vacío, asado de tira y entraña · chimichurri'],
+['Uruguay','América','Parrilla de tira y leña','Muy cercano al asado argentino pero con identidad propia: la tira ancha y el fuego de leña.','Asado de tira, pamplona, provolone · salsa criolla'],
+['Brasil','América','Churrasco y rodízio','Espadas de carne que circulan por la mesa. La picanha, con su capa de grasa, es la reina.','Picanha, costela, linguiça · farofa'],
+['Estados Unidos','América','Barbecue low and slow','Cuatro escuelas: Texas (brisket), Carolina (cerdo y vinagre), Kansas City (dulce y ahumado) y Memphis (costillas secas).','Brisket, pulled pork, ribs · salsa barbacoa'],
+['México','América','Barbacoa y carne asada','La barbacoa tradicional se cocina en un hoyo con piedras calientes y pencas de maguey; en el norte gana la parrilla.','Carne asada, barbacoa de borrego · salsa tatemada'],
+['Perú','América','Anticuchos','Brochetas de corazón de res marinadas en ají panca, herencia andina y colonial.','Anticuchos, pollo a la brasa · ají y chicha'],
+['Colombia','América','Chuzos y carne asada','Brochetas mixtas y carne a la brasa con arepa. El chuzo es comida de calle.','Chuzos, punta de anca · ají picante'],
+['Chile','América','Cordero al palo','En la Patagonia el cordero se clava entero junto al fuego y se cocina varias horas girando.','Cordero al palo, choripán · pebre'],
+['Jamaica','América','Jerk','Carne marinada con pimienta de Jamaica, tomillo y ají scotch bonnet, ahumada sobre leña de pimento.','Jerk chicken y jerk pork · salsa jerk'],
+['España','Europa','Parrilla y brasa','Del chuletón de buey vasco a la parrillada de pescado: la brasa es técnica y materia prima.','Chuletón, sardinas, pimientos · sal gruesa'],
+['Portugal','Europa','Brasa y piri-piri','El pollo piri-piri y las sardinas asadas son emblema del verano portugués.','Frango piri-piri, sardinas · piri-piri'],
+['Italia','Europa','Bistecca y arrosticini','La fiorentina se hace sobre brasa de encina; en Abruzzo, brochetas de cordero.','Bistecca alla fiorentina · aceite y limón'],
+['Alemania','Europa','Bratwurst y leña','Cultura de la parrilla al aire libre con embutidos, cerveza y pan.','Bratwurst, cerdo · mostaza'],
+['Turquía','Europa','Kebab y shish','Brochetas marinadas en yogur y especias, sobre carbón de encina.','Adana kebab, shish · sumac y cebolla'],
+['Grecia','Europa','Souvlaki','Brochetas de cerdo o pollo con limón y orégano, servidas con pita y tzatziki.','Souvlaki, cordero · tzatziki'],
+['Rusia y Cáucaso','Europa','Shashlik','Brochetas de cordero marinadas en vinagre o kéfir, cocinadas sobre brasas intensas.','Shashlik · adjika'],
+['Japón','Asia','Yakitori y robata','Brochetas pequeñas de pollo a la brasa de carbón binchotan; precisión y cortes minuciosos.','Yakitori, yakiniku · tare'],
+['Corea','Asia','Samgyeopsal','La mesa tiene parrilla en el centro: panceta de cerdo, hojas de lechuga y salsas.','Samgyeopsal, bulgogi · gochujang'],
+['China','Asia','Chuanr','Brochetas de cordero con comino y ají, típicas de Xinjiang y de la calle china.','Chuanr · comino y ají'],
+['India','Asia','Tandoor','Horno de barro a alta temperatura: naan, tikka y brochetas que se adhieren a la pared.','Tandoori chicken, naan · yogur y especias'],
+['Medio Oriente','Asia','Mashawi','Parrilla de brochetas y kofta con pan de pita, hierbas y limón.','Kofta, shish tawook · tahini'],
+['Sudáfrica','África','Braai','Ritual social con leña, boerewors y pan asado. El fuego se cuida, no se apura.','Boerewors, cordero · chakalaka'],
+['Nigeria','África','Suya','Brochetas de res con una mezcla de maní, jengibre y ají, asadas en la parrilla de calle.','Suya · yaji (mezcla de especias)'],
+['Marruecos','África','Brochettes y merguez','Brochetas de cordero y embutidos picantes sobre brasas, con pan y té.','Brochettes, merguez · ras el hanout'],
+['Australia','Oceanía','Barbie','La parrilla es institución: salchichas, cordero y mariscos, con el barbie en el jardín.','Lamb chops, snags · salsa de tomate'],
+['Nueva Zelanda','Oceanía','Cordero a la brasa','Tradición pastoril: cordero, venado y pescado sobre brasas de madera nativa.','Lamb rack · hierbas y limón'],
+['Polinesia','Oceanía','Horno de tierra (imu)','Cocción en un pozo con piedras calientes y hojas, pariente del curanto y la barbacoa.','Cerdo kalua · hojas de plátano']];
+B('mundo',P('Cada país tiene su manera de encender el fuego y su manera de sentarse alrededor. Estas son veintisiete tradiciones parrilleras, agrupadas por región.')+`<div class="chips" id="regs">${REG.map((r,i)=>`<button class="chip" data-r="${r}" aria-pressed="${i==0}">${r}</button>`).join('')}</div><div class="grid" id="wg"></div>`);
+const rw=r=>{$('#wg').innerHTML=W.filter(w=>r=='todas'||w[1]==r).map(w=>`<div class="ph"><span class="yr">${w[1]}</span><h3>${w[0]}</h3><p><b style="color:var(--tx)">${w[2]}.</b> ${w[3]}</p><div class="q">${w[4]}</div></div>`).join('')};
+$('#regs').onclick=e=>{const c=e.target.closest('.chip');if(!c)return;$$('.chip',$('#regs')).forEach(x=>x.setAttribute('aria-pressed',x===c));rw(c.dataset.r)};
+rw('todas')})();
+
+tabs('cortes',[
+['Puntos de cocción',P('El punto no se adivina por el color: se mide con un <b>termómetro en el centro de la pieza</b>, sin tocar el hueso ni la grasa.')+gt(['Punto','Temperatura interna','Cómo queda'],`Vuelta y vuelta|48-52 °C|Centro rojo y frío, superficie dorada
+Poco hecho (inglés)|52-55 °C|Centro rojo intenso y tibio
+Al punto|57-62 °C|Centro rosado y jugoso
+Tres cuartos|65-68 °C|Centro apenas rosado
+Bien cocido|71 °C o más|Sin rosado, más seco`)+P('<b>Mínimos de seguridad</b> (no son preferencias, son obligaciones):')+ul(['<b>Carne picada</b> (hamburguesas): 71 °C.','<b>Pollo y aves</b>: 74 °C en la parte más gruesa.','<b>Cerdo</b>: 63 °C con 3 minutos de reposo (piezas enteras); 71 °C si es picado.','<b>Pescado</b>: 60-63 °C o hasta que se separe en láminas.','<b>Restos recalentados</b>: 74 °C.'])+P('Después de retirar la carne, la temperatura sigue subiendo entre 3 y 5 °C. Retirala un poco antes del punto deseado y dejá reposar.')],
+['Guía de cortes',gt(['Corte','De dónde sale','Cómo hacerlo','Punto'],`Asado de tira|Costilla de vacuno|Directo medio o indirecto|Tres cuartos a bien
+Vacío|Falda de vacuno|Indirecto lento, 2 h|Tres cuartos, bien jugoso
+Entraña|Diafragma de vacuno|Directo fuerte y rápido|Al punto o tres cuartos
+Picanha|Tapa de cuadril|Directo, grasa hacia abajo primero|Al punto
+Bife de chorizo|Bife ancho|Directo fuerte|Al punto
+Ojo de bife|Bife angosto|Directo fuerte|Al punto
+Brisket / pecho|Pecho de vacuno|Ahumado 12-16 h|95 °C, desmenuzable
+Costillar de cerdo|Costillas|Indirecto 4-6 h|88-92 °C, se separa del hueso
+Bondiola|Paleta de cerdo|Indirecto 8-10 h|90 °C, se deshilacha
+Pollo entero|Ave|Indirecto con tapa|74 °C
+Cordero|Paletilla o pierna|Indirecto largo|70-75 °C
+Chorizo|Embutido fresco|Directo medio|71 °C
+Pescado entero|Pieza entera|Indirecto con tapa o plancha|60-63 °C
+Vegetales|Berenjena, morrón, cebolla|Directo|Dorados y tiernos`)+P('Los cortes con mucha <b>grasa intramuscular</b> (picanha, ojo de bife, entraña) toleran mejor el calor fuerte. Los cortes magros y las piezas grandes de colágeno (brisket, bondiola, costillar) piden tiempo y temperatura baja.')],
+['Corte y reposo',dfs([['Reposo','Al retirar la carne del fuego, los jugos están presionados hacia el centro. Reposar 5 minutos una hamburguesa, 10 un bife grueso y 20-30 una pieza grande permite que se redistribuyan y no se pierdan al cortar.'],['Contra la fibra','Mirá la dirección de las fibras del músculo y cortá perpendicular a ellas. Los dientes cortan fibras cortas, no fibras largas.'],['Cuchillo y tabla','Cuchillo largo y afilado, de una sola pasada. Sierra sobre la carne la desgarra y la seca.'],['Temperatura de servicio','La carne vacuna se disfruta más entre 50 y 55 °C. Un bife servido a 70 °C pierde matices.'],['Guardar','Enfriar rápido, refrigerar en recipiente cerrado hasta 3-4 días, recalentar a 74 °C. No recongelar carne ya descongelada.'],['Sobrantes','El brisket o el pollo sobrantes son mejores al día siguiente: se usan en tacos, sándwiches, ensaladas o empanadas.']])]
+]);
+
+(()=>{const X=[
+['Chimichurri','Salsa · 10 min',['1 taza de perejil fresco picado','4 dientes de ajo picados','1 cucharadita de orégano seco','Media taza de aceite de oliva','2 cucharadas de vinagre de vino','Ají molido y sal a gusto'],['Picá el perejil y el ajo bien fino.','Mezclá todo en un bol y dejá reposar al menos 30 minutos.','Guardá en la heladera hasta dos semanas en frasco cerrado.'],'El aceite disuelve los aromas del perejil y el ajo; el vinagre equilibra la grasa de la carne. Por eso conviene prepararlo con anticipación.'],
+['Asado de tira','Principal · 40 min',['1 kg de asado de tira','Sal gruesa','Brasas medianas','Pinzas y tabla'],['Salá la carne 30 minutos antes.','Poné la tira con el hueso hacia abajo sobre brasas medias.','Cociná 15-20 minutos por lado, girando una sola vez.','Retirá, dejá reposar 5 minutos y cortá entre los huesos.'],'El hueso transmite calor y protege la carne del fuego directo. La sal gruesa se disuelve despacio y no seca la superficie.'],
+['Picanha a la brasa','Principal · 35 min',['1 picanha entera con capa de grasa','Sal gruesa','Brasas fuertes','Cuchillo largo'],['Cortá la pieza en medallones de 3-4 cm con su grasa.','Salá y poné la grasa hacia abajo sobre brasa fuerte 4 minutos.','Girá y cociná 4-5 minutos más por el lado de la carne.','Retirá al punto, reposá y cortá en tiras contra la fibra.'],'La capa de grasa funciona como aislante: al principio protege la carne y, al derretirse, la baña y la vuelve jugosa.'],
+['Costillas ahumadas','Low and slow · 5 h',['1 costillar de cerdo','Mostaza como adherente','Rub de sal, azúcar morena, pimentón y ajo','Parrilla con tapa y madera de manzano'],['Secá el costillar y untá una capa fina de mostaza.','Cubrí con el rub y dejá reposar 1 hora.','Cociná a 110 °C con humo durante 3 horas.','Envolvé en papel y cociná 1 hora más.','Pintá con salsa barbacoa y terminá 20 minutos destapado.'],'La mostaza no se siente en el sabor final: sirve para que el rub se adhiera. El papel aluminio acelera la cocción y evita que se seque.'],
+['Hamburguesas jugosas','Principal · 20 min',['500 g de carne picada con algo de grasa','Sal y pimienta','Pan, queso y guarniciones','Parrilla bien caliente'],['Formá discos de 2 cm con un hueco en el centro.','No los aprietes ni los amases: la carne se compacta.','Cociná 3-4 minutos por lado según el grosor.','Agregá el queso en el último minuto y tapá.','Serví en pan tostado con lo que más te guste.'],'El hueco central evita que la hamburguesa se abombe al cocinarse. La carne picada debe llegar siempre a 71 °C en el centro.'],
+['Vegetales a la parrilla','Acompañamiento · 20 min',['Berenjena, morrón, cebolla y zucchini','Aceite de oliva','Sal, pimienta y hierbas','Pincel y pinzas'],['Cortá los vegetales en láminas parejas de 1 cm.','Pincelá con aceite y salá justo antes de ponerlos.','Asá sobre brasas medias, girando una vez.','Retirá cuando estén dorados y tiernos, y serví tibios.'],'La berenjena absorbe mucho aceite: salala 15 minutos antes y secala, así suelta agua y se dora en vez de hervirse.']];
+B('recetas',P('Seis preparaciones para arrancar. Todas se hacen con equipo básico: parrilla, brasas, pinzas y termómetro.')+`<div class="grid">${X.map((x,i)=>`<details class="card"${i?'':' open'}><summary><h3>${x[0]}</h3><p style="margin-top:2px">${x[1]}</p></summary>${ul(x[2])}<p style="margin-top:12px"><b>Paso a paso:</b></p>${ol(x[3])}<p style="margin-top:12px"><b>Por qué funciona:</b> ${x[4]}</p></details>`).join('')}</div>`)})();
+
+tabs('seguridad',[
+['Higiene',ul(['Lavate las manos antes y después de manipular carne cruda.','<b>Contaminación cruzada:</b> usá tabla y pinzas distintas para crudos y cocidos, o lavalas entre ambos.','No laves el pollo crudo bajo la canilla: las bacterias salpican toda la cocina.','Descongelá siempre en la heladera, nunca a temperatura ambiente.','Marinadas usadas con carne cruda se descartan: no se reutilizan como salsa.','Enfriá los sobrantes en menos de 2 horas y guardalos tapados.'])+P('La regla es simple: lo crudo no toca lo cocido, y todo lo que tocó carne cruda se lava con agua caliente y detergente.')],
+['El fuego',ul(['Nunca uses carbón, leña o parrilla a gas en un espacio cerrado: el monóxido de carbono es inodoro y letal.','No uses alcohol ni nafta para encender: produce llamaradas invisibles y peligrosas.','El encendedor líquido se aplica solo sobre el carbón frío, antes de encender, y se deja actuar.','Mantené a los chicos y a las mascotas a distancia y nunca dejes el fuego sin supervisión.','Tené siempre a mano un extintor o un balde de arena. El agua sirve para brasas, nunca para aceite.','Cuando termines, cerrá la entrada de aire y esperá a que las brasas se enfríen por completo.','La parrilla a gas se controla con agua jabonosa en las conexiones: si hace burbujas, hay pérdida.'])],
+['Trucos',dfs([['Probá el calor con la mano','A 10 cm sobre la rejilla: 2 segundos es fuego fuerte, 4 medio, 6 suave.'],['Brasas parejas','Extendelas con una pinza y esperá a que todas estén cubiertas de ceniza blanca.'],['Zona de seguridad','Dejá siempre un cuarto de la parrilla sin brasas: ahí se «aparca» la carne si el fuego se descontrola.'],['Punto de la carne sin termómetro','Tocá la base del pulgar con cada dedo: la firmeza de la palma imita el punto (blando, medio, firme). Es orientativo, no reemplaza la sonda.'],['Limpieza en caliente','Cepillá la rejilla cuando está caliente y antes de poner la carne: sale todo y no quedan restos.'],['Reposo bajo papel','Una pieza grande reposada sobre una tabla con papel aluminio suelto mantiene el calor sin cocinarse de más.'],['El humo correcto','Humo azul y fino es bueno; humo blanco y espeso indica combustión incompleta y sabor amargo.'],['Sal temprano o tarde','Piezas grandes pueden salarse la noche anterior; piezas finas se salan justo antes de asar.']])]
+]);
+
+(()=>{const G=[['Adobar','Untar o marinar la carne con una mezcla de especias y líquidos para dar sabor.'],['Ahumado','Cocción lenta con humo de madera a baja temperatura.'],['Anillo de humo','Franja rosada bajo la corteza del ahumado; no es crudo, es una reacción química.'],['Asado de tira','Corte de costilla de vacuno, típico del Río de la Plata.'],['Brasa','Carbón o leña incandescentes, sin llama, que emiten el calor parejo.'],['Braai','Parrilla sudafricana, tanto la técnica como el encuentro social.'],['Brisket','Pecho de vacuno, el corte estrella del barbecue de Texas.'],['Chimichurri','Salsa argentina de perejil, ajo, vinagre, aceite y ají molido.'],['Churrasco','Nombre brasileño y rioplatense de la carne asada a la brasa.'],['Costillar','Pieza de costillas de cerdo o vacuno cocida lenta.'],['Dos zonas','Distribución de brasas a un lado para tener fuego directo e indirecto.'],['Grasa intramuscular','Grasa distribuida dentro del músculo, la que aporta jugosidad.'],['Kebab','Brocheta de carne asada, típica de Turquía y Medio Oriente.'],['Low and slow','Cocción larga a baja temperatura, entre 100 y 120 °C.'],['Maillard','Reacción química entre aminoácidos y azúcares que dora y aromatiza la superficie.'],['Marinada','Líquido con ácido y especias donde se reposa la carne antes de asar.'],['Mop sauce','Salsa aguada que se pincela sobre la carne durante el ahumado.'],['Parrilla','Rejilla sobre la que se asan los alimentos, y también el conjunto del equipo.'],['Picanha','Tapa de cuadril con su capa de grasa, corte emblemático de Brasil.'],['Punto','Grado de cocción de la carne, medido por temperatura interna.'],['Reposo','Tiempo de espera tras retirar la carne del fuego para que los jugos se redistribuyan.'],['Rub','Mezcla seca de especias que se frota sobre la carne antes de cocinar.'],['Salmuera','Solución de agua y sal (a veces azúcar) para sumergir la carne y mantenerla húmeda.'],['Shashlik','Brocheta de cordero del Cáucaso y Rusia, marinada y asada sobre brasas.'],['Souvlaki','Brocheta griega de cerdo o pollo con limón y orégano.'],['Stall','Estancamiento de la temperatura interna durante el ahumado por evaporación.'],['Tandoor','Horno de barro vertical de la India, a muy alta temperatura.'],['Tare','Salsa japonesa de soja, mirin y azúcar para glasear yakitori.'],['Yakitori','Brochetas japonesas de pollo cocidas sobre carbón binchotan.'],['Zona indirecta','Parte de la parrilla sin brasas debajo, usada para cocción lenta con tapa.']];
+B('glosario','<input class="search" id="q" type="search" placeholder="Buscar un término" aria-label="Buscar en el glosario"><div class="grid" id="gl"></div>');
+const r=f=>{$('#gl').innerHTML=G.filter(g=>(g[0]+g[1]).toLowerCase().includes(f)).map(g=>`<div class="card"><h3>${g[0]}</h3><p>${g[1]}</p></div>`).join('')||'<p class="note">No hay términos con esa búsqueda.</p>'};
+$('#q').oninput=e=>r(e.target.value.toLowerCase().trim());r('')})();
+
+const go=h=>{h=V.some(v=>v[0]==h)?h:'inicio';$$('.view').forEach(e=>e.classList.toggle('on',e.id==h));$$('.nl').forEach(a=>a.classList.toggle('on',a.dataset.v==h));scrollTo(0,0)};
+addEventListener('hashchange',()=>go(location.hash.slice(1)));
+$('#tt').onclick=()=>{const d=document.documentElement,k=d.dataset.theme?d.dataset.theme=='dark':matchMedia('(prefers-color-scheme:dark)').matches;d.dataset.theme=k?'light':'dark'};
+go(location.hash.slice(1));
+</script>
+</body></html>

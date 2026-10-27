@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Filosofía para todos</title>
+<meta name="description" content="Filosofía explicada fácil: qué es, línea de tiempo, corrientes de pensamiento, filósofos clave, argumentos y falacias, y glosario.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;700&family=Fraunces:opsz,wght@9..144,600..800&display=swap" rel="stylesheet">
+<style>
+:root{--fd:'Fraunces',Georgia,serif;--fb:'Figtree','Segoe UI',system-ui,sans-serif;--bg:#f6f2fb;--sf:#fff;--s2:#e9e1f4;--bd:#d0c4e5;--tx:#231636;--mu:#5a4b73;--ac:#6a3fb0;--on:#fff;box-sizing:border-box;padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#150f20;--sf:#1e1630;--s2:#2b2045;--bd:#43355f;--tx:#f0eafa;--mu:#b5a8cf;--ac:#b794f0;--on:#150f20}}
+:root[data-theme="dark"]{--bg:#150f20;--sf:#1e1630;--s2:#2b2045;--bd:#43355f;--tx:#f0eafa;--mu:#b5a8cf;--ac:#b794f0;--on:#150f20}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px);-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--tx);font:400 1rem/1.65 var(--fb);overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--bg)}
+h1,h2,h3,h4{font-family:var(--fd);margin:0;line-height:1.12}p{margin:0}a{color:inherit;text-decoration:none}button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--ac);outline-offset:2px;border-radius:6px}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:var(--bg);border-bottom:1px solid var(--bd)}
+.hi{max-width:1100px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:12px}
+.brand{font:700 1.15rem var(--fd);white-space:nowrap}
+.nav{display:flex;gap:2px;margin-left:auto;overflow-x:auto;scrollbar-width:none;min-width:0}.nav::-webkit-scrollbar{display:none}
+.nl{padding:8px 12px;border-radius:10px;font-size:.85rem;color:var(--mu);white-space:nowrap}.nl.on{background:var(--ac);color:var(--on);font-weight:700}
+.tt{width:38px;height:38px;flex:none;border:1px solid var(--bd);border-radius:10px;background:var(--s2)}
+main{max-width:1100px;margin:0 auto;padding:0 16px 70px}
+.view{display:none}.view.on{display:block}
+.hero{margin-top:18px;display:flex;flex-wrap:wrap;align-items:center;gap:8px 28px}.hero h1{font-size:clamp(2.6rem,12vw,6rem);font-weight:800;letter-spacing:-.02em;margin:0 0 10px}.hero svg{flex:none;max-width:42vw;height:auto}
+.lead{color:var(--mu);font-size:1.08rem;max-width:62ch}
+.stn{display:flex;gap:10px;overflow-x:auto;padding:6px 0 12px;margin-top:22px;width:100%}
+.st{flex:0 0 158px;padding:12px 14px;border-radius:12px;background:var(--sf);border:1px solid var(--bd)}
+.st b{display:block;font:700 1.3rem var(--fd);color:var(--ac)}.st span{display:block;font-size:.85rem;line-height:1.3;color:var(--mu)}
+.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));align-items:start}
+.card{padding:18px;border-radius:12px;background:var(--sf);border:1px solid var(--bd)}a.card:hover{border-color:var(--ac)}
+.card h3{font-size:1.15rem;margin-bottom:6px}.card p{font-size:.92rem;color:var(--mu)}
+.home{margin-top:20px}.note{margin-top:22px;padding:14px 18px;border-radius:12px;border:1px dashed var(--bd);color:var(--mu);font-size:.9rem}
+.sec{padding:34px 0 4px}.sec h2{font-size:clamp(1.9rem,6vw,3rem);margin-bottom:8px}.sec>.lead{margin-bottom:22px}
+.tabs{display:flex;gap:8px;margin-bottom:12px;overflow-x:auto;padding-bottom:4px}
+.tab{flex:none;padding:10px 15px;border-radius:10px;border:1px solid var(--bd);background:var(--sf);font-weight:700;font-size:.9rem}.tab[aria-selected=true]{background:var(--ac);color:var(--on);border-color:transparent}
+.panel{padding:20px;border-radius:12px;background:var(--sf);border:1px solid var(--bd);border-left:6px solid var(--ac)}
+.pt{color:var(--mu)}.pt p,.pt ul,.pt ol{max-width:74ch}.pt p+*,.pt ul+*,.pt ol+*{margin-top:.8em}.pt b{color:var(--tx)}.pt ul,.pt ol{padding-left:1.2em}.pt li+li{margin-top:.3em}
+.tl{position:relative;padding-top:4px}.tl::before{content:"";position:absolute;left:7px;top:10px;bottom:10px;width:2px;background:var(--bd)}
+.ev{position:relative;padding:0 0 18px 34px}.ev::before{content:"";position:absolute;left:0;top:5px;width:16px;height:16px;border-radius:50%;background:var(--sf);border:4px solid var(--ac)}
+.ev b{display:block;font:700 1.1rem var(--fd);color:var(--ac)}.ev h4{font-size:1.05rem}.ev p{max-width:62ch;color:var(--mu)}
+.search{width:100%;max-width:420px;padding:12px 16px;border-radius:12px;border:1px solid var(--bd);background:var(--sf);color:var(--tx);font:inherit;margin-bottom:14px}
+.tw{overflow-x:auto}.gt{border-collapse:collapse;width:100%;min-width:540px;font-size:.88rem}.gt th,.gt td{padding:7px 10px;border-bottom:1px solid var(--bd);text-align:left;vertical-align:top}.gt th{color:var(--tx);white-space:nowrap}.gt td{color:var(--mu)}.gt td:first-child{color:var(--tx);font-weight:700}
+.cap{text-align:center;font-size:.82rem;color:var(--mu);margin-bottom:16px}
+.eq{margin:12px 0;padding:14px;border-radius:12px;background:var(--s2);color:var(--tx);font:700 1.15rem var(--fd);text-align:center;overflow-x:auto}
+.defs{display:grid;gap:10px;margin-top:10px}
+.def{padding:12px 14px;border-radius:10px;background:var(--s2)}
+.def b{display:block;font:700 1.05rem var(--fd);color:var(--tx)}
+.def span{display:block;font-size:.9rem;color:var(--mu);margin-top:3px;line-height:1.55}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.chip{padding:8px 14px;border-radius:99px;border:1px solid var(--bd);background:var(--sf);font-weight:700;font-size:.85rem}
+.chip[aria-pressed=true]{background:var(--ac);color:var(--on);border-color:transparent}
+.ph{padding:16px;border-radius:12px;background:var(--sf);border:1px solid var(--bd);border-top:4px solid var(--ac)}
+.ph h3{font-size:1.1rem;margin-bottom:2px}
+.ph .yr{font-size:.8rem;color:var(--ac);font-weight:700}
+.ph p{font-size:.9rem;color:var(--mu);margin-top:6px}
+.ph .q{font-family:var(--fd);font-style:italic;color:var(--tx);border-left:3px solid var(--ac);padding-left:10px;margin-top:10px;font-size:.92rem;line-height:1.4}
+details.card summary{cursor:pointer;list-style:none}details.card summary::-webkit-details-marker{display:none}details.card summary::after{content:" +";color:var(--ac);font-weight:700}details.card[open] summary::after{content:" –"}details.card[open] summary{margin-bottom:10px}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style></head>
+<body>
+<header class="top"><div class="hi"><a class="brand" href="#inicio">Filosofía</a><nav class="nav" id="nav" aria-label="Secciones"></nav><button class="tt" id="tt" aria-label="Cambiar entre tema claro y oscuro">◐</button></div></header>
+<main>
+<section class="view on" id="inicio"><div class="hero"><div><h1>Filosofía</h1><p class="lead">Las preguntas que la humanidad no deja de hacerse desde hace 2.500 años: qué existe, qué podemos conocer, cómo vivir y cómo organizarnos. De Mileto a la inteligencia artificial, explicado sin palabras difíciles.</p></div><div id="hthink"></div>
+<div class="stn" id="stn"></div></div>
+<div class="grid home" id="home"></div>
+<p class="note">Resumen educativo y necesariamente incompleto: cada escuela tiene matices, debates internos y críticos. Las fechas son aproximadas y las citas son versiones breves de uso corriente.</p></section>
+</main>
+<script>
+const $=(s,e=document)=>e.querySelector(s),$$=(s,e=document)=>[...e.querySelectorAll(s)];
+const V=[['que-es','¿Qué es la filosofía?','De dónde viene la palabra, qué preguntas hace y cómo trabaja.','Qué es'],['linea','Línea de tiempo','2.500 años de preguntas: de Mileto a la inteligencia artificial.','Historia'],['corrientes','Corrientes de pensamiento','Las escuelas que intentaron explicar la realidad, la verdad y el bien.','Corrientes'],['filosofos','Filósofos clave','Quiénes fueron y qué idea los volvió memorables.','Filósofos'],['herramientas','Argumentos y falacias','Cómo distinguir una buena razón de una trampa retórica.','Lógica'],['glosario','Glosario','Las palabras del oficio explicadas sin vueltas.','Glosario']];
+$('main').insertAdjacentHTML('beforeend',V.map(v=>`<section class="view" id="${v[0]}"><div class="sec"><h2>${v[1]}</h2><p class="lead">${v[2]}</p><div id="b-${v[0]}"></div></div></section>`).join(''));
+$('#nav').innerHTML=V.map(v=>`<a class="nl" href="#${v[0]}" data-v="${v[0]}">${v[3]}</a>`).join('');
+$('#home').innerHTML=V.map(v=>`<a class="card" href="#${v[0]}"><h3>${v[1]}</h3><p>${v[2]}</p></a>`).join('');
+$('#stn').innerHTML=[['s. VI a.C.','Nace en Mileto, Grecia'],['2.500 años','De preguntas sin parar'],['7','Ramas principales del saber'],['4','Preguntas de Kant'],['∞','Preguntas abiertas']].map(s=>`<div class="st"><b>${s[0]}</b><span>${s[1]}</span></div>`).join('');
+
+const P=t=>`<p>${t}</p>`,ul=a=>`<ul>${a.map(x=>`<li>${x}</li>`).join('')}</ul>`,ol=a=>`<ol>${a.map(x=>`<li>${x}</li>`).join('')}</ol>`;
+const gt=(h,r)=>`<div class="tw"><table class="gt"><tr>${h.map(x=>`<th>${x}</th>`).join('')}</tr>${r.split('\n').map(l=>`<tr>${l.split('|').map(c=>`<td>${c}</td>`).join('')}</tr>`).join('')}</table></div>`;
+const pn=h=>`<div class="panel"><div class="pt">${h}</div></div>`,eq=t=>`<div class="eq">${t}</div>`;
+const ev=a=>`<div class="tl">${a.map(x=>`<div class="ev"><b>${x[0]}</b><h4>${x[1]}</h4><p>${x[2]}</p></div>`).join('')}</div>`;
+const dfs=a=>`<div class="defs">${a.map(x=>`<div class="def"><b>${x[0]}</b><span>${x[1]}</span></div>`).join('')}</div>`;
+const tabs=(id,a)=>{const b=$('#b-'+id);b.innerHTML=`<div class="tabs" role="tablist">${a.map((x,i)=>`<button class="tab" role="tab" data-i="${i}">${x[0]}</button>`).join('')}</div><div class="panel"><div class="pt"></div></div>`;const s=i=>{$$('.tab',b).forEach((t,j)=>t.setAttribute('aria-selected',i==j));$('.pt',b).innerHTML=a[i][1]};b.onclick=e=>{const t=e.target.closest('.tab');t&&s(+t.dataset.i)};s(0)};
+const B=(id,h)=>$('#b-'+id).innerHTML=h;
+
+$('#hthink').innerHTML=`<svg viewBox="0 0 200 200" width="210" role="img" aria-label="Círculos concéntricos con un signo de pregunta y puntos que orbitan: la pregunta filosófica"><g fill="none" stroke="var(--ac)" stroke-width="2" opacity=".55"><circle cx="100" cy="100" r="92"/><circle cx="100" cy="100" r="70" stroke-dasharray="4 8"/></g><circle cx="100" cy="100" r="50" fill="var(--s2)" stroke="var(--ac)" stroke-width="2"/><text x="100" y="126" font-family="Fraunces,Georgia,serif" font-size="72" font-weight="700" fill="var(--ac)" text-anchor="middle">?</text><g fill="var(--ac)"><circle cx="100" cy="8" r="7"/><circle cx="100" cy="192" r="7"/><circle cx="8" cy="100" r="7"/><circle cx="192" cy="100" r="7"/></g></svg>`;
+
+/* ---------- 1. QUÉ ES ---------- */
+tabs('que-es',[
+['La palabra',P('La palabra <b>filosofía</b> viene del griego <i>philosophía</i>: <b>philos</b> (amor, amistad) y <b>sophía</b> (sabiduría). Literalmente, «amor a la sabiduría». No es tener todas las respuestas, sino el hábito de preguntar mejor.')+P('Nació en las colonias griegas de Jonia, en <b>Mileto</b>, hacia el siglo VI a.C., cuando algunos pensadores empezaron a explicar el mundo con razones y no con mitos. Ese paso del <b>mito al logos</b> es el acta de fundación de la filosofía y también de la ciencia.')+ul(['Busca <b>principios</b>: no le alcanza con describir, quiere entender por qué las cosas son como son.','Trabaja con <b>argumentos</b>: una opinión sin razones no vale más que otra.','Examina los <b>supuestos</b>: eso que damos por obvio sin darnos cuenta.','No da nada por terminado: cada respuesta abre preguntas nuevas.'])+P('Por eso convive con la ciencia, la religión y el arte sin confundirse con ellos. La ciencia responde <i>cómo</i> funcionan las cosas; la filosofía pregunta qué significa que funcionen así, qué podemos conocer y qué deberíamos hacer.')],
+['Las ramas',P('La filosofía no es un tema, es un conjunto de preguntas organizadas por tipo:')+dfs([['Metafísica','Qué es lo que realmente existe, qué es ser, qué es el tiempo, qué es la causalidad.'],['Ontología','El estudio del ser en general: qué clases de cosas hay y cómo se relacionan.'],['Epistemología','Qué es conocer, de dónde viene el conocimiento y cuándo está justificado.'],['Lógica','Qué hace que un razonamiento sea correcto, independientemente de su contenido.'],['Ética','Qué está bien y qué está mal, qué es una vida buena y por qué deberíamos ser justos.'],['Estética','Qué es la belleza, qué es el arte y qué significa interpretar una obra.'],['Filosofía política','Cómo se justifica el poder, qué es la justicia y qué debemos a la sociedad.'],['Antropología filosófica','Qué es el ser humano y en qué se distingue de otros seres vivos.'],['Filosofía de la ciencia, la mente y el lenguaje','Preguntas sobre la verdad científica, la conciencia y el significado de las palabras.']])],
+['Las preguntas',P('Kant resumió el oficio en cuatro preguntas que todavía sirven de mapa:')+dfs([['¿Qué puedo conocer?','Epistemología y metafísica: los límites y las posibilidades del conocimiento.'],['¿Qué debo hacer?','Ética: normas, deberes, virtudes y consecuencias.'],['¿Qué me cabe esperar?','Filosofía de la historia y de la religión: sentido, progreso, esperanza.'],['¿Qué es el ser humano?','Antropología filosófica, que reúne a las otras tres.']])+P('Y algunas preguntas abiertas que seguimos discutiendo hoy:')+ul(['¿Tenemos libre albedrío o todo está determinado?','¿Una máquina puede pensar o solo simular que piensa?','¿Qué le debemos a los animales y a las generaciones futuras?','¿Puede haber conocimiento objetivo, o todo depende del punto de vista?','¿Qué hace justa a una sociedad: la igualdad, la libertad, el mérito?'])],
+['El método',P('Filosofar no es opinar: es un procedimiento. Estos pasos sirven tanto para un examen como para una discusión de sobremesa.')+ol(['<b>Detectar el problema.</b> Formular la pregunta con precisión, sin trampas.','<b>Definir los conceptos.</b> ¿Qué queremos decir con «libertad» o con «justicia»?','<b>Construir argumentos.</b> Dar razones a favor de una respuesta, no solo afirmarla.','<b>Buscar contraejemplos.</b> Probar si la idea resiste casos raros.','<b>Escuchar la objeción más fuerte.</b> Refutar la versión débil del rival es hacer trampa.','<b>Revisar la propia posición.</b> Cambiar de idea por buenas razones no es perder: es avanzar.'])+P('Sócrates lo hacía conversando: su <b>mayéutica</b> consistía en preguntar hasta que el otro descubriera sus propias contradicciones. No enseñaba respuestas, ayudaba a parir ideas.')]]
+);
+
+/* ---------- 2. LÍNEA DE TIEMPO ---------- */
+B('linea',P('La historia de la filosofía no es una lista de señores con barba: es una conversación de veinticinco siglos en la que cada época discute con la anterior.')+ev([
+['s. VI a.C.','Los presocráticos','En Mileto, Tales, Anaximandro y Anaxímenes buscan un principio natural (agua, aire, lo indefinido) para explicar el cosmos sin dioses. Heráclito defiende el cambio permanente; Parménides, un ser inmóvil y eterno. Es el paso del mito al logos.'],
+['s. V a.C.','Sócrates y los sofistas','En Atenas, los sofistas enseñan el arte de persuadir y cobran por ello. Sócrates responde con preguntas que desnudan las contradicciones del interlocutor. En 399 a.C. es condenado a muerte por la ciudad.'],
+['387 a.C.','Platón y la Academia','Discípulo de Sócrates, funda la Academia. Teoría de las Ideas: las cosas sensibles son copias imperfectas de modelos eternos. La alegoría de la caverna resume su proyecto: salir de las sombras.'],
+['335 a.C.','Aristóteles y el Liceo','Discípulo de Platón y maestro de Alejandro Magno. Inventa la lógica formal (silogismo), sistematiza la biología y define la virtud como hábito y término medio. Su sombra cubre dos mil años.'],
+['s. III a.C. – II d.C.','Filosofía helenística','Estoicismo (Zenón de Citio): vivir conforme a la naturaleza y ocuparse solo de lo propio. Epicureísmo (Epicuro): placer como ausencia de dolor. Escepticismo (Pirrón): suspender el juicio para alcanzar la calma. Cinismo (Diógenes): desprecio por las convenciones.'],
+['s. IV–V','San Agustín y la patrística','El cristianismo se encuentra con la filosofía griega. Agustín piensa la relación entre fe y razón, la interioridad, el mal y el tiempo como problema.'],
+['s. XIII','Santo Tomás y la escolástica','Aristóteles vuelve a Europa a través del mundo islámico (Avicena, Averroes). Tomás de Aquino armoniza fe y razón con la filosofía del Estagirita. Nacen las universidades.'],
+['1450–1600','Renacimiento y humanismo','Se recuperan los clásicos, el ser humano pasa al centro. Pico della Mirandola, Maquiavelo, Montaigne, Giordano Bruno. La ciencia moderna empieza a separarse de la filosofía.'],
+['1637','Descartes','«Pienso, luego existo». Duda metódica, <i>cogito</i>, dualismo mente-cuerpo. Funda el racionalismo y el proyecto moderno de fundamentar el saber.'],
+['1690–1748','Empirismo británico','Locke, Berkeley y Hume sostienen que todo conocimiento viene de la experiencia. Hume lleva el escepticismo hasta la causalidad misma: solo vemos sucesiones, no conexiones necesarias.'],
+['1781','Kant','<i>Crítica de la razón pura</i>: ni racionalismo ni empirismo puros. El sujeto aporta las formas con que conoce el mundo (giro copernicano). En ética, el imperativo categórico.'],
+['1807','Hegel','<i>Fenomenología del espíritu</i>. Idealismo alemán y dialéctica: la contradicción mueve la historia hacia una libertad cada vez más consciente.'],
+['1848','Marx','<i>Manifiesto comunista</i>. Materialismo histórico: no es la conciencia la que determina la vida, sino la vida la que determina la conciencia. Alienación y lucha de clases.'],
+['1843–1889','Kierkegaard y Nietzsche','Kierkegaard reivindica al individuo concreto, la angustia y el salto de fe. Nietzsche anuncia la muerte de Dios, critica la moral y propone crear valores nuevos.'],
+['1900–1930','Fenomenología y giro lingüístico','Husserl funda la fenomenología: volver a las cosas mismas. Frege y Russell crean la lógica moderna; Wittgenstein sostiene que los límites del lenguaje son los límites del mundo.'],
+['1943','Existencialismo','Sartre: la existencia precede a la esencia, estamos condenados a ser libres. En 1949, Beauvoir publica <i>El segundo sexo</i>: «no se nace mujer, se llega a serlo».'],
+['1947–1970','Escuela de Frankfurt','Adorno, Horkheimer, Marcuse y luego Habermas desarrollan la teoría crítica: razón instrumental, industria cultural, crítica de la sociedad de masas.'],
+['1971','Rawls y la filosofía política','<i>Teoría de la justicia</i>: elegir las reglas sociales tras un velo de ignorancia. Responden Nozick, los comunitaristas y el feminismo. La filosofía política vuelve al centro.'],
+['1970–2000','Posestructuralismo y diferencia','Foucault (poder y saber), Derrida (deconstrucción), Deleuze, Butler (género), Said (orientalismo). Crítica de los grandes relatos y de las identidades fijas.'],
+['Hoy','Filosofía aplicada','Ética de la inteligencia artificial, bioética, ética animal, filosofía de la mente, justicia climática, neuroética y filosofía decolonial. La filosofía sale del aula.']
+]));
+
+/* ---------- 3. CORRIENTES ---------- */
+tabs('corrientes',[
+['Por época',P('Un mapa rápido de las grandes familias de pensamiento, en orden cronológico:')+gt(['Corriente','Época','Idea central'],`Presocráticos|s. VI–V a.C.|Buscan el arjé, el principio de todas las cosas
+Sofistas|s. V a.C.|El ser humano es la medida; retórica y convención
+Platonismo|s. IV a.C.|Existen Ideas eternas; el mundo sensible es apariencia
+Aristotelismo|s. IV a.C.|Observación, lógica y las cuatro causas del ser
+Estoicismo|s. III a.C.|Vivir conforme a la naturaleza; ocuparse solo de lo propio
+Epicureísmo|s. III a.C.|Placer como ausencia de dolor; amistad y vida sencilla
+Escepticismo|s. III a.C.|No podemos decidir; suspender el juicio da paz
+Neoplatonismo|s. III d.C.|Todo emana del Uno (Plotino)
+Patrística|s. II–VIII|Fe cristiana y filosofía griega (Agustín)
+Escolástica|s. XI–XIV|Razón al servicio de la fe (Tomás de Aquino)
+Humanismo|s. XIV–XVI|El ser humano y los clásicos en el centro
+Racionalismo|s. XVII|La razón es la fuente del conocimiento
+Empirismo|s. XVII–XVIII|Todo conocimiento viene de la experiencia
+Ilustración|s. XVIII|Atrévete a pensar; razón, derechos y progreso
+Idealismo alemán|s. XVIII–XIX|La realidad es de naturaleza espiritual (Hegel)
+Positivismo|s. XIX|Solo la ciencia positiva da conocimiento (Comte)
+Marxismo|s. XIX–XX|Materialismo histórico y crítica del capital
+Vitalismo|fines s. XIX|La vida como impulso creador (Nietzsche, Bergson)
+Fenomenología|s. XX|Volver a las cosas mismas (Husserl)
+Existencialismo|s. XX|La existencia precede a la esencia (Sartre)
+Pragmatismo|s. XX|Es verdadero lo que funciona (James, Dewey)
+Filosofía analítica|s. XX|Clarificar el lenguaje y los argumentos
+Escuela de Frankfurt|s. XX|Teoría crítica de la sociedad (Adorno, Habermas)
+Estructuralismo|s. XX|La realidad se explica por estructuras
+Posestructuralismo|s. XX–XXI|Crítica de las estructuras y del sujeto
+Feminismo filosófico|s. XX–XXI|Género, poder y conocimiento situado
+Filosofía decolonial|s. XX–XXI|Crítica del eurocentrismo (Dussel, Mignolo)`)],
+['Conocimiento y realidad',P('Las corrientes que discuten qué existe y cómo lo conocemos:')+dfs([['Racionalismo','La razón, no los sentidos, es la fuente confiable del conocimiento. Descartes, Spinoza, Leibniz.'],['Empirismo','Todo conocimiento proviene de la experiencia sensible. Locke, Berkeley, Hume.'],['Criticismo','Ni razón pura ni experiencia sola: conocemos lo que la experiencia da, organizado por formas de la mente. Kant.'],['Escepticismo','No hay conocimiento definitivamente seguro; conviene suspender el juicio. Pirrón, Sexto Empírico, Hume.'],['Dogmatismo','Es posible alcanzar verdades ciertas y definitivas sobre la realidad.'],['Idealismo','La realidad depende de la mente o es de naturaleza espiritual. Platón, Berkeley, Hegel.'],['Materialismo','Solo existe la materia; la mente es un producto del cerebro. Demócrito, Hobbes, Dennett.'],['Dualismo','Mente y cuerpo son dos sustancias distintas. Descartes.'],['Monismo','Existe una sola clase de realidad: todo es materia, o todo es mente, o todo es proceso.'],['Realismo','El mundo existe independientemente de que lo conozcamos.'],['Fenomenología','Describir la experiencia tal como se presenta a la conciencia. Husserl, Merleau-Ponty.'],['Hermenéutica','Comprender es interpretar: nunca hay acceso directo a los hechos, siempre hay contexto y lenguaje.'],['Pragmatismo','Una idea es verdadera si funciona en la práctica. Peirce, James, Dewey.'],['Constructivismo','El conocimiento se construye activamente; no se copia del mundo.']])],
+['Ética',P('Qué está bien, qué es una vida buena y por qué deberíamos ser justos:')+dfs([['Eudemonismo','La felicidad (eudaimonía) es el fin; se alcanza con la virtud y el ejercicio de la razón. Aristóteles.'],['Hedonismo','El placer es el bien supremo. Epicuro lo entiende como ausencia de dolor; otras versiones, como búsqueda intensa.'],['Estoicismo','La virtud es el único bien; lo demás no depende de nosotros. Séneca, Epicteto, Marco Aurelio.'],['Deontología','Hay deberes que valen por sí mismos, sin importar las consecuencias. Imperativo categórico de Kant.'],['Utilitarismo','Es correcto lo que produce el mayor bienestar para el mayor número. Bentham, Mill.'],['Ética de la virtud','No preguntes solo qué hacer, sino qué clase de persona ser. Aristóteles, MacIntyre, Nussbaum.'],['Ética del cuidado','La moral nace de las relaciones y de la responsabilidad hacia el otro concreto. Gilligan, Noddings.'],['Ética del discurso','Una norma es válida si todos los afectados podrían aceptarla en un diálogo libre. Habermas, Apel.'],['Contractualismo moral','Las reglas morales valen como un acuerdo entre personas libres e iguales.'],['Ética aplicada','Bioética, ética animal, ética de la IA, ética ambiental: la filosofía frente a problemas reales.']])],
+['Política y sociedad',P('Cómo se justifica el poder y qué le debemos a los demás:')+dfs([['Contractualismo','La sociedad nace de un pacto. Hobbes (para evitar la guerra de todos contra todos), Locke (para proteger derechos), Rousseau (para realizar la libertad).'],['Liberalismo','El individuo y sus derechos van primero; el poder debe limitarse. Locke, Mill, Rawls.'],['Comunitarismo','La identidad se forma en comunidades y tradiciones; no somos átomos aislados. MacIntyre, Taylor, Sandel.'],['Republicanismo','La libertad es no dominar ni ser dominado; importa la participación cívica.'],['Socialismo y marxismo','Critica la explotación del trabajo y propone la propiedad colectiva de los medios de producción.'],['Anarquismo','Todo poder estatal es innecesario y opresivo; es posible organizarse sin él. Bakunin, Kropotkin.'],['Conservadurismo','Desconfía de los cambios bruscos; valora las instituciones, la tradición y la experiencia acumulada.'],['Feminismo político','Denuncia la desigualdad de género y las estructuras que la sostienen. Beauvoir, Pateman, Butler.'],['Multiculturalismo','Reconoce derechos colectivos y la coexistencia de culturas. Taylor, Kymlicka.'],['Cosmopolitismo','Todos los seres humanos pertenecen a una misma comunidad moral. Kant, Nussbaum.'],['Crítica del totalitarismo','Arendt analiza cómo el terror y la ideología anulan la pluralidad humana.']])],
+['Existencia y sentido',P('Las corrientes que preguntan cómo vivir sabiendo que vamos a morir:')+dfs([['Existencialismo','La existencia precede a la esencia: primero somos, después nos definimos con nuestras elecciones. Sartre, Heidegger, Jaspers.'],['Absurdismo','El mundo no tiene sentido, pero podemos rebelarnos sin rendirnos. Camus.'],['Nihilismo','No hay valores ni fines últimos dados. Nietzsche lo diagnostica y propone superarlo.'],['Humanismo','El ser humano es el centro del valor; su dignidad no depende de nada externo.'],['Personalismo','La persona es relacional y única; la comunidad debe servirle. Mounier.'],['Filosofía de la liberación','Pensar desde los oprimidos y desde América Latina. Dussel, Freire.'],['Estoicismo y budismo','Trabajan la aceptación de lo que no depende de nosotros y el desapego.'],['Sabidurías del sentido','Epicureísmo, taoísmo y confucianismo: propuestas de vida buena, no solo teorías.']])],
+['Otras tradiciones',P('La filosofía no es solo europea. Estas tradiciones llevan milenios pensando:')+dfs([['Taoísmo','El tao es el curso natural de las cosas; la sabiduría consiste en no forzar. Lao-Tsé, Chuang-Tzu.'],['Confucianismo','La armonía social se logra con la virtud, el ritual y las relaciones bien cultivadas. Confucio.'],['Budismo','El sufrimiento nace del apego; el camino es la atención, la ética y el desapego. Siddhartha Gautama.'],['Vedanta','La realidad última es el Brahman; el yo profundo y el todo son uno.'],['Filosofía islámica','Avicena y Averroes tradujeron y ampliaron a Aristóteles; Al-Ghazali discutió con ellos.'],['Filosofía judía','Maimónides armonizó la Torá con Aristóteles en la Guía de los perplejos.'],['Ubuntu','«Soy porque somos»: la persona se realiza en comunidad.'],['Pensamiento andino','El buen vivir (sumak kawsay): armonía entre las personas y la naturaleza.'],['Filosofía decolonial','Critica el eurocentrismo y revaloriza saberes marginados. Dussel, Mignolo, Spivak.']])]
+]);
+
+/* ---------- 4. FILÓSOFOS ---------- */
+(()=>{const FIL=[['todas','Todos'],['antigua','Antigüedad'],['medieval','Edad Media'],['moderna','Modernidad'],['contemporanea','Contemporáneos']];
+const PH=[
+['Tales de Mileto','624–546 a.C. · Presocrático','antigua','Buscó el principio (arjé) de todas las cosas en el agua. Se lo considera el primer filósofo porque explicó el cosmos sin recurrir a los dioses.','El agua es el principio de todas las cosas.'],
+['Heráclito','535–475 a.C. · Presocrático','antigua','Para él la realidad es cambio permanente: el río nunca es el mismo. El fuego es el símbolo de ese devenir.','Nadie se baña dos veces en el mismo río.'],
+['Parménides','515–450 a.C. · Presocrático','antigua','Opuesto a Heráclito: el cambio es ilusión de los sentidos; solo el ser es, eterno e inmóvil. Abre el camino de la metafísica.','El ser es; el no ser no es.'],
+['Sócrates','470–399 a.C. · Griego clásico','antigua','No escribió nada. Enseñaba en la plaza con preguntas que dejaban al descubierto las contradicciones del interlocutor (mayéutica). Murió condenado por la ciudad.','Solo sé que no sé nada.'],
+['Platón','427–347 a.C. · Idealismo antiguo','antigua','Alumno de Sócrates y maestro de Aristóteles. Las cosas bellas o justas participan de Ideas eternas; el mundo sensible es su sombra.','El asombro es el principio de la filosofía.'],
+['Aristóteles','384–322 a.C. · Aristotelismo','antigua','Inventó la lógica formal, sistematizó la biología y definió la virtud como hábito y término medio entre dos extremos.','Todos los hombres desean por naturaleza saber.'],
+['Epicuro','341–270 a.C. · Epicureísmo','antigua','El placer es el bien, pero entendido como ausencia de dolor y de turbación. La amistad y la vida sencilla son el camino.','La muerte no es nada para nosotros.'],
+['Hipatia','355–415 · Neoplatonismo','antigua','Matemática y filósofa en Alejandría, enseñaba astronomía y neoplatonismo. Fue asesinada por una turba y se volvió símbolo del pensamiento libre.','Resérvate el derecho a pensar.'],
+['Agustín de Hipona','354–430 · Patrística','medieval','Pensó la relación entre fe y razón, la interioridad y el tiempo como problema. Su Ciudad de Dios marcó toda la Edad Media.','Nos hiciste para ti, y nuestro corazón está inquieto hasta que descanse en ti.'],
+['Averroes','1126–1198 · Filosofía islámica','medieval','Comentó a Aristóteles y defendió la autonomía de la razón frente a la fe. Sus obras llegaron a Europa y alimentaron la escolástica.','La ignorancia lleva al miedo, y el miedo al odio.'],
+['Tomás de Aquino','1225–1274 · Escolástica','medieval','Armonizó a Aristóteles con el cristianismo. Propuso cinco vías para demostrar la existencia de Dios y una ética de la ley natural.','La gracia no destruye la naturaleza, la perfecciona.'],
+['Nicolás Maquiavelo','1469–1527 · Realismo político','moderna','Separa la política de la moral: describe el poder tal como es, no como debería ser. Funda el pensamiento político moderno.','Vale más ser temido que amado, si hay que elegir.'],
+['René Descartes','1596–1650 · Racionalismo','moderna','Dudó de todo hasta encontrar algo indudable: que duda, luego piensa, luego existe. Su dualismo mente-cuerpo sigue dando que hablar.','Pienso, luego existo.'],
+['John Locke','1632–1704 · Empirismo','moderna','La mente es una hoja en blanco: todo conocimiento viene de la experiencia. También fundó el liberalismo político y los derechos naturales.','Donde no hay ley, no hay libertad.'],
+['David Hume','1711–1776 · Empirismo escéptico','moderna','Llevó el empirismo hasta el final: no conocemos la causalidad, solo la costumbre de ver una cosa tras otra. La moral nace del sentimiento.','La razón es, y solo debería ser, esclava de las pasiones.'],
+['Jean-Jacques Rousseau','1712–1778 · Ilustración','moderna','El ser humano nace libre y la sociedad lo encadena. Contrato social, voluntad general y educación natural.','El hombre ha nacido libre y en todas partes se halla encadenado.'],
+['Immanuel Kant','1724–1804 · Idealismo trascendental','moderna','El sujeto aporta las formas con que conoce el mundo. En ética, obrar por deber según una máxima que pueda valer para todos.','Obra de tal modo que tu máxima pueda valer como ley universal.'],
+['Georg W. F. Hegel','1770–1831 · Idealismo alemán','moderna','La historia avanza por contradicciones (dialéctica) hacia una conciencia cada vez mayor de la libertad.','Lo verdadero es el todo.'],
+['Søren Kierkegaard','1813–1855 · Precursor del existencialismo','contemporanea','Frente a los grandes sistemas, el individuo concreto: angustia, elección y salto de fe.','La angustia es el vértigo de la libertad.'],
+['Karl Marx','1818–1883 · Materialismo histórico','contemporanea','No es la conciencia la que determina la vida, sino la vida la que determina la conciencia. Crítica de la alienación y del capital.','Los filósofos han interpretado el mundo; de lo que se trata es de transformarlo.'],
+['Friedrich Nietzsche','1844–1900 · Vitalismo','contemporanea','Anunció la muerte de Dios y desenmascaró la moral como expresión de poder. Propuso crear valores nuevos y afirmar la vida.','Dios ha muerto y nosotros lo hemos matado.'],
+['Edmund Husserl','1859–1938 · Fenomenología','contemporanea','Volver a las cosas mismas: describir la experiencia tal como se da a la conciencia, sin prejuicios teóricos.','A las cosas mismas.'],
+['Martin Heidegger','1889–1976 · Fenomenología y existencialismo','contemporanea','Preguntó por el sentido del ser y describió la existencia humana como estar-en-el-mundo, arrojada, angustiada y mortal.','El lenguaje es la casa del ser.'],
+['Ludwig Wittgenstein','1889–1951 · Filosofía analítica','contemporanea','Muchos problemas filosóficos nacen de malentendidos del lenguaje. En su segunda etapa, el significado es el uso.','De lo que no se puede hablar, hay que callar.'],
+['Hannah Arendt','1906–1975 · Teoría política','contemporanea','Analizó el totalitarismo y la «banalidad del mal»: los grandes crímenes pueden cometerlos personas comunes que no se detienen a pensar.','El mayor mal no lo cometen monstruos, sino gente que nunca se detuvo a pensar.'],
+['Jean-Paul Sartre','1905–1980 · Existencialismo','contemporanea','No tenemos una esencia previa: somos lo que hacemos con nuestra libertad, y eso angustia y responsabiliza.','El hombre está condenado a ser libre.'],
+['Simone de Beauvoir','1908–1986 · Existencialismo y feminismo','contemporanea','Aplicó el existencialismo al género: la feminidad es una construcción cultural, no un destino biológico.','No se nace mujer: se llega a serlo.'],
+['Michel Foucault','1926–1984 · Posestructuralismo','contemporanea','Estudió cómo el poder y el saber producen sujetos: la cárcel, la clínica, la sexualidad, las instituciones disciplinarias.','Donde hay poder hay resistencia.'],
+['John Rawls','1921–2002 · Filosofía política','contemporanea','Imaginó elegir las reglas de la sociedad tras un velo de ignorancia: en esa situación elegirías justicia, no privilegios.','La justicia es la primera virtud de las instituciones sociales.'],
+['Martha Nussbaum','1947– · Filosofía contemporánea','contemporanea','Enfoque de las capacidades: una sociedad justa garantiza a cada persona lo necesario para desarrollar una vida digna.','Las emociones son juicios de valor.']];
+B('filosofos',`<div class="chips" id="chips">${FIL.map((f,i)=>`<button class="chip" data-f="${f[0]}" aria-pressed="${i==0}">${f[1]}</button>`).join('')}</div><div class="grid" id="phg"></div>`);
+const rp=f=>{$('#phg').innerHTML=PH.filter(p=>f=='todas'||p[2]==f).map(p=>`<div class="ph"><span class="yr">${p[1]}</span><h3>${p[0]}</h3><p>${p[3]}</p><div class="q">«${p[4]}»</div></div>`).join('')};
+$('#chips').onclick=e=>{const c=e.target.closest('.chip');if(!c)return;$$('.chip').forEach(x=>x.setAttribute('aria-pressed',x===c));rp(c.dataset.f)};
+rp('todas')})();
+
+/* ---------- 5. HERRAMIENTAS ---------- */
+tabs('herramientas',[
+['Argumentos',P('Un <b>argumento</b> no es una pelea: es un conjunto de razones (premisas) que apoyan una afirmación (conclusión).')+ul(['<b>Premisa:</b> la razón que se ofrece.','<b>Conclusión:</b> lo que se quiere defender.','<b>Indicadores:</b> palabras como «por lo tanto», «porque», «en consecuencia», «ya que».'])+eq('Todos los seres humanos son mortales · Sócrates es humano → Sócrates es mortal')+P('Un argumento es <b>válido</b> si la conclusión se sigue necesariamente de las premisas, aunque estas sean falsas. Es <b>sólido</b> si además las premisas son verdaderas. Validez y verdad no son lo mismo: se puede razonar impecablemente desde premisas falsas.')+gt(['Tipo','Cómo funciona','Ejemplo'],`Deductivo|Si las premisas son verdaderas, la conclusión lo es necesariamente|Todos los perros ladran; Toby es un perro; Toby ladra
+Inductivo|Generaliza a partir de casos observados; la conclusión es probable|Los cuervos que vi son negros; probablemente todos lo sean
+Abductivo|Infiere la mejor explicación disponible|El suelo está mojado; lo más probable es que haya llovido`)+P('La ciencia usa los tres, pero sobre todo la inducción y la abducción; la matemática y la lógica trabajan con deducción pura.')],
+['Falacias',P('Una <b>falacia</b> es un razonamiento que parece correcto pero no lo es. Reconocerlas es la mejor defensa contra la manipulación.')+gt(['Falacia','Qué hace','Ejemplo'],`Ad hominem|Ataca a la persona en vez del argumento|«No le creas, es un ignorante»
+Hombre de paja|Distorsiona la posición del otro para refutarla|«Los ecologistas quieren volver a la Edad de Piedra»
+Falsa dicotomía|Presenta solo dos opciones cuando hay más|«O estás conmigo o estás contra mí»
+Pendiente resbaladiza|Encadena consecuencias sin justificarlas|«Si permitimos esto, terminaremos en el caos»
+Apelación a la autoridad|«Lo dijo alguien famoso, entonces es verdad»|Un deportista opina sobre vacunas
+Apelación a la emoción|Sustituye razones por sentimientos|«Piensa en los niños» como único argumento
+Generalización apresurada|Concluye de muy pocos casos|«Mi vecino es maleducado, todos lo son»
+Argumento circular|La conclusión ya está en las premisas|«Es verdad porque lo dice este libro, y el libro es verdad porque es sagrado»
+Post hoc|Confunde sucesión temporal con causa|«Me tomé esto y se me pasó, entonces me curó»
+Tu quoque|Responde con un «y tú también»|«Criticas el gasto pero tú también gastas»
+Falso consenso|Supone que todos piensan igual|«Todo el mundo sabe que...»
+Carga de la prueba|Exige que el otro demuestre lo negativo|«Demostrame que no existe»`)+P('<b>Ojo:</b> señalar una falacia no refuta automáticamente la conclusión. Solo muestra que ese argumento en particular no la sostiene. Puede haber otros mejores.')],
+['Pensar mejor',P('Herramientas concretas para pensar con más cuidado:')+dfs([['Principio de caridad','Interpretá la posición del otro en su versión más fuerte antes de criticarla. Si refutás una versión débil, no demostraste nada.'],['Navaja de Ockham','Entre dos explicaciones que funcionan igual de bien, preferí la que exige menos supuestos.'],['Contraejemplo','Para probar una regla general, buscá un caso que la cumpla y la contradiga. Es la herramienta más afilada de la filosofía.'],['Experimento mental','Imaginá una situación imposible para poner a prueba una intuición: el velo de Rawls, el cuarto chino, el cerebro en una cubeta.'],['Distinguir hecho de opinión','Un hecho se verifica; una opinión se argumenta. Muchas discusiones se traban porque no se aclara cuál es cuál.'],['La pregunta clave','«¿Qué tendría que pasar para que yo cambie de idea?» Si la respuesta es «nada», no estás pensando: estás creyendo.'],['Suspender el juicio','Cuando falta información, «no sé» es una respuesta filosóficamente respetable.']])],
+['Frases para recordar',P('Ideas que resumen el oficio mejor que cualquier manual:')+dfs([['«Conócete a ti mismo»','Inscripción del templo de Delfos, adoptada por Sócrates: el examen de la propia vida es el comienzo.'],['«Una vida sin examen no merece ser vivida»','Sócrates, en la Apología de Platón: pensar es una obligación, no un lujo.'],['«Sapere aude»','Kant: atrevete a saber. Ten valor de servirte de tu propio entendimiento.'],['«Los límites de mi lenguaje son los límites de mi mundo»','Wittgenstein: lo que no podemos nombrar, difícilmente podamos pensarlo.'],['«El asombro es el comienzo de la filosofía»','Platón: no se filosofa desde la certeza, sino desde la sorpresa.']])]
+]);
+
+/* ---------- 6. GLOSARIO ---------- */
+(()=>{const G=[['Aporía','Situación sin salida a la que se llega al discutir; Sócrates la provocaba a propósito.'],['Arjé','Principio primero del que, según los presocráticos, procede todo lo que existe.'],['Argumento','Conjunto de premisas que apoyan una conclusión.'],['Contrato social','Acuerdo hipotético por el que las personas fundan la sociedad y el Estado.'],['Deontología','Ética del deber: hay normas que obligan por sí mismas, más allá de las consecuencias.'],['Dialéctica','Método de pensar mediante contradicciones que se superan en una síntesis (Hegel).'],['Doxa','Opinión común, no fundamentada, en oposición al saber (episteme).'],['Empirismo','Corriente que sostiene que todo conocimiento viene de la experiencia.'],['Episteme','Conocimiento fundamentado y demostrado, frente a la simple opinión.'],['Esencia','Aquello que hace que una cosa sea lo que es.'],['Falacia','Razonamiento aparentemente correcto que en realidad no es válido.'],['Hermenéutica','Teoría de la interpretación de textos, signos y acciones humanas.'],['Idealismo','Corriente que sostiene que la realidad depende de la mente o es de naturaleza espiritual.'],['Imperativo categórico','Regla moral de Kant: obra según una máxima que puedas querer como ley universal.'],['Inducción','Razonamiento que va de casos particulares a una conclusión general.'],['Logos','Razón, palabra, orden del mundo. El paso del mito al logos marca el nacimiento de la filosofía.'],['Materialismo','Corriente que afirma que solo existe la materia y que la mente es producto del cerebro.'],['Mayéutica','Método socrático de preguntar para que el interlocutor descubra sus propias ideas.'],['Metafísica','Estudio de lo que está más allá de la experiencia: el ser, el tiempo, la causalidad.'],['Nihilismo','Posición según la cual no existen valores ni fines últimos dados.'],['Ontología','Rama de la filosofía que estudia el ser y las clases de cosas que existen.'],['Positivismo','Corriente que considera que solo la ciencia empírica produce conocimiento válido.'],['Pragmatismo','Corriente que identifica la verdad con lo que funciona en la práctica.'],['Racionalismo','Corriente que sostiene que la razón es la fuente principal del conocimiento.'],['Silogismo','Razonamiento deductivo de dos premisas y una conclusión (Aristóteles).'],['Sofisma','Argumento engañoso usado para vencer en la discusión, no para buscar la verdad.'],['Teleología','Explicación de algo por el fin hacia el que tiende.'],['Utilitarismo','Ética que juzga las acciones por el bienestar total que producen.'],['Virtud','Excelencia del carácter que se adquiere con hábito y práctica (Aristóteles).'],['Voluntad de poder','Concepto de Nietzsche: impulso creador y de superación que atraviesa la vida.']];
+B('glosario','<input class="search" id="q" type="search" placeholder="Buscar un término" aria-label="Buscar en el glosario"><div class="grid" id="gl"></div>');
+const r=f=>{$('#gl').innerHTML=G.filter(g=>(g[0]+g[1]).toLowerCase().includes(f)).map(g=>`<div class="card"><h3>${g[0]}</h3><p>${g[1]}</p></div>`).join('')||'<p class="note">No hay términos con esa búsqueda.</p>'};
+$('#q').oninput=e=>r(e.target.value.toLowerCase().trim());r('')})();
+
+/* ---------- NAVEGACIÓN ---------- */
+const go=h=>{h=V.some(v=>v[0]==h)?h:'inicio';$$('.view').forEach(e=>e.classList.toggle('on',e.id==h));$$('.nl').forEach(a=>a.classList.toggle('on',a.dataset.v==h));scrollTo(0,0)};
+addEventListener('hashchange',()=>go(location.hash.slice(1)));
+$('#tt').onclick=()=>{const d=document.documentElement,k=d.dataset.theme?d.dataset.theme=='dark':matchMedia('(prefers-color-scheme:dark)').matches;d.dataset.theme=k?'light':'dark'};
+go(location.hash.slice(1));
+</script>
+</body></html>

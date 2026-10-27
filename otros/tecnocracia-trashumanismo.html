@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tecnocracia y Transhumanismo Tecnológico</title>
+<meta name="description" content="Guía educativa sobre tecnocracia y transhumanismo: definiciones, historia, pensadores, convergencia, críticas, avances recientes y glosario.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;700&family=Fraunces:opsz,wght@9..144,600..800&display=swap" rel="stylesheet">
+<style>
+:root{--fd:'Fraunces',Georgia,serif;--fb:'Figtree','Segoe UI',system-ui,sans-serif;--bg:#f2f5fa;--sf:#fff;--s2:#e4ebf5;--bd:#c9d6e8;--tx:#0f1c2e;--mu:#4a5b73;--ac:#1e4d8c;--on:#fff;box-sizing:border-box;padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b1220;--sf:#131e30;--s2:#1d2b42;--bd:#31425c;--tx:#eef3fa;--mu:#a3b5cc;--ac:#6fa3e0;--on:#0b1220}}
+:root[data-theme="dark"]{--bg:#0b1220;--sf:#131e30;--s2:#1d2b42;--bd:#31425c;--tx:#eef3fa;--mu:#a3b5cc;--ac:#6fa3e0;--on:#0b1220}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px);-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--tx);font:400 1rem/1.65 var(--fb);overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--bg)}
+h1,h2,h3,h4{font-family:var(--fd);margin:0;line-height:1.12}p{margin:0}a{color:inherit;text-decoration:none}button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--ac);outline-offset:2px;border-radius:6px}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:var(--bg);border-bottom:1px solid var(--bd)}
+.hi{max-width:1100px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:12px}
+.brand{font:700 1.15rem var(--fd);white-space:nowrap}
+.nav{display:flex;gap:2px;margin-left:auto;overflow-x:auto;scrollbar-width:none;min-width:0}.nav::-webkit-scrollbar{display:none}
+.nl{padding:8px 12px;border-radius:10px;font-size:.85rem;color:var(--mu);white-space:nowrap}.nl.on{background:var(--ac);color:var(--on);font-weight:700}
+.tt{width:38px;height:38px;flex:none;border:1px solid var(--bd);border-radius:10px;background:var(--s2)}
+main{max-width:1100px;margin:0 auto;padding:0 16px 70px}
+.view{display:none}.view.on{display:block}
+.hero{margin-top:18px;display:flex;flex-wrap:wrap;align-items:center;gap:8px 28px}.hero h1{font-size:clamp(2.4rem,11vw,5.8rem);font-weight:800;letter-spacing:-.02em;margin:0 0 10px}.hero svg{flex:none;max-width:42vw;height:auto}
+.lead{color:var(--mu);font-size:1.08rem;max-width:62ch}
+.stn{display:flex;gap:10px;overflow-x:auto;padding:6px 0 12px;margin-top:22px;width:100%}
+.st{flex:0 0 158px;padding:12px 14px;border-radius:12px;background:var(--sf);border:1px solid var(--bd)}
+.st b{display:block;font:700 1.3rem var(--fd);color:var(--ac)}.st span{display:block;font-size:.85rem;line-height:1.3;color:var(--mu)}
+.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));align-items:start}
+.card{padding:18px;border-radius:12px;background:var(--sf);border:1px solid var(--bd)}a.card:hover{border-color:var(--ac)}
+.card h3{font-size:1.15rem;margin-bottom:6px}.card p{font-size:.92rem;color:var(--mu)}
+.home{margin-top:20px}.note{margin-top:22px;padding:14px 18px;border-radius:12px;border:1px dashed var(--bd);color:var(--mu);font-size:.9rem}
+.sec{padding:34px 0 4px}.sec h2{font-size:clamp(1.9rem,6vw,3rem);margin-bottom:8px}.sec>.lead{margin-bottom:22px}
+.tabs{display:flex;gap:8px;margin-bottom:12px;overflow-x:auto;padding-bottom:4px}
+.tab{flex:none;padding:10px 15px;border-radius:10px;border:1px solid var(--bd);background:var(--sf);font-weight:700;font-size:.9rem}.tab[aria-selected=true]{background:var(--ac);color:var(--on);border-color:transparent}
+.panel{padding:20px;border-radius:12px;background:var(--sf);border:1px solid var(--bd);border-left:6px solid var(--ac)}
+.pt{color:var(--mu)}.pt p,.pt ul,.pt ol{max-width:74ch}.pt p+*,.pt ul+*,.pt ol+*{margin-top:.8em}.pt b{color:var(--tx)}.pt ul,.pt ol{padding-left:1.2em}.pt li+li{margin-top:.3em}
+.tl{position:relative;padding-top:4px}.tl::before{content:"";position:absolute;left:7px;top:10px;bottom:10px;width:2px;background:var(--bd)}
+.ev{position:relative;padding:0 0 18px 34px}.ev::before{content:"";position:absolute;left:0;top:5px;width:16px;height:16px;border-radius:50%;background:var(--sf);border:4px solid var(--ac)}
+.ev b{display:block;font:700 1.1rem var(--fd);color:var(--ac)}.ev h4{font-size:1.05rem}.ev p{max-width:62ch;color:var(--mu)}
+.search{width:100%;max-width:420px;padding:12px 16px;border-radius:12px;border:1px solid var(--bd);background:var(--sf);color:var(--tx);font:inherit;margin-bottom:14px}
+.tw{overflow-x:auto}.gt{border-collapse:collapse;width:100%;min-width:540px;font-size:.88rem}.gt th,.gt td{padding:7px 10px;border-bottom:1px solid var(--bd);text-align:left;vertical-align:top}.gt th{color:var(--tx);white-space:nowrap}.gt td{color:var(--mu)}.gt td:first-child{color:var(--tx);font-weight:700}
+.defs{display:grid;gap:10px;margin-top:10px}
+.def{padding:12px 14px;border-radius:10px;background:var(--s2)}
+.def b{display:block;font:700 1.05rem var(--fd);color:var(--tx)}
+.def span{display:block;font-size:.9rem;color:var(--mu);margin-top:3px;line-height:1.55}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="hi">
+    <a class="brand" href="#inicio">Tecnocracia &amp; Transhumanismo</a>
+    <nav class="nav" id="nav" aria-label="Secciones"></nav>
+    <button class="tt" id="tt" aria-label="Cambiar entre tema claro y oscuro">◐</button>
+  </div>
+</header>
+<main>
+  <section class="view on" id="inicio">
+    <div class="hero">
+      <div>
+        <h1>Tecnocracia &amp; Transhumanismo</h1>
+        <p class="lead">Dos ideas que están redefiniendo quién decide y qué significa ser humano. La tecnocracia propone que gobiernen los expertos; el transhumanismo, que la tecnología nos permita superar nuestros límites biológicos. Cada vez más, ambas corrientes convergen en una sola visión del futuro.</p>
+      </div>
+      <div id="hjust"></div>
+      <div class="stn" id="stn"></div>
+    </div>
+    <div class="grid home" id="home"></div>
+    <p class="note">Guía educativa y simplificada. Las fechas son aproximadas y los debates siguen abiertos. No reemplaza la lectura de las fuentes originales.</p>
+  </section>
+</main>
+
+<script>
+const $=(s,e=document)=>e.querySelector(s),$$=(s,e=document)=>[...e.querySelectorAll(s)];
+
+const V=[
+['que-es','¿Qué son?','Definiciones claras de tecnocracia y transhumanismo, y por qué importan.','Definiciones'],
+['historia','Línea de tiempo','De Francis Bacon a los implantes cerebrales de 2026.','Historia'],
+['tecnocracia','Tecnocracia','El gobierno de los expertos: origen, auge y límites.','Tecnocracia'],
+['transhumanismo','Transhumanismo','Mejoramiento humano, extropianismo y la singularidad.','Transhumanismo'],
+['convergencia','Convergencia','Cómo la tecnocracia y el transhumanismo se fusionan en el siglo XXI.','Convergencia'],
+['criticas','Críticas','Los riesgos para la democracia, la igualdad y la dignidad humana.','Críticas'],
+['avances','Avances recientes','Neuralink, Merge Labs y la carrera por la interfaz cerebro-máquina.','Avances'],
+['glosario','Glosario','Los términos clave explicados fácil.','Glosario']
+];
+
+$('main').insertAdjacentHTML('beforeend',V.map(v=>`<section class="view" id="${v[0]}"><div class="sec"><h2>${v[1]}</h2><p class="lead">${v[2]}</p><div id="b-${v[0]}"></div></div></section>`).join(''));
+$('#nav').innerHTML=V.map(v=>`<a class="nl" href="#${v[0]}" data-v="${v[0]}">${v[3]}</a>`).join('');
+$('#home').innerHTML=V.filter(v=>v[0]!=='inicio').map(v=>`<a class="card" href="#${v[0]}"><h3>${v[1]}</h3><p>${v[2]}</p></a>`).join('');
+
+$('#stn').innerHTML=[
+['1919','Nace el término “tecnocracia”'],
+['1998','Se funda la World Transhumanist Association'],
+['2004','Fukuyama la llama “la idea más peligrosa”'],
+['2045','Año previsto por Kurzweil para la singularidad'],
+['2026','Neuralink planea producción masiva'],
+['7','Ideologías agrupadas en el acrónimo TESCREAL']
+].map(s=>`<div class="st"><b>${s[0]}</b><span>${s[1]}</span></div>`).join('');
+
+const P=t=>`<p>${t}</p>`,ul=a=>`<ul>${a.map(x=>`<li>${x}</li>`).join('')}</ul>`,ol=a=>`<ol>${a.map(x=>`<li>${x}</li>`).join('')}</ol>`;
+const gt=(h,r)=>`<div class="tw"><table class="gt"><tr>${h.map(x=>`<th>${x}</th>`).join('')}</tr>${r.split('\n').map(l=>`<tr>${l.split('|').map(c=>`<td>${c}</td>`).join('')}</tr>`).join('')}</table></div>`;
+const ev=a=>`<div class="tl">${a.map(x=>`<div class="ev"><b>${x[0]}</b><h4>${x[1]}</h4><p>${x[2]}</p></div>`).join('')}</div>`;
+const dfs=a=>`<div class="defs">${a.map(x=>`<div class="def"><b>${x[0]}</b><span>${x[1]}</span></div>`).join('')}</div>`;
+const tabs=(id,a)=>{const b=$('#b-'+id);b.innerHTML=`<div class="tabs" role="tablist">${a.map((x,i)=>`<button class="tab" role="tab" data-i="${i}">${x[0]}</button>`).join('')}</div><div class="panel"><div class="pt"></div></div>`;const s=i=>{$$('.tab',b).forEach((t,j)=>t.setAttribute('aria-selected',i==j));$('.pt',b).innerHTML=a[i][1]};b.onclick=e=>{const t=e.target.closest('.tab');t&&s(+t.dataset.i)};s(0)};
+const B=(id,h)=>$('#b-'+id).innerHTML=h;
+
+$('#hjust').innerHTML=`<svg viewBox="0 0 200 200" width="200" role="img" aria-label="Engranaje y silueta humana"><circle cx="100" cy="100" r="60" fill="none" stroke="var(--ac)" stroke-width="4" stroke-dasharray="10 6"/><circle cx="100" cy="100" r="18" fill="var(--ac)" opacity=".2"/><path d="M100 40 v20 M100 140 v20 M40 100 h20 M140 100 h20" stroke="var(--ac)" stroke-width="4"/><circle cx="100" cy="100" r="4" fill="var(--ac)"/></svg>`;
+
+/* ---------- QUÉ ES ---------- */
+tabs('que-es',[
+['Tecnocracia',
+P('La palabra <b>tecnocracia</b> significa literalmente “gobierno de los técnicos”, del griego <i>tékhnē</i> (arte, técnica) y <i>krátos</i> (poder)[reference:0]. Es un sistema de gestión social en el que la autoridad recae en los especialistas técnicos —ingenieros, científicos, expertos— en lugar de en políticos electos o propietarios capitalistas[reference:1].')+
+P('No se trata solo de que los expertos asesoren: se trata de que <b>gobiernen</b>. La tecnocracia se presenta como una alternativa a la democracia representativa y al mercado, basada en la “racionalidad técnica” y la eficiencia[reference:2].')+
+P('El concepto moderno se desarrolló en los años 30 dentro del movimiento tecnocrático estadounidense, pero sus raíces se remontan a Francis Bacon en el siglo XVII, a Saint-Simon en el XIX y a Thorstein Veblen a principios del XX[reference:3].')],
+['Transhumanismo',
+P('El <b>transhumanismo</b> es una corriente filosófica, científica y cultural que promueve el uso de tecnologías avanzadas para ampliar las capacidades físicas, mentales, emocionales y morales del ser humano, trascendiendo sus límites biológicos actuales[reference:4].')+
+P('Su objetivo final es el <b>posthumanismo</b>: la aparición de seres con capacidades tan radicalmente superiores que ya no serían “humanos” en el sentido actual[reference:5]. Esto incluye desde implantes cognitivos y edición genética hasta la extensión radical de la vida o la “subida” de la mente a soportes digitales.')+
+P('El término fue usado por primera vez en 1927, pero el movimiento se organizó formalmente en 1998 con la fundación de la World Transhumanist Association (hoy Humanity+) por Nick Bostrom y David Pearce[reference:6].')],
+['La relación',
+P('Aunque nacieron en contextos distintos, la tecnocracia y el transhumanismo comparten una premisa: <b>la tecnología puede resolver los problemas humanos</b>, incluidos los políticos y los biológicos.')+
+P('La tecnocracia dice: “dejemos que los expertos nos gobiernen”. El transhumanismo dice: “dejemos que la tecnología nos transforme”. Cuando se combinan, el resultado es una visión en la que <b>una élite técnica decide el futuro de la especie</b>, a menudo sin pasar por el debate democrático[reference:7].')+
+P('Esa convergencia es lo que algunos autores llaman el complejo <b>TESCREAL</b>, un acrónimo que agrupa transhumanismo, extropianismo, singularitarismo, cosmismo, racionalismo, altruismo eficaz y largoplacismo[reference:8].')]
+]);
+
+/* ---------- HISTORIA ---------- */
+B('historia', P('Los dos movimientos tienen historias paralelas que se cruzan en el siglo XXI.')+`
+<div class="tabs" role="tablist">
+<button class="tab" data-i="0" aria-selected="true">Tecnocracia</button>
+<button class="tab" data-i="1">Transhumanismo</button>
+</div>
+<div class="panel"><div class="pt" id="hist-panel"></div></div>`);
+
+const histData=[
+['Tecnocracia',ev([
+['1620','Francis Bacon','En <i>La Nueva Atlántida</i> imagina una sociedad gobernada por una comunidad científica. Es el antecedente más remoto del gobierno de los expertos[reference:9].'],
+['1820','Saint-Simon','El conde de Saint-Simon sostiene que la sociedad industrial debe ser dirigida por científicos e industriales, no por la nobleza o el clero. Se le atribuye la primera formulación consciente de la ideología tecnocrática.'],
+['1919','William H. Smyth','El ingeniero californiano introduce el término “tecnocracia” para describir “el gobierno del pueblo hecho efectivo a través de sus servidores, los científicos”[reference:11].'],
+['1921','Thorstein Veblen','Publica <i>Los ingenieros y el sistema de precios</i>, donde propone que los ingenieros sustituyan a los empresarios y banqueros en la dirección de la economía. Habla de un “soviet de ingenieros”[reference:12].'],
+['1933','Howard Scott y Technocracy Inc.','En plena Gran Depresión, el movimiento tecnocrático se institucionaliza. Propone abolir el sistema de precios y sustituirlo por certificados energéticos. Llega a tener miles de seguidores, pero se desinfla tras el New Deal[reference:13].'],
+['1950–70','Galbraith y Bell','La tecnocracia se diluye en teorías más amplias: la “tecnoestructura” de Galbraith, la “sociedad postindustrial” de Daniel Bell. Ya no se trata de un movimiento político, sino de una descripción del poder de los expertos en las democracias avanzadas[reference:14].'],
+['1990–2000','Globalización tecnocrática','La independencia de los bancos centrales, los tribunales internacionales y los organismos reguladores se expande. Los tecnócratas gobiernan de facto áreas enteras de la política económica[reference:15].'],
+['2016','“You will own nothing”','El Foro Económico Mundial publica su famosa predicción: “Para 2030 no poseerás nada y serás feliz”. La frase se convierte en el símbolo de la tecnocracia global criticada por populistas de todo el espectro[reference:16].'],
+['2025–2026','Palantir y el “Manifiesto de la Tecnocracia”','La empresa de Peter Thiel publica <i>La República Tecnológica</i>, donde aboga por fusionar el Estado con la Big Tech. Thiel ha dicho públicamente que “democracia” y “libertad” serían incompatibles[reference:17].']
+])],
+['Transhumanismo',ev([
+['1927','Primera mención','El término “transhumanismo” aparece por primera vez en el libro <i>Religion Without Revelation</i> del biólogo J.B.S. Haldane, aunque con un sentido diferente al actual[reference:18].'],
+['1957','Julian Huxley','El biólogo y humanista acuña el término en su sentido moderno: el hombre puede trascenderse a sí mismo mediante la ciencia y la tecnología.'],
+['1980–90','Extropianismo','Max More y Tom Bell fundan el Extropy Institute y formulan los “principios extrópicos”: progreso perpetuo, autotransformación, optimismo práctico y oposición a la muerte[reference:19]. El extropianismo fusiona transhumanismo con ideas libertarianas[reference:20].'],
+['1998','World Transhumanist Association','Nick Bostrom y David Pearce fundan la WTA (hoy Humanity+) para dar un marco institucional al movimiento y defender el derecho individual a mejorarse tecnológicamente[reference:21].'],
+['2004','Francis Fukuyama','El politólogo estadounidense califica el transhumanismo como “la idea más peligrosa del mundo”, porque podría destruir la igualdad humana básica y abrir la puerta a una nueva eugenesia[reference:22].'],
+['2005','Ray Kurzweil y la singularidad','Publica <i>La singularidad está cerca</i>, donde predice que hacia 2045 la inteligencia humana y la artificial se fusionarán, dando lugar a una civilización postbiológica[reference:23].'],
+['2004–2015','Institucionalización','Se crean el Future of Humanity Institute (Bostrom) y el Institute for Ethics and Emerging Technologies. El transhumanismo pasa de movimiento contracultural a corriente influyente en Silicon Valley.'],
+['2016–2026','De la teoría a los implantes','Neuralink (fundada en 2016) y otras empresas comienzan a implantar interfaces cerebro-computadora en humanos. El transhumanismo deja de ser solo filosofía y se convierte en programa tecnológico con financiación millonaria[reference:24].']
+])]
+];
+
+const hp=$('#hist-panel');
+const renderHist=i=>{hp.innerHTML=histData[i][1];$$('.tab',hp.closest('.panel').previousElementSibling).forEach((t,j)=>t.setAttribute('aria-selected',i===j));};
+document.querySelectorAll('#b-historia .tab').forEach((t,i)=>t.addEventListener('click',()=>renderHist(i)));
+renderHist(0);
+
+/* ---------- TECNOCRACIA ---------- */
+tabs('tecnocracia',[
+['Definición y promesas',
+P('La tecnocracia se define como un “sistema de gobierno en el cual los expertos entrenados técnicamente gobiernan”[reference:25]. Su promesa central es la <b>eficiencia</b>: dejar de lado la politiquería, la demagogia y los ciclos electorales para tomar decisiones basadas en datos, evidencia y racionalidad técnica.')+
+ul(['<b>Objetividad:</b> las decisiones no dependen de intereses partidarios.','<b>Competencia:</b> los que gobiernan saben de lo que hablan.','<b>Visión de largo plazo:</b> se pueden implementar políticas costosas a corto plazo pero beneficiosas a largo plazo, como la lucha contra el cambio climático o la reforma de las pensiones[reference:26].','<b>Estabilidad:</b> los tecnócratas no responden a los “caprichos” de votantes miopes.'])+
+P('En la práctica, la tecnocracia no ha reemplazado a la democracia, pero se ha infiltrado en ella: bancos centrales independientes, autoridades reguladoras, tribunales constitucionales y organismos internacionales son espacios donde los expertos toman decisiones con escasa participación ciudadana[reference:27].')],
+['Límites y problemas',
+P('El problema de la tecnocracia no es que los expertos se equivoquen, sino que <b>su legitimidad es débil</b>. ¿Quién controla a los controladores? ¿Cómo se corrigen los sesgos de los expertos? ¿Qué pasa con los valores que no son técnicos?')+
+ul(['<b>Déficit democrático:</b> las decisiones que afectan a todos se toman sin debate público.','<b>Ilusión de neutralidad:</b> ningún experto es neutral; toda técnica incorpora valores y prioridades.','<b>Responsabilidad difusa:</b> si un tecnócrata se equivoca, no hay forma de castigarlo en las urnas.','<b>Captura por intereses:</b> los expertos suelen provenir de las mismas élites que financian sus instituciones.'])+
+P('Por eso, incluso cuando mejora la eficiencia, la tecnocracia “tensiona” las sociedades democráticas porque “quita espacio al consenso y a la delegación, limitando la legitimidad de la vida pública”[reference:28].')]
+]);
+
+/* ---------- TRANSHUMANISMO ---------- */
+tabs('transhumanismo',[
+['Qué propone',
+P('El transhumanismo no es una sola cosa: es un paraguas que cobija desde libertarios radicales hasta socialdemócratas tecnoprogressistas. Pero hay un núcleo común:')+
+dfs([['Mejoramiento humano','Usar la tecnología para ampliar capacidades físicas, cognitivas y emocionales: desde gafas y prótesis hasta implantes cerebrales y edición genética[reference:29].'],
+['Superación de límites','El objetivo no es solo curar enfermedades, sino ir más allá de lo que la biología permite: memoria expandida, longevidad extrema, inteligencia aumentada.'],
+['Posthumanismo','El horizonte final es la aparición de seres “posthumanos”, con capacidades tan superiores que ya no serían humanos en el sentido actual[reference:30].'],
+['Mente digital','Algunos proponen la “subida” (uploading) de la mente a soportes digitales, lo que permitiría una forma de inmortalidad.']])],
+['Extropianismo y WTA',
+P('Dentro del transhumanismo hay dos grandes alas:')+
+ul(['<b>Extropianismo:</b> la versión libertariana, fundada por Max More en 1991. Enfatiza la autotransformación individual, el progreso perpetuo y la oposición a la muerte. Su lema informal era “¡No a la muerte! ¡No a los impuestos!”[reference:31].','<b>Transhumanismo democrático:</b> la versión liderada por Nick Bostrom y David Pearce, que fundaron la World Transhumanist Association en 1998. Defiende que el acceso a las mejoras debe ser amplio y compatible con la democracia liberal[reference:32].'])+
+P('La WTA se convirtió en Humanity+ en 2008 y hoy es la principal organización transhumanista a nivel global.')],
+['La singularidad',
+P('La <b>singularidad tecnológica</b> es el escenario en el que la inteligencia artificial supera la inteligencia humana y es capaz de mejorarse a sí misma de forma recursiva, desencadenando un cambio tan rápido que resulta impredecible.')+
+P('Ray Kurzweil, su profeta más famoso, predice que esto ocurrirá hacia <b>2045</b>, y que para entonces la inteligencia humana se habrá expandido “un millón de veces” gracias a la fusión con la IA[reference:33].')+
+P('La singularidad no es una predicción científica consensuada: muchos la consideran una forma de <b>ideología religiosa</b> disfrazada de tecnología[reference:34]. Pero su influencia en Silicon Valley es enorme.')]
+]);
+
+/* ---------- CONVERGENCIA ---------- */
+tabs('convergencia',[
+['El complejo TESCREAL',
+P('El acrónimo <b>TESCREAL</b> fue popularizado por Timnit Gebru y Émile P. Torres para describir el paquete ideológico que comparten muchos líderes tecnológicos de Silicon Valley:')+
+gt(['Letra','Ideología','Qué significa'],`T|Transhumanismo|Superar los límites biológicos mediante la tecnología
+E|Extropianismo|Progreso perpetuo, autotransformación, oposición a la muerte
+S|Singularitarismo|La IA superará a los humanos en un futuro cercano (2045)
+C|Cosmismo|Colonización del espacio y destino cósmico de la humanidad
+R|Racionalismo|La razón y la evidencia como única guía válida
+E|Altruismo eficaz|Maximizar el bienestar global con métricas utilitaristas
+A|Largoplacismo|Priorizar los intereses de las generaciones futuras sobre las presentes`)+
+P('Estas siete corrientes se refuerzan mutuamente y proporcionan una “legitimidad múltiple” para que una élite técnica tome decisiones sobre el futuro de la especie sin pasar por la democracia[reference:35].')],
+['Palantir y el Estado tecnocrático',
+P('El caso más explícito de convergencia es <b>Palantir</b>, la empresa de análisis de datos de Peter Thiel. Sus intelectuales orgánicos —Alexander Karp y Nicholas Zamiska— publicaron <i>La República Tecnológica</i>, un manifiesto que aboga por que la Big Tech no solo asesore al Estado, sino que <b>le dé un sentido y un propósito</b>.')+
+P('Según esta visión, el Estado debería organizarse como una megacorporación tecnológica, y los ingenieros y científicos deberían definir los objetivos nacionales. Thiel ha llegado a afirmar que “democracia” y “libertad” son incompatibles[reference:36].')+
+P('La tecnocracia deja de ser una teoría sobre la eficiencia para convertirse en un proyecto de <b>poder político</b>: una alianza entre el capital tecnológico y el Estado para imponer una visión del mundo.')]
+]);
+
+/* ---------- CRÍTICAS ---------- */
+tabs('criticas',[
+['El riesgo democrático',
+P('La objeción más fuerte contra la tecnocracia es que <b>no es democrática</b>. Las decisiones que afectan a todos se toman por personas que nadie eligió. Y cuando la tecnocracia se combina con el transhumanismo, el problema se agrava: ya no se trata solo de gestionar la economía, sino de <b>decidir qué tipo de seres humanos queremos ser</b>.')+
+P('Los ciclos tecnocrático-mayoritarios pueden aumentar el riesgo de “retroceso democrático”[reference:37]. Los populismos surgen, en parte, como reacción a élites tecnocráticas que ignoran las demandas populares[reference:38].')+
+P('En su expresión máxima, la tecnocracia “podría no solo deteriorar la calidad democrática de un país, sino incluso eliminar la democracia en sí misma”[reference:39].')],
+['Desigualdad y brecha de capacidades',
+P('El transhumanismo promete mejoras para todos, pero en la práctica el acceso a las tecnologías de mejoramiento está determinado por el dinero. Quienes puedan pagar implantes cognitivos, edición genética o longevidad extrema tendrán ventajas que los demás no tendrán.')+
+P('Esto crea una <b>“brecha de capacidades”</b> entre seres humanos “mejorados” y “no mejorados” que podría ser más profunda que cualquier desigualdad económica conocida[reference:40].')+
+P('Algunos autores advierten que las mejoras tecnológicas “solo estarán accesibles a los ricos, llevando a una sociedad del siglo XXI más desigual que cualquier otra anterior”[reference:41]. Y no se trata solo de una brecha salarial: la dignidad y las oportunidades quedarían distribuidas según el acceso económico a la tecnología[reference:42].')],
+['Ética y bioconservadurismo',
+P('Desde el bioconservadurismo, autores como <b>Francis Fukuyama</b> sostienen que modificar la biología humana nos llevaría a un territorio moral que no queremos visitar. Si perdemos lo que nos hace humanos —nuestra naturaleza biológica compartida—, perdemos también la base de la igualdad y la dignidad[reference:43].')+
+P('Otras críticas señalan que el transhumanismo no es axiológicamente neutro: es un <b>programa político</b> que impone una determinada idea de lo que significa “mejorar” al ser humano, y que puede terminar diseñando personas según una “teoría estrecha del bien”[reference:44].')+
+P('También hay objeciones sobre el libre albedrío, la identidad personal y el derecho a no ser mejorado. ¿Puede una sociedad tecnocrática obligar a los individuos a aceptar mejoras en nombre del “progreso”?')]
+]);
+
+/* ---------- AVANCES ---------- */
+tabs('avances',[
+['Neuralink y la interfaz cerebro-máquina',
+P('Neuralink, la empresa de Elon Musk, planea para <b>2026</b> la producción a gran escala de implantes cerebrales y procedimientos quirúrgicos completamente automatizados[reference:45]. La empresa obtuvo 650 millones de dólares en 2025 y para septiembre de ese año 12 personas con parálisis severa ya tenían implantes[reference:46].')+
+P('Los voluntarios han podido controlar computadoras con el pensamiento, jugar videojuegos y mover brazos robóticos[reference:47]. El siguiente paso es aumentar el ancho de banda de comunicación entre el cerebro y la máquina: de menos de 1 bit por segundo a megabits o gigabits[reference:48].')+
+P('En China, un equipo del Instituto de Neurociencia de la Academia de Ciencias logró que un paciente con tetraplejía controlara una silla de ruedas y un perro robot mediante señales cerebrales, con una latencia inferior a 100 milisegundos[reference:49].')],
+['Merge Labs y la competencia',
+P('OpenAI no quiere quedarse atrás. En enero de 2026 invirtió 250 millones de dólares en <b>Merge Labs</b>, una empresa de neurotecnología cofundada por Sam Altman. Su misión es “unir la inteligencia biológica y la inteligencia artificial” para potenciar las capacidades humanas, con un enfoque menos invasivo que el de Neuralink[reference:50].')+
+P('La competencia entre ambas empresas acelera el desarrollo de interfaces cerebro-computadora y acerca el escenario de la <b>simbiosis hombre-máquina</b> que Kurzweil situaba en 2045[reference:51].')]
+]);
+
+/* ---------- GLOSARIO ---------- */
+(()=>{const G=[
+['Bioconservadurismo','Corriente que se opone a la modificación radical de la naturaleza humana mediante la tecnología.'],
+['Brecha de capacidades','Desigualdad entre personas mejoradas tecnológicamente y no mejoradas.'],
+['Extropianismo','Versión libertariana del transhumanismo, centrada en el progreso perpetuo y la autotransformación individual.'],
+['Humanity+','Organización transhumanista global, antes conocida como World Transhumanist Association (WTA).'],
+['Posthumano','Ser con capacidades tan superiores a las humanas que ya no puede considerarse humano en el sentido actual.'],
+['Singularidad','Hipotético punto en el que la inteligencia artificial supera a la humana y se acelera exponencialmente.'],
+['Tecnocracia','Sistema de gobierno en el que los expertos técnicos ejercen el poder en lugar de los políticos electos.'],
+['TESCREAL','Acrónimo que agrupa transhumanismo, extropianismo, singularitarismo, cosmismo, racionalismo, altruismo eficaz y largoplacismo.'],
+['Transhumanismo','Corriente que promueve el uso de tecnología para ampliar las capacidades humanas y superar sus límites biológicos.'],
+['Uploading','Hipotética transferencia de la mente humana a un soporte digital.'],
+['World Transhumanist Association','Organización fundada en 1998 por Nick Bostrom y David Pearce, hoy Humanity+.']
+];
+B('glosario','<input class="search" id="q" type="search" placeholder="Buscar un término" aria-label="Buscar en el glosario"><div class="grid" id="gl"></div>');
+const r=f=>{$('#gl').innerHTML=G.filter(g=>(g[0]+g[1]).toLowerCase().includes(f)).map(g=>`<div class="card"><h3>${g[0]}</h3><p>${g[1]}</p></div>`).join('')||'<p class="note">No hay términos con esa búsqueda.</p>'};
+$('#q').oninput=e=>r(e.target.value.toLowerCase().trim());r('')})();
+
+/* ---------- NAVEGACIÓN Y TEMA ---------- */
+const go=h=>{
+  h=V.some(v=>v[0]===h)?h:'inicio';
+  $$('.view').forEach(e=>e.classList.toggle('on',e.id===h));
+  $$('.nl').forEach(a=>a.classList.toggle('on',a.dataset.v===h));
+  scrollTo(0,0);
+};
+addEventListener('hashchange',()=>go(location.hash.slice(1)));
+$('#tt').onclick=()=>{
+  const d=document.documentElement;
+  const k=d.dataset.theme?d.dataset.theme==='dark':matchMedia('(prefers-color-scheme:dark)').matches;
+  d.dataset.theme=k?'light':'dark';
+};
+go(location.hash.slice(1));
+</script>
+</body>
+</html>

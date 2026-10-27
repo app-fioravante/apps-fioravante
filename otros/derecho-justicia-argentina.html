@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Derecho y Poder Judicial en Argentina</title>
+<meta name="description" content="Cómo funciona la justicia argentina explicada fácil: estructura, fueros, Corte Suprema, juicio por jurados, tus derechos y desafíos.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;700&family=Fraunces:opsz,wght@9..144,600..800&display=swap" rel="stylesheet">
+<style>
+:root{--fd:'Fraunces',Georgia,serif;--fb:'Figtree','Segoe UI',system-ui,sans-serif;--bg:#f2f5fa;--sf:#fff;--s2:#e4ebf5;--bd:#c9d6e8;--tx:#0f1c2e;--mu:#4a5b73;--ac:#1e4d8c;--on:#fff;box-sizing:border-box;padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b1220;--sf:#131e30;--s2:#1d2b42;--bd:#31425c;--tx:#eef3fa;--mu:#a3b5cc;--ac:#6fa3e0;--on:#0b1220}}
+:root[data-theme="dark"]{--bg:#0b1220;--sf:#131e30;--s2:#1d2b42;--bd:#31425c;--tx:#eef3fa;--mu:#a3b5cc;--ac:#6fa3e0;--on:#0b1220}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px);-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--tx);font:400 1rem/1.65 var(--fb);overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--bg)}
+h1,h2,h3,h4{font-family:var(--fd);margin:0;line-height:1.12}p{margin:0}a{color:inherit;text-decoration:none}button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--ac);outline-offset:2px;border-radius:6px}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:var(--bg);border-bottom:1px solid var(--bd)}
+.hi{max-width:1100px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:12px}
+.brand{font:700 1.15rem var(--fd);white-space:nowrap}
+.nav{display:flex;gap:2px;margin-left:auto;overflow-x:auto;scrollbar-width:none;min-width:0}.nav::-webkit-scrollbar{display:none}
+.nl{padding:8px 12px;border-radius:10px;font-size:.85rem;color:var(--mu);white-space:nowrap}.nl.on{background:var(--ac);color:var(--on);font-weight:700}
+.tt{width:38px;height:38px;flex:none;border:1px solid var(--bd);border-radius:10px;background:var(--s2)}
+main{max-width:1100px;margin:0 auto;padding:0 16px 70px}
+.view{display:none}.view.on{display:block}
+.hero{margin-top:18px;display:flex;flex-wrap:wrap;align-items:center;gap:8px 28px}.hero h1{font-size:clamp(2.4rem,11vw,5.8rem);font-weight:800;letter-spacing:-.02em;margin:0 0 10px}.hero svg{flex:none;max-width:42vw;height:auto}
+.lead{color:var(--mu);font-size:1.08rem;max-width:62ch}
+.stn{display:flex;gap:10px;overflow-x:auto;padding:6px 0 12px;margin-top:22px;width:100%}
+.st{flex:0 0 158px;padding:12px 14px;border-radius:12px;background:var(--sf);border:1px solid var(--bd)}
+.st b{display:block;font:700 1.3rem var(--fd);color:var(--ac)}.st span{display:block;font-size:.85rem;line-height:1.3;color:var(--mu)}
+.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));align-items:start}
+.card{padding:18px;border-radius:12px;background:var(--sf);border:1px solid var(--bd)}a.card:hover{border-color:var(--ac)}
+.card h3{font-size:1.15rem;margin-bottom:6px}.card p{font-size:.92rem;color:var(--mu)}
+.home{margin-top:20px}.note{margin-top:22px;padding:14px 18px;border-radius:12px;border:1px dashed var(--bd);color:var(--mu);font-size:.9rem}
+.sec{padding:34px 0 4px}.sec h2{font-size:clamp(1.9rem,6vw,3rem);margin-bottom:8px}.sec>.lead{margin-bottom:22px}
+.tabs{display:flex;gap:8px;margin-bottom:12px;overflow-x:auto;padding-bottom:4px}
+.tab{flex:none;padding:10px 15px;border-radius:10px;border:1px solid var(--bd);background:var(--sf);font-weight:700;font-size:.9rem}.tab[aria-selected=true]{background:var(--ac);color:var(--on);border-color:transparent}
+.panel{padding:20px;border-radius:12px;background:var(--sf);border:1px solid var(--bd);border-left:6px solid var(--ac)}
+.pt{color:var(--mu)}.pt p,.pt ul,.pt ol{max-width:74ch}.pt p+*,.pt ul+*,.pt ol+*{margin-top:.8em}.pt b{color:var(--tx)}.pt ul,.pt ol{padding-left:1.2em}.pt li+li{margin-top:.3em}
+.tl{position:relative;padding-top:4px}.tl::before{content:"";position:absolute;left:7px;top:10px;bottom:10px;width:2px;background:var(--bd)}
+.ev{position:relative;padding:0 0 18px 34px}.ev::before{content:"";position:absolute;left:0;top:5px;width:16px;height:16px;border-radius:50%;background:var(--sf);border:4px solid var(--ac)}
+.ev b{display:block;font:700 1.1rem var(--fd);color:var(--ac)}.ev h4{font-size:1.05rem}.ev p{max-width:62ch;color:var(--mu)}
+.search{width:100%;max-width:420px;padding:12px 16px;border-radius:12px;border:1px solid var(--bd);background:var(--sf);color:var(--tx);font:inherit;margin-bottom:14px}
+.tw{overflow-x:auto}.gt{border-collapse:collapse;width:100%;min-width:540px;font-size:.88rem}.gt th,.gt td{padding:7px 10px;border-bottom:1px solid var(--bd);text-align:left;vertical-align:top}.gt th{color:var(--tx);white-space:nowrap}.gt td{color:var(--mu)}.gt td:first-child{color:var(--tx);font-weight:700}
+.eq{margin:12px 0;padding:14px;border-radius:12px;background:var(--s2);color:var(--tx);font:700 1.15rem var(--fd);text-align:center;overflow-x:auto}
+.defs{display:grid;gap:10px;margin-top:10px}
+.def{padding:12px 14px;border-radius:10px;background:var(--s2)}
+.def b{display:block;font:700 1.05rem var(--fd);color:var(--tx)}
+.def span{display:block;font-size:.9rem;color:var(--mu);margin-top:3px;line-height:1.55}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.chip{padding:8px 14px;border-radius:99px;border:1px solid var(--bd);background:var(--sf);font-weight:700;font-size:.85rem}
+.chip[aria-pressed=true]{background:var(--ac);color:var(--on);border-color:transparent}
+.ph{padding:16px;border-radius:12px;background:var(--sf);border:1px solid var(--bd);border-top:4px solid var(--ac)}
+.ph h3{font-size:1.1rem;margin-bottom:2px}
+.ph .yr{font-size:.8rem;color:var(--ac);font-weight:700}
+.ph p{font-size:.9rem;color:var(--mu);margin-top:6px}
+.ph .q{font-family:var(--fd);font-style:italic;color:var(--tx);border-left:3px solid var(--ac);padding-left:10px;margin-top:10px;font-size:.92rem;line-height:1.4}
+details.card summary{cursor:pointer;list-style:none}details.card summary::-webkit-details-marker{display:none}details.card summary::after{content:" +";color:var(--ac);font-weight:700}details.card[open] summary::after{content:" –"}details.card[open] summary{margin-bottom:10px}
+details.card h3{display:inline}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style></head>
+<body>
+<header class="top"><div class="hi"><a class="brand" href="#inicio">Justicia AR</a><nav class="nav" id="nav" aria-label="Secciones"></nav><button class="tt" id="tt" aria-label="Cambiar entre tema claro y oscuro">◐</button></div></header>
+<main>
+<section class="view on" id="inicio"><div class="hero"><div><h1>Justicia</h1><p class="lead">Quién decide, cómo se llega a un juicio y qué derechos tenés frente a la ley en Argentina. El Poder Judicial explicado sin latín ni códigos: estructura, fueros, Corte Suprema, juicio por jurados y los desafíos de una justicia que todavía tarda.</p></div><div id="hjust"></div>
+<div class="stn" id="stn"></div></div>
+<div class="grid home" id="home"></div>
+<p class="note">Guía educativa y simplificada. No reemplaza el asesoramiento de un abogado o abogada. Las normas y los procedimientos cambian; ante un caso concreto, consultá siempre con un profesional o con la Defensoría Pública.</p></section>
+</main>
+<script>
+const $=(s,e=document)=>e.querySelector(s),$$=(s,e=document)=>[...e.querySelectorAll(s)];
+const V=[['que-es','¿Qué es el Poder Judicial?','Los tres poderes y el rol de los jueces en una república.','Qué es'],['historia','Línea de tiempo','De la Constitución de 1853 a la justicia digital.','Historia'],['estructura','Estructura y fueros','Cómo se organizan los tribunales, de abajo hacia arriba.','Estructura'],['corte','Corte Suprema','Quiénes la integran y por qué su palabra es la última.','Corte'],['organos','Consejo y Ministerio Público','Quién elige jueces, quién acusa y quién defiende.','Órganos'],['jurados','Juicio por jurados','Ciudadanos comunes decidiendo en los casos más graves.','Jurados'],['proceso','El proceso y tus derechos','Qué pasa si te detienen y cómo defenderte.','Tus derechos'],['desafios','Desafíos','Vacantes, lentitud y la pelea por la independencia.','Desafíos'],['glosario','Glosario','Las palabras del derecho explicadas fácil.','Glosario']];
+$('main').insertAdjacentHTML('beforeend',V.map(v=>`<section class="view" id="${v[0]}"><div class="sec"><h2>${v[1]}</h2><p class="lead">${v[2]}</p><div id="b-${v[0]}"></div></div></section>`).join(''));
+$('#nav').innerHTML=V.map(v=>`<a class="nl" href="#${v[0]}" data-v="${v[0]}">${v[3]}</a>`).join('');
+$('#home').innerHTML=V.map(v=>`<a class="card" href="#${v[0]}"><h3>${v[1]}</h3><p>${v[2]}</p></a>`).join('');
+$('#stn').innerHTML=[['3','Poderes del Estado'],['1853','Nace la Corte Suprema'],['5','Jueces previstos en la Corte'],['24','Provincias con justicia propia'],['330+','Vacantes en la justicia federal'],['24 h','Plazo máximo para presentar un detenido ante un juez']].map(s=>`<div class="st"><b>${s[0]}</b><span>${s[1]}</span></div>`).join('');
+
+const P=t=>`<p>${t}</p>`,ul=a=>`<ul>${a.map(x=>`<li>${x}</li>`).join('')}</ul>`,ol=a=>`<ol>${a.map(x=>`<li>${x}</li>`).join('')}</ol>`;
+const gt=(h,r)=>`<div class="tw"><table class="gt"><tr>${h.map(x=>`<th>${x}</th>`).join('')}</tr>${r.split('\n').map(l=>`<tr>${l.split('|').map(c=>`<td>${c}</td>`).join('')}</tr>`).join('')}</table></div>`;
+const eq=t=>`<div class="eq">${t}</div>`;
+const ev=a=>`<div class="tl">${a.map(x=>`<div class="ev"><b>${x[0]}</b><h4>${x[1]}</h4><p>${x[2]}</p></div>`).join('')}</div>`;
+const dfs=a=>`<div class="defs">${a.map(x=>`<div class="def"><b>${x[0]}</b><span>${x[1]}</span></div>`).join('')}</div>`;
+const tabs=(id,a)=>{const b=$('#b-'+id);b.innerHTML=`<div class="tabs" role="tablist">${a.map((x,i)=>`<button class="tab" role="tab" data-i="${i}">${x[0]}</button>`).join('')}</div><div class="panel"><div class="pt"></div></div>`;const s=i=>{$$('.tab',b).forEach((t,j)=>t.setAttribute('aria-selected',i==j));$('.pt',b).innerHTML=a[i][1]};b.onclick=e=>{const t=e.target.closest('.tab');t&&s(+t.dataset.i)};s(0)};
+const B=(id,h)=>$('#b-'+id).innerHTML=h;
+
+$('#hjust').innerHTML=`<svg viewBox="0 0 200 200" width="210" role="img" aria-label="Balanza de la justicia"><g fill="none" stroke="var(--ac)" stroke-width="4" stroke-linecap="round"><path d="M100 40 v120"/><path d="M70 180 H130"/><path d="M40 80 H160"/><path d="M40 80 l-18 30 h36 z"/><path d="M160 80 l-18 30 h36 z"/></g><circle cx="100" cy="40" r="10" fill="var(--ac)"/><g fill="var(--ac)" opacity=".6"><circle cx="22" cy="118" r="6"/><circle cx="178" cy="118" r="6"/></g></svg>`;
+
+tabs('que-es',[
+['Los tres poderes',P('En Argentina el poder del Estado está repartido en tres. Ninguno manda solo: se controlan entre sí. Es lo que se llama <b>división de poderes</b>, y es la base de la república.')+gt(['Poder','Quién lo ejerce','Qué hace'],`Ejecutivo|Presidente, vicepresidente y ministros|Gobierna, administra el país y ejecuta las leyes
+Legislativo|Congreso (diputados y senadores)|Hace las leyes y controla al Ejecutivo
+Judicial|Jueces, juezas y tribunales|Resuelve los conflictos y aplica la ley en cada caso`)+P('El Poder Judicial es el único que puede decir qué significa una ley en un caso concreto y, si corresponde, declarar que una norma contradice la Constitución. Esa es su función: <b>administrar justicia</b>, no gobernar.')],
+['Qué hace un juez',P('Un juez no investiga por su cuenta ni sale a buscar delitos. Recibe un caso, escucha a las partes y decide con base en las pruebas y la ley. Sus decisiones se llaman <b>sentencias</b> y deben estar fundamentadas por escrito.')+ul(['<b>No puede actuar de oficio</b> en materia penal: necesita que alguien acuse (el fiscal o el querellante).','<b>Debe ser imparcial</b>: no puede tener interés en el resultado. Si lo tiene, debe apartarse.','<b>Sus fallos son públicos</b> en la mayoría de los casos, y pueden revisarse por un tribunal superior.','<b>No obedece órdenes del Ejecutivo</b>: esa es la garantía de la independencia judicial.'])+P('La justicia no es solo castigar. También resuelve conflictos entre vecinos, familias, empresas y el Estado: desalojos, alimentos, contratos, despidos, daños, amparos.')],
+['Justicia federal y provincial',P('Argentina es un país federal: cada provincia tiene su propio Poder Judicial, y además existe una justicia federal que depende de la Nación.')+gt(['Justicia','Qué resuelve','Ejemplo'],`Provincial|Casi todos los delitos comunes, familia, civil, laboral|Un robo, un divorcio, un despido
+Federal|Delitos graves contra el Estado, narcotráfico, contrabando, causas constitucionales|Una causa por drogas, un conflicto entre provincias
+Nacional (CABA)|Causas comunes en la Ciudad de Buenos Aires|Un juicio civil en la ciudad`)+P('La Corte Suprema es la cabeza de la justicia federal y la última instancia de todo el país. Las provincias tienen sus propias cortes o superiores tribunales.')],
+['Por qué importa',P('La justicia es el lugar donde el más débil puede enfrentar al más fuerte con las mismas reglas. Si funciona, protege derechos; si no, los derechos quedan escritos en el papel.')+ul(['Garantiza que nadie sea castigado sin juicio previo.','Controla que el Estado no abuse de su poder.','Resuelve conflictos sin violencia privada.','Hace cumplir la Constitución, incluso contra el gobierno de turno.'])+P('Por eso la independencia judicial no es un capricho de jueces: es una condición para que tus derechos valgan algo.')]
+]);
+
+B('historia',P('La justicia argentina no nació de un día para otro. Se fue armando con constituciones, leyes y crisis políticas.')+ev([
+['1853','Constitución y Corte Suprema','La Constitución de 1853 crea el Poder Judicial de la Nación y una Corte Suprema. En 1860 se fija en cinco miembros. La Corte empieza a funcionar en 1863, con jueces que juran ese año.'],
+['1862','Se organiza la justicia federal','Durante la presidencia de Mitre se dicta la ley que organiza los tribunales federales en todo el país.'],
+['1886','Primeras cámaras de apelaciones','Se instalan los tribunales de segunda instancia en la Capital Federal. Antes, casi todo se resolvía en primera instancia.'],
+['1949','Reforma constitucional','La reforma peronista cambia el texto constitucional, pero es derogada en 1956. El Poder Judicial queda marcado por los vaivenes políticos.'],
+['1994','La gran reforma judicial','La reforma constitucional crea el Consejo de la Magistratura, cambia la forma de elegir jueces de la Corte (acuerdo del Senado con dos tercios) y fija un límite de 75 años para la función judicial.'],
+['2006','Ley del Consejo','Se reforma la ley del Consejo de la Magistratura para equilibrar su composición entre políticos, jueces y abogados.'],
+['2015','Código Procesal Penal Federal','Se impulsa el sistema acusatorio: juicios orales y públicos, con fiscales que investigan y jueces que solo juzgan. La implementación es gradual.'],
+['2016–2026','Juicio por jurados','Cada vez más provincias implementan jurados populares para delitos graves. Hacia 2026, más de la mitad del país ya los aplica.'],
+['2020–2026','Justicia digital','Expedientes electrónicos, audiencias remotas y notificaciones digitales. La pandemia acelera un cambio que todavía tiene desigualdades entre provincias.']
+]));
+
+tabs('estructura',[
+['La pirámide',P('Los tribunales se ordenan en instancias. La idea es que una decisión pueda ser revisada por un órgano superior. Eso protege contra errores y arbitrariedades.')+gt(['Instancia','Qué hace','Ejemplo'],`Primera instancia|Recibe el caso, escucha pruebas y dicta sentencia inicial|Un juzgado civil o penal
+Segunda instancia (Cámara)|Revisa la sentencia si alguien apela|Cámara de Apelaciones
+Casación|Revisa si se aplicó bien la ley, no los hechos|Cámara de Casación
+Corte Suprema|Última palabra en temas constitucionales y federales|Corte Suprema de Justicia de la Nación`)+P('No todas las causas llegan a la Corte. La Corte elige qué casos toma mediante el <b>certiorari</b>: no está obligada a revisar todo.')],
+['Los fueros',P('Un <b>fuero</b> es una especialidad. Cada fuero tiene sus propios jueces, porque no es lo mismo un divorcio que un homicidio o una deuda.')+gt(['Fuero','Qué trata'],`Penal|Delitos y sus castigos
+Civil|Contratos, daños, propiedad, obligaciones
+Comercial|Empresas, sociedades, cheques, concursos
+Laboral|Despidos, salarios, accidentes de trabajo
+Familia|Divorcios, alimentos, adopciones, violencia familiar
+Contencioso administrativo|Conflictos con el Estado
+Seguridad social|Jubilaciones, pensiones, asignaciones
+Electoral|Elecciones y partidos políticos
+Juvenil|Delitos cometidos por menores de edad`)+P('Los fueros existen para que los jueces sean especialistas. Un juez de familia no debería decidir una causa de narcotráfico, y viceversa.')],
+['Mapa federal',P('Coexisten tres grandes mapas judiciales:')+ul(['<b>Justicia provincial:</b> una por cada provincia. Resuelve la mayoría de los casos.','<b>Justicia federal:</b> depende de la Nación y actúa en todo el país. Entiende en delitos federales y causas constitucionales.','<b>Justicia nacional de la Ciudad de Buenos Aires:</b> atiende causas comunes en la Capital Federal.'])+P('La Corte Suprema está por encima de todos, pero solo revisa cuestiones federales o constitucionales. No es una tercera instancia para cualquier discusión.')]
+]);
+
+B('corte',P('La Corte Suprema de Justicia de la Nación es el tribunal más alto del país. Su palabra final define qué significa la Constitución.')+ul(['Está integrada por <b>cinco jueces</b> según la ley, aunque históricamente tuvo otras composiciones.','Sus miembros son designados por el <b>Presidente</b> con acuerdo del <b>Senado</b>, aprobado por dos tercios de los presentes.','Duran en el cargo mientras tengan <b>buena conducta</b>, con un límite de 75 años fijado en la reforma de 1994.','Actualmente (2026) la integran <b>Horacio Rosatti</b> (presidente), <b>Carlos Rosenkrantz</b> (vicepresidente) y <b>Ricardo Lorenzetti</b>, con varias vacantes pendientes.'])+P('Funciones principales:')+dfs([['Control de constitucionalidad','Puede declarar que una ley o un acto del Estado contradice la Constitución y, por lo tanto, no se aplica al caso.'],['Interpretación de la ley federal','Unifica criterios sobre cómo deben leerse las leyes nacionales en todo el país.'],['Jurisdicción originaria','En algunos casos muy específicos (causas entre provincias, embajadores, etc.) actúa como primera y única instancia.'],['Superintendencia','Administra y controla el funcionamiento de la justicia federal, aunque esa tarea se comparte con el Consejo de la Magistratura.']])+P('La Corte no gobierna ni hace leyes. Pero cuando interpreta la Constitución, su decisión obliga a todos los tribunales del país en casos similares.')+P('<b>Un dato:</b> la Corte puede tardar años en resolver. Eso afecta la vida real de las personas que esperan una definición sobre su libertad, su trabajo o su familia.')+P('Para conocer sus fallos, hay un buscador público de jurisprudencia desde 1863. Cualquier persona puede consultarlo.'));
+
+tabs('organos',[
+['Consejo de la Magistratura',P('Es un órgano permanente del Poder Judicial, creado por la reforma de 1994. Su tarea es seleccionar y controlar a los jueces de los tribunales inferiores (no a los de la Corte).')+ul(['<b>Selecciona:</b> llama a concurso público y elige los candidatos con mejores antecedentes.','<b>Propone:</b> envía al Ejecutivo una terna vinculante (el Presidente debe elegir entre esos tres).','<b>Sanciona:</b> puede aplicar sanciones disciplinarias a jueces.','<b>Administra:</b> maneja el presupuesto y los recursos de la justicia.','<b>Remueve:</b> decide si abre un procedimiento de remoción y formula la acusación.'])+P('Su composición busca equilibrio entre jueces, abogados, académicos y representantes políticos.')],
+['Ministerio Público Fiscal',P('Es el órgano que <b>acusa</b>. Está encabezado por el Procurador General de la Nación y lo integran los fiscales.')+ul(['Investiga los delitos y reúne las pruebas.','Acusa a los imputados en el juicio oral.','Actúa en defensa de la legalidad y de los intereses generales de la sociedad.','No depende del Ejecutivo: tiene autonomía funcional.'])+P('En el sistema acusatorio, el fiscal es el dueño de la investigación. El juez no investiga: controla que se respeten las garantías y luego juzga.')],
+['Defensoría General',P('Es el órgano que <b>defiende</b>. Brinda asistencia gratuita a las personas que no pueden pagar un abogado.')+ul(['Defiende a imputados en causas penales.','Asiste a víctimas de delitos.','Patrocina en causas civiles, laborales y de familia a personas de bajos recursos.','Representa a niños, niñas y adolescentes, y a personas con capacidad restringida.'])+P('La defensa pública es una garantía: sin abogado no hay juicio justo. Por eso el Estado está obligado a proveer uno.')]
+]);
+
+tabs('jurados',[
+['Qué es',P('El <b>juicio por jurados</b> es un sistema en el que ciudadanos comunes, elegidos al azar, deciden si el acusado es culpable o inocente. El juez profesional dirige el debate y fija la pena.')+ul(['Se usa para los delitos más graves: homicidios, violaciones, robos agravados.','El jurado suele tener 12 miembros titulares y suplentes.','El veredicto debe ser por unanimidad o por mayoría calificada, según la provincia.','Los jurados no pueden interrogar a los testigos: solo escuchan y deliberan.'])+P('La idea es que la sociedad participe directamente en la justicia y que las decisiones no queden solo en manos de los jueces.')],
+['Dónde funciona',P('El juicio por jurados no está en todo el país: depende de cada provincia. Hacia 2026, más de la mitad ya lo aplican.')+gt(['Provincia','Estado'],`Buenos Aires|En funcionamiento
+Córdoba|En funcionamiento
+Santa Fe|En funcionamiento en toda la provincia
+Mendoza|En funcionamiento
+Neuquén|En funcionamiento
+Río Negro|En funcionamiento
+Chaco|En funcionamiento
+Chubut|En funcionamiento
+Entre Ríos|En funcionamiento
+Salta|En funcionamiento
+Ciudad de Buenos Aires|En funcionamiento`)+P('Otras provincias lo están discutiendo en sus legislaturas. La Constitución Nacional ordena el juicio por jurados desde 1853, pero la ley que lo reglamentó a nivel nacional tardó más de un siglo.')]
+]);
+
+tabs('proceso',[
+['Si te detienen',P('La detención no borra tus derechos. Al contrario: es el momento en que más se ponen a prueba.')+ul(['<b>Te tienen que informar</b> el motivo de la detención y los derechos que te asisten, en un idioma que entiendas.','<b>Tenés derecho a un abogado</b> desde el primer momento. Si no podés pagarlo, el Estado debe darte un defensor público.','<b>Tenés derecho a guardar silencio.</b> No estás obligado a declarar contra vos mismo.','<b>La detención debe ser legal:</b> por orden de un juez o en flagrancia. Si es ilegal, se puede pedir un <b>habeas corpus</b>.','<b>Deben presentarte ante un juez</b> en un plazo breve (normalmente 24 horas o menos, según la provincia).','<b>No podés ser torturado ni maltratado.</b> Si eso ocurre, denuncialo: es un delito.'])+P('El <b>habeas corpus</b> es una acción rápida que cualquier persona puede presentar a favor de un detenido para que un juez controle la legalidad de la detención. No hace falta ser abogado.')],
+['El proceso penal',P('Desde la reforma, el sistema es <b>acusatorio</b>: el fiscal investiga, el defensor defiende y el juez juzga. Antes el juez investigaba y juzgaba, lo que era criticado por parcial.')+ol(['<b>Investigación:</b> el fiscal reúne pruebas, toma declaraciones y decide si imputa a alguien.','<b>Acusación:</b> si hay pruebas suficientes, el fiscal formula la acusación y pide juicio.','<b>Juicio oral:</b> las partes presentan testigos y pruebas ante el juez o el jurado. Es público.','<b>Sentencia:</b> el juez o el jurado decide si es culpable o inocente. Si es culpable, se fija la pena.','<b>Recursos:</b> la sentencia puede apelarse ante un tribunal superior.'])+P('El juicio oral es público, salvo excepciones (menores, víctimas de delitos sexuales). Cualquier persona puede asistir.')],
+['Tus herramientas',dfs([['Amparo','Acción rápida para proteger un derecho constitucional vulnerado por una autoridad o un particular. Por ejemplo, si te niegan una obra social o un medicamento.'],['Habeas corpus','Protege la libertad física. Sirve si te detienen ilegalmente o si las condiciones de detención son inhumanas.'],['Habeas data','Permite acceder a tus datos personales que están en bases públicas o privadas, y corregirlos si están mal.'],['Apelación','Recurso para que un tribunal superior revise una sentencia que considerás injusta.'],['Queja','Se presenta cuando un juez rechaza un recurso que debía aceptar.'],['Casación','Recurso para revisar si se aplicó mal la ley, no para discutir los hechos.']])]
+]);
+
+tabs('desafios',[
+['Vacantes y lentitud',P('Uno de los problemas más graves es la cantidad de cargos sin cubrir. Hacia 2026 hay más de 330 vacantes en la justicia federal y nacional, casi un tercio de la estructura.')+ul(['Las vacantes generan demoras, sobrecarga de trabajo y desigualdad entre provincias.','Los juicios pueden durar años, y en materia penal eso afecta la libertad de las personas.','Más del 75 % de los abogados encuestados calificó los plazos como lentos o muy lentos.','La falta de jueces titulares hace que subrogantes cubran varios juzgados a la vez.'])+P('La Corte Suprema también tiene vacantes: funciona con tres ministros cuando la ley prevé cinco. Eso la obliga a resolver por unanimidad y limita su capacidad de trabajo.')],
+['Independencia',P('La independencia judicial significa que los jueces deciden sin presiones del Ejecutivo, del Legislativo o de grupos de poder. No es un privilegio personal: es una garantía para la ciudadanía.')+ul(['Cuando un gobierno nombra jueces afines para asegurarse impunidad, la justicia deja de controlar el poder.','Los ataques públicos a jueces y fiscales debilitan la confianza en las instituciones.','La selección por concurso y el control del Consejo de la Magistratura buscan evitar nombramientos arbitrarios.','La transparencia y la publicidad de las decisiones son herramientas contra la manipulación.'])+P('Defender la independencia judicial no es defender a los jueces: es defender tu derecho a que un juez imparcial revise lo que el poder hace con vos.')],
+['Acceso a la justicia',P('No todos llegan a la justicia en las mismas condiciones.')+ul(['La distancia geográfica: en muchas provincias hay un solo juzgado para enormes territorios.','El costo: un abogado particular puede ser inaccesible; la defensa pública es clave pero está sobrecargada.','El lenguaje: los expedientes están escritos en jerga jurídica que la mayoría no entiende.','La perspectiva de género: las causas por violencia familiar requieren formación específica.','La justicia digital: mejora el acceso, pero excluye a quienes no tienen internet o dispositivos.'])+P('La Corte Suprema adoptó políticas de <b>lenguaje claro</b> para que las sentencias se entiendan. Es un avance, pero todavía falta mucho.')]
+]);
+
+(()=>{const G=[['Acusatorio','Sistema penal en el que el fiscal investiga y acusa, el defensor defiende y el juez juzga.'],['Amparo','Acción judicial rápida para proteger un derecho constitucional vulnerado.'],['Apelación','Recurso para que un tribunal superior revise una sentencia.'],['Casación','Recurso para revisar si se aplicó mal la ley, no los hechos.'],['Certiorari','Facultad de la Corte Suprema de elegir qué casos revisa.'],['Consejo de la Magistratura','Órgano que selecciona, controla y sanciona a los jueces inferiores.'],['Constitución','Norma suprema que organiza el Estado y reconoce derechos.'],['Defensoría General','Órgano que brinda defensa gratuita a quienes no pueden pagar abogado.'],['Fuero','Especialidad de la justicia (penal, civil, laboral, familia, etc.).'],['Habeas corpus','Acción para proteger la libertad física frente a una detención ilegal.'],['Habeas data','Acción para acceder a datos personales y corregirlos.'],['Imputado','Persona a la que se le atribuye un delito en una causa penal.'],['Independencia judicial','Garantía de que los jueces deciden sin presiones de otros poderes.'],['Instancia','Cada nivel de revisión de un caso (primera, segunda, casación, Corte).'],['Juicio oral','Etapa pública y oral donde se presentan pruebas y se decide la culpabilidad.'],['Jurado','Grupo de ciudadanos comunes que decide culpabilidad en delitos graves.'],['Ministerio Público Fiscal','Órgano que investiga y acusa en nombre del Estado.'],['Poder Judicial','Conjunto de tribunales que aplican la ley y resuelven conflictos.'],['Querella','Particular que se presenta como acusador en una causa penal.'],['Recurso','Herramienta para pedir que se revise una decisión judicial.'],['Sentencia','Decisión final de un juez o tribunal sobre un caso.'],['Sistema acusatorio','Modelo procesal con separación de funciones: fiscal acusa, defensor defiende, juez juzga.'],['Vacante','Cargo judicial que no está cubierto por un titular.'],['Veredicto','Decisión del jurado sobre culpabilidad o inocencia.']];
+B('glosario','<input class="search" id="q" type="search" placeholder="Buscar un término" aria-label="Buscar en el glosario"><div class="grid" id="gl"></div>');
+const r=f=>{$('#gl').innerHTML=G.filter(g=>(g[0]+g[1]).toLowerCase().includes(f)).map(g=>`<div class="card"><h3>${g[0]}</h3><p>${g[1]}</p></div>`).join('')||'<p class="note">No hay términos con esa búsqueda.</p>'};
+$('#q').oninput=e=>r(e.target.value.toLowerCase().trim());r('')})();
+
+const go=h=>{h=V.some(v=>v[0]==h)?h:'inicio';$$('.view').forEach(e=>e.classList.toggle('on',e.id==h));$$('.nl').forEach(a=>a.classList.toggle('on',a.dataset.v==h));scrollTo(0,0)};
+addEventListener('hashchange',()=>go(location.hash.slice(1)));
+$('#tt').onclick=()=>{const d=document.documentElement,k=d.dataset.theme?d.dataset.theme=='dark':matchMedia('(prefers-color-scheme:dark)').matches;d.dataset.theme=k?'light':'dark'};
+go(location.hash.slice(1));
+</script>
+</body></html>
