@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Panadería, Repostería y Comidas del Mundo</title>
+<meta name="description" content="Guía educativa sobre panadería, repostería y comidas del mundo: ingredientes, técnicas, historia, recetas globales y tendencias.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600;700&family=Young+Serif&display=swap" rel="stylesheet">
+<style>
+:root{--fd:'Young Serif',Georgia,serif;--fb:'Figtree','Segoe UI',system-ui,sans-serif;--bg:#f6f3ef;--sf:#fffefb;--s2:#ece6de;--bd:#dbd1c5;--tx:#2a1a12;--mu:#67574c;--ac:#9a4f0c;--on:#fffaf3;--gd:#d9a23a;--rs:#a82b48;--hb:#2b1810;--ht:#f8efe3;--hm:#d6c3b1;box-sizing:border-box;padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#16100d;--sf:#1f1713;--s2:#2a1f19;--bd:#3e3029;--tx:#f4ece4;--mu:#bfb0a3;--ac:#e8a94d;--on:#1b120c;--gd:#e8b04b;--rs:#e7809a;--hb:#2d1a11}}
+:root[data-theme="dark"]{--bg:#16100d;--sf:#1f1713;--s2:#2a1f19;--bd:#3e3029;--tx:#f4ece4;--mu:#bfb0a3;--ac:#e8a94d;--on:#1b120c;--gd:#e8b04b;--rs:#e7809a;--hb:#2d1a11}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px);-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--tx);font:400 1rem/1.65 var(--fb);overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--bg)}
+h1,h2,h3,h4{font-family:var(--fd);font-weight:400;margin:0;line-height:1.12}p{margin:0}a{color:inherit;text-decoration:none}button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--ac);outline-offset:2px;border-radius:6px}
+.ic{width:28px;height:28px;flex:none}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:var(--bg);border-bottom:1px solid var(--bd)}
+.hi{max-width:1100px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:12px}
+.brand{font:400 1.2rem var(--fd);white-space:nowrap}
+.nav{display:flex;gap:2px;margin-left:auto;overflow-x:auto;scrollbar-width:none;min-width:0}.nav::-webkit-scrollbar{display:none}
+.nl{padding:8px 13px;border-radius:999px;font-size:.86rem;font-weight:600;color:var(--mu);white-space:nowrap;transition:background .2s,color .2s}.nl:hover{color:var(--tx)}.nl.on{background:var(--tx);color:var(--bg)}
+.tt{width:38px;height:38px;flex:none;border:1px solid var(--bd);border-radius:50%;background:var(--sf)}
+main{max-width:1100px;margin:0 auto;padding:0 16px 70px}
+.view{display:none}.view.on{display:block}
+.hero{margin-top:18px;display:grid;grid-template-columns:1.2fr .8fr;gap:12px 24px;align-items:center;padding:clamp(24px,5vw,56px);border-radius:28px;background:var(--hb);color:var(--ht);overflow:hidden}
+.hero h1{font-size:clamp(2.2rem,6.4vw,4.3rem);line-height:1.04;letter-spacing:-.01em;margin:0 0 16px}
+.hero .lead{color:var(--hm)}
+.hart svg{display:block;width:100%;max-width:340px;height:auto;margin:0 auto}
+.sm{opacity:0;animation:st 3.8s ease-out infinite}
+@keyframes st{0%{transform:translateY(10px);opacity:0}35%{opacity:.55}100%{transform:translateY(-22px);opacity:0}}
+.lead{color:var(--mu);font-size:1.08rem;max-width:62ch}
+.stn{display:grid;gap:1px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));margin-top:14px;background:var(--bd);border:1px solid var(--bd);border-radius:20px;overflow:hidden}
+.st{padding:16px 18px;background:var(--sf)}
+.st b{display:block;font:400 1.7rem var(--fd);color:var(--ac)}.st span{display:block;font-size:.85rem;line-height:1.3;color:var(--mu);margin-top:2px}
+.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));align-items:start}
+.card{padding:18px;border-radius:16px;background:var(--sf);border:1px solid var(--bd);transition:border-color .2s}a.card:hover{border-color:var(--ac)}
+.card h3{font-size:1.15rem;margin-bottom:6px}.card p{font-size:.92rem;color:var(--mu)}
+.home{margin-top:14px;display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr))}
+.hc{display:flex;flex-direction:column;gap:8px;min-height:150px;padding:22px;border-radius:22px}.hc .ic{color:var(--ac)}.hc h3{font-size:1.4rem;margin:auto 0 0}
+.hc:nth-child(1){background:color-mix(in srgb,var(--gd) 24%,var(--sf))}.hc:nth-child(2){background:color-mix(in srgb,var(--rs) 14%,var(--sf))}
+@media(min-width:960px){.home{grid-template-columns:repeat(4,1fr)}.hc:nth-child(1),.hc:nth-child(2),.hc:nth-child(7),.hc:nth-child(8){grid-column:span 2}}
+.note{margin-top:22px;padding:14px 18px;border-radius:16px;border:1px dashed var(--bd);color:var(--mu);font-size:.9rem}
+.sec{padding:34px 0 4px}.sh{display:flex;align-items:center;gap:14px;margin-bottom:8px}.sh .ic{width:46px;height:46px;padding:10px;border-radius:14px;background:var(--s2);color:var(--ac)}
+.sec h2{font-size:clamp(2rem,6vw,3.2rem)}.sec>.lead{margin-bottom:22px}
+.tabs{display:flex;gap:6px;margin-bottom:14px;overflow-x:auto;padding-bottom:4px;scrollbar-width:thin}
+.tab{flex:none;padding:9px 16px;border-radius:999px;border:1px solid var(--bd);background:var(--sf);font-weight:600;font-size:.9rem;transition:background .2s,color .2s}.tab:hover{border-color:var(--ac)}.tab[aria-selected=true]{background:var(--ac);color:var(--on);border-color:transparent}
+.panel{padding:clamp(18px,3vw,32px);border-radius:22px;background:var(--sf);border:1px solid var(--bd)}
+.pt{color:var(--mu)}.pt p,.pt ul,.pt ol{max-width:72ch}.pt p+*,.pt ul+*,.pt ol+*{margin-top:.9em}.pt b{color:var(--tx)}.pt ul,.pt ol{padding-left:1.2em}.pt li+li{margin-top:.35em}.pt li::marker{color:var(--gd)}
+.tl{position:relative;padding-top:4px}.tl::before{content:"";position:absolute;left:7px;top:10px;bottom:10px;width:2px;background:linear-gradient(var(--gd),var(--bd))}
+.ev{position:relative;padding:0 0 20px 36px}.ev::before{content:"";position:absolute;left:0;top:5px;width:16px;height:16px;border-radius:50%;background:var(--sf);border:4px solid var(--gd)}
+.ev b{display:block;font:400 1.1rem var(--fd);color:var(--ac)}.ev h4{font-size:1.05rem}.ev p{max-width:62ch;color:var(--mu)}
+.search{width:100%;max-width:420px;padding:12px 18px;border-radius:999px;border:1px solid var(--bd);background:var(--sf);color:var(--tx);font:inherit;margin-bottom:14px}.search:focus{border-color:var(--ac);outline:0}
+.tw{overflow-x:auto;border:1px solid var(--bd);border-radius:14px}.gt{border-collapse:collapse;width:100%;min-width:540px;font-size:.88rem}.gt th,.gt td{padding:10px 14px;border-bottom:1px solid var(--bd);text-align:left;vertical-align:top}.gt tr:last-child td{border-bottom:0}.gt th{color:var(--mu);font-size:.8rem;font-weight:600;white-space:nowrap;background:var(--s2)}.gt td{color:var(--mu)}.gt td:first-child{color:var(--tx);font-weight:700}
+.defs{display:grid;gap:10px;margin-top:10px;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr))}
+.def{padding:14px 16px;border-radius:14px;background:var(--s2)}
+.def b{display:block;font:400 1.05rem var(--fd);color:var(--tx)}
+.def span{display:block;font-size:.9rem;color:var(--mu);margin-top:3px;line-height:1.55}
+.ch{margin:20px 0 4px;padding:16px 18px;border-radius:16px;background:var(--s2);max-width:640px}
+.ch figcaption{font:600 .9rem var(--fb);color:var(--tx);margin-bottom:10px}
+.rg,.ax{display:grid;grid-template-columns:minmax(96px,132px) 1fr 62px;align-items:center;gap:10px}
+.rg{padding:4px 0;font-size:.85rem}.rg span{color:var(--mu)}.rg b{color:var(--tx);text-align:right;font-weight:700;font-variant-numeric:tabular-nums}
+.tk{position:relative;height:12px;border-radius:99px;background:color-mix(in srgb,var(--bd) 70%,transparent)}
+.tk i{position:absolute;top:0;bottom:0;border-radius:99px;background:linear-gradient(90deg,var(--gd),var(--ac));transform-origin:left;animation:gr .8s cubic-bezier(.2,.7,.2,1) both}.tk i.op{background:linear-gradient(90deg,var(--ac),transparent)}
+.ax{font-size:.75rem;color:var(--mu)}.ax div{grid-column:2;display:flex;justify-content:space-between}
+@keyframes gr{from{transform:scaleX(0)}}
+.tc{margin:20px 0 4px;max-width:660px;overflow-x:auto;border-radius:16px;background:var(--s2)}.tc svg{display:block;width:100%;min-width:520px;height:auto}
+.tc text{fill:var(--mu);font:600 12px var(--fb)}.tc .lb{fill:var(--tx)}.tc .gl{stroke:var(--bd);stroke-width:1}
+.cp{font-size:.82rem;color:var(--mu);margin:6px 2px 0}
+@media(max-width:760px){.hero{grid-template-columns:1fr}.hart{order:-1}.hart svg{max-width:230px}}
+@media(max-width:520px){.rg,.ax{grid-template-columns:84px 1fr 50px;gap:8px}.ch{padding:14px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important}.sm{opacity:.4}}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="hi">
+    <a class="brand" href="#inicio">Panadería &amp; Repostería</a>
+    <nav class="nav" id="nav" aria-label="Secciones"></nav>
+    <button class="tt" id="tt" aria-label="Cambiar entre tema claro y oscuro">◐</button>
+  </div>
+</header>
+<main>
+  <section class="view on" id="inicio">
+    <div class="hero">
+      <div class="hx">
+        <h1>Panadería, Repostería &amp; Comidas del Mundo</h1>
+        <p class="lead">Harina, agua, sal y levadura: cuatro ingredientes que han alimentado civilizaciones. Azúcar, huevos y mantequilla: la ciencia del dulce. Y un viaje por los panes y postres de los cinco continentes. Esta guía recorre las técnicas, los ingredientes y las historias que hay detrás de cada bocado.</p>
+      </div>
+      <div class="hart" id="hjust"></div>
+    </div>
+    <div class="stn" id="stn"></div>
+    <div class="home" id="home"></div>
+    <p class="note">Guía educativa y simplificada. Las temperaturas y proporciones son orientativas y varían según la harina, el horno y la altitud. No sustituye la práctica ni las recetas de referencia.</p>
+  </section>
+</main>
+
+<script>
+const $=(s,e=document)=>e.querySelector(s),$$=(s,e=document)=>[...e.querySelectorAll(s)];
+
+const V=[
+['panaderia','Panadería','Harina, agua, sal y levadura: la ciencia del pan.','Panadería'],
+['reposteria','Repostería','Pastelería, chocolate, azúcar y técnicas dulces.','Repostería'],
+['mundo','Comidas del mundo','Panes y dulces de los cinco continentes.','Mundo'],
+['ingredientes','Ingredientes','Harinas, endulzantes, levaduras y grasas.','Ingredientes'],
+['tecnicas','Técnicas','Amasado, laminado, fermentación, horneado y temperado.','Técnicas'],
+['historia','Historia','Del pan neolítico al chocolate industrial.','Historia'],
+['tendencias','Tendencias','Masa madre, sin gluten, plant-based y precisión.','Tendencias'],
+['glosario','Glosario','Términos clave explicados fácil.','Glosario']
+];
+
+const IC={panaderia:'<path d="M4 15c0-4.5 3.2-8 8-8s8 3.5 8 8v2.5H4z"/><path d="M9 11.5l1.4 3.2M13.6 11.5l1.4 3.2"/>',reposteria:'<path d="M5.5 12.5h13l-1.4 7.5H6.9z"/><path d="M6.5 12.5c0-3.2 2.4-5.5 5.5-5.5s5.5 2.3 5.5 5.5"/><path d="M12 7V4"/>',mundo:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3.2 3 3.2 15 0 18M12 3c-3.2 3-3.2 15 0 18"/>',ingredientes:'<path d="M12 21V8"/><path d="M12 8c-2.6 0-4-1.7-4-4 2.6 0 4 1.7 4 4zM12 8c2.6 0 4-1.7 4-4-2.6 0-4 1.7-4 4zM12 14c-2.6 0-4-1.7-4-4 2.6 0 4 1.7 4 4zM12 14c2.6 0 4-1.7 4-4-2.6 0-4 1.7-4 4z"/>',tecnicas:'<rect x="6" y="9" width="12" height="6" rx="3"/><path d="M6 12H2.5M18 12h3.5"/>',historia:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',tendencias:'<path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/>',glosario:'<path d="M5 4h10a4 4 0 014 4v12H9a4 4 0 01-4-4z"/><path d="M5 16a4 4 0 014-4h10"/>'};
+const ic=k=>`<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${IC[k]}</svg>`;
+$('main').insertAdjacentHTML('beforeend',V.map(v=>`<section class="view" id="${v[0]}"><div class="sec"><div class="sh">${ic(v[0])}<h2>${v[1]}</h2></div><p class="lead">${v[2]}</p><div id="b-${v[0]}"></div></div></section>`).join(''));
+$('#nav').innerHTML=V.map(v=>`<a class="nl" href="#${v[0]}" data-v="${v[0]}">${v[3]}</a>`).join('');
+$('#home').innerHTML=V.map(v=>`<a class="card hc" href="#${v[0]}">${ic(v[0])}<h3>${v[1]}</h3><p>${v[2]}</p></a>`).join('');
+
+$('#stn').innerHTML=[
+['~14.000','años de historia del pan'],
+['190–220 °C','temperatura típica de horneado'],
+['~5.000','años de historia del cacao'],
+['72 h','fermentación en frío habitual'],
+['~3.000','variedades de pan en el mundo'],
+['4','pilares: harina, agua, sal y levadura']
+].map(s=>`<div class="st"><b>${s[0]}</b><span>${s[1]}</span></div>`).join('');
+
+const P=t=>`<p>${t}</p>`,ul=a=>`<ul>${a.map(x=>`<li>${x}</li>`).join('')}</ul>`,ol=a=>`<ol>${a.map(x=>`<li>${x}</li>`).join('')}</ol>`;
+const gt=(h,r)=>`<div class="tw"><table class="gt"><tr>${h.map(x=>`<th>${x}</th>`).join('')}</tr>${r.split('\n').map(l=>`<tr>${l.split('|').map(c=>`<td>${c}</td>`).join('')}</tr>`).join('')}</table></div>`;
+const ev=a=>`<div class="tl">${a.map(x=>`<div class="ev"><b>${x[0]}</b><h4>${x[1]}</h4><p>${x[2]}</p></div>`).join('')}</div>`;
+const dfs=a=>`<div class="defs">${a.map(x=>`<div class="def"><b>${x[0]}</b><span>${x[1]}</span></div>`).join('')}</div>`;
+const tabs=(id,a)=>{const b=$('#b-'+id);b.innerHTML=`<div class="tabs" role="tablist">${a.map((x,i)=>`<button class="tab" role="tab" data-i="${i}">${x[0]}</button>`).join('')}</div><div class="panel" role="tabpanel"><div class="pt"></div></div>`;const s=i=>{$$('.tab',b).forEach((t,j)=>t.setAttribute('aria-selected',i==j));$('.pt',b).innerHTML=a[i][1]};b.onclick=e=>{const t=e.target.closest('.tab');t&&s(+t.dataset.i)};s(0)};
+const B=(id,h)=>$('#b-'+id).innerHTML=h;
+const rng=(t,mn,mx,u,rows)=>`<figure class="ch"><figcaption>${t}</figcaption>${rows.map(r=>{const lo=r[1],hi=r[2],a=(lo-mn)/(mx-mn)*100,w=Math.max(((hi==null?mx:hi)-lo)/(mx-mn)*100,1.6);return`<div class="rg"><span>${r[0]}</span><div class="tk"><i class="${hi==null?'op':''}" style="left:${a}%;width:${w}%"></i></div><b>${r[3]}</b></div>`}).join('')}<div class="ax"><span></span><div><span>${mn}${u}</span><span>${mx}${u}</span></div></div></figure>`;
+const temp=()=>{const g=[[200,20],[149,30],[97,40],[46,50]];return`<figure class="tc"><svg viewBox="0 0 600 236" role="img" aria-label="Curva de templado: fundir a 45–50 °C, enfriar a 27–28 °C y recalentar a 31–32 °C para chocolate negro o 29–30 °C para chocolate con leche y blanco">
+<g class="gl">${g.map(a=>`<path d="M52 ${a[0]}H596"/>`).join('')}</g>${g.map(a=>`<text x="44" y="${a[0]+4}" text-anchor="end">${a[1]} °C</text>`).join('')}
+<path d="M100 46V71M250 159V164M400 138V143M400 149V154" stroke="var(--gd)" stroke-opacity=".4" stroke-width="14" fill="none"/>
+<g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"><path d="M100 59L250 161L400 151" stroke="var(--gd)"/><path d="M100 59L250 161L400 141" stroke="var(--ac)"/></g>
+<g fill="var(--sf)" stroke-width="3"><circle cx="100" cy="59" r="5" stroke="var(--ac)"/><circle cx="250" cy="161" r="5" stroke="var(--ac)"/><circle cx="400" cy="141" r="4.5" stroke="var(--ac)"/><circle cx="400" cy="151" r="4.5" stroke="var(--gd)"/></g>
+<text x="116" y="63">45–50 °C</text><text x="250" y="184" text-anchor="middle">27–28 °C</text><text class="lb" x="414" y="136">Negro 31–32 °C</text><text class="lb" x="414" y="168">Leche y blanco 29–30 °C</text>
+<text class="lb" x="100" y="224" text-anchor="middle">1 Fundir</text><text class="lb" x="250" y="224" text-anchor="middle">2 Enfriar</text><text class="lb" x="400" y="224" text-anchor="middle">3 Recalentar</text></svg><p class="cp">Cada punto marca el valor medio de su rango. El recorrido es común hasta el enfriado; solo cambia el recalentado.</p></figure>`};
+
+$('#hjust').innerHTML=`<svg viewBox="0 0 320 300" role="img" aria-label="Hogaza redonda con cortes dorados, vapor y espigas de trigo">
+<defs><linearGradient id="cr" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e5ad5f"/><stop offset="1" stop-color="#93501d"/></linearGradient>
+<g id="we" fill="#e8b04b"><path d="M0 0V-92" stroke="#e8b04b" stroke-width="2.5"/><ellipse cx="0" cy="-98" rx="4" ry="9"/>${[-30,-46,-62,-78].map(y=>`<ellipse cx="-7" cy="${y}" rx="4" ry="9" transform="rotate(-32 -7 ${y})"/><ellipse cx="7" cy="${y}" rx="4" ry="9" transform="rotate(32 7 ${y})"/>`).join('')}</g></defs>
+<circle cx="160" cy="150" r="138" fill="#e8b04b" fill-opacity=".08"/><circle cx="160" cy="150" r="146" fill="none" stroke="#e8b04b" stroke-opacity=".3" stroke-dasharray="3 9"/>
+<use href="#we" transform="translate(40 272) rotate(-13) scale(1.4)"/><use href="#we" transform="translate(66 272) rotate(-4) scale(1.1)" opacity=".65"/>
+<use href="#we" transform="translate(280 272) rotate(13) scale(1.4)"/><use href="#we" transform="translate(254 272) rotate(4) scale(1.1)" opacity=".65"/>
+<ellipse cx="160" cy="258" rx="112" ry="9" fill="#000" opacity=".28"/>
+<path d="M42 196C42 128 92 98 160 98S278 128 278 196C278 234 228 252 160 252S42 234 42 196Z" fill="url(#cr)"/>
+<path d="M70 164Q96 122 150 112" fill="none" stroke="#fff" stroke-opacity=".2" stroke-width="6" stroke-linecap="round"/>
+<g fill="none" stroke="#f7dfb0" stroke-width="9" stroke-linecap="round"><path d="M108 132Q124 168 118 208"/><path d="M160 122Q170 168 160 214"/><path d="M212 132Q198 168 204 208"/></g>
+<g fill="none" stroke="#f8efe3" stroke-width="3" stroke-linecap="round"><path class="sm" d="M128 88q-12-14 0-28t0-28"/><path class="sm" style="animation-delay:1.2s" d="M160 80q-12-14 0-28t0-28"/><path class="sm" style="animation-delay:2.4s" d="M192 88q-12-14 0-28t0-28"/></g>
+</svg>`;
+
+/* ---------- PANADERÍA ---------- */
+tabs('panaderia',[
+['Fundamentos',
+P('El pan se construye con <b>cuatro ingredientes</b>: harina, agua, sal y levadura (o masa madre). La harina aporta almidón y proteínas; el agua hidrata; la sal refuerza el gluten y da sabor; la levadura o los fermentos generan gas.')+
+P('La harina de trigo contiene dos proteínas clave: <b>glutenina</b> (elasticidad) y <b>gliadina</b> (extensibilidad). Al hidratarse y amasarse forman el <b>gluten</b>, una red elástica que atrapa el gas de la fermentación y permite que el pan crezca.')+
+gt(['Ingrediente','Función principal','Nota'],`Harina|Estructura y alimento de la levadura|La fuerza (W) y el porcentaje de proteína determinan el tipo de pan
+Agua|Hidratación, gluten y textura|La panadería profesional usa porcentajes de panadero (harina = 100%)
+Sal|Sabor, refuerzo del gluten, control de fermentación|1,8–2,2% típico sobre harina
+Levadura o masa madre|Producción de gas y aromas|Levadura comercial o fermento natural`)+
+P('La <b>hidratación</b> es el porcentaje de agua respecto a la harina. Una baguette ronda el 65–70%, una ciabatta puede superar el 80%, y una masa de brioche baja al 50% por la grasa y el azúcar.')+rng('Hidratación habitual (% de agua sobre harina)',40,90,'%',[['Brioche',50,50,'~50%'],['Baguette',65,70,'65–70%'],['Ciabatta',80,null,'más de 80%']])],
+['Fermentación',
+P('La fermentación es la fase que da sabor, digestibilidad y volumen. Hay dos grandes familias:')+
+ul([
+'<b>Levadura comercial:</b> <i>Saccharomyces cerevisiae</i> seleccionada. Fermentación rápida (1–3 h), sabor limpio y predecible.',
+'<b>Masa madre:</b> cultivo simbiótico de levaduras y bacterias lácticas. Fermentación lenta (varias horas), más ácido y más aromas. La acidez mejora la conservación y la digestibilidad del gluten.'
+])+
+P('En panadería profesional se distinguen la <b>fermentación en bloque</b> (antes de dividir la masa) y la <b>fermentación final</b> o <i>proofing</i> (ya formado el pan). La <b>retardación en frío</b> (12–72 h a 4 °C) desarrolla sabor y facilita la planificación.')+
+P('La temperatura de la masa es un factor crítico: la fermentación se acelera con el calor. Por eso se controla la temperatura del agua y se usan masas frías en climas cálidos.')],
+['Tipos de pan',
+P('Existen miles de variedades de pan. Estas son algunas de las más representativas:')+
+gt(['Pan','Origen','Característica'],`Baguette|Francia|Miga abierta, corteza crujiente, alta hidratación
+Pan de centeno|Norte de Europa|Denso, ácido, rico en fibra
+Focaccia|Italia|Masa aceitada, miga alveolada, hierbas
+Ciabatta|Italia|Muy hidratada, miga irregular
+Pan de molde|Reino Unido y EE. UU.|Miga tierna, ideal para sándwich
+Pumpernickel|Alemania|Centeno integral, horneado largo a baja temperatura
+Naan|Asia del Sur|Plano, cocido en horno tandoor
+Tortilla de maíz|México|Nixtamalizada, sin gluten, base de tacos
+Pita|Oriente Medio|Plana, forma bolsillo al hornear
+Shokupan|Japón|Pan de molde esponjoso, muy tierno
+Injera|Etiopía|Fermentada, plana, ligeramente ácida`)+
+P('La clasificación también puede hacerse por <b>hidratación</b>, por <b>tipo de harina</b>, por <b>método de fermentación</b> o por <b>forma de cocción</b> (horno, plancha, vapor, tandoor).')],
+['Masas y técnicas',
+P('Más allá de la receta, el pan es <b>técnica</b>. Los gestos clave son:')+
+ul([
+'<b>Autólisis:</b> mezclar harina y agua y dejar reposar antes de añadir sal y levadura. Mejora la hidratación y reduce el amasado.',
+'<b>Amasado:</b> desarrolla el gluten. En masas muy hidratadas se sustituye por <i>stretch and fold</i> (plegados) durante la fermentación.',
+'<b>Formado:</b> da tensión superficial a la masa para que suba y no se desparrame. Baguette, batard, boule y pan de molde requieren gestos distintos.',
+'<b>Greñado o <i>scoring</i>:</b> cortes en la superficie que controlan por dónde abre el pan en el horno.',
+'<b>Vapor:</b> los primeros minutos de horneado mantienen la corteza elástica y permiten el <i>oven spring</i>.'
+])+
+P('La <b>fuerza de la harina</b> (medida por el índice W) indica cuánta energía puede soportar la masa. Harinas débiles para bizcochos, harinas fuertes para panes de larga fermentación.')]
+]);
+
+/* ---------- REPOSTERÍA ---------- */
+tabs('reposteria',[
+['Fundamentos',
+P('La repostería es la rama de la cocina que trabaja con <b>harina, azúcar, huevos, grasas y agentes leudantes</b> para crear dulces, pasteles, galletas y postres. A diferencia del pan, la repostería es una <b>ciencia de precisión</b>: pequeñas variaciones cambian el resultado.')+
+dfs([
+['Pasta quebrada','Mantequilla, harina, azúcar y huevo. Base de tartas y galletas.'],
+['Hojaldre','Masa laminada con mantequilla en capas. Base de croissants y milhojas.'],
+['Pasta choux','Masa cocida en agua y mantequilla, con huevos. Base de éclairs y profiteroles.'],
+['Pasta filo','Láminas finísimas de harina y agua. Base de baklava y pastelas.'],
+['Brioche','Masa enriquecida con mantequilla y huevo. Pan dulce de miga tierna.'],
+['Masa batida','Mantequilla y azúcar batidos con huevos. Base de bizcochos y cupcakes.']
+])+
+P('El <b>balance</b> entre estos componentes determina la textura: más grasa da ternura; más azúcar retiene humedad; más huevo aporta estructura y color; más harina endurece.')],
+['Pastelería',
+P('La pastelería clásica francesa e italiana ha codificado las técnicas fundamentales:')+
+ul([
+'<b>Hojaldre:</b> se intercala mantequilla entre capas de masa y se lamina varias veces. Al hornear, el agua de la mantequilla se convierte en vapor y separa las capas. Resultado: crujiente y ligero.',
+'<b>Pasta quebrada:</b> se arena la mantequilla fría con la harina antes de añadir huevo. Se busca una textura arenosa, no elástica.',
+'<b>Pasta choux:</b> se cuece la harina con agua y mantequilla, se enfría y se añaden huevos hasta obtener una masa brillante que se hincha en el horno.',
+'<b>Merengue:</b> claras batidas con azúcar. Francés, italiano (con almíbar) y suizo (al baño María) son las tres variantes clásicas.',
+'<b>Crema pastelera:</b> leche, yemas, azúcar, maicena y vainilla. Base de tartas, éclairs y milhojas.'
+])+
+P('La <b>temperatura</b> es crítica: la mantequilla debe estar fría para el hojaldre, a temperatura ambiente para las masas batidas, y el chocolate debe templarse para brillar y romper con un chasquido.')],
+['Chocolate',
+P('El chocolate es una de las preparaciones más técnicas de la repostería. Se obtiene de las semillas del <b>cacao</b>, fermentadas, secadas, tostadas y molidas.')+
+ul([
+'<b>Composición:</b> pasta de cacao (sólidos y manteca), azúcar, y opcionalmente leche, vainilla y emulsionantes.',
+'<b>Porcentaje:</b> indica la proporción de pasta de cacao. Un 70% tiene más cacao y menos azúcar que un 50%.',
+'<b>Tipos:</b> negro, con leche, blanco (sin sólidos de cacao, solo manteca), ruby (cacao fermentado de forma especial).',
+'<b>Templado:</b> proceso de calentar y enfriar el chocolate para estabilizar los cristales de manteca de cacao en la forma V, la que da brillo y chasquido.'
+])+
+P('El <b>templado</b> es la técnica más delicada: hay que llevar el chocolate a 45–50 °C, enfriarlo a 27–28 °C y volver a subirlo a 31–32 °C (negro) o 29–30 °C (con leche). Sin templar, el chocolate aparece grisáceo y blando por florecimiento de grasa.')],
+['Azúcar y decoración',
+P('El azúcar no solo endulza: estructura, conserva, da color y textura. En repostería se trabaja en varios estados:')+
+gt(['Estado','Temperatura aprox.','Uso'],`Almíbar|100–105 °C|Humectar bizcochos
+Hilo|105–110 °C|Cabello de ángel
+Bola blanda|112–116 °C|Fondant, caramelos blandos
+Bola dura|118–121 °C|Caramelos duros
+Caramelo claro|160–170 °C|Color y sabor
+Caramelo oscuro|170–180 °C|Sabor intenso, flan
+Caramelo quemado|más de 180 °C|Amargo, no apto`)+
+ul([
+'<b>Merengue:</b> claras y azúcar batidas. El italiano se hace con almíbar a 118 °C y es el más estable.',
+'<b>Fondant:</b> azúcar, agua y glucosa cocidos y batidos hasta formar una pasta elástica para cubrir tartas.',
+'<b>Isomalt:</b> sustituto del azúcar para decoraciones translúcidas y resistentes a la humedad.',
+'<b>Glasé real:</b> clara de huevo y azúcar glas, para decorar galletas con línea fina.'
+])]
+]);
+
+/* ---------- COMIDAS DEL MUNDO ---------- */
+tabs('mundo',[
+['Europa',
+P('Europa es el corazón de muchas tradiciones panaderas y reposteras que hoy son globales.')+
+ul([
+'<b>Francia:</b> baguette, croissant, brioche, éclair, macaron, tarte tatin, crème brûlée.',
+'<b>Italia:</b> focaccia, ciabatta, panettone, tiramisú, cannoli, panna cotta, gelato.',
+'<b>España:</b> churros, torrijas, tortilla de patatas, pan con tomate, crema catalana, turrón.',
+'<b>Alemania:</b> pretzel, stollen, Black Forest, pan de centeno, Apfelstrudel.',
+'<b>Reino Unido:</b> scones, shortbread, pasty, pan de molde, spotted dick.',
+'<b>Portugal:</b> pastel de nata, pão de ló, bacalhau.'
+])],
+['América',
+P('América combina tradiciones indígenas, africanas y europeas en una repostería única.')+
+ul([
+'<b>México:</b> tortilla de maíz y de trigo, pan dulce, conchas, flan, churros, tamales.',
+'<b>Perú:</b> pan de yuca, alfajores, suspiro a la limeña, turrón de Doña Pepa.',
+'<b>Argentina y Uruguay:</b> medialunas, alfajores, dulce de leche, facturas, asado.',
+'<b>Brasil:</b> pão de queijo, brigadeiro, bolo de cenoura, feijoada.',
+'<b>Estados Unidos:</b> cornbread, apple pie, brownies, cheesecake, biscuits and gravy.',
+'<b>Caribe:</b> pan de coco, pastelitos, flan, arroz con dulce.'
+])],
+['Asia',
+P('Asia ofrece una diversidad enorme de panes y dulces, muchos de ellos al vapor o con arroz.')+
+ul([
+'<b>Japón:</b> shokupan, mochi, dorayaki, taiyaki, matcha en repostería.',
+'<b>China:</b> mantou (pan al vapor), baozi, mooncake, spring rolls, tangyuan.',
+'<b>India:</b> naan, paratha, chapati, gulab jamun, jalebi, barfi.',
+'<b>Tailandia:</b> sticky rice con mango, roti, kanom krok.',
+'<b>Corea:</b> hotteok, tteok, bungeoppang.',
+'<b>Vietnam:</b> banh mi (con influencia francesa), banh xeo.'
+])],
+['África y Oriente Medio',
+P('El pan y los dulces son centrales en la vida social de África y Oriente Medio.')+
+ul([
+'<b>Marruecos:</b> msemen, baghrir, pastilla, chebakia, té con menta.',
+'<b>Etiopía:</b> injera (fermentada), doro wat, ambasha.',
+'<b>Turquía:</b> baklava, simit, künefe, lokum, pan de pita.',
+'<b>Líbano y Levante:</b> manakish, baklava, knafeh, hummus con pan de pita.',
+'<b>Egipto:</b> pan baladi, koshari, basbousa, feteer meshaltet.',
+'<b>África Occidental:</b> pan de maíz, fufu, akara, puff-puff.'
+])],
+['Oceanía',
+P('Oceanía mezcla tradiciones polinesias, británicas y asiáticas.')+
+ul([
+'<b>Australia:</b> meat pie, lamingtons, ANZAC biscuits, pavlova (disputada con Nueva Zelanda).',
+'<b>Nueva Zelanda:</b> pavlova, hokey pokey, afghan biscuits, rewena bread (masa madre maorí).',
+'<b>Polinesia:</b> taro, pan de coco, poi, kalua pig.',
+'<b>Fiyi y Samoa:</b> pan de coco, kokoda, palusami.'
+])]
+]);
+
+/* ---------- INGREDIENTES ---------- */
+tabs('ingredientes',[
+['Harinas',
+P('La harina es la base de la panadería y la repostería. Cada cereal y cada molienda dan resultados distintos.')+
+gt(['Harina','Proteína aprox.','Uso típico'],`Trigo panificable|10–12%|Pan, masas fermentadas
+Trigo de fuerza|12–14%|Pan de larga fermentación, brioche
+Trigo flojo|8–10%|Bizcochos, galletas, pastas quebradas
+Centeno|8–10%|Pan denso, alemán y nórdico
+Maíz|6–8%|Tortillas, arepas, pan de maíz
+Arroz|6–7%|Sin gluten, repostería asiática
+Garbanzo|20–25%|Fainá, pan sin gluten
+Alforfón|10–13%|Sin gluten, sabor intenso`)+
+rng('Proteína aproximada por harina',0,30,'%',[['Garbanzo',20,25,'20–25%'],['Trigo de fuerza',12,14,'12–14%'],['Alforfón',10,13,'10–13%'],['Trigo panificable',10,12,'10–12%'],['Trigo flojo',8,10,'8–10%'],['Centeno',8,10,'8–10%'],['Maíz',6,8,'6–8%'],['Arroz',6,7,'6–7%']])+
+P('La <b>fuerza</b> de la harina se mide con el índice W (alveógrafo de Chopin). Harinas débiles (W menor que 150) para bizcochos; harinas fuertes (W mayor que 300) para masas de larga fermentación o muy enriquecidas.')],
+['Endulzantes',
+P('El azúcar es mucho más que dulzor: aporta color, textura, conservación y volumen.')+
+ul([
+'<b>Azúcar blanco:</b> sacarosa refinada. El más neutro.',
+'<b>Azúcar moreno:</b> con melaza residual. Más húmedo y aromático.',
+'<b>Muscovado:</b> sin refinar, muy húmedo, sabor intenso a melaza.',
+'<b>Azúcar glas:</b> pulverizado con almidón. Para glaseados y decoración.',
+'<b>Miel:</b> fructosa y glucosa. Retiene humedad y aporta aromas.',
+'<b>Jarabe de arce:</b> savia de arce reducida. Notas ahumadas.',
+'<b>Melaza:</b> subproducto del refinado. Oscura, amarga, rica en minerales.',
+'<b>Sirope de glucosa:</b> evita la cristalización en caramelos y glaseados.'
+])],
+['Levaduras y fermentos',
+P('Hay tres grandes familias de agentes leudantes:')+
+ul([
+'<b>Levaduras biológicas:</b> <i>Saccharomyces cerevisiae</i> (fresca, seca activa, instantánea). Fermentan azúcares y producen CO₂ y etanol.',
+'<b>Masa madre:</b> cultivo de levaduras salvajes y bacterias lácticas. Fermentación más lenta y ácida.',
+'<b>Levaduras químicas:</b> bicarbonato de sodio (necesita ácido) y polvo de hornear (bicarbonato más ácido más almidón). Reaccionan sin fermentación.',
+'<b>Huevos y claras:</b> el batido incorpora aire; el vapor de agua también leuda.'
+])+
+P('La <b>levadura fresca</b> se usa al 2–3% del peso de la harina; la <b>seca instantánea</b> al 0,7–1%. La masa madre se usa al 20–30% en panadería artesanal.')],
+['Grasas y lácteos',
+P('Las grasas aportan ternura, sabor, color y conservación. Los lácteos añaden humedad, lactosa y reacción de Maillard.')+
+ul([
+'<b>Mantequilla:</b> 80–82% de grasa. La europea tiene más grasa y menos agua que la americana. Clave en hojaldre y brioche.',
+'<b>Aceite:</b> líquido a temperatura ambiente. Focaccia, bizcochos, panes enriquecidos.',
+'<b>Manteca de cerdo:</b> hojaldre tradicional, empanadas, panes mexicanos.',
+'<b>Ghee:</b> mantequilla clarificada. Sabor a nuez, punto de humo alto.',
+'<b>Nata o crema:</b> 30–38% de grasa. Montaje, ganache, cremas.',
+'<b>Leche y nata en polvo:</b> concentran sólidos lácteos y favorecen el color.'
+])]
+]);
+
+/* ---------- TÉCNICAS ---------- */
+tabs('tecnicas',[
+['Amasado y gluten',
+P('El amasado desarrolla la red de gluten. Los gestos varían según la masa:')+
+ul([
+'<b>Amasado tradicional:</b> estirar, plegar y girar la masa hasta que quede lisa y elástica. Prueba de la ventana: la masa se estira sin romperse.',
+'<b>Autólisis:</b> mezclar harina y agua y reposar 20–60 min. Las enzimas hidratan la harina y el gluten se forma solo.',
+'<b>Stretch and fold:</b> plegados cada 30–45 min durante la fermentación. Alternativa al amasado en masas muy hidratadas.',
+'<b>Slap and fold:</b> golpear y plegar la masa sobre la mesa. Desarrolla gluten rápido en masas hidratadas.'
+])],
+['Laminado',
+P('El <b>laminado</b> consiste en intercalar capas de grasa entre capas de masa y estirarlas repetidamente. Al hornear, el agua de la grasa se convierte en vapor y separa las capas, creando hojaldre.')+
+ul([
+'<b>Hojaldre clásico:</b> masa más bloque de mantequilla. 3–6 vueltas simples o dobles.',
+'<b>Hojaldre invertido:</b> la mantequilla envuelve la masa. Más resistente en climas cálidos.',
+'<b>Hojaldre rápido:</b> mantequilla fría en trozos dentro de la masa. Menos capas, resultado más rústico.',
+'<b>Croissant:</b> masa de levadura laminada. Fermentación más laminado igual a textura única.'
+])+
+P('La temperatura es crítica: la mantequilla debe estar plástica pero fría. Si se calienta demasiado, se integra en la masa y se pierden las capas.')],
+['Fermentación y formado',
+P('La fermentación da volumen y sabor; el formado da estructura.')+
+ul([
+'<b>Fermentación en bloque:</b> primera fase, antes de dividir. Desarrolla gluten y aromas.',
+'<b>División y preformado:</b> se corta la masa y se le da una forma preliminar para relajar el gluten.',
+'<b>Formado final:</b> se da la forma definitiva con tensión superficial.',
+'<b>Fermentación final:</b> la masa crece hasta casi duplicar su volumen. Prueba del dedo: si la marca vuelve lentamente, está lista.',
+'<b>Retardación en frío:</b> 12–72 h a 4 °C. Desarrolla sabor y facilita el horneado programado.'
+])],
+['Horneado',
+P('El horneado transforma la masa en pan o pastel mediante tres procesos:')+
+ul([
+'<b>Oven spring:</b> los primeros minutos, el gas se expande y el pan crece antes de que la corteza se endurezca.',
+'<b>Reacción de Maillard:</b> aminoácidos más azúcares reductores más calor producen color dorado y aromas tostados. Ocurre a partir de 140–150 °C.',
+'<b>Caramelización:</b> los azúcares se descomponen por el calor, dando color y sabor a caramelo. A partir de 160–170 °C.',
+'<b>Gelatinización del almidón:</b> el almidón absorbe agua y se hincha, fijando la estructura de la miga.'
+])+
+P('El <b>vapor</b> en los primeros minutos mantiene la corteza elástica y permite el crecimiento. En panadería profesional se inyecta vapor; en casa se puede usar una bandeja con agua o pulverizar.')],
+['Temperado de chocolate',
+P('El <b>templado</b> estabiliza la manteca de cacao en su forma cristalina V, la que da brillo, chasquido y contracción al enfriar.')+
+ol([
+'<b>Fundir:</b> llevar el chocolate a 45–50 °C al baño María.',
+'<b>Enfriar:</b> bajar a 27–28 °C removiendo o añadiendo chocolate ya templado (sembrado).',
+'<b>Recalentar:</b> subir a 31–32 °C (negro) o 29–30 °C (con leche y blanco).',
+'<b>Comprobar:</b> sumergir la punta de un cuchillo; debe solidificar en unos minutos con brillo.'
+])+
+temp()+P('Sin templar, el chocolate desarrolla <b>florecimiento de grasa</b> (manchas blancas) o de azúcar, y pierde textura.')]
+]);
+
+/* ---------- HISTORIA ---------- */
+tabs('historia',[
+['Pan',ev([
+['~14.000 a.C.','Pan plano','En el yacimiento de Shubayqa 1 (Jordania) se han encontrado restos de pan plano de cereales silvestres, anterior a la agricultura.'],
+['~8.000 a.C.','Agricultura','La domesticación del trigo y la cebada en el Creciente Fértil hace posible el pan regular.'],
+['~3.000 a.C.','Egipto','Se documentan panes fermentados y hornos de ladrillo. El pan era alimento y moneda.'],
+['~100 a.C.','Roma','El pan se profesionaliza: surgen los primeros gremios de panaderos (pistores).'],
+['s. V–XV','Edad Media','El pan es la base de la dieta europea. El pan blanco es signo de estatus.'],
+['1810','Horno de vapor','La revolución industrial mecaniza la panadería.'],
+['1961','Chorleywood','En el Reino Unido se desarrolla el proceso Chorleywood, que reduce el tiempo de fermentación a minutos.'],
+['2000–2020','Revival de la masa madre','El pan artesanal y la masa madre vuelven a ser tendencia global.']
+])],
+['Azúcar y chocolate',ev([
+['~8.000 a.C.','Caña de azúcar','Se domestica en Nueva Guinea y se extiende por Asia.'],
+['~500 a.C.','India','Se documenta la cristalización del azúcar y la producción de azúcar en polvo.'],
+['s. VII','Expansión','Los árabes llevan el azúcar al Mediterráneo y a Europa.'],
+['~1.900 a.C.','Cacao','Los olmecas consumen bebidas de cacao en Mesoamérica.'],
+['s. XVI','Europa','El chocolate llega a España y se populariza como bebida.'],
+['1828','Prensa de cacao','Van Houten inventa la prensa que separa la manteca de cacao y permite el cacao en polvo.'],
+['1847','Chocolate sólido','Fry and Sons produce la primera barra de chocolate sólido.'],
+['1879','Conchado','Rodolphe Lindt inventa el conchado, que da textura suave al chocolate.']
+])],
+['Repostería moderna',ev([
+['s. XVIII','Pastelería francesa','Carême sistematiza las técnicas y la arquitectura de la pastelería.'],
+['1843','Polvo de hornear','Se inventa el primer polvo de hornear químico, que simplifica la repostería doméstica.'],
+['s. XIX','Escuela francesa','Escoffier y la cocina clásica codifican salsas, cremas y postres.'],
+['1900–1950','Industrialización','Galletas, bollos y pasteles industriales se popularizan.'],
+['2000s','Pastelería molecular','Ferran Adrià y otros chefs introducen esferificaciones, aires y geles en la repostería.'],
+['2010s','Artesanía y precisión','La balanza de precisión, el termómetro y el control de temperatura se vuelven estándar en la repostería doméstica avanzada.']
+])]
+]);
+
+/* ---------- TENDENCIAS ---------- */
+tabs('tendencias',[
+['Masa madre',
+P('La masa madre ha pasado de ser una técnica tradicional a un fenómeno global. Sus defensores destacan el sabor, la conservación y la digestibilidad; los estudios científicos son más matizados.')+
+ul([
+'<b>Sabor y aroma:</b> la fermentación láctica produce ácidos orgánicos y ésteres que el pan industrial no desarrolla.',
+'<b>Conservación:</b> la acidez retrasa el crecimiento de mohos.',
+'<b>Digestibilidad:</b> la fermentación larga degrada parte del gluten y los fitatos, pero no elimina el gluten.',
+'<b>Comunidad:</b> foros, talleres y redes sociales han convertido la masa madre en un fenómeno cultural.'
+])],
+['Sin gluten',
+P('La enfermedad celíaca y la sensibilidad al gluten no celíaca han impulsado el desarrollo de panes y repostería sin gluten.')+
+ul([
+'<b>Sustitutos:</b> harinas de arroz, maíz, garbanzo, alforfón, teff, quinoa y sorgo.',
+'<b>Hidrocoloides:</b> goma xantana, goma guar y psyllium imitan la red de gluten.',
+'<b>Retos:</b> miga seca, poca vida útil y sabor neutro. La fermentación y las mezclas de harinas mejoran el resultado.',
+'<b>Contaminación cruzada:</b> la certificación sin gluten exige control estricto de toda la cadena.'
+])],
+['Plant-based',
+P('La repostería vegana sustituye huevos, lácteos y mantequilla con alternativas funcionales.')+
+ul([
+'<b>Huevo:</b> aquafaba (agua de garbanzo), lino molido, chía, puré de manzana, plátano.',
+'<b>Mantequilla:</b> margarinas vegetales, aceite de coco, purés de frutos secos.',
+'<b>Leche:</b> bebidas de avena, soja, almendra o coco.',
+'<b>Retos:</b> estructura, color y sabor. La repostería vegana exige ajustar proporciones y técnicas.'
+])],
+['Tecnología y precisión',
+P('La tecnología está cambiando la panadería y la repostería profesional y doméstica.')+
+ul([
+'<b>Básculas de precisión y termómetros:</b> permiten reproducir recetas con exactitud.',
+'<b>Hornos de convección y combinados:</b> control preciso de temperatura y humedad.',
+'<b>Fermentación controlada:</b> cámaras y armarios que mantienen temperatura y humedad constantes.',
+'<b>Software y apps:</b> cálculo de porcentajes de panadero, planificación de fermentaciones y recetas escalables.',
+'<b>IA y desarrollo de recetas:</b> modelos que proponen combinaciones y ajustan fórmulas.'
+])]
+]);
+
+/* ---------- GLOSARIO ---------- */
+(()=>{
+const G=[
+['Alveolado','Conjunto de alvéolos (burbujas) de la miga del pan; su tamaño y distribución indican la fermentación y la hidratación.'],
+['Autólisis','Reposo de harina y agua antes de añadir sal y levadura; mejora la hidratación y reduce el amasado.'],
+['Brioche','Masa enriquecida con mantequilla y huevo, de miga tierna y sabor dulce.'],
+['Caramelización','Descomposición de los azúcares por el calor, que produce color y sabor a caramelo.'],
+['Choux','Masa cocida de harina, agua, mantequilla y huevos; base de éclairs y profiteroles.'],
+['Conchado','Proceso de refinado del chocolate que reduce el tamaño de partícula y suaviza la textura.'],
+['Cristalización','Formación de cristales de azúcar o grasa; controlada en caramelos y chocolate.'],
+['Emulsión','Mezcla estable de dos líquidos inmiscibles, como agua y grasa, unidos por un emulsionante.'],
+['Fermentación','Transformación de azúcares por microorganismos, que produce gas, ácidos y aromas.'],
+['Gluten','Red proteica formada por glutenina y gliadina al hidratar y amasar la harina de trigo.'],
+['Hidratación','Porcentaje de agua respecto a la harina en una masa.'],
+['Hojaldre','Masa laminada con capas de grasa; al hornear, el vapor separa las capas y crea textura crujiente.'],
+['Levadura','Microorganismo que fermenta azúcares y produce CO₂ y etanol.'],
+['Maillard','Reacción entre aminoácidos y azúcares reductores que produce color dorado y aromas tostados.'],
+['Masa madre','Cultivo de levaduras y bacterias lácticas usado para fermentar pan de forma natural.'],
+['Merengue','Claras de huevo batidas con azúcar; francés, italiano o suizo.'],
+['Nixtamalización','Tratamiento del maíz con cal para hacer tortillas; mejora la digestibilidad y el valor nutricional.'],
+['Oven spring','Crecimiento rápido del pan al inicio del horneado por expansión del gas.'],
+['Pasta quebrada','Masa de mantequilla, harina, azúcar y huevo; base de tartas y galletas.'],
+['Prefermento','Masa o líquido fermentado previamente (poolish, biga, esponja) que se añade a la masa final.'],
+['Templado','Proceso de calentar y enfriar el chocolate para estabilizar los cristales de manteca de cacao.'],
+['Windowpane','Prueba de la ventana: estirar la masa hasta que se vea la luz a través sin romperse.']
+];
+B('glosario','<input class="search" id="q" type="search" placeholder="Buscar un término" aria-label="Buscar en el glosario"><div class="grid" id="gl"></div>');
+const r=f=>{$('#gl').innerHTML=G.filter(g=>(g[0]+g[1]).toLowerCase().includes(f)).map(g=>`<div class="card"><h3>${g[0]}</h3><p>${g[1]}</p></div>`).join('')||'<p class="note">No hay términos con esa búsqueda.</p>'};
+$('#q').oninput=e=>r(e.target.value.toLowerCase().trim());r('')})();
+
+/* ---------- NAVEGACIÓN Y TEMA ---------- */
+const go=h=>{
+  h=V.some(v=>v[0]===h)?h:'inicio';
+  $$('.view').forEach(e=>e.classList.toggle('on',e.id===h));
+  $$('.nl').forEach(a=>a.classList.toggle('on',a.dataset.v===h));
+  scrollTo(0,0);
+};
+addEventListener('hashchange',()=>go(location.hash.slice(1)));
+$('#tt').onclick=()=>{
+  const d=document.documentElement;
+  const k=d.dataset.theme?d.dataset.theme==='dark':matchMedia('(prefers-color-scheme:dark)').matches;
+  d.dataset.theme=k?'light':'dark';
+};
+go(location.hash.slice(1));
+</script>
+</body>
+</html>
