@@ -4,6 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Enciclopedia Visual · Fioravante</title>
+  <meta name="description" content="Enciclopedia visual digital: temas de ciencia, historia, arte, naturaleza y oficios organizados por orden alfabético y por materia, con experiencias interactivas.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Fioravante">
+  <meta property="og:locale" content="es_AR">
+  <meta property="og:title" content="Enciclopedia Visual · Fioravante">
+  <meta property="og:description" content="Explora el conocimiento de forma visual: temas organizados por orden alfabético y por materia, cada uno con una experiencia interactiva completa.">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Enciclopedia Visual · Fioravante">
+  <meta name="twitter:description" content="Explora el conocimiento de forma visual: temas organizados por orden alfabético y por materia.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
@@ -698,6 +707,19 @@
       .theme-toggle { top: 14px; right: 14px; width: 42px; height: 42px; }
     }
 
+    /* ─── ACCESIBILIDAD: TEXTO SOLO PARA LECTORES DE PANTALLA ─── */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
     /* ─── ACCESIBILIDAD: REDUCED MOTION ─── */
     @media (prefers-reduced-motion: reduce) {
       *,
@@ -732,7 +754,7 @@
         de forma visual
       </h1>
       <p class="header-subtitle">
-        50 temas organizados por orden alfabético y por materia. Cada tarjeta abre una experiencia interactiva completa.
+        <span id="totalCount">Decenas de</span> temas organizados por orden alfabético y por materia. Cada tarjeta abre una experiencia interactiva completa.
       </p>
     </header>
 
@@ -754,8 +776,8 @@
           >
         </div>
         <div class="view-toggle" role="group" aria-label="Modo de visualización">
-          <button class="view-btn active" data-view="alphabetical" id="btnAlphabetical">A – Z</button>
-          <button class="view-btn" data-view="byCategory" id="btnByCategory">Por materia</button>
+          <button class="view-btn active" data-view="alphabetical" id="btnAlphabetical" aria-pressed="true">A – Z</button>
+          <button class="view-btn" data-view="byCategory" id="btnByCategory" aria-pressed="false">Por materia</button>
         </div>
       </div>
 
@@ -776,7 +798,7 @@
     <footer class="footer">
       <p>
         Enciclopedia Visual · Contenido original de
-        <a href="https://app-fioravante.github.io/apps-fioravante/" target="_blank" rel="noopener noreferrer">Fioravante</a>.
+        <a href="https://app-fioravante.github.io/apps-fioravante/" target="_blank" rel="noopener noreferrer">Fioravante<span class="sr-only"> (se abre en una nueva pestaña)</span></a>.
         Cada tema se abre en una nueva pestaña.
       </p>
     </footer>
@@ -836,6 +858,14 @@
       { title: 'Teléfono',     url: BASE_URL_OTROS + 'telefono',      category: 'Ciencia y Tecnología',      description: 'De los primeros aparatos mecánicos a los smartphones: la revolución de la comunicación a distancia.', color: '#0ea5e9' },
       { title: 'TV',           url: BASE_URL_OTROS + 'tv',            category: 'Ciencia y Tecnología',      description: 'Historia, evolución tecnológica y el impacto cultural de la televisión.', color: '#22d3ee' },
 
+      // ── Nuevos temas solicitados (dentro de /otros/) ──
+      { title: 'Argentina', url: BASE_URL_OTROS + 'argentina', category: 'Historia y Civilizaciones', description: 'Un recorrido por la historia argentina, desde los pueblos originarios y la colonia hasta la independencia y los grandes procesos políticos y sociales, con su diversidad geográfica y cultural.', color: '#a78bfa' },
+      { title: 'Historia de América', url: BASE_URL_OTROS + 'historia-america', category: 'Historia y Civilizaciones', description: 'Un panorama de la historia americana: civilizaciones precolombinas, conquista, colonización, independencias y la construcción de las naciones modernas.', color: '#a78bfa' },
+      { title: 'Israel', url: BASE_URL_OTROS + 'israel', category: 'Historia y Civilizaciones', description: 'Un recorrido por la historia, la cultura y la geografía de Israel, desde los reinos bíblicos hasta el Estado moderno, y su papel central en las tres religiones monoteístas.', color: '#a78bfa' },
+      { title: 'La Tierra', url: BASE_URL_OTROS + 'la-tierra', category: 'Ciencia y Tecnología', description: 'Explorá nuestro planeta: su formación, estructura interna, atmósfera, océanos, clima y los procesos que hacen posible la vida.', color: '#22d3ee' },
+      { title: 'Microscopio', url: BASE_URL_OTROS + 'microscopio', category: 'Ciencia y Tecnología', description: 'Conocé el instrumento que abrió las puertas del mundo invisible: su historia, tipos, funcionamiento y su impacto en la ciencia y la medicina.', color: '#22d3ee' },
+      { title: 'Misiones Argentina', url: BASE_URL_OTROS + 'misiones-argentina', category: 'Geografía y Naturaleza', description: 'Descubrí la provincia de Misiones: sus cataratas, la selva paranaense, la herencia jesuítica y guaraní, y su rica biodiversidad en la frontera tripartita.', color: '#2dd4bf' },
+
       // ── Nuevos temas (en la raíz de /apps-fioravante/) ──
       { title: 'Albañilería',  url: BASE_URL_ROOT + 'albañileria',    category: 'Oficios y Hogar',           description: 'Aprendé el orden correcto de cada trabajo, los materiales y los errores que más cuestan en una obra doméstica.', color: '#f59e0b' },
       { title: 'Comida',       url: BASE_URL_ROOT + 'comida',         category: 'Cocina y Nutrición',        description: 'Armá un plato equilibrado, entendé tu IMC, conocé las dietas más comunes y cociná recetas fáciles.', color: '#34d399' },
@@ -862,13 +892,33 @@
       { title: 'Multimedia', url: BASE_URL_OTROS + 'multimedia', category: 'Tecnología y Computación', description: 'Imagen, sonido, video y las tecnologías que convergen en el contenido digital que consumimos a diario.', color: '#ec4899' },
       { title: 'Peces', url: BASE_URL_OTROS + 'peces', category: 'Naturaleza y Animales', description: 'Diversidad, fisiología y hábitats de los vertebrados acuáticos que habitan ríos, lagos y océanos.', color: '#06b6d4' },
       { title: 'Sistema Solar', url: BASE_URL_OTROS + 'sistema-solar', category: 'Astronomía y Espacio', description: 'Sol, planetas, lunas y cuerpos menores: un recorrido por el vecindario cósmico que llamamos hogar.', color: '#f97316' },
-      { title: 'Zoo', url: BASE_URL_OTROS + 'zoo', category: 'Naturaleza y Animales', description: 'Un recorrido por la diversidad animal: mamíferos, reptiles, aves y los ecosistemas que habitan.', color: '#14b8a6' }
+      { title: 'Zoo', url: BASE_URL_OTROS + 'zoo', category: 'Naturaleza y Animales', description: 'Un recorrido por la diversidad animal: mamíferos, reptiles, aves y los ecosistemas que habitan.', color: '#14b8a6' },
+
+      // ── Nuevos temas añadidos (programación, primeros auxilios, física, química) ──
+      { title: 'Programación', url: BASE_URL_OTROS + 'programacion', category: 'Tecnología y Computación', description: 'Aprendé los fundamentos de la programación: lenguajes, lógica, estructuras de datos y desarrollo de software.', color: '#8b5cf6' },
+      { title: 'Primeros Auxilios', url: BASE_URL_OTROS + 'primeros-auxilios', category: 'Salud y Medicina', description: 'Técnicas básicas de primeros auxilios: RCP, manejo de heridas, quemaduras y situaciones de emergencia.', color: '#f43f5e' },
+      { title: 'Física', url: BASE_URL_OTROS + 'fisica', category: 'Ciencia y Tecnología', description: 'Leyes fundamentales del universo: mecánica, termodinámica, electromagnetismo y física moderna.', color: '#3b82f6' },
+      { title: 'Química', url: BASE_URL_OTROS + 'quimica', category: 'Ciencia y Tecnología', description: 'Estructura de la materia, reacciones químicas, elementos y compuestos que explican el mundo que nos rodea.', color: '#f97316' }
     ];
+
+    // ─── PERSISTENCIA (localStorage, tolerante a errores) ───
+    const STORAGE_KEYS = { view: 'enc-view', category: 'enc-category' };
+    const VIEW_MODES = ['alphabetical', 'byCategory'];
+
+    function storageGet(key) {
+      try { return localStorage.getItem(key); } catch (e) { return null; }
+    }
+    function storageSet(key, value) {
+      try { localStorage.setItem(key, value); } catch (e) {}
+    }
 
     // ─── ESTADO ───
     let currentCategory = 'all';
     let searchQuery = '';
     let viewMode = 'alphabetical';
+
+    // Comparador alfabético en español: "Á" y "A" se tratan como la misma letra base
+    const collator = new Intl.Collator('es', { sensitivity: 'base' });
 
     // ─── REFERENCIAS DOM ───
     const grid = document.getElementById('grid');
@@ -878,17 +928,71 @@
     const btnAlphabetical = document.getElementById('btnAlphabetical');
     const btnByCategory = document.getElementById('btnByCategory');
 
-    // ─── UTILIDAD: oscurecer un color hex ───
+    // ─── UTILIDAD: oscurecer un color hex (HSL) ───
+    // Reduce la luminosidad de forma relativa: percent = 18 → L × 0.82.
+    // Conserva el tono y nunca llega a negro, incluso con colores ya oscuros.
     function darken(hex, percent) {
-      const num = parseInt(hex.replace('#', ''), 16);
-      const r = Math.max(0, Math.min(255, (num >> 16) - Math.round(255 * percent / 100)));
-      const g = Math.max(0, Math.min(255, ((num >> 8) & 0xFF) - Math.round(255 * percent / 100)));
-      const b = Math.max(0, Math.min(255, (num & 0xFF) - Math.round(255 * percent / 100)));
-      return `#${((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1)}`;
+      const m = /^#?([0-9a-f]{6})$/i.exec(hex);
+      if (!m) return hex;
+      const n = parseInt(m[1], 16);
+      const r = (n >> 16) / 255;
+      const g = ((n >> 8) & 0xFF) / 255;
+      const b = (n & 0xFF) / 255;
+
+      // RGB → HSL
+      const max = Math.max(r, g, b);
+      const min = Math.min(r, g, b);
+      const d = max - min;
+      let h = 0;
+      let l = (max + min) / 2;
+      const s = d === 0 ? 0 : d / (1 - Math.abs(2 * l - 1));
+      if (d !== 0) {
+        if (max === r) h = ((g - b) / d) % 6;
+        else if (max === g) h = (b - r) / d + 2;
+        else h = (r - g) / d + 4;
+        h *= 60;
+        if (h < 0) h += 360;
+      }
+
+      l = Math.max(0, Math.min(1, l * (1 - percent / 100)));
+
+      // HSL → RGB
+      const a = s * Math.min(l, 1 - l);
+      const f = (k) => {
+        const t = (k + h / 30) % 12;
+        return l - a * Math.max(-1, Math.min(t - 3, 9 - t, 1));
+      };
+      const toHex = (v) => Math.round(v * 255).toString(16).padStart(2, '0');
+      return `#${toHex(f(0))}${toHex(f(8))}${toHex(f(4))}`;
+    }
+
+    // ─── UTILIDAD: escapar texto para innerHTML ───
+    function escapeHtml(str) {
+      return String(str).replace(/[&<>"']/g, c => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+      }[c]));
     }
 
     // ─── CATEGORÍAS ÚNICAS ───
     const allCategories = ['all', ...new Set(entries.map(e => e.category))];
+
+    // ─── RESTAURAR PREFERENCIAS GUARDADAS (validadas) ───
+    const savedView = storageGet(STORAGE_KEYS.view);
+    if (VIEW_MODES.includes(savedView)) viewMode = savedView;
+
+    const savedCategory = storageGet(STORAGE_KEYS.category);
+    if (allCategories.includes(savedCategory)) currentCategory = savedCategory;
+
+    // ─── CONTADOR TOTAL EN EL SUBTÍTULO ───
+    document.getElementById('totalCount').textContent = entries.length;
+
+    function syncViewButtons() {
+      const isAlpha = viewMode === 'alphabetical';
+      btnAlphabetical.classList.toggle('active', isAlpha);
+      btnByCategory.classList.toggle('active', !isAlpha);
+      btnAlphabetical.setAttribute('aria-pressed', isAlpha);
+      btnByCategory.setAttribute('aria-pressed', !isAlpha);
+    }
 
     // ─── RENDERIZADO DE CHIPS ───
     function renderChips() {
@@ -900,6 +1004,7 @@
         btn.setAttribute('aria-pressed', currentCategory === cat);
         btn.addEventListener('click', () => {
           currentCategory = cat;
+          storageSet(STORAGE_KEYS.category, cat);
           renderChips();
           render();
         });
@@ -932,7 +1037,8 @@
       a.rel = 'noopener noreferrer';
       a.className = 'card';
       a.style.animationDelay = `${Math.min(index * 0.04, 0.5)}s`;
-      a.setAttribute('aria-label', `Abrir ${entry.title} — ${entry.category}`);
+      // El aria-label reemplaza el contenido del enlace, así que el aviso va aquí
+      a.setAttribute('aria-label', `Abrir ${entry.title} — ${entry.category} (se abre en una nueva pestaña)`);
 
       // Gradiente sólido sin transparencia para mejor contraste
       const gradient = `linear-gradient(135deg, ${entry.color}, ${darken(entry.color, 18)})`;
@@ -964,7 +1070,15 @@
       const filtered = getFilteredEntries();
       grid.innerHTML = '';
 
-      resultsCount.innerHTML = `Mostrando <strong>${filtered.length}</strong> de ${entries.length} temas`;
+      let countHtml = `Mostrando <strong>${filtered.length}</strong> de ${entries.length} temas`;
+      if (currentCategory !== 'all') {
+        countHtml += ` en <strong>${escapeHtml(currentCategory)}</strong>`;
+      }
+      const trimmedQuery = searchQuery.trim();
+      if (trimmedQuery !== '') {
+        countHtml += ` para «${escapeHtml(trimmedQuery)}»`;
+      }
+      resultsCount.innerHTML = countHtml;
 
       if (filtered.length === 0) {
         grid.innerHTML = `
@@ -981,7 +1095,7 @@
       }
 
       if (viewMode === 'alphabetical') {
-        filtered.sort((a, b) => a.title.localeCompare(b.title, 'es'));
+        filtered.sort((a, b) => collator.compare(a.title, b.title));
         filtered.forEach((entry, i) => {
           grid.appendChild(createCard(entry, i));
         });
@@ -992,7 +1106,7 @@
           groups[entry.category].push(entry);
         });
 
-        const sortedCategories = Object.keys(groups).sort((a, b) => a.localeCompare(b, 'es'));
+        const sortedCategories = Object.keys(groups).sort((a, b) => collator.compare(a, b));
 
         sortedCategories.forEach(cat => {
           const heading = document.createElement('h2');
@@ -1000,7 +1114,7 @@
           heading.textContent = cat;
           grid.appendChild(heading);
 
-          groups[cat].sort((a, b) => a.title.localeCompare(b.title, 'es'));
+          groups[cat].sort((a, b) => collator.compare(a.title, b.title));
           groups[cat].forEach((entry, i) => {
             grid.appendChild(createCard(entry, i));
           });
@@ -1016,19 +1130,20 @@
 
     btnAlphabetical.addEventListener('click', () => {
       viewMode = 'alphabetical';
-      btnAlphabetical.classList.add('active');
-      btnByCategory.classList.remove('active');
+      storageSet(STORAGE_KEYS.view, viewMode);
+      syncViewButtons();
       render();
     });
 
     btnByCategory.addEventListener('click', () => {
       viewMode = 'byCategory';
-      btnByCategory.classList.add('active');
-      btnAlphabetical.classList.remove('active');
+      storageSet(STORAGE_KEYS.view, viewMode);
+      syncViewButtons();
       render();
     });
 
     // ─── INICIALIZACIÓN ───
+    syncViewButtons();
     renderChips();
     render();
 
