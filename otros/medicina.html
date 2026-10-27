@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Medicina: ciencia, práctica y futuro</title>
+<meta name="description" content="Guía educativa sobre medicina: especialidades, historia, avances tecnológicos, salud pública, retos éticos y glosario.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..600;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+:root{--fd:'Bricolage Grotesque','Segoe UI',system-ui,sans-serif;--fb:'Source Serif 4',Georgia,serif;--bg:#eef2f0;--sf:#fbfcfb;--s2:#e0e9e6;--bd:#c3d2cd;--tx:#0f2229;--mu:#475f66;--ac:#0d6b6e;--hi:#c4403a;--on:#fff;box-sizing:border-box;padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0a181c;--sf:#112329;--s2:#193139;--bd:#2b4852;--tx:#e9f2f0;--mu:#9db8bd;--ac:#4fc1bd;--hi:#ff8a7a;--on:#0a181c}}
+:root[data-theme="dark"]{--bg:#0a181c;--sf:#112329;--s2:#193139;--bd:#2b4852;--tx:#e9f2f0;--mu:#9db8bd;--ac:#4fc1bd;--hi:#ff8a7a;--on:#0a181c}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px);-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--tx);font:400 1.05rem/1.7 var(--fb);overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--bg)}
+h1,h2,h3,h4,h5{font-family:var(--fd);margin:0;line-height:1.08;letter-spacing:-.01em}p{margin:0}a{color:inherit;text-decoration:none}button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--hi);outline-offset:2px;border-radius:6px}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:var(--bg);border-bottom:1px solid var(--bd)}
+.hi{max-width:1100px;margin:0 auto;padding:8px 16px;display:flex;align-items:center;gap:14px}
+.brand{font:800 1.25rem var(--fd);display:flex;align-items:center;gap:8px}.brand::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--hi)}
+.nav{display:flex;gap:2px;margin-left:auto;overflow-x:auto;scrollbar-width:none;min-width:0}.nav::-webkit-scrollbar{display:none}
+.nl{padding:12px 11px;font:500 .88rem var(--fd);color:var(--mu);white-space:nowrap}.nl:hover{color:var(--tx)}.nl.on{color:var(--tx);font-weight:700;box-shadow:inset 0 -3px var(--hi)}
+.tt{width:38px;height:38px;flex:none;border:1px solid var(--bd);border-radius:50%;background:var(--sf)}
+main{max-width:1100px;margin:0 auto;padding:0 16px 80px}
+.view{display:none}.view.on{display:block}
+.hero{margin-top:28px}.hero h1{font-size:clamp(3.6rem,17vw,9rem);font-weight:800;letter-spacing:-.045em;line-height:.92;margin:0 0 16px}
+#hjust{margin:22px 0 6px;border:1px solid var(--bd);border-radius:14px;overflow:hidden;background:linear-gradient(var(--s2) 1px,transparent 1px) 0 0/100% 22px,linear-gradient(90deg,var(--s2) 1px,transparent 1px) 0 0/22px 100%,var(--sf)}
+.ecg{display:block;width:100%;height:auto;min-height:90px}.ecg path{fill:none;stroke:var(--ac);stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1;animation:dr 2.8s cubic-bezier(.3,.6,.3,1) .2s forwards}
+@keyframes dr{to{stroke-dashoffset:0}}
+.lead{color:var(--mu);font-size:1.15rem;max-width:62ch}
+.stn{display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:22px 20px;margin-top:26px}
+.st{padding-top:12px;border-top:3px solid var(--tx)}
+.st b{display:block;font:800 2.2rem/1 var(--fd);letter-spacing:-.03em}.st span{display:block;margin:6px 0 10px;font:500 .85rem/1.35 var(--fd);color:var(--mu)}
+.bar{height:8px;border-radius:4px;background:var(--s2)}.bar i{display:block;width:40%;height:100%;border-radius:4px;background:var(--hi)}
+.grid{display:grid;gap:0 44px;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));align-items:start}
+.card{padding:16px 0 18px;border-top:1px solid var(--bd)}a.card{display:block}a.card:hover h3{color:var(--hi)}
+.card h3{font-size:1.15rem;margin-bottom:4px}.card p{font-size:.95rem;color:var(--mu);line-height:1.55}
+.home{margin-top:34px}.home .card h3{font-size:1.7rem;font-weight:700}
+.note{margin-top:28px;padding:12px 18px;border-left:3px solid var(--hi);border-radius:0 10px 10px 0;background:var(--s2);color:var(--mu);font-size:.92rem}
+.sec{padding:38px 0 4px}.sec h2{font-size:clamp(2.4rem,9vw,4.6rem);font-weight:800;letter-spacing:-.035em;margin-bottom:10px}.sec>.lead{margin-bottom:26px}
+.tabs{display:flex;gap:6px;overflow-x:auto;border-bottom:1px solid var(--bd)}
+.tab{flex:none;padding:11px 14px;margin-bottom:-1px;font:600 .95rem var(--fd);color:var(--mu);border-bottom:3px solid transparent}.tab:hover{color:var(--tx)}.tab[aria-selected=true]{color:var(--tx);border-bottom-color:var(--hi)}
+.panel{padding:24px 0 0}
+.pt{color:var(--mu)}.pt p,.pt ul,.pt ol{max-width:68ch}.pt p+*,.pt ul+*,.pt ol+*{margin-top:.9em}.pt b{color:var(--tx);font-weight:600}
+.pt ul{list-style:none;padding:0}.pt ul li{position:relative;padding-left:1.4em}.pt ul li::before{content:"";position:absolute;left:.1em;top:.7em;width:.5em;height:.5em;border-radius:50%;background:var(--ac)}
+.pt ol{padding-left:1.5em}.pt ol li::marker{font:700 1em var(--fd);color:var(--hi)}.pt li+li{margin-top:.45em}
+.tl{position:relative;padding-top:4px}.tl::before{content:"";position:absolute;left:8px;top:10px;bottom:10px;width:2px;background:linear-gradient(var(--ac),var(--bd))}
+.ev{position:relative;padding:0 0 24px 40px}.ev::before{content:"";position:absolute;left:0;top:5px;width:18px;height:18px;border-radius:50%;background:var(--bg);border:3px solid var(--ac)}
+.ev b{display:block;font:700 .95rem var(--fd);color:var(--hi);letter-spacing:.01em}.ev h4{font-size:1.4rem;margin:2px 0 2px}.ev p{max-width:62ch;color:var(--mu)}
+.search{width:100%;max-width:420px;padding:12px 18px;border-radius:999px;border:1px solid var(--bd);background:var(--sf);color:var(--tx);font:inherit;margin-bottom:18px}
+.tw{overflow-x:auto;border:1px solid var(--bd);border-radius:12px;background:var(--sf)}.gt{border-collapse:collapse;width:100%;min-width:540px;font-size:.92rem}.gt th,.gt td{padding:10px 14px;border-bottom:1px solid var(--bd);text-align:left;vertical-align:top}.gt tr:last-child td{border-bottom:0}.gt th{background:var(--s2);color:var(--tx);font:700 .85rem var(--fd);white-space:nowrap}.gt td{color:var(--mu)}.gt td:first-child{color:var(--tx);font:700 .95rem var(--fd)}
+.fig{margin:22px 0;padding:18px 20px;border:1px solid var(--bd);border-radius:14px;background:var(--sf);overflow-x:auto;max-width:640px}
+.fig h5{font-size:1.05rem;font-weight:700;margin-bottom:12px;color:var(--tx)}
+.fig svg.c{display:block;width:100%;min-width:480px;height:auto}.fig svg text{font:500 12px var(--fd);fill:var(--mu)}.fig svg .v{fill:var(--tx);font-weight:700}.fig svg .t{fill:var(--tx);font-weight:700;font-size:13px}
+.fig small{display:block;margin-top:10px;font:500 .82rem/1.4 var(--fd);color:var(--mu)}
+.dots{display:flex;flex-wrap:wrap;gap:7px;max-width:440px}.dots i{width:22px;height:22px;border-radius:50%;background:var(--ac)}.dots i.o{background:none;border:2px solid var(--hi)}
+.dots.m{gap:3px}.dots.m i{width:8px;height:8px;border-width:1.5px}
+.wf{display:flex;align-items:center;gap:24px;flex-wrap:wrap}.wf svg{flex:none}.wf big{display:block;font:800 4.4rem/1 var(--fd);letter-spacing:-.04em;color:var(--hi)}.wf span{display:block;max-width:26ch;font:500 .95rem/1.4 var(--fd);color:var(--mu)}
+.lg{display:flex;gap:18px;margin-top:12px;font:500 .85rem var(--fd);color:var(--mu)}.lg i{display:inline-block;width:12px;height:12px;border-radius:50%;background:var(--ac);vertical-align:-1px;margin-right:6px}.lg i.o{background:none;border:2px solid var(--hi)}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.ecg path{animation:none;stroke-dashoffset:0}}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="hi">
+    <a class="brand" href="#inicio">Medicina</a>
+    <nav class="nav" id="nav" aria-label="Secciones"></nav>
+    <button class="tt" id="tt" aria-label="Cambiar entre tema claro y oscuro">◐</button>
+  </div>
+</header>
+<main>
+  <section class="view on" id="inicio">
+    <div class="hero">
+      <div>
+        <h1>Medicina</h1>
+        <p class="lead">La medicina es la ciencia y el arte de prevenir, diagnosticar y tratar la enfermedad. Pero también es una institución social, una práctica ética y un sistema en permanente tensión entre lo que la tecnología permite y lo que la sociedad está dispuesta a costear. Esta guía recorre sus especialidades, su historia, sus avances más recientes y los retos que definirán la salud del futuro.</p>
+      </div>
+      <div id="hjust"></div>
+      <div class="stn" id="stn"></div>
+    </div>
+    <div class="grid home" id="home"></div>
+    <p class="note">Guía educativa y simplificada. Las cifras y los datos son aproximados y varían según la fuente y el país. No sustituye la consulta médica ni la formación profesional.</p>
+  </section>
+</main>
+
+<script>
+const $=(s,e=document)=>e.querySelector(s),$$=(s,e=document)=>[...e.querySelectorAll(s)];
+
+const dt=c=>`<div class="dots ${c}" role="img" aria-label="29 de 31 pacientes">${'<i></i>'.repeat(29)}<i class="o"></i><i class="o"></i></div>`;
+const ring=p=>`<svg width="54" height="54" viewBox="0 0 54 54" role="img" aria-label="${p}%"><circle cx="27" cy="27" r="22" fill="none" stroke="var(--s2)" stroke-width="7"/><circle cx="27" cy="27" r="22" fill="none" stroke="var(--hi)" stroke-width="7" stroke-linecap="round" stroke-dasharray="${1.382*p} 200" transform="rotate(-90 27 27)"/></svg>`;
+const fig=(t,b,n)=>`<figure class="fig" style="margin-inline:0"><h5>${t}</h5>${b}<small>${n}</small></figure>`;
+
+const V=[
+['que-es','¿Qué es la medicina?','Definición, ramas y el método clínico.','La medicina'],
+['especialidades','Especialidades','Clínicas, quirúrgicas, diagnósticas y otras.','Especialidades'],
+['historia','Historia','De Imhotep a la edición genética.','Historia'],
+['avances','Avances','IA, CRISPR, CAR-T, telemedicina y robótica.','Avances'],
+['salud-publica','Salud pública','Epidemiología, determinantes y prevención.','Salud pública'],
+['retos','Retos','Resistencia antimicrobiana, salud mental y ética.','Retos'],
+['glosario','Glosario','Términos clave explicados fácil.','Glosario']
+];
+
+$('main').insertAdjacentHTML('beforeend',V.map(v=>`<section class="view" id="${v[0]}"><div class="sec"><h2>${v[1]}</h2><p class="lead">${v[2]}</p><div id="b-${v[0]}"></div></div></section>`).join(''));
+$('#nav').innerHTML=V.map(v=>`<a class="nl" href="#${v[0]}" data-v="${v[0]}">${v[3]}</a>`).join('');
+$('#home').innerHTML=V.map(v=>`<a class="card" href="#${v[0]}"><h3>${v[1]}</h3><p>${v[2]}</p></a>`).join('');
+
+$('#stn').innerHTML=[
+['~2.600 a.C.','Primer médico documentado (Imhotep)'],
+['~1.000','Dispositivos médicos con IA autorizados por la FDA (2024)'],
+['40%+','Antibióticos con resistencia creciente (2018–2023)','<div class="bar"><i></i></div>'],
+['29/31','Pacientes libres de crisis con Casgevy (CRISPR)',dt('m')],
+['63%','Médicos que ya usan IA generativa',ring(63)],
+['~20','Especialidades médicas principales']
+].map(s=>`<div class="st"><b>${s[0]}</b><span>${s[1]}</span>${s[2]||''}</div>`).join('');
+
+const P=t=>`<p>${t}</p>`,ul=a=>`<ul>${a.map(x=>`<li>${x}</li>`).join('')}</ul>`,ol=a=>`<ol>${a.map(x=>`<li>${x}</li>`).join('')}</ol>`;
+const gt=(h,r)=>`<div class="tw"><table class="gt"><tr>${h.map(x=>`<th>${x}</th>`).join('')}</tr>${r.split('\n').map(l=>`<tr>${l.split('|').map(c=>`<td>${c}</td>`).join('')}</tr>`).join('')}</table></div>`;
+const ev=a=>`<div class="tl">${a.map(x=>`<div class="ev"><b>${x[0]}</b><h4>${x[1]}</h4><p>${x[2]}</p></div>`).join('')}</div>`;
+const dfs=a=>`<div class="defs">${a.map(x=>`<div class="def"><b>${x[0]}</b><span>${x[1]}</span></div>`).join('')}</div>`;
+const tabs=(id,a)=>{const b=$('#b-'+id);b.innerHTML=`<div class="tabs" role="tablist">${a.map((x,i)=>`<button class="tab" role="tab" data-i="${i}">${x[0]}</button>`).join('')}</div><div class="panel" role="tabpanel"><div class="pt"></div></div>`;const s=i=>{$$('.tab',b).forEach((t,j)=>t.setAttribute('aria-selected',i==j));$('.pt',b).innerHTML=a[i][1]};b.onclick=e=>{const t=e.target.closest('.tab');t&&s(+t.dataset.i)};s(0)};
+const B=(id,h)=>$('#b-'+id).innerHTML=h;
+
+(()=>{const b='h60 l8 -10 l8 10 h14 l6 8 l10 -52 l10 66 l6 -22 h20 q14 -20 28 0 h40 ';
+$('#hjust').innerHTML=`<svg class="ecg" viewBox="0 0 840 130" preserveAspectRatio="none" role="img" aria-label="Trazado de electrocardiograma"><path pathLength="1" d="M0 70 ${b.repeat(4)}"/></svg>`})();
+const axis=[0,25,50,75,100].map(v=>`<line x1="${110+v*3.9}" x2="${110+v*3.9}" y1="12" y2="104" stroke="var(--bd)"/><text x="${110+v*3.9}" y="124" text-anchor="middle">${v}%</text>`).join('');
+const fRange=fig('Precisión diagnóstica en algunos tumores',`<svg class="c" viewBox="0 0 520 134" role="img" aria-label="Sin IA 58,5 a 74,4 por ciento; con IA y radiólogos 74,4 a 84,1 por ciento">${axis}<text x="100" y="42" text-anchor="end">Referencia</text><rect x="338.2" y="24" width="62" height="26" rx="7" fill="var(--mu)" opacity=".55"/><text class="v" x="408" y="42">58,5–74,4%</text><text x="100" y="84" text-anchor="end">IA + radiólogos</text><rect x="400.2" y="66" width="37.8" height="26" rx="7" fill="var(--ac)"/><text class="v" x="446" y="84">74,4–84,1%</text></svg>`,'Cada barra muestra el rango de precisión indicado; varía según el estudio.');
+const fDots=fig('Pacientes libres de crisis vaso-oclusivas durante 12 meses',dt('')+'<div class="lg"><span><i></i>Libres de crisis: 29</span><span><i class="o"></i>Con crisis: 2</span></div>','Ensayos de Casgevy (CRISPR/Cas9) en anemia falciforme.');
+const fWaf=fig('Resistencia en aumento, 2018–2023',`<div class="wf"><svg width="150" height="150" viewBox="0 0 200 200" role="img" aria-label="40 de cada 100">${Array.from({length:100},(_,i)=>`<rect x="${i%10*20+1}" y="${Math.floor(i/10)*20+1}" width="17" height="17" rx="4" fill="${i<40?'var(--hi)':'var(--s2)'}"/>`).join('')}</svg><div><big>+40%</big><span>de los antibióticos monitorizados mostró resistencia creciente</span></div></div>`,'Cada cuadrado representa 1 de cada 100 antibióticos.');
+const cols=[['Salud'],['Riesgo'],['Enfermedad precoz'],['Enfermedad establecida']];
+const band=(x,w,t,d)=>`<rect x="${x+4}" y="96" width="${w-8}" height="34" rx="9" fill="var(--ac)" fill-opacity=".14" stroke="var(--ac)"/><text class="t" x="${x+w/2}" y="118" text-anchor="middle">${t}</text><text x="${x+w/2}" y="150" text-anchor="middle">${d}</text>`;
+const fPrev=fig('Niveles de prevención según la evolución de la enfermedad',`<svg class="c" viewBox="0 0 560 160" role="img" aria-label="Prevención primaria, secundaria y terciaria a lo largo de la evolución de la enfermedad"><line x1="70" x2="490" y1="46" y2="46" stroke="var(--bd)" stroke-width="3"/>${cols.map((c,i)=>`<circle cx="${70+140*i}" cy="46" r="9" fill="${i<2?'var(--bg)':'var(--hi)'}" stroke="${i<2?'var(--ac)':'var(--hi)'}" stroke-width="3"/><text x="${70+140*i}" y="24" text-anchor="middle">${c[0]}</text>`).join('')}${band(0,280,'Primaria','Evitar la enfermedad')}${band(280,140,'Secundaria','Detectarla pronto')}${band(420,140,'Terciaria','Limitar complicaciones')}</svg>`,'La prevención actúa en cada etapa: antes, durante y después de que aparezca la enfermedad.');
+
+/* ---------- QUÉ ES LA MEDICINA ---------- */
+tabs('que-es',[
+['Definición y alcance',
+P('La <b>medicina</b> es la ciencia y la práctica dedicada a la prevención, el diagnóstico, el tratamiento y la curación de las enfermedades. Se apoya en ciencias básicas como la anatomía, la fisiología, la bioquímica, la farmacología y la genética, y se ejerce a través de un método clínico que combina evidencia, juicio profesional y contexto del paciente.')+
+P('No es solo una disciplina técnica: es también una <b>institución social</b> que organiza recursos, define prioridades y distribuye riesgos. Por eso la medicina está atravesada por debates éticos, económicos y políticos que van más allá de la biología.')+
+ul([
+'<b>Medicina clínica:</b> atiende al paciente individual. Se apoya en la anamnesis, la exploración física y las pruebas complementarias.',
+'<b>Medicina quirúrgica:</b> resuelve problemas mediante intervención manual o instrumental.',
+'<b>Medicina diagnóstica:</b> produce información (imágenes, laboratorio, anatomía patológica) para orientar decisiones.',
+'<b>Salud pública:</b> actúa sobre poblaciones, no solo sobre individuos: prevención, vigilancia, políticas sanitarias.'
+])],
+['El método clínico',
+P('El <b>método clínico</b> es el procedimiento racional que guía la práctica médica. Sus pasos esenciales son:')+
+ol([
+'<b>Anamnesis:</b> recogida de la historia del paciente, síntomas, antecedentes y contexto.',
+'<b>Exploración física:</b> inspección, palpación, percusión y auscultación.',
+'<b>Hipótesis diagnóstica:</b> formulación de diagnósticos diferenciales plausibles.',
+'<b>Pruebas complementarias:</b> análisis, imágenes, biopsias, pruebas genéticas.',
+'<b>Diagnóstico y tratamiento:</b> decisión terapéutica basada en evidencia y preferencias del paciente.',
+'<b>Seguimiento:</b> evaluación de la respuesta y ajuste del plan.'
+])+
+P('La <b>medicina basada en la evidencia</b> (MBE) integra la mejor investigación disponible, la experiencia clínica y los valores del paciente. No sustituye el juicio profesional: lo informa.')],
+['Ramas y campos',
+P('La medicina se organiza en grandes campos que a su vez se subdividen en especialidades:')+
+gt(['Campo','Qué estudia','Ejemplos'],`Ciencias básicas|Estructura y función del organismo|Anatomía, fisiología, bioquímica, genética
+Clínica médica|Enfermedades no quirúrgicas del adulto|Cardiología, neurología, neumología
+Cirugía|Tratamiento mediante intervención|Cirugía general, cardiovascular, neurocirugía
+Diagnóstico|Producción e interpretación de pruebas|Radiología, anatomía patológica, laboratorio
+Salud pública|Salud de poblaciones|Epidemiología, gestión sanitaria, prevención
+Atención primaria|Primer contacto y continuidad|Medicina de familia, pediatría, geriatría`)+
+P('A ello se suman campos transversales como la <b>farmacología clínica</b>, la <b>genética médica</b>, la <b>medicina intensiva</b> y la <b>medicina paliativa</b>.')]
+]);
+
+/* ---------- ESPECIALIDADES ---------- */
+tabs('especialidades',[
+['Clínicas',
+P('Las especialidades clínicas diagnostican y tratan enfermedades mediante medios no quirúrgicos. Algunas de las más representativas son:')+
+ul([
+'<b>Cardiología:</b> corazón y sistema circulatorio.',
+'<b>Neurología:</b> sistema nervioso central y periférico.',
+'<b>Neumología:</b> aparato respiratorio.',
+'<b>Gastroenterología:</b> aparato digestivo.',
+'<b>Endocrinología:</b> hormonas y metabolismo.',
+'<b>Nefrología:</b> riñón y equilibrio hidroelectrolítico.',
+'<b>Hematología:</b> sangre y órganos hematopoyéticos.',
+'<b>Reumatología:</b> enfermedades autoinmunes y articulares.',
+'<b>Infectología:</b> enfermedades infecciosas.',
+'<b>Oncología médica:</b> tratamiento sistémico del cáncer.',
+'<b>Geriatría:</b> salud del adulto mayor.',
+'<b>Psiquiatría:</b> trastornos mentales.'
+])],
+['Quirúrgicas',
+P('Las especialidades quirúrgicas resuelven problemas mediante intervención. La cirugía moderna combina técnicas abiertas, laparoscópicas, robóticas y mínimamente invasivas.')+
+ul([
+'<b>Cirugía general:</b> abdomen, pared abdominal y trauma.',
+'<b>Cirugía cardiovascular:</b> corazón y grandes vasos.',
+'<b>Neurocirugía:</b> sistema nervioso.',
+'<b>Ortopedia y traumatología:</b> huesos, articulaciones y lesiones.',
+'<b>Oftalmología:</b> ojo y vía visual.',
+'<b>Otorrinolaringología:</b> oído, nariz y garganta.',
+'<b>Urología:</b> vías urinarias y aparato reproductor masculino.',
+'<b>Ginecología y obstetricia:</b> salud femenina y embarazo.',
+'<b>Cirugía pediátrica:</b> cirugía en la infancia.',
+'<b>Cirugía plástica y reconstructiva:</b> reconstrucción y estética.'
+])],
+['Diagnósticas y transversales',
+P('Las especialidades diagnósticas producen la información que sustenta las decisiones clínicas y quirúrgicas.')+
+ul([
+'<b>Radiología y diagnóstico por imágenes:</b> rayos X, ecografía, tomografía, resonancia magnética, medicina nuclear.',
+'<b>Anatomía patológica:</b> estudio de tejidos y células para diagnóstico.',
+'<b>Laboratorio clínico:</b> bioquímica, hematología, microbiología, inmunología.',
+'<b>Genética médica:</b> diagnóstico de enfermedades hereditarias y consejo genético.',
+'<b>Medicina nuclear:</b> diagnóstico y terapia con radiotrazadores.'
+])+
+P('Entre las especialidades transversales destacan la <b>anestesiología</b>, la <b>medicina intensiva</b>, la <b>medicina de urgencias</b>, la <b>medicina del trabajo</b>, la <b>medicina del deporte</b> y la <b>medicina paliativa</b>.')]
+]);
+
+/* ---------- HISTORIA ---------- */
+tabs('historia',[
+['Antigüedad y Edad Media',ev([
+['~2600 a.C.','Imhotep','El médico egipcio describe el diagnóstico y tratamiento de unas 200 enfermedades.'],
+['~460 a.C.','Hipócrates','El “padre de la medicina” separa la práctica médica de la religión y funda el estudio científico de la enfermedad.'],
+['~130 d.C.','Galeno','Médico de gladiadores y emperadores romanos; su obra dominará la medicina durante siglos.'],
+['~910','Rhazes','El médico persa identifica la viruela y el sarampión como enfermedades distintas.'],
+['~1010','Avicena','Escribe el <i>Canon de Medicina</i>, referencia en Europa y el mundo islámico hasta el siglo XVII.'],
+['1249','Gafas','Roger Bacon inventa las gafas, primera corrección óptica documentada.']
+])],
+['Revolución científica',ev([
+['1543','Vesalio','Publica <i>De humani corporis fabrica</i>, que corrige errores anatómicos de Galeno.'],
+['1628','Harvey','Describe la circulación sanguínea y demuestra que el corazón bombea sangre.'],
+['1670','Leeuwenhoek','Observa glóbulos rojos y, en 1683, bacterias: nace la microbiología.'],
+['1796','Jenner','Desarrolla la primera vacuna contra la viruela.'],
+['1816','Laennec','Inventa el estetoscopio.'],
+['1847','Semmelweis','Demuestra que el lavado de manos previene la fiebre puerperal.'],
+['1867','Lister','Introduce la antisepsia quirúrgica.'],
+['1895','Röntgen','Descubre los rayos X.']
+])],
+['Siglos XX y XXI',ev([
+['1928','Fleming','Descubre la penicilina, el primer antibiótico.'],
+['1953','Watson y Crick','Describen la doble hélice del ADN.'],
+['1978','Nace Louise Brown','Primer bebé concebido por fecundación in vitro.'],
+['2003','Genoma humano','Se completa la secuencia del genoma humano.'],
+['2012','CRISPR-Cas9','Doudna y Charpentier demuestran la edición genética programable.'],
+['2020','Vacunas ARNm','Las vacunas de ARNm contra la COVID-19 se autorizan en tiempo récord.'],
+['2023','Casgevy','Primera terapia CRISPR aprobada para anemia falciforme.'],
+['2024–2026','IA clínica','Más de mil dispositivos médicos con IA autorizados por la FDA; la IA generativa entra en la práctica médica.']
+])]
+]);
+
+/* ---------- AVANCES ---------- */
+tabs('avances',[
+['IA y diagnóstico',
+P('La <b>inteligencia artificial</b> es la fuerza de transformación más visible de la medicina actual. En 2024 ya había más de <b>1.000 dispositivos médicos con IA</b> autorizados por la FDA, sobre todo en diagnóstico por imagen. El <b>63% de los médicos</b> ya utiliza herramientas de IA generativa para elaborar informes y apoyar la investigación.')+fRange+
+ul([
+'<b>Diagnóstico por imagen:</b> algoritmos de aprendizaje profundo mejoran la detección de cáncer, lesiones y enfermedades neurodegenerativas.',
+'<b>Resonancia magnética abreviada:</b> protocolos de un solo apnea con IA para diagnosticar carcinoma hepatocelular.',
+'<b>Radiómica:</b> la IA combinada con radiólogos eleva la precisión diagnóstica del 58,5–74,4% al 74,4–84,1% en algunos tumores.',
+'<b>Triaje y apoyo a la decisión:</b> sistemas que priorizan pacientes y sugieren diagnósticos diferenciales.',
+'<b>Reto:</b> la IA generativa aún no está integrada de forma generalizada en los dispositivos autorizados; la regulación avanza más despacio que la tecnología.'
+])],
+['Terapias génicas y celulares',
+P('La <b>edición genética</b> ha dejado de ser teoría. Casgevy (CRISPR/Cas9) fue la primera terapia génica aprobada para anemia falciforme: en los ensayos, <b>29 de 31 pacientes</b> quedaron libres de crisis vaso-oclusivas durante 12 meses.')+fDots+
+ul([
+'<b>CRISPR:</b> corrección de variantes genéticas en enfermedades hereditarias, con resultados prometedores en beta-talasemia y nuevos blancos oncológicos.',
+'<b>CAR-T:</b> linfocitos T modificados genéticamente para atacar cánceres hematológicos. La investigación avanza hacia tumores sólidos y hacia la producción <i>in vivo</i> mediante ARNm.',
+'<b>Vacunas de ARNm:</b> más allá de la COVID-19, se exploran como plataforma terapéutica para cáncer personalizado y tolerancia inmunitaria.',
+'<b>Terapia génica para hemofilia:</b> Roctavian, aprobado en Brasil en 2024, reduce sangrados con una sola infusión.',
+'<b>Reto:</b> coste, acceso y seguimiento a largo plazo. La traducción clínica de CRISPR aún está en fases tempranas para muchas enfermedades.'
+])],
+['Telemedicina y wearables',
+P('La <b>telemedicina</b> se consolidó durante la pandemia y ha quedado como parte permanente del sistema sanitario. Medicare renovó su cobertura, y las herramientas digitales se integran cada vez más en la atención primaria y especializada.')+
+ul([
+'<b>Wearables:</b> dispositivos que monitorizan ritmo cardíaco, oxígeno, glucosa, sueño y actividad física.',
+'<b>Sensores remotos:</b> seguimiento de pacientes crónicos sin desplazamiento.',
+'<b>Consultas remotas:</b> acceso desde zonas rurales o con movilidad reducida.',
+'<b>Reto:</b> brecha digital, privacidad de datos y equidad en el acceso.'
+])],
+['Robótica quirúrgica',
+P('La <b>robótica médica</b> avanza hacia la miniaturización y la precisión. En 2024, la FDA autorizó MIRA, el primer robot miniaturizado para cirugía asistida, de aproximadamente 0,5 kg, diseñado para procedimientos abdominales.')+
+ul([
+'<b>Cirugía asistida:</b> mayor precisión, menor invasión y recuperación más rápida.',
+'<b>Telecirugía:</b> posibilidad de operar a distancia con supervisión experta.',
+'<b>Reto:</b> coste, formación y evidencia de superioridad frente a técnicas convencionales en todos los contextos.'
+])]
+]);
+
+/* ---------- SALUD PÚBLICA ---------- */
+tabs('salud-publica',[
+['Epidemiología',
+P('La <b>epidemiología</b> estudia la distribución y los determinantes de las enfermedades en las poblaciones. Es la herramienta básica de la salud pública: permite identificar brotes, evaluar intervenciones y priorizar recursos.')+
+ul([
+'<b>Incidencia:</b> nuevos casos en un periodo.',
+'<b>Prevalencia:</b> casos existentes en un momento dado.',
+'<b>Factores de riesgo:</b> condiciones asociadas a mayor probabilidad de enfermedad.',
+'<b>Vigilancia:</b> recogida sistemática de datos para detectar amenazas sanitarias.'
+])],
+['Determinantes sociales',
+P('La salud no depende solo de genes y virus. Los <b>determinantes sociales</b> —educación, empleo, ingresos, vivienda, entorno— explican una parte enorme de las desigualdades sanitarias.')+
+ul([
+'<b>Desigualdades socioeconómicas:</b> estudios de 2026 muestran una relación dosis-respuesta entre determinantes sociales y salud reproductiva femenina.',
+'<b>Enfermedades no transmisibles:</b> la OMS advierte que las inequidades en cáncer, diabetes, enfermedades cardiovasculares y respiratorias persisten y se agravan por factores socioeconómicos.',
+'<b>Tuberculosis:</b> en Brasil, las desigualdades sociales modifican el efecto de las estrategias de búsqueda activa de casos.',
+'<b>Determinantes ambientales:</b> saneamiento, agua potable, vivienda y gestión de residuos condicionan enfermedades infecciosas desatendidas.'
+])+
+P('La salud pública no es solo medicina aplicada a poblaciones: es también <b>política social</b>. Reducir desigualdades exige intervenir sobre sus causas estructurales.')],
+['Prevención y vacunas',
+P('La <b>prevención</b> es la intervención más coste-efectiva de la medicina. Se organiza en tres niveles:')+
+ul([
+'<b>Primaria:</b> evitar la enfermedad (vacunas, agua potable, educación, ejercicio).',
+'<b>Secundaria:</b> detectarla precozmente (cribados de cáncer, hipertensión, diabetes).',
+'<b>Terciaria:</b> reducir complicaciones y mejorar la calidad de vida en enfermedad establecida.'
+])+fPrev+
+P('Las <b>vacunas</b> han sido uno de los mayores logros sanitarios de la historia. La plataforma de ARNm, desarrollada para la COVID-19, se explora ahora para cáncer, enfermedades autoinmunes y otras infecciones. Sin embargo, las brechas de vacunación y la desinformación siguen siendo amenazas globales.')]
+]);
+
+/* ---------- RETOS ---------- */
+tabs('retos',[
+['Resistencia antimicrobiana',
+P('La <b>resistencia a los antimicrobianos</b> (RAM) es una de las mayores amenazas sanitarias del siglo XXI. Cuando las bacterias dejan de responder a los antibióticos, infecciones antes tratables se vuelven mortales.')+fWaf+
+ul([
+'<b>Magnitud:</b> la resistencia ha aumentado en más del <b>40% de los antibióticos</b> monitorizados entre 2018 y 2023.',
+'<b>Causas:</b> uso excesivo e inadecuado de antibióticos en medicina y ganadería.',
+'<b>Consecuencias:</b> infecciones prolongadas, mayor mortalidad, costes económicos elevados.',
+'<b>Respuestas:</b> uso prudente, nuevos antibióticos, diagnóstico rápido, vacunación y control de infecciones.'
+])],
+['Salud mental',
+P('La <b>salud mental</b> ha pasado de ser un tema secundario a una prioridad sanitaria global. La pandemia visibilizó el problema, pero la brecha de atención persiste.')+
+ul([
+'<b>Prevalencia:</b> los trastornos mentales afectan a cientos de millones de personas en el mundo.',
+'<b>Brecha de tratamiento:</b> la mayoría no recibe atención adecuada, especialmente en países de ingresos bajos y medios.',
+'<b>Determinantes:</b> pobreza, violencia, exclusión social y precariedad laboral agravan el riesgo.',
+'<b>Respuestas:</b> integración en atención primaria, telepsiquiatría, programas comunitarios y reducción del estigma.'
+])+
+P('En España, la creación de la especialidad de Psiquiatría Infantil y Adolescente y la Acción Conjunta Europea ImpleMENTAL son ejemplos de respuestas institucionales recientes.')],
+['Pandemias y ética de la IA',
+P('La medicina del futuro inmediato enfrenta dos tensiones principales: la preparación ante nuevas pandemias y la gobernanza ética de la inteligencia artificial.')+
+ul([
+'<b>Pandemias:</b> la COVID-19 demostró la importancia de la vigilancia, la producción local de vacunas y la cooperación internacional. Los brotes de 2026 (hantavirus, ébola) subrayan que la amenaza persiste.',
+'<b>Ética de la IA:</b> el consentimiento informado tradicional es insuficiente para sistemas que aprenden y se actualizan. Se propone un “addendum de soberanía digital” que informe a los pacientes si sus datos se usan para entrenar algoritmos.',
+'<b>Consentimiento dinámico:</b> los modelos de IA médica que se actualizan continuamente difuminan la frontera entre terapia e investigación, lo que exige nuevas arquitecturas de consentimiento.',
+'<b>Brecha de acceso:</b> sin políticas explícitas, las tecnologías más avanzadas pueden ampliar las desigualdades en salud.'
+])]
+]);
+
+/* ---------- GLOSARIO ---------- */
+(()=>{
+const G=[
+['Anamnesis','Recogida de la historia clínica y los síntomas del paciente.'],
+['Anatomía patológica','Especialidad que estudia tejidos y células para el diagnóstico de enfermedades.'],
+['CAR-T','Terapia celular que modifica genéticamente los linfocitos T del paciente para atacar cáncer.'],
+['CRISPR-Cas9','Herramienta de edición genética que permite modificar secuencias de ADN con precisión.'],
+['Determinantes sociales','Condiciones socioeconómicas y ambientales que influyen en la salud de las poblaciones.'],
+['Epidemiología','Estudio de la distribución y los determinantes de las enfermedades en poblaciones.'],
+['Farmacogenómica','Estudio de cómo los genes influyen en la respuesta a los medicamentos.'],
+['Incidencia','Número de casos nuevos de una enfermedad en un periodo determinado.'],
+['Medicina basada en la evidencia','Integración de la mejor investigación, la experiencia clínica y los valores del paciente.'],
+['Medicina personalizada','Enfoque que adapta prevención y tratamiento a las características genómicas y clínicas del individuo.'],
+['Prevalencia','Número total de casos de una enfermedad en un momento dado.'],
+['Resistencia antimicrobiana','Capacidad de microorganismos para sobrevivir a fármacos que antes los eliminaban.'],
+['Salud pública','Disciplina que protege y mejora la salud de poblaciones mediante prevención y políticas.'],
+['Telemedicina','Prestación de servicios médicos a distancia mediante tecnologías de la información.'],
+['Wearable','Dispositivo electrónico vestible que monitoriza parámetros de salud.']
+];
+B('glosario','<input class="search" id="q" type="search" placeholder="Buscar un término" aria-label="Buscar en el glosario"><div class="grid" id="gl"></div>');
+const r=f=>{$('#gl').innerHTML=G.filter(g=>(g[0]+g[1]).toLowerCase().includes(f)).map(g=>`<div class="card"><h3>${g[0]}</h3><p>${g[1]}</p></div>`).join('')||'<p class="note">No hay términos con esa búsqueda.</p>'};
+$('#q').oninput=e=>r(e.target.value.toLowerCase().trim());r('')})();
+
+/* ---------- NAVEGACIÓN Y TEMA ---------- */
+const go=h=>{
+  h=V.some(v=>v[0]===h)?h:'inicio';
+  $$('.view').forEach(e=>e.classList.toggle('on',e.id===h));
+  $$('.nl').forEach(a=>a.classList.toggle('on',a.dataset.v===h));
+  scrollTo(0,0);
+};
+addEventListener('hashchange',()=>go(location.hash.slice(1)));
+$('#tt').onclick=()=>{
+  const d=document.documentElement;
+  const k=d.dataset.theme?d.dataset.theme==='dark':matchMedia('(prefers-color-scheme:dark)').matches;
+  d.dataset.theme=k?'light':'dark';
+};
+go(location.hash.slice(1));
+</script>
+</body>
+</html>

@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>África: continente, historia y futuro</title>
+<meta name="description" content="Guía educativa sobre África: geografía, historia, regiones, culturas, economía, retos y avances tecnológicos.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600..800&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+<style>
+:root{--fd:'Syne','Segoe UI',system-ui,sans-serif;--fb:'Instrument Sans','Segoe UI',system-ui,sans-serif;--fu:var(--fb);--bg:#f3f2f8;--sf:#fcfbff;--s2:#e6e4f1;--bd:#cfcce3;--tx:#1a1636;--mu:#55506f;--ac:#3b2f9e;--hi:#a85d00;--on:#fff;box-sizing:border-box;padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#12102a;--sf:#1b1840;--s2:#272358;--bd:#3d3880;--tx:#efeeff;--mu:#aeabd0;--ac:#a99bff;--hi:#ffb938;--on:#12102a}}
+:root[data-theme="dark"]{--bg:#12102a;--sf:#1b1840;--s2:#272358;--bd:#3d3880;--tx:#efeeff;--mu:#aeabd0;--ac:#a99bff;--hi:#ffb938;--on:#12102a}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px);-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--tx);font:400 1.03rem/1.65 var(--fb);overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--bg)}
+h1,h2,h3,h4,h5{font-family:var(--fd);margin:0;line-height:1.08;letter-spacing:-.01em}p{margin:0}a{color:inherit;text-decoration:none}button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--hi);outline-offset:2px;border-radius:6px}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:var(--bg);border-bottom:1px solid var(--bd)}
+.hi{max-width:1100px;margin:0 auto;padding:8px 16px;display:flex;align-items:center;gap:14px}
+.brand{font:800 1.25rem var(--fd);display:flex;align-items:center;gap:8px}.brand::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--hi)}
+.nav{display:flex;gap:2px;margin-left:auto;overflow-x:auto;scrollbar-width:none;min-width:0}.nav::-webkit-scrollbar{display:none}
+.nl{padding:12px 11px;font:500 .88rem var(--fu);color:var(--mu);white-space:nowrap}.nl:hover{color:var(--tx)}.nl.on{color:var(--tx);font-weight:700;box-shadow:inset 0 -3px var(--hi)}
+.tt{width:38px;height:38px;flex:none;border:1px solid var(--bd);border-radius:50%;background:var(--sf)}
+main{max-width:1100px;margin:0 auto;padding:0 16px 80px}
+.view{display:none}.view.on{display:block}
+.hero{margin-top:28px;display:flex;flex-wrap:wrap;align-items:center;gap:24px 48px}.hero>div:first-child{flex:1 1 380px}.hero h1{font-size:clamp(3rem,14vw,7.4rem);font-weight:800;letter-spacing:-.03em;line-height:.95;margin:0 0 18px}.hero .stn{flex:1 0 100%}
+.yg small{display:block;max-width:240px;margin-top:10px;font:500 .85rem/1.4 var(--fu);color:var(--mu)}.yg circle{transform-box:fill-box;transform-origin:center;animation:pop .45s ease-out backwards}@keyframes pop{from{opacity:0;transform:scale(.3)}}
+.rg{display:grid;grid-template-columns:repeat(6,1fr);grid-template-areas:"n n n n n n" "w w c c e e" ". . s s . .";gap:8px;max-width:520px;margin:0 0 24px}
+.rg button{min-height:68px;padding:10px 12px;border-radius:12px;border:1.5px solid var(--ac);background:var(--sf);text-align:left;font:700 .95rem var(--fu);color:var(--tx)}.rg button small{display:block;margin-top:2px;font:500 .78rem/1.3 var(--fu);color:var(--mu)}
+.rg button[aria-pressed=true]{background:var(--ac);color:var(--on)}.rg button[aria-pressed=true] small{color:var(--on);opacity:.85}
+.lead{color:var(--mu);font-size:1.15rem;max-width:62ch}
+.stn{display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:22px 20px;margin-top:26px}
+.st{padding-top:12px;border-top:3px solid var(--tx)}
+.st b{display:block;font:800 2.2rem/1 var(--fd);letter-spacing:-.03em}.st span{display:block;margin:6px 0 10px;font:500 .85rem/1.35 var(--fu);color:var(--mu)}
+.bar{height:8px;border-radius:4px;background:var(--s2)}.bar i{display:block;width:40%;height:100%;border-radius:4px;background:var(--hi)}
+.grid{display:grid;gap:0 44px;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));align-items:start}
+.card{padding:16px 0 18px;border-top:1px solid var(--bd)}a.card{display:block}a.card:hover h3{color:var(--hi)}
+.card h3{font-size:1.15rem;margin-bottom:4px}.card p{font-size:.95rem;color:var(--mu);line-height:1.55}
+.home{margin-top:34px}.home .card h3{font-size:1.4rem;font-weight:700}
+.note{margin-top:28px;padding:12px 18px;border-left:3px solid var(--hi);border-radius:0 10px 10px 0;background:var(--s2);color:var(--mu);font-size:.92rem}
+.sec{padding:38px 0 4px}.sec h2{font-size:clamp(2rem,8vw,3.8rem);font-weight:800;letter-spacing:-.02em;margin-bottom:10px}.sec>.lead{margin-bottom:26px}
+.tabs{display:flex;gap:6px;overflow-x:auto;border-bottom:1px solid var(--bd)}
+.tab{flex:none;padding:11px 14px;margin-bottom:-1px;font:600 .95rem var(--fu);color:var(--mu);border-bottom:3px solid transparent}.tab:hover{color:var(--tx)}.tab[aria-selected=true]{color:var(--tx);border-bottom-color:var(--hi)}
+.panel{padding:24px 0 0}
+.pt{color:var(--mu)}.pt p,.pt ul,.pt ol{max-width:68ch}.pt p+*,.pt ul+*,.pt ol+*{margin-top:.9em}.pt b{color:var(--tx);font-weight:600}
+.pt ul{list-style:none;padding:0}.pt ul li{position:relative;padding-left:1.4em}.pt ul li::before{content:"";position:absolute;left:.1em;top:.7em;width:.5em;height:.5em;border-radius:50%;background:var(--ac)}
+.pt ol{padding-left:1.5em}.pt ol li::marker{font:700 1em var(--fu);color:var(--hi)}.pt li+li{margin-top:.45em}
+.tl{position:relative;padding-top:4px}.tl::before{content:"";position:absolute;left:8px;top:10px;bottom:10px;width:2px;background:linear-gradient(var(--ac),var(--bd))}
+.ev{position:relative;padding:0 0 24px 40px}.ev::before{content:"";position:absolute;left:0;top:5px;width:18px;height:18px;border-radius:50%;background:var(--bg);border:3px solid var(--ac)}
+.ev b{display:block;font:700 .95rem var(--fu);color:var(--hi);letter-spacing:.01em}.ev h4{font-size:1.2rem;margin:2px 0 2px}.ev p{max-width:62ch;color:var(--mu)}
+.search{width:100%;max-width:420px;padding:12px 18px;border-radius:999px;border:1px solid var(--bd);background:var(--sf);color:var(--tx);font:inherit;margin-bottom:18px}
+.tw{overflow-x:auto;border:1px solid var(--bd);border-radius:12px;background:var(--sf)}.gt{border-collapse:collapse;width:100%;min-width:540px;font-size:.92rem}.gt th,.gt td{padding:10px 14px;border-bottom:1px solid var(--bd);text-align:left;vertical-align:top}.gt tr:last-child td{border-bottom:0}.gt th{background:var(--s2);color:var(--tx);font:700 .85rem var(--fu);white-space:nowrap}.gt td{color:var(--mu)}.gt td:first-child{color:var(--tx);font:700 .95rem var(--fu)}
+.fig{margin:22px 0;padding:18px 20px;border:1px solid var(--bd);border-radius:14px;background:var(--sf);overflow-x:auto;max-width:640px}
+.fig h5{font-size:1.05rem;font-weight:700;margin-bottom:12px;color:var(--tx)}
+.fig svg.c{display:block;width:100%;min-width:480px;height:auto}.fig svg text{font:500 12px var(--fu);fill:var(--mu)}.fig svg .v{fill:var(--tx);font-weight:700}.fig svg .t{fill:var(--tx);font-weight:700;font-size:13px}
+.fig small{display:block;margin-top:10px;font:500 .82rem/1.4 var(--fu);color:var(--mu)}
+.dots{display:flex;flex-wrap:wrap;gap:7px;max-width:440px}.dots i{width:22px;height:22px;border-radius:50%;background:var(--ac)}.dots i.o{background:none;border:2px solid var(--hi)}
+.dots.m{gap:3px}.dots.m i{width:8px;height:8px;border-width:1.5px}
+.wf{display:flex;align-items:center;gap:24px;flex-wrap:wrap}.wf svg{flex:none}.wf big{display:block;font:800 4.4rem/1 var(--fd);letter-spacing:-.04em;color:var(--hi)}.wf span{display:block;max-width:26ch;font:500 .95rem/1.4 var(--fu);color:var(--mu)}
+.lg{display:flex;gap:18px;margin-top:12px;font:500 .85rem var(--fu);color:var(--mu)}.lg i{display:inline-block;width:12px;height:12px;border-radius:50%;background:var(--ac);vertical-align:-1px;margin-right:6px}.lg i.o{background:none;border:2px solid var(--hi)}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.yg circle{animation:none}}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="hi">
+    <a class="brand" href="#inicio">África</a>
+    <nav class="nav" id="nav" aria-label="Secciones"></nav>
+    <button class="tt" id="tt" aria-label="Cambiar entre tema claro y oscuro">◐</button>
+  </div>
+</header>
+<main>
+  <section class="view on" id="inicio">
+    <div class="hero">
+      <div>
+        <h1>África</h1>
+        <p class="lead">El continente donde nació nuestra especie, donde se hablan más de dos mil lenguas y donde vive la población más joven del planeta. África no es un país ni una sola historia: es 54 Estados, cinco grandes regiones y una diversidad que ningún titular puede resumir.</p>
+      </div>
+      <div id="hjust"></div>
+      <div class="stn" id="stn"></div>
+    </div>
+    <div class="grid home" id="home"></div>
+    <p class="note">Guía educativa y simplificada. Las cifras son aproximadas y varían según la fuente y el año. No sustituye la lectura de fuentes primarias ni de especialistas regionales.</p>
+  </section>
+</main>
+
+<script>
+const $=(s,e=document)=>e.querySelector(s),$$=(s,e=document)=>[...e.querySelectorAll(s)];
+
+const fig=(t,b,n)=>`<figure class="fig" style="margin-inline:0"><h5>${t}</h5>${b}<small>${n}</small></figure>`;
+const bars=(rows,max,step,al)=>{const x0=130,k=340/max,H=rows.length*44+34;let g='';for(let v=0;v<=max;v+=step)g+=`<line x1="${x0+v*k}" x2="${x0+v*k}" y1="6" y2="${H-26}" stroke="var(--bd)"/><text x="${x0+v*k}" y="${H-8}" text-anchor="middle">${v}</text>`;rows.forEach((r,i)=>{const y=12+i*44;g+=`<text x="${x0-10}" y="${y+19}" text-anchor="end">${r[0]}</text><rect x="${x0}" y="${y}" width="${r[1]*k}" height="28" rx="7" fill="${r[3]}" opacity="${r[4]||1}"/><text class="v" x="${x0+r[1]*k+8}" y="${y+19}">${r[2]}</text>`});return `<svg class="c" viewBox="0 0 520 ${H}" role="img" aria-label="${al}">${g}</svg>`};
+
+const V=[
+['continente','El continente','Geografía, población y datos clave de África.','Continente'],
+['historia','Historia','De los primeros Homo sapiens a la Unión Africana.','Historia'],
+['regiones','Regiones','Norte, Occidental, Central, Oriental y Austral.','Regiones'],
+['cultura','Cultura','Lenguas, religiones, arte, música y literatura.','Cultura'],
+['economia','Economía','Recursos, agricultura, ciudades y desafíos.','Economía'],
+['retos','Retos','Conflictos, clima, salud, educación y deuda.','Retos'],
+['avances','Avances','Dinero móvil, energía, espacio, IA y salud.','Avances'],
+['glosario','Glosario','Los términos clave explicados fácil.','Glosario']
+];
+
+$('main').insertAdjacentHTML('beforeend',V.map(v=>`<section class="view" id="${v[0]}"><div class="sec"><h2>${v[1]}</h2><p class="lead">${v[2]}</p><div id="b-${v[0]}"></div></div></section>`).join(''));
+$('#nav').innerHTML=V.map(v=>`<a class="nl" href="#${v[0]}" data-v="${v[0]}">${v[3]}</a>`).join('');
+$('#home').innerHTML=V.map(v=>`<a class="card" href="#${v[0]}"><h3>${v[1]}</h3><p>${v[2]}</p></a>`).join('');
+
+$('#stn').innerHTML=[
+['54','Estados reconocidos por la ONU'],
+['1.500 M','Habitantes (aprox.)'],
+['2.000+','Lenguas vivas'],
+['30,3 M km²','Superficie continental'],
+['~60%','Población menor de 25 años'],
+['5','Grandes regiones','<div class="dots m">'+'<i></i>'.repeat(5)+'</div>']
+].map(s=>`<div class="st"><b>${s[0]}</b><span>${s[1]}</span>${s[2]||''}</div>`).join('');
+
+const P=t=>`<p>${t}</p>`,ul=a=>`<ul>${a.map(x=>`<li>${x}</li>`).join('')}</ul>`,ol=a=>`<ol>${a.map(x=>`<li>${x}</li>`).join('')}</ol>`;
+const gt=(h,r)=>`<div class="tw"><table class="gt"><tr>${h.map(x=>`<th>${x}</th>`).join('')}</tr>${r.split('\n').map(l=>`<tr>${l.split('|').map(c=>`<td>${c}</td>`).join('')}</tr>`).join('')}</table></div>`;
+const ev=a=>`<div class="tl">${a.map(x=>`<div class="ev"><b>${x[0]}</b><h4>${x[1]}</h4><p>${x[2]}</p></div>`).join('')}</div>`;
+const dfs=a=>`<div class="defs">${a.map(x=>`<div class="def"><b>${x[0]}</b><span>${x[1]}</span></div>`).join('')}</div>`;
+const tabs=(id,a)=>{const b=$('#b-'+id);b.innerHTML=`<div class="tabs" role="tablist">${a.map((x,i)=>`<button class="tab" role="tab" data-i="${i}">${x[0]}</button>`).join('')}</div><div class="panel" role="tabpanel"><div class="pt"></div></div>`;const s=i=>{$$('.tab',b).forEach((t,j)=>t.setAttribute('aria-selected',i==j));$('.pt',b).innerHTML=a[i][1]};b.onclick=e=>{const t=e.target.closest('.tab');t&&s(+t.dataset.i)};s(0)};
+const B=(id,h)=>$('#b-'+id).innerHTML=h;
+
+$('#hjust').innerHTML=`<div class="yg"><svg width="240" height="240" viewBox="0 0 240 240" role="img" aria-label="De cada 100 africanos, unos 60 tienen menos de 25 años">${Array.from({length:100},(_,i)=>`<circle cx="${i%10*24+12}" cy="${Math.floor(i/10)*24+12}" r="9" fill="${i<60?'var(--ac)':'none'}" stroke="${i<60?'var(--ac)':'var(--bd)'}" stroke-width="2" style="animation-delay:${i*14+200}ms"/>`).join('')}</svg><small>De cada 100 africanos, unos 60 tienen menos de 25 años.</small></div>`;
+const fAge=fig('Edad media: África y Europa',bars([['África',19.5,'19–20 años','var(--ac)'],['Europa',40,'~40 años','var(--mu)',.55]],50,10,'Edad media de 19 a 20 años en África frente a unos 40 en Europa'),'Edad media aproximada, en años.');
+const fShare=fig('Peso de África en el mundo',bars([['Tierra emergida',20,'~20%','var(--ac)'],['PIB mundial',3,'~3%','var(--hi)']],25,5,'Alrededor del 20 por ciento de la tierra emergida y el 3 por ciento del PIB mundial'),'Porcentaje del total mundial; cifras aproximadas.');
+const fCacao=fig('Cacao mundial',`<div class="wf"><svg width="150" height="150" viewBox="0 0 200 200" role="img" aria-label="Más de la mitad de cada 100">${Array.from({length:100},(_,i)=>`<rect x="${i%10*20+1}" y="${Math.floor(i/10)*20+1}" width="17" height="17" rx="4" fill="${i<50?'var(--hi)':'var(--s2)'}"/>`).join('')}</svg><div><big>+50%</big><span>del cacao mundial lo producen juntos Costa de Marfil y Ghana</span></div></div>`,'Cada cuadrado es 1 de cada 100; se marca la mitad como mínimo.');
+
+/* ---------- EL CONTINENTE ---------- */
+tabs('continente',[
+['Geografía',
+P('África es el <b>segundo continente más extenso</b> del mundo, con unos 30,3 millones de km², y el segundo más poblado. Está atravesado por el <b>ecuador</b> casi por la mitad y por el <b>meridiano de Greenwich</b>, lo que reparte su territorio entre los cuatro hemisferios.')+
+ul([
+'<b>Norte:</b> el desierto del Sahara, el mayor desierto cálido del planeta, y la cordillera del Atlas.',
+'<b>Este:</b> el valle del Rift, los Grandes Lagos y el macizo etíope, con el pico Kilimanjaro (5.895 m) como techo del continente.',
+'<b>Centro:</b> la cuenca del río Congo, la segunda selva tropical más grande del mundo.',
+'<b>Sur:</b> el Kalahari, el Namib y la meseta sudafricana.',
+'<b>Ríos:</b> Nilo, Congo, Níger, Zambeze, Orange y Senegal. El Nilo y el Congo son los dos cursos fluviales más caudalosos del continente.'
+])+
+P('El continente limita al norte con el mar Mediterráneo, al oeste con el Atlántico, al este con el mar Rojo y el océano Índico, y al sur con el Atlántico Sur. Madagascar, en el Índico, es la cuarta isla más grande del mundo.')],
+['Población',
+P('África supera los <b>1.500 millones de habitantes</b> y es la región del mundo que crece más rápido. Según Naciones Unidas, albergará a buena parte del aumento de la población mundial hasta 2100.')+fAge+
+ul([
+'<b>Juventud:</b> alrededor del 60% de la población tiene menos de 25 años. La edad media ronda los 19-20 años, frente a los 40 de Europa.',
+'<b>Urbanización:</b> las ciudades crecen muy rápido. Lagos, El Cairo, Kinsasa, Johannesburgo, Luanda y Dar es Salaam figuran entre las aglomeraciones más grandes del mundo.',
+'<b>Diversidad:</b> conviven miles de grupos étnicos y lingüísticos, y hay países con más de 200 lenguas en su territorio, como Nigeria o la República Democrática del Congo.',
+'<b>Diáspora:</b> millones de africanos y descendientes viven fuera del continente, con un peso creciente en remesas y cultura.'
+])+
+P('Ese <b>bono demográfico</b> es a la vez una oportunidad enorme y un desafío: exige empleo, educación y servicios para una población joven que crece cada año.')],
+['Datos clave',
+gt(['Indicador','Dato aproximado','Nota'],`Países|54|Estados miembros de la ONU; el Sáhara Occidental tiene estatus disputado
+Superficie|30,3 M km²|~20% de la superficie terrestre emergida
+Población|1.500 M|En rápido crecimiento
+Lenguas|2.000+|Muchas amenazadas
+PIB nominal|~3% del mundial|Muy desigual por país
+Países más poblados|Nigeria, Etiopía, Egipto, RDC|Nigeria supera los 220 M
+Mayor economía|Sudáfrica, Nigeria, Egipto, Argelia|Según el año y el criterio
+Esperanza de vida|~64 años|Con grandes diferencias regionales
+Acceso a internet|~40%|En fuerte expansión móvil`)+fShare+
+P('Estos datos son promedios: África es el continente con mayor <b>heterogeneidad interna</b>. Un país como Seychelles tiene una renta por habitante comparable a la de países europeos, mientras que otros figuran entre los más pobres del mundo.')]
+]);
+
+/* ---------- HISTORIA ---------- */
+tabs('historia',[
+['Orígenes humanos',ev([
+['~315.000 a.C.','Jebel Irhoud (Marruecos)','Los fósiles de Homo sapiens más antiguos conocidos se encontraron aquí, lo que sitúa el origen de nuestra especie en África.'],
+['~200.000 a.C.','Omo Kibish (Etiopía)','Restos humanos anatómicamente modernos que confirman la larga presencia de sapiens en el este del continente.'],
+['~70.000 a.C.','Salida de África','Grupos de Homo sapiens abandonan el continente y colonizan el resto del mundo.'],
+['~10.000 a.C.','Agricultura y ganadería','Domesticación de cereales en el valle del Nilo y ganadería en el Sahara, entonces una sabana húmeda.'],
+['~6000 a.C.','Arte rupestre','Pinturas del Tassili n\'Ajjer (Argelia) y Tadrart Acacus (Libia) documentan la vida en el Sahara verde.'],
+['~3000 a.C.','El Sahara se seca','El cambio climático convierte la región en desierto y desplaza poblaciones hacia el Nilo y el Sahel.']
+])],
+['Reinos y comercio',ev([
+['~3100 a.C.','Unificación de Egipto','Narmer unifica el Alto y el Bajo Egipto: nace uno de los Estados más antiguos del mundo.'],
+['~2500 a.C.','Reino de Kush','Nubia desarrolla un reino propio que llegará a gobernar Egipto como la dinastía XXV.'],
+['814 a.C.','Cartago','La colonia fenicia se convierte en potencia comercial del Mediterráneo occidental.'],
+['~330 d.C.','Aksum','El reino etíope adopta el cristianismo, uno de los primeros Estados cristianos del mundo.'],
+['s. VIII–XIII','Ghana, Malí y Songhai','Imperios del Sahel que controlan el comercio transahariano de oro y sal. Timbuctú y Djenné se vuelven centros de saber.'],
+['711','Conquista del Magreb','La expansión islámica llega al norte de África y desde ahí a la península ibérica.'],
+['s. XI–XV','Gran Zimbabue y Congo','Sociedades del sur y centro del continente desarrollan arquitectura en piedra, metalurgia y redes comerciales hacia el Índico.'],
+['1441','Inicio de la trata atlántica','Los primeros africanos esclavizados son llevados a Portugal. Comienza uno de los mayores dramas de la historia.']
+])],
+['Colonización',ev([
+['1652','Colonia del Cabo','La Compañía Neerlandesa de las Indias Orientales funda un asentamiento que se convertirá en núcleo de la Sudáfrica colonial.'],
+['1830','Argelia','Francia invade Argelia e inicia una ocupación de más de un siglo.'],
+['1869','Canal de Suez','La obra conecta el Mediterráneo y el mar Rojo y refuerza el interés estratégico europeo en Egipto.'],
+['1884–85','Conferencia de Berlín','Las potencias europeas se reparten África en un mapa trazado con regla y escuadra, sin consultar a las poblaciones locales.'],
+['1896','Batalla de Adwa','Etiopía derrota a Italia y se convierte en el símbolo de la resistencia anticolonial.'],
+['1910–1960','Colonialismo tardío','Economías de extracción, trabajo forzado, segregación racial y fronteras artificiales que marcarán los conflictos posteriores.']
+])],
+['Independencias y presente',ev([
+['1951','Libia','Primer país africano en independizarse tras la Segunda Guerra Mundial.'],
+['1957','Ghana','Primera independencia del África subsahariana, liderada por Kwame Nkrumah.'],
+['1960','El Año de África','17 países acceden a la independencia en un solo año.'],
+['1963','OUA','Nace la Organización de la Unidad Africana en Adís Abeba.'],
+['1975','Independencias lusófonas','Angola, Mozambique, Cabo Verde, Guinea-Bisáu y Santo Tomé y Príncipe tras el fin del imperio colonial portugués.'],
+['1994','Fin del apartheid','Sudáfrica celebra sus primeras elecciones multirraciales y Nelson Mandela llega a la presidencia.'],
+['2002','Unión Africana','Sustituye a la OUA con una agenda de integración política y económica.'],
+['2015','Agenda 2063','Marco estratégico de la Unión Africana para los próximos cincuenta años.'],
+['2021','AfCFTA','Entra en funcionamiento el Área de Libre Comercio Continental Africana.'],
+['2023–2026','Sahel y Sudán','Golpes de Estado en el Sahel, guerra civil en Sudán y crisis humanitarias marcan la agenda del continente.']
+])]
+]);
+
+/* ---------- REGIONES ---------- */
+tabs('regiones',[
+['África del Norte',
+P('Comprende Egipto, Libia, Túnez, Argelia, Marruecos, Sudán y el Sáhara Occidental. Es la región del <b>Magreb</b>, el Sahara y el valle del Nilo, con fuerte influencia árabe y bereber.')+
+ul([
+'<b>Idiomas:</b> árabe, bereber (tamazight), francés en el Magreb, inglés en Sudán.',
+'<b>Economía:</b> petróleo y gas (Libia, Argelia, Egipto), turismo (Marruecos, Túnez), agricultura del Nilo y energía solar.',
+'<b>Retos:</b> escasez de agua, dependencia de hidrocarburos, inestabilidad política en Libia y Sudán.',
+'<b>Cultura:</b> música raï y gnawa, artesanía, cocina mediterránea y sahariana.'
+])],
+['África Occidental',
+P('Incluye Nigeria, Ghana, Senegal, Malí, Burkina Faso, Níger, Costa de Marfil, Camerún y una veintena más. Es una de las regiones más pobladas y culturalmente influyentes del mundo.')+
+ul([
+'<b>Bloques:</b> la CEDEAO (ECOWAS) es la principal comunidad económica regional.',
+'<b>Economía:</b> petróleo nigeriano, cacao de Costa de Marfil y Ghana, oro, servicios y una pujante escena tecnológica.',
+'<b>Cultura:</b> cuna del <i>afrobeat</i> y del <i>highlife</i>, del cine de Nollywood y de literaturas mayores como la de Wole Soyinka o Chimamanda Ngozi Adichie.',
+'<b>Retos:</b> inseguridad en el Sahel, inflación, infraestructuras y dependencia de materias primas.'
+])],
+['África Central',
+P('Dominada por la cuenca del río Congo, la segunda selva tropical del planeta. Incluye la República Democrática del Congo, Congo, Camerún, Chad, República Centroafricana, Gabón y Guinea Ecuatorial.')+
+ul([
+'<b>Recursos:</b> cobalto, coltán, cobre, diamantes, madera y petróleo. La RDC produce la mayor parte del cobalto mundial.',
+'<b>Población:</b> muy joven y con enorme diversidad lingüística; en la RDC se hablan más de 200 lenguas.',
+'<b>Cultura:</b> música congoleña (rumba, soukous) con influencia global, y una larga tradición de escultura y máscaras.',
+'<b>Retos:</b> conflictos armados en el este de la RDC, deforestación, minería informal y gobernanza frágil.'
+])],
+['África Oriental',
+P('Es la región del Cuerno de África, los Grandes Lagos y el valle del Rift. Reúne a Etiopía, Kenia, Tanzania, Uganda, Ruanda, Burundi, Somalia, Sudán del Sur, Yibuti, Eritrea y las islas del Índico occidental.')+
+ul([
+'<b>Cuna humana:</b> aquí se concentran algunos de los yacimientos paleoantropológicos más importantes del mundo.',
+'<b>Economía:</b> café etíope y keniano, té, turismo de safari, flores de Kenia y una fuerte escena fintech (M-Pesa).',
+'<b>Idiomas:</b> swahili como lengua franca regional, amárico, somalí, oromo, kikuyu y muchos más.',
+'<b>Retos:</b> sequías e inundaciones extremas, conflicto en Somalia y Sudán, presión sobre los recursos hídricos del Nilo.'
+])],
+['África Austral',
+P('Incluye Sudáfrica, Namibia, Botsuana, Zimbabue, Zambia, Mozambique, Angola, Malaui, Lesoto, Esuatini y Madagascar, además de islas como Mauricio y Seychelles.')+
+ul([
+'<b>Economía:</b> Sudáfrica es la economía más industrializada del continente; Botsuana destaca por sus diamantes y buena gobernanza.',
+'<b>Recursos:</b> oro, platino, diamantes, uranio, carbón y gas.',
+'<b>Cultura:</b> diversidad san, khoi, zulú, xhosa, afrikáner e india; música <i>amapiano</i> y <i>kwaito</i> de proyección global.',
+'<b>Retos:</b> desigualdad extrema en Sudáfrica, crisis energética, sequías en el Cabo y ciclones en Mozambique.'
+])]
+]);
+
+(()=>{const b=$('#b-regiones'),R=[['Norte','n','Petróleo y gas, turismo'],['Occidental','w','Cacao, petróleo, oro'],['Central','c','Cobalto y madera'],['Oriental','e','Café, té, safari'],['Austral','s','Oro, platino, diamantes']];
+b.insertAdjacentHTML('afterbegin',`<div class="rg" role="group" aria-label="Mapa esquemático de regiones">${R.map((r,i)=>`<button style="grid-area:${r[1]}" data-i="${i}" aria-pressed="${i==0}">${r[0]}<small>${r[2]}</small></button>`).join('')}</div>`);
+b.addEventListener('click',e=>{const t=e.target.closest('.rg button');if(t)$$('.tab',b)[+t.dataset.i].click();$$('.rg button',b).forEach((x,i)=>x.setAttribute('aria-pressed',$$('.tab',b)[i].getAttribute('aria-selected')==='true'))})})();
+
+/* ---------- CULTURA ---------- */
+tabs('cultura',[
+['Lenguas',
+P('África es el continente con mayor <b>diversidad lingüística</b> del mundo: se calculan más de 2.000 lenguas vivas. La mayoría pertenece a cuatro grandes familias:')+
+gt(['Familia','Ejemplos','Dónde'],`Afroasiática|Árabe, bereber, amárico, somalí, hausa|Norte, Cuerno de África y Sahel
+Nigerocongoleña|Swahili, yoruba, igbo, zulú, xhosa, lingala|Gran parte del África subsahariana
+Nilo-sahariana|Dinka, kanuri, luo|Valle del Nilo y Sahel oriental
+Khoisan|Nama, san, !xóõ|Sur de África (con clics característicos)`)+
+P('Muchas lenguas africanas son <b>tonales</b> y tienen sistemas de clases nominales muy ricos. Algunas, como el swahili, funcionan como lenguas francas regionales y son habladas por decenas de millones de personas como segunda lengua.')+
+P('El multilingüismo es la norma: es habitual que una persona hable en casa una lengua local, en la escuela una lengua colonial y en el trabajo una lengua franca regional.')],
+['Religiones',
+P('La religión en África es diversa y a menudo <b>se combina</b> en la práctica cotidiana.')+
+ul([
+'<b>Cristianismo:</b> mayoritario en el África subsahariana, con enorme peso del pentecostalismo y de las iglesias independientes africanas.',
+'<b>Islam:</b> mayoritario en el norte, el Sahel y partes del este; con tradiciones suníes, sufíes y escuelas jurídicas diversas.',
+'<b>Religiones tradicionales:</b> cultos a los antepasados, espíritus y deidades, presentes en muchas comunidades y sincretizados con las religiones abrahámicas.',
+'<b>Judaísmo:</b> con comunidades históricas como los Beta Israel de Etiopía.',
+'<b>Otras:</b> hinduismo en Mauricio y comunidades del este, bahaísmo, y minorías no creyentes en crecimiento urbano.'
+])+
+P('Un concepto central en muchas culturas del sur del continente es <b>ubuntu</b>: “soy porque somos”, la idea de que la persona se realiza en comunidad.')],
+['Arte y música',
+P('El arte africano es uno de los más influyentes de la historia y ha marcado el arte moderno europeo, la música global y el diseño contemporáneo.')+
+ul([
+'<b>Escultura y cerámica:</b> terracotas de Nok, bronces de Benín, cabezas de Ife, figuras dogón y máscaras de toda la franja tropical.',
+'<b>Textiles:</b> <i>kente</i> akan, <i>bogolan</i> maliense, <i>adire</i> yoruba, <i>kanga</i> y <i>kitenge</i> de África Oriental, rafia kuba.',
+'<b>Instrumentos:</b> kora, djembe, balafón, mbira, ud, qanun y tambores de todo tipo.',
+'<b>Géneros musicales:</b> afrobeat, highlife, soukous, rumba congoleña, mbalax, gnawa, raï, amapiano, gqom y afrobeats contemporáneos.'
+])+
+P('Ciudades como Lagos, Accra, Dakar, Johannesburgo y Nairobi son hoy <b>centros globales</b> de producción musical, moda y arte contemporáneo.')],
+['Literatura y cine',
+P('La tradición oral sigue viva a través de los <b>griots</b>, narradores y músicos que transmiten genealogías e historias. A esa base se sumó una literatura escrita de proyección mundial.')+
+ul([
+'<b>Clásicos:</b> <i>Todo se desmorona</i> de Chinua Achebe, <i>Una larga carta</i> de Mariama Bâ, <i>El intérprete</i> de Wole Soyinka.',
+'<b>Voces contemporáneas:</b> Ngũgĩ wa Thiong\'o, Tsitsi Dangarembga, Chimamanda Ngozi Adichie, Abdulrazak Gurnah (Nobel de Literatura 2021), Leïla Slimani.',
+'<b>Cine:</b> el <i>cinéma africain</i> de Ousmane Sembène, el festival FESPACO de Uagadugú, Nollywood (una de las industrias cinematográficas más prolíficas del mundo) y el cine de autor de Sudáfrica, Etiopía y el Magreb.'
+])+
+P('Muchas de estas obras abordan la <b>memoria colonial</b>, la identidad, la migración y el género desde perspectivas propias.')]
+]);
+
+/* ---------- ECONOMÍA ---------- */
+tabs('economia',[
+['Recursos naturales',
+P('África concentra una parte decisiva de las <b>reservas minerales mundiales</b>, pero históricamente ha exportado materias primas sin transformarlas, lo que limita el valor añadido y el empleo local.')+
+gt(['Recurso','Dónde destaca','Nota'],`Oro|Sudáfrica, Ghana, Malí, Tanzania|Uno de los mayores productores mundiales
+Diamantes|Botsuana, Sudáfrica, RDC|Botsuana gestionó sus recursos con acuerdos favorables
+Cobalto|RDC|Mayor parte de la producción mundial, clave para baterías
+Coltán y litio|RDC, Zimbabue|Minerales críticos para la electrónica
+Platino|Sudáfrica|Primer productor mundial
+Petróleo y gas|Nigeria, Angola, Libia, Argelia|Dependencia fiscal en varios países
+Uranio|Níger, Namibia|Relevante para la energía nuclear
+Fosfatos|Marruecos, Sáhara Occidental|Reservas entre las mayores del mundo`)+
+P('La <b>“maldición de los recursos”</b> describe cómo la abundancia mineral puede alimentar corrupción, conflictos y economías poco diversificadas.')],
+['Agricultura',
+P('La agricultura emplea a una parte muy grande de la población y es la base de la seguridad alimentaria del continente.')+fCacao+
+ul([
+'<b>Cacao:</b> Costa de Marfil y Ghana producen juntos más de la mitad del cacao mundial.',
+'<b>Café:</b> Etiopía (origen de la planta), Kenia, Uganda, Ruanda y Tanzania.',
+'<b>Té:</b> Kenia es uno de los mayores exportadores del mundo.',
+'<b>Otros:</b> algodón en el Sahel, dátiles en el Magreb, cítricos en Sudáfrica, flores y hortalizas de exportación en Kenia y Etiopía.',
+'<b>Retos:</b> dependencia de la lluvia, escasa irrigación, volatilidad de precios, cambio climático y baja mecanización.'
+])+
+P('Uno de los debates actuales es cómo pasar de exportar materia prima a <b>procesar localmente</b> cacao, café o algodón, reteniendo más valor en el continente.')],
+['Ciudades y PIB',
+P('Las economías más grandes del continente son, según el año y el criterio, <b>Nigeria, Sudáfrica, Egipto, Argelia, Marruecos, Kenia y Etiopía</b>.')+
+ul([
+'<b>Nigeria:</b> primera economía por tamaño nominal en varios años, con peso del petróleo y un enorme sector servicios informal.',
+'<b>Sudáfrica:</b> la más industrializada, con minería, finanzas y manufactura, pero con desempleo y desigualdad muy altos.',
+'<b>Egipto y Marruecos:</b> turismo, industria, energía y control del canal de Suez.',
+'<b>Etiopía, Ruanda y Costa de Marfil:</b> entre las economías de crecimiento más rápido de la última década.'
+])+
+P('El sector <b>informal</b> representa una parte muy importante del empleo en casi todo el continente, y las remesas de la diáspora superan en algunos países la ayuda al desarrollo.')],
+['Desafíos económicos',
+P('Pese al crecimiento de las últimas décadas, persisten obstáculos estructurales:')+
+ul([
+'<b>Deuda externa:</b> el servicio de la deuda absorbe recursos que podrían ir a sanidad o educación.',
+'<b>Dependencia de materias primas:</b> economías vulnerables a la caída de precios internacionales.',
+'<b>Infraestructura:</b> déficit de carreteras, ferrocarriles, electricidad y conectividad entre países.',
+'<b>Acceso al crédito:</b> las pymes y las mujeres emprendedoras enfrentan tasas altas y garantías difíciles.',
+'<b>Integración regional:</b> el comercio intraafricano sigue siendo bajo en comparación con otras regiones del mundo.'
+])+
+P('La <b>AfCFTA</b> busca precisamente revertir ese último punto: crear un mercado único de más de 1.400 millones de personas.')]
+]);
+
+/* ---------- RETOS ---------- */
+tabs('retos',[
+['Conflictos y seguridad',
+P('África no es un continente en guerra permanente, pero sí concentra algunos de los conflictos más graves del mundo.')+
+ul([
+'<b>Sahel:</b> insurgencias yihadistas, golpes de Estado en Malí, Burkina Faso, Níger y Guinea, y desplazamiento masivo.',
+'<b>Sudán:</b> guerra civil desde 2023 entre el ejército y las Fuerzas de Apoyo Rápido, con millones de desplazados.',
+'<b>Este de la RDC:</b> grupos armados, milicias y crisis humanitaria recurrente en Kivu.',
+'<b>Somalia:</b> insurgencia de Al-Shabaab y fragilidad estatal.',
+'<b>Mozambique:</b> violencia en Cabo Delgado vinculada a grupos armados.',
+'<b>Etiopía:</b> guerra de Tigray (2020-2022) y tensiones regionales posteriores.'
+])+
+P('A ello se suman la cuestión del Sáhara Occidental, tensiones en el Cuerno de África y la competencia por recursos hídricos, como la del Nilo.')],
+['Cambio climático',
+P('África es la región que <b>menos emisiones genera</b> y una de las que más sufre los impactos del cambio climático.')+
+ul([
+'<b>Sequías:</b> el Cuerno de África ha sufrido sequías consecutivas que han llevado al borde de la hambruna a millones de personas.',
+'<b>Inundaciones:</b> lluvias extremas en el Sahel, África Occidental y el este del continente.',
+'<b>Ciclones:</b> Mozambique, Malaui y Madagascar son golpeados con frecuencia creciente.',
+'<b>Desertificación:</b> avance del Sahara hacia el Sahel y pérdida de tierras cultivables.',
+'<b>Seguridad alimentaria:</b> cosechas y ganado dependen cada vez más del clima.'
+])+
+P('La <b>Gran Muralla Verde</b> del Sahel es una de las respuestas más conocidas: un proyecto de restauración de tierras que atraviesa una docena de países.')],
+['Salud y educación',
+P('Ha habido avances enormes en esperanza de vida y reducción de la mortalidad infantil, pero persisten brechas graves.')+
+ul([
+'<b>Enfermedades:</b> malaria, tuberculosis, VIH/sida y brotes de ébola y cólera siguen siendo retos sanitarios mayores.',
+'<b>Personal sanitario:</b> escasez de médicos y enfermeras, sobre todo en zonas rurales.',
+'<b>Educación:</b> decenas de millones de niños y niñas en edad escolar no están escolarizados; la UNESCO cifra la cifra en torno a 98 millones.',
+'<b>Género:</b> brechas persistentes en matriculación femenina, matrimonio infantil y acceso a anticonceptivos.',
+'<b>Digital:</b> la conectividad mejora muy rápido gracias al móvil, pero la brecha rural sigue siendo grande.'
+])],
+['Deuda y gobernanza',
+P('Muchos países africanos enfrentan una <b>crisis de deuda</b> agravada por la pandemia, la inflación global y la subida de tipos de interés.')+
+ul([
+'<b>Servicio de la deuda:</b> en varios países supera el gasto en salud o educación.',
+'<b>Golpes de Estado:</b> el Sahel ha vivido una oleada de golpes que ha roto el orden constitucional.',
+'<b>Instituciones:</b> capacidad estatal desigual, corrupción y sistemas judiciales frágiles en algunos casos.',
+'<b>Sociedad civil:</b> periodistas, activistas y organizaciones locales son actores centrales para exigir rendición de cuentas.',
+'<b>Migración:</b> alrededor de 40 millones de personas desplazadas o refugiadas en el continente, en buena parte por conflictos y clima.'
+])+
+P('A la vez, la Unión Africana y varios países han impulsado mecanismos propios de mediación y de gobernanza, y la <b>Agenda 2063</b> sirve como marco de referencia continental.')]
+]);
+
+/* ---------- AVANCES ---------- */
+tabs('avances',[
+['Dinero móvil y fintech',
+P('África es el <b>laboratorio mundial del dinero móvil</b>. M-Pesa, lanzado en Kenia en 2007, permitió enviar dinero sin cuenta bancaria y se extendió por varios países.')+
+ul([
+'<b>Escala:</b> el África subsahariana concentra alrededor de la mitad de las cuentas de dinero móvil del mundo.',
+'<b>Empresas:</b> M-Pesa, Flutterwave, Paystack, Chipper Cash, Wave y decenas de <i>startups</i> locales.',
+'<b>Impacto:</b> inclusión financiera de personas sin banco, remesas más baratas y comercio informal digitalizado.',
+'<b>Retos:</b> regulación, interoperabilidad entre operadores y protección de datos.'
+])+
+P('La fintech ha sido la puerta de entrada de muchos ecosistemas tecnológicos locales: Lagos, Nairobi, Ciudad del Cabo y El Cairo figuran entre los grandes polos de innovación del continente.')],
+['Energía y clima',
+P('África tiene un potencial renovable enorme y todavía una parte importante de su población sin acceso a electricidad.')+
+ul([
+'<b>Solar:</b> Noor Ouarzazate en Marruecos y Benban en Egipto se cuentan entre los mayores complejos solares del mundo.',
+'<b>Hidroeléctrica:</b> la Gran Presa del Renacimiento en Etiopía es una de las mayores del planeta y ha generado tensiones con Egipto y Sudán por el Nilo.',
+'<b>Geotermia:</b> Kenia es líder mundial en energía geotérmica.',
+'<b>Gas y minerales críticos:</b> el continente debate cómo usar sus reservas para financiar la transición.',
+'<b>Minirredes y <i>solar off-grid</i>:</b> soluciones descentralizadas para zonas rurales sin red eléctrica.'
+])],
+['Espacio e inteligencia artificial',
+P('El sector espacial africano crece rápido y ya es una realidad operativa.')+
+ul([
+'<b>Agencia Espacial Africana (AfSA):</b> creada en 2023 con sede en Egipto para coordinar políticas espaciales continentales.',
+'<b>Países con programas:</b> Sudáfrica, Egipto, Nigeria, Argelia, Marruecos, Kenia, Etiopía y Ghana, entre otros.',
+'<b>Observación de la Tierra:</b> clave para agricultura, sequías, gestión de desastres y planificación urbana.',
+'<b>IA:</b> estrategias nacionales en Nigeria, Kenia, Sudáfrica, Egipto y Ruanda; centros de investigación y una comunidad de desarrolladores en rápido crecimiento.'
+])+
+P('El reto es que la infraestructura de datos, el cómputo y la formación de talento no dependan exclusivamente de proveedores externos.')],
+['Salud e innovación',
+P('La capacidad sanitaria y científica del continente se ha reforzado tras la pandemia de COVID-19.')+
+ul([
+'<b>Vacunas:</b> la planta de Aspen en Sudáfrica y el Institut Pasteur de Dakar producen vacunas para el continente.',
+'<b>Hub de ARNm:</b> la OMS impulsó un centro de transferencia de tecnología en Sudáfrica para producir vacunas de ARNm en países de ingresos medios y bajos.',
+'<b>Diagnóstico y telemedicina:</b> soluciones móviles para llevar consultas y pruebas a zonas remotas.',
+'<b>Investigación local:</b> ensayos clínicos y centros de investigación en Kenia, Uganda, Sudáfrica, Malí y Senegal.'
+])+
+P('La apuesta es pasar de ser destinatario de la innovación sanitaria a <b>productor regional</b> de medicamentos y vacunas.')]
+]);
+
+/* ---------- GLOSARIO ---------- */
+(()=>{
+const G=[
+['AfCFTA','Área de Libre Comercio Continental Africana, en vigor desde 2021; busca crear un mercado único de más de 1.400 millones de personas.'],
+['Agenda 2063','Marco estratégico de la Unión Africana con objetivos de integración, desarrollo e industrialización para 2063.'],
+['Apartheid','Sistema de segregación racial impuesto en Sudáfrica entre 1948 y 1994.'],
+['Bantú','Familia de lenguas del África subsahariana que incluye el swahili, el zulú o el xhosa, entre muchas otras.'],
+['CEDEAO','Comunidad Económica de los Estados de África Occidental, principal bloque regional del oeste del continente.'],
+['Griot','Narrador y músico de la tradición oral de África Occidental, depositario de genealogías e historias.'],
+['Kente','Tejido ceremonial akan de Ghana, con patrones de colores con significado.'],
+['Magreb','Región del norte de África occidental que incluye Marruecos, Argelia, Túnez, Libia y Mauritania.'],
+['M-Pesa','Servicio de dinero móvil lanzado en Kenia en 2007, referencia mundial de inclusión financiera.'],
+['Panafricanismo','Movimiento político e intelectual que defiende la unidad y solidaridad de los pueblos africanos.'],
+['Sahel','Franja de transición entre el Sahara y la sabana, del Atlántico al mar Rojo; afectada por sequías e inseguridad.'],
+['Swahili','Lengua bantú con fuerte influencia árabe, lengua franca de África Oriental.'],
+['Ubuntu','Concepto del sur de África: “soy porque somos”; la persona se realiza en y con la comunidad.'],
+['Unión Africana','Organización continental fundada en 2002, sucesora de la OUA, con sede en Adís Abeba.'],
+['AfSA','Agencia Espacial Africana, creada en 2023 con sede en Egipto.'],
+['Rift','Valle del Rift, gran fractura geológica del este de África donde se concentran yacimientos clave de la evolución humana.']
+];
+B('glosario','<input class="search" id="q" type="search" placeholder="Buscar un término" aria-label="Buscar en el glosario"><div class="grid" id="gl"></div>');
+const r=f=>{$('#gl').innerHTML=G.filter(g=>(g[0]+g[1]).toLowerCase().includes(f)).map(g=>`<div class="card"><h3>${g[0]}</h3><p>${g[1]}</p></div>`).join('')||'<p class="note">No hay términos con esa búsqueda.</p>'};
+$('#q').oninput=e=>r(e.target.value.toLowerCase().trim());r('')})();
+
+/* ---------- NAVEGACIÓN Y TEMA ---------- */
+const go=h=>{
+  h=V.some(v=>v[0]===h)?h:'inicio';
+  $$('.view').forEach(e=>e.classList.toggle('on',e.id===h));
+  $$('.nl').forEach(a=>a.classList.toggle('on',a.dataset.v===h));
+  scrollTo(0,0);
+};
+addEventListener('hashchange',()=>go(location.hash.slice(1)));
+$('#tt').onclick=()=>{
+  const d=document.documentElement;
+  const k=d.dataset.theme?d.dataset.theme==='dark':matchMedia('(prefers-color-scheme:dark)').matches;
+  d.dataset.theme=k?'light':'dark';
+};
+go(location.hash.slice(1));
+</script>
+</body>
+</html>

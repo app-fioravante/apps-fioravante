@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Europa: geografía, historia, cultura y futuro</title>
+<meta name="description" content="Guía educativa sobre Europa: geografía, historia, regiones, cultura, economía, retos y avances tecnológicos.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400..700&family=Fraunces:opsz,wght@9..144,500..800&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:light dark;--fd:'Fraunces',Georgia,serif;--fb:'Figtree','Segoe UI',system-ui,sans-serif;--bg:light-dark(#eef2f8,#08111f);--sf:light-dark(#fff,#0f1b30);--s2:light-dark(#e3eaf5,#182640);--bd:light-dark(#cdd8ea,#263a5a);--tx:light-dark(#0b1830,#eef3fb);--mu:light-dark(#44566f,#a6b7cf);--ac:light-dark(#2447b8,#8aa8ff);--on:light-dark(#fff,#08111f);--hero:light-dark(#1c3a9c,#0f2070);--gold:#f5b800;box-sizing:border-box;padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+.k0{--k:light-dark(#2447b8,#8aa8ff)}.k1{--k:light-dark(#9a5b00,#f0b24a)}.k2{--k:light-dark(#0b7a75,#4fd1c5)}.k3{--k:light-dark(#8a2f77,#e58fd2)}.k4{--k:light-dark(#2e7a31,#7ed67f)}.k5{--k:light-dark(#b3341f,#ff8a73)}.k6{--k:light-dark(#5b3fc4,#b29cff)}.k7{--k:light-dark(#4a5b73,#a3b5cc)}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:calc(env(safe-area-inset-top,0px) + 64px);-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--tx);font:400 1rem/1.65 var(--fb);overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--bg)}
+h1,h2,h3,h4{font-family:var(--fd);margin:0;line-height:1.12}p{margin:0}a{color:inherit;text-decoration:none}button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--ac);outline-offset:2px;border-radius:6px}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--bd)}
+.hi{max-width:1100px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:12px}
+.brand{display:flex;align-items:center;gap:8px;font:800 1.2rem var(--fd);white-space:nowrap}
+.stx{width:16px;height:16px;background:var(--gold);clip-path:polygon(50% 0,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%)}
+.nav{display:flex;gap:2px;margin-left:auto;overflow-x:auto;scrollbar-width:none;min-width:0}.nav::-webkit-scrollbar{display:none}
+.nl{padding:8px 13px;border-radius:999px;font-size:.86rem;font-weight:500;color:var(--mu);white-space:nowrap;transition:background .15s,color .15s}.nl:hover{color:var(--tx)}.nl.on{background:var(--k);color:var(--on);font-weight:700}
+.tt{width:38px;height:38px;flex:none;border:1px solid var(--bd);border-radius:50%;background:var(--s2)}
+main{max-width:1100px;margin:0 auto;padding:0 16px 70px}
+.view{display:none}.view.on{display:block}
+.hero{position:relative;overflow:hidden;isolation:isolate;margin-top:18px;padding:clamp(28px,6vw,64px);border-radius:24px;background:#039;color:#fff}
+.hero h1{font-size:clamp(3.6rem,18vw,9.5rem);font-weight:800;letter-spacing:-.035em;line-height:.9;margin-bottom:20px}
+.hero .lead{color:#dfe7ff;max-width:56ch}
+.flag{position:absolute;inset:0;width:100%;height:100%;z-index:-1}
+.hero::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,#039 0,rgba(0,51,153,.88) 40%,rgba(0,51,153,0) 74%)}
+.lead{color:var(--mu);font-size:1.08rem;max-width:62ch}
+.stn{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:14px}
+.st{padding:16px;border-radius:14px;background:var(--sf);border:1px solid var(--bd)}
+.st b{display:block;font:700 1.9rem/1 var(--fd);color:var(--ac);margin-bottom:6px}.st em{font-style:normal}.st span{display:block;font-size:.85rem;line-height:1.3;color:var(--mu)}
+.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));align-items:start}
+.card{display:block;padding:20px;border-radius:16px;background:color-mix(in srgb,var(--k,var(--ac)) 7%,var(--sf));border:1px solid var(--bd);border-top:4px solid var(--k,var(--ac))}a.card:hover{border-color:var(--k)}
+.card h3{font-size:1.25rem;margin-bottom:6px;color:var(--k,var(--tx))}.card p{font-size:.92rem;color:var(--mu)}
+.home{margin-top:20px}.note{margin-top:22px;padding:14px 18px;border-radius:12px;border:1px dashed var(--bd);color:var(--mu);font-size:.9rem}
+.sec{padding:36px 0 4px}.sec h2{font-size:clamp(2rem,7vw,3.4rem);font-weight:800;letter-spacing:-.02em;margin-bottom:10px}.sec h2::before{content:"";display:block;width:52px;height:6px;border-radius:3px;background:var(--k);margin-bottom:16px}.sec>.lead{margin-bottom:24px}
+.tabs{display:flex;gap:8px;margin-bottom:14px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}
+.tab{flex:none;padding:10px 16px;border-radius:999px;border:1px solid var(--bd);background:var(--sf);font-weight:600;font-size:.9rem;color:var(--mu);transition:background .15s}.tab:hover{color:var(--tx)}.tab[aria-selected=true]{background:var(--k);color:var(--on);border-color:transparent;font-weight:700}
+.panel{padding:clamp(18px,3vw,30px);border-radius:18px;background:var(--sf);border:1px solid var(--bd);border-left:6px solid var(--k)}
+.pt{color:var(--mu)}.pt p,.pt ul,.pt ol{max-width:74ch}.pt p+*,.pt ul+*,.pt ol+*{margin-top:.8em}.pt b{color:var(--tx)}.pt ul,.pt ol{padding-left:1.2em}.pt li+li{margin-top:.35em}.pt li::marker{color:var(--k)}
+.figs{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-bottom:22px}
+.fig{margin:0;padding:16px 14px;border-radius:14px;background:var(--s2);text-align:center}
+.fig svg{width:116px;height:116px}.fig figcaption{font-size:.84rem;line-height:1.35;color:var(--mu);margin-top:6px}
+.rt,.rv{fill:none;stroke-width:9}.rt{stroke:var(--bd)}
+.rv{stroke:var(--k);stroke-linecap:round;transform:rotate(-90deg);transform-origin:50px 50px;stroke-dashoffset:calc(var(--L) * (1 - var(--p) / 100));animation:rg 1.1s .1s cubic-bezier(.2,.7,.2,1) both}
+@keyframes rg{from{stroke-dashoffset:var(--L)}}
+.rb{font:700 20px var(--fd);fill:var(--tx)}
+.fig.wide{text-align:left}.fig.wide figcaption{margin:0 0 6px;font-weight:700;color:var(--tx);font-size:.9rem}
+@media(min-width:620px){.fig.wide{grid-column:span 2}}
+.bar{display:grid;grid-template-columns:minmax(90px,140px) 1fr auto;gap:10px;align-items:center;font-size:.88rem;margin-top:10px;color:var(--mu)}.bar b{color:var(--tx)}
+.tr{height:12px;border-radius:6px;background:var(--bd);overflow:hidden}.tr i{display:block;height:100%;border-radius:6px;background:var(--k);transform-origin:left;animation:gw .9s .1s cubic-bezier(.2,.7,.2,1) both}
+@keyframes gw{from{transform:scaleX(0)}}
+.tl{position:relative;padding-top:4px}.tl::before{content:"";position:absolute;left:7px;top:10px;bottom:10px;width:2px;background:var(--bd)}
+.ev{position:relative;padding:0 0 20px 34px}.ev::before{content:"";position:absolute;left:0;top:5px;width:16px;height:16px;border-radius:50%;background:var(--sf);border:4px solid var(--k)}
+.ev b{display:block;font:700 1.1rem var(--fd);color:var(--k)}.ev h4{font-size:1.08rem;color:var(--tx)}.ev p{max-width:62ch;color:var(--mu)}
+@media(min-width:720px){.tl::before{left:157px}.ev{display:grid;grid-template-columns:140px 1fr;column-gap:36px;padding-left:0}.ev::before{left:150px}.ev b{grid-column:1;grid-row:1/3;text-align:right;padding-top:1px}.ev h4,.ev p{grid-column:2}}
+.search{width:100%;max-width:420px;padding:12px 18px;border-radius:999px;border:1px solid var(--bd);background:var(--sf);color:var(--tx);font:inherit;margin-bottom:14px}
+.tw{overflow-x:auto;border:1px solid var(--bd);border-radius:12px}.gt{border-collapse:collapse;width:100%;min-width:540px;font-size:.88rem}.gt th,.gt td{padding:10px 14px;border-bottom:1px solid var(--bd);text-align:left;vertical-align:top}.gt tr:last-child td{border-bottom:0}.gt th{background:var(--s2);color:var(--tx);white-space:nowrap}.gt td{color:var(--mu)}.gt td:first-child{color:var(--tx);font-weight:700}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important}}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="hi">
+    <a class="brand" href="#inicio"><i class="stx"></i>Europa</a>
+    <nav class="nav" id="nav" aria-label="Secciones"></nav>
+    <button class="tt" id="tt" aria-label="Cambiar entre tema claro y oscuro">◐</button>
+  </div>
+</header>
+<main>
+  <section class="view on" id="inicio">
+    <div class="hero"><svg class="flag" id="flag" viewBox="0 0 1200 600" preserveAspectRatio="xMaxYMid slice" aria-hidden="true"></svg><h1>Europa</h1><p class="lead">El continente que inventó la filosofía, exportó la Revolución Industrial y hoy enfrenta el envejecimiento, la transición energética y la construcción de una identidad supranacional. Europa no es un país ni una cultura única: es 44 Estados, decenas de lenguas y una diversidad que ningún titular puede resumir.</p></div>
+    <div class="stn" id="stn"></div>
+    <div class="grid home" id="home"></div>
+    <p class="note">Guía educativa y simplificada. Las cifras son aproximadas y varían según la fuente y el año. No sustituye la lectura de fuentes primarias ni de especialistas regionales.</p>
+  </section>
+</main>
+
+<script>
+const $=(s,e=document)=>e.querySelector(s),$$=(s,e=document)=>[...e.querySelectorAll(s)];
+
+const V=[
+['continente','El continente','Geografía, población y datos clave de Europa.','Continente'],
+['historia','Historia','De la Grecia clásica a la Unión Europea.','Historia'],
+['regiones','Regiones','Norte, Sur, Este, Oeste y Central.','Regiones'],
+['cultura','Cultura','Lenguas, religiones, arte y patrimonio.','Cultura'],
+['economia','Economía','PIB, industria, servicios y desafíos.','Economía'],
+['retos','Retos','Envejecimiento, migración, clima y deuda.','Retos'],
+['avances','Avances','Fusión, chips, IA y transición energética.','Avances'],
+['glosario','Glosario','Los términos clave explicados fácil.','Glosario']
+];
+
+$('main').insertAdjacentHTML('beforeend',V.map((v,i)=>`<section class="view k${i}" id="${v[0]}"><div class="sec"><h2>${v[1]}</h2><p class="lead">${v[2]}</p><div id="b-${v[0]}"></div></div></section>`).join(''));
+$('#nav').innerHTML=V.map((v,i)=>`<a class="nl k${i}" href="#${v[0]}" data-v="${v[0]}">${v[3]}</a>`).join('');
+$('#home').innerHTML=V.map((v,i)=>`<a class="card k${i}" href="#${v[0]}"><h3>${v[1]}</h3><p>${v[2]}</p></a>`).join('');
+
+$('#stn').innerHTML=[['',44,'','Estados reconocidos'],['~',740,' M','Habitantes'],['',24,'','Lenguas oficiales en la UE'],['',27,'','Miembros de la Unión Europea'],['~',10,' M km²','Superficie continental'],['','1 de 3','','Mayores de 65 años en la UE hacia 2050']].map(s=>`<div class="st"><b>${s[0]}${typeof s[1]=='number'?`<em data-n="${s[1]}">${s[1]}</em>`:s[1]}${s[2]}</b><span>${s[3]}</span></div>`).join('');
+
+const P=t=>`<p>${t}</p>`,ul=a=>`<ul>${a.map(x=>`<li>${x}</li>`).join('')}</ul>`,ol=a=>`<ol>${a.map(x=>`<li>${x}</li>`).join('')}</ol>`;
+const gt=(h,r)=>`<div class="tw"><table class="gt"><tr>${h.map(x=>`<th>${x}</th>`).join('')}</tr>${r.split('\n').map(l=>`<tr>${l.split('|').map(c=>`<td>${c}</td>`).join('')}</tr>`).join('')}</table></div>`;
+const ev=a=>`<div class="tl">${a.map(x=>`<div class="ev"><b>${x[0]}</b><h4>${x[1]}</h4><p>${x[2]}</p></div>`).join('')}</div>`;
+const dfs=a=>`<div class="defs">${a.map(x=>`<div class="def"><b>${x[0]}</b><span>${x[1]}</span></div>`).join('')}</div>`;
+const tabs=(id,a)=>{const b=$('#b-'+id);b.innerHTML=`<div class="tabs" role="tablist">${a.map((x,i)=>`<button class="tab" role="tab" data-i="${i}">${x[0]}</button>`).join('')}</div><div class="panel" role="tabpanel"><div class="pt"></div></div>`;const s=i=>{$$('.tab',b).forEach((t,j)=>t.setAttribute('aria-selected',i==j));$('.pt',b).innerHTML=a[i][1]};b.onclick=e=>{const t=e.target.closest('.tab');t&&s(+t.dataset.i)};s(0)};
+const B=(id,h)=>$('#b-'+id).innerHTML=h;
+const ring=(p,big,cap)=>{const L=(2*Math.PI*40).toFixed(1);return `<figure class="fig"><svg viewBox="0 0 100 100" role="img" aria-label="${big}: ${cap}"><circle class="rt" cx="50" cy="50" r="40"/><circle class="rv" cx="50" cy="50" r="40" stroke-dasharray="${L}" style="--L:${L};--p:${p}"/><text class="rb" x="50" y="56" text-anchor="middle">${big}</text></svg><figcaption>${cap}</figcaption></figure>`};
+const bars=(t,a,m)=>`<figure class="fig wide"><figcaption>${t}</figcaption>${a.map(x=>`<div class="bar"><span>${x[0]}</span><span class="tr"><i style="width:${x[1]/m*100}%"></i></span><b>${x[2]}</b></div>`).join('')}</figure>`;
+const figs=(...a)=>`<div class="figs">${a.join('')}</div>`;
+
+(()=>{const st=(cx,cy)=>{let p='';for(let k=0;k<10;k++){const r=k%2?12.7:33.3,a=(-90+k*36)*Math.PI/180;p+=(cx+r*Math.cos(a)).toFixed(1)+','+(cy+r*Math.sin(a)).toFixed(1)+' '}return `<polygon points="${p}"/>`};let h='<rect width="1200" height="600" fill="#039"/><g fill="#fc0">';for(let i=0;i<12;i++){const a=i*Math.PI/6;h+=st(880+200*Math.sin(a),300-200*Math.cos(a))}$('#flag').innerHTML=h+'</g>'})();
+
+/* ---------- EL CONTINENTE ---------- */
+tabs('continente',[
+['Geografía',
+P('Europa es el <b>segundo continente más pequeño</b> del mundo, con unos 10 millones de km², pero el segundo más densamente poblado después de Asia. Se extiende desde el océano Ártico en el norte hasta el mar Mediterráneo en el sur, y desde el Atlántico en el oeste hasta los Urales y el Cáucaso en el este.')+
+ul([
+'<b>Norte:</b> península escandinava, Islandia, islas británicas y la llanura nórdica.',
+'<b>Sur:</b> penínsulas ibérica, itálica y balcánica, y las islas mediterráneas.',
+'<b>Este:</b> la gran llanura europea, los Cárpatos y la llanura rusa hasta los Urales.',
+'<b>Oeste:</b> fachada atlántica, con costas recortadas y clima oceánico.',
+'<b>Ríos:</b> Rin, Danubio, Volga, Dniéper, Loira, Elba y Po, entre otros. El Danubio atraviesa diez países.',
+'<b>Relieve:</b> los Alpes, los Pirineos, los Cárpatos, los Balcanes y el Cáucaso. El Mont Blanc (4.808 m) es el pico más alto de Europa occidental.'
+])+
+P('Europa es una <b>península de Eurasia</b>: su carácter peninsular y su fragmentación en mares, golfos y cordilleras han favorecido históricamente la diversidad política y cultural.')],
+['Población',
+figs(ring(75,'+75%','de la población vive en ciudades'),ring(33,'1/3','de la UE tendrá 65 años o más en 2050'))+P('Europa supera los <b>740 millones de habitantes</b>, la mayoría concentrados en ciudades y áreas metropolitanas. Es el continente con menor crecimiento demográfico del mundo y uno de los más envejecidos.')+
+ul([
+'<b>Envejecimiento:</b> la edad media supera los 43 años. Para 2050, casi un tercio de la población de la UE tendrá 65 años o más.',
+'<b>Baja natalidad:</b> la tasa de fertilidad está por debajo del nivel de reemplazo (2,1 hijos por mujer) en casi todos los países.',
+'<b>Urbanización:</b> más del 75% de la población vive en ciudades. Las mayores aglomeraciones son Estambul (a caballo entre Europa y Asia), Moscú, París, Londres y Madrid.',
+'<b>Migración:</b> el saldo migratorio es positivo en muchos países y compensa parcialmente el envejecimiento, aunque genera debates políticos.',
+'<b>Diversidad:</b> conviven más de 200 lenguas y una gran variedad de identidades nacionales, regionales y locales.'
+])+
+P('Europa es también el continente con mayor <b>esperanza de vida</b> del mundo: alrededor de 81 años de media, con diferencias entre países.')],
+['Datos clave',
+figs(ring(59.5,'59%','de los europeos vive en la UE (≈440 de 740 M)'),ring(14.5,'14,5%','del PIB mundial es de la UE'),ring(71,'1,5','hijos por mujer; el reemplazo requiere 2,1'))+gt(['Indicador','Dato aproximado','Nota'],`Países|44|Estados reconocidos internacionalmente
+Superficie|~10,2 M km²|Segundo continente más pequeño
+Población|~740 M|En lento declive demográfico
+UE|27 miembros|Más de 440 M de habitantes
+Lenguas oficiales UE|24|Más de 200 lenguas en todo el continente
+PIB UE|~14,5% del mundial|Según el año y el criterio
+Esperanza de vida|~81 años|Una de las más altas del mundo
+Tasa de fertilidad|~1,5 hijos/mujer|Por debajo del reemplazo`)+
+P('Estos datos son promedios: Europa es muy <b>heterogénea</b>. Luxemburgo tiene la renta per cápita más alta del mundo, mientras que algunos países de Europa del Este aún convergen con la media comunitaria.')]
+]);
+
+/* ---------- HISTORIA ---------- */
+tabs('historia',[
+['Antigüedad y Edad Media',ev([
+['~3000 a.C.','Civilización minoica','En Creta surge una de las primeras civilizaciones europeas, con escritura y comercio marítimo.'],
+['~800 a.C.','Grecia clásica','Atenas, Esparta y otras polis desarrollan la democracia, la filosofía y el teatro.'],
+['~500 a.C.–500 d.C.','Roma','El Imperio romano unifica el Mediterráneo, difunde el latín y el derecho, y sienta las bases de Europa.'],
+['476','Caída de Roma','El fin del Imperio romano de Occidente marca el inicio de la Edad Media.'],
+['800','Imperio carolingio','Carlomagno unifica gran parte de Europa occidental y promueve la educación y la cultura.'],
+['1054','Cisma de Oriente','La separación entre la Iglesia católica y la ortodoxa divide culturalmente el continente.'],
+['1347–1351','Peste Negra','La pandemia reduce la población europea en torno a un tercio y transforma la economía y la sociedad.']
+])],
+['Renacimiento e Ilustración',ev([
+['1440','Imprenta','Gutenberg inventa la imprenta de tipos móviles, que acelera la difusión del conocimiento.'],
+['1492','Llegada a América','La expansión europea conecta el continente con África, América y Asia, y da inicio a la globalización.'],
+['1517','Reforma protestante','Lutero cuestiona la autoridad papal y provoca la división religiosa de Europa.'],
+['1687','Newton','Publica los <i>Principia</i>, que revolucionan la física y la astronomía.'],
+['1789','Revolución Francesa','Los ideales de libertad, igualdad y fraternidad transforman la política europea.'],
+['1815','Congreso de Viena','Tras las guerras napoleónicas, se rediseña el mapa de Europa y se busca un equilibrio de poder.']
+])],
+['Siglos XIX y XX',ev([
+['~1760','Revolución Industrial','Gran Bretaña mecaniza la producción textil y luego la industria, y Europa se convierte en la fábrica del mundo.'],
+['1914–1918','Primera Guerra Mundial','Las rivalidades imperiales y nacionalistas llevan a una guerra que devasta el continente.'],
+['1939–1945','Segunda Guerra Mundial','El conflicto más mortífero de la historia deja Europa dividida y arruinada.'],
+['1947–1989','Guerra Fría','Europa queda dividida por el Telón de Acero entre el bloque occidental y el soviético.'],
+['1958','Comunidad Económica Europea','Los Tratados de Roma crean un mercado común entre seis países.'],
+['1989','Caída del Muro de Berlín','El colapso del bloque soviético abre la puerta a la reunificación europea.'],
+['1993','Unión Europea','El Tratado de Maastricht crea la UE y sienta las bases de la ciudadanía europea.'],
+['2002','Euro','La moneda única entra en circulación en doce países.'],
+['2004–2013','Ampliación','La UE incorpora a la mayoría de los países de Europa del Este y central.'],
+['2020','Brexit','El Reino Unido abandona la UE tras el referéndum de 2016.']
+])]
+]);
+
+/* ---------- REGIONES ---------- */
+tabs('regiones',[
+['Europa del Norte',
+P('Comprende Dinamarca, Finlandia, Islandia, Noruega, Suecia, Estonia, Letonia y Lituania, además de las islas británicas y el mar Báltico. Es la región de los <b>fiordos</b>, las sociedades del bienestar y la alta digitalización.')+
+ul([
+'<b>Idiomas:</b> lenguas germánicas (danés, sueco, noruego, islandés), finlandés y estonio (urálicas), letón y lituano (bálticas).',
+'<b>Economía:</b> alta renta per cápita, tecnología, energías renovables y un sector público fuerte.',
+'<b>Cultura:</b> diseño escandinavo, literatura nórdica, música metal y tradiciones vikingas.',
+'<b>Retos:</b> despoblación rural, integración de la inmigración y defensa ante la presión rusa.'
+])],
+['Europa del Sur',
+P('Incluye España, Portugal, Italia, Grecia, Malta, Chipre y los países de la antigua Yugoslavia. Es la región mediterránea, con fuerte peso del turismo y una rica herencia greco-latina.')+
+ul([
+'<b>Idiomas:</b> lenguas romances (español, portugués, italiano, catalán, gallego, rumano) y griego.',
+'<b>Economía:</b> turismo, agricultura, industria ligera y servicios. Italia y España figuran entre las mayores economías de la eurozona.',
+'<b>Cultura:</b> arte renacentista y barroco, gastronomía mediterránea, flamenco, fado y ópera.',
+'<b>Retos:</b> desempleo juvenil, deuda pública, sequías e incendios.'
+])],
+['Europa del Este',
+P('Reúne a Rusia, Ucrania, Bielorrusia, Polonia, República Checa, Eslovaquia, Hungría, Rumanía, Bulgaria y Moldavia. Es una región marcada por la herencia soviética y por la transición postcomunista.')+
+ul([
+'<b>Idiomas:</b> lenguas eslavas (ruso, ucraniano, polaco, checo, eslovaco, búlgaro), rumano y húngaro.',
+'<b>Economía:</b> fuerte industrialización en Polonia y Chequia; dependencia energética en varios países.',
+'<b>Cultura:</b> literatura rusa y polaca, música clásica, arquitectura ortodoxa y tradiciones populares.',
+'<b>Retos:</b> guerra en Ucrania, presión autoritaria en Rusia y Bielorrusia, y convergencia económica con Europa occidental.'
+])],
+['Europa Occidental y Central',
+P('Incluye Alemania, Francia, Austria, Suiza, Bélgica, Países Bajos, Luxemburgo, Irlanda y el Reino Unido. Es el <b>núcleo económico y político</b> de la UE.')+
+ul([
+'<b>Idiomas:</b> alemán, francés, neerlandés, inglés, irlandés y las lenguas regionales de cada país.',
+'<b>Economía:</b> industria avanzada, finanzas, servicios y las mayores economías de la eurozona.',
+'<b>Cultura:</b> filosofía, ilustración, romanticismo, cine y moda.',
+'<b>Retos:</b> desindustrialización, envejecimiento, integración europea y relaciones con el Reino Unido tras el Brexit.'
+])]
+]);
+
+/* ---------- CULTURA ---------- */
+tabs('cultura',[
+['Lenguas',
+P('Europa es el continente con mayor <b>densidad lingüística</b> del mundo. La mayoría de sus lenguas pertenecen a la familia indoeuropea, que se divide en tres grandes ramas:')+
+gt(['Familia','Ejemplos','Dónde'],`Romances|Español, portugués, francés, italiano, rumano, catalán|Sur y oeste de Europa
+Germánicas|Alemán, inglés, neerlandés, sueco, danés, noruego|Norte y centro de Europa
+Eslavas|Ruso, ucraniano, polaco, checo, búlgaro, serbio|Este y sureste de Europa
+Urálicas|Finlandés, estonio, húngaro|Norte y centro de Europa
+Otras|Griego, albanés, maltés, euskera|Grecia, Albania, Malta, País Vasco`)+
+P('El <b>euskera</b> es una lengua aislada, sin parentesco conocido con ninguna otra de Europa. El <b>romaní</b>, hablado por comunidades gitanas, pertenece a la familia indoaria.')+
+P('La UE reconoce <b>24 lenguas oficiales</b>, y el multilingüismo es uno de sus principios fundamentales.')],
+['Religiones',
+P('Europa es mayoritariamente <b>cristiana</b>, pero con una creciente diversidad religiosa y un fuerte proceso de secularización.')+
+ul([
+'<b>Cristianismo:</b> presente en sus tres grandes ramas: catolicismo en el sur y centro, protestantismo en el norte y ortodoxia en el este.',
+'<b>Islam:</b> con presencia histórica en los Balcanes y comunidades importantes en Europa occidental por la inmigración.',
+'<b>Judaísmo:</b> con comunidades históricas en muchas ciudades europeas, duramente golpeadas por el Holocausto.',
+'<b>Otras:</b> hinduismo, budismo, sijismo y minorías no creyentes en crecimiento.',
+'<b>Secularización:</b> la asistencia religiosa y la creencia en Dios han disminuido en las últimas décadas, sobre todo en Europa occidental y del norte.'
+])+
+P('La <b>libertad religiosa</b> y la separación entre Iglesia y Estado son principios consolidados en la mayoría de los países europeos.')],
+['Arte y patrimonio',
+P('Europa alberga una parte muy importante del <b>patrimonio cultural mundial</b> y es la región con más sitios declarados Patrimonio de la Humanidad por la UNESCO.')+
+ul([
+'<b>Arquitectura:</b> el Partenón, el Coliseo, las catedrales góticas, los palacios renacentistas y barrocos, y la arquitectura moderna de Bauhaus.',
+'<b>Pintura:</b> Giotto, Van Eyck, Leonardo, Miguel Ángel, Velázquez, Rembrandt, Goya, Monet, Van Gogh, Picasso.',
+'<b>Música clásica:</b> Bach, Mozart, Beethoven, Chopin, Wagner, Verdi, Stravinski.',
+'<b>Literatura:</b> Homero, Dante, Cervantes, Shakespeare, Goethe, Tolstói, Kafka, Proust.',
+'<b>Patrimonio UNESCO:</b> Italia lidera el ranking mundial con más de 60 sitios, seguida de China y Alemania. Francia, España y el Reino Unido también figuran entre los primeros.'
+])+
+P('El patrimonio europeo no es solo monumental: incluye paisajes culturales, tradiciones orales, artesanía y gastronomía.')],
+['Identidad y diversidad',
+P('No existe una <b>identidad europea única</b>. Europa se define por su diversidad y por la tensión entre identidades nacionales, regionales y supranacionales.')+
+ul([
+'<b>Valores compartidos:</b> democracia, Estado de derecho, derechos humanos y economía social de mercado, según los tratados de la UE.',
+'<b>Diversidad nacional:</b> cada país tiene su propia historia, instituciones y símbolos.',
+'<b>Regionalismos:</b> Cataluña, Escocia, Flandes, Córcega, Padania y el País Vasco son ejemplos de identidades regionales fuertes.',
+'<b>Migración:</b> ha transformado la composición cultural de las grandes ciudades europeas.',
+'<b>Debate:</b> ¿qué significa ser europeo? La respuesta varía según el país, la generación y la posición política.'
+])]
+]);
+
+/* ---------- ECONOMÍA ---------- */
+tabs('economia',[
+['PIB y crecimiento',
+figs(ring(14.5,'14,5%','del PIB mundial'),bars('Crecimiento real del PIB de la UE',[['2025',1.6,'1,6%'],['2026 (previsión)',1.4,'1,4%'],['2027 (previsión)',1.5,'1,5%']],2))+P('La <b>Unión Europea</b> es una de las mayores economías del mundo, con un PIB que ronda el 14,5% del global. El crecimiento es moderado pero sostenido.')+
+ul([
+'<b>Crecimiento UE:</b> el PIB real creció un 1,6% en 2025 y se espera un 1,4% en 2026, con una ligera aceleración hasta el 1,5% en 2027.',
+'<b>Inflación:</b> la inflación de la eurozona se ha moderado hasta alrededor del 2%, tras el pico de 2022–2023.',
+'<b>Economías mayores:</b> Alemania, Francia, Italia, España y Países Bajos concentran la mayor parte del PIB comunitario.',
+'<b>Divergencia:</b> Irlanda y algunos países del Este crecen más rápido, mientras que Alemania e Italia muestran un crecimiento más débil.'
+])+
+P('La economía europea es fundamentalmente de <b>servicios</b>, con una industria manufacturera todavía muy relevante en Alemania, Italia y Europa central.')],
+['Industria y servicios',
+P('Europa es el hogar de algunos de los sectores industriales más competitivos del mundo:')+
+ul([
+'<b>Automoción:</b> Alemania, Francia, Italia y España. La transición al vehículo eléctrico es un desafío clave.',
+'<b>Aeronáutica:</b> Airbus, con sede en Toulouse, compite con Boeing a nivel global.',
+'<b>Maquinaria y química:</b> Alemania, Suiza y Países Bajos.',
+'<b>Moda y lujo:</b> Francia, Italia y Reino Unido.',
+'<b>Servicios financieros:</b> Londres, Fráncfort, París y Zúrich.',
+'<b>Turismo:</b> Francia, España e Italia son los destinos más visitados del mundo.'
+])+
+P('La <b>industria europea</b> enfrenta una fuerte competencia de China y Estados Unidos, y afronta el reto de la descarbonización y la digitalización.')],
+['Comercio e integración',
+P('La UE es una de las mayores potencias comerciales del mundo y el mercado único es su principal activo económico.')+
+ul([
+'<b>Mercado único:</b> libre circulación de bienes, servicios, capitales y personas entre los Estados miembros.',
+'<b>Euro:</b> moneda oficial en 20 países, que facilita el comercio y la estabilidad de precios.',
+'<b>Acuerdos comerciales:</b> la UE ha firmado acuerdos con Japón, Canadá, Mercosur (en negociación) y decenas de países.',
+'<b>Dependencias:</b> energía fósil, minerales críticos y componentes tecnológicos importados de China y otras regiones.',
+'<b>Competitividad:</b> el Informe Draghi (2024) advirtió sobre la pérdida de competitividad frente a EE. UU. y China, y propuso una agenda de inversión e innovación.'
+])],
+['Desafíos económicos',
+P('Pese a su fortaleza, la economía europea enfrenta obstáculos estructurales:')+
+ul([
+'<b>Envejecimiento:</b> menor población activa y mayor presión sobre pensiones y sanidad.',
+'<b>Deuda pública:</b> elevada en países como Grecia, Italia, Portugal y España.',
+'<b>Desempleo:</b> especialmente juvenil en el sur de Europa.',
+'<b>Brecha digital:</b> desigualdad en la adopción de tecnologías avanzadas entre países y regiones.',
+'<b>Energía:</b> precios históricamente altos y dependencia de importaciones, aunque las renovables crecen con fuerza.'
+])+
+P('La <b>transición verde</b> y la <b>digitalización</b> son las dos grandes apuestas para sostener el crecimiento futuro.')]
+]);
+
+/* ---------- RETOS ---------- */
+tabs('retos',[
+['Envejecimiento y demografía',
+figs(ring(33,'1/3','de la población de la UE con 65 años o más en 2050'))+P('El <b>envejecimiento poblacional</b> es el reto demográfico más importante de Europa. La población en edad de trabajar disminuirá y la presión sobre los sistemas de pensiones, sanidad y cuidados aumentará.')+
+ul([
+'<b>Población:</b> se prevé que la población de la UE disminuya a partir de 2029, y que casi un tercio tenga 65 años o más en 2050.',
+'<b>Fuerza laboral:</b> la población de 15 a 64 años podría reducirse en 1,2 millones al año entre 2025 y 2050.',
+'<b>Respuestas:</b> aumento de la productividad, participación laboral de mujeres y mayores, inmigración y reformas de pensiones.',
+'<b>Territorio:</b> despoblación rural en amplias zonas de España, Italia, Portugal y Europa del Este.'
+])],
+['Migración y asilo',
+P('La migración es uno de los temas más politizados de Europa. Combina necesidades económicas, obligaciones humanitarias y preocupaciones de seguridad.')+
+ul([
+'<b>Presión migratoria:</b> conflictos, pobreza y cambio climático impulsan la llegada de migrantes y solicitantes de asilo.',
+'<b>Pacto de Migración y Asilo:</b> entra en vigor en junio de 2026, con un enfoque centrado en controles, retención y deportaciones rápidas.',
+'<b>Críticas:</b> el pacto tiene un “punto ciego” climático, según analistas, y no aborda las causas profundas del desplazamiento.',
+'<b>Envejecimiento:</b> la inmigración es vista por algunos gobiernos como parte de la solución a la escasez de mano de obra.',
+'<b>Integración:</b> un desafío pendiente en barrios y ciudades de toda Europa.'
+])],
+['Cambio climático',
+figs(ring(54.1,'54,1%','de la electricidad de la UE fue renovable (2.º trim. 2026)'),bars('Calentamiento frente a la media mundial',[['Mundo',1,'1×'],['Europa',2,'≈2×']],2))+P('Europa es uno de los continentes que más rápido se calienta y ya sufre sequías, olas de calor, inundaciones e incendios.')+
+ul([
+'<b>Temperatura:</b> Europa se calienta al doble de la media global.',
+'<b>Energía:</b> las renovables representaron el 54,1% de la electricidad de la UE en el segundo trimestre de 2026.',
+'<b>Políticas:</b> el Pacto Verde Europeo y el objetivo de neutralidad climática para 2050.',
+'<b>Retos:</b> resistencia de sectores industriales y agrícolas, y necesidad de inversión masiva en redes y almacenamiento.'
+])],
+['Deuda, defensa y gobernanza',
+P('Europa enfrenta además desafíos fiscales, de seguridad y de gobernanza interna.')+
+ul([
+'<b>Deuda:</b> varios países mantienen ratios de deuda pública superiores al 100% del PIB.',
+'<b>Defensa:</b> la guerra en Ucrania ha impulsado un aumento del gasto militar y debates sobre la autonomía estratégica europea.',
+'<b>Gobernanza:</b> la UE requiere unanimidad en muchas decisiones, lo que dificulta la respuesta rápida a crisis.',
+'<b>Populismo:</b> partidos euroescépticos y nacionalistas han ganado peso en varios países.',
+'<b>Brexit:</b> las relaciones con el Reino Unido siguen siendo un tema sensible.'
+])]
+]);
+
+/* ---------- AVANCES ---------- */
+tabs('avances',[
+['Fusión nuclear',
+P('Europa es líder mundial en investigación sobre <b>fusión nuclear</b>, la energía que reproduce el proceso del Sol y promete una fuente casi inagotable y limpia.')+
+ul([
+'<b>ITER:</b> el mayor proyecto científico de la historia, construido en Cadarache (Francia) con participación de la UE, China, EE. UU., India, Japón, Corea y Rusia.',
+'<b>W-HYDRA:</b> la mayor plataforma experimental de Europa para probar componentes del <i>breeding blanket</i> de futuros reactores de fusión, en el centro ENEA de Brasimone (Italia).',
+'<b>EUROfusion:</b> consorcio europeo que coordina la investigación y el desarrollo de la central demostrativa DEMO.',
+'<b>Reto:</b> pasar de la experimentación a la producción comercial de electricidad, prevista para la segunda mitad de este siglo.'
+])],
+['Semiconductores y chips',
+P('La UE ha lanzado una estrategia para reducir su dependencia de Asia y EE. UU. en <b>semiconductores</b>.')+
+ul([
+'<b>Línea piloto FAMES:</b> inaugurada en 2026 para avanzar en semiconductores de ultra-bajo consumo, clave para la IoT y la electrónica portátil.',
+'<b>FD-SOI:</b> tecnología europea de chips de bajo consumo, con una escuela de diseño en Grenoble.',
+'<b>Chips Act:</b> moviliza decenas de miles de millones para duplicar la producción europea de chips.',
+'<b>Reto:</b> competir con Taiwán, Corea del Sur y EE. UU. en la fabricación de chips avanzados.'
+])],
+['Inteligencia artificial y robótica',
+P('La UE está impulsando la investigación en <b>IA, robótica y tecnologías digitales</b> a través de programas como Horizonte Europa.')+
+ul([
+'<b>European Excellence Initiative:</b> 80 millones de euros para 16 proyectos de investigación en IA, economía circular, agricultura sostenible, robótica y salud cerebral.',
+'<b>IA Act:</b> la primera ley integral del mundo que regula la inteligencia artificial por niveles de riesgo.',
+'<b>Robótica:</b> Europa es fuerte en robótica industrial, colaborativa y de servicios.',
+'<b>Reto:</b> retener talento y competir con las grandes tecnológicas estadounidenses y chinas.'
+])],
+['Energía limpia',
+figs(ring(54.1,'54%','de la electricidad de la UE es renovable'),ring(46,'46%','objetivo indicativo de electrificación a 2040'))+P('La transición energética europea avanza con paso firme, aunque con desigualdades entre países.')+
+ul([
+'<b>Renovables:</b> más de la mitad de la electricidad de la UE ya es de origen renovable.',
+'<b>Eólica marina:</b> el BEI financió en 2026 proyectos en Alemania y otros países.',
+'<b>Solar:</b> Italia, España y Alemania lideran la capacidad instalada.',
+'<b>Electrificación:</b> la Comisión estudia un objetivo indicativo del 46% de electrificación para 2040.',
+'<b>Hidrógeno verde:</b> proyectos piloto en España, Alemania y Países Bajos.'
+])]
+]);
+
+/* ---------- GLOSARIO ---------- */
+(()=>{
+const G=[
+['Acuerdo de París','Tratado internacional de 2015 para limitar el calentamiento global; la UE es firmante y promotora activa.'],
+['Brexit','Salida del Reino Unido de la Unión Europea, efectiva desde 2020.'],
+['Chips Act','Ley europea de semiconductores para impulsar la producción y la autonomía tecnológica.'],
+['Espacio Schengen','Zona de libre circulación de personas entre la mayoría de los países de la UE.'],
+['Euro','Moneda única de la eurozona, utilizada por 20 Estados miembros.'],
+['Eurozona','Conjunto de países de la UE que han adoptado el euro.'],
+['Fusión nuclear','Reacción que une núcleos atómicos y libera energía, como en el Sol; aún en fase experimental.'],
+['Horizonte Europa','Programa marco de investigación e innovación de la UE.'],
+['IA Act','Reglamento europeo que regula la inteligencia artificial según su nivel de riesgo.'],
+['ITER','Reactor Experimental Termonuclear Internacional, el mayor proyecto de fusión del mundo.'],
+['Pacto Verde Europeo','Estrategia de la UE para alcanzar la neutralidad climática en 2050.'],
+['Pacto de Migración y Asilo','Conjunto de normas de la UE sobre migración y asilo, en vigor desde 2026.'],
+['PIB','Producto Interior Bruto; medida del valor de los bienes y servicios producidos.'],
+['Refugiado','Persona que huye de su país por temor fundado a persecución, guerra o violencia.'],
+['Schengen','Acuerdo que elimina los controles fronterizos entre la mayoría de los países europeos.'],
+['UE','Unión Europea; organización supranacional de 27 Estados miembros.'],
+['UNESCO','Organización de la ONU para la Educación, la Ciencia y la Cultura; declara el Patrimonio Mundial.']
+];
+B('glosario','<input class="search" id="q" type="search" placeholder="Buscar un término" aria-label="Buscar en el glosario"><div class="grid" id="gl"></div>');
+const r=f=>{$('#gl').innerHTML=G.filter(g=>(g[0]+g[1]).toLowerCase().includes(f)).map(g=>`<div class="card"><h3>${g[0]}</h3><p>${g[1]}</p></div>`).join('')||'<p class="note">No hay términos con esa búsqueda.</p>'};
+$('#q').oninput=e=>r(e.target.value.toLowerCase().trim());r('')})();
+
+/* ---------- NAVEGACIÓN Y TEMA ---------- */
+const go=h=>{
+  h=V.some(v=>v[0]===h)?h:'inicio';
+  $$('.view').forEach(e=>e.classList.toggle('on',e.id===h));
+  $$('.nl').forEach(a=>a.classList.toggle('on',a.dataset.v===h));
+  scrollTo(0,0);
+};
+addEventListener('hashchange',()=>go(location.hash.slice(1)));
+$('#tt').onclick=()=>{
+  const d=document.documentElement;
+  const k=d.dataset.theme?d.dataset.theme==='dark':matchMedia('(prefers-color-scheme:dark)').matches;
+  d.dataset.theme=k?'light':'dark';
+};
+go(location.hash.slice(1));
+$$('[data-n]').forEach(e=>{const n=+e.dataset.n,t0=performance.now(),f=t=>{const k=Math.min(1,(t-t0)/1200);e.textContent=Math.round(n*(1-Math.pow(1-k,3)));k<1&&requestAnimationFrame(f)};matchMedia('(prefers-reduced-motion:reduce)').matches||requestAnimationFrame(f)});
+</script>
+</body>
+</html>
