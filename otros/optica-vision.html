@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Óptica y Visión Humana</title>
+<meta name="description" content="Guía educativa sobre óptica y visión humana: el ojo como sistema óptico, refracción, defectos refractivos, retina, instrumentos ópticos y avances recientes.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400..700&family=Fraunces:opsz,wght@9..144,500..800&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:light dark;--fd:'Fraunces',Georgia,serif;--fb:'Figtree','Segoe UI',system-ui,sans-serif;--bg:light-dark(#f1f3f9,#080c18);--sf:light-dark(#fff,#0f1526);--s2:light-dark(#e5e9f4,#171f36);--bd:light-dark(#cfd6e8,#27304c);--tx:light-dark(#0b1022,#eef1fb);--mu:light-dark(#4a5270,#a8b0cc);--ac:light-dark(#2150c8,#7aa2ff);--on:light-dark(#fff,#080c18);box-sizing:border-box;padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+.k0{--k:light-dark(#c2271f,#ff7b6e)}.k1{--k:light-dark(#b4540a,#ff9a4d)}.k2{--k:light-dark(#8a6a00,#f2cf3a)}.k3{--k:light-dark(#1e7a3c,#5fd88a)}.k4{--k:light-dark(#0a7a8a,#4fd6e6)}.k5{--k:light-dark(#2150c8,#7aa2ff)}.k6{--k:light-dark(#4b3bb5,#a99cff)}.k7{--k:light-dark(#8a2fa8,#d58bf0)}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:calc(env(safe-area-inset-top,0px) + 64px);-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--tx);font:400 1rem/1.65 var(--fb);overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--bg)}
+h1,h2,h3,h4{font-family:var(--fd);margin:0;line-height:1.12}p{margin:0}a{color:inherit;text-decoration:none}button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--ac);outline-offset:2px;border-radius:6px}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--bd)}
+.hi{max-width:1100px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:12px}
+.brand{display:flex;align-items:center;gap:9px;font:800 1.15rem var(--fd);white-space:nowrap}
+.stx{width:16px;height:16px;border-radius:50%;background:conic-gradient(#ff5a4d,#ff9a4d,#f2cf3a,#5fd88a,#4fd6e6,#7aa2ff,#c58bff,#ff5a4d)}
+.nav{display:flex;gap:2px;margin-left:auto;overflow-x:auto;scrollbar-width:none;min-width:0}.nav::-webkit-scrollbar{display:none}
+.nl{padding:8px 13px;border-radius:999px;font-size:.86rem;font-weight:500;color:var(--mu);white-space:nowrap;transition:background .15s,color .15s}.nl:hover{color:var(--tx)}.nl.on{background:var(--k);color:var(--on);font-weight:700}
+.tt{width:38px;height:38px;flex:none;border:1px solid var(--bd);border-radius:50%;background:var(--s2)}
+main{max-width:1100px;margin:0 auto;padding:0 16px 70px}
+.view{display:none}.view.on{display:block}
+.hero{position:relative;overflow:hidden;isolation:isolate;margin-top:18px;padding:clamp(28px,6vw,64px);min-height:380px;border-radius:24px;background:#0a1022;color:#fff}
+.hero h1{font-size:clamp(2.8rem,12vw,6.6rem);font-weight:800;letter-spacing:-.03em;line-height:.95;margin-bottom:20px;max-width:9ch}
+.hero .lead{color:#d5dcf5;max-width:54ch}
+.rays{position:absolute;inset:0;width:100%;height:100%;z-index:-1}
+.hero::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,#0a1022 0,rgba(10,16,34,.9) 40%,rgba(10,16,34,0) 76%)}
+.lead{color:var(--mu);font-size:1.08rem;max-width:62ch}
+.stn{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:14px}
+.st{padding:16px;border-radius:14px;background:var(--sf);border:1px solid var(--bd)}
+.st b{display:block;font:700 1.9rem/1 var(--fd);color:var(--ac);margin-bottom:6px}.st em{font-style:normal}.st span{display:block;font-size:.85rem;line-height:1.3;color:var(--mu)}
+.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));align-items:start}
+.card{display:block;padding:20px;border-radius:16px;background:color-mix(in srgb,var(--k,var(--ac)) 7%,var(--sf));border:1px solid var(--bd);border-top:4px solid var(--k,var(--ac))}a.card:hover{border-color:var(--k)}
+.card h3{font-size:1.25rem;margin-bottom:6px;color:var(--k,var(--tx))}.card p{font-size:.92rem;color:var(--mu)}
+.home{margin-top:20px}.note{margin-top:22px;padding:14px 18px;border-radius:12px;border:1px dashed var(--bd);color:var(--mu);font-size:.9rem}
+.sec{padding:36px 0 4px}.sec h2{font-size:clamp(2rem,7vw,3.4rem);font-weight:800;letter-spacing:-.02em;margin-bottom:10px}.sec h2::before{content:"";display:block;width:52px;height:6px;border-radius:3px;background:var(--k);margin-bottom:16px}.sec>.lead{margin-bottom:24px}
+.tabs{display:flex;gap:8px;margin-bottom:14px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}
+.tab{flex:none;padding:10px 16px;border-radius:999px;border:1px solid var(--bd);background:var(--sf);font-weight:600;font-size:.9rem;color:var(--mu);transition:background .15s}.tab:hover{color:var(--tx)}.tab[aria-selected=true]{background:var(--k);color:var(--on);border-color:transparent;font-weight:700}
+.panel{padding:clamp(18px,3vw,30px);border-radius:18px;background:var(--sf);border:1px solid var(--bd);border-left:6px solid var(--k)}
+.pt{color:var(--mu)}.pt p,.pt ul,.pt ol{max-width:74ch}.pt p+*,.pt ul+*,.pt ol+*{margin-top:.8em}.pt b{color:var(--tx)}.pt ul,.pt ol{padding-left:1.2em}.pt li+li{margin-top:.35em}.pt li::marker{color:var(--k)}
+.figs{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-bottom:22px}
+.fig{margin:0;padding:16px 14px;border-radius:14px;background:var(--s2);text-align:center}
+.fig svg{width:116px;height:116px}.fig figcaption{font-size:.84rem;line-height:1.35;color:var(--mu);margin-top:6px}
+.rt,.rv{fill:none;stroke-width:9}.rt{stroke:var(--bd)}
+.rv{stroke:var(--k);stroke-linecap:round;transform:rotate(-90deg);transform-origin:50px 50px;stroke-dashoffset:calc(var(--L) * (1 - var(--p) / 100));animation:rg 1.1s .1s cubic-bezier(.2,.7,.2,1) both}
+@keyframes rg{from{stroke-dashoffset:var(--L)}}
+.rb{font:700 20px var(--fd);fill:var(--tx)}
+.fig.wide{text-align:left}.fig.wide figcaption{margin:0 0 6px;font-weight:700;color:var(--tx);font-size:.9rem}
+@media(min-width:620px){.fig.wide{grid-column:span 2}}
+.bar{display:grid;grid-template-columns:minmax(90px,140px) 1fr auto;gap:10px;align-items:center;font-size:.88rem;margin-top:10px;color:var(--mu)}.bar b{color:var(--tx)}
+.tr{height:12px;border-radius:6px;background:var(--bd);overflow:hidden}.tr i{display:block;height:100%;border-radius:6px;background:var(--k);transform-origin:left;animation:gw .9s .1s cubic-bezier(.2,.7,.2,1) both}
+@keyframes gw{from{transform:scaleX(0)}}
+#snw svg{display:block;width:100%;max-width:340px;height:auto;border-radius:10px;background:var(--sf)}.sl{font:500 11px var(--fb);fill:var(--mu)}
+.snell label{display:block;max-width:340px;font-size:.85rem;color:var(--mu);margin-top:10px}.snell input{display:block;width:100%;margin-top:4px;accent-color:var(--k)}
+.search{width:100%;max-width:420px;padding:12px 18px;border-radius:999px;border:1px solid var(--bd);background:var(--sf);color:var(--tx);font:inherit;margin-bottom:14px}
+.tw{overflow-x:auto;border:1px solid var(--bd);border-radius:12px}.gt{border-collapse:collapse;width:100%;min-width:540px;font-size:.88rem}.gt th,.gt td{padding:10px 14px;border-bottom:1px solid var(--bd);text-align:left;vertical-align:top}.gt tr:last-child td{border-bottom:0}.gt th{background:var(--s2);color:var(--tx);white-space:nowrap}.gt td{color:var(--mu)}.gt td:first-child{color:var(--tx);font-weight:700}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important}}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="hi">
+    <a class="brand" href="#inicio"><i class="stx"></i>Óptica &amp; Visión</a>
+    <nav class="nav" id="nav" aria-label="Secciones"></nav>
+    <button class="tt" id="tt" aria-label="Cambiar entre tema claro y oscuro">◐</button>
+  </div>
+</header>
+<main>
+  <section class="view on" id="inicio">
+    <div class="hero"><svg class="rays" id="rays" viewBox="0 0 1200 600" preserveAspectRatio="xMaxYMid slice" aria-hidden="true"></svg><h1>Óptica &amp; Visión Humana</h1><p class="lead">El ojo es el sistema óptico más sofisticado que conocemos: una lente viva que enfoca, una retina que convierte fotones en impulsos nerviosos y un cerebro que reconstruye el mundo. Esta guía recorre la física de la luz aplicada al ojo, sus defectos y correcciones, y las tecnologías que están redefiniendo la visión.</p></div>
+    <div class="stn" id="stn"></div>
+    <div class="grid home" id="home"></div>
+    <p class="note">Guía educativa y simplificada. Las cifras son aproximadas y varían según el modelo ocular y la fuente. No sustituye un diagnóstico optométrico ni oftalmológico.</p>
+  </section>
+</main>
+
+<script>
+const $=(s,e=document)=>e.querySelector(s),$$=(s,e=document)=>[...e.querySelectorAll(s)];
+
+const V=[
+['ojo','El ojo óptico','Anatomía refractiva, formación de imagen y dioptrías.','Ojo óptico'],
+['refraccion','Refracción','Ley de Snell, lentes y aberraciones del sistema ocular.','Refracción'],
+['defectos','Defectos refractivos','Miopía, hipermetropía, astigmatismo y presbicia.','Defectos'],
+['retina','Retina','Conos, bastones, fóvea y fototransducción.','Retina'],
+['percepcion','Percepción','Agudeza, color, contraste y adaptación.','Percepción'],
+['instrumentos','Instrumentos','Microscopio, telescopio, fibra óptica y láser.','Instrumentos'],
+['avances','Avances','Lentes inteligentes, implantes retinales y optogenética.','Avances'],
+['glosario','Glosario','Términos clave de óptica y visión.','Glosario']
+];
+
+$('main').insertAdjacentHTML('beforeend',V.map((v,i)=>`<section class="view k${i}" id="${v[0]}"><div class="sec"><h2>${v[1]}</h2><p class="lead">${v[2]}</p><div id="b-${v[0]}"></div></div></section>`).join(''));
+$('#nav').innerHTML=V.map((v,i)=>`<a class="nl k${i}" href="#${v[0]}" data-v="${v[0]}">${v[3]}</a>`).join('');
+$('#home').innerHTML=V.map((v,i)=>`<a class="card k${i}" href="#${v[0]}"><h3>${v[1]}</h3><p>${v[2]}</p></a>`).join('');
+
+$('#stn').innerHTML=[['~',60,' D','Potencia óptica total del ojo'],['~',120,' M','Bastones por retina'],['~',6,' M','Conos por retina'],['',1,' arcmin','Límite de resolución visual'],['~','0,1',' mm','Grosor de la retina'],['',3,'','Conos espectrales (S, M, L)']].map(s=>`<div class="st"><b>${s[0]}${typeof s[1]=='number'?`<em data-n="${s[1]}">${s[1]}</em>`:s[1]}${s[2]}</b><span>${s[3]}</span></div>`).join('');
+
+const P=t=>`<p>${t}</p>`,ul=a=>`<ul>${a.map(x=>`<li>${x}</li>`).join('')}</ul>`,ol=a=>`<ol>${a.map(x=>`<li>${x}</li>`).join('')}</ol>`;
+const gt=(h,r)=>`<div class="tw"><table class="gt"><tr>${h.map(x=>`<th>${x}</th>`).join('')}</tr>${r.split('\n').map(l=>`<tr>${l.split('|').map(c=>`<td>${c}</td>`).join('')}</tr>`).join('')}</table></div>`;
+const ev=a=>`<div class="tl">${a.map(x=>`<div class="ev"><b>${x[0]}</b><h4>${x[1]}</h4><p>${x[2]}</p></div>`).join('')}</div>`;
+const dfs=a=>`<div class="defs">${a.map(x=>`<div class="def"><b>${x[0]}</b><span>${x[1]}</span></div>`).join('')}</div>`;
+const tabs=(id,a)=>{const b=$('#b-'+id);b.innerHTML=`<div class="tabs" role="tablist">${a.map((x,i)=>`<button class="tab" role="tab" data-i="${i}">${x[0]}</button>`).join('')}</div><div class="panel" role="tabpanel"><div class="pt"></div></div>`;const s=i=>{$$('.tab',b).forEach((t,j)=>t.setAttribute('aria-selected',i==j));$('.pt',b).innerHTML=a[i][1]};b.onclick=e=>{const t=e.target.closest('.tab');t&&s(+t.dataset.i)};s(0)};
+const B=(id,h)=>$('#b-'+id).innerHTML=h;
+const ring=(p,big,cap)=>{const L=(2*Math.PI*40).toFixed(1);return `<figure class="fig"><svg viewBox="0 0 100 100" role="img" aria-label="${big}: ${cap}"><circle class="rt" cx="50" cy="50" r="40"/><circle class="rv" cx="50" cy="50" r="40" stroke-dasharray="${L}" style="--L:${L};--p:${p}"/><text class="rb" x="50" y="56" text-anchor="middle">${big}</text></svg><figcaption>${cap}</figcaption></figure>`};
+const bars=(t,a,m)=>`<figure class="fig wide"><figcaption>${t}</figcaption>${a.map(x=>`<div class="bar"><span>${x[0]}</span><span class="tr"><i style="width:${x[1]/m*100}%"></i></span><b>${x[2]}</b></div>`).join('')}</figure>`;
+const figs=(...a)=>`<div class="figs">${a.join('')}</div>`;
+const snsvg=a=>{const t=a*Math.PI/180,u=Math.asin(Math.sin(t)/1.38),f=v=>v.toFixed(1);return `<svg viewBox="0 0 300 200" role="img" aria-label="Rayo que pasa del aire a la córnea"><rect y="100" width="300" height="100" fill="var(--k)" opacity=".16"/><line x1="0" y1="100" x2="300" y2="100" stroke="var(--bd)" stroke-width="2"/><line x1="150" y1="10" x2="150" y2="190" stroke="var(--mu)" stroke-dasharray="4 4"/><line x1="${f(150-90*Math.sin(t))}" y1="${f(100-90*Math.cos(t))}" x2="150" y2="100" stroke="var(--k)" stroke-width="3" stroke-linecap="round"/><line x1="150" y1="100" x2="${f(150+90*Math.sin(u))}" y2="${f(100+90*Math.cos(u))}" stroke="var(--k)" stroke-width="3" stroke-linecap="round"/><text x="8" y="22" class="sl">aire · n = 1,00</text><text x="8" y="192" class="sl">córnea · n = 1,38</text><text x="292" y="22" text-anchor="end" class="sl">θ₁ = ${a}°</text><text x="292" y="192" text-anchor="end" class="sl">θ₂ = ${(u*180/Math.PI).toFixed(1).replace('.',',')}°</text></svg>`};
+const snell=()=>`<figure class="fig wide snell"><figcaption>Simulador: del aire a la córnea</figcaption><div id="snw">${snsvg(40)}</div><label>Ángulo de incidencia<input type="range" id="sn" min="5" max="80" value="40"></label></figure>`;
+addEventListener('input',e=>{if(e.target.id=='sn')$('#snw').innerHTML=snsvg(+e.target.value)});
+
+(()=>{const C=['#ff5a4d','#ff9a4d','#f2cf3a','#5fd88a','#4fd6e6','#7aa2ff','#c58bff'];let h='<circle cx="880" cy="300" r="170" fill="none" stroke="#fff" stroke-opacity=".12" stroke-width="2"/><line x1="520" y1="300" x2="1050" y2="300" stroke="#fff" stroke-opacity=".15" stroke-dasharray="6 8"/><path d="M989 170A170 170 0 0 1 989 430" fill="none" stroke="#ff7b6e" stroke-width="6" stroke-linecap="round"/><path d="M660 215Q612 300 660 385" fill="none" stroke="#fff" stroke-opacity=".35" stroke-width="3" stroke-linecap="round"/><path d="M727 190Q777 300 727 410Q677 300 727 190Z" fill="#fff" fill-opacity=".14" stroke="#fff" stroke-opacity=".75" stroke-width="2"/>';C.forEach((c,i)=>{const y=200+i*33;h+=`<polyline points="520,${y} 727,${y} ${1032+(6-i)*3},300" fill="none" stroke="${c}" stroke-width="2.4" stroke-linejoin="round"/>`});$('#rays').innerHTML=h})();
+
+/* ---------- EL OJO ÓPTICO ---------- */
+tabs('ojo',[
+['Anatomía refractiva',
+figs(ring(66,'2/3','de la potencia óptica del ojo la aporta la córnea'))+P('El ojo humano es un sistema óptico compuesto por varias superficies refractivas: la <b>córnea</b>, el <b>humor acuoso</b>, el <b>cristalino</b> y el <b>humor vítreo</b>. Juntas forman una lente compleja que proyecta una imagen invertida y reducida sobre la retina.')+
+ul([
+'<b>Córnea:</b> es la primera superficie refractiva y aporta la mayor parte de la potencia óptica del ojo, alrededor de dos tercios del total. Su forma y transparencia son críticas para la calidad de la imagen.',
+'<b>Humor acuoso:</b> líquido que llena la cámara anterior, entre la córnea y el cristalino. Mantiene la presión intraocular y nutre los tejidos avasculares.',
+'<b>Cristalino:</b> lente biconvexa y elástica que ajusta su potencia mediante el mecanismo de <b>acomodación</b>. Es la estructura que permite enfocar a distintas distancias.',
+'<b>Humor vítreo:</b> gel transparente que ocupa la cámara posterior y mantiene la forma del globo ocular.',
+'<b>Iris y pupila:</b> el iris regula la cantidad de luz que entra actuando como diafragma; la pupila es su abertura central.'
+])+
+P('La retina, en la parte posterior, actúa como el plano focal donde se forma la imagen. El sistema completo tiene una potencia de aproximadamente <b>60 dioptrías</b> (D) en reposo, aunque varía entre individuos y con la edad.')],
+['Formación de imagen',
+P('En un ojo <b>emétrope</b> (normal), los rayos de luz paralelos procedentes de un objeto lejano convergen exactamente sobre la retina cuando el ojo está relajado. La imagen que se forma es <b>real, invertida y de menor tamaño</b> que el objeto.')+
+P('Para objetos cercanos, el cristalino aumenta su curvatura y con ello su potencia: es la <b>acomodación</b>. El punto más lejano que un ojo puede enfocar nítidamente se llama <b>punto remoto</b> (infinito en el emétrope); el más cercano, <b>punto próximo</b> (unos 25 cm en un adulto joven).')+
+P('La relación entre la potencia del sistema y la longitud axial del ojo determina el estado refractivo. Si la potencia es excesiva para la longitud del ojo, la imagen se forma delante de la retina; si es insuficiente, detrás. Esa es la base de los defectos refractivos.')],
+['Modelos y dioptrías',
+figs(bars('Potencia aproximada por componente',[['Córnea',43,'~40–45 D'],['Cristalino',17.5,'~15–20 D'],['Ojo completo',60,'~58–62 D']],60))+P('Para estudiar la óptica del ojo se usan <b>modelos esquemáticos</b>: representaciones simplificadas con superficies refractivas ideales que permiten calcular la formación de imágenes. El modelo paraxial reducido es el más habitual en optometría.')+
+P('La unidad de potencia óptica es la <b>dioptría (D)</b>, definida como el inverso de la distancia focal en metros: <b>D = 1 / f(m)</b>. Una lente de +2 D tiene una distancia focal de 0,5 m. Las potencias se suman cuando las lentes están en contacto.')+
+gt(['Componente','Potencia aproximada (D)','Función'],`Córnea|~40–45|Primera y principal superficie refractiva
+Cristalino (en reposo)|~15–20|Potencia ajustable mediante acomodación
+Sistema total (ojo relajado)|~58–62|Depende de la longitud axial y la edad
+Acomodación (joven)|hasta ~10–14|Permite enfocar de lejos a cerca`)]
+]);
+
+/* ---------- REFRACCIÓN ---------- */
+tabs('refraccion',[
+['Ley de Snell',
+figs(snell())+P('La <b>refracción</b> es el cambio de dirección que experimenta un rayo de luz al pasar de un medio a otro con distinto índice de refracción. Se rige por la <b>ley de Snell</b>: <b>n₁ · sen θ₁ = n₂ · sen θ₂</b>, donde <i>n</i> es el índice de refracción y θ el ángulo respecto a la normal.')+
+P('El ojo funciona gracias a la refracción: la diferencia de índice entre el aire (n ≈ 1,00), la córnea (n ≈ 1,38) y el humor acuoso (n ≈ 1,34) desvía los rayos y los hace converger. Sin esa diferencia, no habría imagen.')+
+P('Cuando la luz pasa de un medio de mayor a menor índice con un ángulo superior al <b>ángulo crítico</b>, se produce <b>reflexión total interna</b>: el rayo no se refracta y queda confinado en el medio denso. Este principio es la base de la fibra óptica.')],
+['Lentes',
+P('Una <b>lente</b> es un medio transparente limitado por dos superficies refractivas. Las lentes <b>convergentes</b> (biconvexas) hacen converger los rayos paralelos en un foco real; las <b>divergentes</b> (bicóncavas) los hacen divergir y forman un foco virtual.')+
+ul([
+'<b>Lente convergente (+):</b> potencia positiva, usada para corregir hipermetropía y presbicia.',
+'<b>Lente divergente (−):</b> potencia negativa, usada para corregir miopía.',
+'<b>Lente cilíndrica:</b> tiene potencia distinta en dos meridianos perpendiculares; corrige el astigmatismo.',
+'<b>Lente tórica:</b> combina potencia esférica y cilíndrica para corregir astigmatismo con componente esférico.'
+])+
+P('La <b>ecuación de las lentes delgadas</b> relaciona la distancia del objeto (<i>s</i>), la distancia de la imagen (<i>s′</i>) y la distancia focal (<i>f</i>): <b>1/f = 1/s + 1/s′</b>. El aumento lateral es <b>m = −s′/s</b>.')],
+['Aberraciones',
+P('Ningún sistema óptico real forma una imagen perfecta. El ojo presenta <b>aberraciones</b> que degradan la calidad de la imagen retiniana:')+
+ul([
+'<b>Aberraciones esféricas:</b> los rayos que pasan por el borde de la pupila se enfocan en un punto distinto que los paraxiales.',
+'<b>Aberraciones cromáticas:</b> la luz azul se refracta más que la roja, por lo que no todas las longitudes de onda enfocan en el mismo plano.',
+'<b>Astigmatismo corneal:</b> la córnea no es perfectamente esférica, lo que introduce un componente cilíndrico incluso en ojos sanos.',
+'<b>Difracción:</b> la pupila actúa como una abertura finita y difracta la luz, imponiendo un límite físico a la resolución.'
+])+
+P('El cerebro compensa parcialmente estas imperfecciones mediante mecanismos de <b>constancia perceptiva</b>, pero los defectos grandes requieren corrección óptica.')]
+]);
+
+/* ---------- DEFECTOS REFRACTIVOS ---------- */
+tabs('defectos',[
+['Visión general',
+P('Los <b>defectos refractivos</b> (ametropías) aparecen cuando la potencia óptica del ojo no coincide con su longitud axial. Son la causa más común de visión borrosa y se corrigen con gafas, lentes de contacto o cirugía.')+
+gt(['Defecto','Qué ocurre','Cómo se corrige'],`Miopía|La imagen se forma delante de la retina; los objetos lejanos se ven borrosos|Lente divergente (−)
+Hipermetropía|La imagen se forma detrás de la retina; los objetos cercanos cuestan más|Lente convergente (+)
+Astigmatismo|La córnea o el cristalino tienen curvatura irregular; la imagen se distorsiona en un eje|Lente cilíndrica o tórica
+Presbicia|Pérdida de elasticidad del cristalino con la edad; disminuye la acomodación|Lente convergente para cerca (adición)`)+
+P('La miopía y la hipermetropía pueden ser <b>axiales</b> (longitud del ojo inadecuada) o <b>refractivas</b> (potencia de córnea o cristalino inadecuada). La presbicia no es un error de forma sino un cambio fisiológico ligado a la edad.')],
+['Miopía e hipermetropía',
+P('<b>Miopía:</b> el ojo es demasiado largo o su córnea demasiado curva. Los rayos de un objeto lejano convergen antes de la retina. Se corrige con lentes divergentes que alejan el punto focal hasta la retina.')+
+P('<b>Hipermetropía:</b> el ojo es demasiado corto o su potencia insuficiente. El ojo debe acomodar incluso para ver de lejos, lo que puede causar fatiga visual. Se corrige con lentes convergentes.')+
+P('Ambas se miden en dioptrías. Una miopía de −3 D significa que el punto remoto está a 33 cm; una hipermetropía de +2 D indica que el ojo necesita 2 D adicionales para enfocar el infinito sin acomodar.')],
+['Astigmatismo y presbicia',
+figs(bars('Capacidad de acomodación',[['Juventud',12,'10–14 D'],['60 años',2,'< 2 D']],14))+P('<b>Astigmatismo:</b> la superficie corneal o el cristalino presentan radios de curvatura distintos en meridianos perpendiculares, por lo que la potencia no es la misma en todas las direcciones. La imagen de un punto no es un punto sino una línea o una elipse. Se corrige con lentes cilíndricas o tóricas.')+
+P('<b>Presbicia:</b> con la edad, el cristalino pierde elasticidad y el músculo ciliar no puede deformarlo lo suficiente. La capacidad de acomodación cae desde unas 10–14 D en la juventud hasta menos de 2 D a los 60 años. Se corrige con lentes de cerca, lentes progresivas o cirugía.')+
+P('A diferencia de la miopía o la hipermetropía, la presbicia es <b>inevitable</b> con la edad y afecta a prácticamente todas las personas a partir de los 40–45 años.')]
+]);
+
+/* ---------- RETINA ---------- */
+tabs('retina',[
+['Conos y bastones',
+figs(ring(95,'20:1','bastones por cada cono'),bars('Fotorreceptores por retina',[['Bastones',120,'~120 M'],['Conos',6,'~6 M']],120))+P('La retina contiene dos tipos de fotorreceptores: <b>conos</b> y <b>bastones</b>. Los bastones son mucho más numerosos (unos 120 millones) y extremadamente sensibles a la luz, responsables de la visión nocturna y periférica. Los conos (unos 6 millones) tienen alta resolución espacial y son responsables de la visión diurna y del color.')+
+gt(['Característica','Bastones','Conos'],`Cantidad|~120 millones|~6 millones
+Sensibilidad|Muy alta (visión escotópica)|Baja (visión fotópica)
+Resolución|Baja|Alta
+Color|No|Sí (tricromática)
+Distribución|Periferia|Centro (fóvea)
+Función|Visión nocturna y movimiento|Visión diurna y detalle`)+
+P('La <b>fóvea</b> es la región central de la retina y contiene únicamente conos. Es el punto de máxima agudeza visual: cada cono foveal está conectado a una fibra del nervio óptico, lo que maximiza la resolución.')],
+['Fototransducción',
+P('La <b>fototransducción</b> es el proceso por el cual un fotón se convierte en una señal eléctrica. Ocurre en el segmento externo de los fotorreceptores, donde se apilan discos membranosos cargados de pigmento visual.')+
+P('En los bastones, el pigmento es la <b>rodopsina</b>, formada por la proteína opsina y el cromóforo <b>11-cis-retinal</b>. Cuando un fotón es absorbido, el retinal se isomeriza a <i>todo-trans</i>-retinal y desencadena una cascada bioquímica que hiperpolariza la célula.')+
+P('Los conos contienen tres opsinas distintas (S, M y L), sensibles a longitudes de onda cortas, medias y largas. La combinación de sus respuestas produce la <b>visión tricromática</b> del color.')],
+['Vías visuales',
+P('La información de los fotorreceptores pasa a las <b>células bipolares</b> y luego a las <b>células ganglionares</b>, cuyos axones forman el <b>nervio óptico</b>.')+
+P('En el quiasma óptico, las fibras de la mitad nasal de cada retina se cruzan, de modo que cada hemisferio cerebral recibe información del campo visual opuesto. La información llega al <b>núcleo geniculado lateral</b> del tálamo y de allí a la <b>corteza visual primaria</b> (V1), en el lóbulo occipital.')+
+P('A partir de V1, la información se distribuye en dos grandes corrientes: la <b>vía ventral</b> (“qué”), especializada en reconocimiento de objetos y color, y la <b>vía dorsal</b> (“dónde/cómo”), especializada en localización espacial y movimiento.')]
+]);
+
+/* ---------- PERCEPCIÓN ---------- */
+tabs('percepcion',[
+['Agudeza y contraste',
+P('La <b>agudeza visual</b> es la capacidad de distinguir dos puntos separados por un ángulo mínimo. Un ojo emétrope sano alcanza aproximadamente <b>1 minuto de arco</b> (1/60 de grado) en la fóvea.')+
+P('La <b>sensibilidad al contraste</b> es la capacidad de detectar diferencias de luminosidad entre un objeto y su fondo. No siempre coincide con la agudeza: una persona puede tener buena agudeza y baja sensibilidad al contraste en condiciones de poca luz.')+
+P('La función visual se evalúa con optotipos (letras, símbolos o rejillas sinusoidales) y con pruebas de sensibilidad al contraste. Los defectos refractivos no corregidos reducen ambas.')],
+['Visión del color',
+P('La visión del color se basa en la comparación de las respuestas de los tres tipos de conos. El cerebro reconstruye el color a partir de la relación entre las señales S, M y L, no de la intensidad absoluta.')+
+ul([
+'<b>Tricromatismo normal:</b> tres tipos de conos funcionales.',
+'<b>Dicromatismo:</b> falta o disfunción de uno de los tres tipos de conos (protanopía, deuteranopía, tritanopía).',
+'<b>Monocromatismo:</b> un solo tipo de cono funcional o ausencia total de conos funcionales.',
+'<b>Falsos colores:</b> el famoso vestido azul/negro o blanco/dorado ilustra cómo el cerebro interpreta la iluminación para asignar color.'
+])+
+P('La percepción del color es <b>constante</b> en gran medida: el cerebro descuenta la iluminación y mantiene el color de los objetos aunque cambie la luz.')],
+['Adaptación y límites',
+P('El ojo se adapta a un rango enorme de luminancias, desde la luz solar directa hasta la noche estrellada, gracias a mecanismos como la dilatación pupilar, la adaptación de los fotorreceptores y el cambio entre visión fotópica (conos) y escotópica (bastones).')+
+ul([
+'<b>Adaptación a la oscuridad:</b> la sensibilidad aumenta lentamente durante unos 30 minutos.',
+'<b>Deslumbramiento:</b> la transición brusca de oscuro a brillante satura los fotorreceptores.',
+'<b>Persistencia retiniana:</b> una imagen permanece unos 1/16 de segundo en la retina; es la base del cine y la televisión.',
+'<b>Punto ciego:</b> la zona donde el nervio óptico sale de la retina no tiene fotorreceptores; el cerebro la rellena.'
+])+
+P('La percepción visual no es una copia pasiva de la imagen retiniana: es una <b>construcción activa</b> del cerebro que integra información sensorial, expectativas y contexto.')]
+]);
+
+/* ---------- INSTRUMENTOS ---------- */
+tabs('instrumentos',[
+['Microscopio y telescopio',
+P('El <b>microscopio</b> y el <b>telescopio</b> son extensiones del sistema óptico del ojo: combinan lentes para aumentar el tamaño angular de la imagen que llega a la retina.')+
+ul([
+'<b>Microscopio compuesto:</b> un objetivo de distancia focal corta forma una imagen real aumentada, que el ocular vuelve a aumentar. Permite resolver detalles de micrómetros.',
+'<b>Telescopio refractor:</b> el objetivo de gran distancia focal forma una imagen real de un objeto lejano; el ocular la aumenta. El aumento angular es la relación entre las distancias focales.',
+'<b>Telescopio reflector:</b> usa espejos en lugar de lentes para evitar aberraciones cromáticas en grandes aperturas.'
+])+
+P('Ambos instrumentos están limitados por la difracción: la apertura finita impone un límite físico a la resolución, tanto en microscopía como en astronomía.')],
+['Fibra óptica',
+P('La <b>fibra óptica</b> es un cable de vidrio o plástico que transporta luz mediante <b>reflexión total interna</b>. Está formada por un núcleo de índice de refracción alto rodeado de un revestimiento de índice menor.')+
+P('Cuando la luz incide en la interfaz núcleo-revestimiento con un ángulo mayor que el crítico, se refleja completamente y queda confinada en el núcleo. Así puede recorrer kilómetros con pérdidas mínimas.')+
+ul([
+'<b>Comunicaciones:</b> telefonía, internet y televisión por cable; el láser modulado transporta datos a velocidades enormes.',
+'<b>Medicina:</b> endoscopios, iluminación quirúrgica y sensores.',
+'<b>Industria:</b> sensores de temperatura, presión y deformación.'
+])],
+['Láser',
+P('El <b>láser</b> (Light Amplification by Stimulated Emission of Radiation) es una fuente de luz coherente, monocromática y altamente direccional. Se basa en la emisión estimulada de radiación en un medio activo.')+
+P('Sus aplicaciones en óptica y visión son enormes:')+
+ul([
+'<b>Cirugía refractiva:</b> el láser excimer remodela la córnea para corregir miopía, hipermetropía y astigmatismo.',
+'<b>Oftalmología:</b> fotocoagulación retiniana, capsulotomía y tratamiento del glaucoma.',
+'<b>Diagnóstico:</b> tomografía de coherencia óptica (OCT) y oftalmoscopia con láser de barrido.',
+'<b>Industria:</b> corte y soldadura de precisión, espectroscopia y comunicaciones.'
+])+
+P('En medicina, longitudes de onda como 2 µm son especialmente útiles porque el agua las absorbe fuertemente, lo que permite cortes precisos con coagulación simultánea.')]
+]);
+
+/* ---------- AVANCES ---------- */
+tabs('avances',[
+['Lentes de contacto inteligentes',
+P('Las lentes de contacto han dejado de ser solo correctoras. Los prototipos actuales integran <b>sensores, microelectrónica y comunicación inalámbrica</b> para monitorizar la salud ocular y administrar terapias.')+
+ul([
+'<b>Monitorización de presión intraocular:</b> sensores de galga extensométrica miden cambios en la curvatura corneal asociados al glaucoma.',
+'<b>Biosensores:</b> detectan glucosa, osmolaridad lagrimal y biomarcadores.',
+'<b>OLED integrado:</b> se han desarrollado lentes de contacto con OLED ultradelgados para diagnóstico retinal inalámbrico, eliminando la necesidad de salas oscuras y equipos fijos.',
+'<b>Materiales MXene:</b> recubrimientos conductores y transparentes que añaden funciones de biosensado y terapia fototérmica sin comprometer la comodidad.'
+])],
+['Visión infrarroja con lentes',
+figs(ring(90,'>90%','de transparencia en el visible'),ring(8,'7–9%','de nanopartículas integradas'))+P('En 2025, un equipo de la Universidad de Ciencia y Tecnología de China (USTC) demostró que unas <b>lentes de contacto de conversión ascendente</b> (UCL) permiten a personas ver luz infrarroja cercana (NIR) de forma no invasiva.')+
+P('Las lentes contienen nanopartículas que convierten la luz NIR en luz visible. Con un 7–9% de integración de nanopartículas y más del 90% de transparencia en el visible, los usuarios pueden no solo detectar la NIR, sino distinguir patrones espaciales y frecuencias temporales.')+
+P('Con versiones tricromáticas (tUCL) se logró incluso una forma de <b>visión de color en el infrarrojo</b>, con aplicaciones potenciales en seguridad, antifalsificación y tratamiento de deficiencias de visión cromática.')],
+['Implantes retinales y optogenética',
+P('Para personas con degeneración retinal avanzada (retinosis pigmentaria, degeneración macular asociada a la edad), las prótesis retinales y la optogenética son las vías más prometedoras.')+
+ul([
+'<b>Prótesis retinales:</b> electrodos implantados que estimulan las células ganglionares supervivientes. Los modelos actuales permiten recuperar visión funcional gruesa, aunque con limitaciones de resolución y durabilidad.',
+'<b>Optogenética:</b> introduce opsinas microbianas en neuronas retinales para hacerlas sensibles a la luz. La revisión de 2026 destaca el dispositivo <b>FlexLED</b> y las estrategias para estimular células ganglionares de alta densidad.',
+'<b>Implante electrónico + gafas AR:</b> en 2025 se reportó que un implante ocular combinado con gafas de realidad aumentada permitió a personas con pérdida de visión recuperar la lectura.'
+])+
+P('El reto común es la <b>resolución</b>: cuantas más neuronas se estimulan de forma independiente, más detalle se puede reconstruir. La optogenética y los electrodos de alta densidad compiten por ese objetivo.')]
+]);
+
+/* ---------- GLOSARIO ---------- */
+(()=>{
+const G=[
+['Acomodación','Cambio de potencia del cristalino para enfocar objetos a distintas distancias.'],
+['Agudeza visual','Capacidad de distinguir dos puntos separados por un ángulo mínimo; se mide en minutos de arco.'],
+['Ametropía','Cualquier defecto refractivo en el que la imagen no se forma nítidamente sobre la retina.'],
+['Astigmatismo','Defecto refractivo por curvatura irregular de la córnea o el cristalino; la potencia varía según el meridiano.'],
+['Bastón','Fotorreceptor muy sensible a la luz, responsable de la visión nocturna y periférica; no distingue color.'],
+['Cono','Fotorreceptor de alta resolución y sensibilidad al color; predomina en la fóvea.'],
+['Córnea','Primera superficie refractiva del ojo; aporta la mayor parte de su potencia óptica.'],
+['Cristalino','Lente elástica del ojo que ajusta su potencia mediante acomodación.'],
+['Dioptría','Unidad de potencia óptica; equivale al inverso de la distancia focal en metros.'],
+['Emétrope','Ojo normal, que enfoca objetos lejanos nítidamente sobre la retina en reposo.'],
+['Fóvea','Región central de la retina, con solo conos, responsable de la máxima agudeza visual.'],
+['Fototransducción','Proceso por el cual un fotón se convierte en una señal eléctrica en los fotorreceptores.'],
+['Hipermetropía','Defecto refractivo en el que la imagen se forma detrás de la retina; se corrige con lentes convergentes.'],
+['Miopía','Defecto refractivo en el que la imagen se forma delante de la retina; se corrige con lentes divergentes.'],
+['Optogenética','Técnica que introduce opsinas en neuronas para hacerlas sensibles a la luz.'],
+['Presbicia','Pérdida de acomodación con la edad por disminución de la elasticidad del cristalino.'],
+['Punto próximo','Distancia más cercana a la que un ojo puede enfocar nítidamente con máxima acomodación.'],
+['Punto remoto','Distancia más lejana que un ojo puede enfocar nítidamente en reposo.'],
+['Reflexión total interna','Fenómeno por el cual la luz queda confinada en un medio de mayor índice; base de la fibra óptica.'],
+['Retina','Capa fotosensible del ojo donde se forma la imagen y se inicia la señal visual.']
+];
+B('glosario','<input class="search" id="q" type="search" placeholder="Buscar un término" aria-label="Buscar en el glosario"><div class="grid" id="gl"></div>');
+const r=f=>{$('#gl').innerHTML=G.filter(g=>(g[0]+g[1]).toLowerCase().includes(f)).map(g=>`<div class="card"><h3>${g[0]}</h3><p>${g[1]}</p></div>`).join('')||'<p class="note">No hay términos con esa búsqueda.</p>'};
+$('#q').oninput=e=>r(e.target.value.toLowerCase().trim());r('')})();
+
+/* ---------- NAVEGACIÓN Y TEMA ---------- */
+const go=h=>{
+  h=V.some(v=>v[0]===h)?h:'inicio';
+  $$('.view').forEach(e=>e.classList.toggle('on',e.id===h));
+  $$('.nl').forEach(a=>a.classList.toggle('on',a.dataset.v===h));
+  scrollTo(0,0);
+};
+addEventListener('hashchange',()=>go(location.hash.slice(1)));
+$('#tt').onclick=()=>{
+  const d=document.documentElement;
+  const k=d.dataset.theme?d.dataset.theme==='dark':matchMedia('(prefers-color-scheme:dark)').matches;
+  d.dataset.theme=k?'light':'dark';
+};
+go(location.hash.slice(1));
+$$('[data-n]').forEach(e=>{const n=+e.dataset.n,t0=performance.now(),f=t=>{const k=Math.min(1,(t-t0)/1200);e.textContent=Math.round(n*(1-Math.pow(1-k,3)));k<1&&requestAnimationFrame(f)};matchMedia('(prefers-reduced-motion:reduce)').matches||requestAnimationFrame(f)});
+</script>
+</body>
+</html>
