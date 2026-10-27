@@ -1,0 +1,2963 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Botánica — Guía de plantas, flores y ecosistemas</title>
+<meta name="description" content="Guía sencilla de botánica: clasificación de plantas, estructura con y sin flor, anatomía floral, plantas peligrosas y comestibles, historia de la agricultura, carnívoras, biomas, microscópicas y glosario.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,700;9..144,900&family=Karla:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --font-display:'Fraunces','Georgia',serif;
+  --font-body:'Karla',system-ui,sans-serif;
+  --font-mono:'IBM Plex Mono',ui-monospace,monospace;
+  --radius:6px;
+  --radius-sm:4px;
+  --maxw:920px;
+  --sidebar:260px;
+  --ease:cubic-bezier(.22,.75,.25,1);
+}
+html[data-theme="light"]{
+  --bg:#f5efe0;
+  --bg-deep:#ede4d0;
+  --surface:#fffdf7;
+  --surface-2:#f2ebd8;
+  --surface-3:#e8dfc7;
+  --border:#d8cfb4;
+  --border-hi:#a89978;
+  --text:#24301c;
+  --text-hi:#0f1a0a;
+  --muted:#6b7059;
+  --dim:#8a8c75;
+  --leaf:#4d7c2a;
+  --leaf-hi:#7cb342;
+  --leaf-soft:rgba(77,124,42,.10);
+  --earth:#8b5a2b;
+  --terracotta:#c96a3f;
+  --terracotta-soft:rgba(201,106,63,.10);
+  --gold:#b8912e;
+  --gold-soft:rgba(184,145,46,.10);
+  --danger:#a83224;
+  --danger-soft:rgba(168,50,36,.08);
+  --paper-shadow:0 1px 0 rgba(139,90,43,.06), 0 6px 20px -12px rgba(30,40,20,.12);
+  --grain-opacity:.03;
+}
+html[data-theme="dark"]{
+  --bg:#141a10;
+  --bg-deep:#0d1208;
+  --surface:#1c2417;
+  --surface-2:#232e1c;
+  --surface-3:#2c3823;
+  --border:#2f3a26;
+  --border-hi:#4a5840;
+  --text:#e6e0cc;
+  --text-hi:#f5efdc;
+  --muted:#a0a389;
+  --dim:#6e7060;
+  --leaf:#8fbf5d;
+  --leaf-hi:#a8d97a;
+  --leaf-soft:rgba(143,191,93,.12);
+  --earth:#c9975c;
+  --terracotta:#e07a4d;
+  --terracotta-soft:rgba(224,122,77,.12);
+  --gold:#e0b94d;
+  --gold-soft:rgba(224,185,77,.12);
+  --danger:#ef5b4a;
+  --danger-soft:rgba(239,91,74,.10);
+  --paper-shadow:0 1px 0 rgba(0,0,0,.3), 0 6px 20px -12px rgba(0,0,0,.6);
+  --grain-opacity:.05;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  font-family:var(--font-body);
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  min-height:100vh;
+  transition:background .4s var(--ease),color .4s var(--ease);
+}
+body::before{
+  content:'';
+  position:fixed;
+  inset:0;
+  background-image:
+    radial-gradient(at 15% 0%, color-mix(in srgb,var(--leaf) 6%, transparent) 0%, transparent 45%),
+    radial-gradient(at 85% 100%, color-mix(in srgb,var(--earth) 6%, transparent) 0%, transparent 50%),
+    radial-gradient(at 50% 50%, color-mix(in srgb,var(--terracotta) 2%, transparent) 0%, transparent 60%);
+  pointer-events:none;
+  z-index:0;
+}
+body::after{
+  content:'';
+  position:fixed;
+  inset:0;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/></filter><rect width='120' height='120' filter='url(%23n)' opacity='0.4'/></svg>");
+  opacity:var(--grain-opacity);
+  pointer-events:none;
+  z-index:0;
+  mix-blend-mode:multiply;
+}
+html[data-theme="dark"] body::after{mix-blend-mode:screen}
+
+h1,h2,h3,h4{font-family:var(--font-display);line-height:1.15;letter-spacing:-.02em;margin:0;font-weight:700}
+p{margin:0}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+a{color:inherit;text-decoration:none}
+ul,ol{margin:0;padding:0}
+::selection{background:var(--leaf-hi);color:#0f1a0a}
+:focus-visible{outline:2px solid var(--leaf);outline-offset:3px;border-radius:var(--radius-sm)}
+
+/* ===== SCROLL PROGRESS ===== */
+.progress-bar{
+  position:fixed;
+  top:0;left:0;
+  height:2px;
+  background:linear-gradient(90deg,var(--leaf),var(--terracotta),var(--gold));
+  width:0%;
+  z-index:200;
+  transition:width .08s linear;
+}
+
+/* ===== APP LAYOUT ===== */
+.app{position:relative;z-index:1;min-height:100vh}
+
+/* ===== SIDEBAR ===== */
+.sidebar{
+  position:fixed;
+  top:0;left:0;bottom:0;
+  width:var(--sidebar);
+  background:var(--surface);
+  border-right:1px solid var(--border);
+  padding:26px 18px 22px;
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+  z-index:60;
+  overflow-y:auto;
+  transition:transform .35s var(--ease),background .4s var(--ease);
+}
+.sidebar::-webkit-scrollbar{width:6px}
+.sidebar::-webkit-scrollbar-thumb{background:var(--border-hi);border-radius:3px}
+.sidebar::-webkit-scrollbar-track{background:transparent}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:0 4px 18px;
+  border-bottom:1px solid var(--border);
+  flex:none;
+}
+.brand-mark{
+  width:42px;height:42px;
+  border-radius:50%;
+  background:linear-gradient(135deg,var(--leaf),var(--leaf-hi));
+  display:grid;place-items:center;
+  color:var(--bg);
+  flex:none;
+  box-shadow:inset 0 -2px 0 rgba(0,0,0,.15);
+}
+.brand-mark svg{width:22px;height:22px}
+.brand-text{
+  display:flex;
+  flex-direction:column;
+  line-height:1.1;
+}
+.brand-text strong{
+  font-family:var(--font-display);
+  font-size:1.05rem;
+  font-weight:700;
+  letter-spacing:-.02em;
+  font-style:italic;
+}
+.brand-text span{
+  font-family:var(--font-mono);
+  font-size:.58rem;
+  color:var(--muted);
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  margin-top:3px;
+}
+
+.nav-label{
+  font-family:var(--font-mono);
+  font-size:.6rem;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--dim);
+  padding:0 6px;
+  margin-bottom:-8px;
+}
+.nav{display:flex;flex-direction:column;gap:1px}
+.nav-link{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:8px 10px;
+  border-radius:var(--radius-sm);
+  font-size:.85rem;
+  font-weight:500;
+  color:var(--muted);
+  text-align:left;
+  transition:background .2s,color .2s;
+  position:relative;
+}
+.nav-link .num{
+  font-family:var(--font-display);
+  font-style:italic;
+  font-size:.82rem;
+  font-weight:500;
+  color:var(--dim);
+  width:22px;
+  flex:none;
+  transition:color .2s;
+}
+.nav-link:hover{background:var(--surface-2);color:var(--text)}
+.nav-link.active{
+  background:var(--leaf-soft);
+  color:var(--leaf);
+  font-weight:600;
+}
+.nav-link.active .num{color:var(--leaf);font-weight:700}
+
+.sidebar-footer{
+  margin-top:auto;
+  padding-top:18px;
+  border-top:1px solid var(--border);
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+.theme-btn{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:9px 11px;
+  border:1px solid var(--border);
+  background:var(--surface-2);
+  border-radius:var(--radius-sm);
+  font-size:.8rem;
+  font-weight:500;
+  color:var(--text);
+  width:100%;
+  transition:border-color .2s,background .2s;
+}
+.theme-btn:hover{border-color:var(--border-hi);background:var(--surface-3)}
+.theme-btn svg{width:15px;height:15px;color:var(--leaf)}
+html[data-theme="dark"] .icon-sun{display:block}
+html[data-theme="dark"] .icon-moon{display:none}
+html[data-theme="light"] .icon-sun{display:none}
+html[data-theme="light"] .icon-moon{display:block}
+.sidebar-note{
+  font-family:var(--font-mono);
+  font-size:.56rem;
+  color:var(--dim);
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  padding:0 4px;
+  line-height:1.6;
+}
+
+/* ===== MAIN ===== */
+.main{
+  margin-left:var(--sidebar);
+  min-height:100vh;
+}
+.content{
+  max-width:var(--maxw);
+  margin:0 auto;
+  padding:46px 42px 100px;
+}
+
+/* ===== PAGE HEADER ===== */
+.page-header{
+  padding-bottom:26px;
+  margin-bottom:32px;
+  border-bottom:1px solid var(--border);
+  position:relative;
+}
+.page-header::after{
+  content:'';
+  position:absolute;
+  bottom:-1px;
+  left:0;
+  width:80px;
+  height:2px;
+  background:var(--leaf);
+}
+.eyebrow{
+  font-family:var(--font-mono);
+  font-size:.66rem;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--leaf);
+  margin-bottom:14px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.eyebrow::before{
+  content:'';
+  width:16px;
+  height:1px;
+  background:var(--leaf);
+}
+.page-header h1{
+  font-size:clamp(1.7rem,3.6vw,2.5rem);
+  font-weight:700;
+  letter-spacing:-.03em;
+  line-height:1.1;
+  margin-bottom:12px;
+  color:var(--text-hi);
+}
+.page-header h1 em{
+  font-style:italic;
+  font-weight:500;
+  color:var(--leaf);
+}
+.page-header .lede{
+  font-size:1rem;
+  color:var(--muted);
+  max-width:700px;
+  line-height:1.65;
+}
+
+/* ===== TYPOGRAPHY HELPERS ===== */
+.kicker{
+  font-family:var(--font-mono);
+  font-size:.62rem;
+  font-weight:500;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--leaf);
+  display:inline-block;
+  margin-bottom:8px;
+}
+.kicker.earth{color:var(--earth)}
+.kicker.terra{color:var(--terracotta)}
+.kicker.gold{color:var(--gold)}
+.kicker.danger{color:var(--danger)}
+
+/* ===== BUTTONS ===== */
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  padding:11px 20px;
+  border-radius:var(--radius);
+  font-family:var(--font-body);
+  font-size:.86rem;
+  font-weight:600;
+  border:1px solid transparent;
+  transition:transform .2s var(--ease),background .2s,border-color .2s;
+  white-space:nowrap;
+}
+.btn svg{width:14px;height:14px;transition:transform .25s var(--ease)}
+.btn-primary{
+  background:var(--leaf);
+  color:var(--surface);
+}
+.btn-primary:hover{background:var(--leaf-hi);transform:translateY(-1px)}
+.btn-primary:hover svg{transform:translateX(3px)}
+.btn-ghost{
+  background:transparent;
+  border-color:var(--border-hi);
+  color:var(--text);
+}
+.btn-ghost:hover{background:var(--surface-2);border-color:var(--leaf);color:var(--leaf)}
+
+/* ===== CARDS ===== */
+.card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:22px 24px;
+  box-shadow:var(--paper-shadow);
+  transition:border-color .2s,transform .2s var(--ease);
+}
+.card:hover{border-color:var(--border-hi)}
+.card h3{
+  font-family:var(--font-display);
+  font-size:1.05rem;
+  font-weight:700;
+  margin-bottom:10px;
+  letter-spacing:-.01em;
+  color:var(--text-hi);
+}
+.card h3 em{font-style:italic;font-weight:500;color:var(--leaf)}
+.card p{font-size:.9rem;color:var(--muted);line-height:1.7}
+.card p + p{margin-top:10px}
+
+.card-accent{border-left:3px solid var(--leaf)}
+.card-accent.terra{border-left-color:var(--terracotta)}
+.card-accent.earth{border-left-color:var(--earth)}
+.card-accent.gold{border-left-color:var(--gold)}
+.card-accent.danger{border-left-color:var(--danger)}
+
+/* ===== GRIDS ===== */
+.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.grid-4{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px}
+
+/* ===== HERO ===== */
+.hero{
+  padding:20px 0 44px;
+}
+.hero-inner{
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:44px;
+  align-items:center;
+}
+.hero-tag{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  font-family:var(--font-mono);
+  font-size:.62rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--leaf);
+  padding:5px 11px;
+  border-radius:999px;
+  border:1px solid color-mix(in srgb,var(--leaf) 30%,var(--border));
+  background:var(--leaf-soft);
+  margin-bottom:22px;
+}
+.hero-tag .dot{
+  width:6px;height:6px;border-radius:50%;
+  background:var(--leaf);
+  animation:pulse 2s ease-in-out infinite;
+}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.85)}}
+.hero h1{
+  font-size:clamp(2rem,4.6vw,3.4rem);
+  font-weight:700;
+  letter-spacing:-.035em;
+  line-height:1.02;
+  margin-bottom:22px;
+  color:var(--text-hi);
+}
+.hero h1 .accent{
+  font-style:italic;
+  font-weight:500;
+  color:var(--leaf);
+  font-variation-settings:"SOFT" 100;
+}
+.hero h1 .accent-terra{
+  font-style:italic;
+  font-weight:500;
+  color:var(--terracotta);
+}
+.hero .lead{
+  font-size:1rem;
+  color:var(--muted);
+  max-width:560px;
+  margin-bottom:28px;
+  line-height:1.7;
+}
+.hero-actions{display:flex;flex-wrap:wrap;gap:11px}
+.hero-art{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+.hero-art svg{max-width:340px;width:100%;height:auto}
+
+/* ===== STATS ===== */
+.stats{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:1px;
+  background:var(--border);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  overflow:hidden;
+  margin:32px 0 0;
+}
+.stat{
+  background:var(--surface);
+  padding:20px 18px;
+  transition:background .2s;
+}
+.stat:hover{background:var(--surface-2)}
+.stat .num{
+  font-family:var(--font-display);
+  font-size:1.7rem;
+  font-weight:700;
+  font-style:italic;
+  letter-spacing:-.02em;
+  line-height:1;
+  color:var(--leaf);
+  margin-bottom:6px;
+}
+.stat.terra .num{color:var(--terracotta)}
+.stat.earth .num{color:var(--earth)}
+.stat.gold .num{color:var(--gold)}
+.stat .lbl{
+  font-family:var(--font-mono);
+  font-size:.6rem;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--muted);
+  line-height:1.5;
+}
+
+/* ===== NAV CARDS (Inicio) ===== */
+.nav-cards{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:1px;
+  background:var(--border);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  overflow:hidden;
+  margin-top:16px;
+}
+.nav-card{
+  background:var(--surface);
+  padding:20px 18px;
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+  text-align:left;
+  transition:background .2s;
+  position:relative;
+}
+.nav-card:hover{background:var(--surface-2)}
+.nav-card:hover .nc-arrow{transform:translateX(3px);color:var(--leaf)}
+.nav-card .nc-num{
+  font-family:var(--font-mono);
+  font-size:.6rem;
+  letter-spacing:.12em;
+  color:var(--leaf);
+  text-transform:uppercase;
+  margin-bottom:2px;
+}
+.nav-card h4{
+  font-family:var(--font-display);
+  font-size:1rem;
+  font-weight:700;
+  letter-spacing:-.01em;
+  color:var(--text-hi);
+  line-height:1.25;
+}
+.nav-card p{font-size:.8rem;color:var(--muted);line-height:1.55}
+.nc-arrow{
+  font-family:var(--font-mono);
+  font-size:.66rem;
+  color:var(--dim);
+  margin-top:6px;
+  transition:transform .25s var(--ease),color .2s;
+}
+
+/* ===== DIAGRAM / SVG ===== */
+.diagram{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:24px 22px;
+  margin-bottom:16px;
+  box-shadow:var(--paper-shadow);
+}
+.diagram-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-bottom:16px;
+  padding-bottom:14px;
+  border-bottom:1px dashed var(--border);
+}
+.diagram-head h4{
+  font-family:var(--font-display);
+  font-size:1.02rem;
+  font-weight:700;
+  letter-spacing:-.01em;
+  color:var(--text-hi);
+}
+.diagram-head .badge{
+  font-family:var(--font-mono);
+  font-size:.58rem;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  padding:3px 8px;
+  border-radius:3px;
+  border:1px solid var(--border-hi);
+  color:var(--muted);
+}
+.badge.leaf{color:var(--leaf);border-color:var(--leaf);background:var(--leaf-soft)}
+.badge.terra{color:var(--terracotta);border-color:var(--terracotta);background:var(--terracotta-soft)}
+.badge.gold{color:var(--gold);border-color:var(--gold);background:var(--gold-soft)}
+.badge.danger{color:var(--danger);border-color:var(--danger);background:var(--danger-soft)}
+
+.diagram-svg{
+  display:block;
+  width:100%;
+  max-width:460px;
+  height:auto;
+  margin:0 auto;
+}
+
+/* SVG botanical styling */
+.stem{stroke:var(--leaf);fill:none;stroke-linecap:round}
+.stem-thin{stroke:var(--leaf);fill:none;stroke-width:2;stroke-linecap:round}
+.leaf-shape{fill:var(--leaf-hi)}
+.leaf-shape.dark{fill:var(--leaf)}
+.petal{fill:var(--terracotta)}
+.petal.alt{fill:var(--gold)}
+.sepal{fill:var(--leaf-hi);opacity:.7}
+.stamen-line{stroke:var(--gold);stroke-width:2;stroke-linecap:round}
+.stamen-tip{fill:var(--gold)}
+.pistil-line{stroke:var(--leaf);stroke-width:3;stroke-linecap:round}
+.ovary{fill:var(--leaf)}
+.stigma{fill:var(--terracotta)}
+.root{stroke:var(--earth);stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.ground-line{stroke:var(--border-hi);stroke-width:1.5;stroke-dasharray:4 4;fill:none}
+.label-text{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:9px;
+  fill:var(--muted);
+  letter-spacing:.05em;
+  text-transform:uppercase;
+}
+.label-line{stroke:var(--border-hi);stroke-width:1;stroke-dasharray:2 2;fill:none}
+.part{cursor:pointer;transition:filter .2s}
+.part:hover{filter:brightness(1.25) drop-shadow(0 0 4px var(--leaf-hi))}
+
+/* ===== INFO PANEL ===== */
+.info-panel{
+  margin-top:16px;
+  padding:14px 18px;
+  border-radius:var(--radius-sm);
+  border:1px dashed var(--border-hi);
+  background:var(--bg);
+  min-height:78px;
+  transition:border-color .2s,background .2s,border-style .2s;
+}
+.info-panel.active{
+  border-style:solid;
+  border-color:var(--leaf);
+  background:var(--leaf-soft);
+}
+.info-panel.terra.active{border-color:var(--terracotta);background:var(--terracotta-soft)}
+.info-panel.gold.active{border-color:var(--gold);background:var(--gold-soft)}
+.info-panel.danger.active{border-color:var(--danger);background:var(--danger-soft)}
+.info-panel .ip-name{
+  font-family:var(--font-display);
+  font-size:.96rem;
+  font-weight:700;
+  font-style:italic;
+  color:var(--leaf);
+  margin-bottom:4px;
+  letter-spacing:-.01em;
+}
+.info-panel.terra .ip-name{color:var(--terracotta)}
+.info-panel.gold .ip-name{color:var(--gold)}
+.info-panel.danger .ip-name{color:var(--danger)}
+.info-panel .ip-desc{font-size:.85rem;color:var(--muted);line-height:1.55}
+.info-panel .ip-hint{
+  font-family:var(--font-mono);
+  font-size:.66rem;
+  color:var(--dim);
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.info-panel .ip-hint::before{
+  content:'';
+  width:5px;height:5px;
+  border-radius:50%;
+  background:var(--muted);
+  animation:pulse 1.8s ease-in-out infinite;
+}
+
+/* ===== PLANT SPECIMEN CARDS ===== */
+.plant-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:14px;
+}
+.plant-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  overflow:hidden;
+  transition:border-color .2s,transform .2s var(--ease);
+  box-shadow:var(--paper-shadow);
+}
+.plant-card:hover{border-color:var(--border-hi);transform:translateY(-2px)}
+.plant-card.danger{border-top:3px solid var(--danger)}
+.plant-card.edible{border-top:3px solid var(--leaf)}
+.plant-head{
+  padding:16px 18px 12px;
+  border-bottom:1px dashed var(--border);
+  display:flex;
+  align-items:flex-start;
+  gap:12px;
+}
+.plant-badge{
+  width:40px;height:40px;
+  border-radius:50%;
+  flex:none;
+  display:grid;
+  place-items:center;
+  background:var(--surface-2);
+  border:1px solid var(--border);
+  color:var(--leaf);
+}
+.plant-card.danger .plant-badge{color:var(--danger);background:var(--danger-soft);border-color:color-mix(in srgb,var(--danger) 30%,var(--border))}
+.plant-badge svg{width:20px;height:20px}
+.plant-name{flex:1;min-width:0}
+.plant-name h4{
+  font-family:var(--font-display);
+  font-size:1rem;
+  font-weight:700;
+  font-style:italic;
+  letter-spacing:-.015em;
+  color:var(--text-hi);
+  line-height:1.2;
+  margin-bottom:2px;
+}
+.plant-name .latin{
+  font-family:var(--font-mono);
+  font-size:.68rem;
+  color:var(--muted);
+  letter-spacing:.02em;
+}
+.plant-body{padding:14px 18px 16px}
+.plant-body p{font-size:.84rem;color:var(--muted);line-height:1.55}
+.plant-info{
+  margin-top:10px;
+  padding-top:10px;
+  border-top:1px dashed var(--border);
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+}
+.plant-info .pi-row{
+  display:flex;
+  gap:6px;
+  font-size:.78rem;
+  line-height:1.4;
+}
+.plant-info .pi-row strong{
+  color:var(--text-hi);
+  font-weight:600;
+  font-family:var(--font-mono);
+  font-size:.68rem;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+  flex:none;
+  min-width:70px;
+  padding-top:1px;
+}
+.plant-info .pi-row span{color:var(--muted)}
+.plant-card.danger .plant-info .pi-row strong{color:var(--danger)}
+.plant-card.edible .plant-info .pi-row strong{color:var(--leaf)}
+
+/* ===== TIMELINE VERTICAL ===== */
+.v-timeline{
+  position:relative;
+  margin-top:8px;
+  padding-left:8px;
+}
+.v-timeline::before{
+  content:'';
+  position:absolute;
+  left:18px;
+  top:6px;
+  bottom:6px;
+  width:2px;
+  background:linear-gradient(180deg,var(--leaf),var(--terracotta),var(--gold),var(--earth));
+  opacity:.4;
+}
+.v-item{
+  position:relative;
+  padding:0 0 22px 52px;
+  animation:itemIn .5s var(--ease) both;
+  animation-delay:var(--d,0ms);
+}
+@keyframes itemIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.v-item::before{
+  content:'';
+  position:absolute;
+  left:12px;
+  top:6px;
+  width:14px;
+  height:14px;
+  border-radius:50%;
+  background:var(--surface);
+  border:3px solid var(--leaf);
+  box-shadow:0 0 0 3px var(--bg);
+  transition:transform .25s var(--ease);
+}
+.v-item:nth-child(4n+2)::before{border-color:var(--terracotta)}
+.v-item:nth-child(4n+3)::before{border-color:var(--gold)}
+.v-item:nth-child(4n+4)::before{border-color:var(--earth)}
+.v-item:hover::before{transform:scale(1.2)}
+.v-date{
+  font-family:var(--font-display);
+  font-style:italic;
+  font-size:.9rem;
+  font-weight:700;
+  color:var(--leaf);
+  margin-bottom:4px;
+}
+.v-item:nth-child(4n+2) .v-date{color:var(--terracotta)}
+.v-item:nth-child(4n+3) .v-date{color:var(--gold)}
+.v-item:nth-child(4n+4) .v-date{color:var(--earth)}
+.v-title{
+  font-family:var(--font-display);
+  font-size:1rem;
+  font-weight:700;
+  color:var(--text-hi);
+  margin-bottom:4px;
+  letter-spacing:-.01em;
+  line-height:1.25;
+}
+.v-body{font-size:.86rem;color:var(--muted);line-height:1.6;max-width:640px}
+
+/* ===== LEVEL LIST ===== */
+.level-list{display:flex;flex-direction:column;gap:6px;margin-top:10px}
+.level-item{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:14px;
+  align-items:start;
+  padding:14px 16px;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius-sm);
+  transition:border-color .2s,background .2s;
+}
+.level-item:hover{border-color:var(--border-hi);background:var(--surface-2)}
+.level-item .lv-name{
+  font-family:var(--font-display);
+  font-size:.94rem;
+  font-weight:700;
+  color:var(--text-hi);
+  margin-bottom:3px;
+  letter-spacing:-.01em;
+}
+.level-item .lv-desc{font-size:.82rem;color:var(--muted);line-height:1.55}
+.level-item .lv-tag{
+  font-family:var(--font-mono);
+  font-size:.58rem;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  padding:3px 8px;
+  border-radius:3px;
+  border:1px solid var(--border);
+  color:var(--muted);
+  background:var(--surface-2);
+  white-space:nowrap;
+  flex:none;
+}
+.level-item .lv-tag.leaf{color:var(--leaf);border-color:var(--leaf)}
+.level-item .lv-tag.terra{color:var(--terracotta);border-color:var(--terracotta)}
+.level-item .lv-tag.gold{color:var(--gold);border-color:var(--gold)}
+
+/* ===== BIOMA COLUMNS ===== */
+.biomas{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:14px;
+  margin-top:8px;
+}
+.bioma{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:0;
+  overflow:hidden;
+  transition:border-color .2s,transform .2s var(--ease);
+  box-shadow:var(--paper-shadow);
+}
+.bioma:hover{border-color:var(--border-hi);transform:translateY(-3px)}
+.bioma-art{
+  height:150px;
+  display:grid;
+  place-items:center;
+  background:linear-gradient(180deg,var(--surface-2),var(--surface-3));
+  border-bottom:1px solid var(--border);
+  position:relative;
+  overflow:hidden;
+}
+.bioma-art svg{max-height:120px;width:auto}
+.bioma-body{padding:16px 18px 18px}
+.bioma-body .bk{
+  font-family:var(--font-mono);
+  font-size:.6rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--leaf);
+  margin-bottom:6px;
+}
+.bioma-body h4{
+  font-family:var(--font-display);
+  font-size:1.04rem;
+  font-weight:700;
+  margin-bottom:6px;
+  letter-spacing:-.01em;
+  color:var(--text-hi);
+}
+.bioma-body p{font-size:.83rem;color:var(--muted);line-height:1.6}
+.bioma-body .stats-mini{
+  margin-top:12px;
+  padding-top:10px;
+  border-top:1px dashed var(--border);
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+}
+.bioma-body .stats-mini span{
+  font-family:var(--font-mono);
+  font-size:.68rem;
+  color:var(--muted);
+  display:flex;
+  justify-content:space-between;
+}
+.bioma-body .stats-mini span b{color:var(--text-hi);font-weight:600}
+
+/* ===== CALLOUT ===== */
+.callout{
+  margin-top:20px;
+  padding:16px 20px;
+  border-radius:var(--radius-sm);
+  border:1px solid var(--border);
+  border-left:3px solid var(--leaf);
+  background:var(--surface);
+  font-size:.87rem;
+  color:var(--muted);
+  line-height:1.65;
+}
+.callout strong{color:var(--text-hi);font-weight:600}
+.callout.danger{border-left-color:var(--danger);background:var(--danger-soft)}
+.callout.danger strong{color:var(--danger)}
+.callout.terra{border-left-color:var(--terracotta);background:var(--terracotta-soft)}
+.callout.terra strong{color:var(--terracotta)}
+.callout.gold{border-left-color:var(--gold);background:var(--gold-soft)}
+.callout.gold strong{color:var(--gold)}
+
+/* ===== COMPARE TABLE ===== */
+.compare{
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  overflow:hidden;
+  background:var(--surface);
+  margin-top:16px;
+  box-shadow:var(--paper-shadow);
+}
+.compare-head,.compare-row{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+}
+.compare-head{
+  background:var(--surface-2);
+  border-bottom:1px solid var(--border);
+}
+.compare-head > div{
+  padding:11px 15px;
+  font-family:var(--font-mono);
+  font-size:.6rem;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--muted);
+  font-weight:500;
+}
+.compare-head > div:nth-child(2){color:var(--leaf);border-left:1px solid var(--border)}
+.compare-head > div:nth-child(3){color:var(--terracotta);border-left:1px solid var(--border)}
+.compare-row{
+  border-bottom:1px solid var(--border);
+  transition:background .15s;
+}
+.compare-row:last-child{border-bottom:none}
+.compare-row:hover{background:var(--surface-2)}
+.compare-row > div{
+  padding:11px 15px;
+  font-size:.83rem;
+  color:var(--text);
+}
+.compare-row .cr-label{
+  color:var(--muted);
+  font-family:var(--font-mono);
+  font-size:.68rem;
+  font-weight:500;
+  letter-spacing:.03em;
+  border-right:1px solid var(--border);
+}
+.compare-row .cr-a{border-right:1px solid var(--border)}
+
+/* ===== GLOSSARY ===== */
+.gloss-search{
+  width:100%;
+  padding:13px 16px;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius-sm);
+  color:var(--text);
+  font-family:var(--font-body);
+  font-size:.92rem;
+  margin-bottom:16px;
+  transition:border-color .2s,box-shadow .2s;
+}
+.gloss-search::placeholder{color:var(--dim)}
+.gloss-search:focus{
+  outline:none;
+  border-color:var(--leaf);
+  box-shadow:0 0 0 3px var(--leaf-soft);
+}
+.gloss-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+  gap:10px;
+}
+.gloss-item{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-left:3px solid var(--leaf);
+  border-radius:var(--radius-sm);
+  padding:14px 16px;
+  transition:border-color .2s,background .2s;
+}
+.gloss-item:hover{background:var(--surface-2);border-color:var(--border-hi);border-left-color:var(--leaf-hi)}
+.gloss-item .gi-term{
+  font-family:var(--font-display);
+  font-size:.94rem;
+  font-weight:700;
+  font-style:italic;
+  color:var(--text-hi);
+  margin-bottom:5px;
+  letter-spacing:-.01em;
+}
+.gloss-item .gi-def{font-size:.82rem;color:var(--muted);line-height:1.55}
+.gloss-empty{
+  text-align:center;
+  padding:30px;
+  color:var(--dim);
+  font-family:var(--font-mono);
+  font-size:.72rem;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  border:1px dashed var(--border);
+  border-radius:var(--radius-sm);
+}
+
+/* ===== REVEAL ===== */
+.reveal{
+  opacity:0;
+  transform:translateY(12px);
+  transition:opacity .6s var(--ease),transform .6s var(--ease);
+}
+.reveal.in{opacity:1;transform:none}
+
+/* ===== VIEW SWITCH ===== */
+.view{display:none}
+.view.active{display:block;animation:viewIn .35s var(--ease)}
+@keyframes viewIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+/* ===== MOBILE ===== */
+.menu-toggle{
+  display:none;
+  position:fixed;
+  top:14px;
+  left:14px;
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  background:var(--surface);
+  border:1px solid var(--border);
+  color:var(--text);
+  z-index:70;
+  align-items:center;
+  justify-content:center;
+  box-shadow:var(--paper-shadow);
+}
+.menu-toggle svg{width:18px;height:18px}
+.backdrop{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(15,20,10,.5);
+  z-index:55;
+}
+.backdrop.show{display:block}
+
+/* ===== FOOTER ===== */
+.footer{
+  border-top:1px solid var(--border);
+  padding:24px 0 0;
+  margin-top:48px;
+  display:flex;
+  justify-content:space-between;
+  gap:14px;
+  flex-wrap:wrap;
+  font-family:var(--font-mono);
+  font-size:.62rem;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--dim);
+}
+.footer strong{color:var(--muted);font-weight:500}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width:920px){
+  .sidebar{
+    transform:translateX(-100%);
+    width:270px;
+    box-shadow:10px 0 30px rgba(0,0,0,.2);
+  }
+  .sidebar.open{transform:translateX(0)}
+  .main{margin-left:0}
+  .menu-toggle{display:flex}
+  .content{padding:64px 22px 80px}
+  .hero-inner{grid-template-columns:1fr;gap:20px}
+  .hero-art svg{max-width:260px}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .compare-head,.compare-row{grid-template-columns:1.1fr 1fr 1fr}
+  .compare-head > div,.compare-row > div{padding:9px 10px;font-size:.76rem}
+  .compare-row .cr-label{font-size:.6rem}
+  .page-header h1{font-size:clamp(1.5rem,6vw,2rem)}
+  .footer{font-size:.58rem}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.01ms!important;
+    animation-iteration-count:1!important;
+    transition-duration:.01ms!important;
+    scroll-behavior:auto!important;
+  }
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<button class="menu-toggle" id="menuToggle" aria-label="Abrir menú">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+</button>
+<div class="backdrop" id="backdrop"></div>
+
+<div class="app">
+
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="brand-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 21c0-4 3-7 7-7"/>
+          <path d="M12 21c0-4-3-7-7-7"/>
+          <path d="M12 21V9"/>
+          <path d="M12 9c0-3 2-6 5-6"/>
+          <path d="M12 9c0-3-2-6-5-6"/>
+          <path d="M12 14c2-1 4-3 5-6"/>
+          <path d="M12 14c-2-1-4-3-5-6"/>
+        </svg>
+      </div>
+      <div class="brand-text">
+        <strong>Botánica</strong>
+        <span>Guía ilustrada</span>
+      </div>
+    </div>
+
+    <div class="nav-label">Secciones</div>
+    <nav class="nav">
+      <a class="nav-link active" href="#inicio" data-route="inicio"><span class="num">01</span>Inicio</a>
+      <a class="nav-link" href="#clasificacion" data-route="clasificacion"><span class="num">02</span>Clasificación</a>
+      <a class="nav-link" href="#estructura" data-route="estructura"><span class="num">03</span>Con y sin flor</a>
+      <a class="nav-link" href="#flores" data-route="flores"><span class="num">04</span>Estructura floral</a>
+      <a class="nav-link" href="#peligrosas" data-route="peligrosas"><span class="num">05</span>Plantas peligrosas</a>
+      <a class="nav-link" href="#comestibles" data-route="comestibles"><span class="num">06</span>Plantas comestibles</a>
+      <a class="nav-link" href="#historia" data-route="historia"><span class="num">07</span>Historia del cultivo</a>
+      <a class="nav-link" href="#carnivoras" data-route="carnivoras"><span class="num">08</span>Plantas carnívoras</a>
+      <a class="nav-link" href="#biomas" data-route="biomas"><span class="num">09</span>Selvas y desiertos</a>
+      <a class="nav-link" href="#microscopicas" data-route="microscopicas"><span class="num">10</span>Microscópicas</a>
+      <a class="nav-link" href="#glosario" data-route="glosario"><span class="num">11</span>Glosario</a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <button class="theme-btn" id="themeToggle" aria-label="Cambiar tema">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        <span id="themeLabel">Modo oscuro</span>
+      </button>
+      <div class="sidebar-note">Herbario digital · Edición 2025 · 11 secciones</div>
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <!-- ============ INICIO ============ -->
+    <section class="view active" data-view="inicio">
+      <div class="content">
+        <div class="hero">
+          <div class="hero-inner">
+            <div class="hero-text">
+              <span class="hero-tag"><span class="dot"></span>Guía de campo · Sin tecnicismos</span>
+              <h1>Botánica, <span class="accent">contada</span> <span class="accent-terra">como un paseo</span>.</h1>
+              <p class="lead">
+                Cómo se clasifican las plantas silvestres, qué llevan dentro las flores, cuáles son peligrosas y cuáles se pueden comer, cómo nació la agricultura y por qué las carnívoras comen insectos. Una guía para mirar el mundo verde con otros ojos.
+              </p>
+              <div class="hero-actions">
+                <button class="btn btn-primary" data-route="clasificacion">
+                  Empezar por la clasificación
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                </button>
+                <button class="btn btn-ghost" data-route="historia">
+                  Historia del cultivo
+                </button>
+              </div>
+            </div>
+            <div class="hero-art" aria-hidden="true">
+              <svg viewBox="0 0 340 340">
+                <circle cx="170" cy="170" r="150" fill="none" stroke="currentColor" opacity=".08" stroke-width="1"/>
+                <circle cx="170" cy="170" r="120" fill="none" stroke="currentColor" opacity=".06" stroke-width="1"/>
+                <!-- Main plant -->
+                <path d="M170 290 Q168 220 172 150 Q170 110 172 80" stroke="#4d7c2a" stroke-width="3" fill="none" stroke-linecap="round"/>
+                <!-- leaves -->
+                <ellipse cx="140" cy="200" rx="22" ry="9" fill="#7cb342" transform="rotate(-35 140 200)"/>
+                <ellipse cx="200" cy="230" rx="22" ry="9" fill="#7cb342" transform="rotate(35 200 230)"/>
+                <ellipse cx="142" cy="250" rx="20" ry="8" fill="#7cb342" transform="rotate(-30 142 250)"/>
+                <ellipse cx="200" cy="180" rx="20" ry="8" fill="#7cb342" transform="rotate(30 200 180)"/>
+                <ellipse cx="145" cy="150" rx="18" ry="7" fill="#7cb342" transform="rotate(-25 145 150)"/>
+                <!-- flower -->
+                <g transform="translate(172 75)">
+                  <ellipse cx="0" cy="-18" rx="11" ry="18" fill="#c96a3f"/>
+                  <ellipse cx="17" cy="-6" rx="11" ry="18" fill="#c96a3f" transform="rotate(72)"/>
+                  <ellipse cx="-17" cy="-6" rx="11" ry="18" fill="#c96a3f" transform="rotate(-72)"/>
+                  <ellipse cx="10" cy="15" rx="11" ry="18" fill="#c96a3f" transform="rotate(144)"/>
+                  <ellipse cx="-10" cy="15" rx="11" ry="18" fill="#c96a3f" transform="rotate(-144)"/>
+                  <circle cx="0" cy="0" r="7" fill="#d4a73b"/>
+                  <circle cx="0" cy="0" r="3" fill="#8b5a2b"/>
+                </g>
+                <!-- small fern fronds at base -->
+                <path d="M120 290 Q115 250 130 220" stroke="#4d7c2a" stroke-width="2" fill="none"/>
+                <ellipse cx="118" cy="260" rx="8" ry="3" fill="#7cb342" transform="rotate(-40 118 260)"/>
+                <ellipse cx="128" cy="245" rx="8" ry="3" fill="#7cb342" transform="rotate(40 128 245)"/>
+                <ellipse cx="122" cy="230" rx="7" ry="3" fill="#7cb342" transform="rotate(-40 122 230)"/>
+
+                <path d="M220 290 Q225 255 215 225" stroke="#4d7c2a" stroke-width="2" fill="none"/>
+                <ellipse cx="222" cy="255" rx="8" ry="3" fill="#7cb342" transform="rotate(40 222 255)"/>
+                <ellipse cx="214" cy="240" rx="8" ry="3" fill="#7cb342" transform="rotate(-40 214 240)"/>
+                <ellipse cx="219" cy="228" rx="7" ry="3" fill="#7cb342" transform="rotate(40 219 228)"/>
+
+                <!-- ground -->
+                <path d="M80 295 Q170 305 260 295" stroke="#8b5a2b" stroke-width="1.5" fill="none" opacity=".5"/>
+              </svg>
+            </div>
+          </div>
+
+          <div class="stats reveal">
+            <div class="stat">
+              <div class="num">~390.000</div>
+              <div class="lbl">Especies de plantas<br>conocidas</div>
+            </div>
+            <div class="stat terra">
+              <div class="num">~90%</div>
+              <div class="lbl">Plantas con flor<br>(angiospermas)</div>
+            </div>
+            <div class="stat earth">
+              <div class="num">~10.000 a.C.</div>
+              <div class="lbl">Origen de la<br>agricultura</div>
+            </div>
+            <div class="stat gold">
+              <div class="num">~50%</div>
+              <div class="lbl">Oxígeno de<br>origen vegetal</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="page-header reveal" style="margin-top:40px">
+          <span class="eyebrow">El recorrido</span>
+          <h1>Once secciones para <em>mirar distinto</em></h1>
+          <p class="lede">De la clasificación científica a las plantas que comen insectos. Puedes ir en orden o saltar a lo que más te intrigue.</p>
+        </div>
+
+        <div class="nav-cards reveal">
+          <button class="nav-card" data-route="clasificacion">
+            <span class="nc-num">02</span>
+            <h4>Clasificación de plantas silvestres</h4>
+            <p>Cómo se agrupan las plantas y qué las diferencia.</p>
+            <span class="nc-arrow">Abrir →</span>
+          </button>
+          <button class="nav-card" data-route="estructura">
+            <span class="nc-num">03</span>
+            <h4>Con flor y sin flor</h4>
+            <p>Las dos grandes formas de ser planta, lado a lado.</p>
+            <span class="nc-arrow">Abrir →</span>
+          </button>
+          <button class="nav-card" data-route="flores">
+            <span class="nc-num">04</span>
+            <h4>Estructura de las flores</h4>
+            <p>Qué hay dentro de una flor y para qué sirve cada parte.</p>
+            <span class="nc-arrow">Abrir →</span>
+          </button>
+          <button class="nav-card" data-route="peligrosas">
+            <span class="nc-num">05</span>
+            <h4>Plantas peligrosas</h4>
+            <p>Las que es mejor no tocar ni probar, y por qué.</p>
+            <span class="nc-arrow">Abrir →</span>
+          </button>
+          <button class="nav-card" data-route="comestibles">
+            <span class="nc-num">06</span>
+            <h4>Plantas comestibles</h4>
+            <p>Especies silvestres que se pueden comer con seguridad.</p>
+            <span class="nc-arrow">Abrir →</span>
+          </button>
+          <button class="nav-card" data-route="historia">
+            <span class="nc-num">07</span>
+            <h4>Historia del cultivo</h4>
+            <p>Cómo pasamos de recolectar a sembrar y transformar el paisaje.</p>
+            <span class="nc-arrow">Abrir →</span>
+          </button>
+          <button class="nav-card" data-route="carnivoras">
+            <span class="nc-num">08</span>
+            <h4>Plantas carnívoras</h4>
+            <p>Las que cazan insectos y cómo lo hacen.</p>
+            <span class="nc-arrow">Abrir →</span>
+          </button>
+          <button class="nav-card" data-route="biomas">
+            <span class="nc-num">09</span>
+            <h4>Selvas, bosques, desiertos</h4>
+            <p>Cómo las plantas se adaptan a cada lugar del planeta.</p>
+            <span class="nc-arrow">Abrir →</span>
+          </button>
+          <button class="nav-card" data-route="microscopicas">
+            <span class="nc-num">10</span>
+            <h4>Plantas microscópicas</h4>
+            <p>El mundo vegetal que no se ve a simple vista.</p>
+            <span class="nc-arrow">Abrir →</span>
+          </button>
+          <button class="nav-card" data-route="glosario">
+            <span class="nc-num">11</span>
+            <h4>Glosario</h4>
+            <p>Todos los términos botánicos que necesitas.</p>
+            <span class="nc-arrow">Abrir →</span>
+          </button>
+        </div>
+
+        <div class="callout reveal">
+          <strong>Una idea para llevarte:</strong> las plantas son la base de casi toda la vida en la Tierra. Producen el oxígeno que respiramos, el alimento que comemos y buena parte de los materiales con los que construimos. Entenderlas es entender el mundo.
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CLASIFICACIÓN ============ -->
+    <section class="view" data-view="clasificacion">
+      <div class="content">
+        <div class="page-header reveal">
+          <span class="eyebrow">02 · Taxonomía</span>
+          <h1>Clasificación de <em>plantas silvestres</em></h1>
+          <p class="lede">Los botánicos agrupan las plantas según sus características, su historia evolutiva y su forma de reproducirse. Esta es la clasificación básica que se usa para las plantas silvestres.</p>
+        </div>
+
+        <div class="diagram reveal">
+          <div class="diagram-head">
+            <h4>Las cuatro grandes divisiones</h4>
+            <span class="badge leaf">Reino Plantae</span>
+          </div>
+
+          <div class="grid-2" style="gap:12px">
+            <div class="card card-accent">
+              <span class="kicker">Briofitas</span>
+              <h3>Musgos y hepáticas</h3>
+              <p>No tienen vasos conductores ni raíces verdaderas. Absorben el agua directamente por la superficie. Viven en lugares húmedos y son pequeñas.</p>
+              <p>Ejemplos: musgo de roca, hepáticas, esfagnos.</p>
+            </div>
+            <div class="card card-accent earth">
+              <span class="kicker earth">Pteridofitas</span>
+              <h3>Helechos y colas de caballo</h3>
+              <p>Tienen vasos conductores, tallos y hojas, pero no producen semillas: se reproducen por esporas. Fueron las primeras plantas con "verdadera" estructura.</p>
+              <p>Ejemplos: helechos, equisetos, licopodios.</p>
+            </div>
+            <div class="card card-accent terra">
+              <span class="kicker terra">Gimnospermas</span>
+              <h3>Coníferas y cícadas</h3>
+              <p>Producen semillas, pero no encerradas en un fruto. Sus semillas están "desnudas" sobre escamas o en conos. La mayoría son árboles y arbustos de climas fríos.</p>
+              <p>Ejemplos: pinos, abetos, cedros, secuoyas.</p>
+            </div>
+            <div class="card card-accent gold">
+              <span class="kicker gold">Angiospermas</span>
+              <h3>Plantas con flor</h3>
+              <p>El grupo más diverso y exitoso. Producen flores y frutos que encierran las semillas. Casi el 90% de las plantas que ves en el campo son angiospermas.</p>
+              <p>Ejemplos: margaritas, robles, trigo, orquídeas.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card reveal" style="margin-top:16px">
+          <span class="kicker">Silvestres vs. cultivadas</span>
+          <h3>¿Qué es una planta silvestre?</h3>
+          <p>Una planta silvestre es aquella que crece por sí sola, sin intervención humana. No ha sido sembrada, regada ni cuidada por nadie: se reproduce donde puede.</p>
+          <p>Las plantas cultivadas, en cambio, han sido seleccionadas durante generaciones por los humanos. Muchas ya no sobreviven sin nosotros. El trigo, el maíz o el tomate son ejemplos de plantas que dependen de la agricultura.</p>
+        </div>
+
+        <div class="grid-3 reveal" style="margin-top:16px">
+          <div class="card card-accent">
+            <span class="kicker">Familia 1</span>
+            <h3>Asteraceae</h3>
+            <p>La familia de las margaritas. Es la más diversa del mundo: más de 30.000 especies. Su "flor" es en realidad una inflorescencia con muchas florecillas pequeñas.</p>
+            <p style="margin-top:8px;font-family:var(--font-mono);font-size:.72rem;color:var(--dim)">Ej: girasol, diente de león, manzanilla.</p>
+          </div>
+          <div class="card card-accent earth">
+            <span class="kicker earth">Familia 2</span>
+            <h3>Fabaceae</h3>
+            <p>La familia de las leguminosas. Sus raíces se asocian con bacterias que fijan nitrógeno del aire, enriqueciendo el suelo. Fundamental para la agricultura.</p>
+            <p style="margin-top:8px;font-family:var(--font-mono);font-size:.72rem;color:var(--dim)">Ej: trébol, acacia, poroto, arveja.</p>
+          </div>
+          <div class="card card-accent terra">
+            <span class="kicker terra">Familia 3</span>
+            <h3>Lamiaceae</h3>
+            <p>La familia de las aromáticas. Sus hojas suelen tener aceites esenciales que les dan olor y sabor. Tallo cuadrangular, muy típico del grupo.</p>
+            <p style="margin-top:8px;font-family:var(--font-mono);font-size:.72rem;color:var(--dim)">Ej: menta, lavanda, orégano, salvia.</p>
+          </div>
+        </div>
+
+        <div class="callout reveal">
+          <strong>¿Sabías que...?</strong> La clasificación moderna ya no se basa solo en la forma de las plantas. Ahora se usan también sus genes, lo que ha reordenado varios grupos tradicionales.
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ESTRUCTURA CON Y SIN FLOR ============ -->
+    <section class="view" data-view="estructura">
+      <div class="content">
+        <div class="page-header reveal">
+          <span class="eyebrow">03 · Anatomía comparada</span>
+          <h1>Plantas <em>con flor</em> y <em>sin flor</em></h1>
+          <p class="lede">A simple vista, todas las plantas parecen iguales. Pero hay dos grandes caminos evolutivos: las que producen flores y las que no. Pasa el cursor sobre cada parte de los dibujos para ver qué hace.</p>
+        </div>
+
+        <div class="grid-2">
+          <div class="diagram reveal">
+            <div class="diagram-head">
+              <h4>Planta con flor (angiosperma)</h4>
+              <span class="badge terra">Con flor y fruto</span>
+            </div>
+            <svg class="diagram-svg" viewBox="0 0 320 420" aria-label="Planta con flor">
+              <!-- ground -->
+              <path class="ground-line" d="M40 385 L280 385"/>
+
+              <!-- roots -->
+              <path class="root" d="M160 385 Q140 405 115 418"/>
+              <path class="root" d="M160 385 Q180 405 205 418"/>
+              <path class="root" d="M160 385 Q155 410 150 428"/>
+              <path class="root" d="M160 385 Q160 415 160 432"/>
+              <path class="root" d="M160 385 Q145 400 125 405"/>
+
+              <!-- stem -->
+              <path class="stem" d="M160 385 Q155 290 160 190 Q165 110 160 70" stroke-width="4"/>
+
+              <!-- leaves -->
+              <g class="part" data-part="leaf-main">
+                <path class="leaf-shape" d="M158 320 Q108 302 88 275 Q118 300 155 305"/>
+                <path class="leaf-shape" d="M162 280 Q212 262 232 235 Q202 260 165 265"/>
+                <path class="leaf-shape" d="M158 240 Q112 222 92 195 Q122 220 155 225"/>
+              </g>
+
+              <!-- flower -->
+              <g class="part" data-part="flower-main">
+                <g transform="translate(160 60)">
+                  <ellipse class="petal" cx="0" cy="-22" rx="12" ry="22"/>
+                  <ellipse class="petal" cx="21" cy="-7" rx="12" ry="22" transform="rotate(72)"/>
+                  <ellipse class="petal" cx="-21" cy="-7" rx="12" ry="22" transform="rotate(-72)"/>
+                  <ellipse class="petal" cx="13" cy="18" rx="12" ry="22" transform="rotate(144)"/>
+                  <ellipse class="petal" cx="-13" cy="18" rx="12" ry="22" transform="rotate(-144)"/>
+                  <circle cx="0" cy="0" r="9" fill="#d4a73b"/>
+                  <circle cx="0" cy="0" r="4" fill="#8b5a2b"/>
+                </g>
+              </g>
+
+              <!-- labels -->
+              <g>
+                <text class="label-text" x="245" y="70">flor</text>
+                <line class="label-line" x1="240" y1="68" x2="200" y2="62"/>
+
+                <text class="label-text" x="248" y="245">hojas</text>
+                <line class="label-line" x1="243" y1="242" x2="220" y2="250"/>
+
+                <text class="label-text" x="230" y="300">tallo</text>
+                <line class="label-line" x1="225" y1="297" x2="195" y2="290"/>
+
+                <text class="label-text" x="205" y="425">raíces</text>
+                <line class="label-line" x1="200" y1="418" x2="185" y2="405"/>
+              </g>
+            </svg>
+            <div class="info-panel terra" id="floweringInfo">
+              <div class="ip-hint">Pasa el cursor sobre una parte</div>
+            </div>
+          </div>
+
+          <div class="diagram reveal">
+            <div class="diagram-head">
+              <h4>Planta sin flor (helecho)</h4>
+              <span class="badge earth">Con esporas</span>
+            </div>
+            <svg class="diagram-svg" viewBox="0 0 320 420" aria-label="Planta sin flor">
+              <!-- ground -->
+              <path class="ground-line" d="M40 385 L280 385"/>
+
+              <!-- rhizome -->
+              <g class="part" data-part="rhizome">
+                <path d="M110 380 Q160 395 210 380" stroke="#8b5a2b" stroke-width="5" fill="none" stroke-linecap="round"/>
+              </g>
+
+              <!-- frond -->
+              <path class="stem-thin" d="M160 380 Q150 290 180 200 Q210 120 240 80" stroke-width="3"/>
+
+              <!-- leaflets -->
+              <g class="part" data-part="frond">
+                <g class="leaf-shape">
+                  <path d="M155 335 Q120 328 105 315 Q130 335 155 335"/>
+                  <path d="M160 335 Q192 328 205 315 Q180 335 160 335"/>
+                  <path d="M158 300 Q125 288 108 270 Q138 295 158 300"/>
+                  <path d="M163 300 Q195 288 212 270 Q182 295 163 300"/>
+                  <path d="M164 265 Q132 250 118 228 Q148 255 164 265"/>
+                  <path d="M168 265 Q200 250 214 228 Q184 255 168 265"/>
+                  <path d="M170 232 Q140 212 130 190 Q155 218 170 232"/>
+                  <path d="M175 232 Q205 212 215 190 Q190 218 175 232"/>
+                  <path d="M180 200 Q155 180 148 158 Q168 185 180 200"/>
+                  <path d="M185 200 Q210 180 217 158 Q197 185 185 200"/>
+                  <path d="M195 168 Q175 152 172 132 Q188 155 195 168"/>
+                  <path d="M200 168 Q220 152 223 132 Q207 155 200 168"/>
+                </g>
+              </g>
+
+              <!-- sori dots (spore clusters) -->
+              <g fill="#c96a3f" opacity=".7">
+                <circle cx="130" cy="295" r="1.5"/>
+                <circle cx="135" cy="292" r="1.5"/>
+                <circle cx="125" cy="300" r="1.5"/>
+                <circle cx="150" cy="260" r="1.5"/>
+                <circle cx="155" cy="255" r="1.5"/>
+                <circle cx="145" cy="265" r="1.5"/>
+              </g>
+
+              <!-- labels -->
+              <g>
+                <text class="label-text" x="250" y="80">fronda</text>
+                <line class="label-line" x1="245" y1="78" x2="238" y2="85"/>
+
+                <text class="label-text" x="75" y="335">foliolos</text>
+                <line class="label-line" x1="120" y1="332" x2="140" y2="320"/>
+
+                <text class="label-text" x="210" y="405">rizoma</text>
+                <line class="label-line" x1="205" y1="398" x2="185" y2="388"/>
+              </g>
+            </svg>
+            <div class="info-panel" id="nonFloweringInfo">
+              <div class="ip-hint">Pasa el cursor sobre una parte</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="compare reveal" style="margin-top:20px">
+          <div class="compare-head">
+            <div></div>
+            <div>Con flor</div>
+            <div>Sin flor</div>
+          </div>
+          <div class="compare-row">
+            <div class="cr-label">Reproducción</div>
+            <div class="cr-a">Por semillas encerradas en frutos</div>
+            <div>Por esporas o por semillas desnudas</div>
+          </div>
+          <div class="compare-row">
+            <div class="cr-label">Estructura</div>
+            <div class="cr-a">Raíz, tallo, hojas, flor, fruto</div>
+            <div>Sin flores verdaderas; helechos sin semilla</div>
+          </div>
+          <div class="compare-row">
+            <div class="cr-label">Diversidad</div>
+            <div class="cr-a">~90 % de las plantas</div>
+            <div>~10 % de las plantas</div>
+          </div>
+          <div class="compare-row">
+            <div class="cr-label">Ambientes</div>
+            <div class="cr-a">Casi todos los hábitats</div>
+            <div>Húmedos, templados, fríos</div>
+          </div>
+          <div class="compare-row">
+            <div class="cr-label">Ejemplos</div>
+            <div class="cr-a">Margarita, roble, trigo, orquídea</div>
+            <div>Helecho, musgo, pino, cola de caballo</div>
+          </div>
+        </div>
+
+        <div class="callout reveal">
+          <strong>Un detalle clave:</strong> "sin flor" no significa "sin reproducción sexual". Helechos y musgos también se reproducen sexualmente, pero lo hacen mediante esporas y estructuras diferentes a las flores.
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ESTRUCTURA DE LAS FLORES ============ -->
+    <section class="view" data-view="flores">
+      <div class="content">
+        <div class="page-header reveal">
+          <span class="eyebrow">04 · Anatomía floral</span>
+          <h1>Estructura de las <em>flores</em></h1>
+          <p class="lede">Una flor es un órgano reproductor. Cada parte cumple una función específica en la producción de semillas. Pasa el cursor sobre cada parte del dibujo para conocerla.</p>
+        </div>
+
+        <div class="diagram reveal">
+          <div class="diagram-head">
+            <h4>Corte longitudinal de una flor</h4>
+            <span class="badge terra">Vista esquemática</span>
+          </div>
+          <svg class="diagram-svg" viewBox="0 0 420 460" aria-label="Corte de una flor">
+            <!-- peduncle -->
+            <g class="part" data-part="peduncle">
+              <line x1="210" y1="430" x2="210" y2="315" stroke="#4d7c2a" stroke-width="7" stroke-linecap="round"/>
+            </g>
+
+            <!-- receptacle -->
+            <ellipse cx="210" cy="310" rx="55" ry="14" fill="#4d7c2a" opacity=".9"/>
+
+            <!-- sepals -->
+            <g class="part" data-part="sepals">
+              <path d="M160 305 Q120 275 128 232 Q158 250 168 295 Z" fill="#7cb342" opacity=".8"/>
+              <path d="M260 305 Q300 275 292 232 Q262 250 252 295 Z" fill="#7cb342" opacity=".8"/>
+            </g>
+
+            <!-- petals -->
+            <g class="part" data-part="petals">
+              <path d="M158 302 Q118 245 138 175 Q210 152 282 175 Q302 245 262 302 Z" fill="#c96a3f" opacity=".75"/>
+              <path d="M170 288 Q145 235 160 195 Q210 175 260 195 Q275 235 250 288 Z" fill="#e08a5f" opacity=".5"/>
+            </g>
+
+            <!-- stamens -->
+            <g class="part" data-part="stamens">
+              <line class="stamen-line" x1="165" y1="215" x2="155" y2="160"/>
+              <ellipse cx="155" cy="155" rx="9" ry="13" fill="#d4a73b"/>
+              <line class="stamen-line" x1="255" y1="215" x2="265" y2="160"/>
+              <ellipse cx="265" cy="155" rx="9" ry="13" fill="#d4a73b"/>
+              <line class="stamen-line" x1="185" y1="230" x2="180" y2="150"/>
+              <ellipse cx="180" cy="145" rx="9" ry="13" fill="#d4a73b"/>
+              <line class="stamen-line" x1="235" y1="230" x2="240" y2="150"/>
+              <ellipse cx="240" cy="145" rx="9" ry="13" fill="#d4a73b"/>
+            </g>
+
+            <!-- pistil -->
+            <g class="part" data-part="pistil">
+              <!-- ovary -->
+              <ellipse cx="210" cy="255" rx="22" ry="28" fill="#4d7c2a"/>
+              <circle cx="210" cy="255" r="7" fill="#8b5a2b"/>
+              <!-- style -->
+              <line class="pistil-line" x1="210" y1="230" x2="210" y2="115" stroke-width="4"/>
+              <!-- stigma -->
+              <ellipse cx="210" cy="110" rx="16" ry="9" fill="#c96a3f"/>
+            </g>
+
+            <!-- labels -->
+            <g>
+              <text class="label-text" x="320" y="112">estigma</text>
+              <line class="label-line" x1="315" y1="110" x2="230" y2="112"/>
+
+              <text class="label-text" x="320" y="175">estilo</text>
+              <line class="label-line" x1="315" y1="172" x2="220" y2="178"/>
+
+              <text class="label-text" x="320" y="260">ovario</text>
+              <line class="label-line" x1="315" y1="258" x2="235" y2="258"/>
+
+              <text class="label-text" x="300" y="155">antera</text>
+              <line class="label-line" x1="295" y1="152" x2="276" y2="152"/>
+
+              <text class="label-text" x="60" y="195">pétalos</text>
+              <line class="label-line" x1="115" y1="195" x2="145" y2="200"/>
+
+              <text class="label-text" x="55" y="270">sépalos</text>
+              <line class="label-line" x1="110" y1="270" x2="140" y2="275"/>
+
+              <text class="label-text" x="255" y="430">pedúnculo</text>
+              <line class="label-line" x1="250" y1="425" x2="222" y2="400"/>
+            </g>
+          </svg>
+          <div class="info-panel terra" id="flowerInfo">
+            <div class="ip-hint">Pasa el cursor sobre una parte</div>
+          </div>
+        </div>
+
+        <div class="grid-3 reveal">
+          <div class="card card-accent gold">
+            <span class="kicker gold">Reproducción</span>
+            <h3>Estambres y pistilo</h3>
+            <p>Los estambres producen el polen (gameto masculino). El pistilo contiene el óvulo (gameto femenino). La polinización es el viaje del polen desde un estambre hasta un estigma.</p>
+          </div>
+          <div class="card card-accent terra">
+            <span class="kicker terra">Atracción</span>
+            <h3>Pétalos y sépalos</h3>
+            <p>Los pétalos atraen a los polinizadores con color, forma y a veces aroma. Los sépalos, verdes, protegen la flor cuando todavía es un capullo cerrado.</p>
+          </div>
+          <div class="card card-accent">
+            <span class="kicker">Soporte</span>
+            <h3>Pedúnculo y receptáculo</h3>
+            <p>El pedúnculo es el "tallo" de la flor. El receptáculo es la base ensanchada donde se insertan todas las piezas florales. Juntos sostienen y nutren la flor.</p>
+          </div>
+        </div>
+
+        <div class="card reveal" style="margin-top:16px">
+          <span class="kicker">Polinización</span>
+          <h3>Los mensajeros del polen</h3>
+          <p>La polinización es el transporte de polen desde los estambres hasta el estigma de otra flor (o de la misma). Los principales polinizadores son:</p>
+          <div class="level-list" style="margin-top:12px">
+            <div class="level-item">
+              <div>
+                <div class="lv-name">Abejas y abejorros</div>
+                <div class="lv-desc">Los más importantes. Buscan néctar y polen, y transportan granos de una flor a otra sin darse cuenta.</div>
+              </div>
+              <span class="lv-tag leaf">Insectos</span>
+            </div>
+            <div class="level-item">
+              <div>
+                <div class="lv-name">Mariposas y polillas</div>
+                <div class="lv-desc">Prefieren flores con néctar abundante y colores vivos. Algunas plantas dependen exclusivamente de una especie.</div>
+              </div>
+              <span class="lv-tag terra">Insectos</span>
+            </div>
+            <div class="level-item">
+              <div>
+                <div class="lv-name">Colibríes y murciélagos</div>
+                <div class="lv-desc">Polinizadores vertebrados. Las flores que atraen suelen ser rojas y con forma tubular.</div>
+              </div>
+              <span class="lv-tag gold">Vertebrados</span>
+            </div>
+            <div class="level-item">
+              <div>
+                <div class="lv-name">Viento y agua</div>
+                <div class="lv-desc">Muchas gramíneas y árboles (como los pinos) no necesitan animales: el viento transporta el polen. Producen muchísimo para compensar.</div>
+              </div>
+              <span class="lv-tag">Abiótica</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="callout terra reveal">
+          <strong>Dato curioso:</strong> la flor más grande del mundo es la <em>Rafflesia arnoldii</em>, que puede medir casi un metro de diámetro y pesar hasta 11 kg. Huele a carne podrida para atraer moscas.
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PELIGROSAS ============ -->
+    <section class="view" data-view="peligrosas">
+      <div class="content">
+        <div class="page-header reveal">
+          <span class="eyebrow">05 · Con precaución</span>
+          <h1>Plantas <em>peligrosas</em></h1>
+          <p class="lede">Algunas plantas silvestres son tóxicas al tocarlas o al comerlas. Conocerlas es la mejor forma de disfrutar del campo sin riesgos. Estas son las más importantes en el hemisferio occidental.</p>
+        </div>
+
+        <div class="callout danger reveal">
+          <strong>Importante:</strong> esta lista es orientativa. Si sospechas que alguien ingirió o tocó una planta tóxica, contacta inmediatamente a un servicio de emergencia o centro de toxicología. No te bases en esta guía para autodiagnosticarte.
+        </div>
+
+        <div class="plant-grid reveal" style="margin-top:18px">
+          <article class="plant-card danger">
+            <div class="plant-head">
+              <div class="plant-badge">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><path d="M12 9v4M12 17h.01"/></svg>
+              </div>
+              <div class="plant-name">
+                <h4>Belladona</h4>
+                <span class="latin">Atropa belladonna</span>
+              </div>
+            </div>
+            <div class="plant-body">
+              <p>Planta herbácea con bayas negras brillantes y dulces. Todas sus partes son tóxicas, especialmente las bayas y las raíces.</p>
+              <div class="plant-info">
+                <div class="pi-row"><strong>Tóxica</strong><span>Toda la planta</span></div>
+                <div class="pi-row"><strong>Síntomas</strong><span>Pupilas dilatadas, alucinaciones, taquicardia, coma</span></div>
+              </div>
+            </div>
+          </article>
+
+          <article class="plant-card danger">
+            <div class="plant-head">
+              <div class="plant-badge">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><path d="M12 9v4M12 17h.01"/></svg>
+              </div>
+              <div class="plant-name">
+                <h4>Adelfa</h4>
+                <span class="latin">Nerium oleander</span>
+              </div>
+            </div>
+            <div class="plant-body">
+              <p>Arbusto ornamental con flores rosas o blancas. Toda la planta es tóxica, incluso el humo al quemarla y el agua donde se remojan sus hojas.</p>
+              <div class="plant-info">
+                <div class="pi-row"><strong>Tóxica</strong><span>Toda la planta, incluso el humo</span></div>
+                <div class="pi-row"><strong>Síntomas</strong><span>Náuseas, arritmias, paro cardíaco</span></div>
+              </div>
+            </div>
+          </article>
+
+          <article class="plant-card danger">
+            <div class="plant-head">
+              <div class="plant-badge">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><path d="M12 9v4M12 17h.01"/></svg>
+              </div>
+              <div class="plant-name">
+                <h4>Cicuta</h4>
+                <span class="latin">Conium maculatum</span>
+              </div>
+            </div>
+            <div class="plant-body">
+              <p>Planta de flores blancas en umbela, parecida al perejil silvestre. Altamente tóxica. Según la historia, con ella se ejecutó a Sócrates.</p>
+              <div class="plant-info">
+                <div class="pi-row"><strong>Tóxica</strong><span>Toda, sobre todo raíces y semillas</span></div>
+                <div class="pi-row"><strong>Síntomas</strong><span>Parálisis muscular, paro respiratorio</span></div>
+              </div>
+            </div>
+          </article>
+
+          <article class="plant-card danger">
+            <div class="plant-head">
+              <div class="plant-badge">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><path d="M12 9v4M12 17h.01"/></svg>
+              </div>
+              <div class="plant-name">
+                <h4>Dedalera</h4>
+                <span class="latin">Digitalis purpurea</span>
+              </div>
+            </div>
+            <div class="plant-body">
+              <p>Planta de flores rosadas o púrpuras en forma de campana. Contiene glucósidos cardíacos. Usada en medicina a dosis muy controladas.</p>
+              <div class="plant-info">
+                <div class="pi-row"><strong>Tóxica</strong><span>Todas las partes, también el néctar</span></div>
+                <div class="pi-row"><strong>Síntomas</strong><span>Arritmias, visión alterada, muerte</span></div>
+              </div>
+            </div>
+          </article>
+
+          <article class="plant-card danger">
+            <div class="plant-head">
+              <div class="plant-badge">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><path d="M12 9v4M12 17h.01"/></svg>
+              </div>
+              <div class="plant-name">
+                <h4>Ricino</h4>
+                <span class="latin">Ricinus communis</span>
+              </div>
+            </div>
+            <div class="plant-body">
+              <p>Planta grande con hojas palmeadas. Sus semillas contienen ricina, una de las sustancias más tóxicas conocidas. Solo 4–8 semillas pueden matar a un adulto.</p>
+              <div class="plant-info">
+                <div class="pi-row"><strong>Tóxica</strong><span>Semillas (contienen ricina)</span></div>
+                <div class="pi-row"><strong>Síntomas</strong><span>Vómitos, diarrea, fallo multiorgánico</span></div>
+              </div>
+            </div>
+          </article>
+
+          <article class="plant-card danger">
+            <div class="plant-head">
+              <div class="plant-badge">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><path d="M12 9v4M12 17h.01"/></svg>
+              </div>
+              <div class="plant-name">
+                <h4>Estramonio</h4>
+                <span class="latin">Datura stramonium</span>
+              </div>
+            </div>
+            <div class="plant-body">
+              <p>Hierba con flores blancas en forma de trompeta y frutos espinosos. Contiene alcaloides tropánicos. Muy tóxica y alucinógena.</p>
+              <div class="plant-info">
+                <div class="pi-row"><strong>Tóxica</strong><span>Todas las partes</span></div>
+                <div class="pi-row"><strong>Síntomas</strong><span>Delirio, alucinaciones, coma</span></div>
+              </div>
+            </div>
+          </article>
+
+          <article class="plant-card danger">
+            <div class="plant-head">
+              <div class="plant-badge">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><path d="M12 9v4M12 17h.01"/></svg>
+              </div>
+              <div class="plant-name">
+                <h4>Acónito</h4>
+                <span class="latin">Aconitum napellus</span>
+              </div>
+            </div>
+            <div class="plant-body">
+              <p>También llamada "reina de los venenos". Flores azules en forma de casco. El acónito es una de las plantas más tóxicas de Europa.</p>
+              <div class="plant-info">
+                <div class="pi-row"><strong>Tóxica</strong><span>Toda la planta, sobre todo raíces</span></div>
+                <div class="pi-row"><strong>Síntomas</strong><span>Hormigueo, arritmias, muerte rápida</span></div>
+              </div>
+            </div>
+          </article>
+
+          <article class="plant-card danger">
+            <div class="plant-head">
+              <div class="plant-badge">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><path d="M12 9v4M12 17h.01"/></svg>
+              </div>
+              <div class="plant-name">
+                <h4>Hiedra venenosa</h4>
+                <span class="latin">Toxicodendron radicans</span>
+              </div>
+            </div>
+            <div class="plant-body">
+              <p>Planta trepadora común en Norteamérica. Todas sus partes contienen urushiol, un aceite que causa sarpullidos intensos al contacto.</p>
+              <div class="plant-info">
+                <div class="pi-row"><strong>Tóxica</strong><span>Solo por contacto (no por ingestión)</span></div>
+                <div class="pi-row"><strong>Síntomas</strong><span>Erupción, ampollas, picor intenso</span></div>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="callout danger reveal" style="margin-top:20px">
+          <strong>Regla de oro:</strong> si no estás seguro al 100% de qué planta es, no la toques, no la huelas y no la comas. La duda no es un problema: es la respuesta correcta.
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ COMESTIBLES ============ -->
+    <section class="view" data-view="comestibles">
+      <div class="content">
+        <div class="page-header reveal">
+          <span class="eyebrow">06 · Recolección responsable</span>
+          <h1>Plantas <em>comestibles</em> para el ser humano</h1>
+          <p class="lede">Muchas plantas silvestres son comestibles y nutritivas. Pero el desconocimiento puede ser peligroso: hay especies comestibles con dobles venenosos. Esta lista recoge las más seguras y conocidas, siempre con precaución.</p>
+        </div>
+
+        <div class="callout reveal">
+          <strong>Antes de empezar:</strong> la recolección silvestre tiene tres reglas. Primera: identificá la planta con total certeza (idealmente con alguien que ya la conozca). Segunda: recolectá solo en lugares limpios, lejos de carreteras y cultivos fumigados. Tercera: nunca consumas grandes cantidades de una planta que probás por primera vez.
+        </div>
+
+        <div class="plant-grid reveal" style="margin-top:18px">
+          <article class="plant-card edible">
+            <div class="plant-head">
+              <div class="plant-badge">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c0-4 3-7 7-7"/><path d="M12 21c0-4-3-7-7-7"/><path d="M12 21V9"/></svg>
+              </div>
+              <div class="plant-name">
+                <h4>Diente de león</h4>
+                <span class="latin">Taraxacum officinale</span>
+              </div>
+            </div>
+            <div class="plant-body">
+              <p>Muy común en prados y jardines. Las hojas tiernas se comen en ensalada (son amargas). La raíz tostada se usa como sucedáneo del café.</p>
+              <div class="plant-info">
+                <div class="pi-row"><strong>Partes</strong><span>Hojas, flores, raíz</span></div>
+                <div class="pi-row"><strong>Uso</strong><span>Ensaladas, infusión, café de raíz</span></div>
+              </div>
+            </div>
+          </article>
+
+          <article class="plant-card edible">
+            <div class="plant-head">
+              <div class="plant-badge">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c0-4 3-7 7-7"/><path d="M12 21c0-4-3-7-7-7"/><path d="M12 21V9"/></svg>
+              </div>
+              <div class="plant-name">
+                <h4>Ortiga</h4>
+                <span class="latin">Urtica dioica</span>
+              </div>
+            </div>
+            <div class="plant-body">
+              <p>Famosa por sus pelos urticantes. Una vez cocida, pierde el poder irritante y se vuelve una verdura muy nutritiva, rica en hierro y vitaminas.</p>
+              <div class="plant-info">
+                <div class="pi-row"><strong>Partes</strong><span>Hojas tiernas (cocidas)</span></div>
+                <div class="pi-row"><strong>Uso</strong><span>Sopas, tortillas, guisos</span></div>
+              </div>
+            </div>
+          </article>
+
+          <article class="plant-card edible">
+            <div class="plant-head">
+              <div class="plant-badge">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c0-4 3-7 7-7"/><path d="M12 21c0-4-3-7-7-7"/><path d="M12 21V9"/></svg>
+              </div>
+              <div class="plant-name">
+                <h4>Verdolaga</h4>
+                <span class="latin">Portulaca oleracea</span>
+              </div>
+            </div>
+            <div class="plant-body">
+              <p>Hierba rastrera de hojas carnosas. Crece en suelos removidos y jardines. Tiene alto contenido en omega-3 y vitamina C.</p>
+              <div class="plant-info">
+                <div class="pi-row"><strong>Partes</strong><span>Hojas y tallos tiernos</span></div>
+                <div class="pi-row"><strong>Uso</strong><span>Ensaladas, salteados</span></div>
+              </div>
+            </div>
+          </article>
+
+          <article class="plant-card edible">
+            <div class="plant-head">
+              <div class="plant-badge">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c0-4 3-7 7-7"/><path d="M12 21c0-4-3-7-7-7"/><path d="M12 21V9"/></svg>
+              </div>
+              <div class="plant-name">
+                <h4>Berro</h4>
+                <span class="latin">Nasturtium officinale</span>
+              </div>
+            </div>
+            <div class="plant-body">
+              <p>Planta acuática de hojas pequeñas y sabor picante. Crece en arroyos limpios. Cuidado: puede confundirse con plantas tóxicas de ribera.</p>
+              <div class="plant-info">
+                <div class="pi-row"><strong>Partes</strong><span>Hojas y tallos</span></div>
+                <div class="pi-row"><strong>Uso</strong><span>Ensaladas, sopas</span></div>
+              </div>
+            </div>
+          </article>
+
+          <article class="plant-card edible">
+            <div class="plant-head">
+              <div class="plant-badge">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c0-4 3-7 7-7"/><path d="M12 21c0-4-3-7-7-7"/><path d="M12 21V9"/></svg>
+              </div>
+              <div class="plant-name">
+                <h4>Fresa silvestre</h4>
+                <span class="latin">Fragaria vesca</span>
+              </div>
+            </div>
+            <div class="plant-body">
+              <p>Más pequeña y aromática que la fresa cultivada. Crece en bosques y claros. Frutos rojos diminutos con un sabor intenso.</p>
+              <div class="plant-info">
+                <div class="pi-row"><strong>Partes</strong><span>Solo el fruto</span></div>
+                <div class="pi-row"><strong>Uso</strong><span>Frescas, mermeladas</span></div>
+              </div>
+            </div>
+          </article>
+
+          <article class="plant-card edible">
+            <div class="plant-head">
+              <div class="plant-badge">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c0-4 3-7 7-7"/><path d="M12 21c0-4-3-7-7-7"/><path d="M12 21V9"/></svg>
+              </div>
+              <div class="plant-name">
+                <h4>Mora silvestre</h4>
+                <span class="latin">Rubus fruticosus</span>
+              </div>
+            </div>
+            <div class="plant-body">
+              <p>Arbusto espinoso con frutos negros y dulces. Muy común en setos y bordes de bosque. Recolectar en verano y principios de otoño.</p>
+              <div class="plant-info">
+                <div class="pi-row"><strong>Partes</strong><span>Solo el fruto</span></div>
+                <div class="pi-row"><strong>Uso</strong><span>Frescas, mermeladas, tartas</span></div>
+              </div>
+            </div>
+          </article>
+
+          <article class="plant-card edible">
+            <div class="plant-head">
+              <div class="plant-badge">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c0-4 3-7 7-7"/><path d="M12 21c0-4-3-7-7-7"/><path d="M12 21V9"/></svg>
+              </div>
+              <div class="plant-name">
+                <h4>Ajo silvestre</h4>
+                <span class="latin">Allium ursinum</span>
+              </div>
+            </div>
+            <div class="plant-body">
+              <p>Planta de bosque con hojas anchas y olor a ajo. Muy apreciada en Europa. Cuidado con confundirla con el lirio de los valles, que es venenoso.</p>
+              <div class="plant-info">
+                <div class="pi-row"><strong>Partes</strong><span>Hojas y bulbo</span></div>
+                <div class="pi-row"><strong>Uso</strong><span>Pesto, ensaladas, salsas</span></div>
+              </div>
+            </div>
+          </article>
+
+          <article class="plant-card edible">
+            <div class="plant-head">
+              <div class="plant-badge">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c0-4 3-7 7-7"/><path d="M12 21c0-4-3-7-7-7"/><path d="M12 21V9"/></svg>
+              </div>
+              <div class="plant-name">
+                <h4>Achicoria</h4>
+                <span class="latin">Cichorium intybus</span>
+              </div>
+            </div>
+            <div class="plant-body">
+              <p>Planta de flores azules que se cierran al mediodía. Hojas amargas, muy usadas en ensaladas italianas. La raíz tostada se usa como sustituto del café.</p>
+              <div class="plant-info">
+                <div class="pi-row"><strong>Partes</strong><span>Hojas, raíz</span></div>
+                <div class="pi-row"><strong>Uso</strong><span>Ensaladas, café de raíz</span></div>
+              </div>
+            </div>
+          </article>
+
+          <article class="plant-card edible">
+            <div class="plant-head">
+              <div class="plant-badge">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c0-4 3-7 7-7"/><path d="M12 21c0-4-3-7-7-7"/><path d="M12 21V9"/></svg>
+              </div>
+              <div class="plant-name">
+                <h4>Acedera</h4>
+                <span class="latin">Rumex acetosa</span>
+              </div>
+            </div>
+            <div class="plant-body">
+              <p>Hojas con sabor ácido por el ácido oxálico. Muy usada en sopas y ensaladas. Consumir con moderación: el exceso de oxalatos puede ser problemático.</p>
+              <div class="plant-info">
+                <div class="pi-row"><strong>Partes</strong><span>Hojas tiernas</span></div>
+                <div class="pi-row"><strong>Uso</strong><span>Sopas, ensaladas, salsas</span></div>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="callout gold reveal" style="margin-top:20px">
+          <strong>Regla de oro para recolectar:</strong> si tenés la más mínima duda, no lo consumas. Identificá siempre con guía o con un experto. Y recordá que muchas plantas silvestres tienen partes tóxicas y partes comestibles: no todas las partes de una planta son seguras.
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ HISTORIA DEL CULTIVO ============ -->
+    <section class="view" data-view="historia">
+      <div class="content">
+        <div class="page-header reveal">
+          <span class="eyebrow">07 · Del Paleolítico al presente</span>
+          <h1>Historia del <em>cultivo</em> y la agricultura</h1>
+          <p class="lede">Hace unos 12.000 años, los humanos empezaron a sembrar. Ese cambio transformó el paisaje, la dieta y la sociedad. Esta es la historia de cómo aprendimos a cultivar plantas.</p>
+        </div>
+
+        <div class="v-timeline reveal">
+          <div class="v-item" style="--d:0ms">
+            <div class="v-date">~10.000 a.C.</div>
+            <div class="v-title">Primeros cultivos</div>
+            <div class="v-body">En el Creciente Fértil (Medio Oriente) se empiezan a cultivar trigo, cebada, lentejas y garbanzos. Nace la agricultura tal como la conocemos.</div>
+          </div>
+          <div class="v-item" style="--d:40ms">
+            <div class="v-date">~9.000 a.C.</div>
+            <div class="v-title">El arroz en Asia</div>
+            <div class="v-body">En el valle del Yangtsé (China) se domestica el arroz. Es uno de los cultivos más antiguos y llegará a alimentar a más de la mitad de la humanidad.</div>
+          </div>
+          <div class="v-item" style="--d:80ms">
+            <div class="v-date">~8.000 a.C.</div>
+            <div class="v-title">El maíz en Mesoamérica</div>
+            <div class="v-body">El maíz se domestica a partir del teosinte en lo que hoy es México. Es uno de los tres grandes cultivos mundiales junto al trigo y el arroz.</div>
+          </div>
+          <div class="v-item" style="--d:120ms">
+            <div class="v-date">~7.000 a.C.</div>
+            <div class="v-title">La papa en los Andes</div>
+            <div class="v-body">Se empieza a cultivar papa en los Andes. Se domestican cientos de variedades, adaptadas a distintos pisos ecológicos.</div>
+          </div>
+          <div class="v-item" style="--d:160ms">
+            <div class="v-date">~5.000 a.C.</div>
+            <div class="v-title">Olivo, vid y frutales</div>
+            <div class="v-body">En el Mediterráneo comienza el cultivo del olivo, la vid y los higos. La agricultura se vuelve más sofisticada.</div>
+          </div>
+          <div class="v-item" style="--d:200ms">
+            <div class="v-date">~3.000 a.C.</div>
+            <div class="v-title">Arado y riego</div>
+            <div class="v-body">En Mesopotamia aparece el arado tirado por animales y se desarrollan canales de riego. La agricultura se vuelve intensiva.</div>
+          </div>
+          <div class="v-item" style="--d:240ms">
+            <div class="v-date">~100 a.C.</div>
+            <div class="v-title">Innovaciones romanas</div>
+            <div class="v-body">Los romanos perfeccionan la rotación de cultivos, el uso del estiércol como abono y los sistemas de riego. La agricultura mediterránea se extiende.</div>
+          </div>
+          <div class="v-item" style="--d:280ms">
+            <div class="v-date">Edad Media</div>
+            <div class="v-title">Sistema de tres campos</div>
+            <div class="v-body">En Europa se populariza el sistema de tres campos, que alterna cultivos y barbecho para no agotar el suelo. La productividad crece lentamente.</div>
+          </div>
+          <div class="v-item" style="--d:320ms">
+            <div class="v-date">Siglo XVIII</div>
+            <div class="v-title">Rotación de cuatro campos</div>
+            <div class="v-body">En Inglaterra (sistema Norfolk) se generaliza la rotación de cuatro campos con trébol y nabos. El suelo descansa y los animales se alimentan mejor.</div>
+          </div>
+          <div class="v-item" style="--d:360ms">
+            <div class="v-date">Siglo XIX</div>
+            <div class="v-title">Mecanización y química</div>
+            <div class="v-body">Aparecen las primeras máquinas agrícolas (sembradoras, cosechadoras). Se desarrollan los fertilizantes químicos y la agricultura se industrializa.</div>
+          </div>
+          <div class="v-item" style="--d:400ms">
+            <div class="v-date">1940–1970</div>
+            <div class="v-title">La Revolución Verde</div>
+            <div class="v-body">Se crean variedades de trigo y arroz de alto rendimiento. La producción de alimentos crece de forma exponencial. También aumentan el uso de agua y agroquímicos.</div>
+          </div>
+          <div class="v-item" style="--d:440ms">
+            <div class="v-date">1980–2000</div>
+            <div class="v-title">Transgénicos y precisión</div>
+            <div class="v-body">Aparecen los primeros cultivos transgénicos. Se empiezan a usar sensores y GPS para aplicar agua y fertilizantes donde más se necesitan.</div>
+          </div>
+          <div class="v-item" style="--d:480ms">
+            <div class="v-date">Siglo XXI</div>
+            <div class="v-title">Agricultura regenerativa y vertical</div>
+            <div class="v-body">Se busca reducir el impacto ambiental. Aparecen los cultivos verticales urbanos, la agricultura de precisión con IA y la agroecología como respuesta a la agricultura industrial.</div>
+          </div>
+        </div>
+
+        <div class="callout reveal" style="margin-top:20px">
+          <strong>Dato clave:</strong> la agricultura no nació en un solo lugar. Se desarrolló de forma independiente en al menos siete regiones del mundo: el Creciente Fértil, China, Mesoamérica, los Andes, el este de Norteamérica, Nueva Guinea y África Occidental.
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CARNÍVORAS ============ -->
+    <section class="view" data-view="carnivoras">
+      <div class="content">
+        <div class="page-header reveal">
+          <span class="eyebrow">08 · Cazadoras verdes</span>
+          <h1>Plantas <em>carnívoras</em></h1>
+          <p class="lede">Son plantas que atrapan y digieren pequeños animales, sobre todo insectos. No lo hacen por placer: viven en suelos pobres en nutrientes y necesitan el nitrógeno de sus presas. Cada especie tiene su propia trampa.</p>
+        </div>
+
+        <div class="grid-2">
+          <div class="diagram reveal">
+            <div class="diagram-head">
+              <h4>Venus atrapamoscas</h4>
+              <span class="badge leaf">Trampa de resorte</span>
+            </div>
+            <svg class="diagram-svg" viewBox="0 0 320 280" aria-label="Venus atrapamoscas">
+              <!-- stem -->
+              <path d="M160 260 Q160 220 155 180" stroke="#4d7c2a" stroke-width="4" fill="none" stroke-linecap="round"/>
+              <!-- two lobes -->
+              <path class="leaf-shape dark" d="M155 180 Q110 145 95 95 Q130 85 155 125 Z"/>
+              <path class="leaf-shape dark" d="M155 180 Q200 145 215 95 Q180 85 155 125 Z"/>
+              <!-- teeth on edges -->
+              <g fill="#7cb342">
+                <path d="M95 95 L88 82 L98 88 Z"/>
+                <path d="M103 90 L96 76 L106 83 Z"/>
+                <path d="M112 87 L107 72 L117 80 Z"/>
+                <path d="M122 84 L119 69 L129 77 Z"/>
+                <path d="M133 82 L132 67 L141 75 Z"/>
+                <path d="M215 95 L222 82 L212 88 Z"/>
+                <path d="M207 90 L214 76 L204 83 Z"/>
+                <path d="M198 87 L203 72 L193 80 Z"/>
+                <path d="M188 84 L191 69 L181 77 Z"/>
+                <path d="M177 82 L178 67 L169 75 Z"/>
+              </g>
+              <!-- trigger hairs -->
+              <g stroke="#c96a3f" stroke-width="1.5" fill="none">
+                <line x1="130" y1="130" x2="128" y2="145"/>
+                <line x1="150" y1="128" x2="148" y2="143"/>
+                <line x1="170" y1="128" x2="172" y2="143"/>
+              </g>
+              <g fill="#c96a3f">
+                <circle cx="128" cy="146" r="2"/>
+                <circle cx="148" cy="144" r="2"/>
+                <circle cx="172" cy="144" r="2"/>
+              </g>
+              <!-- labels -->
+              <g>
+                <text class="label-text" x="30" y="110">trampa</text>
+                <line class="label-line" x1="70" y1="108" x2="98" y2="105"/>
+                <text class="label-text" x="240" y="160">pelos</text>
+                <line class="label-line" x1="238" y1="158" x2="178" y2="145"/>
+              </g>
+            </svg>
+            <div class="info-panel" style="margin-top:14px">
+              <div class="ip-desc"><em>Dionaea muscipula</em>. Dos lóbulos con dientes que se cierran en menos de un segundo cuando un insecto roza los pelos sensoriales dos veces en pocos segundos. Así evita cerrarse por una gota de lluvia.</div>
+            </div>
+          </div>
+
+          <div class="diagram reveal">
+            <div class="diagram-head">
+              <h4>Planta jarra</h4>
+              <span class="badge terra">Trampa de caída</span>
+            </div>
+            <svg class="diagram-svg" viewBox="0 0 320 280" aria-label="Planta jarra">
+              <!-- pitcher body -->
+              <path d="M120 260 Q110 200 130 130 Q145 90 160 60 Q175 90 190 130 Q210 200 200 260 Q160 275 120 260 Z" fill="#7cb342" stroke="#4d7c2a" stroke-width="2"/>
+              <!-- interior -->
+              <ellipse cx="160" cy="90" rx="35" ry="20" fill="#243b1a"/>
+              <ellipse cx="160" cy="90" rx="30" ry="15" fill="#0d1a08"/>
+              <!-- liquid -->
+              <path d="M130 200 Q160 205 190 200 Q192 230 190 260 Q160 268 130 260 Q128 230 130 200 Z" fill="#c96a3f" opacity=".6"/>
+              <!-- lid -->
+              <path d="M125 85 Q120 50 160 45 Q200 50 195 85 Q160 75 125 85 Z" fill="#4d7c2a"/>
+              <!-- rim -->
+              <ellipse cx="160" cy="88" rx="37" ry="6" fill="none" stroke="#c96a3f" stroke-width="1.5" opacity=".6"/>
+              <!-- insect inside -->
+              <g fill="#1a1a1a" opacity=".8">
+                <ellipse cx="158" cy="185" rx="4" ry="2"/>
+                <line x1="155" y1="184" x2="150" y2="181" stroke="#1a1a1a" stroke-width=".8"/>
+                <line x1="161" y1="184" x2="166" y2="181" stroke="#1a1a1a" stroke-width=".8"/>
+              </g>
+              <g>
+                <text class="label-text" x="230" y="80">tapa</text>
+                <line class="label-line" x1="228" y1="78" x2="195" y2="75"/>
+                <text class="label-text" x="230" y="200">líquido</text>
+                <line class="label-line" x1="228" y1="198" x2="192" y2="200"/>
+              </g>
+            </svg>
+            <div class="info-panel terra" style="margin-top:14px">
+              <div class="ip-desc">Las plantas jarra (como <em>Nepenthes</em> o <em>Sarracenia</em>) tienen hojas modificadas en forma de tubo. Atraen al insecto con néctar en el borde, resbala y cae dentro, donde se ahoga y se digiere.</div>
+            </div>
+          </div>
+
+          <div class="diagram reveal">
+            <div class="diagram-head">
+              <h4>Rocío del sol</h4>
+              <span class="badge gold">Trampa adhesiva</span>
+            </div>
+            <svg class="diagram-svg" viewBox="0 0 320 280" aria-label="Rocío del sol">
+              <!-- leaf -->
+              <path d="M160 240 Q130 220 120 180 Q130 150 160 140 Q190 150 200 180 Q190 220 160 240 Z" fill="#7cb342" stroke="#4d7c2a" stroke-width="2"/>
+              <!-- tentacles with droplets -->
+              <g stroke="#c96a3f" stroke-width="2" stroke-linecap="round">
+                <line x1="120" y1="180" x2="100" y2="170"/>
+                <line x1="130" y1="160" x2="115" y2="145"/>
+                <line x1="140" y1="148" x2="128" y2="130"/>
+                <line x1="155" y1="142" x2="148" y2="120"/>
+                <line x1="170" y1="142" x2="178" y2="118"/>
+                <line x1="185" y1="148" x2="195" y2="130"/>
+                <line x1="195" y1="160" x2="210" y2="148"/>
+                <line x1="200" y1="180" x2="220" y2="175"/>
+                <line x1="195" y1="205" x2="215" y2="215"/>
+                <line x1="170" y1="225" x2="185" y2="240"/>
+                <line x1="145" y1="220" x2="135" y2="240"/>
+              </g>
+              <g fill="#e0b94d">
+                <circle cx="100" cy="170" r="3"/>
+                <circle cx="115" cy="145" r="3"/>
+                <circle cx="128" cy="130" r="3"/>
+                <circle cx="148" cy="120" r="3"/>
+                <circle cx="178" cy="118" r="3"/>
+                <circle cx="195" cy="130" r="3"/>
+                <circle cx="210" cy="148" r="3"/>
+                <circle cx="220" cy="175" r="3"/>
+                <circle cx="215" cy="215" r="3"/>
+                <circle cx="185" cy="240" r="3"/>
+                <circle cx="135" cy="240" r="3"/>
+              </g>
+              <g>
+                <text class="label-text" x="20" y="120">gotas</text>
+                <line class="label-line" x1="60" y1="122" x2="105" y2="142"/>
+              </g>
+            </svg>
+            <div class="info-panel gold" style="margin-top:14px">
+              <div class="ip-desc"><em>Drosera</em>. Sus hojas están cubiertas de tentáculos con gotitas pegajosas que brillan como rocío. Cuando un insecto se posa, queda atrapado y la hoja se enrolla lentamente alrededor.</div>
+            </div>
+          </div>
+
+          <div class="diagram reveal">
+            <div class="diagram-head">
+              <h4>Por qué cazan</h4>
+              <span class="badge">Suelos pobres</span>
+            </div>
+            <div class="steps" style="margin-top:0">
+              <div class="step">
+                <div class="step-num">01</div>
+                <div>
+                  <strong>Suelos pobres en nitrógeno</strong>
+                  <p>Viven en turberas, pantanos y suelos muy lavados, donde falta nitrógeno y fósforo.</p>
+                </div>
+              </div>
+              <div class="step">
+                <div class="step-num">02</div>
+                <div>
+                  <strong>Los insectos son el fertilizante</strong>
+                  <p>De los insectos obtienen nitrógeno, fósforo y otros nutrientes que el suelo no les da.</p>
+                </div>
+              </div>
+              <div class="step">
+                <div class="step-num">03</div>
+                <div>
+                  <strong>Hacen fotosíntesis igual</strong>
+                  <p>Cazan para complementar, no para reemplazar. Siguen siendo plantas verdes que producen su propio alimento con luz solar.</p>
+                </div>
+              </div>
+              <div class="step">
+                <div class="step-num">04</div>
+                <div>
+                  <strong>Son raras y frágiles</strong>
+                  <p>Muchas están amenazadas por la destrucción de sus hábitats y la recolección ilegal. Si las ves en la naturaleza, déjalas donde están.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="callout gold reveal" style="margin-top:20px">
+          <strong>Dato curioso:</strong> la <em>Utricularia</em> (vejiga de agua) tiene trampas de succión: unas vejigas diminutas que, al tocarlas un pequeño animal acuático, se abren y lo absorben en menos de un milisegundo. Es una de las reacciones más rápidas del reino vegetal.
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ BIOMAS ============ -->
+    <section class="view" data-view="biomas">
+      <div class="content">
+        <div class="page-header reveal">
+          <span class="eyebrow">09 · Adaptaciones al medio</span>
+          <h1>Selvas, bosques y <em>plantas de desierto</em></h1>
+          <p class="lede">Las plantas se adaptan a su entorno. La misma especie puede tener formas distintas según el agua, la luz y la temperatura. Estos son los tres grandes escenarios donde vive la mayoría de las plantas.</p>
+        </div>
+
+        <div class="biomas reveal">
+          <article class="bioma">
+            <div class="bioma-art">
+              <svg viewBox="0 0 200 120" aria-hidden="true">
+                <!-- jungle palm trees -->
+                <path d="M50 110 Q48 60 55 30" stroke="#4d7c2a" stroke-width="4" fill="none"/>
+                <path d="M55 30 Q35 20 25 30 Q45 25 55 35" fill="#7cb342"/>
+                <path d="M55 30 Q75 20 85 30 Q65 25 55 35" fill="#7cb342"/>
+                <path d="M55 30 Q55 10 65 5 Q60 20 55 30" fill="#7cb342"/>
+                <path d="M55 30 Q45 15 40 8 Q50 20 55 30" fill="#7cb342"/>
+
+                <path d="M110 110 Q112 70 105 45" stroke="#4d7c2a" stroke-width="3" fill="none"/>
+                <path d="M105 45 Q90 35 80 45 Q95 40 105 50" fill="#7cb342"/>
+                <path d="M105 45 Q120 35 130 45 Q115 40 105 50" fill="#7cb342"/>
+
+                <path d="M160 110 Q158 75 165 55" stroke="#4d7c2a" stroke-width="2.5" fill="none"/>
+                <path d="M165 55 Q155 45 148 50 Q158 50 165 58" fill="#7cb342"/>
+                <path d="M165 55 Q175 45 182 50 Q172 50 165 58" fill="#7cb342"/>
+
+                <!-- ground / undergrowth -->
+                <path d="M0 110 Q100 105 200 110" stroke="#8b5a2b" stroke-width="1" fill="none" opacity=".3"/>
+                <g fill="#4d7c2a" opacity=".7">
+                  <path d="M20 110 Q18 100 22 95 Q26 100 24 110 Z"/>
+                  <path d="M90 110 Q88 102 92 97 Q96 102 94 110 Z"/>
+                  <path d="M140 110 Q138 102 142 97 Q146 102 144 110 Z"/>
+                </g>
+              </svg>
+            </div>
+            <div class="bioma-body">
+              <div class="bk">Bioma 1</div>
+              <h4>Selva tropical</h4>
+              <p>Lluvia abundante todo el año, temperaturas cálidas constantes y una biodiversidad extraordinaria. La luz apenas llega al suelo: la competencia por el sol es feroz.</p>
+              <div class="stats-mini">
+                <span>Lluvia <b>&gt;2.000 mm/año</b></span>
+                <span>Estratos <b>3–4 capas</b></span>
+                <span>Ejemplo <b>Amazonas, Congo</b></span>
+              </div>
+            </div>
+          </article>
+
+          <article class="bioma">
+            <div class="bioma-art">
+              <svg viewBox="0 0 200 120" aria-hidden="true">
+                <!-- temperate tree -->
+                <path d="M100 110 L100 60" stroke="#8b5a2b" stroke-width="5" fill="none" stroke-linecap="round"/>
+                <path d="M100 80 L85 70 M100 75 L115 65 M100 65 L90 55 M100 60 L110 52" stroke="#8b5a2b" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                <circle cx="100" cy="40" r="28" fill="#7cb342"/>
+                <circle cx="85" cy="42" r="18" fill="#7cb342"/>
+                <circle cx="115" cy="42" r="18" fill="#7cb342"/>
+                <circle cx="100" cy="25" r="18" fill="#7cb342"/>
+
+                <!-- smaller tree -->
+                <path d="M155 110 L155 85" stroke="#8b5a2b" stroke-width="3" fill="none" stroke-linecap="round"/>
+                <circle cx="155" cy="75" r="14" fill="#4d7c2a"/>
+                <circle cx="146" cy="78" r="10" fill="#4d7c2a"/>
+                <circle cx="164" cy="78" r="10" fill="#4d7c2a"/>
+
+                <!-- ground -->
+                <path d="M0 110 Q100 105 200 110" stroke="#8b5a2b" stroke-width="1" fill="none" opacity=".3"/>
+                <g fill="#4d7c2a" opacity=".5">
+                  <path d="M40 110 Q42 104 40 100 Q38 104 40 110 Z"/>
+                  <path d="M60 110 Q62 104 60 100 Q58 104 60 110 Z"/>
+                  <path d="M180 110 Q182 104 180 100 Q178 104 180 110 Z"/>
+                </g>
+              </svg>
+            </div>
+            <div class="bioma-body">
+              <div class="bk">Bioma 2</div>
+              <h4>Bosque templado</h4>
+              <p>Cuatro estaciones marcadas. Árboles de hoja caduca que pierden las hojas en otoño, o coníferas siempre verdes. Suelo fértil, rico en materia orgánica.</p>
+              <div class="stats-mini">
+                <span>Lluvia <b>700–1.500 mm/año</b></span>
+                <span>Estaciones <b>4 marcadas</b></span>
+                <span>Ejemplo <b>Europa, EE.UU.</b></span>
+              </div>
+            </div>
+          </article>
+
+          <article class="bioma">
+            <div class="bioma-art">
+              <svg viewBox="0 0 200 120" aria-hidden="true">
+                <!-- sun -->
+                <circle cx="160" cy="30" r="14" fill="#d4a73b" opacity=".8"/>
+                <g stroke="#d4a73b" stroke-width="1.5" opacity=".5">
+                  <line x1="160" y1="8" x2="160" y2="2"/>
+                  <line x1="160" y1="58" x2="160" y2="52"/>
+                  <line x1="138" y1="30" x2="132" y2="30"/>
+                  <line x1="188" y1="30" x2="182" y2="30"/>
+                </g>
+
+                <!-- cactus -->
+                <path d="M60 110 L60 70 Q60 55 70 55 Q80 55 80 70 L80 90 Q80 100 90 100 L95 100 L95 110 L75 110 L75 80 Q75 70 70 70 Q65 70 65 80 L65 110 Z" fill="#4d7c2a"/>
+                <!-- spines -->
+                <g stroke="#7cb342" stroke-width=".8">
+                  <line x1="55" y1="85" x2="52" y2="82"/>
+                  <line x1="55" y1="95" x2="52" y2="92"/>
+                  <line x1="85" y1="85" x2="88" y2="82"/>
+                  <line x1="85" y1="95" x2="88" y2="92"/>
+                </g>
+
+                <!-- small cactus -->
+                <path d="M140 110 L140 90 Q140 82 146 82 Q152 82 152 90 L152 110 Z" fill="#7cb342"/>
+
+                <!-- ground -->
+                <path d="M0 110 Q100 108 200 110" stroke="#8b5a2b" stroke-width="1" fill="none" opacity=".5"/>
+                <g fill="#c96a3f" opacity=".5">
+                  <circle cx="110" cy="108" r="1"/>
+                  <circle cx="120" cy="106" r=".8"/>
+                  <circle cx="130" cy="109" r="1"/>
+                </g>
+              </svg>
+            </div>
+            <div class="bioma-body">
+              <div class="bk">Bioma 3</div>
+              <h4>Desierto</h4>
+              <p>Muy poca lluvia y temperaturas extremas. Las plantas almacenan agua en tallos carnosos, tienen espinas en lugar de hojas y raíces muy profundas o muy extendidas.</p>
+              <div class="stats-mini">
+                <span>Lluvia <b>&lt;250 mm/año</b></span>
+                <span>Adaptación <b>Xerófitas</b></span>
+                <span>Ejemplo <b>Sahara, Atacama</b></span>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="card reveal" style="margin-top:16px">
+          <span class="kicker">Adaptaciones</span>
+          <h3>Cómo sobreviven en cada lugar</h3>
+          <div class="level-list" style="margin-top:10px">
+            <div class="level-item">
+              <div>
+                <div class="lv-name">En la selva: competir por la luz</div>
+                <div class="lv-desc">Hojas grandes para captar luz filtrada. Plantas trepadoras que suben por los troncos. Epífitas que viven sobre otras plantas sin parasitarlas.</div>
+              </div>
+              <span class="lv-tag leaf">Selva</span>
+            </div>
+            <div class="level-item">
+              <div>
+                <div class="lv-name">En el bosque: cambiar con las estaciones</div>
+                <div class="lv-desc">Árboles de hoja caduca que pierden las hojas en invierno para no perder agua. Yemas resistentes al frío. Semillas que germinan en primavera.</div>
+              </div>
+              <span class="lv-tag terra">Bosque</span>
+            </div>
+            <div class="level-item">
+              <div>
+                <div class="lv-name">En el desierto: guardar cada gota</div>
+                <div class="lv-desc">Tallos carnosos (suculentos), hojas transformadas en espinas, raíces muy profundas, fotosíntesis nocturna para no perder agua de día.</div>
+              </div>
+              <span class="lv-tag gold">Desierto</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="callout reveal">
+          <strong>Un dato:</strong> el desierto de Atacama, en Chile, es el desierto más árido del mundo. Algunas plantas de allí pueden pasar años sin lluvia y reverdecer en cuestión de horas cuando por fin llueve.
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ MICROSCÓPICAS ============ -->
+    <section class="view" data-view="microscopicas">
+      <div class="content">
+        <div class="page-header reveal">
+          <span class="eyebrow">10 · El mundo invisible</span>
+          <h1>Plantas <em>microscópicas</em></h1>
+          <p class="lede">No todas las plantas se ven a simple vista. Algas, musgos y organismos unicelulares son fundamentales para los ecosistemas: producen oxígeno y son la base de muchas cadenas alimentarias.</p>
+        </div>
+
+        <div class="grid-2">
+          <div class="diagram reveal">
+            <div class="diagram-head">
+              <h4>Diatomea</h4>
+              <span class="badge leaf">Vista al microscopio</span>
+            </div>
+            <svg class="diagram-svg" viewBox="0 0 320 260" aria-label="Diatomea">
+              <circle cx="160" cy="130" r="90" fill="none" stroke="var(--border-hi)" stroke-dasharray="2 3" opacity=".5"/>
+              <circle cx="160" cy="130" r="75" fill="#7cb342" opacity=".8" stroke="#4d7c2a" stroke-width="2"/>
+              <circle cx="160" cy="130" r="58" fill="none" stroke="#4d7c2a" stroke-width="1.5"/>
+              <circle cx="160" cy="130" r="42" fill="none" stroke="#4d7c2a" stroke-width="1.5"/>
+              <circle cx="160" cy="130" r="26" fill="none" stroke="#4d7c2a" stroke-width="1.5"/>
+              <circle cx="160" cy="130" r="10" fill="#c96a3f"/>
+              <g stroke="#4d7c2a" stroke-width="1" opacity=".6">
+                <line x1="160" y1="55" x2="160" y2="205"/>
+                <line x1="85" y1="130" x2="235" y2="130"/>
+                <line x1="107" y1="77" x2="213" y2="183"/>
+                <line x1="213" y1="77" x2="107" y2="183"/>
+              </g>
+              <g>
+                <text class="label-text" x="240" y="50">sílice</text>
+                <line class="label-line" x1="235" y1="52" x2="200" y2="70"/>
+              </g>
+            </svg>
+            <div class="info-panel" style="margin-top:12px">
+              <div class="ip-desc">Algas unicelulares que viven en el agua. Tienen una cáscara de sílice (como el vidrio) con patrones geométricos preciosos. Son grandes productoras de oxígeno: se calcula que aportan cerca del 20 % del oxígeno del planeta.</div>
+            </div>
+          </div>
+
+          <div class="diagram reveal">
+            <div class="diagram-head">
+              <h4>Alga verde</h4>
+              <span class="badge terra">Célula vegetal</span>
+            </div>
+            <svg class="diagram-svg" viewBox="0 0 320 260" aria-label="Alga verde">
+              <ellipse cx="160" cy="130" rx="100" ry="60" fill="#7cb342" opacity=".5" stroke="#4d7c2a" stroke-width="2"/>
+              <!-- chloroplasts -->
+              <g fill="#4d7c2a">
+                <ellipse cx="120" cy="115" rx="14" ry="8" transform="rotate(-20 120 115)"/>
+                <ellipse cx="150" cy="140" rx="14" ry="8" transform="rotate(15 150 140)"/>
+                <ellipse cx="180" cy="120" rx="14" ry="8" transform="rotate(-15 180 120)"/>
+                <ellipse cx="205" cy="140" rx="14" ry="8" transform="rotate(20 205 140)"/>
+                <ellipse cx="135" cy="145" rx="12" ry="7" transform="rotate(-10 135 145)"/>
+              </g>
+              <!-- nucleus -->
+              <circle cx="165" cy="130" r="14" fill="#c96a3f" opacity=".7"/>
+              <circle cx="165" cy="130" r="6" fill="#a83224"/>
+              <g>
+                <text class="label-text" x="30" y="60">cloroplastos</text>
+                <line class="label-line" x1="80" y1="62" x2="115" y2="105"/>
+                <text class="label-text" x="230" y="220">núcleo</text>
+                <line class="label-line" x1="228" y1="212" x2="180" y2="140"/>
+              </g>
+            </svg>
+            <div class="info-panel terra" style="margin-top:12px">
+              <div class="ip-desc">Las algas verdes son un grupo enorme de organismos acuáticos. Algunas son unicelulares y otras forman colonias o filamentos. Fueron las antecesoras de todas las plantas terrestres.</div>
+            </div>
+          </div>
+
+          <div class="diagram reveal">
+            <div class="diagram-head">
+              <h4>Musgo (vista de cerca)</h4>
+              <span class="badge gold">Briofita</span>
+            </div>
+            <svg class="diagram-svg" viewBox="0 0 320 260" aria-label="Musgo">
+              <path d="M40 220 Q160 215 280 220" stroke="#8b5a2b" stroke-width="1.5" fill="none" opacity=".4"/>
+              <g stroke="#4d7c2a" stroke-width="2" fill="none" stroke-linecap="round">
+                <path d="M80 220 Q78 180 82 160"/>
+                <path d="M110 220 Q108 175 112 155"/>
+                <path d="M140 220 Q138 180 142 165"/>
+                <path d="M175 220 Q173 175 178 158"/>
+                <path d="M210 220 Q208 178 213 162"/>
+                <path d="M240 220 Q238 180 242 165"/>
+              </g>
+              <!-- tiny leaves -->
+              <g fill="#7cb342">
+                <ellipse cx="80" cy="170" rx="6" ry="2.5" transform="rotate(-30 80 170)"/>
+                <ellipse cx="84" cy="180" rx="6" ry="2.5" transform="rotate(30 84 180)"/>
+                <ellipse cx="110" cy="165" rx="6" ry="2.5" transform="rotate(-30 110 165)"/>
+                <ellipse cx="114" cy="175" rx="6" ry="2.5" transform="rotate(30 114 175)"/>
+                <ellipse cx="140" cy="175" rx="5" ry="2" transform="rotate(-30 140 175)"/>
+                <ellipse cx="144" cy="185" rx="5" ry="2" transform="rotate(30 144 185)"/>
+                <ellipse cx="175" cy="168" rx="6" ry="2.5" transform="rotate(-30 175 168)"/>
+                <ellipse cx="179" cy="178" rx="6" ry="2.5" transform="rotate(30 179 178)"/>
+                <ellipse cx="210" cy="172" rx="6" ry="2.5" transform="rotate(-30 210 172)"/>
+                <ellipse cx="214" cy="182" rx="6" ry="2.5" transform="rotate(30 214 182)"/>
+                <ellipse cx="240" cy="175" rx="5" ry="2" transform="rotate(-30 240 175)"/>
+                <ellipse cx="244" cy="185" rx="5" ry="2" transform="rotate(30 244 185)"/>
+              </g>
+              <!-- capsule (sporophyte) on one stalk -->
+              <path d="M240 165 L240 130" stroke="#8b5a2b" stroke-width="1.5" fill="none"/>
+              <ellipse cx="240" cy="125" rx="6" ry="10" fill="#c96a3f"/>
+              <ellipse cx="240" cy="122" rx="7" ry="3" fill="#a83224"/>
+              <g>
+                <text class="label-text" x="260" y="125">cápsula</text>
+                <line class="label-line" x1="258" y1="125" x2="250" y2="125"/>
+              </g>
+            </svg>
+            <div class="info-panel gold" style="margin-top:12px">
+              <div class="ip-desc">Los musgos son las plantas terrestres más simples: no tienen raíces verdaderas, ni vasos conductores, ni flores. Absorben agua por toda su superficie. Forman alfombras verdes en lugares húmedos y sombreados.</div>
+            </div>
+          </div>
+
+          <div class="card reveal">
+            <span class="kicker">Por qué importan</span>
+            <h3>El oxígeno que respiramos</h3>
+            <p>Se calcula que el fitoplancton (diatomeas, algas y cianobacterias que flotan en mares y lagos) produce aproximadamente la mitad del oxígeno atmosférico. La otra mitad la producen las plantas terrestres.</p>
+            <p>Sin estos organismos microscópicos, la vida en la Tierra tal como la conocemos no sería posible.</p>
+            <p style="margin-top:12px"><strong>Un dato:</strong> una sola cucharada de agua de mar puede contener millones de células de fitoplancton.</p>
+          </div>
+        </div>
+
+        <div class="callout reveal">
+          <strong>Nota importante:</strong> estrictamente, las algas verde-azuladas (cianobacterias) no son plantas, sino bacterias. Pero se estudian junto a ellas por su función ecológica y porque comparten la capacidad de hacer fotosíntesis.
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ GLOSARIO ============ -->
+    <section class="view" data-view="glosario">
+      <div class="content">
+        <div class="page-header reveal">
+          <span class="eyebrow">11 · Vocabulario</span>
+          <h1>Glosario <em>botánico</em></h1>
+          <p class="lede">Los términos que más se usan cuando se habla de plantas, flores y ecosistemas. Escribí para filtrar.</p>
+        </div>
+
+        <input type="text" class="gloss-search reveal" id="glossSearch" placeholder="Buscar término… (ej: estambre, xilema, polinización)" aria-label="Buscar término">
+
+        <div class="gloss-grid" id="glossGrid"></div>
+        <div class="gloss-empty" id="glossEmpty" style="display:none">No se encontraron términos con esa búsqueda.</div>
+
+        <div class="callout reveal" style="margin-top:20px">
+          <strong>Nota:</strong> este glosario no pretende ser exhaustivo. Cada familia de plantas tiene su propia terminología. Aquí están los términos más importantes para empezar a entender el mundo vegetal.
+        </div>
+      </div>
+    </section>
+
+    <div class="content" style="padding-top:0">
+      <div class="footer">
+        <span><strong>Botánica</strong> — Guía ilustrada</span>
+        <span>11 secciones · Lenguaje sencillo · 2025</span>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+const $ = (sel, root = document) => root.querySelector(sel);
+const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+
+/* ===== TEMA ===== */
+const htmlEl = document.documentElement;
+const themeLabel = $('#themeLabel');
+function setTheme(t){
+  htmlEl.setAttribute('data-theme', t);
+  if (themeLabel) themeLabel.textContent = t === 'dark' ? 'Modo claro' : 'Modo oscuro';
+  try { localStorage.setItem('botanica-theme', t); } catch(e){}
+}
+(function initTheme(){
+  let saved = null;
+  try { saved = localStorage.getItem('botanica-theme'); } catch(e){}
+  setTheme(saved || 'light');
+})();
+
+$('#themeToggle').addEventListener('click', () => {
+  setTheme(htmlEl.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+});
+
+/* ===== RUTAS ===== */
+const ROUTES = ['inicio','clasificacion','estructura','flores','peligrosas','comestibles','historia','carnivoras','biomas','microscopicas','glosario'];
+let currentRoute = 'inicio';
+
+function go(route, push = true){
+  if (!ROUTES.includes(route)) route = 'inicio';
+  currentRoute = route;
+  $$('.view').forEach(v => v.classList.toggle('active', v.dataset.view === route));
+  $$('.nav-link').forEach(a => a.classList.toggle('active', a.dataset.route === route));
+  if (push && location.hash.slice(1) !== route) history.pushState(null, '', '#' + route);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  closeSidebar();
+  requestAnimationFrame(() => {
+    checkReveal();
+    if (route === 'estructura') bindEstructuraParts();
+    if (route === 'flores') bindFloresParts();
+    if (route === 'glosario') renderGlossary();
+  });
+}
+
+document.addEventListener('click', e => {
+  const t = e.target.closest('[data-route]');
+  if (t){
+    e.preventDefault();
+    go(t.dataset.route);
+  }
+});
+window.addEventListener('popstate', () => go(location.hash.slice(1) || 'inicio', false));
+
+/* ===== MOBILE MENU ===== */
+const sidebar = $('#sidebar');
+const backdrop = $('#backdrop');
+function openSidebar(){ sidebar.classList.add('open'); backdrop.classList.add('show'); }
+function closeSidebar(){ sidebar.classList.remove('open'); backdrop.classList.remove('show'); }
+$('#menuToggle').addEventListener('click', () => {
+  if (sidebar.classList.contains('open')) closeSidebar();
+  else openSidebar();
+});
+backdrop.addEventListener('click', closeSidebar);
+
+/* ===== SCROLL PROGRESS ===== */
+const progressBar = $('#progressBar');
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  const max = h.scrollHeight - h.clientHeight;
+  const pct = max > 0 ? (h.scrollTop / max) * 100 : 0;
+  progressBar.style.width = pct + '%';
+}, { passive: true });
+
+/* ===== REVEAL ===== */
+const revealObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting){
+      entry.target.classList.add('in');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+
+function checkReveal(){
+  $$('.view.active .reveal:not(.in)').forEach(el => revealObserver.observe(el));
+  $$('.view:not(.active) .reveal:not(.in)').forEach(el => revealObserver.unobserve(el));
+}
+
+/* ===== DATOS: ESTRUCTURA CON FLOR ===== */
+const FLOWERING_PARTS = {
+  'flower-main': { name:'Flor', desc:'Órgano reproductor de la planta. Contiene los estambres (masculinos) y el pistilo (femenino). Atrae polinizadores con sus colores y aromas.' },
+  'leaf-main': { name:'Hojas', desc:'Las fábricas de la planta. Aquí ocurre la fotosíntesis: con luz solar, agua y CO₂, la planta produce su propio alimento.' },
+  'stem-main': { name:'Tallo', desc:'Sostiene las hojas y las flores, y transporta agua y nutrientes entre las raíces y las partes aéreas.' },
+  'root-main': { name:'Raíces', desc:'Anclan la planta al suelo y absorben agua y minerales. También almacenan nutrientes de reserva.' }
+};
+
+/* ===== DATOS: SIN FLOR ===== */
+const NON_FLOWERING_PARTS = {
+  'frond': { name:'Fronda', desc:'La "hoja" del helecho. Se llama fronda porque tiene una estructura distinta a la de las hojas de plantas con flor: crece desenrollándose desde la base.' },
+  'rhizome': { name:'Rizoma', desc:'Tallo subterráneo horizontal que actúa como raíz. De él salen las frondas y las raíces. En algunos helechos es comestible, pero no todos.' }
+};
+
+/* ===== DATOS: FLOR ===== */
+const FLOWER_PARTS = {
+  'peduncle': { name:'Pedúnculo', desc:'El "tallo" de la flor. Sostiene toda la estructura floral y la conecta con el resto de la planta.' },
+  'sepals': { name:'Sépalos', desc:'Las piezas verdes que envuelven el capullo antes de abrir. En conjunto forman el cáliz. Protegen la flor en desarrollo.' },
+  'petals': { name:'Pétalos', desc:'Las piezas coloridas. Atraen a los polinizadores (abejas, mariposas, etc.). En conjunto forman la corola.' },
+  'stamens': { name:'Estambres', desc:'Órganos masculinos. Cada estambre tiene un filamento y una antera, donde se produce el polen. En conjunto forman el androceo.' },
+  'pistil': { name:'Pistilo', desc:'Órgano femenino. Tiene tres partes: estigma (recibe el polen), estilo (lo conecta) y ovario (donde se forman las semillas). En conjunto forma el gineceo.' }
+};
+
+/* ===== BINDINGS ===== */
+function showInfo(panel, info){
+  if (!info || !panel) return;
+  panel.classList.add('active');
+  panel.innerHTML = `
+    <div class="ip-name">${info.name}</div>
+    <div class="ip-desc">${info.desc}</div>
+  `;
+}
+
+function bindEstructuraParts(){
+  const flowerPanel = $('#floweringInfo');
+  const nonFlowerPanel = $('#nonFloweringInfo');
+  if (flowerPanel){
+    ['flower-main','leaf-main','stem-main','root-main'].forEach(id => {
+      const el = $(`.part[data-part="${id}"]`);
+      if (!el) return;
+      el.addEventListener('pointerenter', () => showInfo(flowerPanel, FLOWERING_PARTS[id]));
+      el.addEventListener('click', () => showInfo(flowerPanel, FLOWERING_PARTS[id]));
+    });
+  }
+  if (nonFlowerPanel){
+    ['frond','rhizome'].forEach(id => {
+      const el = $(`.part[data-part="${id}"]`);
+      if (!el) return;
+      el.addEventListener('pointerenter', () => showInfo(nonFlowerPanel, NON_FLOWERING_PARTS[id]));
+      el.addEventListener('click', () => showInfo(nonFlowerPanel, NON_FLOWERING_PARTS[id]));
+    });
+  }
+}
+
+function bindFloresParts(){
+  const panel = $('#flowerInfo');
+  if (!panel) return;
+  ['peduncle','sepals','petals','stamens','pistil'].forEach(id => {
+    const el = $(`.part[data-part="${id}"]`);
+    if (!el) return;
+    el.addEventListener('pointerenter', () => showInfo(panel, FLOWER_PARTS[id]));
+    el.addEventListener('click', () => showInfo(panel, FLOWER_PARTS[id]));
+  });
+}
+
+/* ===== GLOSARIO ===== */
+const GLOSSARY = [
+  { t:'Angiosperma', d:'Planta con flor. Su semilla está encerrada en un fruto. Es el grupo más diverso y exitoso del reino vegetal.' },
+  { t:'Antera', d:'Parte del estambre donde se produce y almacena el polen. Suele ser amarilla o anaranjada.' },
+  { t:'Briofita', d:'Grupo de plantas sin vasos conductores: musgos, hepáticas y antoceros. Viven en ambientes húmedos y absorben agua por toda la superficie.' },
+  { t:'Bulbo', d:'Órgano subterráneo de reserva, formado por hojas carnosas. Ejemplo: la cebolla y el tulipán.' },
+  { t:'Cáliz', d:'Conjunto de sépalos de una flor. Protege el capullo antes de que se abra.' },
+  { t:'Carnívora', d:'Planta que atrapa y digiere pequeños animales, generalmente insectos, para obtener nutrientes que el suelo no le da.' },
+  { t:'Clorofila', d:'Pigmento verde de las plantas. Captura la energía del sol para la fotosíntesis. Está en los cloroplastos.' },
+  { t:'Cloroplasto', d:'Organelo de la célula vegetal donde ocurre la fotosíntesis. Contiene clorofila y tiene su propio ADN.' },
+  { t:'Conífera', d:'Árbol o arbusto gimnospermo que produce conos (piñas). Ejemplos: pino, abeto, cedro, secuoya.' },
+  { t:'Corola', d:'Conjunto de pétalos de una flor. Atrae a los polinizadores por su color, forma y aroma.' },
+  { t:'Cotiledón', d:'Primera hoja que emerge de la semilla al germinar. Almacena reservas o hace fotosíntesis según la especie.' },
+  { t:'Cultivo', d:'Conjunto de plantas que se siembran y cuidan para obtener alimento, fibra, medicina u otros productos.' },
+  { t:'Cutícula', d:'Capa cerosa que recubre hojas y tallos para evitar la pérdida de agua. Es una adaptación típica de plantas de ambientes secos.' },
+  { t:'Deciduo', d:'Árbol o arbusto que pierde sus hojas en otoño. Ejemplo: el roble, el arce, el castaño.' },
+  { t:'Dicotiledónea', d:'Planta con flor que tiene dos cotiledones en la semilla. Sus hojas suelen tener nervaduras ramificadas. La mayoría de las plantas con flor son dicotiledóneas.' },
+  { t:'Epífita', d:'Planta que crece sobre otra sin parasitarla. Ejemplos: muchas orquídeas y bromelias tropicales.' },
+  { t:'Espora', d:'Célula reproductiva de hongos, helechos y musgos. No necesita otra célula para desarrollarse, a diferencia de la semilla.' },
+  { t:'Estambre', d:'Órgano masculino de la flor. Formado por filamento y antera, donde se produce el polen.' },
+  { t:'Estigma', d:'Parte superior del pistilo, donde aterriza el polen durante la polinización. Suele ser pegajoso.' },
+  { t:'Estilo', d:'Tubo que conecta el estigma con el ovario. Por él viaja el tubo polínico después de la polinización.' },
+  { t:'Fotosíntesis', d:'Proceso por el cual las plantas usan la luz solar para convertir agua y CO₂ en azúcares, liberando oxígeno. Es la base de casi toda la vida en la Tierra.' },
+  { t:'Fronda', d:'Hoja de helecho. Tiene una estructura distinta a las hojas de plantas con flor: crece desenrollándose desde la base.' },
+  { t:'Gimnosperma', d:'Planta con semilla "desnuda", no encerrada en un fruto. Incluye a las coníferas, cícadas y ginkgos.' },
+  { t:'Gineceo', d:'Conjunto de pistilos de una flor. Es la parte femenina del órgano reproductor.' },
+  { t:'Herbácea', d:'Planta de tallo blando y verde, que no desarrolla madera. Ejemplos: la mayoría de las flores silvestres y los pastos.' },
+  { t:'Híbrido', d:'Planta resultante del cruce de dos especies o variedades distintas. Muchos cultivos son híbridos.' },
+  { t:'Invasora', d:'Especie vegetal introducida en un lugar donde no es nativa, que se reproduce sin control y desplaza a las especies locales.' },
+  { t:'Monocotiledónea', d:'Planta con flor que tiene un solo cotiledón en la semilla. Sus hojas suelen tener nervaduras paralelas. Ejemplos: gramíneas, orquídeas, palmeras.' },
+  { t:'Néctar', d:'Líquido azucarado que producen muchas flores para atraer a los polinizadores. Es la "recompensa" de las abejas y mariposas.' },
+  { t:'Nativa', d:'Especie que pertenece naturalmente a una región, sin haber sido introducida por el ser humano.' },
+  { t:'Ovario', d:'Parte inferior del pistilo donde están los óvulos. Después de la fecundación, el ovario se transforma en fruto y los óvulos en semillas.' },
+  { t:'Perenne', d:'Planta que vive más de dos años. Puede ser herbácea (como muchas flores de jardín) o leñosa (árboles y arbustos).' },
+  { t:'Pétalo', d:'Pieza colorida de la flor que atrae a los polinizadores. En conjunto forma la corola.' },
+  { t:'Pistilo', d:'Órgano femenino de la flor. Tiene tres partes: estigma, estilo y ovario. En conjunto forma el gineceo.' },
+  { t:'Polen', d:'Conjunto de granos microscópicos producidos por los estambres. Contiene los gametos masculinos de la planta. Es transportado por viento, agua o animales.' },
+  { t:'Polinización', d:'Transporte del polen desde el estambre hasta el estigma de otra flor (o de la misma). Es el paso previo a la fecundación.' },
+  { t:'Raíz', d:'Órgano subterráneo que ancla la planta al suelo y absorbe agua y minerales. También puede almacenar reservas.' },
+  { t:'Rizoma', d:'Tallo subterráneo horizontal que funciona como raíz. Ejemplo: el jengibre, la cúrcuma y muchos helechos.' },
+  { t:'Semilla', d:'Estructura que contiene el embrión de una nueva planta y reservas de alimento. Está protegida por una cubierta.' },
+  { t:'Sépalo', d:'Pieza verde que envuelve el capullo de la flor antes de abrirse. En conjunto forma el cáliz.' },
+  { t:'Suculenta', d:'Planta que almacena agua en sus hojas, tallos o raíces. Ejemplos: cactus, áloe, echeveria.' },
+  { t:'Transpiración', d:'Pérdida de agua en forma de vapor por los poros (estomas) de las hojas. Ayuda a la planta a enfriarse y a transportar nutrientes.' },
+  { t:'Tubérculo', d:'Tallo subterráneo engrosado que almacena almidón. Ejemplo: la papa y la batata.' },
+  { t:'Xerófita', d:'Planta adaptada a vivir en ambientes secos. Ejemplos: cactus, agaves, algunas euforbias.' },
+  { t:'Xilema', d:'Tejido conductor que transporta agua y minerales desde las raíces hasta las hojas. Forma la "madera" del tallo.' },
+  { t:'Floema', d:'Tejido conductor que transporta los azúcares producidos en las hojas hacia el resto de la planta.' },
+  { t:'Estoma', d:'Pequeño poro en la superficie de las hojas. Permite el intercambio de gases (entra CO₂, sale O₂ y vapor de agua).' },
+  { t:'Fotosíntesis CAM', d:'Variante de la fotosíntesis que usan muchas plantas de desierto. Abren los estomas de noche para perder menos agua.' },
+  { t:'Anual', d:'Planta que completa su ciclo de vida en un año: germina, crece, florece, da semillas y muere.' },
+  { t:'Bienal', d:'Planta que completa su ciclo en dos años: el primero crece, el segundo florece, da semillas y muere.' },
+  { t:'Esqueje', d:'Fragmento de una planta (tallo, hoja o raíz) que se planta para que genere una nueva planta. Es una forma de reproducción asexual.' },
+  { t:'Injerto', d:'Técnica que une una parte de una planta (injerto) con otra planta (portainjerto) para que crezcan juntas. Muy usada en frutales.' }
+];
+
+function renderGlossary(){
+  const grid = $('#glossGrid');
+  const empty = $('#glossEmpty');
+  const search = $('#glossSearch');
+  if (!grid) return;
+
+  function render(filter = ''){
+    const q = filter.trim().toLowerCase();
+    const items = GLOSSARY.filter(g =>
+      !q || g.t.toLowerCase().includes(q) || g.d.toLowerCase().includes(q)
+    ).sort((a, b) => a.t.localeCompare(b.t, 'es'));
+    if (items.length === 0){
+      grid.innerHTML = '';
+      empty.style.display = 'block';
+      return;
+    }
+    empty.style.display = 'none';
+    grid.innerHTML = items.map(g => `
+      <div class="gloss-item">
+        <div class="gi-term">${g.t}</div>
+        <div class="gi-def">${g.d}</div>
+      </div>
+    `).join('');
+  }
+
+  render();
+  if (search && !search.dataset.bound){
+    search.dataset.bound = '1';
+    search.addEventListener('input', e => render(e.target.value));
+  }
+}
+
+/* ===== INIT ===== */
+(function boot(){
+  const initial = location.hash.slice(1) || 'inicio';
+  go(ROUTES.includes(initial) ? initial : 'inicio', false);
+  checkReveal();
+  setTimeout(() => {
+    // Pre-bind SVGs por si el usuario navega antes
+    bindEstructuraParts();
+    bindFloresParts();
+  }, 100);
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) checkReveal();
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Enfermedades y vacunas explicadas en lenguaje sencillo</title>
+<meta name="description" content="Línea del tiempo, clasificación de enfermedades por peligro, vacunación, nuevas técnicas, Covid, otros virus peligrosos, VIH y glosario.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--font-display:'Space Grotesk','Segoe UI',system-ui,sans-serif;--font-body:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;--radius:20px;--maxw:1180px;--ease:cubic-bezier(.22,.75,.25,1)}
+html[data-theme="light"]{--bg:#fbf9f5;--surface:rgba(255,255,255,.86);--s2:rgba(60,40,20,.045);--border:rgba(60,40,20,.12);--bs:rgba(60,40,20,.24);--text:#1a1410;--muted:#6f6252;--accent:#e11d48;--accent-2:#7c3aed;--accent-3:#0891b2;--good:#059669;--warn:#d97706;--bad:#e11d48;--shadow:0 22px 55px -28px rgba(60,30,10,.22);--orb:.16;--dot:rgba(60,40,20,.055)}
+html[data-theme="dark"]{--bg:#0a0806;--surface:rgba(30,25,20,.66);--s2:rgba(255,255,255,.045);--border:rgba(255,255,255,.10);--bs:rgba(255,255,255,.20);--text:#f5ede2;--muted:#a89a86;--accent:#fb7185;--accent-2:#a78bfa;--accent-3:#22d3ee;--good:#34d399;--warn:#fbbf24;--bad:#fb7185;--shadow:0 24px 60px -24px rgba(0,0,0,.9);--orb:.30;--dot:rgba(255,255,255,.03)}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;font-family:var(--font-body);background:var(--bg);color:var(--text);min-height:100vh;line-height:1.65;-webkit-font-smoothing:antialiased;transition:background .45s var(--ease),color .45s var(--ease);overflow-x:hidden}
+h1,h2,h3,h4{font-family:var(--font-display);line-height:1.15;letter-spacing:-.02em;margin:0}
+p{margin:0}button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}a{color:inherit;text-decoration:none}
+::selection{background:var(--accent);color:#fff}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
+.bg-dots{position:fixed;inset:0;z-index:-3;pointer-events:none;background-image:radial-gradient(var(--dot) 1px,transparent 1px);background-size:26px 26px}
+.orbs{position:fixed;inset:0;z-index:-2;overflow:hidden;pointer-events:none}
+.orb{position:absolute;border-radius:50%;filter:blur(100px);opacity:var(--orb);animation:float 28s ease-in-out infinite alternate}
+.o1{width:52vw;height:52vw;background:var(--accent);top:-16vw;left:-12vw}
+.o2{width:42vw;height:42vw;background:var(--accent-2);bottom:-18vw;right:-10vw;animation-delay:-10s}
+.o3{width:34vw;height:34vw;background:var(--accent-3);top:44%;left:58%;animation-delay:-17s}
+@keyframes float{0%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(4vw,-3vw,0) scale(1.1)}100%{transform:translate3d(-3vw,4vw,0) scale(.95)}}
+.site-header{position:sticky;top:0;z-index:50;backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);background:color-mix(in srgb,var(--bg) 78%,transparent);border-bottom:1px solid var(--border)}
+.header-inner{max-width:var(--maxw);margin:0 auto;padding:13px 22px;display:flex;align-items:center;gap:16px}
+.brand{display:flex;align-items:center;gap:11px;font-family:var(--font-display);font-weight:700;white-space:nowrap}
+.mark{width:38px;height:38px;border-radius:12px;flex:none;background:linear-gradient(140deg,var(--accent),var(--accent-2) 55%,var(--accent-3));display:grid;place-items:center;color:#fff;box-shadow:0 8px 22px -8px var(--accent);transition:transform .5s var(--ease)}
+.brand:hover .mark{transform:rotate(-10deg) scale(1.06)}.mark svg{width:22px;height:22px}
+.nav{display:flex;gap:2px;margin-left:auto;overflow-x:auto;scrollbar-width:none;min-width:0}.nav::-webkit-scrollbar{display:none}
+.nav-link{position:relative;padding:9px 11px;border-radius:11px;font-size:.8rem;font-weight:500;color:var(--muted);white-space:nowrap;transition:color .3s,background .3s}
+.nav-link:hover,.nav-link.active{color:var(--text);background:var(--s2)}
+.nav-link.active::after{content:'';position:absolute;left:11px;right:11px;bottom:4px;height:2px;border-radius:2px;background:linear-gradient(90deg,var(--accent),var(--accent-2));animation:navIn .4s var(--ease) both}
+@keyframes navIn{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.tt{width:40px;height:40px;border-radius:12px;flex:none;border:1px solid var(--border);background:var(--s2);display:grid;place-items:center;transition:transform .35s var(--ease)}
+.tt:hover{transform:translateY(-2px) rotate(8deg)}.tt svg{width:19px;height:19px}
+html[data-theme=dark] .i-moon,html[data-theme=light] .i-sun{display:none}
+main{max-width:var(--maxw);margin:0 auto;padding:0 22px 70px}
+.view{display:none}.view.active{display:block;animation:viewIn .55s var(--ease) both}
+@keyframes viewIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.hero{padding:64px 0 36px;max-width:920px}
+.pill{display:inline-flex;align-items:center;gap:8px;padding:7px 15px;border-radius:999px;font-size:.78rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;border:1px solid var(--border);background:var(--surface);color:var(--muted);margin-bottom:24px}
+.pill i{width:7px;height:7px;border-radius:50%;background:var(--good);animation:pulse 2.4s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--good) 60%,transparent)}70%{box-shadow:0 0 0 9px transparent}100%{box-shadow:0 0 0 0 transparent}}
+h1{font-size:clamp(2.1rem,5.2vw,3.9rem);font-weight:700;letter-spacing:-.035em;margin-bottom:20px}
+.grad{background:linear-gradient(100deg,var(--accent),var(--accent-2) 48%,var(--accent-3));-webkit-background-clip:text;background-clip:text;color:transparent;background-size:220% auto;animation:shimmer 8s linear infinite}
+@keyframes shimmer{to{background-position:220% center}}
+.lead{font-size:clamp(1rem,1.6vw,1.15rem);color:var(--muted);max-width:700px;margin-bottom:30px}
+.btn{display:inline-flex;align-items:center;gap:9px;padding:13px 25px;border-radius:13px;font-size:.93rem;font-weight:600;border:1px solid transparent;transition:transform .28s var(--ease),box-shadow .3s}
+.btn-primary{background:linear-gradient(120deg,var(--accent),var(--accent-2));color:#fff;box-shadow:0 14px 34px -14px var(--accent);position:relative;overflow:hidden}
+.btn-primary::after{content:'';position:absolute;inset:0;background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,.45),transparent 70%);transform:translateX(-130%);transition:transform .7s var(--ease)}
+.btn-primary:hover{transform:translateY(-2px)}.btn-primary:hover::after{transform:translateX(130%)}
+.stats,.grid{display:grid;gap:14px}
+.stats{grid-template-columns:repeat(auto-fit,minmax(170px,1fr));margin:8px 0 46px}
+.grid{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.stat,.card{padding:22px 20px;border-radius:var(--radius);background:var(--surface);border:1px solid var(--border);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);transition:transform .35s var(--ease),border-color .3s,box-shadow .35s}
+.stat:hover,.card:hover{transform:translateY(-4px);border-color:var(--bs);box-shadow:var(--shadow)}
+.stat b{display:block;font-family:var(--font-display);font-size:2rem;letter-spacing:-.03em}
+.stat span{font-size:.85rem;color:var(--muted)}
+.card h3{font-size:1.08rem;margin-bottom:8px}.card p{font-size:.92rem;color:var(--muted)}
+.tag{display:inline-block;font-size:.72rem;font-weight:600;padding:3px 10px;border-radius:999px;background:var(--s2);border:1px solid var(--border);margin:10px 6px 0 0;color:var(--muted)}
+.sec{padding:52px 0 22px}.sec h2{font-size:clamp(1.7rem,3.6vw,2.6rem);letter-spacing:-.03em;margin-bottom:12px}
+.sec>.lead{margin-bottom:28px}
+.tl{position:relative;padding:6px 0}
+.tl::before{content:'';position:absolute;left:19px;top:0;bottom:0;width:2px;background:linear-gradient(var(--accent),var(--accent-2),var(--accent-3));opacity:.5}
+.ev{position:relative;padding:0 0 26px 58px;opacity:0;transform:translateY(22px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+.ev.in{opacity:1;transform:none}
+.ev::before{content:'';position:absolute;left:11px;top:22px;width:18px;height:18px;border-radius:50%;background:var(--bg);border:3px solid var(--accent);box-shadow:0 0 0 5px color-mix(in srgb,var(--accent) 18%,transparent)}
+.ev .yr{font-family:var(--font-display);font-weight:700;font-size:1.5rem;background:linear-gradient(100deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+@media(min-width:860px){.tl::before{left:50%}.ev{width:50%;padding:0 46px 30px 0;text-align:right}.ev::before{left:auto;right:-9px}.ev:nth-child(even){margin-left:50%;padding:0 0 30px 46px;text-align:left}.ev:nth-child(even)::before{right:auto;left:-9px}}
+.tabs{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:18px}
+.tab{padding:12px 18px;border-radius:13px;border:1px solid var(--border);background:var(--surface);font-weight:600;font-size:.9rem;transition:transform .25s var(--ease),border-color .3s,background .3s}
+.tab:hover{transform:translateY(-2px)}.tab[aria-selected=true]{color:#fff;border-color:transparent;background:var(--c)}
+.panel{padding:26px;border-radius:var(--radius);background:var(--surface);border:1px solid var(--border);border-left:6px solid var(--c);animation:viewIn .45s var(--ease) both}
+.panel h3{font-size:1.4rem;margin-bottom:8px}.panel p{color:var(--muted);margin-bottom:6px}
+.meter{height:14px;border-radius:99px;background:var(--s2);border:1px solid var(--border);overflow:hidden;margin:14px 0 8px}
+.meter div{height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--accent-3),var(--accent-2),var(--accent));transition:width .5s var(--ease)}
+input[type=range]{width:100%;accent-color:var(--accent);height:28px}
+.big{font-family:var(--font-display);font-size:2.4rem;font-weight:700;letter-spacing:-.03em}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.chip{padding:6px 13px;border-radius:999px;border:1px solid var(--border);background:var(--s2);font-size:.82rem;font-weight:500;transition:border-color .3s,transform .3s}
+.chip:hover{border-color:var(--accent);transform:translateY(-2px)}
+details{border:1px solid var(--border);border-radius:16px;background:var(--surface);margin-bottom:10px;overflow:hidden}
+summary{list-style:none;cursor:pointer;padding:16px 20px;font-family:var(--font-display);font-weight:600;display:flex;justify-content:space-between;gap:12px;align-items:center}
+summary::-webkit-details-marker{display:none}
+summary::after{content:'+';font-size:1.4rem;color:var(--accent);transition:transform .35s var(--ease)}
+details[open] summary::after{transform:rotate(135deg)}
+details>div{padding:0 20px 18px;color:var(--muted);font-size:.94rem;animation:viewIn .4s var(--ease) both}
+details li{margin-bottom:4px}
+.note{margin-top:30px;padding:16px 20px;border-radius:16px;border:1px dashed var(--bs);color:var(--muted);font-size:.86rem}
+.search{width:100%;max-width:440px;padding:13px 18px;border-radius:13px;border:1px solid var(--border);background:var(--surface);color:var(--text);font:inherit;margin-bottom:20px}
+.gl dt{font-family:var(--font-display);font-weight:600}.gl dd{margin:0 0 4px;color:var(--muted);font-size:.92rem}
+.gl .card{padding:18px}
+footer{text-align:center;color:var(--muted);font-size:.82rem;padding:30px 22px 50px}
+@media(max-width:600px){.header-inner{padding:10px 14px;gap:10px}.brand span{display:none}main{padding:0 16px 60px}.hero{padding:40px 0 24px}.btn{width:100%;justify-content:center}.panel{padding:20px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.ev{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div class="bg-dots"></div><div class="orbs"><div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div></div>
+<header class="site-header"><div class="header-inner">
+<a class="brand" href="#inicio"><div class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6v6c0 4.5 3.2 7.6 8 9 4.8-1.4 8-4.5 8-9V6z"/><path d="M12 9v6M9 12h6"/></svg></div><span>Enfermedades y vacunas</span></a>
+<nav class="nav" id="nav"></nav>
+<button class="tt" id="tt" aria-label="Cambiar tema"><svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+</div></header>
+<main>
+
+<section class="view" id="v-inicio">
+<div class="hero"><div class="pill"><i></i>Salud pública</div>
+<h1>Enfermedades y vacunas, <span class="grad">explicadas simple</span></h1>
+<p class="lead">Cómo nos enfermamos, cómo nos protegemos y cómo la ciencia cambió la historia: de la viruela al ARNm, del Covid al VIH.</p>
+<a class="btn btn-primary" href="#tiempo">Empezar por la línea del tiempo</a></div>
+<div class="stats"><div class="stat"><b>1796</b><span>Primera vacuna: Jenner contra la viruela</span></div><div class="stat"><b>1980</b><span>La OMS declara erradicada la viruela</span></div><div class="stat"><b>2020</b><span>Primeras vacunas de ARNm autorizadas</span></div><div class="stat"><b>1 de 4</b><span>Niveles de riesgo de un agente biológico</span></div></div>
+<div class="grid" id="home"></div>
+</section>
+
+<section class="view" id="v-tiempo"><div class="sec"><h2>Línea del tiempo</h2><p class="lead">Los hitos que marcaron la lucha contra las enfermedades infecciosas.</p></div><div class="tl" id="tl"></div></section>
+
+<section class="view" id="v-peligro"><div class="sec"><h2>Clasificación por peligro</h2><p class="lead">Los agentes biológicos (virus, bacterias, hongos, parásitos) se agrupan en cuatro niveles de riesgo según el peligro para las personas y la comunidad. Tocá cada nivel.</p></div>
+<div class="tabs" id="tabs" role="tablist"></div><div id="panel"></div>
+<div class="sec"><h2>Según su extensión</h2></div>
+<div class="grid"><div class="card"><h3>Brote</h3><p>Aumento repentino de casos en un lugar y tiempo acotados.</p></div><div class="card"><h3>Endemia</h3><p>La enfermedad está presente de forma habitual en una zona.</p></div><div class="card"><h3>Epidemia</h3><p>Muchos más casos de los esperados en una región.</p></div><div class="card"><h3>Pandemia</h3><p>Epidemia que se extiende a varios continentes.</p></div></div>
+</section>
+
+<section class="view" id="v-vacunas"><div class="sec"><h2>Vacunación</h2><p class="lead">Una vacuna le muestra al sistema inmune una versión inofensiva del enemigo para que aprenda a defenderse antes del contagio real.</p></div>
+<div class="grid" id="vtypes"></div>
+<div class="sec"><h2>Inmunidad de rebaño</h2><p class="lead">Si suficientes personas están inmunizadas, el microbio no encuentra a quién contagiar y protege también a quienes no pueden vacunarse. Mové el control: cuanto más contagioso, más cobertura hace falta.</p></div>
+<div class="card"><div class="big"><span id="r0v">12</span> contagios por caso (R0)</div><input type="range" id="r0" min="1.2" max="18" step=".1" value="12" aria-label="R0"><div class="meter"><div id="bar"></div></div><p>Cobertura necesaria aproximada: <b id="thr"></b>. Referencias: gripe estacional ~1,3 · Covid original ~2,5-3 · sarampión 12-18.</p></div>
+<div class="sec"><h2>En Argentina</h2></div>
+<div class="grid"><div class="card"><h3>Marco legal</h3><p>La Ley 27.491 de control de enfermedades prevenibles por vacunación establece que las vacunas del Calendario Nacional son obligatorias y gratuitas.</p></div><div class="card"><h3>Primer año</h3><p>BCG, hepatitis B, quíntuple, polio, rotavirus y neumococo.</p></div><div class="card"><h3>Infancia</h3><p>Triple viral, varicela, hepatitis A y refuerzos al ingreso escolar.</p></div><div class="card"><h3>Adolescencia y adultez</h3><p>VPH, triple bacteriana y meningococo a los 11 años; dTpa y gripe en el embarazo; dT cada 10 años.</p></div></div>
+<p class="note">Las dosis y edades pueden actualizarse: verificá siempre el Calendario Nacional vigente en el sitio del Ministerio de Salud de la Nación.</p></section>
+
+<section class="view" id="v-tecnicas"><div class="sec"><h2>Nuevas técnicas</h2><p class="lead">La ciencia sumó plataformas que se diseñan y producen más rápido.</p></div><div class="grid" id="tech"></div></section>
+
+<section class="view" id="v-covid"><div class="sec"><h2>Covid-19</h2><p class="lead">Causado por el virus SARS-CoV-2. La OMS declaró la pandemia el 11 de marzo de 2020 y puso fin a la emergencia internacional el 5 de mayo de 2023.</p></div>
+<div class="grid"><div class="card"><h3>En Argentina</h3><p>El DNU 260/2020 amplió la emergencia sanitaria y el DNU 297/2020 estableció el aislamiento social, preventivo y obligatorio.</p></div><div class="card"><h3>Síntomas</h3><p>Fiebre, tos, dolor de garganta, pérdida de olfato o gusto y dificultad para respirar.</p></div><div class="card"><h3>Prevención</h3><p>Vacunas y refuerzos, ventilar ambientes, higiene de manos y aislarse si hay síntomas.</p></div></div>
+<div class="chips"><span class="chip">Alfa</span><span class="chip">Beta</span><span class="chip">Gamma</span><span class="chip">Delta</span><span class="chip">Ómicron (2021)</span></div>
+<div class="sec"><h2>Otros virus peligrosos</h2></div><div class="grid" id="virus"></div></section>
+
+<section class="view" id="v-vih"><div class="sec"><h2>VIH y sida</h2><p class="lead">El VIH ataca a los linfocitos CD4 y debilita las defensas. El sida es la etapa avanzada, que hoy se puede evitar con diagnóstico y tratamiento a tiempo.</p></div>
+<details open><summary>¿Cómo se transmite?</summary><div><ul><li>Relaciones sexuales sin preservativo.</li><li>Sangre: jeringas compartidas o transfusiones sin control.</li><li>De madre a hijo: embarazo, parto o lactancia.</li></ul>No se transmite por besos, abrazos, mate, vasos, baños ni mosquitos.</div></details>
+<details><summary>¿Cómo se previene?</summary><div><ul><li>Preservativo en todas las relaciones.</li><li>PrEP: medicación previa a la exposición.</li><li>PEP: medicación posterior a una exposición, idealmente dentro de las 72 horas.</li><li>Tratamiento de embarazadas para evitar la transmisión vertical.</li></ul></div></details>
+<details><summary>Tratamiento hoy</summary><div>Desde 1996 la terapia antirretroviral combinada controla el virus. Con carga viral indetectable la persona no transmite el VIH por vía sexual (indetectable = intransmisible).</div></details>
+<details><summary>Marco legal en Argentina</summary><div>La Ley 23.798 y la Ley 27.675 (2022) garantizan el diagnóstico y el tratamiento gratuitos y prohíben la discriminación. El test es confidencial y se realiza en hospitales y centros de salud.</div></details>
+<details><summary>Hitos</summary><div><ul><li>1981: primeros casos descriptos.</li><li>1983: se aísla el virus.</li><li>1987: primer antirretroviral (AZT).</li><li>2012: se aprueba la PrEP.</li><li>Años recientes: inyectables de acción prolongada.</li></ul></div></details>
+</section>
+
+<section class="view" id="v-glosario"><div class="sec"><h2>Glosario</h2><p class="lead">Buscá una palabra o recorré la lista.</p></div>
+<input class="search" id="q" type="search" placeholder="Buscar término" aria-label="Buscar término"><dl class="grid gl" id="gl"></dl></section>
+</main>
+<footer>Contenido informativo. No reemplaza la consulta con un profesional de la salud.</footer>
+
+<script>
+const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
+const R=[['inicio','Inicio'],['tiempo','Línea del tiempo'],['peligro','Peligro'],['vacunas','Vacunación'],['tecnicas','Nuevas técnicas'],['covid','Covid y virus'],['vih','VIH'],['glosario','Glosario']];
+$('#nav').innerHTML=R.map(r=>`<a class="nav-link" href="#${r[0]}" data-r="${r[0]}">${r[1]}</a>`).join('');
+function go(r){if(!R.some(x=>x[0]===r))r='inicio';$$('.view').forEach(v=>v.classList.toggle('active',v.id==='v-'+r));$$('.nav-link').forEach(a=>a.classList.toggle('active',a.dataset.r===r));scrollTo({top:0});reveal()}
+addEventListener('hashchange',()=>go(location.hash.slice(1)));
+const root=document.documentElement;root.dataset.theme=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';
+$('#tt').onclick=()=>root.dataset.theme=root.dataset.theme==='dark'?'light':'dark';
+
+$('#home').innerHTML=R.slice(1).map(r=>`<a class="card" href="#${r[0]}"><h3>${r[1]}</h3><p>Entrar a la sección</p></a>`).join('');
+
+const TL=[[1796,'Jenner y la viruela','Edward Jenner usa pus de viruela bovina para proteger contra la viruela humana: nace la vacunación.'],[1885,'Pasteur y la rabia','Louis Pasteur aplica la primera vacuna antirrábica a un niño mordido por un perro.'],[1921,'BCG','Se aplica por primera vez la vacuna contra la tuberculosis.'],[1955,'Vacuna contra la polio','Jonas Salk presenta la vacuna inactivada; Sabin desarrolla después la oral.'],[1980,'Viruela erradicada','La OMS declara a la viruela la primera enfermedad humana erradicada.'],[1981,'Aparece el sida','Se describen los primeros casos; en 1983 se identifica el VIH.'],[1996,'Terapia antirretroviral','El tratamiento combinado transforma el VIH en una condición crónica controlable.'],[2018,'Ley 27.491','Argentina sanciona la ley de control de enfermedades prevenibles por vacunación.'],[2020,'Covid-19 y ARNm','Pandemia en marzo; en diciembre se autorizan las primeras vacunas de ARNm.'],[2023,'Malaria y dengue','La OMS recomienda la vacuna R21 contra la malaria; Argentina aprueba una vacuna contra el dengue.']];
+$('#tl').innerHTML=TL.map(e=>`<div class="ev"><div class="yr">${e[0]}</div><h3>${e[1]}</h3><p class="lead" style="margin:6px 0 0;font-size:.95rem">${e[2]}</p></div>`).join('');
+const io=new IntersectionObserver(es=>es.forEach(x=>x.isIntersecting&&x.target.classList.add('in')),{threshold:.15});
+function reveal(){$$('.ev').forEach(e=>io.observe(e))}
+
+const G=[['Grupo 1','Sin riesgo','#059669','Es poco probable que cause enfermedad en personas sanas.',['Lactobacillus del yogur','Levadura de cerveza']],['Grupo 2','Riesgo moderado','#d97706','Puede causar enfermedad, pero la propagación es limitada y existe prevención o tratamiento.',['Gripe estacional','Varicela','Hepatitis A','Salmonella']],['Grupo 3','Riesgo individual alto','#e11d48','Causa enfermedad grave; se propaga poco en la comunidad y suele haber tratamiento o vacuna.',['Tuberculosis','VIH','Hepatitis B y C','SARS-CoV-2','Fiebre amarilla','Rabia']],['Grupo 4','Riesgo individual y comunitario alto','#7c3aed','Enfermedad muy grave que se propaga con facilidad y casi no tiene tratamiento eficaz.',['Ébola','Marburg','Lassa','Crimea-Congo','Viruela']]];
+$('#tabs').innerHTML=G.map((g,i)=>`<button class="tab" role="tab" style="--c:${g[2]}" aria-selected="${i==0}" data-i="${i}">${g[0]}</button>`).join('');
+function showG(i){const g=G[i];$$('.tab').forEach(t=>t.setAttribute('aria-selected',t.dataset.i==i));$('#panel').innerHTML=`<div class="panel" style="--c:${g[2]}"><h3>${g[1]}</h3><p>${g[3]}</p><div class="chips">${g[4].map(x=>`<span class="chip">${x}</span>`).join('')}</div></div>`}
+$('#tabs').onclick=e=>{const b=e.target.closest('.tab');b&&showG(b.dataset.i)};showG(0);
+
+$('#vtypes').innerHTML=[['Vivas atenuadas','Usan el microbio debilitado. Dan inmunidad fuerte y duradera.','Triple viral · BCG · varicela · fiebre amarilla'],['Inactivadas','Usan el microbio muerto; pueden requerir refuerzos.','Polio inyectable · hepatitis A · gripe'],['Subunidades y toxoides','Usan solo un fragmento o la toxina inactivada.','Tétanos · difteria · hepatitis B · VPH'],['ARNm','Dan instrucciones para fabricar una proteína del virus.','Covid-19 (Pfizer, Moderna)'],['Vector viral','Un virus inofensivo transporta el gen del antígeno.','AstraZeneca · Sputnik V']].map(v=>`<div class="card"><h3>${v[0]}</h3><p>${v[1]}</p><span class="tag">${v[2]}</span></div>`).join('');
+const r0=$('#r0');function calc(){const v=+r0.value,t=Math.max(0,(1-1/v)*100);$('#r0v').textContent=v.toFixed(1).replace('.',',');$('#thr').textContent=t.toFixed(0)+' %';$('#bar').style.width=t+'%'}r0.oninput=calc;calc();
+
+$('#tech').innerHTML=[['ARN mensajero','Se diseña en días a partir de la secuencia genética. Se estudia también para gripe, VRS y vacunas personalizadas contra el cáncer (en ensayos).'],['Proteínas y nanopartículas','Presentan el antígeno sin material genético. Ejemplos: vacunas contra el VRS y la malaria R21.'],['Dengue','Una vacuna de virus atenuado ya se aprobó en Argentina y se aplica de forma focalizada.'],['Inyectables de acción prolongada','Cabotegravir (cada 2 meses) y lenacapavir (cada 6 meses) para prevenir el VIH.'],['Anticuerpos monoclonales','Anticuerpos fabricados en laboratorio para tratar o prevenir infecciones.'],['Edición genética y vigilancia','CRISPR en investigación; la secuenciación genómica detecta variantes casi en tiempo real.']].map(t=>`<div class="card"><h3>${t[0]}</h3><p>${t[1]}</p></div>`).join('');
+
+$('#virus').innerHTML=[['Ébola','Contacto con fluidos de personas o animales infectados. Letalidad promedio cercana al 50 %. Existe vacuna.'],['Dengue','Lo transmite el mosquito Aedes aegypti. Prevención: eliminar recipientes con agua estancada.'],['Hantavirus','Roedores silvestres. El brote de Epuyén (2018-2019) tuvo contagio entre personas.'],['Gripe aviar H5N1','Circula en aves; los casos humanos son raros pero se vigilan por su potencial de mutación.'],['Mpox','Contacto estrecho. La OMS declaró emergencia internacional en 2022 y en 2024.'],['Rabia','Mordedura de animales infectados. Casi siempre mortal si aparecen síntomas: vacunar tras la exposición.']].map(v=>`<div class="card"><h3>${v[0]}</h3><p>${v[1]}</p></div>`).join('');
+
+const GL=[['Antígeno','Sustancia que el sistema inmune reconoce como extraña.'],['Anticuerpo','Proteína que neutraliza a un antígeno específico.'],['Adyuvante','Sustancia que refuerza la respuesta a una vacuna.'],['Atenuado','Microbio debilitado que no causa enfermedad.'],['Carga viral','Cantidad de virus en la sangre.'],['CD4','Linfocitos que coordinan la defensa; el VIH los destruye.'],['Cuarentena','Separación de personas expuestas para ver si enferman.'],['Efectividad','Protección de una vacuna en la vida real.'],['Eficacia','Protección de una vacuna en ensayos clínicos.'],['Endemia','Enfermedad presente de forma habitual en una zona.'],['Epidemia','Aumento de casos por encima de lo esperado.'],['Inmunidad de rebaño','Protección indirecta cuando gran parte de la población es inmune.'],['Letalidad','Proporción de enfermos que fallece.'],['Pandemia','Epidemia que alcanza varios continentes.'],['PEP','Profilaxis posexposición al VIH, dentro de las 72 horas.'],['PrEP','Profilaxis previa a la exposición al VIH.'],['R0','Número de contagios que genera un caso en una población sin inmunidad.'],['Zoonosis','Enfermedad que pasa de animales a personas.'],['Variante','Versión de un virus con mutaciones que lo diferencian.'],['Vector','Organismo, como un mosquito, que transmite el agente.']];
+function glo(t=''){const f=GL.filter(g=>(g[0]+g[1]).toLowerCase().includes(t.toLowerCase()));$('#gl').innerHTML=f.length?f.map(g=>`<div class="card"><dt>${g[0]}</dt><dd>${g[1]}</dd></div>`).join(''):'<p class="lead">No hay resultados. Probá con otra palabra.</p>'}
+$('#q').oninput=e=>glo(e.target.value);glo();
+go(location.hash.slice(1));
+</script>
+</body>
+</html>

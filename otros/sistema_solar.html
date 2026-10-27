@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>El Sistema Solar: origen, formación, Sol, año luz, Voyager y composición</title>
+<meta name="description" content="Guía del Sistema Solar: origen y formación, el Sol y las estrellas cercanas, el año luz, las sondas Voyager y Pioneer, los objetos extrasolares (ʻOumuamua, Borisov, 3I/ATLAS), la ficción de viajes interestelares, la composición de planetas y otros cuerpos, y un glosario.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--font-display:'Space Grotesk','Segoe UI',system-ui,sans-serif;--font-body:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;--radius:20px;--maxw:1180px;--ease:cubic-bezier(.22,.75,.25,1)}
+html[data-theme="light"]{--bg:#f6f6f2;--surface:rgba(255,255,255,.86);--s2:rgba(40,40,50,.045);--border:rgba(40,40,50,.12);--bs:rgba(40,40,50,.24);--text:#14141a;--muted:#5f5f6b;--accent:#64748b;--accent-2:#818cf8;--accent-3:#22d3ee;--good:#059669;--warn:#d97706;--bad:#e11d48;--shadow:0 22px 55px -28px rgba(20,20,40,.22);--orb:.14;--dot:rgba(40,40,60,.055)}
+html[data-theme="dark"]{--bg:#08080c;--surface:rgba(24,24,32,.66);--s2:rgba(255,255,255,.045);--border:rgba(255,255,255,.10);--bs:rgba(255,255,255,.20);--text:#ececf2;--muted:#9a9aaa;--accent:#94a3b8;--accent-2:#a78bfa;--accent-3:#67e8f9;--good:#34d399;--warn:#fbbf24;--bad:#fb7185;--shadow:0 24px 60px -24px rgba(0,0,0,.9);--orb:.28;--dot:rgba(255,255,255,.03)}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;font-family:var(--font-body);background:var(--bg);color:var(--text);min-height:100vh;line-height:1.65;-webkit-font-smoothing:antialiased;transition:background .45s var(--ease),color .45s var(--ease);overflow-x:hidden}
+h1,h2,h3,h4{font-family:var(--font-display);line-height:1.15;letter-spacing:-.02em;margin:0}
+p{margin:0}button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}a{color:inherit;text-decoration:none}
+::selection{background:var(--accent);color:#fff}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
+.bg-dots{position:fixed;inset:0;z-index:-3;pointer-events:none;background-image:radial-gradient(var(--dot) 1px,transparent 1px);background-size:26px 26px}
+.orbs{position:fixed;inset:0;z-index:-2;overflow:hidden;pointer-events:none}
+.orb{position:absolute;border-radius:50%;filter:blur(100px);opacity:var(--orb);animation:float 28s ease-in-out infinite alternate}
+.o1{width:52vw;height:52vw;background:var(--accent);top:-16vw;left:-12vw}
+.o2{width:42vw;height:42vw;background:var(--accent-2);bottom:-18vw;right:-10vw;animation-delay:-10s}
+.o3{width:34vw;height:34vw;background:var(--accent-3);top:44%;left:58%;animation-delay:-17s}
+@keyframes float{0%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(4vw,-3vw,0) scale(1.1)}100%{transform:translate3d(-3vw,4vw,0) scale(.95)}}
+.site-header{position:sticky;top:0;z-index:50;backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);background:color-mix(in srgb,var(--bg) 78%,transparent);border-bottom:1px solid var(--border)}
+.header-inner{max-width:var(--maxw);margin:0 auto;padding:13px 22px;display:flex;align-items:center;gap:16px}
+.brand{display:flex;align-items:center;gap:11px;font-family:var(--font-display);font-weight:700;white-space:nowrap}
+.mark{width:38px;height:38px;border-radius:12px;flex:none;background:linear-gradient(140deg,var(--accent),var(--accent-2) 55%,var(--accent-3));display:grid;place-items:center;color:#fff;box-shadow:0 8px 22px -8px var(--accent);transition:transform .5s var(--ease)}
+.brand:hover .mark{transform:rotate(-10deg) scale(1.06)}.mark svg{width:22px;height:22px}
+.nav{display:flex;gap:2px;margin-left:auto;overflow-x:auto;scrollbar-width:none;min-width:0}.nav::-webkit-scrollbar{display:none}
+.nav-link{position:relative;padding:9px 11px;border-radius:11px;font-size:.8rem;font-weight:500;color:var(--muted);white-space:nowrap;transition:color .3s,background .3s}
+.nav-link:hover,.nav-link.active{color:var(--text);background:var(--s2)}
+.nav-link.active::after{content:'';position:absolute;left:11px;right:11px;bottom:4px;height:2px;border-radius:2px;background:linear-gradient(90deg,var(--accent),var(--accent-2));animation:navIn .4s var(--ease) both}
+@keyframes navIn{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.tt{width:40px;height:40px;border-radius:12px;flex:none;border:1px solid var(--border);background:var(--s2);display:grid;place-items:center;transition:transform .35s var(--ease)}
+.tt:hover{transform:translateY(-2px) rotate(8deg)}.tt svg{width:19px;height:19px}
+html[data-theme=dark] .i-moon,html[data-theme=light] .i-sun{display:none}
+main{max-width:var(--maxw);margin:0 auto;padding:0 22px 70px}
+.view{display:none}.view.active{display:block;animation:viewIn .55s var(--ease) both}
+@keyframes viewIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.hero{padding:64px 0 36px;max-width:920px}
+.pill{display:inline-flex;align-items:center;gap:8px;padding:7px 15px;border-radius:999px;font-size:.78rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;border:1px solid var(--border);background:var(--surface);color:var(--muted);margin-bottom:24px}
+.pill i{width:7px;height:7px;border-radius:50%;background:var(--good);animation:pulse 2.4s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--good) 60%,transparent)}70%{box-shadow:0 0 0 9px transparent}100%{box-shadow:0 0 0 0 transparent}}
+h1{font-size:clamp(2.1rem,5.2vw,3.9rem);font-weight:700;letter-spacing:-.035em;margin-bottom:20px}
+.grad{background:linear-gradient(100deg,var(--accent),var(--accent-2) 48%,var(--accent-3));-webkit-background-clip:text;background-clip:text;color:transparent;background-size:220% auto;animation:shimmer 8s linear infinite}
+@keyframes shimmer{to{background-position:220% center}}
+.lead{font-size:clamp(1rem,1.6vw,1.15rem);color:var(--muted);max-width:700px;margin-bottom:30px}
+.btn{display:inline-flex;align-items:center;gap:9px;padding:13px 25px;border-radius:13px;font-size:.93rem;font-weight:600;border:1px solid transparent;transition:transform .28s var(--ease),box-shadow .3s}
+.btn-primary{background:linear-gradient(120deg,var(--accent),var(--accent-2));color:#fff;box-shadow:0 14px 34px -14px var(--accent);position:relative;overflow:hidden}
+.btn-primary::after{content:'';position:absolute;inset:0;background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,.45),transparent 70%);transform:translateX(-130%);transition:transform .7s var(--ease)}
+.btn-primary:hover{transform:translateY(-2px)}.btn-primary:hover::after{transform:translateX(130%)}
+.stats,.grid{display:grid;gap:14px}
+.stats{grid-template-columns:repeat(auto-fit,minmax(170px,1fr));margin:8px 0 46px}
+.grid{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.stat,.card{padding:22px 20px;border-radius:var(--radius);background:var(--surface);border:1px solid var(--border);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);transition:transform .35s var(--ease),border-color .3s,box-shadow .35s}
+.stat:hover,.card:hover{transform:translateY(-4px);border-color:var(--bs);box-shadow:var(--shadow)}
+.stat b{display:block;font-family:var(--font-display);font-size:2rem;letter-spacing:-.03em}
+.stat span{font-size:.85rem;color:var(--muted)}
+.card h3{font-size:1.08rem;margin-bottom:8px}.card p{font-size:.92rem;color:var(--muted)}
+.tag{display:inline-block;font-size:.72rem;font-weight:600;padding:3px 10px;border-radius:999px;background:var(--s2);border:1px solid var(--border);margin:10px 6px 0 0;color:var(--muted)}
+.sec{padding:52px 0 22px}.sec h2{font-size:clamp(1.7rem,3.6vw,2.6rem);letter-spacing:-.03em;margin-bottom:12px}
+.sec>.lead{margin-bottom:28px}
+.tl{position:relative;padding:6px 0}
+.tl::before{content:'';position:absolute;left:19px;top:0;bottom:0;width:2px;background:linear-gradient(var(--accent),var(--accent-2),var(--accent-3));opacity:.5}
+.ev{position:relative;padding:0 0 26px 58px;opacity:0;transform:translateY(22px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+.ev.in{opacity:1;transform:none}
+.ev::before{content:'';position:absolute;left:11px;top:22px;width:18px;height:18px;border-radius:50%;background:var(--bg);border:3px solid var(--accent);box-shadow:0 0 0 5px color-mix(in srgb,var(--accent) 18%,transparent)}
+.ev .yr{font-family:var(--font-display);font-weight:700;font-size:1.5rem;background:linear-gradient(100deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+@media(min-width:860px){.tl::before{left:50%}.ev{width:50%;padding:0 46px 30px 0;text-align:right}.ev::before{left:auto;right:-9px}.ev:nth-child(even){margin-left:50%;padding:0 0 30px 46px;text-align:left}.ev:nth-child(even)::before{right:auto;left:-9px}}
+.tabs{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:18px}
+.tab{padding:12px 18px;border-radius:13px;border:1px solid var(--border);background:var(--surface);font-weight:600;font-size:.9rem;transition:transform .25s var(--ease),border-color .3s,background .3s}
+.tab:hover{transform:translateY(-2px)}.tab[aria-selected=true]{color:#fff;border-color:transparent;background:var(--c)}
+.panel{padding:26px;border-radius:var(--radius);background:var(--surface);border:1px solid var(--border);border-left:6px solid var(--c);animation:viewIn .45s var(--ease) both}
+.panel h3{font-size:1.4rem;margin-bottom:8px}.panel p{color:var(--muted);margin-bottom:6px}
+.meter{height:14px;border-radius:99px;background:var(--s2);border:1px solid var(--border);overflow:hidden;margin:14px 0 8px}
+.meter div{height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--accent-3),var(--accent-2),var(--accent));transition:width .5s var(--ease)}
+input[type=range]{width:100%;accent-color:var(--accent);height:28px}
+.big{font-family:var(--font-display);font-size:2.4rem;font-weight:700;letter-spacing:-.03em}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.chip{padding:6px 13px;border-radius:999px;border:1px solid var(--border);background:var(--s2);font-size:.82rem;font-weight:500;transition:border-color .3s,transform .3s}
+.chip:hover{border-color:var(--accent);transform:translateY(-2px)}
+details{border:1px solid var(--border);border-radius:16px;background:var(--surface);margin-bottom:10px;overflow:hidden}
+summary{list-style:none;cursor:pointer;padding:16px 20px;font-family:var(--font-display);font-weight:600;display:flex;justify-content:space-between;gap:12px;align-items:center}
+summary::-webkit-details-marker{display:none}
+summary::after{content:'+';font-size:1.4rem;color:var(--accent);transition:transform .35s var(--ease)}
+details[open] summary::after{transform:rotate(135deg)}
+details>div{padding:0 20px 18px;color:var(--muted);font-size:.94rem;animation:viewIn .4s var(--ease) both}
+details li{margin-bottom:4px}
+.note{margin-top:30px;padding:16px 20px;border-radius:16px;border:1px dashed var(--bs);color:var(--muted);font-size:.86rem}
+.search{width:100%;max-width:440px;padding:13px 18px;border-radius:13px;border:1px solid var(--border);background:var(--surface);color:var(--text);font:inherit;margin-bottom:20px}
+.gl dt{font-family:var(--font-display);font-weight:600}.gl dd{margin:0 0 4px;color:var(--muted);font-size:.92rem}
+.gl .card{padding:18px}
+footer{text-align:center;color:var(--muted);font-size:.82rem;padding:30px 22px 50px}
+@media(max-width:600px){.header-inner{padding:10px 14px;gap:10px}.brand span{display:none}main{padding:0 16px 60px}.hero{padding:40px 0 24px}.btn{width:100%;justify-content:center}.panel{padding:20px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.ev{opacity:1;transform:none}}
+.calc{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:14px 0}
+.calc label{font-size:.85rem;color:var(--muted);display:grid;gap:6px}
+.calc select,.calc input{padding:12px 14px;border-radius:12px;border:1px solid var(--border);background:var(--surface);color:var(--text);font:inherit;width:100%}
+pre.code{margin:14px 0;padding:16px;border-radius:14px;border:1px solid var(--border);background:var(--s2);font:.9rem/1.7 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;overflow-x:auto}
+pre.code span{display:block;padding:0 8px;border-radius:6px}
+pre.code .hl{background:color-mix(in srgb,var(--accent) 22%,transparent)}
+</style>
+</head>
+<body>
+
+<div class="bg-dots"></div><div class="orbs"><div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div></div>
+<header class="site-header"><div class="header-inner">
+<a class="brand" href="#inicio"><div class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></div><span>Sistema Solar</span></a>
+<nav class="nav" id="nav"></nav>
+<button class="tt" id="tt" aria-label="Cambiar tema"><svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+</div></header>
+<main>
+<section class="view" id="v-inicio">
+<div class="hero"><div class="pill"><i></i>Sistema Solar</div>
+<h1>El Sistema Solar, <span class="grad">explicado simple</span></h1>
+<p class="lead">Cómo nació, cómo es el Sol y cuáles son sus vecinas más cercanas, qué es un año luz, qué hacen las sondas Voyager y Pioneer, qué son los visitantes de otras estrellas y cómo los imaginó la ficción, y de qué están hechos los planetas y otros cuerpos. Con glosario.</p>
+<a class="btn btn-primary" href="#origen">Empezar por el origen</a></div>
+<div class="stats"><div class="stat"><b>8</b><span>Planetas, más 5 planetas enanos reconocidos</span></div><div class="stat"><b>4.568 M</b><span>Años desde su formación</span></div><div class="stat"><b>99,86 %</b><span>De la masa está en el Sol</span></div><div class="stat"><b>~442</b><span>Lunas conocidas (marzo de 2026)</span></div></div>
+<div class="sec"><h2>Cómo está organizado</h2><p class="lead">El Sistema Solar es el Sol y todo lo que gira a su alrededor, unido por su gravedad. Las distancias se miden en unidades astronómicas (UA): 1 UA es la distancia media entre la Tierra y el Sol, 149,6 millones de km.</p></div>
+<div class="grid" id="estructura"></div>
+<div class="sec"><h2>Explorá la guía</h2></div>
+<div class="grid" id="home"></div>
+<p class="note">Datos de NASA, ESA y la Unión Astronómica Internacional, revisados el 19 de octubre de 2026. Los números de lunas y el estado de las sondas cambian con el tiempo.</p>
+</section>
+
+<section class="view" id="v-origen"><div class="sec"><h2>Origen del Sistema Solar</h2><p class="lead">Hace unos 4.600 millones de años, una nube enorme de gas y polvo, de varios años luz de ancho, empezó a contraerse. De ese colapso salieron el Sol, los planetas y todo lo demás.</p></div>
+<div class="grid" id="origen-cards"></div>
+<div class="sec"><h2>Nuestro lugar en la galaxia</h2></div>
+<div class="card"><p>El Sistema Solar está en el brazo de Orión de la Vía Láctea, a unos <b>26.000 años luz</b> del centro. Da una vuelta completa a la galaxia cada <b>225 a 250 millones de años</b>, lo que se llama un año galáctico.</p></div>
+</section>
+
+<section class="view" id="v-formacion"><div class="sec"><h2>Formación de los planetas</h2><p class="lead">Un disco de gas y polvo fue juntando materia grano a grano hasta formar planetas, lunas y asteroides en unas decenas de millones de años.</p></div>
+<div class="grid" id="form-cards"></div>
+<div class="sec"><h2>Cronología de la formación</h2></div>
+<div class="tl" id="form-tl"></div>
+</section>
+
+<section class="view" id="v-sol"><div class="sec"><h2>El Sol</h2><p class="lead">Es una estrella enana amarilla (tipo G2V) y la fuente de casi toda la energía del Sistema Solar. En su núcleo funde hidrógeno en helio desde hace unos 4.600 millones de años.</p></div>
+<div class="grid" id="sol-cards"></div>
+<div class="sec"><h2>Capas del Sol</h2><p class="lead">De adentro hacia afuera.</p></div>
+<div class="card"><div style="display:grid;gap:6px">
+<div style="min-height:38px;border-radius:12px;background:#9a3412;display:flex;align-items:center;padding:6px 14px;font-size:.82rem;font-weight:600;color:#fff">Núcleo: ~15 millones de °C, donde ocurre la fusión nuclear</div>
+<div style="min-height:38px;border-radius:12px;background:#c2410c;display:flex;align-items:center;padding:6px 14px;font-size:.82rem;font-weight:600;color:#fff">Zona radiativa: la energía tarda miles de años en atravesarla</div>
+<div style="min-height:38px;border-radius:12px;background:#ea580c;display:flex;align-items:center;padding:6px 14px;font-size:.82rem;font-weight:600;color:#fff">Zona convectiva: el gas hierve y sube hacia la superficie</div>
+<div style="min-height:38px;border-radius:12px;background:#f59e0b;display:flex;align-items:center;padding:6px 14px;font-size:.82rem;font-weight:600;color:#1f1300">Fotosfera: la superficie visible, ~5.500 °C</div>
+<div style="min-height:38px;border-radius:12px;background:#fde68a;display:flex;align-items:center;padding:6px 14px;font-size:.82rem;font-weight:600;color:#1f1300">Cromosfera y corona: la atmósfera, con millones de °C</div>
+</div></div>
+<div class="sec"><h2>Estrellas cercanas</h2><p class="lead">Los vecinos más próximos, medidos en años luz. Ninguno está a menos de 4 años luz.</p></div>
+<div class="grid" id="estrellas"></div>
+</section>
+
+<section class="view" id="v-anioluz"><div class="sec"><h2>El año luz</h2><p class="lead">No mide tiempo sino distancia: es lo que recorre la luz en un año, a unos 300.000 km por segundo.</p></div>
+<div class="card"><p><b>1 año luz ≈ 9,46 billones de km</b> (9.460.730.000.000 km), o unas 63.241 UA.</p></div>
+<div class="sec"><h2>Cuánto tarda la luz</h2></div>
+<div class="grid" id="ly-cards"></div>
+<div class="sec"><h2>Calculadora</h2><p class="lead">Escribí una distancia en años luz y mirá cuánto tardaría la Voyager 1, que viaja a unos 17 km/s.</p></div>
+<div class="card"><div class="calc"><label>Distancia (años luz)<input id="ly" type="number" min="0" step="any" value="4.24" aria-label="Distancia en años luz"></label></div>
+<p>Equivale a</p><div class="big" id="ly-km"></div><p style="margin-top:10px">La Voyager 1 tardaría</p><div class="big" id="ly-yr"></div></div>
+</section>
+
+<section class="view" id="v-voyager"><div class="sec"><h2>Voyager y Pioneer</h2><p class="lead">Cuatro sondas lanzadas en los años 70 exploraron los planetas gigantes y hoy se alejan del Sol. Las dos Voyager siguen en contacto con la Tierra.</p></div>
+<div class="tabs" id="vytabs" role="tablist"></div><div id="vypanel"></div>
+<div class="sec"><h2>Estado de las Voyager en 2026</h2></div>
+<div class="card"><p>El <b>18 de noviembre de 2026</b>, la Voyager 1 llegará a <b>25.900 millones de km</b> de la Tierra, un día luz. Será el primer objeto humano en lograrlo. Desde entonces, cada mensaje tardará un día en llegar y otro en volver.</p><p style="margin-top:8px">NASA apaga instrumentos de a uno para ahorrar energía, porque los generadores de plutonio pierden unos 4 vatios por año. En abril de 2026, la Voyager 1 tenía 2 instrumentos activos (magnetómetro y ondas de plasma) y la Voyager 2, 3. La Voyager 2 llegaría a un día luz hacia 2035, si sigue operando.</p></div>
+<div class="sec"><h2>Mensajes para otros mundos</h2></div>
+<div class="grid" id="voy-msg"></div>
+</section>
+
+<section class="view" id="v-extrasolares"><div class="sec"><h2>Objetos extrasolares</h2><p class="lead">Son cuerpos que no nacieron en el Sistema Solar: vienen de otra estrella, cruzan el nuestro en una órbita abierta (hiperbólica) y no vuelven. Se nombran con un número y una «I» de interestelar: 1I, 2I, 3I.</p></div>
+<div class="tabs" id="extabs" role="tablist"></div><div id="expanel"></div>
+<div class="sec"><h2>El evento ʻOumuamua</h2><p class="lead">El primer visitante interestelar confirmado cambió la discusión científica en pocas semanas.</p></div>
+<div class="tl" id="ou-tl"></div>
+<div class="sec"><h2>¿Qué era ʻOumuamua?</h2><p class="lead">Sigue en debate. Estas son las explicaciones principales.</p></div>
+<div id="ou-acc"></div>
+<div class="sec"><h2>Otros casos y candidatos</h2></div>
+<div class="grid" id="ex-otros"></div>
+<div class="sec"><h2>Ficción de viajes interestelares</h2><p class="lead">La literatura y el cine imaginaron las estrellas antes de que existiera una sonda capaz de salir del Sistema Solar. Algunas ideas son plausibles; otras rompen las leyes de la física.</p></div>
+<div class="tabs" id="fxtabs" role="tablist"></div><div id="fxpanel"></div>
+<div class="sec"><h2>De la ficción a la realidad</h2><p class="lead">Proyectos y estudios reales, algunos nacidos de esas mismas ideas.</p></div>
+<div class="grid" id="fx-real"></div>
+<div class="sec"><h2>Calculadora de viaje</h2><p class="lead">Elegí una velocidad y una distancia en años luz, y mirá cuánto duraría el viaje.</p></div>
+<div class="card"><div class="calc"><label>Velocidad<select id="vsel" aria-label="Velocidad"></select></label><label>Distancia (años luz)<input id="vly" type="number" min="0" step="any" value="4.24" aria-label="Distancia en años luz"></label></div>
+<p>El viaje duraría</p><div class="big" id="vout"></div></div>
+<p class="note">Datos de NASA, ESA y el Minor Planet Center, revisados el 19 de octubre de 2026. Esta guía interpreta «Unauoma» como ʻOumuamua, nombre hawaiano del objeto 1I/2017 U1. En esta fecha no hay un cuarto objeto interestelar confirmado.</p>
+</section>
+
+<section class="view" id="v-composicion"><div class="sec"><h2>De qué están hechos</h2><p class="lead">La composición de cada cuerpo depende de su distancia al Sol: cerca abundan la roca y el metal; lejos, los hielos y los gases.</p></div>
+<div class="tabs" id="ctabs" role="tablist"></div><div id="cpanel"></div>
+<div class="sec"><h2>Lunas del Sistema Solar</h2><p class="lead">Se conocen unas 442 lunas alrededor de planetas y planetas enanos. Mercurio y Venus no tienen ninguna.</p></div>
+<div class="grid" id="lunas"></div>
+</section>
+
+<section class="view" id="v-glosario"><div class="sec"><h2>Glosario</h2><p class="lead">Buscá un término o recorré la lista.</p></div>
+<input class="search" id="q" type="search" placeholder="Buscar término" aria-label="Buscar término"><dl class="grid gl" id="gl"></dl></section>
+</main>
+<footer>Contenido educativo. Verificá las cifras en NASA, ESA y la Unión Astronómica Internacional. Información revisada el 19 de octubre de 2026.</footer>
+
+<script>
+const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
+const R=[['inicio','Inicio'],['origen','Origen'],['formacion','Formación'],['sol','Sol y estrellas'],['anioluz','Año luz'],['voyager','Voyager y Pioneer'],['extrasolares','Extrasolares'],['composicion','Composición'],['glosario','Glosario']];
+$('#nav').innerHTML=R.map(r=>`<a class="nav-link" href="#${r[0]}" data-r="${r[0]}">${r[1]}</a>`).join('');
+function go(r){if(!R.some(x=>x[0]===r))r='inicio';$$('.view').forEach(v=>v.classList.toggle('active',v.id==='v-'+r));$$('.nav-link').forEach(a=>a.classList.toggle('active',a.dataset.r===r));scrollTo({top:0})}
+addEventListener('hashchange',()=>go(location.hash.slice(1)));
+const root=document.documentElement;root.dataset.theme=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';
+$('#tt').onclick=()=>root.dataset.theme=root.dataset.theme==='dark'?'light':'dark';
+$('#home').innerHTML=R.slice(1).map(r=>`<a class="card" href="#${r[0]}"><h3>${r[1]}</h3><p>Entrar a la sección</p></a>`).join('');
+const cards=(id,a)=>$(id).innerHTML=a.map(c=>`<div class="card"><h3>${c[0]}</h3><p>${c[1]}</p></div>`).join('');
+const li=a=>'<ul style="margin:6px 0 0;padding-left:20px;color:var(--muted)">'+a.map(x=>`<li style="margin-bottom:6px"><b style="color:var(--text)">${x[0]}</b> ${x[1]}</li>`).join('')+'</ul>';
+function tabs(tid,pid,D,render){$(tid).innerHTML=D.map((d,i)=>`<button class="tab" role="tab" style="--c:${d[1]}" aria-selected="${i==0}" data-i="${i}">${d[0]}</button>`).join('');
+ const show=i=>{$$('.tab',$(tid)).forEach(t=>t.setAttribute('aria-selected',t.dataset.i==i));$(pid).innerHTML=`<div class="panel" style="--c:${D[i][1]}">${render(D[i])}</div>`};
+ $(tid).onclick=e=>{const b=e.target.closest('.tab');b&&show(b.dataset.i)};show(0)}
+const acc=(id,a,f)=>$(id).innerHTML=a.map((x,i)=>`<details${i?'':' open'}><summary>${x[0]}</summary><div>${f(x)}</div></details>`).join('');
+
+/* ===== INICIO: estructura ===== */
+cards('#estructura',[['Planetas rocosos (0,4 a 1,5 UA)','Mercurio, Venus, Tierra y Marte: pequeños, de roca y metal.'],['Cinturón de asteroides (2,1 a 3,3 UA)','Millones de restos rocosos entre Marte y Júpiter. Allí está el planeta enano Ceres.'],['Gigantes gaseosos (5 a 10 UA)','Júpiter y Saturno: casi todo hidrógeno y helio.'],['Gigantes helados (19 a 30 UA)','Urano y Neptuno: ricos en agua, amoníaco y metano.'],['Cinturón de Kuiper (30 a 50 UA)','Cuerpos helados más allá de Neptuno, como Plutón y Arrokoth.'],['Heliosfera y nube de Oort','La heliosfera termina a unas 120 UA, donde entraron las Voyager. La nube de Oort, hipotética, llegaría hasta unas 100.000 UA.']]);
+
+/* ===== ORIGEN ===== */
+cards('#origen-cards',[['Una nube molecular','Región fría y densa de gas, sobre todo hidrógeno y helio, mezclado con polvo. Una parte empezó a contraerse por su propia gravedad.'],['Ingredientes heredados','El hidrógeno y casi todo el helio vienen del Big Bang. El carbono, el oxígeno y el hierro los fabricaron estrellas anteriores, que los esparcieron al morir.'],['Posible detonante','Meteoritos con rastros de aluminio-26 y hierro-60 sugieren que una supernova cercana pudo comprimir la nube y acelerar el colapso.'],['Un disco que gira','Al contraerse, la nube giró más rápido y se aplanó: el Sol nació en el centro y el resto formó un disco.'],['La edad, medida','Los sólidos más antiguos de los meteoritos tienen 4.567 millones de años. Esa cifra se usa para datar el Sistema Solar.'],['Otros discos, hoy','El telescopio ALMA fotografió discos alrededor de estrellas jóvenes, con huecos donde se están formando planetas.']]);
+
+/* ===== FORMACIÓN ===== */
+cards('#form-cards',[['Zona interna, cálida','Solo sobrevivieron rocas y metales: de ahí salieron planetas rocosos y pequeños.'],['Línea de nieve (3 a 5 UA)','Más allá, el hielo de agua se condensa y hay más material sólido para formar núcleos grandes.'],['Gigantes gaseosos','Sus núcleos crecieron rápido y atrajeron hidrógeno y helio del disco antes de que se disipara.'],['Gigantes helados','Urano y Neptuno crecieron más lento y capturaron menos gas.'],['Los sobrantes','Asteroides, cometas y objetos del cinturón de Kuiper son restos que no llegaron a formar planetas.'],['Pruebas','Los meteoritos conservan material de esa época y los discos de otras estrellas muestran el proceso en vivo.']]);
+$('#form-tl').innerHTML=[['Hace 4.600 M de años','La nube de gas y polvo empieza a colapsar por su propia gravedad, quizás empujada por una supernova cercana.'],['Primeros 100.000 años','El centro se calienta y forma la protoestrella. El resto se aplana en un disco que gira.'],['4.567 M de años','Aparecen los primeros sólidos: granos ricos en calcio y aluminio, los más antiguos que conservamos en meteoritos.'],['Primeros millones de años','Los granos chocan y se pegan hasta formar planetesimales de kilómetros. Crecen los núcleos de los planetas.'],['3 a 10 M de años','El viento solar barre el gas del disco. Los gigantes dejan de crecer.'],['Decenas de M de años','El Sol enciende la fusión de hidrógeno. Los protoplanetas chocan entre sí: un impacto gigante forma la Luna.'],['Cientos de M de años','Los planetas gigantes se reacomodan (modelo de Niza) y dispersan cuerpos pequeños. El Sistema Solar toma su forma actual.']].map(e=>`<div class="ev in"><div class="yr">${e[0]}</div><p style="color:var(--muted);font-size:.92rem">${e[1]}</p></div>`).join('');
+
+/* ===== SOL Y ESTRELLAS CERCANAS ===== */
+cards('#sol-cards',[['Tamaño','1,39 millones de km de diámetro: caben unas 109 Tierras en fila. Tiene 333.000 veces la masa de la Tierra.'],['Composición','En masa: ~73 % hidrógeno, ~25 % helio y ~2 % elementos más pesados.'],['Temperatura','~5.500 °C en la superficie y ~15 millones de °C en el núcleo.'],['Luz','Tarda 8 minutos y 20 segundos en llegar a la Tierra.'],['Viento solar','Corriente de partículas cargadas que forma la heliosfera.'],['Futuro','En unos 5.000 millones de años se hinchará hasta ser una gigante roja y terminará como enana blanca.']]);
+cards('#estrellas',[['Próxima Centauri','4,24 años luz. Enana roja débil, invisible a simple vista. Tiene al menos un planeta, Próxima b, en su zona habitable.'],['Alfa Centauri A y B','4,37 años luz. Dos estrellas parecidas al Sol. Se ven a simple vista desde el hemisferio sur, junto a la Cruz del Sur.'],['Estrella de Barnard','5,96 años luz. Enana roja con el mayor movimiento propio conocido en el cielo.'],['Luhman 16','6,5 años luz. Par de enanas marrones: más grandes que un planeta, pero sin masa suficiente para ser estrellas.'],['Wolf 359','7,9 años luz. Enana roja muy tenue.'],['Sirio','8,6 años luz. La estrella más brillante del cielo nocturno, acompañada por Sirio B, una enana blanca.']]);
+
+/* ===== AÑO LUZ ===== */
+cards('#ly-cards',[['Luna','1,3 segundos.'],['Sol','8 minutos y 20 segundos.'],['Júpiter','Unos 43 minutos, en promedio.'],['Neptuno','Unas 4 horas.'],['Voyager 1','Casi 24 horas. El 18 de noviembre de 2026 llegará a 1 día luz.'],['Próxima Centauri','4,24 años.']]);
+$('#ly').oninput=()=>{const v=parseFloat($('#ly').value)||0,km=v*9.4607e12,a=km/17/31557600;$('#ly-km').textContent=km.toLocaleString('es-AR',{maximumFractionDigits:0})+' km';$('#ly-yr').textContent=a.toLocaleString('es-AR',{maximumFractionDigits:0})+' años'};$('#ly').oninput();
+
+/* ===== VOYAGER Y PIONEER ===== */
+tabs('#vytabs','#vypanel',[['Voyager 1','#64748b',[['Lanzamiento','5 de septiembre de 1977.'],['Júpiter','Marzo de 1979: descubrió el tenue anillo y los volcanes activos de Ío.'],['Saturno','Noviembre de 1980: estudió Titán y los anillos.'],['Espacio interestelar','Agosto de 2012: primer objeto humano fuera de la heliosfera.'],['Hoy','Es el objeto humano más lejano, a casi 1 día luz.']]],['Voyager 2','#0891b2',[['Lanzamiento','20 de agosto de 1977, antes que la Voyager 1.'],['Júpiter y Saturno','Julio de 1979 y agosto de 1981.'],['Urano','Enero de 1986: es la única sonda que lo visitó.'],['Neptuno','Agosto de 1989: es la única sonda que lo visitó.'],['Espacio interestelar','Noviembre de 2018.']]],['Pioneer 10','#818cf8',[['Lanzamiento','2 de marzo de 1972.'],['Primicias','Primera sonda en cruzar el cinturón de asteroides y primera en llegar a Júpiter (diciembre de 1973).'],['Último contacto','23 de enero de 2003.'],['Rumbo','Hacia la estrella Aldebarán, adonde llegaría en unos 2 millones de años.']]],['Pioneer 11','#d97706',[['Lanzamiento','5 de abril de 1973.'],['Júpiter','Diciembre de 1974.'],['Saturno','Septiembre de 1979: primera sonda en visitarlo.'],['Último contacto','Noviembre de 1995.']]]],d=>`<h3>${d[0]}</h3>${li(d[2])}`);
+cards('#voy-msg',[['Disco de Oro (Voyager)','Disco de cobre bañado en oro con 115 imágenes, saludos en 55 idiomas, sonidos de la Tierra y unos 90 minutos de música.'],['Placa de Pioneer','Placa de aluminio con un hombre y una mujer, el Sistema Solar y la posición del Sol respecto de 14 púlsares. La diseñaron Carl Sagan, Frank Drake y Linda Salzman Sagan.'],['Punto azul pálido','El 14 de febrero de 1990, la Voyager 1 fotografió la Tierra desde unos 6.000 millones de km: un punto de luz.'],['Y después','New Horizons (Plutón en 2015, Arrokoth en 2019) también se aleja del Sol. En unos 40.000 años, la Voyager 1 pasará a 1,6 años luz de la estrella Gliese 445.']]);
+
+/* ===== EXTRASOLARES ===== */
+tabs('#extabs','#expanel',[['1I/ʻOumuamua','#d97706',[['Descubrimiento','19 de octubre de 2017, por Robert Weryk con el telescopio Pan-STARRS1 (Haleakalā, Hawái).'],['Nombre','Hawaiano: «mensajero que llega de lejos, primero».'],['Trayectoria','Pasó a 0,25 UA del Sol (9 de septiembre) y a unos 24 millones de km de la Tierra (14 de octubre). Venía de la zona de la constelación de la Lira.'],['Forma','El brillo variaba unas 10 veces cada 7,3 horas: sería alargado o muy aplanado, de unos 100 a 1.000 m según el brillo supuesto.'],['Rareza','Se aceleró sin que se viera coma ni cola.']]],['2I/Borisov','#0891b2',[['Descubrimiento','Finales de agosto de 2019, por el aficionado Gennadiy Borisov desde Crimea.'],['Naturaleza','Un cometa claro, con coma y cola. Parecido a los del Sistema Solar, pero con mucho monóxido de carbono.'],['Trayectoria','Perihelio a 2 UA en diciembre de 2019. Velocidad de unos 32 km/s.'],['Núcleo','Menor a 1 km.']]],['3I/ATLAS','#059669',[['Descubrimiento','1 de julio de 2025, por el sondeo ATLAS en Río Hurtado, Chile.'],['Trayectoria','Perihelio dentro de la órbita de Marte (octubre de 2025). Máxima cercanía a la Tierra el 19 de diciembre de 2025, a unos 270 millones de km. Velocidad de unos 60 km/s.'],['Tamaño','Incierto: las estimaciones van de cientos de metros a varios kilómetros. Sería el mayor visitante conocido.'],['Edad','Simulaciones sugieren que podría ser más antiguo que el Sistema Solar.'],['Estado','Se aleja del Sol y no volverá. La comunidad científica lo considera un cometa natural.']]]],d=>`<h3>${d[0]}</h3>${li(d[2])}`);
+$('#ou-tl').innerHTML=[['Septiembre de 2017','Pasa por su perihelio, a 0,25 UA del Sol, sin que nadie lo conozca todavía.'],['14 de octubre de 2017','Máxima cercanía a la Tierra, a unos 24 millones de km.'],['19 de octubre de 2017','Weryk lo detecta en Pan-STARRS1, ya alejándose. En días se ve que su órbita es hiperbólica.'],['Noviembre de 2017','La UAI crea la categoría «I» y lo nombra 1I/ʻOumuamua.'],['Junio de 2018','Se publica que se acelera sin coma visible, algo que no explica solo la gravedad.'],['2018 a 2023','Se proponen explicaciones: un trozo de hielo de hidrógeno o de nitrógeno, un objeto aplanado o una vela de luz artificial.'],['2023','Un estudio propone que liberó hidrógeno desde hielo de agua alterado por rayos cósmicos.']].map(e=>`<div class="ev in"><div class="yr">${e[0]}</div><p style="color:var(--muted);font-size:.92rem">${e[1]}</p></div>`).join('');
+acc('#ou-acc',[['Hielo de hidrógeno o de nitrógeno','Un hielo puro se evaporaría sin dejar polvo visible, lo que explicaría la ausencia de cola y la aceleración. Tiene problemas de cantidad de masa y de cómo se formaría.'],['Hielo de agua con hidrógeno atrapado','Los rayos cósmicos pudieron generar hidrógeno dentro del hielo. Al calentarse cerca del Sol, escapó y empujó al objeto. Es la explicación que más gana apoyo.'],['Hipótesis de la vela solar','El astrofísico Avi Loeb planteó que podía ser un objeto artificial, una vela delgada empujada por la luz. NASA y la mayoría de los astrónomos prefieren explicaciones naturales.']],x=>x[1]);
+cards('#ex-otros',[['Nombres','Se usa un número y una «I». 1I es ʻOumuamua, 2I es Borisov y 3I es ATLAS.'],['Cuántos hay','Los modelos estiman que podría haber miles de objetos interestelares en el Sistema Solar a la vez, casi todos pequeños y muy tenues.'],['El observatorio Rubin','El Observatorio Vera C. Rubin (Chile) debería aumentar el ritmo de hallazgos. Un candidato anunciado en junio de 2026 fue descartado por su equipo por ser casi seguro un falso enlace.'],['Meteoros interestelares','IM1 (2014) y Polar-IM (1 de abril de 2026) son fireballs candidatos a ser interestelares, según análisis de Avi Loeb y colegas. No tienen confirmación independiente.'],['Voyager y los visitantes','Las Voyager son objetos humanos que salen del Sistema Solar. Los visitantes hacen lo contrario: entran, giran alrededor del Sol y se van a unos 26 a 60 km/s, mucho más rápido que los 17 km/s de la Voyager 1.']]);
+tabs('#fxtabs','#fxpanel',[['Visitantes y contacto','#d97706',[['Cita con Rama','Arthur C. Clarke (1973): una nave cilíndrica de unos 50 km de largo cruza el Sistema Solar y se va sin explicar nada. Tras 2017 se la comparó con ʻOumuamua.'],['2001: Odisea del espacio','Clarke y Kubrick (1968): un monolito enterrado en la Luna emite una señal hacia Júpiter.'],['Contacto','Carl Sagan (1985): un mensaje llega desde la estrella Vega. Sagan también fue clave en el Disco de Oro de las Voyager.'],['Solaris','Stanisław Lem (1961): un océano pensante que los humanos no logran comprender.']]],['Naves generacionales','#059669',[['Huérfanos del cielo','Robert Heinlein (1941): una nave tan larga que sus habitantes olvidaron que viajan.'],['Non-Stop','Brian Aldiss (1958): la tripulación vive en la selva en que se convirtió la nave.'],['Aniara','Harry Martinson (1956): poema sobre una nave que pierde el rumbo, con película de 2018.'],['Aurora','Kim Stanley Robinson (2015): una nave hacia Tau Ceti, para mostrar lo difícil que sería de verdad.'],['El problema real','Con motores actuales, llegar a Próxima Centauri llevaría decenas de miles de años: más de mil generaciones.']]],['Relatividad','#0891b2',[['Tau Cero','Poul Anderson (1970): una nave de fusión que no puede frenar y acelera cerca de la velocidad de la luz.'],['La guerra interminable','Joe Haldeman (1974): los soldados vuelven a una Tierra donde pasaron siglos.'],['Interstellar','Christopher Nolan (2014): un agujero de gusano cerca de Saturno. Kip Thorne asesoró la física.'],['La idea física','Cerca de la velocidad de la luz, el tiempo a bordo pasa más despacio que en la Tierra. Es real y está medido.']]],['Más rápido que la luz','#818cf8',[['Motor de curvatura','Star Trek (1966). Miguel Alcubierre propuso en 1994 una versión matemática que requeriría materia exótica de energía negativa. No se sabe si existe.'],['Hiperespacio','Star Wars y Dune lo usan como atajo. No tiene base física conocida.'],['Ansible','Ursula K. Le Guin (1966) inventó un comunicador instantáneo. Hoy, hasta la Voyager 1 está a casi un día luz.'],['Problema de fondo','La relatividad no permite acelerar materia hasta la velocidad de la luz. Sin una salida, las estrellas quedan lejos.']]]],d=>`<h3>${d[0]}</h3>${li(d[2])}`);
+cards('#fx-real',[['Breakthrough Starshot (2016)','Velas de unos gramos empujadas por un láser de ~100 GW hasta el 20 % de la velocidad de la luz: llegarían a Alfa Centauri en unos 20 años. Sigue como concepto.'],['Proyecto Dédalo (1973 a 1978)','Estudio de la Sociedad Interplanetaria Británica: una sonda de fusión hacia la estrella de Barnard, a ~12 % de la velocidad de la luz, en unos 50 años.'],['Proyecto Lira','Propuesta de 2017 del Initiative for Interstellar Studies para perseguir a ʻOumuamua con un impulso en Júpiter y en el Sol: unos 25 años.'],['Comet Interceptor (ESA)','Sonda que esperará en el espacio, con lanzamiento previsto a fines de esta década, a un cometa nuevo, quizás un visitante interestelar.'],['Sonda interestelar (NASA)','Estudio de concepto para llegar a unas 1.000 UA en unos 50 años, más allá de lo que alcanzaron las Voyager.']]);
+const VS=[['Voyager 1 (17 km/s)',17],['ʻOumuamua (26 km/s)',26],['3I/ATLAS (60 km/s)',60],['Parker Solar Probe, máximo (192 km/s)',192],['Dédalo (12 % de c)',35976],['Starshot (20 % de c)',59958]];
+$('#vsel').innerHTML=VS.map((v,i)=>`<option value="${i}">${v[0]}</option>`).join('');
+const vc=()=>{const d=parseFloat($('#vly').value)||0,a=d*9.4607e12/VS[$('#vsel').value][1]/31557600;$('#vout').textContent=a.toLocaleString('es-AR',{maximumFractionDigits:a<100?1:0})+' años'};
+$('#vsel').onchange=$('#vly').oninput=vc;vc();
+
+/* ===== COMPOSICIÓN ===== */
+tabs('#ctabs','#cpanel',[['Planetas rocosos','#b45309',[['Mercurio','Gran núcleo de hierro (~85 % del radio) y casi sin atmósfera. Hay hielo de agua en cráteres polares en sombra.'],['Venus','Roca y metal. Atmósfera de 96,5 % dióxido de carbono con nubes de ácido sulfúrico y 465 °C en la superficie.'],['Tierra','Núcleo de hierro y níquel y manto rocoso. Atmósfera de 78 % nitrógeno y 21 % oxígeno. El 71 % de la superficie es agua.'],['Marte','Basalto y óxido de hierro, por eso es rojizo. Atmósfera tenue de 95 % dióxido de carbono. Hielo de agua en los polos y bajo la superficie.']]],['Gigantes gaseosos','#059669',[['Júpiter','Alrededor de 90 % hidrógeno y 10 % helio. En el interior, el hidrógeno se comprime hasta volverse metálico. Tiene más del doble de la masa de todos los demás planetas juntos.'],['Saturno','Hidrógeno y helio. Es menos denso que el agua. Sus anillos son de hielo de agua casi puro.']]],['Gigantes helados','#0891b2',[['Urano','Interior de agua, amoníaco y metano comprimidos («hielos») sobre un núcleo rocoso. El metano le da el color cian. Gira de costado, con 98° de inclinación.'],['Neptuno','Composición parecida a la de Urano. Tiene los vientos más rápidos del Sistema Solar, de hasta unos 2.000 km/h.']]],['Planetas enanos','#818cf8',[['Ceres','Unos 940 km, en el cinturón de asteroides. Roca y hielo de agua, con manchas brillantes de sales.'],['Plutón','2.377 km. Superficie de hielo de nitrógeno, metano y monóxido de carbono. Interior de roca y hielo. Tiene 5 lunas.'],['Eris','Un 27 % más masivo que Plutón, aunque de diámetro algo menor.'],['Haumea','Forma de óvalo por su rotación de unas 4 horas. Tiene anillo y 2 lunas.'],['Makemake','Superficie con hielo de metano. Tiene 1 luna.']]],['Asteroides y cometas','#d97706',[['Asteroides','Restos rocosos o metálicos que no formaron un planeta. Hay millones, casi todos entre Marte y Júpiter.'],['Cometas','Bolas de hielo y polvo. Al acercarse al Sol, el hielo se evapora y forma la coma y la cola.'],['Cinturón de Kuiper','Cuerpos helados más allá de Neptuno. New Horizons visitó Arrokoth (2019), formado por dos lóbulos unidos.'],['Meteoros y meteoritos','El meteoro es el trazo de luz al entrar en la atmósfera. El meteorito es el fragmento que llega al suelo.']]]],d=>`<h3>${d[0]}</h3>${li(d[2])}`);
+cards('#lunas',[['Recuento','Tierra 1, Marte 2, Júpiter 101, Saturno 285, Urano 29 y Neptuno 16.'],['Ganímedes (Júpiter)','La luna más grande del Sistema Solar, mayor que Mercurio. Roca, hielo y un océano interno.'],['Europa (Júpiter)','Corteza de hielo sobre un océano de agua salada.'],['Ío (Júpiter)','El cuerpo con más actividad volcánica del Sistema Solar.'],['Titán (Saturno)','Atmósfera densa de nitrógeno y lagos de metano y etano.'],['Encélado (Saturno)','Chorros de vapor de agua salen de su polo sur.'],['Tritón (Neptuno)','Orbita al revés y tiene géiseres de nitrógeno.']]);
+
+/* ===== GLOSARIO ===== */
+const GL=[['Año luz','Distancia que recorre la luz en un año: unos 9,46 billones de km.'],['Asteroide','Cuerpo rocoso o metálico pequeño que orbita el Sol.'],['Cinturón de asteroides','Región entre Marte y Júpiter con millones de asteroides.'],['Cinturón de Kuiper','Región helada más allá de Neptuno, entre 30 y 50 UA.'],['Cometa','Cuerpo de hielo y polvo que forma una cola al acercarse al Sol.'],['Disco protoplanetario','Disco de gas y polvo alrededor de una estrella joven, donde se forman los planetas.'],['Enana blanca','Núcleo caliente y compacto que deja una estrella como el Sol al final de su vida.'],['Enana marrón','Objeto más masivo que un planeta pero sin masa para fusionar hidrógeno.'],['Enana roja','Estrella pequeña, fría y tenue; es el tipo más común.'],['Exoplaneta','Planeta que orbita otra estrella.'],['Fusión nuclear','Proceso que une núcleos de hidrógeno para formar helio y libera energía.'],['Gigante gaseoso','Planeta formado sobre todo por hidrógeno y helio: Júpiter y Saturno.'],['Gigante helado','Planeta rico en agua, amoníaco y metano: Urano y Neptuno.'],['Heliopausa','Límite donde el viento solar se frena frente al medio interestelar.'],['Heliosfera','Burbuja de partículas y campo magnético que crea el Sol.'],['Línea de nieve','Distancia al Sol desde la cual el hielo de agua se mantiene sólido en el disco.'],['Meteorito','Fragmento de roca o metal del espacio que llega al suelo.'],['Nebulosa solar','Nube de gas y polvo de la que nació el Sistema Solar.'],['Nube de Oort','Reserva hipotética de cuerpos helados en el borde del Sistema Solar.'],['Planeta enano','Cuerpo redondo que orbita el Sol pero no ha despejado su órbita: Ceres, Plutón y otros.'],['Planetesimal','Cuerpo de kilómetros que se formó en el disco y dio origen a los planetas.'],['Protoestrella','Estrella en formación, antes de comenzar la fusión de hidrógeno.'],['Unidad astronómica (UA)','Distancia media Tierra-Sol: 149,6 millones de km.'],['Viento solar','Flujo constante de partículas cargadas que sale del Sol.']];
+GL.push(['Objeto interestelar','Cuerpo que viene de otra estrella y cruza el Sistema Solar sin quedar ligado al Sol. Se nombra con una «I», como 1I/ʻOumuamua.'],['Órbita hiperbólica','Trayectoria abierta de un cuerpo que pasa una vez y no vuelve. Su excentricidad es mayor que 1.'],['Nave generacional','Nave interestelar con un viaje tan largo que sus tripulantes mueren y nacen a bordo. Es una idea de la ficción.'],['Dilatación del tiempo','Efecto de la relatividad: a velocidades cercanas a la de la luz, el tiempo a bordo pasa más lento.'],['Motor de curvatura','Idea de la ficción, con una versión matemática de Alcubierre (1994), de curvar el espacio para ir más rápido que la luz. Requiere materia exótica.'],['Coma','Nube de gas y polvo que rodea el núcleo de un cometa activo.']);
+GL.sort((a,b)=>a[0].localeCompare(b[0],'es'));
+function glo(t=''){const f=GL.filter(g=>(g[0]+g[1]).toLowerCase().includes(t.toLowerCase()));$('#gl').innerHTML=f.length?f.map(g=>`<div class="card"><dt>${g[0]}</dt><dd>${g[1]}</dd></div>`).join(''):'<p class="lead">No hay resultados. Probá con otra palabra.</p>'}
+$('#q').oninput=e=>glo(e.target.value);glo();
+go(location.hash.slice(1));
+
+</script>
+</body>
+</html>

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>La Luna: mapa, viajes, colonia y futuro explicados simple</title>
+<meta name="description" content="La Luna desde el hemisferio sur y norte, viajes espaciales, llegada humana, proyectos futuros, colonia lunar, origen, estructura, órbita y distancia. Línea del tiempo y glosario.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--font-display:'Space Grotesk','Segoe UI',system-ui,sans-serif;--font-body:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;--radius:20px;--maxw:1180px;--ease:cubic-bezier(.22,.75,.25,1)}
+html[data-theme="light"]{--bg:#f6f6f2;--surface:rgba(255,255,255,.86);--s2:rgba(40,40,50,.045);--border:rgba(40,40,50,.12);--bs:rgba(40,40,50,.24);--text:#14141a;--muted:#5f5f6b;--accent:#64748b;--accent-2:#818cf8;--accent-3:#22d3ee;--good:#059669;--warn:#d97706;--bad:#e11d48;--shadow:0 22px 55px -28px rgba(20,20,40,.22);--orb:.14;--dot:rgba(40,40,60,.055)}
+html[data-theme="dark"]{--bg:#08080c;--surface:rgba(24,24,32,.66);--s2:rgba(255,255,255,.045);--border:rgba(255,255,255,.10);--bs:rgba(255,255,255,.20);--text:#ececf2;--muted:#9a9aaa;--accent:#94a3b8;--accent-2:#a78bfa;--accent-3:#67e8f9;--good:#34d399;--warn:#fbbf24;--bad:#fb7185;--shadow:0 24px 60px -24px rgba(0,0,0,.9);--orb:.28;--dot:rgba(255,255,255,.03)}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;font-family:var(--font-body);background:var(--bg);color:var(--text);min-height:100vh;line-height:1.65;-webkit-font-smoothing:antialiased;transition:background .45s var(--ease),color .45s var(--ease);overflow-x:hidden}
+h1,h2,h3,h4{font-family:var(--font-display);line-height:1.15;letter-spacing:-.02em;margin:0}
+p{margin:0}button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}a{color:inherit;text-decoration:none}
+::selection{background:var(--accent);color:#fff}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
+.bg-dots{position:fixed;inset:0;z-index:-3;pointer-events:none;background-image:radial-gradient(var(--dot) 1px,transparent 1px);background-size:26px 26px}
+.orbs{position:fixed;inset:0;z-index:-2;overflow:hidden;pointer-events:none}
+.orb{position:absolute;border-radius:50%;filter:blur(100px);opacity:var(--orb);animation:float 28s ease-in-out infinite alternate}
+.o1{width:52vw;height:52vw;background:var(--accent);top:-16vw;left:-12vw}
+.o2{width:42vw;height:42vw;background:var(--accent-2);bottom:-18vw;right:-10vw;animation-delay:-10s}
+.o3{width:34vw;height:34vw;background:var(--accent-3);top:44%;left:58%;animation-delay:-17s}
+@keyframes float{0%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(4vw,-3vw,0) scale(1.1)}100%{transform:translate3d(-3vw,4vw,0) scale(.95)}}
+.site-header{position:sticky;top:0;z-index:50;backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);background:color-mix(in srgb,var(--bg) 78%,transparent);border-bottom:1px solid var(--border)}
+.header-inner{max-width:var(--maxw);margin:0 auto;padding:13px 22px;display:flex;align-items:center;gap:16px}
+.brand{display:flex;align-items:center;gap:11px;font-family:var(--font-display);font-weight:700;white-space:nowrap}
+.mark{width:38px;height:38px;border-radius:12px;flex:none;background:linear-gradient(140deg,var(--accent),var(--accent-2) 55%,var(--accent-3));display:grid;place-items:center;color:#fff;box-shadow:0 8px 22px -8px var(--accent);transition:transform .5s var(--ease)}
+.brand:hover .mark{transform:rotate(-10deg) scale(1.06)}.mark svg{width:22px;height:22px}
+.nav{display:flex;gap:2px;margin-left:auto;overflow-x:auto;scrollbar-width:none;min-width:0}.nav::-webkit-scrollbar{display:none}
+.nav-link{position:relative;padding:9px 11px;border-radius:11px;font-size:.8rem;font-weight:500;color:var(--muted);white-space:nowrap;transition:color .3s,background .3s}
+.nav-link:hover,.nav-link.active{color:var(--text);background:var(--s2)}
+.nav-link.active::after{content:'';position:absolute;left:11px;right:11px;bottom:4px;height:2px;border-radius:2px;background:linear-gradient(90deg,var(--accent),var(--accent-2));animation:navIn .4s var(--ease) both}
+@keyframes navIn{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.tt{width:40px;height:40px;border-radius:12px;flex:none;border:1px solid var(--border);background:var(--s2);display:grid;place-items:center;transition:transform .35s var(--ease)}
+.tt:hover{transform:translateY(-2px) rotate(8deg)}.tt svg{width:19px;height:19px}
+html[data-theme=dark] .i-moon,html[data-theme=light] .i-sun{display:none}
+main{max-width:var(--maxw);margin:0 auto;padding:0 22px 70px}
+.view{display:none}.view.active{display:block;animation:viewIn .55s var(--ease) both}
+@keyframes viewIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.hero{padding:64px 0 36px;max-width:920px}
+.pill{display:inline-flex;align-items:center;gap:8px;padding:7px 15px;border-radius:999px;font-size:.78rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;border:1px solid var(--border);background:var(--surface);color:var(--muted);margin-bottom:24px}
+.pill i{width:7px;height:7px;border-radius:50%;background:var(--good);animation:pulse 2.4s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--good) 60%,transparent)}70%{box-shadow:0 0 0 9px transparent}100%{box-shadow:0 0 0 0 transparent}}
+h1{font-size:clamp(2.1rem,5.2vw,3.9rem);font-weight:700;letter-spacing:-.035em;margin-bottom:20px}
+.grad{background:linear-gradient(100deg,var(--accent),var(--accent-2) 48%,var(--accent-3));-webkit-background-clip:text;background-clip:text;color:transparent;background-size:220% auto;animation:shimmer 8s linear infinite}
+@keyframes shimmer{to{background-position:220% center}}
+.lead{font-size:clamp(1rem,1.6vw,1.15rem);color:var(--muted);max-width:700px;margin-bottom:30px}
+.btn{display:inline-flex;align-items:center;gap:9px;padding:13px 25px;border-radius:13px;font-size:.93rem;font-weight:600;border:1px solid transparent;transition:transform .28s var(--ease),box-shadow .3s}
+.btn-primary{background:linear-gradient(120deg,var(--accent),var(--accent-2));color:#fff;box-shadow:0 14px 34px -14px var(--accent);position:relative;overflow:hidden}
+.btn-primary::after{content:'';position:absolute;inset:0;background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,.45),transparent 70%);transform:translateX(-130%);transition:transform .7s var(--ease)}
+.btn-primary:hover{transform:translateY(-2px)}.btn-primary:hover::after{transform:translateX(130%)}
+.stats,.grid{display:grid;gap:14px}
+.stats{grid-template-columns:repeat(auto-fit,minmax(170px,1fr));margin:8px 0 46px}
+.grid{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.stat,.card{padding:22px 20px;border-radius:var(--radius);background:var(--surface);border:1px solid var(--border);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);transition:transform .35s var(--ease),border-color .3s,box-shadow .35s}
+.stat:hover,.card:hover{transform:translateY(-4px);border-color:var(--bs);box-shadow:var(--shadow)}
+.stat b{display:block;font-family:var(--font-display);font-size:2rem;letter-spacing:-.03em}
+.stat span{font-size:.85rem;color:var(--muted)}
+.card h3{font-size:1.08rem;margin-bottom:8px}.card p{font-size:.92rem;color:var(--muted)}
+.tag{display:inline-block;font-size:.72rem;font-weight:600;padding:3px 10px;border-radius:999px;background:var(--s2);border:1px solid var(--border);margin:10px 6px 0 0;color:var(--muted)}
+.sec{padding:52px 0 22px}.sec h2{font-size:clamp(1.7rem,3.6vw,2.6rem);letter-spacing:-.03em;margin-bottom:12px}
+.sec>.lead{margin-bottom:28px}
+.tl{position:relative;padding:6px 0}
+.tl::before{content:'';position:absolute;left:19px;top:0;bottom:0;width:2px;background:linear-gradient(var(--accent),var(--accent-2),var(--accent-3));opacity:.5}
+.ev{position:relative;padding:0 0 26px 58px;opacity:0;transform:translateY(22px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+.ev.in{opacity:1;transform:none}
+.ev::before{content:'';position:absolute;left:11px;top:22px;width:18px;height:18px;border-radius:50%;background:var(--bg);border:3px solid var(--accent);box-shadow:0 0 0 5px color-mix(in srgb,var(--accent) 18%,transparent)}
+.ev .yr{font-family:var(--font-display);font-weight:700;font-size:1.5rem;background:linear-gradient(100deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+@media(min-width:860px){.tl::before{left:50%}.ev{width:50%;padding:0 46px 30px 0;text-align:right}.ev::before{left:auto;right:-9px}.ev:nth-child(even){margin-left:50%;padding:0 0 30px 46px;text-align:left}.ev:nth-child(even)::before{right:auto;left:-9px}}
+.tabs{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:18px}
+.tab{padding:12px 18px;border-radius:13px;border:1px solid var(--border);background:var(--surface);font-weight:600;font-size:.9rem;transition:transform .25s var(--ease),border-color .3s,background .3s}
+.tab:hover{transform:translateY(-2px)}.tab[aria-selected=true]{color:#fff;border-color:transparent;background:var(--c)}
+.panel{padding:26px;border-radius:var(--radius);background:var(--surface);border:1px solid var(--border);border-left:6px solid var(--c);animation:viewIn .45s var(--ease) both}
+.panel h3{font-size:1.4rem;margin-bottom:8px}.panel p{color:var(--muted);margin-bottom:6px}
+.meter{height:14px;border-radius:99px;background:var(--s2);border:1px solid var(--border);overflow:hidden;margin:14px 0 8px}
+.meter div{height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--accent-3),var(--accent-2),var(--accent));transition:width .5s var(--ease)}
+input[type=range]{width:100%;accent-color:var(--accent);height:28px}
+.big{font-family:var(--font-display);font-size:2.4rem;font-weight:700;letter-spacing:-.03em}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.chip{padding:6px 13px;border-radius:999px;border:1px solid var(--border);background:var(--s2);font-size:.82rem;font-weight:500;transition:border-color .3s,transform .3s}
+.chip:hover{border-color:var(--accent);transform:translateY(-2px)}
+details{border:1px solid var(--border);border-radius:16px;background:var(--surface);margin-bottom:10px;overflow:hidden}
+summary{list-style:none;cursor:pointer;padding:16px 20px;font-family:var(--font-display);font-weight:600;display:flex;justify-content:space-between;gap:12px;align-items:center}
+summary::-webkit-details-marker{display:none}
+summary::after{content:'+';font-size:1.4rem;color:var(--accent);transition:transform .35s var(--ease)}
+details[open] summary::after{transform:rotate(135deg)}
+details>div{padding:0 20px 18px;color:var(--muted);font-size:.94rem;animation:viewIn .4s var(--ease) both}
+details li{margin-bottom:4px}
+.note{margin-top:30px;padding:16px 20px;border-radius:16px;border:1px dashed var(--bs);color:var(--muted);font-size:.86rem}
+.search{width:100%;max-width:440px;padding:13px 18px;border-radius:13px;border:1px solid var(--border);background:var(--surface);color:var(--text);font:inherit;margin-bottom:20px}
+.gl dt{font-family:var(--font-display);font-weight:600}.gl dd{margin:0 0 4px;color:var(--muted);font-size:.92rem}
+.gl .card{padding:18px}
+footer{text-align:center;color:var(--muted);font-size:.82rem;padding:30px 22px 50px}
+@media(max-width:600px){.header-inner{padding:10px 14px;gap:10px}.brand span{display:none}main{padding:0 16px 60px}.hero{padding:40px 0 24px}.btn{width:100%;justify-content:center}.panel{padding:20px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.ev{opacity:1;transform:none}}
+.calc{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:14px 0}
+.calc label{font-size:.85rem;color:var(--muted);display:grid;gap:6px}
+.calc input{padding:12px 14px;border-radius:12px;border:1px solid var(--border);background:var(--surface);color:var(--text);font:inherit;width:100%}
+pre.code{margin:14px 0;padding:16px;border-radius:14px;border:1px solid var(--border);background:var(--s2);font:.9rem/1.7 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;overflow-x:auto}
+pre.code span{display:block;padding:0 8px;border-radius:6px}
+pre.code .hl{background:color-mix(in srgb,var(--accent) 22%,transparent)}
+/* Mapa lunar con imagen real */
+.luna-wrap{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start}
+@media(max-width:700px){.luna-wrap{grid-template-columns:1fr}}
+.luna-img{width:100%;height:auto;border-radius:50%;box-shadow:0 0 30px rgba(0,0,0,.3),0 0 0 1px var(--border);display:block;transition:transform .6s var(--ease)}
+.luna-img:hover{transform:scale(1.02)}
+.luna-sur{transform:rotate(180deg)}
+.hemi-lbl{font-family:var(--font-display);font-weight:700;text-align:center;margin-bottom:10px;color:var(--muted);font-size:.9rem;letter-spacing:.05em;text-transform:uppercase}
+</style>
+</head>
+<body>
+<div class="bg-dots"></div><div class="orbs"><div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div></div>
+<header class="site-header"><div class="header-inner">
+<a class="brand" href="#inicio"><div class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></svg></div><span>La Luna</span></a>
+<nav class="nav" id="nav"></nav>
+<button class="tt" id="tt" aria-label="Cambiar tema"><svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+</div></header>
+<main>
+<section class="view" id="v-inicio">
+<div class="hero"><div class="pill"><i></i>Exploración lunar</div>
+<h1>La Luna, <span class="grad">explicada simple</span></h1>
+<p class="lead">Mapa desde los dos hemisferios, viajes espaciales, llegada humana, proyectos futuros, colonia lunar, origen y estructura, órbita y distancia. Una guía visual para entender nuestro satélite.</p>
+<a class="btn btn-primary" href="#mapa">Explorar el mapa lunar</a></div>
+<div class="stats"><div class="stat"><b>384.400 km</b><span>Distancia media Tierra-Luna</span></div><div class="stat"><b>3.474 km</b><span>Diámetro lunar (¼ del terrestre)</span></div><div class="stat"><b>1/6</b><span>Gravedad respecto a la Tierra</span></div><div class="stat"><b>4.500 M</b><span>Años desde su formación</span></div></div>
+<div class="grid" id="home"></div>
+<p class="note">Datos de NASA, ESA y fuentes astronómicas, revisados el 19 de octubre de 2026. Las fechas de las misiones futuras cambian con frecuencia: NASA prevé una actualización sobre Artemis el 23 de octubre.</p>
+</section>
+
+<section class="view" id="v-mapa"><div class="sec"><h2>Mapa de la Luna: hemisferio sur y norte</h2><p class="lead">La Luna siempre muestra la misma cara desde la Tierra, pero la orientación cambia según el hemisferio desde donde se observe. La imagen de la izquierda está rotada 180° para reflejar cómo se ve desde el hemisferio sur.</p></div>
+<div class="luna-wrap">
+<div><div class="hemi-lbl">Hemisferio Sur</div><img class="luna-img luna-sur" src="https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg" alt="Fotografía real de la Luna llena, rotada 180° para simular la vista desde el hemisferio sur"><p style="font-size:.8rem;color:var(--muted);margin-top:10px">Vista con el polo sur lunar hacia arriba. Los mares aparecen invertidos respecto al hemisferio norte.</p></div>
+<div><div class="hemi-lbl">Hemisferio Norte</div><img class="luna-img" src="https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg" alt="Fotografía real de la Luna llena en su orientación estándar, vista desde el hemisferio norte"><p style="font-size:.8rem;color:var(--muted);margin-top:10px">Vista con el polo norte lunar hacia arriba. Es la orientación más familiar en el hemisferio norte terrestre.</p></div>
+</div>
+<div class="sec"><h2>Mares y cráteres principales</h2><p class="lead">Nombres en latín y su traducción. Los mares son grandes manchas oscuras; los cráteres, círculos claros.</p></div>
+<div class="grid" id="mapa-lista"></div>
+</section>
+
+<section class="view" id="v-viajes"><div class="sec"><h2>Viajes espaciales a la Luna</h2><p class="lead">Desde las primeras sondas robóticas hasta las misiones tripuladas y los planes actuales. La Luna es el único cuerpo celeste fuera de la Tierra que ha pisado un ser humano.</p></div>
+<div class="grid" id="viajes-cards"></div>
+<div class="sec"><h2>Misiones destacadas</h2></div><div class="tabs" id="vtabs" role="tablist"></div><div id="vpanel"></div>
+</section>
+
+<section class="view" id="v-llegada"><div class="sec"><h2>Llegada humana</h2><p class="lead">Doce personas han caminado sobre la Luna, todas en el programa Apolo (1969-1972). En abril de 2026, Artemis II llevó a cuatro astronautas alrededor de la Luna, sin alunizar. Artemis IV intentará volver a la superficie (previsto para 2028).</p></div>
+<div class="grid" id="llegada"></div>
+<div class="sec"><h2>Apolo 11: el primer paso</h2></div>
+<div class="card"><p><b>20 de julio de 1969.</b> Neil Armstrong y Buzz Aldrin alunizaron en el Mar de la Tranquilidad. Armstrong fue la primera persona en pisar la Luna. Michael Collins permaneció en órbita.</p><p style="margin-top:8px">La misión duró 8 días y trajo 21,5 kg de rocas lunares.</p></div>
+<div class="sec"><h2>Artemis II: el regreso a la Luna</h2></div>
+<div class="card"><p><b>1 al 10 de abril de 2026.</b> Reid Wiseman, Victor Glover, Christina Koch y Jeremy Hansen despegaron en el cohete SLS y sobrevolaron la Luna con la nave Orion. No alunizaron ni entraron en órbita lunar: siguieron una trayectoria de retorno libre. El 6 de abril pasaron a unos 6.500 km de la superficie y vieron la cara oculta.</p><p style="margin-top:8px">La misión duró algo más de 9 días y llegó a 406.771 km de la Tierra, superando el récord de Apolo 13 (400.171 km, en 1970).</p></div>
+</section>
+
+<section class="view" id="v-proyectos"><div class="sec"><h2>Proyectos futuros</h2><p class="lead">Iniciativas en marcha y planes para las próximas décadas. El objetivo ya no es solo volver, sino quedarse. Varias fechas se movieron a 2027.</p></div><div class="tabs" id="ptabs" role="tablist"></div><div id="ppanel"></div></section>
+
+<section class="view" id="v-colonia"><div class="sec"><h2>Colonia lunar</h2><p class="lead">Establecer una presencia permanente en la Luna es el siguiente gran paso. En marzo de 2026, NASA presentó su plan Moon Base: una base en el polo sur, con recursos locales como el hielo de agua, que reemplaza al Gateway orbital.</p></div>
+<div class="grid" id="colonia"></div>
+<div class="sec"><h2>Fases de la base lunar</h2></div>
+<div class="tl" id="colonia-tl"></div>
+<div class="sec"><h2>Desafíos de vivir en la Luna</h2></div>
+<div class="grid" id="colonia-desafios"></div>
+</section>
+
+<section class="view" id="v-origen"><div class="sec"><h2>Origen y estructura de la Luna</h2><p class="lead">La teoría más aceptada es el <b>Gran Impacto</b>: un cuerpo del tamaño de Marte chocó contra la Tierra primitiva y los escombros formaron la Luna.</p></div>
+<div class="grid" id="origen-cards"></div>
+<div class="sec"><h2>Estructura interna</h2><p class="lead">La Luna tiene capas diferenciadas. Su núcleo es pequeño y no genera un campo magnético global.</p></div>
+<div class="card"><div style="display:grid;gap:6px">
+<div style="height:38px;border-radius:12px;background:#8b5e3c;display:flex;align-items:center;padding:0 14px;font-size:.82rem;font-weight:600;color:#fff">Corteza (roca sólida, ~34-43 km en promedio)</div>
+<div style="height:38px;border-radius:12px;background:#6b4f3a;display:flex;align-items:center;padding:0 14px;font-size:.82rem;font-weight:600;color:#fff">Manto rígido</div>
+<div style="height:38px;border-radius:12px;background:#4a3a2a;display:flex;align-items:center;padding:0 14px;font-size:.82rem;font-weight:600;color:#fff">Manto semisólido</div>
+<div style="height:38px;border-radius:12px;background:#2a2a2a;display:flex;align-items:center;padding:0 14px;font-size:.82rem;font-weight:600;color:#fff">Núcleo de hierro (2-4 % de la masa)</div>
+</div></div>
+</section>
+
+<section class="view" id="v-orbita"><div class="sec"><h2>Órbita y distancia a la Tierra</h2><p class="lead">La Luna orbita la Tierra en una elipse, por lo que su distancia varía. Se aleja lentamente de nosotros.</p></div>
+<div class="grid" id="orbita"></div>
+<div class="sec"><h2>Distancia en 2026</h2></div>
+<div class="card"><p>La distancia media es de <b>384.400 km</b>. En 2026, el apogeo más lejano será el <b>11 de diciembre</b> (~<b>406.300 km</b>) y el perigeo más cercano el <b>24 de diciembre</b> (~<b>356.900 km</b>).</p><div class="meter"><div style="width:56%"></div></div><div style="display:flex;justify-content:space-between;gap:12px;font-size:.78rem;color:var(--muted)"><span>Perigeo ~356.900 km</span><span>Apogeo ~406.300 km</span></div><p style="font-size:.82rem;color:var(--muted);margin-top:10px">La barra marca la distancia media dentro de ese rango. La Luna se aleja unos <b>3,8 cm por año</b>.</p></div>
+</section>
+
+<section class="view" id="v-timeline"><div class="sec"><h2>Línea del tiempo lunar</h2><p class="lead">Hitos históricos y futuros de la exploración.</p></div><div class="tl" id="tl"></div></section>
+
+<section class="view" id="v-glosario"><div class="sec"><h2>Glosario lunar</h2><p class="lead">Buscá un término o recorré la lista.</p></div>
+<input class="search" id="q" type="search" placeholder="Buscar término" aria-label="Buscar término"><dl class="grid gl" id="gl"></dl></section>
+</main>
+<footer>Contenido educativo y plural. Verificá las cifras en NASA, ESA, la UAI y fuentes oficiales. Información actualizada al 19 de octubre de 2026.</footer>
+
+<script>
+const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
+const R=[['inicio','Inicio'],['mapa','Mapa'],['viajes','Viajes'],['llegada','Llegada humana'],['proyectos','Proyectos'],['colonia','Colonia'],['origen','Origen'],['orbita','Órbita'],['timeline','Línea de tiempo'],['glosario','Glosario']];
+$('#nav').innerHTML=R.map(r=>`<a class="nav-link" href="#${r[0]}" data-r="${r[0]}">${r[1]}</a>`).join('');
+function go(r){if(!R.some(x=>x[0]===r))r='inicio';$$('.view').forEach(v=>v.classList.toggle('active',v.id==='v-'+r));$$('.nav-link').forEach(a=>a.classList.toggle('active',a.dataset.r===r));scrollTo({top:0})}
+addEventListener('hashchange',()=>go(location.hash.slice(1)));
+const root=document.documentElement;root.dataset.theme=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';
+$('#tt').onclick=()=>root.dataset.theme=root.dataset.theme==='dark'?'light':'dark';
+$('#home').innerHTML=R.slice(1).map(r=>`<a class="card" href="#${r[0]}"><h3>${r[1]}</h3><p>Entrar a la sección</p></a>`).join('');
+const cards=(id,a)=>$(id).innerHTML=a.map(c=>`<div class="card"><h3>${c[0]}</h3><p>${c[1]}</p></div>`).join('');
+const li=a=>'<ul style="margin:6px 0 0;padding-left:20px;color:var(--muted)">'+a.map(x=>`<li style="margin-bottom:6px"><b style="color:var(--text)">${x[0]}</b> ${x[1]}</li>`).join('')+'</ul>';
+function tabs(tid,pid,D,render){$(tid).innerHTML=D.map((d,i)=>`<button class="tab" role="tab" style="--c:${d[1]}" aria-selected="${i==0}" data-i="${i}">${d[0]}</button>`).join('');
+ const show=i=>{$$('.tab',$(tid)).forEach(t=>t.setAttribute('aria-selected',t.dataset.i==i));$(pid).innerHTML=`<div class="panel" style="--c:${D[i][1]}">${render(D[i])}</div>`};
+ $(tid).onclick=e=>{const b=e.target.closest('.tab');b&&show(b.dataset.i)};show(0)}
+const acc=(id,a,f)=>$(id).innerHTML=a.map((x,i)=>`<details${i?'':' open'}><summary>${x[0]}</summary><div>${f(x)}</div></details>`).join('');
+
+/* ===== MAPA: lista textual de mares, cráteres y destinos actuales ===== */
+const MAPA_LISTA=[['Mare Frigoris','Mar del Frío'],['Mare Imbrium','Mar de las Lluvias'],['Mare Serenitatis','Mar de la Serenidad'],['Mare Tranquillitatis','Mar de la Tranquilidad'],['Mare Crisium','Mar de las Crisis'],['Mare Fecunditatis','Mar de la Fecundidad'],['Mare Nectaris','Mar del Néctar'],['Mare Nubium','Mar de las Nubes'],['Mare Humorum','Mar de la Humedad'],['Oceanus Procellarum','Océano de las Tormentas'],['Mare Cognitum','Mar Conocido'],['Mare Vaporum','Mar de los Vapores'],['Crater Tycho','Cráter Tycho (sur)'],['Crater Copernicus','Cráter Copérnico'],['Crater Kepler','Cráter Kepler'],['Crater Clavius','Cráter Clavius (sur)'],['Crater Gassendi','Cráter Gassendi'],['Crater Aristarchus','Cráter Aristarco'],['Crater Shackleton','Cráter Shackleton (polo sur, ~21 km): su cresta es el destino de Moon Base I'],['Mons Mouton','Monte Mouton o Leibnitz Beta (polo sur): destino de Griffin-1 (Moon Base II)'],['Reiner Gamma','Remolino lunar con anomalía magnética: destino de IM-3 (Moon Base III)']];
+$('#mapa-lista').innerHTML=MAPA_LISTA.map(m=>`<div class="card"><h3>${m[0]}</h3><p>${m[1]}</p></div>`).join('');
+
+/* ===== VIAJES ===== */
+cards('#viajes-cards',[['Era Apolo (1968-1972)','Apolo 8 fue la primera misión tripulada en orbitar la Luna (1968). Entre 1969 y 1972, 6 misiones alunizaron y 12 personas caminaron sobre la superficie. Se trajeron 382 kg de rocas.'],['Sondas robóticas','Luna, Surveyor, Lunar Orbiter, Chang\'e, Chandrayaan, SLIM y las misiones comerciales CLPS han cartografiado y estudiado el satélite.'],['Artemis (2020s)','Artemis II (abril de 2026) llevó a 4 astronautas a sobrevolar la Luna, la primera misión tripulada a la Luna desde 1972. Artemis III (2027) probará landers en órbita terrestre y Artemis IV (2028) intentará el alunizaje.'],['Misiones comerciales','Blue Origin, Astrobotic (ahora parte de Voyager Technologies), Intuitive Machines, Firefly y SpaceX desarrollan landers y servicios de carga para NASA.']]);
+tabs('#vtabs','#vpanel',[['Apolo','#64748b',[['Apolo 8','Primera misión tripulada en orbitar la Luna (diciembre de 1968).'],['Apolo 11','Primer alunizaje tripulado (1969).'],['Apolo 13','Famosa misión fallida que regresó a salvo (1970). Su récord de distancia duró hasta 2026.'],['Apolo 17','Última misión tripulada (1972); geólogo Harrison Schmitt.']]],['Robóticas','#0891b2',[['Chang\'e 4','Primer alunizaje en la cara oculta (2019).'],['Chang\'e 5','Retorno de muestras de la cara visible (2020).'],['Chang\'e 6','Primeras muestras de la cara oculta (2024).'],['Chandrayaan-3','India alunizó cerca del polo sur (2023).'],['SLIM','Japón logró un alunizaje de alta precisión (2024).'],['Blue Ghost 1','Primera misión comercial totalmente exitosa en la Luna (Firefly, 2025).']]],['Artemis','#818cf8',[['Artemis I','Prueba no tripulada de SLS y Orion (2022).'],['Artemis II','Completada: despegó el 1 de abril de 2026 y amerizó el 10 de abril. Sobrevoló la Luna con 4 astronautas y llegó a 406.771 km de la Tierra, un récord humano.'],['Artemis III','Prueba tripulada en órbita terrestre del acoplamiento de Orion con los landers comerciales (prevista para 2027).'],['Artemis IV','Primer alunizaje tripulado del programa, en el polo sur (previsto a principios de 2028).']]]],d=>`<h3>${d[0]}</h3>${li(d[2])}`);
+
+/* ===== LLEGADA HUMANA ===== */
+cards('#llegada',[['Neil Armstrong','Comandante de Apolo 11. Primera persona en pisar la Luna (20/07/1969).'],['Buzz Aldrin','Piloto del módulo lunar de Apolo 11. Segundo en pisar la Luna.'],['Harrison Schmitt','Único geólogo que caminó sobre la Luna (Apolo 17).'],['Christina Koch','Artemis II (2026): primera mujer en viajar a la Luna y rodearla. No alunizó.'],['Victor Glover','Piloto de Artemis II: primera persona de color en viajar a la Luna.'],['Jeremy Hansen','Astronauta canadiense de Artemis II: primer no estadounidense en viajar a la Luna.']]);
+
+/* ===== PROYECTOS FUTUROS ===== */
+tabs('#ptabs','#ppanel',[['En marcha (2026)','#059669',[['Artemis II','Completada en abril de 2026: sobrevuelo lunar con 4 astronautas. En octubre NASA publicó más de 800 GB de datos científicos de la misión.'],['Artemis III','En preparación: los propulsores del cohete SLS ya fueron apilados y la tripulación (Bresnik, Parmitano, Rubio y Douglas) se entrena para el vuelo de 2027.'],['Moon Base II (Griffin-1)','Lander de Astrobotic (ahora Voyager Technologies) con el rover FLIP. Lanzamiento previsto no antes de noviembre de 2026 en un Falcon Heavy, rumbo a Mons Mouton, en el polo sur. Es el único lanzamiento lunar de NASA previsto para este año.'],['Moon Base I y III','Pasaron a la primera parte de 2027: Blue Moon MK1 Endurance (Blue Origin, retrasada por la explosión del cohete New Glenn en mayo) e IM-3 Trinity (Intuitive Machines, rumbo a Reiner Gamma).'],['Chang\'e 7','Se perdió la ventana de lanzamiento de agosto de 2026 y la misión al polo sur lunar se pospuso, con 2027 como horizonte probable.']]],['Futuros','#818cf8',[['Artemis IV','Primer alunizaje tripulado del programa, en el polo sur: dos astronautas descenderán en un lander comercial (previsto a principios de 2028).'],['Artemis V','Prevista para fines de 2028: primeros trabajos de construcción de la base permanente.'],['Moon Base (NASA)','Plan anunciado en marzo de 2026: decenas de aterrizajes robóticos hasta 2029, capacidad inicial para astronautas hacia 2032 y presencia sostenida después.'],['Lunar Gateway','Pausado por NASA en marzo de 2026: la prioridad pasó a la base en la superficie.'],['VIPER y Firefly','Un segundo Blue Moon MK1 llevaría el rover VIPER a fines de 2027; Blue Ghost 2 (Firefly) está previsto para más adelante en 2027.'],['Chang\'e 8','Exploración de recursos lunares (~2028-2029).']]],['China e ILRS','#d97706',[['Alunizaje tripulado','China apunta a llevar astronautas a la Luna antes de 2030, con el cohete Long March 10, la nave Mengzhou y el lander Lanyue.'],['Pruebas en curso','En febrero de 2026 probó una versión del Long March 10 con una cápsula Mengzhou sin tripulación.'],['Chang\'e 7 y 8','Chang\'e 7 buscaría hielo de agua en el polo sur; Chang\'e 8 probaría el uso de recursos lunares.'],['ILRS','Base de investigación lunar internacional que China impulsa con Rusia y otros países; una versión inicial se prevé hacia 2035.']]]],d=>`<h3>${d[0]}</h3>${li(d[2])}`);
+
+/* ===== COLONIA ===== */
+cards('#colonia',[['Polo sur lunar','Región elegida por NASA y China: tiene hielo de agua en cráteres en sombra permanente y zonas con mucha luz solar, como la cresta conectora de Shackleton.'],['Hielo de agua','Fuente de agua potable, oxígeno e hidrógeno para combustible.'],['Hábitats','Módulos presurizados (hábitats semipermanentes hacia 2032) y posible uso de tubos de lava como refugio natural.'],['Energía','Paneles solares, baterías y, según el plan de NASA, energía nuclear con un reactor de fisión para atravesar la noche lunar.'],['Rovers','Vehículos para desplazarse y transportar carga: el Vehículo Lunar de Terreno (LTV) y rovers presurizados.'],['Comunicaciones','Enlaces con la Tierra, satélites de retransmisión y una red en superficie, similar a las antenas de telefonía celular.']]);
+$('#colonia-tl').innerHTML=[['2026-2029','Fase 1: aterrizajes robóticos con rovers y drones para explorar el polo sur y elegir el sitio de la base.'],['2028','Artemis IV: primeros astronautas del programa en la superficie.'],['2029-2032','Fase 2: hábitats, energía nuclear y solar, y rovers presurizados para estadías tripuladas cortas.'],['2032 en adelante','Fase 3: presencia humana sostenida y uso de recursos locales.']].map(e=>`<div class="ev in"><div class="yr">${e[0]}</div><p style="color:var(--muted);font-size:.92rem">${e[1]}</p></div>`).join('');
+cards('#colonia-desafios',[['Radiación cósmica','Sin atmósfera ni magnetosfera, la radiación es alta; se necesitan blindajes.'],['Polvo lunar','Abrasivo y peligroso para pulmones y equipos.'],['Baja gravedad','1/6 de la terrestre; efectos a largo plazo en huesos y músculos.'],['Temperaturas extremas','De -173 °C a 127 °C según la iluminación.'],['Noche lunar','Dura unos 14 días terrestres (salvo en crestas muy iluminadas): hay que almacenar energía o usar reactores.'],['Logística y cadencia','Hacen falta decenas de aterrizajes. Los retrasos de los landers comerciales ya movieron varias misiones a 2027.']]);
+
+/* ===== ORIGEN ===== */
+cards('#origen-cards',[['Teoría del Gran Impacto','Hace ~4.500 millones de años, un protoplaneta del tamaño de Marte (Tea o Theia) chocó contra la Tierra. Los escombros formaron la Luna.'],['Evidencias','Similitud en la composición de isótopos de oxígeno entre Tierra y Luna, y el pequeño núcleo lunar.'],['Mares de lava','La corteza se solidificó y luego grandes impactos crearon cuencas que se llenaron de basalto.'],['Cara oculta','Tiene una corteza más gruesa y menos mares. La sonda soviética Luna 3 la fotografió por primera vez en 1959; Chang\'e 4 (2019) y Chang\'e 6 (2024) alunizaron allí.']]);
+
+/* ===== ÓRBITA ===== */
+cards('#orbita',[['Distancia media','384.400 km.'],['Perigeo','~363.300 km en promedio. El más cercano de 2026: ~356.900 km (24 de diciembre).'],['Apogeo','~405.500 km en promedio. El más lejano de 2026: ~406.300 km (11 de diciembre).'],['Período orbital','27,3 días (mes sideral). Las fases tardan 29,5 días (mes sinódico).'],['Rotación','Sincrónica: muestra siempre la misma cara.'],['Alejamiento','3,8 cm por año.']]);
+
+/* ===== LÍNEA DEL TIEMPO ===== */
+const TL=[['1959','La sonda soviética Luna 3 fotografía la cara oculta.'],['1969','Apolo 11: primer alunizaje tripulado.'],['1972','Apolo 17: última misión tripulada a la Luna.'],['2019','Chang\'e 4 aluniza en la cara oculta.'],['2020','Chang\'e 5 trae muestras lunares.'],['2023','Chandrayaan-3 de India aluniza cerca del polo sur.'],['2024','Chang\'e 6 trae las primeras muestras de la cara oculta. Odysseus (Intuitive Machines) es el primer alunizaje comercial de EE. UU.'],['2025','Blue Ghost (Firefly) completa con éxito la primera misión comercial en la superficie lunar.'],['2026','NASA presenta Moon Base y pausa el Gateway (marzo). Artemis II sobrevuela la Luna con 4 astronautas y bate el récord de distancia (abril).'],['Fines de 2026','Lanzamiento previsto de Griffin-1 (Moon Base II) al polo sur.'],['2027','Artemis III prueba landers en órbita terrestre. Se prevé la llegada de Moon Base I y III; Chang\'e 7 apunta a ese año.'],['2028','Artemis IV: primer alunizaje tripulado del programa. Artemis V a fines de año.'],['Antes de 2030','Objetivo de China para su primer alunizaje tripulado.'],['2032','Moon Base alcanzaría capacidad inicial para astronautas (plan de NASA).']];
+$('#tl').innerHTML=TL.map(t=>`<div class="ev in"><div class="yr">${t[0]}</div><p style="color:var(--muted);font-size:.92rem">${t[1]}</p></div>`).join('');
+
+/* ===== GLOSARIO ===== */
+const GL=[['Alunizaje','Descenso controlado de una nave sobre la superficie lunar.'],['Apogeo','Punto de la órbita lunar más alejado de la Tierra.'],['Artemis','Programa de NASA con socios internacionales para volver a la Luna y construir una base.'],['Basalto','Roca volcánica oscura que forma los mares lunares.'],['Cara oculta','Hemisferio lunar no visible desde la Tierra.'],['CLPS','Servicios comerciales de carga a la Luna: NASA contrata empresas para llevar instrumentos en sus landers.'],['Cráter','Depresión circular formada por el impacto de un meteorito.'],['Gateway','Estación espacial en órbita lunar que NASA pausó en 2026 para priorizar una base en la superficie.'],['Gran Impacto','Teoría del origen de la Luna por colisión con un protoplaneta.'],['Hielo de agua','Agua congelada, clave para una base lunar.'],['HLS (Sistema de Aterrizaje Humano)','Lander que llevará astronautas de la órbita lunar a la superficie (Starship o Blue Moon).'],['Lander','Módulo de aterrizaje.'],['Manto','Capa intermedia entre el núcleo y la corteza.'],['Mare','Llanura de lava basáltica en la Luna.'],['Moon Base','Plan de NASA para construir por fases una base en el polo sur lunar.'],['Núcleo','Centro de hierro de la Luna (2-4 % de su masa).'],['Perigeo','Punto de la órbita lunar más cercano a la Tierra.'],['Regolito','Capa de polvo y fragmentos rocosos que cubre la superficie lunar.'],['Rover','Vehículo para explorar la superficie.'],['Sobrevuelo','Paso cerca de la Luna sin entrar en órbita ni alunizar, como hizo Artemis II.'],['Síncrona (rotación)','La Luna tarda lo mismo en rotar que en orbitar, mostrando siempre la misma cara.'],['Trayectoria de retorno libre','Ruta que usa la gravedad lunar para devolver la nave a la Tierra.'],['Tubo de lava','Túnel subterráneo formado por lava, posible refugio para una base.']];
+GL.sort((a,b)=>a[0].localeCompare(b[0],'es'));
+function glo(t=''){const f=GL.filter(g=>(g[0]+g[1]).toLowerCase().includes(t.toLowerCase()));$('#gl').innerHTML=f.length?f.map(g=>`<div class="card"><dt>${g[0]}</dt><dd>${g[1]}</dd></div>`).join(''):'<p class="lead">No hay resultados. Probá con otra palabra.</p>'}
+$('#q').oninput=e=>glo(e.target.value);glo();
+go(location.hash.slice(1));
+</script>
+</body>
+</html>

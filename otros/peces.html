@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Peces</title>
+<meta name="description" content="Peces explicados en lenguaje sencillo: cuerpo y nado, grupos, hábitats, peces de acuario, cómo montar un acuario, evolución y glosario.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Unbounded:wght@500..800&display=swap" rel="stylesheet">
+<style>
+:root{--fd:'Unbounded','Segoe UI',system-ui,sans-serif;--fb:'Atkinson Hyperlegible','Segoe UI',system-ui,sans-serif;--bg:#efeaf8;--sf:#faf8fe;--s2:#ddd3f2;--bd:#c3b5e4;--text:#1a1236;--mu:#554a7a;--accent:#5b2ea6;--on:#fff;--c1:#5b2ea6;--c2:#c2500a;--c3:#0b7a75;--c4:#1f5fa8;--c5:#b0275a;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0d0a1f;--sf:#17133a;--s2:#211c4d;--bd:#3a3382;--text:#ece8ff;--mu:#b6adde;--accent:#b89cff;--on:#0d0a1f;--c1:#b89cff;--c2:#ffa05c;--c3:#4fe0cf;--c4:#7db4ff;--c5:#ff8fb4}}
+:root[data-theme="dark"]{--bg:#0d0a1f;--sf:#17133a;--s2:#211c4d;--bd:#3a3382;--text:#ece8ff;--mu:#b6adde;--accent:#b89cff;--on:#0d0a1f;--c1:#b89cff;--c2:#ffa05c;--c3:#4fe0cf;--c4:#7db4ff;--c5:#ff8fb4}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px);-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--text);font:400 1rem/1.65 var(--fb);overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--bg)}
+h1,h2,h3{font-family:var(--fd);font-weight:600;line-height:1.15;margin:0;letter-spacing:-.02em}p{margin:0}a{color:inherit;text-decoration:none}button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
+.site-header{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:var(--bg);border-bottom:1px solid var(--bd)}
+.hi{max-width:1100px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:14px}
+.brand{display:flex;align-items:center;gap:9px;font:700 1.1rem var(--fd);white-space:nowrap}.brand svg{width:34px;height:20px;color:var(--accent)}
+.nav{display:flex;gap:2px;margin-left:auto;overflow-x:auto;scrollbar-width:none;min-width:0}.nav::-webkit-scrollbar{display:none}
+.nl{padding:8px 12px;border-radius:10px;font-size:.85rem;color:var(--mu);white-space:nowrap}.nl:hover{background:var(--s2)}.nl.active{color:var(--on);background:var(--accent);font-weight:700}
+.tt{width:38px;height:38px;flex:none;border:1px solid var(--bd);border-radius:10px;background:var(--s2);font-size:1.1rem}
+main{max-width:1100px;margin:0 auto;padding:0 20px 70px}
+.view{display:none}.view.active{display:block;animation:vin .5s ease both}@keyframes vin{from{opacity:0;transform:translateY(14px)}}
+.hero{position:relative;overflow:hidden;margin-top:22px;padding:64px 36px 90px;border-radius:28px;background:linear-gradient(var(--s2),var(--bg))}
+.hero>*{position:relative}.hero>.shoal{position:absolute;inset:0;width:100%;height:100%;color:var(--accent);opacity:.4}
+.sh{animation:sw 26s linear infinite}@keyframes sw{from{transform:translateX(660px)}to{transform:translateX(-240px)}}
+h1{font-size:clamp(2.8rem,10vw,6rem);font-weight:700;margin-bottom:18px;letter-spacing:-.03em}
+.lead{color:var(--mu);font-size:1.1rem;max-width:620px}.hero .lead{margin-bottom:26px}
+.btn{display:inline-block;padding:13px 24px;border-radius:12px;background:var(--accent);color:var(--on);font-weight:700}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.card{padding:20px;border-radius:12px;background:var(--sf);border:1px solid var(--bd)}a.card:hover{border-color:var(--accent)}
+.card h3{font-size:1.02rem;margin-bottom:6px}.card p,.card dd{font-size:.93rem;color:var(--mu)}.card dt{font:600 .98rem var(--fd)}.card dd{margin:0}
+.home{margin-top:30px}
+.sec{padding:46px 0 6px}.sec h2{font-size:clamp(1.6rem,4vw,2.5rem);margin-bottom:10px}.sec>.lead{margin-bottom:26px}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.tab{padding:11px 16px;border-radius:10px;border:1px solid var(--bd);background:var(--sf);font-weight:700;font-size:.9rem}.tab[aria-selected=true]{background:var(--c);color:var(--on);border-color:transparent}
+.panel{padding:24px;border-radius:12px;background:var(--sf);border:1px solid var(--bd);border-left:6px solid var(--c);animation:vin .4s ease both}
+.panel h3{font-size:1.3rem;margin-bottom:8px}.panel p{color:var(--mu);max-width:70ch}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}.chip{padding:5px 12px;border-radius:99px;border:1px solid var(--bd);background:var(--s2);font-size:.82rem}
+.tool{padding:24px;border-radius:16px;border:1px solid var(--bd);background:var(--sf);margin-bottom:24px}
+.tool h3{font-size:1.35rem;margin:4px 0 8px}.tool p{max-width:70ch;color:var(--mu)}.tool .m{font-size:.9rem;color:var(--mu)}
+.bar{height:14px;border-radius:99px;background:var(--s2);border:1px solid var(--bd);overflow:hidden;margin:10px 0}.bar i{display:block;height:100%;min-width:4px;border-radius:99px;background:var(--c2);transition:width .5s}
+.row{display:grid;grid-template-columns:84px 1fr;align-items:center;gap:10px;font-size:.9rem;color:var(--mu)}.row .bar{margin:5px 0}
+input[type=range]{width:100%;height:30px;accent-color:var(--accent);margin:8px 0}
+.tl{position:relative;padding:6px 0}.tl::before{content:"";position:absolute;left:15px;top:0;bottom:0;width:2px;background:var(--bd)}
+.ev{position:relative;padding:0 0 24px 46px;opacity:0;transform:translateY(18px);transition:opacity .5s,transform .5s}.ev.in{opacity:1;transform:none}
+.ev::before{content:"";position:absolute;left:7px;top:8px;width:18px;height:18px;border-radius:50%;background:var(--bg);border:4px solid var(--accent)}
+.ev b{display:block;font:600 1.05rem var(--fd);color:var(--accent);margin-bottom:2px}.ev h3{font-size:1.1rem}.ev p{color:var(--mu);max-width:60ch}
+@media(min-width:860px){.tl::before{left:50%}.ev{width:50%;padding:0 44px 28px 0;text-align:right}.ev p{margin-left:auto}.ev::before{left:auto;right:-9px}.ev:nth-child(even){margin-left:50%;padding:0 0 28px 44px;text-align:left}.ev:nth-child(even) p{margin-left:0}.ev:nth-child(even)::before{right:auto;left:-9px}}
+.search{width:100%;max-width:420px;padding:12px 16px;border-radius:12px;border:1px solid var(--bd);background:var(--sf);color:var(--text);font:inherit;margin-bottom:18px}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.ev{opacity:1;transform:none}.sh{transform:translateX(300px)}}
+</style>
+</head>
+<body>
+<header class="site-header"><div class="hi">
+<a class="brand" href="#inicio"><svg viewBox="0 0 40 20" fill="currentColor"><path d="M0 10C8 0 22 0 30 10C22 20 8 20 0 10ZM28 10L40 2V18Z"/></svg>Peces</a>
+<nav class="nav" id="nav" aria-label="Secciones"></nav>
+<button class="tt" id="tt" aria-label="Cambiar entre tema claro y oscuro">◐</button></div></header>
+<main>
+<section class="view" id="inicio">
+<div class="hero"><svg class="shoal" viewBox="0 0 600 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><path id="fh" d="M0 10C8 0 22 0 30 10C22 20 8 20 0 10ZM28 10L40 2V18Z"/></defs><g class="sh"><use href="#fh" x="0" y="80"/><use href="#fh" x="45" y="55"/><use href="#fh" x="45" y="105"/><use href="#fh" x="95" y="35"/><use href="#fh" x="95" y="80"/><use href="#fh" x="95" y="125"/><use href="#fh" x="145" y="58"/><use href="#fh" x="145" y="104"/><use href="#fh" x="195" y="80"/></g></svg>
+<h1>Peces</h1><p class="lead">Respiran bajo el agua, sienten el movimiento con todo el cuerpo y viven desde un arroyo hasta el fondo del mar. Y algunos, en una pecera.</p><a class="btn" href="#cuerpo">Mirá cómo nadan</a></div>
+<div class="grid home" id="home"></div>
+</section>
+<section class="view" id="cuerpo"><div class="sec"><h2>Cuerpo y nado</h2><p class="lead">Un pez está hecho para moverse y respirar en el agua. Estas son sus piezas y sus formas de nadar.</p><div class="grid" id="g-cu" style="margin-bottom:24px"></div><div id="t-cu"></div></div></section>
+<section class="view" id="grupos"><div class="sec"><h2>Grupos de peces</h2><p class="lead">Hay unas 35 000 especies, de milímetros a muchos metros. Deslizá para comparar tamaños.</p>
+<div class="tool"><span class="m" id="szm"></span><h3 id="szn"></h3><div class="bar"><i id="szb"></i></div><p id="szd"></p><input id="sz" type="range" min="0" max="4" value="0" aria-label="Elegir pez por tamaño"></div><div id="t-gr"></div></div></section>
+<section class="view" id="habitats"><div class="sec"><h2>Dónde viven</h2><p class="lead">Cada ambiente pide un cuerpo y una conducta distintos. Y el agua más cálida lleva menos oxígeno, como vas a ver abajo.</p>
+<div class="tool"><span class="m">Temperatura: <b id="oxt"></b> °C</span><h3 id="oxh"></h3><div class="bar"><i id="oxb"></i></div><p id="oxd"></p><input id="ox" type="range" min="0" max="35" value="24" aria-label="Temperatura del agua en grados"></div><div id="t-ha"></div></div></section>
+<section class="view" id="acuario"><div class="sec"><h2>Peces de acuario</h2><p class="lead">Antes de elegir un pez, fijate en su tamaño adulto, su temperatura ideal y su carácter. Estos son los más comunes.</p><div id="t-ac"></div></div></section>
+<section class="view" id="montaje"><div class="sec"><h2>Montar un acuario</h2><p class="lead">Un acuario nuevo necesita semanas para que se formen las bacterias que limpian el agua. Es el llamado ciclado: deslizá por las semanas.</p>
+<div class="tool"><span class="m">Semana <b id="nwk"></b> de 6</span><h3 id="nt"></h3><p id="nd"></p><input id="nc" type="range" min="0" max="6" value="0" aria-label="Semana del ciclado"><div id="nb"></div><p class="m" style="margin-top:10px">Esquema orientativo: los tiempos cambian con la temperatura, el filtro y la cantidad de peces. Un kit de test de agua muestra en qué punto estás.</p></div>
+<div class="grid" id="g-mo"></div></div></section>
+<section class="view" id="evolucion"><div class="sec"><h2>Evolución</h2><p class="lead">Los peces fueron los primeros vertebrados. Algunos hitos, del más antiguo al más reciente.</p><div class="tl" id="tl"></div></div></section>
+<section class="view" id="glosario"><div class="sec"><h2>Glosario</h2><p class="lead">Palabras clave de esta guía, en orden alfabético.</p><input class="search" id="q" type="search" placeholder="Buscar una palabra" aria-label="Buscar en el glosario"><div class="grid" id="gl"></div></div></section>
+</main>
+<script>
+const $=(s,e=document)=>e.querySelector(s),$$=(s,e=document)=>[...e.querySelectorAll(s)];
+const V=[['inicio','Inicio',''],['cuerpo','Cuerpo y nado','Branquias, aletas, línea lateral y formas de nadar.','Cuerpo'],['grupos','Grupos de peces','Sin mandíbulas, cartilaginosos y óseos.','Grupos'],['habitats','Dónde viven','Ríos, lagos, arrecifes, mar abierto y abismo.','Hábitats'],['acuario','Peces de acuario','Tetras, gupis, bettas, cíclidos y más.','Acuario'],['montaje','Montar un acuario','El ciclado del agua y los cuidados básicos.','Montaje'],['evolucion','Evolución','Más de 500 millones de años en el agua.'],['glosario','Glosario','Términos clave con buscador.']];
+$('#nav').innerHTML=V.map(v=>`<a class="nl" href="#${v[0]}" data-v="${v[0]}">${v[3]||v[1]}</a>`).join('');
+$('#home').innerHTML=V.slice(1).map(v=>`<a class="card" href="#${v[0]}"><h3>${v[1]}</h3><p>${v[2]}</p></a>`).join('');
+const io=new IntersectionObserver(es=>es.forEach(e=>e.isIntersecting&&e.target.classList.add('in')),{threshold:.15});
+function go(h){const id=V.some(v=>v[0]===h)?h:'inicio';$$('.view').forEach(e=>e.classList.toggle('active',e.id===id));$$('.nl').forEach(e=>e.classList.toggle('active',e.dataset.v===id));scrollTo(0,0);$$('.ev').forEach(e=>io.observe(e))}
+addEventListener('hashchange',()=>go(location.hash.slice(1)));
+$('#tt').onclick=()=>{const r=document.documentElement,d=r.dataset.theme==='dark'||(!r.dataset.theme&&matchMedia('(prefers-color-scheme:dark)').matches);r.dataset.theme=d?'light':'dark';try{localStorage.setItem('peces-theme',r.dataset.theme)}catch(e){}};
+try{const t=localStorage.getItem('peces-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}
+
+function tabs(id,D){const e=$('#'+id);e.innerHTML=`<div class="tabs" role="tablist">${D.map((d,i)=>`<button class="tab" role="tab" style="--c:var(--c${i%5+1})" data-i="${i}">${d[0]}</button>`).join('')}</div><div class="panel" role="tabpanel"></div>`;
+const p=$('.panel',e),sel=i=>{$$('.tab',e).forEach((t,j)=>t.setAttribute('aria-selected',i===j));const d=D[i];p.style.setProperty('--c',`var(--c${i%5+1})`);p.innerHTML=`<h3>${d[1]}</h3><p>${d[2]}</p><div class="chips">${d[3].map(c=>`<span class="chip">${c}</span>`).join('')}</div>`;p.style.animation='none';p.offsetWidth;p.style.animation=''};
+e.onclick=ev=>{const t=ev.target.closest('.tab');t&&sel(+t.dataset.i)};sel(0)}
+const cards=(id,D)=>$('#'+id).innerHTML=D.map(d=>`<div class="card"><h3>${d[0]}</h3><p>${d[1]}</p></div>`).join('');
+
+cards('g-cu',[['Branquias','Extraen el oxígeno disuelto en el agua. El agua entra por la boca y sale por debajo del opérculo, la tapa de las branquias.'],['Aletas','Dorsal, pectorales, pélvicas, anal y caudal: dan estabilidad, dirección y empuje.'],['Escamas y mucus','Las escamas protegen el cuerpo y una capa de mucus ayuda a defenderlo de parásitos.'],['Línea lateral','Órgano sensorial a lo largo del cuerpo que detecta vibraciones y cambios de presión del agua.'],['Vejiga natatoria','Bolsa de gas que permite flotar a una profundidad sin gastar energía. Los tiburones no la tienen.'],['Sentidos','Ven, huelen y oyen. Muchos tienen receptores del gusto en la piel o en barbillones.']]);
+tabs('t-cu',[
+['Cola potente','Atún y tiburón','Los peces rápidos baten la cola de lado a lado y tienen un cuerpo hidrodinámico. El atún y el pez vela están entre los nadadores más veloces.',['Atún','Pez vela','Tiburones']],
+['Ondulación','Todo el cuerpo','Las anguilas y las lampreas avanzan ondulando el cuerpo entero, como una serpiente. Les sirve para moverse entre rocas y plantas.',['Anguila','Lamprea']],
+['Aletas pectorales','Maniobrar con precisión','Los peces de arrecife usan las aletas pectorales para frenar, girar y avanzar despacio entre los corales.',['Peces mariposa','Peces ángel','Peces loro']],
+['Cardúmenes','Nadar en grupo','Muchos peces nadan en cardumen y se coordinan con la línea lateral. En grupo, cada individuo tiene menos riesgo de ser capturado.',['Sardinas','Tetras','Línea lateral']],
+['Flotación','Vejiga natatoria','Los peces óseos regulan el gas de la vejiga natatoria para flotar. Los tiburones compensan con un hígado rico en aceite y con el movimiento constante.',['Vejiga','Hígado con aceite']]]);
+
+const Z=[['Paedocypris progenia','Cerca de 8 mm. Es uno de los vertebrados más pequeños que se conocen y vive en pantanos de Sumatra.',.8,'8 mm'],['Neón tetra','De 3 a 4 cm. Es un clásico de los acuarios y vive en cardumen en ríos de Sudamérica.',4,'4 cm'],['Pez dorado común','Puede llegar a unos 30 cm y, bien cuidado, vivir muchos años.',25,'25 cm'],['Atún rojo','Puede superar los 2 m y pesar varios cientos de kilos. Nada a gran velocidad en mar abierto.',250,'2,5 m'],['Tiburón ballena','Cerca de 12 m o más. Es el pez más grande del mundo y se alimenta de plancton.',1200,'12 m']];
+function sz(){const z=Z[+$('#sz').value];$('#szm').textContent='Largo: '+z[3];$('#szn').textContent=z[0];$('#szd').textContent=z[1];$('#szb').style.width=Math.sqrt(z[2]/1200)*100+'%'}
+$('#sz').oninput=sz;sz();
+tabs('t-gr',[
+['Sin mandíbulas','Lampreas y mixinos','Son los peces más antiguos que viven hoy. Tienen boca en forma de disco o con dientes córneos, sin mandíbulas, y un cuerpo alargado sin escamas.',['Lampreas','Mixinos']],
+['Cartilaginosos','Tiburones y rayas','Tienen el esqueleto de cartílago, no de hueso. Incluyen tiburones, rayas y quimeras. Muchos tienen una piel áspera cubierta de dentículos.',['Tiburones','Rayas','Quimeras']],
+['Óseos','La gran mayoría','Con esqueleto de hueso, son más del 95 % de los peces actuales. Casi todos tienen vejiga natatoria y escamas.',['Atunes','Truchas','Carpas','Peces de acuario']],
+['Pulmonados y celacantos','Parientes de los anfibios','Tienen aletas carnosas con huesos. Los peces pulmonados respiran aire y están emparentados con los animales de cuatro patas.',['Pez pulmonado','Celacanto']]]);
+
+const O=[14.6,12.8,11.3,10.1,9.1,8.3,7.5,6.9];
+function ox(){const t=+$('#ox').value,i=Math.min(6,Math.floor(t/5)),o=O[i]+(O[i+1]-O[i])*(t-i*5)/5,h=t<10?'Agua fría':t<20?'Agua templada':t<=28?'Agua cálida':'Agua muy cálida',d=t<10?'Contiene mucho oxígeno. Es el agua de arroyos de montaña, donde viven las truchas.':t<20?'Buen nivel de oxígeno. Es típica de lagos y ríos de zonas templadas.':t<=28?'Es el rango del acuario tropical, de 24 a 27 °C. Conviene mover la superficie del agua para que entre aire.':'Hay poco oxígeno disuelto y los peces gastan más. En un acuario esto es una señal de alerta.';$('#oxt').textContent=t;$('#oxh').textContent=h+': '+o.toFixed(1).replace('.',',')+' mg/L de oxígeno disuelto';$('#oxd').textContent=d;$('#oxb').style.width=o/15*100+'%'}
+$('#ox').oninput=ox;ox();
+tabs('t-ha',[
+['Ríos y arroyos','Agua que corre','Los peces de río resisten la corriente con cuerpos fuertes o se refugian entre piedras. En los grandes ríos sudamericanos viven dorados, surubíes y pacúes; en arroyos fríos, truchas.',['Dorado','Surubí','Trucha','Bagres']],
+['Lagos y lagunas','Agua quieta','Con poca corriente, viven peces que se alimentan en el fondo o entre las plantas. Las carpas y las mojarras son comunes. Algunos lagos africanos albergan cientos de especies de cíclidos.',['Carpas','Mojarras','Cíclidos']],
+['Arrecifes','Colores y refugios','Los corales ofrecen comida y escondites. El pez payaso vive protegido entre los tentáculos de las anémonas y el pez loro raspa el coral con su pico, y produce arena al digerirlo.',['Pez payaso','Pez loro','Peces ángel']],
+['Mar abierto','Sin dónde esconderse','Allí predominan los nadadores veloces y los cardúmenes. Atunes, marlines y sardinas cruzan grandes distancias en busca de alimento.',['Atún','Marlín','Sardinas']],
+['El abismo','Oscuridad y presión','En la profundidad casi no hay luz. Algunos peces producen su propia luz: el rape abisal usa un señuelo luminoso para atraer presas.',['Rape abisal','Pez víbora','Bioluminiscencia']]]);
+tabs('t-ac',[
+['Tetras y rasboras','Peces de cardumen','Son pequeños, de colores brillantes y sociables. Conviene tenerlos en grupos de al menos seis de la misma especie. El neón tetra, de Sudamérica, es el más conocido.',['Neón tetra','Rasboras','Cardumen']],
+['Gupis y platis','Peces vivíparos','Las hembras paren crías vivas y se reproducen con facilidad. Son resistentes y los machos suelen ser muy coloridos. Si hay muchos, el acuario se llena rápido.',['Gupi','Plati','Espada']],
+['Betta','El pez luchador','Los machos pelean entre sí, así que cada uno necesita su acuario. Pueden respirar aire en la superficie gracias a un órgano laberinto. Viven mejor en agua cálida y con espacio.',['Betta splendens','Órgano laberinto','Agua cálida']],
+['Cíclidos','Cuidadores de crías','Los escalares y los ramirezi cuidan huevos y crías. Algunos son territoriales y pueden comerse peces muy pequeños, por eso hay que revisar la compatibilidad.',['Escalar','Ramirezi','Territoriales']],
+['Peces de fondo','Corydoras y limpiafondos','Los corydoras son pequeños y sociables, y revuelven el fondo en busca de comida. Prefieren estar en grupo y un fondo de arena fina, que no les lastime los barbillones.',['Corydoras','Loricáridos']],
+['Pez dorado','Mucho más que una pecera','Es de agua fría o templada y produce muchos desechos. Puede llegar a unos 30 cm y vivir muchos años, por lo que necesita un acuario grande y buena filtración.',['Carassius auratus','Agua fría','Acuario grande']],
+['Peces marinos','Más exigentes','El pez payaso y otros peces marinos requieren agua salada, control de salinidad y más experiencia. Conviene empezar con un acuario de agua dulce.',['Pez payaso','Agua salada','Nivel avanzado']]]);
+
+const NS=[['Arranque','Se arma el acuario con agua declorada, filtro y calentador. Todavía casi no hay bacterias útiles.'],['Aparece el amoníaco','Los restos de comida y los desechos generan amoníaco, que es tóxico para los peces.'],['Pico de amoníaco','Empiezan a crecer bacterias que consumen amoníaco. Es el momento más delicado.'],['Sube el nitrito','El amoníaco baja y se forma nitrito, también tóxico.'],['Se estabiliza el nitrito','Otro grupo de bacterias convierte el nitrito en nitrato, mucho menos tóxico.'],['Casi ciclado','El amoníaco y el nitrito están cerca de cero y el nitrato va en aumento.'],['Acuario ciclado','El filtro biológico ya funciona. Los cambios parciales de agua mantienen bajo el nitrato.']],NA=[10,70,100,60,15,0,0],NN=[0,5,40,100,60,5,0],NT=[5,5,10,30,60,80,90];
+function nc(){const i=+$('#nc').value,r=(l,v,c)=>`<div class="row"><span>${l}</span><div class="bar"><i style="width:${v}%;background:var(${c})"></i></div></div>`;$('#nwk').textContent=i;$('#nt').textContent=NS[i][0];$('#nd').textContent=NS[i][1];$('#nb').innerHTML=r('Amoníaco',NA[i],'--c5')+r('Nitrito',NN[i],'--c2')+r('Nitrato',NT[i],'--c3')}
+$('#nc').oninput=nc;nc();
+cards('g-mo',[['Tamaño','Más agua es más estable. Elegí el acuario según el tamaño adulto de los peces, no el que tienen al comprarlos.'],['Filtro','Además de limpiar, aloja las bacterias que transforman el amoníaco. No conviene lavarlo con agua de la canilla.'],['Temperatura','La mayoría de los peces tropicales vive bien entre 24 y 27 °C. Un calentador con termómetro ayuda a mantenerla.'],['Agua de la canilla','Suele tener cloro, que daña a los peces. Usá un declorador antes de llenar o cambiar el agua.'],['Luz y plantas','Unas 6 a 8 horas de luz alcanzan. Más luz favorece las algas. Las plantas y los refugios dan tranquilidad.'],['Alimentación','Poca comida: lo que se comen en un par de minutos. El exceso ensucia el agua.'],['Peces nuevos','Dejá la bolsa flotando unos 15 a 20 minutos y agregá de a poco agua del acuario antes de soltarlos.'],['No los sueltes','Nunca liberes peces en ríos o lagunas: pueden convertirse en especies invasoras y dañar a las nativas.']]);
+
+$('#tl').innerHTML=[['Hace unos 520 millones de años','Primeros peces','Aparecen los primeros vertebrados, peces pequeños y sin mandíbulas.'],['Hace unos 430 millones de años','Peces con mandíbulas','Las mandíbulas permiten morder y cazar presas más grandes.'],['Hace unos 400 millones de años','La edad de los peces','En el Devónico se diversifican los peces, incluidos depredadores gigantes de armadura ósea.'],['Hace unos 375 millones de años','Tiktaalik','Un pez con aletas robustas y cuello móvil muestra rasgos de transición hacia los animales de cuatro patas.'],['Hace unos 250 millones de años','Gran extinción','Desaparece cerca del 90 % de las especies marinas. Los peces se diversifican otra vez después.'],['Hace unos 100 millones de años','Auge de los teleósteos','Se multiplican los peces óseos modernos, hoy el grupo dominante.'],['Hace más de 1000 años','El pez dorado','En China se empieza a criar la carpa dorada, antepasada del pez dorado actual.'],['1853','Primer acuario público','El zoológico de Londres abre una casa de peces con acuarios para el público.'],['Hoy','Unas 35 000 especies','Los peces son el grupo de vertebrados más diverso. Muchas poblaciones sufren por la pesca excesiva y la pérdida de hábitat.']].map(e=>`<div class="ev"><b>${e[0]}</b><h3>${e[1]}</h3><p>${e[2]}</p></div>`).join('');
+
+const G=[['Aclimatación','Adaptación gradual de un pez al agua de un acuario nuevo.'],['Aleta','Estructura que permite nadar, girar y mantener el equilibrio.'],['Amoníaco','Desecho tóxico que producen los peces y la comida en descomposición.'],['Barbillón','Filamento sensorial cerca de la boca de algunos peces.'],['Branquia','Órgano que extrae oxígeno del agua.'],['Cardumen','Grupo de peces que nadan juntos.'],['Ciclado','Proceso por el cual se forman las bacterias que limpian el agua de un acuario.'],['Declorador','Producto que elimina el cloro del agua de red.'],['Dureza del agua','Cantidad de minerales disueltos, sobre todo calcio y magnesio.'],['Escama','Placa fina que cubre y protege la piel de muchos peces.'],['Especie invasora','Especie introducida que se expande y daña a las nativas.'],['Filtro biológico','Superficie donde viven bacterias que transforman el amoníaco.'],['Línea lateral','Órgano sensorial que detecta vibraciones del agua.'],['Nitrato','Producto final del ciclo del nitrógeno, poco tóxico en cantidades bajas.'],['Nitrito','Compuesto tóxico intermedio del ciclo del nitrógeno.'],['Opérculo','Tapa ósea que protege las branquias.'],['Órgano laberinto','Estructura que permite a algunos peces respirar aire.'],['Oxígeno disuelto','Oxígeno presente en el agua, que respiran los peces.'],['Ovíparo','Que pone huevos.'],['pH','Medida de la acidez o la alcalinidad del agua.'],['Teleósteo','Pez óseo moderno, el grupo más numeroso.'],['Vejiga natatoria','Bolsa de gas que ayuda a los peces óseos a flotar.'],['Vivíparo','Que pare crías vivas, como el gupi.']];
+G.sort((a,b)=>a[0].localeCompare(b[0],'es'));
+function glo(t=''){const f=G.filter(g=>(g[0]+g[1]).toLowerCase().includes(t.toLowerCase()));$('#gl').innerHTML=f.length?f.map(g=>`<div class="card"><dl style="margin:0"><dt>${g[0]}</dt><dd>${g[1]}</dd></dl></div>`).join(''):'<p class="lead">No hay resultados. Probá con otra palabra.</p>'}
+$('#q').oninput=e=>glo(e.target.value);glo();
+go(location.hash.slice(1));
+</script>
+</body>
+</html>

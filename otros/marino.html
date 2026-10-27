@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mundo marino</title>
+<meta name="description" content="Flora y fauna marina, ríos, océanos, el mundo microscópico, la evolución de la vida en el agua y un glosario.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Fraunces:opsz,wght@9..144,500..800&display=swap" rel="stylesheet">
+<style>
+:root{--fd:'Fraunces',Georgia,serif;--fb:'Atkinson Hyperlegible','Segoe UI',system-ui,sans-serif;--bg:#eaf4f3;--sf:#f8fcfc;--s2:#d3e9e8;--bd:#b4d3d4;--text:#0a2a35;--mu:#42626c;--accent:#0b7285;--on:#fff;--c1:#0b7285;--c2:#2f7d4f;--c3:#9a6412;--c4:#7c4a9e;--c5:#b23a48;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#04141c;--sf:#0a2230;--s2:#10303f;--bd:#1b4658;--text:#e4f6f6;--mu:#9bbfc6;--accent:#4fd1c5;--on:#04141c;--c1:#4fd1c5;--c2:#7bd88f;--c3:#ffc857;--c4:#c4a1f0;--c5:#ff8fa0}}
+:root[data-theme="dark"]{--bg:#04141c;--sf:#0a2230;--s2:#10303f;--bd:#1b4658;--text:#e4f6f6;--mu:#9bbfc6;--accent:#4fd1c5;--on:#04141c;--c1:#4fd1c5;--c2:#7bd88f;--c3:#ffc857;--c4:#c4a1f0;--c5:#ff8fa0}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px);-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--text);font:400 1rem/1.65 var(--fb);overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--bg)}
+h1,h2,h3{font-family:var(--fd);line-height:1.1;margin:0;letter-spacing:-.02em}p{margin:0}a{color:inherit;text-decoration:none}button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
+.site-header{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:var(--bg);border-bottom:1px solid var(--bd)}
+.hi{max-width:1100px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:14px}
+.brand{display:flex;align-items:center;gap:9px;font:700 1.2rem var(--fd);white-space:nowrap}.brand svg{width:30px;height:30px;color:var(--accent)}
+.nav{display:flex;gap:2px;margin-left:auto;overflow-x:auto;scrollbar-width:none;min-width:0}.nav::-webkit-scrollbar{display:none}
+.nl{padding:8px 12px;border-radius:10px;font-size:.85rem;color:var(--mu);white-space:nowrap}.nl:hover{background:var(--s2)}.nl.active{color:var(--on);background:var(--accent);font-weight:700}
+.tt{width:38px;height:38px;flex:none;border:1px solid var(--bd);border-radius:10px;background:var(--s2);font-size:1.1rem}
+main{max-width:1100px;margin:0 auto;padding:0 20px 70px}
+.view{display:none}.view.active{display:block;animation:vin .5s ease both}@keyframes vin{from{opacity:0;transform:translateY(14px)}}
+.hero{position:relative;overflow:hidden;margin-top:22px;padding:64px 36px 140px;border-radius:28px;background:linear-gradient(var(--s2),var(--bg))}
+h1{font-size:clamp(2.7rem,9vw,5.8rem);font-weight:700;margin-bottom:18px}
+.lead{color:var(--mu);font-size:1.1rem;max-width:620px}.hero .lead{margin-bottom:26px}
+.btn{display:inline-block;padding:13px 24px;border-radius:12px;background:var(--accent);color:var(--on);font-weight:700}
+.waves{position:absolute;left:0;bottom:0;width:100%;height:110px;pointer-events:none}
+.waves svg{position:absolute;bottom:0;left:0;width:200%;height:100%;fill:var(--accent);opacity:.22;animation:wv 14s linear infinite}
+.waves svg+svg{height:75%;opacity:.35;animation-duration:22s;animation-direction:reverse}@keyframes wv{to{transform:translateX(-50%)}}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.card{padding:20px;border-radius:12px;background:var(--sf);border:1px solid var(--bd)}a.card:hover{border-color:var(--accent)}
+.card h3{font-size:1.15rem;margin-bottom:6px}.card p,.card dd{font-size:.93rem;color:var(--mu)}.card dt{font:600 1.05rem var(--fd)}.card dd{margin:0}
+.home{margin-top:30px}
+.sec{padding:46px 0 6px}.sec h2{font-size:clamp(1.9rem,4.4vw,3rem);margin-bottom:10px}.sec>.lead{margin-bottom:26px}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.tab{padding:11px 16px;border-radius:10px;border:1px solid var(--bd);background:var(--sf);font-weight:700;font-size:.9rem}.tab[aria-selected=true]{background:var(--c);color:var(--on);border-color:transparent}
+.panel{padding:24px;border-radius:12px;background:var(--sf);border:1px solid var(--bd);border-left:6px solid var(--c);animation:vin .4s ease both}
+.panel h3{font-size:1.45rem;margin-bottom:8px}.panel p{color:var(--mu);max-width:70ch}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}.chip{padding:5px 12px;border-radius:99px;border:1px solid var(--bd);background:var(--s2);font-size:.82rem}
+.tool{padding:24px;border-radius:16px;border:1px solid var(--bd);background:var(--sf);margin-bottom:24px;transition:background .3s,color .3s}
+.tool h3{font-size:1.5rem;margin:4px 0 8px}.tool p{max-width:70ch}.tool .m{font-size:.9rem;opacity:.85}
+input[type=range]{width:100%;height:30px;accent-color:var(--accent);margin:8px 0}
+.lens{width:190px;height:190px;margin:6px 0 14px;border-radius:50%;border:6px solid var(--bd);background:var(--s2);display:grid;place-items:center}
+.lens i{display:block;border-radius:50%;background:radial-gradient(circle at 35% 30%,var(--c2),var(--c1));transition:width .5s,height .5s}
+.tl{position:relative;padding:6px 0}.tl::before{content:"";position:absolute;left:15px;top:0;bottom:0;width:2px;background:var(--bd)}
+.ev{position:relative;padding:0 0 24px 46px;opacity:0;transform:translateY(18px);transition:opacity .5s,transform .5s}.ev.in{opacity:1;transform:none}
+.ev::before{content:"";position:absolute;left:7px;top:8px;width:18px;height:18px;border-radius:50%;background:var(--bg);border:4px solid var(--accent)}
+.ev b{display:block;font:700 1.35rem var(--fd);color:var(--accent)}.ev p{color:var(--mu);max-width:60ch}
+@media(min-width:860px){.tl::before{left:50%}.ev{width:50%;padding:0 44px 28px 0;text-align:right}.ev p{margin-left:auto}.ev::before{left:auto;right:-9px}.ev:nth-child(even){margin-left:50%;padding:0 0 28px 44px;text-align:left}.ev:nth-child(even) p{margin-left:0}.ev:nth-child(even)::before{right:auto;left:-9px}}
+.search{width:100%;max-width:420px;padding:12px 16px;border-radius:12px;border:1px solid var(--bd);background:var(--sf);color:var(--text);font:inherit;margin-bottom:18px}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.ev{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<header class="site-header"><div class="hi">
+<a class="brand" href="#inicio"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M2 11q4-5 7 0t7 0 7 0 7 0M2 18q4-5 7 0t7 0 7 0 7 0M2 25q4-5 7 0t7 0 7 0 7 0"/></svg>Mundo marino</a>
+<nav class="nav" id="nav" aria-label="Secciones"></nav>
+<button class="tt" id="tt" aria-label="Cambiar entre tema claro y oscuro">◐</button></div></header>
+<main>
+<section class="view" id="inicio">
+<div class="hero"><h1>Mundo marino</h1><p class="lead">Del plancton que no se ve a la ballena azul: cómo es la vida en el agua, desde un río hasta la fosa más profunda del planeta.</p><a class="btn" href="#flora">Sumergite en la flora</a>
+<div class="waves"><svg viewBox="0 0 1200 100" preserveAspectRatio="none"><path d="M0 50Q150 0 300 50T600 50 900 50 1200 50V100H0Z"/></svg><svg viewBox="0 0 1200 100" preserveAspectRatio="none"><path d="M0 40Q150 90 300 40T600 40 900 40 1200 40V100H0Z"/></svg></div></div>
+<div class="grid home" id="home"></div>
+</section>
+<section class="view" id="flora"><div class="sec"><h2>Flora marina</h2><p class="lead">No todo lo verde del mar es una planta, pero casi todo produce oxígeno y alimento. Elegí un grupo.</p><div id="t-flora"></div></div></section>
+<section class="view" id="fauna"><div class="sec"><h2>Fauna marina</h2><p class="lead">Desde animales sin huesos hasta mamíferos que vuelven a la superficie para respirar.</p><div id="t-fauna"></div></div></section>
+<section class="view" id="rios"><div class="sec"><h2>En ríos</h2><p class="lead">Los ríos llevan agua dulce al mar. En el encuentro, la sal cambia quién puede vivir en cada tramo.</p>
+<div class="tool"><span class="m">Salinidad: <b id="salv"></b> gramos de sal por litro</span><h3 id="salt"></h3><p id="sald"></p><input id="sal" type="range" min="0" max="36" value="0" aria-label="Salinidad del agua"><div class="chips" id="salc"></div></div>
+<div class="grid" id="g-rios"></div></div></section>
+<section class="view" id="oceanos"><div class="sec"><h2>En océanos</h2><p class="lead">El océano cubre cerca del 71 % de la superficie terrestre y guarda la mayor parte del agua del planeta. Bajá y mirá qué cambia.</p>
+<div class="tool" id="depbox"><span class="m">Profundidad: <b id="depv"></b> m · Presión: <b id="depp"></b> veces la de la superficie</span><h3 id="dept"></h3><p id="depd"></p><input id="dep" type="range" min="0" max="11000" step="50" value="0" aria-label="Profundidad en metros"><p class="m" id="depx"></p></div>
+<div class="grid" id="g-oc"></div></div></section>
+<section class="view" id="micro"><div class="sec"><h2>En el microscopio</h2><p class="lead">Una gota de agua de mar contiene más vida de la que se ve a simple vista. Deslizá para achicar la escala.</p>
+<div class="tool"><span class="m" id="mics"></span><h3 id="micn"></h3><div class="lens"><i id="micd"></i></div><p id="mict"></p><input id="mic" type="range" min="0" max="4" value="0" aria-label="Nivel de aumento"></div></div></section>
+<section class="view" id="evolucion"><div class="sec"><h2>Evolución</h2><p class="lead">La vida empezó en el agua y pasó la mayor parte de su historia allí. Algunos hitos, del más antiguo al más reciente.</p><div class="tl" id="tl"></div></div></section>
+<section class="view" id="glosario"><div class="sec"><h2>Glosario</h2><p class="lead">Palabras clave de esta guía, en orden alfabético.</p><input class="search" id="q" type="search" placeholder="Buscar una palabra" aria-label="Buscar en el glosario"><div class="grid" id="gl"></div></div></section>
+</main>
+<script>
+const $=(s,e=document)=>e.querySelector(s),$$=(s,e=document)=>[...e.querySelectorAll(s)];
+const V=[['inicio','Inicio',''],['flora','Flora marina','Fitoplancton, algas, pastos marinos y manglares.'],['fauna','Fauna marina','Invertebrados, peces, reptiles, aves y mamíferos.'],['rios','En ríos','Peces que cruzan entre agua dulce y salada.'],['oceanos','En océanos','Una bajada por las zonas de luz, penumbra y oscuridad.'],['micro','En el microscopio','Plancton, bacterias y virus del mar.'],['evolucion','Evolución','Más de 3000 millones de años de vida acuática.'],['glosario','Glosario','Términos clave con buscador.']];
+$('#nav').innerHTML=V.map(v=>`<a class="nl" href="#${v[0]}" data-v="${v[0]}">${v[1].replace('En ','')}</a>`).join('');
+$('#home').innerHTML=V.slice(1).map(v=>`<a class="card" href="#${v[0]}"><h3>${v[1]}</h3><p>${v[2]}</p></a>`).join('');
+const io=new IntersectionObserver(es=>es.forEach(e=>e.isIntersecting&&e.target.classList.add('in')),{threshold:.15});
+function go(h){const id=V.some(v=>v[0]===h)?h:'inicio';$$('.view').forEach(e=>e.classList.toggle('active',e.id===id));$$('.nl').forEach(e=>e.classList.toggle('active',e.dataset.v===id));scrollTo(0,0);$$('.ev').forEach(e=>io.observe(e))}
+addEventListener('hashchange',()=>go(location.hash.slice(1)));
+$('#tt').onclick=()=>{const r=document.documentElement,d=r.dataset.theme==='dark'||(!r.dataset.theme&&matchMedia('(prefers-color-scheme:dark)').matches);r.dataset.theme=d?'light':'dark';try{localStorage.setItem('mm-theme',r.dataset.theme)}catch(e){}};
+try{const t=localStorage.getItem('mm-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}
+
+function tabs(id,D){const e=$('#'+id);e.innerHTML=`<div class="tabs" role="tablist">${D.map((d,i)=>`<button class="tab" role="tab" style="--c:var(--c${i%5+1})" data-i="${i}">${d[0]}</button>`).join('')}</div><div class="panel" role="tabpanel"></div>`;
+const p=$('.panel',e),sel=i=>{$$('.tab',e).forEach((t,j)=>t.setAttribute('aria-selected',i===j));const d=D[i];p.style.setProperty('--c',`var(--c${i%5+1})`);p.innerHTML=`<h3>${d[1]}</h3><p>${d[2]}</p><div class="chips">${d[3].map(c=>`<span class="chip">${c}</span>`).join('')}</div>`;p.style.animation='none';p.offsetWidth;p.style.animation=''};
+e.onclick=ev=>{const t=ev.target.closest('.tab');t&&sel(+t.dataset.i)};sel(0)}
+const cards=(id,D)=>$('#'+id).innerHTML=D.map(d=>`<div class="card"><h3>${d[0]}</h3><p>${d[1]}</p></div>`).join('');
+
+tabs('t-flora',[
+['Fitoplancton','Algas microscópicas que flotan','Son diminutos organismos que hacen fotosíntesis y viven cerca de la superficie. Producen una parte enorme del oxígeno que respiramos y son el primer eslabón de casi todas las cadenas alimentarias del mar.',['Diatomeas','Dinoflagelados','Cianobacterias','Base de la cadena trófica']],
+['Algas pardas','Bosques de kelp','Algas grandes, sujetas al fondo rocoso, que forman verdaderos bosques submarinos. El kelp gigante puede crecer hasta medio metro por día y da refugio a peces, erizos y nutrias marinas.',['Macrocystis','Laminaria','Fucus','Alginato: espesante industrial']],
+['Algas rojas y verdes','Colores según la luz','Las rojas tienen pigmentos que aprovechan la luz azul, la que llega más hondo, y por eso viven a más profundidad. Las verdes, como la lechuga de mar, prefieren aguas someras y son parientes lejanas de las plantas terrestres.',['Agar y carragenina','Algas coralinas','Ulva (lechuga de mar)','Nori']],
+['Pastos marinos','Plantas con flores bajo el agua','A diferencia de las algas, tienen raíces, tallos, hojas, flores y semillas. Forman praderas que estabilizan el fondo, guardan carbono y sirven de guardería a peces jóvenes y caballitos de mar.',['Posidonia','Zostera','Praderas','Carbono azul']],
+['Manglares','Árboles con las raíces en agua salada','Son árboles y arbustos que toleran la sal. Sus raíces aéreas sostienen el barro, filtran el agua y frenan el oleaje, y entre ellas crían cangrejos, camarones y peces.',['Raíces aéreas','Agua salobre','Defensa costera','Zona tropical']]]);
+tabs('t-fauna',[
+['Invertebrados','Sin columna vertebral','Son la gran mayoría de los animales marinos. Incluyen esponjas, medusas, corales, caracoles, pulpos, calamares, estrellas de mar y crustáceos. Los corales son animales diminutos que, en colonia, construyen los arrecifes.',['Medusas','Corales','Pulpos','Cangrejos','Estrellas de mar']],
+['Peces','Cartilaginosos y óseos','Respiran con branquias. Los tiburones y las rayas tienen esqueleto de cartílago; casi todos los demás tienen huesos y vejiga natatoria. El pez más grande del mundo es el tiburón ballena, de más de 12 m, que se alimenta de plancton.',['Tiburones','Rayas','Atunes','Caballitos de mar']],
+['Reptiles','Tortugas y serpientes marinas','Respiran aire, así que suben a la superficie. Las tortugas marinas recorren miles de kilómetros y vuelven a la playa donde nacieron para poner sus huevos.',['Tortuga verde','Tortuga laúd','Serpientes marinas','Iguana marina']],
+['Aves marinas','Pasan la vida entre costa y mar','Pescan en el agua pero anidan en tierra. Los pingüinos no vuelan: nadan con las alas convertidas en aletas. Los albatros planean durante horas sin batir apenas las alas.',['Pingüinos','Albatros','Gaviotas','Petreles']],
+['Mamíferos','Respiran aire, amamantan crías','Ballenas, delfines, focas y lobos marinos descienden de animales terrestres. La ballena azul, de hasta unos 30 m, es el animal más grande que existe hoy.',['Ballena azul','Delfines','Orcas','Lobos marinos','Manatíes']]]);
+
+cards('g-rios',[
+['Anádromos','El salmón nace en un río, crece en el mar y vuelve a su río para desovar.'],
+['Catádromos','La anguila vive en ríos y viaja al mar para reproducirse: el camino inverso.'],
+['Estuarios y deltas','Donde el río desemboca, el agua dulce y la salada se mezclan. Son zonas muy ricas en alimento y criaderos de peces.'],
+['Delfines de río','El bufeo rosado del Amazonas y el delfín del Ganges viven toda su vida en agua dulce.'],
+['Tiburón toro','Uno de los pocos tiburones que tolera el agua dulce y remonta ríos tropicales.'],
+['Amenazas','Las represas cortan las rutas migratorias; la contaminación y las especies invasoras alteran los hábitats.']]);
+const S=[[1,'Agua dulce','Es la de los ríos y los lagos. Casi no tiene sal, y por eso allí viven especies adaptadas a ella.',['Bagres','Carpas','Pirañas','Delfín rosado']],[30,'Agua salobre','Zona de mezcla de los estuarios. La salinidad cambia con las mareas, así que viven especies que toleran esas variaciones.',['Lisas','Cangrejos','Manglares','Tiburón toro']],[99,'Agua de mar','El promedio del océano ronda los 35 g de sal por litro. Es el hogar de casi toda la fauna marina.',['Atunes','Corales','Ballenas','Calamares']]];
+function sal(){const v=+$('#sal').value,s=S.find(s=>v<s[0]);$('#salv').textContent=v;$('#salt').textContent=s[1];$('#sald').textContent=s[2];$('#salc').innerHTML=s[3].map(c=>`<span class="chip">${c}</span>`).join('')}
+$('#sal').oninput=sal;sal();
+
+const Z=[[200,'Zona epipelágica: la zona de luz','Llega luz suficiente para hacer fotosíntesis. Acá vive casi todo lo que conocemos del mar.','Fitoplancton, atunes, delfines, corales, tortugas.'],[1000,'Zona mesopelágica: la penumbra','La luz se apaga y la temperatura baja rápido. Muchos animales suben de noche a comer y bajan de día.','Pez linterna, calamares, pez hacha.'],[4000,'Zona batipelágica: la oscuridad','No llega luz solar. Muchos animales producen su propia luz, la bioluminiscencia.','Rape abisal, calamar gigante, cachalotes que se sumergen a cazar.'],[6000,'Zona abisopelágica: las llanuras abisales','Agua fría, cerca de 2 a 4 °C, y oscuridad total. Los animales dependen de los restos que caen desde arriba.','Pepinos de mar, pulpo dumbo, estrellas frágiles.'],[11000,'Zona hadal: las fosas','Son las fosas oceánicas. La de las Marianas llega a unos 11 km, con una presión más de mil veces la de la superficie.','Pez caracol, anfípodos, bacterias de las fosas.']];
+function dep(){const d=+$('#dep').value,z=Z.find(z=>d<=z[0]),l=Math.max(4,62-Math.sqrt(d/11000)*60),b=$('#depbox');b.style.background=`hsl(197 70% ${l}%)`;b.style.color=l>40?'#04141c':'#e4f6f6';b.style.borderColor='transparent';$('#depv').textContent=d.toLocaleString('es');$('#depp').textContent=Math.round(1+d/10).toLocaleString('es');$('#dept').textContent=z[1];$('#depd').textContent=z[2];$('#depx').textContent='Seres típicos: '+z[3]}
+$('#dep').oninput=dep;dep();
+cards('g-oc',[['Cinco océanos','Pacífico, Atlántico, Índico, Antártico (o Austral) y Ártico. Forman una sola masa de agua conectada.'],['Corrientes','Mueven calor y nutrientes por todo el planeta y regulan el clima de las costas.'],['Mareas','Suben y bajan por la atracción de la Luna y el Sol sobre el agua.'],['Salinidad','El agua de mar tiene en promedio unos 35 g de sal por litro.'],['Arrecifes de coral','Ocupan una porción muy pequeña del fondo, pero albergan una enorme variedad de especies.'],['Cambio climático','El agua se calienta y se acidifica, lo que provoca el blanqueamiento de los corales.']]);
+
+const M=[['1 a 2 mm','Copépodos','Crustáceos diminutos del zooplancton. Son de los animales más abundantes del planeta y alimentan a peces y ballenas.'],['20 a 200 µm','Diatomeas','Algas de una sola célula con caparazón de sílice, como una cajita de vidrio con dibujos geométricos.'],['10 a 50 µm','Dinoflagelados','Algas con dos flagelos para moverse. Algunas brillan en la oscuridad y otras causan mareas rojas.'],['Cerca de 0,6 µm','Prochlorococcus','Una cianobacteria y una de las formas de vida fotosintéticas más abundantes del océano.'],['Cerca de 0,1 µm','Virus marinos','Hay millones en cada mililitro de agua. Infectan bacterias y algas y ayudan a reciclar los nutrientes.']],sz=[150,110,76,40,16];
+function mic(){const i=+$('#mic').value,m=M[i],d=$('#micd');d.style.width=d.style.height=sz[i]+'px';$('#micn').textContent=m[1];$('#mics').textContent='Tamaño: '+m[0];$('#mict').textContent=m[2]}
+$('#mic').oninput=mic;mic();
+
+$('#tl').innerHTML=[['Hace unos 3500 millones de años','Primeros microbios','Aparecen las primeras células y los estromatolitos, estructuras formadas por colonias de microbios.'],['Hace unos 2400 millones de años','La gran oxidación','Las cianobacterias llenan la atmósfera de oxígeno gracias a la fotosíntesis.'],['Hace unos 600 millones de años','Primeros animales','Esponjas y organismos de cuerpo blando viven en mares poco profundos.'],['Hace 541 millones de años','Explosión cámbrica','Surgen los grandes grupos de animales con partes duras, como los trilobites.'],['Hace unos 500 millones de años','Primeros vertebrados','Aparecen peces sin mandíbulas; luego llegan los peces con mandíbulas.'],['Hace unos 375 millones de años','Salida a tierra','Peces como Tiktaalik muestran rasgos de transición hacia los animales de cuatro patas.'],['Hace unos 250 millones de años','Gran extinción','Desaparece cerca del 90 % de las especies marinas, la mayor extinción conocida.'],['Hace unos 50 millones de años','Las ballenas vuelven al mar','Mamíferos terrestres como Pakicetus son ancestros de las ballenas actuales.'],['Hoy','Océanos en cambio','El calentamiento, la acidificación y la pesca excesiva ponen a prueba a los ecosistemas marinos.']].map(e=>`<div class="ev"><b>${e[0]}</b><h3>${e[1]}</h3><p>${e[2]}</p></div>`).join('');
+
+const G=[['Acidificación oceánica','Descenso del pH del mar por la absorción de dióxido de carbono.'],['Anádromo','Pez que nace en agua dulce, vive en el mar y vuelve al río a desovar.'],['Arrecife','Estructura construida por colonias de corales.'],['Bacteriófago','Virus que infecta bacterias.'],['Bentos','Seres que viven en el fondo o sobre él.'],['Bioluminiscencia','Producción de luz por un ser vivo.'],['Cadena trófica','Secuencia de seres vivos que se alimentan unos de otros.'],['Catádromo','Pez que vive en agua dulce y se reproduce en el mar.'],['Cianobacteria','Bacteria que hace fotosíntesis.'],['Copépodo','Crustáceo diminuto del zooplancton.'],['Diatomea','Alga unicelular con caparazón de sílice.'],['Estuario','Desembocadura de un río, donde se mezcla agua dulce y salada.'],['Fitoplancton','Plancton que hace fotosíntesis.'],['Fosa oceánica','Zona muy profunda y estrecha del fondo marino.'],['Kelp','Alga parda grande que forma bosques submarinos.'],['Manglar','Bosque de árboles que crecen en agua salobre costera.'],['Nécton','Animales que nadan activamente, como peces y ballenas.'],['Pastos marinos','Plantas con flores que viven sumergidas en el mar.'],['Plancton','Organismos que flotan a la deriva en el agua.'],['Salinidad','Cantidad de sales disueltas en el agua.'],['Salobre','Agua con una salinidad intermedia entre la dulce y la marina.'],['Zona hadal','Parte del océano por debajo de unos 6000 m, en las fosas.'],['Zooplancton','Plancton formado por animales o larvas.']];
+function glo(t=''){const f=G.filter(g=>(g[0]+g[1]).toLowerCase().includes(t.toLowerCase()));$('#gl').innerHTML=f.length?f.map(g=>`<div class="card"><dl style="margin:0"><dt>${g[0]}</dt><dd>${g[1]}</dd></dl></div>`).join(''):'<p class="lead">No hay resultados. Probá con otra palabra.</p>'}
+$('#q').oninput=e=>glo(e.target.value);glo();
+go(location.hash.slice(1));
+</script>
+</body>
+</html>

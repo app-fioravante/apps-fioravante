@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ciudadanía e identidad digital explicadas en lenguaje sencillo</title>
+<meta name="description" content="Ciudadanía e identidad digital, economía digital, control, programación, proyectos actuales y futuros, peligros y glosario.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--font-display:'Space Grotesk','Segoe UI',system-ui,sans-serif;--font-body:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;--radius:20px;--maxw:1180px;--ease:cubic-bezier(.22,.75,.25,1)}
+html[data-theme="light"]{--bg:#fbf9f5;--surface:rgba(255,255,255,.86);--s2:rgba(60,40,20,.045);--border:rgba(60,40,20,.12);--bs:rgba(60,40,20,.24);--text:#1a1410;--muted:#6f6252;--accent:#e11d48;--accent-2:#7c3aed;--accent-3:#0891b2;--good:#059669;--warn:#d97706;--bad:#e11d48;--shadow:0 22px 55px -28px rgba(60,30,10,.22);--orb:.16;--dot:rgba(60,40,20,.055)}
+html[data-theme="dark"]{--bg:#0a0806;--surface:rgba(30,25,20,.66);--s2:rgba(255,255,255,.045);--border:rgba(255,255,255,.10);--bs:rgba(255,255,255,.20);--text:#f5ede2;--muted:#a89a86;--accent:#fb7185;--accent-2:#a78bfa;--accent-3:#22d3ee;--good:#34d399;--warn:#fbbf24;--bad:#fb7185;--shadow:0 24px 60px -24px rgba(0,0,0,.9);--orb:.30;--dot:rgba(255,255,255,.03)}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;font-family:var(--font-body);background:var(--bg);color:var(--text);min-height:100vh;line-height:1.65;-webkit-font-smoothing:antialiased;transition:background .45s var(--ease),color .45s var(--ease);overflow-x:hidden}
+h1,h2,h3,h4{font-family:var(--font-display);line-height:1.15;letter-spacing:-.02em;margin:0}
+p{margin:0}button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}a{color:inherit;text-decoration:none}
+::selection{background:var(--accent);color:#fff}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
+.bg-dots{position:fixed;inset:0;z-index:-3;pointer-events:none;background-image:radial-gradient(var(--dot) 1px,transparent 1px);background-size:26px 26px}
+.orbs{position:fixed;inset:0;z-index:-2;overflow:hidden;pointer-events:none}
+.orb{position:absolute;border-radius:50%;filter:blur(100px);opacity:var(--orb);animation:float 28s ease-in-out infinite alternate}
+.o1{width:52vw;height:52vw;background:var(--accent);top:-16vw;left:-12vw}
+.o2{width:42vw;height:42vw;background:var(--accent-2);bottom:-18vw;right:-10vw;animation-delay:-10s}
+.o3{width:34vw;height:34vw;background:var(--accent-3);top:44%;left:58%;animation-delay:-17s}
+@keyframes float{0%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(4vw,-3vw,0) scale(1.1)}100%{transform:translate3d(-3vw,4vw,0) scale(.95)}}
+.site-header{position:sticky;top:0;z-index:50;backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);background:color-mix(in srgb,var(--bg) 78%,transparent);border-bottom:1px solid var(--border)}
+.header-inner{max-width:var(--maxw);margin:0 auto;padding:13px 22px;display:flex;align-items:center;gap:16px}
+.brand{display:flex;align-items:center;gap:11px;font-family:var(--font-display);font-weight:700;white-space:nowrap}
+.mark{width:38px;height:38px;border-radius:12px;flex:none;background:linear-gradient(140deg,var(--accent),var(--accent-2) 55%,var(--accent-3));display:grid;place-items:center;color:#fff;box-shadow:0 8px 22px -8px var(--accent);transition:transform .5s var(--ease)}
+.brand:hover .mark{transform:rotate(-10deg) scale(1.06)}.mark svg{width:22px;height:22px}
+.nav{display:flex;gap:2px;margin-left:auto;overflow-x:auto;scrollbar-width:none;min-width:0}.nav::-webkit-scrollbar{display:none}
+.nav-link{position:relative;padding:9px 11px;border-radius:11px;font-size:.8rem;font-weight:500;color:var(--muted);white-space:nowrap;transition:color .3s,background .3s}
+.nav-link:hover,.nav-link.active{color:var(--text);background:var(--s2)}
+.nav-link.active::after{content:'';position:absolute;left:11px;right:11px;bottom:4px;height:2px;border-radius:2px;background:linear-gradient(90deg,var(--accent),var(--accent-2));animation:navIn .4s var(--ease) both}
+@keyframes navIn{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.tt{width:40px;height:40px;border-radius:12px;flex:none;border:1px solid var(--border);background:var(--s2);display:grid;place-items:center;transition:transform .35s var(--ease)}
+.tt:hover{transform:translateY(-2px) rotate(8deg)}.tt svg{width:19px;height:19px}
+html[data-theme=dark] .i-moon,html[data-theme=light] .i-sun{display:none}
+main{max-width:var(--maxw);margin:0 auto;padding:0 22px 70px}
+.view{display:none}.view.active{display:block;animation:viewIn .55s var(--ease) both}
+@keyframes viewIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.hero{padding:64px 0 36px;max-width:920px}
+.pill{display:inline-flex;align-items:center;gap:8px;padding:7px 15px;border-radius:999px;font-size:.78rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;border:1px solid var(--border);background:var(--surface);color:var(--muted);margin-bottom:24px}
+.pill i{width:7px;height:7px;border-radius:50%;background:var(--good);animation:pulse 2.4s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--good) 60%,transparent)}70%{box-shadow:0 0 0 9px transparent}100%{box-shadow:0 0 0 0 transparent}}
+h1{font-size:clamp(2.1rem,5.2vw,3.9rem);font-weight:700;letter-spacing:-.035em;margin-bottom:20px}
+.grad{background:linear-gradient(100deg,var(--accent),var(--accent-2) 48%,var(--accent-3));-webkit-background-clip:text;background-clip:text;color:transparent;background-size:220% auto;animation:shimmer 8s linear infinite}
+@keyframes shimmer{to{background-position:220% center}}
+.lead{font-size:clamp(1rem,1.6vw,1.15rem);color:var(--muted);max-width:700px;margin-bottom:30px}
+.btn{display:inline-flex;align-items:center;gap:9px;padding:13px 25px;border-radius:13px;font-size:.93rem;font-weight:600;border:1px solid transparent;transition:transform .28s var(--ease),box-shadow .3s}
+.btn-primary{background:linear-gradient(120deg,var(--accent),var(--accent-2));color:#fff;box-shadow:0 14px 34px -14px var(--accent);position:relative;overflow:hidden}
+.btn-primary::after{content:'';position:absolute;inset:0;background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,.45),transparent 70%);transform:translateX(-130%);transition:transform .7s var(--ease)}
+.btn-primary:hover{transform:translateY(-2px)}.btn-primary:hover::after{transform:translateX(130%)}
+.stats,.grid{display:grid;gap:14px}
+.stats{grid-template-columns:repeat(auto-fit,minmax(170px,1fr));margin:8px 0 46px}
+.grid{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.stat,.card{padding:22px 20px;border-radius:var(--radius);background:var(--surface);border:1px solid var(--border);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);transition:transform .35s var(--ease),border-color .3s,box-shadow .35s}
+.stat:hover,.card:hover{transform:translateY(-4px);border-color:var(--bs);box-shadow:var(--shadow)}
+.stat b{display:block;font-family:var(--font-display);font-size:2rem;letter-spacing:-.03em}
+.stat span{font-size:.85rem;color:var(--muted)}
+.card h3{font-size:1.08rem;margin-bottom:8px}.card p{font-size:.92rem;color:var(--muted)}
+.tag{display:inline-block;font-size:.72rem;font-weight:600;padding:3px 10px;border-radius:999px;background:var(--s2);border:1px solid var(--border);margin:10px 6px 0 0;color:var(--muted)}
+.sec{padding:52px 0 22px}.sec h2{font-size:clamp(1.7rem,3.6vw,2.6rem);letter-spacing:-.03em;margin-bottom:12px}
+.sec>.lead{margin-bottom:28px}
+.tl{position:relative;padding:6px 0}
+.tl::before{content:'';position:absolute;left:19px;top:0;bottom:0;width:2px;background:linear-gradient(var(--accent),var(--accent-2),var(--accent-3));opacity:.5}
+.ev{position:relative;padding:0 0 26px 58px;opacity:0;transform:translateY(22px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+.ev.in{opacity:1;transform:none}
+.ev::before{content:'';position:absolute;left:11px;top:22px;width:18px;height:18px;border-radius:50%;background:var(--bg);border:3px solid var(--accent);box-shadow:0 0 0 5px color-mix(in srgb,var(--accent) 18%,transparent)}
+.ev .yr{font-family:var(--font-display);font-weight:700;font-size:1.5rem;background:linear-gradient(100deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+@media(min-width:860px){.tl::before{left:50%}.ev{width:50%;padding:0 46px 30px 0;text-align:right}.ev::before{left:auto;right:-9px}.ev:nth-child(even){margin-left:50%;padding:0 0 30px 46px;text-align:left}.ev:nth-child(even)::before{right:auto;left:-9px}}
+.tabs{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:18px}
+.tab{padding:12px 18px;border-radius:13px;border:1px solid var(--border);background:var(--surface);font-weight:600;font-size:.9rem;transition:transform .25s var(--ease),border-color .3s,background .3s}
+.tab:hover{transform:translateY(-2px)}.tab[aria-selected=true]{color:#fff;border-color:transparent;background:var(--c)}
+.panel{padding:26px;border-radius:var(--radius);background:var(--surface);border:1px solid var(--border);border-left:6px solid var(--c);animation:viewIn .45s var(--ease) both}
+.panel h3{font-size:1.4rem;margin-bottom:8px}.panel p{color:var(--muted);margin-bottom:6px}
+.meter{height:14px;border-radius:99px;background:var(--s2);border:1px solid var(--border);overflow:hidden;margin:14px 0 8px}
+.meter div{height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--accent-3),var(--accent-2),var(--accent));transition:width .5s var(--ease)}
+input[type=range]{width:100%;accent-color:var(--accent);height:28px}
+.big{font-family:var(--font-display);font-size:2.4rem;font-weight:700;letter-spacing:-.03em}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.chip{padding:6px 13px;border-radius:999px;border:1px solid var(--border);background:var(--s2);font-size:.82rem;font-weight:500;transition:border-color .3s,transform .3s}
+.chip:hover{border-color:var(--accent);transform:translateY(-2px)}
+details{border:1px solid var(--border);border-radius:16px;background:var(--surface);margin-bottom:10px;overflow:hidden}
+summary{list-style:none;cursor:pointer;padding:16px 20px;font-family:var(--font-display);font-weight:600;display:flex;justify-content:space-between;gap:12px;align-items:center}
+summary::-webkit-details-marker{display:none}
+summary::after{content:'+';font-size:1.4rem;color:var(--accent);transition:transform .35s var(--ease)}
+details[open] summary::after{transform:rotate(135deg)}
+details>div{padding:0 20px 18px;color:var(--muted);font-size:.94rem;animation:viewIn .4s var(--ease) both}
+details li{margin-bottom:4px}
+.note{margin-top:30px;padding:16px 20px;border-radius:16px;border:1px dashed var(--bs);color:var(--muted);font-size:.86rem}
+.search{width:100%;max-width:440px;padding:13px 18px;border-radius:13px;border:1px solid var(--border);background:var(--surface);color:var(--text);font:inherit;margin-bottom:20px}
+.gl dt{font-family:var(--font-display);font-weight:600}.gl dd{margin:0 0 4px;color:var(--muted);font-size:.92rem}
+.gl .card{padding:18px}
+footer{text-align:center;color:var(--muted);font-size:.82rem;padding:30px 22px 50px}
+@media(max-width:600px){.header-inner{padding:10px 14px;gap:10px}.brand span{display:none}main{padding:0 16px 60px}.hero{padding:40px 0 24px}.btn{width:100%;justify-content:center}.panel{padding:20px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.ev{opacity:1;transform:none}}
+.calc{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:14px 0}
+.calc label{font-size:.85rem;color:var(--muted);display:grid;gap:6px}
+.calc input{padding:12px 14px;border-radius:12px;border:1px solid var(--border);background:var(--surface);color:var(--text);font:inherit;width:100%}
+.checks{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px;margin:16px 0}
+.checks label{display:flex;gap:10px;align-items:center;padding:14px 16px;border-radius:14px;border:1px solid var(--border);background:var(--surface);cursor:pointer;transition:border-color .3s,transform .3s}
+.checks label:hover{border-color:var(--accent);transform:translateY(-2px)}
+.checks input{accent-color:var(--accent);width:18px;height:18px;flex:none}
+.rank{display:grid;gap:10px}
+.rk{display:grid;grid-template-columns:minmax(96px,160px) 1fr 74px;gap:10px;align-items:center;font-size:.85rem}
+.rk i{display:block;height:12px;border-radius:99px;background:linear-gradient(90deg,var(--accent-3),var(--accent-2),var(--accent));width:0;transition:width .9s var(--ease)}
+.rk b{text-align:right;font-family:var(--font-display)}
+@media(max-width:600px){.rk{grid-template-columns:90px 1fr 62px}}
+pre.code{margin:14px 0;padding:16px;border-radius:14px;border:1px solid var(--border);background:var(--s2);font:.9rem/1.7 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;overflow-x:auto}
+pre.code span{display:block;padding:0 8px;border-radius:6px}
+pre.code .hl{background:color-mix(in srgb,var(--accent) 22%,transparent)}
+</style>
+</head>
+<body>
+<div class="bg-dots"></div><div class="orbs"><div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div></div>
+<header class="site-header"><div class="header-inner">
+<a class="brand" href="#inicio"><div class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6v6c0 4.5 3.2 7.6 8 9 4.8-1.4 8-4.5 8-9V6z"/><path d="M9 12l2 2 4-4"/></svg></div><span>Vida digital</span></a>
+<nav class="nav" id="nav"></nav>
+<button class="tt" id="tt" aria-label="Cambiar tema"><svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+</div></header>
+<main>
+<section class="view" id="v-inicio">
+<div class="hero"><div class="pill"><i></i>Vida digital</div>
+<h1>Ciudadanía y economía digital, <span class="grad">explicadas simple</span></h1>
+<p class="lead">Quién sos en internet, cómo circula el dinero digital, quién controla los datos, cómo se programa el mundo digital, qué proyectos vienen y qué peligros conviene conocer. Presenta las distintas posturas sin tomar partido.</p>
+<a class="btn btn-primary" href="#ciudadania">Empezar por la identidad digital</a></div>
+<div class="stats"><div class="stat"><b>6.000 M</b><span>De personas usan internet en 2025 (74 %), según la UIT</span></div><div class="stat"><b>2.200 M</b><span>Siguen sin conexión, casi todas en países de ingresos bajos y medios</span></div><div class="stat"><b>Fines de 2026</b><span>Plazo para que cada país de la UE ofrezca una billetera de identidad digital</span></div><div class="stat"><b>+130</b><span>Países exploran una moneda digital de banco central</span></div></div>
+<div class="grid" id="home"></div>
+<p class="note">Cifras de la UIT (Facts and Figures 2025), Atlantic Council y fuentes oficiales; algunas son estimaciones y pueden cambiar.</p>
+</section>
+
+<section class="view" id="v-ciudadania"><div class="sec"><h2>Ciudadanía e identidad digital</h2><p class="lead">La ciudadanía digital es ejercer derechos y deberes en entornos digitales: informarse, participar, hacer trámites y convivir con respeto. La identidad digital es el conjunto de datos y credenciales que te identifican en línea.</p></div>
+<div class="grid" id="idc"></div>
+<div class="sec"><h2>Tres modelos de identidad</h2></div><div class="grid" id="idm"></div>
+<div class="sec"><h2>En el mundo y en Argentina</h2></div><div class="grid" id="idw"></div>
+<div class="sec"><h2>Tu higiene digital</h2><p class="lead">Marcá los hábitos que ya tenés.</p></div>
+<div class="card"><div class="checks" id="ck1"></div><div class="big"><span id="ck1-sc">0</span> de 7</div><div class="meter"><div id="ck1-bar"></div></div><p id="ck1-msg"></p></div></section>
+
+<section class="view" id="v-economia"><div class="sec"><h2>Economía digital</h2><p class="lead">Es la actividad económica que se apoya en tecnologías digitales y en datos: compras en línea, plataformas, pagos electrónicos, trabajo remoto y nuevas formas de dinero.</p></div>
+<div class="grid" id="ec"></div>
+<div class="sec"><h2>Tipos de dinero digital</h2></div><div class="tabs" id="mtabs" role="tablist"></div><div id="mpanel"></div>
+<div class="sec"><h2>Moneda digital de banco central</h2></div>
+<div class="grid"><div class="card"><h3>A favor</h3><p>Pagos rápidos y baratos, inclusión financiera y soberanía monetaria frente a monedas privadas.</p></div><div class="card"><h3>Críticas</h3><p>Riesgos para la privacidad, posible control o programación del dinero y pérdida de negocio de los bancos.</p></div><div class="card"><h3>Estado en 2026</h3><p>Más de 130 países la exploran (Atlantic Council). El euro digital haría su piloto en 2027 y su emisión llegaría en 2029 como pronto, si lo aprueba el Parlamento Europeo. En China, el yuan digital paga intereses desde enero de 2026.</p></div></div></section>
+
+<section class="view" id="v-control"><div class="sec"><h2>Control</h2><p class="lead">Se trata de quién tiene poder sobre los datos, las tecnologías y las personas: Estados, empresas y la propia ciudadanía. Cada forma de control tiene una finalidad declarada y una preocupación.</p></div><div id="ctl"></div>
+<div class="sec"><h2>¿Es legítimo un sistema de vigilancia?</h2><p class="lead">Seis criterios que se usan para evaluarlo. Guía didáctica.</p></div>
+<div class="card"><div class="checks" id="ck2"></div><div class="big"><span id="ck2-sc">0</span> de 6</div><div class="meter"><div id="ck2-bar"></div></div><p id="ck2-msg"></p></div>
+<div class="sec"><h2>Marco legal</h2></div>
+<div class="grid"><div class="card"><h3>Argentina</h3><p>Ley 25.326 de protección de datos, privacidad (art. 19 de la Constitución) y hábeas data (art. 43). Hay proyectos en el Congreso para reformar la ley de datos y regular el reconocimiento facial.</p></div><div class="card"><h3>Unión Europea</h3><p>El RGPD (2018) protege los datos personales y la ley de IA (2024) prohíbe prácticas como la puntuación social.</p></div></div></section>
+
+<section class="view" id="v-programacion"><div class="sec"><h2>Programación</h2><p class="lead">Programar es dar instrucciones precisas a una computadora. Un algoritmo es una receta paso a paso; el código es su traducción a un lenguaje como Python o JavaScript.</p></div>
+<div class="grid" id="prg"></div>
+<div class="sec"><h2>Probá una condición</h2><p class="lead">Un programa decide según reglas. Cambiá la edad y mirá qué rama se ejecuta. En Argentina el voto es obligatorio de 18 a 70 años y optativo a los 16 y 17 y desde los 71.</p></div>
+<div class="card"><div class="calc"><label>Edad<input id="age" type="number" min="0" max="120" value="17"></label></div><pre class="code" id="code"></pre><p class="big" style="font-size:1.3rem" id="out"></p></div>
+<div class="sec"><h2>Código y poder</h2></div>
+<div class="grid"><div class="card"><h3>"El código es ley"</h3><p>El jurista Lawrence Lessig planteó que el software regula la conducta como lo hacen las leyes.</p></div><div class="card"><h3>Contratos inteligentes</h3><p>Acuerdos que se ejecutan solos en una blockchain cuando se cumplen sus condiciones.</p></div><div class="card"><h3>Software libre</h3><p>Su código es público y auditable. Sus defensores valoran la transparencia; otros señalan que exige mantenimiento y recursos.</p></div><div class="card"><h3>Habilidades</h3><p>La UIT observa que las habilidades básicas están extendidas, pero las avanzadas, como seguridad y creación digital, crecen más despacio. En Argentina, la Ley 27.506 promueve la economía del conocimiento.</p></div></div></section>
+
+<section class="view" id="v-proyectos"><div class="sec"><h2>Proyectos actuales y futuros</h2><p class="lead">Iniciativas en marcha y propuestas en preparación. Las previsiones pueden cambiar.</p></div><div class="tabs" id="ptabs" role="tablist"></div><div id="ppanel"></div></section>
+
+<section class="view" id="v-peligros"><div class="sec"><h2>Peligros</h2><p class="lead">Abrí cada riesgo para ver de qué se trata y cómo cuidarte.</p></div><div id="pel"></div>
+<div class="sec"><h2>¿Reconocés la estafa?</h2></div><div class="card" id="qz"></div>
+<div class="sec"></div>
+<details><summary>Marco legal en Argentina</summary><div><ul><li>Ley 26.388 (2008): delitos informáticos en el Código Penal.</li><li>Ley 26.904 (2013): grooming.</li><li>Ley 27.411 (2017): adhesión al Convenio de Budapest sobre ciberdelito.</li><li>Ley 27.590 (2020, Mica Ortega): prevención del grooming.</li><li>Ley 25.326 (2000): protección de datos personales.</li></ul>Ante una estafa o delito, conviene denunciar en la fiscalía o la policía.</div></details></section>
+
+<section class="view" id="v-glosario"><div class="sec"><h2>Glosario</h2><p class="lead">Buscá una palabra o recorré la lista.</p></div>
+<input class="search" id="q" type="search" placeholder="Buscar término" aria-label="Buscar término"><dl class="grid gl" id="gl"></dl></section>
+</main>
+<footer>Contenido educativo y plural, sin tomar partido. Verificá las cifras en la UIT, el Atlantic Council y fuentes oficiales.</footer>
+
+<script>
+const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
+const R=[['inicio','Inicio'],['ciudadania','Identidad digital'],['economia','Economía digital'],['control','Control'],['programacion','Programación'],['proyectos','Proyectos'],['peligros','Peligros'],['glosario','Glosario']];
+$('#nav').innerHTML=R.map(r=>`<a class="nav-link" href="#${r[0]}" data-r="${r[0]}">${r[1]}</a>`).join('');
+function go(r){if(!R.some(x=>x[0]===r))r='inicio';$$('.view').forEach(v=>v.classList.toggle('active',v.id==='v-'+r));$$('.nav-link').forEach(a=>a.classList.toggle('active',a.dataset.r===r));scrollTo({top:0})}
+addEventListener('hashchange',()=>go(location.hash.slice(1)));
+const root=document.documentElement;root.dataset.theme=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';
+$('#tt').onclick=()=>root.dataset.theme=root.dataset.theme==='dark'?'light':'dark';
+$('#home').innerHTML=R.slice(1).map(r=>`<a class="card" href="#${r[0]}"><h3>${r[1]}</h3><p>Entrar a la sección</p></a>`).join('');
+const cards=(id,a)=>$(id).innerHTML=a.map(c=>`<div class="card"><h3>${c[0]}</h3><p>${c[1]}</p></div>`).join('');
+const li=a=>'<ul style="margin:6px 0 0;padding-left:20px;color:var(--muted)">'+a.map(x=>`<li style="margin-bottom:6px"><b style="color:var(--text)">${x[0]}</b> ${x[1]}</li>`).join('')+'</ul>';
+function tabs(tid,pid,D,render){$(tid).innerHTML=D.map((d,i)=>`<button class="tab" role="tab" style="--c:${d[1]}" aria-selected="${i==0}" data-i="${i}">${d[0]}</button>`).join('');
+ const show=i=>{$$('.tab',$(tid)).forEach(t=>t.setAttribute('aria-selected',t.dataset.i==i));$(pid).innerHTML=`<div class="panel" style="--c:${D[i][1]}">${render(D[i])}</div>`};
+ $(tid).onclick=e=>{const b=e.target.closest('.tab');b&&show(b.dataset.i)};show(0)}
+function mk(id,items,res){const n=items.length,e=$('#'+id);e.innerHTML=items.map(c=>`<label><input type="checkbox">${c}</label>`).join('');
+ e.onchange=()=>{const k=$$('input:checked',e).length;$('#'+id+'-sc').textContent=k;$('#'+id+'-bar').style.width=k/n*100+'%';$('#'+id+'-msg').textContent=k<=2?res[0]:k<n?res[1]:res[2]};$('#'+id+'-msg').textContent='Marcá las opciones para ver el resultado.'}
+const acc=(id,a,f)=>$(id).innerHTML=a.map((x,i)=>`<details${i?'':' open'}><summary>${x[0]}</summary><div>${f(x)}</div></details>`).join('');
+
+cards('#idc',[['Identidad','Quién sos: nombre, DNI y otros atributos.'],['Autenticación','Cómo lo demostrás: clave, huella, rostro o doble verificación.'],['Autorización','Qué podés hacer una vez identificado.'],['Huella digital','El rastro de datos que dejás al navegar, comprar y publicar.']]);
+cards('#idm',[['Centralizado','Un organismo o empresa guarda y verifica todo, como en sistemas nacionales tipo Aadhaar (India). Es simple y universal, pero concentra riesgos de falla y de abuso.'],['Federado','Usás una cuenta para entrar a otros servicios, como "iniciar sesión con Google". Es cómodo, pero las plataformas saben dónde te identificás.'],['Autosoberano','Guardás tus credenciales en tu propia billetera y compartís solo lo necesario. Da más control, pero exige cuidar la billetera. Ejemplo: el proyecto DIDI en Argentina.']]);
+cards('#idw',[['Unión Europea','Cada Estado debe ofrecer, hacia fines de 2026, al menos una billetera de identidad digital: gratuita y voluntaria. Los documentos físicos siguen siendo válidos.'],['Argentina: servicios','Mi Argentina y la firma digital (Ley 25.506) permiten identificarse y firmar en línea.'],['Argentina: datos','La Ley 25.326 (2000) protege los datos personales. En 2026 se presentaron proyectos en Diputados para reemplazarla; están en debate.'],['El debate','Quienes la impulsan destacan comodidad y acceso a servicios; quienes la cuestionan advierten sobre privacidad y exclusión de quienes no tienen conexión o dispositivos.']]);
+mk('ck1',['Uso una clave distinta para cada servicio','Activé la doble verificación','Actualizo el teléfono y las apps','Desconfío de enlaces y mensajes urgentes','Reviso los permisos de mis apps','Hago copias de seguridad','No comparto códigos ni datos sensibles'],['Conviene reforzar lo básico: empezá por claves únicas y doble verificación.','Vas bien: completá los hábitos que faltan.','Excelente higiene digital.']);
+
+cards('#ec',[['Comercio electrónico','Compra y venta en línea, con pagos digitales.'],['Plataformas','Mercados digitales que conectan oferta y demanda y concentran datos.'],['Fintech y pagos','Billeteras, pagos QR y servicios financieros digitales.'],['Trabajo remoto y por plataformas','Más flexibilidad, pero con debate sobre derechos laborales.'],['Economía del conocimiento','Servicios basados en software, datos y creatividad.'],['Datos como activo','Los datos generan valor: de ahí el debate sobre quién los controla.']]);
+tabs('#mtabs','#mpanel',[['Dinero bancario y billeteras','#0891b2',[['Emisor:','bancos comerciales; es un depósito.'],['Riesgo:','fallas del sistema y fraudes.'],['Privacidad:','la entidad ve tus movimientos.']]],['Criptomonedas','#d97706',[['Emisor:','redes descentralizadas, sin autoridad central.'],['Riesgo:','alta volatilidad y estafas.'],['Privacidad:','las operaciones son públicas en la cadena, con seudónimos.']]],['Stablecoins','#059669',[['Emisor:','empresas privadas; su valor se ata a una moneda como el dólar.'],['Riesgo:','depende de las reservas que la respaldan.'],['Privacidad:','depende del emisor y de la red.']]],['Moneda digital de banco central','#7c3aed',[['Emisor:','el banco central; es dinero oficial en formato digital.'],['Riesgo:','según sus críticos, menor privacidad y efectos sobre los bancos.'],['Privacidad:','depende del diseño y es el eje del debate.']]]],d=>`<h3>${d[0]}</h3>${li(d[2])}`);
+
+acc('#ctl',[['Vigilancia estatal','Para qué: seguridad, prevención de delitos y emergencias.','Qué preocupa: abusos, vigilancia masiva y falta de control judicial. En Buenos Aires la Justicia suspendió el sistema de reconocimiento facial por falta de garantías.'],['Datos y publicidad','Para qué: personalizar servicios y financiar plataformas gratuitas.','Qué preocupa: perfilado, manipulación y venta de datos.'],['Algoritmos de recomendación','Para qué: ordenar el contenido que probablemente te interese.','Qué preocupa: burbujas de información y falta de transparencia.'],['Censura y filtrado','Para qué: combatir contenido ilegal, como el abuso infantil.','Qué preocupa: restricciones a la libertad de expresión.'],['Puntuación y decisiones automatizadas','Para qué: evaluar riesgos y asignar beneficios con eficiencia.','Qué preocupa: sesgos y falta de apelación. La ley de IA de la UE prohíbe la puntuación social.'],['Dinero programable','Para qué: pagos automáticos y subsidios con destino definido.','Qué preocupa: límites al uso libre del dinero.']],x=>`<ul><li><b>${x[1].split(':')[0]}:</b>${x[1].split(':').slice(1).join(':')}</li><li><b>${x[2].split(':')[0]}:</b>${x[2].split(':').slice(1).join(':')}</li></ul>`);
+mk('ck2',['Tiene una base legal clara','Persigue un fin concreto y legítimo','Es proporcional: no hay una opción menos invasiva','Hay control judicial o independiente','Es transparente y auditable','Permite reclamar y corregir errores'],['Faltan garantías básicas.','Hay garantías parciales: revisá las que faltan.','Cumple los criterios de esta guía.']);
+
+cards('#prg',[['Variable','Un nombre que guarda un dato: edad = 17.'],['Condición','Decide según una regla: si edad ≥ 18, entonces...'],['Bucle','Repite una acción: para cada trámite de la lista...'],['Función','Un bloque reutilizable que hace una tarea.'],['Algoritmo','Secuencia ordenada de pasos para resolver un problema.']]);
+function age(){const a=+$('#age').value;let k=a>=18&&a<=70?0:(a>=16||a>70)?1:2;
+ const L=['si edad >= 18 y edad <= 70:','    mostrar "Voto obligatorio"','si no, si edad >= 16 o edad > 70:','    mostrar "Voto optativo"','si no:','    mostrar "Todavía no vota"'];
+ $('#code').innerHTML=L.map((l,i)=>`<span${i==k*2||i==k*2+1?' class="hl"':''}>${l.replace(/ /g,'&nbsp;')}</span>`).join('');
+ $('#out').textContent=['Voto obligatorio.','Voto optativo.','Todavía no vota.'][k]}
+$('#age').oninput=age;age();
+
+tabs('#ptabs','#ppanel',[['Actuales','#059669',[['Billetera de identidad europea:','cada Estado debe ofrecerla hacia fines de 2026.'],['Yuan digital (e-CNY):','paga intereses desde enero de 2026.'],['mBridge:','pagos entre países con monedas digitales de bancos centrales, con China y Emiratos entre sus participantes.'],['Gobierno digital:','Estonia, Dinamarca y Singapur lideran el ranking de la ONU de 2024.'],['Argentina:','Mi Argentina, la gestión documental electrónica y el Gemelo Digital Social, anunciado en mayo de 2026 y en etapa inicial.'],['5G:','cubre al 55 % de la población mundial en 2025.']]],['Futuros','#7c3aed',[['Euro digital:','piloto previsto en 2027 y emisión no antes de 2029.'],['Libra digital:','el Banco de Inglaterra debe decidir en 2026.'],['Criptografía poscuántica:','nuevos estándares para proteger datos ante futuras computadoras cuánticas.'],['Identidad interoperable:','billeteras que funcionen entre países.'],['Argentina:','proyectos en Diputados para reemplazar la ley de datos y regular la inteligencia artificial.'],['Conectividad universal:','llevar internet a los 2.200 millones de personas sin conexión.'],['6G:','estándares en preparación, con despliegue esperado hacia 2030.']]]],d=>`<h3>${d[0]}</h3>${li(d[2])}`);
+
+acc('#pel',[['Phishing y estafas','Mensajes o sitios falsos que suplantan a bancos, empresas o conocidos para robar datos o dinero.','No compartas códigos ni claves, verificá por canales oficiales y desconfiá de la urgencia.'],['Robo de identidad','Uso de tus datos personales por terceros para abrir cuentas, comprar o cometer fraudes.','Usá claves únicas, doble verificación y revisá tus movimientos.'],['Ransomware y ciberataques','Programas que bloquean sistemas o roban información y piden un rescate.','Hacé copias de seguridad y mantené el software actualizado.'],['Vigilancia y pérdida de privacidad','Recolección masiva de datos por Estados o empresas, a veces sin conocimiento de las personas.','Revisá permisos, limitá lo que compartís y conocé tus derechos de datos.'],['Desinformación y deepfakes','Contenido falso o manipulado con IA que parece real.','Contrastá con medios confiables antes de compartir.'],['Sesgos y decisiones automatizadas','Algoritmos que pueden reproducir prejuicios o decidir sin explicación.','Exigí transparencia y posibilidad de reclamar.'],['Brecha digital','2.200 millones de personas siguen sin conexión: 94 % usa internet en países de ingresos altos y 23 % en los de ingresos bajos (UIT, 2025).','Políticas de conectividad, acceso asequible y alfabetización digital.'],['Grooming y ciberacoso','Adultos que engañan a menores en línea o acoso entre pares. Es delito en Argentina.','Acompañar a niñas, niños y adolescentes, configurar la privacidad y denunciar.'],['Dependencia de plataformas','Pocas empresas concentran servicios: una cuenta bloqueada puede dejarte sin acceso a datos y trámites.','Guardá copias propias y evitá depender de una sola cuenta.']],x=>`${x[1]}<ul><li><b>Cómo cuidarte:</b> ${x[2]}</li></ul>`);
+const QZ=[{q:'Te llega un SMS del banco con un enlace para "desbloquear tu cuenta". ¿Qué hacés?',o:['Entro rápido al enlace, es urgente','Ignoro el enlace y llamo al número oficial del banco','Respondo con mis datos para confirmar'],c:1,e:'Los bancos no piden claves ni códigos por enlaces. Entrá siempre desde la app o el sitio oficial.'},{q:'Alguien te pide el código de 6 dígitos que te llegó por mensaje "para verificar tu cuenta".',o:['Se lo doy, parece amable','No lo comparto con nadie','Lo comparto si dice que es de soporte'],c:1,e:'Ese código es la llave de tu cuenta: quien lo tiene puede entrar.'},{q:'Ves un video de una figura pública diciendo algo insólito. ¿Qué conviene?',o:['Compartirlo ya, para avisar','Buscar la noticia en medios confiables, porque puede ser un deepfake','Creerlo si tiene muchas vistas'],c:1,e:'Las vistas no prueban nada. Contrastá la fuente antes de difundir.'},{q:'Un sitio vende un celular a 80 % menos y solo acepta transferencia a una cuenta personal.',o:['Transfiero rápido antes de que se agote','Desconfío: precio irreal y pago sin protección son señales de estafa','Pido un descuento extra'],c:1,e:'Preferí sitios con medios de pago protegidos y opiniones verificables.'}];
+let qi=0,qs=0;
+function rq(){const c=$('#qz');delete c.dataset.d;
+ if(qi>=QZ.length){c.innerHTML=`<div class="big">${qs}/${QZ.length}</div><p style="margin:8px 0 14px">${qs===QZ.length?'Excelente: reconocés las señales de alerta.':'Repasá las señales de alerta y probá otra vez.'}</p><button class="btn btn-primary" id="qr">Reintentar</button>`;$('#qr').onclick=()=>{qi=qs=0;rq()};return}
+ const q=QZ[qi];c.innerHTML=`<p class="lead" style="margin-bottom:10px">Pregunta ${qi+1} de ${QZ.length}</p><h3 style="margin-bottom:14px">${q.q}</h3>${q.o.map((o,i)=>`<button class="tab" style="display:block;width:100%;text-align:left;margin-bottom:8px;--c:#0891b2" data-i="${i}">${o}</button>`).join('')}<p id="qf" style="margin-top:12px"></p>`;
+ $$('.tab',c).forEach(b=>b.onclick=()=>{if(c.dataset.d)return;c.dataset.d=1;const i=+b.dataset.i,ok=i===q.c;if(ok)qs++;
+  $$('.tab',c).forEach(x=>{if(+x.dataset.i===q.c){x.style.setProperty('--c','#059669');x.setAttribute('aria-selected','true')}});
+  if(!ok){b.style.setProperty('--c','#e11d48');b.setAttribute('aria-selected','true')}
+  $('#qf').innerHTML=`<b>${ok?'Correcto.':'No exactamente.'}</b> ${q.e}<br><button class="btn btn-primary" id="qn" style="margin-top:12px">${qi==QZ.length-1?'Ver resultado':'Siguiente'}</button>`;
+  $('#qn').onclick=()=>{qi++;rq()}})}
+rq();
+
+const GL=[['Algoritmo','Secuencia de pasos para resolver un problema.'],['Autenticación','Proceso para demostrar que sos quien decís ser.'],['Biometría','Identificación por rasgos físicos, como huella o rostro.'],['Billetera digital','App que guarda dinero, credenciales o documentos.'],['Blockchain','Registro compartido y encadenado de operaciones, difícil de alterar.'],['Brecha digital','Desigualdad en acceso a internet, dispositivos y habilidades.'],['CBDC','Moneda digital emitida por un banco central.'],['Ciberacoso','Hostigamiento a través de medios digitales.'],['Ciberseguridad','Protección de sistemas y datos frente a ataques.'],['Cifrado','Codificación de información para que solo la lea quien tiene la clave.'],['Criptomoneda','Dinero digital basado en criptografía y redes descentralizadas.'],['Datos personales','Información que identifica o permite identificar a una persona.'],['Deepfake','Contenido falso creado o alterado con inteligencia artificial.'],['Doble verificación','Segundo paso para entrar a una cuenta, además de la clave.'],['Economía del conocimiento','Actividades basadas en software, datos y servicios de alto valor.'],['Fintech','Servicios financieros que usan tecnología.'],['Grooming','Engaño de un adulto a un menor en línea con fines de abuso.'],['Hábeas data','Acción para conocer y corregir los datos propios en registros.'],['Huella digital','Rastro de datos que dejás en línea.'],['Identidad autosoberana','Modelo donde la persona controla sus propias credenciales.'],['Identidad digital','Datos y credenciales que te identifican en línea.'],['Inteligencia artificial','Sistemas que realizan tareas que requieren inteligencia humana.'],['Interoperabilidad','Capacidad de sistemas distintos de funcionar juntos.'],['Malware','Software malicioso.'],['Phishing','Engaño para que entregues datos haciéndote pasar por otro.'],['Privacidad','Derecho a controlar qué se sabe de vos.'],['Ransomware','Malware que secuestra datos y pide un rescate.'],['Reconocimiento facial','Identificación de personas por los rasgos del rostro.'],['Contrato inteligente','Acuerdo que se ejecuta automáticamente al cumplirse sus condiciones.'],['Software libre','Programa cuyo código se puede ver, usar y modificar.'],['Stablecoin','Criptomoneda cuyo valor se ata a otra moneda.'],['Vigilancia masiva','Recolección generalizada de datos de la población.']];
+GL.sort((a,b)=>a[0].localeCompare(b[0],'es'));
+function glo(t=''){const f=GL.filter(g=>(g[0]+g[1]).toLowerCase().includes(t.toLowerCase()));$('#gl').innerHTML=f.length?f.map(g=>`<div class="card"><dt>${g[0]}</dt><dd>${g[1]}</dd></div>`).join(''):'<p class="lead">No hay resultados. Probá con otra palabra.</p>'}
+$('#q').oninput=e=>glo(e.target.value);glo();
+go(location.hash.slice(1));
+</script>
+</body>
+</html>

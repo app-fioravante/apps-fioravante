@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ciudades sustentables explicadas en lenguaje sencillo</title>
+<meta name="description" content="Densidad poblacional, ciudades sustentables, ciudad de 15 minutos, Agenda 2030 y glosario.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--font-display:'Space Grotesk','Segoe UI',system-ui,sans-serif;--font-body:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;--radius:20px;--maxw:1180px;--ease:cubic-bezier(.22,.75,.25,1)}
+html[data-theme="light"]{--bg:#fbf9f5;--surface:rgba(255,255,255,.86);--s2:rgba(60,40,20,.045);--border:rgba(60,40,20,.12);--bs:rgba(60,40,20,.24);--text:#1a1410;--muted:#6f6252;--accent:#e11d48;--accent-2:#7c3aed;--accent-3:#0891b2;--good:#059669;--warn:#d97706;--bad:#e11d48;--shadow:0 22px 55px -28px rgba(60,30,10,.22);--orb:.16;--dot:rgba(60,40,20,.055)}
+html[data-theme="dark"]{--bg:#0a0806;--surface:rgba(30,25,20,.66);--s2:rgba(255,255,255,.045);--border:rgba(255,255,255,.10);--bs:rgba(255,255,255,.20);--text:#f5ede2;--muted:#a89a86;--accent:#fb7185;--accent-2:#a78bfa;--accent-3:#22d3ee;--good:#34d399;--warn:#fbbf24;--bad:#fb7185;--shadow:0 24px 60px -24px rgba(0,0,0,.9);--orb:.30;--dot:rgba(255,255,255,.03)}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;font-family:var(--font-body);background:var(--bg);color:var(--text);min-height:100vh;line-height:1.65;-webkit-font-smoothing:antialiased;transition:background .45s var(--ease),color .45s var(--ease);overflow-x:hidden}
+h1,h2,h3,h4{font-family:var(--font-display);line-height:1.15;letter-spacing:-.02em;margin:0}
+p{margin:0}button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}a{color:inherit;text-decoration:none}
+::selection{background:var(--accent);color:#fff}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
+.bg-dots{position:fixed;inset:0;z-index:-3;pointer-events:none;background-image:radial-gradient(var(--dot) 1px,transparent 1px);background-size:26px 26px}
+.orbs{position:fixed;inset:0;z-index:-2;overflow:hidden;pointer-events:none}
+.orb{position:absolute;border-radius:50%;filter:blur(100px);opacity:var(--orb);animation:float 28s ease-in-out infinite alternate}
+.o1{width:52vw;height:52vw;background:var(--accent);top:-16vw;left:-12vw}
+.o2{width:42vw;height:42vw;background:var(--accent-2);bottom:-18vw;right:-10vw;animation-delay:-10s}
+.o3{width:34vw;height:34vw;background:var(--accent-3);top:44%;left:58%;animation-delay:-17s}
+@keyframes float{0%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(4vw,-3vw,0) scale(1.1)}100%{transform:translate3d(-3vw,4vw,0) scale(.95)}}
+.site-header{position:sticky;top:0;z-index:50;backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);background:color-mix(in srgb,var(--bg) 78%,transparent);border-bottom:1px solid var(--border)}
+.header-inner{max-width:var(--maxw);margin:0 auto;padding:13px 22px;display:flex;align-items:center;gap:16px}
+.brand{display:flex;align-items:center;gap:11px;font-family:var(--font-display);font-weight:700;white-space:nowrap}
+.mark{width:38px;height:38px;border-radius:12px;flex:none;background:linear-gradient(140deg,var(--accent),var(--accent-2) 55%,var(--accent-3));display:grid;place-items:center;color:#fff;box-shadow:0 8px 22px -8px var(--accent);transition:transform .5s var(--ease)}
+.brand:hover .mark{transform:rotate(-10deg) scale(1.06)}.mark svg{width:22px;height:22px}
+.nav{display:flex;gap:2px;margin-left:auto;overflow-x:auto;scrollbar-width:none;min-width:0}.nav::-webkit-scrollbar{display:none}
+.nav-link{position:relative;padding:9px 11px;border-radius:11px;font-size:.8rem;font-weight:500;color:var(--muted);white-space:nowrap;transition:color .3s,background .3s}
+.nav-link:hover,.nav-link.active{color:var(--text);background:var(--s2)}
+.nav-link.active::after{content:'';position:absolute;left:11px;right:11px;bottom:4px;height:2px;border-radius:2px;background:linear-gradient(90deg,var(--accent),var(--accent-2));animation:navIn .4s var(--ease) both}
+@keyframes navIn{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.tt{width:40px;height:40px;border-radius:12px;flex:none;border:1px solid var(--border);background:var(--s2);display:grid;place-items:center;transition:transform .35s var(--ease)}
+.tt:hover{transform:translateY(-2px) rotate(8deg)}.tt svg{width:19px;height:19px}
+html[data-theme=dark] .i-moon,html[data-theme=light] .i-sun{display:none}
+main{max-width:var(--maxw);margin:0 auto;padding:0 22px 70px}
+.view{display:none}.view.active{display:block;animation:viewIn .55s var(--ease) both}
+@keyframes viewIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.hero{padding:64px 0 36px;max-width:920px}
+.pill{display:inline-flex;align-items:center;gap:8px;padding:7px 15px;border-radius:999px;font-size:.78rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;border:1px solid var(--border);background:var(--surface);color:var(--muted);margin-bottom:24px}
+.pill i{width:7px;height:7px;border-radius:50%;background:var(--good);animation:pulse 2.4s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--good) 60%,transparent)}70%{box-shadow:0 0 0 9px transparent}100%{box-shadow:0 0 0 0 transparent}}
+h1{font-size:clamp(2.1rem,5.2vw,3.9rem);font-weight:700;letter-spacing:-.035em;margin-bottom:20px}
+.grad{background:linear-gradient(100deg,var(--accent),var(--accent-2) 48%,var(--accent-3));-webkit-background-clip:text;background-clip:text;color:transparent;background-size:220% auto;animation:shimmer 8s linear infinite}
+@keyframes shimmer{to{background-position:220% center}}
+.lead{font-size:clamp(1rem,1.6vw,1.15rem);color:var(--muted);max-width:700px;margin-bottom:30px}
+.btn{display:inline-flex;align-items:center;gap:9px;padding:13px 25px;border-radius:13px;font-size:.93rem;font-weight:600;border:1px solid transparent;transition:transform .28s var(--ease),box-shadow .3s}
+.btn-primary{background:linear-gradient(120deg,var(--accent),var(--accent-2));color:#fff;box-shadow:0 14px 34px -14px var(--accent);position:relative;overflow:hidden}
+.btn-primary::after{content:'';position:absolute;inset:0;background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,.45),transparent 70%);transform:translateX(-130%);transition:transform .7s var(--ease)}
+.btn-primary:hover{transform:translateY(-2px)}.btn-primary:hover::after{transform:translateX(130%)}
+.stats,.grid{display:grid;gap:14px}
+.stats{grid-template-columns:repeat(auto-fit,minmax(170px,1fr));margin:8px 0 46px}
+.grid{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.stat,.card{padding:22px 20px;border-radius:var(--radius);background:var(--surface);border:1px solid var(--border);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);transition:transform .35s var(--ease),border-color .3s,box-shadow .35s}
+.stat:hover,.card:hover{transform:translateY(-4px);border-color:var(--bs);box-shadow:var(--shadow)}
+.stat b{display:block;font-family:var(--font-display);font-size:2rem;letter-spacing:-.03em}
+.stat span{font-size:.85rem;color:var(--muted)}
+.card h3{font-size:1.08rem;margin-bottom:8px}.card p{font-size:.92rem;color:var(--muted)}
+.tag{display:inline-block;font-size:.72rem;font-weight:600;padding:3px 10px;border-radius:999px;background:var(--s2);border:1px solid var(--border);margin:10px 6px 0 0;color:var(--muted)}
+.sec{padding:52px 0 22px}.sec h2{font-size:clamp(1.7rem,3.6vw,2.6rem);letter-spacing:-.03em;margin-bottom:12px}
+.sec>.lead{margin-bottom:28px}
+.tl{position:relative;padding:6px 0}
+.tl::before{content:'';position:absolute;left:19px;top:0;bottom:0;width:2px;background:linear-gradient(var(--accent),var(--accent-2),var(--accent-3));opacity:.5}
+.ev{position:relative;padding:0 0 26px 58px;opacity:0;transform:translateY(22px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+.ev.in{opacity:1;transform:none}
+.ev::before{content:'';position:absolute;left:11px;top:22px;width:18px;height:18px;border-radius:50%;background:var(--bg);border:3px solid var(--accent);box-shadow:0 0 0 5px color-mix(in srgb,var(--accent) 18%,transparent)}
+.ev .yr{font-family:var(--font-display);font-weight:700;font-size:1.5rem;background:linear-gradient(100deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+@media(min-width:860px){.tl::before{left:50%}.ev{width:50%;padding:0 46px 30px 0;text-align:right}.ev::before{left:auto;right:-9px}.ev:nth-child(even){margin-left:50%;padding:0 0 30px 46px;text-align:left}.ev:nth-child(even)::before{right:auto;left:-9px}}
+.tabs{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:18px}
+.tab{padding:12px 18px;border-radius:13px;border:1px solid var(--border);background:var(--surface);font-weight:600;font-size:.9rem;transition:transform .25s var(--ease),border-color .3s,background .3s}
+.tab:hover{transform:translateY(-2px)}.tab[aria-selected=true]{color:#fff;border-color:transparent;background:var(--c)}
+.panel{padding:26px;border-radius:var(--radius);background:var(--surface);border:1px solid var(--border);border-left:6px solid var(--c);animation:viewIn .45s var(--ease) both}
+.panel h3{font-size:1.4rem;margin-bottom:8px}.panel p{color:var(--muted);margin-bottom:6px}
+.meter{height:14px;border-radius:99px;background:var(--s2);border:1px solid var(--border);overflow:hidden;margin:14px 0 8px}
+.meter div{height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--accent-3),var(--accent-2),var(--accent));transition:width .5s var(--ease)}
+input[type=range]{width:100%;accent-color:var(--accent);height:28px}
+.big{font-family:var(--font-display);font-size:2.4rem;font-weight:700;letter-spacing:-.03em}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.chip{padding:6px 13px;border-radius:999px;border:1px solid var(--border);background:var(--s2);font-size:.82rem;font-weight:500;transition:border-color .3s,transform .3s}
+.chip:hover{border-color:var(--accent);transform:translateY(-2px)}
+details{border:1px solid var(--border);border-radius:16px;background:var(--surface);margin-bottom:10px;overflow:hidden}
+summary{list-style:none;cursor:pointer;padding:16px 20px;font-family:var(--font-display);font-weight:600;display:flex;justify-content:space-between;gap:12px;align-items:center}
+summary::-webkit-details-marker{display:none}
+summary::after{content:'+';font-size:1.4rem;color:var(--accent);transition:transform .35s var(--ease)}
+details[open] summary::after{transform:rotate(135deg)}
+details>div{padding:0 20px 18px;color:var(--muted);font-size:.94rem;animation:viewIn .4s var(--ease) both}
+details li{margin-bottom:4px}
+.note{margin-top:30px;padding:16px 20px;border-radius:16px;border:1px dashed var(--bs);color:var(--muted);font-size:.86rem}
+.search{width:100%;max-width:440px;padding:13px 18px;border-radius:13px;border:1px solid var(--border);background:var(--surface);color:var(--text);font:inherit;margin-bottom:20px}
+.gl dt{font-family:var(--font-display);font-weight:600}.gl dd{margin:0 0 4px;color:var(--muted);font-size:.92rem}
+.gl .card{padding:18px}
+footer{text-align:center;color:var(--muted);font-size:.82rem;padding:30px 22px 50px}
+@media(max-width:600px){.header-inner{padding:10px 14px;gap:10px}.brand span{display:none}main{padding:0 16px 60px}.hero{padding:40px 0 24px}.btn{width:100%;justify-content:center}.panel{padding:20px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.ev{opacity:1;transform:none}}
+.calc{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:14px 0}
+.calc label{font-size:.85rem;color:var(--muted);display:grid;gap:6px}
+.calc input{padding:12px 14px;border-radius:12px;border:1px solid var(--border);background:var(--surface);color:var(--text);font:inherit;width:100%}
+.checks{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px;margin:16px 0}
+.checks label{display:flex;gap:10px;align-items:center;padding:14px 16px;border-radius:14px;border:1px solid var(--border);background:var(--surface);cursor:pointer;transition:border-color .3s,transform .3s}
+.checks label:hover{border-color:var(--accent);transform:translateY(-2px)}
+.checks input{accent-color:var(--accent);width:18px;height:18px;flex:none}
+.rank{display:grid;gap:10px}
+.rk{display:grid;grid-template-columns:minmax(96px,160px) 1fr 74px;gap:10px;align-items:center;font-size:.85rem}
+.rk i{display:block;height:12px;border-radius:99px;background:linear-gradient(90deg,var(--accent-3),var(--accent-2),var(--accent));width:0;transition:width .9s var(--ease)}
+.rk b{text-align:right;font-family:var(--font-display)}
+@media(max-width:600px){.rk{grid-template-columns:90px 1fr 62px}}
+</style>
+</head>
+<body>
+<div class="bg-dots"></div><div class="orbs"><div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div></div>
+<header class="site-header"><div class="header-inner">
+<a class="brand" href="#inicio"><div class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V10l6-3v14M9 21V4l12 4v13M2 21h20"/><path d="M13 11h4M13 15h4"/></svg></div><span>Ciudades sustentables</span></a>
+<nav class="nav" id="nav"></nav>
+<button class="tt" id="tt" aria-label="Cambiar tema"><svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+</div></header>
+<main>
+<section class="view" id="v-inicio">
+<div class="hero"><div class="pill"><i></i>Urbanismo sostenible</div>
+<h1>Ciudades más habitables, <span class="grad">explicadas simple</span></h1>
+<p class="lead">Cuánta gente vive en cada kilómetro cuadrado, cómo se diseña una ciudad que cuida el ambiente y a las personas, y qué metas se fijó el mundo para 2030.</p>
+<a class="btn btn-primary" href="#densidad">Empezar por la densidad</a></div>
+<div class="stats"><div class="stat"><b>55 %</b><span>Población urbana mundial en 2018; cerca de 68 % hacia 2050</span></div><div class="stat"><b>15 min</b><span>A pie o en bici para cubrir lo esencial</span></div><div class="stat"><b>17</b><span>Objetivos de Desarrollo Sostenible, con 169 metas</span></div><div class="stat"><b id="days">–</b><span>Días que faltan para el fin de 2030</span></div></div>
+<div class="grid" id="home"></div>
+</section>
+
+<section class="view" id="v-densidad"><div class="sec"><h2>Densidad poblacional</h2><p class="lead">Es la cantidad de personas que viven en un territorio: población ÷ superficie. Se mide en habitantes por kilómetro cuadrado (hab/km²).</p></div>
+<div class="card"><h3>Calculadora</h3><div class="calc"><label>Población<input id="pop" type="number" min="0" value="1000000"></label><label>Superficie (km²)<input id="area" type="number" min="0.01" step="any" value="200"></label></div><div class="big"><span id="den"></span> hab/km²</div><div class="meter"><div id="dbar"></div></div><p id="dcat"></p></div>
+<div class="sec"><h2>Comparación</h2><p class="lead">Escala logarítmica: cada tramo vale diez veces más que el anterior. Valores aproximados.</p></div>
+<div class="card"><div class="rank" id="rank"></div></div>
+<div class="sec"><h2>Ciudad compacta o dispersa</h2></div>
+<div class="grid"><div class="card"><h3>Ventajas de la densidad</h3><p>Transporte público más eficiente, servicios cercanos, menos suelo ocupado y menos energía por habitante.</p></div><div class="card"><h3>Desafíos</h3><p>Hacinamiento, falta de verde, calor urbano y presión sobre agua, cloacas y escuelas si no se planifica.</p></div><div class="card"><h3>Expansión urbana</h3><p>Barrios dispersos obligan a usar el auto, encarecen las redes de servicios y avanzan sobre campo y humedales.</p></div><div class="card"><h3>En Argentina</h3><p>Más del 90 % vive en ciudades y cerca de un tercio en el Área Metropolitana de Buenos Aires, mientras grandes zonas del país casi no tienen población.</p></div></div>
+<div class="sec"></div>
+<details><summary>Cinco principios de ONU-Hábitat para barrios sostenibles</summary><div><ul><li>Calles bien conectadas, con al menos 30 % del suelo para vías.</li><li>Densidad alta: al menos 15.000 personas por km².</li><li>Usos mixtos: al menos 40 % de la superficie construida para actividad económica.</li><li>Mezcla social: entre 20 % y 50 % de vivienda asequible.</li><li>Pocas manzanas de un único uso (menos de 10 %).</li></ul></div></details>
+</section>
+
+<section class="view" id="v-sustentables"><div class="sec"><h2>Ciudades sustentables</h2><p class="lead">Una ciudad sustentable satisface las necesidades de hoy sin comprometer el ambiente ni las posibilidades de las generaciones futuras. Se apoya en cinco pilares.</p></div>
+<div class="tabs" id="tabs" role="tablist"></div><div id="panel"></div>
+<div class="sec"><h2>Proyectos que inspiran</h2></div><div class="grid" id="proy"></div>
+<div class="sec"><h2>Cómo llegamos hasta acá</h2></div><div class="tl" id="tl"></div></section>
+
+<section class="view" id="v-quince"><div class="sec"><h2>Ciudad de 15 minutos</h2><p class="lead">Propuesta del urbanista Carlos Moreno, difundida desde París en 2020: que cada persona pueda resolver lo esencial a 15 minutos de su casa, caminando o en bicicleta. A pie son unos 1,2 km; en bici, de 3 a 4 km.</p></div>
+<div class="grid" id="six"></div>
+<div class="sec"><h2>Evaluá tu barrio</h2><p class="lead">Marcá lo que encontrás a 15 minutos a pie o en bici.</p></div>
+<div class="card"><div class="checks" id="checks"></div><div class="big"><span id="sc">0</span> de 6</div><div class="meter"><div id="sbar"></div></div><p id="smsg"></p></div>
+<div class="sec"><h2>Ejemplos y límites</h2></div>
+<div class="grid"><div class="card"><h3>París</h3><p>Calles escolares, más ciclovías y espacio público recuperado.</p></div><div class="card"><h3>Melbourne y Portland</h3><p>Planes de barrios de 20 minutos que priorizan caminar y pedalear.</p></div><div class="card"><h3>Barcelona</h3><p>Las superillas reducen el tráfico dentro de grupos de manzanas.</p></div><div class="card"><h3>Críticas</h3><p>No resuelve por sí sola el acceso al trabajo ni la desigualdad, y puede encarecer los barrios mejorados (gentrificación).</p></div></div></section>
+
+<section class="view" id="v-agenda"><div class="sec"><h2>Agenda 2030</h2><p class="lead">Son las reglas de juego globales: la ONU aprobó en 2015 la Agenda 2030, con 17 Objetivos de Desarrollo Sostenible. El ODS 11 busca ciudades inclusivas, seguras, resilientes y sostenibles.</p></div>
+<details open><summary>ODS 11: sus metas principales</summary><div><ul><li><b>11.1</b> Vivienda y servicios básicos adecuados y asequibles para todos.</li><li><b>11.2</b> Transporte seguro, asequible y accesible.</li><li><b>11.3</b> Urbanización inclusiva y planificación participativa.</li><li><b>11.4</b> Proteger el patrimonio cultural y natural.</li><li><b>11.5</b> Reducir muertes y pérdidas por desastres.</li><li><b>11.6</b> Menos impacto ambiental: calidad del aire y gestión de residuos.</li><li><b>11.7</b> Zonas verdes y espacios públicos seguros y accesibles.</li></ul></div></details>
+<details><summary>Otros objetivos que se conectan</summary><div>Agua limpia (ODS 6), energía asequible y no contaminante (7), industria e infraestructura (9), producción y consumo responsables (12) y acción por el clima (13).<div class="chips"><span class="chip">ODS 6</span><span class="chip">ODS 7</span><span class="chip">ODS 9</span><span class="chip">ODS 12</span><span class="chip">ODS 13</span></div></div></details>
+<details><summary>Acuerdos que lo acompañan</summary><div>Acuerdo de París (2015) para frenar el cambio climático y Nueva Agenda Urbana (Quito, 2016) para guiar el desarrollo de las ciudades.</div></details>
+<details><summary>Marco legal en Argentina</summary><div>Ley 25.675 General del Ambiente, Ley 27.520 de adaptación y mitigación del cambio climático y, en la provincia de Buenos Aires, la Ley 14.449 de Acceso Justo al Hábitat.</div></details>
+</section>
+
+<section class="view" id="v-glosario"><div class="sec"><h2>Glosario</h2><p class="lead">Buscá una palabra o recorré la lista.</p></div>
+<input class="search" id="q" type="search" placeholder="Buscar término" aria-label="Buscar término"><dl class="grid gl" id="gl"></dl></section>
+</main>
+<footer>Datos aproximados con fines educativos. Verificá las cifras en INDEC, ONU y ONU-Hábitat.</footer>
+
+<script>
+const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
+const N=new Intl.NumberFormat('es-AR',{maximumFractionDigits:1});
+const R=[['inicio','Inicio'],['densidad','Densidad'],['sustentables','Ciudades sustentables'],['quince','Ciudad de 15 min'],['agenda','Agenda 2030'],['glosario','Glosario']];
+$('#nav').innerHTML=R.map(r=>`<a class="nav-link" href="#${r[0]}" data-r="${r[0]}">${r[1]}</a>`).join('');
+function go(r){if(!R.some(x=>x[0]===r))r='inicio';$$('.view').forEach(v=>v.classList.toggle('active',v.id==='v-'+r));$$('.nav-link').forEach(a=>a.classList.toggle('active',a.dataset.r===r));scrollTo({top:0});reveal();if(r==='densidad')setTimeout(draw,60)}
+addEventListener('hashchange',()=>go(location.hash.slice(1)));
+const root=document.documentElement;root.dataset.theme=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';
+$('#tt').onclick=()=>root.dataset.theme=root.dataset.theme==='dark'?'light':'dark';
+$('#home').innerHTML=R.slice(1).map(r=>`<a class="card" href="#${r[0]}"><h3>${r[1]}</h3><p>Entrar a la sección</p></a>`).join('');
+$('#days').textContent=N.format(Math.max(0,Math.ceil((new Date(2030,11,31)-new Date())/864e5)));
+
+const lg=v=>Math.min(100,Math.max(2,Math.log10(Math.max(v,1))/Math.log10(20000)*100));
+const DN=[['Mónaco',19000],['Buenos Aires (CABA)',15000],['Singapur',8000],['Mundo (promedio)',60],['Argentina (promedio)',17],['Mongolia',2]];
+$('#rank').innerHTML=DN.map(d=>`<div class="rk"><span>${d[0]}</span><i data-w="${lg(d[1])}"></i><b>≈ ${N.format(d[1])}</b></div>`).join('');
+function draw(){$$('.rk i').forEach(i=>i.style.width=i.dataset.w+'%')}
+function dens(){const p=+$('#pop').value,a=+$('#area').value;if(!(p>=0)||!(a>0)){$('#den').textContent='–';$('#dcat').textContent='Ingresá una población y una superficie mayores a cero.';return}
+const d=p/a;$('#den').textContent=N.format(d);$('#dbar').style.width=lg(d)+'%';
+$('#dcat').textContent=(d<50?'Densidad baja: territorio rural o poco poblado.':d<500?'Densidad media.':d<5000?'Densidad alta.':'Densidad muy alta: urbana y compacta.')+(d>=15000?' Alcanza la referencia de ONU-Hábitat para barrios sostenibles (15.000 hab/km²).':'')}
+$('#pop').oninput=$('#area').oninput=dens;dens();
+
+const P=[['Movilidad','#0891b2','Priorizar caminar, pedalear y el transporte público masivo antes que el auto particular.',['Metrobus','BRT','Ciclovías','Calles peatonales']],['Energía y edificios','#d97706','Edificios eficientes y energía renovable reducen el consumo por habitante.',['Paneles solares','Aislación térmica','Alumbrado LED','Redes inteligentes']],['Agua y residuos','#059669','Cuidar el agua, separar y reutilizar: economía circular.',['Recolección diferenciada','Compostaje','Reúso de agua','Drenaje sostenible']],['Naturaleza urbana','#16a34a','Árboles, plazas, techos verdes y humedales bajan la temperatura y absorben lluvias.',['Arbolado','Techos verdes','Parques inundables','Corredores biológicos']],['Vivienda y comunidad','#7c3aed','Vivienda asequible, mezcla social y participación de los vecinos.',['Integración socio urbana','Alquiler asequible','Presupuesto participativo','Espacio público']]];
+$('#tabs').innerHTML=P.map((p,i)=>`<button class="tab" role="tab" style="--c:${p[1]}" aria-selected="${i==0}" data-i="${i}">${p[0]}</button>`).join('');
+function showP(i){const p=P[i];$$('.tab').forEach(t=>t.setAttribute('aria-selected',t.dataset.i==i));$('#panel').innerHTML=`<div class="panel" style="--c:${p[1]}"><h3>${p[0]}</h3><p>${p[2]}</p><div class="chips">${p[3].map(x=>`<span class="chip">${x}</span>`).join('')}</div></div>`}
+$('#tabs').onclick=e=>{const b=e.target.closest('.tab');b&&showP(b.dataset.i)};showP(0);
+
+$('#proy').innerHTML=[['Curitiba, Brasil','Pionera del transporte rápido en buses (BRT, 1974) y de la planificación integrada.'],['Copenhague, Dinamarca','Apuesta a la bicicleta y a la neutralidad en carbono.'],['Singapur','Ciudad en un jardín: infraestructura verde y gestión integral del agua.'],['Vitoria-Gasteiz, España','Anillo verde y Capital Verde Europea 2012.'],['Barcelona, España','Superillas que devuelven la calle a los vecinos.'],['Medellín, Colombia','Metrocable y espacios públicos que conectaron barrios de ladera.'],['Rosario, Argentina','Programa de Agricultura Urbana con huertas comunitarias en terrenos vacantes.'],['Buenos Aires, Argentina','Metrobus y red de ciclovías.']].map(c=>`<div class="card"><h3>${c[0]}</h3><p>${c[1]}</p></div>`).join('');
+$('#tl').innerHTML=[[1898,'Ciudad jardín','Ebenezer Howard propone ciudades que combinan campo y urbanismo.'],[1961,'Jane Jacobs','Defiende calles vivas, usos mixtos y barrios caminables.'],[1987,'Informe Brundtland','Define el desarrollo sostenible.'],[1992,'Cumbre de Río','Los países acuerdan una agenda ambiental global.'],[2015,'Agenda 2030 y París','Se aprueban los ODS y el acuerdo climático.'],[2020,'Ciudad de 15 minutos','Se populariza desde París.']].map(e=>`<div class="ev"><div class="yr">${e[0]}</div><h3>${e[1]}</h3><p class="lead" style="margin:6px 0 0;font-size:.95rem">${e[2]}</p></div>`).join('');
+const io=new IntersectionObserver(es=>es.forEach(x=>x.isIntersecting&&x.target.classList.add('in')),{threshold:.15});
+function reveal(){$$('.ev').forEach(e=>io.observe(e))}
+
+const F=[['Habitar','Vivienda digna y asequible'],['Trabajar','Empleo o espacios de trabajo cercanos'],['Abastecerse','Comercios y alimentos frescos'],['Cuidarse','Salud y bienestar'],['Aprender','Escuelas y cultura'],['Disfrutar','Plazas, deporte y recreación']];
+$('#six').innerHTML=F.map(f=>`<div class="card"><h3>${f[0]}</h3><p>${f[1]}</p></div>`).join('');
+$('#checks').innerHTML=F.map((f,i)=>`<label><input type="checkbox" data-i="${i}">${f[0]}</label>`).join('');
+$('#checks').onchange=()=>{const n=$$('#checks input:checked').length;$('#sc').textContent=n;$('#sbar').style.width=n/6*100+'%';$('#smsg').textContent=n<3?'Hay pocos servicios cerca: el barrio depende de traslados largos.':n<6?'Barrio en camino: faltan algunas funciones a distancia corta.':'Barrio de 15 minutos: resolvés todo lo esencial cerca de casa.'};
+$('#smsg').textContent='Marcá las opciones para ver el resultado.';
+
+const GL=[['Agenda 2030','Plan de la ONU con 17 objetivos para lograr un desarrollo sostenible.'],['BRT','Autobús de tránsito rápido con carril exclusivo.'],['Ciudad compacta','Ciudad con densidad alta, usos mixtos y distancias cortas.'],['Densidad poblacional','Habitantes por kilómetro cuadrado.'],['Economía circular','Modelo que reutiliza, repara y recicla para generar menos residuos.'],['Expansión urbana','Crecimiento disperso de la ciudad sobre suelo rural o natural.'],['Gentrificación','Encarecimiento de un barrio que desplaza a sus residentes originales.'],['Hacinamiento','Exceso de personas en un espacio reducido.'],['Huella de carbono','Emisiones de gases de efecto invernadero de una actividad o persona.'],['Huella ecológica','Superficie de naturaleza necesaria para sostener un estilo de vida.'],['Infraestructura verde','Árboles, parques y humedales que cumplen funciones urbanas y ambientales.'],['Isla de calor','Zona urbana más cálida que su entorno por el asfalto y la falta de vegetación.'],['Movilidad activa','Desplazarse a pie o en bicicleta.'],['Neutralidad de carbono','Equilibrio entre emisiones y absorciones de carbono.'],['Nueva Agenda Urbana','Acuerdo de la ONU de 2016 sobre el futuro de las ciudades.'],['ODS','Objetivos de Desarrollo Sostenible de la Agenda 2030.'],['Planificación participativa','Decisiones urbanas tomadas con los vecinos.'],['Resiliencia','Capacidad de resistir y recuperarse de crisis y desastres.'],['Superilla','Conjunto de manzanas con tráfico restringido.'],['Uso mixto del suelo','Vivienda, comercio y trabajo en un mismo sector.'],['Urbanización','Aumento de la proporción de población que vive en ciudades.'],['Vivienda asequible','Vivienda cuyo costo no compromete la economía del hogar.']];
+function glo(t=''){const f=GL.filter(g=>(g[0]+g[1]).toLowerCase().includes(t.toLowerCase()));$('#gl').innerHTML=f.length?f.map(g=>`<div class="card"><dt>${g[0]}</dt><dd>${g[1]}</dd></div>`).join(''):'<p class="lead">No hay resultados. Probá con otra palabra.</p>'}
+$('#q').oninput=e=>glo(e.target.value);glo();
+go(location.hash.slice(1));
+</script>
+</body>
+</html>

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ideas políticas explicadas en lenguaje sencillo</title>
+<meta name="description" content="Democracia, dictaduras, sistemas del futuro, línea del tiempo, personajes de la historia política, ideas en Argentina y glosario.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--font-display:'Space Grotesk','Segoe UI',system-ui,sans-serif;--font-body:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;--radius:20px;--maxw:1180px;--ease:cubic-bezier(.22,.75,.25,1)}
+html[data-theme="light"]{--bg:#fbf9f5;--surface:rgba(255,255,255,.86);--s2:rgba(60,40,20,.045);--border:rgba(60,40,20,.12);--bs:rgba(60,40,20,.24);--text:#1a1410;--muted:#6f6252;--accent:#e11d48;--accent-2:#7c3aed;--accent-3:#0891b2;--good:#059669;--warn:#d97706;--bad:#e11d48;--shadow:0 22px 55px -28px rgba(60,30,10,.22);--orb:.16;--dot:rgba(60,40,20,.055)}
+html[data-theme="dark"]{--bg:#0a0806;--surface:rgba(30,25,20,.66);--s2:rgba(255,255,255,.045);--border:rgba(255,255,255,.10);--bs:rgba(255,255,255,.20);--text:#f5ede2;--muted:#a89a86;--accent:#fb7185;--accent-2:#a78bfa;--accent-3:#22d3ee;--good:#34d399;--warn:#fbbf24;--bad:#fb7185;--shadow:0 24px 60px -24px rgba(0,0,0,.9);--orb:.30;--dot:rgba(255,255,255,.03)}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;font-family:var(--font-body);background:var(--bg);color:var(--text);min-height:100vh;line-height:1.65;-webkit-font-smoothing:antialiased;transition:background .45s var(--ease),color .45s var(--ease);overflow-x:hidden}
+h1,h2,h3,h4{font-family:var(--font-display);line-height:1.15;letter-spacing:-.02em;margin:0}
+p{margin:0}button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}a{color:inherit;text-decoration:none}
+::selection{background:var(--accent);color:#fff}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
+.bg-dots{position:fixed;inset:0;z-index:-3;pointer-events:none;background-image:radial-gradient(var(--dot) 1px,transparent 1px);background-size:26px 26px}
+.orbs{position:fixed;inset:0;z-index:-2;overflow:hidden;pointer-events:none}
+.orb{position:absolute;border-radius:50%;filter:blur(100px);opacity:var(--orb);animation:float 28s ease-in-out infinite alternate}
+.o1{width:52vw;height:52vw;background:var(--accent);top:-16vw;left:-12vw}
+.o2{width:42vw;height:42vw;background:var(--accent-2);bottom:-18vw;right:-10vw;animation-delay:-10s}
+.o3{width:34vw;height:34vw;background:var(--accent-3);top:44%;left:58%;animation-delay:-17s}
+@keyframes float{0%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(4vw,-3vw,0) scale(1.1)}100%{transform:translate3d(-3vw,4vw,0) scale(.95)}}
+.site-header{position:sticky;top:0;z-index:50;backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);background:color-mix(in srgb,var(--bg) 78%,transparent);border-bottom:1px solid var(--border)}
+.header-inner{max-width:var(--maxw);margin:0 auto;padding:13px 22px;display:flex;align-items:center;gap:16px}
+.brand{display:flex;align-items:center;gap:11px;font-family:var(--font-display);font-weight:700;white-space:nowrap}
+.mark{width:38px;height:38px;border-radius:12px;flex:none;background:linear-gradient(140deg,var(--accent),var(--accent-2) 55%,var(--accent-3));display:grid;place-items:center;color:#fff;box-shadow:0 8px 22px -8px var(--accent);transition:transform .5s var(--ease)}
+.brand:hover .mark{transform:rotate(-10deg) scale(1.06)}.mark svg{width:22px;height:22px}
+.nav{display:flex;gap:2px;margin-left:auto;overflow-x:auto;scrollbar-width:none;min-width:0}.nav::-webkit-scrollbar{display:none}
+.nav-link{position:relative;padding:9px 11px;border-radius:11px;font-size:.8rem;font-weight:500;color:var(--muted);white-space:nowrap;transition:color .3s,background .3s}
+.nav-link:hover,.nav-link.active{color:var(--text);background:var(--s2)}
+.nav-link.active::after{content:'';position:absolute;left:11px;right:11px;bottom:4px;height:2px;border-radius:2px;background:linear-gradient(90deg,var(--accent),var(--accent-2));animation:navIn .4s var(--ease) both}
+@keyframes navIn{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.tt{width:40px;height:40px;border-radius:12px;flex:none;border:1px solid var(--border);background:var(--s2);display:grid;place-items:center;transition:transform .35s var(--ease)}
+.tt:hover{transform:translateY(-2px) rotate(8deg)}.tt svg{width:19px;height:19px}
+html[data-theme=dark] .i-moon,html[data-theme=light] .i-sun{display:none}
+main{max-width:var(--maxw);margin:0 auto;padding:0 22px 70px}
+.view{display:none}.view.active{display:block;animation:viewIn .55s var(--ease) both}
+@keyframes viewIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.hero{padding:64px 0 36px;max-width:920px}
+.pill{display:inline-flex;align-items:center;gap:8px;padding:7px 15px;border-radius:999px;font-size:.78rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;border:1px solid var(--border);background:var(--surface);color:var(--muted);margin-bottom:24px}
+.pill i{width:7px;height:7px;border-radius:50%;background:var(--good);animation:pulse 2.4s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--good) 60%,transparent)}70%{box-shadow:0 0 0 9px transparent}100%{box-shadow:0 0 0 0 transparent}}
+h1{font-size:clamp(2.1rem,5.2vw,3.9rem);font-weight:700;letter-spacing:-.035em;margin-bottom:20px}
+.grad{background:linear-gradient(100deg,var(--accent),var(--accent-2) 48%,var(--accent-3));-webkit-background-clip:text;background-clip:text;color:transparent;background-size:220% auto;animation:shimmer 8s linear infinite}
+@keyframes shimmer{to{background-position:220% center}}
+.lead{font-size:clamp(1rem,1.6vw,1.15rem);color:var(--muted);max-width:700px;margin-bottom:30px}
+.btn{display:inline-flex;align-items:center;gap:9px;padding:13px 25px;border-radius:13px;font-size:.93rem;font-weight:600;border:1px solid transparent;transition:transform .28s var(--ease),box-shadow .3s}
+.btn-primary{background:linear-gradient(120deg,var(--accent),var(--accent-2));color:#fff;box-shadow:0 14px 34px -14px var(--accent);position:relative;overflow:hidden}
+.btn-primary::after{content:'';position:absolute;inset:0;background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,.45),transparent 70%);transform:translateX(-130%);transition:transform .7s var(--ease)}
+.btn-primary:hover{transform:translateY(-2px)}.btn-primary:hover::after{transform:translateX(130%)}
+.stats,.grid{display:grid;gap:14px}
+.stats{grid-template-columns:repeat(auto-fit,minmax(170px,1fr));margin:8px 0 46px}
+.grid{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.stat,.card{padding:22px 20px;border-radius:var(--radius);background:var(--surface);border:1px solid var(--border);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);transition:transform .35s var(--ease),border-color .3s,box-shadow .35s}
+.stat:hover,.card:hover{transform:translateY(-4px);border-color:var(--bs);box-shadow:var(--shadow)}
+.stat b{display:block;font-family:var(--font-display);font-size:2rem;letter-spacing:-.03em}
+.stat span{font-size:.85rem;color:var(--muted)}
+.card h3{font-size:1.08rem;margin-bottom:8px}.card p{font-size:.92rem;color:var(--muted)}
+.tag{display:inline-block;font-size:.72rem;font-weight:600;padding:3px 10px;border-radius:999px;background:var(--s2);border:1px solid var(--border);margin:10px 6px 0 0;color:var(--muted)}
+.sec{padding:52px 0 22px}.sec h2{font-size:clamp(1.7rem,3.6vw,2.6rem);letter-spacing:-.03em;margin-bottom:12px}
+.sec>.lead{margin-bottom:28px}
+.tl{position:relative;padding:6px 0}
+.tl::before{content:'';position:absolute;left:19px;top:0;bottom:0;width:2px;background:linear-gradient(var(--accent),var(--accent-2),var(--accent-3));opacity:.5}
+.ev{position:relative;padding:0 0 26px 58px;opacity:0;transform:translateY(22px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+.ev.in{opacity:1;transform:none}
+.ev::before{content:'';position:absolute;left:11px;top:22px;width:18px;height:18px;border-radius:50%;background:var(--bg);border:3px solid var(--accent);box-shadow:0 0 0 5px color-mix(in srgb,var(--accent) 18%,transparent)}
+.ev .yr{font-family:var(--font-display);font-weight:700;font-size:1.5rem;background:linear-gradient(100deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+@media(min-width:860px){.tl::before{left:50%}.ev{width:50%;padding:0 46px 30px 0;text-align:right}.ev::before{left:auto;right:-9px}.ev:nth-child(even){margin-left:50%;padding:0 0 30px 46px;text-align:left}.ev:nth-child(even)::before{right:auto;left:-9px}}
+.tabs{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:18px}
+.tab{padding:12px 18px;border-radius:13px;border:1px solid var(--border);background:var(--surface);font-weight:600;font-size:.9rem;transition:transform .25s var(--ease),border-color .3s,background .3s}
+.tab:hover{transform:translateY(-2px)}.tab[aria-selected=true]{color:#fff;border-color:transparent;background:var(--c)}
+.panel{padding:26px;border-radius:var(--radius);background:var(--surface);border:1px solid var(--border);border-left:6px solid var(--c);animation:viewIn .45s var(--ease) both}
+.panel h3{font-size:1.4rem;margin-bottom:8px}.panel p{color:var(--muted);margin-bottom:6px}
+.meter{height:14px;border-radius:99px;background:var(--s2);border:1px solid var(--border);overflow:hidden;margin:14px 0 8px}
+.meter div{height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--accent-3),var(--accent-2),var(--accent));transition:width .5s var(--ease)}
+input[type=range]{width:100%;accent-color:var(--accent);height:28px}
+.big{font-family:var(--font-display);font-size:2.4rem;font-weight:700;letter-spacing:-.03em}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.chip{padding:6px 13px;border-radius:999px;border:1px solid var(--border);background:var(--s2);font-size:.82rem;font-weight:500;transition:border-color .3s,transform .3s}
+.chip:hover{border-color:var(--accent);transform:translateY(-2px)}
+details{border:1px solid var(--border);border-radius:16px;background:var(--surface);margin-bottom:10px;overflow:hidden}
+summary{list-style:none;cursor:pointer;padding:16px 20px;font-family:var(--font-display);font-weight:600;display:flex;justify-content:space-between;gap:12px;align-items:center}
+summary::-webkit-details-marker{display:none}
+summary::after{content:'+';font-size:1.4rem;color:var(--accent);transition:transform .35s var(--ease)}
+details[open] summary::after{transform:rotate(135deg)}
+details>div{padding:0 20px 18px;color:var(--muted);font-size:.94rem;animation:viewIn .4s var(--ease) both}
+details li{margin-bottom:4px}
+.note{margin-top:30px;padding:16px 20px;border-radius:16px;border:1px dashed var(--bs);color:var(--muted);font-size:.86rem}
+.search{width:100%;max-width:440px;padding:13px 18px;border-radius:13px;border:1px solid var(--border);background:var(--surface);color:var(--text);font:inherit;margin-bottom:20px}
+.gl dt{font-family:var(--font-display);font-weight:600}.gl dd{margin:0 0 4px;color:var(--muted);font-size:.92rem}
+.gl .card{padding:18px}
+footer{text-align:center;color:var(--muted);font-size:.82rem;padding:30px 22px 50px}
+@media(max-width:600px){.header-inner{padding:10px 14px;gap:10px}.brand span{display:none}main{padding:0 16px 60px}.hero{padding:40px 0 24px}.btn{width:100%;justify-content:center}.panel{padding:20px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.ev{opacity:1;transform:none}}
+.calc{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:14px 0}
+.calc label{font-size:.85rem;color:var(--muted);display:grid;gap:6px}
+.calc input{padding:12px 14px;border-radius:12px;border:1px solid var(--border);background:var(--surface);color:var(--text);font:inherit;width:100%}
+.checks{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px;margin:16px 0}
+.checks label{display:flex;gap:10px;align-items:center;padding:14px 16px;border-radius:14px;border:1px solid var(--border);background:var(--surface);cursor:pointer;transition:border-color .3s,transform .3s}
+.checks label:hover{border-color:var(--accent);transform:translateY(-2px)}
+.checks input{accent-color:var(--accent);width:18px;height:18px;flex:none}
+.rank{display:grid;gap:10px}
+.rk{display:grid;grid-template-columns:minmax(96px,160px) 1fr 74px;gap:10px;align-items:center;font-size:.85rem}
+.rk i{display:block;height:12px;border-radius:99px;background:linear-gradient(90deg,var(--accent-3),var(--accent-2),var(--accent));width:0;transition:width .9s var(--ease)}
+.rk b{text-align:right;font-family:var(--font-display)}
+@media(max-width:600px){.rk{grid-template-columns:90px 1fr 62px}}
+</style>
+</head>
+<body>
+<div class="bg-dots"></div><div class="orbs"><div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div></div>
+<header class="site-header"><div class="header-inner">
+<a class="brand" href="#inicio"><div class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10l9-6 9 6M5 10v8M9 10v8M15 10v8M19 10v8M3 21h18"/><path d="M2 21h20"/></svg></div><span>Ideas políticas</span></a>
+<nav class="nav" id="nav"></nav>
+<button class="tt" id="tt" aria-label="Cambiar tema"><svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+</div></header>
+<main>
+<section class="view" id="v-inicio">
+<div class="hero"><div class="pill"><i></i>Ideas políticas</div>
+<h1>Entender la política, <span class="grad">explicada simple</span></h1>
+<p class="lead">Qué es una democracia, cómo funcionan las dictaduras, qué sistemas se proponen para el futuro y qué ideas marcaron la historia mundial y la argentina. Presenta las distintas posturas sin tomar partido.</p>
+<a class="btn btn-primary" href="#democracia">Empezar por la democracia</a></div>
+<div class="stats"><div class="stat"><b>c. 508 a.C.</b><span>Reformas de Clístenes: nace la democracia en Atenas</span></div><div class="stat"><b>74 %</b><span>De la población mundial vive en autocracias, según V-Dem (2025)</span></div><div class="stat"><b>20 años</b><span>De descenso global de la libertad, según Freedom House</span></div><div class="stat"><b>1983</b><span>Vuelta de la democracia en Argentina</span></div></div>
+<div class="grid" id="home"></div>
+<p class="note">Los índices de V-Dem y Freedom House usan métodos distintos y algunas de sus clasificaciones son discutidas. Se citan como referencia, no como verdad única.</p>
+</section>
+
+<section class="view" id="v-democracia"><div class="sec"><h2>Democracia</h2><p class="lead">Significa "poder del pueblo". Es un sistema donde la ciudadanía elige a sus gobernantes y estos deben respetar reglas y límites.</p></div>
+<div class="grid" id="princ"></div>
+<div class="sec"><h2>Tipos y formas de gobierno</h2></div>
+<div class="grid"><div class="card"><h3>Directa</h3><p>La gente decide sin intermediarios, como en la Atenas antigua o en consultas populares.</p></div><div class="card"><h3>Representativa</h3><p>Se eligen representantes que deciden en nombre de la ciudadanía. Es la forma más extendida.</p></div><div class="card"><h3>Participativa y deliberativa</h3><p>Suma consultas, presupuestos participativos y debate público entre elecciones.</p></div><div class="card"><h3>Presidencialismo y parlamentarismo</h3><p>En el primero el presidente es elegido por separado del Congreso; en el segundo el gobierno surge del parlamento.</p></div></div>
+<div class="sec"><h2>Fortalezas y críticas</h2></div>
+<div class="grid"><div class="card"><h3>Quienes la defienden</h3><p>Permite cambiar gobiernos sin violencia, protege derechos y obliga a rendir cuentas.</p></div><div class="card"><h3>Quienes la critican</h3><p>Señalan decisiones lentas, desigual influencia del dinero, polarización y baja confianza en los partidos.</p></div></div></section>
+
+<section class="view" id="v-dictaduras"><div class="sec"><h2>Dictaduras y autoritarismos</h2><p class="lead">Son regímenes donde el poder se concentra en una persona, un grupo o un partido, sin elecciones libres ni controles efectivos.</p></div>
+<div class="grid"><div class="card"><h3>Dictadura militar</h3><p>Las fuerzas armadas toman el poder, generalmente por un golpe de Estado.</p></div><div class="card"><h3>Totalitarismo</h3><p>El Estado intenta controlar toda la vida social y política, con ideología oficial y partido único.</p></div><div class="card"><h3>Autocracia electoral</h3><p>Hay elecciones, pero sin condiciones de libertad e igualdad de competencia.</p></div><div class="card"><h3>Monarquía absoluta y teocracia</h3><p>El poder surge de la herencia o de la autoridad religiosa, sin límites constitucionales.</p></div></div>
+<div class="sec"><h2>Cómo se llega</h2><p class="lead">Por golpe de Estado, por autogolpe o por erosión gradual: un gobierno electo que debilita los controles, la prensa o la justicia.</p></div>
+<div class="grid"><div class="card"><h3>V-Dem 2026</h3><p>A fines de 2025 contó 92 autocracias y 87 democracias, con 74 % de la población mundial en autocracias.</p></div><div class="card"><h3>Freedom House 2026</h3><p>La libertad global bajó por 20.º año seguido: 54 países empeoraron y 35 mejoraron. El 21 % de la gente vive en países "libres".</p></div></div>
+<div class="sec"><h2>Termómetro de un régimen</h2><p class="lead">Pensá en un país y marcá lo que se cumple. Es una guía didáctica: los índices profesionales usan cientos de indicadores.</p></div>
+<div class="card"><div class="checks" id="checks"></div><div class="big"><span id="sc">0</span> de 8</div><div class="meter"><div id="sbar"></div></div><p id="smsg"></p></div></section>
+
+<section class="view" id="v-futuro"><div class="sec"><h2>Sistemas del futuro</h2><p class="lead">Ningún modelo nuevo está probado a gran escala. Son propuestas y experimentos en debate: abrí cada una para ver los argumentos de ambos lados.</p></div><div id="fut"></div></section>
+
+<section class="view" id="v-gobierno"><div class="sec"><h2>Gobierno digital</h2><p class="lead">Es el uso de tecnologías digitales para que el Estado ofrezca trámites y servicios en línea, decida con datos y se relacione mejor con la ciudadanía. También se llama gobierno electrónico.</p></div>
+<div class="grid" id="gd"></div>
+<div class="sec"><h2>Etapas de madurez</h2><p class="lead">Un gobierno suele avanzar de publicar información a integrar sus servicios.</p></div>
+<div class="chips"><span class="chip">1. Presencia en línea</span><span class="chip">2. Interacción</span><span class="chip">3. Transacciones completas</span><span class="chip">4. Servicios integrados</span></div>
+<div class="sec"><h2>En el mundo</h2></div>
+<div class="grid"><div class="card"><h3>Ranking de la ONU 2024</h3><p>Dinamarca, Estonia y Singapur ocuparon los tres primeros lugares del índice de gobierno electrónico (E-Government Survey).</p></div><div class="card"><h3>Estonia</h3><p>Combina identidad digital con una plataforma de intercambio de datos entre organismos, y ofrece la gran mayoría de sus servicios en línea.</p></div><div class="card"><h3>América Latina</h3><p>Uruguay es señalado como líder regional; Argentina quedó en el puesto 42 de 193 en la edición 2024.</p></div></div>
+<div class="sec"><h2>En Argentina</h2></div>
+<div class="grid"><div class="card"><h3>Mi Argentina</h3><p>Portal y aplicación con documentos digitales y trámites.</p></div><div class="card"><h3>Gestión Documental Electrónica</h3><p>Expedientes y documentos oficiales digitales (Decreto 561/2016).</p></div><div class="card"><h3>Firma digital</h3><p>Ley 25.506 (2001): la firma digital tiene validez jurídica.</p></div><div class="card"><h3>Datos e información</h3><p>Ley 27.275 (2016) de acceso a la información pública y Ley 25.326 (2000) de protección de datos personales.</p></div></div>
+<div class="sec"><h2>Ventajas y desafíos</h2></div>
+<div class="grid"><div class="card"><h3>Ventajas</h3><p>Ahorra tiempo y papel, facilita el acceso desde cualquier lugar y puede reducir la discrecionalidad y la corrupción.</p></div><div class="card"><h3>Desafíos</h3><p>Brecha digital de conectividad y habilidades, ciberataques, privacidad y dependencia de proveedores tecnológicos.</p></div></div></section>
+
+<section class="view" id="v-gemelo"><div class="sec"><h2>Gemelo Digital Social</h2><p class="lead">Un gemelo digital es una réplica virtual y dinámica de un sistema real que se alimenta con datos para observar, simular y anticipar su comportamiento. Nació en la industria y se usa en ingeniería, transporte y ciudades inteligentes.</p></div>
+<div class="card"><h3>Qué anunció el Gobierno</h3><p>El 22 de mayo de 2026 el Ministerio de Capital Humano presentó el "Gemelo Digital Social": una plataforma de inteligencia artificial que integraría datos sociales, educativos, laborales y territoriales para simular escenarios y proyectar el impacto de políticas públicas antes de aplicarlas. Según el Gobierno, busca un "Estado predictivo" y es la primera vez que la lógica del gemelo digital se aplica al desarrollo social.</p></div>
+<div class="sec"><h2>Cómo funciona un gemelo digital</h2><p class="lead">Esquema general, no una descripción técnica de este proyecto.</p></div>
+<div class="tabs" id="gtabs" role="tablist"></div><div id="gpanel"></div>
+<div class="sec"><h2>Posiciones en debate</h2></div>
+<div class="grid"><div class="card"><h3>A favor</h3><p>Integrar información dispersa entre organismos, coordinar mejor, detectar a tiempo situaciones de vulnerabilidad, abandono escolar o problemas de empleo y evaluar medidas antes de aplicarlas.</p></div><div class="card"><h3>Críticas y dudas</h3><p>Privacidad y protección de datos; falta de detalles sobre qué organismos lo supervisan y bajo qué marco legal; y que ninguna tecnología es neutral, según organizaciones como Fundación Vía Libre.</p></div><div class="card"><h3>Límites técnicos</h3><p>Analistas advierten sobre la dependencia tecnológica y los límites de predecir conductas sociales con algoritmos, incluidos los sesgos.</p></div></div>
+<div class="sec"><h2>Evaluá una herramienta de IA pública</h2><p class="lead">Guía didáctica con seis preguntas que se pueden hacer sobre cualquier sistema de este tipo.</p></div>
+<div class="card"><div class="checks" id="ck2"></div><div class="big"><span id="ck2-sc">0</span> de 6</div><div class="meter"><div id="ck2-bar"></div></div><p id="ck2-msg"></p></div>
+<p class="note">Basado en notas periodísticas de mayo y junio de 2026. El proyecto estaba en etapa inicial al momento del anuncio y puede haber cambiado: verificá las novedades en fuentes oficiales. El marco general de protección de datos personales es la Ley 25.326.</p></section>
+
+<section class="view" id="v-tiempo"><div class="sec"><h2>Línea del tiempo</h2><p class="lead">Hitos de las ideas y los regímenes políticos.</p></div><div class="tl" id="tl"></div></section>
+
+<section class="view" id="v-personajes"><div class="sec"><h2>Personajes de la historia política</h2><p class="lead">Pensadores, líderes y figuras de regímenes autoritarios, con su aporte o hecho principal.</p></div><div class="tabs" id="tabs" role="tablist"></div><div id="panel"></div></section>
+
+<section class="view" id="v-argentina"><div class="sec"><h2>Ideas políticas en Argentina</h2><p class="lead">La Constitución define a la Nación como representativa, republicana y federal (art. 1). Estas son las corrientes que marcaron el debate; cada una tiene defensores y críticos.</p></div>
+<div class="tabs" id="atabs" role="tablist"></div><div id="apanel"></div>
+<div class="sec"><h2>Hitos políticos</h2></div><div class="tl" id="tl2"></div>
+<div class="sec"></div>
+<details><summary>Marco legal clave</summary><div><ul><li>Constitución Nacional (1853; última reforma en 1994).</li><li>Art. 36: los actos de fuerza contra el orden democrático son insanablemente nulos.</li><li>Ley 8.871 (Sáenz Peña, 1912): voto secreto y obligatorio.</li><li>Ley 13.010 (1947): voto femenino.</li><li>Ley 26.774 (2012): voto optativo desde los 16 años.</li><li>Ley 27.412 (2017): paridad de género en listas legislativas.</li></ul></div></details>
+</section>
+
+<section class="view" id="v-glosario"><div class="sec"><h2>Glosario</h2><p class="lead">Buscá una palabra o recorré la lista.</p></div>
+<input class="search" id="q" type="search" placeholder="Buscar término" aria-label="Buscar término"><dl class="grid gl" id="gl"></dl></section>
+</main>
+<footer>Contenido educativo y plural, sin tomar partido. Verificá las cifras en V-Dem, Freedom House, ONU y fuentes oficiales.</footer>
+
+<script>
+const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
+const R=[['inicio','Inicio'],['democracia','Democracia'],['dictaduras','Dictaduras'],['futuro','Sistema del futuro'],['gobierno','Gobierno digital'],['gemelo','Gemelo digital social'],['tiempo','Línea del tiempo'],['personajes','Personajes'],['argentina','Argentina'],['glosario','Glosario']];
+$('#nav').innerHTML=R.map(r=>`<a class="nav-link" href="#${r[0]}" data-r="${r[0]}">${r[1]}</a>`).join('');
+const io=new IntersectionObserver(es=>es.forEach(x=>x.isIntersecting&&x.target.classList.add('in')),{threshold:.15});
+function reveal(){$$('.ev').forEach(e=>io.observe(e))}
+function go(r){if(!R.some(x=>x[0]===r))r='inicio';$$('.view').forEach(v=>v.classList.toggle('active',v.id==='v-'+r));$$('.nav-link').forEach(a=>a.classList.toggle('active',a.dataset.r===r));scrollTo({top:0});reveal()}
+addEventListener('hashchange',()=>go(location.hash.slice(1)));
+const root=document.documentElement;root.dataset.theme=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';
+$('#tt').onclick=()=>root.dataset.theme=root.dataset.theme==='dark'?'light':'dark';
+$('#home').innerHTML=R.slice(1).map(r=>`<a class="card" href="#${r[0]}"><h3>${r[1]}</h3><p>Entrar a la sección</p></a>`).join('');
+const cards=(id,a)=>$(id).innerHTML=a.map(c=>`<div class="card"><h3>${c[0]}</h3><p>${c[1]}</p></div>`).join('');
+cards('#princ',[['Soberanía popular','El poder surge de la ciudadanía.'],['Elecciones libres','Competitivas, periódicas y con voto secreto.'],['Separación de poderes','Ejecutivo, legislativo y judicial se controlan entre sí.'],['Estado de derecho','Todos, incluidos los gobernantes, deben cumplir la ley.'],['Derechos y libertades','Expresión, prensa, reunión y protección de las minorías.'],['Pluralismo','Conviven partidos e ideas distintas, con alternancia.']]);
+
+const C=['Elecciones libres y competitivas','Alternancia pacífica en el poder','Prensa y expresión libres','Justicia independiente','Poderes que se controlan entre sí','Derechos de minorías y oposición','Protesta y sociedad civil permitidas','Sin persecución por pensar distinto'];
+$('#checks').innerHTML=C.map(c=>`<label><input type="checkbox">${c}</label>`).join('');
+$('#checks').onchange=()=>{const n=$$('#checks input:checked').length;$('#sc').textContent=n;$('#sbar').style.width=n/8*100+'%';$('#smsg').textContent=n<=2?'Predominan rasgos autoritarios.':n<=5?'Régimen híbrido o democracia en riesgo: faltan garantías importantes.':'Rasgos de una democracia sólida.'};
+$('#smsg').textContent='Marcá las opciones para ver el resultado.';
+
+$('#fut').innerHTML=[['Democracia digital','Votar y participar por internet. Estonia permite el voto en línea desde 2005.','Más acceso y participación.','Riesgos de seguridad, brecha digital y desconfianza.'],['Asambleas ciudadanas','Personas elegidas por sorteo deliberan sobre un tema, como en Irlanda (2016-2018).','Decisiones informadas y diversas.','Carecen de legitimidad electoral y de poder propio.'],['Presupuesto participativo','Los vecinos deciden parte del gasto público (Porto Alegre, 1989).','Cercanía y control social.','Alcance limitado a pequeñas partidas.'],['Democracia líquida','Delegar el voto por tema y retirarlo en cualquier momento.','Flexibilidad y participación.','Puede concentrar poder en delegados muy populares.'],['Gobierno de expertos','Más peso de especialistas en decisiones técnicas (tecnocracia).','Decisiones basadas en evidencia.','Déficit democrático: ¿quién elige a los expertos?'],['Inteligencia artificial en el Estado','Apoyo en datos y automatización de trámites y decisiones.','Eficiencia y servicios más ágiles.','Sesgos, opacidad y dudas sobre quién responde.'],['Gobernanza global','Coordinar clima, pandemias y tecnología más allá de cada país.','Los problemas globales requieren acuerdos globales.','Pérdida de soberanía y poca rendición de cuentas.']].map((f,i)=>`<details${i?'':' open'}><summary>${f[0]}</summary><div>${f[1]}<ul><li><b>A favor:</b> ${f[2]}</li><li><b>En contra:</b> ${f[3]}</li></ul></div></details>`).join('');
+
+const tlr=(id,a)=>$(id).innerHTML=a.map(e=>`<div class="ev"><div class="yr">${e[0]}</div><h3>${e[1]}</h3><p class="lead" style="margin:6px 0 0;font-size:.95rem">${e[2]}</p></div>`).join('');
+tlr('#tl',[['c. 508 a.C.','Democracia ateniense','Clístenes impulsa una participación directa de los ciudadanos varones.'],['1215','Magna Carta','Se limita por primera vez el poder del rey inglés.'],['1651-1762','Contrato social','Hobbes, Locke, Montesquieu y Rousseau fundan el pensamiento político moderno.'],['1776-1789','Revoluciones','Independencia de EE.UU. y Revolución Francesa: derechos y soberanía popular.'],['1848','Manifiesto Comunista','Marx y Engels plantean la lucha de clases.'],['1917','Revolución Rusa','Nace la URSS, primer Estado socialista.'],['1922-1945','Fascismo y nazismo','Regímenes totalitarios en Italia y Alemania.'],['1945-1948','ONU y derechos humanos','Se aprueba la Declaración Universal de Derechos Humanos.'],['1974','Tercera ola','Con Portugal comienza una ola de transiciones democráticas.'],['1989-1991','Fin de la Guerra Fría','Cae el Muro de Berlín y se disuelve la URSS.'],['2000-2025','Retroceso democrático','Informes de V-Dem y Freedom House señalan un descenso global.']]);
+tlr('#tl2',[['1810','Revolución de Mayo','Comienza el proceso de independencia.'],['1853','Constitución Nacional','Inspirada en las Bases de Alberdi.'],['1912','Ley Sáenz Peña','Voto secreto y obligatorio para varones.'],['1930','Primer golpe de Estado','Se inicia un siglo de interrupciones institucionales.'],['1947','Voto femenino','La Ley 13.010 lo establece; se aplicó en 1951.'],['1976','Dictadura cívico-militar','Terrorismo de Estado hasta 1983.'],['1983','Vuelta a la democracia','Asume Raúl Alfonsín.'],['1985','Juicio a las Juntas','Se juzga a los comandantes de la dictadura.'],['1994','Reforma constitucional','Reelección presidencial, Art. 36 y nuevos derechos.']]);
+
+function tabs(tid,pid,D,render){$(tid).innerHTML=D.map((d,i)=>`<button class="tab" role="tab" style="--c:${d[1]}" aria-selected="${i==0}" data-i="${i}">${d[0]}</button>`).join('');
+ const show=i=>{$$('.tab',$(tid)).forEach(t=>t.setAttribute('aria-selected',t.dataset.i==i));$(pid).innerHTML=`<div class="panel" style="--c:${D[i][1]}">${render(D[i])}</div>`};
+ $(tid).onclick=e=>{const b=e.target.closest('.tab');b&&show(b.dataset.i)};show(0)}
+const li=a=>'<ul style="margin:6px 0 0;padding-left:20px;color:var(--muted)">'+a.map(x=>`<li style="margin-bottom:6px"><b style="color:var(--text)">${x[0]}</b> ${x[1]}</li>`).join('')+'</ul>';
+tabs('#tabs','#panel',[['Pensadores','#7c3aed',[['Platón (c. 427-347 a.C.)','La República: propone gobernar por los más sabios y critica la democracia ateniense.'],['Aristóteles (384-322 a.C.)','Clasifica los regímenes y defiende un gobierno mixto con clase media fuerte.'],['Maquiavelo (1469-1527)','El Príncipe: analiza el poder tal como funciona.'],['Hobbes (1588-1679)','Leviatán: el orden exige un soberano fuerte.'],['Locke (1632-1704)','Derechos naturales y gobierno limitado.'],['Montesquieu (1689-1755)','Separación de poderes.'],['Rousseau (1712-1778)','Soberanía popular y voluntad general.'],['Stuart Mill (1806-1873)','Libertad individual y voto femenino.'],['Marx (1818-1883)','Crítica del capitalismo y lucha de clases.'],['Arendt (1906-1975)','Analizó el totalitarismo.']]],['Líderes y reformistas','#0891b2',[['Pericles (c. 495-429 a.C.)','Impulsó la democracia ateniense.'],['George Washington (1732-1799)','Primer presidente de EE.UU.; se retiró tras dos mandatos.'],['José de San Martín (1778-1850)','Lideró la independencia de Argentina, Chile y Perú.'],['Simón Bolívar (1783-1830)','Lideró la independencia de varios países sudamericanos.'],['Abraham Lincoln (1809-1865)','Condujo EE.UU. en la Guerra Civil y abolió la esclavitud.'],['Emmeline Pankhurst (1858-1928)','Dirigente del sufragismo británico.'],['Gandhi (1869-1948)','Resistencia no violenta por la independencia de la India.'],['Nelson Mandela (1918-2013)','Enfrentó el apartheid y fue presidente de Sudáfrica (1994-1999).']]],['Regímenes autoritarios','#e11d48',[['Mussolini (1883-1945)','Fundó el fascismo y gobernó Italia desde 1922.'],['Hitler (1889-1945)','Líder del nazismo; responsable del Holocausto.'],['Stalin (1878-1953)','Dirigió la URSS con represión masiva.'],['Franco (1892-1975)','Dictador de España de 1939 a 1975.'],['Pinochet (1915-2006)','Dictador de Chile de 1973 a 1990.'],['Videla (1925-2013)','Presidió la primera junta militar argentina (1976-1981); fue condenado por crímenes de lesa humanidad.']]]],d=>`<h3>${d[0]}</h3>${li(d[2])}`);
+
+tabs('#atabs','#apanel',[['Unitarios y federales','#0891b2','Siglo XIX: los unitarios querían un gobierno central fuerte; los federales, autonomía para las provincias.','Rivadavia, Dorrego, Quiroga, Rosas.','Se discute si el federalismo defendió a las provincias o derivó en caudillismo, y si el unitarismo ignoró al interior.'],['Liberalismo constitucional','#059669','Libertades civiles, división de poderes, educación pública e inmigración.','Alberdi, Sarmiento, Generación del 37 y del 80.','Se valora la Constitución de 1853; se critica que la democracia fue restringida y con fraude.'],['Radicalismo','#e11d48','Voto libre, moral pública y ampliación de la ciudadanía (UCR, 1891).','Alem, Yrigoyen, Illia, Alfonsín.','Defendió el sufragio y los derechos humanos; algunos lo consideran más moderado que transformador.'],['Socialismo y movimiento obrero','#d97706','Derechos laborales y reforma social (Partido Socialista, 1896; CGT, 1930).','Juan B. Justo, Alfredo Palacios.','Se discute su alcance: unos lo ven reformista; otros, un freno a la actividad económica.'],['Peronismo','#7c3aed','Justicia social, derechos laborales, voto femenino y un Estado activo.','Perón, Eva Perón.','Sus defensores destacan la ampliación de derechos; sus críticos, la concentración de poder y la presión sobre opositores y prensa.'],['Desarrollismo','#0891b2','Industrialización e inversión como motor del crecimiento (1958-1962).','Frondizi, Frigerio.','Se debate su apertura al capital extranjero y los acuerdos petroleros.'],['Liberalismo económico','#059669','Mercado abierto, privatizaciones y estabilidad monetaria (1976 y años 90).','Martínez de Hoz, Cavallo.','Defensores: estabilidad y eficiencia. Críticos: efectos en empleo y desigualdad.'],['Libertarismo','#e11d48','Libertad individual y de mercado, y un Estado mínimo; hoy es la idea del gobierno nacional.','Javier Milei (presidente 2023-2027).','Defensores: más libertad económica y orden fiscal. Críticos: costo social del ajuste y menor rol del Estado.']],d=>`<h3>${d[0]}</h3><p>${d[2]}</p><p><b>Referentes:</b> ${d[3]}</p><p><b>Debate:</b> ${d[4]}</p>`);
+
+const GL=[['Absolutismo','Monarquía sin límites legales al poder del rey.'],['Anarquismo','Corriente que rechaza la autoridad del Estado.'],['Autocracia','Gobierno de una sola persona o grupo sin controles efectivos.'],['Autogolpe','Un gobernante rompe el orden constitucional para quedarse con más poder.'],['Autoritarismo','Poder concentrado que limita libertades y pluralismo.'],['Capitalismo','Sistema económico basado en propiedad privada y mercado.'],['Comunismo','Corriente que propone propiedad colectiva y una sociedad sin clases.'],['Conservadurismo','Corriente que valora la tradición y el cambio gradual.'],['Constitución','Ley suprema que organiza el poder y garantiza derechos.'],['Democracia','Gobierno del pueblo, con elecciones libres y derechos.'],['Dictadura','Régimen donde el poder se ejerce sin límites ni elecciones libres.'],['Estado de derecho','Principio por el cual todos están sometidos a la ley.'],['Fascismo','Ideología totalitaria y nacionalista nacida en Italia.'],['Federalismo','Organización con poder repartido entre Nación y provincias.'],['Golpe de Estado','Toma ilegal del poder, con frecuencia por la fuerza.'],['Ideología','Conjunto de ideas sobre cómo organizar la sociedad.'],['Liberalismo','Corriente que prioriza libertades individuales y límites al poder.'],['Libertarismo','Corriente que defiende un Estado mínimo y la máxima libertad individual.'],['Monarquía','Gobierno encabezado por un rey o una reina.'],['Parlamentarismo','Sistema donde el gobierno depende de la mayoría del parlamento.'],['Pluralismo','Convivencia de ideas, partidos y grupos distintos.'],['Populismo','Estilo que enfrenta al "pueblo" con las "élites"; su significado es debatido.'],['Presidencialismo','Sistema con presidente elegido separadamente del Congreso.'],['República','Gobierno con división de poderes, ley común y cargos renovables.'],['Socialismo','Corriente que busca mayor igualdad y control social de la economía.'],['Soberanía popular','Idea de que el poder reside en el pueblo.'],['Sufragio','Derecho a votar.'],['Tecnocracia','Gobierno guiado por especialistas técnicos.'],['Totalitarismo','Control estatal de toda la vida pública y privada.']];
+cards('#gd',[['Trámites en línea','Gestiones sin ir a una oficina.'],['Identidad y firma digital','Acreditar quién sos y firmar con validez legal.'],['Datos abiertos y transparencia','Información pública disponible para consultar y reutilizar.'],['Interoperabilidad','Los organismos intercambian datos para no pedirte lo mismo dos veces.'],['Ciberseguridad y privacidad','Proteger la información y los datos personales.'],['Inclusión digital','Que nadie quede afuera por falta de conexión o de habilidades.']]);
+tabs('#gtabs','#gpanel',[['1. Datos','#0891b2','Se reúnen registros de distintas áreas, como educación, empleo, programas sociales y territorio.'],['2. Modelo','#7c3aed','Algoritmos de inteligencia artificial buscan patrones y construyen una representación virtual del sistema.'],['3. Simulación','#d97706','Se prueban preguntas del tipo "¿qué pasaría si?" con distintas medidas antes de aplicarlas.'],['4. Decisión','#e11d48','Las autoridades interpretan los resultados y deciden. El debate gira en torno a qué controles y transparencia existen en este paso.']],d=>`<h3>${d[0]}</h3><p>${d[2]}</p>`);
+function mk(id,items,res){const n=items.length,e=$('#'+id);e.innerHTML=items.map(c=>`<label><input type="checkbox">${c}</label>`).join('');
+ e.onchange=()=>{const k=$$('input:checked',e).length;$('#'+id+'-sc').textContent=k;$('#'+id+'-bar').style.width=k/n*100+'%';$('#'+id+'-msg').textContent=k<=2?res[0]:k<n?res[1]:res[2]};$('#'+id+'-msg').textContent='Marcá las opciones para ver el resultado.'}
+mk('ck2',['Tiene una finalidad pública clara y publicada','Se sabe qué datos usa y con qué base legal','Cumple la ley de protección de datos personales','Lo supervisa un organismo independiente','Se auditan sesgos y errores del modelo','Las personas pueden consultar y reclamar decisiones que las afectan'],['Faltan garantías básicas: conviene pedir más información.','Hay garantías parciales: revisá las que faltan.','Cumple los criterios de buenas prácticas de esta guía.']);
+GL.push(['Brecha digital','Desigualdad en acceso a internet, dispositivos y habilidades digitales.'],['Ciberseguridad','Protección de sistemas y datos frente a ataques informáticos.'],['Datos abiertos','Información pública publicada en formatos que cualquiera puede reutilizar.'],['Estado predictivo','Idea de un Estado que anticipa problemas con datos y modelos.'],['Firma digital','Firma electrónica con validez jurídica equivalente a la manuscrita.'],['Gemelo digital','Réplica virtual de un sistema real, alimentada con datos para simular su comportamiento.'],['Gobierno abierto','Gestión basada en transparencia, participación y rendición de cuentas.'],['Gobierno digital','Uso de tecnologías digitales para prestar servicios y gestionar el Estado.'],['Identidad digital','Medio seguro de acreditar quién es una persona en línea.'],['Interoperabilidad','Capacidad de distintos sistemas u organismos de intercambiar datos.'],['Protección de datos personales','Derecho a controlar cómo se recolecta y usa la información propia.'],['Sesgo algorítmico','Error sistemático de un modelo que perjudica a ciertos grupos.']);
+GL.sort((a,b)=>a[0].localeCompare(b[0],'es'));
+function glo(t=''){const f=GL.filter(g=>(g[0]+g[1]).toLowerCase().includes(t.toLowerCase()));$('#gl').innerHTML=f.length?f.map(g=>`<div class="card"><dt>${g[0]}</dt><dd>${g[1]}</dd></div>`).join(''):'<p class="lead">No hay resultados. Probá con otra palabra.</p>'}
+$('#q').oninput=e=>glo(e.target.value);glo();
+go(location.hash.slice(1));
+</script>
+</body>
+</html>

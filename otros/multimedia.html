@@ -1,0 +1,2497 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Multimedia — Historia y tecnología del audio</title>
+<meta name="description" content="Guía sencilla de multimedia: tocadiscos, cassette, CD, parlantes, Bluetooth, música online, línea del tiempo y glosario del audio.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --font-display:'Sora','Helvetica Neue',sans-serif;
+  --font-body:'DM Sans',system-ui,sans-serif;
+  --font-mono:'JetBrains Mono',ui-monospace,monospace;
+  --maxw:1100px;
+  --radius:8px;
+  --radius-sm:5px;
+  --ease:cubic-bezier(.22,.75,.25,1);
+}
+html[data-theme="dark"]{
+  --bg:#06070b;
+  --bg-2:#0b0d14;
+  --surface:#101320;
+  --surface-2:#161a2a;
+  --surface-3:#1c2136;
+  --border:#1e2333;
+  --border-hi:#2e3549;
+  --text:#e8eaf2;
+  --text-hi:#ffffff;
+  --muted:#8892a8;
+  --dim:#5a6380;
+  --cyan:#22d3ee;
+  --cyan-soft:rgba(34,211,238,.12);
+  --pink:#f472b6;
+  --pink-soft:rgba(244,114,182,.12);
+  --violet:#a78bfa;
+  --violet-soft:rgba(167,139,250,.12);
+  --yellow:#fbbf24;
+  --yellow-soft:rgba(251,191,36,.12);
+  --red:#f87171;
+  --grid-line:rgba(255,255,255,.022);
+  --grid-major:rgba(255,255,255,.04);
+  --glow-cyan:0 0 50px -12px rgba(34,211,238,.55);
+  --glow-pink:0 0 50px -12px rgba(244,114,182,.55);
+  --glow-violet:0 0 50px -12px rgba(167,139,250,.55);
+}
+html[data-theme="light"]{
+  --bg:#f7f8fc;
+  --bg-2:#eef1f8;
+  --surface:#ffffff;
+  --surface-2:#f3f5fa;
+  --surface-3:#e8ebf3;
+  --border:#dde2ec;
+  --border-hi:#b8c0d0;
+  --text:#0f172a;
+  --text-hi:#000000;
+  --muted:#5a6480;
+  --dim:#8a94ae;
+  --cyan:#0891b2;
+  --cyan-soft:rgba(8,145,178,.10);
+  --pink:#db2777;
+  --pink-soft:rgba(219,39,119,.10);
+  --violet:#7c3aed;
+  --violet-soft:rgba(124,58,237,.10);
+  --yellow:#b45309;
+  --yellow-soft:rgba(180,83,9,.10);
+  --red:#dc2626;
+  --grid-line:rgba(15,23,42,.035);
+  --grid-major:rgba(15,23,42,.06);
+  --glow-cyan:0 0 40px -15px rgba(8,145,178,.4);
+  --glow-pink:0 0 40px -15px rgba(219,39,119,.4);
+  --glow-violet:0 0 40px -15px rgba(124,58,237,.4);
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  font-family:var(--font-body);
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  min-height:100vh;
+  overflow-x:hidden;
+  transition:background .4s var(--ease),color .4s var(--ease);
+}
+body::before{
+  content:'';
+  position:fixed;
+  inset:0;
+  background-image:
+    linear-gradient(var(--grid-line) 1px,transparent 1px),
+    linear-gradient(90deg,var(--grid-line) 1px,transparent 1px);
+  background-size:22px 22px;
+  pointer-events:none;
+  z-index:0;
+}
+body::after{
+  content:'';
+  position:fixed;
+  top:0;left:20%;right:20%;height:1px;
+  background:var(--grid-major);
+  pointer-events:none;
+  z-index:0;
+}
+
+h1,h2,h3,h4,h5{font-family:var(--font-display);line-height:1.1;letter-spacing:-.025em;margin:0;font-weight:700}
+p{margin:0}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+a{color:inherit;text-decoration:none}
+ul,ol{margin:0;padding:0}
+::selection{background:var(--pink);color:#06070b}
+:focus-visible{outline:2px solid var(--cyan);outline-offset:3px;border-radius:var(--radius-sm)}
+
+/* ===== GLOW ORBS ===== */
+.orbs{
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  pointer-events:none;
+  overflow:hidden;
+}
+.orb{
+  position:absolute;
+  border-radius:50%;
+  filter:blur(120px);
+  opacity:.35;
+  animation:float 30s ease-in-out infinite alternate;
+}
+html[data-theme="light"] .orb{opacity:.14}
+.orb.o1{width:46vw;height:46vw;background:var(--cyan);top:-18vw;left:-10vw}
+.orb.o2{width:40vw;height:40vw;background:var(--pink);bottom:-15vw;right:-12vw;animation-delay:-10s}
+.orb.o3{width:30vw;height:30vw;background:var(--violet);top:40%;left:55%;animation-delay:-20s}
+@keyframes float{
+  0%{transform:translate3d(0,0,0) scale(1)}
+  100%{transform:translate3d(4vw,-4vw,0) scale(1.15)}
+}
+
+/* ===== SCROLL PROGRESS ===== */
+.progress-line{
+  position:fixed;
+  top:0;left:0;
+  height:2px;
+  background:linear-gradient(90deg,var(--cyan),var(--pink),var(--violet));
+  width:0%;
+  z-index:200;
+  transition:width .05s linear;
+  box-shadow:0 0 12px var(--cyan);
+}
+
+/* ===== TOP BAR ===== */
+.topbar{
+  position:sticky;
+  top:0;
+  z-index:100;
+  backdrop-filter:blur(22px) saturate(160%);
+  -webkit-backdrop-filter:blur(22px) saturate(160%);
+  background:color-mix(in srgb,var(--bg) 78%, transparent);
+  border-bottom:1px solid var(--border);
+  transition:background .4s var(--ease),border-color .4s var(--ease);
+}
+.topbar-inner{
+  max-width:var(--maxw);
+  margin:0 auto;
+  padding:12px 24px;
+  display:flex;
+  align-items:center;
+  gap:18px;
+}
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  flex:none;
+  transition:transform .25s var(--ease);
+}
+.brand:hover{transform:translateY(-1px)}
+.brand-mark{
+  width:36px;height:36px;
+  border-radius:var(--radius-sm);
+  background:linear-gradient(135deg,var(--cyan),var(--pink));
+  display:grid;
+  place-items:center;
+  color:#06070b;
+  box-shadow:var(--glow-cyan);
+  flex:none;
+}
+.brand-mark svg{width:20px;height:20px}
+.brand-text{
+  font-family:var(--font-display);
+  font-weight:800;
+  font-size:.94rem;
+  letter-spacing:-.02em;
+  line-height:1.1;
+}
+.brand-text span{
+  display:block;
+  font-family:var(--font-mono);
+  font-size:.55rem;
+  font-weight:500;
+  color:var(--muted);
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  margin-top:2px;
+}
+.topnav{
+  display:flex;
+  gap:1px;
+  overflow-x:auto;
+  scrollbar-width:none;
+  flex:1;
+  margin-left:8px;
+}
+.topnav::-webkit-scrollbar{display:none}
+.topnav a{
+  padding:8px 11px;
+  border-radius:var(--radius-sm);
+  font-size:.78rem;
+  font-weight:500;
+  color:var(--muted);
+  white-space:nowrap;
+  position:relative;
+  transition:color .2s,background .2s;
+}
+.topnav a:hover{color:var(--text);background:var(--surface-2)}
+.topnav a.active{
+  color:var(--text-hi);
+  background:var(--surface-2);
+}
+.topnav a.active::before{
+  content:'';
+  position:absolute;
+  left:11px;right:11px;bottom:2px;
+  height:2px;
+  background:linear-gradient(90deg,var(--cyan),var(--pink));
+  border-radius:2px;
+}
+.theme-btn{
+  width:36px;height:36px;
+  border-radius:var(--radius-sm);
+  border:1px solid var(--border);
+  background:var(--surface);
+  color:var(--text);
+  display:grid;
+  place-items:center;
+  flex:none;
+  transition:border-color .2s,transform .25s var(--ease);
+}
+.theme-btn:hover{border-color:var(--border-hi);transform:rotate(8deg)}
+.theme-btn svg{width:16px;height:16px}
+html[data-theme="dark"] .icon-sun{display:block}
+html[data-theme="dark"] .icon-moon{display:none}
+html[data-theme="light"] .icon-sun{display:none}
+html[data-theme="light"] .icon-moon{display:block}
+
+/* ===== MAIN ===== */
+main{
+  position:relative;
+  z-index:1;
+  max-width:var(--maxw);
+  margin:0 auto;
+  padding:0 24px 100px;
+}
+.view{display:none}
+.view.active{display:block;animation:viewIn .35s var(--ease)}
+@keyframes viewIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+/* ===== HERO ===== */
+.hero{
+  padding:70px 0 46px;
+  position:relative;
+}
+.hero-tag{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:5px 11px;
+  border-radius:999px;
+  font-family:var(--font-mono);
+  font-size:.62rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--cyan);
+  background:var(--cyan-soft);
+  border:1px solid color-mix(in srgb,var(--cyan) 30%,var(--border));
+  margin-bottom:26px;
+}
+.hero-tag .dot{
+  width:6px;height:6px;border-radius:50%;
+  background:var(--cyan);
+  animation:blink 1.6s ease-in-out infinite;
+}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.35}}
+.hero h1{
+  font-size:clamp(2.1rem,5.4vw,3.8rem);
+  font-weight:800;
+  letter-spacing:-.045em;
+  line-height:.98;
+  margin-bottom:24px;
+  max-width:900px;
+}
+.hero h1 .accent-cyan{
+  background:linear-gradient(100deg,var(--cyan),#06b6d4 60%,var(--violet));
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+}
+.hero h1 .accent-pink{
+  background:linear-gradient(100deg,var(--pink),var(--violet));
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  font-style:italic;
+  font-weight:700;
+}
+.hero .lead{
+  font-size:1.03rem;
+  color:var(--muted);
+  max-width:660px;
+  margin-bottom:30px;
+  line-height:1.65;
+}
+.hero-actions{display:flex;flex-wrap:wrap;gap:11px}
+
+/* ===== WAVEFORM ===== */
+.waveform{
+  display:flex;
+  align-items:center;
+  gap:3px;
+  height:44px;
+  margin-top:36px;
+  opacity:.55;
+}
+.waveform .bar{
+  width:3px;
+  border-radius:2px;
+  background:linear-gradient(180deg,var(--cyan),var(--violet));
+  animation:wavePulse 1.6s ease-in-out infinite;
+  animation-delay:var(--bd,0s);
+}
+@keyframes wavePulse{
+  0%,100%{height:var(--h-min,12%)}
+  50%{height:var(--h-max,100%)}
+}
+
+/* ===== BUTTONS ===== */
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  padding:12px 22px;
+  border-radius:var(--radius);
+  font-family:var(--font-body);
+  font-size:.86rem;
+  font-weight:600;
+  border:1px solid transparent;
+  transition:transform .2s var(--ease),background .2s,border-color .2s,box-shadow .2s;
+  white-space:nowrap;
+}
+.btn svg{width:14px;height:14px;transition:transform .25s var(--ease)}
+.btn-primary{
+  background:linear-gradient(135deg,var(--cyan),#0891b2);
+  color:#06070b;
+  box-shadow:var(--glow-cyan);
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 0 60px -8px rgba(34,211,238,.7)}
+.btn-primary:hover svg{transform:translateX(3px)}
+.btn-pink{
+  background:linear-gradient(135deg,var(--pink),var(--violet));
+  color:#fff;
+  box-shadow:var(--glow-pink);
+}
+.btn-pink:hover{transform:translateY(-2px);box-shadow:0 0 60px -8px rgba(244,114,182,.7)}
+.btn-ghost{
+  background:var(--surface);
+  border-color:var(--border);
+  color:var(--text);
+}
+.btn-ghost:hover{border-color:var(--border-hi);background:var(--surface-2);transform:translateY(-2px)}
+
+/* ===== SECTION HEAD ===== */
+.section-head{
+  padding:36px 0 22px;
+  border-bottom:1px solid var(--border);
+  margin-bottom:28px;
+}
+.section-head .eyebrow{
+  font-family:var(--font-mono);
+  font-size:.66rem;
+  font-weight:500;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--cyan);
+  margin-bottom:12px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.section-head .eyebrow::after{
+  content:'';
+  flex:1;
+  height:1px;
+  background:linear-gradient(90deg,var(--cyan),transparent);
+  max-width:120px;
+}
+.section-head h1{
+  font-size:clamp(1.6rem,3.6vw,2.4rem);
+  font-weight:800;
+  letter-spacing:-.03em;
+  margin-bottom:10px;
+  line-height:1.05;
+}
+.section-head .lede{
+  font-size:.96rem;
+  color:var(--muted);
+  max-width:720px;
+  line-height:1.65;
+}
+
+/* ===== STATS ===== */
+.stats{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+  gap:1px;
+  background:var(--border);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  overflow:hidden;
+  margin:36px 0 0;
+}
+.stat{
+  background:var(--surface);
+  padding:22px 18px;
+  position:relative;
+  transition:background .2s;
+}
+.stat:hover{background:var(--surface-2)}
+.stat .num{
+  font-family:var(--font-display);
+  font-size:1.7rem;
+  font-weight:800;
+  letter-spacing:-.03em;
+  line-height:1;
+  margin-bottom:6px;
+  background:linear-gradient(135deg,var(--cyan),var(--violet));
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+}
+.stat.pink .num{background:linear-gradient(135deg,var(--pink),var(--violet));-webkit-background-clip:text;background-clip:text}
+.stat.violet .num{background:linear-gradient(135deg,var(--violet),var(--pink));-webkit-background-clip:text;background-clip:text}
+.stat.yellow .num{background:linear-gradient(135deg,var(--yellow),var(--pink));-webkit-background-clip:text;background-clip:text}
+.stat .lbl{
+  font-family:var(--font-mono);
+  font-size:.62rem;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--muted);
+  line-height:1.4;
+}
+
+/* ===== NAV CARDS ===== */
+.nav-cards{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:12px;
+  margin-top:32px;
+}
+.nav-card{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  padding:20px 18px;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  text-align:left;
+  position:relative;
+  transition:border-color .2s,transform .2s var(--ease),background .2s;
+  overflow:hidden;
+}
+.nav-card::before{
+  content:'';
+  position:absolute;
+  top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--cyan),var(--pink),transparent);
+  opacity:0;
+  transition:opacity .3s;
+}
+.nav-card:hover{
+  border-color:var(--border-hi);
+  transform:translateY(-3px);
+  background:var(--surface-2);
+}
+.nav-card:hover::before{opacity:1}
+.nav-card .nc-num{
+  font-family:var(--font-mono);
+  font-size:.62rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--cyan);
+}
+.nav-card h4{
+  font-family:var(--font-display);
+  font-size:1rem;
+  font-weight:700;
+  letter-spacing:-.015em;
+  color:var(--text-hi);
+  line-height:1.25;
+}
+.nav-card p{font-size:.82rem;color:var(--muted);line-height:1.5}
+.nav-card .arrow{
+  font-family:var(--font-mono);
+  font-size:.68rem;
+  font-weight:500;
+  color:var(--muted);
+  margin-top:6px;
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  transition:color .2s,gap .25s var(--ease);
+}
+.nav-card:hover .arrow{color:var(--pink);gap:9px}
+
+/* ===== DIAGRAM ===== */
+.diagram{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:24px 22px;
+  margin-bottom:16px;
+  transition:border-color .2s;
+}
+.diagram:hover{border-color:var(--border-hi)}
+.diagram-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+  flex-wrap:wrap;
+  margin-bottom:18px;
+}
+.diagram-head h4{
+  font-family:var(--font-display);
+  font-size:1.02rem;
+  font-weight:700;
+  letter-spacing:-.01em;
+}
+.badge{
+  font-family:var(--font-mono);
+  font-size:.6rem;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  padding:4px 9px;
+  border-radius:4px;
+  border:1px solid var(--border-hi);
+  color:var(--muted);
+}
+.badge.cyan{color:var(--cyan);border-color:color-mix(in srgb,var(--cyan) 40%,var(--border));background:var(--cyan-soft)}
+.badge.pink{color:var(--pink);border-color:color-mix(in srgb,var(--pink) 40%,var(--border));background:var(--pink-soft)}
+.badge.violet{color:var(--violet);border-color:color-mix(in srgb,var(--violet) 40%,var(--border));background:var(--violet-soft)}
+.badge.yellow{color:var(--yellow);border-color:color-mix(in srgb,var(--yellow) 40%,var(--border));background:var(--yellow-soft)}
+
+.diagram-svg{
+  display:block;
+  width:100%;
+  max-width:520px;
+  height:auto;
+  margin:0 auto;
+}
+
+/* SVG styling */
+.spk-cabinet{fill:var(--surface-2);stroke:var(--border-hi);stroke-width:2}
+.spk-cone{fill:var(--surface-3);stroke:var(--border-hi);stroke-width:1.5}
+.spk-surround{fill:none;stroke:var(--border-hi);stroke-width:2}
+.spk-dustcap{fill:var(--border-hi)}
+.spk-part{cursor:pointer;transition:filter .2s}
+.spk-part:hover{filter:brightness(1.35) drop-shadow(0 0 6px var(--cyan))}
+.spk-magnet{fill:var(--pink)}
+.spk-tweeter{fill:var(--cyan)}
+.spk-mid{fill:var(--violet)}
+.spk-woofer{fill:var(--yellow)}
+.spk-crossover{fill:var(--pink)}
+.spk-port{fill:var(--cyan)}
+.spk-label{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:.05em;fill:var(--muted)}
+.spk-wire{stroke:var(--border-hi);stroke-width:1.5;fill:none;stroke-dasharray:3 3}
+.spk-line{stroke:var(--border-hi);stroke-width:1;fill:none}
+
+.tt-base{fill:var(--surface-2);stroke:var(--border-hi);stroke-width:2}
+.tt-platter{fill:var(--surface-3);stroke:var(--border-hi);stroke-width:1.5}
+.tt-record{fill:#0a0b10;stroke:var(--border-hi);stroke-width:1.5}
+html[data-theme="light"] .tt-record{fill:#1f2430}
+.tt-groove{fill:none;stroke:#3a4055;stroke-width:.8}
+html[data-theme="light"] .tt-groove{stroke:#8a94ae}
+.tt-arm{stroke:var(--border-hi);stroke-width:4;fill:none;stroke-linecap:round}
+.tt-cart{fill:var(--pink)}
+.tt-part{cursor:pointer;transition:filter .2s}
+.tt-part:hover{filter:brightness(1.35) drop-shadow(0 0 6px var(--pink))}
+.tt-center{fill:var(--cyan)}
+.tt-label-spindle{fill:var(--yellow)}
+.tt-pivot{fill:var(--border-hi)}
+
+.cas-shell{fill:var(--surface-2);stroke:var(--border-hi);stroke-width:2}
+.cas-window{fill:var(--bg);stroke:var(--border-hi);stroke-width:1.5}
+.cas-reel{fill:var(--surface-3);stroke:var(--border-hi);stroke-width:1.5}
+.cas-reel-hub{fill:var(--border-hi)}
+.cas-tape{fill:var(--pink);opacity:.85}
+.cas-label{fill:var(--yellow)}
+.cas-head{fill:var(--cyan)}
+.cas-capstan{fill:var(--violet)}
+.cas-part{cursor:pointer;transition:filter .2s}
+.cas-part:hover{filter:brightness(1.35) drop-shadow(0 0 6px var(--pink))}
+
+.cd-disc{fill:var(--surface-3);stroke:var(--border-hi);stroke-width:1.5}
+.cd-hole{fill:var(--bg);stroke:var(--border-hi);stroke-width:1.5}
+.cd-ring{fill:none;stroke:var(--cyan);stroke-width:1;opacity:.55}
+.cd-laser-box{fill:var(--surface-2);stroke:var(--border-hi);stroke-width:1.5}
+.cd-laser-beam{stroke:var(--pink);stroke-width:2;filter:drop-shadow(0 0 4px var(--pink))}
+.cd-lens{fill:var(--cyan)}
+.cd-part{cursor:pointer;transition:filter .2s}
+.cd-part:hover{filter:brightness(1.35) drop-shadow(0 0 6px var(--cyan))}
+
+.bt-device{fill:var(--surface-2);stroke:var(--border-hi);stroke-width:2}
+.bt-screen{fill:var(--surface-3);stroke:var(--border-hi);stroke-width:1}
+.bt-wave{fill:none;stroke:var(--cyan);stroke-width:2;stroke-linecap:round;opacity:.9}
+.bt-icon{fill:var(--pink)}
+.bt-label{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;fill:var(--muted);letter-spacing:.08em}
+
+/* ===== INFO PANEL ===== */
+.info-panel{
+  margin-top:16px;
+  padding:15px 18px;
+  border-radius:var(--radius-sm);
+  border:1px dashed var(--border-hi);
+  background:var(--bg);
+  min-height:82px;
+  transition:border-color .2s,background .2s,border-style .2s;
+}
+.info-panel.active{
+  border-style:solid;
+  border-color:var(--cyan);
+  background:var(--cyan-soft);
+}
+.info-panel.pink.active{border-color:var(--pink);background:var(--pink-soft)}
+.info-panel.violet.active{border-color:var(--violet);background:var(--violet-soft)}
+.info-panel.yellow.active{border-color:var(--yellow);background:var(--yellow-soft)}
+.info-panel .ip-name{
+  font-family:var(--font-display);
+  font-size:.96rem;
+  font-weight:700;
+  color:var(--cyan);
+  margin-bottom:5px;
+  letter-spacing:-.01em;
+}
+.info-panel.pink .ip-name{color:var(--pink)}
+.info-panel.violet .ip-name{color:var(--violet)}
+.info-panel.yellow .ip-name{color:var(--yellow)}
+.info-panel .ip-desc{font-size:.85rem;color:var(--muted);line-height:1.55}
+.info-panel .ip-hint{
+  font-family:var(--font-mono);
+  font-size:.68rem;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--dim);
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.info-panel .ip-hint::before{
+  content:'';
+  width:6px;height:6px;
+  border-radius:50%;
+  background:var(--muted);
+  animation:blink 1.4s ease-in-out infinite;
+}
+
+/* ===== CARDS ===== */
+.card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:22px 24px;
+  transition:border-color .2s,transform .2s var(--ease),background .2s;
+}
+.card:hover{border-color:var(--border-hi)}
+.card h3{
+  font-family:var(--font-display);
+  font-size:1.04rem;
+  font-weight:700;
+  letter-spacing:-.01em;
+  margin-bottom:10px;
+}
+.card p{font-size:.88rem;color:var(--muted);line-height:1.65}
+.card p + p{margin-top:10px}
+
+.card-accent{border-left:3px solid var(--cyan)}
+.card-accent.pink{border-left-color:var(--pink)}
+.card-accent.violet{border-left-color:var(--violet)}
+.card-accent.yellow{border-left-color:var(--yellow)}
+
+.kicker{
+  font-family:var(--font-mono);
+  font-size:.62rem;
+  font-weight:700;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--cyan);
+  margin-bottom:8px;
+  display:inline-block;
+}
+.kicker.pink{color:var(--pink)}
+.kicker.violet{color:var(--violet)}
+.kicker.yellow{color:var(--yellow)}
+
+.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+.grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px}
+.grid-4{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}
+
+/* ===== BULLETS ===== */
+.bullets{
+  list-style:none;
+  display:flex;
+  flex-direction:column;
+  gap:9px;
+  margin-top:8px;
+}
+.bullets li{
+  display:flex;
+  gap:10px;
+  font-size:.85rem;
+  color:var(--muted);
+  line-height:1.55;
+}
+.bullets li::before{
+  content:'';
+  flex:none;
+  width:5px;height:5px;
+  margin-top:9px;
+  background:var(--cyan);
+  border-radius:50%;
+}
+.bullets.pink li::before{background:var(--pink)}
+.bullets.violet li::before{background:var(--violet)}
+.bullets.yellow li::before{background:var(--yellow)}
+.bullets strong{color:var(--text-hi);font-weight:600}
+
+/* ===== STEPS ===== */
+.steps{
+  display:flex;
+  flex-direction:column;
+  gap:0;
+  margin-top:6px;
+}
+.step{
+  display:grid;
+  grid-template-columns:36px 1fr;
+  gap:14px;
+  padding:12px 0;
+  border-bottom:1px dashed var(--border);
+}
+.step:last-child{border-bottom:none}
+.step .step-num{
+  width:32px;height:32px;
+  border-radius:6px;
+  border:1px solid var(--border-hi);
+  background:var(--bg);
+  display:grid;
+  place-items:center;
+  font-family:var(--font-mono);
+  font-size:.72rem;
+  font-weight:700;
+  color:var(--cyan);
+}
+.step strong{
+  display:block;
+  font-family:var(--font-display);
+  font-size:.9rem;
+  font-weight:700;
+  color:var(--text-hi);
+  margin-bottom:3px;
+  letter-spacing:-.01em;
+}
+.step p{font-size:.83rem;color:var(--muted);line-height:1.55}
+
+/* ===== TIMELINE ===== */
+.timeline-wrap{margin-top:8px}
+.timeline-track{
+  display:flex;
+  gap:12px;
+  overflow-x:auto;
+  padding:8px 2px 22px;
+  scroll-snap-type:x mandatory;
+  scrollbar-width:thin;
+  scrollbar-color:var(--border-hi) transparent;
+}
+.timeline-track::-webkit-scrollbar{height:6px}
+.timeline-track::-webkit-scrollbar-track{background:var(--bg-2);border-radius:3px}
+.timeline-track::-webkit-scrollbar-thumb{background:var(--border-hi);border-radius:3px}
+.tl-card{
+  flex:0 0 260px;
+  scroll-snap-align:start;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:18px 18px 20px;
+  position:relative;
+  transition:border-color .2s,transform .2s var(--ease),background .2s;
+}
+.tl-card::before{
+  content:'';
+  position:absolute;
+  top:0;left:14px;right:14px;height:2px;
+  background:linear-gradient(90deg,var(--cyan),var(--pink));
+  opacity:.7;
+  border-radius:1px;
+}
+.tl-card:hover{
+  border-color:var(--border-hi);
+  transform:translateY(-3px);
+  background:var(--surface-2);
+}
+.tl-card .year{
+  font-family:var(--font-display);
+  font-size:1.6rem;
+  font-weight:800;
+  letter-spacing:-.03em;
+  line-height:1;
+  margin-bottom:8px;
+  color:var(--cyan);
+}
+.tl-card:nth-child(3n+2) .year{color:var(--pink)}
+.tl-card:nth-child(3n+3) .year{color:var(--violet)}
+.tl-card .era{
+  font-family:var(--font-mono);
+  font-size:.56rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--dim);
+  margin-bottom:10px;
+}
+.tl-card h4{
+  font-family:var(--font-display);
+  font-size:.94rem;
+  font-weight:700;
+  letter-spacing:-.01em;
+  line-height:1.25;
+  margin-bottom:6px;
+}
+.tl-card p{font-size:.8rem;color:var(--muted);line-height:1.55}
+.tl-hint{
+  font-family:var(--font-mono);
+  font-size:.64rem;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--dim);
+  text-align:right;
+  padding:4px 6px 0;
+}
+
+/* ===== PROJECT CARDS ===== */
+.project-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:20px 20px 18px;
+  transition:border-color .2s,transform .2s var(--ease);
+  position:relative;
+  overflow:hidden;
+}
+.project-card::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:radial-gradient(400px circle at var(--mx,50%) var(--my,0%),var(--cyan-soft),transparent 60%);
+  opacity:0;
+  transition:opacity .3s;
+  pointer-events:none;
+}
+.project-card:hover{border-color:var(--border-hi);transform:translateY(-3px)}
+.project-card:hover::after{opacity:1}
+.project-card .pc-icon{
+  width:40px;height:40px;
+  border-radius:var(--radius-sm);
+  background:var(--surface-2);
+  border:1px solid var(--border);
+  display:grid;
+  place-items:center;
+  color:var(--cyan);
+  margin-bottom:14px;
+}
+.project-card .pc-icon svg{width:18px;height:18px}
+.project-card h4{
+  font-family:var(--font-display);
+  font-size:.96rem;
+  font-weight:700;
+  letter-spacing:-.01em;
+  margin-bottom:6px;
+}
+.project-card p{font-size:.82rem;color:var(--muted);line-height:1.55}
+.project-card .pc-status{
+  display:inline-block;
+  margin-top:12px;
+  font-family:var(--font-mono);
+  font-size:.58rem;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  padding:3px 8px;
+  border-radius:3px;
+  border:1px solid var(--border);
+  color:var(--dim);
+}
+.project-card .pc-status.live{color:var(--cyan);border-color:color-mix(in srgb,var(--cyan) 40%,var(--border));background:var(--cyan-soft)}
+.project-card .pc-status.dev{color:var(--pink);border-color:color-mix(in srgb,var(--pink) 40%,var(--border));background:var(--pink-soft)}
+.project-card .pc-status.research{color:var(--violet);border-color:color-mix(in srgb,var(--violet) 40%,var(--border));background:var(--violet-soft)}
+
+/* ===== CALLOUT ===== */
+.callout{
+  margin-top:20px;
+  padding:16px 20px;
+  border-radius:var(--radius-sm);
+  border:1px solid var(--border);
+  border-left:3px solid var(--cyan);
+  background:var(--surface);
+  font-size:.87rem;
+  color:var(--muted);
+  line-height:1.6;
+}
+.callout strong{color:var(--text-hi);font-weight:600}
+.callout.pink{border-left-color:var(--pink);background:var(--pink-soft)}
+.callout.pink strong{color:var(--pink)}
+.callout.violet{border-left-color:var(--violet);background:var(--violet-soft)}
+.callout.violet strong{color:var(--violet)}
+.callout.yellow{border-left-color:var(--yellow);background:var(--yellow-soft)}
+.callout.yellow strong{color:var(--yellow)}
+
+/* ===== COMPARE TABLE ===== */
+.compare{
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  overflow:hidden;
+  background:var(--surface);
+  margin-top:16px;
+}
+.compare-head,.compare-row{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+}
+.compare-head{
+  background:var(--bg-2);
+  border-bottom:1px solid var(--border);
+}
+.compare-head > div{
+  padding:11px 15px;
+  font-family:var(--font-mono);
+  font-size:.62rem;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--muted);
+  font-weight:700;
+}
+.compare-head > div:nth-child(2){color:var(--cyan);border-left:1px solid var(--border)}
+.compare-head > div:nth-child(3){color:var(--pink);border-left:1px solid var(--border)}
+.compare-row{
+  border-bottom:1px solid var(--border);
+  transition:background .15s;
+}
+.compare-row:last-child{border-bottom:none}
+.compare-row:hover{background:var(--surface-2)}
+.compare-row > div{
+  padding:11px 15px;
+  font-size:.83rem;
+  color:var(--text);
+}
+.compare-row .cr-label{
+  color:var(--muted);
+  font-family:var(--font-mono);
+  font-size:.7rem;
+  font-weight:500;
+  letter-spacing:.04em;
+  border-right:1px solid var(--border);
+}
+.compare-row .cr-a{border-right:1px solid var(--border)}
+
+/* ===== GLOSSARY ===== */
+.gloss-search{
+  width:100%;
+  padding:14px 16px;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  color:var(--text);
+  font-family:var(--font-body);
+  font-size:.94rem;
+  margin-bottom:16px;
+  transition:border-color .2s,box-shadow .2s;
+}
+.gloss-search::placeholder{color:var(--dim)}
+.gloss-search:focus{
+  outline:none;
+  border-color:var(--cyan);
+  box-shadow:0 0 0 3px var(--cyan-soft);
+}
+.gloss-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+  gap:10px;
+}
+.gloss-item{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius-sm);
+  padding:14px 16px;
+  transition:border-color .2s,background .2s;
+}
+.gloss-item:hover{border-color:var(--border-hi);background:var(--surface-2)}
+.gloss-item .gi-term{
+  font-family:var(--font-display);
+  font-size:.92rem;
+  font-weight:700;
+  color:var(--text-hi);
+  margin-bottom:5px;
+  letter-spacing:-.01em;
+}
+.gloss-item .gi-def{font-size:.8rem;color:var(--muted);line-height:1.55}
+.gloss-empty{
+  text-align:center;
+  padding:30px;
+  color:var(--dim);
+  font-family:var(--font-mono);
+  font-size:.75rem;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  border:1px dashed var(--border);
+  border-radius:var(--radius-sm);
+}
+
+/* ===== LEVEL LIST (BT versions) ===== */
+.level-list{display:flex;flex-direction:column;gap:6px;margin-top:8px}
+.level-item{
+  display:grid;
+  grid-template-columns:70px 1fr;
+  gap:14px;
+  align-items:center;
+  padding:12px 15px;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius-sm);
+  transition:border-color .2s,background .2s;
+}
+.level-item:hover{border-color:var(--border-hi);background:var(--surface-2)}
+.level-item .lv-code{
+  font-family:var(--font-mono);
+  font-size:.76rem;
+  font-weight:700;
+  color:var(--cyan);
+  letter-spacing:.06em;
+}
+.level-item .lv-body strong{
+  display:block;
+  font-family:var(--font-display);
+  font-size:.88rem;
+  font-weight:700;
+  color:var(--text-hi);
+  margin-bottom:2px;
+}
+.level-item .lv-body span{font-size:.8rem;color:var(--muted);line-height:1.5}
+
+/* ===== REVEAL ===== */
+.reveal{
+  opacity:0;
+  transform:translateY(14px);
+  transition:opacity .55s var(--ease),transform .55s var(--ease);
+}
+.reveal.in{opacity:1;transform:none}
+
+/* ===== FOOTER ===== */
+.footer{
+  border-top:1px solid var(--border);
+  padding:26px 0 0;
+  margin-top:60px;
+  font-family:var(--font-mono);
+  font-size:.64rem;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--dim);
+  display:flex;
+  justify-content:space-between;
+  gap:14px;
+  flex-wrap:wrap;
+}
+.footer strong{color:var(--muted);font-weight:700}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width:900px){
+  .topbar-inner{padding:10px 16px;gap:10px}
+  .brand-text{display:none}
+  .topnav{margin-left:0}
+  .topnav a{padding:8px 9px;font-size:.72rem}
+  main{padding:0 16px 80px}
+  .hero{padding:44px 0 32px}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .stat{padding:16px 14px}
+  .stat .num{font-size:1.4rem}
+  .grid-2,.grid-3,.grid-4{grid-template-columns:1fr}
+  .compare-head,.compare-row{grid-template-columns:1.2fr 1fr 1fr}
+  .compare-head > div,.compare-row > div{padding:9px 10px;font-size:.76rem}
+  .compare-row .cr-label{font-size:.62rem}
+  .tl-card{flex:0 0 220px;padding:15px}
+  .tl-card .year{font-size:1.35rem}
+  .level-item{grid-template-columns:60px 1fr;padding:10px 12px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.01ms!important;
+    animation-iteration-count:1!important;
+    transition-duration:.01ms!important;
+    scroll-behavior:auto!important;
+  }
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<div class="progress-line" id="progressLine"></div>
+
+<div class="orbs" aria-hidden="true">
+  <div class="orb o1"></div>
+  <div class="orb o2"></div>
+  <div class="orb o3"></div>
+</div>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="#inicio" data-route="inicio">
+      <span class="brand-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 12h2v6H3zM9 8h2v10H9zM15 4h2v14h-2zM21 10h2v8h-2z"/>
+        </svg>
+      </span>
+      <span class="brand-text">Multimedia<span>Historia del audio</span></span>
+    </a>
+    <nav class="topnav" aria-label="Navegación principal">
+      <a href="#inicio" class="active" data-route="inicio">Inicio</a>
+      <a href="#parlantes" data-route="parlantes">Parlantes</a>
+      <a href="#tocadiscos" data-route="tocadiscos">Tocadiscos</a>
+      <a href="#cassette" data-route="cassette">Cassette</a>
+      <a href="#cd" data-route="cd">Compact Disc</a>
+      <a href="#bluetooth" data-route="bluetooth">Bluetooth</a>
+      <a href="#online" data-route="online">Música online</a>
+      <a href="#timeline" data-route="timeline">Historia</a>
+      <a href="#futuro" data-route="futuro">Futuro</a>
+      <a href="#glosario" data-route="glosario">Glosario</a>
+    </nav>
+    <button class="theme-btn" id="themeToggle" aria-label="Cambiar tema">
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+    </button>
+  </div>
+</header>
+
+<main>
+
+  <!-- ============ INICIO ============ -->
+  <section class="view active" data-view="inicio">
+    <div class="hero">
+      <span class="hero-tag"><span class="dot"></span>Del vinilo al streaming</span>
+      <h1>Cómo escuchamos música, <span class="accent-cyan">explicado</span> <span class="accent-pink">sin vueltas</span>.</h1>
+      <p class="lead">
+        Un recorrido por los aparatos que nos hicieron bailar, llorar y viajar: tocadiscos, pasacasettes, discmans, parlantes, Bluetooth y streaming. Cómo funciona cada uno y por qué todavía hoy conviven todos.
+      </p>
+      <div class="hero-actions">
+        <button class="btn btn-primary" data-route="tocadiscos">
+          Empezar por el tocadiscos
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+        <button class="btn btn-ghost" data-route="timeline">
+          Ver línea del tiempo
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h18M12 3v18"/></svg>
+        </button>
+      </div>
+
+      <div class="waveform" aria-hidden="true" id="waveform"></div>
+    </div>
+
+    <div class="stats reveal">
+      <div class="stat">
+        <div class="num" data-count="33" data-suffix=" rpm">0</div>
+        <div class="lbl">Velocidad<br>de un disco LP</div>
+      </div>
+      <div class="stat pink">
+        <div class="num" data-count="4.7" data-suffix=" cm/s">0</div>
+        <div class="lbl">Velocidad<br>de una cinta</div>
+      </div>
+      <div class="stat violet">
+        <div class="num" data-count="44" data-suffix=" kHz">0</div>
+        <div class="lbl">Muestreo<br>de un CD</div>
+      </div>
+      <div class="stat yellow">
+        <div class="num" data-count="320" data-suffix=" kbps">0</div>
+        <div class="lbl">Bitrate típico<br>de streaming</div>
+      </div>
+    </div>
+
+    <div class="section-head reveal" style="margin-top:52px">
+      <div class="eyebrow">Recorrido</div>
+      <h1>¿Por dónde empezar?</h1>
+      <p class="lede">Diez secciones que van de lo mecánico a lo digital. Puedes seguir el orden o saltar a lo que más te interese.</p>
+    </div>
+
+    <div class="nav-cards">
+      <button class="nav-card reveal" data-route="parlantes">
+        <span class="nc-num">02 / Parlantes</span>
+        <h4>Cómo suena un parlante</h4>
+        <p>La estructura interna: woofer, tweeter, imán, crossover y todo lo que hay adentro.</p>
+        <span class="arrow">Ver estructura →</span>
+      </button>
+      <button class="nav-card reveal" data-route="tocadiscos">
+        <span class="nc-num">03 / Tocadiscos</span>
+        <h4>Tocadiscos y vinilo</h4>
+        <p>Cómo una aguja diminuta puede hacer sonar una canción entera.</p>
+        <span class="arrow">Abrir →</span>
+      </button>
+      <button class="nav-card reveal" data-route="cassette">
+        <span class="nc-num">04 / Cassette</span>
+        <h4>El cassette</h4>
+        <p>La cinta magnética que nos dejó llevar la música a todos lados.</p>
+        <span class="arrow">Abrir →</span>
+      </button>
+      <button class="nav-card reveal" data-route="cd">
+        <span class="nc-num">05 / Compact Disc</span>
+        <h4>El CD</h4>
+        <p>Láser, ceros y unos: el primer salto completo a lo digital.</p>
+        <span class="arrow">Abrir →</span>
+      </button>
+      <button class="nav-card reveal" data-route="bluetooth">
+        <span class="nc-num">06 / Bluetooth</span>
+        <h4>El audio inalámbrico</h4>
+        <p>Cómo viaja el sonido sin cables por el aire, con sus ventajas y límites.</p>
+        <span class="arrow">Abrir →</span>
+      </button>
+      <button class="nav-card reveal" data-route="online">
+        <span class="nc-num">07 / Música online</span>
+        <h4>Internet y la música</h4>
+        <p>Del MP3 al streaming: cómo cambió para siempre la forma de escuchar.</p>
+        <span class="arrow">Abrir →</span>
+      </button>
+      <button class="nav-card reveal" data-route="timeline">
+        <span class="nc-num">08 / Historia</span>
+        <h4>Línea del tiempo</h4>
+        <p>Del fonógrafo de Edison al audio espacial, pasando por el Walkman y el iPod.</p>
+        <span class="arrow">Ver historia →</span>
+      </button>
+      <button class="nav-card reveal" data-route="futuro">
+        <span class="nc-num">09 / Futuro</span>
+        <h4>Proyectos futuros</h4>
+        <p>Audio espacial, Hi-Res inalámbrico, codecs con IA y mucho más.</p>
+        <span class="arrow">Abrir →</span>
+      </button>
+      <button class="nav-card reveal" data-route="glosario">
+        <span class="nc-num">10 / Glosario</span>
+        <h4>Glosario del audio</h4>
+        <p>Hz, dB, bitrate, códec, impedancia y todo el vocabulario técnico explicado.</p>
+        <span class="arrow">Abrir →</span>
+      </button>
+    </div>
+
+    <div class="callout reveal">
+      <strong>Una idea para llevarte:</strong> en audio, todo es una onda. Un micrófono la convierte en señal, un amplificador la hace más grande y un parlante la vuelve a convertir en sonido. Cada tecnología de esta guía es una forma distinta de mover esa misma onda.
+    </div>
+  </section>
+
+  <!-- ============ PARLANTES ============ -->
+  <section class="view" data-view="parlantes">
+    <div class="section-head reveal">
+      <div class="eyebrow">02 / Estructura</div>
+      <h1>Cómo funciona un parlante</h1>
+      <p class="lede">Un parlante es un motor que empuja aire. La electricidad mueve una bobina, la bobina mueve un cono, y el cono empuja el aire a su alrededor. Eso es todo. Pasa el cursor por cada parte para ver qué hace.</p>
+    </div>
+
+    <div class="diagram reveal">
+      <div class="diagram-head">
+        <h4>Vista de frente de un parlante de 3 vías</h4>
+        <span class="badge cyan">Caja acústica</span>
+      </div>
+      <svg class="diagram-svg" viewBox="0 0 400 460" aria-label="Estructura de un parlante">
+        <!-- Gabinete -->
+        <rect class="spk-cabinet" x="60" y="20" width="280" height="420" rx="6"/>
+        <!-- Puerto bass-reflex -->
+        <circle class="spk-part spk-port" data-part="port" cx="110" cy="410" r="14"/>
+        <circle cx="110" cy="410" r="9" fill="var(--bg)"/>
+        <text class="spk-label" x="135" y="414">PUERTO</text>
+
+        <!-- Tweeter (arriba) -->
+        <circle class="spk-surround" cx="200" cy="100" r="42"/>
+        <circle class="spk-part spk-tweeter" data-part="tweeter" cx="200" cy="100" r="34"/>
+        <circle class="spk-cone" cx="200" cy="100" r="24"/>
+        <circle class="spk-dustcap" cx="200" cy="100" r="10"/>
+        <text class="spk-label" x="252" y="104">TWEETER</text>
+
+        <!-- Mid-range (medio) -->
+        <circle class="spk-surround" cx="200" cy="215" r="62"/>
+        <circle class="spk-part spk-mid" data-part="mid" cx="200" cy="215" r="52"/>
+        <circle class="spk-cone" cx="200" cy="215" r="38"/>
+        <circle class="spk-dustcap" cx="200" cy="215" r="16"/>
+        <text class="spk-label" x="272" y="219">MEDIO</text>
+
+        <!-- Woofer (abajo) -->
+        <circle class="spk-surround" cx="200" cy="345" r="78"/>
+        <circle class="spk-part spk-woofer" data-part="woofer" cx="200" cy="345" r="68"/>
+        <circle class="spk-cone" cx="200" cy="345" r="50"/>
+        <circle class="spk-dustcap" cx="200" cy="345" r="20"/>
+        <text class="spk-label" x="288" y="349">WOOFER</text>
+
+        <!-- Conexiones crossover (dashed) -->
+        <path class="spk-wire" d="M 130 145 Q 130 195 155 205"/>
+        <path class="spk-wire" d="M 130 145 Q 130 260 145 275"/>
+        <path class="spk-wire" d="M 130 145 Q 130 340 145 345"/>
+
+        <!-- Crossover box -->
+        <rect class="spk-part spk-crossover" data-part="crossover" x="76" y="120" width="46" height="60" rx="3"/>
+        <circle cx="88" cy="138" r="3" fill="var(--bg)"/>
+        <circle cx="102" cy="138" r="3" fill="var(--bg)"/>
+        <circle cx="88" cy="152" r="3" fill="var(--bg)"/>
+        <circle cx="102" cy="152" r="3" fill="var(--bg)"/>
+        <text class="spk-label" x="72" y="196">CROSSOVER</text>
+      </svg>
+      <div class="info-panel" id="spkInfo">
+        <div class="ip-hint">Pasa el cursor sobre una parte</div>
+      </div>
+    </div>
+
+    <div class="grid-3 reveal">
+      <div class="card card-accent">
+        <span class="kicker">Graves</span>
+        <h3>Woofer</h3>
+        <p>Se encarga de las frecuencias bajas: bombos, bajos, el "golpe" de una canción. Es el cono más grande y necesita más potencia que los demás.</p>
+      </div>
+      <div class="card card-accent violet">
+        <span class="kicker violet">Medios</span>
+        <h3>Mid-range</h3>
+        <p>Reproduce las frecuencias medias, donde vive la voz y la mayoría de los instrumentos. Es el que más "se escucha" en un parlante.</p>
+      </div>
+      <div class="card card-accent pink">
+        <span class="kicker pink">Agudos</span>
+        <h3>Tweeter</h3>
+        <p>Las frecuencias altas: platillos, detalles de la voz, brillo. Es el cono más pequeño y ligero, y se mueve rapidísimo.</p>
+      </div>
+    </div>
+
+    <div class="diagram reveal" style="margin-top:16px">
+      <div class="diagram-head">
+        <h4>Las partes que no se ven</h4>
+        <span class="badge violet">Corte transversal</span>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">01</div>
+          <div>
+            <strong>Imán permanente</strong>
+            <p>Genera un campo magnético fijo. Es el "motor" del parlante, la parte pesada que va atrás del cono.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">02</div>
+          <div>
+            <strong>Bobina móvil (voice coil)</strong>
+            <p>Es un cable enrollado que está dentro del campo magnético. Cuando le llega corriente, se mueve hacia adelante y hacia atrás.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">03</div>
+          <div>
+            <strong>Cono (diafragma)</strong>
+            <p>Es la parte que ves. Está pegado a la bobina y empuja el aire cuando la bobina se mueve.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">04</div>
+          <div>
+            <strong>Borde (surround)</strong>
+            <p>El anillo flexible que une el cono con el marco. Permite que el cono se mueva sin romperse.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">05</div>
+          <div>
+            <strong>Crossover</strong>
+            <p>Un pequeño circuito que separa las frecuencias: manda los graves al woofer, los medios al mid y los agudos al tweeter.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">06</div>
+          <div>
+            <strong>Puerto bass-reflex</strong>
+            <p>Un tubo que deja salir el aire que empuja el woofer por detrás, reforzando los graves. Sin él, la caja sería más chica y seca.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout reveal">
+      <strong>Un dato:</strong> los parlantes profesionales pueden mover el cono miles de veces por segundo. Cuanto más agudo es el sonido, más rápido tiene que vibrar el cono.
+    </div>
+  </section>
+
+  <!-- ============ TOCADISCOS ============ -->
+  <section class="view" data-view="tocadiscos">
+    <div class="section-head reveal">
+      <div class="eyebrow">03 / Analógico</div>
+      <h1>Tocadiscos y vinilo</h1>
+      <p class="lede">Un tocadiscos hace sonar un disco de vinilo. Una aguja diminuta recorre un surco en forma de espiral y convierte las vibraciones en una señal eléctrica. Nada de ceros y unos: es sonido puro, físico.</p>
+    </div>
+
+    <div class="diagram reveal">
+      <div class="diagram-head">
+        <h4>Partes de un tocadiscos</h4>
+        <span class="badge pink">Vista superior</span>
+      </div>
+      <svg class="diagram-svg" viewBox="0 0 460 320" aria-label="Tocadiscos">
+        <!-- Base -->
+        <rect class="tt-base" x="20" y="20" width="420" height="280" rx="8"/>
+
+        <!-- Plato giratorio -->
+        <circle class="tt-platter" cx="180" cy="160" r="112"/>
+        <!-- Disco -->
+        <circle class="tt-record" cx="180" cy="160" r="100"/>
+        <!-- Surcos -->
+        <circle class="tt-groove" cx="180" cy="160" r="92"/>
+        <circle class="tt-groove" cx="180" cy="160" r="82"/>
+        <circle class="tt-groove" cx="180" cy="160" r="70"/>
+        <circle class="tt-groove" cx="180" cy="160" r="58"/>
+        <!-- Etiqueta central -->
+        <circle class="tt-part tt-center" data-part="platter" cx="180" cy="160" r="30"/>
+        <!-- Eje -->
+        <circle class="tt-label-spindle" cx="180" cy="160" r="4"/>
+
+        <!-- Brazo -->
+        <circle class="tt-part tt-pivot" data-part="tonearm" cx="380" cy="100" r="16"/>
+        <path class="tt-arm" d="M 380 100 L 300 180"/>
+        <!-- Cápsula y aguja -->
+        <rect class="tt-part tt-cart" data-part="cartridge" x="284" y="174" width="26" height="14" rx="2" transform="rotate(-42 297 181)"/>
+
+        <!-- Botones de velocidad -->
+        <circle class="tt-part" data-part="motor" cx="380" cy="240" r="12" fill="var(--cyan)"/>
+        <text class="spk-label" x="352" y="268">33 RPM</text>
+        <circle cx="380" cy="210" r="12" fill="var(--surface-3)" stroke="var(--border-hi)" stroke-width="1.5"/>
+        <text class="spk-label" x="352" y="196">45 RPM</text>
+
+        <!-- Leyendas -->
+        <text class="spk-label" x="240" y="140">DISCO</text>
+        <text class="spk-label" x="350" y="88">BRAZO</text>
+      </svg>
+      <div class="info-panel pink" id="ttInfo">
+        <div class="ip-hint">Pasa el cursor sobre una parte</div>
+      </div>
+    </div>
+
+    <div class="grid-2 reveal">
+      <div class="card card-accent pink">
+        <span class="kicker pink">Cómo suena</span>
+        <h3>Del surco al oído</h3>
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">01</div>
+            <div>
+              <strong>El disco gira</strong>
+              <p>El motor hace girar el plato a una velocidad constante (33 o 45 rpm).</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">02</div>
+            <div>
+              <strong>La aguja recorre el surco</strong>
+              <p>El surco tiene ondulaciones microscópicas que reproducen el sonido grabado.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">03</div>
+            <div>
+              <strong>La cápsula convierte</strong>
+              <p>La aguja vibra y la cápsula transforma esas vibraciones en una señal eléctrica muy débil.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">04</div>
+            <div>
+              <strong>El amplificador agranda</strong>
+              <p>La señal se amplifica y llega a los parlantes, que la convierten en sonido.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card card-accent">
+        <span class="kicker">Datos</span>
+        <h3>El vinilo, en números</h3>
+        <ul class="bullets">
+          <li><strong>Velocidades:</strong> 33⅓ rpm para LP (larga duración) y 45 rpm para singles.</li>
+          <li><strong>Tamaños:</strong> 12" (LP), 7" (single), 10" (EP).</li>
+          <li><strong>Duración:</strong> unos 20–25 minutos por cara en un LP.</li>
+          <li><strong>Surco:</strong> mide entre 0,04 y 0,08 mm de ancho. La aguja viaja por él a presión.</li>
+          <li><strong>Material:</strong> PVC (policloruro de vinilo), de ahí el nombre.</li>
+          <li><strong>Renacimiento:</strong> desde 2015 las ventas de vinilo no han parado de crecer.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout pink reveal">
+      <strong>Por qué volvió el vinilo:</strong> no es solo nostalgia. Muchos oyentes prefieren su sonido cálido, el ritual de poner el disco y el objeto físico en sí. Es la música que se puede tocar.
+    </div>
+  </section>
+
+  <!-- ============ CASSETTE ============ -->
+  <section class="view" data-view="cassette">
+    <div class="section-head reveal">
+      <div class="eyebrow">04 / Magnético</div>
+      <h1>El cassette</h1>
+      <p class="lede">El cassette (o casete) fue el primer formato que nos dejó llevar la música a todas partes. Una cinta magnética enrollada en dos carretes guarda el sonido, y un cabezal lo lee cuando la cinta pasa por delante.</p>
+    </div>
+
+    <div class="diagram reveal">
+      <div class="diagram-head">
+        <h4>Partes de un cassette</h4>
+        <span class="badge yellow">Vista de frente</span>
+      </div>
+      <svg class="diagram-svg" viewBox="0 0 460 300" aria-label="Cassette">
+        <!-- Carcasa -->
+        <path class="cas-shell" d="M 40 50 L 420 50 L 420 250 L 40 250 Z"/>
+        <path class="cas-shell" d="M 40 50 L 70 30 L 390 30 L 420 50 Z"/>
+
+        <!-- Etiqueta superior -->
+        <rect class="cas-part cas-label" data-part="label" x="80" y="55" width="300" height="40" rx="3"/>
+        <text class="spk-label" x="90" y="80" fill="#0a0a0f">LADO A · 60 MIN</text>
+
+        <!-- Ventana -->
+        <rect class="cas-window" x="100" y="115" width="260" height="90" rx="4"/>
+
+        <!-- Carrete izquierdo -->
+        <circle class="cas-part cas-reel" data-part="reel" cx="165" cy="160" r="32"/>
+        <circle class="cas-reel-hub" cx="165" cy="160" r="8"/>
+        <circle cx="165" cy="160" r="20" fill="none" stroke="var(--border-hi)" stroke-width="1" stroke-dasharray="2 3"/>
+
+        <!-- Carrete derecho -->
+        <circle class="cas-part cas-reel" data-part="reel" cx="295" cy="160" r="32"/>
+        <circle class="cas-reel-hub" cx="295" cy="160" r="8"/>
+        <circle cx="295" cy="160" r="20" fill="none" stroke="var(--border-hi)" stroke-width="1" stroke-dasharray="2 3"/>
+
+        <!-- Cinta entre carretes -->
+        <path class="cas-part cas-tape" data-part="tape" d="M 165 190 Q 230 210 295 190 L 295 128 Q 230 148 165 128 Z"/>
+
+        <!-- Cabezal y capstán (parte inferior) -->
+        <rect class="cas-part cas-head" data-part="head" x="180" y="220" width="30" height="22" rx="2"/>
+        <circle class="cas-part cas-capstan" data-part="capstan" cx="260" cy="231" r="8"/>
+
+        <text class="spk-label" x="168" y="270">CABEZAL</text>
+        <text class="spk-label" x="252" y="270">CAPSTÁN</text>
+      </svg>
+      <div class="info-panel yellow" id="casInfo">
+        <div class="ip-hint">Pasa el cursor sobre una parte</div>
+      </div>
+    </div>
+
+    <div class="grid-3 reveal">
+      <div class="card card-accent yellow">
+        <span class="kicker yellow">Cómo funciona</span>
+        <h3>El recorrido de la cinta</h3>
+        <p>Los dos carretes giran y la cinta pasa por delante del cabezal a 4,7 cm/s. El cabezal lee las variaciones magnéticas grabadas y las convierte en señal eléctrica.</p>
+      </div>
+      <div class="card card-accent">
+        <span class="kicker">Por qué importó</span>
+        <h3>La revolución portátil</h3>
+        <p>Antes del cassette, la música en movimiento era cosa de discos grandes. El cassette hizo posible el Walkman, las cintas mixtas y grabar la radio en casa.</p>
+      </div>
+      <div class="card card-accent pink">
+        <span class="kicker pink">Los dos lados</span>
+        <h3>Lado A y Lado B</h3>
+        <p>Una cinta tiene dos caras. Se puede grabar por los dos lados, lo que da el doble de duración. Podías poner tus canciones favoritas y regalarlas.</p>
+      </div>
+    </div>
+
+    <div class="callout yellow reveal">
+      <strong>Dato nostálgico:</strong> cuando la cinta se enredaba en el mecanismo, había que sacarla con un lápiz. Ese pequeño ritual se llamaba "rebobinar a mano" y era parte de la experiencia.
+    </div>
+  </section>
+
+  <!-- ============ COMPACT DISC ============ -->
+  <section class="view" data-view="cd">
+    <div class="section-head reveal">
+      <div class="eyebrow">05 / Digital</div>
+      <h1>Compact Disc (CD)</h1>
+      <p class="lede">El CD fue el primer paso completo al audio digital para el gran público. Un láser lee pequeños huecos en la superficie del disco y los traduce a ceros y unos. Del disco al oído sin pasar por lo físico.</p>
+    </div>
+
+    <div class="diagram reveal">
+      <div class="diagram-head">
+        <h4>Partes del CD</h4>
+        <span class="badge cyan">Vista superior</span>
+      </div>
+      <svg class="diagram-svg" viewBox="0 0 460 300" aria-label="Compact Disc">
+        <!-- Disco -->
+        <circle class="cd-disc" cx="230" cy="150" r="120"/>
+        <!-- Surcos espirales -->
+        <circle class="cd-ring" cx="230" cy="150" r="100"/>
+        <circle class="cd-ring" cx="230" cy="150" r="88"/>
+        <circle class="cd-ring" cx="230" cy="150" r="76"/>
+        <circle class="cd-ring" cx="230" cy="150" r="64"/>
+        <circle class="cd-ring" cx="230" cy="150" r="52"/>
+        <!-- Hueco central -->
+        <circle class="cd-hole" cx="230" cy="150" r="22"/>
+        <!-- Brillo -->
+        <path d="M 230 30 A 120 120 0 0 1 350 150 L 300 150 A 70 70 0 0 0 230 80 Z" fill="var(--cyan)" opacity=".08"/>
+
+        <!-- Láser (abajo) -->
+        <rect class="cd-laser-box" x="200" y="245" width="60" height="40" rx="3"/>
+        <circle class="cd-lens" cx="230" cy="252" r="6"/>
+        <path class="cd-laser-beam" d="M 230 252 L 230 200" stroke-dasharray="4 3"/>
+        <text class="spk-label" x="200" y="298">LÁSER</text>
+      </svg>
+      <div class="info-panel" id="cdInfo">
+        <div class="ip-hint">Pasa el cursor sobre una parte</div>
+      </div>
+    </div>
+
+    <div class="grid-2 reveal">
+      <div class="card card-accent">
+        <span class="kicker">Cómo funciona</span>
+        <h3>El viaje del láser</h3>
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">01</div>
+            <div>
+              <strong>El motor gira el disco</strong>
+              <p>Un motor hace girar el CD a velocidad constante (entre 200 y 500 rpm según la zona que se lee).</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">02</div>
+            <div>
+              <strong>El láser apunta</strong>
+              <p>Un láser de estado sólido apunta a la superficie inferior del disco, donde están los "pits" y "lands".</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">03</div>
+            <div>
+              <strong>La luz se refleja distinto</strong>
+              <p>Los huecos (pits) y las zonas planas (lands) reflejan la luz de forma diferente. Eso genera la señal digital.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">04</div>
+            <div>
+              <strong>El DAC lo convierte</strong>
+              <p>Un conversor digital-analógico transforma los ceros y unos en una señal eléctrica que ya puede ir al amplificador.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card card-accent pink">
+        <span class="kicker pink">Números del CD</span>
+        <h3>Ficha técnica</h3>
+        <ul class="bullets pink">
+          <li><strong>Diámetro:</strong> 12 cm.</li>
+          <li><strong>Frecuencia de muestreo:</strong> 44.100 Hz.</li>
+          <li><strong>Profundidad:</strong> 16 bits.</li>
+          <li><strong>Duración:</strong> hasta 80 minutos por disco.</li>
+          <li><strong>Capacidad:</strong> unos 700 MB.</li>
+          <li><strong>Creado por:</strong> Sony y Philips, 1982.</li>
+          <li><strong>Primer álbum:</strong> "The Visitors" de ABBA (1982).</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout reveal">
+      <strong>Por qué el CD fue un antes y un después:</strong> por primera vez, la música doméstica no se desgastaba con el uso. No había ruido, no había saltos, no había aguja que reemplazar. Podías escuchar el mismo disco mil veces igual que la primera.
+    </div>
+  </section>
+
+  <!-- ============ BLUETOOTH ============ -->
+  <section class="view" data-view="bluetooth">
+    <div class="section-head reveal">
+      <div class="eyebrow">06 / Inalámbrico</div>
+      <h1>Bluetooth y el audio sin cables</h1>
+      <p class="lede">Bluetooth es una tecnología de radio de corto alcance. Permite que dos dispositivos se comuniquen sin cables: tu teléfono con parlantes, auriculares, el auto. Es simple, pero tiene reglas y límites.</p>
+    </div>
+
+    <div class="diagram reveal">
+      <div class="diagram-head">
+        <h4>Cómo viaja el sonido por el aire</h4>
+        <span class="badge pink">Punto a punto</span>
+      </div>
+      <svg class="diagram-svg" viewBox="0 0 460 220" aria-label="Bluetooth">
+        <!-- Celular -->
+        <rect class="bt-device" x="40" y="60" width="60" height="110" rx="8"/>
+        <rect class="bt-screen" x="48" y="70" width="44" height="76" rx="2"/>
+        <circle cx="70" cy="158" r="4" fill="var(--border-hi)"/>
+        <text class="bt-label" x="42" y="195">EMISOR</text>
+
+        <!-- Parlante -->
+        <rect class="bt-device" x="360" y="40" width="60" height="140" rx="6"/>
+        <circle cx="390" cy="80" r="14" fill="var(--surface-3)" stroke="var(--border-hi)" stroke-width="1.5"/>
+        <circle cx="390" cy="80" r="6" fill="var(--cyan)"/>
+        <circle cx="390" cy="130" r="20" fill="var(--surface-3)" stroke="var(--border-hi)" stroke-width="1.5"/>
+        <circle cx="390" cy="130" r="8" fill="var(--pink)"/>
+        <text class="bt-label" x="362" y="195">RECEPTOR</text>
+
+        <!-- Onda bluetooth -->
+        <path class="bt-wave" d="M 130 115 Q 150 95 170 115 Q 190 135 210 115 Q 230 95 250 115 Q 270 135 290 115 Q 310 95 330 115"/>
+        <path class="bt-wave" d="M 130 130 Q 150 110 170 130 Q 190 150 210 130 Q 230 110 250 130 Q 270 150 290 130 Q 310 110 330 130" opacity=".5"/>
+        <path class="bt-wave" d="M 130 145 Q 150 125 170 145 Q 190 165 210 145 Q 230 125 250 145 Q 270 165 290 145 Q 310 125 330 145" opacity=".3"/>
+
+        <!-- Icono BT -->
+        <text x="230" y="105" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="28" font-weight="700" fill="var(--pink)">ᛒ</text>
+
+        <text class="spk-label" x="180" y="210">ONDA DE RADIO · 2.4 GHz</text>
+      </svg>
+      <div class="info-panel pink" id="btInfo">
+        <div class="ip-hint">Pasa el cursor sobre una parte</div>
+      </div>
+    </div>
+
+    <div class="grid-2 reveal">
+      <div class="card card-accent pink">
+        <span class="kicker pink">Cómo funciona</span>
+        <h3>Los pasos del Bluetooth</h3>
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">01</div>
+            <div>
+              <strong>Emparejamiento</strong>
+              <p>Los dos dispositivos se encuentran y se "conocen". Se hace una sola vez por dispositivo.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">02</div>
+            <div>
+              <strong>Compresión del audio</strong>
+              <p>El emisor comprime la música con un códec (SBC, AAC, aptX, LDAC) para que entre por el canal inalámbrico.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">03</div>
+            <div>
+              <strong>Transmisión</strong>
+              <p>Los datos viajan por radio a 2,4 GHz. El alcance típico es de 10 metros, aunque puede llegar a 100 con Bluetooth 5.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">04</div>
+            <div>
+              <strong>Descompresión y sonido</strong>
+              <p>El receptor descomprime y convierte los datos en sonido. Ahí termina el viaje.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card card-accent violet">
+        <span class="kicker violet">Códecs</span>
+        <h3>Calidad vs. latencia</h3>
+        <p>Cada códec es una forma distinta de comprimir el audio. Algunos priorizan la calidad; otros, la velocidad.</p>
+        <ul class="bullets violet">
+          <li><strong>SBC:</strong> el básico, universal, calidad aceptable.</li>
+          <li><strong>AAC:</strong> el de Apple. Buen equilibrio.</li>
+          <li><strong>aptX:</strong> mejor calidad, usado en Android.</li>
+          <li><strong>LDAC:</strong> alta resolución, mucho más datos.</li>
+          <li><strong>LC3 (LE Audio):</strong> el nuevo estándar, muy eficiente.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="diagram reveal" style="margin-top:16px">
+      <div class="diagram-head">
+        <h4>Versiones de Bluetooth</h4>
+        <span class="badge cyan">Evolución</span>
+      </div>
+      <div class="level-list">
+        <div class="level-item">
+          <div class="lv-code">1.x</div>
+          <div class="lv-body"><strong>El comienzo (1999)</strong><span>Velocidad muy baja, alcance corto. Casi no se usaba para audio.</span></div>
+        </div>
+        <div class="level-item">
+          <div class="lv-code">2.0</div>
+          <div class="lv-body"><strong>EDR (2004)</strong><span>Más velocidad. Aquí llega A2DP y se popularizan los auriculares inalámbricos.</span></div>
+        </div>
+        <div class="level-item">
+          <div class="lv-code">3.0</div>
+          <div class="lv-body"><strong>HS (2009)</strong><span>Alta velocidad mediante Wi-Fi. Poco adoptado.</span></div>
+        </div>
+        <div class="level-item">
+          <div class="lv-code">4.0</div>
+          <div class="lv-body"><strong>LE (2010)</strong><span>Bluetooth Low Energy. Aparecen los beacons y los dispositivos de bajo consumo.</span></div>
+        </div>
+        <div class="level-item">
+          <div class="lv-code">5.x</div>
+          <div class="lv-body"><strong>Alcance extendido (2016+)</strong><span>Hasta 4x más alcance, 2x velocidad. Base del audio inalámbrico moderno.</span></div>
+        </div>
+        <div class="level-item">
+          <div class="lv-code">LE Audio</div>
+          <div class="lv-body"><strong>El futuro (2020s)</strong><span>Nuevo códec LC3, audio multipunto, audífonos compartidos. El gran salto.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout pink reveal">
+      <strong>Bluetooth no es magia:</strong> como cualquier radio, tiene interferencias y límites. Paredes gruesas, distancia y otros dispositivos (Wi-Fi, microondas) pueden afectar la calidad. Por eso existen distintos códecs y versiones: para adaptarse.
+    </div>
+  </section>
+
+  <!-- ============ MÚSICA ONLINE ============ -->
+  <section class="view" data-view="online">
+    <div class="section-head reveal">
+      <div class="eyebrow">07 / Internet</div>
+      <h1>Internet y la música</h1>
+      <p class="lede">Cuando la música se volvió un archivo digital, todo cambió. Primero el MP3, después el intercambio entre usuarios, luego el iPod y finalmente el streaming. Hoy no "tenemos" música: la "alquilamos" por mes.</p>
+    </div>
+
+    <div class="grid-2 reveal">
+      <div class="card card-accent">
+        <span class="kicker">El salto</span>
+        <h3>El MP3</h3>
+        <p>En 1987, el Instituto Fraunhofer empieza a desarrollar el códec MP3. La idea era reducir el tamaño de un archivo de audio eliminando la información que el oído humano no percibe.</p>
+        <p>Resultado: una canción pasaba de ocupar 40 MB a 3–5 MB. Eso la hacía fácil de compartir por internet.</p>
+      </div>
+      <div class="card card-accent pink">
+        <span class="kicker pink">La revolución</span>
+        <h3>Intercambio entre usuarios</h3>
+        <p>Programas como Napster (1999), Kazaa y eMule permitieron a millones de personas compartir música gratis. Fue una revolución para los usuarios y un terremoto para la industria.</p>
+        <p>Legal o no, cambió para siempre el modelo de negocio de la música.</p>
+      </div>
+    </div>
+
+    <div class="grid-3 reveal" style="margin-top:14px">
+      <div class="card">
+        <span class="kicker">2001</span>
+        <h3>iPod</h3>
+        <p>Apple junta 1.000 canciones en el bolsillo. La música se vuelve portátil, digital y organizada en listas.</p>
+      </div>
+      <div class="card">
+        <span class="kicker pink">2003</span>
+        <h3>iTunes Store</h3>
+        <p>Comprar canciones por 99 centavos. La industria encuentra un modelo legal de venta digital.</p>
+      </div>
+      <div class="card">
+        <span class="kicker violet">2008</span>
+        <h3>Spotify</h3>
+        <p>Streaming por suscripción. Ya no compras canciones: pagas por mes y escuchas lo que quieras, cuando quieras.</p>
+      </div>
+    </div>
+
+    <div class="diagram reveal" style="margin-top:16px">
+      <div class="diagram-head">
+        <h4>Del CD al streaming</h4>
+        <span class="badge violet">Comparativa</span>
+      </div>
+      <div class="compare">
+        <div class="compare-head">
+          <div></div>
+          <div>Físico</div>
+          <div>Streaming</div>
+        </div>
+        <div class="compare-row">
+          <div class="cr-label">Posesión</div>
+          <div class="cr-a">Tienes el disco</div>
+          <div>Acceso mientras pagues</div>
+        </div>
+        <div class="compare-row">
+          <div class="cr-label">Calidad</div>
+          <div class="cr-a">Depende del formato y del equipo</div>
+          <div>De 128 kbps a Hi-Res lossless</div>
+        </div>
+        <div class="compare-row">
+          <div class="cr-label">Catálogo</div>
+          <div class="cr-a">Lo que tengas</div>
+          <div>Millones de canciones</div>
+        </div>
+        <div class="compare-row">
+          <div class="cr-label">Portabilidad</div>
+          <div class="cr-a">Limitada al reproductor</div>
+          <div>En todos tus dispositivos</div>
+        </div>
+        <div class="compare-row">
+          <div class="cr-label">Precio</div>
+          <div class="cr-a">Pago único</div>
+          <div>Suscripción mensual</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout violet reveal">
+      <strong>Dato:</strong> Spotify, Apple Music, YouTube Music, Deezer, Tidal y Amazon Music son las plataformas más grandes. Cada una tiene distinto catálogo, calidad de audio y algoritmo de recomendación.
+    </div>
+  </section>
+
+  <!-- ============ LÍNEA DEL TIEMPO ============ -->
+  <section class="view" data-view="timeline">
+    <div class="section-head reveal">
+      <div class="eyebrow">08 / Historia</div>
+      <h1>Línea del tiempo del audio</h1>
+      <p class="lede">Del fonógrafo de Edison al audio espacial. Desplázate horizontalmente para recorrer los hitos que marcaron cómo escuchamos música.</p>
+    </div>
+
+    <div class="timeline-wrap reveal">
+      <div class="timeline-track" id="timelineTrack">
+
+        <div class="tl-card">
+          <div class="year">1877</div>
+          <div class="era">El primer sonido grabado</div>
+          <h4>Fonógrafo de Edison</h4>
+          <p>Thomas Edison graba y reproduce sonido en cilindros de cera. Es la primera vez en la historia que una voz humana se puede escuchar después de haberla grabado.</p>
+        </div>
+
+        <div class="tl-card">
+          <div class="year">1887</div>
+          <div class="era">Disco plano</div>
+          <h4>Gramófono de Berliner</h4>
+          <p>Emile Berliner reemplaza los cilindros por discos planos. Nace el formato que, con cambios, llega hasta el vinilo actual.</p>
+        </div>
+
+        <div class="tl-card">
+          <div class="year">1925</div>
+          <div class="era">Amplificación eléctrica</div>
+          <h4>Micrófonos y amplificadores</h4>
+          <p>La grabación eléctrica reemplaza a la mecánica. El sonido se amplifica y aparecen los primeros altavoces eléctricos.</p>
+        </div>
+
+        <div class="tl-card">
+          <div class="year">1948</div>
+          <div class="era">Long Play</div>
+          <h4>El LP de 33 rpm</h4>
+          <p>Columbia lanza el vinilo de larga duración. Un solo disco contiene varios temas por cara. Se populariza el álbum como formato.</p>
+        </div>
+
+        <div class="tl-card">
+          <div class="year">1963</div>
+          <div class="era">Portabilidad</div>
+          <h4>El cassette compacto</h4>
+          <p>Philips presenta el cassette. Pequeño, resistente y grabable. La música empieza a poder llevarse a todas partes.</p>
+        </div>
+
+        <div class="tl-card">
+          <div class="year">1969</div>
+          <div class="era">Reducción de ruido</div>
+          <h4>Dolby B</h4>
+          <p>El sistema Dolby reduce el siseo de las cintas. El cassette se vuelve una opción de audio seria, no solo para voz.</p>
+        </div>
+
+        <div class="tl-card">
+          <div class="year">1979</div>
+          <div class="era">Revolución portátil</div>
+          <h4>Sony Walkman</h4>
+          <p>El primer reproductor de cassette portátil con auriculares. La música deja de ser una actividad de salón: te acompaña a todos lados.</p>
+        </div>
+
+        <div class="tl-card">
+          <div class="year">1982</div>
+          <div class="era">Digital</div>
+          <h4>Compact Disc</h4>
+          <p>Sony y Philips lanzan el CD. Calidad digital, sin ruido ni desgaste. El primer reproductor llega al mercado ese mismo año en Japón.</p>
+        </div>
+
+        <div class="tl-card">
+          <div class="year">1984</div>
+          <div class="era">CD portátil</div>
+          <h4>Sony Discman</h4>
+          <p>El primer reproductor de CD portátil. El CD se vuelve el rey del audio doméstico y del automóvil.</p>
+        </div>
+
+        <div class="tl-card">
+          <div class="year">1987</div>
+          <div class="era">Compresión</div>
+          <h4>Nace el MP3</h4>
+          <p>El Instituto Fraunhofer empieza a desarrollar el códec MP3. La compresión hace que la música pese mucho menos y pueda viajar por internet.</p>
+        </div>
+
+        <div class="tl-card">
+          <div class="year">1999</div>
+          <div class="era">Intercambio</div>
+          <h4>Napster</h4>
+          <p>El primer gran sistema de intercambio de música entre usuarios. Millones de personas comparten archivos. La industria discográfica entra en crisis.</p>
+        </div>
+
+        <div class="tl-card">
+          <div class="year">2001</div>
+          <div class="era">1000 canciones</div>
+          <h4>iPod</h4>
+          <p>Apple presenta el iPod. "Mil canciones en tu bolsillo". La música digital se vuelve masiva y elegante.</p>
+        </div>
+
+        <div class="tl-card">
+          <div class="year">2003</div>
+          <div class="era">Venta digital</div>
+          <h4>iTunes Store</h4>
+          <p>La compra legal de música digital empieza a funcionar. Pagas 99 centavos por canción y te la quedas para siempre.</p>
+        </div>
+
+        <div class="tl-card">
+          <div class="year">2008</div>
+          <div class="era">Streaming</div>
+          <h4>Spotify</h4>
+          <p>El streaming por suscripción cambia el modelo. Ya no compras canciones: pagas por acceso. El catálogo entero en un solo lugar.</p>
+        </div>
+
+        <div class="tl-card">
+          <div class="year">2011</div>
+          <div class="era">Streaming masivo</div>
+          <h4>La era del streaming</h4>
+          <p>Apple Music, Deezer, Tidal, YouTube Music. El streaming se convierte en la forma principal de escuchar música en el mundo.</p>
+        </div>
+
+        <div class="tl-card">
+          <div class="year">2015</div>
+          <div class="era">Renacimiento</div>
+          <h4>El vinilo vuelve</h4>
+          <p>Las ventas de vinilo superan a las de CD en varios países. El formato físico revive como objeto de colección y experiencia.</p>
+        </div>
+
+        <div class="tl-card">
+          <div class="year">2016</div>
+          <div class="era">Sin cables</div>
+          <h4>AirPods y TWS</h4>
+          <p>Los auriculares completamente inalámbricos se popularizan. El audio personal se libera del cable para siempre.</p>
+        </div>
+
+        <div class="tl-card">
+          <div class="year">2020s</div>
+          <div class="era">Inmersivo</div>
+          <h4>Audio espacial</h4>
+          <p>Dolby Atmos, Sony 360 Reality Audio y el audio espacial de Apple. El sonido deja de ser estéreo y se vuelve envolvente.</p>
+        </div>
+
+        <div class="tl-card">
+          <div class="year">Hoy</div>
+          <div class="era">Todo convive</div>
+          <h4>Vinilo, streaming y casete</h4>
+          <p>Los tres formatos conviven. Un mismo oyente puede tener un tocadiscos, auriculares Bluetooth y una suscripción a Spotify. Sin contradicción.</p>
+        </div>
+
+      </div>
+      <div class="tl-hint">← Desplaza horizontalmente →</div>
+    </div>
+
+    <div class="callout reveal">
+      <strong>Observación:</strong> cada tecnología nueva no reemplazó del todo a la anterior. El cassette no mató al vinilo, el CD no mató al cassette y el streaming no mató al CD. Conviven, cada uno con su público.
+    </div>
+  </section>
+
+  <!-- ============ FUTURO ============ -->
+  <section class="view" data-view="futuro">
+    <div class="section-head reveal">
+      <div class="eyebrow">09 / Futuro</div>
+      <h1>Proyectos futuros</h1>
+      <p class="lede">El audio está en plena transformación. Estas son las tecnologías que ya están cambiando la forma en que escuchamos y las que vienen en camino.</p>
+    </div>
+
+    <div class="grid-3">
+      <article class="project-card reveal">
+        <div class="pc-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2"/></svg>
+        </div>
+        <h4>Audio espacial</h4>
+        <p>Dolby Atmos, Sony 360 Reality Audio y el Spatial Audio de Apple permiten que el sonido venga "de todas partes", no solo de izquierda y derecha. Ideal para cine, realidad virtual y música inmersiva.</p>
+        <span class="pc-status live">En uso</span>
+      </article>
+
+      <article class="project-card reveal">
+        <div class="pc-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l2-7 4 14 2-7h6"/></svg>
+        </div>
+        <h4>Hi-Res inalámbrico</h4>
+        <p>Códecs como LDAC, aptX Lossless y LC3 Plus permiten transmitir audio de alta resolución por Bluetooth sin perder calidad. La meta: auriculares inalámbricos que suenen como los de estudio.</p>
+        <span class="pc-status dev">En desarrollo</span>
+      </article>
+
+      <article class="project-card reveal">
+        <div class="pc-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 9h6v6H9z"/></svg>
+        </div>
+        <h4>Codecs con IA</h4>
+        <p>La inteligencia artificial comprime audio de forma más inteligente: menos datos, más calidad. Algunos códecs ya "reconstruyen" partes de la señal que se perdieron al comprimir.</p>
+        <span class="pc-status research">En investigación</span>
+      </article>
+
+      <article class="project-card reveal">
+        <div class="pc-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C8 2 4 6 4 12c0 5 4 10 8 10s8-5 8-10c0-6-4-10-8-10z"/><path d="M12 6v12"/></svg>
+        </div>
+        <h4>Audio personalizado por IA</h4>
+        <p>Cada oído es distinto. Los auriculares con IA ajustan la ecualización en tiempo real según cómo escucha cada persona. También pueden aislar voces o sonidos del entorno automáticamente.</p>
+        <span class="pc-status dev">En desarrollo</span>
+      </article>
+
+      <article class="project-card reveal">
+        <div class="pc-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20h20M4 20V10l8-6 8 6v10"/><path d="M9 20v-6h6v6"/></svg>
+        </div>
+        <h4>Audio por conducción ósea</h4>
+        <p>Auriculares que envían el sonido por vibración de los huesos del cráneo, sin tapar el oído. Muy usados para deporte y para personas con problemas auditivos.</p>
+        <span class="pc-status live">En uso</span>
+      </article>
+
+      <article class="project-card reveal">
+        <div class="pc-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 0 18"/></svg>
+        </div>
+        <h4>Vinilo híbrido</h4>
+        <p>Vinilos que incluyen un código QR o NFC para acceder también a la versión digital. El coleccionista conserva el objeto físico y el usuario accede a la música en cualquier parte.</p>
+        <span class="pc-status research">Experimental</span>
+      </article>
+
+      <article class="project-card reveal">
+        <div class="pc-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 18 0"/><path d="M6 12a6 6 0 0 1 12 0"/><circle cx="12" cy="16" r="2"/></svg>
+        </div>
+        <h4>Bluetooth LE Audio</h4>
+        <p>El nuevo estándar. Mucho más eficiente, permite compartir audio entre varios auriculares a la vez y mejora la duración de la batería. Es el futuro del audio inalámbrico.</p>
+        <span class="pc-status dev">Despliegue</span>
+      </article>
+
+      <article class="project-card reveal">
+        <div class="pc-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M2 11h20"/><circle cx="7" cy="17" r="1.5"/></svg>
+        </div>
+        <h4>Audio lossless en streaming</h4>
+        <p>Spotify, Apple Music y Amazon Music ya ofrecen audio sin pérdida. La diferencia con el audio comprimido se nota especialmente con buen equipo.</p>
+        <span class="pc-status live">En uso</span>
+      </article>
+
+      <article class="project-card reveal">
+        <div class="pc-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-9-9"/><path d="M21 3v6h-6"/></svg>
+        </div>
+        <h4>Realidad aumentada sonora</h4>
+        <p>El audio de realidad aumentada modifica lo que escuchas en tiempo real según el entorno. Puede traducir idiomas, amplificar voces o eliminar ruidos molestos con auriculares.</p>
+        <span class="pc-status research">Investigación</span>
+      </article>
+    </div>
+
+    <div class="callout violet reveal">
+      <strong>Una idea de fondo:</strong> el futuro del audio no va solo de "más calidad". Va de "más contexto": sonido que se adapta a dónde estás, a cómo escuchas y a lo que necesitas en cada momento.
+    </div>
+  </section>
+
+  <!-- ============ GLOSARIO ============ -->
+  <section class="view" data-view="glosario">
+    <div class="section-head reveal">
+      <div class="eyebrow">10 / Glosario</div>
+      <h1>Glosario del audio</h1>
+      <p class="lede">Los términos que más se usan cuando se habla de música y tecnología de audio, explicados en lenguaje sencillo. Escribe para filtrar.</p>
+    </div>
+
+    <input type="text" class="gloss-search reveal" id="glossSearch" placeholder="Buscar término… (ej: bitrate, códec, impedancia)" aria-label="Buscar término">
+
+    <div class="gloss-grid" id="glossGrid"></div>
+    <div class="gloss-empty" id="glossEmpty" style="display:none">No se encontraron términos con esa búsqueda.</div>
+
+    <div class="callout reveal">
+      <strong>Nota:</strong> este glosario no pretende ser exhaustivo. Cada tecnología (vinilo, cassette, CD, streaming) tiene sus propios términos. Aquí están los más importantes para empezar a entender.
+    </div>
+  </section>
+
+  <div class="footer">
+    <span><strong>Multimedia</strong> — Historia del audio</span>
+    <span>10 secciones · Lenguaje sencillo · 2025</span>
+  </div>
+
+</main>
+
+<script>
+const $ = (sel, root = document) => root.querySelector(sel);
+const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+
+/* ===== TEMA ===== */
+const htmlEl = document.documentElement;
+function setTheme(t){
+  htmlEl.setAttribute('data-theme', t);
+  try { localStorage.setItem('multimedia-theme', t); } catch(e){}
+}
+(function initTheme(){
+  let saved = null;
+  try { saved = localStorage.getItem('multimedia-theme'); } catch(e){}
+  setTheme(saved || 'dark');
+})();
+$('#themeToggle').addEventListener('click', () => {
+  setTheme(htmlEl.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+});
+
+/* ===== RUTAS ===== */
+const ROUTES = ['inicio','parlantes','tocadiscos','cassette','cd','bluetooth','online','timeline','futuro','glosario'];
+let currentRoute = 'inicio';
+
+function go(route, push = true){
+  if (!ROUTES.includes(route)) route = 'inicio';
+  currentRoute = route;
+  $$('.view').forEach(v => v.classList.toggle('active', v.dataset.view === route));
+  $$('.topnav a').forEach(a => a.classList.toggle('active', a.dataset.route === route));
+  if (push && location.hash.slice(1) !== route) history.pushState(null, '', '#' + route);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  requestAnimationFrame(() => {
+    checkReveal();
+    if (route === 'inicio') animateCounters();
+    if (route === 'glosario') renderGlossary();
+    if (route === 'parlantes') bindSpeakerParts();
+    if (route === 'tocadiscos') bindTTParts();
+    if (route === 'cassette') bindCassetteParts();
+    if (route === 'cd') bindCDParts();
+    if (route === 'bluetooth') bindBTParts();
+  });
+}
+
+document.addEventListener('click', e => {
+  const t = e.target.closest('[data-route]');
+  if (t){
+    e.preventDefault();
+    go(t.dataset.route);
+  }
+});
+window.addEventListener('popstate', () => go(location.hash.slice(1) || 'inicio', false));
+
+/* ===== SCROLL PROGRESS ===== */
+const progressLine = $('#progressLine');
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  const max = h.scrollHeight - h.clientHeight;
+  const pct = max > 0 ? (h.scrollTop / max) * 100 : 0;
+  progressLine.style.width = pct + '%';
+}, { passive: true });
+
+/* ===== REVEAL ===== */
+const revealObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting){
+      entry.target.classList.add('in');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+
+function checkReveal(){
+  $$('.view.active .reveal:not(.in)').forEach(el => revealObserver.observe(el));
+  $$('.view:not(.active) .reveal:not(.in)').forEach(el => revealObserver.unobserve(el));
+}
+
+/* ===== CONTADORES ===== */
+function animateCounters(){
+  $$('.stat .num[data-count]').forEach(el => {
+    if (el.dataset.done === '1') return;
+    el.dataset.done = '1';
+    const target = parseFloat(el.dataset.count);
+    const suffix = el.dataset.suffix || '';
+    const isDecimal = String(el.dataset.count).includes('.');
+    const dur = 1400;
+    const start = performance.now();
+    function tick(now){
+      const p = Math.min((now - start) / dur, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      const val = target * eased;
+      el.textContent = (isDecimal ? val.toFixed(1) : Math.round(val)) + suffix;
+      if (p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  });
+}
+
+/* ===== WAVEFORM ===== */
+(function buildWaveform(){
+  const wf = $('#waveform');
+  if (!wf) return;
+  const heights = [30,45,70,90,60,40,80,100,75,55,35,60,85,100,70,45,25,40,65,80,55,35,50,70,45,30];
+  heights.forEach((h, i) => {
+    const bar = document.createElement('div');
+    bar.className = 'bar';
+    bar.style.setProperty('--h-min', (h * 0.35) + '%');
+    bar.style.setProperty('--h-max', h + '%');
+    bar.style.setProperty('--bd', (i * 0.06) + 's');
+    wf.appendChild(bar);
+  });
+})();
+
+/* ===== DATOS: PARLANTE ===== */
+const SPEAKER_PARTS = {
+  tweeter: { name:'Tweeter', desc:'Reproduce las frecuencias agudas. Es el cono más pequeño de la caja y suele estar arriba. Se encarga de los platillos, el brillo de la voz y los detalles.' },
+  mid: { name:'Mid-range (medio)', desc:'Reproduce las frecuencias medias, donde vive la voz y la mayoría de los instrumentos. Es el que más se escucha y el que define el carácter del parlante.' },
+  woofer: { name:'Woofer (graves)', desc:'Reproduce las frecuencias bajas: bombos, bajos, el "golpe" de la música. Es el cono más grande y necesita más potencia y una caja más robusta.' },
+  crossover: { name:'Crossover', desc:'Circuito que separa las frecuencias: manda los graves al woofer, los medios al mid y los agudos al tweeter. Sin él, cada cono intentaría reproducir todo y sonaría mal.' },
+  port: { name:'Puerto bass-reflex', desc:'Tubo que deja salir el aire que el woofer empuja hacia atrás, reforzando los graves. Permite cajas más chicas sin perder pegada.' }
+};
+
+/* ===== DATOS: TOCADISCOS ===== */
+const TT_PARTS = {
+  platter: { name:'Plato y disco', desc:'El plato es el círculo metálico que gira. El disco se apoya encima. El motor mantiene la velocidad constante, que puede ser 33⅓ rpm o 45 rpm.' },
+  tonearm: { name:'Brazo', desc:'Estructura que sostiene la cápsula y la aguja sobre el disco. Debe ser muy liviano y preciso, para seguir el surco sin saltar.' },
+  cartridge: { name:'Cápsula y aguja', desc:'La aguja recorre el surco y transmite las vibraciones a la cápsula, que las convierte en una señal eléctrica. Es la parte más delicada del sistema.' },
+  motor: { name:'Motor y botones de velocidad', desc:'Hace girar el plato a la velocidad elegida. Los botones permiten cambiar entre 33⅓ rpm (LP) y 45 rpm (singles).' }
+};
+
+/* ===== DATOS: CASSETTE ===== */
+const CASSETTE_PARTS = {
+  reel: { name:'Carretes', desc:'Los dos carretes (izquierdo y derecho) enrollan la cinta magnética. Al reproducir, la cinta pasa de un carrete al otro.' },
+  tape: { name:'Cinta magnética', desc:'Es una banda de plástico recubierta de óxido de hierro. Guarda la información magnética del sonido grabado. Circula a 4,7 cm/s por delante del cabezal.' },
+  head: { name:'Cabezal de lectura', desc:'Es la parte que "lee" la cinta. Detecta las variaciones magnéticas grabadas y las convierte en señal eléctrica. En grabación, también escribe.' },
+  capstan: { name:'Capstán', desc:'Eje giratorio que arrastra la cinta a velocidad constante. Junto con el rodillo pinchador, mantiene el ritmo justo para que el sonido no se distorsione.' },
+  label: { name:'Etiqueta', desc:'La parte que se ve arriba. Ahí escribías el nombre del álbum o las canciones. Era la "portada" del cassette.' }
+};
+
+/* ===== DATOS: CD ===== */
+const CD_PARTS = {
+  disc: { name:'Disco', desc:'Disco de policarbonato con una capa reflectante de aluminio. Los "pits" y "lands" de la superficie guardan la información digital (ceros y unos).' },
+  laser: { name:'Láser', desc:'Un diodo láser apunta a la superficie del disco y detecta si la luz se refleja más o menos. Eso genera la señal digital de ceros y unos.' },
+  lens: { name:'Lente', desc:'Enfoca el haz de láser sobre el surco del disco. El sistema de seguimiento mantiene el láser apuntando al lugar correcto a pesar de las vibraciones.' }
+};
+
+/* ===== DATOS: BLUETOOTH ===== */
+const BT_PARTS = {
+  wave: { name:'Ondas de radio', desc:'Bluetooth usa radio a 2,4 GHz. Es la misma banda que el Wi-Fi, por eso a veces se interfieren. El alcance típico es de 10 metros.' }
+};
+
+/* ===== BINDINGS ===== */
+function showInfo(panel, info){
+  if (!info || !panel) return;
+  panel.classList.add('active');
+  panel.innerHTML = `
+    <div class="ip-name">${info.name}</div>
+    <div class="ip-desc">${info.desc}</div>
+  `;
+}
+
+function bindSpeakerParts(){
+  const panel = $('#spkInfo');
+  if (!panel) return;
+  $$('#spkInfo').forEach(() => {});
+  ['tweeter','mid','woofer','crossover','port'].forEach(id => {
+    const el = $(`.spk-part[data-part="${id}"]`);
+    if (!el) return;
+    el.addEventListener('pointerenter', () => showInfo(panel, SPEAKER_PARTS[id]));
+    el.addEventListener('click', () => showInfo(panel, SPEAKER_PARTS[id]));
+  });
+}
+
+function bindTTParts(){
+  const panel = $('#ttInfo');
+  if (!panel) return;
+  ['platter','tonearm','cartridge','motor'].forEach(id => {
+    const el = $(`.tt-part[data-part="${id}"]`);
+    if (!el) return;
+    el.addEventListener('pointerenter', () => showInfo(panel, TT_PARTS[id]));
+    el.addEventListener('click', () => showInfo(panel, TT_PARTS[id]));
+  });
+}
+
+function bindCassetteParts(){
+  const panel = $('#casInfo');
+  if (!panel) return;
+  ['reel','tape','head','capstan','label'].forEach(id => {
+    $$(`.cas-part[data-part="${id}"]`).forEach(el => {
+      el.addEventListener('pointerenter', () => showInfo(panel, CASSETTE_PARTS[id]));
+      el.addEventListener('click', () => showInfo(panel, CASSETTE_PARTS[id]));
+    });
+  });
+}
+
+function bindCDParts(){
+  const panel = $('#cdInfo');
+  if (!panel) return;
+  ['disc','laser','lens'].forEach(id => {
+    $$(`.cd-part[data-part="${id}"]`).forEach(el => {
+      el.addEventListener('pointerenter', () => showInfo(panel, CD_PARTS[id]));
+      el.addEventListener('click', () => showInfo(panel, CD_PARTS[id]));
+    });
+  });
+  // Also bind disc area as a whole
+  const discArea = $('.cd-disc');
+  if (discArea){
+    discArea.addEventListener('pointerenter', () => showInfo(panel, CD_PARTS.disc));
+  }
+}
+
+function bindBTParts(){
+  const panel = $('#btInfo');
+  if (!panel) return;
+  // Show a general description on hover on waves
+  const waves = $$('.bt-wave');
+  waves.forEach(w => {
+    w.addEventListener('pointerenter', () => showInfo(panel, BT_PARTS.wave));
+  });
+}
+
+/* ===== GLOSARIO ===== */
+const GLOSSARY = [
+  { t:'AAC', d:'Advanced Audio Coding. Códec de compresión con pérdida, usado por Apple y muchas plataformas. Mejor calidad que MP3 con el mismo tamaño.' },
+  { t:'Amplificador', d:'Dispositivo que aumenta la potencia de una señal de audio para mover los parlantes.' },
+  { t:'Analógico', d:'Señal continua que representa el sonido original. Un vinilo o un cassette son analógicos.' },
+  { t:'Bitrate', d:'Cantidad de datos por segundo que usa un archivo de audio. Se mide en kbps (kilobits por segundo). Más bitrate = más calidad pero archivos más grandes.' },
+  { t:'Bluetooth', d:'Tecnología de radio de corto alcance que permite conectar dispositivos sin cables. Funciona a 2,4 GHz.' },
+  { t:'Cápsula (tocadiscos)', d:'Componente que sostiene la aguja y convierte las vibraciones del surco en una señal eléctrica.' },
+  { t:'Cassette', d:'Formato de cinta magnética en una carcasa plástica. Popular en los 70 y 80. Velocidad de 4,7 cm/s.' },
+  { t:'CD', d:'Compact Disc. Disco óptico de audio digital. Frecuencia de muestreo de 44.100 Hz y 16 bits.' },
+  { t:'Códec', d:'Algoritmo que comprime y descomprime audio. Ejemplos: MP3, AAC, FLAC, aptX, LDAC.' },
+  { t:'Crossover', d:'Circuito que separa las frecuencias de una señal de audio para enviar cada rango al parlante adecuado.' },
+  { t:'DAC', d:'Digital to Analog Converter. Convierte la señal digital (ceros y unos) en señal analógica (ondas de voltaje) para el amplificador.' },
+  { t:'dB (decibel)', d:'Unidad que mide la intensidad del sonido. Es una escala logarítmica: 10 dB más es diez veces más energía.' },
+  { t:'Digital', d:'Señal representada por números (ceros y unos). Un CD, un archivo MP3 o el streaming son digitales.' },
+  { t:'Estéreo', d:'Sistema de audio de dos canales (izquierdo y derecho). Permite crear sensación de espacio.' },
+  { t:'FLAC', d:'Formato de audio sin pérdida (lossless). Ocupa más espacio que MP3 pero conserva toda la calidad del original.' },
+  { t:'Frecuencia', d:'Número de vibraciones por segundo. Se mide en hercios (Hz). El oído humano escucha entre 20 Hz y 20.000 Hz aproximadamente.' },
+  { t:'Hi-Fi', d:'High Fidelity. Equipos o grabaciones de alta calidad de reproducción.' },
+  { t:'Hi-Res', d:'High Resolution Audio. Audio digital de calidad superior al CD. Se considera Hi-Res a partir de 24 bits y 96 kHz de muestreo.' },
+  { t:'Impedancia', d:'Resistencia al paso de la corriente alterna. En parlantes y auriculares se mide en ohmios (Ω). Determina qué amplificador se necesita.' },
+  { t:'kHz (kilohercio)', d:'1.000 Hz. Se usa para medir frecuencias de muestreo (44,1 kHz en CD) o rangos de sonido.' },
+  { t:'LDAC', d:'Códec de alta resolución desarrollado por Sony. Transmite mucha más información que SBC o AAC por Bluetooth.' },
+  { t:'Lossless', d:'Sin pérdida. Formatos como FLAC o WAV que conservan toda la calidad del audio original. Ocupan más espacio.' },
+  { t:'Lossy', d:'Con pérdida. Formatos como MP3 o AAC que descartan información que el oído no percibe para reducir el tamaño.' },
+  { t:'LP', d:'Long Play. Disco de vinilo de 12 pulgadas que gira a 33⅓ rpm. Dura unos 20–25 minutos por cara.' },
+  { t:'MP3', d:'Códec de compresión de audio desarrollado por Fraunhofer. Fue el formato que popularizó la música digital portátil.' },
+  { t:'Ohmio (Ω)', d:'Unidad de impedancia. Un parlante de 8 Ω y uno de 4 Ω necesitan amplificadores distintos.' },
+  { t:'Pasacasette', d:'Aparato que se colocaba en el reproductor de cassette del auto y permitía conectar un reproductor externo (como un CD portátil o un MP3).' },
+  { t:'Parlante', d:'Dispositivo que convierte una señal eléctrica en sonido. También se llama altavoz o bafle.' },
+  { t:'PCM', d:'Pulse Code Modulation. Forma básica de representar audio digital. Es la que usa el CD.' },
+  { t:'RMS', d:'Root Mean Square. Medida de potencia continua que puede manejar un parlante o amplificador. Es la que importa; el PMPO es un valor de pico, menos útil.' },
+  { t:'Sample rate', d:'Frecuencia de muestreo. Cantidad de muestras por segundo que se toman de una señal analógica para digitalizarla. En CD es 44.100 Hz.' },
+  { t:'SBC', d:'Sub Band Coding. Códec Bluetooth básico, el más universal. Calidad aceptable pero inferior a otros códecs.' },
+  { t:'Streaming', d:'Reproducción de audio o video por internet sin descargar el archivo completo. Ejemplos: Spotify, Apple Music.' },
+  { t:'Surround', d:'Sistema de audio envolvente con múltiples canales (5.1, 7.1). El sonido viene de varias direcciones.' },
+  { t:'Tocadiscos', d:'Aparato que hace girar un disco de vinilo y reproduce su sonido mediante una aguja y una cápsula.' },
+  { t:'Tweeter', d:'Parlante pequeño especializado en frecuencias agudas. Suele estar arriba en la caja.' },
+  { t:'TWS', d:'True Wireless Stereo. Auriculares completamente inalámbricos, sin cable entre ellos.' },
+  { t:'Vinilo', d:'Formato de disco de PVC con surcos grabados. Se reproduce en un tocadiscos. Tuvo su auge en el siglo XX y vive un renacimiento desde 2015.' },
+  { t:'WAV', d:'Formato de audio sin compresión. Muy usado en estudios. Ocupa mucho espacio.' },
+  { t:'Woofer', d:'Parlante grande especializado en frecuencias graves. Es el que da el "golpe" de los bajos.' }
+];
+
+function renderGlossary(){
+  const grid = $('#glossGrid');
+  const empty = $('#glossEmpty');
+  const search = $('#glossSearch');
+  if (!grid) return;
+
+  function render(filter = ''){
+    const q = filter.trim().toLowerCase();
+    const items = GLOSSARY.filter(g =>
+      !q || g.t.toLowerCase().includes(q) || g.d.toLowerCase().includes(q)
+    );
+    if (items.length === 0){
+      grid.innerHTML = '';
+      empty.style.display = 'block';
+      return;
+    }
+    empty.style.display = 'none';
+    grid.innerHTML = items.map(g => `
+      <div class="gloss-item">
+        <div class="gi-term">${g.t}</div>
+        <div class="gi-def">${g.d}</div>
+      </div>
+    `).join('');
+  }
+
+  render();
+  if (search && !search.dataset.bound){
+    search.dataset.bound = '1';
+    search.addEventListener('input', e => render(e.target.value));
+  }
+}
+
+/* ===== MOUSE TRACKING EN PROJECT CARDS ===== */
+$$('.project-card').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const r = card.getBoundingClientRect();
+    card.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
+    card.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
+  });
+});
+
+/* ===== INIT ===== */
+(function boot(){
+  const initial = location.hash.slice(1) || 'inicio';
+  go(ROUTES.includes(initial) ? initial : 'inicio', false);
+  checkReveal();
+  setTimeout(() => {
+    if (currentRoute === 'inicio') animateCounters();
+  }, 250);
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) checkReveal();
+  });
+  // Re-bind SVGs on load in case they exist
+  setTimeout(() => {
+    bindSpeakerParts();
+    bindTTParts();
+    bindCassetteParts();
+    bindCDParts();
+    bindBTParts();
+  }, 100);
+})();
+</script>
+</body>
+</html>

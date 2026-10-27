@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Aves</title>
+<meta name="description" content="Aves explicadas en lenguaje sencillo: plumas y vuelo, grupos, canto y nidos, migración, una pluma de cerca, evolución y glosario.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Young+Serif&display=swap" rel="stylesheet">
+<style>
+:root{--fd:'Young Serif',Georgia,serif;--fb:'Atkinson Hyperlegible','Segoe UI',system-ui,sans-serif;--bg:#eaf1fa;--sf:#f9fbfe;--s2:#d5e3f5;--bd:#b3c8e6;--text:#0f1f3a;--mu:#46587a;--accent:#1d4fb8;--on:#fff;--c1:#1d4fb8;--c2:#b8460a;--c3:#17787a;--c4:#7a3fb0;--c5:#a8324a;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#08111f;--sf:#101c31;--s2:#17284a;--bd:#2a4170;--text:#e8f0ff;--mu:#a4b8dc;--accent:#7aa8ff;--on:#08111f;--c1:#7aa8ff;--c2:#ffb067;--c3:#5fd8d0;--c4:#cfa9ff;--c5:#ff8fa3}}
+:root[data-theme="dark"]{--bg:#08111f;--sf:#101c31;--s2:#17284a;--bd:#2a4170;--text:#e8f0ff;--mu:#a4b8dc;--accent:#7aa8ff;--on:#08111f;--c1:#7aa8ff;--c2:#ffb067;--c3:#5fd8d0;--c4:#cfa9ff;--c5:#ff8fa3}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px);-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--text);font:400 1rem/1.65 var(--fb);overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--bg)}
+h1,h2,h3{font-family:var(--fd);font-weight:400;line-height:1.1;margin:0;letter-spacing:-.01em}p{margin:0}a{color:inherit;text-decoration:none}button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
+.site-header{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:var(--bg);border-bottom:1px solid var(--bd)}
+.hi{max-width:1100px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:14px}
+.brand{display:flex;align-items:center;gap:9px;font:400 1.35rem var(--fd);white-space:nowrap}.brand svg{width:32px;height:32px;color:var(--accent)}
+.nav{display:flex;gap:2px;margin-left:auto;overflow-x:auto;scrollbar-width:none;min-width:0}.nav::-webkit-scrollbar{display:none}
+.nl{padding:8px 12px;border-radius:10px;font-size:.85rem;color:var(--mu);white-space:nowrap}.nl:hover{background:var(--s2)}.nl.active{color:var(--on);background:var(--accent);font-weight:700}
+.tt{width:38px;height:38px;flex:none;border:1px solid var(--bd);border-radius:10px;background:var(--s2);font-size:1.1rem}
+main{max-width:1100px;margin:0 auto;padding:0 20px 70px}
+.view{display:none}.view.active{display:block;animation:vin .5s ease both}@keyframes vin{from{opacity:0;transform:translateY(14px)}}
+.hero{position:relative;overflow:hidden;margin-top:22px;padding:64px 36px 80px;border-radius:28px;background:linear-gradient(var(--s2),var(--bg))}
+.hero>*{position:relative}.hero>.flock{position:absolute;right:3%;top:12%;width:min(46%,400px);color:var(--accent);opacity:.5;animation:fl 12s ease-in-out infinite alternate}@keyframes fl{to{transform:translate(-28px,12px)}}
+@media(max-width:700px){.hero>.flock{opacity:.2;width:70%}}
+h1{font-size:clamp(3.2rem,12vw,7rem);margin-bottom:18px}
+.lead{color:var(--mu);font-size:1.1rem;max-width:620px}.hero .lead{margin-bottom:26px}
+.btn{display:inline-block;padding:13px 24px;border-radius:12px;background:var(--accent);color:var(--on);font-weight:700}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.card{padding:20px;border-radius:12px;background:var(--sf);border:1px solid var(--bd)}a.card:hover{border-color:var(--accent)}
+.card h3{font-size:1.2rem;margin-bottom:6px}.card p,.card dd{font-size:.93rem;color:var(--mu)}.card dt{font:400 1.1rem var(--fd)}.card dd{margin:0}
+.home{margin-top:30px}
+.sec{padding:46px 0 6px}.sec h2{font-size:clamp(1.9rem,4.4vw,3rem);margin-bottom:10px}.sec>.lead{margin-bottom:26px}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.tab{padding:11px 16px;border-radius:10px;border:1px solid var(--bd);background:var(--sf);font-weight:700;font-size:.9rem}.tab[aria-selected=true]{background:var(--c);color:var(--on);border-color:transparent}
+.panel{padding:24px;border-radius:12px;background:var(--sf);border:1px solid var(--bd);border-left:6px solid var(--c);animation:vin .4s ease both}
+.panel h3{font-size:1.5rem;margin-bottom:8px}.panel p{color:var(--mu);max-width:70ch}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}.chip{padding:5px 12px;border-radius:99px;border:1px solid var(--bd);background:var(--s2);font-size:.82rem}
+.tool{padding:24px;border-radius:16px;border:1px solid var(--bd);background:var(--sf);margin-bottom:24px}
+.tool h3{font-size:1.5rem;margin:4px 0 8px}.tool p{max-width:70ch;color:var(--mu)}.tool .m{font-size:.9rem;color:var(--mu)}
+.bar{height:14px;border-radius:99px;background:var(--s2);border:1px solid var(--bd);overflow:hidden;margin:12px 0}.bar i{display:block;height:100%;min-width:4px;border-radius:99px;background:var(--c2);transition:width .5s}
+input[type=range]{width:100%;height:30px;accent-color:var(--accent);margin:8px 0}
+.lens{width:190px;height:190px;margin:6px 0 14px;border-radius:50%;border:6px solid var(--bd);background:var(--s2);display:grid;place-items:center}
+.lens i{display:block;border-radius:50%;background:radial-gradient(circle at 35% 30%,var(--c3),var(--c1));transition:width .5s,height .5s}
+.tl{position:relative;padding:6px 0}.tl::before{content:"";position:absolute;left:15px;top:0;bottom:0;width:2px;background:var(--bd)}
+.ev{position:relative;padding:0 0 24px 46px;opacity:0;transform:translateY(18px);transition:opacity .5s,transform .5s}.ev.in{opacity:1;transform:none}
+.ev::before{content:"";position:absolute;left:7px;top:8px;width:18px;height:18px;border-radius:50%;background:var(--bg);border:4px solid var(--accent)}
+.ev b{display:block;font:400 1.25rem var(--fd);color:var(--accent)}.ev p{color:var(--mu);max-width:60ch}
+@media(min-width:860px){.tl::before{left:50%}.ev{width:50%;padding:0 44px 28px 0;text-align:right}.ev p{margin-left:auto}.ev::before{left:auto;right:-9px}.ev:nth-child(even){margin-left:50%;padding:0 0 28px 44px;text-align:left}.ev:nth-child(even) p{margin-left:0}.ev:nth-child(even)::before{right:auto;left:-9px}}
+.search{width:100%;max-width:420px;padding:12px 16px;border-radius:12px;border:1px solid var(--bd);background:var(--sf);color:var(--text);font:inherit;margin-bottom:18px}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.ev{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<header class="site-header"><div class="hi">
+<a class="brand" href="#inicio"><svg viewBox="0 0 40 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M3 15q8-14 17 0q9-14 17 0"/></svg>Aves</a>
+<nav class="nav" id="nav" aria-label="Secciones"></nav>
+<button class="tt" id="tt" aria-label="Cambiar entre tema claro y oscuro">◐</button></div></header>
+<main>
+<section class="view" id="inicio">
+<div class="hero"><svg class="flock" viewBox="0 0 320 130" aria-hidden="true"><defs><path id="gl" d="M0 12q10-14 20 0q10-14 20 0" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></defs><use href="#gl" x="140" y="6"/><use href="#gl" x="100" y="34"/><use href="#gl" x="180" y="34"/><use href="#gl" x="60" y="62"/><use href="#gl" x="220" y="62"/><use href="#gl" x="20" y="90"/><use href="#gl" x="260" y="90"/></svg>
+<h1>Aves</h1><p class="lead">Plumas, huesos livianos y un viaje que a veces cruza el planeta. Todo sobre las aves, desde el colibrí hasta el cóndor.</p><a class="btn" href="#vuelo">Empezá por el vuelo</a></div>
+<div class="grid home" id="home"></div>
+</section>
+<section class="view" id="vuelo"><div class="sec"><h2>Plumas y vuelo</h2><p class="lead">Volar exige un cuerpo liviano y fuerte. Estas son las piezas clave y las formas de volar.</p><div class="grid" id="g-vu" style="margin-bottom:24px"></div><div id="t-vu"></div></div></section>
+<section class="view" id="grupos"><div class="sec"><h2>Grupos de aves</h2><p class="lead">Se conocen más de 11 000 especies, de pocos gramos a más de cien kilos. Deslizá para comparar tamaños.</p>
+<div class="tool"><span class="m" id="szm"></span><h3 id="szn"></h3><div class="bar"><i id="szb"></i></div><p id="szd"></p><input id="sz" type="range" min="0" max="4" value="0" aria-label="Elegir ave por tamaño"></div><div id="t-gr"></div></div></section>
+<section class="view" id="canto"><div class="sec"><h2>Canto y nidos</h2><p class="lead">Cómo se comunican, cómo se emparejan y dónde crían a sus polluelos.</p><div id="t-ca"></div></div></section>
+<section class="view" id="migracion"><div class="sec"><h2>Migración</h2><p class="lead">Muchas aves viajan cada año entre el lugar donde crían y el lugar donde pasan la época fría.</p><div id="t-mi"></div></div></section>
+<section class="view" id="pluma"><div class="sec"><h2>Una pluma de cerca</h2><p class="lead">Una pluma parece una sola pieza, pero está armada con estructuras cada vez más pequeñas. Deslizá para acercarte.</p>
+<div class="tool"><span class="m" id="mics"></span><h3 id="micn"></h3><div class="lens"><i id="micd"></i></div><p id="mict"></p><input id="mic" type="range" min="0" max="4" value="0" aria-label="Nivel de aumento"></div></div></section>
+<section class="view" id="evolucion"><div class="sec"><h2>Evolución</h2><p class="lead">Las aves descienden de dinosaurios. Algunos hitos, del más antiguo al más reciente.</p><div class="tl" id="tl"></div></div></section>
+<section class="view" id="glosario"><div class="sec"><h2>Glosario</h2><p class="lead">Palabras clave de esta guía, en orden alfabético.</p><input class="search" id="q" type="search" placeholder="Buscar una palabra" aria-label="Buscar en el glosario"><div class="grid" id="gl"></div></div></section>
+</main>
+<script>
+const $=(s,e=document)=>e.querySelector(s),$$=(s,e=document)=>[...e.querySelectorAll(s)];
+const V=[['inicio','Inicio',''],['vuelo','Plumas y vuelo','Huesos huecos, plumas y cinco formas de volar.','Vuelo'],['grupos','Grupos de aves','Desde el colibrí abeja hasta el avestruz.','Grupos'],['canto','Canto y nidos','Sonidos, cortejo, nidos y crianza.'],['migracion','Migración','Por qué viajan y cómo se orientan.'],['pluma','Una pluma de cerca','Del raquis a las estructuras de color.','Pluma'],['evolucion','Evolución','De los dinosaurios a las aves actuales.'],['glosario','Glosario','Términos clave con buscador.']];
+$('#nav').innerHTML=V.map(v=>`<a class="nl" href="#${v[0]}" data-v="${v[0]}">${v[3]||v[1]}</a>`).join('');
+$('#home').innerHTML=V.slice(1).map(v=>`<a class="card" href="#${v[0]}"><h3>${v[1]}</h3><p>${v[2]}</p></a>`).join('');
+const io=new IntersectionObserver(es=>es.forEach(e=>e.isIntersecting&&e.target.classList.add('in')),{threshold:.15});
+function go(h){const id=V.some(v=>v[0]===h)?h:'inicio';$$('.view').forEach(e=>e.classList.toggle('active',e.id===id));$$('.nl').forEach(e=>e.classList.toggle('active',e.dataset.v===id));scrollTo(0,0);$$('.ev').forEach(e=>io.observe(e))}
+addEventListener('hashchange',()=>go(location.hash.slice(1)));
+$('#tt').onclick=()=>{const r=document.documentElement,d=r.dataset.theme==='dark'||(!r.dataset.theme&&matchMedia('(prefers-color-scheme:dark)').matches);r.dataset.theme=d?'light':'dark';try{localStorage.setItem('aves-theme',r.dataset.theme)}catch(e){}};
+try{const t=localStorage.getItem('aves-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}
+
+function tabs(id,D){const e=$('#'+id);e.innerHTML=`<div class="tabs" role="tablist">${D.map((d,i)=>`<button class="tab" role="tab" style="--c:var(--c${i%5+1})" data-i="${i}">${d[0]}</button>`).join('')}</div><div class="panel" role="tabpanel"></div>`;
+const p=$('.panel',e),sel=i=>{$$('.tab',e).forEach((t,j)=>t.setAttribute('aria-selected',i===j));const d=D[i];p.style.setProperty('--c',`var(--c${i%5+1})`);p.innerHTML=`<h3>${d[1]}</h3><p>${d[2]}</p><div class="chips">${d[3].map(c=>`<span class="chip">${c}</span>`).join('')}</div>`;p.style.animation='none';p.offsetWidth;p.style.animation=''};
+e.onclick=ev=>{const t=ev.target.closest('.tab');t&&sel(+t.dataset.i)};sel(0)}
+const cards=(id,D)=>$('#'+id).innerHTML=D.map(d=>`<div class="card"><h3>${d[0]}</h3><p>${d[1]}</p></div>`).join('');
+
+cards('g-vu',[['Plumas','Hay plumas de vuelo, de cobertura y plumón. Las de vuelo dan sustentación y avance; el plumón aísla del frío.'],['Huesos livianos','Muchos huesos son huecos y están reforzados por dentro, así el esqueleto pesa poco.'],['Quilla','Cresta del esternón donde se sujetan los grandes músculos que mueven las alas.'],['Respiración','Los sacos aéreos mantienen un flujo de aire casi continuo por los pulmones, muy útil a gran altura.'],['Pico','No tienen dientes. Su forma depende del alimento: ganchudo, fino, ancho o robusto.'],['Vista','Ven muy bien. Muchas aves distinguen colores, incluida la luz ultravioleta, que nosotros no vemos.']]);
+tabs('t-vu',[
+['Planeo','Aprovechar el viento','Los albatros usan el viento sobre el mar para recorrer grandes distancias casi sin aletear. Es un vuelo que ahorra energía.',['Albatros','Petreles']],
+['Aleteo','Batida continua','Las aves pequeñas, como gorriones y golondrinas, aletean con frecuencia, a veces alternando con tramos de planeo.',['Gorriones','Golondrinas','Palomas']],
+['Cernido','Quedarse en el aire','El colibrí puede quedar quieto frente a una flor batiendo las alas muchas veces por segundo, y hasta volar hacia atrás. Algunos halcones se ciernen contra el viento para observar presas.',['Colibríes','Halcones','Martín pescador']],
+['Térmicas','Subir sin esfuerzo','Cóndores, águilas y buitres usan columnas de aire caliente que suben para ganar altura y luego planean largas distancias.',['Cóndor andino','Águilas','Buitres']],
+['Sin vuelo','Corren o nadan','Avestruces y ñandúes corren a gran velocidad. Los pingüinos no vuelan en el aire, pero usan las alas como aletas para nadar.',['Ñandú','Avestruz','Pingüinos','Kiwi']]]);
+
+const Z=[['Colibrí abeja','Cerca de 6 cm y unos 2 g. Es el ave más pequeña del mundo y vive en Cuba.',6,'6 cm'],['Gorrión','Cerca de 15 cm y unos 30 g. Vive junto a las personas en ciudades de casi todo el mundo.',15,'15 cm'],['Paloma doméstica','Cerca de 32 cm y unos 300 g.',32,'32 cm'],['Cóndor andino','Hasta unos 1,3 m de largo, unos 3 m de envergadura y hasta 15 kg. Es una de las aves voladoras más grandes.',130,'1,3 m'],['Avestruz','Hasta unos 2,5 m de alto y más de 100 kg. Es el ave más grande y no vuela.',250,'2,5 m']];
+function sz(){const z=Z[+$('#sz').value];$('#szm').textContent='Largo o altura: '+z[3];$('#szn').textContent=z[0];$('#szd').textContent=z[1];$('#szb').style.width=Math.sqrt(z[2]/250)*100+'%'}
+$('#sz').oninput=sz;sz();
+tabs('t-gr',[
+['Paseriformes','Aves cantoras','Es el grupo más numeroso: más de la mitad de las especies de aves. Tienen patas adaptadas para posarse en ramas y muchos cantan con gran complejidad.',['Gorriones','Zorzales','Horneros','Cardenales']],
+['Rapaces','Cazadoras','Tienen pico ganchudo, garras fuertes y vista aguda. Incluyen águilas, halcones, búhos y lechuzas; los búhos cazan de noche con un oído muy fino.',['Águilas','Halcones','Búhos','Lechuzas']],
+['Aves acuáticas','Patos, garzas y gaviotas','Viven en ríos, lagunas y costas. Muchas tienen patas con membranas para nadar o patas largas para caminar en aguas poco profundas.',['Patos','Cisnes','Garzas','Flamencos','Gaviotas']],
+['Loros y picaflores','Color y especialización','Los loros tienen pico curvo y muchos imitan sonidos. Los picaflores o colibríes se alimentan de néctar y viven solo en América.',['Loros','Guacamayos','Cotorras','Picaflores']],
+['Aves marinas','Del mar a la costa','Pasan buena parte de su vida en el océano. Los pingüinos nadan, los albatros planean y los alcatraces se zambullen para pescar.',['Pingüinos','Albatros','Alcatraces','Petreles']],
+['Corredoras','Aves sin vuelo','Avestruces, ñandúes, emúes, casuarios y kiwis no vuelan. Tienen patas fuertes para correr y el esternón sin quilla.',['Avestruz','Ñandú','Emú','Kiwi']]]);
+tabs('t-ca',[
+['Canto','Territorio y pareja','Muchas aves producen sonidos con la siringe, un órgano propio de ellas, en la base de la tráquea. Los machos suelen cantar para defender un territorio y atraer pareja. En muchas aves cantoras el canto se aprende.',['Siringe','Territorio','Aprendizaje','Dúos']],
+['Cortejo','Colores, danzas y regalos','Las aves también se comunican con el plumaje, las posturas y la danza. Algunas especies hacen despliegues elaborados para conquistar pareja, como el pavo real o las aves del paraíso.',['Plumaje','Danzas','Pavo real','Aves del paraíso']],
+['Nidos','Cada especie, su arquitectura','El nido puede ser un hueco en el suelo, una taza de ramitas o una construcción de barro. El hornero levanta su casa de barro con forma de horno sobre postes o ramas.',['Hornero','Tejedores','Cuevas','Barro']],
+['Huevos','Una cáscara que respira','La cáscara es de carbonato de calcio y tiene poros muy pequeños que dejan pasar el aire. La forma y el color varían según dónde se pone: en suelos abiertos suelen tener manchas que sirven de camuflaje.',['Cáscara','Poros','Incubación','Camuflaje']],
+['Crianza','Nidícolas y nidífugos','Los polluelos nidícolas nacen sin plumas y dependen de sus padres en el nido. Los nidífugos, como patos y gallinas, nacen con plumón y caminan pronto. Algunas aves, como los tordos y los cucos, ponen sus huevos en nidos ajenos.',['Nidícolas','Nidífugos','Tordos y cucos']]]);
+tabs('t-mi',[
+['Por qué migran','Seguir el alimento','Muchas aves se mueven entre zonas de cría e invernada para aprovechar la época con más alimento y mejor clima. Cambian de lugar cuando baja la comida o llega el frío.',['Alimento','Clima','Cría','Invernada']],
+['Cómo se orientan','Un mapa en la cabeza','Usan el Sol, las estrellas, el campo magnético terrestre y puntos del paisaje como ríos y costas. En algunas especies la ruta es en gran parte heredada y en otras se aprende de los adultos.',['Sol y estrellas','Campo magnético','Paisaje']],
+['Récords','Viajes extremos','El charrán ártico recorre cerca de 70 000 km por año entre el Ártico y la Antártida. La aguja colipinta cruza el Pacífico sin escalas, unos 11 000 km. El colibrí garganta rubí cruza el golfo de México, cerca de 800 km, sin parar.',['Charrán ártico','Aguja colipinta','Colibrí garganta rubí']],
+['Amenazas','Un viaje con riesgos','Las aves necesitan humedales y costas donde descansar y comer en el camino. La pérdida de esos sitios, las ventanas de vidrio, las luces nocturnas y el cambio climático las ponen en riesgo.',['Humedales','Luces','Vidrios','Cambio climático']]]);
+
+const M=[['Cerca de 10 cm','Pluma completa','Tiene un eje central, el raquis, y a cada lado las barbas que forman la lámina. Es liviana, flexible y resistente.'],['Cerca de 1 mm','Barbas','Del raquis salen cientos de barbas paralelas, como los dientes de un peine.'],['Cerca de 100 µm','Bárbulas','De cada barba salen bárbulas más finas, que se entrelazan con las de las barbas vecinas.'],['Pocos µm','Bárbicelos','Son ganchillos de las bárbulas que se enganchan como un cierre. Si se separan, el ave los alinea de nuevo con el pico.'],['Cerca de 200 nm','Estructuras de color','En plumas iridiscentes, como las de los colibríes, capas diminutas de melanina y aire reflejan la luz y producen colores que cambian con el ángulo.']],sm=[150,110,76,40,16];
+function mic(){const i=+$('#mic').value,m=M[i],d=$('#micd');d.style.width=d.style.height=sm[i]+'px';$('#micn').textContent=m[1];$('#mics').textContent='Tamaño: '+m[0];$('#mict').textContent=m[2]}
+$('#mic').oninput=mic;mic();
+
+$('#tl').innerHTML=[['Hace unos 230 millones de años','Primeros dinosaurios','Aparecen los dinosaurios, entre ellos los terópodos, el grupo del que descienden las aves.'],['Hace unos 160 millones de años','Dinosaurios con plumas','Fósiles de China, como Anchiornis, muestran terópodos pequeños con plumas en brazos y patas.'],['Hace unos 150 millones de años','Archaeopteryx','Un fósil de Alemania con alas de plumas, dientes y cola ósea larga: mezcla rasgos de dinosaurio y de ave.'],['Hace unos 125 millones de años','Aves del Cretácico','Aves como Confuciusornis ya tenían pico sin dientes. Había muchos grupos, casi todos hoy extintos.'],['Hace 66 millones de años','Extinción de los dinosaurios','Un impacto de asteroide termina con los dinosaurios no avianos. Sobreviven algunas aves, antepasadas de las actuales.'],['Desde hace unos 60 millones de años','Aves modernas','Las aves actuales se diversifican y ocupan casi todos los ambientes de la Tierra.'],['Hoy','Más de 11 000 especies','Las aves son los dinosaurios que sobrevivieron. Muchas especies están amenazadas por la pérdida de hábitat, las especies invasoras y el cambio climático.']].map(e=>`<div class="ev"><b>${e[0]}</b><h3>${e[1]}</h3><p>${e[2]}</p></div>`).join('');
+
+const G=[['Álula','Pequeño grupo de plumas en el “pulgar” del ala que ayuda a controlar el vuelo lento.'],['Barba','Cada una de las láminas que salen a los lados del raquis.'],['Bárbula','Filamento fino que sale de una barba y se engancha con las vecinas.'],['Cernido','Vuelo en el que el ave se queda casi quieta en el aire.'],['Cortejo','Conductas con las que un ave busca atraer pareja.'],['Dimorfismo sexual','Diferencias de aspecto entre machos y hembras de una especie.'],['Envergadura','Distancia entre las puntas de las alas abiertas.'],['Incubación','Calor que dan los padres a los huevos hasta que nacen los polluelos.'],['Invernada','Época y lugar donde pasan el invierno las aves migratorias.'],['Migración','Viaje regular entre una zona de cría y otra de invernada.'],['Muda','Cambio de las plumas viejas por otras nuevas.'],['Nidícola','Polluelo que nace sin plumas y depende de los padres en el nido.'],['Nidífugo','Polluelo que nace con plumón y sale pronto del nido.'],['Paseriforme','Ave del grupo más numeroso, con patas adaptadas para posarse.'],['Plumón','Pluma suave y esponjosa que aísla del frío.'],['Quilla','Cresta del esternón donde se sujetan los músculos del vuelo.'],['Rapaz','Ave cazadora con pico ganchudo y garras fuertes.'],['Raquis','Eje central de la pluma.'],['Ratites','Aves corredoras sin quilla, como el avestruz y el ñandú.'],['Siringe','Órgano con el que las aves producen sonidos.'],['Térmica','Columna de aire caliente que sube y ayuda a planear.'],['Territorio','Zona que un ave defiende para criar o alimentarse.'],['Vía migratoria','Ruta que siguen muchas aves en su migración.']];
+G.sort((a,b)=>a[0].localeCompare(b[0],'es'));
+function glo(t=''){const f=G.filter(g=>(g[0]+g[1]).toLowerCase().includes(t.toLowerCase()));$('#gl').innerHTML=f.length?f.map(g=>`<div class="card"><dl style="margin:0"><dt>${g[0]}</dt><dd>${g[1]}</dd></dl></div>`).join(''):'<p class="lead">No hay resultados. Probá con otra palabra.</p>'}
+$('#q').oninput=e=>glo(e.target.value);glo();
+go(location.hash.slice(1));
+</script>
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Insectos</title>
+<meta name="description" content="Insectos explicados en lenguaje sencillo: polinización, diversidad, metamorfosis, insectos acuáticos, microscopio, evolución y glosario.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,500..800&display=swap" rel="stylesheet">
+<style>
+:root{--fd:'Bricolage Grotesque','Segoe UI',system-ui,sans-serif;--fb:'Atkinson Hyperlegible','Segoe UI',system-ui,sans-serif;--bg:#edf3e1;--sf:#fafcf3;--s2:#dce8c4;--bd:#bccfa0;--text:#18240c;--mu:#52633a;--accent:#4b7a12;--on:#fff;--c1:#4b7a12;--c2:#b4530f;--c3:#8a5a00;--c4:#6b3fa0;--c5:#a8324a;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1708;--sf:#18240d;--s2:#223214;--bd:#384f22;--text:#eef5dc;--mu:#b3c595;--accent:#a7e05a;--on:#0f1708;--c1:#a7e05a;--c2:#ffa94d;--c3:#ffd666;--c4:#c9a8f5;--c5:#ff8fa3}}
+:root[data-theme="dark"]{--bg:#0f1708;--sf:#18240d;--s2:#223214;--bd:#384f22;--text:#eef5dc;--mu:#b3c595;--accent:#a7e05a;--on:#0f1708;--c1:#a7e05a;--c2:#ffa94d;--c3:#ffd666;--c4:#c9a8f5;--c5:#ff8fa3}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px);-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--text);font:400 1rem/1.65 var(--fb);overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--bg)}
+h1,h2,h3{font-family:var(--fd);line-height:1.1;margin:0;letter-spacing:-.025em}p{margin:0}a{color:inherit;text-decoration:none}button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
+.site-header{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:var(--bg);border-bottom:1px solid var(--bd)}
+.hi{max-width:1100px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:14px}
+.brand{display:flex;align-items:center;gap:9px;font:800 1.2rem var(--fd);white-space:nowrap}.brand svg{width:30px;height:30px;color:var(--accent)}
+.nav{display:flex;gap:2px;margin-left:auto;overflow-x:auto;scrollbar-width:none;min-width:0}.nav::-webkit-scrollbar{display:none}
+.nl{padding:8px 12px;border-radius:10px;font-size:.85rem;color:var(--mu);white-space:nowrap}.nl:hover{background:var(--s2)}.nl.active{color:var(--on);background:var(--accent);font-weight:700}
+.tt{width:38px;height:38px;flex:none;border:1px solid var(--bd);border-radius:10px;background:var(--s2);font-size:1.1rem}
+main{max-width:1100px;margin:0 auto;padding:0 20px 70px}
+.view{display:none}.view.active{display:block;animation:vin .5s ease both}@keyframes vin{from{opacity:0;transform:translateY(14px)}}
+.hero{position:relative;overflow:hidden;margin-top:22px;padding:64px 36px 70px;border-radius:28px;background:linear-gradient(var(--s2),var(--bg))}
+.hero>*{position:relative}.hero>svg{position:absolute;inset:0;width:100%;height:100%;color:var(--accent);opacity:.25;-webkit-mask-image:linear-gradient(110deg,transparent 35%,#000);mask-image:linear-gradient(110deg,transparent 35%,#000)}
+h1{font-size:clamp(3rem,11vw,6.4rem);font-weight:800;margin-bottom:18px}
+.lead{color:var(--mu);font-size:1.1rem;max-width:620px}.hero .lead{margin-bottom:26px}
+.btn{display:inline-block;padding:13px 24px;border-radius:12px;background:var(--accent);color:var(--on);font-weight:700}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.card{padding:20px;border-radius:12px;background:var(--sf);border:1px solid var(--bd)}a.card:hover{border-color:var(--accent)}
+.card h3{font-size:1.15rem;margin-bottom:6px}.card p,.card dd{font-size:.93rem;color:var(--mu)}.card dt{font:700 1.05rem var(--fd)}.card dd{margin:0}
+.home{margin-top:30px}
+.sec{padding:46px 0 6px}.sec h2{font-size:clamp(1.9rem,4.4vw,3rem);margin-bottom:10px}.sec>.lead{margin-bottom:26px}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.tab{padding:11px 16px;border-radius:10px;border:1px solid var(--bd);background:var(--sf);font-weight:700;font-size:.9rem}.tab[aria-selected=true]{background:var(--c);color:var(--on);border-color:transparent}
+.panel{padding:24px;border-radius:12px;background:var(--sf);border:1px solid var(--bd);border-left:6px solid var(--c);animation:vin .4s ease both}
+.panel h3{font-size:1.45rem;margin-bottom:8px}.panel p{color:var(--mu);max-width:70ch}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}.chip{padding:5px 12px;border-radius:99px;border:1px solid var(--bd);background:var(--s2);font-size:.82rem}
+.tool{padding:24px;border-radius:16px;border:1px solid var(--bd);background:var(--sf);margin-bottom:24px}
+.tool h3{font-size:1.5rem;margin:4px 0 8px}.tool p{max-width:70ch;color:var(--mu)}.tool .m{font-size:.9rem;color:var(--mu)}
+.stage{border-left:8px solid var(--c1)}
+input[type=range]{width:100%;height:30px;accent-color:var(--accent);margin:8px 0}
+.lens{width:190px;height:190px;margin:6px 0 14px;border-radius:50%;border:6px solid var(--bd);background:var(--s2);display:grid;place-items:center}
+.lens i{display:block;border-radius:50%;background:radial-gradient(circle at 35% 30%,var(--c2),var(--c1));transition:width .5s,height .5s}
+.tl{position:relative;padding:6px 0}.tl::before{content:"";position:absolute;left:15px;top:0;bottom:0;width:2px;background:var(--bd)}
+.ev{position:relative;padding:0 0 24px 46px;opacity:0;transform:translateY(18px);transition:opacity .5s,transform .5s}.ev.in{opacity:1;transform:none}
+.ev::before{content:"";position:absolute;left:7px;top:8px;width:18px;height:18px;border-radius:50%;background:var(--bg);border:4px solid var(--accent)}
+.ev b{display:block;font:700 1.25rem var(--fd);color:var(--accent)}.ev p{color:var(--mu);max-width:60ch}
+@media(min-width:860px){.tl::before{left:50%}.ev{width:50%;padding:0 44px 28px 0;text-align:right}.ev p{margin-left:auto}.ev::before{left:auto;right:-9px}.ev:nth-child(even){margin-left:50%;padding:0 0 28px 44px;text-align:left}.ev:nth-child(even) p{margin-left:0}.ev:nth-child(even)::before{right:auto;left:-9px}}
+.search{width:100%;max-width:420px;padding:12px 16px;border-radius:12px;border:1px solid var(--bd);background:var(--sf);color:var(--text);font:inherit;margin-bottom:18px}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.ev{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<header class="site-header"><div class="hi">
+<a class="brand" href="#inicio"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><ellipse cx="16" cy="19" rx="4.5" ry="8"/><circle cx="16" cy="8" r="3"/><path d="M14 5L11 2M18 5l3-3M11.5 16L5 13M11.5 21L5 24M20.5 16L27 13M20.5 21L27 24"/></svg>Insectos</a>
+<nav class="nav" id="nav" aria-label="Secciones"></nav>
+<button class="tt" id="tt" aria-label="Cambiar entre tema claro y oscuro">◐</button></div></header>
+<main>
+<section class="view" id="inicio">
+<div class="hero"><svg aria-hidden="true"><defs><pattern id="hx" width="56" height="100" patternUnits="userSpaceOnUse"><path d="M28 66L0 50V16L28 0l28 16v34zM28 66v34M0 84l28 16 28-16V50" fill="none" stroke="currentColor" stroke-width="1.5"/></pattern></defs><rect width="100%" height="100%" fill="url(#hx)"/></svg>
+<h1>Insectos</h1><p class="lead">Seis patas, el esqueleto por fuera y más especies que cualquier otro grupo animal. Así viven, de las flores al fondo de un arroyo.</p><a class="btn" href="#plantas">Empezá por las flores</a></div>
+<div class="grid home" id="home"></div>
+</section>
+<section class="view" id="plantas"><div class="sec"><h2>Plantas y polinización</h2><p class="lead">Los insectos y las plantas dependen unos de otros desde hace más de cien millones de años. Elegí un tema.</p><div id="t-plantas"></div></div></section>
+<section class="view" id="diversidad"><div class="sec"><h2>Diversidad</h2><p class="lead">Se conocen más de un millón de especies de insectos. Estos son los grupos más importantes.</p><div id="t-div"></div></div></section>
+<section class="view" id="cuerpo"><div class="sec"><h2>Cuerpo y metamorfosis</h2><p class="lead">Un insecto adulto tiene tres partes, seis patas y, casi siempre, alas. Para llegar ahí, muchos cambian por completo. Deslizá para ver las etapas de una mariposa.</p>
+<div class="tool stage" id="stg"><span class="m">Etapa <b id="stn"></b> de 4</span><h3 id="stt"></h3><p id="std"></p><input id="st" type="range" min="0" max="3" value="0" aria-label="Etapa de la metamorfosis"><p class="m">En la metamorfosis incompleta, como en saltamontes o chinches, no hay pupa: del huevo sale una ninfa parecida al adulto, pero sin alas.</p></div>
+<div class="grid" id="g-cu"></div></div></section>
+<section class="view" id="agua"><div class="sec"><h2>En el agua</h2><p class="lead">Muchos insectos pasan su juventud bajo el agua. Como no todos toleran la contaminación, sirven para medir la salud de un río.</p>
+<div class="tool"><span class="m">Contaminación del agua: <b id="cov"></b> de 100</span><h3 id="cot"></h3><p id="cod"></p><input id="co" type="range" min="0" max="100" value="0" aria-label="Nivel de contaminación"><div class="chips" id="coc"></div></div>
+<div class="grid" id="g-ag"></div></div></section>
+<section class="view" id="micro"><div class="sec"><h2>En el microscopio</h2><p class="lead">Un insecto es pequeño, pero por dentro y por fuera tiene estructuras todavía menores. Deslizá para achicar la escala.</p>
+<div class="tool"><span class="m" id="mics"></span><h3 id="micn"></h3><div class="lens"><i id="micd"></i></div><p id="mict"></p><input id="mic" type="range" min="0" max="4" value="0" aria-label="Nivel de aumento"></div></div></section>
+<section class="view" id="evolucion"><div class="sec"><h2>Evolución</h2><p class="lead">Los insectos fueron los primeros animales en volar. Algunos hitos, del más antiguo al más reciente.</p><div class="tl" id="tl"></div></div></section>
+<section class="view" id="glosario"><div class="sec"><h2>Glosario</h2><p class="lead">Palabras clave de esta guía, en orden alfabético.</p><input class="search" id="q" type="search" placeholder="Buscar una palabra" aria-label="Buscar en el glosario"><div class="grid" id="gl"></div></div></section>
+</main>
+<script>
+const $=(s,e=document)=>e.querySelector(s),$$=(s,e=document)=>[...e.querySelectorAll(s)];
+const V=[['inicio','Inicio',''],['plantas','Plantas y polinización','Quién lleva el polen y qué come cada oruga.','Plantas'],['diversidad','Diversidad','Escarabajos, mariposas, abejas, moscas y más.'],['cuerpo','Cuerpo y metamorfosis','Anatomía y el cambio de oruga a mariposa.','Cuerpo'],['agua','En el agua','Larvas acuáticas que miden la salud de un río.'],['micro','En el microscopio','Ojos, escamas, tráqueas y microbios.','Microscopio'],['evolucion','Evolución','Más de 400 millones de años de historia.'],['glosario','Glosario','Términos clave con buscador.']];
+$('#nav').innerHTML=V.map(v=>`<a class="nl" href="#${v[0]}" data-v="${v[0]}">${v[3]||v[1]}</a>`).join('');
+$('#home').innerHTML=V.slice(1).map(v=>`<a class="card" href="#${v[0]}"><h3>${v[1]}</h3><p>${v[2]}</p></a>`).join('');
+const io=new IntersectionObserver(es=>es.forEach(e=>e.isIntersecting&&e.target.classList.add('in')),{threshold:.15});
+function go(h){const id=V.some(v=>v[0]===h)?h:'inicio';$$('.view').forEach(e=>e.classList.toggle('active',e.id===id));$$('.nl').forEach(e=>e.classList.toggle('active',e.dataset.v===id));scrollTo(0,0);$$('.ev').forEach(e=>io.observe(e))}
+addEventListener('hashchange',()=>go(location.hash.slice(1)));
+$('#tt').onclick=()=>{const r=document.documentElement,d=r.dataset.theme==='dark'||(!r.dataset.theme&&matchMedia('(prefers-color-scheme:dark)').matches);r.dataset.theme=d?'light':'dark';try{localStorage.setItem('ins-theme',r.dataset.theme)}catch(e){}};
+try{const t=localStorage.getItem('ins-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}
+
+function tabs(id,D){const e=$('#'+id);e.innerHTML=`<div class="tabs" role="tablist">${D.map((d,i)=>`<button class="tab" role="tab" style="--c:var(--c${i%5+1})" data-i="${i}">${d[0]}</button>`).join('')}</div><div class="panel" role="tabpanel"></div>`;
+const p=$('.panel',e),sel=i=>{$$('.tab',e).forEach((t,j)=>t.setAttribute('aria-selected',i===j));const d=D[i];p.style.setProperty('--c',`var(--c${i%5+1})`);p.innerHTML=`<h3>${d[1]}</h3><p>${d[2]}</p><div class="chips">${d[3].map(c=>`<span class="chip">${c}</span>`).join('')}</div>`;p.style.animation='none';p.offsetWidth;p.style.animation=''};
+e.onclick=ev=>{const t=ev.target.closest('.tab');t&&sel(+t.dataset.i)};sel(0)}
+const cards=(id,D)=>$('#'+id).innerHTML=D.map(d=>`<div class="card"><h3>${d[0]}</h3><p>${d[1]}</p></div>`).join('');
+
+tabs('t-plantas',[
+['Polinizadores','Quién lleva el polen','Al visitar una flor para tomar néctar o polen, el insecto transporta granos de polen de una flor a otra. Así la planta puede producir frutos y semillas. Abejas, mariposas, escarabajos y moscas son polinizadores importantes.',['Abejas','Mariposas','Moscas sírfidas','Escarabajos','Polillas']],
+['Flores y colores','Una flor hecha para ser vista','Muchas flores tienen colores, olores y formas que atraen a un tipo de insecto. Las abejas ven la luz ultravioleta, y algunas flores tienen dibujos que solo se notan en ese rango, como pistas de aterrizaje.',['Néctar','Guías ultravioleta','Perfume','Coevolución']],
+['Plantas hospedantes','La planta que come la oruga','Muchas orugas se alimentan de una sola especie o familia de plantas. La mariposa monarca depende del algodoncillo (Asclepias) para criar: si la planta desaparece, la mariposa también.',['Monarca y algodoncillo','Orugas','Especialistas']],
+['Hongos cultivados','Agricultores de seis patas','Las hormigas cortadoras llevan trozos de hoja al nido para cultivar un hongo del que se alimentan. Algunas termitas también cultivan hongos dentro de sus termiteros.',['Hormigas cortadoras','Termitas','Simbiosis']],
+['Plagas y control','Cuando un insecto daña un cultivo','Algunos insectos se alimentan de cultivos. Una alternativa a los plaguicidas es el control biológico: usar enemigos naturales, como las vaquitas de San Antonio, que comen pulgones, o avispas parasitoides.',['Pulgones','Vaquitas de San Antonio','Parasitoides','Manejo integrado']]]);
+tabs('t-div',[
+['Escarabajos','Coleópteros','Es el grupo de animales con más especies conocidas, cerca de 400 000. Sus alas delanteras se endurecen y forman estuches que protegen las alas de vuelo.',['Vaquitas de San Antonio','Gorgojos','Luciérnagas','Escarabajos peloteros']],
+['Mariposas y polillas','Lepidópteros','Tienen alas cubiertas de escamas diminutas y una trompa enrollada para chupar néctar. Se conocen unas 160 000 especies; la mayoría son polillas, de hábitos nocturnos.',['Monarca','Polillas','Escamas','Trompa o probóscide']],
+['Abejas, avispas y hormigas','Himenópteros','Reúnen a muchos polinizadores, parásitos e insectos sociales. Tienen dos pares de alas unidas por pequeños ganchos.',['Abejas','Avispas','Hormigas','Abejorros']],
+['Moscas y mosquitos','Dípteros','Solo tienen un par de alas para volar; el segundo par se redujo a pequeñas estructuras de equilibrio llamadas halterios. Incluyen polinizadores, descomponedores y algunos transmisores de enfermedades.',['Mosquitos','Sírfidos','Moscas de la fruta','Halterios']],
+['Otros grupos','Libélulas, grillos y chinches','Las libélulas son cazadoras aéreas; los grillos y saltamontes cantan frotando partes del cuerpo; las chinches y cigarras pinchan y succionan líquidos.',['Libélulas','Grillos','Langostas','Chinches','Cigarras']],
+['Insectos sociales','Vida en colonia','Hormigas, abejas, algunas avispas y termitas viven en colonias con una reina que pone huevos y obreras que cuidan el nido y buscan alimento. Se comunican con feromonas y, en el caso de las abejas, con una danza.',['Reina','Obreras','Feromonas','Danza de las abejas']]]);
+
+const ST=[['Huevo','La hembra lo pone sobre o cerca del alimento de la futura larva, casi siempre una planta.'],['Larva (oruga)','Come sin parar y crece. Para hacerlo cambia de piel varias veces: son las mudas.'],['Pupa (crisálida)','Casi no se mueve, pero por dentro el cuerpo se reorganiza por completo: se forman alas, ojos compuestos y patas adultas.'],['Adulto (imago)','Sale con alas, se reproduce y, en muchas especies, se alimenta de néctar.']];
+function st(){const i=+$('#st').value;$('#stg').style.borderLeftColor=`var(--c${i+1})`;$('#stn').textContent=i+1;$('#stt').textContent=ST[i][0];$('#std').textContent=ST[i][1]}
+$('#st').oninput=st;st();
+cards('g-cu',[['Cabeza','Lleva dos antenas, ojos compuestos y las piezas bucales, que cambian según lo que come cada insecto.'],['Tórax','Tiene tres pares de patas y, en la mayoría, uno o dos pares de alas.'],['Abdomen','Contiene el aparato digestivo y reproductor, y los orificios de respiración.'],['Exoesqueleto','Una cubierta de quitina que protege y sostiene. Para crecer, el insecto debe mudarla.'],['Respiración','No tienen pulmones: el aire entra por espiráculos y viaja por tubos llamados tráqueas.'],['Sentidos','Las antenas detectan olores, humedad y movimiento del aire, además de las feromonas.']]);
+
+const C=[[34,'Agua limpia','Viven las larvas más sensibles. Si aparecen en un arroyo, es buena señal de que el agua está bien oxigenada y sin contaminantes.',['Plecópteros','Efímeras','Tricópteros']],[67,'Calidad intermedia','Faltan los más sensibles y aparecen grupos que toleran algo de contaminación.',['Libélulas','Escarabajos acuáticos','Chinches de agua']],[101,'Muy contaminada','Solo quedan larvas que toleran poco oxígeno. Cuando son casi lo único que hay, el agua está en mal estado.',['Quironómidos (“gusanos de sangre”)','Larvas de mosquito']]];
+function co(){const v=+$('#co').value,c=C.find(c=>v<c[0]);$('#cov').textContent=v;$('#cot').textContent=c[1];$('#cod').textContent=c[2];$('#coc').innerHTML=c[3].map(x=>`<span class="chip">${x}</span>`).join('')}
+$('#co').oninput=co;co();
+cards('g-ag',[['Efímeras','Sus ninfas viven meses bajo el agua; los adultos, apenas unas horas o días.'],['Tricópteros','Sus larvas construyen estuches con arena y ramitas para protegerse.'],['Libélulas','Las ninfas son depredadoras y atrapan presas con un labio que se proyecta.'],['Patinadores','Caminan sobre el agua gracias a la tensión superficial.'],['Mosquitos','Sus larvas viven en agua quieta, hasta en recipientes con muy poca cantidad.'],['Escarabajos buceadores','Llevan una burbuja de aire bajo las alas para respirar sumergidos.']]);
+
+const M=[['Cerca de 1 mm','Ojo compuesto','Está formado por cientos o miles de unidades llamadas omatidios. Las libélulas tienen hasta unos 30 000 por ojo.'],['Cerca de 100 µm','Escamas de un ala','Las alas de las mariposas están cubiertas de escamas como tejas. Muchos colores brillantes no vienen de pigmentos sino de estructuras diminutas que reflejan la luz.'],['1 a 10 µm','Tráqueas','Los insectos respiran por tubos que se ramifican hasta llegar casi a cada célula. El aire entra por orificios del cuerpo llamados espiráculos.'],['1 a 2 µm','Bacterias simbiontes','En el intestino de las termitas viven microbios que ayudan a digerir la madera. Muchos insectos dependen de bacterias para obtener nutrientes.'],['40 a 300 nm','Baculovirus','Son virus que infectan sobre todo a orugas. Se estudian y se usan como bioinsecticidas específicos.']],sz=[150,110,76,40,16];
+function mic(){const i=+$('#mic').value,m=M[i],d=$('#micd');d.style.width=d.style.height=sz[i]+'px';$('#micn').textContent=m[1];$('#mics').textContent='Tamaño: '+m[0];$('#mict').textContent=m[2]}
+$('#mic').oninput=mic;mic();
+
+$('#tl').innerHTML=[['Hace más de 400 millones de años','Primeros insectos','Aparecen los primeros insectos conocidos por fósiles, entre los primeros animales en vivir en tierra.'],['Hace unos 350 millones de años','Primeras alas','Los insectos son los primeros animales en volar, mucho antes que las aves o los murciélagos.'],['Hace más de 300 millones de años','Metamorfosis completa','Surge el desarrollo con larva y pupa, que luego domina entre los insectos.'],['Hace unos 300 millones de años','Libélulas gigantes','Algunas libélulas primitivas, como Meganeura, tenían alas de unos 70 cm de punta a punta.'],['Hace unos 250 millones de años','Gran extinción','La mayor extinción conocida también afectó a los insectos, que se diversificaron de nuevo después.'],['Hace unos 130 millones de años','Flores y polinizadores','Con la expansión de las plantas con flores se diversifican abejas, mariposas y otros polinizadores.'],['Hace unos 100 millones de años','Hormigas y ámbar','Las hormigas se diversifican y muchos insectos quedan atrapados en ámbar, donde se conservan hasta hoy.'],['Hoy','Más de un millón de especies conocidas','Es el grupo animal más diverso. Estudios en varias regiones registran descensos de poblaciones por pérdida de hábitat, plaguicidas y cambio climático.']].map(e=>`<div class="ev"><b>${e[0]}</b><h3>${e[1]}</h3><p>${e[2]}</p></div>`).join('');
+
+const G=[['Abdomen','Parte posterior del cuerpo del insecto.'],['Antena','Órgano en la cabeza para oler y tocar.'],['Bioindicador','Organismo cuya presencia o ausencia informa sobre el estado del ambiente.'],['Casta','Grupo de una colonia con una función, como reina u obrera.'],['Coevolución','Evolución conjunta de dos especies que se influyen entre sí.'],['Control biológico','Uso de enemigos naturales para limitar una plaga.'],['Crisálida','Pupa de las mariposas.'],['Entomología','Ciencia que estudia los insectos.'],['Espiráculo','Orificio del cuerpo por donde entra el aire.'],['Exoesqueleto','Esqueleto externo que cubre el cuerpo.'],['Feromona','Sustancia química que un animal usa para comunicarse con otros de su especie.'],['Hemimetábolo','Insecto con metamorfosis incompleta: huevo, ninfa y adulto.'],['Holometábolo','Insecto con metamorfosis completa: huevo, larva, pupa y adulto.'],['Imago','Insecto adulto, ya con alas y capaz de reproducirse.'],['Larva','Etapa juvenil muy distinta del adulto.'],['Muda','Cambio del exoesqueleto para poder crecer.'],['Ninfa','Etapa juvenil parecida al adulto, pero sin alas.'],['Omatidio','Unidad del ojo compuesto.'],['Plaga','Población de una especie que causa daños económicos o sanitarios.'],['Polinización','Transporte de polen de una flor a otra.'],['Pupa','Etapa en la que la larva se transforma en adulto.'],['Quitina','Material resistente que forma el exoesqueleto.'],['Tráquea','Tubo que lleva aire a los tejidos del insecto.']];
+G.sort((a,b)=>a[0].localeCompare(b[0],'es'));
+function glo(t=''){const f=G.filter(g=>(g[0]+g[1]).toLowerCase().includes(t.toLowerCase()));$('#gl').innerHTML=f.length?f.map(g=>`<div class="card"><dl style="margin:0"><dt>${g[0]}</dt><dd>${g[1]}</dd></dl></div>`).join(''):'<p class="lead">No hay resultados. Probá con otra palabra.</p>'}
+$('#q').oninput=e=>glo(e.target.value);glo();
+go(location.hash.slice(1));
+</script>
+</body>
+</html>
