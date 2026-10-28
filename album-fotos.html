@@ -1,0 +1,2086 @@
+<!DOCTYPE html>
+<html lang="es" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="referrer" content="no-referrer">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Álbum de Fotos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/exifr@7.1.3/dist/full.umd.js" onerror="console.warn('exifr no disponible')"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        celeste: {
+                            50: '#F2F7FC', 100: '#E5F0FA', 200: '#D4E5F7', 300: '#A1CAEF',
+                            400: '#64A4E2', 500: '#3876BF', 600: '#2A5D9B', 700: '#214777',
+                            800: '#1E3E62', 900: '#112238'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['Playfair Display', 'Georgia', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #F2F7FC; color: #112238; overflow-x: hidden; }
+        .font-serif-title { font-family: 'Playfair Display', serif; }
+        .glass-header { background: rgba(242, 247, 252, 0.88); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
+        .glass-card { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px); border: 1px solid rgba(212, 229, 247, 0.8); box-shadow: 0 10px 30px -10px rgba(56, 118, 191, 0.08); }
+        .glass-card:hover { box-shadow: 0 20px 40px -12px rgba(33, 71, 119, 0.16); border-color: rgba(100, 164, 226, 0.9); }
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #F2F7FC; }
+        ::-webkit-scrollbar-thumb { background: #A1CAEF; border-radius: 99px; }
+        ::-webkit-scrollbar-thumb:hover { background: #3876BF; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        .zoom-img-container { overflow: hidden; cursor: zoom-in; }
+        .zoom-img-container.zoomed { cursor: zoom-out; }
+        .zoom-img-container img { transition: transform 0.3s ease; }
+
+        @media print {
+            header, nav, #floatingActionBar, #addModal, #statsDrawer, .no-print { display: none !important; }
+            body { background: white !important; }
+            .glass-card { border: 1px solid #ccc !important; box-shadow: none !important; break-inside: avoid; }
+        }
+
+        html:has(#splash:not(.is-hidden)) { overflow: hidden; }
+        #splash { position: fixed; inset: 0; z-index: 100; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2rem; padding: 1.5rem; overflow: hidden; color: #3876BF; text-align: center; background: #F2F7FC; transition: opacity .5s ease, transform .5s ease; }
+        #splash.is-hidden { display: none; }
+        #splash.leave { opacity: 0; transform: scale(1.04); pointer-events: none; }
+        .sp-blob { position: absolute; border-radius: 50%; filter: blur(80px); opacity: .5; pointer-events: none; }
+        .sp-stage { --R: clamp(105px, 31vw, 175px); --S: clamp(44px, 12vw, 60px); position: relative; display: grid; place-items: center; width: calc(var(--R) * 2 + var(--S)); height: calc(var(--R) * 2 + var(--S)); }
+        .sp-ring { position: absolute; inset: calc(var(--S) / 2); border: 2px dashed rgba(33,71,119,.16); border-radius: 50%; }
+        .sp-orbit { position: absolute; inset: 0; animation: sp-spin 50s linear infinite; }
+        .sp-ico { position: absolute; left: 50%; top: 50%; width: var(--S); height: var(--S); margin: calc(var(--S) / -2) 0 0 calc(var(--S) / -2); transform: rotate(var(--a)) translateX(var(--R)) rotate(calc(var(--a) * -1)); }
+        .sp-ico > span { display: grid; place-items: center; width: 100%; height: 100%; border-radius: 1.1rem; color: #fff; font-size: calc(var(--S) * .42); background: var(--c); box-shadow: 0 12px 26px -8px var(--c); animation: sp-spin 50s linear infinite reverse; }
+        .sp-cam { position: relative; z-index: 1; display: grid; place-items: center; width: calc(var(--R) * 1.05); height: calc(var(--R) * 1.05); border-radius: 30%; font-size: calc(var(--R) * .5); color: #3876BF; background: #fff; border: 2px solid #D4E5F7; box-shadow: 0 24px 60px -12px rgba(56,118,191,.4); }
+        .sp-cam::before { content: ""; position: absolute; inset: -14px; border-radius: inherit; border: 2px solid rgba(56,118,191,.45); animation: sp-pulse 2.4s ease-out infinite; }
+        .sp-title { font-size: clamp(2.2rem, 8vw, 3.4rem); font-weight: 800; letter-spacing: -.03em; line-height: 1.05; }
+        .sp-sub { margin-top: .6rem; color: #2A5D9B; font-size: 1rem; font-weight: 500; }
+        .sp-btn { --a: 0deg; margin-top: 1.5rem; padding: .95rem 3rem; border: 2px solid transparent; border-radius: 999px; cursor: pointer; font: 800 1rem 'Plus Jakarta Sans', sans-serif; color: #3876BF; background: linear-gradient(#fff, #fff) padding-box, conic-gradient(from var(--a), #D4E5F7 0deg 200deg, #64A4E2 270deg, #2A5D9B 345deg, #D4E5F7 360deg) border-box; box-shadow: 0 12px 28px -12px rgba(56,118,191,.45); transition: transform .2s ease, box-shadow .2s ease, color .2s ease; }
+        .sp-btn:hover { transform: translateY(-2px) scale(1.04); color: #2A5D9B; box-shadow: 0 16px 34px -12px rgba(56,118,191,.6); }
+        .sp-btn:focus-visible { outline: 2px solid rgba(56,118,191,.35); outline-offset: 5px; }
+        @keyframes sp-spin { to { transform: rotate(360deg); } }
+        @keyframes sp-pulse { from { transform: scale(.96); opacity: .9; } to { transform: scale(1.35); opacity: 0; } }
+        @media (prefers-reduced-motion: reduce) { .sp-orbit, .sp-ico > span, .sp-cam::before { animation: none; } }
+
+        .bk-stage { max-width: 960px; margin: 0 auto; padding: .5rem 0 1.5rem; perspective: 2600px; }
+        .bk { position: relative; width: 100%; aspect-ratio: 3/2; transform-style: preserve-3d; transition: transform .9s cubic-bezier(.5,.1,.2,1); }
+        .bk.closed { transform: translateX(-25%); }
+        .bk.ended { transform: translateX(25%); }
+        .bk-sheet { position: absolute; top: 0; left: 50%; width: 50%; height: 100%; transform-origin: left center; transform-style: preserve-3d; transition: transform .9s cubic-bezier(.5,.1,.2,1); }
+        .bk-sheet.flipped { transform: rotateY(-180deg); }
+        .bk-face { position: absolute; inset: 0; overflow: hidden; background: #fff; backface-visibility: hidden; -webkit-backface-visibility: hidden; border-radius: 3px 14px 14px 3px; box-shadow: 0 22px 40px -22px rgba(17,34,56,.5); }
+        .bk-face::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(90deg, rgba(33,71,119,.16), transparent 9%); }
+        .bk-bk { transform: rotateY(180deg); border-radius: 14px 3px 3px 14px; }
+        .bk-bk::after { background: linear-gradient(270deg, rgba(33,71,119,.16), transparent 9%); }
+        .bk-page { position: absolute; inset: 0; padding: 7% 7% 9%; background: linear-gradient(#FDFEFF, #F2F7FC); }
+        .bk-grid { height: 100%; display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 5%; }
+        @media (max-width: 639px) { .bk { aspect-ratio: 4/3; } .bk-grid { grid-template-columns: 1fr; } }
+        .bk-ph { margin: 0; display: flex; flex-direction: column; min-height: 0; padding: 5px 5px 0; background: #fff; border: 1px solid #D4E5F7; border-radius: 4px; box-shadow: 0 6px 14px -8px rgba(33,71,119,.45); transform: rotate(var(--r)); cursor: zoom-in; transition: transform .25s; }
+        .bk-ph:hover { transform: rotate(0) scale(1.03); }
+        .bk-ph img { flex: 1; min-height: 0; width: 100%; object-fit: cover; border-radius: 2px; }
+        .bk-ph figcaption { display: flex; flex-direction: column; padding: 4px 2px 5px; font-size: clamp(8px, 1.1vw, 11px); line-height: 1.2; color: #214777; }
+        .bk-ph b { font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .bk-ph span { color: #64A4E2; }
+        .bk-num { position: absolute; bottom: 3%; left: 0; right: 0; text-align: center; font-size: 11px; color: #64A4E2; }
+        .bk-cover { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; color: #fff; background: linear-gradient(135deg, #64A4E2, #2A5D9B 55%, #1E3E62); }
+        .bk-cover::before { content: ""; position: absolute; inset: 6%; border: 2px solid rgba(255,255,255,.45); border-radius: 10px; }
+        .bk-cover i { font-size: clamp(2.2rem, 8vw, 4.5rem); }
+        .bk-cover h2 { font-weight: 800; font-size: clamp(1rem, 3.2vw, 2rem); text-align: center; }
+        .bk-endpaper { position: absolute; inset: 0; background: repeating-linear-gradient(45deg, #E5F0FA 0 10px, #F2F7FC 10px 20px); }
+        .bk-corner { position: absolute; bottom: 0; width: 56px; height: 56px; border: 0; cursor: pointer; z-index: 2000; display: flex; align-items: flex-end; justify-content: flex-end; padding: 0 9px 8px; color: #3876BF; font-size: 15px; transition: width .25s, height .25s; }
+        .bk-corner:hover, .bk-corner:focus-visible { width: 84px; height: 84px; }
+        .bk-corner.r { right: 0; justify-content: flex-end; border-bottom-right-radius: 14px; background: linear-gradient(135deg, transparent 50%, rgba(17,34,56,.3) 50%, #fff 55%, #A1CAEF); }
+        .bk-corner.l { left: 0; justify-content: flex-start; border-bottom-left-radius: 14px; background: linear-gradient(225deg, transparent 50%, rgba(17,34,56,.3) 50%, #fff 55%, #A1CAEF); }
+        @media (prefers-reduced-motion: reduce) { .bk, .bk-sheet { transition-duration: .01s; } }
+
+        /* Cloudinary upload zone */
+        .upload-zone { transition: all .2s; }
+        .upload-zone.drag-over { border-color: #3876BF; background-color: #E5F0FA; transform: scale(1.01); }
+        .upload-progress-bar { transition: width .15s ease; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col selection:bg-celeste-200 selection:text-celeste-900">
+    <!-- Pantalla de inicio -->
+    <div id="splash" class="no-print">
+        <div class="sp-stage" aria-hidden="true">
+            <div class="sp-ring"></div>
+            <div class="sp-orbit">
+                    <div class="sp-ico" style="--a:-90deg;--c:#FF4FA3"><span><i class="fa-solid fa-cake-candles"></i></span></div>
+                    <div class="sp-ico" style="--a:-45deg;--c:#8B5CF6"><span><i class="fa-solid fa-ring"></i></span></div>
+                    <div class="sp-ico" style="--a:0deg;--c:#3B82F6"><span><i class="fa-solid fa-graduation-cap"></i></span></div>
+                    <div class="sp-ico" style="--a:45deg;--c:#06B6D4"><span><i class="fa-solid fa-plane"></i></span></div>
+                    <div class="sp-ico" style="--a:90deg;--c:#84CC16"><span><i class="fa-solid fa-music"></i></span></div>
+                    <div class="sp-ico" style="--a:135deg;--c:#FFB020"><span><i class="fa-solid fa-champagne-glasses"></i></span></div>
+                    <div class="sp-ico" style="--a:180deg;--c:#FF8A3D"><span><i class="fa-solid fa-gift"></i></span></div>
+                    <div class="sp-ico" style="--a:225deg;--c:#FB7185"><span><i class="fa-solid fa-umbrella-beach"></i></span></div>
+            </div>
+            <div class="sp-cam"><i class="fa-solid fa-camera"></i></div>
+        </div>
+        <div style="position:relative">
+            <h1 class="sp-title">Álbum de Fotos</h1>
+            <p class="sp-sub">Tus eventos favoritos, en un solo lugar</p>
+            <button id="enterBtn" class="sp-btn" onclick="enterApp()">Entrar</button>
+        </div>
+    </div>
+    <script>
+        let spTimer;
+        function enterApp() {
+            const s = document.getElementById('splash');
+            s.classList.add('leave');
+            spTimer = setTimeout(() => s.classList.add('is-hidden'), 550);
+            window.scrollTo(0, 0);
+        }
+        function exitApp() {
+            const s = document.getElementById('splash');
+            clearTimeout(spTimer);
+            s.classList.remove('is-hidden');
+            void s.offsetWidth;
+            s.classList.remove('leave');
+            spinBtn();
+            document.getElementById('enterBtn').focus();
+        }
+        let spinning = false;
+        function spinBtn() {
+            const b = document.getElementById('enterBtn'), sp = document.getElementById('splash');
+            if (spinning || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+            spinning = true;
+            let ang = 0, speed = 70, last = performance.now();
+            const tick = t => {
+                if (sp.classList.contains('is-hidden')) { spinning = false; return; }
+                const dt = Math.min((t - last) / 1000, .1); last = t;
+                speed += ((b.matches(':hover') ? 520 : 70) - speed) * Math.min(1, dt * 4);
+                ang = (ang + speed * dt) % 360;
+                b.style.setProperty('--a', ang + 'deg');
+                requestAnimationFrame(tick);
+            };
+            requestAnimationFrame(tick);
+        }
+        spinBtn();
+        document.getElementById('enterBtn').focus();
+    </script>
+
+    <!-- Top Accent Bar -->
+    <div class="h-1.5 w-full bg-gradient-to-r from-celeste-300 via-celeste-500 to-celeste-700"></div>
+
+    <!-- Header Navigation -->
+    <header class="sticky top-0 z-30 glass-header border-b border-celeste-200/80 px-4 sm:px-8 py-3.5 transition-all">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+            
+            <div class="flex items-center space-x-3.5 w-full md:w-auto justify-between md:justify-start">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-celeste-600 to-celeste-400 flex items-center justify-center shadow-lg shadow-celeste-500/30 text-white transform hover:rotate-6 transition-transform cursor-pointer" onclick="resetFilters()">
+                        <i class="fa-solid fa-camera text-lg"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl font-bold font-serif-title text-celeste-500 tracking-tight">Álbum de Fotos</h1>
+                    </div>
+                </div>
+                <button onclick="openAddModal()" class="md:hidden flex items-center justify-center w-9 h-9 rounded-xl bg-celeste-500 text-white shadow-md">
+                    <i class="fa-solid fa-plus"></i>
+                </button>
+            </div>
+
+            <div class="flex items-center gap-3 w-full md:w-auto justify-end flex-wrap">
+                <div class="relative flex-1 md:w-72">
+                    <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-celeste-400">
+                        <i class="fa-solid fa-magnifying-glass text-xs"></i>
+                    </span>
+                    <input type="text" id="searchInput" placeholder="Buscar título, evento, persona, lugar..." 
+                        class="w-full pl-9 pr-8 py-2 bg-white/90 border border-celeste-200 rounded-2xl text-xs text-celeste-900 placeholder-celeste-400 focus:outline-none focus:border-celeste-500 focus:ring-2 focus:ring-celeste-200/80 transition-all shadow-sm">
+                    <button id="clearSearchBtn" onclick="clearSearch()" class="hidden absolute inset-y-0 right-0 pr-3 flex items-center text-xs text-celeste-400 hover:text-celeste-700">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+
+                <button onclick="toggleStatsDrawer()" class="flex items-center gap-2 px-3.5 py-2 rounded-2xl border border-celeste-200 bg-white hover:bg-celeste-50 text-celeste-700 text-xs font-semibold transition-all shadow-sm">
+                    <i class="fa-solid fa-chart-pie text-celeste-500"></i>
+                    <span class="hidden sm:inline">Analíticas</span>
+                </button>
+
+                <button id="batchToggleBtn" onclick="toggleBatchMode()" class="flex items-center gap-2 px-3.5 py-2 rounded-2xl border border-celeste-200 bg-white hover:bg-celeste-50 text-celeste-700 text-xs font-semibold transition-all shadow-sm">
+                    <i class="fa-solid fa-list-check text-celeste-500"></i>
+                    <span class="hidden sm:inline">Selección</span>
+                </button>
+
+                <!-- Cloudinary Config -->
+                <button onclick="openCloudinaryModal()" title="Configurar Cloudinary" id="cloudinaryBtn" class="flex items-center gap-2 px-3.5 py-2 rounded-2xl border border-celeste-200 bg-white hover:bg-celeste-50 text-celeste-700 text-xs font-semibold transition-all shadow-sm">
+                    <i class="fa-solid fa-cloud text-celeste-500"></i>
+                    <span class="hidden sm:inline">Cloudinary</span>
+                    <span id="cloudinaryStatus" class="w-2 h-2 rounded-full bg-gray-300"></span>
+                </button>
+
+                <button onclick="syncFromCloudinary()" title="Traer fotos desde Cloudinary" class="flex items-center gap-2 px-3.5 py-2 rounded-2xl border border-celeste-200 bg-white hover:bg-celeste-50 text-celeste-700 text-xs font-semibold transition-all shadow-sm">
+                    <i id="syncIcon" class="fa-solid fa-rotate text-celeste-500"></i>
+                    <span class="hidden sm:inline">Sincronizar</span>
+                </button>
+
+                <button onclick="openAddModal()" class="hidden md:flex items-center gap-2 bg-gradient-to-r from-celeste-500 to-celeste-700 hover:from-celeste-600 hover:to-celeste-800 text-white font-medium px-4 py-2 rounded-2xl text-xs shadow-md shadow-celeste-500/25 transition-all transform active:scale-95">
+                    <i class="fa-solid fa-plus"></i>
+                    <span>Nueva Memoria</span>
+                </button>
+
+                <button onclick="exitApp()" title="Volver al inicio" aria-label="Salir al inicio" class="flex items-center gap-2 px-3.5 py-2 rounded-2xl border border-celeste-200 bg-white hover:bg-celeste-50 text-celeste-700 text-xs font-semibold transition-all shadow-sm">
+                    <i class="fa-solid fa-right-from-bracket text-celeste-500"></i>
+                    <span class="hidden sm:inline">Salir</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sub-Header -->
+    <nav class="max-w-7xl mx-auto w-full px-4 sm:px-8 pt-6 pb-2">
+        <div id="highlightsSection" class="mb-6 bg-gradient-to-r from-celeste-100/90 via-white to-celeste-100/90 border border-celeste-200/80 rounded-3xl p-4 sm:p-6 shadow-sm relative overflow-hidden">
+            <div class="flex items-center justify-between mb-3">
+                <div class="flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-celeste-500 animate-pulse"></span>
+                    <h2 class="text-xs sm:text-sm font-bold uppercase tracking-wider text-celeste-800 font-sans">
+                        Destacados Especiales
+                    </h2>
+                </div>
+                <div class="flex items-center gap-1.5">
+                    <button onclick="scrollHighlights(-1)" class="w-7 h-7 rounded-full bg-white border border-celeste-200 text-celeste-700 hover:bg-celeste-50 flex items-center justify-center text-xs shadow-sm">
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </button>
+                    <button onclick="scrollHighlights(1)" class="w-7 h-7 rounded-full bg-white border border-celeste-200 text-celeste-700 hover:bg-celeste-50 flex items-center justify-center text-xs shadow-sm">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+            <div id="highlightsTrack" class="flex items-center gap-4 overflow-x-auto no-scrollbar scroll-smooth py-1"></div>
+        </div>
+
+        <div class="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4 border-b border-celeste-200/60 pb-4">
+            <div class="flex items-center gap-2 overflow-x-auto pb-2 lg:pb-0 no-scrollbar" id="categoryFilters"></div>
+            <div class="flex items-center justify-between lg:justify-end gap-3 flex-wrap">
+                <div class="flex items-center bg-white border border-celeste-200 p-1 rounded-2xl shadow-sm">
+                    <button onclick="setViewMode('grid')" id="viewBtnGrid" class="px-2.5 py-1 rounded-xl text-xs font-medium transition-all bg-celeste-500 text-white shadow-sm" title="Vista en Cuadrícula">
+                        <i class="fa-solid fa-border-all"></i>
+                    </button>
+                    <button onclick="setViewMode('masonry')" id="viewBtnMasonry" class="px-2.5 py-1 rounded-xl text-xs font-medium text-celeste-700 hover:bg-celeste-50 transition-all" title="Vista Mosaico/Masonry">
+                        <i class="fa-solid fa-table-cells font-bold"></i>
+                    </button>
+                    <button onclick="setViewMode('timeline')" id="viewBtnTimeline" class="px-2.5 py-1 rounded-xl text-xs font-medium text-celeste-700 hover:bg-celeste-50 transition-all" title="Vista Línea de Tiempo">
+                        <i class="fa-solid fa-timeline"></i>
+                    </button>
+                    <button onclick="setViewMode('album')" id="viewBtnAlbum" class="px-2.5 py-1 rounded-xl text-xs font-medium text-celeste-700 hover:bg-celeste-50 transition-all" title="Vista Álbum (hojas)">
+                        <i class="fa-solid fa-book-open"></i>
+                    </button>
+                </div>
+                <button id="favFilterBtn" onclick="toggleFavoriteFilter()" class="flex items-center gap-1.5 px-3 py-1.5 rounded-2xl border border-celeste-200 bg-white text-celeste-700 text-xs font-semibold hover:bg-celeste-50 transition-all shadow-sm">
+                    <i class="fa-regular fa-heart text-celeste-500" id="favFilterIcon"></i>
+                    <span>Favoritos</span>
+                </button>
+                <div class="flex items-center gap-1.5">
+                    <select id="sortOrder" onchange="handleSortChange()" class="bg-white border border-celeste-200 text-xs font-semibold text-celeste-800 rounded-2xl px-3 py-1.5 focus:outline-none focus:border-celeste-500 shadow-sm">
+                        <option value="recent">Fecha: Recientes</option>
+                        <option value="oldest">Fecha: Antiguas</option>
+                        <option value="alpha">Título (A-Z)</option>
+                        <option value="favorites">Favoritos primero</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto w-full px-4 sm:px-8 py-6 flex-1">
+        <div id="mainViewContainer"></div>
+        <div id="emptyState" class="hidden flex-col items-center justify-center py-20 text-center">
+            <div class="w-20 h-20 rounded-3xl bg-white border border-celeste-200 flex items-center justify-center text-celeste-400 text-3xl mb-4 shadow-xl shadow-celeste-100">
+                <i class="fa-solid fa-image font-light"></i>
+            </div>
+            <h3 id="emptyTitle" class="text-lg font-bold font-serif-title text-celeste-900">No se encontraron recuerdos</h3>
+            <p id="emptyText" class="text-xs text-celeste-600 mt-1 max-w-xs">Ajusta los filtros de búsqueda o agrega una nueva fotografía para enriquecer tu álbum pro.</p>
+            <button id="emptyBtn" onclick="resetFilters()" class="mt-4 px-4 py-2 bg-celeste-100 hover:bg-celeste-200 text-celeste-700 font-bold rounded-xl text-xs transition-all">
+                Restablecer Filtros
+            </button>
+        </div>
+    </main>
+
+    <!-- Batch Action Bar -->
+    <div id="floatingActionBar" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 hidden bg-celeste-900 text-white border border-celeste-700 px-6 py-3 rounded-3xl shadow-2xl items-center gap-6 backdrop-blur-lg">
+        <div class="text-xs font-semibold">
+            <span id="selectedCount" class="text-celeste-300 font-bold">0</span> memorias seleccionadas
+        </div>
+        <div class="h-4 w-px bg-celeste-700"></div>
+        <div class="flex items-center gap-3">
+            <button onclick="exportSelectedJSON()" class="text-xs bg-celeste-700 hover:bg-celeste-600 px-3 py-1.5 rounded-xl font-medium transition-all flex items-center gap-1.5">
+                <i class="fa-solid fa-download"></i> Exportar
+            </button>
+            <button onclick="deleteSelectedBatch()" class="text-xs bg-red-600/80 hover:bg-red-600 px-3 py-1.5 rounded-xl font-medium transition-all flex items-center gap-1.5">
+                <i class="fa-solid fa-trash"></i> Eliminar
+            </button>
+            <button onclick="toggleBatchMode(false)" class="text-xs text-celeste-300 hover:text-white px-2 py-1">Cancelar</button>
+        </div>
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div id="lightboxModal" class="fixed inset-0 z-50 hidden bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-2 sm:p-6 opacity-0 transition-opacity duration-300">
+        <div class="relative w-full max-w-6xl bg-white border border-celeste-200 rounded-3xl overflow-hidden shadow-2xl flex flex-col lg:flex-row max-h-[95vh]">
+            <button onclick="closeLightbox()" class="absolute top-4 right-4 z-30 w-10 h-10 rounded-full bg-white/90 hover:bg-white text-celeste-900 flex items-center justify-center transition-all shadow-md">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <div class="lg:w-2/3 bg-slate-900 flex flex-col items-center justify-center relative overflow-hidden min-h-[360px] lg:min-h-[580px] select-none">
+                <div id="zoomContainer" class="zoom-img-container w-full h-full flex items-center justify-center p-4">
+                    <img id="lbImage" src="" alt="Vista previa" class="max-h-[78vh] w-auto object-contain transition-all duration-300 rounded-lg">
+                </div>
+
+                <div id="compareContainer" class="hidden absolute inset-0 bg-slate-950 p-4 flex items-center justify-center gap-2">
+                    <div class="w-1/2 h-full flex flex-col items-center justify-center border-r border-slate-800 pr-2">
+                        <span class="text-[10px] text-celeste-300 uppercase tracking-widest mb-1">Original / Hero</span>
+                        <img id="lbCompareImg1" src="" class="max-h-[70vh] object-contain rounded-lg">
+                    </div>
+                    <div class="w-1/2 h-full flex flex-col items-center justify-center pl-2">
+                        <span class="text-[10px] text-celeste-300 uppercase tracking-widest mb-1">Sub-foto Relacionada</span>
+                        <img id="lbCompareImg2" src="" class="max-h-[70vh] object-contain rounded-lg">
+                    </div>
+                </div>
+
+                <div class="absolute top-4 left-4 z-20 flex items-center gap-2 bg-slate-900/80 backdrop-blur-md px-3 py-1.5 rounded-2xl border border-slate-700/80 text-white text-xs">
+                    <button onclick="toggleZoom()" title="Zoom In/Out" class="hover:text-celeste-300 px-1.5 py-1">
+                        <i class="fa-solid fa-magnifying-glass-plus" id="zoomIcon"></i>
+                    </button>
+                    <button onclick="toggleFullscreen()" title="Pantalla Completa" class="hover:text-celeste-300 px-1.5 py-1">
+                        <i class="fa-solid fa-expand"></i>
+                    </button>
+                    <button onclick="toggleCompareMode()" id="compareToggleBtn" title="Modo Comparación" class="hover:text-celeste-300 px-1.5 py-1 hidden">
+                        <i class="fa-solid fa-columns"></i>
+                    </button>
+                </div>
+
+                <button onclick="navigateLightbox(-1)" class="absolute left-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/80 hover:bg-white text-celeste-800 flex items-center justify-center shadow-lg transition-all z-20">
+                    <i class="fa-solid fa-chevron-left text-base"></i>
+                </button>
+                <button onclick="navigateLightbox(1)" class="absolute right-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/80 hover:bg-white text-celeste-800 flex items-center justify-center shadow-lg transition-all z-20">
+                    <i class="fa-solid fa-chevron-right text-base"></i>
+                </button>
+
+                <div id="lbSubGalleryBar" class="absolute bottom-3 left-1/2 -translate-x-1/2 z-20 hidden items-center gap-2 bg-slate-900/90 backdrop-blur-md px-3 py-2 rounded-2xl border border-slate-700/80 max-w-full overflow-x-auto no-scrollbar"></div>
+            </div>
+
+            <div class="lg:w-1/3 p-6 flex flex-col justify-between overflow-y-auto bg-white border-t lg:border-t-0 lg:border-l border-celeste-100 max-h-[95vh]">
+                <div class="space-y-5">
+                    <div class="flex items-center justify-between">
+                        <span id="lbCategory" class="px-3 py-1 bg-celeste-100 text-celeste-800 border border-celeste-200 rounded-full text-xs font-bold tracking-wider uppercase"></span>
+                        <button id="lbFavBtn" onclick="toggleFavoriteCurrent()" class="flex items-center gap-1.5 text-xs font-bold text-celeste-700 bg-celeste-50 border border-celeste-200 px-3 py-1 rounded-full transition-all hover:bg-celeste-100">
+                            <i class="fa-regular fa-heart" id="lbFavIcon"></i> <span id="lbFavText">Favorito</span>
+                        </button>
+                    </div>
+                    <div>
+                        <h2 id="lbTitle" class="text-2xl font-bold font-serif-title text-celeste-900 leading-tight"></h2>
+                        <p id="lbSubtitle" class="text-xs font-semibold text-celeste-600 mt-0.5"></p>
+                        <div class="flex items-center gap-2 text-xs text-celeste-700 font-medium mt-2">
+                            <i class="fa-regular fa-calendar-check text-celeste-500"></i>
+                            <span id="lbDate"></span>
+                        </div>
+                    </div>
+                    <p id="lbDescription" class="text-xs text-celeste-800 leading-relaxed bg-celeste-50/60 p-3.5 rounded-2xl border border-celeste-100"></p>
+                    <div class="space-y-1">
+                        <div class="flex items-center justify-between">
+                            <h4 class="text-[11px] font-bold text-celeste-800 uppercase tracking-wider flex items-center gap-1.5">
+                                <i class="fa-solid fa-location-dot text-celeste-500"></i> Ubicación
+                            </h4>
+                            <button id="lbMapLinkBtn" onclick="openMapModal()" class="text-[11px] text-celeste-600 hover:text-celeste-800 font-semibold underline flex items-center gap-1">
+                                Ver mapa <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i>
+                            </button>
+                        </div>
+                        <p id="lbLocation" class="text-xs font-semibold text-celeste-900 bg-white px-3 py-2 rounded-xl border border-celeste-100 shadow-sm"></p>
+                    </div>
+                    <div class="space-y-2">
+                        <h4 class="text-[11px] font-bold text-celeste-800 uppercase tracking-wider flex items-center gap-1.5">
+                            <i class="fa-solid fa-users text-celeste-500"></i> Personas Tagged
+                        </h4>
+                        <div id="lbPeople" class="flex flex-wrap gap-1.5"></div>
+                    </div>
+                    <div id="lbTagsContainer" class="space-y-1.5">
+                        <h4 class="text-[11px] font-bold text-celeste-800 uppercase tracking-wider flex items-center gap-1.5">
+                            <i class="fa-solid fa-tags text-celeste-500"></i> Etiquetas
+                        </h4>
+                        <div id="lbTags" class="flex flex-wrap gap-1"></div>
+                    </div>
+                    <div class="pt-3 border-t border-celeste-100">
+                        <h4 class="text-[11px] font-bold text-celeste-800 uppercase tracking-wider flex items-center gap-1.5 mb-2">
+                            <i class="fa-solid fa-camera text-celeste-500"></i> Información Técnica (EXIF)
+                        </h4>
+                        <div id="lbExifGrid" class="grid grid-cols-2 gap-2 text-[11px] text-celeste-800 bg-celeste-50/70 p-3 rounded-2xl border border-celeste-100"></div>
+                    </div>
+                </div>
+
+                <div class="pt-5 mt-5 border-t border-celeste-100 flex items-center justify-between gap-2">
+                    <div class="flex items-center gap-2">
+                        <button onclick="shareCurrentPhoto()" class="text-xs px-3 py-2 rounded-xl bg-celeste-50 hover:bg-celeste-100 text-celeste-700 font-semibold border border-celeste-200 transition-all flex items-center gap-1.5">
+                            <i class="fa-solid fa-share-nodes"></i> Compartir
+                        </button>
+                        <button onclick="editCurrentPhoto()" class="text-xs px-3 py-2 rounded-xl bg-celeste-50 hover:bg-celeste-100 text-celeste-700 font-semibold border border-celeste-200 transition-all flex items-center gap-1.5">
+                            <i class="fa-solid fa-pen"></i> Editar
+                        </button>
+                    </div>
+                    <button id="lbDeleteBtn" onclick="deleteCurrentPhoto()" class="text-xs px-3 py-2 rounded-xl bg-red-50 hover:bg-red-100 text-red-600 font-semibold border border-red-200 transition-all flex items-center gap-1.5">
+                        <i class="fa-solid fa-trash-can"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Map Modal -->
+    <div id="mapModal" class="fixed inset-0 z-50 hidden bg-slate-950/60 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="relative w-full max-w-2xl bg-white border border-celeste-200 rounded-3xl overflow-hidden shadow-2xl p-6">
+            <div class="flex items-center justify-between pb-4 border-b border-celeste-100">
+                <h3 class="font-bold text-sm text-celeste-900 font-serif-title flex items-center gap-2">
+                    <i class="fa-solid fa-map-location-dot text-celeste-500"></i> Vista de Ubicación
+                </h3>
+                <button onclick="closeMapModal()" class="w-8 h-8 rounded-full bg-celeste-50 hover:bg-celeste-100 text-celeste-700 flex items-center justify-center">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="py-4">
+                <p id="mapLocationName" class="text-xs font-semibold text-celeste-700 mb-3"></p>
+                <div class="w-full h-64 bg-celeste-100 rounded-2xl flex flex-col items-center justify-center text-center p-6 border border-celeste-200">
+                    <i class="fa-solid fa-compass text-4xl text-celeste-400 mb-2 animate-bounce"></i>
+                    <p class="text-xs font-bold text-celeste-800">Visualización de Mapa Satelital Pro</p>
+                    <p class="text-[11px] text-celeste-600 max-w-sm mt-1">Ubicación verificada mediante coordenadas GPS asociadas a la imagen.</p>
+                </div>
+            </div>
+            <div class="flex justify-end">
+                <button onclick="closeMapModal()" class="px-4 py-2 bg-celeste-500 text-white rounded-xl text-xs font-bold">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add/Edit Memory Modal -->
+    <div id="addModal" class="fixed inset-0 z-50 hidden bg-slate-950/60 backdrop-blur-sm flex items-center justify-center p-3 sm:p-6 opacity-0 transition-opacity duration-300">
+        <div class="relative w-full max-w-2xl bg-white border border-celeste-200 rounded-3xl overflow-hidden shadow-2xl flex flex-col max-h-[90vh]">
+            <div class="px-6 py-4 border-b border-celeste-100 flex items-center justify-between bg-celeste-50/80">
+                <h3 id="modalFormTitle" class="text-base font-bold font-serif-title text-celeste-900 flex items-center gap-2">
+                    <i class="fa-solid fa-cloud-arrow-up text-celeste-500"></i> Guardar Nueva Memoria
+                </h3>
+                <button onclick="closeAddModal()" class="w-8 h-8 rounded-full bg-white hover:bg-celeste-100 text-celeste-700 flex items-center justify-center border border-celeste-200">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="flex items-center border-b border-celeste-100 bg-white px-6 pt-2 gap-4 text-xs font-semibold text-celeste-600 overflow-x-auto no-scrollbar">
+                <button onclick="switchFormTab('tabGeneral')" id="tabBtnGeneral" class="py-2 border-b-2 border-celeste-500 text-celeste-900 font-bold">1. Información General</button>
+                <button onclick="switchFormTab('tabLocation')" id="tabBtnLocation" class="py-2 border-b-2 border-transparent hover:text-celeste-900">2. Evento y Ubicación</button>
+                <button onclick="switchFormTab('tabExif')" id="tabBtnExif" class="py-2 border-b-2 border-transparent hover:text-celeste-900">3. Datos EXIF & Tags</button>
+            </div>
+
+            <form id="photoForm" onsubmit="handleFormSubmit(event)" class="p-6 space-y-4 overflow-y-auto flex-1">
+                <input type="hidden" id="editPhotoId" value="">
+
+                <!-- TAB 1: General -->
+                <div id="tabGeneral" class="form-tab-content space-y-4">
+                    <!-- Cloudinary Upload Zone -->
+                    <div id="cloudinaryUploadZone" class="upload-zone border-2 border-dashed border-celeste-300 rounded-2xl p-5 text-center bg-celeste-50/40 hover:bg-celeste-50 cursor-pointer relative">
+                        <input type="file" id="cloudinaryFileInput" accept="image/*" class="hidden" onchange="handleCloudinaryFileSelect(event)">
+                        <div id="uploadIdleState" onclick="document.getElementById('cloudinaryFileInput').click()">
+                            <i class="fa-solid fa-cloud-arrow-up text-3xl text-celeste-500 mb-2"></i>
+                            <p class="text-xs font-bold text-celeste-800">Subir foto a Cloudinary</p>
+                            <p class="text-[10px] text-celeste-600 mt-1">Haz clic o arrastra una imagen. Los datos EXIF se importarán automáticamente.</p>
+                        </div>
+                        <div id="uploadProgressState" class="hidden">
+                            <i class="fa-solid fa-spinner fa-spin text-2xl text-celeste-500 mb-2"></i>
+                            <p class="text-xs font-bold text-celeste-800" id="uploadProgressText">Subiendo…</p>
+                            <div class="w-full bg-celeste-200 h-2 rounded-full overflow-hidden mt-2 max-w-xs mx-auto">
+                                <div id="uploadProgressBar" class="upload-progress-bar bg-celeste-500 h-full rounded-full" style="width:0%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-3 my-1">
+                        <div class="h-px bg-celeste-200 flex-1"></div>
+                        <span class="text-[10px] font-bold text-celeste-500 uppercase tracking-wider">o pega una URL</span>
+                        <div class="h-px bg-celeste-200 flex-1"></div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-celeste-800 uppercase tracking-wider mb-1">URL de la Imagen Principal *</label>
+                        <input type="url" id="inputUrl" required placeholder="https://res.cloudinary.com/..." onchange="onUrlChange(this.value)"
+                            class="w-full px-3.5 py-2 bg-celeste-50/50 border border-celeste-200 rounded-xl text-xs text-celeste-900 focus:outline-none focus:border-celeste-500 focus:bg-white transition-all">
+                    </div>
+
+                    <div id="urlPreviewBox" class="hidden w-full h-36 bg-celeste-50 border border-celeste-200 rounded-2xl overflow-hidden relative">
+                        <img id="urlPreviewImg" src="" class="w-full h-full object-cover">
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs font-bold text-celeste-800 uppercase tracking-wider mb-1">Título del Evento *</label>
+                            <input type="text" id="inputTitle" required placeholder="Ej: Atardecer en el Lago" 
+                                class="w-full px-3.5 py-2 bg-celeste-50/50 border border-celeste-200 rounded-xl text-xs text-celeste-900 focus:outline-none focus:border-celeste-500 focus:bg-white transition-all">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-celeste-800 uppercase tracking-wider mb-1">Subtítulo / Edición</label>
+                            <input type="text" id="inputSubtitle" placeholder="Ej: Edición Romántica de Verano" 
+                                class="w-full px-3.5 py-2 bg-celeste-50/50 border border-celeste-200 rounded-xl text-xs text-celeste-900 focus:outline-none focus:border-celeste-500 focus:bg-white transition-all">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs font-bold text-celeste-800 uppercase tracking-wider mb-1">Tipo de evento *</label>
+                            <input type="text" id="inputCategory" required list="categoryList" maxlength="40" pattern=".*\S.*" placeholder="Ej: Cumpleaños, Boda, Viaje..." class="w-full px-3.5 py-2 bg-celeste-50/50 border border-celeste-200 rounded-xl text-xs text-celeste-900 placeholder-celeste-400 focus:outline-none focus:border-celeste-500 focus:bg-white transition-all">
+                            <datalist id="categoryList"></datalist>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-celeste-800 uppercase tracking-wider mb-1">Fecha del Evento *</label>
+                            <input type="date" id="inputDate" required 
+                                class="w-full px-3.5 py-2 bg-celeste-50/50 border border-celeste-200 rounded-xl text-xs text-celeste-900 focus:outline-none focus:border-celeste-500 focus:bg-white transition-all">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-celeste-800 uppercase tracking-wider mb-1">Descripción Narrativa</label>
+                        <textarea id="inputDescription" rows="3" placeholder="Escribe la historia o anécdota especial..." 
+                            class="w-full px-3.5 py-2 bg-celeste-50/50 border border-celeste-200 rounded-xl text-xs text-celeste-900 focus:outline-none focus:border-celeste-500 focus:bg-white transition-all resize-none"></textarea>
+                    </div>
+                </div>
+
+                <!-- TAB 2: Location -->
+                <div id="tabLocation" class="form-tab-content space-y-4 hidden">
+                    <div>
+                        <label class="block text-xs font-bold text-celeste-800 uppercase tracking-wider mb-1">Ubicación Completa *</label>
+                        <input type="text" id="inputLocation" required placeholder="Ej: Playa Norte, Isla Mujeres, México" 
+                            class="w-full px-3.5 py-2 bg-celeste-50/50 border border-celeste-200 rounded-xl text-xs text-celeste-900 focus:outline-none focus:border-celeste-500 focus:bg-white transition-all">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-celeste-800 uppercase tracking-wider mb-1">Personas Tagged (separadas por comas)</label>
+                        <input type="text" id="inputPeople" placeholder="Ej: Valentina, Mateo, Sofía" 
+                            class="w-full px-3.5 py-2 bg-celeste-50/50 border border-celeste-200 rounded-xl text-xs text-celeste-900 focus:outline-none focus:border-celeste-500 focus:bg-white transition-all">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-celeste-800 uppercase tracking-wider mb-1">Sub-fotografías Relacionadas (URLs separadas por coma)</label>
+                        <textarea id="inputSubPhotos" rows="2" placeholder="https://image1.jpg, https://image2.jpg" 
+                            class="w-full px-3.5 py-2 bg-celeste-50/50 border border-celeste-200 rounded-xl text-xs text-celeste-900 focus:outline-none focus:border-celeste-500 focus:bg-white transition-all resize-none"></textarea>
+                    </div>
+                    <div class="flex items-center gap-2 pt-2">
+                        <input type="checkbox" id="inputFavorite" class="w-4 h-4 text-celeste-600 border-celeste-300 rounded focus:ring-celeste-400">
+                        <label for="inputFavorite" class="text-xs font-semibold text-celeste-800 cursor-pointer">Marcar como Memoria Favorita 🩵</label>
+                    </div>
+                </div>
+
+                <!-- TAB 3: EXIF -->
+                <div id="tabExif" class="form-tab-content space-y-4 hidden">
+                    <div class="flex items-center justify-between gap-2">
+                        <div id="exifAutoNotice" class="hidden flex-1 text-[11px] border rounded-xl px-3 py-2 flex items-center gap-2 bg-emerald-50 text-emerald-800 border-emerald-200">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i>
+                            <span id="exifNoticeText">Datos técnicos importados automáticamente de la foto.</span>
+                        </div>
+                        <button type="button" onclick="detectExifFromCurrentUrl()" class="shrink-0 ml-auto text-[11px] px-3 py-2 rounded-xl bg-celeste-50 hover:bg-celeste-100 text-celeste-700 font-semibold border border-celeste-200 flex items-center gap-1.5">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i> Detectar desde la foto
+                        </button>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs font-bold text-celeste-800 uppercase tracking-wider mb-1">Cámara</label>
+                            <input type="text" id="inputCamera" placeholder="Ej: Sony A7 IV" 
+                                class="w-full px-3.5 py-2 bg-celeste-50/50 border border-celeste-200 rounded-xl text-xs text-celeste-900 focus:outline-none focus:border-celeste-500 focus:bg-white transition-all">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-celeste-800 uppercase tracking-wider mb-1">Lente</label>
+                            <input type="text" id="inputLens" placeholder="Ej: FE 24-70mm f/2.8 GM" 
+                                class="w-full px-3.5 py-2 bg-celeste-50/50 border border-celeste-200 rounded-xl text-xs text-celeste-900 focus:outline-none focus:border-celeste-500 focus:bg-white transition-all">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-3 gap-3">
+                        <div>
+                            <label class="block text-xs font-bold text-celeste-800 uppercase tracking-wider mb-1">Apertura</label>
+                            <input type="text" id="inputAperture" placeholder="f/2.8" 
+                                class="w-full px-3.5 py-2 bg-celeste-50/50 border border-celeste-200 rounded-xl text-xs text-celeste-900 focus:outline-none focus:border-celeste-500 focus:bg-white transition-all">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-celeste-800 uppercase tracking-wider mb-1">ISO</label>
+                            <input type="text" id="inputIso" placeholder="100" 
+                                class="w-full px-3.5 py-2 bg-celeste-50/50 border border-celeste-200 rounded-xl text-xs text-celeste-900 focus:outline-none focus:border-celeste-500 focus:bg-white transition-all">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-celeste-800 uppercase tracking-wider mb-1">Obturación</label>
+                            <input type="text" id="inputShutter" placeholder="1/1000s" 
+                                class="w-full px-3.5 py-2 bg-celeste-50/50 border border-celeste-200 rounded-xl text-xs text-celeste-900 focus:outline-none focus:border-celeste-500 focus:bg-white transition-all">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-celeste-800 uppercase tracking-wider mb-1">Etiquetas / Tags (separadas por coma)</label>
+                        <input type="text" id="inputTags" placeholder="Ej: atardecer, playa, romántico, 2026" 
+                            class="w-full px-3.5 py-2 bg-celeste-50/50 border border-celeste-200 rounded-xl text-xs text-celeste-900 focus:outline-none focus:border-celeste-500 focus:bg-white transition-all">
+                    </div>
+                </div>
+
+                <div class="pt-4 border-t border-celeste-100 flex items-center justify-between">
+                    <button type="button" onclick="closeAddModal()" class="px-4 py-2 rounded-xl bg-celeste-50 hover:bg-celeste-100 text-celeste-700 text-xs font-bold transition-all">Cancelar</button>
+                    <button type="submit" class="px-6 py-2 rounded-xl bg-gradient-to-r from-celeste-500 to-celeste-700 hover:from-celeste-600 hover:to-celeste-800 text-white text-xs font-bold shadow-md shadow-celeste-500/20 transition-all">Guardar Memoria</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Analytics Drawer -->
+    <div id="statsDrawer" class="fixed inset-y-0 right-0 z-50 w-full max-w-md bg-white border-l border-celeste-200 shadow-2xl p-6 transform translate-x-full transition-transform duration-300 overflow-y-auto">
+        <div class="flex items-center justify-between pb-4 border-b border-celeste-100">
+            <h3 class="text-base font-bold font-serif-title text-celeste-900 flex items-center gap-2">
+                <i class="fa-solid fa-chart-line text-celeste-500"></i> Panel de Analíticas
+            </h3>
+            <button onclick="toggleStatsDrawer()" class="w-8 h-8 rounded-full bg-celeste-50 hover:bg-celeste-100 text-celeste-700 flex items-center justify-center">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <div class="py-6 space-y-6">
+            <div class="grid grid-cols-2 gap-3">
+                <div class="bg-celeste-50/70 border border-celeste-200 p-4 rounded-2xl">
+                    <span class="text-2xl font-bold font-serif-title text-celeste-900" id="drawerStatTotal">0</span>
+                    <p class="text-[11px] font-semibold text-celeste-600 uppercase tracking-wider mt-1">Memorias</p>
+                </div>
+                <div class="bg-celeste-50/70 border border-celeste-200 p-4 rounded-2xl">
+                    <span class="text-2xl font-bold font-serif-title text-celeste-900" id="drawerStatFavs">0</span>
+                    <p class="text-[11px] font-semibold text-celeste-600 uppercase tracking-wider mt-1">Favoritas</p>
+                </div>
+            </div>
+
+            <div>
+                <h4 class="text-xs font-bold uppercase tracking-wider text-celeste-800 mb-3">Distribución por Categorías</h4>
+                <div id="drawerCatBreakdown" class="space-y-2"></div>
+            </div>
+
+            <div>
+                <h4 class="text-xs font-bold uppercase tracking-wider text-celeste-800 mb-3">Personas Más Frecuentes</h4>
+                <div id="drawerTopPeople" class="flex flex-wrap gap-2"></div>
+            </div>
+
+            <div class="pt-6 border-t border-celeste-100 space-y-3">
+                <h4 class="text-xs font-bold uppercase tracking-wider text-celeste-800">Gestión de Datos</h4>
+                <div class="flex items-center gap-2">
+                    <button onclick="exportFullJSON()" class="w-1/2 py-2.5 bg-celeste-50 hover:bg-celeste-100 border border-celeste-200 text-celeste-800 text-xs font-bold rounded-xl transition-all flex items-center justify-center gap-1.5">
+                        <i class="fa-solid fa-download"></i> Exportar
+                    </button>
+                    <label class="w-1/2 py-2.5 bg-celeste-50 hover:bg-celeste-100 border border-celeste-200 text-celeste-800 text-xs font-bold rounded-xl transition-all cursor-pointer flex items-center justify-center gap-1.5">
+                        <i class="fa-solid fa-upload"></i> Importar
+                        <input type="file" id="importJsonInput" accept=".json" class="hidden" onchange="importJSON(event)">
+                    </label>
+                </div>
+                <button onclick="window.print()" class="w-full py-2.5 bg-white border border-celeste-200 hover:bg-celeste-50 text-celeste-800 text-xs font-bold rounded-xl transition-all flex items-center justify-center gap-1.5">
+                    <i class="fa-solid fa-print"></i> Modo Imprimir / PDF
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cloudinary Config Modal -->
+    <div id="cloudinaryModal" class="fixed inset-0 z-50 hidden bg-slate-950/60 backdrop-blur-sm items-center justify-center p-4">
+        <form onsubmit="saveCloudinaryCfg(event)" class="bg-white rounded-3xl shadow-2xl w-full max-w-md p-6 space-y-3 max-h-[90vh] overflow-y-auto">
+            <h3 class="text-base font-bold font-serif-title text-celeste-900 flex items-center gap-2">
+                <i class="fa-solid fa-cloud text-celeste-500"></i> Configuración de Cloudinary
+            </h3>
+            <p class="text-xs text-celeste-700">Configura tu cuenta de Cloudinary para subir fotos. Los datos EXIF se leen automáticamente de la foto.</p>
+
+            <label class="block text-xs font-semibold text-celeste-800">Cloud Name
+                <input id="cloudinaryCloudName" required placeholder="mi-cuenta-cloud" class="mt-1 w-full px-3.5 py-2 bg-celeste-50/50 border border-celeste-200 rounded-xl text-xs font-normal focus:outline-none focus:border-celeste-500">
+            </label>
+
+            <label class="block text-xs font-semibold text-celeste-800">Upload Preset (unsigned)
+                <input id="cloudinaryUploadPreset" required placeholder="album_fotos_unsigned" class="mt-1 w-full px-3.5 py-2 bg-celeste-50/50 border border-celeste-200 rounded-xl text-xs font-normal focus:outline-none focus:border-celeste-500">
+            </label>
+
+            <div class="pt-2 border-t border-celeste-100 space-y-2">
+                <p class="text-xs font-bold text-celeste-800 flex items-center gap-1.5"><i class="fa-solid fa-trash-can text-red-500"></i> Borrar fotos de Cloudinary (opcional)</p>
+                <p class="text-[10px] text-celeste-600">Cloudinary exige una firma para borrar. Pega tu API Key y API Secret (Dashboard → API Keys). Se guardan <b>solo en este navegador</b>, nunca en el archivo. Úsalo únicamente en tus dispositivos personales.</p>
+                <input id="cloudinaryApiKey" autocomplete="off" placeholder="API Key" class="w-full px-3.5 py-2 bg-celeste-50/50 border border-celeste-200 rounded-xl text-xs font-normal focus:outline-none focus:border-celeste-500">
+                <input id="cloudinaryApiSecret" type="password" autocomplete="off" placeholder="API Secret" class="w-full px-3.5 py-2 bg-celeste-50/50 border border-celeste-200 rounded-xl text-xs font-normal focus:outline-none focus:border-celeste-500">
+            </div>
+
+            <details class="text-[11px] text-celeste-700">
+                <summary class="cursor-pointer font-semibold">¿Cómo obtengo estos datos?</summary>
+                <ol class="list-decimal ml-4 mt-1 space-y-0.5">
+                    <li>Entra a cloudinary.com y crea una cuenta gratuita.</li>
+                    <li>En el Dashboard copia tu <b>Cloud Name</b>.</li>
+                    <li>Ve a Settings → Upload → Upload presets → Add upload preset.</li>
+                    <li>En <b>Signing mode</b> elige <b>Unsigned</b> y guarda.</li>
+                    <li>Copia el nombre exacto del preset y pégalo arriba.</li>
+                    <li>Los datos EXIF se leen en tu navegador antes de subir la foto.</li>
+                </ol>
+            </details>
+
+            <div class="flex justify-between gap-2 pt-1">
+                <button type="button" onclick="resetCloudinaryCfg()" class="px-4 py-2 rounded-xl text-xs font-semibold text-red-600 hover:bg-red-50">Eliminar config</button>
+                <div class="flex gap-2">
+                    <button type="button" onclick="closeCloudinaryModal()" class="px-4 py-2 rounded-xl text-xs font-semibold text-celeste-700 hover:bg-celeste-50">Cancelar</button>
+                    <button class="px-4 py-2 rounded-xl text-xs font-bold text-white bg-gradient-to-r from-celeste-500 to-celeste-700">Guardar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- Delete confirmation Modal -->
+    <div id="deleteModal" class="fixed inset-0 z-[60] hidden bg-slate-950/60 backdrop-blur-sm items-center justify-center p-4">
+        <div class="bg-white rounded-3xl shadow-2xl w-full max-w-sm p-6 space-y-4">
+            <h3 class="text-base font-bold font-serif-title text-celeste-900 flex items-center gap-2">
+                <i class="fa-solid fa-trash-can text-red-500"></i> Eliminar
+            </h3>
+            <p id="deleteModalText" class="text-xs text-celeste-700"></p>
+            <div id="deleteCloudRow" class="hidden">
+                <label class="flex items-start gap-2 text-xs text-celeste-800 bg-celeste-50 border border-celeste-200 rounded-xl p-3 cursor-pointer">
+                    <input type="checkbox" id="deleteCloudChk" class="mt-0.5 w-4 h-4 text-red-600 border-celeste-300 rounded">
+                    <span><b>También eliminar de Cloudinary</b><br><span id="deleteCloudHint" class="text-[10px] text-celeste-600"></span></span>
+                </label>
+            </div>
+            <div class="flex justify-end gap-2">
+                <button type="button" onclick="resolveDelete(false)" class="px-4 py-2 rounded-xl text-xs font-semibold text-celeste-700 hover:bg-celeste-50">Cancelar</button>
+                <button type="button" onclick="resolveDelete(true)" class="px-4 py-2 rounded-xl text-xs font-bold text-white bg-red-600 hover:bg-red-700">Eliminar</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 bg-celeste-900 text-white px-4 py-3 rounded-2xl shadow-2xl flex items-center gap-3 border border-celeste-700">
+        <div id="toastIcon" class="w-6 h-6 rounded-full bg-celeste-700 text-celeste-200 flex items-center justify-center text-xs">
+            <i class="fa-solid fa-circle-info"></i>
+        </div>
+        <span id="toastMessage" class="text-xs font-semibold">Notificación</span>
+    </div>
+
+    <!-- App Logic -->
+    <script>
+        // ---------- Cloudinary config ----------
+        // >>> COMPLETA ESTOS DOS VALORES UNA SOLA VEZ Y FUNCIONARÁ EN CUALQUIER NAVEGADOR <<<
+        // Cloud Name: Dashboard de Cloudinary (esquina superior izquierda / "Product Environment Credentials").
+        // Upload Preset: Settings → Upload → Upload presets (debe estar en modo "Unsigned").
+        // Nota: ambos son datos públicos por diseño. NUNCA pongas aquí el API Secret.
+        const EMBEDDED_CLOUDINARY = {
+            cloudName: 'iarfi7bw',
+            uploadPreset: 'album_fotos_unsigned'
+        };
+
+        const CLOUDINARY_CFG_KEY = 'album_cloudinary_cfg';
+        const hasEmbeddedCfg = () =>
+            !!EMBEDDED_CLOUDINARY.cloudName && !!EMBEDDED_CLOUDINARY.uploadPreset &&
+            !/^TU_/.test(EMBEDDED_CLOUDINARY.cloudName) && !/^TU_/.test(EMBEDDED_CLOUDINARY.uploadPreset);
+        function loadCloudinaryCfg() {
+            // Prioridad: 1) valores incrustados en el código  2) configuración manual guardada en el navegador
+            if (hasEmbeddedCfg()) return { cloudName: EMBEDDED_CLOUDINARY.cloudName, uploadPreset: EMBEDDED_CLOUDINARY.uploadPreset };
+            try { return JSON.parse(localStorage.getItem(CLOUDINARY_CFG_KEY)) || {}; } catch (e) { return {}; }
+        }
+        let cloudinaryCfg = loadCloudinaryCfg();
+
+        // Credenciales opcionales para borrar (solo en este navegador, nunca en el código)
+        const CLOUDINARY_API_KEY = 'album_cloudinary_api';
+        function loadCloudinaryApi() {
+            try { return JSON.parse(localStorage.getItem(CLOUDINARY_API_KEY)) || {}; } catch (e) { return {}; }
+        }
+        let cloudinaryApi = loadCloudinaryApi();
+
+        // ---------- App state ----------
+        let memories = [];
+        let currentCategory = 'todos';
+        let searchQuery = '';
+        let onlyFavorites = false;
+        let currentSort = 'recent';
+        let currentViewMode = 'grid';
+        let activePhotoId = null;
+        let activeSubPhotoIndex = -1;
+        let isBatchMode = false;
+        let selectedIds = new Set();
+        let isCompareMode = false;
+        let isZoomed = false;
+
+        function initApp() {
+            try { memories = JSON.parse(localStorage.getItem('auramemories_pro_data')) || []; } catch (e) { memories = []; }
+            if (!Array.isArray(memories)) memories = [];
+            updateCloudinaryStatus();
+            renderHighlights();
+            renderGallery();
+            updateDrawerStats();
+            enrichMissingExif();
+        }
+
+        function saveStorage() {
+            try { localStorage.setItem('auramemories_pro_data', JSON.stringify(memories)); }
+            catch (e) { showToast('No se pudo guardar en el navegador (almacenamiento lleno o bloqueado)'); }
+            updateDrawerStats();
+        }
+
+        // ---------- Cloudinary UI ----------
+        function updateCloudinaryStatus() {
+            const dot = document.getElementById('cloudinaryStatus');
+            if (cloudinaryCfg.cloudName && cloudinaryCfg.uploadPreset) {
+                dot.className = 'w-2 h-2 rounded-full bg-emerald-500';
+                dot.title = hasEmbeddedCfg() ? 'Cloudinary configurado (incrustado en el código)' : 'Cloudinary configurado';
+            } else {
+                dot.className = 'w-2 h-2 rounded-full bg-amber-400';
+                dot.title = 'Cloudinary sin configurar';
+            }
+        }
+
+        function openCloudinaryModal() {
+            document.getElementById('cloudinaryCloudName').value = cloudinaryCfg.cloudName || '';
+            document.getElementById('cloudinaryUploadPreset').value = cloudinaryCfg.uploadPreset || '';
+            // Si cloud name / preset están incrustados en el código, solo se pueden editar las credenciales de borrado
+            document.getElementById('cloudinaryCloudName').readOnly = hasEmbeddedCfg();
+            document.getElementById('cloudinaryUploadPreset').readOnly = hasEmbeddedCfg();
+            document.getElementById('cloudinaryApiKey').value = cloudinaryApi.apiKey || '';
+            document.getElementById('cloudinaryApiSecret').value = cloudinaryApi.apiSecret || '';
+            const m = document.getElementById('cloudinaryModal'); m.classList.remove('hidden'); m.classList.add('flex');
+        }
+        function closeCloudinaryModal() {
+            const m = document.getElementById('cloudinaryModal'); m.classList.add('hidden'); m.classList.remove('flex');
+        }
+        function saveCloudinaryCfg(e) {
+            e.preventDefault();
+            const cn = document.getElementById('cloudinaryCloudName').value.trim();
+            const up = document.getElementById('cloudinaryUploadPreset').value.trim();
+            if (!hasEmbeddedCfg()) {
+                if (/[\s\/:]/.test(cn)) { showToast('El Cloud Name no debe incluir espacios, URL ni barras'); return; }
+                cloudinaryCfg = { cloudName: cn, uploadPreset: up };
+                localStorage.setItem(CLOUDINARY_CFG_KEY, JSON.stringify(cloudinaryCfg));
+            }
+            const ak = document.getElementById('cloudinaryApiKey').value.trim();
+            const as = document.getElementById('cloudinaryApiSecret').value.trim();
+            cloudinaryApi = (ak && as) ? { apiKey: ak, apiSecret: as } : {};
+            try {
+                if (cloudinaryApi.apiKey) localStorage.setItem(CLOUDINARY_API_KEY, JSON.stringify(cloudinaryApi));
+                else localStorage.removeItem(CLOUDINARY_API_KEY);
+            } catch (err) {}
+            updateCloudinaryStatus();
+            closeCloudinaryModal();
+            showToast('Cloudinary configurado correctamente ☁️');
+        }
+        function resetCloudinaryCfg() {
+            if (!confirm('¿Eliminar la configuración de Cloudinary guardada en este navegador (incluidas las credenciales de borrado)?')) return;
+            localStorage.removeItem(CLOUDINARY_CFG_KEY);
+            localStorage.removeItem(CLOUDINARY_API_KEY);
+            cloudinaryApi = {};
+            cloudinaryCfg = loadCloudinaryCfg();
+            updateCloudinaryStatus();
+            closeCloudinaryModal();
+            showToast('Configuración eliminada');
+        }
+
+        // ---------- Cloudinary upload ----------
+        function handleCloudinaryFileSelect(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            uploadToCloudinaryFlow(file);
+            e.target.value = '';
+        }
+
+        function uploadToCloudinaryFlow(file) {
+            if (!cloudinaryCfg.cloudName || !cloudinaryCfg.uploadPreset) {
+                showToast('Primero configura Cloudinary ☁️');
+                openCloudinaryModal();
+                return;
+            }
+            if (!file.type.startsWith('image/')) {
+                showToast('Solo se permiten imágenes');
+                return;
+            }
+
+            // Update UI to progress state
+            const idle = document.getElementById('uploadIdleState');
+            const prog = document.getElementById('uploadProgressState');
+            const bar = document.getElementById('uploadProgressBar');
+            const txt = document.getElementById('uploadProgressText');
+            idle.classList.add('hidden');
+            prog.classList.remove('hidden');
+            bar.style.width = '0%';
+            txt.textContent = 'Subiendo a Cloudinary…';
+
+            // EXIF local (en paralelo a la subida)
+            const exifPromise = readLocalExif(file);
+
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', `https://api.cloudinary.com/v1_1/${encodeURIComponent(cloudinaryCfg.cloudName)}/image/upload`);
+
+            xhr.upload.onprogress = (evt) => {
+                if (evt.lengthComputable) {
+                    const pct = Math.round((evt.loaded / evt.total) * 100);
+                    bar.style.width = pct + '%';
+                    txt.textContent = `Subiendo… ${pct}%`;
+                }
+            };
+
+            xhr.onload = () => {
+                idle.classList.remove('hidden');
+                prog.classList.add('hidden');
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    let data;
+                    try { data = JSON.parse(xhr.responseText); }
+                    catch (err) { showToast('Respuesta inválida de Cloudinary'); return; }
+                    exifPromise.then(localMeta => handleCloudinarySuccess(data, localMeta));
+                } else {
+                    let msg = 'HTTP ' + xhr.status;
+                    try { msg = JSON.parse(xhr.responseText).error?.message || msg; } catch (e) {}
+                    if (/preset/i.test(msg) && /not found|Invalid/i.test(msg)) msg += ' (revisa el nombre del preset)';
+                    else if (/unsigned/i.test(msg)) msg += ' (el preset debe estar en modo Unsigned)';
+                    else if (/cloud_name|Invalid cloud/i.test(msg)) msg += ' (revisa el Cloud Name)';
+                    showToast('Error al subir: ' + msg);
+                }
+            };
+
+            xhr.onerror = () => {
+                idle.classList.remove('hidden');
+                prog.classList.add('hidden');
+                showToast('Error de red al subir la imagen');
+            };
+
+            const fd = new FormData();
+            fd.append('file', file);
+            // Subida unsigned: solo se permiten file, upload_preset, folder, tags, context, public_id...
+            // (image_metadata NO está permitido y provocaba el error en cada subida).
+            fd.append('upload_preset', cloudinaryCfg.uploadPreset);
+            fd.append('tags', CLOUDINARY_TAG); // permite listar las fotos desde el navegador
+            xhr.send(fd);
+        }
+
+        // exifr con CDN de respaldo (si el principal falla, antes el EXIF no se rellenaba nunca)
+        let exifrLoading = null;
+        function ensureExifr() {
+            if (window.exifr) return Promise.resolve(true);
+            if (exifrLoading) return exifrLoading;
+            const urls = [
+                'https://cdn.jsdelivr.net/npm/exifr@7.1.3/dist/full.umd.js',
+                'https://unpkg.com/exifr@7.1.3/dist/full.umd.js',
+                'https://cdnjs.cloudflare.com/ajax/libs/exifr/7.1.3/full.umd.js'
+            ];
+            exifrLoading = (async () => {
+                for (const u of urls) {
+                    if (window.exifr) break;
+                    await new Promise(r => { const sc = document.createElement('script'); sc.src = u; sc.onload = sc.onerror = r; document.head.appendChild(sc); });
+                }
+                if (!window.exifr) exifrLoading = null; // permite reintentar
+                return !!window.exifr;
+            })();
+            return exifrLoading;
+        }
+
+        // src: File o URL. Devuelve {} si no hay EXIF, o null si no se pudo leer (red / CORS / librería).
+        async function readExif(src) {
+            try {
+                if (!(await ensureExifr())) return null;
+                return (await window.exifr.parse(src, { tiff: true, exif: true, ifd0: true, ifd1: false, gps: false, interop: false, mergeOutput: true })) || {};
+            } catch (e) { return null; }
+        }
+        const readLocalExif = readExif;
+
+        // ---------- URLs de Cloudinary ----------
+        // Devuelve { cloud, publicId, original } o null. "original" = URL sin transformaciones (conserva el EXIF).
+        function parseCloudinaryUrl(url) {
+            const m = typeof url === 'string' && url.match(/^https:\/\/res\.cloudinary\.com\/([^/]+)\/image\/upload\/(.+)$/);
+            if (!m) return null;
+            const segs = m[2].split('?')[0].split('/');
+            const vi = segs.findIndex(x => /^v\d+$/.test(x));
+            let start = vi !== -1 ? vi + 1 : 0;
+            if (vi === -1) while (start < segs.length - 1 && (segs[start].includes(',') || /^[a-z]{1,3}_/i.test(segs[start]))) start++;
+            const rest = segs.slice(start).join('/');
+            const dot = rest.lastIndexOf('.');
+            const idEnc = dot > -1 ? rest.slice(0, dot) : rest;
+            let publicId; try { publicId = decodeURIComponent(idEnc); } catch (e) { publicId = idEnc; }
+            let cloud; try { cloud = decodeURIComponent(m[1]); } catch (e) { cloud = m[1]; }
+            return { cloud, publicId, original: `https://res.cloudinary.com/${m[1]}/image/upload/${vi !== -1 ? segs[vi] + '/' : ''}${rest}` };
+        }
+
+        let pendingUpload = null;   // última subida (guarda el delete_token, válido 10 min)
+        function handleCloudinarySuccess(info, localMeta) {
+            const finalUrl = info.secure_url || info.url || '';
+            document.getElementById('inputUrl').value = finalUrl;
+            previewFormImage(finalUrl);
+            lastExifUrl = finalUrl;
+            pendingUpload = info.delete_token ? { url: finalUrl, token: info.delete_token, at: Date.now() } : null;
+
+            // EXIF: primero lo leído en el navegador; Cloudinary solo como respaldo si el preset lo devuelve
+            const cldMeta = info.image_metadata || info.media_metadata || {};
+            const meta = Object.assign({}, cldMeta, localMeta || {});
+            const hasExif = applyExifToForm(meta, { overwrite: true });
+
+            const editId = document.getElementById('editPhotoId').value;
+            if (!editId) {
+                if (!document.getElementById('inputTitle').value) {
+                    const clean = (info.original_filename || 'foto')
+                        .replace(/\.[^.]+$/, '')
+                        .replace(/[-_]+/g, ' ')
+                        .replace(/\s+[a-z0-9]{6}$/i, '') // sufijo aleatorio que agrega Cloudinary
+                        .trim();
+                    document.getElementById('inputTitle').value = clean.charAt(0).toUpperCase() + clean.slice(1);
+                }
+                const taken = parseExifDate(meta.DateTimeOriginal || meta.CreateDate);
+                if (taken) document.getElementById('inputDate').value = taken;
+                else if (!document.getElementById('inputDate').value) document.getElementById('inputDate').valueAsDate = new Date();
+            }
+
+            if (hasExif) {
+                switchFormTab('tabExif');
+                setExifNotice('ok', 'Datos técnicos y etiquetas importados automáticamente de la foto.');
+                showToast('Foto subida. EXIF importado automáticamente ✨');
+            } else {
+                // Respaldo: leer el EXIF desde la imagen ya subida (si el preset conserva metadatos)
+                showToast('Foto subida a Cloudinary ☁️');
+                autoFillExifFromUrl(finalUrl, { overwrite: true, fillDate: !editId });
+            }
+        }
+
+        function parseExifDate(v) {
+            if (!v) return '';
+            const d = v instanceof Date ? v : new Date(String(v).replace(/^(\d{4}):(\d{2}):(\d{2})/, '$1-$2-$3').replace(' ', 'T'));
+            if (isNaN(d)) return '';
+            const p = n => String(n).padStart(2, '0');
+            return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}`;
+        }
+
+        // Convierte "1/250", "0.004" o 0.004 → "1/250s"
+        function formatShutter(v) {
+            if (v === undefined || v === null || v === '') return '';
+            if (typeof v === 'string' && v.includes('/')) return v.replace(/s$/, '') + 's';
+            const n = parseFloat(v);
+            if (isNaN(n) || n <= 0) return String(v);
+            return n < 1 ? '1/' + Math.round(1 / n) + 's' : (Math.round(n * 10) / 10) + 's';
+        }
+
+        const MESES = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+        function exifDateObj(v) {
+            if (!v) return null;
+            const d = v instanceof Date ? v : new Date(String(v).replace(/^(\d{4}):(\d{2}):(\d{2})/, '$1-$2-$3').replace(' ', 'T'));
+            return isNaN(d) ? null : d;
+        }
+
+        // Convierte el EXIF crudo en campos del álbum (sin tocar el DOM)
+        function extractExifFields(meta) {
+            meta = meta || {};
+            const num = v => { const n = parseFloat(String(v).replace(/[^\d.]/g, '')); return isNaN(n) ? null : n; };
+            const out = { camera: '', lens: '', aperture: '', iso: '', shutter: '', date: '', tags: [] };
+
+            const make = String(meta.Make || '').trim();
+            const model = String(meta.Model || '').trim();
+            if (make || model) out.camera = model.toLowerCase().startsWith(make.toLowerCase()) ? model : [make, model].filter(Boolean).join(' ');
+            out.lens = String(meta.LensModel || meta.Lens || '').trim();
+
+            let f = num(meta.FNumber);
+            if (f === null && meta.ApertureValue != null && num(meta.ApertureValue) !== null) f = Math.pow(2, num(meta.ApertureValue) / 2); // APEX → f/
+            if (f !== null) out.aperture = 'f/' + (Math.round(f * 10) / 10);
+
+            const isoRaw = meta.ISO ?? meta.ISOSpeedRatings;
+            const iso = Array.isArray(isoRaw) ? isoRaw[0] : isoRaw;
+            if (iso !== undefined && iso !== null && iso !== '') out.iso = String(iso);
+
+            let exp = meta.ExposureTime;
+            if ((exp === undefined || exp === null) && meta.ShutterSpeedValue != null && num(meta.ShutterSpeedValue) !== null) exp = Math.pow(2, -num(meta.ShutterSpeedValue)); // APEX → s
+            out.shutter = formatShutter(exp);
+
+            // ---- Tags automáticos ----
+            const t = [];
+            if (make) { const b = make.split(/\s+/)[0]; t.push(b.charAt(0).toUpperCase() + b.slice(1).toLowerCase()); }
+            const fl = num(meta.FocalLength);
+            if (fl !== null) t.push(Math.round(fl) + 'mm');
+            const flash = meta.Flash;
+            const fired = typeof flash === 'number' ? (flash & 1) === 1
+                : typeof flash === 'object' && flash !== null ? !!flash.fired
+                : typeof flash === 'string' ? /fired/i.test(flash) && !/not|no /i.test(flash) : false;
+            if (fired) t.push('Flash');
+            const d = exifDateObj(meta.DateTimeOriginal || meta.CreateDate);
+            if (d) {
+                out.date = parseExifDate(d);
+                t.push(String(d.getFullYear()), MESES[d.getMonth()]);
+                const h = d.getHours();
+                t.push(h < 6 ? 'madrugada' : h < 12 ? 'mañana' : h < 19 ? 'tarde' : 'noche');
+            }
+            out.tags = t;
+            return out;
+        }
+
+        let exifReqId = 0;
+        let lastExifUrl = '';
+
+        function setExifNotice(kind, text) {
+            const box = document.getElementById('exifAutoNotice');
+            const palette = { ok: 'bg-emerald-50 text-emerald-800 border-emerald-200', warn: 'bg-amber-50 text-amber-800 border-amber-200', load: 'bg-celeste-50 text-celeste-700 border-celeste-200' }[kind] || '';
+            box.className = 'flex-1 text-[11px] border rounded-xl px-3 py-2 flex items-center gap-2 ' + palette;
+            document.getElementById('exifNoticeText').textContent = text;
+        }
+
+        // opts.overwrite: pisa campos ya escritos; opts.fillDate: también pone la fecha del evento
+        function applyExifToForm(meta, opts = {}) {
+            const x = extractExifFields(meta);
+            let found = false;
+            const set = (id, v) => {
+                if (!v) return;
+                const el = document.getElementById(id);
+                if (opts.overwrite || !el.value.trim()) { el.value = v; found = true; }
+            };
+            set('inputCamera', x.camera);
+            set('inputLens', x.lens);
+            set('inputAperture', x.aperture);
+            set('inputIso', x.iso);
+            set('inputShutter', x.shutter);
+
+            // Tags: se agregan a los que ya existan, sin duplicar
+            const tagsInput = document.getElementById('inputTags');
+            const cur = tagsInput.value.split(',').map(v => v.trim()).filter(Boolean);
+            const lower = new Set(cur.map(v => v.toLowerCase()));
+            const added = x.tags.filter(v => v && !lower.has(v.toLowerCase()));
+            if (added.length) { tagsInput.value = cur.concat(added).join(', '); found = true; }
+
+            if (opts.fillDate && x.date) document.getElementById('inputDate').value = x.date;
+            return found;
+        }
+
+        // Lee el EXIF de la foto (por URL) y rellena la pestaña "Datos EXIF & Tags"
+        async function autoFillExifFromUrl(url, opts = {}) {
+            url = (url || '').trim();
+            if (!/^https?:/.test(url)) { setExifNotice('warn', 'Pega primero la URL de la foto.'); return false; }
+            const info = parseCloudinaryUrl(url);
+            const my = ++exifReqId;
+            setExifNotice('load', 'Leyendo datos EXIF de la foto…');
+            const meta = await readExif(info ? info.original : url);
+            if (my !== exifReqId) return false;           // el formulario cambió mientras se leía
+            if (meta === null) { setExifNotice('warn', 'No se pudo leer la foto (red, CORS o librería EXIF). Completa los datos a mano.'); return false; }
+            const found = applyExifToForm(meta, opts);
+            setExifNotice(found ? 'ok' : 'warn', found
+                ? 'Datos técnicos y etiquetas importados automáticamente de la foto.'
+                : 'Esta foto no trae datos EXIF (pasa con capturas o fotos reenviadas por WhatsApp/redes). Puedes completarlos a mano.');
+            if (found && !opts.silent) showToast('EXIF detectado ✨ Revisa la pestaña 3');
+            return found;
+        }
+
+        function onUrlChange(v) {
+            v = (v || '').trim();
+            previewFormImage(v);
+            if (v && v !== lastExifUrl && /^https?:/.test(v)) {
+                lastExifUrl = v;
+                autoFillExifFromUrl(v, { overwrite: false, fillDate: !document.getElementById('editPhotoId').value });
+            }
+        }
+        function detectExifFromCurrentUrl() {
+            const v = document.getElementById('inputUrl').value;
+            lastExifUrl = v.trim();
+            autoFillExifFromUrl(v, { overwrite: true, fillDate: false });
+        }
+
+        // Completa en segundo plano el EXIF/tags de las fotos guardadas que aún no lo tienen
+        let enriching = false;
+        async function enrichMissingExif() {
+            if (enriching) return;
+            enriching = true;
+            let changed = 0;
+            try {
+                for (const m of memories) {
+                    if (m.exifChecked || typeof m.url !== 'string' || !/^https?:/.test(m.url)) continue;
+                    if (m.camera || m.lens || m.aperture || m.iso || m.shutter) { m.exifChecked = true; continue; }
+                    const info = parseCloudinaryUrl(m.url);
+                    const meta = await readExif(info ? info.original : m.url);
+                    if (meta === null) continue;           // fallo de red: reintenta en otra sesión
+                    m.exifChecked = true;
+                    const x = extractExifFields(meta);
+                    if (m.fromSync && x.date) m.date = x.date;
+                    delete m.fromSync;
+                    if (x.camera || x.lens || x.aperture || x.iso || x.shutter) {
+                        Object.assign(m, { camera: x.camera, lens: x.lens, aperture: x.aperture, iso: x.iso, shutter: x.shutter });
+                        if (!m.tags || !m.tags.length) m.tags = x.tags;
+                        changed++;
+                    }
+                }
+            } finally { enriching = false; }
+            saveStorage();
+            if (changed) { renderGallery(); showToast(`EXIF y etiquetas completados en ${changed} foto(s) ✨`); }
+        }
+
+        // ---------- Sincronizar desde Cloudinary ----------
+        const CLOUDINARY_TAG = 'album_fotos';
+        const CLOUDINARY_TAG_KEY = 'album_cloudinary_tag';
+
+        async function syncFromCloudinary() {
+            if (!cloudinaryCfg.cloudName) { showToast('Primero configura Cloudinary ☁️'); openCloudinaryModal(); return; }
+            let saved = ''; try { saved = localStorage.getItem(CLOUDINARY_TAG_KEY) || ''; } catch (e) {}
+            const tag = (prompt('Etiqueta de Cloudinary a sincronizar:', saved || CLOUDINARY_TAG) || '').trim();
+            if (!tag) return;
+            try { localStorage.setItem(CLOUDINARY_TAG_KEY, tag); } catch (e) {}
+            const icon = document.getElementById('syncIcon');
+            icon.classList.add('fa-spin');
+            const cn = cloudinaryCfg.cloudName;
+            try {
+                const res = await fetch(`https://res.cloudinary.com/${encodeURIComponent(cn)}/image/list/${encodeURIComponent(tag)}.json`, { cache: 'no-store' });
+                if (!res.ok) {
+                    alert(res.status === 404
+                        ? `No se encontraron fotos con la etiqueta "${tag}".\n\nEn Cloudinary → Media Library, selecciona tus fotos y agrégales esa etiqueta.`
+                        : `Cloudinary bloqueó la lista (HTTP ${res.status}).\n\nEntra a Settings → Security → "Restricted media types" y desmarca "Resource list".`);
+                    return;
+                }
+                const data = await res.json();
+                const today = new Date().toISOString().slice(0, 10);
+                let added = 0;
+                (data.resources || []).forEach(r => {
+                    if (memories.some(m => typeof m.url === 'string' && m.url.includes('/' + r.public_id + '.'))) return;
+                    const raw = r.public_id.split('/').pop().replace(/[-_]+/g, ' ').replace(/\s+[a-z0-9]{6}$/i, '').trim();
+                    memories.unshift({
+                        id: 'mem_' + Date.now() + '_' + added,
+                        url: `https://res.cloudinary.com/${cn}/image/upload/v${r.version}/${r.public_id}.${r.format}`,
+                        title: raw ? raw.charAt(0).toUpperCase() + raw.slice(1) : 'Foto',
+                        subtitle: '', category: 'General', date: parseExifDate(r.created_at) || today,
+                        description: '', location: '', people: [], subPhotos: [], favorite: false,
+                        camera: '', lens: '', aperture: '', iso: '', shutter: '', tags: [], fromSync: true
+                    });
+                    added++;
+                });
+                saveStorage(); renderHighlights(); renderGallery();
+                enrichMissingExif();
+                showToast(added ? `${added} foto(s) nueva(s) desde Cloudinary ☁️` : 'Todo está al día ✨');
+            } catch (err) {
+                alert('No se pudo conectar con Cloudinary. Revisa tu conexión y el Cloud Name.');
+            } finally {
+                icon.classList.remove('fa-spin');
+            }
+        }
+
+        // Si Cloudinary rechaza la URL con transformaciones (f_auto,q_auto,w_...), reintenta con la original
+        document.addEventListener('error', (e) => {
+            const img = e.target;
+            if (!(img instanceof HTMLImageElement)) return;
+            // Sin flag: la URL de reintento ya no coincide con el patrón, así que no hay bucle
+            // (un flag por elemento rompía el visor, que reutiliza el mismo <img> para todas las fotos)
+            const m = img.src.match(/^(https:\/\/res\.cloudinary\.com\/[^/]+\/image\/upload\/)f_auto,q_auto(?:,w_\d+)?\/(.*)$/);
+            if (!m) return;
+            e.stopImmediatePropagation();
+            img.src = m[1] + m[2];
+        }, true);
+
+        // Drag & drop wiring
+        window.addEventListener('DOMContentLoaded', () => {
+            const urlInput = document.getElementById('inputUrl');
+            if (urlInput) urlInput.addEventListener('paste', () => setTimeout(() => onUrlChange(urlInput.value), 60));
+            const zone = document.getElementById('cloudinaryUploadZone');
+            if (!zone) return;
+            ['dragenter', 'dragover'].forEach(evt => zone.addEventListener(evt, (e) => {
+                e.preventDefault();
+                zone.classList.add('drag-over');
+            }));
+            ['dragleave', 'drop'].forEach(evt => zone.addEventListener(evt, (e) => {
+                e.preventDefault();
+                zone.classList.remove('drag-over');
+            }));
+            zone.addEventListener('drop', (e) => {
+                const f = e.dataTransfer.files && e.dataTransfer.files[0];
+                if (f) uploadToCloudinaryFlow(f);
+            });
+        });
+
+        // ---------- Rest of app (unchanged) ----------
+        function scrollHighlights(direction) {
+            const track = document.getElementById('highlightsTrack');
+            track.scrollBy({ left: direction * 280, behavior: 'smooth' });
+        }
+
+        function renderHighlights() {
+            const track = document.getElementById('highlightsTrack');
+            track.innerHTML = '';
+            document.getElementById('highlightsSection').classList.toggle('hidden', memories.length === 0);
+            const favs = memories.filter(m => m.favorite);
+            const itemsToRender = favs.length > 0 ? favs : memories;
+            itemsToRender.forEach(m => {
+                const item = document.createElement('div');
+                item.className = "min-w-[240px] max-w-[240px] h-32 rounded-2xl overflow-hidden relative cursor-pointer group shadow-sm flex-shrink-0 border border-celeste-200";
+                item.onclick = () => openLightbox(m.id);
+                item.innerHTML = `
+                    <img src="${esc(cld(m.url, 600))}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.onerror=null;this.src='https://placehold.co/600x400/e0f2fe/0284c7?text=Memoria'">
+                    <div class="absolute inset-0 bg-gradient-to-t from-celeste-900/80 via-transparent to-transparent p-3 flex flex-col justify-end">
+                        <span class="text-[9px] font-bold text-celeste-200 uppercase tracking-widest">${esc(m.category)}</span>
+                        <h4 class="text-xs font-bold text-white font-serif-title line-clamp-1">${esc(m.title)}</h4>
+                    </div>
+                `;
+                track.appendChild(item);
+            });
+        }
+
+        // 'YYYY-MM-DD' con new Date() se interpreta como UTC y en UTC-3 cae el día anterior
+        function localDate(s) { return new Date(/^\d{4}-\d{2}-\d{2}$/.test(s) ? s + 'T00:00:00' : s); }
+        const esc = t => String(t == null ? '' : t).replace(/[&<>"']/g, c => '&#' + c.charCodeAt(0) + ';');
+        // Optimiza URLs de Cloudinary (f_auto = también muestra HEIC; q_auto; ancho máximo)
+        function cld(url, w) {
+            if (typeof url !== 'string' || !url.includes('res.cloudinary.com') || !url.includes('/image/upload/')) return url;
+            return url.replace('/image/upload/', `/image/upload/f_auto,q_auto${w ? ',w_' + w : ''}/`);
+        }
+
+        function getFilteredMemories() {
+            return memories.filter(m => {
+                const matchesCat = currentCategory === 'todos' || m.category.toLowerCase() === currentCategory.toLowerCase();
+                const matchesFav = !onlyFavorites || m.favorite;
+                const q = searchQuery.toLowerCase();
+                const matchesSearch = !q ||
+                    m.title.toLowerCase().includes(q) ||
+                    (m.subtitle && m.subtitle.toLowerCase().includes(q)) ||
+                    (m.location && m.location.toLowerCase().includes(q)) ||
+                    m.category.toLowerCase().includes(q) ||
+                    (m.description && m.description.toLowerCase().includes(q)) ||
+                    (m.people && m.people.some(p => p.toLowerCase().includes(q))) ||
+                    (m.tags && m.tags.some(t => t.toLowerCase().includes(q)));
+                return matchesCat && matchesFav && matchesSearch;
+            }).sort((a, b) => {
+                if (currentSort === 'recent') return localDate(b.date) - localDate(a.date);
+                if (currentSort === 'oldest') return localDate(a.date) - localDate(b.date);
+                if (currentSort === 'alpha') return a.title.localeCompare(b.title);
+                if (currentSort === 'favorites') return (b.favorite ? 1 : 0) - (a.favorite ? 1 : 0);
+                return 0;
+            });
+        }
+
+        function renderGallery() {
+            const container = document.getElementById('mainViewContainer');
+            const emptyState = document.getElementById('emptyState');
+            renderCategoryPills();
+            const filtered = getFilteredMemories();
+
+            if (filtered.length === 0) {
+                const none = memories.length === 0;
+                document.getElementById('emptyTitle').textContent = none ? 'Tu álbum está vacío' : 'No se encontraron recuerdos';
+                document.getElementById('emptyText').textContent = none ? 'Agrega tu primera foto y escribe el tipo de evento que quieras.' : 'Ajusta los filtros de búsqueda o agrega una nueva fotografía.';
+                const eb = document.getElementById('emptyBtn');
+                eb.textContent = none ? 'Agregar foto' : 'Restablecer Filtros';
+                eb.onclick = none ? openAddModal : resetFilters;
+                container.innerHTML = '';
+                emptyState.classList.remove('hidden');
+                emptyState.classList.add('flex');
+                return;
+            } else {
+                emptyState.classList.add('hidden');
+                emptyState.classList.remove('flex');
+            }
+
+            if (currentViewMode === 'grid') renderGridView(container, filtered);
+            else if (currentViewMode === 'masonry') renderMasonryView(container, filtered);
+            else if (currentViewMode === 'timeline') renderTimelineView(container, filtered);
+            else if (currentViewMode === 'album') renderAlbumView(container, filtered);
+        }
+
+        function renderGridView(container, list) {
+            container.innerHTML = `<div id="photoGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"></div>`;
+            const grid = document.getElementById('photoGrid');
+            list.forEach(item => grid.appendChild(createCardElement(item)));
+        }
+        function renderMasonryView(container, list) {
+            container.innerHTML = `<div id="masonryGrid" class="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-6 space-y-6"></div>`;
+            const grid = document.getElementById('masonryGrid');
+            list.forEach(item => grid.appendChild(createCardElement(item, true)));
+        }
+        function renderTimelineView(container, list) {
+            const groups = {};
+            list.forEach(item => {
+                const dateObj = localDate(item.date);
+                const monthYear = dateObj.toLocaleDateString('es-ES', { month: 'long', year: 'numeric' });
+                if (!groups[monthYear]) groups[monthYear] = [];
+                groups[monthYear].push(item);
+            });
+            container.innerHTML = `<div id="timelineContainer" class="space-y-8 max-w-5xl mx-auto"></div>`;
+            const timeContainer = document.getElementById('timelineContainer');
+            Object.keys(groups).forEach(monthYear => {
+                const groupEl = document.createElement('div');
+                groupEl.className = "space-y-4";
+                groupEl.innerHTML = `
+                    <div class="flex items-center gap-3 border-b border-celeste-200 pb-2">
+                        <i class="fa-solid fa-clock text-celeste-500"></i>
+                        <h3 class="text-sm font-bold capitalize text-celeste-900 font-serif-title">${esc(monthYear)}</h3>
+                        <span class="text-[10px] bg-celeste-100 text-celeste-700 px-2 py-0.5 rounded-full font-bold">${groups[monthYear].length}</span>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+                `;
+                const subGrid = groupEl.querySelector('.grid');
+                groups[monthYear].forEach(item => subGrid.appendChild(createCardElement(item)));
+                timeContainer.appendChild(groupEl);
+            });
+        }
+
+        function createCardElement(item, isMasonry = false) {
+            const card = document.createElement('div');
+            const isSelected = selectedIds.has(item.id);
+            card.className = `glass-card rounded-3xl overflow-hidden transition-all duration-300 flex flex-col cursor-pointer group relative ${isMasonry ? 'break-inside-avoid' : ''} ${isSelected ? 'ring-2 ring-celeste-500' : ''}`;
+            card.onclick = () => {
+                if (isBatchMode) toggleSelectCard(item.id);
+                else openLightbox(item.id);
+            };
+            const peopleBadges = item.people && item.people.length > 0
+                ? `<span class="text-[10px] text-celeste-700 flex items-center gap-1 font-semibold"><i class="fa-solid fa-users text-celeste-400"></i> ${item.people.length}</span>` : '';
+            const subPhotosBadge = item.subPhotos && item.subPhotos.length > 0
+                ? `<span class="absolute bottom-3 left-3 px-2 py-0.5 bg-slate-900/70 backdrop-blur-md text-white rounded-md text-[10px] font-bold"><i class="fa-solid fa-layer-group text-[9px] mr-1"></i>+${item.subPhotos.length}</span>` : '';
+
+            card.innerHTML = `
+                ${isBatchMode ? `<div class="absolute top-3 left-3 z-20"><input type="checkbox" ${isSelected ? 'checked' : ''} class="w-5 h-5 rounded border-celeste-300 text-celeste-600 focus:ring-celeste-400"></div>` : ''}
+                <div class="relative w-full ${isMasonry ? 'h-auto max-h-[400px]' : 'aspect-[4/3]'} overflow-hidden bg-celeste-100">
+                    <img src="${esc(cld(item.url, 800))}" alt="${esc(item.title)}" loading="lazy" onerror="this.onerror=null;this.src='https://placehold.co/600x400/e0f2fe/0284c7?text=Memoria'" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-celeste-900/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    ${!isBatchMode ? `<span class="absolute top-3 left-3 px-2.5 py-1 bg-white/90 backdrop-blur-md text-celeste-800 rounded-full text-[10px] font-bold tracking-wider uppercase border border-celeste-200/60 shadow-sm">${esc(item.category)}</span>` : ''}
+                    ${subPhotosBadge}
+                    <button onclick="event.stopPropagation(); toggleFavoriteCard('${item.id}')" class="absolute top-3 right-3 w-8 h-8 rounded-full ${item.favorite ? 'bg-celeste-500 text-white' : 'bg-white/80 text-celeste-500 hover:bg-white'} backdrop-blur-md flex items-center justify-center transition-all shadow-sm">
+                        <i class="${item.favorite ? 'fa-solid' : 'fa-regular'} fa-heart text-xs"></i>
+                    </button>
+                </div>
+                <div class="p-4 flex flex-col flex-1 justify-between bg-white">
+                    <div>
+                        <div class="flex items-center justify-between text-[10px] font-bold text-celeste-600 uppercase tracking-wider mb-1">
+                            <span><i class="fa-regular fa-calendar-check mr-1"></i>${esc(item.date)}</span>
+                            ${peopleBadges}
+                        </div>
+                        <h3 class="font-bold text-sm text-celeste-900 font-serif-title group-hover:text-celeste-600 transition-colors line-clamp-1">${esc(item.title)}</h3>
+                        ${item.subtitle ? `<p class="text-[11px] font-medium text-celeste-600 line-clamp-1">${esc(item.subtitle)}</p>` : ''}
+                        <p class="text-xs text-celeste-700 flex items-center gap-1 mt-1.5 line-clamp-1"><i class="fa-solid fa-location-dot text-celeste-400"></i> ${esc(item.location)}</p>
+                    </div>
+                </div>
+            `;
+            return card;
+        }
+
+        // Album view
+        let albumIdx = 0, albumSheets = 0, albumPpp = 4;
+        const albumEsc = t => String(t == null ? '' : t).replace(/[&<>"']/g, c => '&#' + c.charCodeAt(0) + ';');
+        function albumPageHTML(items, n) {
+            const figs = items.map((m, k) => `<figure class="bk-ph" style="--r:${k % 2 ? 1.2 : -1.2}deg" onclick="openLightbox('${albumEsc(m.id)}')"><img src="${albumEsc(cld(m.url, 600))}" alt="${albumEsc(m.title)}" loading="lazy"><figcaption><b>${albumEsc(m.title)}</b><span>${albumEsc(m.date)}</span></figcaption></figure>`).join('');
+            return `<div class="bk-page"><div class="bk-grid">${figs}</div><span class="bk-num">${n}</span></div>`;
+        }
+        function renderAlbumView(container, list) {
+            albumPpp = window.innerWidth < 640 ? 2 : 4;
+            const pages = [];
+            for (let i = 0; i < list.length; i += albumPpp) pages.push(list.slice(i, i + albumPpp));
+            if (pages.length % 2 === 0) pages.push([]);
+            const faces = ['<div class="bk-cover"><i class="fa-solid fa-camera"></i><h2>Álbum de Fotos</h2></div>', '<div class="bk-endpaper"></div>']
+                .concat(pages.map((pg, n) => albumPageHTML(pg, n + 1)), ['<div class="bk-cover"></div>']);
+            albumSheets = faces.length / 2;
+            let sheets = '';
+            for (let s = 0; s < albumSheets; s++) {
+                sheets += `<div class="bk-sheet"><div class="bk-face">${faces[2 * s]}</div><div class="bk-face bk-bk">${faces[2 * s + 1]}</div></div>`;
+            }
+            container.innerHTML = `<div class="bk-stage"><div class="bk" id="bk">${sheets}
+                <button class="bk-corner l" onclick="albumFlip(-1)" aria-label="Replegar"><i class="fa-solid fa-angle-left"></i></button>
+                <button class="bk-corner r" onclick="albumFlip(1)" aria-label="Desplegar"><i class="fa-solid fa-angle-right"></i></button></div></div>`;
+            albumIdx = Math.min(albumIdx, albumSheets);
+            albumApply();
+        }
+        function albumApply(movingEl) {
+            const bk = document.getElementById('bk');
+            if (!bk) return;
+            bk.classList.toggle('closed', albumIdx === 0);
+            bk.classList.toggle('ended', albumIdx === albumSheets);
+            bk.querySelectorAll('.bk-sheet').forEach((el, i) => {
+                el.classList.toggle('flipped', i < albumIdx);
+                el.style.zIndex = el === movingEl ? 999 : (i < albumIdx ? i : albumSheets - i);
+            });
+            bk.querySelector('.bk-corner.l').style.display = albumIdx === 0 ? 'none' : '';
+            bk.querySelector('.bk-corner.r').style.display = albumIdx === albumSheets ? 'none' : '';
+        }
+        function albumFlip(dir) {
+            const next = albumIdx + dir;
+            if (next < 0 || next > albumSheets) return;
+            const el = document.querySelectorAll('#bk .bk-sheet')[dir > 0 ? albumIdx : next];
+            albumIdx = next;
+            albumApply(el);
+            setTimeout(() => albumApply(), 950);
+        }
+        window.addEventListener('resize', () => {
+            if (currentViewMode === 'album' && (window.innerWidth < 640 ? 2 : 4) !== albumPpp) { albumIdx = 0; renderGallery(); }
+        });
+
+        function setViewMode(mode) {
+            currentViewMode = mode;
+            document.querySelectorAll('#viewBtnGrid, #viewBtnMasonry, #viewBtnTimeline, #viewBtnAlbum').forEach(btn => {
+                btn.classList.remove('bg-celeste-500', 'text-white');
+                btn.classList.add('text-celeste-700');
+            });
+            const activeBtn = { grid: 'viewBtnGrid', masonry: 'viewBtnMasonry', timeline: 'viewBtnTimeline', album: 'viewBtnAlbum' }[mode];
+            if (mode === 'album') albumIdx = 0;
+            document.getElementById(activeBtn).classList.add('bg-celeste-500', 'text-white');
+            document.getElementById(activeBtn).classList.remove('text-celeste-700');
+            renderGallery();
+        }
+
+        let pillsSig = '';
+        function renderCategoryPills() {
+            const cats = [];
+            memories.forEach(m => {
+                const c = (m.category || '').trim();
+                if (c && !cats.some(x => x.toLowerCase() === c.toLowerCase())) cats.push(c);
+            });
+            cats.sort((a, b) => a.localeCompare(b));
+            if (currentCategory !== 'todos' && !cats.some(c => c.toLowerCase() === currentCategory.toLowerCase())) currentCategory = 'todos';
+            const sig = currentCategory + '|' + cats.join('|');
+            if (sig === pillsSig) return;
+            pillsSig = sig;
+            const box = document.getElementById('categoryFilters');
+            box.innerHTML = '';
+            [['todos', 'Todas', 'fa-layer-group']].concat(cats.map(c => [c, c, 'fa-tag'])).forEach(([val, label, icon]) => {
+                const active = val.toLowerCase() === currentCategory.toLowerCase();
+                const btn = document.createElement('button');
+                btn.className = 'category-btn px-3.5 py-1.5 rounded-2xl text-xs font-bold transition-all whitespace-nowrap ' + (active
+                    ? 'bg-celeste-500 text-white shadow-md shadow-celeste-500/20'
+                    : 'bg-white text-celeste-800 border border-celeste-200 hover:border-celeste-400 shadow-sm');
+                btn.innerHTML = `<i class="fa-solid ${icon} mr-1.5 ${active ? '' : 'text-celeste-500'}"></i>`;
+                btn.appendChild(document.createTextNode(label));
+                btn.onclick = () => filterCategory(val);
+                box.appendChild(btn);
+            });
+            const dl = document.getElementById('categoryList');
+            if (dl) {
+                dl.innerHTML = '';
+                cats.forEach(c => { const o = document.createElement('option'); o.value = c; dl.appendChild(o); });
+            }
+        }
+        function filterCategory(cat) { currentCategory = cat; renderGallery(); }
+
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+            searchQuery = e.target.value.trim();
+            const clearBtn = document.getElementById('clearSearchBtn');
+            if (searchQuery.length > 0) clearBtn.classList.remove('hidden');
+            else clearBtn.classList.add('hidden');
+            renderGallery();
+        });
+        function clearSearch() {
+            document.getElementById('searchInput').value = '';
+            searchQuery = '';
+            document.getElementById('clearSearchBtn').classList.add('hidden');
+            renderGallery();
+        }
+        function resetFilters() {
+            currentCategory = 'todos';
+            searchQuery = '';
+            onlyFavorites = false;
+            document.getElementById('searchInput').value = '';
+            document.getElementById('clearSearchBtn').classList.add('hidden');
+            document.getElementById('favFilterBtn').classList.remove('bg-celeste-500', 'text-white');
+            document.getElementById('favFilterBtn').classList.add('bg-white', 'text-celeste-700');
+            document.getElementById('favFilterIcon').classList.replace('fa-solid', 'fa-regular');
+            filterCategory('todos');
+        }
+        function toggleFavoriteFilter() {
+            onlyFavorites = !onlyFavorites;
+            const btn = document.getElementById('favFilterBtn');
+            const icon = document.getElementById('favFilterIcon');
+            if (onlyFavorites) {
+                btn.classList.add('bg-celeste-500', 'text-white');
+                btn.classList.remove('bg-white', 'text-celeste-700');
+                icon.classList.replace('fa-regular', 'fa-solid');
+            } else {
+                btn.classList.remove('bg-celeste-500', 'text-white');
+                btn.classList.add('bg-white', 'text-celeste-700');
+                icon.classList.replace('fa-solid', 'fa-regular');
+            }
+            renderGallery();
+        }
+        function handleSortChange() { currentSort = document.getElementById('sortOrder').value; renderGallery(); }
+
+        function toggleFavoriteCard(id) {
+            const photo = memories.find(p => p.id === id);
+            if (photo) {
+                photo.favorite = !photo.favorite;
+                saveStorage(); renderHighlights(); renderGallery();
+                showToast(photo.favorite ? "Memoria marcada como favorita 🩵" : "Memoria quitada de favoritas");
+            }
+        }
+
+        function toggleBatchMode(force) {
+            isBatchMode = typeof force === 'boolean' ? force : !isBatchMode;
+            const btn = document.getElementById('batchToggleBtn');
+            const actionBar = document.getElementById('floatingActionBar');
+            if (isBatchMode) {
+                btn.classList.add('bg-celeste-500', 'text-white');
+                actionBar.classList.remove('hidden');
+                actionBar.classList.add('flex');
+            } else {
+                btn.classList.remove('bg-celeste-500', 'text-white');
+                actionBar.classList.add('hidden');
+                actionBar.classList.remove('flex');
+                selectedIds.clear();
+            }
+            updateSelectedCount();
+            renderGallery();
+        }
+        function toggleSelectCard(id) {
+            if (selectedIds.has(id)) selectedIds.delete(id);
+            else selectedIds.add(id);
+            updateSelectedCount();
+            renderGallery();
+        }
+        function updateSelectedCount() {
+            document.getElementById('selectedCount').textContent = selectedIds.size;
+        }
+        async function deleteSelectedBatch() {
+            if (selectedIds.size === 0) return;
+            const list = memories.filter(m => selectedIds.has(m.id));
+            if (await removeMemories(list)) toggleBatchMode(false);
+        }
+        function exportSelectedJSON() {
+            if (selectedIds.size === 0) return;
+            const items = memories.filter(m => selectedIds.has(m.id));
+            downloadJSON(items, 'album_seleccion.json');
+        }
+
+        // Lightbox
+        function openLightbox(id) {
+            const photo = memories.find(p => p.id === id);
+            if (!photo) return;
+            activePhotoId = id;
+            activeSubPhotoIndex = -1;
+            isCompareMode = false;
+            isZoomed = false;
+            document.getElementById('lbImage').style.transform = 'scale(1)';
+            document.getElementById('zoomIcon').className = "fa-solid fa-magnifying-glass-plus";
+            updateLbImageView();
+            document.getElementById('lbCategory').textContent = photo.category;
+            document.getElementById('lbDate').textContent = photo.date;
+            document.getElementById('lbTitle').textContent = photo.title;
+            document.getElementById('lbSubtitle').textContent = photo.subtitle || '';
+            document.getElementById('lbDescription').textContent = photo.description || 'Sin descripción guardada.';
+            document.getElementById('lbLocation').textContent = photo.location;
+            updateLbFavState(photo.favorite);
+
+            const subBar = document.getElementById('lbSubGalleryBar');
+            subBar.innerHTML = '';
+            if (photo.subPhotos && photo.subPhotos.length > 0) {
+                subBar.classList.remove('hidden');
+                subBar.classList.add('flex');
+                const heroThumb = document.createElement('img');
+                heroThumb.src = cld(photo.url, 120);
+                heroThumb.className = "w-10 h-10 object-cover rounded-lg cursor-pointer border-2 border-celeste-400";
+                heroThumb.onclick = () => selectLbSubPhoto(-1);
+                subBar.appendChild(heroThumb);
+                photo.subPhotos.forEach((subUrl, idx) => {
+                    const thumb = document.createElement('img');
+                    thumb.src = cld(subUrl, 120);
+                    thumb.className = "w-10 h-10 object-cover rounded-lg cursor-pointer border-2 border-transparent hover:border-celeste-300 opacity-70 hover:opacity-100";
+                    thumb.onclick = () => selectLbSubPhoto(idx);
+                    subBar.appendChild(thumb);
+                });
+                document.getElementById('compareToggleBtn').classList.remove('hidden');
+            } else {
+                subBar.classList.add('hidden');
+                document.getElementById('compareToggleBtn').classList.add('hidden');
+            }
+
+            const peopleContainer = document.getElementById('lbPeople');
+            peopleContainer.innerHTML = '';
+            if (photo.people && photo.people.length > 0) {
+                photo.people.forEach(person => {
+                    const tag = document.createElement('span');
+                    tag.className = "px-2.5 py-1 bg-celeste-50 border border-celeste-200 text-celeste-800 rounded-full text-xs font-semibold";
+                    tag.innerHTML = `<i class="fa-solid fa-user-check mr-1 text-celeste-500"></i> ${esc(person)}`;
+                    peopleContainer.appendChild(tag);
+                });
+            } else {
+                peopleContainer.innerHTML = `<span class="text-xs text-celeste-400 italic">No hay personas etiquetadas</span>`;
+            }
+
+            const tagsBox = document.getElementById('lbTags');
+            tagsBox.innerHTML = '';
+            if (photo.tags && photo.tags.length > 0) {
+                photo.tags.forEach(t => {
+                    tagsBox.innerHTML += `<span class="text-[10px] bg-celeste-100 text-celeste-700 px-2 py-0.5 rounded-md font-bold">#${esc(t)}</span>`;
+                });
+            }
+
+            const exifGrid = document.getElementById('lbExifGrid');
+            exifGrid.innerHTML = `
+                <div><strong class="text-celeste-900">Cámara:</strong> ${esc(photo.camera || '—')}</div>
+                <div><strong class="text-celeste-900">Lente:</strong> ${esc(photo.lens || '—')}</div>
+                <div><strong class="text-celeste-900">Apertura:</strong> ${esc(photo.aperture || '—')}</div>
+                <div><strong class="text-celeste-900">ISO:</strong> ${esc(photo.iso || '—')}</div>
+                <div><strong class="text-celeste-900">Obturación:</strong> ${esc(photo.shutter || '—')}</div>
+            `;
+
+            const modal = document.getElementById('lightboxModal');
+            clearTimeout(lbHideTimer);
+            modal.classList.remove('hidden');
+            setTimeout(() => modal.classList.remove('opacity-0'), 10);
+        }
+
+        function updateLbImageView() {
+            const photo = memories.find(p => p.id === activePhotoId);
+            if (!photo) return;
+            const mainImg = document.getElementById('lbImage');
+            const targetUrl = activeSubPhotoIndex === -1 ? photo.url : photo.subPhotos[activeSubPhotoIndex];
+            const hi = cld(targetUrl, 1800), lo = cld(targetUrl, 800);
+            mainImg.dataset.want = hi;
+            mainImg.src = lo;                       // ya está en caché por la galería: se ve al instante
+            if (hi !== lo) {
+                const pre = new Image();
+                pre.onload = () => { if (mainImg.dataset.want === hi) mainImg.src = hi; };
+                pre.src = hi;
+            }
+            if (isCompareMode && photo.subPhotos && photo.subPhotos.length > 0) {
+                document.getElementById('compareContainer').classList.remove('hidden');
+                document.getElementById('lbCompareImg1').src = cld(photo.url, 1200);
+                document.getElementById('lbCompareImg2').src = cld(photo.subPhotos[0], 1200);
+            } else {
+                document.getElementById('compareContainer').classList.add('hidden');
+            }
+        }
+        function selectLbSubPhoto(index) { activeSubPhotoIndex = index; updateLbImageView(); }
+        function toggleCompareMode() { isCompareMode = !isCompareMode; updateLbImageView(); }
+        function toggleZoom() {
+            isZoomed = !isZoomed;
+            const img = document.getElementById('lbImage');
+            const icon = document.getElementById('zoomIcon');
+            if (isZoomed) { img.style.transform = 'scale(1.8)'; icon.className = "fa-solid fa-magnifying-glass-minus"; }
+            else { img.style.transform = 'scale(1)'; icon.className = "fa-solid fa-magnifying-glass-plus"; }
+        }
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) document.getElementById('lightboxModal').requestFullscreen().catch(() => {});
+            else document.exitFullscreen();
+        }
+        function updateLbFavState(isFav) {
+            const icon = document.getElementById('lbFavIcon');
+            const text = document.getElementById('lbFavText');
+            if (isFav) { icon.className = "fa-solid fa-heart text-celeste-600"; text.textContent = "Favorito"; }
+            else { icon.className = "fa-regular fa-heart text-celeste-500"; text.textContent = "Marcar Favorito"; }
+        }
+        function toggleFavoriteCurrent() {
+            if (!activePhotoId) return;
+            const photo = memories.find(p => p.id === activePhotoId);
+            if (photo) {
+                photo.favorite = !photo.favorite;
+                updateLbFavState(photo.favorite);
+                saveStorage(); renderHighlights(); renderGallery();
+            }
+        }
+        function navigateLightbox(direction) {
+            if (!activePhotoId) return;
+            const filtered = getFilteredMemories();
+            const currentIndex = filtered.findIndex(p => p.id === activePhotoId);
+            if (currentIndex === -1) return;
+            let nextIndex = currentIndex + direction;
+            if (nextIndex < 0) nextIndex = filtered.length - 1;
+            if (nextIndex >= filtered.length) nextIndex = 0;
+            openLightbox(filtered[nextIndex].id);
+        }
+        document.addEventListener('keydown', (e) => {
+            if (!activePhotoId) return;
+            if (e.key === 'ArrowLeft') navigateLightbox(-1);
+            if (e.key === 'ArrowRight') navigateLightbox(1);
+            if (e.key === 'Escape') closeLightbox();
+        });
+        let lbHideTimer;
+        function closeLightbox() {
+            const modal = document.getElementById('lightboxModal');
+            modal.classList.add('opacity-0');
+            clearTimeout(lbHideTimer);
+            lbHideTimer = setTimeout(() => modal.classList.add('hidden'), 300);
+            activePhotoId = null;
+        }
+        async function deleteCurrentPhoto() {
+            const photo = memories.find(p => p.id === activePhotoId);
+            if (!photo) return;
+            if (await removeMemories([photo])) closeLightbox();
+        }
+
+        // ---------- Eliminar (álbum + Cloudinary) ----------
+        const isCloudinaryAsset = m => { const i = parseCloudinaryUrl(m.url); return !!i && i.cloud === cloudinaryCfg.cloudName; };
+        function cloudDeleteMethod(m) {
+            if (!isCloudinaryAsset(m)) return null;
+            if (cloudinaryApi.apiKey && cloudinaryApi.apiSecret) return 'signed';
+            if (m.cldDeleteToken && Date.now() - (m.cldTokenAt || 0) < 9 * 60 * 1000) return 'token'; // el token vale 10 min
+            return null;
+        }
+        async function sha1Hex(str) {
+            if (!window.crypto || !crypto.subtle) throw new Error('crypto');
+            const buf = await crypto.subtle.digest('SHA-1', new TextEncoder().encode(str));
+            return [...new Uint8Array(buf)].map(b => b.toString(16).padStart(2, '0')).join('');
+        }
+        async function destroyCloudinaryAsset(m) {
+            const info = parseCloudinaryUrl(m.url);
+            const method = cloudDeleteMethod(m);
+            if (!info || !method) return { ok: false, reason: 'faltan las credenciales de Cloudinary (☁️ → API Key y Secret)' };
+            const base = `https://api.cloudinary.com/v1_1/${encodeURIComponent(info.cloud)}`;
+            const fd = new FormData();
+            let endpoint;
+            try {
+                if (method === 'signed') {
+                    const ts = Math.floor(Date.now() / 1000);
+                    // La firma incluye los parámetros en orden alfabético + el API Secret
+                    const signature = await sha1Hex(`invalidate=true&public_id=${info.publicId}&timestamp=${ts}${cloudinaryApi.apiSecret}`);
+                    fd.append('public_id', info.publicId);
+                    fd.append('invalidate', 'true');
+                    fd.append('timestamp', String(ts));
+                    fd.append('api_key', cloudinaryApi.apiKey);
+                    fd.append('signature', signature);
+                    endpoint = base + '/image/destroy';
+                } else {
+                    fd.append('token', m.cldDeleteToken);
+                    endpoint = base + '/delete_by_token';
+                }
+                const res = await fetch(endpoint, { method: 'POST', body: fd });
+                const data = await res.json().catch(() => ({}));
+                if (res.ok && (data.result === 'ok' || data.result === 'not found')) return { ok: true };
+                return { ok: false, reason: (data.error && data.error.message) || ('HTTP ' + res.status) };
+            } catch (e) {
+                return { ok: false, reason: e.message === 'crypto' ? 'el navegador no permite firmar (usa https o localhost)' : 'error de red' };
+            }
+        }
+
+        let deleteResolver = null;
+        function askDelete(text, cloud) {
+            return new Promise(resolve => {
+                deleteResolver = resolve;
+                document.getElementById('deleteModalText').textContent = text;
+                const row = document.getElementById('deleteCloudRow');
+                const chk = document.getElementById('deleteCloudChk');
+                row.classList.toggle('hidden', cloud.count === 0);
+                chk.disabled = !cloud.canDelete;
+                chk.checked = cloud.canDelete;
+                document.getElementById('deleteCloudHint').textContent = cloud.hint;
+                const modal = document.getElementById('deleteModal');
+                modal.classList.remove('hidden'); modal.classList.add('flex');
+            });
+        }
+        function resolveDelete(ok) {
+            const chk = document.getElementById('deleteCloudChk');
+            const row = document.getElementById('deleteCloudRow');
+            const cloud = ok && !row.classList.contains('hidden') && chk.checked && !chk.disabled;
+            const modal = document.getElementById('deleteModal');
+            modal.classList.add('hidden'); modal.classList.remove('flex');
+            const r = deleteResolver; deleteResolver = null;
+            if (r) r({ ok, cloud });
+        }
+
+        // Devuelve true si se eliminó algo
+        async function removeMemories(list) {
+            if (!list.length) return false;
+            const cloudItems = list.filter(isCloudinaryAsset);
+            const capable = cloudItems.filter(m => cloudDeleteMethod(m)).length;
+            let hint = 'Se borrará de tu cuenta de Cloudinary de forma permanente.';
+            if (cloudItems.length && capable === 0) hint = 'No disponible: agrega tu API Key y API Secret en el botón ☁️ Cloudinary.';
+            else if (capable < cloudItems.length) hint = `Solo se pueden borrar ${capable} de ${cloudItems.length} (faltan credenciales para el resto).`;
+            const text = list.length === 1 ? `¿Eliminar "${list[0].title}" del álbum?` : `¿Eliminar ${list.length} fotos del álbum?`;
+            const res = await askDelete(text, { count: cloudItems.length, canDelete: capable > 0, hint });
+            if (!res.ok) return false;
+
+            const keep = new Set();   // las que Cloudinary no pudo borrar se conservan para no dejarlas huérfanas
+            const errors = [];
+            if (res.cloud) {
+                for (const m of cloudItems) {
+                    const r = await destroyCloudinaryAsset(m);
+                    if (!r.ok) { keep.add(m.id); errors.push(`"${m.title}": ${r.reason}`); }
+                }
+            }
+            const ids = new Set(list.filter(m => !keep.has(m.id)).map(m => m.id));
+            memories = memories.filter(m => !ids.has(m.id));
+            saveStorage(); renderHighlights(); renderGallery();
+            if (errors.length) alert(`No se pudo borrar de Cloudinary (se conservó en el álbum):\n\n${errors.join('\n')}`);
+            if (ids.size) showToast(ids.size === 1 ? 'Fotografía eliminada correctamente' : `${ids.size} fotografías eliminadas`);
+            return ids.size > 0;
+        }
+        function shareCurrentPhoto() {
+            if (!activePhotoId) return;
+            const photo = memories.find(p => p.id === activePhotoId);
+            if (photo) {
+                const done = () => showToast("Enlace copiado al portapapeles ✨");
+                if (navigator.clipboard) navigator.clipboard.writeText(photo.url).then(done, () => showToast('No se pudo copiar el enlace'));
+                else { const t = document.createElement('textarea'); t.value = photo.url; document.body.appendChild(t); t.select(); document.execCommand('copy'); t.remove(); done(); }
+            }
+        }
+        function openMapModal() {
+            if (!activePhotoId) return;
+            const photo = memories.find(p => p.id === activePhotoId);
+            document.getElementById('mapLocationName').textContent = photo ? photo.location : '';
+            document.getElementById('mapModal').classList.remove('hidden');
+        }
+        function closeMapModal() { document.getElementById('mapModal').classList.add('hidden'); }
+
+        // Add / Edit Modal
+        function openAddModal() {
+            document.getElementById('editPhotoId').value = '';
+            document.getElementById('modalFormTitle').innerHTML = `<i class="fa-solid fa-cloud-arrow-up text-celeste-500"></i> Guardar Nueva Memoria`;
+            document.getElementById('photoForm').reset();
+            document.getElementById('inputDate').valueAsDate = new Date();
+            document.getElementById('urlPreviewBox').classList.add('hidden');
+            document.getElementById('exifAutoNotice').classList.add('hidden');
+            exifReqId++; lastExifUrl = ''; pendingUpload = null;
+            switchFormTab('tabGeneral');
+            const modal = document.getElementById('addModal');
+            modal.classList.remove('hidden');
+            setTimeout(() => modal.classList.remove('opacity-0'), 10);
+        }
+        function editCurrentPhoto() {
+            if (!activePhotoId) return;
+            const photo = memories.find(p => p.id === activePhotoId);
+            if (!photo) return;
+            document.getElementById('editPhotoId').value = photo.id;
+            document.getElementById('modalFormTitle').innerHTML = `<i class="fa-solid fa-pen-to-square text-celeste-500"></i> Editar Memoria`;
+            document.getElementById('inputUrl').value = photo.url;
+            previewFormImage(photo.url);
+            document.getElementById('inputTitle').value = photo.title;
+            document.getElementById('inputSubtitle').value = photo.subtitle || '';
+            document.getElementById('inputCategory').value = photo.category;
+            document.getElementById('inputDate').value = photo.date;
+            document.getElementById('inputDescription').value = photo.description || '';
+            document.getElementById('inputLocation').value = photo.location;
+            document.getElementById('inputPeople').value = photo.people ? photo.people.join(', ') : '';
+            document.getElementById('inputSubPhotos').value = photo.subPhotos ? photo.subPhotos.join(', ') : '';
+            document.getElementById('inputFavorite').checked = photo.favorite;
+            document.getElementById('inputCamera').value = photo.camera || '';
+            document.getElementById('inputLens').value = photo.lens || '';
+            document.getElementById('inputAperture').value = photo.aperture || '';
+            document.getElementById('inputIso').value = photo.iso || '';
+            document.getElementById('inputShutter').value = photo.shutter || '';
+            document.getElementById('inputTags').value = photo.tags ? photo.tags.join(', ') : '';
+            document.getElementById('exifAutoNotice').classList.add('hidden');
+            exifReqId++; pendingUpload = null; lastExifUrl = photo.url;
+            // Si la foto aún no tiene datos técnicos, se intentan leer automáticamente
+            if (!photo.camera && !photo.lens && !photo.aperture && !photo.iso && !photo.shutter) {
+                autoFillExifFromUrl(photo.url, { overwrite: false, fillDate: false, silent: true });
+            }
+            closeLightbox();
+            switchFormTab('tabGeneral');
+            const modal = document.getElementById('addModal');
+            modal.classList.remove('hidden');
+            setTimeout(() => modal.classList.remove('opacity-0'), 10);
+        }
+        function previewFormImage(url) {
+            const box = document.getElementById('urlPreviewBox');
+            const img = document.getElementById('urlPreviewImg');
+            if (url && url.startsWith('http')) {
+                img.src = cld(url, 800);
+                box.classList.remove('hidden');
+            } else box.classList.add('hidden');
+        }
+        function switchFormTab(tabId) {
+            document.querySelectorAll('.form-tab-content').forEach(tab => tab.classList.add('hidden'));
+            document.getElementById(tabId).classList.remove('hidden');
+            document.querySelectorAll('#tabBtnGeneral, #tabBtnLocation, #tabBtnExif').forEach(btn => {
+                btn.classList.remove('border-celeste-500', 'text-celeste-900', 'font-bold');
+                btn.classList.add('border-transparent');
+            });
+            const activeBtn = tabId === 'tabGeneral' ? 'tabBtnGeneral' : (tabId === 'tabLocation' ? 'tabBtnLocation' : 'tabBtnExif');
+            document.getElementById(activeBtn).classList.add('border-celeste-500', 'text-celeste-900', 'font-bold');
+            document.getElementById(activeBtn).classList.remove('border-transparent');
+        }
+        function closeAddModal() {
+            const modal = document.getElementById('addModal');
+            modal.classList.add('opacity-0');
+            setTimeout(() => modal.classList.add('hidden'), 300);
+        }
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            const editId = document.getElementById('editPhotoId').value;
+            const url = document.getElementById('inputUrl').value.trim();
+            const title = document.getElementById('inputTitle').value.trim();
+            const subtitle = document.getElementById('inputSubtitle').value.trim();
+            const category = document.getElementById('inputCategory').value.trim();
+            const date = document.getElementById('inputDate').value;
+            const description = document.getElementById('inputDescription').value.trim();
+            const location = document.getElementById('inputLocation').value.trim();
+            const peopleRaw = document.getElementById('inputPeople').value.trim();
+            const people = peopleRaw ? peopleRaw.split(',').map(p => p.trim()).filter(p => p) : [];
+            const subPhotosRaw = document.getElementById('inputSubPhotos').value.trim();
+            const subPhotos = subPhotosRaw ? subPhotosRaw.split(',').map(s => s.trim()).filter(s => s) : [];
+            const favorite = document.getElementById('inputFavorite').checked;
+            const camera = document.getElementById('inputCamera').value.trim();
+            const lens = document.getElementById('inputLens').value.trim();
+            const aperture = document.getElementById('inputAperture').value.trim();
+            const iso = document.getElementById('inputIso').value.trim();
+            const shutter = document.getElementById('inputShutter').value.trim();
+            const tagsRaw = document.getElementById('inputTags').value.trim();
+            const tags = tagsRaw ? tagsRaw.split(',').map(t => t.trim()).filter(t => t) : [];
+
+            const tokenData = (pendingUpload && pendingUpload.url === url) ? { cldDeleteToken: pendingUpload.token, cldTokenAt: pendingUpload.at } : {};
+
+            if (editId) {
+                const index = memories.findIndex(m => m.id === editId);
+                if (index !== -1) {
+                    memories[index] = { ...memories[index], url, title, subtitle, category, date, description, location, people, subPhotos, favorite, camera, lens, aperture, iso, shutter, tags, exifChecked: true, ...tokenData };
+                }
+                showToast("Memoria actualizada 🩵");
+            } else {
+                const newMem = { id: 'mem_' + Date.now(), url, title, subtitle, category, date, description, location, people, subPhotos, favorite, camera, lens, aperture, iso, shutter, tags, exifChecked: true, ...tokenData };
+                memories.unshift(newMem);
+                showToast("¡Nueva memoria agregada!");
+            }
+            saveStorage(); closeAddModal(); renderHighlights(); renderGallery();
+        }
+
+        // Drawer
+        function toggleStatsDrawer() {
+            const drawer = document.getElementById('statsDrawer');
+            if (drawer.classList.contains('translate-x-full')) drawer.classList.remove('translate-x-full');
+            else drawer.classList.add('translate-x-full');
+        }
+        function updateDrawerStats() {
+            document.getElementById('drawerStatTotal').textContent = memories.length;
+            document.getElementById('drawerStatFavs').textContent = memories.filter(m => m.favorite).length;
+            const catMap = {};
+            memories.forEach(m => { catMap[m.category] = (catMap[m.category] || 0) + 1; });
+            const catContainer = document.getElementById('drawerCatBreakdown');
+            catContainer.innerHTML = '';
+            Object.keys(catMap).forEach(cat => {
+                const pct = memories.length ? Math.round((catMap[cat] / memories.length) * 100) : 0;
+                catContainer.innerHTML += `
+                    <div class="text-xs">
+                        <div class="flex justify-between font-semibold text-celeste-800 mb-1">
+                            <span>${esc(cat)}</span><span>${catMap[cat]} (${pct}%)</span>
+                        </div>
+                        <div class="w-full bg-celeste-100 h-2 rounded-full overflow-hidden">
+                            <div class="bg-celeste-500 h-full rounded-full" style="width: ${pct}%"></div>
+                        </div>
+                    </div>`;
+            });
+            const peopleMap = {};
+            memories.forEach(m => { if (m.people) m.people.forEach(p => peopleMap[p] = (peopleMap[p] || 0) + 1); });
+            const peopleContainer = document.getElementById('drawerTopPeople');
+            peopleContainer.innerHTML = '';
+            Object.keys(peopleMap).forEach(person => {
+                peopleContainer.innerHTML += `<span class="px-2.5 py-1 bg-celeste-100 text-celeste-800 rounded-full text-xs font-semibold">${esc(person)} (${peopleMap[person]})</span>`;
+            });
+        }
+
+        // Import/Export
+        function exportFullJSON() { downloadJSON(memories, 'album_backup.json'); }
+        function downloadJSON(data, filename) {
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = filename;
+            a.click();
+            showToast("Archivo JSON descargado");
+        }
+        function importJSON(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                try {
+                    const imported = JSON.parse(event.target.result);
+                    if (Array.isArray(imported)) {
+                        memories = imported.filter(m => m && typeof m.url === 'string').map((m, i) => ({
+                            ...m,
+                            id: m.id || 'mem_' + Date.now() + '_' + i,
+                            title: String(m.title || 'Sin título'),
+                            category: String(m.category || 'General'),
+                            location: String(m.location || ''),
+                            date: String(m.date || '')
+                        }));
+                        saveStorage(); renderHighlights(); renderGallery();
+                        showToast("Memorias importadas con éxito");
+                    } else showToast("El JSON debe ser una lista de memorias");
+                } catch (err) { showToast("Error al procesar el archivo JSON"); }
+            };
+            reader.readAsText(file);
+            e.target.value = '';
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMessage').textContent = message;
+            toast.classList.remove('translate-y-24', 'opacity-0');
+            setTimeout(() => toast.classList.add('translate-y-24', 'opacity-0'), 3000);
+        }
+
+        window.onload = initApp;
+    </script>
+</body>
+</html>
