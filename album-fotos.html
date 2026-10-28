@@ -690,7 +690,7 @@
             <h3 class="text-base font-bold font-serif-title text-celeste-900 flex items-center gap-2">
                 <i class="fa-solid fa-cloud text-celeste-500"></i> Configuración de Cloudinary
             </h3>
-            <p class="text-xs text-celeste-700">Configura tu cuenta de Cloudinary para subir fotos. Los datos EXIF se leen automáticamente de la foto.</p>
+            <p class="text-xs text-celeste-700">Configura tu cuenta de Cloudinary para subir fotos. Los datos EXIF se leen automáticamente de la foto. Con tu API Key y Secret, además, todo lo que edites (título, evento, fecha, lugar, personas, etiquetas, favoritos…) se guarda también en Cloudinary y vuelve al sincronizar.</p>
 
             <label class="block text-xs font-semibold text-celeste-800">Cloud Name
                 <input id="cloudinaryCloudName" required placeholder="mi-cuenta-cloud" class="mt-1 w-full px-3.5 py-2 bg-celeste-50/50 border border-celeste-200 rounded-xl text-xs font-normal focus:outline-none focus:border-celeste-500">
@@ -701,8 +701,8 @@
             </label>
 
             <div class="pt-2 border-t border-celeste-100 space-y-2">
-                <p class="text-xs font-bold text-celeste-800 flex items-center gap-1.5"><i class="fa-solid fa-trash-can text-red-500"></i> Borrar fotos de Cloudinary (opcional)</p>
-                <p class="text-[10px] text-celeste-600">Cloudinary exige una firma para borrar. Pega tu API Key y API Secret (Dashboard → API Keys). Se guardan <b>solo en este navegador</b>, nunca en el archivo. Úsalo únicamente en tus dispositivos personales.</p>
+                <p class="text-xs font-bold text-celeste-800 flex items-center gap-1.5"><i class="fa-solid fa-cloud-arrow-up text-celeste-500"></i> Guardar cambios y borrar fotos en Cloudinary (opcional)</p>
+                <p class="text-[10px] text-celeste-600">Cloudinary exige una firma para modificar o borrar fotos ya subidas. Pega tu API Key y API Secret (Dashboard → API Keys). Se guardan <b>solo en este navegador</b>, nunca en el archivo. Úsalo únicamente en tus dispositivos personales. Hace falta en cada dispositivo desde el que quieras guardar cambios; para ver y sincronizar no.</p>
                 <input id="cloudinaryApiKey" autocomplete="off" placeholder="API Key" class="w-full px-3.5 py-2 bg-celeste-50/50 border border-celeste-200 rounded-xl text-xs font-normal focus:outline-none focus:border-celeste-500">
                 <input id="cloudinaryApiSecret" type="password" autocomplete="off" placeholder="API Secret" class="w-full px-3.5 py-2 bg-celeste-50/50 border border-celeste-200 rounded-xl text-xs font-normal focus:outline-none focus:border-celeste-500">
             </div>
@@ -808,6 +808,8 @@
             renderGallery();
             updateDrawerStats();
             enrichMissingExif();
+            // Álbum vacío (navegador nuevo o datos borrados): se recupera solo desde Cloudinary
+            if (!memories.length && cloudinaryCfg.cloudName) syncFromCloudinary({ auto: true });
         }
 
         function saveStorage() {
@@ -1186,7 +1188,6 @@
                     m.exifChecked = true;
                     const x = extractExifFields(meta);
                     if (m.fromSync && x.date) m.date = x.date;
-                    delete m.fromSync;
                     if (x.camera || x.lens || x.aperture || x.iso || x.shutter) {
                         Object.assign(m, { camera: x.camera, lens: x.lens, aperture: x.aperture, iso: x.iso, shutter: x.shutter });
                         if (!m.tags || !m.tags.length) m.tags = x.tags;
@@ -1198,48 +1199,252 @@
             if (changed) { renderGallery(); showToast(`EXIF y etiquetas completados en ${changed} foto(s) ✨`); }
         }
 
+        // ---------- Guardar los datos de cada foto en Cloudinary ----------
+        // Título, evento, fecha, lugar, personas, etiquetas, favorito y datos EXIF se guardan en cada foto de
+        // Cloudinary como "contextual metadata". Escribirlos exige la API firmada (API Key + Secret, que solo
+        // viven en este navegador). Se leen de vuelta con "Sincronizar" (la lista por etiqueta incluye el contexto).
+        function canWriteCloud() { return !!(cloudinaryCfg.cloudName && cloudinaryApi.apiKey && cloudinaryApi.apiSecret); }
+
+        const CTX_CHUNK = 240;      // cada valor de contexto admite ~255 caracteres: los textos largos se parten en trozos
+        const CTX_MAX_CHUNKS = 12;
+        function ctxClean(v) { return String(v == null ? '' : v).replace(/\\/g, '/').replace(/\s*[\r\n]+\s*/g, ' ').trim(); }
+        function ctxChunks(raw) {
+            const units = [];
+            for (const ch of ctxClean(raw)) units.push((ch === '|' || ch === '=') ? '\\' + ch : ch);   // | y = se escapan con barra invertida
+            const out = []; let i = 0;
+            while (i < units.length) {
+                let end = i, len = 0;
+                while (end < units.length && len + units[end].length <= CTX_CHUNK) len += units[end++].length;
+                if (end < units.length) {
+                    // el corte nunca deja un espacio al borde de un trozo (por si Cloudinary recorta espacios de los valores)
+                    let cut = end;
+                    while (cut > i + 1 && (/\s/.test(units[cut - 1]) || /\s/.test(units[cut]))) cut--;
+                    end = cut;
+                }
+                out.push(units.slice(i, end).join(''));
+                i = end;
+            }
+            return out;
+        }
+
+        // Foto del álbum → cadena "clave=valor|clave=valor" para Cloudinary (los campos vacíos no se envían)
+        function memoryToContext(m) {
+            const fields = [
+                ['caption', m.title], ['sub', m.subtitle], ['cat', m.category], ['date', m.date], ['desc', m.description],
+                ['loc', m.location], ['ppl', (m.people || []).join(', ')], ['tags', (m.tags || []).join(', ')],
+                ['fav', m.favorite ? '1' : ''], ['subph', (m.subPhotos || []).join(' ')],
+                ['cam', m.camera], ['lens', m.lens], ['ap', m.aperture], ['iso', m.iso], ['sh', m.shutter],
+                ['upd', String(m.updatedAt || Date.now())]
+            ];
+            const pairs = []; let truncated = false;
+            fields.forEach(([k, v]) => {
+                let chunks = ctxChunks(v);
+                if (chunks.length > CTX_MAX_CHUNKS) { chunks = chunks.slice(0, CTX_MAX_CHUNKS); truncated = true; }
+                chunks.forEach((c, i) => pairs.push((i ? k + '_' + (i + 1) : k) + '=' + c));
+            });
+            return { text: pairs.join('|'), truncated };
+        }
+
+        function ctxGet(custom, key) {
+            let s = '';
+            for (let i = 1; i <= CTX_MAX_CHUNKS; i++) {
+                const v = custom[i === 1 ? key : key + '_' + i];
+                if (v == null) break;
+                s += String(v);
+            }
+            return s.replace(/\\([|=])/g, '$1');
+        }
+        const ctxList = (s, sep) => s ? String(s).split(sep).map(x => x.trim()).filter(Boolean) : [];
+
+        // Contexto de Cloudinary → campos del álbum. Devuelve null si la foto no tiene datos guardados por el álbum.
+        function contextToFields(custom) {
+            if (!custom || typeof custom !== 'object') return null;
+            const g = k => ctxGet(custom, k);
+            const upd = parseInt(g('upd'), 10) || 0;
+            const title = g('caption');
+            if (!upd || !title) return null;
+            const fields = {
+                title, subtitle: g('sub'), category: g('cat') || 'General', description: g('desc'), location: g('loc'),
+                people: ctxList(g('ppl'), ','), tags: ctxList(g('tags'), ','), favorite: g('fav') === '1',
+                subPhotos: ctxList(g('subph'), /\s+/),
+                camera: g('cam'), lens: g('lens'), aperture: g('ap'), iso: g('iso'), shutter: g('sh')
+            };
+            if (g('date')) fields.date = g('date');
+            return { updatedAt: upd, fields };
+        }
+
+        function sameCloudAsset(m, publicId) {
+            const i = parseCloudinaryUrl(m.url);
+            return !!i && i.cloud === cloudinaryCfg.cloudName && i.publicId === publicId;
+        }
+
+        // Llamada firmada a /image/context (command = remove_all | add). Firma: parámetros en orden alfabético + API Secret.
+        async function cloudContextCall(info, command, contextText) {
+            if (!window.crypto || !crypto.subtle) return { ok: false, reason: 'el navegador no permite firmar (usa https o localhost)' };
+            const ts = Math.floor(Date.now() / 1000);
+            const parts = ['command=' + command];
+            if (contextText) parts.push('context=' + contextText);
+            parts.push('public_ids=' + info.publicId, 'timestamp=' + ts);
+            try {
+                const signature = await sha1Hex(parts.join('&') + cloudinaryApi.apiSecret);
+                const fd = new FormData();
+                fd.append('command', command);
+                if (contextText) fd.append('context', contextText);
+                fd.append('public_ids[]', info.publicId);
+                fd.append('timestamp', String(ts));
+                fd.append('api_key', cloudinaryApi.apiKey);
+                fd.append('signature', signature);
+                const res = await fetch(`https://api.cloudinary.com/v1_1/${encodeURIComponent(info.cloud)}/image/context`, { method: 'POST', body: fd });
+                const data = await res.json().catch(() => ({}));
+                if (res.ok && !data.error) return { ok: true };
+                return { ok: false, reason: (data.error && data.error.message) || ('HTTP ' + res.status) };
+            } catch (e) { return { ok: false, reason: 'error de red' }; }
+        }
+
+        // Reescribe por completo el contexto de la foto (así también se borran los campos que vaciaste en la app)
+        async function pushMemoryNow(m) {
+            const info = parseCloudinaryUrl(m.url);
+            if (!info || info.cloud !== cloudinaryCfg.cloudName) return { ok: false, skipped: true };
+            if (!canWriteCloud()) return { ok: false, skipped: true, noCreds: true };
+            if (!m.updatedAt) m.updatedAt = Date.now();
+            const ctx = memoryToContext(m);
+            let r = await cloudContextCall(info, 'remove_all');
+            if (r.ok) r = await cloudContextCall(info, 'add', ctx.text);
+            return r.ok ? { ok: true, truncated: ctx.truncated } : { ok: false, reason: r.reason };
+        }
+
+        const pendingPush = new Set();
+        let pushChain = Promise.resolve();
+        let warnedNoCreds = false;
+        // Se llama después de guardar un cambio local. opts.announce: avisa "Guardando…/Guardado";
+        // opts.hint: avisa siempre si faltan las credenciales; opts.quiet: no avisa de nada salvo errores.
+        function cloudAfterEdit(id, opts = {}) {
+            const m = memories.find(x => x.id === id);
+            if (!m || !isCloudinaryAsset(m)) return;
+            if (!canWriteCloud()) {
+                if (opts.hint || (!opts.quiet && !warnedNoCreds)) {
+                    showToast('Guardado solo en este navegador. Para que también quede en Cloudinary, agrega tu API Key y Secret en ☁️ Cloudinary.', 5500);
+                    warnedNoCreds = true;
+                }
+                return;
+            }
+            if (pendingPush.has(id)) return;           // ya hay un envío en cola: enviará el estado más reciente
+            pendingPush.add(id);
+            if (opts.announce) showToast('Guardando en Cloudinary…', 4000);
+            pushChain = pushChain.then(async () => {
+                pendingPush.delete(id);
+                const cur = memories.find(x => x.id === id);
+                if (!cur) return;
+                const r = await pushMemoryNow(cur);
+                saveStorage();
+                if (r.ok) {
+                    if (r.truncated) showToast('Guardado en Cloudinary, pero un texto era muy largo y se recortó', 6000);
+                    else if (opts.announce) showToast('Guardado también en Cloudinary ☁️');
+                } else if (!r.skipped) showToast('No se pudo guardar en Cloudinary: ' + r.reason, 7000);
+            }).catch(() => {});
+        }
+
+        // Envío en lote (3 a la vez) para "Sincronizar"
+        async function pushMany(list, onProgress) {
+            const out = { ok: 0, fail: [], truncated: 0 };
+            let next = 0, done = 0;
+            const worker = async () => {
+                while (next < list.length) {
+                    const m = list[next++];
+                    const r = await pushMemoryNow(m);
+                    done++;
+                    if (r.ok) { out.ok++; if (r.truncated) out.truncated++; }
+                    else if (!r.skipped) out.fail.push(`"${m.title}": ${r.reason}`);
+                    if (onProgress) onProgress(done, list.length);
+                }
+            };
+            await Promise.all([worker(), worker(), worker()]);
+            return out;
+        }
+
         // ---------- Sincronizar desde Cloudinary ----------
         const CLOUDINARY_TAG = 'album_fotos';
         const CLOUDINARY_TAG_KEY = 'album_cloudinary_tag';
 
-        async function syncFromCloudinary() {
-            if (!cloudinaryCfg.cloudName) { showToast('Primero configura Cloudinary ☁️'); openCloudinaryModal(); return; }
+        // Aplica a una foto local los datos que vienen de Cloudinary (si Cloudinary no trae un dato técnico, se conserva el leído de la foto)
+        function applyCloudFields(m, cloud) {
+            const f = Object.assign({}, cloud.fields);
+            ['camera', 'lens', 'aperture', 'iso', 'shutter'].forEach(k => { if (!f[k] && m[k]) f[k] = m[k]; });
+            Object.assign(m, f, { updatedAt: cloud.updatedAt });
+            delete m.fromSync;
+            if (f.camera || f.lens || f.aperture || f.iso || f.shutter) m.exifChecked = true;
+        }
+
+        // opts.auto: arranque automático con el álbum vacío (sin preguntas ni ventanas emergentes)
+        async function syncFromCloudinary(opts = {}) {
+            const auto = !!opts.auto;
+            if (!cloudinaryCfg.cloudName) { if (!auto) { showToast('Primero configura Cloudinary ☁️'); openCloudinaryModal(); } return; }
             let saved = ''; try { saved = localStorage.getItem(CLOUDINARY_TAG_KEY) || ''; } catch (e) {}
-            const tag = (prompt('Etiqueta de Cloudinary a sincronizar:', saved || CLOUDINARY_TAG) || '').trim();
-            if (!tag) return;
-            try { localStorage.setItem(CLOUDINARY_TAG_KEY, tag); } catch (e) {}
+            let tag = saved || CLOUDINARY_TAG;
+            if (!auto) {
+                tag = (prompt('Etiqueta de Cloudinary a sincronizar:', tag) || '').trim();
+                if (!tag) return;
+                try { localStorage.setItem(CLOUDINARY_TAG_KEY, tag); } catch (e) {}
+            }
             const icon = document.getElementById('syncIcon');
             icon.classList.add('fa-spin');
             const cn = cloudinaryCfg.cloudName;
             try {
                 const res = await fetch(`https://res.cloudinary.com/${encodeURIComponent(cn)}/image/list/${encodeURIComponent(tag)}.json`, { cache: 'no-store' });
                 if (!res.ok) {
-                    alert(res.status === 404
+                    if (!auto) alert(res.status === 404
                         ? `No se encontraron fotos con la etiqueta "${tag}".\n\nEn Cloudinary → Media Library, selecciona tus fotos y agrégales esa etiqueta.`
                         : `Cloudinary bloqueó la lista (HTTP ${res.status}).\n\nEntra a Settings → Security → "Restricted media types" y desmarca "Resource list".`);
                     return;
                 }
                 const data = await res.json();
                 const today = new Date().toISOString().slice(0, 10);
-                let added = 0;
+                let added = 0, updated = 0;
+                const toPush = [];
                 (data.resources || []).forEach(r => {
-                    if (memories.some(m => typeof m.url === 'string' && m.url.includes('/' + r.public_id + '.'))) return;
-                    const raw = r.public_id.split('/').pop().replace(/[-_]+/g, ' ').replace(/\s+[a-z0-9]{6}$/i, '').trim();
-                    memories.unshift({
-                        id: 'mem_' + Date.now() + '_' + added,
-                        url: `https://res.cloudinary.com/${cn}/image/upload/v${r.version}/${r.public_id}.${r.format}`,
-                        title: raw ? raw.charAt(0).toUpperCase() + raw.slice(1) : 'Foto',
-                        subtitle: '', category: 'General', date: parseExifDate(r.created_at) || today,
-                        description: '', location: '', people: [], subPhotos: [], favorite: false,
-                        camera: '', lens: '', aperture: '', iso: '', shutter: '', tags: [], fromSync: true
-                    });
-                    added++;
+                    const cloud = contextToFields(r.context && r.context.custom);   // datos guardados por el álbum, si existen
+                    const local = memories.find(m => typeof m.url === 'string' && (sameCloudAsset(m, r.public_id) || m.url.includes('/' + r.public_id + '.')));
+                    if (!local) {
+                        const raw = r.public_id.split('/').pop().replace(/[-_]+/g, ' ').replace(/\s+[a-z0-9]{6}$/i, '').trim();
+                        const mem = {
+                            id: 'mem_' + Date.now() + '_' + added,
+                            url: `https://res.cloudinary.com/${cn}/image/upload/v${r.version}/${r.public_id}.${r.format}`,
+                            title: raw ? raw.charAt(0).toUpperCase() + raw.slice(1) : 'Foto',
+                            subtitle: '', category: 'General', date: parseExifDate(r.created_at) || today,
+                            description: '', location: '', people: [], subPhotos: [], favorite: false,
+                            camera: '', lens: '', aperture: '', iso: '', shutter: '', tags: [], fromSync: true
+                        };
+                        if (cloud) applyCloudFields(mem, cloud);   // nombre, evento, lugar, etc. tal como los dejaste
+                        memories.unshift(mem);
+                        added++;
+                        return;
+                    }
+                    const localTime = local.updatedAt || 0;
+                    if (cloud && cloud.updatedAt > localTime) { applyCloudFields(local, cloud); updated++; }   // Cloudinary tiene lo más reciente
+                    else if (cloud && localTime > cloud.updatedAt) toPush.push(local);                          // este navegador tiene lo más reciente
+                    else if (!cloud && !local.fromSync) toPush.push(local);                                     // solo existía en este navegador: se sube una vez
                 });
                 saveStorage(); renderHighlights(); renderGallery();
                 enrichMissingExif();
-                showToast(added ? `${added} foto(s) nueva(s) desde Cloudinary ☁️` : 'Todo está al día ✨');
+
+                let pushed = null;
+                if (toPush.length && canWriteCloud()) {
+                    showToast(`Guardando ${toPush.length} foto(s) en Cloudinary…`, 4000);
+                    pushed = await pushMany(toPush);
+                    saveStorage();
+                }
+                const bits = [];
+                if (added) bits.push(`${added} nueva(s)`);
+                if (updated) bits.push(`${updated} actualizada(s) con los datos de Cloudinary`);
+                if (pushed && pushed.ok) bits.push(`${pushed.ok} guardada(s) en Cloudinary`);
+                if (toPush.length && !canWriteCloud()) {
+                    showToast((bits.length ? bits.join(', ') + '. ' : '') + `${toPush.length} foto(s) tienen cambios solo en este navegador: agrega tu API Key y Secret en ☁️ Cloudinary para guardarlos allí.`, 7000);
+                } else {
+                    showToast(bits.length ? bits.join(', ') + ' ☁️' : 'Todo está al día ✨', 4500);
+                }
+                if (pushed && pushed.fail.length && !auto) alert(`No se pudo guardar en Cloudinary (se conserva en el álbum):\n\n${pushed.fail.join('\n')}`);
             } catch (err) {
-                alert('No se pudo conectar con Cloudinary. Revisa tu conexión y el Cloud Name.');
+                if (!auto) alert('No se pudo conectar con Cloudinary. Revisa tu conexión y el Cloud Name.');
             } finally {
                 icon.classList.remove('fa-spin');
             }
@@ -1580,8 +1785,10 @@
             const photo = memories.find(p => p.id === id);
             if (photo) {
                 photo.favorite = !photo.favorite;
+                photo.updatedAt = Date.now(); delete photo.fromSync;
                 saveStorage(); renderHighlights(); renderGallery();
                 showToast(photo.favorite ? "Memoria marcada como favorita 🩵" : "Memoria quitada de favoritas");
+                cloudAfterEdit(photo.id, { quiet: true });
             }
         }
 
@@ -1746,7 +1953,9 @@
             if (photo) {
                 photo.favorite = !photo.favorite;
                 updateLbFavState(photo.favorite);
+                photo.updatedAt = Date.now(); delete photo.fromSync;
                 saveStorage(); renderHighlights(); renderGallery();
+                cloudAfterEdit(photo.id, { quiet: true });
             }
         }
         function navigateLightbox(direction) {
@@ -1990,18 +2199,22 @@
 
             const tokenData = (pendingUpload && pendingUpload.url === url) ? { cldDeleteToken: pendingUpload.token, cldTokenAt: pendingUpload.at } : {};
 
+            let savedId = editId;
             if (editId) {
                 const index = memories.findIndex(m => m.id === editId);
                 if (index !== -1) {
-                    memories[index] = { ...memories[index], url, title, subtitle, category, date, description, location, people, subPhotos, favorite, camera, lens, aperture, iso, shutter, tags, exifChecked: true, ...tokenData };
+                    memories[index] = { ...memories[index], url, title, subtitle, category, date, description, location, people, subPhotos, favorite, camera, lens, aperture, iso, shutter, tags, exifChecked: true, updatedAt: Date.now(), ...tokenData };
+                    delete memories[index].fromSync;
                 }
                 showToast("Memoria actualizada 🩵");
             } else {
-                const newMem = { id: 'mem_' + Date.now(), url, title, subtitle, category, date, description, location, people, subPhotos, favorite, camera, lens, aperture, iso, shutter, tags, exifChecked: true, ...tokenData };
+                const newMem = { id: 'mem_' + Date.now(), url, title, subtitle, category, date, description, location, people, subPhotos, favorite, camera, lens, aperture, iso, shutter, tags, exifChecked: true, updatedAt: Date.now(), ...tokenData };
                 memories.unshift(newMem);
+                savedId = newMem.id;
                 showToast("¡Nueva memoria agregada!");
             }
             saveStorage(); closeAddModal(); renderHighlights(); renderGallery();
+            if (savedId) cloudAfterEdit(savedId, { announce: true, hint: true });   // también en Cloudinary
         }
 
         // Drawer
@@ -2073,11 +2286,13 @@
             e.target.value = '';
         }
 
-        function showToast(message) {
+        let toastTimer;
+        function showToast(message, ms = 3000) {
             const toast = document.getElementById('toast');
             document.getElementById('toastMessage').textContent = message;
             toast.classList.remove('translate-y-24', 'opacity-0');
-            setTimeout(() => toast.classList.add('translate-y-24', 'opacity-0'), 3000);
+            clearTimeout(toastTimer);
+            toastTimer = setTimeout(() => toast.classList.add('translate-y-24', 'opacity-0'), ms);
         }
 
         window.onload = initApp;
