@@ -1,0 +1,1089 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Capacitación Judicial · Certificados</title>
+<meta name="description" content="Registro de certificados de asistencia y aprobación de cursos de capacitación judicial, con PDF en Cloudinary.">
+<meta name="theme-color" content="#4338ca">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%234338ca'/%3E%3Cg fill='none' stroke='white' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M32 14v34M22 50h20M16 22h32'/%3E%3Cpath d='M16 22l-7 16a8 8 0 0 0 14 0zM48 22l-7 16a8 8 0 0 0 14 0z'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script>
+try{var r=localStorage.getItem('cc.theme');var t=r?JSON.parse(r):(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.dataset.theme=t;}catch(e){}
+</script>
+<style>
+:root{
+  --font:"Plus Jakarta Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --bg:#f4f5fb;--surface:#ffffff;--surface-2:#f7f8fd;--ink:#0b1220;--ink-2:#334155;--muted:#667085;--line:#e5e8f1;
+  --brand:#4338ca;--brand-2:#6366f1;--brand-soft:#eef0ff;--accent:#06b6d4;
+  --ok:#047857;--ok-soft:#e5f7ef;--info:#0369a1;--info-soft:#e4f3fb;--warn:#b45309;--warn-soft:#fff4e0;--danger:#e11d48;--danger-soft:#fff0f3;
+  --shadow-sm:0 1px 2px rgba(16,24,40,.05),0 1px 3px rgba(16,24,40,.07);
+  --shadow-md:0 10px 28px -8px rgba(30,41,90,.18),0 2px 6px rgba(16,24,40,.05);
+  --shadow-lg:0 30px 80px -20px rgba(15,23,60,.45);
+  --radius:20px;--radius-sm:12px;
+}
+:root[data-theme=dark]{
+  --bg:#070c19;--surface:#10172d;--surface-2:#0c1224;--ink:#eef1fb;--ink-2:#c5cde2;--muted:#8d99b8;--line:#1e2947;
+  --brand:#8b93fb;--brand-2:#8b93fb;--brand-soft:#1b2250;--accent:#22d3ee;
+  --ok:#4ade9f;--ok-soft:#0e2a22;--info:#5cc8f5;--info-soft:#0b2535;--warn:#fbbf6a;--warn-soft:#2c2010;--danger:#fb7185;--danger-soft:#2d1320;
+  --shadow-sm:0 1px 2px rgba(0,0,0,.4);
+  --shadow-md:0 12px 30px -10px rgba(0,0,0,.6);
+  --shadow-lg:0 30px 80px -20px rgba(0,0,0,.8);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{margin:0;font-family:var(--font);background:var(--bg);color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased;min-height:100vh;font-feature-settings:"tnum" 0}
+button,input,select,textarea{font:inherit;color:inherit}
+a{color:inherit;text-decoration:none}
+[hidden]{display:none!important}
+.aurora{position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:
+   radial-gradient(60rem 28rem at 8% -8%,color-mix(in srgb,var(--brand-2) 20%,transparent),transparent 62%),
+   radial-gradient(48rem 26rem at 100% 2%,color-mix(in srgb,var(--accent) 15%,transparent),transparent 60%),
+   var(--bg)}
+.wrap{max-width:1240px;margin:0 auto;padding:0 20px}
+i[data-i],.ico{display:inline-flex;flex:none;line-height:0}
+
+/* ---------- Top bar ---------- */
+.topbar{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--surface) 78%,transparent);backdrop-filter:saturate(1.6) blur(16px);-webkit-backdrop-filter:saturate(1.6) blur(16px);border-bottom:1px solid color-mix(in srgb,var(--line) 80%,transparent)}
+.topbar-in{display:flex;align-items:center;gap:16px;max-width:1240px;margin:0 auto;padding:12px 20px}
+.brand{display:flex;align-items:center;gap:12px;min-width:0}
+.brand-mark{width:42px;height:42px;border-radius:13px;display:grid;place-items:center;color:#fff;background:linear-gradient(135deg,#4338ca,#7c3aed 60%,#06b6d4);box-shadow:0 8px 20px -6px rgba(79,70,229,.6)}
+.brand-txt{display:flex;flex-direction:column;line-height:1.15}
+.brand-txt strong{font-weight:800;letter-spacing:-.02em;font-size:1.02rem}
+.brand-txt small{color:var(--muted);font-size:.74rem;font-weight:600;letter-spacing:.02em}
+.nav{display:flex;gap:4px;margin-left:12px;padding:4px;border-radius:14px;background:var(--surface-2);border:1px solid var(--line)}
+.nav a{padding:7px 14px;border-radius:10px;font-weight:600;font-size:.88rem;color:var(--muted);transition:.15s}
+.nav a:hover{color:var(--ink)}
+.nav a.on{background:var(--surface);color:var(--brand);box-shadow:var(--shadow-sm)}
+.top-actions{margin-left:auto;display:flex;align-items:center;gap:8px}
+
+/* ---------- Buttons ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:42px;padding:0 18px;border-radius:13px;border:1px solid transparent;font-weight:700;font-size:.9rem;cursor:pointer;transition:transform .12s,box-shadow .2s,background .2s,border-color .2s;white-space:nowrap}
+.btn:active{transform:translateY(1px)}
+.btn.primary{color:#fff;background:linear-gradient(135deg,#4f46e5,#7c3aed);box-shadow:0 10px 24px -10px rgba(79,70,229,.9)}
+.btn.primary:hover{box-shadow:0 14px 30px -10px rgba(79,70,229,1);filter:brightness(1.06)}
+.btn.ghost{background:transparent;border-color:var(--line);color:var(--ink-2)}
+.btn.ghost:hover{background:var(--surface-2);border-color:color-mix(in srgb,var(--brand) 40%,var(--line))}
+.btn.soft{background:var(--brand-soft);color:var(--brand)}
+.btn.soft:hover{filter:brightness(.97)}
+.btn.danger{background:var(--danger);color:#fff}
+.btn.sm{height:36px;padding:0 12px;font-size:.82rem;border-radius:11px}
+.btn[disabled]{opacity:.55;cursor:not-allowed;box-shadow:none}
+.icon-btn{width:40px;height:40px;border-radius:12px;display:inline-grid;place-items:center;border:1px solid var(--line);background:var(--surface);color:var(--ink-2);cursor:pointer;transition:.15s}
+.icon-btn:hover{border-color:color-mix(in srgb,var(--brand) 45%,var(--line));color:var(--brand)}
+.icon-btn.sm{width:34px;height:34px;border-radius:10px}
+.icon-btn.del:hover{color:var(--danger);border-color:color-mix(in srgb,var(--danger) 45%,var(--line))}
+.sync{display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 14px;border-radius:12px;border:1px solid var(--line);background:var(--surface);font-size:.8rem;font-weight:600;color:var(--ink-2);cursor:pointer}
+.sync:hover{border-color:color-mix(in srgb,var(--brand) 40%,var(--line))}
+.sync .dot{width:8px;height:8px;border-radius:50%;background:var(--muted)}
+.sync[data-s=ok] .dot{background:#10b981;box-shadow:0 0 0 4px color-mix(in srgb,#10b981 22%,transparent)}
+.sync[data-s=busy] .dot{background:#f59e0b;animation:pulse 1s infinite}
+.sync[data-s=error] .dot{background:var(--danger)}
+@keyframes pulse{50%{opacity:.35;transform:scale(1.35)}}
+
+/* ---------- Layout ---------- */
+main{padding:28px 0 90px}
+.hero{padding:10px 0 22px}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;margin:0 0 12px;padding:5px 12px;border-radius:99px;background:var(--brand-soft);color:var(--brand);font-weight:700;font-size:.76rem;letter-spacing:.06em;text-transform:uppercase}
+h1.title{margin:0;font-size:clamp(1.7rem,3.4vw,2.7rem);font-weight:800;letter-spacing:-.035em;line-height:1.08;max-width:26ch}
+.grad{background:linear-gradient(100deg,#4f46e5,#7c3aed 45%,#06b6d4);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{margin:14px 0 0;color:var(--muted);font-size:1.02rem;max-width:62ch}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:8px 0 26px}
+.stat{position:relative;padding:18px 20px;border-radius:var(--radius);background:var(--surface);border:1px solid var(--line);box-shadow:var(--shadow-sm);overflow:hidden}
+.stat .ico{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:var(--brand-soft);color:var(--brand);margin-bottom:12px}
+.stat b{display:block;font-size:1.9rem;font-weight:800;letter-spacing:-.03em;line-height:1}
+.stat span{display:block;margin-top:6px;color:var(--muted);font-size:.82rem;font-weight:600}
+.stat.hl{background:linear-gradient(135deg,#4338ca,#6d4ae6 60%,#0891b2);border:0;color:#fff}
+.stat.hl .ico{background:rgba(255,255,255,.18);color:#fff}
+.stat.hl span{color:rgba(255,255,255,.8)}
+.notice{display:flex;gap:14px;align-items:flex-start;padding:16px 18px;border-radius:var(--radius-sm);border:1px solid var(--line);background:var(--surface);margin-bottom:18px}
+.notice .ico{width:36px;height:36px;border-radius:11px;display:grid;place-items:center;flex:none}
+.notice.info .ico{background:var(--info-soft);color:var(--info)}
+.notice.warn .ico{background:var(--warn-soft);color:var(--warn)}
+.notice.err .ico{background:var(--danger-soft);color:var(--danger)}
+.notice h4{margin:0 0 2px;font-size:.95rem}
+.notice p{margin:0;color:var(--muted);font-size:.87rem}
+.notice .acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.notice > div:nth-child(2){flex:1;min-width:0}
+
+/* ---------- Toolbar ---------- */
+.toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;padding:12px;border-radius:var(--radius);background:var(--surface);border:1px solid var(--line);box-shadow:var(--shadow-sm)}
+.search{position:relative;flex:1 1 260px;min-width:200px}
+.search .ico{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--muted)}
+.field input,.field select,.field textarea,.toolbar select,.search input,.cfg input{width:100%;height:44px;padding:0 14px;border-radius:var(--radius-sm);border:1px solid var(--line);background:var(--surface-2);outline:none;transition:border-color .15s,box-shadow .15s,background .15s}
+.search input{padding-left:42px}
+.toolbar select{width:auto;min-width:0;max-width:260px;text-overflow:ellipsis;padding-right:34px;cursor:pointer;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center}
+.field textarea{height:auto;padding:12px 14px;resize:vertical;min-height:84px;line-height:1.45}
+.field select{cursor:pointer}
+input:focus-visible,select:focus-visible,textarea:focus-visible{border-color:var(--brand-2)!important;box-shadow:0 0 0 4px color-mix(in srgb,var(--brand-2) 22%,transparent);background:var(--surface)!important}
+button:focus-visible,a:focus-visible,.drop:focus-visible{outline:3px solid color-mix(in srgb,var(--brand-2) 55%,transparent);outline-offset:2px}
+.seg{display:inline-flex;padding:4px;gap:4px;border-radius:12px;background:var(--surface-2);border:1px solid var(--line)}
+.seg button{width:38px;height:34px;border:0;border-radius:9px;display:grid;place-items:center;background:transparent;color:var(--muted);cursor:pointer}
+.seg button.on{background:var(--surface);color:var(--brand);box-shadow:var(--shadow-sm)}
+.count{margin:16px 4px 14px;color:var(--muted);font-size:.86rem;font-weight:600}
+
+/* ---------- Results ---------- */
+.grp{display:flex;align-items:baseline;gap:12px;margin:26px 4px 14px}
+.grp:first-child{margin-top:6px}
+.grp h2{margin:0;font-size:1.35rem;font-weight:800;letter-spacing:-.03em}
+.grp span{color:var(--muted);font-size:.84rem;font-weight:600}
+.grp::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--line),transparent)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(285px,1fr));gap:18px}
+.card{display:flex;flex-direction:column;border-radius:var(--radius);background:var(--surface);border:1px solid var(--line);box-shadow:var(--shadow-sm);overflow:hidden;transition:transform .2s,box-shadow .2s,border-color .2s}
+.card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md);border-color:color-mix(in srgb,var(--brand) 30%,var(--line))}
+.thumb{position:relative;display:block;width:100%;aspect-ratio:16/10;border:0;padding:0;cursor:pointer;overflow:hidden;background:linear-gradient(135deg,var(--brand-soft),var(--surface-2))}
+.thumb .fb{position:absolute;inset:0;display:grid;place-items:center;color:color-mix(in srgb,var(--brand) 55%,transparent)}
+.thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center;background:#fff}
+.thumb::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(8,12,30,.28));pointer-events:none}
+.badge{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:99px;font-size:.72rem;font-weight:700;letter-spacing:.01em}
+.badge.Asistencia{background:var(--info-soft);color:var(--info)}
+.badge.Aprobación{background:var(--ok-soft);color:var(--ok)}
+.thumb .badge{position:absolute;left:12px;top:12px;z-index:2;backdrop-filter:blur(6px);box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.thumb .pg{position:absolute;right:12px;top:12px;z-index:2;padding:4px 9px;border-radius:99px;background:rgba(10,14,32,.7);color:#fff;font-size:.7rem;font-weight:700}
+.card-b{padding:16px 18px 6px;flex:1}
+.meta{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}
+.mat{display:inline-flex;align-items:center;gap:7px;min-width:0;max-width:100%;padding:4px 10px;border-radius:99px;font-size:.74rem;font-weight:700;background:hsl(var(--h) 85% 95%);color:hsl(var(--h) 62% 28%)}
+:root[data-theme=dark] .mat{background:hsl(var(--h) 40% 20%);color:hsl(var(--h) 90% 84%)}
+.mat::before{content:"";width:7px;height:7px;border-radius:50%;background:hsl(var(--h) 75% 52%);flex:none}
+.mat span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.date{display:inline-flex;align-items:center;gap:6px;color:var(--muted);font-size:.78rem;font-weight:600;white-space:nowrap;flex:none}
+.det{margin:0 0 10px;font-size:1.02rem;font-weight:700;letter-spacing:-.015em;line-height:1.35;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.facts{display:flex;flex-wrap:wrap;gap:6px 14px;margin:0 0 10px;color:var(--muted);font-size:.8rem;font-weight:500}
+.facts span{display:inline-flex;align-items:center;gap:6px}
+.card-f{display:flex;gap:8px;align-items:center;padding:12px 14px 14px}
+.card-f .btn{flex:1}
+.tbl-wrap{overflow:auto;border-radius:var(--radius);border:1px solid var(--line);background:var(--surface);box-shadow:var(--shadow-sm)}
+table{width:100%;border-collapse:collapse;min-width:820px}
+th{position:sticky;top:0;text-align:left;padding:13px 16px;font-size:.72rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);background:var(--surface-2);border-bottom:1px solid var(--line)}
+td{padding:14px 16px;border-bottom:1px solid var(--line);vertical-align:top;font-size:.9rem}
+tr:last-child td{border-bottom:0}
+tbody tr:hover td{background:color-mix(in srgb,var(--brand-soft) 45%,transparent)}
+tr.grp-row td{background:var(--surface-2);font-weight:800;font-size:.92rem;letter-spacing:-.01em;padding:11px 16px}
+tr.grp-row small{color:var(--muted);font-weight:600;margin-left:8px}
+td.num,th.num{text-align:right;white-space:nowrap}
+td .det{font-size:.92rem;-webkit-line-clamp:2;margin:0}
+td.acts{white-space:nowrap;text-align:right}
+td.acts .icon-btn{margin-left:4px}
+.empty{display:grid;place-items:center;text-align:center;padding:64px 20px;border-radius:var(--radius);border:1.5px dashed color-mix(in srgb,var(--brand) 35%,var(--line));background:color-mix(in srgb,var(--surface) 70%,transparent)}
+.empty .ico{width:68px;height:68px;border-radius:22px;display:grid;place-items:center;color:var(--brand);background:var(--brand-soft);margin-bottom:18px}
+.empty h3{margin:0 0 6px;font-size:1.25rem;letter-spacing:-.02em}
+.empty p{margin:0 0 20px;color:var(--muted);max-width:46ch}
+.skeleton{height:300px;border-radius:var(--radius);background:linear-gradient(100deg,var(--surface) 30%,var(--surface-2) 50%,var(--surface) 70%);background-size:200% 100%;animation:sk 1.3s infinite;border:1px solid var(--line)}
+@keyframes sk{to{background-position:-200% 0}}
+
+/* ---------- Dialogs ---------- */
+dialog{border:0;padding:0;color:var(--ink);background:var(--surface);border-radius:24px;box-shadow:var(--shadow-lg);max-width:none}
+dialog::backdrop{background:rgba(8,12,28,.58);backdrop-filter:blur(5px)}
+dialog[open]{animation:pop .22s cubic-bezier(.2,.9,.3,1.2)}
+@keyframes pop{from{opacity:0;transform:translateY(14px) scale(.98)}}
+.sheet{width:min(740px,calc(100% - 24px));max-height:calc(100dvh - 24px)}
+.sheet form{display:flex;flex-direction:column;max-height:calc(100dvh - 24px)}
+.sheet-h{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:20px 24px 14px}
+.sheet-h h2{margin:0;font-size:1.3rem;font-weight:800;letter-spacing:-.03em}
+.sheet-h p{margin:2px 0 0;color:var(--muted);font-size:.85rem}
+.sheet-b{padding:4px 24px 20px;overflow:auto;flex:1;display:grid;gap:16px}
+.sheet-f{display:flex;justify-content:flex-end;gap:10px;padding:16px 24px;border-top:1px solid var(--line);background:var(--surface-2)}
+.field{display:grid;gap:7px;min-width:0}
+.field>span,.field>label>span,.lbl{font-size:.8rem;font-weight:700;color:var(--ink-2);letter-spacing:.005em}
+.field small{color:var(--muted);font-weight:500}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.grid3{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:14px}
+.radios{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:4px;border-radius:var(--radius-sm);background:var(--surface-2);border:1px solid var(--line);height:44px}
+.radios label{position:relative;display:grid;place-items:center;border-radius:9px;cursor:pointer;font-weight:700;font-size:.86rem;color:var(--muted)}
+.radios input{position:absolute;opacity:0;inset:0;cursor:pointer;width:100%;height:100%}
+.radios label:has(input:checked){background:var(--surface);color:var(--brand);box-shadow:var(--shadow-sm)}
+.radios label:has(input:focus-visible){outline:3px solid color-mix(in srgb,var(--brand-2) 55%,transparent)}
+.drop{display:flex;align-items:center;gap:14px;padding:16px;border-radius:var(--radius-sm);border:1.5px dashed color-mix(in srgb,var(--brand) 40%,var(--line));background:color-mix(in srgb,var(--brand-soft) 50%,transparent);cursor:pointer;transition:.15s}
+.drop:hover,.drop.over{background:var(--brand-soft);border-color:var(--brand-2)}
+.drop .ico{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;background:var(--surface);color:var(--brand);box-shadow:var(--shadow-sm)}
+.drop b{display:block;font-size:.92rem}
+.drop small{display:block;color:var(--muted);font-size:.8rem;word-break:break-all}
+.drop.has b{color:var(--ok)}
+.prog{height:8px;border-radius:99px;background:var(--surface-2);border:1px solid var(--line);overflow:hidden}
+.prog div{height:100%;width:0;background:linear-gradient(90deg,#4f46e5,#06b6d4);transition:width .15s}
+.viewer{width:min(1100px,calc(100% - 24px));height:calc(100dvh - 24px);flex-direction:column}
+.viewer[open]{display:flex}
+.viewer-h{display:flex;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid var(--line)}
+.viewer-h h3{margin:0;flex:1;min-width:0;font-size:1rem;letter-spacing:-.01em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.viewer iframe{flex:1;width:100%;border:0;background:#fff;border-radius:0 0 24px 24px}
+.confirm{width:min(440px,calc(100% - 24px));padding:26px}
+.confirm h3{margin:0 0 8px;font-size:1.2rem;letter-spacing:-.02em}
+.confirm p{margin:0 0 22px;color:var(--muted)}
+.confirm .row{display:flex;gap:10px;justify-content:flex-end}
+#toasts{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);z-index:100;display:grid;gap:10px;width:min(460px,calc(100% - 24px))}
+.toast{display:flex;gap:12px;align-items:flex-start;padding:13px 16px;border-radius:14px;background:var(--ink);color:var(--bg);box-shadow:var(--shadow-md);font-size:.88rem;font-weight:600;animation:pop .25s;transition:.3s}
+.toast.out{opacity:0;transform:translateY(10px)}
+.toast.err{background:#be123c;color:#fff}
+.toast .ico{margin-top:1px}
+
+/* ---------- Resumen / Ajustes ---------- */
+.panels{display:grid;grid-template-columns:1.2fr 1fr;gap:18px}
+.panel{padding:22px;border-radius:var(--radius);background:var(--surface);border:1px solid var(--line);box-shadow:var(--shadow-sm)}
+.panel h3{margin:0 0 4px;font-size:1.1rem;font-weight:800;letter-spacing:-.02em}
+.panel>p{margin:0 0 18px;color:var(--muted);font-size:.86rem}
+.bars{display:grid;gap:14px}
+.bar-row{display:grid;gap:6px}
+.bar-top{display:flex;justify-content:space-between;gap:10px;font-size:.86rem;font-weight:700}
+.bar-top small{color:var(--muted);font-weight:600}
+.bar{height:10px;border-radius:99px;background:var(--surface-2);border:1px solid var(--line);overflow:hidden}
+.bar i{display:block;height:100%;border-radius:99px;background:hsl(var(--h,245) 75% 58%)}
+.recent{display:grid;gap:4px;margin:0;padding:0;list-style:none}
+.recent li{display:flex;gap:12px;align-items:center;padding:10px;border-radius:12px;cursor:pointer}
+.recent li:hover{background:var(--surface-2)}
+.recent .ico{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;background:var(--brand-soft);color:var(--brand)}
+.recent b{display:block;font-size:.9rem;line-height:1.3;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:36ch}
+.recent small{color:var(--muted);font-weight:600}
+.cfg{display:grid;gap:16px;max-width:640px}
+.cfg .row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.cfg .btns{display:flex;gap:10px;flex-wrap:wrap}
+.steps{margin:0;padding-left:20px;display:grid;gap:10px;color:var(--ink-2);font-size:.9rem}
+.steps code{padding:2px 7px;border-radius:7px;background:var(--surface-2);border:1px solid var(--line);font-size:.82rem;font-weight:600}
+.testout{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.testout li{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-radius:12px;font-size:.86rem;font-weight:600}
+.testout li.ok{background:var(--ok-soft);color:var(--ok)}
+.testout li.bad{background:var(--danger-soft);color:var(--danger)}
+.settings-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:18px;align-items:start}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:6px 16px;font-size:.88rem;margin:0 0 16px}
+.kv dt{color:var(--muted);font-weight:600}
+.kv dd{margin:0;font-weight:700;text-align:right}
+
+@media (max-width:980px){
+  .panels,.settings-grid{grid-template-columns:1fr}
+  .stats{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:760px){
+  .topbar-in{flex-wrap:wrap;gap:10px;padding:10px 14px}
+  .brand{flex:1}
+  .brand-txt small{display:none}
+  .top-actions{gap:6px}
+  .nav{order:3;width:100%;margin:0;justify-content:space-between}
+  .nav a{flex:1;text-align:center}
+  .hide-sm{display:none}
+  .sync span.t{display:none}
+  .sync{padding:0 12px}
+  .btn.primary .lbl-long{display:none}
+  .toolbar select{flex:1 1 140px;max-width:none}
+  .grid2,.grid3,.cfg .row2{grid-template-columns:1fr}
+  .stat{padding:15px}
+  .stat b{font-size:1.55rem}
+  .sheet-h,.sheet-b,.sheet-f{padding-left:18px;padding-right:18px}
+  .viewer{width:100%;height:100dvh;border-radius:0}
+  .viewer iframe{border-radius:0}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+#ln{
+  --navy:#081a33;--navy-2:#0a1d3a;--sky:#38bdf8;--sky-2:#7dd3fc;--sky-3:#e0f2fe;--ink:#0b2a4a;--muted:#46688c;
+  --serif:"Fraunces",Georgia,"Times New Roman",serif;
+  --sans:"Plus Jakarta Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --px:0;--py:0;
+}
+#ln{margin:0;font-family:var(--sans);color:var(--ink);background:
+  radial-gradient(60rem 36rem at 50% 28%,#f6fbff,transparent 70%),linear-gradient(180deg,#e4f3ff,#cde8fb);
+  -webkit-font-smoothing:antialiased;overflow-x:hidden}
+#ln .ln-bg{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+#ln .ln-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(14,116,190,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(14,116,190,.08) 1px,transparent 1px);background-size:56px 56px;-webkit-mask-image:radial-gradient(60% 55% at 50% 38%,#000,transparent);mask-image:radial-gradient(60% 55% at 50% 38%,#000,transparent)}
+#ln .ln-blob{position:absolute;border-radius:50%;filter:blur(70px);opacity:.5;translate:calc(var(--px)*-24px) calc(var(--py)*-24px);transition:translate .6s ease-out}
+#ln .ln-blob.ln-a{width:44vmax;height:44vmax;left:-12vmax;top:-14vmax;background:radial-gradient(circle,rgba(125,211,252,.85),transparent 65%);animation:ln-drift 18s ease-in-out infinite alternate}
+#ln .ln-blob.ln-b{width:38vmax;height:38vmax;right:-10vmax;bottom:-12vmax;background:radial-gradient(circle,rgba(147,197,253,.75),transparent 65%);animation:ln-drift 22s ease-in-out infinite alternate-reverse}
+@keyframes ln-drift{to{transform:translate(6vmax,4vmax) scale(1.12)}}
+#ln .ln-dust span{position:absolute;bottom:-12px;border-radius:50%;background:#0ea5e9;opacity:0;animation:ln-rise linear infinite}
+@keyframes ln-rise{10%{opacity:.7}90%{opacity:.15}100%{transform:translateY(-110vh);opacity:0}}
+#ln .ln-main{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:48px 22px 56px}
+#ln .ln-float{translate:calc(var(--px)*12px) calc(var(--py)*12px);transition:translate .5s ease-out}
+#ln .ln-seal{position:relative;width:clamp(170px,30vw,236px);aspect-ratio:1;border-radius:50%;display:grid;place-items:center;
+  background:#fff;
+  border:1px solid rgba(56,189,248,.5);
+  box-shadow:0 0 60px rgba(56,189,248,.45),0 24px 50px -18px rgba(10,60,110,.35);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  animation:ln-pop 1.1s cubic-bezier(.2,1.25,.3,1) both}
+#ln .ln-seal::before{content:"";position:absolute;inset:-12px;border-radius:50%;
+  background:conic-gradient(from 0deg,transparent 0 55%,#38bdf8 85%,#0369a1 100%);
+  -webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 3px),#000 calc(100% - 2px));mask:radial-gradient(farthest-side,transparent calc(100% - 3px),#000 calc(100% - 2px));
+  animation:ln-spin 9s linear infinite}
+#ln .ln-seal::after{content:"";position:absolute;inset:0;border-radius:50%;border:1px solid #0ea5e9;opacity:0;animation:ln-halo 3.6s ease-out 1.2s infinite}
+@keyframes ln-pop{from{opacity:0;transform:scale(.4) rotate(-14deg)}}
+@keyframes ln-spin{to{transform:rotate(360deg)}}
+@keyframes ln-halo{0%{transform:scale(1);opacity:.55}100%{transform:scale(1.6);opacity:0}}
+#ln .ln-scale{width:78%;height:78%;overflow:visible;filter:drop-shadow(0 4px 8px rgba(14,165,233,.35))}
+#ln .ln-scale *{fill:none;stroke:url(#lnGrad);stroke-width:3.5;stroke-linecap:round;stroke-linejoin:round}
+#ln .ln-scale .ln-bowl{fill:rgba(125,211,252,.2)}
+#ln .ln-scale .ln-pivot{fill:#0284c7;stroke:none}
+#ln .ln-beam{transform-box:view-box;transform-origin:100px 48px;animation:ln-tilt 5s ease-in-out 1.3s infinite alternate}
+#ln .ln-pan{transform-box:view-box;animation:ln-untilt 5s ease-in-out 1.3s infinite alternate}
+#ln .ln-pan.ln-l{transform-origin:36px 48px}
+#ln .ln-pan.ln-r{transform-origin:164px 48px}
+@keyframes ln-tilt{from{transform:rotate(-4deg)}to{transform:rotate(4deg)}}
+@keyframes ln-untilt{from{transform:rotate(4deg)}to{transform:rotate(-4deg)}}
+#ln h1{margin:clamp(26px,5vh,42px) 0 0;font-family:var(--serif);font-weight:600;font-size:clamp(2.3rem,7.4vw,4.8rem);line-height:1.02;letter-spacing:-.02em;text-wrap:balance;max-width:14ch}
+#ln h1 span{display:inline-block;animation:ln-word 1s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(.45s + var(--i)*.18s)}
+@keyframes ln-word{from{opacity:0;filter:blur(14px);transform:translateY(.45em)}}
+#ln .ln-sub{margin:16px 0 0;display:flex;align-items:center;gap:16px;animation:ln-fade 1s ease 1s both}
+#ln .ln-sub i{display:block;height:2px;width:clamp(28px,8vw,72px);border-radius:2px;transform-origin:center;animation:ln-grow 1s ease 1.15s both}
+#ln .ln-sub i:first-child{background:linear-gradient(90deg,transparent,#0ea5e9)}
+#ln .ln-sub i:last-child{background:linear-gradient(90deg,#0ea5e9,transparent)}
+#ln .ln-sub b{font-weight:600;font-size:clamp(1.15rem,3.2vw,1.7rem);letter-spacing:.32em;text-indent:.32em;
+  background:linear-gradient(100deg,#0369a1 20%,#38bdf8 45%,#0369a1 70%);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:ln-shine 5s linear infinite}
+@keyframes ln-shine{to{background-position:-220% 0}}
+@keyframes ln-grow{from{transform:scaleX(0)}}
+@keyframes ln-fade{from{opacity:0;transform:translateY(10px)}}
+#ln .ln-lead{margin:22px 0 0;max-width:46ch;color:var(--muted);font-size:1.02rem;line-height:1.6;animation:ln-fade 1s ease 1.3s both}
+#ln .ln-cta{position:relative;overflow:hidden;margin-top:34px;display:inline-flex;align-items:center;gap:10px;height:52px;padding:0 30px;border-radius:99px;font-weight:700;font-size:1rem;color:#e0f2fe;text-decoration:none;
+  background:linear-gradient(135deg,#0a2a52,#0b4a82);box-shadow:0 14px 34px -10px rgba(10,42,82,.7);
+  transition:transform .25s,box-shadow .25s;animation:ln-fade 1s ease 1.5s both}
+#ln .ln-cta::after{content:"";position:absolute;top:0;bottom:0;left:-40%;width:30%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.75),transparent);transform:skewX(-20deg);transition:left .7s ease}
+#ln .ln-cta:hover{transform:translateY(-3px);box-shadow:0 20px 44px -10px rgba(10,42,82,.85)}
+#ln .ln-cta:hover::after{left:120%}
+#ln .ln-cta:active{transform:translateY(0)}
+#ln .ln-cta:focus-visible{outline:3px solid #0369a1;outline-offset:4px}
+#ln .ln-cta svg{width:18px;height:18px;transition:transform .25s}
+#ln .ln-cta:hover svg{transform:translateX(4px)}
+#ln .ln-cta svg *{fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+@media (prefers-reduced-motion:reduce){#ln .ln-dust{display:none}}
+#ln{display:none;position:fixed;inset:0;z-index:60;overflow-x:hidden;overflow-y:auto;overscroll-behavior:contain}
+body.on-ln #ln{display:block}
+body.on-ln .topbar,body.on-ln main,body.on-ln .aurora{display:none}
+#btnExit{text-decoration:none}
+@media (max-width:560px){#btnExit{width:42px;padding:0}#btnExit span{display:none}}
+
+</style>
+</head>
+<body>
+<div class="aurora" aria-hidden="true"></div>
+<section id="ln" aria-label="Página de inicio"><div class="ln-bg" aria-hidden="true">
+  <div class="ln-grid"></div><div class="ln-blob ln-a"></div><div class="ln-blob ln-b"></div><div class="ln-dust"></div>
+</div>
+
+<div class="ln-main">
+  <div class="ln-float">
+    <div class="ln-seal" role="img" aria-label="Balanza de la justicia">
+      <svg class="ln-scale" viewBox="-4 22 208 164" aria-hidden="true">
+        <defs><linearGradient id="lnGrad" gradientUnits="userSpaceOnUse" x1="0" y1="30" x2="0" y2="180"><stop offset="0" stop-color="#7dd3fc"/><stop offset="1" stop-color="#0ea5e9"/></linearGradient></defs>
+        <path d="M100 52V160"/><path d="M70 174h60M82 162h36"/><circle cx="100" cy="38" r="5"/>
+        <g class="ln-beam">
+          <path d="M36 48h128"/>
+          <g class="ln-pan ln-l"><path d="M36 48L16 104M36 48l20 56"/><path class="ln-bowl" d="M14 104h44c0 12-10 20-22 20s-22-8-22-20z"/></g>
+          <g class="ln-pan ln-r"><path d="M164 48l-20 56M164 48l20 56"/><path class="ln-bowl" d="M142 104h44c0 12-10 20-22 20s-22-8-22-20z"/></g>
+          <circle class="ln-pivot" cx="100" cy="48" r="4"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+
+  <h1><span style="--i:0">Capacitación</span> <span style="--i:1">Judicial</span></h1>
+  <p class="ln-sub"><i></i><b>Certificados</b><i></i></p>
+  <p class="ln-lead">Registro de certificados de asistencia y aprobación de cursos de capacitación judicial.</p>
+  <a class="ln-cta" href="#/registro">Ingresar al registro
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+  </a>
+</div></section>
+
+<header class="topbar">
+  <div class="topbar-in">
+    <a class="brand" href="#/registro" aria-label="Ir al registro">
+      <span class="brand-mark"><i data-i="scales" data-sz="22"></i></span>
+      <span class="brand-txt"><strong>Certificados</strong><small>Capacitación Judicial</small></span>
+    </a>
+    <nav class="nav" aria-label="Secciones">
+      <a href="#/registro" data-route="registro">Registro</a>
+      <a href="#/resumen" data-route="resumen">Resumen</a>
+      <a href="#/ajustes" data-route="ajustes">Ajustes</a>
+    </nav>
+    <div class="top-actions">
+      <button class="sync" id="btnSync" type="button" data-s="idle" title="Sincronizar con Cloudinary"><span class="dot"></span><span class="t" id="syncTxt">Sin configurar</span></button>
+      <button class="icon-btn" id="btnTheme" type="button" aria-label="Cambiar tema claro/oscuro"></button>
+      <button class="btn primary" id="btnNew" type="button"><i data-i="plus"></i><span>Nuevo<span class="lbl-long"> certificado</span></span></button>
+      <a class="btn ghost" id="btnExit" href="#/inicio" aria-label="Salir" title="Salir y volver al inicio"><i data-i="logout"></i><span>Salir</span></a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <!-- ===== REGISTRO ===== -->
+  <section class="view" id="view-registro">
+    <div class="hero">
+      <p class="eyebrow"><i data-i="scales" data-sz="14"></i> Capacitación Judicial</p>
+      <h1 class="title">Registro de <span class="grad">Certificados de Asistencia y Aprobación</span> de Cursos</h1>
+      <p class="lead">Guarda el PDF de cada certificado y consúltalo ordenado por fecha, materia y detalle de la capacitación.</p>
+    </div>
+    <div class="stats" id="stats"></div>
+    <div id="notice"></div>
+
+    <div class="toolbar" role="search">
+      <label class="search"><i class="ico" data-i="search"></i><input id="q" type="search" placeholder="Buscar por materia o detalle…" autocomplete="off" aria-label="Buscar"></label>
+      <select id="fYear" aria-label="Filtrar por año"></select>
+      <select id="fMateria" aria-label="Filtrar por materia"></select>
+      <select id="fTipo" aria-label="Filtrar por tipo">
+        <option value="">Todos los tipos</option>
+        <option value="Asistencia">Asistencia</option>
+        <option value="Aprobación">Aprobación</option>
+      </select>
+      <select id="sort" aria-label="Ordenar por">
+        <option value="fecha_desc">Fecha · más recientes</option>
+        <option value="fecha_asc">Fecha · más antiguos</option>
+        <option value="materia">Materia · A–Z</option>
+        <option value="detalle">Detalle · A–Z</option>
+      </select>
+      <select id="group" aria-label="Agrupar por">
+        <option value="year">Agrupar por año</option>
+        <option value="materia">Agrupar por materia</option>
+        <option value="none">Sin agrupar</option>
+      </select>
+      <div class="seg" role="group" aria-label="Vista">
+        <button type="button" id="vGrid" data-v="grid" aria-label="Vista de tarjetas"><i data-i="grid"></i></button>
+        <button type="button" id="vTable" data-v="table" aria-label="Vista de tabla"><i data-i="list"></i></button>
+      </div>
+    </div>
+    <div class="count" id="count" aria-live="polite"></div>
+    <div id="results"></div>
+  </section>
+
+  <!-- ===== RESUMEN ===== -->
+  <section class="view" id="view-resumen" hidden></section>
+
+  <!-- ===== AJUSTES ===== -->
+  <section class="view" id="view-ajustes" hidden></section>
+</main>
+
+<!-- ===== Formulario ===== -->
+<dialog class="sheet" id="dlgForm" aria-labelledby="formTitle">
+  <form id="form" novalidate>
+    <div class="sheet-h">
+      <div><h2 id="formTitle">Nuevo certificado</h2><p>Completa los datos y adjunta el PDF del certificado.</p></div>
+      <button class="icon-btn" type="button" data-close aria-label="Cerrar"><i data-i="x"></i></button>
+    </div>
+    <div class="sheet-b">
+      <div class="grid2">
+        <label class="field"><span>Fecha del certificado *</span><input type="date" id="fFecha" required></label>
+        <div class="field"><span>Tipo de certificado *</span>
+          <div class="radios" role="radiogroup" aria-label="Tipo de certificado">
+            <label><input type="radio" name="tipo" value="Asistencia" checked>Asistencia</label>
+            <label><input type="radio" name="tipo" value="Aprobación">Aprobación</label>
+          </div>
+        </div>
+      </div>
+      <label class="field"><span>Materia *</span><input id="fMat" list="dlMaterias" required maxlength="120" placeholder="Escribe o elige una materia" autocomplete="off"></label>
+      <label class="field"><span>Detalle de la capacitación *</span><textarea id="fDet" required maxlength="400" placeholder="Describe la capacitación"></textarea></label>
+      <label class="field"><span>Ámbito</span><select id="fAmb"><option value="">Automático (según la institución)</option><option value="pj">Poder Judicial</option><option value="mp">Ministerio Público</option><option value="otros">Otros</option></select></label>
+      <div class="grid3">
+        <label class="field"><span>Institución / organismo</span><input id="fInst" list="dlInst" maxlength="140" placeholder="Institución u organismo" autocomplete="off"></label>
+        <label class="field"><span>Carga horaria</span><input id="fHoras" type="number" min="0" step="0.5" inputmode="decimal" placeholder="Horas"></label>
+        <label class="field"><span>N.º de certificado</span><input id="fNro" maxlength="60" placeholder="Opcional"></label>
+      </div>
+      <label class="field"><span>Observaciones <small>(opcional)</small></span><textarea id="fObs" maxlength="600" style="min-height:64px" placeholder="Opcional"></textarea></label>
+      <div class="field">
+        <span id="pdfLbl">Certificado en PDF *</span>
+        <div class="drop" id="drop" tabindex="0" role="button" aria-labelledby="pdfLbl">
+          <span class="ico"><i data-i="upload" data-sz="22"></i></span>
+          <span><b id="dropT">Arrastra el PDF aquí o haz clic para elegirlo</b><small id="dropS">Solo archivos PDF · se sube a tu Cloudinary</small></span>
+        </div>
+        <input type="file" id="fFile" accept="application/pdf,.pdf" hidden>
+        <div class="prog" id="prog" hidden><div></div></div>
+      </div>
+    </div>
+    <div class="sheet-f">
+      <button type="button" class="btn ghost" data-close>Cancelar</button>
+      <button type="submit" class="btn primary" id="btnSave"><i data-i="check"></i><span id="saveTxt">Guardar certificado</span></button>
+    </div>
+  </form>
+</dialog>
+<datalist id="dlMaterias"></datalist>
+<datalist id="dlInst"></datalist>
+
+<!-- ===== Visor PDF ===== -->
+<dialog class="viewer" id="dlgView" aria-label="Visor de certificado">
+  <div class="viewer-h">
+    <h3 id="viewT">Certificado</h3>
+    <a class="btn ghost sm" id="viewOpen" target="_blank" rel="noopener"><i data-i="external" data-sz="16"></i><span class="hide-sm">Abrir</span></a>
+    <a class="btn soft sm" id="viewDl" target="_blank" rel="noopener"><i data-i="download" data-sz="16"></i><span class="hide-sm">Descargar</span></a>
+    <button class="icon-btn sm" type="button" data-close aria-label="Cerrar visor"><i data-i="x"></i></button>
+  </div>
+  <iframe id="viewF" title="PDF del certificado"></iframe>
+</dialog>
+
+<!-- ===== Confirmación ===== -->
+<dialog class="confirm" id="dlgConfirm">
+  <h3 id="cfT">¿Eliminar?</h3>
+  <p id="cfP"></p>
+  <div class="row"><button type="button" class="btn ghost" id="cfNo">Cancelar</button><button type="button" class="btn danger" id="cfYes">Eliminar</button></div>
+</dialog>
+
+<div id="toasts" role="status" aria-live="polite"></div>
+<noscript><p style="padding:24px;font-family:sans-serif">Esta aplicación necesita JavaScript.</p></noscript>
+
+<script>
+(() => {
+"use strict";
+
+/* ==========================================================================
+   CONFIGURACIÓN (opcional): puedes completar aquí tus datos de Cloudinary
+   o cargarlos desde la pestaña «Ajustes» (quedan guardados en el navegador).
+   ========================================================================== */
+const DEFAULT_CFG = { cloudName: "", uploadPreset: "" };
+
+/*LOGIC_START*/
+const TAG_REG = "certcap_reg";
+const TAG_PDF = "certcap_pdf";
+const norm = (s) => String(s ?? "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
+const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
+const slug = (s) => norm(s).replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 40) || "certificado";
+const collator = new Intl.Collator("es", { sensitivity: "base", numeric: true });
+const hueOf = (s) => { let h = 0; for (const c of String(s)) h = (h * 31 + c.charCodeAt(0)) % 360; return h; };
+
+/* Los cambios se guardan como "eventos" JSON en Cloudinary; el último (rev mayor) de cada id manda. */
+function foldEvents(events) {
+  const latest = new Map();
+  for (const e of events) {
+    if (!e || !e.id || typeof e.rev !== "number") continue;
+    const cur = latest.get(e.id);
+    if (!cur || e.rev > cur.rev) latest.set(e.id, e);
+  }
+  return [...latest.values()].filter((e) => !e.deleted && e.data).map((e) => ({ ...e.data, id: e.id, rev: e.rev }));
+}
+const cmpFecha = (a, b) => (a.fecha < b.fecha ? -1 : a.fecha > b.fecha ? 1 : 0);
+const SORTS = {
+  fecha_desc: (a, b) => cmpFecha(b, a) || collator.compare(a.materia, b.materia) || collator.compare(a.detalle, b.detalle),
+  fecha_asc: (a, b) => cmpFecha(a, b) || collator.compare(a.materia, b.materia) || collator.compare(a.detalle, b.detalle),
+  materia: (a, b) => collator.compare(a.materia, b.materia) || cmpFecha(b, a) || collator.compare(a.detalle, b.detalle),
+  detalle: (a, b) => collator.compare(a.detalle, b.detalle) || cmpFecha(b, a) || collator.compare(a.materia, b.materia),
+};
+const sortRecords = (list, key) => [...list].sort(SORTS[key] || SORTS.fecha_desc);
+function applyFilters(list, f) {
+  const q = norm(f.q);
+  return list.filter((r) =>
+    (!f.year || r.fecha.startsWith(f.year)) &&
+    (!f.materia || r.materia === f.materia) &&
+    (!f.tipo || r.tipo === f.tipo) &&
+    (!q || norm([r.materia, r.detalle, r.institucion, r.nro, r.obs].join(" ")).includes(q)));
+}
+function groupRecords(list, mode, sortKey) {
+  if (mode === "none") return [{ key: "", items: list }];
+  const map = new Map();
+  for (const r of list) {
+    const k = mode === "materia" ? r.materia : r.fecha.slice(0, 4);
+    if (!map.has(k)) map.set(k, []);
+    map.get(k).push(r);
+  }
+  const groups = [...map].map(([key, items]) => ({ key, items }));
+  if (mode === "materia") groups.sort((a, b) => collator.compare(a.key, b.key));
+  else groups.sort((a, b) => (sortKey === "fecha_asc" ? 1 : -1) * (a.key < b.key ? -1 : a.key > b.key ? 1 : 0));
+  return groups;
+}
+const sumHoras = (list) => list.reduce((s, r) => s + (Number(r.horas) || 0), 0);
+const AMBITOS = { pj: "Poder Judicial", mp: "Ministerio Público", otros: "Otros" };
+function ambitoOf(r) {
+  if (AMBITOS[r.ambito]) return r.ambito;
+  const t = String(r.institucion || "").toLowerCase();
+  if (/ministerio p[uú]blico|fiscal|defensor|\bmpf\b|\bmpd\b/.test(t)) return "mp";
+  if (/judicial|tribunal|juzgado|c[aá]mara|\bstj\b/.test(t)) return "pj";
+  return "otros";
+}
+function computeStats(list, year) {
+  const a = { pj: 0, mp: 0, otros: 0 }; list.forEach((r) => { a[ambitoOf(r)]++; });
+  return { total: list.length, ...a, horas: sumHoras(list), materias: new Set(list.map((r) => r.materia)).size, delAnio: list.filter((r) => r.fecha.startsWith(String(year))).length };
+}
+function byKey(list, keyFn) {
+  const m = new Map();
+  for (const r of list) { const k = keyFn(r); const o = m.get(k) || { n: 0, h: 0 }; o.n++; o.h += Number(r.horas) || 0; m.set(k, o); }
+  return [...m].map(([k, v]) => ({ k, ...v }));
+}
+const csvEscape = (v) => { const s = String(v ?? ""); return /["\n\r;,]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s; };
+function toCSV(list, urlOf) {
+  const head = ["Fecha", "Materia", "Detalle de la capacitación", "Institución", "Horas", "Tipo", "N.º certificado", "Observaciones", "PDF"];
+  const rows = list.map((r) => [r.fecha, r.materia, r.detalle, r.institucion || "", r.horas ?? "", r.tipo, r.nro || "", r.obs || "", urlOf(r) || ""]);
+  return "\ufeff" + [head, ...rows].map((row) => row.map(csvEscape).join(";")).join("\r\n");
+}
+const ctxClean = (s) => String(s ?? "").replace(/[|=\\\r\n]+/g, " ").trim().slice(0, 200);
+const buildContext = (d) => `fecha=${ctxClean(d.fecha)}|materia=${ctxClean(d.materia)}|detalle=${ctxClean(d.detalle)}|tipo=${ctxClean(d.tipo)}`;
+const cdnBase = (cloud) => `https://res.cloudinary.com/${encodeURIComponent(cloud)}`;
+const fileLabel = (r) => `${r.fecha}_${slug(r.materia)}_${slug(r.detalle)}`.replace(/-/g, "_").slice(0, 80);
+const pdfUrl = (cloud, r, attach) => r.pdf ? `${cdnBase(cloud)}/image/upload/${attach ? `fl_attachment:${fileLabel(r)}/` : ""}v${r.pdf.version}/${r.pdf.public_id}.pdf` : "";
+const thumbUrl = (cloud, r) => r.pdf ? `${cdnBase(cloud)}/image/upload/pg_1,w_560,c_limit,f_jpg,q_auto/v${r.pdf.version}/${r.pdf.public_id}.jpg` : "";
+/*LOGIC_END*/
+
+/* ---------------------------- utilidades UI ---------------------------- */
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const store = {
+  get(k, d) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch { return d; } },
+  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} },
+};
+const ICONS = {
+  logout: '<path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/>',
+  plus: '<path d="M12 5v14M5 12h14"/>',
+  x: '<path d="M18 6 6 18M6 6l12 12"/>',
+  check: '<path d="M20 6 9 17l-5-5"/>',
+  alert: '<circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5h.01"/>',
+  search: '<circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>',
+  file: '<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/>',
+  eye: '<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',
+  edit: '<path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/>',
+  trash: '<path d="M3 6h18M8 6V4a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6M10 11v6M14 11v6"/>',
+  download: '<path d="M12 3v12m0 0 4-4m-4 4-4-4M5 21h14"/>',
+  external: '<path d="M14 4h6v6M20 4 10 14M19 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5"/>',
+  sun: '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',
+  moon: '<path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>',
+  grid: '<rect x="3" y="3" width="7" height="7" rx="1.6"/><rect x="14" y="3" width="7" height="7" rx="1.6"/><rect x="3" y="14" width="7" height="7" rx="1.6"/><rect x="14" y="14" width="7" height="7" rx="1.6"/>',
+  list: '<path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/>',
+  upload: '<path d="M4 14.9A7 7 0 1 1 15.7 8h1.8a4.5 4.5 0 0 1 2.5 8.2M12 12v9m0-9-3 3m3-3 3 3"/>',
+  clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+  calendar: '<rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>',
+  building: '<path d="M3 21h18M5 21V7l7-4 7 4v14M9 9h.01M9 13h.01M9 17h.01M15 9h.01M15 13h.01M15 17h.01"/>',
+  scales: '<path d="M12 3v18M7 21h10M5 7h14M5 7l-3 7a3 3 0 0 0 6 0zM19 7l-3 7a3 3 0 0 0 6 0z"/>',
+  books: '<path d="M4 4h5v16H4zM9 4h5v16H9zM15.5 5.5l4.6-1.2 3 15-4.6 1.2z" transform="scale(.92) translate(.6 .6)"/>',
+  award: '<circle cx="12" cy="9" r="6"/><path d="m8.5 14-1.5 8 5-3 5 3-1.5-8"/>',
+  chart: '<path d="M3 3v18h18M7 15v3M12 9v9M17 5v13"/>',
+  cloud: '<path d="M17.5 19a4.5 4.5 0 0 0 .5-8.97A6 6 0 0 0 6.2 9.6 4 4 0 0 0 7 19z"/>',
+  refresh: '<path d="M3 12a9 9 0 0 1 15.5-6.2L21 8M21 3v5h-5M21 12a9 9 0 0 1-15.5 6.2L3 16M3 21v-5h5"/>',
+  hash: '<path d="M4 9h16M4 15h16M10 3 8 21M16 3l-2 18"/>',
+};
+const icon = (n, sz = 18) => `<svg viewBox="0 0 24 24" width="${sz}" height="${sz}" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[n] || ""}</svg>`;
+const paintIcons = (root = document) => $$("i[data-i]", root).forEach((el) => { el.innerHTML = icon(el.dataset.i, +el.dataset.sz || 18); });
+
+function toast(msg, kind = "ok", ms = 4200) {
+  const el = document.createElement("div");
+  el.className = "toast " + kind;
+  el.innerHTML = `<span class="ico">${icon(kind === "err" ? "alert" : "check")}</span><span>${esc(msg)}</span>`;
+  $("#toasts").append(el);
+  setTimeout(() => el.classList.add("out"), ms);
+  setTimeout(() => el.remove(), ms + 350);
+}
+function confirmBox(title, text, okLabel) {
+  return new Promise((res) => {
+    const d = $("#dlgConfirm");
+    $("#cfT").textContent = title; $("#cfP").textContent = text; $("#cfYes").textContent = okLabel || "Eliminar";
+    const done = (v) => { d.close(); $("#cfYes").onclick = $("#cfNo").onclick = null; res(v); };
+    $("#cfYes").onclick = () => done(true);
+    $("#cfNo").onclick = () => done(false);
+    d.oncancel = () => res(false);
+    d.showModal();
+  });
+}
+
+/* ------------------------------- estado -------------------------------- */
+const S = {
+  cfg: { ...DEFAULT_CFG, ...store.get("cc.cfg", {}) },
+  events: store.get("cc.events", {}),
+  lastSync: store.get("cc.sync", null),
+  ui: { view: "grid", sort: "fecha_desc", group: "year", ...store.get("cc.ui", {}) },
+  f: { q: "", year: "", materia: "", tipo: "" },
+  sync: { state: "idle", msg: "" },
+  editing: null, formFile: null, draftPdf: null, busy: false,
+};
+for (const k of ["cloudName", "uploadPreset"]) if (!S.cfg[k]) S.cfg[k] = DEFAULT_CFG[k] || "";
+const configured = () => !!(S.cfg.cloudName && S.cfg.uploadPreset);
+const records = () => foldEvents(Object.values(S.events));
+const saveEvents = () => store.set("cc.events", S.events);
+const MESES = ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"];
+const fmtFecha = (f) => { const [y, m, d] = f.split("-").map(Number); return `${d} ${MESES[m - 1]} ${y}`; };
+const fmtHoras = (h) => (h || h === 0) && h !== "" && h !== null ? `${Number(h).toLocaleString("es-AR")} h` : "";
+const pdfOf = (r, attach) => pdfUrl(S.cfg.cloudName, r, attach);
+
+/* ---------------------------- Cloudinary I/O ---------------------------- */
+function friendly(e) {
+  const m = String((e && e.message) || e);
+  if (e && (e.status === 401 || e.status === 403) && e.list) return "Cloudinary no permite leer el listado. Desactiva «Resource list» en Settings → Security → Restricted media types.";
+  if (/preset/i.test(m) && /not found|disabled|whitelist|unsigned|invalid/i.test(m)) return `El upload preset no existe o no es «Unsigned» (${m}).`;
+  if (/Failed to fetch|NetworkError|Load failed/i.test(m)) return "No se pudo conectar con Cloudinary. Revisa tu conexión y el nombre del cloud.";
+  if (/format|not allowed|extension/i.test(m)) return `${m}. Revisa que el preset admita PDF y archivos raw (JSON).`;
+  return m;
+}
+function upload({ resource, file, publicId, tags, context, onProgress }) {
+  const cfg = S.cfg;
+  return new Promise((resolve, reject) => {
+    const fd = new FormData();
+    fd.append("file", file);
+    fd.append("upload_preset", cfg.uploadPreset);
+    fd.append("public_id", publicId);
+    if (tags) fd.append("tags", tags);
+    if (context) fd.append("context", context);
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", `https://api.cloudinary.com/v1_1/${encodeURIComponent(cfg.cloudName)}/${resource}/upload`);
+    if (onProgress) xhr.upload.onprogress = (e) => { if (e.lengthComputable) onProgress(e.loaded / e.total); };
+    xhr.onload = () => {
+      let j = null; try { j = JSON.parse(xhr.responseText); } catch {}
+      if (xhr.status >= 200 && xhr.status < 300 && j && j.public_id) resolve(j);
+      else { const err = new Error((j && j.error && j.error.message) || `Error ${xhr.status} al subir`); err.status = xhr.status; reject(err); }
+    };
+    xhr.onerror = () => reject(new Error("Failed to fetch"));
+    xhr.send(fd);
+  });
+}
+async function listEvents() {
+  let last = null;
+  for (const kind of ["raw", "any"]) {
+    try {
+      const r = await fetch(`${cdnBase(S.cfg.cloudName)}/${kind}/list/${TAG_REG}.json`, { cache: "no-store" });
+      if (r.ok) { const j = await r.json(); return j.resources || []; }
+      last = new Error(`Listado ${kind}: HTTP ${r.status}`); last.status = r.status; last.list = true;
+      if (r.status === 401 || r.status === 403) throw last;
+    } catch (e) { if (e.status === 401 || e.status === 403) throw e; last = last || e; }
+  }
+  throw last;
+}
+async function pool(items, n, fn) {
+  let i = 0, fails = 0;
+  await Promise.all(Array.from({ length: Math.min(n, items.length) }, async () => {
+    while (i < items.length) { const it = items[i++]; try { await fn(it); } catch { fails++; } }
+  }));
+  return fails;
+}
+function setSync(state, msg = "") {
+  S.sync = { state, msg };
+  const b = $("#btnSync"); b.dataset.s = state === "nocfg" ? "idle" : state;
+  const txt = { busy: "Sincronizando…", ok: "Sincronizado", error: "Error de sincronización", nocfg: "Sin configurar", idle: "Sin sincronizar" }[state];
+  $("#syncTxt").textContent = txt;
+  b.title = state === "ok" && S.lastSync ? "Última sincronización: " + new Date(S.lastSync).toLocaleString("es-AR") : (msg || "Sincronizar con Cloudinary");
+  renderNotice();
+}
+async function sync() {
+  if (!configured()) { setSync("nocfg"); return; }
+  if (S.sync.state === "busy") return;
+  setSync("busy");
+  try {
+    let items = [];
+    try { items = await listEvents(); } catch (e) { if (e.status === 404) items = []; else throw e; }
+    const present = new Set(items.map((i) => i.public_id));
+    const fresh = items.filter((i) => !S.events[i.public_id]);
+    const fails = await pool(fresh, 6, async (it) => {
+      const r = await fetch(`${cdnBase(S.cfg.cloudName)}/raw/upload/v${it.version}/${it.public_id}`);
+      if (!r.ok) throw new Error("HTTP " + r.status);
+      const ev = await r.json();
+      ev._pid = it.public_id; ev._saved = Date.now();
+      S.events[it.public_id] = ev;
+    });
+    for (const pid of Object.keys(S.events)) if (!present.has(pid) && Date.now() - (S.events[pid]._saved || 0) > 10 * 60 * 1000) delete S.events[pid];
+    saveEvents();
+    S.lastSync = Date.now(); store.set("cc.sync", S.lastSync);
+    if (fails) setSync("error", `No se pudieron leer ${fails} registro(s). Vuelve a sincronizar.`);
+    else setSync("ok");
+  } catch (e) { setSync("error", friendly(e)); }
+  renderAll();
+}
+
+/* ------------------------------- render -------------------------------- */
+function refreshFilters() {
+  const all = records();
+  const years = [...new Set(all.map((r) => r.fecha.slice(0, 4)))].sort().reverse();
+  const mats = [...new Set(all.map((r) => r.materia))].sort(collator.compare);
+  if (S.f.year && !years.includes(S.f.year)) S.f.year = "";
+  if (S.f.materia && !mats.includes(S.f.materia)) S.f.materia = "";
+  $("#fYear").innerHTML = `<option value="">Todos los años</option>` + years.map((y) => `<option ${y === S.f.year ? "selected" : ""}>${y}</option>`).join("");
+  $("#fMateria").innerHTML = `<option value="">Todas las materias</option>` + mats.map((m) => `<option value="${esc(m)}" ${m === S.f.materia ? "selected" : ""}>${esc(m)}</option>`).join("");
+  const sug = ["Derecho Civil y Comercial", "Derecho de Familia", "Derecho Procesal", "Derecho Penal", "Derecho Constitucional", "Derechos Humanos", "Género", "Ética Judicial", "Informática Jurídica", "Gestión Judicial", "Mediación"];
+  $("#dlMaterias").innerHTML = [...new Set([...mats, ...sug])].map((m) => `<option value="${esc(m)}">`).join("");
+  $("#dlInst").innerHTML = [...new Set(all.map((r) => r.institucion).filter(Boolean))].map((m) => `<option value="${esc(m)}">`).join("");
+}
+function renderStats() {
+  const s = computeStats(records(), new Date().getFullYear());
+  const card = (ic, v, l, cls = "") => `<div class="stat ${cls}"><span class="ico">${icon(ic, 20)}</span><b>${v}</b><span>${l}</span></div>`;
+  $("#stats").innerHTML =
+    card("file", s.total, "Cantidad total", "hl") +
+    card("scales", s.pj, "En Poder Judicial") +
+    card("building", s.mp, "En Ministerio Público") +
+    card("books", s.otros, "Otros");
+}
+function renderNotice() {
+  const el = $("#notice");
+  const act = (id, label, cls = "btn sm soft") => `<button type="button" class="${cls}" id="${id}">${label}</button>`;
+  let h = "";
+  if (!configured()) h = `<div class="notice warn"><span class="ico">${icon("cloud")}</span><div><h4>Conecta tu cuenta de Cloudinary</h4><p>Ingresa el nombre de tu cloud y un upload preset <b>unsigned</b> para subir los PDF y volver a verlos aquí.</p><div class="acts">${act("nCfg", "Configurar ahora", "btn sm primary")}</div></div></div>`;
+  else if (S.sync.state === "error") h = `<div class="notice err"><span class="ico">${icon("alert")}</span><div><h4>No se pudo sincronizar</h4><p>${esc(S.sync.msg)}</p><div class="acts">${act("nRetry", "Reintentar", "btn sm primary")}${act("nCfg", "Revisar ajustes")}</div></div></div>`;
+  el.innerHTML = h;
+  const on = (id, fn) => { const b = $("#" + id); if (b) b.onclick = fn; };
+  on("nCfg", () => { location.hash = "#/ajustes"; });
+  on("nRetry", () => sync());
+}
+function actions(r) {
+  return `<button class="btn soft sm" type="button" data-act="view" data-id="${r.id}">${icon("eye", 16)} Ver PDF</button>
+<button class="icon-btn sm" type="button" data-act="edit" data-id="${r.id}" aria-label="Editar" title="Editar">${icon("edit", 16)}</button>
+<button class="icon-btn sm del" type="button" data-act="del" data-id="${r.id}" aria-label="Eliminar" title="Eliminar">${icon("trash", 16)}</button>`;
+}
+function matChip(r) { return `<span class="mat" style="--h:${hueOf(r.materia)}" title="${esc(r.materia)}"><span>${esc(r.materia)}</span></span>`; }
+function cardHTML(r) {
+  const img = r.pdf ? `<img loading="lazy" alt="" src="${thumbUrl(S.cfg.cloudName, r)}">` : "";
+  const pages = r.pdf && r.pdf.pages > 1 ? `<span class="pg">${r.pdf.pages} págs.</span>` : "";
+  return `<article class="card">
+<button class="thumb" type="button" data-act="view" data-id="${r.id}" aria-label="Ver PDF de ${esc(r.detalle)}"><span class="fb">${icon("file", 44)}</span>${img}<span class="badge ${r.tipo}">${icon(r.tipo === "Aprobación" ? "award" : "check", 13)} ${r.tipo}</span>${pages}</button>
+<div class="card-b"><div class="meta">${matChip(r)}<span class="date">${icon("calendar", 14)} ${fmtFecha(r.fecha)}</span></div>
+<h3 class="det">${esc(r.detalle)}</h3>
+<div class="facts">${r.institucion ? `<span>${icon("building", 14)} ${esc(r.institucion)}</span>` : ""}${fmtHoras(r.horas) ? `<span>${icon("clock", 14)} ${fmtHoras(r.horas)}</span>` : ""}${r.nro ? `<span>${icon("hash", 14)} ${esc(r.nro)}</span>` : ""}</div></div>
+<div class="card-f">${actions(r)}</div></article>`;
+}
+function rowHTML(r) {
+  return `<tr><td style="white-space:nowrap">${fmtFecha(r.fecha)}</td><td>${matChip(r)}</td><td><h3 class="det">${esc(r.detalle)}</h3>${r.nro ? `<small style="color:var(--muted)">N.º ${esc(r.nro)}</small>` : ""}</td><td>${esc(r.institucion || "—")}</td><td class="num">${fmtHoras(r.horas) || "—"}</td><td><span class="badge ${r.tipo}">${r.tipo}</span></td><td class="acts">${actions(r)}</td></tr>`;
+}
+function groupLabel(key, mode) { return mode === "materia" ? esc(key) : key; }
+function renderResults() {
+  const all = records();
+  const list = sortRecords(applyFilters(all, S.f), S.ui.sort);
+  const filtered = list.length !== all.length;
+  $("#count").textContent = all.length ? (filtered ? `${list.length} de ${all.length} certificados` : `${all.length} certificado${all.length === 1 ? "" : "s"}`) : "";
+  const box = $("#results");
+  if (!all.length) {
+    const loading = S.sync.state === "busy";
+    box.innerHTML = loading ? `<div class="grid">${'<div class="skeleton"></div>'.repeat(3)}</div>` :
+      `<div class="empty"><span class="ico">${icon("file", 32)}</span><h3>Aún no hay certificados</h3><p>${configured() ? "Agrega tu primer certificado: completa fecha, materia y detalle, y adjunta el PDF." : "Configura Cloudinary en Ajustes y empieza a cargar tus certificados."}</p>${configured() ? `<button class="btn primary" type="button" data-act="new">${icon("plus")} Agregar certificado</button>` : `<button class="btn primary" type="button" data-act="cfg">${icon("cloud")} Configurar Cloudinary</button>`}</div>`;
+    return;
+  }
+  if (!list.length) {
+    box.innerHTML = `<div class="empty"><span class="ico">${icon("search", 32)}</span><h3>Sin resultados</h3><p>Ningún certificado coincide con los filtros actuales.</p><button class="btn soft" type="button" data-act="reset">Quitar filtros</button></div>`;
+    return;
+  }
+  const groups = groupRecords(list, S.ui.group, S.ui.sort);
+  const head = (g) => `<div class="grp"><h2>${groupLabel(g.key, S.ui.group)}</h2><span>${g.items.length} certificado${g.items.length === 1 ? "" : "s"}${sumHoras(g.items) ? " · " + sumHoras(g.items).toLocaleString("es-AR") + " h" : ""}</span></div>`;
+  if (S.ui.view === "table") {
+    let rows = "";
+    for (const g of groups) {
+      if (S.ui.group !== "none") rows += `<tr class="grp-row"><td colspan="7">${groupLabel(g.key, S.ui.group)}<small>${g.items.length} certificado${g.items.length === 1 ? "" : "s"}</small></td></tr>`;
+      rows += g.items.map(rowHTML).join("");
+    }
+    box.innerHTML = `<div class="tbl-wrap"><table><thead><tr><th>Fecha</th><th>Materia</th><th>Detalle de la capacitación</th><th>Institución</th><th class="num">Horas</th><th>Tipo</th><th></th></tr></thead><tbody>${rows}</tbody></table></div>`;
+  } else {
+    box.innerHTML = groups.map((g) => (S.ui.group !== "none" ? head(g) : "") + `<div class="grid">${g.items.map(cardHTML).join("")}</div>`).join("");
+  }
+}
+function renderResumen() {
+  const all = records();
+  const el = $("#view-resumen");
+  if (!all.length) { el.innerHTML = `<div class="hero"><p class="eyebrow">Resumen</p><h1 class="title">Aún no hay datos para resumir</h1></div><div class="empty"><span class="ico">${icon("chart", 32)}</span><h3>Sin certificados</h3><p>Cuando registres certificados verás aquí tus horas y materias.</p><a class="btn primary" href="#/registro">Ir al registro</a></div>`; return; }
+  const mat = byKey(all, (r) => r.materia).sort((a, b) => b.n - a.n || b.h - a.h);
+  const yrs = byKey(all, (r) => r.fecha.slice(0, 4)).sort((a, b) => (a.k < b.k ? 1 : -1));
+  const maxM = Math.max(...mat.map((x) => x.n)), maxY = Math.max(...yrs.map((x) => x.h || x.n));
+  const recent = sortRecords(all, "fecha_desc").slice(0, 6);
+  el.innerHTML = `<div class="hero"><p class="eyebrow">${icon("chart", 14)} Resumen</p><h1 class="title">Tu trayectoria de <span class="grad">capacitación</span></h1><p class="lead">Horas y certificados acumulados por año y por materia.</p></div>
+<div class="stats" id="stats2"></div>
+<div class="panels">
+<div class="panel"><h3>Certificados por materia</h3><p>Cantidad de certificados y horas por materia.</p><div class="bars">${mat.map((m) => `<div class="bar-row"><div class="bar-top"><span>${esc(m.k)}</span><small>${m.n} cert.${m.h ? " · " + m.h.toLocaleString("es-AR") + " h" : ""}</small></div><div class="bar"><i style="--h:${hueOf(m.k)};width:${Math.max(4, (m.n / maxM) * 100)}%"></i></div></div>`).join("")}</div></div>
+<div style="display:grid;gap:18px;align-content:start">
+<div class="panel"><h3>Horas por año</h3><p>Carga horaria acumulada en cada año.</p><div class="bars">${yrs.map((y) => `<div class="bar-row"><div class="bar-top"><span>${y.k}</span><small>${y.h ? y.h.toLocaleString("es-AR") + " h · " : ""}${y.n} cert.</small></div><div class="bar"><i style="--h:215;width:${Math.max(4, ((y.h || y.n) / maxY) * 100)}%"></i></div></div>`).join("")}</div></div>
+<div class="panel"><h3>Últimos certificados</h3><p>Los más recientes del registro.</p><ul class="recent">${recent.map((r) => `<li data-act="view" data-id="${r.id}"><span class="ico">${icon(r.tipo === "Aprobación" ? "award" : "file", 18)}</span><span style="min-width:0"><b>${esc(r.detalle)}</b><small>${fmtFecha(r.fecha)} · ${esc(r.materia)}</small></span></li>`).join("")}</ul></div>
+</div></div>`;
+  const s = computeStats(all, new Date().getFullYear());
+  const card = (ic, v, l, cls = "") => `<div class="stat ${cls}"><span class="ico">${icon(ic, 20)}</span><b>${v}</b><span>${l}</span></div>`;
+  $("#stats2").innerHTML = card("file", s.total, "Cantidad total", "hl") + card("scales", s.pj, "En Poder Judicial") + card("building", s.mp, "En Ministerio Público") + card("books", s.otros, "Otros");
+}
+function renderAjustes() {
+  const c = S.cfg, n = Object.keys(S.events).length;
+  $("#view-ajustes").innerHTML = `<div class="hero"><p class="eyebrow">${icon("cloud", 14)} Ajustes</p><h1 class="title">Conexión con <span class="grad">Cloudinary</span></h1><p class="lead">Aquí se guardan tus PDF y los datos de cada certificado, para verlos desde cualquier dispositivo.</p></div>
+<div class="settings-grid">
+<div style="display:grid;gap:18px">
+<div class="panel"><h3>Credenciales</h3><p>Solo se necesita el nombre del cloud y un upload preset sin firma. No pegues tu API secret.</p>
+<form class="cfg" id="cfgForm" autocomplete="off">
+<label class="field"><span>Cloud name</span><input id="cCloud" value="${esc(c.cloudName)}" placeholder="Nombre de tu cloud" spellcheck="false"></label>
+<label class="field"><span>Upload preset (unsigned)</span><input id="cPreset" value="${esc(c.uploadPreset)}" placeholder="Nombre del upload preset" spellcheck="false"></label>
+<div class="btns"><button class="btn primary" type="submit">${icon("check")} Guardar</button><button class="btn ghost" type="button" id="cTest">${icon("refresh")} Probar conexión</button></div>
+<ul class="testout" id="testOut"></ul></form></div>
+<div class="panel"><h3>Tus datos</h3><p>Copia local para abrir rápido; la fuente de verdad es Cloudinary.</p>
+<dl class="kv"><dt>Registros en esta app</dt><dd>${records().length}</dd><dt>Archivos de datos sincronizados</dt><dd>${n} / 1000</dd><dt>Última sincronización</dt><dd>${S.lastSync ? new Date(S.lastSync).toLocaleString("es-AR") : "—"}</dd></dl>
+<div class="cfg"><div class="btns"><button class="btn ghost sm" type="button" id="xCsv">${icon("download", 16)} Exportar CSV</button><button class="btn ghost sm" type="button" id="xJson">${icon("download", 16)} Respaldo JSON</button><button class="btn ghost sm" type="button" id="xClear">${icon("trash", 16)} Vaciar copia local</button></div></div></div>
+</div>
+<div class="panel"><h3>Configuración en Cloudinary</h3><p>Se hace una sola vez en <b>console.cloudinary.com</b>.</p>
+<ol class="steps">
+<li><b>Upload preset:</b> en <code>Settings → Upload → Upload presets</code> crea uno con <code>Signing mode: Unsigned</code>. Déjalo sin restricción de formatos (debe aceptar PDF y JSON).</li>
+<li><b>Entrega de PDF:</b> en <code>Settings → Security → Restricted media types</code> desmarca <code>PDF and ZIP files delivery</code> para poder verlos.</li>
+<li><b>Listado:</b> en esa misma pantalla desmarca <code>Resource list</code>. Así la app puede leer el registro sin exponer tu API secret.</li>
+<li>Pega aquí tu <b>cloud name</b> y el nombre del preset, y pulsa <b>Probar conexión</b>.</li>
+</ol>
+<p style="margin:14px 0 0">Cada certificado se guarda como un PDF (etiqueta <code>${TAG_PDF}</code>) más un pequeño archivo de datos (<code>${TAG_REG}</code>). Al eliminar un certificado se quita del registro; el PDF queda en tu Media Library, donde puedes borrarlo si quieres.</p></div>
+</div>`;
+  $("#cfgForm").onsubmit = (e) => {
+    e.preventDefault();
+    S.cfg.cloudName = $("#cCloud").value.trim(); S.cfg.uploadPreset = $("#cPreset").value.trim();
+    store.set("cc.cfg", S.cfg);
+    toast("Ajustes guardados"); setSync(configured() ? "idle" : "nocfg"); renderAll(); if (configured()) sync();
+  };
+  $("#cTest").onclick = testConnection;
+  $("#xCsv").onclick = () => download(`certificados_${new Date().toLocaleDateString("sv-SE")}.csv`, toCSV(sortRecords(records(), "fecha_desc"), (r) => pdfOf(r)), "text/csv;charset=utf-8");
+  $("#xJson").onclick = () => download(`certificados_${new Date().toLocaleDateString("sv-SE")}.json`, JSON.stringify(sortRecords(records(), "fecha_desc"), null, 2), "application/json");
+  $("#xClear").onclick = async () => { if (await confirmBox("¿Vaciar la copia local?", "Se volverán a descargar los datos desde Cloudinary en la próxima sincronización.", "Vaciar")) { S.events = {}; saveEvents(); renderAll(); renderAjustes(); sync(); } };
+}
+function renderAll() {
+  refreshFilters(); renderStats(); renderNotice(); renderResults();
+  const v = currentRoute();
+  if (v === "resumen") renderResumen(); if (v === "ajustes" && !$("#cfgForm")) renderAjustes();
+  $$("#vGrid,#vTable").forEach((b) => b.classList.toggle("on", b.dataset.v === S.ui.view));
+}
+function download(name, text, type) {
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([text], { type })); a.download = name; document.body.append(a); a.click();
+  setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500);
+}
+async function testConnection() {
+  const out = $("#testOut"); out.innerHTML = "";
+  S.cfg.cloudName = $("#cCloud").value.trim(); S.cfg.uploadPreset = $("#cPreset").value.trim();
+  const log = (ok, t) => out.insertAdjacentHTML("beforeend", `<li class="${ok ? "ok" : "bad"}">${icon(ok ? "check" : "x", 16)}<span>${esc(t)}</span></li>`);
+  if (!configured()) { log(false, "Completa el cloud name y el upload preset."); return; }
+  $("#cTest").disabled = true;
+  try { await upload({ resource: "raw", file: new File([JSON.stringify({ test: true })], "test.json", { type: "application/json" }), publicId: `certcap/test/${uid()}.json`, tags: "certcap_test" }); log(true, "Subida de archivos: correcta."); }
+  catch (e) { log(false, "Subida: " + friendly(e)); }
+  try { const items = await listEvents(); log(true, `Lectura del listado: correcta (${items.length} registro${items.length === 1 ? "" : "s"}).`); }
+  catch (e) { if (e.status === 404) log(true, "Lectura del listado: correcta (todavía no hay registros)."); else log(false, "Listado: " + friendly(e)); }
+  $("#cTest").disabled = false;
+}
+
+/* ------------------------------ formulario ------------------------------ */
+const fileInfo = (f) => `${f.name} · ${(f.size / 1048576).toFixed(2)} MB`;
+function setFile(f) {
+  if (!f) return;
+  if (!(f.type === "application/pdf" || /\.pdf$/i.test(f.name))) { toast("El archivo debe ser un PDF.", "err"); return; }
+  if (f.size > 10 * 1048576) toast("El PDF supera 10 MB; el plan gratuito de Cloudinary podría rechazarlo.", "err", 6000);
+  S.formFile = f; S.draftPdf = null;
+  $("#drop").classList.add("has"); $("#dropT").textContent = "PDF listo para subir"; $("#dropS").textContent = fileInfo(f);
+}
+function openForm(rec) {
+  if (!configured()) { toast("Primero configura Cloudinary en Ajustes.", "err"); location.hash = "#/ajustes"; return; }
+  S.editing = rec || null; S.formFile = null; S.draftPdf = null;
+  $("#formTitle").textContent = rec ? "Editar certificado" : "Nuevo certificado";
+  $("#saveTxt").textContent = rec ? "Guardar cambios" : "Guardar certificado";
+  $("#fFecha").value = rec ? rec.fecha : new Date().toLocaleDateString("sv-SE");
+  $$("input[name=tipo]").forEach((i) => { i.checked = i.value === (rec ? rec.tipo : "Asistencia"); });
+  $("#fMat").value = rec ? rec.materia : ""; $("#fDet").value = rec ? rec.detalle : "";
+  $("#fInst").value = rec ? rec.institucion || "" : ""; $("#fAmb").value = rec ? rec.ambito || "" : ""; $("#fHoras").value = rec && rec.horas != null ? rec.horas : "";
+  $("#fNro").value = rec ? rec.nro || "" : ""; $("#fObs").value = rec ? rec.obs || "" : "";
+  $("#fFile").value = ""; $("#prog").hidden = true; $("#prog div").style.width = "0";
+  const d = $("#drop"); d.classList.toggle("has", !!(rec && rec.pdf));
+  $("#dropT").textContent = rec && rec.pdf ? "PDF actual cargado · haz clic para reemplazarlo" : "Arrastra el PDF aquí o haz clic para elegirlo";
+  $("#dropS").textContent = rec && rec.pdf ? (rec.pdf.name || "certificado.pdf") : "Solo archivos PDF · se sube a tu Cloudinary";
+  setBusy(false);
+  $("#dlgForm").showModal();
+  setTimeout(() => $("#fMat").focus(), 60);
+}
+function setBusy(b, label) {
+  S.busy = b; $("#btnSave").disabled = b;
+  $("#saveTxt").textContent = b ? label : (S.editing ? "Guardar cambios" : "Guardar certificado");
+}
+async function submitForm(e) {
+  e.preventDefault();
+  if (S.busy) return;
+  if (!$("#form").reportValidity()) return;
+  const horasV = $("#fHoras").value;
+  const d = {
+    fecha: $("#fFecha").value, tipo: $("input[name=tipo]:checked").value,
+    materia: $("#fMat").value.trim(), detalle: $("#fDet").value.trim(),
+    institucion: $("#fInst").value.trim(), ambito: $("#fAmb").value, horas: horasV === "" ? null : Number(horasV),
+    nro: $("#fNro").value.trim(), obs: $("#fObs").value.trim(), pdf: S.editing ? S.editing.pdf : null,
+  };
+  if (!d.materia || !d.detalle) { toast("Completa materia y detalle.", "err"); return; }
+  if (!S.formFile && !d.pdf) { toast("Adjunta el PDF del certificado.", "err"); return; }
+  const prog = $("#prog"), bar = $("#prog div");
+  try {
+    if (S.formFile) {
+      if (S.draftPdf && S.draftPdf.file === S.formFile) d.pdf = S.draftPdf.pdf;
+      else {
+        setBusy(true, "Subiendo PDF…"); prog.hidden = false; bar.style.width = "0";
+        const r = await upload({ resource: "image", file: S.formFile, publicId: `certcap/pdf/${uid()}-${slug(d.materia)}`, tags: TAG_PDF, context: buildContext(d), onProgress: (p) => { bar.style.width = Math.round(p * 100) + "%"; } });
+        d.pdf = { public_id: r.public_id, version: r.version, bytes: r.bytes, pages: r.pages || null, name: S.formFile.name };
+        S.draftPdf = { file: S.formFile, pdf: d.pdf };
+      }
+    }
+    setBusy(true, "Guardando registro…");
+    const id = S.editing ? S.editing.id : uid(), rev = Date.now();
+    const payload = { v: 1, id, rev, data: d };
+    const res = await upload({ resource: "raw", file: new File([JSON.stringify(payload)], `${id}.json`, { type: "application/json" }), publicId: `certcap/reg/${id}-${rev}.json`, tags: TAG_REG });
+    S.events[res.public_id] = { ...payload, _pid: res.public_id, _saved: Date.now() };
+    saveEvents();
+    $("#dlgForm").close(); toast(S.editing ? "Cambios guardados" : "Certificado guardado en Cloudinary");
+    renderAll();
+  } catch (err) { toast(friendly(err), "err", 7000); }
+  finally { setBusy(false); prog.hidden = true; }
+}
+async function removeRecord(r) {
+  if (!(await confirmBox("¿Eliminar este certificado?", `«${r.detalle}» se quitará del registro. El PDF seguirá en tu Media Library de Cloudinary.`, "Eliminar"))) return;
+  try {
+    const rev = Date.now(), payload = { v: 1, id: r.id, rev, deleted: true };
+    const res = await upload({ resource: "raw", file: new File([JSON.stringify(payload)], `${r.id}.json`, { type: "application/json" }), publicId: `certcap/reg/${r.id}-${rev}.json`, tags: TAG_REG });
+    S.events[res.public_id] = { ...payload, _pid: res.public_id, _saved: Date.now() };
+    saveEvents(); renderAll(); toast("Certificado eliminado del registro");
+  } catch (err) { toast(friendly(err), "err", 7000); }
+}
+function viewPdf(r) {
+  if (!r.pdf) { toast("Este certificado no tiene PDF.", "err"); return; }
+  $("#viewT").textContent = `${fmtFecha(r.fecha)} · ${r.materia} — ${r.detalle}`;
+  $("#viewOpen").href = pdfOf(r); $("#viewDl").href = pdfOf(r, true);
+  $("#viewF").src = pdfOf(r);
+  $("#dlgView").showModal();
+}
+
+/* -------------------------------- eventos -------------------------------- */
+function currentRoute() { const n = (location.hash.match(/^#\/(\w+)/) || [])[1]; return ["inicio", "registro", "resumen", "ajustes"].includes(n) ? n : "inicio"; }
+function route() {
+  const v = currentRoute();
+  document.body.classList.toggle("on-ln", v === "inicio");
+  const ln = $("#ln"); if (ln) ln.scrollTop = 0;
+  $$(".view").forEach((el) => { el.hidden = el.id !== "view-" + v; });
+  $$(".nav a").forEach((a) => a.classList.toggle("on", a.dataset.route === v));
+  if (v === "resumen") renderResumen();
+  if (v === "ajustes") renderAjustes();
+  window.scrollTo({ top: 0 });
+}
+function setTheme(t) { document.documentElement.dataset.theme = t; store.set("cc.theme", t); $("#btnTheme").innerHTML = icon(t === "dark" ? "sun" : "moon"); }
+function handleAct(e) {
+  const t = e.target.closest("[data-act]"); if (!t) return;
+  const act = t.dataset.act, r = records().find((x) => x.id === t.dataset.id);
+  if (act === "view" && r) viewPdf(r);
+  else if (act === "edit" && r) openForm(r);
+  else if (act === "del" && r) removeRecord(r);
+  else if (act === "new") openForm();
+  else if (act === "cfg") location.hash = "#/ajustes";
+  else if (act === "reset") { S.f = { q: "", year: "", materia: "", tipo: "" }; $("#q").value = ""; $("#fTipo").value = ""; refreshFilters(); renderResults(); }
+}
+function init() {
+  paintIcons();
+  setTheme(document.documentElement.dataset.theme || "light");
+  $("#btnTheme").onclick = () => setTheme(document.documentElement.dataset.theme === "dark" ? "light" : "dark");
+  $("#btnNew").onclick = () => openForm();
+  $("#btnSync").onclick = () => { if (!configured()) location.hash = "#/ajustes"; else sync(); };
+  $("#sort").value = S.ui.sort; $("#group").value = S.ui.group;
+  let tm; $("#q").oninput = (e) => { clearTimeout(tm); tm = setTimeout(() => { S.f.q = e.target.value; renderResults(); }, 120); };
+  $("#fYear").onchange = (e) => { S.f.year = e.target.value; renderResults(); };
+  $("#fMateria").onchange = (e) => { S.f.materia = e.target.value; renderResults(); };
+  $("#fTipo").onchange = (e) => { S.f.tipo = e.target.value; renderResults(); };
+  $("#sort").onchange = (e) => { S.ui.sort = e.target.value; store.set("cc.ui", S.ui); renderResults(); };
+  $("#group").onchange = (e) => { S.ui.group = e.target.value; store.set("cc.ui", S.ui); renderResults(); };
+  $$("#vGrid,#vTable").forEach((b) => { b.onclick = () => { S.ui.view = b.dataset.v; store.set("cc.ui", S.ui); renderAll(); }; });
+  document.addEventListener("click", handleAct);
+  $("#results").addEventListener("error", (e) => { if (e.target.tagName === "IMG") e.target.remove(); }, true);
+  $$("[data-close]").forEach((b) => { b.onclick = () => b.closest("dialog").close(); });
+  $("#dlgView").addEventListener("close", () => { $("#viewF").src = "about:blank"; });
+  $("#dlgView").addEventListener("click", (e) => { if (e.target === e.currentTarget) e.currentTarget.close(); });
+  $("#dlgConfirm").addEventListener("click", (e) => { if (e.target === e.currentTarget) $("#cfNo").click(); });
+  const drop = $("#drop"), inp = $("#fFile");
+  drop.onclick = () => inp.click();
+  drop.onkeydown = (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); inp.click(); } };
+  inp.onchange = () => setFile(inp.files[0]);
+  ["dragenter", "dragover"].forEach((ev) => drop.addEventListener(ev, (e) => { e.preventDefault(); drop.classList.add("over"); }));
+  ["dragleave", "drop"].forEach((ev) => drop.addEventListener(ev, (e) => { e.preventDefault(); drop.classList.remove("over"); }));
+  drop.addEventListener("drop", (e) => setFile(e.dataTransfer.files[0]));
+  $("#form").addEventListener("submit", submitForm);
+  window.addEventListener("hashchange", route);
+  document.addEventListener("visibilitychange", () => { if (!document.hidden && configured() && (!S.lastSync || Date.now() - S.lastSync > 120000)) sync(); });
+  setSync(configured() ? "idle" : "nocfg");
+  route(); renderAll();
+  if (configured()) sync();
+}
+init();
+})();
+</script>
+<script>
+(function(){
+  var ln=document.getElementById('ln');
+  if(!ln||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  var d=ln.querySelector('.ln-dust');
+  for(var i=0;i<22;i++){
+    var s=document.createElement('span'),z=2+Math.random()*3;
+    s.style.cssText='left:'+Math.random()*100+'%;width:'+z+'px;height:'+z+'px;animation-duration:'+(14+Math.random()*16)+'s;animation-delay:-'+Math.random()*20+'s';
+    d.appendChild(s);
+  }
+  ln.addEventListener('pointermove',function(e){
+    ln.style.setProperty('--px',(e.clientX/innerWidth*2-1).toFixed(3));
+    ln.style.setProperty('--py',(e.clientY/innerHeight*2-1).toFixed(3));
+  },{passive:true});
+})();
+</script>
+</body>
+</html>
