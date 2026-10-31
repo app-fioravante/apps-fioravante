@@ -519,10 +519,30 @@ body.on-ln .topbar,body.on-ln main,body.on-ln .aurora{display:none}
 "use strict";
 
 /* ==========================================================================
-   CONFIGURACIÓN (opcional): puedes completar aquí tus datos de Cloudinary
-   o cargarlos desde la pestaña «Ajustes» (quedan guardados en el navegador).
+   CREDENCIALES DE CLOUDINARY · EMBEBIDAS EN EL CÓDIGO
+   --------------------------------------------------------------------------
+   ► Completa AQUÍ, entre las comillas, tu «Cloud name» y tu «Upload preset»
+     (el preset debe ser de tipo Unsigned). Se escriben una sola vez y la app
+     funciona igual en cualquier navegador o dispositivo, sin cargar nada en
+     la pestaña «Ajustes».
+
+       Ejemplo:
+         cloudName:    "mi-cloud",
+         uploadPreset: "certificados",
+
+   • Si completas ambos, estos valores tienen prioridad sobre lo guardado en el
+     navegador y «Ajustes» los muestra bloqueados (solo lectura).
+   • Si los dejas vacíos, la app sigue funcionando como antes: se cargan desde
+     «Ajustes» y quedan guardados en ese navegador.
+   • No pegues nunca tu API secret: aquí solo van el cloud name y el preset
+     unsigned (son datos que el navegador envía a Cloudinary de todos modos).
    ========================================================================== */
-const DEFAULT_CFG = { cloudName: "", uploadPreset: "" };
+const DEFAULT_CFG = {
+  cloudName:    "ad9pydlr",   // ← escribe aquí tu Cloud name
+  uploadPreset: "certificados",   // ← escribe aquí tu Upload preset (unsigned)
+};
+const embedded = (k) => String(DEFAULT_CFG[k] || "").trim();
+const CFG_LOCKED = !!(embedded("cloudName") && embedded("uploadPreset"));
 
 /*LOGIC_START*/
 const TAG_REG = "certcap_reg";
@@ -666,7 +686,7 @@ function confirmBox(title, text, okLabel) {
 
 /* ------------------------------- estado -------------------------------- */
 const S = {
-  cfg: { ...DEFAULT_CFG, ...store.get("cc.cfg", {}) },
+  cfg: CFG_LOCKED ? { cloudName: embedded("cloudName"), uploadPreset: embedded("uploadPreset") } : { ...DEFAULT_CFG, ...store.get("cc.cfg", {}) },
   events: store.get("cc.events", {}),
   lastSync: store.get("cc.sync", null),
   ui: { view: "grid", sort: "fecha_desc", group: "year", ...store.get("cc.ui", {}) },
@@ -872,11 +892,11 @@ function renderAjustes() {
   $("#view-ajustes").innerHTML = `<div class="hero"><p class="eyebrow">${icon("cloud", 14)} Ajustes</p><h1 class="title">Conexión con <span class="grad">Cloudinary</span></h1><p class="lead">Aquí se guardan tus PDF y los datos de cada certificado, para verlos desde cualquier dispositivo.</p></div>
 <div class="settings-grid">
 <div style="display:grid;gap:18px">
-<div class="panel"><h3>Credenciales</h3><p>Solo se necesita el nombre del cloud y un upload preset sin firma. No pegues tu API secret.</p>
+<div class="panel"><h3>Credenciales</h3><p>${CFG_LOCKED ? "Las credenciales están embebidas en el código (<code>DEFAULT_CFG</code>, al inicio del script). Para cambiarlas, edítalas ahí en el archivo HTML." : "Solo se necesita el nombre del cloud y un upload preset sin firma. No pegues tu API secret."}</p>
 <form class="cfg" id="cfgForm" autocomplete="off">
-<label class="field"><span>Cloud name</span><input id="cCloud" value="${esc(c.cloudName)}" placeholder="Nombre de tu cloud" spellcheck="false"></label>
-<label class="field"><span>Upload preset (unsigned)</span><input id="cPreset" value="${esc(c.uploadPreset)}" placeholder="Nombre del upload preset" spellcheck="false"></label>
-<div class="btns"><button class="btn primary" type="submit">${icon("check")} Guardar</button><button class="btn ghost" type="button" id="cTest">${icon("refresh")} Probar conexión</button></div>
+<label class="field"><span>Cloud name</span><input id="cCloud" value="${esc(c.cloudName)}" placeholder="Nombre de tu cloud" spellcheck="false"${CFG_LOCKED ? " readonly" : ""}></label>
+<label class="field"><span>Upload preset (unsigned)</span><input id="cPreset" value="${esc(c.uploadPreset)}" placeholder="Nombre del upload preset" spellcheck="false"${CFG_LOCKED ? " readonly" : ""}></label>
+<div class="btns">${CFG_LOCKED ? "" : `<button class="btn primary" type="submit">${icon("check")} Guardar</button>`}<button class="btn ghost" type="button" id="cTest">${icon("refresh")} Probar conexión</button></div>
 <ul class="testout" id="testOut"></ul></form></div>
 <div class="panel"><h3>Tus datos</h3><p>Copia local para abrir rápido; la fuente de verdad es Cloudinary.</p>
 <dl class="kv"><dt>Registros en esta app</dt><dd>${records().length}</dd><dt>Archivos de datos sincronizados</dt><dd>${n} / 1000</dd><dt>Última sincronización</dt><dd>${S.lastSync ? new Date(S.lastSync).toLocaleString("es-AR") : "—"}</dd></dl>
@@ -893,6 +913,7 @@ function renderAjustes() {
 </div>`;
   $("#cfgForm").onsubmit = (e) => {
     e.preventDefault();
+    if (CFG_LOCKED) return;
     S.cfg.cloudName = $("#cCloud").value.trim(); S.cfg.uploadPreset = $("#cPreset").value.trim();
     store.set("cc.cfg", S.cfg);
     toast("Ajustes guardados"); setSync(configured() ? "idle" : "nocfg"); renderAll(); if (configured()) sync();
