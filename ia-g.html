@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lógica de la IA: Generativa vs Agéntica</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    @keyframes pulse-soft {
+      0%, 100% { transform: scale(1); opacity: 0.7; }
+      50% { transform: scale(1.05); opacity: 0.9; }
+    }
+    .pulse-bg { animation: pulse-soft 6s infinite ease-in-out; }
+    .code-font { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; }
+  </style>
+</head>
+<body class="bg-rose-50/40 text-slate-800 min-h-screen flex flex-col font-sans selection:bg-rose-200 selection:text-rose-900">
+
+  <!-- Encabezado / Navbar -->
+  <header class="border-b border-rose-200/70 bg-white/85 backdrop-blur-md sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex flex-wrap justify-between items-center gap-4">
+      <div class="flex items-center space-x-3">
+        <div class="p-2.5 bg-gradient-to-tr from-rose-400 to-pink-500 rounded-xl shadow-md shadow-rose-200 text-white">
+          <i data-lucide="cpu" class="w-5 h-5"></i>
+        </div>
+        <div>
+          <h1 class="font-extrabold text-lg leading-tight tracking-tight text-slate-900">
+            Lógica de la IA: <span class="bg-gradient-to-r from-rose-600 to-pink-600 bg-clip-text text-transparent">Generativa vs Agéntica</span>
+          </h1>
+          <p class="text-xs text-rose-800/70 font-medium">Guía interactiva de funcionamiento y arquitecturas</p>
+        </div>
+      </div>
+
+      <!-- Pestañas de Navegación -->
+      <nav class="flex flex-wrap bg-rose-100/70 p-1 rounded-xl border border-rose-200/80 text-xs sm:text-sm gap-1">
+        <button onclick="switchTab('tab-comparativa')" id="btn-comparativa" class="tab-btn px-3.5 py-1.5 rounded-lg font-semibold transition-all bg-rose-500 text-white shadow-sm shadow-rose-300">
+          1. Comparativa Central
+        </button>
+        <button onclick="switchTab('tab-generativa')" id="btn-generativa" class="tab-btn px-3.5 py-1.5 rounded-lg font-semibold transition-all text-rose-900/70 hover:text-rose-950 hover:bg-rose-200/50">
+          2. Simulador GenAI (Tokens)
+        </button>
+        <button onclick="switchTab('tab-agentica')" id="btn-agentica" class="tab-btn px-3.5 py-1.5 rounded-lg font-semibold transition-all text-rose-900/70 hover:text-rose-950 hover:bg-rose-200/50">
+          3. Simulador Agéntico (ReAct)
+        </button>
+        <button onclick="switchTab('tab-sinergia')" id="btn-sinergia" class="tab-btn px-3.5 py-1.5 rounded-lg font-semibold transition-all text-rose-900/70 hover:text-rose-950 hover:bg-rose-200/50">
+          4. La Sinergia
+        </button>
+        <button onclick="switchTab('tab-ejemplos')" id="btn-ejemplos" class="tab-btn px-3.5 py-1.5 rounded-lg font-semibold transition-all text-rose-900/70 hover:text-rose-950 hover:bg-rose-200/50 flex items-center gap-1">
+          <i data-lucide="sparkle" class="w-3.5 h-3.5"></i>
+          5. Ejemplos actuales
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Contenido Principal -->
+  <main class="flex-grow max-w-6xl mx-auto p-4 sm:p-6 w-full space-y-6">
+
+    <!-- SECCIÓN 1: COMPARATIVA CENTRAL -->
+    <section id="tab-comparativa" class="tab-content space-y-8">
+      <div class="text-center max-w-2xl mx-auto space-y-2 pt-2">
+        <span class="text-xs uppercase tracking-widest font-bold text-rose-600 bg-rose-100 px-3 py-1 rounded-full border border-rose-200">
+          Fundamentos de Arquitectura
+        </span>
+        <h2 class="text-3xl font-black text-slate-900 pt-1">Dos paradigmas de Inteligencia Artificial</h2>
+        <p class="text-slate-600 text-sm leading-relaxed">
+          Mientras que la IA Generativa predice y crea contenido estático, la IA Agéntica razona, ejecuta herramientas y resuelve metas complejas de forma autónoma.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <!-- Tarjeta GenAI -->
+        <div class="bg-white border border-rose-200/80 rounded-2xl p-6 shadow-sm shadow-rose-100 flex flex-col justify-between relative overflow-hidden">
+          <div class="absolute -right-12 -top-12 w-44 h-44 bg-pink-100/60 rounded-full blur-2xl pointer-events-none pulse-bg"></div>
+          <div>
+            <div class="flex items-center space-x-3 mb-4">
+              <span class="p-2.5 rounded-xl bg-rose-100 text-rose-600 border border-rose-200 shadow-sm">
+                <i data-lucide="sparkles" class="w-5 h-5"></i>
+              </span>
+              <h3 class="text-xl font-bold text-slate-900">IA Generativa (El Creador / Oráculo)</h3>
+            </div>
+            <p class="text-sm text-slate-600 mb-4 leading-relaxed">
+              Basada en <strong>modelos probabilísticos</strong> (Transformers). Su propósito es <em>predecir la siguiente palabra más verosímil</em> o sintetizar una imagen a partir de ruido latente.
+            </p>
+            <ul class="text-xs space-y-2.5 text-slate-600 border-t border-rose-100 pt-4 mb-4">
+              <li class="flex items-start gap-2">
+                <i data-lucide="check" class="w-4 h-4 text-rose-500 shrink-0 mt-0.5"></i>
+                <span><strong>Flujo:</strong> Prompt &rarr; Inferencia probabilística &rarr; Respuesta única.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <i data-lucide="check" class="w-4 h-4 text-rose-500 shrink-0 mt-0.5"></i>
+                <span><strong>Naturaleza:</strong> Pasiva. Responde exclusivamente ante una consulta.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <i data-lucide="x" class="w-4 h-4 text-red-500 shrink-0 mt-0.5"></i>
+                <span><strong>Límite:</strong> No interactúa con el mundo real ni ejecuta acciones directas.</span>
+              </li>
+            </ul>
+          </div>
+          <div class="bg-rose-50/80 p-3 rounded-xl border border-rose-200/70 text-xs text-rose-900 font-mono">
+            Objetivo matemático: <span class="font-bold text-rose-700">P(Token_{t} | Token_{1...t-1})</span>
+          </div>
+        </div>
+
+        <!-- Tarjeta Agentic AI -->
+        <div class="bg-white border border-pink-200/80 rounded-2xl p-6 shadow-sm shadow-pink-100 flex flex-col justify-between relative overflow-hidden">
+          <div class="absolute -right-12 -top-12 w-44 h-44 bg-rose-200/40 rounded-full blur-2xl pointer-events-none pulse-bg"></div>
+          <div>
+            <div class="flex items-center space-x-3 mb-4">
+              <span class="p-2.5 rounded-xl bg-pink-100 text-pink-700 border border-pink-200 shadow-sm">
+                <i data-lucide="bot" class="w-5 h-5"></i>
+              </span>
+              <h3 class="text-xl font-bold text-slate-900">IA Agéntica (El Ejecutor Autónomo)</h3>
+            </div>
+            <p class="text-sm text-slate-600 mb-4 leading-relaxed">
+              Utiliza a la GenAI como <strong>"motor de razonamiento"</strong> dentro de un bucle de control con memoria y acceso a <strong>herramientas externas</strong> (APIs, bases de datos, código).
+            </p>
+            <ul class="text-xs space-y-2.5 text-slate-600 border-t border-rose-100 pt-4 mb-4">
+              <li class="flex items-start gap-2">
+                <i data-lucide="check" class="w-4 h-4 text-pink-600 shrink-0 mt-0.5"></i>
+                <span><strong>Flujo:</strong> Meta &rarr; Planificación &rarr; Acción (Tool) &rarr; Observación &rarr; Bucle.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <i data-lucide="check" class="w-4 h-4 text-pink-600 shrink-0 mt-0.5"></i>
+                <span><strong>Naturaleza:</strong> Activa e interactiva. Corrige sus errores dinámicamente.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <i data-lucide="check" class="w-4 h-4 text-pink-600 shrink-0 mt-0.5"></i>
+                <span><strong>Poder:</strong> Conexión al entorno (navegación web, correos, SQL, terminal).</span>
+              </li>
+            </ul>
+          </div>
+          <div class="bg-pink-50/80 p-3 rounded-xl border border-pink-200/70 text-xs text-pink-900 font-mono">
+            Objetivo: <span class="font-bold text-pink-700">Resolver metas complejas iterando con herramientas</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tabla Comparativa -->
+      <div class="bg-white border border-rose-200/80 rounded-2xl overflow-hidden shadow-sm shadow-rose-100">
+        <div class="px-6 py-4 bg-rose-50/50 border-b border-rose-100 flex items-center justify-between">
+          <h4 class="font-bold text-slate-900 text-sm">Matriz Comparativa Directa</h4>
+          <span class="text-xs font-semibold text-rose-600 bg-rose-100/70 px-2.5 py-0.5 rounded-full border border-rose-200">Resumen</span>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs sm:text-sm text-slate-700">
+            <thead class="bg-rose-100/60 text-rose-950 font-bold border-b border-rose-200">
+              <tr>
+                <th class="p-3.5 sm:p-4">Dimensión</th>
+                <th class="p-3.5 sm:p-4 text-rose-700">IA Generativa Pura</th>
+                <th class="p-3.5 sm:p-4 text-pink-700">IA Agéntica</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-rose-100">
+              <tr class="hover:bg-rose-50/30 transition">
+                <td class="p-3.5 sm:p-4 font-bold text-slate-900">Función principal</td>
+                <td class="p-3.5 sm:p-4">Sintetizar texto, código, audio o arte.</td>
+                <td class="p-3.5 sm:p-4">Alcanzar metas orquestando herramientas y pasos lógicos.</td>
+              </tr>
+              <tr class="hover:bg-rose-50/30 transition">
+                <td class="p-3.5 sm:p-4 font-bold text-slate-900">Interacción con el entorno</td>
+                <td class="p-3.5 sm:p-4 text-red-600 font-medium">Nula (Caja cerrada / Sin efectos colaterales).</td>
+                <td class="p-3.5 sm:p-4 text-emerald-700 font-medium">Alta (Usa APIs, terminales, escribe y consulta bases).</td>
+              </tr>
+              <tr class="hover:bg-rose-50/30 transition">
+                <td class="p-3.5 sm:p-4 font-bold text-slate-900">Capacidad de autocorregirse</td>
+                <td class="p-3.5 sm:p-4">Baja (Si alucina, suele seguir desarrollando el error).</td>
+                <td class="p-3.5 sm:p-4">Alta (Inspecciona la respuesta de la herramienta y replanifica).</td>
+              </tr>
+              <tr class="hover:bg-rose-50/30 transition">
+                <td class="p-3.5 sm:p-4 font-bold text-slate-900">Estructura del proceso</td>
+                <td class="p-3.5 sm:p-4">Directa (Entrada &rarr; Salida en un solo ciclo).</td>
+                <td class="p-3.5 sm:p-4">Cíclica (Pensamiento &rarr; Acción &rarr; Observación &rarr; Bucle).</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 2: SIMULADOR GENERATIVO (TOKENS) -->
+    <section id="tab-generativa" class="tab-content hidden space-y-6">
+      <div class="bg-white border border-rose-200/80 rounded-2xl p-6 shadow-sm shadow-rose-100">
+        <div class="flex items-center space-x-3 mb-2">
+          <div class="p-2 rounded-lg bg-rose-100 text-rose-600 border border-rose-200">
+            <i data-lucide="binary" class="w-5 h-5"></i>
+          </div>
+          <h3 class="text-xl font-bold text-slate-900">¿Cómo piensa la IA Generativa? (Predicción de Tokens)</h3>
+        </div>
+        <p class="text-sm text-slate-600 leading-relaxed">
+          Un LLM no planifica un texto completo de antemano. En cada iteración calcula un vector de probabilidades sobre su vocabulario para elegir el siguiente <strong>token</strong>, modulado por el hiperparámetro de <strong>Temperatura</strong>.
+        </p>
+
+        <!-- Controles interactivos -->
+        <div class="mt-6 p-5 bg-rose-50/60 rounded-xl border border-rose-200/70 space-y-4">
+          <div>
+            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Contexto actual (Prompt acumulado):</label>
+            <div id="gen-context" class="p-3.5 bg-white border border-rose-200 rounded-lg text-sm text-slate-800 code-font min-h-[48px] shadow-inner flex flex-wrap items-center gap-1.5">
+              El gato saltó sobre el...
+            </div>
+          </div>
+
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-2">
+            <div class="flex items-center gap-3">
+              <label class="text-xs font-bold text-slate-700">Temperatura (Aleatoriedad):</label>
+              <input id="temp-slider" type="range" min="0" max="1" step="0.1" value="0.7" class="accent-rose-500 cursor-pointer">
+              <span id="temp-val" class="text-xs font-mono font-bold bg-white px-2.5 py-1 rounded-md text-rose-600 border border-rose-200">0.7</span>
+            </div>
+
+            <div class="flex gap-2">
+              <button onclick="generarSiguienteToken()" class="px-4 py-2 bg-rose-500 hover:bg-rose-600 text-white rounded-lg text-xs font-bold transition flex items-center gap-1.5 shadow-md shadow-rose-200">
+                <i data-lucide="play" class="w-4 h-4"></i> Generar Siguiente Token
+              </button>
+              <button onclick="reiniciarGen()" class="px-3.5 py-2 bg-white hover:bg-rose-100 text-slate-700 rounded-lg text-xs font-semibold border border-rose-200 transition">
+                Reiniciar
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Visualización de Probabilidades -->
+        <div class="mt-6">
+          <h4 class="text-xs uppercase font-extrabold text-slate-600 mb-3 tracking-wider">Candidatos calculados para el siguiente token:</h4>
+          <div id="token-candidates" class="grid sm:grid-cols-2 gap-3">
+            <!-- Render dinámico -->
+          </div>
+        </div>
+
+        <div class="mt-6 p-4 bg-rose-100/70 border border-rose-200 rounded-xl text-xs text-rose-950 flex items-start gap-2.5">
+          <i data-lucide="info" class="w-4 h-4 shrink-0 text-rose-600 mt-0.5"></i>
+          <span><strong>Regla de muestreo:</strong> Con temperatura 0.0 (codicioso o <em>greedy</em>), el modelo toma de forma determinista el candidato de mayor probabilidad. A mayor temperatura (&gt; 0.7), la distribución se suaviza, dando margen a alternativas menos frecuentes.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 3: SIMULADOR AGÉNTICO -->
+    <section id="tab-agentica" class="tab-content hidden space-y-6">
+      <div class="bg-white border border-rose-200/80 rounded-2xl p-6 shadow-sm shadow-rose-100">
+        <div class="flex items-center space-x-3 mb-2">
+          <div class="p-2 rounded-lg bg-pink-100 text-pink-600 border border-pink-200">
+            <i data-lucide="workflow" class="w-5 h-5"></i>
+          </div>
+          <h3 class="text-xl font-bold text-slate-900">¿Cómo piensa y actúa la IA Agéntica? (Patrón ReAct)</h3>
+        </div>
+        <p class="text-sm text-slate-600 leading-relaxed">
+          El paradigma <strong>ReAct (Reasoning + Acting)</strong> dota al modelo de autonomía organizando su ejecución en ciclos continuos:
+          <span class="text-rose-600 font-bold">Pensar (Thought)</span> &rarr;
+          <span class="text-amber-600 font-bold">Accionar (Action / Tool)</span> &rarr;
+          <span class="text-sky-600 font-bold">Observar (Observation)</span> hasta resolver el objetivo.
+        </p>
+
+        <!-- Selector de Misión -->
+        <div class="mt-6 p-5 bg-rose-50/60 rounded-xl border border-rose-200/70">
+          <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Selecciona un objetivo autónomo:</label>
+          <div class="flex flex-wrap gap-2 mb-4">
+            <button onclick="cargarMision(0)" id="mision-btn-0" class="mission-btn px-3 py-1.5 rounded-lg text-xs font-bold border border-rose-400 bg-white text-rose-700 shadow-sm">
+              Caso 1: Alerta de Servidor Caído
+            </button>
+            <button onclick="cargarMision(1)" id="mision-btn-1" class="mission-btn px-3 py-1.5 rounded-lg text-xs font-medium border border-rose-200 hover:bg-white text-slate-600">
+              Caso 2: Reservar vuelo con presupuesto
+            </button>
+          </div>
+
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between border-t border-rose-200/60 pt-3 gap-3">
+            <div class="text-xs text-slate-600">
+              Meta actual: <span id="mission-goal" class="text-slate-900 font-bold">Detectar si el servidor principal responde y reiniciar el servicio si falló.</span>
+            </div>
+            <div class="flex gap-2">
+              <button id="btn-next-step" onclick="ejecutarPasoAgente()" class="px-4 py-2 bg-pink-600 hover:bg-pink-700 text-white rounded-lg text-xs font-bold transition flex items-center gap-1.5 shadow-md shadow-pink-200">
+                <i data-lucide="step-forward" class="w-4 h-4"></i> Siguiente Paso del Bucle
+              </button>
+              <button onclick="reiniciarAgente()" class="px-3.5 py-2 bg-white hover:bg-rose-100 text-slate-700 rounded-lg text-xs font-semibold border border-rose-200 transition">
+                Reiniciar
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ventana de Ejecución del Agente -->
+        <div class="mt-6">
+          <div class="flex justify-between items-center mb-3">
+            <h4 class="text-xs uppercase font-extrabold text-slate-600 tracking-wider">Historial del Bucle Agéntico:</h4>
+            <span id="agent-status" class="text-xs px-2.5 py-0.5 rounded-full bg-rose-100 text-rose-700 border border-rose-200 font-medium">Listo para iniciar</span>
+          </div>
+
+          <div id="agent-log" class="space-y-3 min-h-[220px] max-h-[420px] overflow-y-auto p-4 bg-rose-50/40 rounded-xl border border-rose-200 font-mono text-xs shadow-inner">
+            <div class="text-slate-500 italic font-sans text-center py-8">Presiona "Siguiente Paso del Bucle" para observar el razonamiento, la ejecución de herramientas y la toma de decisiones autónoma.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 4: LA SINERGIA (ARQUITECTURA) -->
+    <section id="tab-sinergia" class="tab-content hidden space-y-6">
+      <div class="bg-white border border-rose-200/80 rounded-2xl p-6 shadow-sm shadow-rose-100">
+        <div class="flex items-center space-x-3 mb-2">
+          <div class="p-2 rounded-lg bg-rose-100 text-rose-600 border border-rose-200">
+            <i data-lucide="layers" class="w-5 h-5"></i>
+          </div>
+          <h3 class="text-xl font-bold text-slate-900">La Sinergia: ¿Son tecnologías rivales o complementarias?</h3>
+        </div>
+        <p class="text-sm text-slate-600 leading-relaxed">
+          No compiten entre sí. <strong>La IA Agéntica está construida sobre la IA Generativa</strong>. Si la IA Generativa es el <em>"cerebro cognitivo y lingüístico"</em>, los módulos agénticos son sus <em>"extremidades, memoria persistente y sentido de dirección"</em>.
+        </p>
+
+        <!-- Diagrama Conceptual Modular -->
+        <div class="mt-8 grid md:grid-cols-4 gap-4 text-center">
+          <!-- Módulo 1 -->
+          <div class="p-5 bg-rose-50/50 border border-rose-200 rounded-xl hover:shadow-md hover:border-rose-300 transition">
+            <div class="w-11 h-11 mx-auto mb-3 bg-white text-rose-600 rounded-xl flex items-center justify-center border border-rose-200 shadow-sm">
+              <i data-lucide="brain" class="w-5 h-5"></i>
+            </div>
+            <h4 class="font-bold text-slate-900 text-sm mb-1">1. Núcleo (LLM)</h4>
+            <p class="text-xs text-slate-600">
+              <strong>IA Generativa</strong> pura. Provee razonamiento, comprensión contextual y síntesis.
+            </p>
+          </div>
+
+          <!-- Módulo 2 -->
+          <div class="p-5 bg-pink-50/50 border border-pink-200 rounded-xl hover:shadow-md hover:border-pink-300 transition">
+            <div class="w-11 h-11 mx-auto mb-3 bg-white text-pink-600 rounded-xl flex items-center justify-center border border-pink-200 shadow-sm">
+              <i data-lucide="database" class="w-5 h-5"></i>
+            </div>
+            <h4 class="font-bold text-slate-900 text-sm mb-1">2. Memoria</h4>
+            <p class="text-xs text-slate-600">
+              Memoria a corto plazo (Context Window) y a largo plazo (Bases de datos vectoriales / RAG).
+            </p>
+          </div>
+
+          <!-- Módulo 3 -->
+          <div class="p-5 bg-amber-50/50 border border-amber-200 rounded-xl hover:shadow-md hover:border-amber-300 transition">
+            <div class="w-11 h-11 mx-auto mb-3 bg-white text-amber-600 rounded-xl flex items-center justify-center border border-amber-200 shadow-sm">
+              <i data-lucide="wrench" class="w-5 h-5"></i>
+            </div>
+            <h4 class="font-bold text-slate-900 text-sm mb-1">3. Herramientas (Tools)</h4>
+            <p class="text-xs text-slate-600">
+              APIs meteorológicas, ejecutores de comandos Bash, navegadores web y motores SQL.
+            </p>
+          </div>
+
+          <!-- Módulo 4 -->
+          <div class="p-5 bg-purple-50/50 border border-purple-200 rounded-xl hover:shadow-md hover:border-purple-300 transition">
+            <div class="w-11 h-11 mx-auto mb-3 bg-white text-purple-600 rounded-xl flex items-center justify-center border border-purple-200 shadow-sm">
+              <i data-lucide="refresh-cw" class="w-5 h-5"></i>
+            </div>
+            <h4 class="font-bold text-slate-900 text-sm mb-1">4. Bucle de Control</h4>
+            <p class="text-xs text-slate-600">
+              Orquestador: evalúa si la meta fue alcanzada o si requiere corregir y llamar a otra herramienta.
+            </p>
+          </div>
+        </div>
+
+        <!-- Banner resumen -->
+        <div class="mt-8 p-6 bg-gradient-to-r from-rose-100/90 via-pink-100/60 to-rose-100/90 border border-rose-200 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-4">
+          <div>
+            <h4 class="text-rose-950 font-bold text-base mb-1">Evolución de la industria</h4>
+            <p class="text-slate-700 text-xs sm:text-sm">
+              La transición actual va desde chatbots conversacionales pasivos (IA Generativa simple) hacia sistemas multiagente capaces de delegarse tareas, auditarse entre sí y resolver proyectos enteros de principio a fin.
+            </p>
+          </div>
+          <button onclick="switchTab('tab-ejemplos')" class="whitespace-nowrap px-4 py-2.5 bg-rose-600 hover:bg-rose-700 text-white rounded-xl text-xs font-bold shadow-md shadow-rose-200 transition">
+            Ver Ejemplos Actuales &rarr;
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 5: EJEMPLOS ACTUALES -->
+    <section id="tab-ejemplos" class="tab-content hidden space-y-6">
+      <div class="bg-white border border-rose-200/80 rounded-2xl p-6 shadow-sm shadow-rose-100 space-y-6">
+        <div>
+          <div class="flex items-center space-x-3 mb-2">
+            <div class="p-2 rounded-lg bg-rose-100 text-rose-600 border border-rose-200">
+              <i data-lucide="compass" class="w-5 h-5"></i>
+            </div>
+            <h3 class="text-xl font-bold text-slate-900">Casos Reales y Herramientas del Ecosistema Actual</h3>
+          </div>
+          <p class="text-sm text-slate-600 leading-relaxed">
+            Explora cómo se aplican ambos conceptos en productos que usamos hoy en día. Filtra por categoría para entender por qué una herramienta es puramente <strong>Generativa</strong> o plenamente <strong>Agéntica</strong>.
+          </p>
+        </div>
+
+        <!-- Filtros interactivos de ejemplos -->
+        <div class="flex flex-wrap items-center gap-2 border-b border-rose-100 pb-4">
+          <span class="text-xs font-bold text-slate-500 mr-2">Filtrar por tipo:</span>
+          <button onclick="filtrarEjemplos('todos')" id="filter-todos" class="filter-btn px-3 py-1 rounded-full text-xs font-bold bg-rose-500 text-white shadow-sm shadow-rose-200 transition">
+            Todos los casos (6)
+          </button>
+          <button onclick="filtrarEjemplos('generativa')" id="filter-generativa" class="filter-btn px-3 py-1 rounded-full text-xs font-semibold bg-rose-50 text-rose-800 border border-rose-200 hover:bg-rose-100 transition">
+            Solo IA Generativa
+          </button>
+          <button onclick="filtrarEjemplos('agentica')" id="filter-agentica" class="filter-btn px-3 py-1 rounded-full text-xs font-semibold bg-rose-50 text-pink-800 border border-pink-200 hover:bg-pink-100 transition">
+            Solo IA Agéntica
+          </button>
+        </div>
+
+        <!-- Grid de Tarjetas de Ejemplos -->
+        <div id="grid-ejemplos" class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+
+          <!-- Caso 1: Midjourney / Flux (GenAI) -->
+          <div class="example-card bg-white border border-rose-200/90 rounded-2xl p-5 shadow-sm hover:shadow-md transition flex flex-col justify-between" data-category="generativa">
+            <div>
+              <div class="flex justify-between items-start mb-3">
+                <span class="text-[11px] font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-rose-100 text-rose-700 border border-rose-200">
+                  IA Generativa
+                </span>
+                <span class="text-xs text-slate-400 font-medium">Imagen / Difusión</span>
+              </div>
+              <h4 class="text-base font-bold text-slate-900 mb-1 flex items-center gap-1.5">
+                <i data-lucide="image" class="w-4 h-4 text-rose-500"></i> Midjourney / Flux
+              </h4>
+              <p class="text-xs text-slate-600 mb-3 leading-relaxed">
+                El usuario introduce un prompt y el modelo genera una imagen desde ruido gaussiano en un proceso directo.
+              </p>
+              <div class="p-2.5 rounded-lg bg-rose-50/70 border border-rose-100 text-[11px] text-slate-700 space-y-1 mb-4">
+                <div><strong>Entrada:</strong> "A cyberpunk cafe in Tokyo, 35mm"</div>
+                <div><strong>Salida:</strong> Archivo PNG con la imagen sintetizada.</div>
+              </div>
+            </div>
+            <div class="border-t border-rose-100 pt-3 text-[11px] text-rose-900/80 font-medium">
+              💡 <strong>¿Por qué no es agéntica?</strong> No navega por internet, no comprueba si la imagen le gustó al usuario ni toma decisiones adicionales por sí misma.
+            </div>
+          </div>
+
+          <!-- Caso 2: ChatGPT clásico / Claude Chat (GenAI) -->
+          <div class="example-card bg-white border border-rose-200/90 rounded-2xl p-5 shadow-sm hover:shadow-md transition flex flex-col justify-between" data-category="generativa">
+            <div>
+              <div class="flex justify-between items-start mb-3">
+                <span class="text-[11px] font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-rose-100 text-rose-700 border border-rose-200">
+                  IA Generativa
+                </span>
+                <span class="text-xs text-slate-400 font-medium">Texto / LLM Chat</span>
+              </div>
+              <h4 class="text-base font-bold text-slate-900 mb-1 flex items-center gap-1.5">
+                <i data-lucide="message-square" class="w-4 h-4 text-rose-500"></i> ChatGPT (Modo Chat Estándar)
+              </h4>
+              <p class="text-xs text-slate-600 mb-3 leading-relaxed">
+                Redacta correos, resume PDFs estáticos o escribe poesía prediciendo la siguiente secuencia de texto.
+              </p>
+              <div class="p-2.5 rounded-lg bg-rose-50/70 border border-rose-100 text-[11px] text-slate-700 space-y-1 mb-4">
+                <div><strong>Entrada:</strong> "Escribe un email de agradecimiento a mi equipo"</div>
+                <div><strong>Salida:</strong> Texto formateado listo para copiar.</div>
+              </div>
+            </div>
+            <div class="border-t border-rose-100 pt-3 text-[11px] text-rose-900/80 font-medium">
+              💡 <strong>¿Por qué no es agéntica?</strong> El modelo termina su trabajo cuando emite el token final; no envía el correo ni abre tu cliente de Gmail.
+            </div>
+          </div>
+
+          <!-- Caso 3: Suno / Udio (GenAI) -->
+          <div class="example-card bg-white border border-rose-200/90 rounded-2xl p-5 shadow-sm hover:shadow-md transition flex flex-col justify-between" data-category="generativa">
+            <div>
+              <div class="flex justify-between items-start mb-3">
+                <span class="text-[11px] font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-rose-100 text-rose-700 border border-rose-200">
+                  IA Generativa
+                </span>
+                <span class="text-xs text-slate-400 font-medium">Audio / Música</span>
+              </div>
+              <h4 class="text-base font-bold text-slate-900 mb-1 flex items-center gap-1.5">
+                <i data-lucide="music" class="w-4 h-4 text-rose-500"></i> Suno &amp; Udio
+              </h4>
+              <p class="text-xs text-slate-600 mb-3 leading-relaxed">
+                Generan canciones completas con voces, instrumentos y acordes en estilos concretos a partir de letra o descripción.
+              </p>
+              <div class="p-2.5 rounded-lg bg-rose-50/70 border border-rose-100 text-[11px] text-slate-700 space-y-1 mb-4">
+                <div><strong>Entrada:</strong> "Canción indie pop alegre sobre viajar en tren"</div>
+                <div><strong>Salida:</strong> Pista musical estéreo en formato MP3/WAV.</div>
+              </div>
+            </div>
+            <div class="border-t border-rose-100 pt-3 text-[11px] text-rose-900/80 font-medium">
+              💡 <strong>¿Por qué no es agéntica?</strong> Sintetiza una forma de onda sonora una sola vez. No publica en Spotify ni gestiona derechos.
+            </div>
+          </div>
+
+          <!-- Caso 4: Claude Code / Devin / Cursor Composer (Agéntica) -->
+          <div class="example-card bg-white border border-pink-200/90 rounded-2xl p-5 shadow-sm hover:shadow-md transition flex flex-col justify-between" data-category="agentica">
+            <div>
+              <div class="flex justify-between items-start mb-3">
+                <span class="text-[11px] font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-pink-100 text-pink-700 border border-pink-200">
+                  IA Agéntica
+                </span>
+                <span class="text-xs text-slate-400 font-medium">Ingeniería de Software</span>
+              </div>
+              <h4 class="text-base font-bold text-slate-900 mb-1 flex items-center gap-1.5">
+                <i data-lucide="terminal" class="w-4 h-4 text-pink-600"></i> Devin &amp; Claude Code
+              </h4>
+              <p class="text-xs text-slate-600 mb-3 leading-relaxed">
+                Ingenieros de software autónomos. Abren un repositorio, leen archivos, escriben tests, ejecutan compiladores y corrigen sus propios bugs.
+              </p>
+              <div class="p-2.5 rounded-lg bg-pink-50/70 border border-pink-100 text-[11px] text-slate-700 space-y-1 mb-4 font-mono">
+                <div>&bull; Tool: terminal_exec("npm test")</div>
+                <div>&bull; Observación: 2 errores detectados</div>
+                <div>&bull; Acción: Edita archivo y vuelve a probar</div>
+              </div>
+            </div>
+            <div class="border-t border-pink-100 pt-3 text-[11px] text-pink-900/80 font-medium">
+              ⚡ <strong>¿Por qué es agéntica?</strong> Tiene acceso a una consola bash, inspecciona logs de error y no se detiene hasta que el build pasa en verde.
+            </div>
+          </div>
+
+          <!-- Caso 5: Deep Research (OpenAI / Perplexity Pro) (Agéntica) -->
+          <div class="example-card bg-white border border-pink-200/90 rounded-2xl p-5 shadow-sm hover:shadow-md transition flex flex-col justify-between" data-category="agentica">
+            <div>
+              <div class="flex justify-between items-start mb-3">
+                <span class="text-[11px] font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-pink-100 text-pink-700 border border-pink-200">
+                  IA Agéntica
+                </span>
+                <span class="text-xs text-slate-400 font-medium">Investigación Autónoma</span>
+              </div>
+              <h4 class="text-base font-bold text-slate-900 mb-1 flex items-center gap-1.5">
+                <i data-lucide="search-check" class="w-4 h-4 text-pink-600"></i> Deep Research (OpenAI / Gemini)
+              </h4>
+              <p class="text-xs text-slate-600 mb-3 leading-relaxed">
+                Agente que navega decenas de sitios web, lee PDFs científicos, contrasta fuentes discordantes y redacta informes exhaustivos de varias páginas.
+              </p>
+              <div class="p-2.5 rounded-lg bg-pink-50/70 border border-pink-100 text-[11px] text-slate-700 space-y-1 mb-4 font-mono">
+                <div>&bull; Búsqueda 1 &rarr; Lee artículo técnico</div>
+                <div>&bull; Encuentra contradicción &rarr; Busca fuente primaria</div>
+                <div>&bull; Genera reporte con 40 citas validadas</div>
+              </div>
+            </div>
+            <div class="border-t border-pink-100 pt-3 text-[11px] text-pink-900/80 font-medium">
+              ⚡ <strong>¿Por qué es agéntica?</strong> Formula sus propias sub-preguntas, descarta enlaces no relevantes y toma caminos alternativos de búsqueda.
+            </div>
+          </div>
+
+          <!-- Caso 6: Anthropic Computer Use / OpenAI Operator (Agéntica) -->
+          <div class="example-card bg-white border border-pink-200/90 rounded-2xl p-5 shadow-sm hover:shadow-md transition flex flex-col justify-between" data-category="agentica">
+            <div>
+              <div class="flex justify-between items-start mb-3">
+                <span class="text-[11px] font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-pink-100 text-pink-700 border border-pink-200">
+                  IA Agéntica
+                </span>
+                <span class="text-xs text-slate-400 font-medium">Control de Sistema / GUI</span>
+              </div>
+              <h4 class="text-base font-bold text-slate-900 mb-1 flex items-center gap-1.5">
+                <i data-lucide="mouse-pointer" class="w-4 h-4 text-pink-600"></i> Computer Use &amp; Operator
+              </h4>
+              <p class="text-xs text-slate-600 mb-3 leading-relaxed">
+                Agentes que miran la pantalla del ordenador mediante capturas, mueven el cursor, hacen clic en botones y rellenan formularios web por ti.
+              </p>
+              <div class="p-2.5 rounded-lg bg-pink-50/70 border border-pink-100 text-[11px] text-slate-700 space-y-1 mb-4 font-mono">
+                <div>&bull; Captura de pantalla &rarr; Encuentra botón</div>
+                <div>&bull; mouse_click(x=450, y=320)</div>
+                <div>&bull; type_text("confirmar_reserva")</div>
+              </div>
+            </div>
+            <div class="border-t border-pink-100 pt-3 text-[11px] text-pink-900/80 font-medium">
+              ⚡ <strong>¿Por qué es agéntica?</strong> Modifica directamente el estado del entorno visual del usuario y reacciona ante ventanas emergentes.
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Tabla comparativa resumen de herramientas -->
+        <div class="p-5 bg-gradient-to-r from-rose-50 to-pink-50/70 border border-rose-200 rounded-2xl">
+          <h4 class="font-bold text-slate-900 text-sm mb-2 flex items-center gap-2">
+            <i data-lucide="scale" class="w-4 h-4 text-rose-600"></i> La prueba rápida para distinguir cualquier herramienta en la práctica:
+          </h4>
+          <div class="grid sm:grid-cols-2 gap-3 text-xs text-slate-600">
+            <div class="p-3 bg-white border border-rose-200/80 rounded-xl">
+              <span class="font-bold text-rose-700 block mb-1">Si le pides: "Planea mis vacaciones"</span>
+              <p><strong>GenAI:</strong> Te devuelve un itinerario escrito en texto enriquecido. Tu trabajo apenas comienza.</p>
+            </div>
+            <div class="p-3 bg-white border border-pink-200/80 rounded-xl">
+              <span class="font-bold text-pink-700 block mb-1">Si le pides: "Planea mis vacaciones"</span>
+              <p><strong>IA Agéntica:</strong> Consulta tu calendario, busca ofertas en vuelos, reserva hoteles y te envía los tickets a tu correo.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-rose-200/70 bg-white/60 py-4 text-center text-xs text-slate-500 font-medium">
+    SPA Educativa &bull; Arquitectura y Lógica de Inteligencia Artificial
+  </footer>
+
+  <!-- Lógica JavaScript -->
+  <script>
+    // Inicializar iconos Lucide
+    lucide.createIcons();
+
+    // 1. GESTOR DE PESTAÑAS (SPA)
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+      document.getElementById(tabId).classList.remove('hidden');
+
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('bg-rose-500', 'text-white', 'shadow-sm', 'shadow-rose-300');
+        btn.classList.add('text-rose-900/70');
+      });
+
+      const activeBtnId = tabId.replace('tab-', 'btn-');
+      const activeBtn = document.getElementById(activeBtnId);
+      if (activeBtn) {
+        activeBtn.classList.add('bg-rose-500', 'text-white', 'shadow-sm', 'shadow-rose-300');
+        activeBtn.classList.remove('text-rose-900/70');
+      }
+    }
+
+    // FILTRO DE EJEMPLOS ACTUALES (PUNTO 5)
+    function filtrarEjemplos(categoria) {
+      const cards = document.querySelectorAll('.example-card');
+      const buttons = document.querySelectorAll('.filter-btn');
+
+      buttons.forEach(btn => {
+        btn.className = "filter-btn px-3 py-1 rounded-full text-xs font-semibold bg-rose-50 text-slate-700 border border-rose-200 hover:bg-rose-100 transition";
+      });
+
+      const activeBtn = document.getElementById(`filter-${categoria}`);
+      if (activeBtn) {
+        activeBtn.className = "filter-btn px-3 py-1 rounded-full text-xs font-bold bg-rose-500 text-white shadow-sm shadow-rose-200 transition";
+      }
+
+      cards.forEach(card => {
+        if (categoria === 'todos' || card.getAttribute('data-category') === categoria) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    }
+
+    // 2. SIMULADOR IA GENERATIVA (TOKEN PREDICTION)
+    const datasetGen = [
+      {
+        candidatos: [
+          { token: "sofá", prob: 0.45 },
+          { token: "tejado", prob: 0.30 },
+          { token: "ratón", prob: 0.15 },
+          { token: "árbol", prob: 0.10 }
+        ]
+      },
+      {
+        candidatos: [
+          { token: "y se durmió", prob: 0.50 },
+          { token: "y arañó el cojín", prob: 0.25 },
+          { token: "y maulló fuerte", prob: 0.15 },
+          { token: "y miró fijamente", prob: 0.10 }
+        ]
+      },
+      {
+        candidatos: [
+          { token: "toda la tarde.", prob: 0.60 },
+          { token: "mientras llovía.", prob: 0.25 },
+          { token: "tranquilamente.", prob: 0.15 }
+        ]
+      }
+    ];
+
+    let genIndex = 0;
+    const tempSlider = document.getElementById('temp-slider');
+    const tempVal = document.getElementById('temp-val');
+
+    tempSlider.addEventListener('input', (e) => {
+      tempVal.textContent = e.target.value;
+      renderCandidatos();
+    });
+
+    // Calcula la distribución ajustada por temperatura
+    function getDistribucionTemperatura(items, temp) {
+      const effectiveTemp = temp === 0 ? 0.01 : temp;
+      const weighted = items.map(item => ({
+        token: item.token,
+        originalProb: item.prob,
+        weight: Math.pow(item.prob, 1 / effectiveTemp)
+      }));
+      const totalWeight = weighted.reduce((acc, cur) => acc + cur.weight, 0);
+      return weighted.map(item => ({
+        token: item.token,
+        originalProb: item.originalProb,
+        finalProb: item.weight / totalWeight
+      }));
+    }
+
+    function renderCandidatos() {
+      const container = document.getElementById('token-candidates');
+      container.innerHTML = '';
+
+      if (genIndex >= datasetGen.length) {
+        container.innerHTML = `<div class="col-span-2 text-center text-xs font-semibold text-rose-700 p-4 border border-dashed border-rose-300 rounded-xl bg-rose-50">Secuencia generativa completada (Token &lt;EOS&gt; alcanzado). Presiona "Reiniciar" para volver a probar.</div>`;
+        return;
+      }
+
+      const temp = parseFloat(tempSlider.value);
+      const items = datasetGen[genIndex].candidatos;
+      const distribucion = getDistribucionTemperatura(items, temp);
+
+      distribucion.forEach((c) => {
+        const percent = Math.round(c.finalProb * 100);
+        const card = document.createElement('div');
+        card.className = "p-3.5 bg-white border border-rose-200 rounded-xl flex flex-col justify-between shadow-sm";
+        card.innerHTML = `
+          <div class="flex justify-between items-center mb-1.5">
+            <span class="font-mono text-sm font-bold text-slate-800">"${c.token}"</span>
+            <span class="text-xs font-mono font-bold text-rose-600">${percent}%</span>
+          </div>
+          <div class="w-full bg-rose-100 h-2 rounded-full overflow-hidden">
+            <div class="bg-gradient-to-r from-rose-400 to-pink-500 h-full rounded-full transition-all duration-300" style="width: ${percent}%"></div>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function generarSiguienteToken() {
+      if (genIndex >= datasetGen.length) return;
+
+      const temp = parseFloat(tempSlider.value);
+      const items = datasetGen[genIndex].candidatos;
+      let chosenToken = "";
+
+      if (temp === 0) {
+        // Greedy: el de mayor probabilidad original
+        const maxItem = items.reduce((a, b) => (b.prob > a.prob ? b : a), items[0]);
+        chosenToken = maxItem.token;
+      } else {
+        // Muestreo sobre la distribución ajustada por temperatura
+        const distribucion = getDistribucionTemperatura(items, temp);
+        let rand = Math.random();
+        let cumulative = 0;
+        chosenToken = distribucion[0].token;
+        for (let item of distribucion) {
+          cumulative += item.finalProb;
+          if (rand <= cumulative) {
+            chosenToken = item.token;
+            break;
+          }
+        }
+      }
+
+      const contextEl = document.getElementById('gen-context');
+      contextEl.innerHTML += ` <span class="text-rose-700 font-bold bg-rose-100 px-2 py-0.5 rounded border border-rose-300 shadow-sm">${chosenToken}</span>`;
+
+      genIndex++;
+      renderCandidatos();
+    }
+
+    function reiniciarGen() {
+      genIndex = 0;
+      document.getElementById('gen-context').innerHTML = "El gato saltó sobre el...";
+      renderCandidatos();
+    }
+
+    renderCandidatos();
+
+    // 3. SIMULADOR IA AGÉNTICA (ReAct Pattern)
+    const misiones = [
+      {
+        meta: "Detectar si el servidor principal responde y reiniciar el servicio si falló.",
+        pasos: [
+          {
+            tipo: "THOUGHT",
+            texto: "Para verificar la salud del servidor, debo ejecutar una solicitud de comprobación de estado HTTP.",
+            icono: "brain",
+            colorClass: "bg-purple-50 border-purple-200 text-purple-900"
+          },
+          {
+            tipo: "ACTION",
+            texto: "Ejecutando herramienta: ping_service(host='api.empresa.com')",
+            icono: "wrench",
+            colorClass: "bg-amber-50 border-amber-200 text-amber-900"
+          },
+          {
+            tipo: "OBSERVATION",
+            texto: "Respuesta de la herramienta: Error 503 Service Unavailable (Timeout tras 5000ms).",
+            icono: "eye",
+            colorClass: "bg-sky-50 border-sky-200 text-sky-900"
+          },
+          {
+            tipo: "THOUGHT",
+            texto: "El servicio no responde. Debo intentar reiniciar el proceso del servidor mediante la herramienta de administración.",
+            icono: "brain",
+            colorClass: "bg-purple-50 border-purple-200 text-purple-900"
+          },
+          {
+            tipo: "ACTION",
+            texto: "Ejecutando herramienta: restart_service(service='api-gateway')",
+            icono: "wrench",
+            colorClass: "bg-amber-50 border-amber-200 text-amber-900"
+          },
+          {
+            tipo: "OBSERVATION",
+            texto: "Respuesta de la herramienta: Servicio reiniciado correctamente. PID 4821 activo.",
+            icono: "eye",
+            colorClass: "bg-sky-50 border-sky-200 text-sky-900"
+          },
+          {
+            tipo: "THOUGHT",
+            texto: "El servicio fue reiniciado. Debo verificar nuevamente el endpoint de salud para confirmar la recuperación.",
+            icono: "brain",
+            colorClass: "bg-purple-50 border-purple-200 text-purple-900"
+          },
+          {
+            tipo: "ACTION",
+            texto: "Ejecutando herramienta: ping_service(host='api.empresa.com')",
+            icono: "wrench",
+            colorClass: "bg-amber-50 border-amber-200 text-amber-900"
+          },
+          {
+            tipo: "OBSERVATION",
+            texto: "Respuesta de la herramienta: HTTP 200 OK. Tiempo de respuesta: 120ms.",
+            icono: "eye",
+            colorClass: "bg-sky-50 border-sky-200 text-sky-900"
+          },
+          {
+            tipo: "FINAL",
+            texto: "Servidor operativo y respondiendo correctamente. Meta alcanzada: el servicio fue reiniciado y validado.",
+            icono: "check-circle",
+            colorClass: "bg-emerald-50 border-emerald-300 text-emerald-900"
+          }
+        ]
+      },
+      {
+        meta: "Reservar un vuelo a Madrid con presupuesto máximo de 300€.",
+        pasos: [
+          {
+            tipo: "THOUGHT",
+            texto: "Necesito buscar vuelos disponibles hacia Madrid que respeten el presupuesto máximo de 300€.",
+            icono: "brain",
+            colorClass: "bg-purple-50 border-purple-200 text-purple-900"
+          },
+          {
+            tipo: "ACTION",
+            texto: "Ejecutando herramienta: search_flights(destination='Madrid', max_price=300)",
+            icono: "wrench",
+            colorClass: "bg-amber-50 border-amber-200 text-amber-900"
+          },
+          {
+            tipo: "OBSERVATION",
+            texto: "Respuesta de la herramienta: 3 vuelos encontrados — Iberia 289€, Ryanair 145€, Vueling 210€.",
+            icono: "eye",
+            colorClass: "bg-sky-50 border-sky-200 text-sky-900"
+          },
+          {
+            tipo: "THOUGHT",
+            texto: "Ryanair es la opción más económica. Sin embargo, debo verificar si incluye equipaje facturado antes de decidir.",
+            icono: "brain",
+            colorClass: "bg-purple-50 border-purple-200 text-purple-900"
+          },
+          {
+            tipo: "ACTION",
+            texto: "Ejecutando herramienta: get_flight_details(flight_id='RYR-4521')",
+            icono: "wrench",
+            colorClass: "bg-amber-50 border-amber-200 text-amber-900"
+          },
+          {
+            tipo: "OBSERVATION",
+            texto: "Respuesta de la herramienta: Ryanair 145€ incluye solo equipaje de mano. Maleta facturada: +50€ (total 195€).",
+            icono: "eye",
+            colorClass: "bg-sky-50 border-sky-200 text-sky-900"
+          },
+          {
+            tipo: "THOUGHT",
+            texto: "Con maleta el total sería 195€, aún por debajo del presupuesto de 300€. Procedo a reservar el vuelo.",
+            icono: "brain",
+            colorClass: "bg-purple-50 border-purple-200 text-purple-900"
+          },
+          {
+            tipo: "ACTION",
+            texto: "Ejecutando herramienta: book_flight(flight_id='RYR-4521', passenger='usuario')",
+            icono: "wrench",
+            colorClass: "bg-amber-50 border-amber-200 text-amber-900"
+          },
+          {
+            tipo: "OBSERVATION",
+            texto: "Respuesta de la herramienta: Reserva confirmada. Código de reserva: RYR-4521-XK9.",
+            icono: "eye",
+            colorClass: "bg-sky-50 border-sky-200 text-sky-900"
+          },
+          {
+            tipo: "FINAL",
+            texto: "Vuelo reservado a Madrid por 195€ (145€ billete + 50€ maleta), dentro del presupuesto de 300€. Meta alcanzada.",
+            icono: "check-circle",
+            colorClass: "bg-emerald-50 border-emerald-300 text-emerald-900"
+          }
+        ]
+      }
+    ];
+
+    let misionActual = 0;
+    let pasoActual = 0;
+
+    // Renderiza un paso del bucle en el log
+    function renderPaso(paso) {
+      const log = document.getElementById('agent-log');
+      const div = document.createElement('div');
+      div.className = `p-3.5 rounded-xl border ${paso.colorClass} flex items-start gap-3 shadow-sm transition-all`;
+
+      // Etiqueta y estilo por tipo
+      const labelMap = {
+        THOUGHT: { text: "PENSAMIENTO", cls: "bg-purple-200/70 text-purple-900 border-purple-300" },
+        ACTION: { text: "ACCIÓN (TOOL)", cls: "bg-amber-200/70 text-amber-900 border-amber-300" },
+        OBSERVATION: { text: "OBSERVACIÓN", cls: "bg-sky-200/70 text-sky-900 border-sky-300" },
+        FINAL: { text: "RESULTADO FINAL", cls: "bg-emerald-200/70 text-emerald-900 border-emerald-300" }
+      };
+      const label = labelMap[paso.tipo] || { text: paso.tipo, cls: "bg-slate-200 text-slate-800 border-slate-300" };
+
+      div.innerHTML = `
+        <div class="shrink-0 p-1.5 rounded-lg bg-white/70 border border-white shadow-sm">
+          <i data-lucide="${paso.icono}" class="w-4 h-4"></i>
+        </div>
+        <div class="flex-grow min-w-0">
+          <span class="inline-block text-[10px] font-extrabold tracking-wider px-2 py-0.5 rounded-full border ${label.cls} mb-1.5">${label.text}</span>
+          <p class="font-mono text-[12px] leading-relaxed break-words">${paso.texto}</p>
+        </div>
+      `;
+      log.appendChild(div);
+      log.scrollTop = log.scrollHeight;
+      // Re-renderizar iconos lucide en el nodo dinámico
+      lucide.createIcons();
+    }
+
+    function actualizarEstado(texto, clases) {
+      const status = document.getElementById('agent-status');
+      status.textContent = texto;
+      status.className = `text-xs px-2.5 py-0.5 rounded-full font-medium border ${clases}`;
+    }
+
+    function cargarMision(index) {
+      misionActual = index;
+      pasoActual = 0;
+
+      // Actualizar botones de misión
+      document.querySelectorAll('.mission-btn').forEach((btn, i) => {
+        if (i === index) {
+          btn.className = "mission-btn px-3 py-1.5 rounded-lg text-xs font-bold border border-rose-400 bg-white text-rose-700 shadow-sm";
+        } else {
+          btn.className = "mission-btn px-3 py-1.5 rounded-lg text-xs font-medium border border-rose-200 hover:bg-white text-slate-600";
+        }
+      });
+
+      document.getElementById('mission-goal').textContent = misiones[index].meta;
+      reiniciarAgente();
+    }
+
+    function ejecutarPasoAgente() {
+      const pasos = misiones[misionActual].pasos;
+
+      if (pasoActual >= pasos.length) {
+        actualizarEstado("Misión completada ✓", "bg-emerald-100 text-emerald-700 border-emerald-300");
+        return;
+      }
+
+      const log = document.getElementById('agent-log');
+      // Limpiar mensaje inicial
+      if (pasoActual === 0 && log.querySelector('.italic')) {
+        log.innerHTML = '';
+      }
+
+      const paso = pasos[pasoActual];
+      renderPaso(paso);
+      pasoActual++;
+
+      // Actualizar estado
+      if (paso.tipo === "FINAL") {
+        actualizarEstado("Misión completada ✓", "bg-emerald-100 text-emerald-700 border-emerald-300");
+      } else if (pasoActual >= pasos.length) {
+        actualizarEstado("Misión completada ✓", "bg-emerald-100 text-emerald-700 border-emerald-300");
+      } else {
+        actualizarEstado(`Paso ${pasoActual} de ${pasos.length}`, "bg-rose-100 text-rose-700 border-rose-200");
+      }
+    }
+
+    function reiniciarAgente() {
+      pasoActual = 0;
+      const log = document.getElementById('agent-log');
+      log.innerHTML = `<div class="text-slate-500 italic font-sans text-center py-8">Presiona "Siguiente Paso del Bucle" para observar el razonamiento, la ejecución de herramientas y la toma de decisiones autónoma.</div>`;
+      actualizarEstado("Listo para iniciar", "bg-rose-100 text-rose-700 border-rose-200");
+    }
+
+    // Inicializar misión por defecto
+    cargarMision(0);
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistemas Operativos Actuales: Windows y Alternativas</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    @keyframes pulse-soft {
+      0%, 100% { transform: scale(1); opacity: 0.7; }
+      50% { transform: scale(1.05); opacity: 0.9; }
+    }
+    .pulse-bg { animation: pulse-soft 6s infinite ease-in-out; }
+    .code-font { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; }
+    .chart-bar { transition: width 0.8s ease-in-out; }
+  </style>
+</head>
+<body class="bg-blue-50/40 text-slate-800 min-h-screen flex flex-col font-sans selection:bg-blue-200 selection:text-blue-900">
+
+  <!-- Encabezado / Navbar -->
+  <header class="border-b border-blue-200/70 bg-white/85 backdrop-blur-md sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex flex-wrap justify-between items-center gap-4">
+      <div class="flex items-center space-x-3">
+        <div class="p-2.5 bg-gradient-to-tr from-blue-400 to-indigo-500 rounded-xl shadow-md shadow-blue-200 text-white">
+          <i data-lucide="monitor" class="w-5 h-5"></i>
+        </div>
+        <div>
+          <h1 class="font-extrabold text-lg leading-tight tracking-tight text-slate-900">
+            Sistemas Operativos: <span class="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">Windows y Alternativas</span>
+          </h1>
+          <p class="text-xs text-blue-800/70 font-medium">Guía interactiva de los SO actuales y los menos conocidos</p>
+        </div>
+      </div>
+
+      <!-- Pestañas de Navegación -->
+      <nav class="flex flex-wrap bg-blue-100/70 p-1 rounded-xl border border-blue-200/80 text-xs sm:text-sm gap-1">
+        <button onclick="switchTab('tab-comparativa')" id="btn-comparativa" class="tab-btn px-3.5 py-1.5 rounded-lg font-semibold transition-all bg-blue-500 text-white shadow-sm shadow-blue-300">
+          1. Comparativa Central
+        </button>
+        <button onclick="switchTab('tab-windows')" id="btn-windows" class="tab-btn px-3.5 py-1.5 rounded-lg font-semibold transition-all text-blue-900/70 hover:text-blue-950 hover:bg-blue-200/50">
+          2. Windows 11
+        </button>
+        <button onclick="switchTab('tab-alternativos')" id="btn-alternativos" class="tab-btn px-3.5 py-1.5 rounded-lg font-semibold transition-all text-blue-900/70 hover:text-blue-950 hover:bg-blue-200/50">
+          3. macOS, Linux y ChromeOS
+        </button>
+        <button onclick="switchTab('tab-desconocidos')" id="btn-desconocidos" class="tab-btn px-3.5 py-1.5 rounded-lg font-semibold transition-all text-blue-900/70 hover:text-blue-950 hover:bg-blue-200/50">
+          4. SO Desconocidos
+        </button>
+        <button onclick="switchTab('tab-ejemplos')" id="btn-ejemplos" class="tab-btn px-3.5 py-1.5 rounded-lg font-semibold transition-all text-blue-900/70 hover:text-blue-950 hover:bg-blue-200/50 flex items-center gap-1">
+          <i data-lucide="sparkle" class="w-3.5 h-3.5"></i>
+          5. Cuota de Mercado
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Contenido Principal -->
+  <main class="flex-grow max-w-6xl mx-auto p-4 sm:p-6 w-full space-y-6">
+
+    <!-- SECCIÓN 1: COMPARATIVA CENTRAL -->
+    <section id="tab-comparativa" class="tab-content space-y-8">
+      <div class="text-center max-w-2xl mx-auto space-y-2 pt-2">
+        <span class="text-xs uppercase tracking-widest font-bold text-blue-600 bg-blue-100 px-3 py-1 rounded-full border border-blue-200">
+          El panorama actual
+        </span>
+        <h2 class="text-3xl font-black text-slate-900 pt-1">Windows domina, pero no está solo</h2>
+        <p class="text-slate-600 text-sm leading-relaxed">
+          Windows sigue siendo el sistema operativo de escritorio más usado, pero macOS, Linux y ChromeOS han ganado terreno. Más allá, existen proyectos alternativos que exploran otras formas de entender la informática.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <!-- Tarjeta Windows -->
+        <div class="bg-white border border-blue-200/80 rounded-2xl p-6 shadow-sm shadow-blue-100 flex flex-col justify-between relative overflow-hidden">
+          <div class="absolute -right-12 -top-12 w-44 h-44 bg-blue-100/60 rounded-full blur-2xl pointer-events-none pulse-bg"></div>
+          <div>
+            <div class="flex items-center space-x-3 mb-4">
+              <span class="p-2.5 rounded-xl bg-blue-100 text-blue-600 border border-blue-200 shadow-sm">
+                <i data-lucide="monitor" class="w-5 h-5"></i>
+              </span>
+              <h3 class="text-xl font-bold text-slate-900">Windows (Microsoft)</h3>
+            </div>
+            <p class="text-sm text-slate-600 mb-4 leading-relaxed">
+              El sistema operativo de escritorio más extendido. Windows 11 es la versión actual, con actualizaciones anuales (25H2, 26H2) y un fuerte enfoque en <strong>inteligencia artificial</strong> y productividad.
+            </p>
+            <ul class="text-xs space-y-2.5 text-slate-600 border-t border-blue-100 pt-4 mb-4">
+              <li class="flex items-start gap-2">
+                <i data-lucide="check" class="w-4 h-4 text-blue-500 shrink-0 mt-0.5"></i>
+                <span><strong>Cuota de mercado:</strong> ~56.5% global (junio 2026)[reference:0].</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <i data-lucide="check" class="w-4 h-4 text-blue-500 shrink-0 mt-0.5"></i>
+                <span><strong>Fortalezas:</strong> compatibilidad total con hardware y software, videojuegos, entorno empresarial.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <i data-lucide="x" class="w-4 h-4 text-red-500 shrink-0 mt-0.5"></i>
+                <span><strong>Críticas:</strong> requisitos de hardware elevados (TPM 2.0), publicidad integrada, telemetría.</span>
+              </li>
+            </ul>
+          </div>
+          <div class="bg-blue-50/80 p-3 rounded-xl border border-blue-200/70 text-xs text-blue-900 font-mono">
+            Versión actual: <span class="font-bold text-blue-700">Windows 11 25H2</span> (Windows 12 no está anunciado)
+          </div>
+        </div>
+
+        <!-- Tarjeta Alternativas -->
+        <div class="bg-white border border-indigo-200/80 rounded-2xl p-6 shadow-sm shadow-indigo-100 flex flex-col justify-between relative overflow-hidden">
+          <div class="absolute -right-12 -top-12 w-44 h-44 bg-indigo-100/60 rounded-full blur-2xl pointer-events-none pulse-bg"></div>
+          <div>
+            <div class="flex items-center space-x-3 mb-4">
+              <span class="p-2.5 rounded-xl bg-indigo-100 text-indigo-700 border border-indigo-200 shadow-sm">
+                <i data-lucide="layers" class="w-5 h-5"></i>
+              </span>
+              <h3 class="text-xl font-bold text-slate-900">Alternativas principales</h3>
+            </div>
+            <p class="text-sm text-slate-600 mb-4 leading-relaxed">
+              macOS, Linux y ChromeOS cubren nichos específicos: ecosistema Apple, libertad y código abierto, y ligereza para la nube, respectivamente.
+            </p>
+            <ul class="text-xs space-y-2.5 text-slate-600 border-t border-blue-100 pt-4 mb-4">
+              <li class="flex items-start gap-2">
+                <i data-lucide="apple" class="w-4 h-4 text-indigo-600 shrink-0 mt-0.5"></i>
+                <span><strong>macOS:</strong> integración con el ecosistema Apple, diseño cuidado, alta durabilidad.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <i data-lucide="terminal" class="w-4 h-4 text-indigo-600 shrink-0 mt-0.5"></i>
+                <span><strong>Linux:</strong> código abierto, personalizable, ideal para servidores y desarrollo.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <i data-lucide="globe" class="w-4 h-4 text-indigo-600 shrink-0 mt-0.5"></i>
+                <span><strong>ChromeOS:</strong> ligero, seguro, centrado en la web y la nube.</span>
+              </li>
+            </ul>
+          </div>
+          <div class="bg-indigo-50/80 p-3 rounded-xl border border-indigo-200/70 text-xs text-indigo-900 font-mono">
+            Cuota combinada: <span class="font-bold text-indigo-700">macOS + Linux + ChromeOS ≈ 15%</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tabla Comparativa Rápida -->
+      <div class="bg-white border border-blue-200/80 rounded-2xl overflow-hidden shadow-sm shadow-blue-100">
+        <div class="px-6 py-4 bg-blue-50/50 border-b border-blue-100 flex items-center justify-between">
+          <h4 class="font-bold text-slate-900 text-sm">Matriz Comparativa Directa (SO de escritorio)</h4>
+          <span class="text-xs font-semibold text-blue-600 bg-blue-100/70 px-2.5 py-0.5 rounded-full border border-blue-200">Resumen</span>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs sm:text-sm text-slate-700">
+            <thead class="bg-blue-100/60 text-blue-950 font-bold border-b border-blue-200">
+              <tr>
+                <th class="p-3.5 sm:p-4">Característica</th>
+                <th class="p-3.5 sm:p-4 text-blue-700">Windows 11</th>
+                <th class="p-3.5 sm:p-4 text-indigo-700">macOS 26</th>
+                <th class="p-3.5 sm:p-4 text-emerald-700">Linux (Ubuntu/Mint)</th>
+                <th class="p-3.5 sm:p-4 text-amber-700">ChromeOS Flex</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-blue-100">
+              <tr class="hover:bg-blue-50/30 transition">
+                <td class="p-3.5 sm:p-4 font-bold text-slate-900">Licencia</td>
+                <td class="p-3.5 sm:p-4">Comercial (pago)</td>
+                <td class="p-3.5 sm:p-4">Comercial (incluido con Mac)</td>
+                <td class="p-3.5 sm:p-4">Gratuito y de código abierto</td>
+                <td class="p-3.5 sm:p-4">Gratuito</td>
+              </tr>
+              <tr class="hover:bg-blue-50/30 transition">
+                <td class="p-3.5 sm:p-4 font-bold text-slate-900">Cuota de mercado (2026)</td>
+                <td class="p-3.5 sm:p-4 text-blue-700 font-medium">~56.5%[reference:1]</td>
+                <td class="p-3.5 sm:p-4 text-indigo-700 font-medium">~16% (OS X + macOS)[reference:2]</td>
+                <td class="p-3.5 sm:p-4 text-emerald-700 font-medium">~4.4%[reference:3]</td>
+                <td class="p-3.5 sm:p-4 text-amber-700 font-medium">~1.2%[reference:4]</td>
+              </tr>
+              <tr class="hover:bg-blue-50/30 transition">
+                <td class="p-3.5 sm:p-4 font-bold text-slate-900">Compatibilidad de software</td>
+                <td class="p-3.5 sm:p-4">Excelente (casi todo)</td>
+                <td class="p-3.5 sm:p-4">Muy buena (ecosistema Apple y apps clave)</td>
+                <td class="p-3.5 sm:p-4">Buena (apps nativas + alternativas)</td>
+                <td class="p-3.5 sm:p-4 text-red-600 font-medium">Limitada (apps web; sin Android)[reference:5]</td>
+              </tr>
+              <tr class="hover:bg-blue-50/30 transition">
+                <td class="p-3.5 sm:p-4 font-bold text-slate-900">Personalización</td>
+                <td class="p-3.5 sm:p-4">Media</td>
+                <td class="p-3.5 sm:p-4">Baja (ecosistema cerrado)</td>
+                <td class="p-3.5 sm:p-4 text-emerald-700 font-medium">Muy alta (código abierto)</td>
+                <td class="p-3.5 sm:p-4">Baja</td>
+              </tr>
+              <tr class="hover:bg-blue-50/30 transition">
+                <td class="p-3.5 sm:p-4 font-bold text-slate-900">Ideal para</td>
+                <td class="p-3.5 sm:p-4">Gaming, ofimática, empresa</td>
+                <td class="p-3.5 sm:p-4">Diseño, edición, ecosistema Apple</td>
+                <td class="p-3.5 sm:p-4">Desarrollo, servidores, privacidad</td>
+                <td class="p-3.5 sm:p-4">Navegación web, nube, equipos antiguos</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 2: WINDOWS 11 -->
+    <section id="tab-windows" class="tab-content hidden space-y-6">
+      <div class="bg-white border border-blue-200/80 rounded-2xl p-6 shadow-sm shadow-blue-100">
+        <div class="flex items-center space-x-3 mb-2">
+          <div class="p-2 rounded-lg bg-blue-100 text-blue-600 border border-blue-200">
+            <i data-lucide="monitor" class="w-5 h-5"></i>
+          </div>
+          <h3 class="text-xl font-bold text-slate-900">Windows 11: La apuesta de Microsoft por la IA y la productividad</h3>
+        </div>
+        <p class="text-sm text-slate-600 leading-relaxed">
+          Windows 11 sigue evolucionando con actualizaciones anuales. La versión <strong>25H2</strong> (2026) introduce mejoras en inteligencia artificial, administración de tareas y experiencias colaborativas.
+        </p>
+
+        <!-- Tarjetas de características -->
+        <div class="mt-6 grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div class="p-4 bg-blue-50/60 border border-blue-200 rounded-xl">
+            <div class="flex items-center gap-2 mb-2">
+              <i data-lucide="audio-lines" class="w-4 h-4 text-blue-600"></i>
+              <h4 class="font-bold text-sm text-slate-900">Audio compartido</h4>
+            </div>
+            <p class="text-xs text-slate-600">Dos personas pueden escuchar el mismo audio desde un solo PC simultáneamente[reference:6].</p>
+          </div>
+          <div class="p-4 bg-blue-50/60 border border-blue-200 rounded-xl">
+            <div class="flex items-center gap-2 mb-2">
+              <i data-lucide="activity" class="w-4 h-4 text-blue-600"></i>
+              <h4 class="font-bold text-sm text-slate-900">Administrador de tareas con NPU</h4>
+            </div>
+            <p class="text-xs text-slate-600">Muestra el uso de la NPU (unidad de procesamiento neuronal) y actividad de IA[reference:7].</p>
+          </div>
+          <div class="p-4 bg-blue-50/60 border border-blue-200 rounded-xl">
+            <div class="flex items-center gap-2 mb-2">
+              <i data-lucide="camera" class="w-4 h-4 text-blue-600"></i>
+              <h4 class="font-bold text-sm text-slate-900">Cámara multi-app</h4>
+            </div>
+            <p class="text-xs text-slate-600">Varias aplicaciones pueden acceder a la cámara a la vez, con un modo básico para solucionar problemas[reference:8].</p>
+          </div>
+          <div class="p-4 bg-blue-50/60 border border-blue-200 rounded-xl">
+            <div class="flex items-center gap-2 mb-2">
+              <i data-lucide="folder" class="w-4 h-4 text-blue-600"></i>
+              <h4 class="font-bold text-sm text-slate-900">Nombre de carpeta personalizado</h4>
+            </div>
+            <p class="text-xs text-slate-600">Puedes elegir el nombre de tu carpeta de usuario durante la instalación[reference:9].</p>
+          </div>
+          <div class="p-4 bg-blue-50/60 border border-blue-200 rounded-xl">
+            <div class="flex items-center gap-2 mb-2">
+              <i data-lucide="bluetooth" class="w-4 h-4 text-blue-600"></i>
+              <h4 class="font-bold text-sm text-slate-900">Audio Bluetooth LE</h4>
+            </div>
+            <p class="text-xs text-slate-600">Soporte para compartir audio mediante Bluetooth LE Audio broadcast[reference:10].</p>
+          </div>
+          <div class="p-4 bg-blue-50/60 border border-blue-200 rounded-xl">
+            <div class="flex items-center gap-2 mb-2">
+              <i data-lucide="trash-2" class="w-4 h-4 text-blue-600"></i>
+              <h4 class="font-bold text-sm text-slate-900">Eliminación de apps preinstaladas</h4>
+            </div>
+            <p class="text-xs text-slate-600">Los administradores de TI pueden quitar apps predeterminadas vía políticas de grupo[reference:11].</p>
+          </div>
+        </div>
+
+        <!-- Nota sobre Windows 12 -->
+        <div class="mt-6 p-4 bg-amber-50 border border-amber-200 rounded-xl text-xs text-amber-900 flex items-start gap-2.5">
+          <i data-lucide="info" class="w-4 h-4 shrink-0 text-amber-600 mt-0.5"></i>
+          <span><strong>¿Y Windows 12?</strong> Microsoft no ha anunciado oficialmente Windows 12. Se especuló con un lanzamiento en 2026, pero la compañía ha desmentido los rumores y continúa con el ciclo anual de Windows 11 (25H2, 26H2)[reference:12][reference:13].</span>
+        </div>
+
+        <!-- Enlace a la sección de cuota de mercado -->
+        <div class="mt-4 flex justify-end">
+          <button onclick="switchTab('tab-ejemplos')" class="text-xs font-bold text-blue-600 hover:text-blue-800 flex items-center gap-1 transition">
+            Ver cuota de mercado y tendencias <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 3: macOS, LINUX Y CHROMEOS -->
+    <section id="tab-alternativos" class="tab-content hidden space-y-6">
+      <div class="bg-white border border-blue-200/80 rounded-2xl p-6 shadow-sm shadow-blue-100">
+        <div class="flex items-center space-x-3 mb-2">
+          <div class="p-2 rounded-lg bg-indigo-100 text-indigo-600 border border-indigo-200">
+            <i data-lucide="layers" class="w-5 h-5"></i>
+          </div>
+          <h3 class="text-xl font-bold text-slate-900">Las alternativas consolidadas: macOS, Linux y ChromeOS</h3>
+        </div>
+        <p class="text-sm text-slate-600 leading-relaxed">
+          Estos tres sistemas cubren necesidades muy distintas: el ecosistema cerrado y cuidado de Apple, la libertad y el código abierto de Linux, y la ligereza y seguridad de ChromeOS.
+        </p>
+
+        <!-- Tarjetas de sistemas -->
+        <div class="mt-6 grid lg:grid-cols-3 gap-5">
+          <!-- macOS -->
+          <div class="bg-indigo-50/50 border border-indigo-200 rounded-2xl p-5 flex flex-col">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="p-2 bg-white rounded-lg border border-indigo-200 text-indigo-600">
+                <i data-lucide="apple" class="w-5 h-5"></i>
+              </div>
+              <h4 class="font-bold text-slate-900">macOS 26 (Tahoe)</h4>
+            </div>
+            <p class="text-xs text-slate-600 mb-3 flex-grow">
+              El sistema de Apple. La versión 26 (Tahoe) introduce el diseño <strong>Liquid Glass</strong>, mejoras en Apple Intelligence y una integración más profunda entre dispositivos.
+            </p>
+            <ul class="text-xs text-slate-600 space-y-1.5 mb-3">
+              <li class="flex items-start gap-1.5"><i data-lucide="check" class="w-3.5 h-3.5 text-indigo-500 shrink-0 mt-0.5"></i><span>Diseño Liquid Glass y nuevas opciones de personalización[reference:14].</span></li>
+              <li class="flex items-start gap-1.5"><i data-lucide="check" class="w-3.5 h-3.5 text-indigo-500 shrink-0 mt-0.5"></i><span>Apple Intelligence integrada (traducción en vivo, Genmoji)[reference:15].</span></li>
+              <li class="flex items-start gap-1.5"><i data-lucide="check" class="w-3.5 h-3.5 text-indigo-500 shrink-0 mt-0.5"></i><span>Mejoras en Safari (pestañas compactas), Freeform y FaceTime[reference:16].</span></li>
+            </ul>
+            <div class="text-[11px] bg-white/70 p-2 rounded-lg border border-indigo-100 mt-auto">
+              <strong>Ideal para:</strong> usuarios del ecosistema Apple, diseño y edición.
+            </div>
+          </div>
+
+          <!-- Linux -->
+          <div class="bg-emerald-50/50 border border-emerald-200 rounded-2xl p-5 flex flex-col">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="p-2 bg-white rounded-lg border border-emerald-200 text-emerald-600">
+                <i data-lucide="terminal" class="w-5 h-5"></i>
+              </div>
+              <h4 class="font-bold text-slate-900">Linux (Ubuntu, Mint, Fedora)</h4>
+            </div>
+            <p class="text-xs text-slate-600 mb-3 flex-grow">
+              El núcleo de código abierto. Existen cientos de distribuciones. <strong>Ubuntu</strong> y <strong>Linux Mint</strong> son las más recomendadas para principiantes.
+            </p>
+            <ul class="text-xs text-slate-600 space-y-1.5 mb-3">
+              <li class="flex items-start gap-1.5"><i data-lucide="check" class="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5"></i><span>Gratuito, de código abierto y altamente personalizable.</span></li>
+              <li class="flex items-start gap-1.5"><i data-lucide="check" class="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5"></i><span>Ideal para desarrollo, servidores y recuperar equipos antiguos[reference:17].</span></li>
+              <li class="flex items-start gap-1.5"><i data-lucide="check" class="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5"></i><span>Cuota de mercado en crecimiento (~4.4% en 2026)[reference:18].</span></li>
+            </ul>
+            <div class="text-[11px] bg-white/70 p-2 rounded-lg border border-emerald-100 mt-auto">
+              <strong>Ideal para:</strong> desarrolladores, entusiastas, privacidad y hardware antiguo.
+            </div>
+          </div>
+
+          <!-- ChromeOS -->
+          <div class="bg-amber-50/50 border border-amber-200 rounded-2xl p-5 flex flex-col">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="p-2 bg-white rounded-lg border border-amber-200 text-amber-600">
+                <i data-lucide="globe" class="w-5 h-5"></i>
+              </div>
+              <h4 class="font-bold text-slate-900">ChromeOS / ChromeOS Flex</h4>
+            </div>
+            <p class="text-xs text-slate-600 mb-3 flex-grow">
+              Sistema ligero de Google basado en la web. <strong>ChromeOS Flex</strong> permite instalarlo en PC y Mac antiguos para darles una segunda vida.
+            </p>
+            <ul class="text-xs text-slate-600 space-y-1.5 mb-3">
+              <li class="flex items-start gap-1.5"><i data-lucide="check" class="w-3.5 h-3.5 text-amber-500 shrink-0 mt-0.5"></i><span>Arranque en menos de 10 segundos y actualizaciones automáticas[reference:19].</span></li>
+              <li class="flex items-start gap-1.5"><i data-lucide="check" class="w-3.5 h-3.5 text-amber-500 shrink-0 mt-0.5"></i><span>Ideal para navegación web, streaming y ofimática en la nube.</span></li>
+              <li class="flex items-start gap-1.5"><i data-lucide="x" class="w-3.5 h-3.5 text-red-400 shrink-0 mt-0.5"></i><span>ChromeOS Flex <strong>no soporta apps de Android</strong>[reference:20].</span></li>
+            </ul>
+            <div class="text-[11px] bg-white/70 p-2 rounded-lg border border-amber-100 mt-auto">
+              <strong>Ideal para:</strong> educación, nube, equipos con pocos recursos.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 4: SO DESCONOCIDOS -->
+    <section id="tab-desconocidos" class="tab-content hidden space-y-6">
+      <div class="bg-white border border-blue-200/80 rounded-2xl p-6 shadow-sm shadow-blue-100">
+        <div class="flex items-center space-x-3 mb-2">
+          <div class="p-2 rounded-lg bg-purple-100 text-purple-600 border border-purple-200">
+            <i data-lucide="flask-conical" class="w-5 h-5"></i>
+          </div>
+          <h3 class="text-xl font-bold text-slate-900">Sistemas operativos desconocidos: laboratorios de innovación</h3>
+        </div>
+        <p class="text-sm text-slate-600 leading-relaxed">
+          Más allá de los grandes nombres, existen proyectos independientes que exploran paradigmas distintos: compatibilidad con Windows, herencia de BeOS, diseño desde cero, microkernels y más.
+        </p>
+
+        <div class="mt-6 grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <!-- Haiku -->
+          <div class="p-4 bg-purple-50/50 border border-purple-200 rounded-xl">
+            <div class="flex items-center gap-2 mb-2">
+              <i data-lucide="leaf" class="w-4 h-4 text-purple-600"></i>
+              <h4 class="font-bold text-sm text-slate-900">Haiku</h4>
+            </div>
+            <p class="text-xs text-slate-600">Continuación de código abierto de BeOS. Enfocado en <strong>multimedia y capacidad de respuesta</strong>. En 2026 se encuentra en fase beta (R1/beta6)[reference:21][reference:22].</p>
+          </div>
+          <!-- ReactOS -->
+          <div class="p-4 bg-purple-50/50 border border-purple-200 rounded-xl">
+            <div class="flex items-center gap-2 mb-2">
+              <i data-lucide="copy" class="w-4 h-4 text-purple-600"></i>
+              <h4 class="font-bold text-sm text-slate-900">ReactOS</h4>
+            </div>
+            <p class="text-xs text-slate-600">Intenta ser <strong>compatible con Windows NT y sus controladores</strong> sin usar código de Microsoft. Sigue en fase alpha (0.4.15), pero avanza constantemente[reference:23].</p>
+          </div>
+          <!-- FreeBSD -->
+          <div class="p-4 bg-purple-50/50 border border-purple-200 rounded-xl">
+            <div class="flex items-center gap-2 mb-2">
+              <i data-lucide="server" class="w-4 h-4 text-purple-600"></i>
+              <h4 class="font-bold text-sm text-slate-900">FreeBSD</h4>
+            </div>
+            <p class="text-xs text-slate-600">Unix-like usado en <strong>servidores de Netflix, PlayStation y routers Juniper</strong>. Su licencia BSD permite uso comercial cerrado. Está mejorando su soporte para laptops[reference:24].</p>
+          </div>
+          <!-- SerenityOS -->
+          <div class="p-4 bg-purple-50/50 border border-purple-200 rounded-xl">
+            <div class="flex items-center gap-2 mb-2">
+              <i data-lucide="palette" class="w-4 h-4 text-purple-600"></i>
+              <h4 class="font-bold text-sm text-slate-900">SerenityOS</h4>
+            </div>
+            <p class="text-xs text-slate-600">SO gráfico con <strong>estética de los 90</strong> (Motif, CDE, BeOS) creado por Andreas Kling. Todo el stack (kernel, navegador, apps) está escrito desde cero[reference:25].</p>
+          </div>
+          <!-- OpenIndiana -->
+          <div class="p-4 bg-purple-50/50 border border-purple-200 rounded-xl">
+            <div class="flex items-center gap-2 mb-2">
+              <i data-lucide="sun" class="w-4 h-4 text-purple-600"></i>
+              <h4 class="font-bold text-sm text-slate-900">OpenIndiana</h4>
+            </div>
+            <p class="text-xs text-slate-600">Continuación de OpenSolaris. Orientado a <strong>servidores y almacenamiento empresarial</strong>, con ZFS y zonas. Mantiene viva la herencia de Solaris[reference:26].</p>
+          </div>
+          <!-- Mención especial -->
+          <div class="p-4 bg-purple-50/50 border border-purple-200 rounded-xl">
+            <div class="flex items-center gap-2 mb-2">
+              <i data-lucide="star" class="w-4 h-4 text-purple-600"></i>
+              <h4 class="font-bold text-sm text-slate-900">Otros proyectos</h4>
+            </div>
+            <p class="text-xs text-slate-600">Redox OS (microkernel en Rust), TempleOS (arte y religión), Plan 9 / 9front, AROS (AmigaOS), MenuetOS (ensamblador). Un ecosistema de experimentación constante[reference:27].</p>
+          </div>
+        </div>
+
+        <div class="mt-6 p-4 bg-purple-50 border border-purple-200 rounded-xl text-xs text-purple-900 flex items-start gap-2.5">
+          <i data-lucide="info" class="w-4 h-4 shrink-0 text-purple-600 mt-0.5"></i>
+          <span><strong>¿Por qué existen?</strong> Aprendizaje, exploración de paradigmas alternativos (microkernels, capacidades, verificación formal) y, sobre todo, <strong>diversión</strong>. Son laboratorios de ideas que a veces influyen en los sistemas mainstream[reference:28].</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 5: CUOTA DE MERCADO (EJEMPLOS) -->
+    <section id="tab-ejemplos" class="tab-content hidden space-y-6">
+      <div class="bg-white border border-blue-200/80 rounded-2xl p-6 shadow-sm shadow-blue-100 space-y-6">
+        <div>
+          <div class="flex items-center space-x-3 mb-2">
+            <div class="p-2 rounded-lg bg-blue-100 text-blue-600 border border-blue-200">
+              <i data-lucide="bar-chart-3" class="w-5 h-5"></i>
+            </div>
+            <h3 class="text-xl font-bold text-slate-900">Cuota de mercado de SO de escritorio (2026)</h3>
+          </div>
+          <p class="text-sm text-slate-600 leading-relaxed">
+            Datos de StatCounter para junio de 2026. Windows sigue liderando, pero ha caído por debajo del 60% histórico, mientras Linux y macOS ganan terreno[reference:29].
+          </p>
+        </div>
+
+        <!-- Gráfico de barras simple -->
+        <div class="space-y-4">
+          <div>
+            <div class="flex justify-between text-xs font-semibold mb-1">
+              <span>Windows</span>
+              <span>56.55%</span>
+            </div>
+            <div class="w-full bg-blue-100 h-6 rounded-full overflow-hidden">
+              <div class="chart-bar bg-gradient-to-r from-blue-400 to-blue-600 h-full rounded-full" style="width: 56.55%"></div>
+            </div>
+          </div>
+          <div>
+            <div class="flex justify-between text-xs font-semibold mb-1">
+              <span>macOS (OS X + macOS)</span>
+              <span>~16%</span>
+            </div>
+            <div class="w-full bg-indigo-100 h-6 rounded-full overflow-hidden">
+              <div class="chart-bar bg-gradient-to-r from-indigo-400 to-indigo-600 h-full rounded-full" style="width: 16.37%"></div>
+            </div>
+          </div>
+          <div>
+            <div class="flex justify-between text-xs font-semibold mb-1">
+              <span>Linux</span>
+              <span>4.39%</span>
+            </div>
+            <div class="w-full bg-emerald-100 h-6 rounded-full overflow-hidden">
+              <div class="chart-bar bg-gradient-to-r from-emerald-400 to-emerald-600 h-full rounded-full" style="width: 4.39%"></div>
+            </div>
+          </div>
+          <div>
+            <div class="flex justify-between text-xs font-semibold mb-1">
+              <span>ChromeOS</span>
+              <span>1.21%</span>
+            </div>
+            <div class="w-full bg-amber-100 h-6 rounded-full overflow-hidden">
+              <div class="chart-bar bg-gradient-to-r from-amber-400 to-amber-600 h-full rounded-full" style="width: 1.21%"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tarjetas de tendencias -->
+        <div class="grid md:grid-cols-3 gap-4 pt-2">
+          <div class="p-3 bg-blue-50/70 border border-blue-200 rounded-xl text-xs">
+            <span class="font-bold text-blue-700 block mb-1">Windows</span>
+            <p class="text-slate-600">Por primera vez por debajo del 60%. Los requisitos de hardware de Windows 11 y el impulso de servicios en la nube están llevando a algunos usuarios a buscar alternativas[reference:30].</p>
+          </div>
+          <div class="p-3 bg-indigo-50/70 border border-indigo-200 rounded-xl text-xs">
+            <span class="font-bold text-indigo-700 block mb-1">macOS</span>
+            <p class="text-slate-600">Mantiene una base sólida y fiel, especialmente en creativos y profesionales. La integración con el ecosistema Apple sigue siendo su principal fortaleza[reference:31].</p>
+          </div>
+          <div class="p-3 bg-emerald-50/70 border border-emerald-200 rounded-xl text-xs">
+            <span class="font-bold text-emerald-700 block mb-1">Linux</span>
+            <p class="text-slate-600">Crecimiento constante. Impulsado por Steam Deck, mejoras en compatibilidad de juegos y distribuciones cada vez más amigables[reference:32].</p>
+          </div>
+        </div>
+
+        <!-- Nota sobre la medición -->
+        <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-600 flex items-start gap-2.5">
+          <i data-lucide="info" class="w-4 h-4 shrink-0 text-slate-500 mt-0.5"></i>
+          <span>Las cifras de StatCounter se basan en el análisis de visitas a sitios web con su código de seguimiento, no en el número de dispositivos instalados. Reflejan la actividad en línea de los usuarios[reference:33].</span>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-blue-200/70 bg-white/60 py-4 text-center text-xs text-slate-500 font-medium">
+    SPA Educativa &bull; Sistemas Operativos Actuales: Windows y Alternativas
+  </footer>
+
+  <!-- Lógica JavaScript -->
+  <script>
+    // Inicializar iconos Lucide
+    lucide.createIcons();
+
+    // 1. GESTOR DE PESTAÑAS (SPA)
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+      document.getElementById(tabId).classList.remove('hidden');
+
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('bg-blue-500', 'text-white', 'shadow-sm', 'shadow-blue-300');
+        btn.classList.add('text-blue-900/70');
+      });
+
+      const activeBtnId = tabId.replace('tab-', 'btn-');
+      const activeBtn = document.getElementById(activeBtnId);
+      if (activeBtn) {
+        activeBtn.classList.add('bg-blue-500', 'text-white', 'shadow-sm', 'shadow-blue-300');
+        activeBtn.classList.remove('text-blue-900/70');
+      }
+    }
+
+    // Animación de las barras del gráfico al entrar en la pestaña
+    function animateChart() {
+      document.querySelectorAll('.chart-bar').forEach(bar => {
+        const width = bar.style.width;
+        bar.style.width = '0%';
+        setTimeout(() => { bar.style.width = width; }, 100);
+      });
+    }
+
+    // Sobrescribir switchTab para animar el gráfico
+    const originalSwitchTab = switchTab;
+    switchTab = function(tabId) {
+      originalSwitchTab(tabId);
+      if (tabId === 'tab-ejemplos') {
+        setTimeout(animateChart, 200);
+      }
+    };
+  </script>
+
+</body>
+</html>

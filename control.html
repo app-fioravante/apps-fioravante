@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Algoritmo de control</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f5f3ff;--bg2:#e6e0ff;--text:#1b1640;--muted:#554f7e;--card:rgba(255,255,255,.72);--line:rgba(90,70,210,.2);--v:#6a4cff;--m:#d92b6a;--c:#0a9f94;--a:#c77d00;--dot:rgba(60,45,160,.35);--hbg:rgba(245,243,255,.85)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0d0a26;--bg2:#1a1245;--text:#f1eeff;--muted:#aaa4d6;--card:rgba(255,255,255,.06);--line:rgba(255,255,255,.13);--v:#8b72ff;--m:#ff5c9a;--c:#2ee6d6;--a:#ffb547;--dot:rgba(200,190,255,.3);--hbg:rgba(13,10,38,.85)}}
+:root[data-theme="dark"]{--bg:#0d0a26;--bg2:#1a1245;--text:#f1eeff;--muted:#aaa4d6;--card:rgba(255,255,255,.06);--line:rgba(255,255,255,.13);--v:#8b72ff;--m:#ff5c9a;--c:#2ee6d6;--a:#ffb547;--dot:rgba(200,190,255,.3);--hbg:rgba(13,10,38,.85)}
+*{box-sizing:border-box;margin:0}
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{background:var(--bg);color:var(--text);font:17px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;min-height:100vh;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--hbg);z-index:30}
+h1,h2,h3{font-family:"Bricolage Grotesque",system-ui,sans-serif;line-height:1.1;letter-spacing:-.02em}
+.aurora{position:fixed;inset:0;z-index:-1;overflow:hidden}
+.aurora i{position:absolute;width:55vmax;height:55vmax;border-radius:50%;filter:blur(90px);opacity:.35;animation:drift 22s ease-in-out infinite alternate}
+.aurora i:nth-child(1){background:var(--v);left:-15vmax;top:-10vmax}
+.aurora i:nth-child(2){background:var(--m);right:-20vmax;top:20vh;animation-delay:-8s;animation-duration:28s}
+.aurora i:nth-child(3){background:var(--c);left:20vw;bottom:-25vmax;animation-delay:-14s;opacity:.25}
+@keyframes drift{to{transform:translate(8vmax,6vmax) scale(1.15)}}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--hbg);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.bar{max-width:1060px;margin:auto;padding:10px 18px;display:flex;align-items:center;gap:14px}
+.logo{font:800 1.15rem "Bricolage Grotesque",system-ui,sans-serif;text-decoration:none;color:var(--text);white-space:nowrap;display:flex;align-items:center;gap:8px}
+.logo b{width:14px;height:14px;border-radius:50%;background:conic-gradient(var(--c),var(--v),var(--m),var(--c));animation:spin 4s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+nav{display:flex;gap:4px;overflow-x:auto;margin-left:auto;scrollbar-width:none}
+nav a{padding:7px 14px;border-radius:99px;text-decoration:none;color:var(--muted);font-size:.92rem;white-space:nowrap;transition:.25s}
+nav a:hover{color:var(--text);background:var(--card)}
+nav a[aria-current="page"]{color:#fff;background:linear-gradient(90deg,var(--v),var(--m))}
+#theme{border:1px solid var(--line);background:var(--card);color:var(--text);width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:1rem;flex:none}
+main{max-width:1060px;margin:auto;padding:28px 18px 80px}
+.view[hidden]{display:none}
+.view.show .rv{animation:up .65s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--i,0)*80ms)}
+@keyframes up{from{opacity:0;transform:translateY(22px)}}
+h1{font-size:clamp(2.2rem,6.5vw,4.4rem);font-weight:800;max-width:15ch}
+h1 span,h2 span{background:linear-gradient(90deg,var(--v),var(--m),var(--a),var(--c));background-size:250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shift 8s linear infinite}
+@keyframes shift{to{background-position:250% 0}}
+h2{font-size:clamp(1.7rem,4.5vw,2.7rem);font-weight:800;margin-bottom:10px}
+.lead{color:var(--muted);max-width:62ch;font-size:1.1rem;margin:16px 0 22px}
+.hero{position:relative;border:1px solid var(--line);border-radius:28px;background:var(--card);backdrop-filter:blur(8px);overflow:hidden;padding:clamp(22px,5vw,48px)}
+.hero canvas{position:absolute;inset:0;width:100%;height:100%;opacity:.85}
+.hero>div{position:relative;pointer-events:none}.hero .btns{pointer-events:auto}
+.btns{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-block;padding:13px 24px;border-radius:99px;font:600 1rem system-ui,sans-serif;text-decoration:none;border:1px solid var(--line);color:var(--text);background:var(--card);cursor:pointer;transition:.25s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 30px -10px var(--v)}
+.btn.main{color:#fff;border:0;background:linear-gradient(90deg,var(--v),var(--m))}
+.cap{color:var(--muted);font-size:.9rem;margin-top:12px;max-width:44ch}
+.grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));margin-top:26px}
+.card{border:1px solid var(--line);background:var(--card);backdrop-filter:blur(8px);border-radius:22px;padding:24px;position:relative;overflow:hidden}
+.card h3{font-size:1.35rem;margin-bottom:8px}
+.card p{color:var(--muted)}
+.card.k1{border-top:3px solid var(--c)}.card.k2{border-top:3px solid var(--m)}.card.k3{border-top:3px solid var(--a)}
+.ex{cursor:pointer;text-align:left;font:inherit;color:inherit;width:100%;transition:.3s}
+.ex:hover{transform:translateY(-4px) rotate(-.4deg)}
+.ex .tag{display:inline-block;font-size:.8rem;padding:3px 11px;border-radius:99px;background:color-mix(in srgb,var(--v) 18%,transparent);margin-bottom:12px}
+.ex .more{max-height:0;opacity:0;overflow:hidden;transition:.5s}
+.ex[aria-expanded="true"] .more{max-height:420px;opacity:1;margin-top:12px}
+.ex .more p{color:var(--text)}.ex .more strong{color:var(--m)}
+.ex .plus{position:absolute;right:20px;top:18px;font-size:1.5rem;color:var(--v);transition:.3s}
+.ex[aria-expanded="true"] .plus{transform:rotate(45deg)}
+.flow{display:grid;gap:0;margin-top:30px;position:relative}
+.step{display:flex;gap:18px;padding:0 0 28px}
+.step .n{flex:none;width:46px;height:46px;border-radius:50%;display:grid;place-items:center;font:800 1.1rem "Bricolage Grotesque",sans-serif;color:#fff;background:linear-gradient(135deg,var(--v),var(--m));box-shadow:0 0 0 0 var(--v);animation:pulse 2.8s infinite;animation-delay:calc(var(--i)*.5s)}
+@keyframes pulse{70%{box-shadow:0 0 0 14px transparent}}
+.step:not(:last-child) .n::after{content:"";position:absolute;margin-top:92px;width:2px;height:34px;background:linear-gradient(var(--v),transparent)}
+.step h3{font-size:1.25rem}.step p{color:var(--muted);max-width:60ch}
+.sim{margin-top:24px;display:grid;gap:22px}
+.zone{display:grid;gap:8px}
+.zone b{display:flex;justify-content:space-between;font-weight:600}
+.track{height:30px;border-radius:99px;background:color-mix(in srgb,var(--muted) 18%,transparent);overflow:hidden;display:flex}
+.track i{display:block;height:100%;width:50%;transition:width .9s cubic-bezier(.2,.8,.2,1);display:grid;place-items:center;color:#fff;font:600 .8rem system-ui,sans-serif}
+.track .a{background:linear-gradient(90deg,var(--v),var(--m))}.track .b{background:linear-gradient(90deg,var(--c),var(--v));flex:1}
+.ctrl{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+.ctrl label{display:flex;gap:10px;align-items:center;color:var(--muted);font-size:.95rem}
+input[type=range]{accent-color:var(--m);width:150px}
+.msg{padding:16px 20px;border-radius:18px;border:1px dashed var(--m);background:color-mix(in srgb,var(--m) 10%,transparent);min-height:84px;transition:.3s}
+.pill{display:inline-block;background:var(--card);border:1px solid var(--line);border-radius:99px;padding:3px 14px;font-weight:600}
+.chk{display:grid;gap:10px;margin-top:22px}
+.chk button{display:flex;gap:14px;align-items:center;text-align:left;font:inherit;color:var(--text);padding:15px 18px;border-radius:18px;border:1px solid var(--line);background:var(--card);cursor:pointer;transition:.3s}
+.chk button:hover{border-color:var(--c)}
+.chk .box{flex:none;width:26px;height:26px;border-radius:9px;border:2px solid var(--muted);display:grid;place-items:center;color:transparent;transition:.3s}
+.chk button[aria-pressed="true"]{border-color:var(--c);background:color-mix(in srgb,var(--c) 14%,transparent)}
+.chk button[aria-pressed="true"] .box{background:var(--c);border-color:var(--c);color:#fff;transform:rotate(360deg)}
+.meter{height:10px;border-radius:99px;background:color-mix(in srgb,var(--muted) 20%,transparent);margin:18px 0 6px;overflow:hidden}
+.meter i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--m),var(--a),var(--c));transition:width .6s}
+nav{min-width:0}
+@media (max-width:760px){.bar{flex-wrap:wrap}nav{order:3;width:100%;margin-left:0}#theme{margin-left:auto}}
+.seg{display:inline-flex;gap:4px;padding:5px;border-radius:99px;background:var(--card);border:1px solid var(--line);margin-top:14px;flex-wrap:wrap}
+.seg button{border:0;background:transparent;color:var(--muted);padding:10px 20px;border-radius:99px;font:600 .95rem system-ui,sans-serif;cursor:pointer;transition:.3s}
+.seg button[aria-pressed="true"]{color:#fff;background:linear-gradient(90deg,var(--c),var(--v));box-shadow:0 8px 24px -10px var(--c)}
+.seg button.b[aria-pressed="true"]{background:linear-gradient(90deg,var(--m),var(--a));box-shadow:0 8px 24px -10px var(--m)}
+.twin{padding:8px 24px;margin-top:14px;border-left:4px solid var(--c);transition:border-color .4s}
+.twin.b{border-left-color:var(--m)}
+.twin div{padding:16px 0;border-bottom:1px solid var(--line);display:grid;gap:4px}
+.twin div:last-child{border:0}
+.twin b{font:800 1.05rem "Bricolage Grotesque",system-ui,sans-serif;color:var(--c)}
+.twin.b b{color:var(--m)}
+.twin.flip div{animation:up .5s both;animation-delay:calc(var(--j)*70ms)}
+.src a{color:var(--v)}
+footer{text-align:center;color:var(--muted);font-size:.85rem;padding:0 18px 40px;max-width:70ch;margin:auto}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(--c);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
+<header><div class="bar">
+<a class="logo" href="#inicio"><b></b>Algoritmo de control</a>
+<nav id="nav" aria-label="Secciones">
+<a href="#inicio">Inicio</a><a href="#ejemplos">Casos reales</a><a href="#gemelo">Gemelo digital Social Argentino</a><a href="#como">Cómo funciona</a><a href="#simulador">Simulador</a><a href="#defensas">Qué hacer</a>
+</nav>
+<button id="theme" aria-label="Cambiar entre modo claro y oscuro">◐</button>
+</div></header>
+
+<main>
+<section class="view" id="v-inicio">
+<div class="hero rv">
+<canvas id="cv" aria-hidden="true"></canvas>
+<div>
+<h1>Cuando un algoritmo decide quién es <span>“riesgoso”</span></h1>
+<p class="lead">Una guía sin tecnicismos sobre los sistemas de inteligencia artificial que intentan adivinar qué hará una persona, y sobre lo que pasa cuando esas adivinanzas se usan para vigilar, castigar o negar ayudas.</p>
+<div class="btns"><a class="btn main" href="#ejemplos">Ver casos reales</a><a class="btn" href="#simulador">Probar el simulador</a></div>
+<p class="cap">Cada punto es una persona. Pasa el cursor: nadie sabe por qué recibió su color.</p>
+</div></div>
+<div class="grid">
+<article class="card k1 rv"><h3>¿Qué es?</h3><p>Programas que miran datos del pasado (denuncias, trámites, compras, cámaras) y calculan un número: la “probabilidad” de que alguien cometa un delito, un fraude o un incumplimiento.</p></article>
+<article class="card k2 rv"><h3>¿Por qué importa?</h3><p>Ese número puede decidir si te revisan, te niegan un subsidio, te frenan en la calle o te dan menos oportunidades. Y casi nunca se explica cómo se calculó.</p></article>
+<article class="card k3 rv"><h3>Ojo con los extremos</h3><p>Predecir no es malo en sí: sirve para ubicar dónde falta ayuda o prevenir accidentes. El problema aparece cuando la predicción se convierte en castigo sin poder apelar.</p></article>
+</div>
+</section>
+
+<section class="view" id="v-ejemplos" hidden>
+<h2 class="rv"><span>Casos reales</span> en el mundo</h2>
+<p class="lead rv">Toca cada tarjeta para ver qué pasó. Son resúmenes simplificados: te recomiendo leer las fuentes originales de cada caso.</p>
+<div class="grid" id="exs"></div>
+</section>
+
+<section class="view" id="v-gemelo" hidden>
+<h2 class="rv">El <span>Gemelo Digital Social</span> argentino</h2>
+<p class="lead rv">Un “gemelo digital” es una copia virtual de algo real que sirve para probar cambios antes de hacerlos: un puente, una fábrica, una ciudad. En Argentina se anunció una versión pensada para la sociedad, construida con datos de las personas.</p>
+<div class="grid">
+<article class="card k1 rv"><h3>Qué se anunció</h3><p>El 22 de mayo de 2026, el Ministerio de Capital Humano, a cargo de Sandra Pettovello, presentó una plataforma de IA para simular escenarios y anticipar el impacto de políticas sociales antes de aplicarlas. Cruzaría datos sociales, educativos, laborales y territoriales.</p></article>
+<article class="card k3 rv"><h3>Qué dice el Gobierno</h3><p>Sostiene que busca políticas basadas en evidencia y un Estado que anticipa en lugar de solo reaccionar. Afirma que se hará por etapas, empezando por relevar los datos y capacidades del propio ministerio, y negó que pertenezca a una empresa o persona en particular.</p></article>
+<article class="card k2 rv"><h3>Qué preguntan los críticos</h3><p>Análisis periodísticos señalan que no se conocen presupuesto, cronograma, proveedor ni marco legal. Se presentó un hábeas data colectivo en la Justicia y legisladores de la oposición pidieron citar a la ministra. Los expertos advierten sobre reunir datos personales en una sola base.</p></article>
+</div>
+<h3 class="rv" style="margin:40px 0 4px;font-size:1.6rem">Un mismo gemelo, dos usos muy distintos</h3>
+<p class="cap rv" style="max-width:62ch">Ejemplo conceptual para entender la diferencia. No describe cómo funciona el sistema real, que todavía no fue detallado públicamente.</p>
+<div class="seg rv" role="group" aria-label="Elegir uso del gemelo digital"><button id="ma" aria-pressed="true">Planificar políticas</button><button id="mb" class="b" aria-pressed="false">Clasificar personas</button></div>
+<div class="card twin rv" id="twin"></div>
+<p class="lead rv">Los críticos temen que, sin reglas claras, el paso de planificar a clasificar sea muy corto. Los defensores sostienen que el objetivo es mejorar las políticas públicas. Una forma de evaluarlo es hacer las mismas preguntas a cualquier sistema.</p>
+<div class="btns rv"><a class="btn main" href="#defensas">Aplicar la lista de preguntas</a></div>
+<p class="cap src rv" style="max-width:70ch">Basado en prensa argentina hasta agosto de 2026; el proyecto puede haber cambiado. Fuentes: <a href="https://www.infobae.com/politica/2026/05/22/el-ministerio-de-capital-humano-presento-gemelo-digital-un-sistema-de-inteligencia-artificial-para-disenar-politicas-sociales-y-predecir-su-impacto/" target="_blank" rel="noopener">Infobae</a>, <a href="https://www.ambito.com/politica/presentan-un-habeas-data-colectivo-la-justicia-contra-el-proyecto-gemelo-digital-social-n6282090" target="_blank" rel="noopener">Ámbito</a>, <a href="https://mercado.com.ar/para-entender/el-gemelo-digital-social-argentino-ambicion-global-ejecucion-opaca" target="_blank" rel="noopener">Mercado</a>.</p>
+</section>
+
+<section class="view" id="v-como" hidden>
+<h2 class="rv">Así funciona, <span>paso a paso</span></h2>
+<p class="lead rv">Casi todos estos sistemas siguen el mismo camino, sin importar el país ni la empresa.</p>
+<div class="flow">
+<div class="step rv"><div class="n">1</div><div><h3>Juntan datos</h3><p>Denuncias, antecedentes, domicilio, deudas, cámaras, redes sociales, trámites. Cuantos más cruces, más “completo” parece el retrato.</p></div></div>
+<div class="step rv"><div class="n">2</div><div><h3>Buscan parecidos</h3><p>El programa compara a cada persona o barrio con casos pasados y se pregunta: “¿a quién se parece?”. No entiende motivos, solo repite patrones.</p></div></div>
+<div class="step rv"><div class="n">3</div><div><h3>Ponen un número</h3><p>El resultado llega como un puntaje, un semáforo o una alerta roja. Se ve objetivo, aunque dependa de datos viejos o incompletos.</p></div></div>
+<div class="step rv"><div class="n">4</div><div><h3>Alguien actúa</h3><p>Se envían patrullas, se revisa un expediente, se corta un beneficio. Muchas veces la persona confía en el número sin cuestionarlo.</p></div></div>
+<div class="step rv"><div class="n">5</div><div><h3>El ciclo se repite</h3><p>Lo que se encuentra vuelve a entrar como dato nuevo. Si empezó con un sesgo, el sistema lo refuerza. Pruébalo en el simulador.</p></div></div>
+</div>
+<div class="btns rv"><a class="btn main" href="#simulador">Ir al simulador</a></div>
+</section>
+
+<section class="view" id="v-simulador" hidden>
+<h2 class="rv">El <span>círculo vicioso</span> de los datos</h2>
+<p class="lead rv">Dos barrios tienen exactamente los mismos problemas reales. Pero los registros viejos mostraban un poco más de casos en el Norte, porque allí ya había más policías mirando. Mira qué hace el sistema con eso.</p>
+<div class="card sim rv">
+<div class="zone"><b><span>Realidad (problemas verdaderos)</span><span class="pill">Norte 50 % · Sur 50 %</span></b><div class="track"><i style="width:50%;background:var(--muted)">Norte</i><i style="flex:1;background:color-mix(in srgb,var(--muted) 70%,transparent)">Sur</i></div></div>
+<div class="zone"><b><span>Casos registrados</span><span class="pill" id="rec">Norte 60 % · Sur 40 %</span></b><div class="track"><i class="a" id="bRec" style="width:60%">Norte</i><i class="b">Sur</i></div></div>
+<div class="zone"><b><span>Patrullas que envía el sistema</span><span class="pill" id="pat">—</span></b><div class="track"><i class="a" id="bPat" style="width:60%">Norte</i><i class="b">Sur</i></div></div>
+<div class="ctrl">
+<button class="btn main" id="step">Avanzar un mes</button><button class="btn" id="reset">Reiniciar</button>
+<label>Foco en lo “más riesgoso” <input type="range" id="k" min="1" max="3" step=".5" value="2"></label>
+<span class="pill">Mes <span id="mes">0</span></span>
+</div>
+<div class="msg" id="msg">Pulsa “Avanzar un mes” para ver cómo cambian los números.</div>
+</div>
+<p class="cap rv" style="max-width:70ch">Modelo muy simplificado, hecho para entender la idea: donde se mira más, se encuentra más, y lo que se encuentra se usa para justificar mirar todavía más.</p>
+</section>
+
+<section class="view" id="v-defensas" hidden>
+<h2 class="rv">Cómo <span>cuestionar</span> un sistema así</h2>
+<p class="lead rv">Si una institución usa IA para decidir sobre tu vida, estas son preguntas razonables. Marca las que ya tienen respuesta clara en el caso que te interese.</p>
+<div class="chk rv" id="chk"></div>
+<div class="meter rv"><i id="mt"></i></div>
+<p class="cap rv" id="mtxt" style="max-width:70ch">Cuantas menos respuestas, más motivos para desconfiar.</p>
+<div class="grid">
+<article class="card k1 rv"><h3>Reglas que ya existen</h3><p>La Unión Europea prohibió en su ley de IA el “puntaje social” y limitó la predicción de delitos basada solo en el perfil de una persona. Otros países discuten reglas parecidas.</p></article>
+<article class="card k2 rv"><h3>Tus derechos de datos</h3><p>En muchos países puedes pedir a qué datos tuyos accede una entidad y reclamar si una decisión automática te perjudica. Consulta la ley de protección de datos de tu país.</p></article>
+<article class="card k3 rv"><h3>Qué ayuda a la sociedad</h3><p>Auditorías independientes, transparencia sobre errores, periodismo de datos y organizaciones de derechos digitales han frenado varios de estos sistemas.</p></article>
+</div>
+</section>
+</main>
+<footer>Contenido educativo con fines informativos. Los casos están resumidos y simplificados; contrasta con fuentes originales.</footer>
+
+<script>
+const V=['inicio','ejemplos','gemelo','como','simulador','defensas'];
+const nav=document.getElementById('nav');
+function route(){
+  let h=location.hash.slice(1); if(!V.includes(h)) h='inicio';
+  V.forEach(v=>{const el=document.getElementById('v-'+v);el.hidden=v!==h;el.classList.remove('show')});
+  const cur=document.getElementById('v-'+h);
+  cur.querySelectorAll('.rv').forEach((e,i)=>e.style.setProperty('--i',i));
+  void cur.offsetWidth;cur.classList.add('show');
+  nav.querySelectorAll('a').forEach(a=>a.getAttribute('href')==='#'+h?a.setAttribute('aria-current','page'):a.removeAttribute('aria-current'));
+  window.scrollTo(0,0);
+}
+addEventListener('hashchange',route);
+
+/* Tema */
+const root=document.documentElement;let colors={};
+function readColors(){const s=getComputedStyle(root);colors={c:s.getPropertyValue('--c').trim(),a:s.getPropertyValue('--a').trim(),m:s.getPropertyValue('--m').trim(),dot:s.getPropertyValue('--dot').trim(),t:s.getPropertyValue('--text').trim()}}
+document.getElementById('theme').onclick=()=>{
+  const dark=root.dataset.theme?root.dataset.theme==='dark':matchMedia('(prefers-color-scheme:dark)').matches;
+  root.dataset.theme=dark?'light':'dark';readColors();
+};
+matchMedia('(prefers-color-scheme:dark)').addEventListener('change',()=>setTimeout(readColors,50));
+
+/* Casos */
+const EX=[
+['EE. UU.','Policía predictiva','Programas como PredPol y las “listas de calor” de Chicago intentaron anticipar dónde o quién cometería delitos.','Se alimentaban de denuncias pasadas, que reflejan dónde ya había más policía, no dónde había más delito. <strong>Varias ciudades los abandonaron</strong>, entre ellas Los Ángeles, que dejó PredPol en 2020.'],
+['EE. UU.','Puntaje para jueces (COMPAS)','Un software que estima si un acusado volverá a delinquir y que se usó para apoyar decisiones judiciales.','En 2016, un análisis de ProPublica halló que acusados negros que luego no reincidieron eran clasificados como “alto riesgo” más seguido que acusados blancos. <strong>La empresa discutió el método</strong>; el debate sobre qué es “justo” sigue abierto.'],
+['Países Bajos','Subsidios para familias','Un sistema de detección de fraude marcó a miles de familias que recibían ayudas por cuidado infantil.','Familias con doble nacionalidad quedaron bajo más sospecha y muchas debieron devolver dinero que no debían. <strong>El escándalo derribó al gobierno en 2021.</strong> Antes, un tribunal había frenado otro sistema de cruce de datos (SyRI).'],
+['Australia','Robodebt','Un programa automático cruzaba datos de impuestos y beneficios sociales para reclamar supuestas deudas.','Promediaba ingresos de forma errónea y llegó a cientos de miles de personas. <strong>Fue declarado ilegal</strong>, hubo un acuerdo millonario de devolución y una comisión investigadora en 2023.'],
+['China','“Crédito social”','Se imagina como un puntaje único que vigila a todos.','La realidad es más fragmentada: hay listas negras, registros judiciales y sistemas locales o de empresas. <strong>Aun así tiene efectos reales</strong>, como restringir la compra de ciertos pasajes a quienes figuran como morosos judiciales.'],
+['Varios países','Reconocimiento facial','Cámaras que comparan caras en la calle con listas de personas buscadas.','Estudios independientes encontraron más errores en mujeres y en personas de piel oscura. <strong>Un error puede significar una detención injusta.</strong> Algunas ciudades y países lo limitaron o lo pausaron.']
+];
+const exs=document.getElementById('exs');
+EX.forEach((e,i)=>{
+  const b=document.createElement('button');b.className='ex card rv k'+(i%3+1);b.setAttribute('aria-expanded','false');
+  b.innerHTML='<span class="plus">+</span><span class="tag">'+e[0]+'</span><h3>'+e[1]+'</h3><p>'+e[2]+'</p><div class="more"><p>'+e[3]+'</p></div>';
+  b.onclick=()=>b.setAttribute('aria-expanded',b.getAttribute('aria-expanded')==='false');
+  exs.appendChild(b);
+});
+
+/* Simulador */
+const S0=.6;let s=S0,mes=0;
+const $=id=>document.getElementById(id);
+function pct(x){return Math.round(x*100)}
+function paint(p){
+  $('bRec').style.width=pct(s)+'%';$('bPat').style.width=pct(p)+'%';
+  $('rec').textContent='Norte '+pct(s)+' % · Sur '+(100-pct(s))+' %';
+  $('pat').textContent='Norte '+pct(p)+' % · Sur '+(100-pct(p))+' %';
+  $('mes').textContent=mes;
+}
+function next(){
+  const k=+$('k').value,a=Math.pow(s,k),b=Math.pow(1-s,k),p=a/(a+b);
+  mes++;s=p;paint(p);
+  const m=$('msg');
+  if(k===1) m.textContent='Con foco parejo, el sistema reparte las patrullas igual que los datos viejos. El desequilibrio inicial no se corrige: queda congelado, aunque la realidad sea 50 y 50.';
+  else if(pct(s)>=95) m.textContent='Casi toda la vigilancia está en el Norte. Los registros “prueban” que el Norte es peligroso, cuando el Sur simplemente dejó de ser mirado.';
+  else m.textContent='Más patrullas en el Norte encuentran más casos allí. Esos casos nuevos se suman a los datos y la próxima predicción es todavía más sesgada.';
+}
+$('step').onclick=next;
+$('reset').onclick=()=>{s=S0;mes=0;paint(S0);$('msg').textContent='Reiniciado. Cambia el foco y vuelve a probar.'};
+paint(S0);$('pat').textContent='—';
+
+/* Lista de preguntas */
+const Q=['¿Se dijo públicamente que se usa este sistema y quién lo decidió?','¿Se sabe con qué datos se entrenó y de dónde salieron?','¿Puedo saber mi puntaje o por qué me marcaron?','¿Puedo apelar ante una persona real, no solo ante una máquina?','¿Se midió si se equivoca más con ciertos grupos o barrios?','¿Hay una auditoría independiente de sus resultados?','¿Está claro cuánto tiempo guardan mis datos y quién los ve?'];
+const chk=$('chk');
+Q.forEach(q=>{
+  const b=document.createElement('button');b.setAttribute('aria-pressed','false');
+  b.innerHTML='<span class="box">✓</span><span>'+q+'</span>';
+  b.onclick=()=>{b.setAttribute('aria-pressed',b.getAttribute('aria-pressed')==='false');upd()};
+  chk.appendChild(b);
+});
+function upd(){
+  const n=chk.querySelectorAll('[aria-pressed="true"]').length;
+  $('mt').style.width=(n/Q.length*100)+'%';
+  $('mtxt').textContent=n+' de '+Q.length+' respondidas. '+(n<=2?'Con tan pocas respuestas, hay motivos serios para desconfiar.':n<6?'Hay avances, pero faltan garantías importantes.':'Es un sistema con buenas garantías de transparencia.');
+}
+
+/* Gemelo digital: dos usos */
+const TW={a:[['Datos que usa','Grupos de personas (por barrio, edad o programa), sin nombres.'],['Pregunta que responde','“Si cambiamos este programa, ¿qué pasa con la escuela y el trabajo en cada zona?”'],['Quién decide','Personas con nombre y cargo leen los resultados y se hacen responsables.'],['Riesgo principal','Un modelo con datos pobres puede equivocar una política, pero no señala a nadie en particular.']],b:[['Datos que usa','Información individual cruzada con nombre y DNI: trámites, ingresos, escuela, salud, domicilio.'],['Pregunta que responde','“¿Quién va a abandonar, incumplir o necesitar vigilancia?”'],['Quién decide','El puntaje tiende a decidir solo: quién recibe ayuda y quién es revisado.'],['Riesgo principal','Etiquetas que se pegan a una persona y se repiten, como en el simulador del círculo vicioso.']]};
+function twin(m){
+  const t=$('twin');t.classList.remove('flip');t.classList.toggle('b',m==='b');
+  t.innerHTML=TW[m].map((r,i)=>'<div style="--j:'+i+'"><b>'+r[0]+'</b><span>'+r[1]+'</span></div>').join('');
+  void t.offsetWidth;t.classList.add('flip');
+  $('ma').setAttribute('aria-pressed',m==='a');$('mb').setAttribute('aria-pressed',m==='b');
+}
+$('ma').onclick=()=>twin('a');$('mb').onclick=()=>twin('b');twin('a');
+
+/* Hero: puntos con puntaje */
+const cv=$('cv'),ctx=cv.getContext('2d');let W,H,mx=-999,my=-999;
+const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+function size(){const d=Math.min(devicePixelRatio||1,2);W=cv.clientWidth;H=cv.clientHeight;cv.width=W*d;cv.height=H*d;ctx.setTransform(d,0,0,d,0,0)}
+const sc=(i,j)=>Math.floor(Math.abs((Math.sin(i*12.9898+j*78.233)*43758.5453)%1)*100);
+function frame(t){
+  if(cv.offsetParent===null){requestAnimationFrame(frame);return}
+  ctx.clearRect(0,0,W,H);
+  const g=26,sx=reduce?W*.62:((t/14)%(W+260))-130;let tip=null;
+  for(let i=0,x=g/2;x<W;i++,x+=g)for(let j=0,y=g/2;y<H;j++,y+=g){
+    const d=sx-x,v=sc(i,j),near=Math.hypot(x-mx,y-my)<46;
+    let r=2.2,col=colors.dot;
+    if(d>0){col=v<45?colors.c:v<75?colors.a:colors.m;r=3.4+(d<90?(1-d/90)*3:0)}
+    if(near&&d>0){r+=3;tip=[x,y,v]}
+    ctx.fillStyle=col;ctx.beginPath();ctx.arc(x,y,r,0,6.283);ctx.fill();
+  }
+  const gr=ctx.createLinearGradient(sx-60,0,sx,0);gr.addColorStop(0,'transparent');gr.addColorStop(1,colors.c);
+  ctx.fillStyle=gr;ctx.fillRect(sx-60,0,60,H);
+  if(tip){const txt='Riesgo estimado: '+tip[2]+' %';ctx.font='600 13px system-ui,sans-serif';const w=ctx.measureText(txt).width+20,tx=Math.min(tip[0]+12,W-w-6),ty=Math.max(tip[1]-34,6);
+    ctx.fillStyle='rgba(15,10,45,.92)';ctx.beginPath();ctx.roundRect(tx,ty,w,26,13);ctx.fill();ctx.fillStyle='#fff';ctx.fillText(txt,tx+10,ty+17)}
+  if(!reduce)requestAnimationFrame(frame);
+}
+cv.parentElement.addEventListener('pointermove',e=>{const r=cv.getBoundingClientRect();mx=e.clientX-r.left;my=e.clientY-r.top;if(reduce)frame(0)});
+cv.parentElement.addEventListener('pointerleave',()=>{mx=my=-999;if(reduce)frame(0)});
+addEventListener('resize',()=>{size();if(reduce)frame(0)});
+readColors();size();route();requestAnimationFrame(frame);
+</script>
+</body>
+</html>
