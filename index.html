@@ -1,519 +1,509 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Repositorio de aplicaciones de Rómulo Fioravante: accesos personales, laborales y del hogar en un solo lugar.">
-<meta name="theme-color" content="#f2f4f8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
 <title>Rómulo Fioravante App</title>
+<meta name="description" content="Repositorio de aplicaciones de Rómulo Fioravante: accesos personales, laborales y del hogar en un solo lugar.">
+<meta name="theme-color" content="#d5e7f8">
+<script>
+  /* Franjas: amanecer 5-7, mañana 7-12, tarde 12-18, atardecer 18-20, noche 20-5.
+     Para probar una hora: ?hora=19:30 */
+  function rfSky() {
+    var p = (new URLSearchParams(location.search).get('hora') || '').match(/^(\d{1,2}):(\d{2})$/);
+    var d = new Date(), x = p ? +p[1] + p[2] / 60 : d.getHours() + d.getMinutes() / 60;
+    var s = x >= 5 && x < 7 ? 'amanecer' : x >= 7 && x < 12 ? 'manana' : x >= 12 && x < 18 ? 'tarde' : x >= 18 && x < 20 ? 'atardecer' : 'noche';
+    var r = document.documentElement;
+    if (r.getAttribute('data-sky') === s) return;
+    r.setAttribute('data-sky', s);
+    var m = document.querySelector('meta[name="theme-color"]');
+    if (m) m.setAttribute('content', { amanecer: '#fbdcc0', manana: '#d5e7f8', tarde: '#f6d9e4', atardecer: '#fbdcc0', noche: '#b4c4ea' }[s]);
+  }
+  rfSky();
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Instrument+Sans:wght@400..700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<script>
-  /* Tema aplicado antes de pintar para evitar el destello */
-  (function(){
-    var t;
-    try { t = localStorage.getItem('rf-theme'); } catch(e) {}
-    if (t !== 'dark' && t !== 'light') {
-      t = (window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
-    }
-    document.documentElement.setAttribute('data-theme', t);
-  })();
-</script>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,500;1,700&display=swap" rel="stylesheet">
 <style>
-  :root{
-    color-scheme:light;
-    --bg:#f2f4f8;
-    --surface:#ffffff;
-    --surface-2:#f5f7fb;
-    --line:#e0e5ee;
-    --line-strong:#ccd4e1;
-    --ink:#0c1424;
-    --ink-2:#47536b;
-    --ink-3:#76829a;
-    --focus:#2f5bd8;
-    --mark-bg:#1e3a8a;
-    --tile-mix:11%;
-    --lift:0%;
-    --shadow-pop:0 40px 80px -28px rgba(12,20,36,.38);
-    --display:'Bricolage Grotesque','Instrument Sans',system-ui,sans-serif;
-    --body:'Instrument Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
-    --gutter:clamp(16px,4vw,32px);
+  @property --sky-1 { syntax: '<color>'; inherits: true; initial-value: #e6f1fc; }
+  @property --sky-2 { syntax: '<color>'; inherits: true; initial-value: #d5e7f8; }
+  @property --sky-3 { syntax: '<color>'; inherits: true; initial-value: #c6dcf3; }
+  @property --glow { syntax: '<color>'; inherits: true; initial-value: #f5faff; }
+  @property --muted { syntax: '<color>'; inherits: true; initial-value: #46607f; }
+  :root {
+    --sky-1: #e6f1fc;
+    --sky-2: #d5e7f8;
+    --sky-3: #c6dcf3;
+    --glow: #f5faff;
+    --ink: #0c2a60;
+    --muted: #46607f;
+    --pill: rgba(255, 255, 255, 0.55);
+    --pill-line: rgba(12, 42, 96, 0.14);
+    color-scheme: light;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
   }
-  :root[data-theme="dark"]{
-    color-scheme:dark;
-    --bg:#080c17;
-    --surface:#10172a;
-    --surface-2:#161f37;
-    --line:#212b45;
-    --line-strong:#2f3d5f;
-    --ink:#eaf0fb;
-    --ink-2:#a2b0cc;
-    --ink-3:#7585a6;
-    --focus:#7f9bff;
-    --mark-bg:#3558d6;
-    --tile-mix:24%;
-    --lift:50%;
-    --shadow-pop:0 40px 80px -24px rgba(0,0,0,.7);
-  }
-
-  *{margin:0;padding:0;box-sizing:border-box;}
-  [hidden]{display:none!important;}
-  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
-  body{
-    font-family:var(--body);
-    font-size:16px;
-    line-height:1.5;
-    color:var(--ink);
-    background:var(--bg);
-    min-height:100vh;
-    min-height:100dvh;
-    -webkit-font-smoothing:antialiased;
-  }
-  body.locked{overflow:hidden;}
-  button,input{font:inherit;color:inherit;}
-  button{cursor:pointer;}
-  a{color:inherit;}
-  :focus-visible{outline:2px solid var(--focus);outline-offset:2px;}
-
-  .wrap{max-width:1120px;margin:0 auto;padding-inline:var(--gutter);}
-
-  /* Cada elemento que lleva el color de un módulo declara --accent en línea */
-  .tinted{
-    --accent-fg:color-mix(in srgb, white var(--lift), var(--accent));
-    --tile:color-mix(in srgb, var(--accent) var(--tile-mix), var(--surface));
+  *, *::before, *::after { box-sizing: inherit; -webkit-tap-highlight-color: transparent; }
+  html { height: 100%; scroll-padding-top: env(safe-area-inset-top, 0px); }
+  body {
+    margin: 0;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(18px, 4vh, 36px);
+    padding: 24px 20px;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    color: var(--ink);
+    background:
+      radial-gradient(60% 48% at 50% 44%, var(--glow) 0%, rgba(245, 250, 255, 0) 72%),
+      radial-gradient(45% 40% at 100% 100%, var(--sky-3) 0%, rgba(198, 220, 243, 0) 70%),
+      linear-gradient(160deg, var(--sky-1) 0%, var(--sky-2) 58%, var(--sky-3) 100%);
+    background-color: var(--sky-2);
+    overflow-x: hidden;
   }
 
-  .skip{
-    position:absolute;left:12px;top:-64px;z-index:100;
-    background:var(--ink);color:var(--bg);
-    padding:10px 14px;border-radius:10px;
-    font-weight:600;text-decoration:none;
-    transition:top .15s ease;
-  }
-  .skip:focus{top:12px;}
+  main { width: min(34vw, 170px, calc(24vh * 2.03)); }
+  /* Estado final: firma + nombre quedan chicos, estilo logo */
+  body.docked main { width: min(26vw, 104px); }
 
-  /* Barra superior */
-  .topbar{
-    position:sticky;top:0;z-index:20;
-    background:color-mix(in srgb, var(--bg) 84%, transparent);
-    -webkit-backdrop-filter:saturate(1.4) blur(14px);
-    backdrop-filter:saturate(1.4) blur(14px);
+  svg#canvas {
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+    /* Realce mínimo: la firma parece grabada en el propio fondo */
+    filter: drop-shadow(0 1px 0 rgba(255, 255, 255, 0.9)) drop-shadow(0 2px 3px rgba(12, 42, 96, 0.12));
   }
-  .topbar-in{
-    display:flex;align-items:center;justify-content:space-between;
-    gap:16px;height:68px;
-  }
-  .brand{display:flex;align-items:center;gap:12px;min-width:0;}
-  .mark{
-    width:40px;height:40px;flex-shrink:0;
-    display:grid;place-items:center;
-    border-radius:12px;
-    background:var(--mark-bg);color:#fff;
-    font-family:var(--display);font-weight:800;font-size:.95rem;
-  }
-  .brand-text{min-width:0;}
-  .brand-name{
-    font-family:var(--display);font-weight:700;font-size:1.02rem;line-height:1.2;
-    white-space:nowrap;
-  }
-  .brand-name span{color:var(--ink-3);font-weight:500;margin-left:6px;}
-  .brand-sub{
-    font-size:.8rem;color:var(--ink-2);line-height:1.3;
-    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-  }
-  .icon-btn{
-    width:40px;height:40px;flex-shrink:0;
-    display:grid;place-items:center;
-    border-radius:12px;
-    border:1px solid var(--line);
-    background:var(--surface);
-    color:var(--ink-2);
-    transition:color .15s ease, border-color .15s ease;
-  }
-  .icon-btn:hover{color:var(--ink);border-color:var(--line-strong);}
+  #sig { transition: opacity 0.5s ease; }
 
-  /* Portada */
-  .hero{padding-top:clamp(32px,6vw,64px);}
-  .hero-date{
-    font-size:.9rem;color:var(--ink-3);
-    font-variant-numeric:tabular-nums;
-    margin-bottom:10px;
+  .ink {
+    fill: none;
+    stroke: var(--ink);
+    stroke-width: 3.4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 1 1;
+    stroke-dashoffset: 1;
+    opacity: 0;
+    transition: stroke-width 1.1s cubic-bezier(0.65, 0, 0.35, 1);
   }
-  .hero h1{
-    font-family:var(--display);font-weight:700;
-    font-size:clamp(2.1rem,5.4vw,3.6rem);
-    line-height:1.04;letter-spacing:-.025em;
-    font-optical-sizing:auto;
+  /* Al achicarse, el trazo se engrosa en unidades SVG para conservar el mismo grosor visual */
+  body.docked .ink { stroke-width: 5.6; }
+  #name path { transition: stroke-width 1.1s cubic-bezier(0.65, 0, 0.35, 1); }
+  body.docked #name path { stroke-width: 1.8; }
+  #dot {
+    fill: var(--ink);
+    transform-box: fill-box;
+    transform-origin: center;
+    transform: scale(0);
+    transition: transform 0.35s cubic-bezier(0.25, 1.7, 0.45, 1);
   }
-  .hero-sub{margin-top:12px;color:var(--ink-2);max-width:48ch;}
+  #nib { opacity: 0; transition: opacity 0.25s ease; }
+  #nib .halo { fill: var(--ink); opacity: 0.12; }
+  #nib .tip { fill: var(--ink); }
 
-  .search{position:relative;margin-top:26px;max-width:640px;}
-  .search input{
-    width:100%;height:58px;
-    padding:0 96px 0 52px;
-    border-radius:18px;
-    border:1px solid var(--line-strong);
-    background:var(--surface);
-    font-size:1.02rem;
-    outline:none;
-    -webkit-appearance:none;appearance:none;
-    transition:border-color .15s ease, box-shadow .15s ease;
+  .caption {
+    margin: 0;
+    text-align: center;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-weight: 700;
+    font-size: clamp(16px, 2.4vw, 20px);
+    line-height: 1.35;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+    max-width: min(92vw, 560px);
+    text-wrap: balance;
+    transition: opacity 0.5s ease;
   }
-  .search input::placeholder{color:var(--ink-3);}
-  .search input::-webkit-search-cancel-button{display:none;}
-  .search input:focus{
-    border-color:var(--focus);
-    box-shadow:0 0 0 4px color-mix(in srgb, var(--focus) 22%, transparent);
-  }
-  .search .ico{
-    position:absolute;left:20px;top:50%;transform:translateY(-50%);
-    color:var(--ink-3);pointer-events:none;
-  }
-  .search kbd{
-    position:absolute;right:16px;top:50%;transform:translateY(-50%);
-    min-width:26px;height:26px;padding:0 8px;
-    display:grid;place-items:center;
-    font:600 .78rem var(--body);
-    color:var(--ink-3);
-    border:1px solid var(--line-strong);border-radius:8px;
-    background:var(--surface-2);
-    pointer-events:none;
-  }
-  .search.has-value kbd{display:none;}
-  .search .clear{
-    position:absolute;right:10px;top:50%;transform:translateY(-50%);
-    width:38px;height:38px;border:0;border-radius:11px;
-    background:transparent;color:var(--ink-3);
-  }
-  .search .clear:hover{background:var(--surface-2);color:var(--ink);}
-  @media (hover:none){.search kbd{display:none;}}
+  .caption .ch { opacity: 0; transition: opacity 0.16s ease; }
+  .caption .ch.on { opacity: 1; }
+  .caption.instant, .caption.instant .ch { transition: none; }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
-  /* Secciones */
-  main{padding-bottom:8px;}
-  .section{margin-top:clamp(28px,4.5vw,44px);}
-  .section-head{
-    display:flex;align-items:baseline;justify-content:space-between;
-    gap:12px;margin-bottom:14px;
-  }
-  .section-head h2{
-    font-family:var(--display);font-weight:700;
-    font-size:1.2rem;letter-spacing:-.01em;
-  }
-  .section-head p{font-size:.84rem;color:var(--ink-3);}
-  .link-btn{
-    background:none;border:0;padding:2px 0;
-    font-size:.84rem;color:var(--ink-3);
-    text-decoration:underline;text-underline-offset:3px;
-  }
-  .link-btn:hover{color:var(--ink);}
+  /* En pantallas chicas el trazo se engrosa un poco para que se mantenga visible */
+  @media (max-width: 480px) { .ink { stroke-width: 4.4; } body.docked .ink { stroke-width: 5.6; } }
 
-  /* Recientes */
-  .chips{display:flex;flex-wrap:wrap;gap:8px;}
-  .chip{
-    display:inline-flex;align-items:center;gap:9px;
-    max-width:100%;
-    padding:6px 15px 6px 6px;
-    border-radius:999px;
-    background:var(--surface);
-    border:1px solid var(--line);
-    text-decoration:none;font-size:.88rem;font-weight:500;
-    transition:border-color .15s ease;
-  }
-  .chip:hover{border-color:color-mix(in srgb, var(--accent) 50%, var(--line));}
-  .chip-ico{
-    width:28px;height:28px;flex-shrink:0;
-    display:grid;place-items:center;
-    border-radius:50%;
-    background:var(--tile);color:var(--accent-fg);
-    font-size:.72rem;
-  }
-  .chip-name{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .hero { display: flex; flex-direction: column; align-items: center; gap: clamp(16px, 3.4vh, 30px); }
+  .brand { display: flex; flex-direction: column; align-items: center; gap: clamp(8px, 1.6vh, 14px); }
 
-  /* Módulos */
-  .grid{
-    display:grid;
-    grid-template-columns:repeat(3,minmax(0,1fr));
-    gap:16px;
-  }
-  .card{
-    display:flex;flex-direction:column;
-    min-height:184px;
-    padding:20px;
-    text-align:left;
-    background:var(--surface);
-    border:1px solid var(--line);
-    border-radius:20px;
-    animation:enter .5s ease both;
-    animation-delay:calc(var(--i) * 40ms);
-    transition:transform .2s ease, border-color .2s ease, box-shadow .2s ease;
-  }
-  .card:hover{
-    transform:translateY(-2px);
-    border-color:color-mix(in srgb, var(--accent) 50%, var(--line));
-    box-shadow:0 22px 34px -26px color-mix(in srgb, var(--accent) 85%, transparent);
-  }
-  .card:focus-visible{outline:2px solid var(--accent-fg);outline-offset:3px;}
-  .card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;}
-  .tile{
-    width:46px;height:46px;flex-shrink:0;
-    display:grid;place-items:center;
-    border-radius:14px;
-    background:var(--tile);color:var(--accent-fg);
-    font-size:1.05rem;
-    transition:background .2s ease, color .2s ease;
-  }
-  .card:hover .tile{background:var(--accent);color:#fff;}
-  .count{
-    padding:3px 10px;
-    font-size:.78rem;font-weight:500;color:var(--ink-2);
-    background:var(--surface-2);
-    border:1px solid var(--line);
-    border-radius:999px;
-    font-variant-numeric:tabular-nums;
-    white-space:nowrap;
-  }
-  .card-title{
-    display:block;margin-top:18px;
-    font-family:var(--display);font-weight:700;
-    font-size:1.14rem;line-height:1.25;letter-spacing:-.01em;
-  }
-  .desc{
-    display:block;margin-top:5px;flex:1;
-    font-size:.88rem;line-height:1.45;color:var(--ink-2);
-  }
-  @keyframes enter{
-    from{opacity:0;transform:translateY(8px);}
-    to{opacity:1;transform:none;}
+  /* Estado final: el bloque sube al borde superior y debajo aparece el sistema */
+  .reveal { display: none; flex: 1; width: 100%; flex-direction: column; align-items: center; gap: clamp(16px, 3vh, 28px); }
+  body.docked { justify-content: flex-start; padding-top: clamp(14px, 3vh, 28px); }
+  body.docked .reveal { display: flex; }
+  body.docked #caption { display: none; }
+
+  .sys {
+    margin: 0;
+    text-align: center;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-weight: 700;
+    font-size: clamp(21px, 3.2vw, 28px);
+    line-height: 1.2;
+    color: var(--ink);
+    text-wrap: balance;
   }
 
-  /* Listas agrupadas (ventana de módulo y resultados) */
-  .group + .group{margin-top:18px;}
-  .group-title{
-    display:flex;align-items:center;gap:8px;
-    margin:0 4px 8px;
-    font-family:var(--display);font-weight:700;font-size:.92rem;
-    color:var(--accent-fg, var(--ink));
+  [hidden] { display: none !important; }
+  .home { flex: 1; width: 100%; max-width: 920px; display: flex; flex-direction: column; align-items: center; gap: clamp(16px, 3vh, 26px); }
+  .areas { list-style: none; margin: 0; padding: 0; width: 100%; flex: 1; display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: minmax(92px, 1fr); }
+  .areas li {
+    display: flex; align-items: center; justify-content: center; text-align: center; padding: 0;
+    font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; font-weight: 500;
+    font-size: clamp(22px, 3.4vw, 34px); line-height: 1.15; color: var(--ink); text-wrap: balance;
+    border-bottom: 1px solid var(--pill-line);
   }
-  .group-title i{font-size:.8rem;}
-  .list{
-    display:flex;flex-direction:column;gap:1px;
-    background:var(--line);
-    border:1px solid var(--line);
-    border-radius:14px;
-    overflow:hidden;
+  .areas li.b { font-weight: 700; }
+  .areas button {
+    appearance: none; width: 100%; height: 100%; padding: 20px 14px; border: 0; background: transparent;
+    font: inherit; color: inherit; text-align: center; text-wrap: balance; cursor: pointer; transition: background-color 0.25s ease;
   }
-  .row{
-    display:flex;align-items:center;justify-content:space-between;gap:14px;
-    padding:13px 16px;
-    background:var(--surface);
-    text-decoration:none;font-weight:500;font-size:.94rem;
-    transition:background .12s ease;
+  .areas button:hover { background: rgba(255, 255, 255, 0.4); }
+  .areas button:focus-visible { outline: 2px solid var(--ink); outline-offset: -6px; }
+  @media (min-width: 721px) {
+    .areas li:not(:nth-child(3n)) { border-right: 1px solid var(--pill-line); }
+    .areas li:nth-last-child(-n+3) { border-bottom: 0; }
   }
-  .row:hover{background:var(--surface-2);}
-  .row:focus-visible{outline-offset:-2px;background:var(--surface-2);}
-  .row i{
-    flex-shrink:0;font-size:.76rem;color:var(--ink-3);
-    transition:color .15s ease, transform .15s ease;
-  }
-  .row:hover i{color:var(--accent-fg, var(--ink));transform:translate(1px,-1px);}
-  .row-main{display:flex;flex-direction:column;min-width:0;}
-  .row-sub{font-size:.78rem;font-weight:400;color:var(--ink-3);}
-  mark{
-    background:color-mix(in srgb, var(--accent, var(--focus)) 28%, transparent);
-    color:inherit;border-radius:3px;padding:0 1px;
+  @media (max-width: 720px) {
+    .areas { grid-template-columns: 1fr 1fr; }
+    .areas li:nth-child(odd) { border-right: 1px solid var(--pill-line); }
+    .areas li:last-child { border-bottom: 0; grid-column: 1 / -1; border-right: 0; }
   }
 
-  .results{max-width:760px;}
-  .empty{
-    padding:36px 20px;text-align:center;color:var(--ink-2);
-    background:var(--surface);
-    border:1px dashed var(--line-strong);
-    border-radius:18px;
-  }
-  .empty i{font-size:1.4rem;color:var(--ink-3);margin-bottom:10px;}
-  .empty strong{display:block;color:var(--ink);font-weight:600;margin-bottom:2px;}
-  .empty-note{padding:22px 8px;text-align:center;color:var(--ink-3);font-size:.9rem;}
+  /* Aparición suave: de borroso a nítido, uno tras otro */
+  .fade { opacity: 0; filter: blur(6px); transition: opacity 1s ease, filter 1s ease; transition-delay: calc(var(--i, 0) * 180ms); }
+  .reveal.show .fade { opacity: 1; filter: none; }
+  .reveal:not(.show) { pointer-events: none; }
+  @media (prefers-reduced-motion: reduce) { .fade { transition: none; } }
 
-  footer{
-    padding:40px 0 48px;
-    text-align:center;font-size:.82rem;color:var(--ink-3);
-  }
+  /* Sección abierta: el título elegido queda bajo el sistema, con Volver en la misma línea */
+  .reveal.show .home.leaving .fade:not(.picked) { opacity: 0; filter: blur(4px); transition-duration: 0.3s; transition-delay: 0s; }
+  .areas button span { display: inline-block; }
+  .reveal.open .home { display: none; }
+  .reveal.open .detail { display: flex; }
+  .reveal.open .bar { display: grid; }
 
-  /* Ventana de módulo */
-  .overlay{
-    position:fixed;inset:0;z-index:50;
-    display:flex;align-items:center;justify-content:center;
-    padding:20px;
-    background:rgba(6,10,20,.52);
-    -webkit-backdrop-filter:blur(6px);
-    backdrop-filter:blur(6px);
-    opacity:0;visibility:hidden;
-    transition:opacity .22s ease, visibility 0s linear .22s;
+  .bar { display: none; width: 100%; grid-template-columns: 1fr auto 1fr; align-items: center; }
+  .sel {
+    grid-column: 2;
+    justify-self: center;
+    margin: 0;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: clamp(21px, 3.4vw, 30px);
+    line-height: 1.15;
+    text-align: center;
+    color: var(--ink);
   }
-  .overlay.open{opacity:1;visibility:visible;transition:opacity .22s ease;}
-  .sheet{
-    width:100%;max-width:520px;
-    max-height:min(84vh,760px);
-    max-height:min(84dvh,760px);
-    display:flex;flex-direction:column;
-    background:var(--surface);
-    border:1px solid var(--line);
-    border-radius:24px;
-    box-shadow:var(--shadow-pop);
-    overflow:hidden;
-    transform:translateY(14px) scale(.98);
-    transition:transform .26s cubic-bezier(.2,.8,.2,1);
+  .sel.b { font-weight: 700; }
+  .back {
+    grid-column: 3;
+    justify-self: end;
+    appearance: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1;
+    color: var(--ink);
+    background: rgba(255, 255, 255, 0.55);
+    border: 1px solid var(--pill-line);
+    border-radius: 999px;
+    padding: 10px 18px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease, background-color 0.2s ease;
   }
-  .overlay.open .sheet{transform:none;}
-  .sheet-head{display:flex;align-items:flex-start;gap:14px;padding:20px 20px 18px;}
-  .sheet-head .tile{width:48px;height:48px;background:var(--accent);color:#fff;}
-  .sheet-titles{flex:1;min-width:0;}
-  .sheet-titles h2{
-    font-family:var(--display);font-weight:700;
-    font-size:1.3rem;line-height:1.2;letter-spacing:-.015em;
-  }
-  .sheet-titles p{margin-top:3px;font-size:.86rem;color:var(--ink-2);}
-  .sheet-titles .sheet-count{margin-top:6px;font-size:.8rem;color:var(--ink-3);}
-  .sheet-filter{position:relative;padding:0 16px 14px;}
-  .sheet-filter input{
-    width:100%;height:42px;
-    padding:0 14px 0 38px;
-    border-radius:12px;
-    border:1px solid var(--line-strong);
-    background:var(--surface-2);
-    font-size:.92rem;outline:none;
-    -webkit-appearance:none;appearance:none;
-  }
-  .sheet-filter input::-webkit-search-cancel-button{display:none;}
-  .sheet-filter input:focus{border-color:var(--focus);}
-  .sheet-filter i{
-    position:absolute;left:30px;top:21px;transform:translateY(-50%);
-    font-size:.82rem;color:var(--ink-3);pointer-events:none;
-  }
-  .sheet-body{
-    flex:1;overflow-y:auto;
-    padding:16px 16px 22px;
-    border-top:1px solid var(--line);
-    overscroll-behavior:contain;
-    scrollbar-width:thin;scrollbar-color:var(--line-strong) transparent;
-  }
+  .bar.ready .back { opacity: 1; pointer-events: auto; }
+  .back:hover { background: rgba(255, 255, 255, 0.85); }
+  .back:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
 
-  @media (max-width:640px){
-    .topbar-in{height:60px;}
-    .brand-sub{display:none;}
-    .search input{height:54px;}
-    .grid{gap:8px;}
-    .card{min-height:0;padding:12px;border-radius:16px;}
-    .tile{width:36px;height:36px;border-radius:11px;font-size:.9rem;}
-    .count{padding:2px 8px;font-size:.72rem;}
-    .count-label{display:none;}
-    .card-title{margin-top:12px;font-size:.88rem;}
-    .desc{display:none;}
-    .chips{
-      flex-wrap:nowrap;overflow-x:auto;
-      margin-inline:calc(var(--gutter) * -1);
-      padding-inline:var(--gutter);
-      scrollbar-width:none;
-    }
-    .chips::-webkit-scrollbar{display:none;}
-    .chip{flex-shrink:0;}
-    .overlay{align-items:flex-end;padding:0;}
-    .sheet{
-      max-width:none;max-height:88vh;max-height:88dvh;
-      border-radius:24px 24px 0 0;
-      border-bottom:0;
-      transform:translateY(100%);
-    }
-  }
 
-  @media (prefers-reduced-motion:reduce){
-    html{scroll-behavior:auto;}
-    *{transition-duration:.01ms!important;animation:none!important;}
+  /* Contenido de index: buscador, recientes, accesos */
+  .sub, .dd, .rl { margin: 0; text-align: center; font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; font-weight: 500; color: var(--muted); }
+  .sub { font-size: clamp(16px, 2.4vw, 19px); }
+  .dd { font-size: clamp(16px, 2.4vw, 19px); }
+  .rl { font-size: 17px; margin-right: 4px; }
+  .search { position: relative; width: 100%; max-width: 560px; align-self: center; }
+  .search input {
+    width: 100%; height: 52px; padding: 0 48px 0 24px; border: 1px solid var(--pill-line); border-radius: 999px;
+    background: var(--pill); color: var(--ink); outline: none; -webkit-appearance: none; appearance: none;
+    font: italic 500 clamp(18px, 2.6vw, 21px) 'Cormorant Garamond', Georgia, serif;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
   }
+  .search input::placeholder { color: var(--muted); opacity: 0.85; }
+  .search input::-webkit-search-cancel-button { display: none; }
+  .search input:focus { background: rgba(255, 255, 255, 0.85); border-color: var(--ink); }
+  .clear { position: absolute; right: 8px; top: 50%; transform: translateY(-50%); width: 36px; height: 36px; border: 0; border-radius: 50%; background: transparent; color: var(--muted); font-size: 22px; line-height: 1; cursor: pointer; }
+  .clear:hover { background: rgba(255, 255, 255, 0.7); color: var(--ink); }
+  .recents { width: 100%; max-width: 680px; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 8px; }
+  .chip { display: inline-block; max-width: 100%; padding: 9px 16px; border: 1px solid var(--pill-line); border-radius: 999px; background: var(--pill); color: var(--ink); font-size: 14px; font-weight: 500; line-height: 1; text-decoration: none; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; transition: background-color 0.2s ease; }
+  .chip:hover { background: rgba(255, 255, 255, 0.85); }
+  .link { appearance: none; border: 0; background: none; padding: 6px; font: inherit; font-size: 13px; color: var(--muted); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+  .link:hover { color: var(--ink); }
+  .results, .detail { width: 100%; max-width: 680px; }
+  .detail { display: none; flex-direction: column; gap: 14px; opacity: 0; filter: blur(6px); transition: opacity 0.35s ease, filter 0.35s ease; }
+  .detail.in { opacity: 1; filter: none; }
+  .group + .group { margin-top: 18px; }
+  .gt { margin: 0 6px 6px; font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; font-weight: 700; font-size: clamp(19px, 2.8vw, 23px); line-height: 1.2; color: var(--ink); }
+  .list { border-top: 1px solid var(--pill-line); }
+  .row { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 13px 8px; border-bottom: 1px solid var(--pill-line); color: var(--ink); text-decoration: none; transition: background-color 0.2s ease; }
+  .row:hover { background: rgba(255, 255, 255, 0.4); }
+  .row:focus-visible { outline: 2px solid var(--ink); outline-offset: -3px; }
+  .row-main { display: flex; flex-direction: column; min-width: 0; }
+  .row-name { font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; font-weight: 500; font-size: clamp(20px, 3vw, 24px); line-height: 1.2; }
+  .row-sub { font-size: 12.5px; color: var(--muted); }
+  .go { flex-shrink: 0; font-size: 16px; color: var(--muted); transition: transform 0.2s ease, color 0.2s ease; }
+  .row:hover .go { color: var(--ink); transform: translate(1px, -1px); }
+  mark { background: rgba(12, 42, 96, 0.14); color: inherit; border-radius: 3px; padding: 0 1px; }
+  .meta, .empty { margin: 0 0 10px; text-align: center; font-size: 14px; color: var(--muted); }
+  /* Fondo según el momento del día (mañana = celeste, la paleta base) */
+  :root { transition: --sky-1 2.5s ease, --sky-2 2.5s ease, --sky-3 2.5s ease, --glow 2.5s ease, --muted 2.5s ease; }
+  :root[data-sky="tarde"] { --sky-1: #fbe9ef; --sky-2: #f6d9e4; --sky-3: #efc8d8; --glow: #fff6f9; --muted: #5d4a6b; }
+  :root[data-sky="amanecer"], :root[data-sky="atardecer"] { --sky-1: #fdeedd; --sky-2: #fbdcc0; --sky-3: #f6c9a4; --glow: #fff7ee; --muted: #6a4a3a; }
+  :root[data-sky="noche"] { --sky-1: #cbd8f3; --sky-2: #b4c4ea; --sky-3: #9fb1de; --glow: #dfe7f9; --muted: #2f4673; }
+  @media (prefers-reduced-motion: reduce) { :root { transition: none; } }
+  .foot { margin: auto 0 0; padding-top: 10px; text-align: center; font-size: 12.5px; color: var(--muted); }
 </style>
 </head>
 <body>
-
-<a class="skip" href="#modulos">Ir a los módulos</a>
-
-<div id="page">
-  <header class="topbar">
-    <div class="wrap topbar-in">
-      <div class="brand">
-        <div class="mark" aria-hidden="true">RF</div>
-        <div class="brand-text">
-          <div class="brand-name">App Web SPA <span>2025–2026</span></div>
-          <div class="brand-sub">Repositorio de aplicaciones de Rómulo Fioravante</div>
-        </div>
-      </div>
-      <button type="button" class="icon-btn" id="themeBtn" aria-label="Cambiar tema"></button>
-    </div>
-  </header>
-
-  <main class="wrap">
-    <section class="hero" aria-labelledby="greeting">
-      <p class="hero-date" id="heroDate"></p>
-      <h1 id="greeting">Hola, Rómulo</h1>
-      <p class="hero-sub" id="heroSub"></p>
-
-      <div class="search" id="searchBox" role="search">
-        <i class="fas fa-magnifying-glass ico" aria-hidden="true"></i>
-        <input type="search" id="q" placeholder="Buscar app o sistema" aria-label="Buscar app o sistema" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="search">
-        <kbd aria-hidden="true">/</kbd>
-        <button type="button" class="clear" id="clearBtn" aria-label="Borrar búsqueda" hidden><i class="fas fa-xmark" aria-hidden="true"></i></button>
-      </div>
-    </section>
-
-    <section class="section" id="recents" aria-labelledby="recentsTitle" hidden>
-      <div class="section-head">
-        <h2 id="recentsTitle">Recientes</h2>
-        <button type="button" class="link-btn" id="clearRecents">Borrar</button>
-      </div>
-      <div class="chips" id="chips"></div>
-    </section>
-
-    <section class="section" id="modulos" aria-labelledby="modulesTitle">
-      <div class="section-head">
-        <h2 id="modulesTitle">Módulos</h2>
-        <p id="pageMeta"></p>
-      </div>
-      <div class="grid" id="grid"></div>
-    </section>
-
-    <section class="section results" id="results" aria-labelledby="resultsTitle" hidden>
-      <div class="section-head">
-        <h2 id="resultsTitle">Resultados</h2>
-        <p id="resultsMeta" aria-live="polite"></p>
-      </div>
-      <div id="resultsBody"></div>
-    </section>
+  <div class="hero" id="hero">
+  <div class="brand" id="brand">
+  <main>
+    <svg id="canvas" viewBox="20 0 630 410" role="img" aria-label="Firma manuscrita Rf y nombre Rómulo Fioravante, trazados en azul oscuro">
+      <g id="sig">
+        <path class="ink" pathLength="1" d="M 58 236 C 70 190, 95 100, 112 44 C 120 22, 150 24, 168 36 C 204 56, 206 104, 172 122 C 150 134, 118 138, 86 138"/>
+        <path class="ink" pathLength="1" d="M 133 135 C 152 162, 168 202, 190 232 C 199 244, 214 240, 222 226"/>
+        <path class="ink" pathLength="1" d="M 262 228 C 285 205, 335 110, 350 60 C 356 40, 352 18, 336 22 C 322 26, 320 70, 314 120 C 310 170, 300 240, 294 268 C 290 286, 268 292, 258 276"/>
+        <path class="ink" pathLength="1" d="M 266 176 C 300 172, 340 170, 400 170 C 470 170, 540 172, 590 168 C 618 166, 628 152, 606 146 C 560 136, 470 132, 410 124 C 398 122, 400 112, 410 114"/>
+        <circle id="dot" cx="404" cy="92" r="3.6"/>
+      </g>
+      <mask id="nameMask" maskUnits="userSpaceOnUse" x="0" y="290" width="700" height="130">
+        <polygon id="wipe" fill="#fff" points="0,0 0,0 0,0 0,0"/>
+      </mask>
+      <g id="name" mask="url(#nameMask)" aria-hidden="true">
+        <path d="M70.3 384Q70 384 70 383.5Q70 383.1 70.3 383.1Q72.5 383.1 73.7 382.7Q74.9 382.3 75.5 381.1Q76.1 380 76.5 377.8L82.6 342.7Q83.1 340.5 82.9 339.4Q82.8 338.2 81.8 337.8Q80.8 337.4 78.7 337.4Q78.4 337.4 78.4 337Q78.4 336.5 78.7 336.5Q80.4 336.5 82.7 336.6Q84.9 336.7 87.4 336.7Q89.1 336.7 91.5 336.5Q94 336.3 95.5 336.3Q103.2 336.3 106.3 338.9Q109.4 341.6 108.5 346.7Q107.7 351.1 104.6 354.3Q101.6 357.5 97.1 359.2Q92.7 360.9 87.8 360.9Q87.5 360.9 86.9 360.9Q86.2 360.8 86.1 360.7L86.5 358.4Q87 358.6 87.9 358.7Q88.8 358.8 89.3 358.8Q94.3 358.8 96.9 356.4Q99.6 354 100.4 348.4Q101.1 344.5 100.5 342.2Q99.8 339.8 98.3 338.9Q96.8 337.9 94.8 337.9Q93.1 337.9 92.3 338.1Q91.5 338.3 91 339.4Q90.6 340.4 90.2 342.8L83.9 377.8Q83.6 380 83.7 381.1Q83.9 382.3 84.8 382.7Q85.8 383.1 87.8 383.1Q88.1 383.1 88.1 383.5Q88.1 384 87.9 384Q86.1 384 83.9 383.9Q81.7 383.8 79.1 383.8Q76.6 383.8 74.3 383.9Q72 384 70.3 384ZM103.8 384Q102.8 384 101 381.6Q99.3 379.1 97 373.7Q94.7 368.3 92 359.5L98.1 357.5Q101.9 367.1 104.7 372.6Q107.6 378.2 110.1 380.7Q112.7 383.1 115.2 383.1Q115.5 383.1 115.5 383.5Q115.5 384 115.2 384Q110.6 384 107.9 384Q105.1 384 103.8 384ZM127.7 385.1Q123.5 385.1 121.1 382.9Q118.6 380.7 117.8 377.1Q117.1 373.5 117.8 369.3Q118.7 364.7 121.2 361.2Q123.6 357.6 127.1 355.7Q130.6 353.7 134.6 353.7Q138.9 353.7 141.4 355.8Q143.9 357.9 144.7 361.4Q145.6 364.9 144.7 369.3Q143.7 374.5 141 378Q138.3 381.6 134.8 383.3Q131.3 385.1 127.7 385.1ZM130.3 383.2Q132.7 383.2 134.5 380.3Q136.3 377.5 137.1 372.7Q137.7 369.3 137.7 366.2Q137.7 363.1 137 360.7Q136.3 358.2 135.1 356.9Q133.9 355.5 132.1 355.5Q130 355.5 128.2 358.1Q126.3 360.7 125.4 366.1Q124.7 369.5 124.8 372.6Q124.9 375.7 125.5 378.1Q126.2 380.4 127.4 381.8Q128.6 383.2 130.3 383.2ZM134.2 348.1Q134.1 348.3 133.7 348.1Q133.3 348 133.4 347.8L139.1 329.6Q139.2 329.2 140.4 328.9Q141.7 328.6 143.2 328.4Q144.7 328.3 145.8 328.3Q146.9 328.4 146.7 328.7ZM188.5 384.7Q185.9 384.7 185.2 382.8Q184.6 380.9 185.2 377.2L187.4 365.2Q188.1 361.5 187.6 359.8Q187.1 358 185.6 358Q183.8 358 181.6 360.8Q179.4 363.6 177.3 369.1Q175.3 374.7 173.9 383.1L172.6 383Q174.1 373.7 176.7 367.2Q179.2 360.6 182.6 357.1Q185.9 353.7 189.6 353.7Q192.5 353.7 193.8 356.1Q195 358.5 194.1 363.7L191.6 377.2Q191.2 379.4 191.6 380.1Q191.9 380.8 192.6 380.8Q193.5 380.8 194.4 380Q195.4 379.3 196.6 378.1Q196.9 377.8 197.2 378.1Q197.5 378.5 197.2 378.8Q194.8 381.6 192.8 383.1Q190.7 384.7 188.5 384.7ZM152.8 384.6Q151.3 384.6 150.8 384.4Q150.3 384.2 150.3 384Q150.3 383.7 150.7 382Q151.1 380.4 151.4 378.4L154.5 361.4Q155.2 357.7 153.4 357.7Q152.6 357.7 151.5 358.5Q150.4 359.2 149 360.7Q148.8 361 148.5 360.7Q148.2 360.4 148.4 360.1Q151.1 356.8 153.3 355.4Q155.5 354 157.7 354Q160.1 354 160.8 355.7Q161.6 357.4 161 360.5L157 383.1Q156.7 384.6 152.8 384.6ZM169.7 384.6Q168.2 384.6 167.7 384.4Q167.2 384.2 167.2 384Q167.2 383.7 167.6 382Q168 380.4 168.3 378.4L170.8 365Q171.5 361.3 170.9 359.6Q170.3 358 168.8 358Q166.8 358 164.5 361Q162.3 363.9 160.3 369.5Q158.3 375.1 157 383.1L155.7 383Q157.1 374 159.7 367.4Q162.2 360.8 165.6 357.2Q169 353.7 172.8 353.7Q175.7 353.7 177 356Q178.3 358.4 177.4 363.6L173.9 383.1Q173.7 384.6 169.7 384.6ZM208.4 385Q205.2 385 203.9 382.5Q202.6 380 203.6 375L206.2 361.4Q206.6 359.2 206.3 358.5Q205.9 357.9 205.2 357.9Q204.5 357.9 203.5 358.6Q202.5 359.4 201.3 360.5Q201 360.8 200.7 360.5Q200.4 360.2 200.7 359.9Q203.1 357 205.1 355.5Q207.1 354 209.3 354Q211.5 354 212.5 355.7Q213.4 357.5 212.6 361.4L210.2 373.5Q209.5 377.2 210.1 378.9Q210.7 380.7 212.3 380.7Q214.5 380.7 216.8 377.8Q219.1 374.9 221.2 369.3Q223.2 363.7 224.6 355.6L226 355.7Q224.5 364.6 221.9 371.2Q219.2 377.8 215.8 381.4Q212.4 385 208.4 385ZM224 384.7Q221.6 384.7 220.8 383Q220.1 381.3 220.7 378.1L224.6 355.6Q225 354.1 228.9 354.1Q230.4 354.1 230.9 354.3Q231.4 354.5 231.4 354.7Q231.4 355 231 356.6Q230.6 358.3 230.2 360.3L227.1 377.2Q226.4 381 228.3 381Q229 381 230.1 380.2Q231.2 379.4 232.7 377.9Q232.9 377.6 233.2 378Q233.5 378.3 233.3 378.6Q230.5 381.9 228.4 383.3Q226.2 384.7 224 384.7ZM242.1 384.7Q239.5 384.7 238.8 382.8Q238.1 380.9 238.7 377.2L245.7 339.2Q246.3 335.6 245.4 334.8Q244.4 334.1 241.3 335.6Q241 335.7 240.9 335.2Q240.7 334.8 241 334.7L252.8 328.9Q253.2 328.7 253.5 329.1Q253.8 329.4 253.7 329.5L245.2 377.2Q244.8 379.4 245.1 380.1Q245.5 380.8 246.1 380.8Q247 380.8 247.9 380Q248.9 379.3 250.1 378.1Q250.5 377.8 250.8 378.1Q251.1 378.5 250.8 378.8Q248.4 381.6 246.3 383.1Q244.3 384.7 242.1 384.7ZM265.7 385.1Q261.5 385.1 259.1 382.9Q256.6 380.7 255.8 377.1Q255.1 373.5 255.8 369.3Q256.8 364.7 259.2 361.2Q261.6 357.6 265.1 355.7Q268.6 353.7 272.6 353.7Q276.9 353.7 279.4 355.8Q281.9 357.9 282.8 361.4Q283.6 364.9 282.7 369.3Q281.7 374.5 279 378Q276.3 381.6 272.8 383.3Q269.3 385.1 265.7 385.1ZM268.3 383.2Q270.7 383.2 272.5 380.3Q274.3 377.5 275.2 372.7Q275.8 369.3 275.7 366.2Q275.7 363.1 275 360.7Q274.3 358.2 273.1 356.9Q271.9 355.5 270.1 355.5Q268 355.5 266.2 358.1Q264.4 360.7 263.4 366.1Q262.8 369.5 262.8 372.6Q262.9 375.7 263.6 378.1Q264.2 380.4 265.4 381.8Q266.6 383.2 268.3 383.2ZM303.6 384Q303.5 384 303.5 383.5Q303.5 383.1 303.6 383.1Q305.7 383.1 306.8 382.7Q307.9 382.3 308.4 381.2Q309 380 309.3 377.8L315.6 342.7Q316.2 339.4 315.5 338.4Q314.7 337.4 311.9 337.4Q311.6 337.4 311.6 337Q311.6 336.5 311.9 336.5H341.7Q342.3 336.5 342.2 337.2Q342 338.6 341.6 340.6Q341.3 342.6 341 344.4Q340.7 346.2 340.6 347.4Q340.5 347.7 340.1 347.6Q339.7 347.4 339.7 347.3Q339.4 343 336.7 340.6Q334.1 338.1 329.8 338.1H328.5Q326.4 338.1 325.3 338.4Q324.2 338.8 323.8 339.8Q323.4 340.8 323 342.7L316.9 377.5Q316.5 379.8 316.9 381Q317.3 382.2 318.8 382.6Q320.3 383.1 323.3 383.1Q323.4 383.1 323.4 383.5Q323.4 384 323.3 384Q321.8 384 319.1 383.9Q316.3 383.8 311.9 383.8Q309.6 383.8 307.4 383.9Q305.3 384 303.6 384ZM333.4 368Q333.4 368.3 332.9 368.2Q332.5 368.2 332.5 367.9Q333.1 364.6 331.5 362.9Q329.9 361.3 326.6 361.3H316.5L316.7 359.1H327.1Q330.6 359.1 332.5 357.8Q334.4 356.4 335 353.3Q335.1 353 335.6 353Q336 353.1 335.9 353.4Q335.6 355.9 335.3 357.3Q335 358.7 334.7 360.2Q334.4 362.1 334.1 363.9Q333.8 365.8 333.4 368ZM347.4 384.7Q344.9 384.7 344.2 382.8Q343.4 380.9 344.2 377.2L347.3 361.4Q348 357.7 346.1 357.7Q345.4 357.7 344.3 358.5Q343.2 359.2 341.8 360.7Q341.5 361 341.2 360.7Q340.9 360.4 341.1 360.1Q343.9 356.8 346.1 355.4Q348.3 354 350.4 354Q352.8 354 353.6 355.7Q354.3 357.4 353.7 360.5L350.5 377.2Q350.2 379.4 350.5 380.1Q350.9 380.8 351.5 380.8Q352.4 380.8 353.4 380Q354.3 379.3 355.6 378.1Q355.9 377.8 356.2 378.1Q356.5 378.5 356.2 378.8Q353.8 381.6 351.8 383.1Q349.7 384.7 347.4 384.7ZM352.5 346.1Q350.5 346.1 349.4 344.9Q348.2 343.8 348.2 341.7Q348.2 339.8 349.4 338.7Q350.5 337.6 352.5 337.6Q354.5 337.6 355.6 338.7Q356.7 339.8 356.7 341.7Q356.7 346.1 352.5 346.1ZM370.1 385.1Q366 385.1 363.5 382.9Q361 380.7 360.3 377.1Q359.5 373.5 360.3 369.3Q361.2 364.7 363.6 361.2Q366 357.6 369.5 355.7Q373 353.7 377.1 353.7Q381.3 353.7 383.8 355.8Q386.3 357.9 387.2 361.4Q388 364.9 387.1 369.3Q386.1 374.5 383.4 378Q380.7 381.6 377.2 383.3Q373.7 385.1 370.1 385.1ZM372.7 383.2Q375.2 383.2 377 380.3Q378.7 377.5 379.6 372.7Q380.2 369.3 380.1 366.2Q380.1 363.1 379.4 360.7Q378.7 358.2 377.5 356.9Q376.3 355.5 374.6 355.5Q372.4 355.5 370.6 358.1Q368.8 360.7 367.8 366.1Q367.2 369.5 367.3 372.6Q367.3 375.7 368 378.1Q368.6 380.4 369.8 381.8Q371.1 383.2 372.7 383.2ZM399.3 383.1 398.5 383Q399.3 379 400.2 374.8Q401.2 370.7 402.4 367Q403.6 363.3 405 360.3Q406.5 357.4 408.1 355.7Q409.8 354 411.7 354Q412.9 354 414.2 354.6Q415.5 355.3 416.4 356.3Q417.2 357.4 417 358.7Q416.9 359.7 416 360.7Q415.1 361.8 413.6 361.8Q412.5 361.8 411.6 361.2Q410.8 360.7 410.1 360.1Q409.4 359.5 408.5 359.5Q407.7 359.5 406.6 361.2Q405.6 362.8 404.5 365.5Q403.4 368.1 402.3 371.3Q401.3 374.4 400.5 377.5Q399.7 380.7 399.3 383.1ZM395 384.6Q393.6 384.6 393 384.4Q392.5 384.2 392.5 384Q392.5 383.7 392.9 382Q393.4 380.4 393.7 378.4L396.8 361.4Q397.1 360.1 397 359.3Q396.9 358.5 396.6 358.1Q396.2 357.7 395.6 357.7Q394.9 357.7 393.8 358.5Q392.7 359.2 391.3 360.7Q391 361 390.7 360.7Q390.4 360.4 390.7 360.1Q393.4 356.8 395.6 355.4Q397.8 354 399.9 354Q401.6 354 402.4 354.7Q403.3 355.5 403.5 356.9Q403.7 358.4 403.3 360.5L399.3 383.1Q399 384.6 395 384.6ZM420.8 385Q418.2 385 416.7 383.1Q415.2 381.3 415.8 377.1Q416.4 373.2 418.4 369.1Q420.5 365.1 423.6 361.5Q426.7 358 430.2 355.8Q433.6 353.7 436.8 353.7Q438.3 353.7 439.9 354.2Q441.5 354.8 442.7 356.1Q443.9 357.3 444 359.4L439.5 356.9Q440.8 356.7 442.2 355.7Q443.6 354.6 444.6 353.1Q444.7 352.8 445.1 353Q445.5 353.1 445.5 353.3L441.1 377.2Q440.4 380.8 441.9 380.8Q442.7 380.8 443.7 380.1Q444.8 379.4 446 378.1Q446.2 377.9 446.5 378.2Q446.8 378.5 446.6 378.8Q444.2 381.6 442.2 383.1Q440.1 384.7 438.1 384.7Q435.7 384.7 434.8 382.9Q433.9 381.1 434.5 377.2L436.4 366.6L438 365.3Q436.2 371.5 433.3 375.9Q430.4 380.4 427.1 382.7Q423.9 385 420.8 385ZM425.6 379.4Q427.5 379.4 429.3 378Q431.1 376.6 432.7 374.3Q434.2 372 435.3 369.4Q436.4 366.9 436.8 364.8Q437.4 361.4 436.3 359.4Q435.3 357.4 433 357.4Q430.9 357.4 428.8 359.1Q426.8 360.9 425.2 363.9Q423.6 367 422.9 370.9Q422.1 375.7 423 377.6Q424 379.4 425.6 379.4ZM461.7 385Q459.3 385 457.5 383.7Q455.6 382.5 454.7 380.4Q453.7 378.4 453.7 375.9Q454 372.8 455.8 369.5Q457.7 366.2 459.4 362.6Q459.9 361.5 459.9 361Q460 360.4 459.1 360.4H455.5Q453.7 360.4 452.6 360.8Q451.5 361.1 450.8 361.8Q450.2 362.6 449.8 363.7Q449.6 364 449.2 363.9Q448.7 363.9 448.9 363.5Q450 360.2 451 358.3Q451.9 356.3 453.3 355.5Q454.7 354.6 456.9 354.6H463.9Q464.5 354.6 464.7 354.7Q464.8 354.9 464.5 355.5Q463.1 358.9 461.7 362.9Q460.3 366.9 459.9 369.6Q459.2 374 460.9 376.6Q462.5 379.1 465.5 379.1Q467.6 379.1 469.6 377.9Q471.6 376.6 473.1 374.3Q474.6 372 475 368.9Q475.3 367.1 475 365.8Q474.7 364.6 474.1 363.6Q473.5 362.6 472.5 361.5Q471.8 360.7 471.2 359.8Q470.5 358.8 470.5 357.6Q470.5 355.7 471.8 354.8Q473.1 353.9 474.7 353.9Q476.3 353.9 477.3 354.7Q478.3 355.5 478.7 357.6Q479.1 359.7 478.7 363.5Q478.2 367.8 476.6 371.7Q475 375.6 472.5 378.6Q470 381.6 467.2 383.3Q464.4 385 461.7 385ZM487.6 385Q485.1 385 483.6 383.1Q482.1 381.3 482.7 377.1Q483.2 373.2 485.3 369.1Q487.4 365.1 490.5 361.5Q493.6 358 497 355.8Q500.5 353.7 503.7 353.7Q505.2 353.7 506.8 354.2Q508.4 354.8 509.6 356.1Q510.7 357.3 510.9 359.4L506.3 356.9Q507.6 356.7 509 355.7Q510.4 354.6 511.4 353.1Q511.6 352.8 512 353Q512.4 353.1 512.3 353.3L507.9 377.2Q507.3 380.8 508.8 380.8Q509.5 380.8 510.6 380.1Q511.7 379.4 512.9 378.1Q513.1 377.9 513.4 378.2Q513.7 378.5 513.5 378.8Q511.1 381.6 509 383.1Q506.9 384.7 505 384.7Q502.5 384.7 501.7 382.9Q500.8 381.1 501.4 377.2L503.3 366.6L504.9 365.3Q503.1 371.5 500.2 375.9Q497.3 380.4 494 382.7Q490.8 385 487.6 385ZM492.5 379.4Q494.3 379.4 496.2 378Q498 376.6 499.5 374.3Q501.1 372 502.2 369.4Q503.3 366.9 503.7 364.8Q504.3 361.4 503.2 359.4Q502.2 357.4 499.9 357.4Q497.8 357.4 495.7 359.1Q493.6 360.9 492.1 363.9Q490.5 367 489.8 370.9Q489 375.7 489.9 377.6Q490.8 379.4 492.5 379.4ZM540.8 384.7Q538.3 384.7 537.6 382.8Q536.9 380.9 537.6 377.2L539.8 365.2Q541.1 358 537.7 358Q535.6 358 533.2 360.9Q530.9 363.8 528.8 369.4Q526.8 375 525.4 383.1L524 383Q525.6 374 528.2 367.4Q530.8 360.8 534.3 357.2Q537.7 353.7 541.6 353.7Q544.8 353.7 546.1 356.1Q547.4 358.5 546.5 363.7L544 377.2Q543.6 379.4 543.9 380.1Q544.3 380.8 545 380.8Q545.8 380.8 546.8 380Q547.8 379.3 549 378.1Q549.2 377.8 549.5 378.1Q549.8 378.5 549.6 378.8Q547.2 381.6 545.2 383.1Q543.1 384.7 540.8 384.7ZM521.2 384.6Q519.7 384.6 519.2 384.4Q518.7 384.2 518.7 384Q518.7 383.7 519.1 382Q519.5 380.4 519.8 378.4L522.9 361.4Q523.6 357.7 521.8 357.7Q521 357.7 519.9 358.5Q518.8 359.2 517.4 360.7Q517.1 361 516.8 360.7Q516.5 360.4 516.8 360.1Q519.5 356.8 521.7 355.4Q523.9 354 526 354Q528.5 354 529.2 355.7Q530 357.4 529.4 360.5L525.4 383.1Q525 384.6 521.2 384.6ZM560.8 384.9Q558.9 384.9 557.3 384.3Q555.7 383.7 555 381.9Q554.2 380.2 554.8 376.9L557.8 360.7Q558.2 358.2 557.8 357.5Q557.3 356.7 555.2 356.7Q554.9 356.7 554.9 356.1Q555 355.5 555.2 355.5Q558.9 355.5 561.2 353.4Q563.5 351.4 564.9 348.8Q565 348.5 565.7 348.6Q566.4 348.7 566.3 349L561.6 375.6Q561.1 378.2 562 379.5Q563 380.7 565.3 380.7Q566.8 380.7 568.4 380Q570 379.4 571.7 377.9Q571.9 377.8 572.2 378.1Q572.5 378.4 572.3 378.6Q568.8 381.9 566.1 383.4Q563.4 384.9 560.8 384.9ZM572.3 358.4Q572.2 358.4 570.8 358.2Q569.4 357.9 567.4 357.7Q565.4 357.5 563.3 357.5L563.4 355.3Q566 355.3 568.1 355.1Q570.3 355 571.9 354.8Q573.5 354.7 574.3 354.7Q574.7 354.7 574.8 355Q574.9 355.3 574.8 355.6Q574.7 356.2 573.9 357.3Q573.1 358.4 572.3 358.4ZM586.2 384.9Q581.8 384.9 579.3 382.7Q576.9 380.5 576.1 377.1Q575.4 373.7 576.1 369.9Q576.7 367 578.3 364.1Q579.9 361.1 582.3 358.8Q584.8 356.5 587.9 355.1Q591 353.7 594.6 353.7Q597.7 353.7 599.3 354.7Q600.8 355.8 600.7 357.8Q600.4 359.8 598.6 361.6Q596.8 363.4 593.8 364.8Q590.8 366.3 587.1 367.3Q583.4 368.3 579.6 368.7L579.8 367.7Q585.2 366.9 588.8 365Q592.5 363 593 359.4Q593.3 357.7 592.6 356.7Q592 355.7 590.6 355.7Q588.9 355.7 587.5 357.3Q586.1 358.8 585 361.5Q584 364.2 583.5 367.4Q582.9 371.3 583.4 374.5Q583.9 377.7 585.8 379.6Q587.6 381.6 590.7 381.6Q592.1 381.6 594 381Q595.9 380.5 597.5 379.2Q597.7 379.1 598 379.4Q598.2 379.7 598.1 379.8Q595.2 382.6 592.1 383.8Q589 384.9 586.2 384.9Z" fill="#0c2a60" stroke="#0c2a60" stroke-width="1.1" stroke-linejoin="round"/>
+      </g>
+      <g id="nib" aria-hidden="true">
+        <circle class="halo" r="9"/>
+        <circle class="tip" r="3.2"/>
+      </g>
+    </svg>
   </main>
-
-  <footer>&copy; 2025–2026 Rómulo Fioravante</footer>
-</div>
-
-<div class="overlay" id="overlay" aria-hidden="true">
-  <div class="sheet tinted" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
-    <div class="sheet-head">
-      <div class="tile" id="sheetTile" aria-hidden="true"></div>
-      <div class="sheet-titles">
-        <h2 id="sheetTitle"></h2>
-        <p id="sheetDesc"></p>
-        <p class="sheet-count" id="sheetCount"></p>
-      </div>
-      <button type="button" class="icon-btn" id="sheetClose" aria-label="Cerrar"><i class="fas fa-xmark" aria-hidden="true"></i></button>
-    </div>
-    <div class="sheet-filter" id="sheetFilterWrap" hidden>
-      <i class="fas fa-magnifying-glass" aria-hidden="true"></i>
-      <input type="search" id="sheetFilter" placeholder="Filtrar accesos" aria-label="Filtrar accesos de este módulo" autocomplete="off" spellcheck="false">
-    </div>
-    <div class="sheet-body" id="sheetBody"></div>
   </div>
-</div>
+
+  <p class="caption" id="caption"><span class="sr">Desarrollo y Programación de Aplicativos Digitales</span><span id="capVis" aria-hidden="true"></span></p>
+  </div>
+
+  <section class="reveal" id="reveal">
+    <h1 class="sys fade" id="greeting" style="--i:0">Hola, Rómulo</h1>
+    <p class="sub fade" id="heroDate" style="--i:1"></p>
+    <div class="bar" id="bar">
+      <h2 class="sel" id="sel"></h2>
+      <button type="button" class="back" id="backBtn">Volver</button>
+    </div>
+    <div class="home" id="home">
+      <div class="search fade" id="searchBox" role="search" style="--i:1.5">
+        <input type="search" id="q" placeholder="Buscar app o sistema" aria-label="Buscar app o sistema" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="search">
+        <button type="button" class="clear" id="clearBtn" aria-label="Borrar búsqueda" hidden>&times;</button>
+      </div>
+      <div class="recents fade" id="recents" style="--i:2" hidden></div>
+      <ul class="areas" id="areas"></ul>
+      <div class="results" id="results" hidden>
+        <p class="meta" id="resultsMeta" aria-live="polite"></p>
+        <div id="resultsBody"></div>
+      </div>
+    </div>
+    <div class="detail" id="detail">
+      <p class="dd" id="dDesc"></p>
+      <div class="search" id="dFilterWrap" hidden>
+        <input type="search" id="dFilter" placeholder="Filtrar accesos" aria-label="Filtrar accesos de este módulo" autocomplete="off" spellcheck="false">
+      </div>
+      <div id="dBody"></div>
+      <p class="empty" id="dEmpty" hidden>Ningún acceso coincide con ese nombre.</p>
+    </div>
+    <p class="foot fade" style="--i:5">&copy; 2025–2026 Rómulo Fioravante</p>
+  </section>
+
 
 <script>
+(() => {
+  const paths = [...document.querySelectorAll('.ink')];
+  const lengths = paths.map(p => p.getTotalLength());
+  const sig = document.getElementById('sig');
+  const dot = document.getElementById('dot');
+  const nib = document.getElementById('nib');
+  const cap = document.getElementById('caption');
+  const hero = document.getElementById('brand'); // firma + nombre
+  const reveal = document.getElementById('reveal');
+  const chars = [];
+  [cap].forEach(p => p.querySelector('.sr').textContent.trim().split(/\s+/).forEach((word, wi, arr) => {
+    const vis = p.lastElementChild;
+    const w = document.createElement('span');
+    w.style.whiteSpace = 'nowrap';
+    [...word].forEach(ch => {
+      const s = document.createElement('span');
+      s.className = 'ch';
+      s.textContent = ch;
+      w.appendChild(s);
+      chars.push(s);
+    });
+    vis.appendChild(w);
+    if (wi < arr.length - 1) vis.appendChild(document.createTextNode(' '));
+  }));
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const SPEED = 1000; // unidades SVG por segundo
+  const DOT = { x: 404, y: 92 };
+  let token = 0;
+
+  // Nombre manuscrito: se revela con un barrido inclinado, letra a letra, siguiendo la plumilla
+  const NAME = { b: [[68.8, 115.7], [115.7, 146.7], [146.7, 198.8], [198.8, 234.9], [234.9, 253.7], [253.7, 284.7], [284.7, 302.5], [302.5, 339.4], [339.4, 358.1], [358.1, 389.1], [389.1, 414.5], [414.5, 447.3], [447.3, 481.3], [481.3, 515.1], [515.1, 551.2], [551.2, 574.1], [574.1, 601.2]], base: 384, top: 310, bot: 402, slant: 0.25, speed: 230 };
+  const wipe = document.getElementById('wipe');
+  function setWipe(xe) {
+    if (xe === null) { wipe.setAttribute('points', '0,0 0,0 0,0 0,0'); return; }
+    const L = 20, t = NAME.top, bt = NAME.bot, s = NAME.slant;
+    wipe.setAttribute('points', `${L},${t} ${xe + s * (NAME.base - t)},${t} ${xe - s * (bt - NAME.base)},${bt} ${L},${bt}`);
+  }
+  async function writeName(tk) {
+    const b = NAME.b, text = "R\u00f3mulo Fioravante";
+    for (let i = 0; i < b.length; i++) {
+      const w = b[i][1] - b[i][0];
+      const space = text[i] === ' ';
+      const dur = w / NAME.speed * 1000 * (space ? 0.35 : 1);
+      nib.style.opacity = space ? '0.4' : '1';
+      const ok = await anim(dur, tk, t => {
+        const e = 0.5 * t + 0.5 * ease(t);
+        const xe = b[i][0] + w * e;
+        setWipe(xe);
+        const y = NAME.base - 22 - 20 * Math.sin(2 * Math.PI * t + 0.6);
+        setNib(xe + NAME.slant * (NAME.base - y), y);
+      });
+      if (!ok) return false;
+    }
+    setWipe(700);
+    return true;
+  }
+
+  const ease = t => -(Math.cos(Math.PI * t) - 1) / 2;
+  const sleep = (ms, tk) => new Promise(r => setTimeout(() => r(tk === token), ms));
+  const setNib = (x, y) => nib.setAttribute('transform', `translate(${x} ${y})`);
+
+  function anim(dur, tk, fn) {
+    return new Promise(res => {
+      const t0 = performance.now();
+      (function f(now) {
+        if (tk !== token) return res(false);
+        const t = Math.min(1, (now - t0) / dur);
+        fn(t);
+        t < 1 ? requestAnimationFrame(f) : res(true);
+      })(t0);
+    });
+  }
+
+  // Salto en el aire entre trazos, con un pequeño arco
+  function hop(a, b, tk) {
+    nib.style.opacity = '0.4';
+    return anim(110, tk, t => {
+      const e = ease(t);
+      setNib(a.x + (b.x - a.x) * e, a.y + (b.y - a.y) * e - Math.sin(Math.PI * t) * 14);
+    });
+  }
+
+  function reset() {
+    paths.forEach(p => { p.style.strokeDashoffset = '1'; p.style.opacity = '0'; });
+    dot.style.transform = 'scale(0)';
+    setWipe(null);
+    nib.style.opacity = '0';
+    cap.classList.add('instant');
+    chars.forEach(c => c.classList.remove('on'));
+    cap.style.opacity = '1';
+    void cap.offsetWidth;
+    cap.classList.remove('instant');
+  }
+
+  function showAll() {
+    sig.style.opacity = '1';
+    paths.forEach(p => { p.style.strokeDashoffset = '0'; p.style.opacity = '1'; });
+    dot.style.transform = 'scale(1)';
+    setWipe(700);
+    nib.style.opacity = '0';
+    chars.forEach(c => c.classList.add('on'));
+  }
+
+  // Solo la firma sube al borde superior y queda fija; el texto se desvanece en su lugar y luego aparecen los títulos
+  async function dock(tk) {
+    cap.style.opacity = '0';
+    if (!(await sleep(500, tk))) return;
+    const first = hero.getBoundingClientRect();
+    document.body.classList.add('docked');
+    const last = hero.getBoundingClientRect();
+    hero.style.transition = 'none';
+    hero.style.transformOrigin = 'top left';
+    hero.style.transform = `translate(${first.left - last.left}px, ${first.top - last.top}px) scale(${first.width / last.width})`;
+    void hero.offsetWidth;
+    hero.style.transition = 'transform 1.1s cubic-bezier(0.65, 0, 0.35, 1)';
+    hero.style.transform = 'none';
+    if (!(await sleep(1000, tk))) return;
+    reveal.classList.add('show');
+  }
+
+  async function run() {
+    const tk = ++token;
+    if (reduce) { showAll(); document.body.classList.add('docked'); reveal.classList.add('show'); return; }
+    while (tk === token) {
+      sig.style.transition = 'none';
+      reset();
+      sig.style.opacity = '1';
+      void sig.getBoundingClientRect();
+      sig.style.transition = '';
+
+      let cur = paths[0].getPointAtLength(0);
+      setNib(cur.x, cur.y);
+      nib.style.opacity = '1';
+      if (!(await sleep(120, tk))) return;
+
+      for (let i = 0; i < paths.length; i++) {
+        const p = paths[i], len = lengths[i];
+        const start = p.getPointAtLength(0);
+        if (i > 0 && !(await hop(cur, start, tk))) return;
+        nib.style.opacity = '1';
+        p.style.opacity = '1';
+        const ok = await anim(len / SPEED * 1000, tk, t => {
+          const e = ease(t);
+          p.style.strokeDashoffset = String(1 - e);
+          cur = p.getPointAtLength(e * len);
+          setNib(cur.x, cur.y);
+        });
+        if (!ok || !(await sleep(20, tk))) return;
+      }
+
+      if (!(await hop(cur, DOT, tk))) return;
+      nib.style.opacity = '1';
+      dot.style.transform = 'scale(1)';
+      if (!(await sleep(200, tk))) return;
+      if (!(await hop(DOT, { x: NAME.b[0][0] - 4, y: NAME.base - 24 }, tk))) return;
+      nib.style.opacity = '1';
+      if (!(await writeName(tk))) return;
+      if (!(await sleep(150, tk))) return;
+      nib.style.opacity = '0';
+
+      let shown = 0;
+      const typed = await anim(chars.length * 22, tk, t => {
+        const n = Math.round(t * chars.length);
+        while (shown < n) chars[shown++].classList.add('on');
+      });
+      if (!typed || !(await sleep(900, tk))) return;
+      await dock(tk);
+      return;
+    }
+  }
+
   const modules = [
     {
       title: "Personal",
@@ -615,7 +605,6 @@
     }
   ];
 
-  /* ---------- Datos derivados ---------- */
   modules.forEach((m, mi) => {
     let cur = { name: null, items: [] };
     m.groups = [cur];
@@ -624,111 +613,62 @@
       else cur.items.push({ name: l.name, url: l.url, group: cur.name, mod: mi });
     });
     m.groups = m.groups.filter(g => g.items.length);
-    m.count = m.groups.reduce((s, g) => s + g.items.length, 0);
+    m.count = m.groups.reduce((n, g) => n + g.items.length, 0);
   });
   const allLinks = modules.flatMap(m => m.groups.flatMap(g => g.items));
   const byUrl = new Map(allLinks.map(l => [l.url, l]));
 
-  /* ---------- Utilidades ---------- */
   const $ = id => document.getElementById(id);
-  const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]));
-  const norm = s => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+  const esc = t => String(t).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const norm = t => t.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
   const accesos = n => n + (n === 1 ? ' acceso' : ' accesos');
 
-  const page = $('page'), grid = $('grid'), q = $('q'), searchBox = $('searchBox'), clearBtn = $('clearBtn');
-  const recentsSec = $('recents'), chips = $('chips'), modulesSec = $('modulos');
-  const resultsSec = $('results'), resultsBody = $('resultsBody'), resultsMeta = $('resultsMeta');
-  const overlay = $('overlay'), sheet = $('sheet'), sheetBody = $('sheetBody');
-  const sheetFilterWrap = $('sheetFilterWrap'), sheetFilter = $('sheetFilter');
+  const home = $('home'), areas = $('areas'), bar = $('bar'), sel = $('sel'), backBtn = $('backBtn');
+  const detail = $('detail'), dBody = $('dBody'), dFilter = $('dFilter'), dFilterWrap = $('dFilterWrap');
+  const q = $('q'), clearBtn = $('clearBtn'), recentsEl = $('recents');
+  const results = $('results'), resultsBody = $('resultsBody'), resultsMeta = $('resultsMeta');
 
-  /* ---------- Tema ---------- */
-  const root = document.documentElement;
-  const themeBtn = $('themeBtn');
-  function setTheme(t, save){
-    root.setAttribute('data-theme', t);
-    themeBtn.innerHTML = '<i class="fas ' + (t === 'dark' ? 'fa-sun' : 'fa-moon') + '" aria-hidden="true"></i>';
-    themeBtn.setAttribute('aria-label', t === 'dark' ? 'Cambiar a tema claro' : 'Cambiar a tema oscuro');
-    const meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.setAttribute('content', t === 'dark' ? '#080c17' : '#f2f4f8');
-    if (save) { try { localStorage.setItem('rf-theme', t); } catch (e) {} }
-  }
-  themeBtn.addEventListener('click', () => setTheme(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark', true));
-  setTheme(root.getAttribute('data-theme') || 'light', false);
-
-  /* ---------- Saludo y reloj ---------- */
-  function tick(){
+  /* Saludo y reloj */
+  function tick() {
     const d = new Date(), h = d.getHours();
-    const saludo = h < 6 ? 'Buenas noches' : h < 13 ? 'Buen día' : h < 20 ? 'Buenas tardes' : 'Buenas noches';
-    $('greeting').textContent = saludo + ', Rómulo';
-    const fecha = d.toLocaleDateString('es-AR', { weekday: 'long', day: 'numeric', month: 'long' });
-    const hora = d.toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit', hour12: false });
-    const s = fecha + ', ' + hora;
-    $('heroDate').textContent = s.charAt(0).toUpperCase() + s.slice(1);
+    const g = (h < 6 ? 'Buenas noches' : h < 13 ? 'Buen día' : h < 20 ? 'Buenas tardes' : 'Buenas noches') + ', Rómulo';
+    const t = d.toLocaleDateString('es-AR', { weekday: 'long', day: 'numeric', month: 'long' }) + ', ' + d.toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit', hour12: false });
+    const f = t.charAt(0).toUpperCase() + t.slice(1);
+    if ($('greeting').textContent !== g) $('greeting').textContent = g;
+    if ($('heroDate').textContent !== f) $('heroDate').textContent = f;
+    rfSky();
+  }
+  q.placeholder = 'Buscar entre ' + accesos(allLinks.length);
+
+  /* Módulos: mismo formato que las áreas de Rf */
+  areas.innerHTML = modules.map((m, i) => `<li class="fade${i % 2 ? '' : ' b'}" style="--i:${(2 + i * 0.25).toFixed(2)}"><button type="button" data-mod="${i}"><span>${esc(m.title)}</span></button></li>`).join('');
+
+  const rowHTML = (l, label, sub) => `<a class="row" href="${esc(l.url)}" target="_blank" rel="noopener" data-url="${esc(l.url)}"><span class="row-main"><span class="row-name">${label}</span>${sub ? `<span class="row-sub">${esc(sub)}</span>` : ''}</span><span class="go" aria-hidden="true">&#8599;&#xFE0E;</span></a>`;
+
+  /* Apertura de un módulo: el título sube a la barra y aparecen sus accesos */
+  let picked = null;
+  const pause = ms => new Promise(r => setTimeout(r, ms));
+  const snap = el => el.getBoundingClientRect();
+  function fly(el, from, to, ms) {
+    el.style.transformOrigin = 'top left';
+    el.style.transition = 'none';
+    el.style.transform = `translate(${from.left - to.left}px, ${from.top - to.top}px) scale(${from.width / to.width})`;
+    void el.offsetWidth;
+    el.style.transition = `transform ${ms}ms cubic-bezier(0.65, 0, 0.35, 1)`;
+    el.style.transform = 'none';
   }
 
-  /* ---------- Módulos ---------- */
-  function renderGrid(){
-    grid.innerHTML = modules.map((m, i) => `
-      <button type="button" class="card tinted" style="--accent:${m.color};--i:${i}" data-mod="${i}" aria-haspopup="dialog">
-        <span class="card-top">
-          <span class="tile"><i class="fas ${m.icon}" aria-hidden="true"></i></span>
-          <span class="count"><b>${m.count}</b><span class="count-label"> ${m.count === 1 ? 'acceso' : 'accesos'}</span></span>
-        </span>
-        <span class="card-title">${esc(m.title)}</span>
-        <span class="desc">${esc(m.desc)}</span>
-      </button>`).join('');
-    $('pageMeta').textContent = modules.length + ' módulos, ' + accesos(allLinks.length);
-    $('heroSub').textContent = 'Busca entre ' + accesos(allLinks.length) + ' o abre un módulo.';
+  function fillDetail(m) {
+    $('dDesc').textContent = m.desc;
+    dBody.innerHTML = m.groups.map(g => `<section class="group">${g.name ? `<h3 class="gt">${esc(g.name)}</h3>` : ''}<div class="list">${g.items.map(l => rowHTML(l, esc(l.name))).join('')}</div></section>`).join('');
+    dFilter.value = '';
+    dFilterWrap.hidden = m.count <= 8;
+    $('dEmpty').hidden = true;
   }
-
-  const rowHTML = (l, label, sub) => `
-    <a class="row" href="${esc(l.url)}" target="_blank" rel="noopener" data-url="${esc(l.url)}">
-      <span class="row-main"><span class="row-name">${label}</span>${sub ? `<span class="row-sub">${esc(sub)}</span>` : ''}</span>
-      <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i>
-    </a>`;
-
-  /* ---------- Ventana de módulo ---------- */
-  let lastOpener = null;
-  const sheetOpen = () => overlay.classList.contains('open');
-
-  function openSheet(i, opener){
-    const m = modules[i];
-    lastOpener = opener || null;
-    sheet.style.setProperty('--accent', m.color);
-    $('sheetTile').innerHTML = `<i class="fas ${m.icon}"></i>`;
-    $('sheetTitle').textContent = m.title;
-    $('sheetDesc').textContent = m.desc;
-    $('sheetCount').textContent = accesos(m.count);
-    sheetBody.innerHTML = m.groups.map(g => `
-      <section class="group">
-        ${g.name ? `<h3 class="group-title">${esc(g.name)}</h3>` : ''}
-        <div class="list">${g.items.map(l => rowHTML(l, esc(l.name))).join('')}</div>
-      </section>`).join('') + '<p class="empty-note" id="sheetEmpty" hidden>Ningún acceso coincide con ese nombre.</p>';
-    sheetFilter.value = '';
-    sheetFilterWrap.hidden = m.count <= 8;
-    sheetBody.scrollTop = 0;
-
-    page.inert = true;
-    document.body.classList.add('locked');
-    overlay.setAttribute('aria-hidden', 'false');
-    overlay.classList.add('open');
-    setTimeout(() => $('sheetClose').focus(), 30);
-  }
-
-  function closeSheet(){
-    if (!sheetOpen()) return;
-    overlay.classList.remove('open');
-    overlay.setAttribute('aria-hidden', 'true');
-    page.inert = false;
-    document.body.classList.remove('locked');
-    if (lastOpener && document.contains(lastOpener)) lastOpener.focus();
-    lastOpener = null;
-  }
-
-  sheetFilter.addEventListener('input', () => {
-    const term = norm(sheetFilter.value.trim());
+  dFilter.addEventListener('input', () => {
+    const term = norm(dFilter.value.trim());
     let shown = 0;
-    sheetBody.querySelectorAll('.group').forEach(g => {
+    dBody.querySelectorAll('.group').forEach(g => {
       let any = false;
       g.querySelectorAll('.row').forEach(r => {
         const ok = !term || norm(r.textContent).includes(term);
@@ -737,55 +677,79 @@
       });
       g.hidden = !any;
     });
-    $('sheetEmpty').hidden = shown > 0;
+    $('dEmpty').hidden = shown > 0;
   });
 
-  grid.addEventListener('click', e => {
-    const card = e.target.closest('.card');
-    if (card) openSheet(+card.dataset.mod, card);
-  });
-  $('sheetClose').addEventListener('click', closeSheet);
-  overlay.addEventListener('click', e => { if (e.target === overlay) closeSheet(); });
-
-  /* ---------- Recientes ---------- */
-  const RKEY = 'rf-recientes';
-  function getRecents(){
-    try { return (JSON.parse(localStorage.getItem(RKEY) || '[]')).filter(u => byUrl.has(u)); }
-    catch (e) { return []; }
+  async function openArea(btn) {
+    if (picked) return;
+    picked = btn;
+    const m = modules[+btn.dataset.mod], li = btn.parentElement;
+    sel.textContent = m.title;
+    sel.classList.toggle('b', li.classList.contains('b'));
+    fillDetail(m);
+    li.classList.add('picked');
+    home.classList.add('leaving');
+    if (!reduce) await pause(320);
+    const from = snap(btn.firstElementChild);
+    reveal.classList.add('open');
+    if (!reduce) fly(sel, from, snap(sel), 850);
+    await pause(reduce ? 0 : 500);
+    bar.classList.add('ready');
+    detail.classList.add('in');
+    backBtn.focus({ preventScroll: true });
   }
-  function pushRecent(url){
+
+  async function closeArea() {
+    if (!picked) return;
+    const btn = picked, text = btn.firstElementChild;
+    bar.classList.remove('ready');
+    detail.classList.remove('in');
+    if (!reduce) await pause(320);
+    const from = snap(sel);
+    reveal.classList.remove('open');
+    void home.offsetWidth;
+    if (!reduce) fly(text, from, snap(text), 850);
+    home.classList.remove('leaving');
+    btn.parentElement.classList.remove('picked');
+    picked = null;
+    btn.focus({ preventScroll: true });
+  }
+
+  areas.addEventListener('click', e => {
+    const b = e.target.closest('button[data-mod]');
+    if (b) openArea(b);
+  });
+  backBtn.addEventListener('click', closeArea);
+
+  /* Recientes */
+  const RKEY = 'rf-recientes';
+  const getRecents = () => { try { return JSON.parse(localStorage.getItem(RKEY) || '[]').filter(u => byUrl.has(u)); } catch (e) { return []; } };
+  function pushRecent(url) {
     try {
       const a = getRecents().filter(u => u !== url);
       a.unshift(url);
       localStorage.setItem(RKEY, JSON.stringify(a.slice(0, 6)));
     } catch (e) {}
   }
-  function renderRecents(){
+  function renderRecents() {
     const list = getRecents();
-    recentsSec.hidden = !list.length || !!q.value.trim();
-    chips.innerHTML = list.map(u => {
-      const l = byUrl.get(u), m = modules[l.mod];
-      return `<a class="chip tinted" style="--accent:${m.color}" href="${esc(l.url)}" target="_blank" rel="noopener" data-url="${esc(l.url)}">
-        <span class="chip-ico"><i class="fas ${m.icon}" aria-hidden="true"></i></span>
-        <span class="chip-name">${esc(l.name)}</span>
-      </a>`;
-    }).join('');
+    recentsEl.hidden = !list.length || !!q.value.trim();
+    recentsEl.innerHTML = list.length
+      ? '<span class="rl">Recientes</span>' + list.map(u => `<a class="chip" href="${esc(u)}" target="_blank" rel="noopener" data-url="${esc(u)}">${esc(byUrl.get(u).name)}</a>`).join('') + '<button type="button" class="link" data-clear>Borrar</button>'
+      : '';
   }
-  $('clearRecents').addEventListener('click', () => {
-    try { localStorage.removeItem(RKEY); } catch (e) {}
-    renderRecents();
+  recentsEl.addEventListener('click', e => {
+    if (e.target.closest('[data-clear]')) { try { localStorage.removeItem(RKEY); } catch (err) {} renderRecents(); }
   });
-  function track(e){
+  const track = e => {
     const a = e.target.closest('a[data-url]');
-    if (!a) return;
-    pushRecent(a.dataset.url);
-    setTimeout(renderRecents, 150);
-  }
+    if (a) { pushRecent(a.dataset.url); setTimeout(renderRecents, 150); }
+  };
   document.addEventListener('click', track);
   document.addEventListener('auxclick', e => { if (e.button === 1) track(e); });
 
-  /* ---------- Búsqueda ---------- */
-  function mark(text, tokens){
+  /* Búsqueda */
+  function mark(text, tokens) {
     const n = norm(text), ranges = [];
     tokens.forEach(t => {
       let i = n.indexOf(t);
@@ -794,108 +758,81 @@
     if (!ranges.length) return esc(text);
     ranges.sort((a, b) => a[0] - b[0]);
     const merged = [ranges[0].slice()];
-    for (let k = 1; k < ranges.length; k++){
+    for (let k = 1; k < ranges.length; k++) {
       const last = merged[merged.length - 1];
       if (ranges[k][0] <= last[1]) last[1] = Math.max(last[1], ranges[k][1]);
       else merged.push(ranges[k].slice());
     }
     let out = '', pos = 0;
-    merged.forEach(([a, b]) => {
-      out += esc(text.slice(pos, a)) + '<mark>' + esc(text.slice(a, b)) + '</mark>';
-      pos = b;
-    });
+    merged.forEach(([a, b]) => { out += esc(text.slice(pos, a)) + '<mark>' + esc(text.slice(a, b)) + '</mark>'; pos = b; });
     return out + esc(text.slice(pos));
   }
 
-  function runSearch(raw){
+  function runSearch(raw) {
     const tokens = norm(raw).split(/\s+/).filter(Boolean);
     const hits = allLinks.filter(l => {
       const hay = norm(l.name + ' ' + modules[l.mod].title + ' ' + (l.group || ''));
       return tokens.every(t => hay.includes(t));
     });
-
-    if (!hits.length){
-      resultsMeta.textContent = 'Sin resultados';
-      resultsBody.innerHTML = `
-        <div class="empty">
-          <i class="fas fa-magnifying-glass" aria-hidden="true"></i>
-          <strong>Sin resultados para «${esc(raw)}»</strong>
-          Prueba con otra palabra o <button type="button" class="link-btn" id="emptyClear">borra la búsqueda</button>.
-        </div>`;
+    if (!hits.length) {
+      resultsMeta.textContent = '';
+      resultsBody.innerHTML = `<p class="empty">Sin resultados para «${esc(raw)}». <button type="button" class="link" id="emptyClear">Borrar búsqueda</button></p>`;
       $('emptyClear').addEventListener('click', clearSearch);
       return;
     }
-
     resultsMeta.textContent = hits.length + (hits.length === 1 ? ' resultado' : ' resultados');
     const byMod = new Map();
     hits.forEach(l => { if (!byMod.has(l.mod)) byMod.set(l.mod, []); byMod.get(l.mod).push(l); });
-    resultsBody.innerHTML = [...byMod.entries()].map(([mi, items]) => {
-      const m = modules[mi];
-      return `
-        <section class="group tinted" style="--accent:${m.color}">
-          <h3 class="group-title"><i class="fas ${m.icon}" aria-hidden="true"></i>${esc(m.title)}</h3>
-          <div class="list">${items.map(l => rowHTML(l, mark(l.name, tokens), l.group)).join('')}</div>
-        </section>`;
-    }).join('');
+    resultsBody.innerHTML = [...byMod.entries()].map(([mi, items]) =>
+      `<section class="group"><h3 class="gt">${esc(modules[mi].title)}</h3><div class="list">${items.map(l => rowHTML(l, mark(l.name, tokens), l.group)).join('')}</div></section>`).join('');
   }
 
-  function onQuery(){
+  function onQuery() {
     const v = q.value.trim();
-    searchBox.classList.toggle('has-value', !!q.value);
     clearBtn.hidden = !q.value;
-    if (!v){
-      resultsSec.hidden = true;
-      modulesSec.hidden = false;
-      renderRecents();
-    } else {
-      modulesSec.hidden = true;
-      recentsSec.hidden = true;
-      resultsSec.hidden = false;
-      runSearch(v);
-    }
+    areas.hidden = !!v;
+    results.hidden = !v;
+    if (v) { recentsEl.hidden = true; runSearch(v); } else renderRecents();
   }
-  function clearSearch(){ q.value = ''; onQuery(); q.focus(); }
-
+  function clearSearch() { q.value = ''; onQuery(); q.focus(); }
   q.addEventListener('input', onQuery);
   clearBtn.addEventListener('click', clearSearch);
-
   q.addEventListener('keydown', e => {
-    const first = resultsSec.hidden ? null : resultsSec.querySelector('.row');
-    if (e.key === 'ArrowDown' && first){ e.preventDefault(); first.focus(); }
-    else if (e.key === 'Enter' && first){ e.preventDefault(); first.click(); }
+    const first = results.hidden ? null : results.querySelector('.row');
+    if (e.key === 'ArrowDown' && first) { e.preventDefault(); first.focus(); }
+    else if (e.key === 'Enter' && first) { e.preventDefault(); first.click(); }
   });
-  resultsSec.addEventListener('keydown', e => {
+  results.addEventListener('keydown', e => {
     if (e.key !== 'ArrowDown' && e.key !== 'ArrowUp') return;
-    const rows = [...resultsSec.querySelectorAll('.row')];
-    const i = rows.indexOf(document.activeElement);
+    const rows = [...results.querySelectorAll('.row')], i = rows.indexOf(document.activeElement);
     if (i === -1) return;
     e.preventDefault();
     if (e.key === 'ArrowDown') rows[Math.min(i + 1, rows.length - 1)].focus();
     else (i === 0 ? q : rows[i - 1]).focus();
   });
 
-  /* ---------- Teclado global ---------- */
+  /* Teclado global */
   document.addEventListener('keydown', e => {
-    if (e.key === 'Escape'){
-      if (sheetOpen()) { closeSheet(); return; }
-      if (document.activeElement === q && q.value) { q.value = ''; onQuery(); }
+    if (e.key === 'Escape') {
+      if (picked) closeArea();
+      else if (document.activeElement === q && q.value) { q.value = ''; onQuery(); }
       return;
     }
-    if (sheetOpen()) return;
+    if (picked || !reveal.classList.contains('show')) return;
     const el = document.activeElement;
     const typing = el && (/^(INPUT|TEXTAREA|SELECT)$/.test(el.tagName) || el.isContentEditable);
-    if ((e.key === '/' && !typing) || ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k')){
-      e.preventDefault();
-      q.focus();
-      q.select();
+    if ((e.key === '/' && !typing) || ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k')) {
+      e.preventDefault(); q.focus(); q.select();
     }
   });
 
-  /* ---------- Inicio ---------- */
-  renderGrid();
   renderRecents();
   tick();
-  setInterval(tick, 30000);
+  setInterval(tick, 1000);
+  document.addEventListener('visibilitychange', tick);
+
+  run();
+})();
 </script>
 </body>
 </html>
