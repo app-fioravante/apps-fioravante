@@ -359,6 +359,17 @@
   :root[data-sky="noche"] { --sky-1: #b8c8ec; --sky-2: #9fb3e3; --sky-3: #889fd6; --glow: #d4e0fa; --muted: #243b68; }
   @media (prefers-reduced-motion: reduce) { :root { transition: none; } }
   .foot { margin: auto 0 0; padding-top: 10px; text-align: center; font-size: 12.5px; color: var(--muted); }
+  /* Aviso de ingreso: solo aparece si el navegador no deja sonar de entrada */
+  .gate {
+    position: fixed; inset: 0; z-index: 50; display: flex; align-items: center; justify-content: center;
+    padding: 24px; text-align: center; cursor: pointer; user-select: none; -webkit-user-select: none;
+    font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; font-weight: 700;
+    font-size: clamp(20px, 3.2vw, 28px); letter-spacing: 0.02em; color: var(--ink);
+    opacity: 0; transition: opacity 0.5s ease;
+  }
+  .gate.on { opacity: 1; animation: gatePulse 2.4s ease-in-out 0.6s infinite; }
+  .gate.off { opacity: 0; pointer-events: none; }
+  @keyframes gatePulse { 50% { opacity: 0.55; } }
 </style>
 </head>
 <body>
@@ -430,6 +441,212 @@
 
 <script>
 (() => {
+  /* ── Sonido: Web Audio sintetizado (sin archivos). El navegador solo lo activa tras el primer toque, clic o tecla. ── */
+  const sfx = (() => {
+    const AC = window.AudioContext || window.webkitAudioContext;
+    let ctx = null, master = null, noise = null, pen = null, lastKey = 0, lastHover = 0;
+    const rnd = (a, b) => a + Math.random() * (b - a);
+    const live = () => !!ctx && ctx.state === 'running';
+
+    function init() {
+      if (ctx || !AC) return;
+      try { ctx = new AC(); } catch (e) { ctx = null; return; }
+      const comp = ctx.createDynamicsCompressor();
+      master = ctx.createGain();
+      master.gain.value = 0.9;
+      master.connect(comp);
+      comp.connect(ctx.destination);
+      const n = ctx.sampleRate * 2;
+      noise = ctx.createBuffer(1, n, ctx.sampleRate);
+      const d = noise.getChannelData(0);
+      for (let i = 0; i < n; i++) d[i] = Math.random() * 2 - 1;
+      ctx.onstatechange = () => { if (ctx.state !== 'running') arm(); };
+    }
+
+    /* Ráfaga de ruido filtrado (golpes, chasquidos) */
+    function burst(t, dur, type, freq, q, gain) {
+      const s = ctx.createBufferSource();
+      s.buffer = noise;
+      const f = ctx.createBiquadFilter();
+      f.type = type; f.frequency.value = freq; f.Q.value = q;
+      const g = ctx.createGain();
+      g.gain.setValueAtTime(0.0001, t);
+      g.gain.exponentialRampToValueAtTime(gain, t + 0.002);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+      s.connect(f); f.connect(g); g.connect(master);
+      s.start(t, Math.random() * 1.5, dur + 0.02);
+    }
+
+    /* Tono con caída de volumen y barrido de frecuencia opcional */
+    function tone(t, f0, f1, dur, type, gain, lp) {
+      const o = ctx.createOscillator();
+      o.type = type;
+      o.frequency.setValueAtTime(f0, t);
+      if (f1 !== f0) o.frequency.exponentialRampToValueAtTime(f1, t + dur);
+      const g = ctx.createGain();
+      g.gain.setValueAtTime(0.0001, t);
+      g.gain.exponentialRampToValueAtTime(gain, t + 0.004);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+      o.connect(g);
+      let out = g;
+      if (lp) {
+        const f = ctx.createBiquadFilter();
+        f.type = 'lowpass'; f.frequency.value = lp;
+        g.connect(f);
+        out = f;
+      }
+      out.connect(master);
+      o.start(t);
+      o.stop(t + dur + 0.02);
+    }
+
+    /* Trazo de lápiz/bolígrafo: roce de ruido que sube y baja con la velocidad del trazo */
+    function penStart() {
+      if (!live() || pen) return;
+      const t = ctx.currentTime;
+      const s = ctx.createBufferSource();
+      s.buffer = noise; s.loop = true;
+      s.playbackRate.value = rnd(0.9, 1.1);
+      const hp = ctx.createBiquadFilter();
+      hp.type = 'highpass'; hp.frequency.value = 1400;
+      const bp = ctx.createBiquadFilter();
+      bp.type = 'bandpass'; bp.frequency.value = 3200; bp.Q.value = 0.9;
+      const g = ctx.createGain();
+      g.gain.value = 0;
+      s.connect(hp); hp.connect(bp); bp.connect(g); g.connect(master);
+      s.start(t, Math.random() * 1.5);
+      pen = { s, bp, g };
+      burst(t, 0.02, 'lowpass', 900, 0.7, 0.16);
+    }
+    function penMove(v) {
+      if (!pen || !live()) return;
+      const t = ctx.currentTime;
+      pen.g.gain.setTargetAtTime((0.05 + 0.55 * v) * rnd(0.65, 1), t, 0.015);
+      pen.bp.frequency.setTargetAtTime(2200 + 2400 * v + rnd(-250, 250), t, 0.02);
+    }
+    function penStop() {
+      if (!pen) return;
+      const { s, g } = pen;
+      pen = null;
+      try {
+        const t = ctx.currentTime;
+        g.gain.cancelScheduledValues(t);
+        g.gain.setTargetAtTime(0, t, 0.02);
+        s.stop(t + 0.12);
+      } catch (e) {}
+    }
+
+    /* Punto de la i: toque seco del bolígrafo */
+    function tap() {
+      if (!live()) return;
+      const t = ctx.currentTime + 0.003;
+      burst(t, 0.03, 'lowpass', 1600, 0.7, 0.3);
+      tone(t, 420, 210, 0.05, 'sine', 0.14);
+    }
+
+    /* Máquina de escribir: golpe grave + chasquido + metal. 'space' = barra espaciadora, 'light' = tecleo rápido */
+    function key(kind) {
+      if (!live()) return;
+      const t = ctx.currentTime + 0.004, v = rnd(0.92, 1.08);
+      if (kind === 'space') {
+        tone(t, 150 * v, 70 * v, 0.1, 'sine', 0.42);
+        burst(t, 0.06, 'lowpass', 1100, 0.7, 0.3);
+        return;
+      }
+      const k = kind === 'light' ? 0.55 : 1;
+      tone(t, 200 * v, 80 * v, 0.07, 'sine', 0.36 * k);
+      burst(t, 0.03, 'bandpass', 2800 * v, 1.3, 0.5 * k);
+      burst(t + 0.011, 0.05, 'highpass', 5200, 0.7, 0.13 * k);
+      tone(t + 0.006, 2600 * v, 2000 * v, 0.045, 'triangle', 0.045 * k);
+    }
+    function keyRapid() {
+      const now = performance.now();
+      if (now - lastKey < 44) return;
+      lastKey = now;
+      key('light');
+    }
+
+    /* Clic seco al pasar el puntero sobre un título */
+    function hover() {
+      if (!live()) return;
+      const now = performance.now();
+      if (now - lastHover < 50) return;
+      lastHover = now;
+      const t = ctx.currentTime + 0.003;
+      burst(t, 0.014, 'highpass', 3500, 0.7, 0.3);
+      tone(t, 2200, 1300, 0.022, 'square', 0.035, 4200);
+      tone(t, 950, 520, 0.02, 'sine', 0.12);
+    }
+
+    /* Sonido digital de ingreso: arpegio ascendente, barrido y destello final */
+    function enter() {
+      if (!live()) return;
+      const t = ctx.currentTime + 0.01;
+      [523.25, 659.25, 783.99, 1046.5, 1318.5].forEach((f, i) => tone(t + i * 0.055, f, f, 0.11, 'square', 0.08, 3200));
+      tone(t, 220, 1760, 0.3, 'sawtooth', 0.03, 2600);
+      tone(t + 0.28, 2093, 2093, 0.45, 'sine', 0.1);
+    }
+
+    /* Desbloqueo: se intenta arrancar solo; si el navegador lo impide, el primer gesto lo activa */
+    const EVS = ['pointerdown', 'pointerup', 'click', 'touchend', 'keydown'];
+    function arm() { EVS.forEach(ev => window.addEventListener(ev, unlock, true)); }
+    function drop() { EVS.forEach(ev => window.removeEventListener(ev, unlock, true)); }
+    function unlock() {
+      init();
+      if (!ctx) return;
+      if (ctx.state === 'running') { drop(); return; }
+      const r = ctx.resume();
+      if (r && r.then) r.then(() => { if (ctx.state === 'running') drop(); }).catch(() => {});
+    }
+    arm();
+    init();
+    if (ctx) { const r = ctx.resume(); if (r && r.catch) r.catch(() => {}); }
+    document.addEventListener('visibilitychange', () => { if (document.hidden) penStop(); });
+
+    /* Inicio: si el navegador deja sonar de entrada, arranca solo; si no, pide un toque para ingresar con sonido */
+    function start(go) {
+      if (!AC) { go(); return; }
+      init();
+      if (!ctx) { go(); return; }
+      let done = false, gate = null, timer = 0, poll = 0;
+      /* si tras el primer gesto el navegador no habilita el audio, se ingresa igual (sin sonido) */
+      const soon = () => { if (!timer) timer = setTimeout(fire, 800); };
+      function fire() {
+        if (done) return;
+        done = true;
+        clearInterval(poll);
+        clearTimeout(timer);
+        EVS.forEach(ev => window.removeEventListener(ev, soon, true));
+        if (gate) {
+          const g = gate;
+          g.classList.remove('on');
+          g.classList.add('off');
+          setTimeout(() => g.remove(), 600);
+        }
+        go();
+      }
+      const check = () => { if (ctx.state === 'running') fire(); };
+      poll = setInterval(check, 80);
+      const r = ctx.resume();
+      if (r && r.then) r.then(check).catch(() => {});
+      setTimeout(() => {
+        if (done) return;
+        gate = document.createElement('div');
+        gate.className = 'gate';
+        gate.setAttribute('role', 'button');
+        gate.setAttribute('aria-label', 'Tocar para ingresar con sonido');
+        gate.tabIndex = 0;
+        gate.textContent = 'Toca o haz clic para ingresar';
+        document.body.appendChild(gate);
+        void gate.offsetWidth;
+        gate.classList.add('on');
+        EVS.forEach(ev => window.addEventListener(ev, soon, true));
+      }, 250);
+    }
+
+    return { key, keyRapid, penStart, penMove, penStop, tap, hover, enter, start };
+  })();
+
   const paths = [...document.querySelectorAll('.ink')];
   const lengths = paths.map(p => p.getTotalLength());
   const sig = document.getElementById('sig');
@@ -472,6 +689,7 @@
       const space = text[i] === ' ';
       const dur = w / NAME.speed * 1000 * (space ? 0.35 : 1);
       nib.style.opacity = space ? '0.4' : '1';
+      sfx.key(space ? 'space' : 'full');
       const ok = await anim(dur, tk, t => {
         const e = 0.5 * t + 0.5 * ease(t);
         const xe = b[i][0] + w * e;
@@ -510,6 +728,7 @@
   }
 
   function reset() {
+    sfx.penStop();
     paths.forEach(p => { p.style.strokeDashoffset = '1'; p.style.opacity = '0'; });
     dot.style.transform = 'scale(0)';
     setWipe(null);
@@ -567,18 +786,22 @@
         if (i > 0 && !(await hop(cur, start, tk))) return;
         nib.style.opacity = '1';
         p.style.opacity = '1';
+        sfx.penStart();
         const ok = await anim(len / SPEED * 1000, tk, t => {
           const e = ease(t);
           p.style.strokeDashoffset = String(1 - e);
           cur = p.getPointAtLength(e * len);
           setNib(cur.x, cur.y);
+          sfx.penMove(Math.sin(Math.PI * t));
         });
+        sfx.penStop();
         if (!ok || !(await sleep(20, tk))) return;
       }
 
       if (!(await hop(cur, DOT, tk))) return;
       nib.style.opacity = '1';
       dot.style.transform = 'scale(1)';
+      sfx.tap();
       if (!(await sleep(200, tk))) return;
       if (!(await hop(DOT, { x: NAME.b[0][0] - 4, y: NAME.base - 24 }, tk))) return;
       nib.style.opacity = '1';
@@ -589,6 +812,7 @@
       let shown = 0;
       const typed = await anim(chars.length * 22, tk, t => {
         const n = Math.round(t * chars.length);
+        if (n > shown) sfx.keyRapid();
         while (shown < n) chars[shown++].classList.add('on');
       });
       if (!typed || !(await sleep(900, tk))) return;
@@ -808,6 +1032,7 @@
   async function openArea(btn) {
     if (picked) return;
     picked = btn;
+    sfx.enter();
     const m = modules[+btn.dataset.mod], li = btn.parentElement;
     sel.textContent = m.title;
     sel.style.setProperty('--mod-color', m.color);
@@ -846,6 +1071,11 @@
     if (b) openArea(b);
   });
   backBtn.addEventListener('click', closeArea);
+  areas.addEventListener('pointerover', e => {
+    if (picked || e.pointerType === 'touch') return;
+    const b = e.target.closest('button[data-mod]');
+    if (b && !b.contains(e.relatedTarget)) sfx.hover();
+  });
 
   /* Recientes con indicador de módulo y color */
   const RKEY = 'rf-recientes';
@@ -880,6 +1110,8 @@
     if (a) { pushRecent(a.dataset.url); setTimeout(renderRecents, 150); }
   };
   document.addEventListener('click', track);
+  /* Sonido de ingreso al pulsar un acceso (dentro de un módulo, en la búsqueda o en recientes) */
+  document.addEventListener('click', e => { if (e.target.closest('a[data-url]')) sfx.enter(); });
   document.addEventListener('auxclick', e => { if (e.button === 1) track(e); });
 
   /* Búsqueda */
@@ -967,7 +1199,7 @@
   setInterval(tick, 1000);
   document.addEventListener('visibilitychange', tick);
 
-  run();
+  if (reduce) run(); else sfx.start(run);
 })();
 </script>
 </body>
